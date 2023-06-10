@@ -98,6 +98,29 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testGainAbilityControlledSpellsOnly() {
+
+        addCard(Zone.BATTLEFIELD, playerB, "Firesong and Sunspeaker"); // shouldn't give Searing Blood lifelink
+        addCard(Zone.BATTLEFIELD, playerA, "Walking Corpse"); // creature to target
+        addCard(Zone.HAND, playerA, "Covetous Urge"); // makes Searing Blood castable from exile
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4); // to cast Covetous Urge
+        addCard(Zone.HAND, playerB, "Searing Blood"); // to find with Covetous Urge
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2); // to cast Searing Blood
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Covetous Urge", playerB); // tap four Islands, find Searing Blood
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Searing Blood", "Walking Corpse");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Walking Corpse", 1);
+        assertLife(playerB, 20); // lifelink should not apply
+        assertLife(playerA, 20 - 3);
+
+    }
+
     /**
      * Reported bug: https://github.com/magefree/mage/issues/9565
      *  1. Cast all three of Frondland Felidar, Jubilant Skybonder, and Proud Wildbonder.
