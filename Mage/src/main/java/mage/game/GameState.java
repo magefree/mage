@@ -1202,6 +1202,12 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         Ability newAbility;
         if (ability instanceof MageSingleton || !copyAbility) {
+            // Avoid adding another instance of an ability where multiple copies are redundant
+            if (attachedTo.getAbilities().contains(ability)
+                    || (getAllOtherAbilities(attachedTo.getId()) != null
+                    && getAllOtherAbilities(attachedTo.getId()).contains(ability))) {
+                return;
+            }
             newAbility = ability;
         } else {
             // must use new id, so you can add multiple instances of the same ability
