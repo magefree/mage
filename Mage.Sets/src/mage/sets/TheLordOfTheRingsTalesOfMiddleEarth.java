@@ -144,6 +144,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Oliphaunt", 139, Rarity.COMMON, mage.cards.o.Oliphaunt.class));
         cards.add(new SetCardInfo("Olog-hai Crusher", 140, Rarity.COMMON, mage.cards.o.OlogHaiCrusher.class));
         cards.add(new SetCardInfo("One Ring to Rule Them All", 102, Rarity.RARE, mage.cards.o.OneRingToRuleThemAll.class));
+        cards.add(new SetCardInfo("Orcish Medicine", 104, Rarity.COMMON, mage.cards.o.OrcishMedicine.class));
         cards.add(new SetCardInfo("Pelargir Survivor", 64, Rarity.COMMON, mage.cards.p.PelargirSurvivor.class));
         cards.add(new SetCardInfo("Peregrin Took", 181, Rarity.UNCOMMON, mage.cards.p.PeregrinTook.class));
         cards.add(new SetCardInfo("Pippin's Bravery", 182, Rarity.COMMON, mage.cards.p.PippinsBravery.class));
