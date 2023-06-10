@@ -65,7 +65,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Foray of Orcs", 128, Rarity.UNCOMMON, mage.cards.f.ForayOfOrcs.class));
         cards.add(new SetCardInfo("Forest", 270, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frodo Baggins", 205, Rarity.UNCOMMON, mage.cards.f.FrodoBaggins.class));
-        cards.add(new SetCardInfo("Frodo, Determined Hero", 388, Rarity.RARE, mage.cards.f.FrodoDeterminedHero.class));
+        cards.add(new SetCardInfo("Frodo, Determined Hero", 289, Rarity.RARE, mage.cards.f.FrodoDeterminedHero.class));
         cards.add(new SetCardInfo("Frodo, Sauron's Bane", 18, Rarity.RARE, mage.cards.f.FrodoSauronsBane.class));
         cards.add(new SetCardInfo("Galadhrim Bow", 167, Rarity.COMMON, mage.cards.g.GaladhrimBow.class));
         cards.add(new SetCardInfo("Galadriel of Lothlorien", 206, Rarity.RARE, mage.cards.g.GaladrielOfLothlorien.class));
@@ -135,7 +135,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Revive the Shire", 185, Rarity.COMMON, mage.cards.r.ReviveTheShire.class));
         cards.add(new SetCardInfo("Ringsight", 220, Rarity.UNCOMMON, mage.cards.r.Ringsight.class));
         cards.add(new SetCardInfo("Rising of the Day", 145, Rarity.UNCOMMON, mage.cards.r.RisingOfTheDay.class));
-        cards.add(new SetCardInfo("Rivendell", 344, Rarity.RARE, mage.cards.r.Rivendell.class));
+        cards.add(new SetCardInfo("Rivendell", 259, Rarity.RARE, mage.cards.r.Rivendell.class));
         cards.add(new SetCardInfo("Rosie Cotton of South Lane", 27, Rarity.UNCOMMON, mage.cards.r.RosieCottonOfSouthLane.class));
         cards.add(new SetCardInfo("Samwise Gamgee", 222, Rarity.RARE, mage.cards.s.SamwiseGamgee.class));
         cards.add(new SetCardInfo("Samwise the Stouthearted", 28, Rarity.UNCOMMON, mage.cards.s.SamwiseTheStouthearted.class));
@@ -162,7 +162,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 266, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarming of Moria", 150, Rarity.COMMON, mage.cards.s.SwarmingOfMoria.class));
         cards.add(new SetCardInfo("Tale of Tinuviel", 34, Rarity.UNCOMMON, mage.cards.t.TaleOfTinuviel.class));
-        cards.add(new SetCardInfo("The Balrog, Flame of Udun", 395, Rarity.RARE, mage.cards.t.TheBalrogFlameOfUdun.class));
+        cards.add(new SetCardInfo("The Balrog, Flame of Udun", 297, Rarity.RARE, mage.cards.t.TheBalrogFlameOfUdun.class));
         cards.add(new SetCardInfo("The Bath Song", 40, Rarity.UNCOMMON, mage.cards.t.TheBathSong.class));
         cards.add(new SetCardInfo("The Mouth of Sauron", 216, Rarity.UNCOMMON, mage.cards.t.TheMouthOfSauron.class));
         cards.add(new SetCardInfo("The One Ring", 246, Rarity.MYTHIC, mage.cards.t.TheOneRing.class));
