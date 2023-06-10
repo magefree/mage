@@ -46,22 +46,22 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
         }
 
         for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
-            if (card.isOwnedBy(source.getControllerId()) && filter.match(card, game)) {
+            if (filter.match(card, game) && player.getPlayableObjects(game, Zone.EXILED, true).containsObject(card.getId())) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
         for (Card card : player.getLibrary().getCards(game)) {
-            if (filter.match(card, game)) {
+            if (filter.match(card, game) && player.getPlayableObjects(game, Zone.LIBRARY, true).containsObject(card.getId())) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
         for (Card card : player.getHand().getCards(game)) {
-            if (filter.match(card, game)) {
+            if (filter.match(card, game) && player.getPlayableObjects(game, Zone.HAND, true).containsObject(card.getId())) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
         for (Card card : player.getGraveyard().getCards(game)) {
-            if (filter.match(card, game)) {
+            if (filter.match(card, game) && player.getPlayableObjects(game, Zone.GRAVEYARD, true).containsObject(card.getId())) {
                 game.getState().addOtherAbility(card, ability);
             }
         }
