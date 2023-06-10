@@ -120,6 +120,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Mirror of Galadriel", 244, Rarity.UNCOMMON, mage.cards.m.MirrorOfGaladriel.class));
         cards.add(new SetCardInfo("Mirrormere Guardian", 179, Rarity.COMMON, mage.cards.m.MirrormereGuardian.class));
         cards.add(new SetCardInfo("Mithril Coat", 245, Rarity.RARE, mage.cards.m.MithrilCoat.class));
+        cards.add(new SetCardInfo("Mordor Muster", 96, Rarity.COMMON, mage.cards.m.MordorMuster.class));
         cards.add(new SetCardInfo("Morgul-Knife Wound", 98, Rarity.COMMON, mage.cards.m.MorgulKnifeWound.class));
         cards.add(new SetCardInfo("Moria Marauder", 138, Rarity.RARE, mage.cards.m.MoriaMarauder.class));
         cards.add(new SetCardInfo("Mount Doom", 258, Rarity.MYTHIC, mage.cards.m.MountDoom.class));
