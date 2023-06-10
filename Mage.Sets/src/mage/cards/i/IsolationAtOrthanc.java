@@ -1,4 +1,4 @@
-package mage.cards.c;
+package mage.cards.i;
 
 import mage.abilities.effects.common.PutIntoLibraryNFromTopTargetEffect;
 import mage.cards.CardImpl;
@@ -9,24 +9,24 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author TheElk801
  */
-public final class Chronostutter extends CardImpl {
+public final class IsolationAtOrthanc extends CardImpl {
 
-    public Chronostutter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{U}");
+    public IsolationAtOrthanc(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
         // Put target creature into its owner's library second from the top.
         this.getSpellAbility().addEffect(new PutIntoLibraryNFromTopTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    private Chronostutter(final Chronostutter card) {
+    private IsolationAtOrthanc(final IsolationAtOrthanc card) {
         super(card);
     }
 
     @Override
-    public Chronostutter copy() {
-        return new Chronostutter(this);
+    public IsolationAtOrthanc copy() {
+        return new IsolationAtOrthanc(this);
     }
 }
