@@ -1183,8 +1183,6 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param ability
      */
     public void addOtherAbility(Card attachedTo, Ability ability) {
-        checkWrongDynamicAbilityUsage(attachedTo, ability);
-
         addOtherAbility(attachedTo, ability, true);
     }
 
