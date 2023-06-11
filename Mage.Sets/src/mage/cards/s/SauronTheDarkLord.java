@@ -51,7 +51,7 @@ public final class SauronTheDarkLord extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Ward--Sacrifice a legendary artifact or legendary creature.
-        this.addAbility(new WardAbility(new SacrificeTargetCost(filter)));
+        this.addAbility(new WardAbility(new SacrificeTargetCost(filter), false));
 
         // Whenever an opponent casts a spell, amass Orcs 1.
         this.addAbility(new SpellCastOpponentTriggeredAbility(

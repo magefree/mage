@@ -46,7 +46,7 @@ public final class PippinGuardOfTheCitadel extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Ward {1}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}"), false));
 
         // {T}: Another target creature you control gains protection from the card type of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(new PippinGuardOfTheCitadelEffect(), new TapSourceCost());
@@ -91,7 +91,6 @@ class PippinGuardOfTheCitadelEffect extends OneShotEffect {
         Choice choice = new ChoiceCardType();
         player.choose(outcome, choice, game);
         CardType cardType = CardType.fromString(choice.getChoice());
-        String typeName = cardType.toString();
         FilterCard filter = new FilterCard(cardType.getPluralName().toLowerCase());
         filter.add(cardType.getPredicate());
         game.addEffect(new GainAbilityTargetEffect(new ProtectionAbility(filter))
