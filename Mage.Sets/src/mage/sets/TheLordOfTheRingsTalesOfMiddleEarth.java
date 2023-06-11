@@ -116,6 +116,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Ithilien Kingfisher", 58, Rarity.COMMON, mage.cards.i.IthilienKingfisher.class));
         cards.add(new SetCardInfo("Knight of the Keep", 291, Rarity.COMMON, mage.cards.k.KnightOfTheKeep.class));
         cards.add(new SetCardInfo("Knights of Dol Amroth", 59, Rarity.COMMON, mage.cards.k.KnightsOfDolAmroth.class));
+        cards.add(new SetCardInfo("Landroval, Horizon Witness", 21, Rarity.UNCOMMON, mage.cards.l.LandrovalHorizonWitness.class));
         cards.add(new SetCardInfo("Lash of the Balrog", 92, Rarity.COMMON, mage.cards.l.LashOfTheBalrog.class));
         cards.add(new SetCardInfo("Last March of the Ents", 172, Rarity.MYTHIC, mage.cards.l.LastMarchOfTheEnts.class));
         cards.add(new SetCardInfo("Legolas, Counter of Kills", 212, Rarity.UNCOMMON, mage.cards.l.LegolasCounterOfKills.class));
