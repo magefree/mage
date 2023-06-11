@@ -54,6 +54,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Easterling Vanguard", 83, Rarity.COMMON, mage.cards.e.EasterlingVanguard.class));
         cards.add(new SetCardInfo("Eastfarthing Farmer", 8, Rarity.COMMON, mage.cards.e.EastfarthingFarmer.class));
         cards.add(new SetCardInfo("Elrond, Lord of Rivendell", 49, Rarity.UNCOMMON, mage.cards.e.ElrondLordOfRivendell.class));
+        cards.add(new SetCardInfo("Elrond, Master of Healing", 200, Rarity.RARE, mage.cards.e.ElrondMasterOfHealing.class));
         cards.add(new SetCardInfo("Elven Chorus", 160, Rarity.RARE, mage.cards.e.ElvenChorus.class));
         cards.add(new SetCardInfo("Elven Farsight", 161, Rarity.COMMON, mage.cards.e.ElvenFarsight.class));
         cards.add(new SetCardInfo("Elvish Mariner", 283, Rarity.RARE, mage.cards.e.ElvishMariner.class));

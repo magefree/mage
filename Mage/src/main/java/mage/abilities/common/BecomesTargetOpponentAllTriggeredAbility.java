@@ -3,6 +3,8 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -14,20 +16,28 @@ import java.util.*;
 /**
  * @author weirddan455
  */
-public class BecomesTargetControlledPermanentTriggeredAbility extends TriggeredAbilityImpl {
+public class BecomesTargetOpponentAllTriggeredAbility extends TriggeredAbilityImpl {
 
-    public BecomesTargetControlledPermanentTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("Whenever a permanent you control becomes the target of a spell or ability an opponent controls, ");
+    private final FilterPermanent filter;
+
+    public BecomesTargetOpponentAllTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, StaticFilters.FILTER_CONTROLLED_A_PERMANENT, optional);
     }
 
-    private BecomesTargetControlledPermanentTriggeredAbility(final BecomesTargetControlledPermanentTriggeredAbility ability) {
+    public BecomesTargetOpponentAllTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.filter = filter;
+        setTriggerPhrase("Whenever " + filter + " becomes the target of a spell or ability an opponent controls, ");
+    }
+
+    private BecomesTargetOpponentAllTriggeredAbility(final BecomesTargetOpponentAllTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter;
     }
 
     @Override
-    public BecomesTargetControlledPermanentTriggeredAbility copy() {
-        return new BecomesTargetControlledPermanentTriggeredAbility(this);
+    public BecomesTargetOpponentAllTriggeredAbility copy() {
+        return new BecomesTargetOpponentAllTriggeredAbility(this);
     }
 
     @Override
@@ -46,7 +56,7 @@ public class BecomesTargetControlledPermanentTriggeredAbility extends TriggeredA
             return false;
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent == null || !permanent.isControlledBy(this.getControllerId())) {
+        if (permanent == null || !filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
         // If a spell or ability an opponent controls targets a single permanent you control more than once,
