@@ -31,6 +31,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bastion Protector", 162, Rarity.RARE, mage.cards.b.BastionProtector.class));
         cards.add(new SetCardInfo("Battlefield Forge", 296, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Beast Within", 234, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
+        cards.add(new SetCardInfo("Beregond of the Guard", 9, Rarity.RARE, mage.cards.b.BeregondOfTheGuard.class));
         cards.add(new SetCardInfo("Birds of Paradise", 235, Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
         cards.add(new SetCardInfo("Blasphemous Act", 211, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Bojuka Bog", 358, Rarity.MYTHIC, mage.cards.b.BojukaBog.class));
