@@ -32,7 +32,7 @@ public final class SaradocMasterOfBuckland extends CardImpl {
     private static final FilterPermanent filter
             = new FilterCreaturePermanent("nontoken creature with power 2 or less");
     private static final FilterControlledPermanent filter2
-            = new FilterControlledPermanent(SubType.HALFLING, "two other untapped Halflings you control");
+            = new FilterControlledPermanent(SubType.HALFLING, "other untapped Halflings you control");
 
     static {
         filter.add(TokenPredicate.FALSE);
@@ -58,7 +58,7 @@ public final class SaradocMasterOfBuckland extends CardImpl {
         // Tap two other untapped Halflings you control: Saradoc gets +2/+0 and gains lifelink until end of turn.
         Ability ability = new SimpleActivatedAbility(
                 new BoostSourceEffect(2, 0, Duration.EndOfTurn)
-                        .setText("gets +2/+0"),
+                        .setText("{this} gets +2/+0"),
                 new TapTargetCost(new TargetControlledPermanent(2, filter2))
         );
         ability.addEffect(new GainAbilitySourceEffect(
