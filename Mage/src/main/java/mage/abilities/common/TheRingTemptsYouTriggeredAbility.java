@@ -12,7 +12,11 @@ import mage.game.events.GameEvent;
 public class TheRingTemptsYouTriggeredAbility extends TriggeredAbilityImpl {
 
     public TheRingTemptsYouTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+        this(Zone.BATTLEFIELD, effect, false);
+    }
+
+    public TheRingTemptsYouTriggeredAbility(Zone zone, Effect effect, boolean optional) {
+        super(zone, effect, optional);
         setTriggerPhrase("Whenever the Ring tempts you, ");
     }
 
