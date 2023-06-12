@@ -45,7 +45,6 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     private static final List<CardType> emptyCardType = Collections.unmodifiableList(new ArrayList<>());
     private static final List<String> emptyString = Collections.unmodifiableList(new ArrayList<>());
-    private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
     private static final Costs<Cost> emptyCosts = new CostsImpl<>();
     private static final Abilities<Ability> emptyAbilites = new AbilitiesImpl<>();
@@ -223,12 +222,12 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public ObjectColor getColor() {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
