@@ -8,6 +8,7 @@ import mage.collation.BoosterCollator;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.constants.SuperType;
 import mage.filter.FilterMana;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
@@ -139,6 +140,7 @@ public abstract class ExpansionSet implements Serializable {
 
     protected boolean hasUnbalancedColors = false;
     protected boolean hasOnlyMulticolorCards = false;
+    protected boolean hasAlternateBoosterPrintings = true; // not counting basic lands; e.g. Fallen Empires true, but Tenth Edition false
 
     protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
@@ -540,11 +542,21 @@ public abstract class ExpansionSet implements Serializable {
                 // TODO: is it ok to put all parent's cards to booster instead lands only?
                 needSets.add(this.parentSet.code);
             }
-            List<CardInfo> cardInfos = CardRepository.instance.findCards(new CardCriteria()
-                    .setCodes(needSets)
-                    .variousArt(true)
-                    .maxCardNumber(maxCardNumberInBooster) // ignore bonus/extra reprints
-            );
+            List<CardInfo> cardInfos;
+            if (hasAlternateBoosterPrintings) {
+                cardInfos = CardRepository.instance.findCards(new CardCriteria()
+                        .setCodes(needSets)
+                        .variousArt(true)
+                        .maxCardNumber(maxCardNumberInBooster) // ignore bonus/extra reprints
+                );
+            } else {
+                cardInfos = CardRepository.instance.findCards(new CardCriteria()
+                        .setCodes(needSets)
+                        .variousArt(true)
+                        .maxCardNumber(maxCardNumberInBooster) // ignore bonus/extra reprints
+                        .supertypes(SuperType.BASIC) // only basic lands with extra printings
+                );
+            }
             cardInfos.forEach(card -> {
                 this.savedReprints.putIfAbsent(card.getName(), new ArrayList<>());
                 this.savedReprints.get(card.getName()).add(card);
