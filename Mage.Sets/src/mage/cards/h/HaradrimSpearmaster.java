@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -34,6 +35,9 @@ public final class HaradrimSpearmaster extends CardImpl {
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
+
+        // Reach
+        this.addAbility(ReachAbility.getInstance());
 
         // At the beginning of combat on your turn, another target creature you control gets +1/+0 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(

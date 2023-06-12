@@ -3,6 +3,7 @@ package mage.cards.w;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,6 +22,9 @@ public final class WillowWind extends CardImpl {
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
         // When Willow-Wind enters the battlefield, scry 2.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(2, false)));
