@@ -15,6 +15,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -72,8 +73,8 @@ class RemoveCounterMaintenanceHangarEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (Card card : controller.getGraveyard().getCards(game)) {
-                if (card.getCounters(game).getCount("repair") > 0) {
-                    card.removeCounters("repair", 1, source, game);
+                if (card.getCounters(game).getCount(CounterType.REPAIR) > 0) {
+                    card.removeCounters(CounterType.REPAIR.getName(), 1, source, game);
                 }
             }
             return true;

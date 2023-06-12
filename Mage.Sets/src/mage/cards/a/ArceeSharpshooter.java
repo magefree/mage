@@ -46,7 +46,7 @@ public final class ArceeSharpshooter extends CardImpl {
                         .setText("it deals that much damage to target creature"),
                 new GenericManaCost(1)
         );
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1.createInstance(), 1));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1, 1));
         ability.addEffect(new TransformSourceEffect().setText("convert {this}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

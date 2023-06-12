@@ -39,7 +39,7 @@ public final class MercadianLift extends CardImpl {
 
         // {tap}, Remove X winch counters from Mercadian Lift: You may put a creature card with converted mana cost X from your hand onto the battlefield.
         Ability ability2 = new SimpleActivatedAbility(new MercadianLiftEffect(), new TapSourceCost());
-        ability2.addCost(new RemoveVariableCountersSourceCost(CounterType.WINCH.createInstance(1)));
+        ability2.addCost(new RemoveVariableCountersSourceCost(CounterType.WINCH));
         this.addAbility(ability2);
 
     }

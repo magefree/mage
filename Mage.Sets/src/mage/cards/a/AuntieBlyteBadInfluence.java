@@ -50,7 +50,7 @@ public final class AuntieBlyteBadInfluence extends CardImpl {
                 new DamageTargetEffect(GetXValue.instance, "it"), new ManaCostsImpl<>("{1}{R}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
