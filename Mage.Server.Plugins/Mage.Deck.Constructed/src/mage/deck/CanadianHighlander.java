@@ -39,7 +39,6 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Mystical Tutor", 1);
         pointMap.put("Natural Order", 3);
         pointMap.put("Price of Progress", 1);
-        pointMap.put("Protean Hulk", 2);
         pointMap.put("Sol Ring", 4);
         pointMap.put("Spellseeker", 3);
         pointMap.put("Strip Mine", 3);
