@@ -71,7 +71,7 @@ class SiegeDefeatedTriggeredAbility extends TriggeredAbilityImpl {
         return permanent != null
                 && permanent.getCounters(game).getCount(CounterType.DEFENSE) == 0
                 && event.getTargetId().equals(this.getSourceId())
-                && event.getData().equals("defense") && event.getAmount() > 0;
+                && event.getData().equals(CounterType.DEFENSE.getName()) && event.getAmount() > 0;
     }
 
     @Override

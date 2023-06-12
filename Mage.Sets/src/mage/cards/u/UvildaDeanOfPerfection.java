@@ -197,7 +197,7 @@ class UvildaDeanOfPerfectionTriggeredAbility extends TriggeredAbilityImpl {
                 && sourceObject instanceof Card
                 && ((Card) sourceObject).getCounters(game).getCount(CounterType.HONE) == 0
                 && event.getAmount() > 0
-                && event.getData().equals("hone");
+                && event.getData().equals(CounterType.HONE.getName());
     }
 
     @Override
