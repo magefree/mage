@@ -83,7 +83,7 @@ class WhirlwindDenialEffect extends OneShotEffect {
                         game.informPlayers(stackObject.getIdName()
                                 + " will be countered as "
                                 + opponent.getLogName()
-                                + " does not pay the cost");
+                                + " does not pay the cost.");
                         stackObjectsToCounter.add(stackObject); // will be countered all at the end
                     }
                 }
