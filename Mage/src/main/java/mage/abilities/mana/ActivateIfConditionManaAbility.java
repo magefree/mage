@@ -27,11 +27,6 @@ public class ActivateIfConditionManaAbility extends ActivatedManaAbilityImpl {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        return super.activate(game, noMana);
-    }
-
-    @Override
     public String getRule() {
         return super.getRule() + " Activate only if " + condition.toString() + '.';
     }

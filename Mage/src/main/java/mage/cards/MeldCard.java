@@ -150,24 +150,6 @@ public abstract class MeldCard extends CardImpl {
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
-        // TODO: missing override method for meld cards? See removeFromZone, updateZoneChangeCounter, etc
-        return super.moveToZone(toZone, source, game, flag, appliedEffects);
-    }
-
-    @Override
-    public void setZone(Zone zone, Game game) {
-        // TODO: missing override method for meld cards? See removeFromZone, updateZoneChangeCounter, etc
-        super.setZone(zone, game);
-    }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
-        // TODO: missing override method for meld cards? See removeFromZone, updateZoneChangeCounter, etc
-        return super.moveToExile(exileId, name, source, game, appliedEffects);
-    }
-
-    @Override
     public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
         if (isCopy()) {
             return super.removeFromZone(game, fromZone, source);

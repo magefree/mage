@@ -24,11 +24,6 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean resolve(Game game) {
-        return super.resolve(game);
-    }
-
-    @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder(super.getRule());
         if (condition instanceof InvertCondition) {

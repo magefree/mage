@@ -130,14 +130,6 @@ public class PermanentToken extends PermanentImpl {
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
-        // token must change zcc on enters to battlefield (like cards do with stack),
-        // so it can keep abilities settings synced with copied spell/card
-        // example: kicker ability of copied creature spell
-        super.updateZoneChangeCounter(game, event);
-    }
-
-    @Override
     public Card getMainCard() {
         // token don't have game card, so return itself
         return this;

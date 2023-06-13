@@ -54,9 +54,4 @@ public class CostModificationSourceEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return (abilityToModify.getClass().isAssignableFrom(abilityType)) && abilityToModify.getSourceId().equals(source.getSourceId());
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return super.getText(mode);
-    }
 }

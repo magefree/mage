@@ -2872,11 +2872,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public void cleanUpOnMatchEnd() {
-        super.cleanUpOnMatchEnd(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public ComputerPlayer copy() {
         return new ComputerPlayer(this);
     }

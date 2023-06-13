@@ -247,11 +247,6 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public List<String> getManaCostSymbols() {
-        return super.getManaCostSymbols();
-    }
-
-    @Override
     public MageInt getPower() {
         return MageInt.EmptyMageInt;
     }

@@ -74,12 +74,6 @@ public abstract class AdventureCard extends CardImpl {
     }
 
     @Override
-    public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
-        // zone contains only one main card
-        return super.removeFromZone(game, fromZone, source);
-    }
-
-    @Override
     public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         if (isCopy()) { // same as meld cards
             super.updateZoneChangeCounter(game, event);

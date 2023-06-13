@@ -30,11 +30,6 @@ public class PersistAbility extends DiesSourceTriggeredAbility {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return super.checkEventType(event, game);
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             Permanent permanent = ((ZoneChangeEvent) event).getTarget();

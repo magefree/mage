@@ -25,11 +25,6 @@ public class DeclareAttackersStep extends Step {
     }
 
     @Override
-    public boolean skipStep(Game game, UUID activePlayerId) {
-        return super.skipStep(game, activePlayerId);
-    }
-
-    @Override
     public void beginStep(Game game, UUID activePlayerId) {
         super.beginStep(game, activePlayerId);
         game.getTurn().setDeclareAttackersStepStarted(true);

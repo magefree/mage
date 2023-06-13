@@ -61,9 +61,4 @@ public class OneOrMoreDiceRolledTriggeredAbility extends TriggeredAbilityImpl {
         this.getEffects().setValue("totalDieRoll", totalRoll);
         return true;
     }
-
-    @Override
-    public String getRule() {
-        return super.getRule();
-    }
 }

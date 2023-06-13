@@ -97,11 +97,6 @@ class FeedingGroundsEffect extends CostModificationEffectImpl {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-    }
-
-    @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         MageObject object = abilityToModify.getSourceObject(game);
         int reduce = 0;

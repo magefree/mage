@@ -127,12 +127,6 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
     }
 
     @Override
-    public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
-        // zone contains only one main card
-        return super.removeFromZone(game, fromZone, source);
-    }
-
-    @Override
     public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         if (isCopy()) { // same as meld cards
             super.updateZoneChangeCounter(game, event);
@@ -310,11 +304,6 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
                 this.getInnerAbilities(game, true, false),
                 this.getInnerAbilities(game, true, true)
         );
-    }
-
-    @Override
-    public boolean hasAbility(Ability ability, Game game) {
-        return super.hasAbility(ability, game);
     }
 
     @Override

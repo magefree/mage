@@ -85,11 +85,6 @@ class TurriIslandEffect extends CostModificationEffectImpl {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-    }
-
-    @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         CardUtil.reduceCost(abilityToModify, this.amount);
         return true;

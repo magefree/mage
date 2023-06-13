@@ -300,10 +300,4 @@ public class CountryComboBox extends JComboBox {
             model.addElement(anItem);
         }
     }
-
-    @Override
-    public Object getSelectedItem() {
-        return super.getSelectedItem(); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

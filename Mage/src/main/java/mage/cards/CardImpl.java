@@ -219,17 +219,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     /**
-     * Gets all base abilities - does not include additional abilities added by
-     * other cards or effects
-     *
-     * @return A list of {@link Ability} - this collection is modifiable
-     */
-    @Override
-    public Abilities<Ability> getAbilities() {
-        return super.getAbilities();
-    }
-
-    /**
      * Gets all current abilities - includes additional abilities added by other
      * cards or effects. Warning, you can't modify that list.
      *

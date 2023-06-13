@@ -57,11 +57,6 @@ public class RecoverAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-
-    @Override
-    public String getRule() {
-        return super.getRule();
-    }
 }
 
 class RecoverEffect extends OneShotEffect {

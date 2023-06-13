@@ -40,11 +40,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
         this.playerId = playerId;
     }
 
-    @Override
-    public void cleanUp() {
-        super.cleanUp();
-    }
-
     public void ask(final String question, final Map<String, Serializable> options) {
         if (!killed) {
             userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_ASK, game.getId(), new GameClientMessage(getGameView(), options, question)))

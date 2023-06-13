@@ -273,18 +273,6 @@ public class CheckBoxList extends JList {
         }
 
         /**
-         * Returns the component at the specified index.
-         *
-         * @param index an index into this list
-         * @return the component at the specified index
-         * @throws ArrayIndexOutOfBoundsException
-         */
-        @Override
-        public Object getElementAt(int index) {
-            return super.getElementAt(index);//.getContent();
-        }
-
-        /**
          * Searches for the first occurrence of elem.
          *
          * @param elem an object

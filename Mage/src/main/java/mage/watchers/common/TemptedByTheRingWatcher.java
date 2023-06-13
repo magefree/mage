@@ -34,11 +34,6 @@ public class TemptedByTheRingWatcher extends Watcher {
         }
     }
 
-    @Override
-    public void reset() {
-        super.reset();
-    }
-
     public static int getCount(UUID playerId, Game game) {
         return game
                 .getState()

@@ -104,12 +104,6 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
     }
 
     @Override
-    public boolean removeFromZone(Game game, Zone fromZone, Ability source) {
-        // zone contains only one main card
-        return super.removeFromZone(game, fromZone, source);
-    }
-
-    @Override
     public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         if (isCopy()) { // same as meld cards
             super.updateZoneChangeCounter(game, event);
@@ -226,16 +220,5 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         leftHalfCard.setOwnerId(ownerId);
         rightHalfCard.getAbilities().setControllerId(ownerId);
         rightHalfCard.setOwnerId(ownerId);
-    }
-
-    @Override
-    public int getManaValue() {
-        // 202.3d The converted mana cost of a split card not on the stack or of a fused split spell on the
-        // stack is determined from the combined mana costs of its halves. Otherwise, while a split card is
-        // on the stack, the converted mana cost of the spell is determined by the mana cost of the half
-        // that was chosen to be cast. See rule 708, “Split Cards.”
-
-        // split card and it's halfes contains own mana costs, so no need to rewrite logic
-        return super.getManaValue();
     }
 }

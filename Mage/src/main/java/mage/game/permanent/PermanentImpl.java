@@ -381,16 +381,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public Abilities<Ability> getAbilities() {
-        return super.getAbilities();
-    }
-
-    @Override
-    public Abilities<Ability> getAbilities(Game game) {
-        return super.getAbilities(game);
-    }
-
-    @Override
     public Ability addAbility(Ability ability, UUID sourceId, Game game) {
         // singleton abilities -- only one instance
         // other abilities -- any amount of instances

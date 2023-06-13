@@ -367,13 +367,6 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
     protected abstract void paintCard(Graphics2D g);
 
     @Override
-    public void paint(Graphics g) {
-        // card rotating implemented by top layer panel
-        // TODO: is CardPanel can be used without MageLayer?
-        super.paint(g);
-    }
-
-    @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) (g.create());
 
