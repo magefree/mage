@@ -13,7 +13,7 @@ import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -27,7 +27,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class FlamescrollCelebrant extends ModalDoubleFacesCard {
+public final class FlamescrollCelebrant extends ModalDoubleFacedCard {
 
     public FlamescrollCelebrant(UUID ownerId, CardSetInfo setInfo) {
         super(

@@ -17,7 +17,7 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public final class ValkiGodOfLies extends ModalDoubleFacesCard {
+public final class ValkiGodOfLies extends ModalDoubleFacedCard {
 
     public ValkiGodOfLies(UUID ownerId, CardSetInfo setInfo) {
         super(

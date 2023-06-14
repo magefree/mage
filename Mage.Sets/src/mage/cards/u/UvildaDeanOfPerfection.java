@@ -33,7 +33,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class UvildaDeanOfPerfection extends ModalDoubleFacesCard {
+public final class UvildaDeanOfPerfection extends ModalDoubleFacedCard {
 
     public UvildaDeanOfPerfection(UUID ownerId, CardSetInfo setInfo) {
         super(
@@ -197,7 +197,7 @@ class UvildaDeanOfPerfectionTriggeredAbility extends TriggeredAbilityImpl {
                 && sourceObject instanceof Card
                 && ((Card) sourceObject).getCounters(game).getCount(CounterType.HONE) == 0
                 && event.getAmount() > 0
-                && event.getData().equals("hone");
+                && event.getData().equals(CounterType.HONE.getName());
     }
 
     @Override

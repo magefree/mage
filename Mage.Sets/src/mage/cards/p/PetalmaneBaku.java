@@ -40,7 +40,7 @@ public final class PetalmaneBaku extends CardImpl {
                 new GenericManaCost(1),
                 "Add X mana of any one color",
                 true, new CountersSourceCount(CounterType.KI));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI));
         this.addAbility(ability);
     }
 

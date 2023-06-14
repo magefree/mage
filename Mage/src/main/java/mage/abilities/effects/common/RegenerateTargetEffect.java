@@ -72,7 +72,7 @@ public class RegenerateTargetEffect extends ReplacementEffectImpl {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("Regenerate ");
+        sb.append("regenerate ");
         Target target = mode.getTargets().get(0);
         if (target != null) {
             if (!target.getTargetName().toLowerCase(Locale.ENGLISH).startsWith("another")) {

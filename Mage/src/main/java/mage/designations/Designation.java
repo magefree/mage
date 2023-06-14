@@ -25,7 +25,6 @@ import java.util.UUID;
  */
 public abstract class Designation extends MageObjectImpl {
 
-    private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCostsImpl emptyCost = new ManaCostsImpl<>();
 
     private final DesignationType designationType;
@@ -82,7 +81,7 @@ public abstract class Designation extends MageObjectImpl {
 
     @Override
     public ObjectColor getFrameColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     public DesignationType getDesignationType() {
@@ -121,12 +120,12 @@ public abstract class Designation extends MageObjectImpl {
 
     @Override
     public ObjectColor getColor() {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override

@@ -113,9 +113,8 @@ class SylvanPrimordialEffect extends OneShotEffect {
             }
         }
         if (destroyedCreatures > 0) {
-            new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(destroyedCreatures, filterForest), true, true).apply(game, source);
+            new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(destroyedCreatures, filterForest), true).apply(game, source);
         }
         return result;
     }
 }
-

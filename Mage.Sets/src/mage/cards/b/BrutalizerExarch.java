@@ -45,7 +45,7 @@ public final class BrutalizerExarch extends CardImpl {
         // When Brutalizer Exarch enters the battlefield, choose one
         // - Search your library for a creature card, reveal it, then shuffle your library and put that card on top of it;
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterCreatureCard("a creature card"));
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true, true), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true), false);
         // or put target noncreature permanent on the bottom of its owner's library.
         Mode mode = new Mode(new BrutalizerExarchEffect2());
         mode.addTarget(new TargetPermanent(filter));

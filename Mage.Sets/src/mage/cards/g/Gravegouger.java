@@ -34,7 +34,7 @@ public final class Gravegouger extends CardImpl {
         this.addAbility(ability);
 
         // When Gravegouger leaves the battlefield, return the exiled cards to their owner's graveyard.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.GRAVEYARD), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.GRAVEYARD).withText(true, false), false));
     }
 
     private Gravegouger(final Gravegouger card) {

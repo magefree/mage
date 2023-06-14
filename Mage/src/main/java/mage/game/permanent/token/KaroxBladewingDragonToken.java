@@ -13,7 +13,7 @@ import mage.constants.SuperType;
 public final class KaroxBladewingDragonToken extends TokenImpl {
 
     public KaroxBladewingDragonToken() {
-        super("Karox Bladewing Token", "legendary 4/4 red Dragon creature token with flying");
+        super("Karox Bladewing", "Karox Bladewing, a legendary 4/4 red Dragon creature token with flying");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.supertype.add(SuperType.LEGENDARY);

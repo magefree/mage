@@ -85,7 +85,7 @@ class AshnodTheUncaringTriggeredAbility extends TriggeredAbilityImpl {
                 .noneMatch(SacrificeCost.class::isInstance)) {
             return false;
         }
-        Permanent permanent = game.getPermanent(stackAbility.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(stackAbility.getSourceId());
         if (permanent == null || (!permanent.isArtifact(game) && !permanent.isCreature(game))) {
             return false;
         }

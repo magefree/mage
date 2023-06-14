@@ -27,7 +27,7 @@ public class CyclingAbility extends ActivatedAbilityImpl {
     }
 
     public CyclingAbility(Cost cost, FilterCard filter, String text) {
-        super(Zone.HAND, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), cost);
+        super(Zone.HAND, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), cost);
         this.addCost(new CyclingDiscardCost());
         this.cost = cost;
         this.text = text;

@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardScanner;
 import mage.constants.Rarity;
@@ -314,7 +314,7 @@ public class BoosterGenerationTest extends MageTestBase {
             );
             assertEquals(
                     "Booster must contain exactly 1 MDFC", 1,
-                    booster.stream().filter(ModalDoubleFacesCard.class::isInstance).count()
+                    booster.stream().filter(ModalDoubleFacedCard.class::isInstance).count()
             );
         }
     }
@@ -390,7 +390,7 @@ public class BoosterGenerationTest extends MageTestBase {
                     fail("Booster can't have more than three snow lands");
             }
 
-            long mdfcCount = booster.stream().filter(ModalDoubleFacesCard.class::isInstance).count();
+            long mdfcCount = booster.stream().filter(ModalDoubleFacedCard.class::isInstance).count();
             assertTrue("Booster can't have more than one MDFC", mdfcCount < 2);
 
             foundMDFC |= mdfcCount > 0;

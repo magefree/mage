@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -38,7 +37,7 @@ public final class ProteanHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // If damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageAndRemoveCountersEffect(true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageAndRemoveCountersEffect(true, false, true)));
 
         // Whenever a +1/+1 counter is removed from Protean Hydra, put two +1/+1 counters on it at the beginning of the next end step.
         this.addAbility(new ProteanHydraAbility());
@@ -76,10 +75,7 @@ public final class ProteanHydra extends CardImpl {
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getData().equals("+1/+1") && event.getTargetId().equals(this.getSourceId())) {
-                return true;
-            }
-            return false;
+            return event.getData().equals(CounterType.P1P1.getName()) && event.getTargetId().equals(this.getSourceId());
         }
 
         @Override

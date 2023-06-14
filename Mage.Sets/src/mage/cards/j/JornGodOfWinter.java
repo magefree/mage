@@ -12,7 +12,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentCard;
@@ -28,7 +28,7 @@ import java.util.UUID;
 /**
  * @author weirddan455
  */
-public final class JornGodOfWinter extends ModalDoubleFacesCard {
+public final class JornGodOfWinter extends ModalDoubleFacedCard {
 
     private static final FilterPermanent filter = new FilterPermanent();
     private static final FilterPermanentCard filter2 = new FilterPermanentCard("snow permanent card from your graveyard");

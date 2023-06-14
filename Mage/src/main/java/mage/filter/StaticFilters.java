@@ -291,6 +291,11 @@ public final class StaticFilters {
         FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT.setLockedFilter(true);
     }
 
+    public static final FilterArtifactOrEnchantmentPermanent FILTER_PERMANENT_ARTIFACTS_AND_ENCHANTMENTS = new FilterArtifactOrEnchantmentPermanent("artifacts and enchantments");
+
+    static {
+        FILTER_PERMANENT_ARTIFACTS_AND_ENCHANTMENTS.setLockedFilter(true);
+    }
 
     public static final FilterControlledPermanent FILTER_PERMANENT_CONTROLLED_ARTIFACT_OR_ENCHANTMENT = new FilterControlledPermanent("artifact or enchantment you control");
 
@@ -553,6 +558,13 @@ public final class StaticFilters {
                 CardType.CREATURE.getPredicate()
         ));
         FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_ANOTHER_TARGET_CREATURE = new FilterCreaturePermanent("another target creature");
+
+    static {
+        FILTER_ANOTHER_TARGET_CREATURE.add(AnotherPredicate.instance);
+        FILTER_ANOTHER_TARGET_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_ANOTHER_CREATURE_TARGET_2 = new FilterCreaturePermanent("another target creature");
@@ -1075,6 +1087,28 @@ public final class StaticFilters {
     static {
         FILTER_PERMANENT_LEGENDARY.add(SuperType.LEGENDARY.getPredicate());
         FILTER_PERMANENT_LEGENDARY.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_CREATURE_LEGENDARY = new FilterCreaturePermanent("legendary creature");
+
+    static {
+        FILTER_CREATURE_LEGENDARY.add(SuperType.LEGENDARY.getPredicate());
+        FILTER_CREATURE_LEGENDARY.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_CREATURES_LEGENDARY = new FilterCreaturePermanent("legendary creatures");
+
+    static {
+        FILTER_CREATURES_LEGENDARY.add(SuperType.LEGENDARY.getPredicate());
+        FILTER_CREATURES_LEGENDARY.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_CONTROLLED_CREATURE_LEGENDARY = new FilterCreaturePermanent("legendary creature you control");
+
+    static {
+        FILTER_CONTROLLED_CREATURE_LEGENDARY.add(TargetController.YOU.getControllerPredicate());
+        FILTER_CONTROLLED_CREATURE_LEGENDARY.add(SuperType.LEGENDARY.getPredicate());
+        FILTER_CONTROLLED_CREATURE_LEGENDARY.setLockedFilter(true);
     }
 
     public static final FilterCard FILTER_CARD_ARTIFACT_OR_CREATURE = new FilterCard("artifact or creature card");

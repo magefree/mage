@@ -11,6 +11,7 @@ import mage.constants.Duration;
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
+import mage.constants.SubType;
 
 /**
  * @author TheElk801
@@ -21,7 +22,7 @@ public final class LazotepPlating extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Amass 1.
-        this.getSpellAbility().addEffect(new AmassEffect(1));
+        this.getSpellAbility().addEffect(new AmassEffect(1, SubType.ZOMBIE));
 
         // You and permanents you control gain hexproof until end of turn.
         Effect effect = new GainAbilityControllerEffect(

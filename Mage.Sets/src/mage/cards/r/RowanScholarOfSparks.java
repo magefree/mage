@@ -16,7 +16,7 @@ import mage.abilities.hint.Hint;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 /**
  * @author TheElk801
  */
-public final class RowanScholarOfSparks extends ModalDoubleFacesCard {
+public final class RowanScholarOfSparks extends ModalDoubleFacedCard {
 
     private static final FilterCard filter = new FilterInstantOrSorceryCard("instant and sorcery spells");
 

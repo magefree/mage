@@ -26,7 +26,8 @@ public enum TargetController {
     NEXT,
     EACH_PLAYER,
     ENCHANTED,
-    SOURCE_TARGETS;
+    SOURCE_TARGETS,
+    MONARCH;
 
     private final OwnerPredicate ownerPredicate;
     private final PlayerPredicate playerPredicate;
@@ -79,6 +80,8 @@ public enum TargetController {
                     return permanent != null && input.getObject().isOwnedBy(permanent.getAttachedTo());
                 case SOURCE_TARGETS:
                     return card.isOwnedBy(input.getSource().getFirstTarget());
+                case MONARCH:
+                    return card.isOwnedBy(game.getMonarchId());
                 case ANY:
                     return true;
                 default:
@@ -118,6 +121,8 @@ public enum TargetController {
                     return !player.getId().equals(playerId);
                 case SOURCE_TARGETS:
                     return player.equals(input.getSource().getFirstTarget());
+                case MONARCH:
+                    return player.getId().equals(game.getMonarchId());
                 default:
                     throw new UnsupportedOperationException("TargetController not supported");
             }
@@ -159,6 +164,8 @@ public enum TargetController {
                     return permanent != null && input.getObject().isControlledBy(permanent.getAttachedTo());
                 case SOURCE_TARGETS:
                     return object.isControlledBy(input.getSource().getFirstTarget());
+                case MONARCH:
+                    return object.isControlledBy(game.getMonarchId());
                 case ANY:
                     return true;
                 default:

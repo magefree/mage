@@ -24,7 +24,6 @@ import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.util.CardUtil;
 import mage.util.trace.TraceInfo;
 import org.apache.log4j.Logger;
 
@@ -541,7 +540,7 @@ public class ContinuousEffects implements Serializable {
             } else if (!type.needPlayCardAbility() && objectToCheck instanceof AdventureCardSpell) {
                 // adventure spell uses alternative characteristics for spell/stack, all other cases must use main card
                 idToCheck = ((AdventureCardSpell) objectToCheck).getMainCard().getId();
-            } else if (!type.needPlayCardAbility() && objectToCheck instanceof ModalDoubleFacesCardHalf) {
+            } else if (!type.needPlayCardAbility() && objectToCheck instanceof ModalDoubleFacedCardHalf) {
                 // each mdf side uses own characteristics to check for playing, all other cases must use main card
                 // rules:
                 // "If an effect allows you to play a land or cast a spell from among a group of cards,
@@ -549,7 +548,7 @@ public class ContinuousEffects implements Serializable {
                 // of that effect. For example, if Sejiri Shelter / Sejiri Glacier is in your graveyard
                 // and an effect allows you to play lands from your graveyard, you could play Sejiri Glacier.
                 // That effect doesn't allow you to cast Sejiri Shelter."
-                idToCheck = ((ModalDoubleFacesCardHalf) objectToCheck).getMainCard().getId();
+                idToCheck = ((ModalDoubleFacedCardHalf) objectToCheck).getMainCard().getId();
             } else {
                 idToCheck = objectId;
             }

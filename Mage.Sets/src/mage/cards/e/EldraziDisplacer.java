@@ -12,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -22,12 +21,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class EldraziDisplacer extends CardImpl {
-
-    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("another target creature");
-
-    static {
-        FILTER.add(AnotherPredicate.instance);
-    }
 
     public EldraziDisplacer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -41,7 +34,7 @@ public final class EldraziDisplacer extends CardImpl {
         // {2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new ManaCostsImpl<>("{2}{C}"));
         ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, false, "it").concatBy(", then"));
-        ability.addTarget(new TargetCreaturePermanent(FILTER));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 

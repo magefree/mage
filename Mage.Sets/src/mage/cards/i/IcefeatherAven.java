@@ -13,8 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -22,12 +21,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class IcefeatherAven extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public IcefeatherAven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}");
@@ -43,7 +36,7 @@ public final class IcefeatherAven extends CardImpl {
         this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{G}{U}")));
         // When Icefeather Aven is turned face up, you may return another target creature to its owner's hand.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ReturnToHandTargetEffect(), false, true);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
 
     }

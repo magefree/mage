@@ -36,7 +36,7 @@ public final class HissingQuagmire extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {1}{B}{G}: Hissing Quagmire becomes a 2/2 black and green Elemental creature with deathtouch until end of turn. It's still a land.
-        Effect effect = new BecomesCreatureSourceEffect(new HissingQuagmireToken(), "land", Duration.EndOfTurn);
+        Effect effect = new BecomesCreatureSourceEffect(new HissingQuagmireToken(), CardType.LAND, Duration.EndOfTurn);
         effect.setText("{this} becomes a 2/2 black and green Elemental creature with deathtouch until end of turn. It's still a land");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{B}{G}")));
     }

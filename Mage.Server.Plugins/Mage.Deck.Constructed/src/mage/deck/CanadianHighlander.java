@@ -18,8 +18,7 @@ public class CanadianHighlander extends Constructed {
 
     static {
         pointMap.put("Ancestral Recall", 7);
-        pointMap.put("Balance", 1);
-        pointMap.put("Birthing Pod", 2);
+        pointMap.put("Birthing Pod", 1);
         pointMap.put("Black Lotus", 7);
         pointMap.put("Crop Rotation", 1);
         pointMap.put("Demonic Tutor", 4);
@@ -28,26 +27,22 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Gifts Ungiven", 2);
         pointMap.put("Imperial Seal", 1);
         pointMap.put("Intuition", 1);
-        pointMap.put("Library of Alexandria", 1);
-        pointMap.put("Mana Crypt", 4);
+        pointMap.put("Mana Crypt", 5);
         pointMap.put("Mana Drain", 1);
         pointMap.put("Mana Vault", 1);
         pointMap.put("Merchant Scroll", 1);
-        pointMap.put("Mind Twist", 1);
         pointMap.put("Mox Emerald", 3);
         pointMap.put("Mox Jet", 3);
         pointMap.put("Mox Pearl", 3);
         pointMap.put("Mox Ruby", 3);
         pointMap.put("Mox Sapphire", 3);
-        pointMap.put("Mystical Tutor", 2);
+        pointMap.put("Mystical Tutor", 1);
         pointMap.put("Natural Order", 3);
         pointMap.put("Price of Progress", 1);
-        pointMap.put("Protean Hulk", 2);
         pointMap.put("Sol Ring", 4);
-        pointMap.put("Spellseeker", 2);
+        pointMap.put("Spellseeker", 3);
         pointMap.put("Strip Mine", 3);
-        pointMap.put("Summoner's Pact", 1);
-        pointMap.put("Survival of the Fittest", 2);
+        pointMap.put("Survival of the Fittest", 1);
         pointMap.put("Tainted Pact", 1);
         pointMap.put("Thassa's Oracle", 7);
         pointMap.put("Time Vault", 7);
@@ -57,11 +52,11 @@ public class CanadianHighlander extends Constructed {
         pointMap.put("Transmute Artifact", 1);
         pointMap.put("Treasure Cruise", 1);
         pointMap.put("True-Name Nemesis", 1);
-        pointMap.put("Umezawa's Jitte", 1);
-        pointMap.put("Underworld Breach", 2);
+        pointMap.put("Umezawa's Jitte", 2);
+        pointMap.put("Underworld Breach", 3);
         pointMap.put("Vampiric Tutor", 2);
         pointMap.put("Wishclaw Talisman", 1);
-        pointMap.put("Yawgmoth's Will", 2);
+        pointMap.put("Yawgmoth's Will", 1);
     }
 
     public CanadianHighlander() {

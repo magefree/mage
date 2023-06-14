@@ -24,7 +24,7 @@ public final class PersonalTutor extends CardImpl {
 
 
         // Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
-        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true));
     }
 
     private PersonalTutor(final PersonalTutor card) {

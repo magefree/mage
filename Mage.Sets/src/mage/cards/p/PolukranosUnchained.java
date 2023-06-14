@@ -51,7 +51,7 @@ public final class PolukranosUnchained extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new PolukranosUnchainedEffect()));
 
         // If damage would be dealt to Polukranos while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from it.
-        this.addAbility(new SimpleStaticAbility(new PreventDamageAndRemoveCountersEffect(true)));
+        this.addAbility(new SimpleStaticAbility(new PreventDamageAndRemoveCountersEffect(true, true, true)));
 
         // {1}{B}{G}: Polukranos fights another target creature.
         Ability ability = new SimpleActivatedAbility(new FightTargetSourceEffect(), new ManaCostsImpl<>("{1}{B}{G}"));

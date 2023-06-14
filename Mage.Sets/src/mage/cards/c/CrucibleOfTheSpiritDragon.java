@@ -49,7 +49,7 @@ public final class CrucibleOfTheSpiritDragon extends CardImpl {
                 new CrucibleOfTheSpiritDragonManaBuilder(),
                 false
         );
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE));
         this.addAbility(ability);
     }
 

@@ -9,6 +9,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
@@ -111,7 +112,7 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
             permanent = game.getPermanentEntering(event.getTargetId());
         }
         return permanent != null && event.getAmount() > 0 && permanent.isCreature(game)
-                && event.getData() != null && event.getData().equals("+1/+1");
+                && event.getData() != null && event.getData().equals(CounterType.P1P1.getName());
     }
 
     @Override

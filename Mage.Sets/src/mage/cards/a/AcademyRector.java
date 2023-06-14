@@ -31,7 +31,7 @@ public final class AcademyRector extends CardImpl {
         // When Academy Rector dies, you may exile it. If you do, search your library for an enchantment card, put that card onto the battlefield, then shuffle your library.
         this.addAbility(new DiesSourceTriggeredAbility(
                 new DoIfCostPaid(
-                        new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterEnchantmentCard())),
+                        new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterEnchantmentCard()), false, true),
                         new ExileSourceFromGraveCost(),
                         "Exile to search for an enchantment?"
                 ), false

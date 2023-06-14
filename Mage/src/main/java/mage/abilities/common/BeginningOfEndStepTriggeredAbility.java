@@ -92,6 +92,14 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
                     this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return true;
+            case MONARCH:
+                if (!event.getPlayerId().equals(game.getMonarchId())) {
+                    break;
+                }
+                if (getTargets().isEmpty()) {
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
+                return true;
         }
         return false;
     }
@@ -120,6 +128,8 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
                 return "At the beginning of the end step of enchanted permanent's controller, " + generateConditionString();
             case ENCHANTED:
                 return "At the beginning of enchanted player's end step, " + generateConditionString();
+            case MONARCH:
+                return "At the beginning the monarch's end step, " + generateConditionString();
         }
         return "";
     }

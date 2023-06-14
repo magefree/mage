@@ -45,7 +45,6 @@ public class Dungeon extends CommandObjectImpl {
     }
 
     private static final List<CardType> cardTypes = Collections.unmodifiableList(Arrays.asList(CardType.DUNGEON));
-    private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
 
     private UUID controllerId;
@@ -238,17 +237,17 @@ public class Dungeon extends CommandObjectImpl {
 
     @Override
     public ObjectColor getColor() {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getFrameColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override

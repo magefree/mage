@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
@@ -95,7 +96,7 @@ class HibernationsEndEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null && player != null) {
-            int newConvertedCost = sourcePermanent.getCounters(game).getCount("age");
+            int newConvertedCost = sourcePermanent.getCounters(game).getCount(CounterType.AGE);
             FilterCard filter = new FilterCard("creature card with mana value " + newConvertedCost);
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, newConvertedCost));
             filter.add(CardType.CREATURE.getPredicate());

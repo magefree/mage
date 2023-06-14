@@ -3,9 +3,8 @@ package mage.cards.s;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
 import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -16,7 +15,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class SejiriShelter extends ModalDoubleFacesCard {
+public final class SejiriShelter extends ModalDoubleFacedCard {
 
     public SejiriShelter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

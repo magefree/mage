@@ -174,8 +174,8 @@ class EvelynTheCovetousManaEffect extends AsThoughEffectImpl implements AsThough
                     && EvelynTheCovetousWatcher.checkExile(affectedControllerId, card, game, 0);
         }
         CardState cardState;
-        if (card instanceof ModalDoubleFacesCard) {
-            cardState = game.getLastKnownInformationCard(((ModalDoubleFacesCard) card).getLeftHalfCard().getId(), Zone.EXILED);
+        if (card instanceof ModalDoubleFacedCard) {
+            cardState = game.getLastKnownInformationCard(((ModalDoubleFacedCard) card).getLeftHalfCard().getId(), Zone.EXILED);
         } else {
             cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
         }

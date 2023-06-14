@@ -37,7 +37,7 @@ public final class WormfangBehemoth extends CardImpl {
 
         // When Wormfang Behemoth leaves the battlefield, return the exiled cards to their owner's hand.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(
-                new ReturnFromExileForSourceEffect(Zone.HAND), false
+                new ReturnFromExileForSourceEffect(Zone.HAND).withText(true, false), false
         ));
     }
 

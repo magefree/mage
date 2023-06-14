@@ -56,7 +56,7 @@ public final class RasputinTheOneiromancer extends CardImpl {
                 new TapSourceCost(),
                 "Add that much {C}",
                 true, new CountersSourceCount(CounterType.DREAM));
-        ability2.addCost(new RemoveVariableCountersSourceCost(CounterType.DREAM.createInstance(), 1,
+        ability2.addCost(new RemoveVariableCountersSourceCost(CounterType.DREAM, 1,
                 "Remove one or more dream counters from {this}"));
         this.addAbility(ability2);
 

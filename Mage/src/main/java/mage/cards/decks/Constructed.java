@@ -16,14 +16,6 @@ public class Constructed extends DeckValidator {
 
     private static final Logger logger = Logger.getLogger(Constructed.class);
 
-    private static final List<String> anyNumberCardsAllowed = new ArrayList<>(Arrays.asList(
-            "Relentless Rats", "Shadowborn Apostle", "Rat Colony",
-            "Persistent Petitioners", "Seven Dwarves", "Dragon's Approach"
-    ));
-    protected static final List<String> basicLandNames = new ArrayList<>(Arrays.asList(
-            "Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes", "Snow-Covered Forest",
-            "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"
-    ));
     protected List<String> banned = new ArrayList<>();
     protected List<String> restricted = new ArrayList<>();
     protected List<String> setCodes = new ArrayList<>();
@@ -351,13 +343,7 @@ public class Constructed extends DeckValidator {
     protected boolean checkCounts(int maxCopies, Map<String, Integer> counts) {
         boolean valid = true;
         for (Entry<String, Integer> entry : counts.entrySet()) {
-            if (entry.getValue() > maxCopies
-                    && !basicLandNames.contains(entry.getKey())
-                    && !anyNumberCardsAllowed.contains(entry.getKey())) {
-                addError(DeckValidatorErrorType.OTHER, entry.getKey(), "Too many: " + entry.getValue(), true);
-                valid = false;
-            }
-            if (entry.getValue() > 7 && entry.getKey().equals("Seven Dwarves")) {
+            if (entry.getValue() > getMaxCopies(entry.getKey(), maxCopies)) {
                 addError(DeckValidatorErrorType.OTHER, entry.getKey(), "Too many: " + entry.getValue(), true);
                 valid = false;
             }

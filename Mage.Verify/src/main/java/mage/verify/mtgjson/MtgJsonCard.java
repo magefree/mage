@@ -65,6 +65,18 @@ public final class MtgJsonCard {
             return getNameAsFace();
         }
 
-        return asciiName != null ? asciiName : name;
+        return getNameAsASCII();
+    }
+
+    public String getNameAsUnicode() {
+        return this.name;
+    }
+
+    public String getNameAsASCII() {
+        return this.asciiName != null ? this.asciiName : this.name;
+    }
+
+    public boolean isUseUnicodeName() {
+        return this.asciiName != null && this.name != null && !this.asciiName.equals(this.name);
     }
 }

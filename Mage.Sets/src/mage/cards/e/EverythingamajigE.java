@@ -92,7 +92,7 @@ class UrzasHotTubEffect extends OneShotEffect {
                 if (discardedCard != null) {
                     FilterCard filter = new FilterCard();
                     filter.add(new UrzasHotTubPredicate(discardedCard.getName()));
-                    return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true).apply(game, source);
+                    return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true).apply(game, source);
                 }
             }
         }
@@ -113,8 +113,8 @@ class UrzasHotTubPredicate implements Predicate<MageObject> {
         String name = input.getName();
         if (input instanceof SplitCard) {
             return sharesWordWithName(((SplitCard) input).getLeftHalfCard().getName()) || sharesWordWithName(((SplitCard) input).getRightHalfCard().getName());
-        } else if (input instanceof ModalDoubleFacesCard) {
-            return sharesWordWithName(((ModalDoubleFacesCard) input).getLeftHalfCard().getName()) || sharesWordWithName(((ModalDoubleFacesCard) input).getRightHalfCard().getName());
+        } else if (input instanceof ModalDoubleFacedCard) {
+            return sharesWordWithName(((ModalDoubleFacedCard) input).getLeftHalfCard().getName()) || sharesWordWithName(((ModalDoubleFacedCard) input).getRightHalfCard().getName());
         } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
             SplitCard card = (SplitCard) ((Spell) input).getCard();
             return sharesWordWithName(card.getLeftHalfCard().getName()) || sharesWordWithName(card.getRightHalfCard().getName());

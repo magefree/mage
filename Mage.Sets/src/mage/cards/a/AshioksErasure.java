@@ -49,7 +49,7 @@ public final class AshioksErasure extends CardImpl {
 
         // When Ashiok's Erasure leaves the battlefield, return the exiled card to its owner's hand.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(
-                Zone.HAND, false, true
+                Zone.HAND
         ).setText("return the exiled card to its owner's hand"), false));
     }
 

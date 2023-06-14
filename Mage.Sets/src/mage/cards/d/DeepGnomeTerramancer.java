@@ -7,7 +7,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -57,7 +56,7 @@ class DeepGnomeTerramancerTriggeredAbility extends TriggeredAbilityImpl {
         FilterCard filter = new FilterCard("Plains card");
         filter.add(SubType.PLAINS.getPredicate());
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        addEffect(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay));
+        addEffect(new SearchLibraryPutInPlayEffect(target, true));
     }
 
     DeepGnomeTerramancerTriggeredAbility(DeepGnomeTerramancerTriggeredAbility ability) {

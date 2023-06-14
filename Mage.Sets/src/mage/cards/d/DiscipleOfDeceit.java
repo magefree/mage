@@ -87,7 +87,7 @@ class DiscipleOfDeceitEffect extends OneShotEffect {
                     String targetName = "card with mana value of " + card.getManaValue();
                     FilterCard filter = new FilterCard(targetName);
                     filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, card.getManaValue()));
-                    return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true).apply(game, source);                    
+                    return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true).apply(game, source);
                 }
             }
             return true;

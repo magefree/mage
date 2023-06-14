@@ -15,7 +15,7 @@ import mage.abilities.hint.common.LandsYouControlHint;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -28,7 +28,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class JadziOracleOfArcavios extends ModalDoubleFacesCard {
+public final class JadziOracleOfArcavios extends ModalDoubleFacedCard {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
             StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, ComparisonType.MORE_THAN, 7
