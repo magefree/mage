@@ -25,7 +25,7 @@ public enum CreatureDiedControlledCondition implements Condition {
         return game
                 .getState()
                 .getWatcher(CreaturesDiedWatcher.class)
-                .getAmountOfCreaturesDiedThisTurnByOwner(source.getControllerId()) > 0;
+                .getAmountOfCreaturesDiedThisTurnByController(source.getControllerId()) > 0;
     }
 
     @Override
