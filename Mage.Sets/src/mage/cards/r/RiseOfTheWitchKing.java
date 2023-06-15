@@ -103,7 +103,7 @@ class RiseOfTheWitchKingEffect extends OneShotEffect {
             permanent.sacrifice(source, game);
         }
         Cards yourGrave = new CardsImpl(controller.getGraveyard());
-        yourGrave.removeIf(uuid -> !game.getCard(uuid).isCreature(game));
+        yourGrave.removeIf(uuid -> !game.getCard(uuid).isPermanent(game));
         if (yours == null || !yours.sacrifice(source, game)) {
             return true;
         }
