@@ -87,6 +87,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Galadriel of Lothlorien", 206, Rarity.RARE, mage.cards.g.GaladrielOfLothlorien.class));
         cards.add(new SetCardInfo("Galadriel, Gift-Giver", 296, Rarity.RARE, mage.cards.g.GaladrielGiftGiver.class));
         cards.add(new SetCardInfo("Gandalf the Grey", 207, Rarity.RARE, mage.cards.g.GandalfTheGrey.class));
+        cards.add(new SetCardInfo("Gandalf's Sanction", 208, Rarity.UNCOMMON, mage.cards.g.GandalfsSanction.class));
         cards.add(new SetCardInfo("Gandalf, Friend of the Shire", 50, Rarity.UNCOMMON, mage.cards.g.GandalfFriendOfTheShire.class));
         cards.add(new SetCardInfo("Generous Ent", 169, Rarity.COMMON, mage.cards.g.GenerousEnt.class));
         cards.add(new SetCardInfo("Gift of Strands", 170, Rarity.UNCOMMON, mage.cards.g.GiftOfStrands.class));
