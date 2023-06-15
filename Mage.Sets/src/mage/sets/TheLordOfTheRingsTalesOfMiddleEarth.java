@@ -106,6 +106,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Grond, the Gatebreaker", 89, Rarity.UNCOMMON, mage.cards.g.GrondTheGatebreaker.class));
         cards.add(new SetCardInfo("Gwaihir the Windlord", 210, Rarity.UNCOMMON, mage.cards.g.GwaihirTheWindlord.class));
         cards.add(new SetCardInfo("Haradrim Spearmaster", 135, Rarity.COMMON, mage.cards.h.HaradrimSpearmaster.class));
+        cards.add(new SetCardInfo("Haunt of the Dead Marshes", 90, Rarity.COMMON, mage.cards.h.HauntOfTheDeadMarshes.class));
         cards.add(new SetCardInfo("Hew the Entwood", 136, Rarity.MYTHIC, mage.cards.h.HewTheEntwood.class));
         cards.add(new SetCardInfo("Hithlain Knots", 54, Rarity.COMMON, mage.cards.h.HithlainKnots.class));
         cards.add(new SetCardInfo("Hobbit's Sting", 20, Rarity.COMMON, mage.cards.h.HobbitsSting.class));
