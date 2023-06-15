@@ -148,6 +148,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Necroblossom Snarl", 321, Rarity.RARE, mage.cards.n.NecroblossomSnarl.class));
         cards.add(new SetCardInfo("Night's Whisper", 205, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Notion Thief", 270, Rarity.RARE, mage.cards.n.NotionThief.class));
+        cards.add(new SetCardInfo("Oath of Eorl", 64, Rarity.RARE, mage.cards.o.OathOfEorl.class));
         cards.add(new SetCardInfo("Oboro, Palace in the Clouds", 371, Rarity.MYTHIC, mage.cards.o.OboroPalaceInTheClouds.class));
         cards.add(new SetCardInfo("Opt", 194, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Orchard Strider", 253, Rarity.COMMON, mage.cards.o.OrchardStrider.class));
