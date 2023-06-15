@@ -846,31 +846,6 @@
 |Generate|TOK:ORI|Thopter|1||ThopterColorlessToken|
 |Generate|TOK:ORI|Thopter|2||ThopterColorlessToken|
 |Generate|TOK:ORI|Zombie|||ZombieToken|
-|Generate|TOK:PC2|Angel|||AngelToken|
-|Generate|TOK:PC2|Beast|||BeastToken|
-|Generate|TOK:PC2|Boar|||BoarToken|
-|Generate|TOK:PC2|Eldrazi Spawn|||EldraziSpawnToken|
-|Generate|TOK:PC2|Phyrexian Germ|||PhyrexianGermToken|
-|Generate|TOK:PC2|Goblin|||GoblinToken|
-|Generate|TOK:PC2|Hellion|||HellionToken|
-|Generate|TOK:PC2|Insect|||InsectToken|
-|Generate|TOK:PC2|Ooze|||Ooze2Token|
-|Generate|TOK:PC2|Plant|||PlantToken|
-|Generate|TOK:PC2|Saproling|||SaprolingToken|
-|Generate|TOK:PC2|Spider|||PenumbraSpiderToken|
-|Generate|TOK:PCY|Minion|||MinionToken|
-|Generate|TOK:PCY|Squirrel|||SquirrelToken|
-|Generate|TOK:PLS|Hippo|||HippoToken|
-|Generate|TOK:PLS|Saproling|||SaprolingToken|
-|Generate|TOK:PLS|Spirit|||SpiritWhiteToken|
-|Generate|TOK:RAV|Centaur|||HuntedCentaurToken|
-|Generate|TOK:RAV|Goblin|||GoblinToken|
-|Generate|TOK:RAV|Horror|||HorrorToken|
-|Generate|TOK:RAV|Knight|||HuntedDragonKnightToken|
-|Generate|TOK:RAV|Saproling|||SaprolingToken|
-|Generate|TOK:RAV|Spirit|||SpiritWhiteToken|
-|Generate|TOK:RAV|Voja|||VojaToken|
-|Generate|TOK:RAV|Faerie|||FaerieToken|
 |Generate|TOK:RIX|Elemental|1||RekindlingPhoenixToken|
 |Generate|TOK:RIX|Elemental|2||RedElementalToken|
 |Generate|TOK:RIX|Golem|||GoldForgeGarrisonGolemToken|
@@ -894,11 +869,6 @@
 |Generate|TOK:RTR|Saproling|||SaprolingToken|
 |Generate|TOK:RTR|Soldier|||SoldierToken|
 |Generate|TOK:RTR|Wurm|||WurmWithTrampleToken|
-|Generate|TOK:SCG|Angel|||AngelToken|
-|Generate|TOK:SCG|Beast|||BeastToken2|
-|Generate|TOK:SCG|Dragon|||DragonToken2|
-|Generate|TOK:SCG|Goblin|||GoblinToken|
-|Generate|TOK:SCG|Soldier|||SoldierToken|
 |Generate|TOK:SHM|Elemental|1||DinOfTheFireherdToken|
 |Generate|TOK:SHM|Elemental|2||Elemental11HasteToken|
 |Generate|TOK:SHM|Elf Warrior|1||ElfWarriorToken|
@@ -927,10 +897,6 @@
 |Generate|TOK:SOI|Vampire Knight|||VampireKnightToken|
 |Generate|TOK:SOI|Wolf|||WolfToken|
 |Generate|TOK:SOI|Zombie|||ZombieToken|
-|Generate|TOK:SOK|Elemental|||ElementalTokenWithHaste|
-|Generate|TOK:SOK|Snake|||SnakeToken|
-|Generate|TOK:SOK|Urami|||UramiToken|
-|Generate|TOK:SOK|Warrior|||RallyTheHordeWarriorToken|
 |Generate|TOK:SOM|Cat|||CatToken|
 |Generate|TOK:SOM|Goblin|||GoblinToken|
 |Generate|TOK:SOM|Golem|||GolemToken|
