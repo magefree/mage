@@ -1,10 +1,9 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.TheRingTemptsYouChooseAnotherTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CreatureDiedControlledCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -13,9 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.game.Game;
 import mage.game.permanent.token.HumanSoldierToken;
-import mage.watchers.common.CreaturesDiedWatcher;
 
 import java.util.UUID;
 
@@ -36,8 +33,8 @@ public final class FaramirFieldCommander extends CardImpl {
         // At the beginning of your end step, if a creature died under your control this turn, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), TargetController.YOU,
-                FaramirFieldCommanderCondition.instance, false
-        ));
+                CreatureDiedControlledCondition.instance, false
+        ).addHint(CreatureDiedControlledCondition.getHint()));
 
         // Whenever the Ring tempts you, if you chose a creature other than Faramir, Field Commander as your Ring-bearer, create a 1/1 white Human Soldier creature token.
         this.addAbility(new TheRingTemptsYouChooseAnotherTriggeredAbility(new CreateTokenEffect(new HumanSoldierToken())));
@@ -53,19 +50,3 @@ public final class FaramirFieldCommander extends CardImpl {
     }
 }
 
-enum FaramirFieldCommanderCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game
-                .getState()
-                .getWatcher(CreaturesDiedWatcher.class)
-                .getAmountOfCreaturesDiedThisTurnByOwner(source.getControllerId()) > 0;
-    }
-
-    @Override
-    public String toString() {
-        return "a creature died under your control this turn";
-    }
-}
