@@ -88,13 +88,13 @@ class VorinclexMonstrousRaiderEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player targetPlayer = game.getPlayer(event.getTargetId());
-        Permanent targetPermanet = game.getPermanentEntering(event.getTargetId());
-        if (targetPermanet == null) {
-            targetPermanet = game.getPermanent(event.getTargetId());
+        Permanent targetPermanent = game.getPermanentEntering(event.getTargetId());
+        if (targetPermanent == null) {
+            targetPermanent = game.getPermanent(event.getTargetId());
         }
 
         // on a permanent or player
-        if (targetPlayer == null && targetPermanet == null) {
+        if (targetPlayer == null && targetPermanent == null) {
             return false;
         }
 

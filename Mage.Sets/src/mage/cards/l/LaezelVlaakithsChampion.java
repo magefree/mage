@@ -76,7 +76,10 @@ class LaezelVlaakithsChampionEffect extends ReplacementEffectImpl {
         if (source.isControlledBy(event.getTargetId())) {
             return true;
         }
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = game.getPermanentEntering(event.getTargetId());
+        if (permanent == null) {
+            permanent = game.getPermanent(event.getTargetId());
+        }
         return permanent != null
                 && (permanent.isCreature(game) || permanent.isPlaneswalker(game))
                 && permanent.isControlledBy(source.getControllerId());
