@@ -81,8 +81,6 @@ class DoublingSeasonTokenEffect extends ReplacementEffectImpl {
 
 class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
 
-    private boolean landPlayed = false; // a played land is not an effect
-
     DoublingSeasonCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
         staticText = "If an effect would put one or more counters on a permanent you control, it puts twice that many of those counters on that permanent instead";
@@ -111,13 +109,13 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl {
         }
         if (permanent == null) {
             permanent = game.getPermanentEntering(event.getTargetId());
-            landPlayed = (permanent != null
-                    && permanent.isLand(game));  // a played land is not an effect
+            if (permanent != null && permanent.isLand(game)) {
+                return false; // a played land is not an effect (e.g. Gemstone Mine)
+            }
         }
         return permanent != null
                 && permanent.isControlledBy(source.getControllerId())
-                && event.getAmount() > 0
-                && !landPlayed;  // example: gemstone mine being played as a land drop
+                && event.getAmount() > 0;
     }
 
     @Override
