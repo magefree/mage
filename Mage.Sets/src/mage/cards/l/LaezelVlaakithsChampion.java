@@ -70,7 +70,7 @@ class LaezelVlaakithsChampionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!source.isControlledBy(event.getPlayerId())) {
+        if (event.getAmount() <= 0 || !source.isControlledBy(event.getPlayerId())) {
             return false;
         }
         if (source.isControlledBy(event.getTargetId())) {
