@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -73,7 +74,7 @@ class VorinclexMonstrousRaiderEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (source.isControlledBy(event.getPlayerId())) {
-            event.setAmountForCounters(2 * event.getAmount(), true);
+            event.setAmountForCounters(CardUtil.overflowMultiply(event.getAmount(), 2), true);
         } else if (game.getOpponents(event.getPlayerId()).contains(source.getControllerId())) {
             event.setAmountForCounters(Math.floorDiv(event.getAmount(), 2), true);
         }

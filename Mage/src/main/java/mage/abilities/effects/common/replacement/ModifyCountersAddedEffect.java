@@ -36,7 +36,7 @@ public class ModifyCountersAddedEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmountForCounters(event.getAmount() + 1, true);
+        event.setAmountForCounters(CardUtil.overflowInc(event.getAmount(), 1), true);
         return false;
     }
 
