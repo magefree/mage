@@ -13,6 +13,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -63,7 +64,7 @@ class MowuLoyalCompanionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmountForCounters(event.getAmount() + 1, true);
+        event.setAmountForCounters(CardUtil.overflowInc(event.getAmount(), 1), true);
         return false;
     }
 

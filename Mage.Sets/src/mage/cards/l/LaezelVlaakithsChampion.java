@@ -11,6 +11,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -59,7 +60,7 @@ class LaezelVlaakithsChampionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmountForCounters(event.getAmount() + 1, true);
+        event.setAmountForCounters(CardUtil.overflowInc(event.getAmount(), 1), true);
         return false;
     }
 
@@ -70,7 +71,7 @@ class LaezelVlaakithsChampionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!source.isControlledBy(event.getPlayerId())) {
+        if (event.getAmount() <= 0 || !source.isControlledBy(event.getPlayerId())) {
             return false;
         }
         if (source.isControlledBy(event.getTargetId())) {

@@ -75,14 +75,14 @@ class BlightbeetleEffect extends ContinuousRuleModifyingEffectImpl {
         if (!event.getData().equals(CounterType.P1P1.getName())) {
             return false;
         }
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = game.getPermanentEntering(event.getTargetId());
+        if (permanent == null) {
+            permanent = game.getPermanent(event.getTargetId());
+        }
         if (permanent == null || !permanent.isCreature(game)) {
             return false;
         }
         Player player = game.getPlayer(permanent.getControllerId());
-        if (player == null || !player.hasOpponent(source.getControllerId(), game)) {
-            return false;
-        }
-        return true;
+        return player != null && player.hasOpponent(source.getControllerId(), game);
     }
 }
