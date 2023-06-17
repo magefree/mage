@@ -114,6 +114,7 @@
 |Generate|EMBLEM:MOM|Emblem Wrenn|||WrennAndRealmbreakerEmblem|
 |Generate|EMBLEM:MOC|Emblem Elspeth|||ElspethSunsChampionEmblem|
 |Generate|EMBLEM:MOC|Emblem Teferi|||TeferisTalentEmblem|
+|Generate|EMBLEM:DIS|Emblem Momir|||MomirEmblem|
 
 # ALL PLANES
 # Usage hints:
