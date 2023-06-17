@@ -359,6 +359,7 @@ public class ConnectDialog extends MageDialog {
         btnFindMain.setText("X");
         btnFindMain.setToolTipText("Connect to xmage.de (first Europe server, most popular, registration needs)");
         btnFindMain.setAlignmentY(0.0F);
+        btnFindMain.setEnabled(false);
         btnFindMain.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnFindMain.setMaximumSize(new java.awt.Dimension(42, 23));
         btnFindMain.setMinimumSize(new java.awt.Dimension(42, 23));
@@ -397,6 +398,7 @@ public class ConnectDialog extends MageDialog {
         btnFindUs.setText("US");
         btnFindUs.setToolTipText("Connect to us.xmage.today (USA, use any username without registration)");
         btnFindUs.setAlignmentY(0.0F);
+        btnFindUs.setEnabled(false);
         btnFindUs.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnFindUs.setPreferredSize(new java.awt.Dimension(23, 23));
         btnFindUs.addActionListener(new java.awt.event.ActionListener() {
@@ -418,6 +420,7 @@ public class ConnectDialog extends MageDialog {
         btnFindEU.setText("EU");
         btnFindEU.setToolTipText("Connect to eu.xmage.today (second Europe server, use any username without registration)");
         btnFindEU.setAlignmentY(0.0F);
+        btnFindEU.setEnabled(false);
         btnFindEU.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnFindEU.setMaximumSize(new java.awt.Dimension(42, 23));
         btnFindEU.setMinimumSize(new java.awt.Dimension(42, 23));
@@ -474,6 +477,7 @@ public class ConnectDialog extends MageDialog {
         btnCheckStatus.setText("Check online status");
         btnCheckStatus.setToolTipText("Go to servers online statuses page");
         btnCheckStatus.setAlignmentY(0.0F);
+        btnCheckStatus.setEnabled(false);
         btnCheckStatus.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnCheckStatus.setPreferredSize(new java.awt.Dimension(23, 23));
         btnCheckStatus.addActionListener(new java.awt.event.ActionListener() {

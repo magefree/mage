@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
+import mage.watchers.common.AbilityResolvedWatcher;
 
 import java.util.UUID;
 
@@ -35,7 +36,7 @@ public final class ElrondLordOfRivendell extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_CREATURE, false, true
         );
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(2, new TheRingTemptsYouEffect()));
-        this.addAbility(ability);
+        this.addAbility(ability, new AbilityResolvedWatcher());
     }
 
     private ElrondLordOfRivendell(final ElrondLordOfRivendell card) {
