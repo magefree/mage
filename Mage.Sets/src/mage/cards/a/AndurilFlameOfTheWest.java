@@ -51,6 +51,7 @@ public final class AndurilFlameOfTheWest extends CardImpl {
 }
 
 class AndurilFlameOfTheWestEffect extends OneShotEffect {
+
     AndurilFlameOfTheWestEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create two tapped 1/1 white Spirit creature tokens with flying. If that creature is legendary, instead create two of those tokens that are tapped and attacking";
@@ -73,6 +74,11 @@ class AndurilFlameOfTheWestEffect extends OneShotEffect {
         }
 
         return new SpiritWhiteToken().putOntoBattlefield(2, game, source, source.getControllerId(), true, equipped.isLegendary() );
+    }
+
+    @Override
+    public AndurilFlameOfTheWestEffect copy() {
+        return new AndurilFlameOfTheWestEffect(this);
     }
 
     @Override
