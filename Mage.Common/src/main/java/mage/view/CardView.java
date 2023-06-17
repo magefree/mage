@@ -241,6 +241,10 @@ public class CardView extends SimpleCardView {
         if (cardView.cardIcons != null) {
             cardView.cardIcons.forEach(icon -> this.cardIcons.add(icon.copy()));
         }
+
+        this.playableStats = cardView.playableStats.copy();
+        this.isChoosable = cardView.isChoosable;
+        this.isSelected = cardView.isSelected;
     }
 
     /**
@@ -698,6 +702,10 @@ public class CardView extends SimpleCardView {
         this.cardNumber = "";
         this.imageNumber = 0;
         this.rarity = Rarity.COMMON;
+
+        this.playableStats = emblem.playableStats.copy();
+        this.isChoosable = emblem.isChoosable();
+        this.isSelected = emblem.isSelected();
     }
 
     public CardView(DungeonView dungeon) {
@@ -716,6 +724,10 @@ public class CardView extends SimpleCardView {
         this.cardNumber = "";
         this.imageNumber = 0;
         this.rarity = Rarity.COMMON;
+
+        this.playableStats = dungeon.playableStats.copy();
+        this.isChoosable = dungeon.isChoosable();
+        this.isSelected = dungeon.isSelected();
     }
 
     public CardView(PlaneView plane) {
@@ -735,6 +747,10 @@ public class CardView extends SimpleCardView {
         this.cardNumber = "";
         this.imageNumber = 0;
         this.rarity = Rarity.COMMON;
+
+        this.playableStats = plane.playableStats.copy();
+        this.isChoosable = plane.isChoosable();
+        this.isSelected = plane.isSelected();
     }
 
     public CardView(Designation designation, StackAbility stackAbility) {
@@ -754,6 +770,7 @@ public class CardView extends SimpleCardView {
         this.cardNumber = "";
         this.imageNumber = 0;
         this.rarity = Rarity.COMMON;
+        // no playable/chooseable marks for designations
     }
 
     public CardView(boolean empty) {

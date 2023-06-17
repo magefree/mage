@@ -4104,10 +4104,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     /**
-     * Creates a list of card ids that are currently playable.<br>
-     * Used to mark the playable cards in GameView Also contains number of
-     * playable abilities for that object (it's just info, server decides to
-     * show choose dialog or not)
+     * Creates a list of card ids that are currently playable.
+     * <br>
+     * Used to mark the playable cards in GameView
+     * Also contains number of playable abilities for that object
+     * <br>
+     * GUI only feature for the users, all real logic processing by server side
+     * in getPlayable and other places
      *
      * @param game
      * @return A Set of cardIds that are playable and amount of playable
@@ -4137,6 +4140,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (spell != null) {
                     putToPlayableObjects(playableObjects, spell.getId(), ability);
                 }
+            } else {
+                // TODO: is it an error or a normal use case?
+                throw new IllegalStateException("Wrong code usage: ability without source id");
             }
         }
         return new PlayableObjectsList(playableObjects);
