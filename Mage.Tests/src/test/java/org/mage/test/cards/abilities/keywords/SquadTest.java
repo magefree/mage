@@ -43,7 +43,7 @@ public class SquadTest extends CardTestPlayerBase {
     private final static String swamp = "Swamp";
 
     @Test
-    public void test_Squad_DontUse_Manual() {
+    public void test_Squad_NotUsed_Manual() {
         addCard(Zone.BATTLEFIELD, playerA, swamp, 5);
         addCard(Zone.HAND, playerA, flagellant);
 
@@ -60,7 +60,7 @@ public class SquadTest extends CardTestPlayerBase {
     @Test
     //@Ignore
     // TODO: enable test after replicate ability will be supported by AI
-    public void test_Squad_DontUse_AI() {
+    public void test_Squad_NotUsed_AI() {
         addCard(Zone.BATTLEFIELD, playerA, swamp, 5 - 1); // haven't all mana
         addCard(Zone.HAND, playerA, flagellant);
 

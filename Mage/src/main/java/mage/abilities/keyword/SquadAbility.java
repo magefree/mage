@@ -69,7 +69,7 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
 
     private SquadAbility(final SquadAbility ability) {
         super(ability);
-        this.squadCost = ability.squadCost;
+        this.squadCost = ability.squadCost.copy();
 
         setRuleAtTheTop(true);
         this.activations.putAll(ability.activations);
@@ -103,7 +103,7 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
             --zcc;
         }
 
-        return zcc + ""; // + "-" + source.getSourceId() ???
+        return zcc + "|" + source.getSourceId();
     }
 
     private void activateSquad(int count, Ability source, Game game) {
