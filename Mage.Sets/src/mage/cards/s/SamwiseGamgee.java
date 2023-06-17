@@ -17,6 +17,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterHistoricCard;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.FoodToken;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -34,6 +35,7 @@ public final class SamwiseGamgee extends CardImpl {
     private static final FilterCard filter3 = new FilterHistoricCard("historic card from your graveyard");
 
     static {
+        filter.add(AnotherPredicate.instance);
         filter.add(TokenPredicate.FALSE);
     }
 
