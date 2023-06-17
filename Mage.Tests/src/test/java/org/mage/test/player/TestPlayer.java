@@ -33,6 +33,7 @@ import mage.game.GameImpl;
 import mage.game.Graveyard;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
+import mage.game.command.CommandObject;
 import mage.game.draft.Draft;
 import mage.game.events.GameEvent;
 import mage.game.match.Match;
@@ -885,6 +886,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check emblem count: emblem name, count
+                        if (params[0].equals(CHECK_COMMAND_EMBLEM_COUNT) && params.length == 3) {
+                            assertEmblemCount(action, game, computerPlayer, params[1], Integer.parseInt(params[2]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check color: card name, colors, must have
                         if (params[0].equals(CHECK_COMMAND_COLOR) && params.length == 4) {
                             assertColor(action, game, computerPlayer, params[1], params[2], Boolean.parseBoolean(params[3]));
@@ -1146,16 +1154,28 @@ public class TestPlayer implements Player {
 
     private void printCards(List<Card> cards, boolean sorted) {
         System.out.println("Total cards: " + cards.size());
+        printObjectsInner(cards, sorted);
+    }
 
+    private void printObjects(List<MageObject> objects) {
+        printObjects(objects, true);
+    }
+
+    private void printObjects(List<MageObject> objects, boolean sorted) {
+        System.out.println("Total objects: " + objects.size());
+        printObjectsInner(objects, sorted);
+    }
+
+    private void printObjectsInner(List<? extends MageObject> objects, boolean sorted) {
         List<String> data;
         if (sorted) {
-            data = cards.stream()
-                    .map(Card::getIdName)
+            data = objects.stream()
+                    .map(MageObject::getIdName)
                     .sorted()
                     .collect(Collectors.toList());
         } else {
-            data = cards.stream()
-                    .map(Card::getIdName)
+            data = objects.stream()
+                    .map(MageObject::getIdName)
                     .collect(Collectors.toList());
         }
 
@@ -1496,6 +1516,26 @@ public class TestPlayer implements Player {
             printCards(game.getCommanderCardsFromCommandZone(player, CommanderCardType.COMMANDER_OR_OATHBREAKER));
             printEnd();
             Assert.fail(action.getActionName() + " - must have " + count + " cards with name " + cardName + ", but found " + realCount);
+        }
+    }
+
+    private void assertEmblemCount(PlayerAction action, Game game, Player player, String emblemName, int count) {
+        int realCount = 0;
+        List<MageObject> realList = new ArrayList<>();
+        for (CommandObject commandObject : game.getState().getCommand()) {
+            if (commandObject.getControllerId().equals(player.getId())) {
+                realList.add(commandObject);
+                if (hasObjectTargetNameOrAlias(commandObject, emblemName)) {
+                    realCount++;
+                }
+            }
+        }
+
+        if (realCount != count) {
+            printStart(game, "Emblems of " + player.getName());
+            printObjects(realList);
+            printEnd();
+            Assert.fail(action.getActionName() + " - must have " + count + " emblems with name " + emblemName + ", but found " + realCount);
         }
     }
 
