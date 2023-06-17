@@ -18,6 +18,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("Anduril, Flame of the West", 236, Rarity.MYTHIC, mage.cards.a.AndurilFlameOfTheWest.class));
         cards.add(new SetCardInfo("Aragorn and Arwen, Wed", 287, Rarity.MYTHIC, mage.cards.a.AragornAndArwenWed.class));
         cards.add(new SetCardInfo("Aragorn, Company Leader", 191, Rarity.RARE, mage.cards.a.AragornCompanyLeader.class));
         cards.add(new SetCardInfo("Aragorn, the Uniter", 192, Rarity.MYTHIC, mage.cards.a.AragornTheUniter.class));
