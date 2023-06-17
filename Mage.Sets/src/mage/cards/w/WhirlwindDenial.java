@@ -64,32 +64,36 @@ class WhirlwindDenialEffect extends OneShotEffect {
         // then pays that amount. Then each other opponent in turn order does the same.
         // Then all spells and abilities that weren't paid for are countered at the same time.
         // (2020-01-24)
-        Player opponent = game.getPlayer(game.getActivePlayerId());
-        do { // loop through all players starting with active to pay costs, but skip controller
-            if (game.getOpponents(source.getControllerId()).contains(opponent.getId())) {
-                for (StackObject stackObject : game.getStack()) {
-                    if (stackObject.getControllerId() != opponent.getId()) {
-                        continue;
-                    }
-                    if (cost.canPay(source, source, opponent.getId(), game)
-                            && opponent.chooseUse(outcome, "Pay {4} to prevent "
-                            + stackObject.getIdName() + " from being countered?", source, game)
-                            && cost.pay(source, game, source, stackObject.getControllerId(), false)) {
-                        game.informPlayers(opponent.getLogName()
-                                + " pays the cost to prevent "
-                                + stackObject.getIdName()
-                                + " from being countered.");
-                    } else {
-                        game.informPlayers(stackObject.getIdName()
-                                + " will be countered as "
-                                + opponent.getLogName()
-                                + " does not pay the cost.");
-                        stackObjectsToCounter.add(stackObject); // will be countered all at the end
-                    }
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            if (playerId.equals(source.getControllerId())) {
+                continue; // only opponents have to pay
+            }
+            Player player = game.getPlayer(playerId);
+            for (StackObject stackObject : game.getStack()) {
+                if (!playerId.equals(stackObject.getControllerId())) {
+                    continue; // opponents only choose for their own spells/abilities
+                }
+                if (player == null) { // shouldn't be null, but if somehow so, they can't pay, so counter it
+                    stackObjectsToCounter.add(stackObject);
+                    continue;
+                }
+                if (cost.canPay(source, source, playerId, game)
+                && player.chooseUse(outcome, "Pay {4} to prevent "
+                        + stackObject.getIdName() + " from being countered?", source, game)
+                        && cost.pay(source, game, source, stackObject.getControllerId(), false)) {
+                    game.informPlayers(player.getLogName()
+                            + " pays the cost to prevent "
+                            + stackObject.getIdName()
+                            + " from being countered.");
+                } else {
+                    game.informPlayers(stackObject.getIdName()
+                            + " will be countered as "
+                            + player.getLogName()
+                            + " does not pay the cost.");
+                    stackObjectsToCounter.add(stackObject); // will be countered all at the end
                 }
             }
-            opponent = game.getPlayerList().getNextInRange(opponent, game); // move to next player
-        } while (opponent.getId() != game.getActivePlayerId()); // stop once looped through all players
+        }
         for (StackObject toCounter : stackObjectsToCounter) {
             game.getStack().counter(toCounter.getId(), source, game);
         }
