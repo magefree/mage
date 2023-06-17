@@ -37,7 +37,7 @@ public final class AndurilFlameOfTheWest extends CardImpl {
         this.addAbility(new AttacksAttachedTriggeredAbility(new AndurilFlameOfTheWestEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(2,false));
+        this.addAbility(new EquipAbility(2, false));
     }
 
     private AndurilFlameOfTheWest(final AndurilFlameOfTheWest card) {
