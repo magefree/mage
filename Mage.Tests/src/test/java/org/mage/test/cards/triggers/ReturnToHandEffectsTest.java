@@ -220,7 +220,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
     @Test
     public void testDemonicVigorAgain() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.HAND, playerA, "Dryad Sophisticate");
         addCard(Zone.HAND, playerA, "Demonic Vigor", 2);
         addCard(Zone.HAND, playerA, "Disfigure", 2);
@@ -249,7 +249,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
     @Test
     public void testDemonicVigorMDFCAgain() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.HAND, playerA, "Tangled Florahedron");
         addCard(Zone.HAND, playerA, "Demonic Vigor", 2);
         addCard(Zone.HAND, playerA, "Disfigure", 2);
