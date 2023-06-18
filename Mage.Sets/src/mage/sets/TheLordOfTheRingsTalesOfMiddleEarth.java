@@ -49,6 +49,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Deceive the Messenger", 47, Rarity.COMMON, mage.cards.d.DeceiveTheMessenger.class));
         cards.add(new SetCardInfo("Denethor, Ruling Steward", 198, Rarity.UNCOMMON, mage.cards.d.DenethorRulingSteward.class));
         cards.add(new SetCardInfo("Display of Power", 119, Rarity.RARE, mage.cards.d.DisplayOfPower.class));
+        cards.add(new SetCardInfo("Doors of Durin", 199, Rarity.RARE, mage.cards.d.DoorsOfDurin.class));
         cards.add(new SetCardInfo("Dreadful as the Storm", 48, Rarity.COMMON, mage.cards.d.DreadfulAsTheStorm.class));
         cards.add(new SetCardInfo("Dunedain Blade", 6, Rarity.COMMON, mage.cards.d.DunedainBlade.class));
         cards.add(new SetCardInfo("Dunedain Rangers", 159, Rarity.UNCOMMON, mage.cards.d.DunedainRangers.class));
