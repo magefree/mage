@@ -119,6 +119,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Hithlain Knots", 54, Rarity.COMMON, mage.cards.h.HithlainKnots.class));
         cards.add(new SetCardInfo("Hobbit's Sting", 20, Rarity.COMMON, mage.cards.h.HobbitsSting.class));
         cards.add(new SetCardInfo("Horn of Gondor", 240, Rarity.RARE, mage.cards.h.HornOfGondor.class));
+        cards.add(new SetCardInfo("Horn of the Mark", 241, Rarity.RARE, mage.cards.h.HornOfTheMark.class));
         cards.add(new SetCardInfo("Horses of the Bruinen", 55, Rarity.UNCOMMON, mage.cards.h.HorsesOfTheBruinen.class));
         cards.add(new SetCardInfo("Improvised Club", 137, Rarity.COMMON, mage.cards.i.ImprovisedClub.class));
         cards.add(new SetCardInfo("Inherited Envelope", 242, Rarity.COMMON, mage.cards.i.InheritedEnvelope.class));
