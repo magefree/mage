@@ -30,7 +30,7 @@ public class AuratouchedMageTest extends CardTestPlayerBase {
      * made the Mage an artifact, for example, you could search for an Aura with
      * “enchant artifact.” (2005-10-01)
      */
-    @Test // TODO: fix very rare random fails (16 of 1000)
+    @Test
     public void testAuratouchedMageEffectHasMadeIntoTypeArtifact() {
         //Expected result: An effect has made Auratouched Mage into an artifact upon entering the battlefield.  An aura that only works on artifacts should work.
         setStrictChooseMode(true);
@@ -38,7 +38,7 @@ public class AuratouchedMageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 8);
         addCard(Zone.HAND, playerA, "Auratouched Mage"); //5W cost
         addCard(Zone.HAND, playerA, "Argent Mutation"); //2U cost.  Target is an artifact until end of turn
-        addCard(Zone.LIBRARY, playerA, "Relic Ward"); //Only enchants an artifact permanent
+        addCard(Zone.LIBRARY, playerA, "Relic Ward", 2); //Only enchants an artifact permanent (second copy avoids rare fail to find target)
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Auratouched Mage");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);  // Wait for Auratouched Mage to ETB
