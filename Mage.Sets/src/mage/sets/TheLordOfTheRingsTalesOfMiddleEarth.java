@@ -104,6 +104,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Fireleaper", 133, Rarity.UNCOMMON, mage.cards.g.GoblinFireleaper.class));
         cards.add(new SetCardInfo("Gollum's Bite", 85, Rarity.UNCOMMON, mage.cards.g.GollumsBite.class));
         cards.add(new SetCardInfo("Gollum, Patient Plotter", 84, Rarity.UNCOMMON, mage.cards.g.GollumPatientPlotter.class));
+        cards.add(new SetCardInfo("Gorbag of Minas Morgul", 86, Rarity.UNCOMMON, mage.cards.g.GorbagOfMinasMorgul.class));
         cards.add(new SetCardInfo("Gothmog, Morgul Lieutenant", 87, Rarity.UNCOMMON, mage.cards.g.GothmogMorgulLieutenant.class));
         cards.add(new SetCardInfo("Great Hall of the Citadel", 254, Rarity.COMMON, mage.cards.g.GreatHallOfTheCitadel.class));
         cards.add(new SetCardInfo("Grey Havens Navigator", 53, Rarity.COMMON, mage.cards.g.GreyHavensNavigator.class));
