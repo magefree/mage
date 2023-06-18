@@ -34,7 +34,7 @@ public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
 
     @Test
     public void testAttackerLessThanTadeasAttackBlockerPowerEqualAttacker() {
-        attack(1, playerA, "Sweet-Gum Recluse");
+        attack(1, playerA, "Canopy Spider");
         runCode("check blocking", 1, PhaseStep.DECLARE_BLOCKERS, playerB, (info, player, game) -> {
             Permanent equalPowerBlocker = getBlocker("Dryad Arbor", game);
             Assertions.assertTrue(game.getCombat().getGroups().get(0).canBlock(equalPowerBlocker, game),
