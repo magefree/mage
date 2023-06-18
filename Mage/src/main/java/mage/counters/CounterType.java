@@ -100,6 +100,7 @@ public enum CounterType {
     INCARNATION("incarnation"),
     INDESTRUCTIBLE("indestructible"),
     INFECTION("infection"),
+    INFLUENCE("influence"),
     INGENUITY("ingenuity"),
     INTEL("intel"),
     INTERVENTION("intervention"),
