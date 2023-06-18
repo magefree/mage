@@ -131,6 +131,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Lash of the Balrog", 92, Rarity.COMMON, mage.cards.l.LashOfTheBalrog.class));
         cards.add(new SetCardInfo("Last March of the Ents", 172, Rarity.MYTHIC, mage.cards.l.LastMarchOfTheEnts.class));
         cards.add(new SetCardInfo("Legolas, Counter of Kills", 212, Rarity.UNCOMMON, mage.cards.l.LegolasCounterOfKills.class));
+        cards.add(new SetCardInfo("Lembas", 243, Rarity.COMMON, mage.cards.l.Lembas.class));
         cards.add(new SetCardInfo("Lobelia Sackville-Baggins", 93, Rarity.RARE, mage.cards.l.LobeliaSackvilleBaggins.class));
         cards.add(new SetCardInfo("Long List of the Ents", 174, Rarity.UNCOMMON, mage.cards.l.LongListOfTheEnts.class));
         cards.add(new SetCardInfo("Lorien Revealed", 60, Rarity.COMMON, mage.cards.l.LorienRevealed.class));
