@@ -67,7 +67,7 @@ public final class GimliMournfulAvenger extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter
         );
         ability.addEffect(new GimliMournfulAvengerEffect());
-        this.addAbility(ability);
+        this.addAbility(ability, new AbilityResolvedWatcher());
     }
 
     private GimliMournfulAvenger(final GimliMournfulAvenger card) {
