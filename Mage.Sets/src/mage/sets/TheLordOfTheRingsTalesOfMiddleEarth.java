@@ -143,6 +143,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Lothlorien Lookout", 175, Rarity.COMMON, mage.cards.l.LothlorienLookout.class));
         cards.add(new SetCardInfo("Lotho, Corrupt Shirriff", 213, Rarity.RARE, mage.cards.l.LothoCorruptShirriff.class));
         cards.add(new SetCardInfo("Many Partings", 176, Rarity.COMMON, mage.cards.m.ManyPartings.class));
+        cards.add(new SetCardInfo("March from the Black Gate", 94, Rarity.UNCOMMON, mage.cards.m.MarchFromTheBlackGate.class));
         cards.add(new SetCardInfo("Mauhur, Uruk-hai Captain", 214, Rarity.UNCOMMON, mage.cards.m.MauhurUrukHaiCaptain.class));
         cards.add(new SetCardInfo("Meriadoc Brandybuck", 177, Rarity.UNCOMMON, mage.cards.m.MeriadocBrandybuck.class));
         cards.add(new SetCardInfo("Minas Tirith", 256, Rarity.RARE, mage.cards.m.MinasTirith.class));
