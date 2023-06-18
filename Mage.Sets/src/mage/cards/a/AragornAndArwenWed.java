@@ -16,8 +16,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
 
@@ -26,7 +26,12 @@ import java.util.UUID;
  */
 public final class AragornAndArwenWed extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("other creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, 1);
     private static final Hint hint = new ValueHint("Other creatures you control", xValue);
 
@@ -48,6 +53,7 @@ public final class AragornAndArwenWed extends CardImpl {
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)
         );
         ability.addEffect(new GainLifeEffect(xValue));
+        ability.addHint(hint);
         this.addAbility(ability);
     }
 
