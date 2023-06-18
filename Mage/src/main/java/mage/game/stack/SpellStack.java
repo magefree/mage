@@ -9,6 +9,7 @@ import mage.abilities.Ability;
 import mage.constants.PutCards;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -142,6 +143,6 @@ public class SpellStack extends ArrayDeque<StackObject> {
 
     @Override
     public String toString() {
-        return this.size() + (this.isEmpty() ? "" : " (top: " + this.getFirst().toString() + ")");
+        return this.size() + (this.isEmpty() ? "" : " (top: " + CardUtil.substring(this.getFirst().toString(), 100) + ")");
     }
 }
