@@ -76,6 +76,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Visionary", 240, Rarity.COMMON, mage.cards.e.ElvishVisionary.class));
         cards.add(new SetCardInfo("Elvish Warmaster", 241, Rarity.RARE, mage.cards.e.ElvishWarmaster.class));
         cards.add(new SetCardInfo("Ensnaring Bridge", 350, Rarity.MYTHIC, mage.cards.e.EnsnaringBridge.class));
+        cards.add(new SetCardInfo("Erestor of the Council", 53, Rarity.RARE, mage.cards.e.ErestorOfTheCouncil.class));
         cards.add(new SetCardInfo("Essence Warden", 242, Rarity.COMMON, mage.cards.e.EssenceWarden.class));
         cards.add(new SetCardInfo("Everflowing Chalice", 278, Rarity.UNCOMMON, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Evolving Wilds", 306, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
