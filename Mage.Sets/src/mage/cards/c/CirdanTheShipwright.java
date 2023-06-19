@@ -103,6 +103,10 @@ class CirdanTheShipwrightEffect extends OneShotEffect {
 
 class CirdanTheShipwrightVote extends VoteHandler<Player> {
 
+    CirdanTheShipwrightVote() {
+        this.secret = true;
+    }
+
     @Override
     protected Set<Player> getPossibleVotes(Ability source, Game game) {
         return game

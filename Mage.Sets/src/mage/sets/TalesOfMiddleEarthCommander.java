@@ -241,6 +241,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Trading Post", 288, Rarity.RARE, mage.cards.t.TradingPost.class));
         cards.add(new SetCardInfo("Tranquil Cove", 340, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 341, Rarity.UNCOMMON, mage.cards.t.TranquilThicket.class));
+        cards.add(new SetCardInfo("Trap the Trespassers", 25, Rarity.RARE, mage.cards.t.TrapTheTrespassers.class));
         cards.add(new SetCardInfo("Travel Through Caradhras", 44, Rarity.RARE, mage.cards.t.TravelThroughCaradhras.class));
         cards.add(new SetCardInfo("Treasure Nabber", 230, Rarity.RARE, mage.cards.t.TreasureNabber.class));
         cards.add(new SetCardInfo("Unbreakable Formation", 179, Rarity.RARE, mage.cards.u.UnbreakableFormation.class));

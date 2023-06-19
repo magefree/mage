@@ -18,7 +18,7 @@ public abstract class VoteHandler<T> {
 
     protected final Map<UUID, List<T>> playerMap = new HashMap<>();
     protected VoteHandlerAI<T> aiVoteHint = null;
-    private boolean secret = false;
+    protected boolean secret = false;
 
     public void doVotes(Ability source, Game game) {
         doVotes(source, game, null);
@@ -188,9 +188,5 @@ public abstract class VoteHandler<T> {
                 .filter(e -> !e.getValue().stream().allMatch(playerMap.get(playerId)::contains))
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toSet());
-    }
-
-    public void setSecret(boolean secret) {
-        this.secret = secret;
     }
 }
