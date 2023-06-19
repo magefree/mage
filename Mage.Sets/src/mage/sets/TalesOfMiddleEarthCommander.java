@@ -48,6 +48,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cavern of Souls", 362, Rarity.MYTHIC, mage.cards.c.CavernOfSouls.class));
         cards.add(new SetCardInfo("Choked Estuary", 299, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 275, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
+        cards.add(new SetCardInfo("Cirdan the Shipwright", 50, Rarity.RARE, mage.cards.c.CirdanTheShipwright.class));
         cards.add(new SetCardInfo("Clifftop Retreat", 300, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
         cards.add(new SetCardInfo("Cloudstone Curio", 349, Rarity.MYTHIC, mage.cards.c.CloudstoneCurio.class));
         cards.add(new SetCardInfo("Colossal Whale", 186, Rarity.RARE, mage.cards.c.ColossalWhale.class));
