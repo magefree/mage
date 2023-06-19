@@ -82,6 +82,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Extract from Darkness", 266, Rarity.UNCOMMON, mage.cards.e.ExtractFromDarkness.class));
         cards.add(new SetCardInfo("Fact or Fiction", 190, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Faithless Looting", 215, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
+        cards.add(new SetCardInfo("Faramir, Steward of Gondor", 54, Rarity.RARE, mage.cards.f.FaramirStewardOfGondor.class));
         cards.add(new SetCardInfo("Farhaven Elf", 243, Rarity.COMMON, mage.cards.f.FarhavenElf.class));
         cards.add(new SetCardInfo("Farseek", 244, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Fealty to the Realm", 21, Rarity.RARE, mage.cards.f.FealtyToTheRealm.class));
