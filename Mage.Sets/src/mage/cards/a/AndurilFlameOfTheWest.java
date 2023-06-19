@@ -8,10 +8,7 @@ import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SpiritWhiteToken;
@@ -34,7 +31,7 @@ public final class AndurilFlameOfTheWest extends CardImpl {
 
         // Whenever equipped creature attacks, create two tapped 1/1 white Spirit creature tokens with flying.
         // If that creature is legendary, instead create two of those tokens that are tapped and attacking.
-        this.addAbility(new AttacksAttachedTriggeredAbility(new AndurilFlameOfTheWestEffect()));
+        this.addAbility(new AttacksAttachedTriggeredAbility(new AndurilFlameOfTheWestEffect(), AttachmentType.EQUIPMENT, false, SetTargetPointer.PERMANENT));
 
         // Equip {2}
         this.addAbility(new EquipAbility(2, false));
@@ -64,17 +61,8 @@ class AndurilFlameOfTheWestEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment == null) {
-            return false;
-        }
-
-        Permanent equipped = game.getPermanent(equipment.getAttachedTo());
-        if (equipped == null) {
-            return false;
-        }
-
-        return new SpiritWhiteToken().putOntoBattlefield(2, game, source, source.getControllerId(), true, equipped.isLegendary());
+        Permanent equipped = this.getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        return new SpiritWhiteToken().putOntoBattlefield(2, game, source, source.getControllerId(), true, equipped.isLegendary(game));
     }
 
     @Override
