@@ -44,7 +44,7 @@ public final class SongOfEarendil extends CardImpl {
         // I-- Scry 2, then draw two cards.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, new ScryEffect(2, false),
-                new DrawCardSourceControllerEffect(1).concatBy(", then")
+                new DrawCardSourceControllerEffect(2).concatBy(", then")
         );
 
         // II-- Create a Treasure token and a 2/2 blue Bird creature token with flying.
