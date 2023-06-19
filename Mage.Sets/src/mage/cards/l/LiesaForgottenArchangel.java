@@ -9,8 +9,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.replacement.CreaturesOppCtrlAreExiledOnDeathReplacementEffect;
 import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -20,10 +20,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -57,7 +53,7 @@ public final class LiesaForgottenArchangel extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new LiesaForgottenArchangelReturnToHandEffect(), false, filter, true));
 
         // If a creature an opponent controls would die, exile it instead.
-        this.addAbility(new SimpleStaticAbility(new LiesaForgottenArchangelReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new CreaturesOppCtrlAreExiledOnDeathReplacementEffect()));
     }
 
     private LiesaForgottenArchangel(final LiesaForgottenArchangel card) {
@@ -94,46 +90,5 @@ class LiesaForgottenArchangelReturnToHandEffect extends OneShotEffect {
         DelayedTriggeredAbility ability = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(ability, source);
         return true;
-    }
-}
-
-class LiesaForgottenArchangelReplacementEffect extends ReplacementEffectImpl {
-
-    public LiesaForgottenArchangelReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "If a creature an opponent controls would die, exile it instead";
-    }
-
-    private LiesaForgottenArchangelReplacementEffect(final LiesaForgottenArchangelReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LiesaForgottenArchangelReplacementEffect copy() {
-        return new LiesaForgottenArchangelReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            Permanent permanent = zEvent.getTarget();
-            if (permanent != null && permanent.isCreature()) {
-                Player player = game.getPlayer(source.getControllerId());
-                return player != null && player.hasOpponent(permanent.getControllerId(), game);
-            }
-        }
-        return false;
     }
 }
