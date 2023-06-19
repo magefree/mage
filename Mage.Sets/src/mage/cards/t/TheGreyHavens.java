@@ -31,12 +31,12 @@ public final class TheGreyHavens extends CardImpl {
     }
 
     public TheGreyHavens(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "{0}");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         
         this.supertype.add(SuperType.LEGENDARY);
 
         // When The Grey Havens enters the battlefield, scry 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {T}: Add one mana of any color among legendary creature cards in your graveyard.
