@@ -201,6 +201,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Siege-Gang Commander", 228, Rarity.RARE, mage.cards.s.SiegeGangCommander.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 332, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Sol Ring", 284, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Song of Earendil", 69, Rarity.RARE, mage.cards.s.SongOfEarendil.class));
         cards.add(new SetCardInfo("Sulfur Falls", 333, Rarity.RARE, mage.cards.s.SulfurFalls.class));
         cards.add(new SetCardInfo("Sulfurous Springs", 334, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
         cards.add(new SetCardInfo("Sunken Hollow", 335, Rarity.RARE, mage.cards.s.SunkenHollow.class));
