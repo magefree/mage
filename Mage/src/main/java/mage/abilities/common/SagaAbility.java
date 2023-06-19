@@ -63,6 +63,10 @@ public class SagaAbility extends SimpleStaticAbility {
         addChapterEffect(card, chapter, chapter, new Effects(effects));
     }
 
+    public void addChapterEffect(Card card, SagaChapter chapter, Effects effects, Target target) {
+        addChapterEffect(card, chapter, chapter, effects, target);
+    }
+
     public void addChapterEffect(Card card, SagaChapter chapter, Consumer<TriggeredAbility> applier) {
         addChapterEffect(card, chapter, chapter, applier);
     }
