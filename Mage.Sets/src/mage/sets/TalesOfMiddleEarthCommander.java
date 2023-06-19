@@ -133,6 +133,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kor Haven", 368, Rarity.MYTHIC, mage.cards.k.KorHaven.class));
         cards.add(new SetCardInfo("Languish", 202, Rarity.RARE, mage.cards.l.Languish.class));
         cards.add(new SetCardInfo("Learn from the Past", 192, Rarity.UNCOMMON, mage.cards.l.LearnFromThePast.class));
+        cards.add(new SetCardInfo("Legolas Greenleaf", 40, Rarity.RARE, mage.cards.l.LegolasGreenleaf.class));
         cards.add(new SetCardInfo("Lightning Greaves", 281, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Lignify", 252, Rarity.COMMON, mage.cards.l.Lignify.class));
         cards.add(new SetCardInfo("Living Death", 203, Rarity.RARE, mage.cards.l.LivingDeath.class));
