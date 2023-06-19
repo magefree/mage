@@ -94,6 +94,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Foreboding Ruins", 310, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
         cards.add(new SetCardInfo("Forth Eorlingas!", 56, Rarity.RARE, mage.cards.f.ForthEorlingas.class));
         cards.add(new SetCardInfo("Fortified Village", 311, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
+        cards.add(new SetCardInfo("Frodo, Adventurous Hobbit", 2, Rarity.MYTHIC, mage.cards.f.FrodoAdventurousHobbit.class));
         cards.add(new SetCardInfo("Frontier Warmonger", 217, Rarity.RARE, mage.cards.f.FrontierWarmonger.class));
         cards.add(new SetCardInfo("Frontline Medic", 169, Rarity.RARE, mage.cards.f.FrontlineMedic.class));
         cards.add(new SetCardInfo("Frostboil Snarl", 312, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
