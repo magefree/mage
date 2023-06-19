@@ -20,6 +20,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ancient Tomb", 357, Rarity.MYTHIC, mage.cards.a.AncientTomb.class));
         cards.add(new SetCardInfo("Anger", 210, Rarity.UNCOMMON, mage.cards.a.Anger.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 265, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));
+        cards.add(new SetCardInfo("Aragorn, King of Gondor", 5, Rarity.MYTHIC, mage.cards.a.AragornKingOfGondor.class));
         cards.add(new SetCardInfo("Arbor Elf", 232, Rarity.COMMON, mage.cards.a.ArborElf.class));
         cards.add(new SetCardInfo("Arcane Denial", 184, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
         cards.add(new SetCardInfo("Arcane Signet", 273, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
