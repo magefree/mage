@@ -171,6 +171,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Path of Ancestry", 322, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 175, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
         cards.add(new SetCardInfo("Pillar of the Paruns", 372, Rarity.MYTHIC, mage.cards.p.PillarOfTheParuns.class));
+        cards.add(new SetCardInfo("Pippin, Warden of Isengard", 65, Rarity.RARE, mage.cards.p.PippinWardenOfIsengard.class));
         cards.add(new SetCardInfo("Plea for Power", 195, Rarity.RARE, mage.cards.p.PleaForPower.class));
         cards.add(new SetCardInfo("Port Town", 323, Rarity.RARE, mage.cards.p.PortTown.class));
         cards.add(new SetCardInfo("Prairie Stream", 324, Rarity.RARE, mage.cards.p.PrairieStream.class));
