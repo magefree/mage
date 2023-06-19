@@ -178,6 +178,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Prairie Stream", 324, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Preordain", 196, Rarity.COMMON, mage.cards.p.Preordain.class));
         cards.add(new SetCardInfo("Pristine Talisman", 283, Rarity.COMMON, mage.cards.p.PristineTalisman.class));
+        cards.add(new SetCardInfo("Prize Pig", 43, Rarity.RARE, mage.cards.p.PrizePig.class));
         cards.add(new SetCardInfo("Prosperous Innkeeper", 256, Rarity.UNCOMMON, mage.cards.p.ProsperousInnkeeper.class));
         cards.add(new SetCardInfo("Radagast, Wizard of Wilds", 66, Rarity.RARE, mage.cards.r.RadagastWizardOfWilds.class));
         cards.add(new SetCardInfo("Rampant Growth", 257, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
