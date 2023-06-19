@@ -38,6 +38,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Blasphemous Act", 211, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Bojuka Bog", 358, Rarity.MYTHIC, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Boon of the Wish-Giver", 185, Rarity.UNCOMMON, mage.cards.b.BoonOfTheWishGiver.class));
+        cards.add(new SetCardInfo("Boromir, Gondor's Hope", 49, Rarity.RARE, mage.cards.b.BoromirGondorsHope.class));
         cards.add(new SetCardInfo("Boseiju, Who Shelters All", 359, Rarity.MYTHIC, mage.cards.b.BoseijuWhoSheltersAll.class));
         cards.add(new SetCardInfo("Brushland", 297, Rarity.RARE, mage.cards.b.Brushland.class));
         cards.add(new SetCardInfo("Cabal Coffers", 360, Rarity.MYTHIC, mage.cards.c.CabalCoffers.class));
