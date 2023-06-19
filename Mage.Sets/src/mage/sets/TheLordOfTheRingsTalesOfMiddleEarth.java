@@ -170,6 +170,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Nimrodel Watcher", 63, Rarity.COMMON, mage.cards.n.NimrodelWatcher.class));
         cards.add(new SetCardInfo("Now for Wrath, Now for Ruin!", 24, Rarity.COMMON, mage.cards.n.NowForWrathNowForRuin.class));
         cards.add(new SetCardInfo("Oath of the Grey Host", 101, Rarity.UNCOMMON, mage.cards.o.OathOfTheGreyHost.class));
+        cards.add(new SetCardInfo("Old Man Willow", 217, Rarity.UNCOMMON, mage.cards.o.OldManWillow.class));
         cards.add(new SetCardInfo("Oliphaunt", 139, Rarity.COMMON, mage.cards.o.Oliphaunt.class));
         cards.add(new SetCardInfo("Olog-hai Crusher", 140, Rarity.COMMON, mage.cards.o.OlogHaiCrusher.class));
         cards.add(new SetCardInfo("One Ring to Rule Them All", 102, Rarity.RARE, mage.cards.o.OneRingToRuleThemAll.class));
