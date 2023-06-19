@@ -22,7 +22,7 @@ public final class ElvishImpersonators extends CardImpl {
 
     public ElvishImpersonators(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.subtype.add(SubType.ELVES);
+        this.subtype.add(SubType.ELF);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
