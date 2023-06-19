@@ -111,6 +111,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Gothmog, Morgul Lieutenant", 87, Rarity.UNCOMMON, mage.cards.g.GothmogMorgulLieutenant.class));
         cards.add(new SetCardInfo("Great Hall of the Citadel", 254, Rarity.COMMON, mage.cards.g.GreatHallOfTheCitadel.class));
         cards.add(new SetCardInfo("Grey Havens Navigator", 53, Rarity.COMMON, mage.cards.g.GreyHavensNavigator.class));
+        cards.add(new SetCardInfo("Grima Wormtongue", 88, Rarity.UNCOMMON, mage.cards.g.GrimaWormtongue.class));
         cards.add(new SetCardInfo("Grishnakh, Brash Instigator", 134, Rarity.UNCOMMON, mage.cards.g.GrishnakhBrashInstigator.class));
         cards.add(new SetCardInfo("Grond, the Gatebreaker", 89, Rarity.UNCOMMON, mage.cards.g.GrondTheGatebreaker.class));
         cards.add(new SetCardInfo("Gwaihir the Windlord", 210, Rarity.UNCOMMON, mage.cards.g.GwaihirTheWindlord.class));
