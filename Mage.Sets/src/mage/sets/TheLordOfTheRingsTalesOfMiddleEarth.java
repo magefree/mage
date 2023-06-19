@@ -48,6 +48,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Claim the Precious", 81, Rarity.COMMON, mage.cards.c.ClaimThePrecious.class));
         cards.add(new SetCardInfo("Council's Deliberation", 46, Rarity.UNCOMMON, mage.cards.c.CouncilsDeliberation.class));
         cards.add(new SetCardInfo("Deceive the Messenger", 47, Rarity.COMMON, mage.cards.d.DeceiveTheMessenger.class));
+        cards.add(new SetCardInfo("Delighted Halfling", 158, Rarity.RARE, mage.cards.d.DelightedHalfling.class));
         cards.add(new SetCardInfo("Denethor, Ruling Steward", 198, Rarity.UNCOMMON, mage.cards.d.DenethorRulingSteward.class));
         cards.add(new SetCardInfo("Display of Power", 119, Rarity.RARE, mage.cards.d.DisplayOfPower.class));
         cards.add(new SetCardInfo("Doors of Durin", 199, Rarity.RARE, mage.cards.d.DoorsOfDurin.class));
