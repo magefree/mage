@@ -144,6 +144,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lignify", 252, Rarity.COMMON, mage.cards.l.Lignify.class));
         cards.add(new SetCardInfo("Living Death", 203, Rarity.RARE, mage.cards.l.LivingDeath.class));
         cards.add(new SetCardInfo("Lonely Sandbar", 319, Rarity.UNCOMMON, mage.cards.l.LonelySandbar.class));
+        cards.add(new SetCardInfo("Lossarnach Captain", 16, Rarity.RARE, mage.cards.l.LossarnachCaptain.class));
         cards.add(new SetCardInfo("Marshal's Anthem", 172, Rarity.RARE, mage.cards.m.MarshalsAnthem.class));
         cards.add(new SetCardInfo("Mentor of the Meek", 173, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
         cards.add(new SetCardInfo("Merciless Executioner", 204, Rarity.UNCOMMON, mage.cards.m.MercilessExecutioner.class));
