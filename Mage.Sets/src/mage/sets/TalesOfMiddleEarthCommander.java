@@ -105,6 +105,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Genesis Wave", 245, Rarity.RARE, mage.cards.g.GenesisWave.class));
         cards.add(new SetCardInfo("Ghost Quarter", 314, Rarity.UNCOMMON, mage.cards.g.GhostQuarter.class));
         cards.add(new SetCardInfo("Gilded Goose", 246, Rarity.RARE, mage.cards.g.GildedGoose.class));
+        cards.add(new SetCardInfo("Gimli of the Glittering Caves", 32, Rarity.RARE, mage.cards.g.GimliOfTheGlitteringCaves.class));
         cards.add(new SetCardInfo("Glacial Fortress", 315, Rarity.RARE, mage.cards.g.GlacialFortress.class));
         cards.add(new SetCardInfo("Go for the Throat", 201, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
         cards.add(new SetCardInfo("Goblin Cratermaker", 218, Rarity.UNCOMMON, mage.cards.g.GoblinCratermaker.class));
