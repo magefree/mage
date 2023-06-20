@@ -1,6 +1,7 @@
 
 package mage.game.match;
 
+import mage.cards.Card;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
@@ -10,10 +11,7 @@ import mage.game.result.ResultProtos;
 import mage.players.PlayerType;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  *
@@ -49,6 +47,9 @@ public class MatchOptions implements Serializable {
      */
     protected MatchTimeLimit matchTimeLimit; // 0 = no priorityTime handling
     protected MulliganType mulliganType;
+
+    protected Collection<Card> perPlayerEmblemCards;
+    protected Collection<Card> globalEmblemCards;
 
     /*public MatchOptions(String name, String gameType) {
         this.name = name;
@@ -271,4 +272,19 @@ public class MatchOptions implements Serializable {
         return mulliganType;
     }
 
+    public Collection<Card> getPerPlayerEmblemCards() {
+        return perPlayerEmblemCards;
+    }
+
+    public void setPerPlayerEmblemCards(Collection<Card> perPlayerEmblemCards) {
+        this.perPlayerEmblemCards = perPlayerEmblemCards;
+    }
+
+    public Collection<Card> getGlobalEmblemCards() {
+        return globalEmblemCards;
+    }
+
+    public void setGlobalEmblemCards(Collection<Card> globalEmblemCards) {
+        this.globalEmblemCards = globalEmblemCards;
+    }
 }

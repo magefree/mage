@@ -1455,4 +1455,10 @@ public abstract class AbilityImpl implements Ability {
                 .filter(Objects::nonNull)
                 .anyMatch(Condition::caresAboutManaColor);
     }
+
+    public AbilityImpl copyWithZone(Zone zone) {
+        AbilityImpl copy = ((AbilityImpl)this.copy());
+        copy.zone = zone;
+        return copy;
+    }
 }

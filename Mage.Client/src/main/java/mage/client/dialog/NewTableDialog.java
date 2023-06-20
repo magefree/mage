@@ -1,5 +1,9 @@
 package mage.client.dialog;
 
+import mage.cards.Card;
+import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.DeckFileFilter;
 import mage.cards.decks.importer.DeckImporter;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -12,6 +16,7 @@ import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
+import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.mulligan.MulliganType;
 import mage.players.PlayerType;
@@ -20,10 +25,9 @@ import mage.view.TableView;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * App GUI: create new GAME
@@ -56,6 +60,12 @@ public class NewTableDialog extends MageDialog {
         this.spnMinimumRating.setModel(new SpinnerNumberModel(0, 0, 3000, 10));
         this.spnEdhPowerLevel.setModel(new SpinnerNumberModel(100, 0, 100, 5));
         MageFrame.getUI().addButton(MageComponents.NEW_TABLE_OK_BUTTON, btnOK);
+        fcSelectEmblemCardsPerPlayer = new JFileChooser();
+        fcSelectEmblemCardsPerPlayer.setAcceptAllFileFilterUsed(false);
+        fcSelectEmblemCardsPerPlayer.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
+        fcSelectEmblemCardsStartingPlayer = new JFileChooser();
+        fcSelectEmblemCardsStartingPlayer.setAcceptAllFileFilterUsed(false);
+        fcSelectEmblemCardsStartingPlayer.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
     }
 
     /**
@@ -102,6 +112,13 @@ public class NewTableDialog extends MageDialog {
         cbSkillLevel = new javax.swing.JComboBox();
         lblNumWins = new javax.swing.JLabel();
         spnNumWins = new javax.swing.JSpinner();
+        chkEmblemCards = new javax.swing.JCheckBox();
+        lblEmblemCardsPerPlayer = new javax.swing.JLabel();
+        txtEmblemCardsPerPlayer = new javax.swing.JTextField();
+        btnEmblemCardsPerPlayer = new javax.swing.JButton();
+        lblEmblemCardsStartingPlayer = new javax.swing.JLabel();
+        txtEmblemCardsStartingPlayer = new javax.swing.JTextField();
+        btnEmblemCardsStartingPlayer = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         player1Panel = new mage.client.table.NewPlayerPanel();
@@ -240,6 +257,48 @@ public class NewTableDialog extends MageDialog {
         lblNumWins.setText("Wins:");
         lblNumWins.setToolTipText("How many games has a player to win to win the match.");
 
+        chkEmblemCards.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        chkEmblemCards.setText("Emblem Cards - ");
+        chkEmblemCards.setToolTipText("If enabled, select cards to give players emblem copies of");
+        chkEmblemCards.setActionCommand("Emblem Cards - ");
+        chkEmblemCards.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkEmblemCardsActionPerformed(evt);
+            }
+        });
+
+        lblEmblemCardsPerPlayer.setText("Per-Player File");
+        lblEmblemCardsPerPlayer.setToolTipText("An emblem of each card in this file is given to each player");
+
+        txtEmblemCardsPerPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmblemCardsPerPlayerActionPerformed(evt);
+            }
+        });
+
+        btnEmblemCardsPerPlayer.setText("...");
+        btnEmblemCardsPerPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmblemCardsPerPlayerActionPerformed(evt);
+            }
+        });
+
+        lblEmblemCardsStartingPlayer.setText("Starting Player File");
+        lblEmblemCardsStartingPlayer.setToolTipText("An emblem of every card in this file is given to the starting player (useful for symmetric effects)");
+
+        txtEmblemCardsStartingPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmblemCardsStartingPlayerActionPerformed(evt);
+            }
+        });
+
+        btnEmblemCardsStartingPlayer.setText("...");
+        btnEmblemCardsStartingPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmblemCardsStartingPlayerActionPerformed(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Player 1 (You)");
 
@@ -300,194 +359,217 @@ public class NewTableDialog extends MageDialog {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblSettings)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblSettings)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSettingsLoad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSettingsSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(player1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
+                    .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblName)
+                                    .addComponent(lbDeckType)
+                                    .addComponent(lblGameType))
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbTimeLimit)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblPassword)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(chkSpectatorsAllowed))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(cbDeckType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cbGameType, 0, 270, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(chkRollbackTurnsAllowed)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(chkRated)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnSettingsLoad)
+                                                .addComponent(lblMinimumRating)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnSettingsSave)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(spnMinimumRating, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jSeparator2)
-                                        .addComponent(player1Panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
-                                        .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(lblName)
-                                                                        .addComponent(lbDeckType)
-                                                                        .addComponent(lblGameType))
-                                                                .addGap(6, 6, 6)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(lbTimeLimit)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(lblPassword)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(chkSpectatorsAllowed))
-                                                                        .addGroup(layout.createSequentialGroup()
-                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                                                        .addComponent(cbDeckType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                                        .addComponent(cbGameType, 0, 270, Short.MAX_VALUE))
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                        .addComponent(chkRollbackTurnsAllowed)
-                                                                                        .addGroup(layout.createSequentialGroup()
-                                                                                                .addComponent(chkRated)
-                                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                .addComponent(lblMinimumRating)
-                                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                .addComponent(spnMinimumRating, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                .addComponent(lblQuitRatio)
-                                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                .addComponent(lblEdhPowerLevel)
-                                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                .addComponent(spnEdhPowerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(lblNumPlayers)
-                                                                        .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(lblRange)
-                                                                        .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addGap(8, 8, 8)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(lblAttack))
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(lblSkillLevel))
-                                                                .addGap(4, 4, 4)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(lblNumWins))
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(lblMullgian)
-                                                                        .addComponent(cbMulligan, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(chkPlaneChase))
-                                                                        .addComponent(lblFreeMulligans))))
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap())
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
-                                        .addContainerGap()))
+                                                .addComponent(lblQuitRatio)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblEdhPowerLevel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(spnEdhPowerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNumPlayers)
+                                    .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblRange)
+                                    .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(8, 8, 8)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblAttack))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblSkillLevel))
+                                .addGap(4, 4, 4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblNumWins))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblMullgian)
+                                    .addComponent(cbMulligan, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(chkPlaneChase))
+                                    .addComponent(lblFreeMulligans))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(chkEmblemCards)
+                        .addGap(0, 0, 0)
+                        .addComponent(lblEmblemCardsPerPlayer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEmblemCardsPerPlayer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEmblemCardsPerPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblEmblemCardsStartingPlayer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEmblemCardsStartingPlayer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEmblemCardsStartingPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(txtName)
-                                                .addComponent(lblName))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(cbTimeLimit)
-                                                .addComponent(lbTimeLimit)
-                                                .addComponent(lblPassword)
-                                                .addComponent(txtPassword)
-                                                .addComponent(chkSpectatorsAllowed)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lbDeckType)
-                                        .addComponent(lblQuitRatio)
-                                        .addComponent(lblEdhPowerLevel)
-                                        .addComponent(spnEdhPowerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblMinimumRating)
-                                        .addComponent(spnMinimumRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(chkRated))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblGameType)
-                                        .addComponent(chkRollbackTurnsAllowed))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblRange)
-                                                .addGap(0, 0, 0)
-                                                .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblNumPlayers)
-                                                .addGap(0, 0, 0)
-                                                .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblAttack)
-                                                .addGap(0, 0, 0)
-                                                .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblSkillLevel)
-                                                .addGap(0, 0, 0)
-                                                .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblNumWins)
-                                                .addGap(0, 0, 0)
-                                                .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblMullgian)
-                                                .addGap(0, 0, 0)
-                                                .addComponent(cbMulligan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblFreeMulligans)
-                                                .addGap(0, 0, 0)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(chkPlaneChase))))
-                                .addGap(14, 14, 14)
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, 0)
-                                .addComponent(player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                                .addGap(9, 9, 9)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnSettingsLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnSettingsSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblSettings))
-                                .addContainerGap())
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                        .addGap(201, 201, 201)
-                                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(180, Short.MAX_VALUE)))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtName)
+                        .addComponent(lblName))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbTimeLimit)
+                        .addComponent(lbTimeLimit)
+                        .addComponent(lblPassword)
+                        .addComponent(txtPassword)
+                        .addComponent(chkSpectatorsAllowed)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbDeckType)
+                    .addComponent(lblQuitRatio)
+                    .addComponent(lblEdhPowerLevel)
+                    .addComponent(spnEdhPowerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMinimumRating)
+                    .addComponent(spnMinimumRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkRated))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblGameType)
+                    .addComponent(chkRollbackTurnsAllowed))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblRange)
+                        .addGap(0, 0, 0)
+                        .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblNumPlayers)
+                        .addGap(0, 0, 0)
+                        .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblAttack)
+                        .addGap(0, 0, 0)
+                        .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblSkillLevel)
+                        .addGap(0, 0, 0)
+                        .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblNumWins)
+                        .addGap(0, 0, 0)
+                        .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblMullgian)
+                        .addGap(0, 0, 0)
+                        .addComponent(cbMulligan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblFreeMulligans)
+                        .addGap(0, 0, 0)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chkPlaneChase))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEmblemCardsStartingPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEmblemCardsStartingPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmblemCardsStartingPlayer)
+                    .addComponent(txtEmblemCardsPerPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEmblemCardsPerPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmblemCardsPerPlayer)
+                    .addComponent(chkEmblemCards))
+                .addGap(14, 14, 14)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(0, 0, 0)
+                .addComponent(player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                .addGap(9, 9, 9)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSettingsLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSettingsSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSettings))
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(201, 201, 201)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(184, Short.MAX_VALUE)))
         );
 
         lblMullgian.getAccessibleContext().setAccessibleName("Mullgian");
@@ -594,6 +676,45 @@ public class NewTableDialog extends MageDialog {
         onLoadSettings(-1);
     }//GEN-LAST:event_menuLoadSettingsDefaultActionPerformed
 
+    private void chkEmblemCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEmblemCardsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkEmblemCardsActionPerformed
+    private void txtEmblemCardsPerPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmblemCardsPerPlayerActionPerformed
+    }//GEN-LAST:event_txtEmblemCardsPerPlayerActionPerformed
+
+    private void txtEmblemCardsStartingPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmblemCardsStartingPlayerActionPerformed
+    }//GEN-LAST:event_txtEmblemCardsStartingPlayerActionPerformed
+    private void btnEmblemCardsPerPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmblemCardsPerPlayerActionPerformed
+        loadEmblemCardFile(false);
+    }//GEN-LAST:event_btnEmblemCardsPerPlayerActionPerformed
+
+    private void btnEmblemCardsStartingPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmblemCardsStartingPlayerActionPerformed
+        loadEmblemCardFile(true);
+    }//GEN-LAST:event_btnEmblemCardsStartingPlayerActionPerformed
+
+    private final JFileChooser fcSelectEmblemCardsPerPlayer;
+    private final JFileChooser fcSelectEmblemCardsStartingPlayer;
+    private void loadEmblemCardFile(boolean isStartingPlayer) {
+        JFileChooser fileChooser = isStartingPlayer ? fcSelectEmblemCardsStartingPlayer : fcSelectEmblemCardsPerPlayer;
+        JTextField textField = isStartingPlayer ? txtEmblemCardsStartingPlayer : txtEmblemCardsPerPlayer;
+        String prefKey = isStartingPlayer ? "lastStartingPlayerEmblemCardsFolder" : "lastPerPlayerEmblemCardsFolder";
+
+        String lastFolder = MageFrame.getPreferences().get(prefKey, "");
+        if (!lastFolder.isEmpty()) {
+            fileChooser.setCurrentDirectory(new File(lastFolder));
+        }
+        int ret = fileChooser.showDialog(this, "Select Emblem Cards");
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            textField.setText(file.getPath());
+            try {
+                MageFrame.getPreferences().put(prefKey, file.getCanonicalPath());
+            } catch (IOException ex) {
+            }
+        }
+        fileChooser.setSelectedFile(null);
+    }
+
     private MatchOptions getMatchOptions() {
         // current settings
         GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
@@ -623,6 +744,38 @@ public class NewTableDialog extends MageDialog {
         options.setLimited(options.getDeckType().startsWith("Limited"));
         if (options.getDeckType().startsWith("Variant Magic - Freeform Unlimited Commander")) {
             options.setLimited(true); // limited-style sideboarding with unlimited basics enabled for Freeform Unlimited Commander
+        }
+        if (chkEmblemCards.isSelected()) {
+            if (!txtEmblemCardsPerPlayer.getText().isEmpty()) {
+                Deck perPlayerEmblemDeck = null;
+                try {
+                    perPlayerEmblemDeck = Deck.load(DeckImporter.importDeckFromFile(txtEmblemCardsPerPlayer.getText(), true), true, true);
+                } catch (GameException e1) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
+                }
+                if (perPlayerEmblemDeck != null) {
+                    perPlayerEmblemDeck.clearLayouts();
+                    // copy the cards set so deck can be garbage collected
+                    options.setPerPlayerEmblemCards(new HashSet<>(perPlayerEmblemDeck.getCards()));
+                }
+            }
+            if (!txtEmblemCardsStartingPlayer.getText().isEmpty()) {
+                Deck startingPlayerEmblemDeck = null;
+                try {
+                    startingPlayerEmblemDeck = Deck.load(DeckImporter.importDeckFromFile(txtEmblemCardsStartingPlayer.getText(), true), true, true);
+                } catch (GameException e1) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), e1.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
+                }
+                if (startingPlayerEmblemDeck != null) {
+                    startingPlayerEmblemDeck.clearLayouts();
+                    // copy the cards set so deck can be garbage collected
+                    options.setGlobalEmblemCards(new HashSet<>(startingPlayerEmblemDeck.getCards()));
+                }
+            }
+        }
+        else {
+            options.setPerPlayerEmblemCards(Collections.emptySet());
+            options.setGlobalEmblemCards(Collections.emptySet());
         }
 
         return options;
@@ -975,6 +1128,8 @@ public class NewTableDialog extends MageDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnEmblemCardsPerPlayer;
+    private javax.swing.JButton btnEmblemCardsStartingPlayer;
     private javax.swing.JButton btnOK;
     private javax.swing.JButton btnSettingsLoad;
     private javax.swing.JButton btnSettingsSave;
@@ -985,6 +1140,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JComboBox cbRange;
     private javax.swing.JComboBox cbSkillLevel;
     private javax.swing.JComboBox cbTimeLimit;
+    private javax.swing.JCheckBox chkEmblemCards;
     private javax.swing.JCheckBox chkPlaneChase;
     private javax.swing.JCheckBox chkRated;
     private javax.swing.JCheckBox chkRollbackTurnsAllowed;
@@ -998,6 +1154,8 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JLabel lbTimeLimit;
     private javax.swing.JLabel lblAttack;
     private javax.swing.JLabel lblEdhPowerLevel;
+    private javax.swing.JLabel lblEmblemCardsPerPlayer;
+    private javax.swing.JLabel lblEmblemCardsStartingPlayer;
     private javax.swing.JLabel lblFreeMulligans;
     private javax.swing.JLabel lblGameType;
     private javax.swing.JLabel lblMinimumRating;
@@ -1028,6 +1186,8 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JSpinner spnNumPlayers;
     private javax.swing.JSpinner spnNumWins;
     private javax.swing.JSpinner spnQuitRatio;
+    private javax.swing.JTextField txtEmblemCardsPerPlayer;
+    private javax.swing.JTextField txtEmblemCardsStartingPlayer;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     // End of variables declaration//GEN-END:variables

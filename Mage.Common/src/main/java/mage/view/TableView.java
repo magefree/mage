@@ -111,6 +111,10 @@ public class TableView implements Serializable {
             if (table.getMatch().getOptions().isPlaneChase()) {
                 addInfo.append(" PC");
             }
+            if (!(table.getMatch().getOptions().getPerPlayerEmblemCards().isEmpty())
+                || !(table.getMatch().getOptions().getGlobalEmblemCards().isEmpty())) {
+                addInfo.append(" EC");
+            }
             if (table.getMatch().getOptions().isSpectatorsAllowed()) {
                 addInfo.append(" SP");
             }
@@ -165,6 +169,10 @@ public class TableView implements Serializable {
                     }
                     if (table.getTournament().getOptions().getMatchOptions().isPlaneChase()) {
                         infoText.append(" PC");
+                    }
+                    if (!(table.getTournament().getOptions().getMatchOptions().getPerPlayerEmblemCards().isEmpty())
+                            || !(table.getTournament().getOptions().getMatchOptions().getGlobalEmblemCards().isEmpty())) {
+                        infoText.append(" EC");
                     }
                     if (table.getTournament().getOptions().isWatchingAllowed()) {
                         infoText.append(" SP");

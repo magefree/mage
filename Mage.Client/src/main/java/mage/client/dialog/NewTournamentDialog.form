@@ -227,6 +227,21 @@
                   </Group>
                   <Component id="player1Panel" alignment="0" max="32767" attributes="0"/>
                   <Component id="pnlRandomPacks" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="chkEmblemCards" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="lblEmblemCardsPerPlayer" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtEmblemCardsPerPlayer" max="32767" attributes="2"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEmblemCardsPerPlayer" min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblEmblemCardsStartingPlayer" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtEmblemCardsStartingPlayer" max="32767" attributes="2"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEmblemCardsStartingPlayer" min="-2" pref="24" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -299,13 +314,23 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtEmblemCardsStartingPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEmblemCardsStartingPlayer" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
+                  <Component id="lblEmblemCardsStartingPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtEmblemCardsPerPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEmblemCardsPerPlayer" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
+                  <Component id="lblEmblemCardsPerPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="chkEmblemCards" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="lblPacks" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="pnlPacks" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlRandomPacks" pref="10" max="32767" attributes="0"/>
+                      <Component id="pnlRandomPacks" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="103" alignment="1" groupAlignment="3" attributes="0">
@@ -598,6 +623,56 @@
         <Property name="toolTipText" type="java.lang.String" value="Use Plane Chase for the tournament."/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JCheckBox" name="chkEmblemCards">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Emblem Cards - "/>
+        <Property name="toolTipText" type="java.lang.String" value="If enabled, select cards to give players emblem copies of"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkEmblemCardsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEmblemCardsStartingPlayer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Starting Player File"/>
+        <Property name="toolTipText" type="java.lang.String" value="An emblem of every card in this file is given to the starting player (useful for symmetric effects)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEmblemCardsStartingPlayer">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmblemCardsStartingPlayerActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEmblemCardsStartingPlayer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="..."/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmblemCardsStartingPlayerActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEmblemCardsPerPlayer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Per-Player File"/>
+        <Property name="toolTipText" type="java.lang.String" value="An emblem of each card in this file is given to each player"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEmblemCardsPerPlayer">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEmblemCardsPerPlayerActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEmblemCardsPerPlayer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="..."/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmblemCardsPerPlayerActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JLabel" name="lblPlayer1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -639,7 +714,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="pnlOtherPlayers" alignment="0" pref="5" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
