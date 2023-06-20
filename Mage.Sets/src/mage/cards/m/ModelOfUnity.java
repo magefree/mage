@@ -68,7 +68,7 @@ class ModelOfUnityEffect extends OneShotEffect {
             }
             Player player = game.getPlayer(opponentId);
             if (player != null && player.chooseUse(outcome, "Scry 2?", source, game)) {
-                player.loseLife(2, game, source, false);
+                player.scry(2, source, game);
             }
         }
         return true;
