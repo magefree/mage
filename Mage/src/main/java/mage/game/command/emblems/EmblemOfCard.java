@@ -1,21 +1,14 @@
 package mage.game.command.emblems;
 
 import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.AbilityImpl;
-import mage.abilities.StaticAbility;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.decks.importer.CardLookup;
 import mage.cards.mock.MockCard;
 import mage.constants.Zone;
-import mage.game.GameImpl;
 import mage.game.command.Emblem;
 import org.apache.log4j.Logger;
 
-import java.lang.reflect.Field;
 import java.util.stream.Collectors;
 
 public final class EmblemOfCard extends Emblem {
@@ -29,7 +22,7 @@ public final class EmblemOfCard extends Emblem {
                     .getCard();
         }
         this.getAbilities().addAll(card.getAbilities().stream().filter(
-                ability -> ability.getZone() == zone || ability.getZone() == Zone.ALL
+                ability -> zone.match(ability.getZone())
         ).map(ability -> {
             if (ability instanceof AbilityImpl && ability.getZone() == zone) {
                 return ((AbilityImpl)ability).copyWithZone(Zone.COMMAND);
@@ -45,7 +38,7 @@ public final class EmblemOfCard extends Emblem {
         this(card, Zone.BATTLEFIELD);
     }
 
-    public EmblemOfCard(EmblemOfCard eoc) {
+    private EmblemOfCard(EmblemOfCard eoc) {
         super(eoc);
     }
     @Override
@@ -55,12 +48,10 @@ public final class EmblemOfCard extends Emblem {
 
     @Override
     public void setSourceObject(MageObject sourceObject) {
-        logger.info("In override setSourceObject");
         try {
             super.setSourceObject(sourceObject);
         }
         catch (IllegalArgumentException e) {
-            logger.info("caught exception from base class");
             // happens because this isn't a real emblem, but the source object gets set before throwing so it's fine
         }
     }
