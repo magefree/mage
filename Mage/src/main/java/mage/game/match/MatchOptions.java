@@ -64,6 +64,8 @@ public class MatchOptions implements Serializable {
         this.password = "";
         this.multiPlayer = multiPlayer;
         this.numSeats = numSeats;
+        this.perPlayerEmblemCards = Collections.emptySet();
+        this.globalEmblemCards = Collections.emptySet();
     }
 
     public void setNumSeats (int numSeats) {

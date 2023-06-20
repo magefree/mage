@@ -1315,18 +1315,14 @@ public abstract class GameImpl implements Game {
         if (!gameOptions.perPlayerEmblemCards.isEmpty()) {
             for (UUID playerId : state.getPlayerList(startingPlayerId)) {
                 for (Card card : gameOptions.perPlayerEmblemCards) {
-                    logger.info("Creating emblem for " + card.getLogName() + " (player: " + playerId + ")");
                     addEmblem(new EmblemOfCard(card), card, playerId);
-                    logger.info("Created.");
                 }
             }
         }
 
         if (!gameOptions.globalEmblemCards.isEmpty()) {
             for (Card card : gameOptions.globalEmblemCards) {
-                logger.info("Creating emblem for " + card.getLogName() + " (player: " + startingPlayerId + ")");
                 addEmblem(new EmblemOfCard(card), card, startingPlayerId);
-                logger.info("Created.");
             }
         }
     }
@@ -1862,24 +1858,15 @@ public abstract class GameImpl implements Game {
      */
     @Override
     public void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId) {
-        logger.info("Copying...");
-        logger.info("Original class: " + emblem.getClass().getName());
         Emblem newEmblem = emblem.copy();
-        logger.info("Copy class: " + newEmblem.getClass().getName());
-        logger.info("Setting source object...");
         newEmblem.setSourceObject(sourceObject);
-        logger.info("Setting controller ID...");
         newEmblem.setControllerId(toPlayerId);
-        logger.info("Assigning new ID...");
         newEmblem.assignNewId();
-        logger.info("Assigning new abilities ID...");
         newEmblem.getAbilities().newId();
         for (Ability ability : newEmblem.getAbilities()) {
-            logger.info("Setting source ID for ability \"" + ability.getRule() + "\"...");
             ability.setSourceId(newEmblem.getId());
         }
 
-        logger.info("Adding command object...");
         state.addCommandObject(newEmblem); // TODO: generate image for emblem here?
     }
 
