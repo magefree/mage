@@ -65,7 +65,7 @@ class FriendlyRivalryEffect extends OneShotEffect {
     FriendlyRivalryEffect() {
         super(Outcome.Benefit);
         staticText = "Target creature you control and up to one other target legendary " +
-            "creature you control each deal damage equal to their power to target creature you don’t control.";
+            "creature you control each deal damage equal to their power to target creature you don't control.";
     }
 
     private FriendlyRivalryEffect(final FriendlyRivalryEffect effect) {
