@@ -4,14 +4,11 @@ import java.util.UUID;
 
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.PutCards;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterBasicLandCard;
