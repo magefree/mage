@@ -3,23 +3,12 @@ package mage.abilities.hint.common;
 import com.sun.xml.internal.ws.util.StringUtils;
 import mage.abilities.Ability;
 import mage.abilities.hint.Hint;
-import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.abilities.condition.common.CountersOnPermanentsCondition;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * A hint which keeps track of how many counters of a specific type there are
