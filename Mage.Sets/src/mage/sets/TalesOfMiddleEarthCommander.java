@@ -260,6 +260,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Whispersilk Cloak", 292, Rarity.UNCOMMON, mage.cards.w.WhispersilkCloak.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 344, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Windbrisk Heights", 345, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
+        cards.add(new SetCardInfo("Windswift Slice", 45, Rarity.RARE, mage.cards.w.WindswiftSlice.class));
         cards.add(new SetCardInfo("Wood Elves", 263, Rarity.COMMON, mage.cards.w.WoodElves.class));
         cards.add(new SetCardInfo("Woodfall Primus", 264, Rarity.RARE, mage.cards.w.WoodfallPrimus.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 346, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
