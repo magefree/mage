@@ -8,6 +8,7 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.abilities.condition.common.CountersOnPermanentsCondition;
+import mage.util.CardUtil;
 
 /**
  * A hint which keeps track of how many counters of a specific type there are
@@ -51,7 +52,7 @@ public class CountersOnPermanentsHint implements Hint {
 
             }
         }
-        return this.counterType.getName() + " counters among " + this.filter.getMessage() + ": " + totalCounters;
+        return CardUtil.getTextWithFirstCharUpperCase(this.counterType.getName()) + " counters among " + this.filter.getMessage() + ": " + totalCounters;
     }
 
     @Override
