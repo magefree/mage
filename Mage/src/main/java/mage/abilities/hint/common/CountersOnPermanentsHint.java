@@ -1,6 +1,5 @@
 package mage.abilities.hint.common;
 
-import com.sun.xml.internal.ws.util.StringUtils;
 import mage.abilities.Ability;
 import mage.abilities.hint.Hint;
 import mage.counters.Counter;
@@ -52,7 +51,7 @@ public class CountersOnPermanentsHint implements Hint {
 
             }
         }
-        return StringUtils.capitalize(this.counterType.getName()) + " counters among " + this.filter.getMessage() + ": " + totalCounters;
+        return this.counterType.getName() + " counters among " + this.filter.getMessage() + ": " + totalCounters;
     }
 
     @Override
