@@ -4,7 +4,9 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
+import mage.abilities.condition.common.SquadCondition;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.costs.*;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,16 +17,12 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author notgreat
  */
 
-//Mostly copied from Kicker/Multikicker code
 public class SquadAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
-    protected Map<String, Integer> activations = new ConcurrentHashMap<>(); // zoneChangeCounter, activations
     protected OptionalAdditionalCost cost;
     protected static final String SQUAD_KEYWORD = "Squad";
     protected static final String SQUAD_REMINDER = "You may pay an additional "
@@ -35,13 +33,16 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
 
     public SquadAbility(Cost cost) {
         super(Zone.STACK, null);
-        addSubAbility(new EntersBattlefieldTriggeredAbility(new SquadEffectETB()));
+        addSubAbility(new ConditionalInterveningIfTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new SquadEffectETB()),
+                SquadCondition.instance, "“When this creature enters the battlefield, if its squad cost was paid, " +
+                    "create a token that’s a copy of it for each time its squad cost was paid."
+        ));
         addSquadCost(cost);
     }
 
     private SquadAbility(final SquadAbility ability) {
         super(ability);
-        this.activations.putAll(ability.activations);
         this.cost = ability.cost.copy();
     }
 
@@ -60,18 +61,9 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
 
     private void reset() {
         cost.reset();
-        activations.clear();
     }
 
-    protected int getSquadCount(Game game, Ability source) {
-        String key;
-        key = getActivationKey(source, game);
-        if (activations.containsKey(key) && activations.get(key) > 0) {
-            return activations.get(key);
-        }
-        return 0;
-    }
-    private static String getActivationKey(Ability source, Game game) {
+    protected static String getActivationKey(Ability source, Game game) {
         // Squad/Kicker activates in STACK zone so all zcc must be from "stack moment"
         // Use cases:
         // * resolving spell have same zcc (example: check kicker status in sorcery/instant);
@@ -91,17 +83,9 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
             --zcc;
         }
 
-        return zcc + "";
+        return "Squad_zcc"+zcc;
     }
 
-    private void incrementSquad(Ability source, Game game) {
-        int amount = 1;
-        String key = getActivationKey(source, game);
-        if (activations.containsKey(key)) {
-            amount += activations.get(key);
-        }
-        activations.put(key, amount);
-    }
     @Override
     public void addOptionalAdditionalCosts(Ability ability, Game game) {
         if (!(ability instanceof SpellAbility)) {
@@ -113,16 +97,16 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
         }
         this.reset();
         boolean again = true;
+        int activatedCount = 0;
         while (player.canRespond() && again) {
             String times = "";
-            int activatedCount = getSquadCount(game, ability);
             times = (activatedCount + 1) + (activatedCount == 0 ? " time " : " times ");
             // TODO: add AI support to find max number of possible activations (from available mana)
             //  canPay checks only single mana available, not total mana usage
             if (cost.canPay(ability, this, ability.getControllerId(), game)
                     && player.chooseUse(/*Outcome.Benefit*/Outcome.AIDontUseIt,
                     "Pay " + times + cost.getText(false) + " ?", ability, game)) {
-                this.incrementSquad(ability, game);
+                activatedCount += 1;
                 if (cost instanceof ManaCostsImpl) {
                     ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
                 } else {
@@ -132,6 +116,7 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
                 again = false;
             }
         }
+        this.getSubAbilities().get(0).getEffects().setValue(getActivationKey(ability, game),activatedCount);
     }
 
     @Override
@@ -145,6 +130,19 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
     @Override
     public String getRule() {
         return "Squad";
+    }
+
+    /**
+     * If squad cost was paid
+     *
+     * @param game
+     * @param source
+     * @return boolean if the squad effect was paid
+     */
+    public boolean isPaid(Game game, Ability source) {
+        String activationKey = getActivationKey(source, game);
+        Object val = this.getSubAbilities().get(0).getAllEffects().get(0).getValue(activationKey);
+        return val != null && (int) val > 0;
     }
 }
 class SquadEffectETB extends OneShotEffect {
@@ -165,8 +163,8 @@ class SquadEffectETB extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int timesPaid = ((SquadAbility) game.getObject(source.getSourceId())).getSquadCount(game, source);
-        CreateTokenCopySourceEffect effect = new CreateTokenCopySourceEffect(timesPaid);
+        String activationKey = SquadAbility.getActivationKey(source, game);
+        CreateTokenCopySourceEffect effect = new CreateTokenCopySourceEffect((int)getValue(activationKey));
         return effect.apply(game, source);
     }
 }
