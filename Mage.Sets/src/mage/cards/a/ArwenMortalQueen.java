@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -45,6 +46,7 @@ public final class ArwenMortalQueen extends CardImpl {
                 new GainAbilityTargetEffect(IndestructibleAbility.getInstance()),
                 new RemoveCountersSourceCost(CounterType.INDESTRUCTIBLE.createInstance())
         );
+        ability.addManaCost(new GenericManaCost(1));
         ability.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                 .setText("Put a +1/+1 counter"));
         ability.addEffect(new AddCountersTargetEffect(CounterType.LIFELINK.createInstance())
