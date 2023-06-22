@@ -13,6 +13,7 @@ import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -29,7 +30,6 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class BillThePony extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
     private static final FilterControlledPermanent foodFilter = new FilterControlledPermanent(SubType.FOOD, "a Food");;
 
     public BillThePony(UUID ownerId, CardSetInfo setInfo) {
@@ -48,7 +48,7 @@ public final class BillThePony extends CardImpl {
             new BillThePonyEffect(),
             new SacrificeTargetCost(new TargetControlledPermanent(foodFilter))
         );
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE));
 
         this.addAbility(ability);
     }
@@ -83,7 +83,9 @@ class BillThePonyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent == null) return false;
+        if (permanent == null) {
+            return false;
+        }
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new MageObjectReferencePredicate(permanent, game));
