@@ -75,7 +75,7 @@ public final class ProteanHydra extends CardImpl {
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            return event.getData().equals("+1/+1") && event.getTargetId().equals(this.getSourceId());
+            return event.getData().equals(CounterType.P1P1.getName()) && event.getTargetId().equals(this.getSourceId());
         }
 
         @Override

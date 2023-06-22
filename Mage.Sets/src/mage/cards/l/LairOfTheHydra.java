@@ -51,6 +51,7 @@ public final class LairOfTheHydra extends CardImpl {
         for (Object cost : manaCosts) {
             if (cost instanceof VariableManaCost) {
                 ((VariableManaCost) cost).setMinX(1);
+                break;
             }
         }
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LairOfTheHydraEffect(), manaCosts));

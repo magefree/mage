@@ -3,6 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -35,7 +36,7 @@ public final class GaladrielGiftGiver extends CardImpl {
 
         // Whenever Galadriel, Gift-Giver enters the battlefield or attacks, choose one --
         // * Put a +1/+1 counter on another target creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance())
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
