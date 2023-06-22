@@ -58,11 +58,15 @@ class TributeToTheWorldTreeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanentEntering = (Permanent) getValue("permanentEnteringBattlefield");
-        if (permanentEntering == null) return false;
+        if (permanentEntering == null) {
+            return false;
+        }
 
         // We need to ask the game for the actualized object for the entering permanent.
         Permanent permanent = game.getPermanent(permanentEntering.getId());
-        if (permanent == null) return false;
+        if (permanent == null) {
+            return false;
+        }
 
         int power = permanent.getPower().getValue();
         if (power < 3) {
