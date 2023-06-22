@@ -104,7 +104,9 @@ enum QuintoriusLoremasterPredicate implements ObjectSourcePlayerPredicate<Card> 
                 .map(exile -> {
                     Ability source = input.getSource();
                     Permanent quintorius = source.getSourcePermanentOrLKI(game);
-                    if(quintorius == null) return null;
+                    if(quintorius == null) {
+                        return null;
+                    }
                     UUID exileZoneId = CardUtil.getExileZoneId(game, quintorius.getId(), quintorius.getZoneChangeCounter(game));
                     return exile.getExileZone(exileZoneId);
                 })
