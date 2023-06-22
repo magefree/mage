@@ -4,13 +4,12 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
-import mage.abilities.condition.common.SquadCondition;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.costs.*;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.CreateTokenCopySourceEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -33,12 +32,9 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
 
     public SquadAbility(Cost cost) {
         super(Zone.STACK, null);
-        addSubAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new SquadEffectETB()),
-                SquadCondition.instance, "“When this creature enters the battlefield, if its squad cost was paid, " +
-                    "create a token that’s a copy of it for each time its squad cost was paid."
-        ));
-        addSquadCost(cost);
+        setSquadCost(cost);
+        addSubAbility(new SquadTriggerAbility());
+        //Note that I get subabilities list's position 0 to modify the zcc/count references
     }
 
     private SquadAbility(final SquadAbility ability) {
@@ -51,7 +47,7 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
         return new SquadAbility(this);
     }
 
-    public final void addSquadCost(Cost cost) {
+    public final void setSquadCost(Cost cost) {
         OptionalAdditionalCost newCost = new OptionalAdditionalCostImpl(
                 SQUAD_KEYWORD, SQUAD_REMINDER, cost);
         newCost.setRepeatable(true);
@@ -63,7 +59,7 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
         cost.reset();
     }
 
-    protected static String getActivationKey(Ability source, Game game) {
+    protected static int get_zcc(Ability source, Game game) {
         // Squad/Kicker activates in STACK zone so all zcc must be from "stack moment"
         // Use cases:
         // * resolving spell have same zcc (example: check kicker status in sorcery/instant);
@@ -82,8 +78,7 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
         if (sourceObjectZone != Zone.STACK) {
             --zcc;
         }
-
-        return "Squad_zcc"+zcc;
+        return zcc;
     }
 
     @Override
@@ -97,16 +92,16 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
         }
         this.reset();
         boolean again = true;
-        int activatedCount = 0;
         while (player.canRespond() && again) {
             String times = "";
+            int activatedCount = getSquadCount();
             times = (activatedCount + 1) + (activatedCount == 0 ? " time " : " times ");
             // TODO: add AI support to find max number of possible activations (from available mana)
             //  canPay checks only single mana available, not total mana usage
             if (cost.canPay(ability, this, ability.getControllerId(), game)
                     && player.chooseUse(/*Outcome.Benefit*/Outcome.AIDontUseIt,
                     "Pay " + times + cost.getText(false) + " ?", ability, game)) {
-                activatedCount += 1;
+                cost.activate();
                 if (cost instanceof ManaCostsImpl) {
                     ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
                 } else {
@@ -116,7 +111,10 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
                 again = false;
             }
         }
-        this.getSubAbilities().get(0).getEffects().setValue(getActivationKey(ability, game),activatedCount);
+        SquadTriggerAbility squadETB = (SquadTriggerAbility)getSubAbilities().get(0);
+        squadETB.zcc = get_zcc(ability, game);
+        SquadEffectETB squadEffect = (SquadEffectETB)squadETB.getEffects().get(0);
+        squadEffect.activationCount = cost.getActivateCount();
     }
 
     @Override
@@ -129,31 +127,61 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
 
     @Override
     public String getRule() {
-        return "Squad";
+        return "Squad "+cost.getText()+" <i>(As an additional cost to cast this spell, you may pay "+
+            cost.getText()+"any number of times. When this creature enters the battlefield, "+
+            "create that many tokens that are copies of it.)</i>";
     }
 
     /**
-     * If squad cost was paid
+     * Number of times squad cost was paid
      *
-     * @param game
-     * @param source
-     * @return boolean if the squad effect was paid
+     * @return int activation count
      */
-    public boolean isPaid(Game game, Ability source) {
-        String activationKey = getActivationKey(source, game);
-        Object val = this.getSubAbilities().get(0).getAllEffects().get(0).getValue(activationKey);
-        return val != null && (int) val > 0;
+    public int getSquadCount() {
+        return cost.getActivateCount();
     }
 }
+class SquadTriggerAbility extends EntersBattlefieldTriggeredAbility {
+    protected Integer zcc;
+    public SquadTriggerAbility() {
+        super(new SquadEffectETB());
+        this.setRuleVisible(false);
+    }
+
+    private SquadTriggerAbility(final SquadTriggerAbility ability) {
+        super(ability);
+        this.zcc = ability.zcc;
+    }
+    @Override
+    public SquadTriggerAbility copy() {
+        return new SquadTriggerAbility(this);
+    }
+
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        if (zcc != null && zcc == SquadAbility.get_zcc(this, game)){
+            SquadEffectETB effect = (SquadEffectETB)getEffects().get(0);
+            return effect.activationCount > 0;
+        }
+        return false;
+    }
+    @Override
+    public String getRule() {
+        return "Squad <i>(When this creature enters the battlefield, if its squad cost was paid, "
+                + "create a token that’s a copy of it for each time its squad cost was paid.)</i>";
+    }
+}
+
 class SquadEffectETB extends OneShotEffect {
+    protected Integer activationCount;
 
     SquadEffectETB() {
         super(Outcome.Benefit);
-        staticText = "create that many tokens that are copies of it.";
     }
 
     private SquadEffectETB(final SquadEffectETB effect) {
         super(effect);
+        this.activationCount = effect.activationCount;
     }
 
     @Override
@@ -163,8 +191,10 @@ class SquadEffectETB extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String activationKey = SquadAbility.getActivationKey(source, game);
-        CreateTokenCopySourceEffect effect = new CreateTokenCopySourceEffect((int)getValue(activationKey));
-        return effect.apply(game, source);
+        if (activationCount != null) {
+            CreateTokenCopySourceEffect effect = new CreateTokenCopySourceEffect(activationCount);
+            return effect.apply(game, source);
+        }
+        return true;
     }
 }
