@@ -7,11 +7,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -20,16 +22,12 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class FriendlyRivalry extends CardImpl {
 
-    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("target creature you control");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("other target legendary creature you control");
-    private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("target creature you don't control");
+    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("other target legendary creature you control");
 
     static {
-        filter1.add(TargetController.YOU.getControllerPredicate());
         filter2.add(new AnotherTargetPredicate(2));
         filter2.add(SuperType.LEGENDARY.getPredicate());
         filter2.add(TargetController.YOU.getControllerPredicate());
-        filter3.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public FriendlyRivalry(UUID ownerId, CardSetInfo setInfo) {
@@ -40,13 +38,13 @@ public final class FriendlyRivalry extends CardImpl {
         // each deal damage equal to their power to target creature you don't control.
         this.getSpellAbility().addEffect(new FriendlyRivalryEffect());
 
-        TargetCreaturePermanent target1 = new TargetCreaturePermanent(1, 1, filter1);
+        TargetControlledCreaturePermanent target1 = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(target1.setTargetTag(1));
 
-        TargetCreaturePermanent target2 = new TargetCreaturePermanent(0, 1, filter2);
+        TargetControlledCreaturePermanent target2 = new TargetControlledCreaturePermanent(0, 1, filter2, false);
         this.getSpellAbility().addTarget(target2.setTargetTag(2));
 
-        TargetCreaturePermanent target3 = new TargetCreaturePermanent(1, 1, filter3);
+        TargetCreaturePermanent target3 = new TargetCreaturePermanent(1, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL);
         this.getSpellAbility().addTarget(target3);
     }
 
@@ -98,7 +96,9 @@ class FriendlyRivalryEffect extends OneShotEffect {
         Permanent permanentDamage2 = damageTarget2 == null || damageTarget2.getTargets().isEmpty() ? null
             : game.getPermanent(damageTarget2.getTargets().get(0));
         Permanent permanentDest = game.getPermanent(destTarget.getTargets().get(0));
-        if (permanentDest == null) return false;
+        if (permanentDest == null){
+            return false;
+        }
 
         if (permanentDamage1 != null) {
             permanentDest.damage(permanentDamage1.getPower().getValue(), permanentDamage1.getId(), source, game, false, true);
