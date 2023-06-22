@@ -27,7 +27,6 @@ public final class FriendlyRivalry extends CardImpl {
     static {
         filter2.add(new AnotherTargetPredicate(2));
         filter2.add(SuperType.LEGENDARY.getPredicate());
-        filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
     public FriendlyRivalry(UUID ownerId, CardSetInfo setInfo) {
