@@ -242,6 +242,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("The Bath Song", 40, Rarity.UNCOMMON, mage.cards.t.TheBathSong.class));
         cards.add(new SetCardInfo("The Battle of Bywater", 2, Rarity.RARE, mage.cards.t.TheBattleOfBywater.class));
         cards.add(new SetCardInfo("The Black Breath", 78, Rarity.COMMON, mage.cards.t.TheBlackBreath.class));
+        cards.add(new SetCardInfo("The Grey Havens", 255, Rarity.UNCOMMON, mage.cards.t.TheGreyHavens.class));
         cards.add(new SetCardInfo("The Mouth of Sauron", 216, Rarity.UNCOMMON, mage.cards.t.TheMouthOfSauron.class));
         cards.add(new SetCardInfo("The One Ring", 246, Rarity.MYTHIC, mage.cards.t.TheOneRing.class));
         cards.add(new SetCardInfo("The Ring Goes South", 186, Rarity.RARE, mage.cards.t.TheRingGoesSouth.class));
