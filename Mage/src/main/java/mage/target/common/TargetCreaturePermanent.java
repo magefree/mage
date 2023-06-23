@@ -28,10 +28,6 @@ public class TargetCreaturePermanent extends TargetPermanent {
         this(minNumTargets, maxNumTargets, maxNumTargets > 1 ? StaticFilters.FILTER_PERMANENT_CREATURES : StaticFilters.FILTER_PERMANENT_CREATURE, false);
     }
 
-    public TargetCreaturePermanent(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter) {
-        super(minNumTargets, maxNumTargets, filter, false);
-    }
-
     public TargetCreaturePermanent(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }

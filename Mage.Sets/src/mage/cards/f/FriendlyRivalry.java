@@ -43,7 +43,7 @@ public final class FriendlyRivalry extends CardImpl {
         TargetControlledCreaturePermanent target2 = new TargetControlledCreaturePermanent(0, 1, filter2, false);
         this.getSpellAbility().addTarget(target2.setTargetTag(2));
 
-        TargetCreaturePermanent target3 = new TargetCreaturePermanent(1, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL);
+        TargetCreaturePermanent target3 = new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL);
         this.getSpellAbility().addTarget(target3);
     }
 
