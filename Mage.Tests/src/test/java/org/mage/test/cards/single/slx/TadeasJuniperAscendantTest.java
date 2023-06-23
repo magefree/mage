@@ -18,6 +18,7 @@ public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Sweet-Gum Recluse");         // 0/3 //Reach
         addCard(Zone.BATTLEFIELD, playerA, "Canopy Spider");             // 1/3 //Reach
         addCard(Zone.BATTLEFIELD, playerA, "Brood Weaver");              // 2/4 //Reach
+        addCard(Zone.BATTLEFIELD, playerA, "Acolyte of Xathrid");        // 0/5
 
         addCard(Zone.BATTLEFIELD, playerB, "Phyrexian Walker");          // 0/3
         addCard(Zone.BATTLEFIELD, playerB, "Dryad Arbor");               // 1/1
@@ -54,6 +55,21 @@ public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
             Permanent morePowerBlocker = getBlocker("Southern Elephant", game);
             assertFalse(game.getCombat().getGroups().get(0).canBlock(morePowerBlocker, game),
                     "morePowerBlocker should not be able to block");
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void testAttackerLessThanTadeasAttackWithoutReachBlockerPowerMoreThanAttacker() {
+        attack(1, playerA, "Canopy Spider");
+        attack(1, playerA, "Acolyte of Xathrid");
+        runCode("check blocking", 1, PhaseStep.DECLARE_BLOCKERS, playerB, (info, player, game) -> {
+            Permanent morePowerBlocker = getBlocker("Runeclaw Bear", game);
+            assertTrue(game.getCombat().getGroups().get(1).canBlock(morePowerBlocker, game),
+                    "morePowerBlocker should be able to block");
         });
 
         setStrictChooseMode(true);
