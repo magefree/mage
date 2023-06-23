@@ -12,7 +12,6 @@ public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
 
     @Before
     public void setUp() {
-        System.out.println("setupCall");
         addCard(Zone.BATTLEFIELD, playerA, "Tadeas, Juniper Ascendant"); // 1/3
         addCard(Zone.BATTLEFIELD, playerA, "Sweet-Gum Recluse");         // 0/3 //Reach
         addCard(Zone.BATTLEFIELD, playerA, "Canopy Spider");             // 1/3 //Reach
