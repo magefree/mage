@@ -2009,6 +2009,9 @@ public class ScryfallImageSupportTokens {
             // DIS
             put("DIS/Emblem Momir", "https://api.scryfall.com/cards/pmoa/61/en?format=image");
 
+            // MUL
+            put("MUL/Elemental", "https://api.scryfall.com/cards/tmul/2/en?format=image");
+            put("MUL/Phyrexian Myr", "https://api.scryfall.com/cards/tmul/1/en?format=image");
 
             // generate supported sets
             supportedSets.clear();
