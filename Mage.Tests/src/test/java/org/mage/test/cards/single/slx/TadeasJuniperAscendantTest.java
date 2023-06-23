@@ -5,8 +5,10 @@ import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
 
@@ -36,7 +38,7 @@ public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
         attack(1, playerA, "Canopy Spider");
         runCode("check blocking", 1, PhaseStep.DECLARE_BLOCKERS, playerB, (info, player, game) -> {
             Permanent equalPowerBlocker = getBlocker("Dryad Arbor", game);
-            Assertions.assertTrue(game.getCombat().getGroups().get(0).canBlock(equalPowerBlocker, game),
+            assertTrue(game.getCombat().getGroups().get(0).canBlock(equalPowerBlocker, game),
                     "equalPowerBlocker should be able to block");
         });
 
@@ -50,7 +52,7 @@ public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
         attack(1, playerA, "Sweet-Gum Recluse");
         runCode("check blocking", 1, PhaseStep.DECLARE_BLOCKERS, playerB, (info, player, game) -> {
             Permanent morePowerBlocker = getBlocker("Southern Elephant", game);
-            Assertions.assertFalse(game.getCombat().getGroups().get(0).canBlock(morePowerBlocker, game),
+            assertFalse(game.getCombat().getGroups().get(0).canBlock(morePowerBlocker, game),
                     "morePowerBlocker should not be able to block");
         });
 
@@ -64,7 +66,7 @@ public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
         attack(1, playerA, "Canopy Spider");
         runCode("check blocking", 1, PhaseStep.DECLARE_BLOCKERS, playerB, (info, player, game) -> {
             Permanent lessPowerBlocker = getBlocker("Phyrexian Walker", game);
-            Assertions.assertTrue(game.getCombat().getGroups().get(0).canBlock(lessPowerBlocker, game),
+            assertTrue(game.getCombat().getGroups().get(0).canBlock(lessPowerBlocker, game),
                     "lessPowerBlocker should be able to block");
         });
 
@@ -78,7 +80,7 @@ public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
         attack(1, playerA, "Canopy Spider");
         runCode("check blocking", 1, PhaseStep.DECLARE_BLOCKERS, playerB, (info, player, game) -> {
             Permanent equalPowerBlocker = getBlocker("Dryad Arbor", game);
-            Assertions.assertTrue(game.getCombat().getGroups().get(0).canBlock(equalPowerBlocker, game),
+            assertTrue(game.getCombat().getGroups().get(0).canBlock(equalPowerBlocker, game),
                     "equalPowerBlocker should be able to block");
         });
 
@@ -92,7 +94,7 @@ public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
         attack(1, playerA, "Canopy Spider");
         runCode("check blocking", 1, PhaseStep.DECLARE_BLOCKERS, playerB, (info, player, game) -> {
             Permanent morePowerBlocker = getBlocker("Southern Elephant", game);
-            Assertions.assertFalse(game.getCombat().getGroups().get(0).canBlock(morePowerBlocker, game),
+            assertFalse(game.getCombat().getGroups().get(0).canBlock(morePowerBlocker, game),
                     "morePowerBlocker should not be able to block");
         });
 
@@ -106,7 +108,7 @@ public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
             attack(1, playerA, "Brood Weaver");
             runCode("check blocking", 1, PhaseStep.DECLARE_BLOCKERS, playerB, (info, player, game) -> {
                 Permanent lessPowerBlocker = getBlocker("Dryad Arbor", game);
-                Assertions.assertTrue(game.getCombat().getGroups().get(0).canBlock(lessPowerBlocker, game),
+                assertTrue(game.getCombat().getGroups().get(0).canBlock(lessPowerBlocker, game),
                         "lessPowerBlocker should not be able to block");
             });
 
@@ -120,7 +122,7 @@ public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
             attack(1, playerA, "Brood Weaver");
             runCode("check blocking", 1, PhaseStep.DECLARE_BLOCKERS, playerB, (info, player, game) -> {
                 Permanent equalPowerBlocker = getBlocker("Runeclaw Bear", game);
-                Assertions.assertTrue(game.getCombat().getGroups().get(0).canBlock(equalPowerBlocker, game),
+                assertTrue(game.getCombat().getGroups().get(0).canBlock(equalPowerBlocker, game),
                         "equalPowerBlocker should be able to block");
             });
 
@@ -134,7 +136,7 @@ public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
             attack(1, playerA, "Brood Weaver");
             runCode("check blocking", 1, PhaseStep.DECLARE_BLOCKERS, playerB, (info, player, game) -> {
                 Permanent morePowerBlocker = getBlocker("Southern Elephant", game);
-                Assertions.assertFalse(game.getCombat().getGroups().get(0).canBlock(morePowerBlocker, game),
+                assertFalse(game.getCombat().getGroups().get(0).canBlock(morePowerBlocker, game),
                         "morePowerBlocker should not be able to block");
             });
 
