@@ -75,7 +75,7 @@ jobs:
               cards.forEach(cardData => {
                 const className = toCamelCase(cardData[0]);
                 const cleanCardName = cardData[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase();
-                if (fs.existsSync(path.join('Mage.Sets', 'src', 'mage', 'cards', className.substring(0, 1), `${className}.java`)) {
+                if (fs.existsSync(path.join('Mage.Sets', 'src', 'mage', 'cards', className.substring(0, 1), `${className}.java`))) {
                   implemented.push({
                     pr: false, //TODO: check to see if there is a PR for this card
                     name: cardData[0],
