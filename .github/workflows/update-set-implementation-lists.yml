@@ -51,12 +51,13 @@ jobs:
             
             setsData.forEach(set => {
               let foundIssue = undefined;
-              issues.forEach(issue => {
+              issues.every(issue => {
                 if(issue && issue.title && issue.title.startsWith(set[1])) {
                   console.log(`Found tracking issue for ${set[0]} with issue number: ${issue.number}`);
                   foundIssue = issue;
-                  break;
+                  return false;
                 }
+                return true;
               });
               if(foundIssue !== undefined) {
                 issuesToUpdate.push(foundIssue);
