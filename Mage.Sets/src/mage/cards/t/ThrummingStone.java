@@ -22,7 +22,7 @@ public final class ThrummingStone extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Spells you cast have Ripple 4
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new RippleAbility(4), new FilterCard("Spells"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new RippleAbility(4), new FilterCard("Spells you cast"))));
     }
 
     private ThrummingStone(final ThrummingStone card) {
