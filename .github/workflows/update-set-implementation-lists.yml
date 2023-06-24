@@ -31,10 +31,19 @@ jobs:
             const mustache = require('mustache')
             const fs = require('fs')
             
+            const setsData = fs.readFileSync(path.join('Utils', 'mtg-sets-data.txt'), 'utf8')
+              .split('\n')
+              .map(line => {line.split('|')[1], line.split('|')[0]});
+              
+            console.log(setsData);
+            
+            
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
               labels: 'tracking set'
             });
             
-            console.log("Found list of existing issues:", issues)
+            console.log("Found list of existing issues:", issues);
+            
+            
