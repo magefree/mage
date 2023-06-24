@@ -187,5 +187,10 @@ jobs:
               sets: sets
             });
             
-            fs.writeFile(path.join('wiki', 'Set-implementation-list.md'), content);
+            console.log(content);
             
+            try {
+              fs.writeFileSync(path.join('wiki', 'Set-implementation-list.md'), content);
+            } catch (err) {
+              console.error(err);
+            }
