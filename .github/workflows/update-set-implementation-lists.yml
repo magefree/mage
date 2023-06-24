@@ -17,12 +17,14 @@ jobs:
         with:
           actions: 'find-issues'
           labels: 'tracking set'
+        
       - uses: actions/setup-node@v3
         with:
           node-version: 16
       - run: npm install mustache
         shell: bash
-      - uses: actions/github-script@v2.1.0
+        
+      - uses: actions/github-script@v6.4.1
         id: updateissues
         with:
           script: |
