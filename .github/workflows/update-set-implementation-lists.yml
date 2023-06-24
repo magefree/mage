@@ -29,6 +29,7 @@ jobs:
         with:
           script: |
             const mustache = require('mustache')
+            const path = require('path')
             const fs = require('fs')
             
             const setsData = fs.readFileSync(path.join('Utils', 'mtg-sets-data.txt'), 'utf8')
