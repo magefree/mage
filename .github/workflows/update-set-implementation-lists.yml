@@ -72,7 +72,7 @@ jobs:
               const implemented = [];
               
               cards.forEach(cardData => {
-                const className = toCamelCase(cardData[0].replace(/[+]/g, ' Plus ').replace(/[_]+/g, ' Blank ')).replace(/[-+,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '');
+                const className = toCamelCase(cardData[0].replace(/[+]/g, ' Plus ').replace(/[_]+/g, ' Blank ').replace(/[-+,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, ''));
                 const cleanCardName = cardData[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase();
                 const cardPath = path.join('Mage.Sets', 'src', 'mage', 'cards', className.substring(0, 1), `${className.charAt(0).toUpperCase()+className.slice(1)}.java`);
                 if(cleanCardName === "ulamogscrusher") console.log(cardPath);
