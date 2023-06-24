@@ -34,17 +34,40 @@ jobs:
             
             const setsData = fs.readFileSync(path.join('Utils', 'mtg-sets-data.txt'), 'utf8')
               .split('\n')
-              .map(line => ({[line.split('|')[1]]: line.split('|')[0]}));
-              
-            console.log(setsData);
-            
+              .map(line => line.split('|'));
+            const cardsData = fs.readFileSync(path.join('Utils', 'mtg-cards-data.txt'), 'utf8')
+              .split('\n')
+              .map(line => line.split('|'));
             
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
               labels: 'tracking set'
             });
-            
             console.log("Found list of existing issues:", issues);
             
+            const issuesToUpdate = [];
+            const issuesToCreate = [];
+            
+            setsData.forEach(set => {
+              let foundIssue = undefined;
+              issues.forEach(issue => {
+                if(issue && issue.title && issue.title.startsWith(set[1])) {
+                  console.log(`Found tracking issue for ${set[0]} with issue number: ${issue.number}`);
+                  foundIssue = issue;
+                  break;
+                }
+              });
+              if(foundIssue !== undefined) {
+                issuesToUpdate.push(foundIssue);
+              } else {
+                issuesToCreate.push({
+                  title: `${set[1]}: ${set[0]} Set Card Implementation Tracking`,
+                  body: `Placeholder`
+                });
+              }
+            });
+            
+            console.log("Issues to update: ", issuesToUpdate);
+            console.log("Issues to create: ", issuesToCreate);
             
