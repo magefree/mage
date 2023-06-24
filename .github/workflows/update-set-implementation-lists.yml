@@ -31,13 +31,10 @@ jobs:
             const mustache = require('mustache')
             const fs = require('fs')
             
-            const issues = await github.rest.issues.listForRepo({
+            const issues = await octokit.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
               labels: 'tracking set'
             });
-            console.log("Found list of existing issues:", issues)
             
-            issues.forEach(issue => {
-              console.log(issue.title);
-            })
+            console.log("Found list of existing issues:", issues)
