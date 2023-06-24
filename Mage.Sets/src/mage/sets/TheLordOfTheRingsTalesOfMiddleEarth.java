@@ -90,6 +90,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Fog on the Barrow-Downs", 16, Rarity.COMMON, mage.cards.f.FogOnTheBarrowDowns.class));
         cards.add(new SetCardInfo("Foray of Orcs", 128, Rarity.UNCOMMON, mage.cards.f.ForayOfOrcs.class));
         cards.add(new SetCardInfo("Forest", 270, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Friendly Rivalry", 204, Rarity.UNCOMMON, mage.cards.f.FriendlyRivalry.class));
         cards.add(new SetCardInfo("Frodo Baggins", 205, Rarity.UNCOMMON, mage.cards.f.FrodoBaggins.class));
         cards.add(new SetCardInfo("Frodo, Determined Hero", 289, Rarity.RARE, mage.cards.f.FrodoDeterminedHero.class));
         cards.add(new SetCardInfo("Frodo, Sauron's Bane", 18, Rarity.RARE, mage.cards.f.FrodoSauronsBane.class));
