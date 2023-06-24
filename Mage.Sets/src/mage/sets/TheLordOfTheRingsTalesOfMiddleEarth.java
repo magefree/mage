@@ -219,6 +219,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Scroll of Isildur", 69, Rarity.RARE, mage.cards.s.ScrollOfIsildur.class));
         cards.add(new SetCardInfo("Second Breakfast", 29, Rarity.COMMON, mage.cards.s.SecondBreakfast.class));
         cards.add(new SetCardInfo("Shadow Summoning", 226, Rarity.UNCOMMON, mage.cards.s.ShadowSummoning.class));
+        cards.add(new SetCardInfo("Shadowfax, Lord of Horses", 227, Rarity.UNCOMMON, mage.cards.s.ShadowfaxLordOfHorses.class));
         cards.add(new SetCardInfo("Shagrat, Loot Bearer", 228, Rarity.RARE, mage.cards.s.ShagratLootBearer.class));
         cards.add(new SetCardInfo("Shelob's Ambush", 108, Rarity.COMMON, mage.cards.s.ShelobsAmbush.class));
         cards.add(new SetCardInfo("Shire Scarecrow", 249, Rarity.COMMON, mage.cards.s.ShireScarecrow.class));
