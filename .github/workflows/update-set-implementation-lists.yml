@@ -117,18 +117,8 @@ jobs:
             
             console.log("Issues to update: ", issuesToUpdate);
             console.log("Issues to create: ", issuesToCreate);
-  update-set-impl-wiki:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: npm install mustache
-        shell: bash
-        
       - uses: actions/github-script@v6.4.1
-        id: updateissues
+        id: updatewiki
         with:
           script: |
             const mustache = require('mustache')
@@ -139,6 +129,13 @@ jobs:
             mustache.escape = function(str) {
               return str;
             };
+            
+            // https://stackoverflow.com/a/2970667
+            function toCamelCase(str) {
+              return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+                return index === 0 ? word.toLowerCase() : word.toUpperCase();
+              }).replace(/\s+/g, '')
+            }
             
             const setImplementationTemplate = fs.readFileSync(path.join('.github', 'templates', 'set-tracking-wiki.md'), 'utf8');
             
@@ -186,6 +183,9 @@ jobs:
               });
             });
             
-            const content = mustache.render(setImplementationTemplate, {});
+            const content = mustache.render(setImplementationTemplate, {
+              sets: sets
+            });
             
-            fs.writeFile(path.join('wiki', 'Set-implementation-list.md'), content); 
+            fs.writeFile(path.join('wiki', 'Set-implementation-list.md'), content);
+            
