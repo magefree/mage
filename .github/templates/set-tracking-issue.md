@@ -15,8 +15,8 @@ Don't worry about moving things from in progress to completed either, this issue
 {{/unimplementedCards}}
 
 [Scryfall gallery of everything currently unimplemented]({{unimplementedScryfallLink}})
-
 {{/hasUnimplementedCards}}
+
 {{^hasUnimplementedCards}}
 All cards are implemented
 {{/hasUnimplementedCards}}
