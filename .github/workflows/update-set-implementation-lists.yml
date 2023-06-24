@@ -31,6 +31,8 @@ jobs:
             const mustache = require('mustache')
             const fs = require('fs')
             
+            console.log(${{ steps.setimplissues.outputs.issues }})
+            
             const issues = JSON.parse(${{ steps.setimplissues.outputs.issues }})
             console.log("Found list of existing issues:", issues)
             
