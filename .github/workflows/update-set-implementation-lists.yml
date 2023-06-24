@@ -45,7 +45,7 @@ jobs:
             const cardsData = fs.readFileSync(path.join('Utils', 'mtg-cards-data.txt'), 'utf8')
               .split('\n')
               .map(line => line.split('|'));
-            const cardIssueTemplate = fs.readFileSync(path.join('.github', 'templates', 'set-tracking-issue.md'));
+            const cardIssueTemplate = fs.readFileSync(path.join('.github', 'templates', 'set-tracking-issue.md'), 'utf8');
             
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
@@ -90,7 +90,7 @@ jobs:
                 }
               });
               const cleanCards = cards.map(card => card[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase());
-              if(foundIssue !== undefined) {
+              if (foundIssue !== undefined) {
                 foundIssue.body = mustache.render(cardIssueTemplate, {
                   hasUnimplementedCards: unimplemented.length > 0,
                   hasImplementedCards: implemented.length > 0,
