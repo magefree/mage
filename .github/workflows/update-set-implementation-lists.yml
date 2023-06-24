@@ -43,7 +43,7 @@ jobs:
             const cardsData = fs.readFileSync(path.join('Utils', 'mtg-cards-data.txt'), 'utf8')
               .split('\n')
               .map(line => line.split('|'))
-              .filter(card => !(card[0].toLowerCase() === "plains" || card[0].toLowerCase() === "swamp" || card[0].toLowerCase() === "island" || card[0].toLowerCase() === "mountain" || card[0].toLowerCase() === "forest");
+              .filter(card => !(card[0].toLowerCase() === "plains" || card[0].toLowerCase() === "swamp" || card[0].toLowerCase() === "island" || card[0].toLowerCase() === "mountain" || card[0].toLowerCase() === "forest"));
             const cardIssueTemplate = fs.readFileSync(path.join('.github', 'templates', 'set-tracking-issue.md'), 'utf8');
             
             const issues = await github.paginate(github.rest.issues.listForRepo, {
