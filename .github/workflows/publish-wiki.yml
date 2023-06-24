@@ -18,5 +18,5 @@ jobs:
       - uses: impresscms-dev/strip-markdown-extensions-from-links-action@v1.0.0
         with:
           path: wiki
-      - uses: Andrew-Chen-Wang/github-wik-action@v4
+      - uses: Andrew-Chen-Wang/github-wiki-action@v4.2.0
     
