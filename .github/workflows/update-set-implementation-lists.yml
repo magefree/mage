@@ -16,7 +16,7 @@ jobs:
         with:
           actions: 'find-issues'
           labels: 'tracking set'
-      - uses: github/checkout@v3
+      # - uses: github/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 16
