@@ -75,7 +75,6 @@ jobs:
                 const className = toCamelCase(cardData[0].replace(/[+]/g, ' Plus ').replace(/[_]+/g, ' Blank ').replace(/[']/g, '').replace(/[-+,.!?`@#$%^&*()_=<>:";~\\|/]/g, ' '));
                 const cleanCardName = cardData[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase();
                 const cardPath = path.join('Mage.Sets', 'src', 'mage', 'cards', className.substring(0, 1), `${className.charAt(0).toUpperCase()+className.slice(1)}.java`);
-                if(cleanCardName === "willothewisp") console.log(cardPath);
                 if (fs.existsSync(cardPath)) {
                   implemented.push({
                     pr: true, //TODO: check to see if there is a PR for this card
@@ -146,13 +145,46 @@ jobs:
             const setsData = fs.readFileSync(path.join('Utils', 'mtg-sets-data.txt'), 'utf8')
               .split('\n')
               .map(line => line.split('|'));
-              
+            const cardsData = fs.readFileSync(path.join('Utils', 'mtg-cards-data.txt'), 'utf8')
+              .split('\n')
+              .map(line => line.split('|'))
+              .filter(card => !(card[0].toLowerCase() === "plains" || card[0].toLowerCase() === "swamp" || card[0].toLowerCase() === "island" || card[0].toLowerCase() === "mountain" || card[0].toLowerCase() === "forest"))
+            
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
               labels: 'tracking set'
             });
-            console.log("Found list of existing issues:", issues);
+            
+            const sets = [];
+            setsData.forEach(set => {
+              let foundIssue = undefined;
+              issues.every(issue => {
+                if(issue && issue.title && issue.title.startsWith(set[1])) {
+                  console.log(`Found tracking issue for ${set[0]} with issue number: ${issue.number}`);
+                  foundIssue = issue;
+                  return false;
+                }
+                return true;
+              });
+              
+              const cards = cardsData.filter(card => card[1] === set[0]);
+              let implementedCount = 0;
+              cards.forEach(cardData => {
+                const className = toCamelCase(cardData[0].replace(/[+]/g, ' Plus ').replace(/[_]+/g, ' Blank ').replace(/[']/g, '').replace(/[-+,.!?`@#$%^&*()_=<>:";~\\|/]/g, ' '));
+                const cleanCardName = cardData[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase();
+                const cardPath = path.join('Mage.Sets', 'src', 'mage', 'cards', className.substring(0, 1), `${className.charAt(0).toUpperCase()+className.slice(1)}.java`);
+                if (fs.existsSync(cardPath)) {
+                  implementedCount++;
+                }
+              });
+              sets.push({
+                name: set[0],
+                issueLink: foundIssue === undefined ? "https://www.github.com/mage/magefree" : foundIssue.url,
+                total: cards.length,
+                missing: cards.length - implementedCount
+              });
+            });
             
             const content = mustache.render(setImplementationTemplate, {});
             
