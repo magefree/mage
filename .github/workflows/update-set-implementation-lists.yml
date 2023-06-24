@@ -34,7 +34,7 @@ jobs:
             
             const setsData = fs.readFileSync(path.join('Utils', 'mtg-sets-data.txt'), 'utf8')
               .split('\n')
-              .map(line => line.split('|'));
+              .map(line => {[line.split('|')[1]]: line.split('|')[0]);
               
             console.log(setsData);
             
