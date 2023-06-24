@@ -103,12 +103,12 @@ jobs:
                 issuesToCreate.push({
                   title: `${set[1]}: ${set[0]} Set Card Implementation Tracking`,
                   body: mustache.render(cardIssueTemplate, {
-                  hasUnimplementedCards: unimplemented.length > 0,
-                  hasImplementedCards: implemented.length > 0,
-                  unimplementedCards: unimplemented,
-                  implementedCards: implemented,
-                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${String.join('"OR!"', cleanCards)}"+e:${set[1]}`
-                });
+                    hasUnimplementedCards: unimplemented.length > 0,
+                    hasImplementedCards: implemented.length > 0,
+                    unimplementedCards: unimplemented,
+                    implementedCards: implemented,
+                    unimplementedScryfallLink: `https://scryfall.com/search?q=!"${String.join('"OR!"', cleanCards)}"+e:${set[1]}`
+                  })
                 });
               }
             });
