@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
@@ -23,6 +22,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.TargetPointer;
 
 import java.util.UUID;
 
@@ -101,30 +101,26 @@ class TadeasJuniperAscendantEffect extends OneShotEffect {
             return false;
         }
         permanent.untap(game);
-        game.addEffect(new TadeasJuniperAscendantEvasionEffect(permanent, game), source);
+        game.addEffect(new TadeasJuniperAscendantEvasionEffect(getTargetPointer()), source);
         return true;
     }
 }
 
 class TadeasJuniperAscendantEvasionEffect extends RestrictionEffect {
 
-    private final MageObjectReference mor;
-    TadeasJuniperAscendantEvasionEffect(Permanent permanent, Game game) {
+    TadeasJuniperAscendantEvasionEffect(TargetPointer targetPointer) {
         super(Duration.EndOfCombat);
-        this.mor = new MageObjectReference(permanent, game);
+        this.targetPointer = targetPointer;
         staticText = "and can't be blocked by creatures with greater power";
     }
 
     private TadeasJuniperAscendantEvasionEffect(final TadeasJuniperAscendantEvasionEffect effect) {
         super(effect);
-        this.mor = effect.mor;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent attacker = mor.getPermanent(game);
-        if (attacker == null) return false;
-        return permanent == attacker;
+        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
     }
 
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
