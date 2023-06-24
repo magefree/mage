@@ -14,7 +14,6 @@ public final class BadgerToken extends TokenImpl {
         subtype.add(SubType.BADGER);
         power = new MageInt(3);
         toughness = new MageInt(3);
-        setOriginalExpansionSetCode("DMC");
     }
 
     public BadgerToken(final BadgerToken token) {

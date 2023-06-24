@@ -40,7 +40,7 @@ public final class KnightlyValor extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Knightly Valor enters the battlefield, create a 2/2 white Knight creature token with vigilance.

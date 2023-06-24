@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -16,9 +15,7 @@ import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -26,13 +23,6 @@ import mage.target.common.TargetControlledPermanent;
  * @author TheElk801
  */
 public final class UndercityNecrolisk extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public UndercityNecrolisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -50,7 +40,7 @@ public final class UndercityNecrolisk extends CardImpl {
                 new GenericManaCost(1)
         );
         ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(filter)
+                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
         ));
         // It gains menace until end of turn. Activate this ability only any time you could cast a sorcery.
         ability.addEffect(new GainAbilitySourceEffect(

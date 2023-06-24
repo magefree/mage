@@ -18,11 +18,13 @@ public class RavenousAbility extends EntersBattlefieldAbility {
 
     public RavenousAbility() {
         super(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance()));
-        this.addSubAbility(new ConditionalInterveningIfTriggeredAbility(
+        Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 RavenousAbilityCondition.instance, "When this creature enters the battlefield, " +
                 "if X is 5 or more, draw a card"
-        ));
+        );
+        ability.setRuleVisible(false);
+        this.addSubAbility(ability);
     }
 
     private RavenousAbility(final RavenousAbility ability) {

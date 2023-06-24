@@ -1,14 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-
-import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class SerfToken extends TokenImpl {
@@ -20,8 +16,6 @@ public final class SerfToken extends TokenImpl {
         subtype.add(SubType.SERF);
         power = new MageInt(0);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("EMA");
     }
 
     public SerfToken(final SerfToken token) {

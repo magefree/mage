@@ -29,17 +29,26 @@ public abstract class MageObjectImpl implements MageObject {
 
     protected String name;
     protected ManaCosts<ManaCost> manaCost;
+
     protected ObjectColor color;
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
+
+    private String expansionSetCode = "";
+    private String cardNumber = "";
+    private int imageNumber = 0;
+
+    protected List<SuperType> supertype = new ArrayList<>();
     protected List<CardType> cardType = new ArrayList<>();
     protected SubTypes subtype = new SubTypes();
-    protected Set<SuperType> supertype = EnumSet.noneOf(SuperType.class);
     protected Abilities<Ability> abilities;
+
     protected String text;
     protected MageInt power;
     protected MageInt toughness;
     protected int startingLoyalty = -1; // -2 means X, -1 means none, 0 and up is normal
+    protected int startingDefense = -1; // -2 means X, -1 means none, 0 and up is normal
+
     protected boolean copy;
     protected MageObject copyFrom; // copied card INFO (used to call original adjusters)
 
@@ -66,9 +75,13 @@ public abstract class MageObjectImpl implements MageObject {
         color = object.color.copy();
         frameColor = object.frameColor.copy();
         frameStyle = object.frameStyle;
+        expansionSetCode = object.expansionSetCode;
+        cardNumber = object.cardNumber;
+        imageNumber = object.imageNumber;
         power = object.power.copy();
         toughness = object.toughness.copy();
         startingLoyalty = object.startingLoyalty;
+        startingDefense = object.startingDefense;
         abilities = object.abilities.copy();
         this.cardType.addAll(object.cardType);
         this.subtype.copyFrom(object.subtype);
@@ -95,11 +108,6 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public String getLogName() {
         return GameLog.getColoredObjectIdName(this);
-    }
-
-    @Override
-    public String getImageName() {
-        return name;
     }
 
     @Override
@@ -138,7 +146,14 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public Set<SuperType> getSuperType() {
+    public List<SuperType> getSuperType(Game game) {
+        if (game != null) {
+            // dynamic
+            MageObjectAttribute mageObjectAttribute = game.getState().getMageObjectAttribute(getId());
+            if (mageObjectAttribute != null) {
+                return mageObjectAttribute.getSuperType();
+            }
+        }
         return supertype;
     }
 
@@ -174,6 +189,16 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public void setStartingLoyalty(int startingLoyalty) {
         this.startingLoyalty = startingLoyalty;
+    }
+
+    @Override
+    public int getStartingDefense() {
+        return startingDefense;
+    }
+
+    @Override
+    public void setStartingDefense(int startingDefense) {
+        this.startingDefense = startingDefense;
     }
 
     @Override
@@ -219,6 +244,36 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public FrameStyle getFrameStyle() {
         return frameStyle;
+    }
+
+    @Override
+    public String getExpansionSetCode() {
+        return expansionSetCode;
+    }
+
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {
+        this.expansionSetCode = expansionSetCode;
+    }
+
+    @Override
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    @Override
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    @Override
+    public Integer getImageNumber() {
+        return imageNumber;
+    }
+
+    @Override
+    public void setImageNumber(Integer imageNumber) {
+        this.imageNumber = imageNumber;
     }
 
     @Override

@@ -31,14 +31,14 @@ public final class WintersRest extends CardImpl {
     public WintersRest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Winter's Rest enters the battlefield, tap enchanted creature.

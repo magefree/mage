@@ -38,7 +38,7 @@ public final class CuratorsWard extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted permanent has hexproof.

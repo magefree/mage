@@ -35,7 +35,7 @@ public final class DawnsReflection extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors.
@@ -56,8 +56,7 @@ class DawnsReflectionManaEffect extends ManaEffect {
 
     DawnsReflectionManaEffect() {
         super();
-        this.staticText = "its controller adds two mana in any combination of colors " +
-                "<i>(in addition to the mana the land produces)</i>";
+        this.staticText = "its controller adds an additional two mana in any combination of colors";
     }
 
     private DawnsReflectionManaEffect(final DawnsReflectionManaEffect effect) {

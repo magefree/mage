@@ -45,7 +45,7 @@ public final class BoseijuReachesSkyward extends CardImpl {
                 this, SagaChapter.CHAPTER_I,
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                         0, 2, filter
-                ), true, true)
+                ), true)
         );
 
         // II — Put up to one target land card from your graveyard on top of your library.

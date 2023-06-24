@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -6,7 +5,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author L_J
  */
 public final class SheepToken extends TokenImpl {

@@ -42,7 +42,7 @@ public final class LivingArtifact extends CardImpl {
         TargetPermanent auraTarget = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Whenever you're dealt damage, put that many vitality counters on Living Artifact.
         this.addAbility(new LivingArtifactTriggeredAbility());

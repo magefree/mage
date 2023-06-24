@@ -98,8 +98,7 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    public boolean canTransform(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean canTransform(Game game, boolean canUseChooseDialogs) {
         return true;
     }
-
 }

@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -19,8 +17,6 @@ public final class SalamnderWarriorToken extends TokenImpl {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(4);
         toughness = new MageInt(3);
-
-        availableImageSetCodes = Arrays.asList("CMR");
     }
 
     public SalamnderWarriorToken(final SalamnderWarriorToken token) {
@@ -29,10 +25,5 @@ public final class SalamnderWarriorToken extends TokenImpl {
 
     public SalamnderWarriorToken copy() {
         return new SalamnderWarriorToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
     }
 }

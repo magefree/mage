@@ -179,7 +179,7 @@ class OldGrowthTrollContinuousEffect extends ContinuousEffectImpl {
                 TargetPermanent auraTarget = new TargetPermanent(filter);
                 troll.getSpellAbility().addTarget(auraTarget);
                 troll.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-                troll.addAbility(new EnchantAbility(auraTarget.getTargetName()), source.getSourceId(), game);
+                troll.addAbility(new EnchantAbility(auraTarget), source.getSourceId(), game);
 
                 // add the activated ability
                 troll.addAbility(makeAbility(), source.getSourceId(), game);

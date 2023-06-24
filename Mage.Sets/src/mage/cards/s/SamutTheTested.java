@@ -33,7 +33,7 @@ public final class SamutTheTested extends CardImpl {
 
     public SamutTheTested(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SAMUT);
 
         this.setStartingLoyalty(4);
@@ -51,7 +51,7 @@ public final class SamutTheTested extends CardImpl {
         this.addAbility(ability);
 
         // -7: Search your library for up to two creature and/or planeswalker cards, put them onto the battlefield, then shuffle your library.
-        effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filter), false, true);
+        effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filter), false);
         ability = new LoyaltyAbility(effect, -7);
         this.addAbility(ability);
     }

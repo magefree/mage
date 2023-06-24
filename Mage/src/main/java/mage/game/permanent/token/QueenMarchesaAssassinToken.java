@@ -1,16 +1,12 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.HasteAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class QueenMarchesaAssassinToken extends TokenImpl {
@@ -24,8 +20,6 @@ public final class QueenMarchesaAssassinToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(DeathtouchAbility.getInstance());
         addAbility(HasteAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("CN2");
     }
 
     public QueenMarchesaAssassinToken(final QueenMarchesaAssassinToken token) {

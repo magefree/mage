@@ -33,10 +33,11 @@ public final class Rubblehulk extends CardImpl {
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS);
 
         // Rubblehulk's power and toughness are each equal to the number of lands you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(controlledLands, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(controlledLands)));
 
         // Bloodrush - 1{R}{G}, Discard Rubblehulk: Target attacking creature gets +X/+X until end of turn, where X is the number of lands you control.
-        this.addAbility(new BloodrushAbility("{1}{R}{G}", new BoostTargetEffect(controlledLands, controlledLands, Duration.EndOfTurn)));
+        this.addAbility(new BloodrushAbility("{1}{R}{G}", new BoostTargetEffect(controlledLands, controlledLands, Duration.EndOfTurn)
+                .setText("target attacking creature gets +X/+X until end of turn, where X is the number of lands you control")));
     }
 
     private Rubblehulk(final Rubblehulk card) {

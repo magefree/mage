@@ -1,8 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -15,15 +12,15 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class RevengeOfTheHunted extends CardImpl {
 
     public RevengeOfTheHunted(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
 
         // Until end of turn, target creature gets +6/+6 and gains trample, and all creatures able to block it this turn do so.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -34,7 +31,7 @@ public final class RevengeOfTheHunted extends CardImpl {
         this.getSpellAbility().addEffect(effect);
 
         // Miracle {G}
-        this.addAbility(new MiracleAbility(this, new ManaCostsImpl<>("{G}")));
+        this.addAbility(new MiracleAbility("{G}"));
     }
 
     private RevengeOfTheHunted(final RevengeOfTheHunted card) {

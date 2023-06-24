@@ -34,14 +34,14 @@ public final class GlacialPlating extends CardImpl {
     public GlacialPlating(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Cumulative upkeep {snow}

@@ -1,8 +1,4 @@
-
 package mage.game.permanent.token;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -14,7 +10,6 @@ import mage.constants.SubType;
 import mage.target.common.TargetAnyTarget;
 
 /**
- *
  * @author fireshoes
  */
 public final class DevilToken extends TokenImpl {
@@ -33,8 +28,6 @@ public final class DevilToken extends TokenImpl {
         Ability ability = new DiesSourceTriggeredAbility(effect);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
-
-        availableImageSetCodes = Arrays.asList("SOI", "WAR", "AFR", "MID", "SNC", "NCC", "CLB");
     }
 
     public DevilToken(final DevilToken token) {

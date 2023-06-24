@@ -66,7 +66,7 @@ class ProwlingPangolinEffect extends OneShotEffect {
         if (controller != null) {
             boolean costPaid = false;
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledCreaturePermanent("two creatures"), true));
+                Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledCreaturePermanent("creatures"), true));
                 Player player = game.getPlayer(playerId);
                 if (player != null
                         && cost.canPay(source, source, playerId, game)

@@ -89,7 +89,7 @@ class DokaiWeaverofLife extends TokenImpl {
 
     DokaiWeaverofLife() {
         super("Dokai, Weaver of Life", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.HUMAN, SubType.MONK);

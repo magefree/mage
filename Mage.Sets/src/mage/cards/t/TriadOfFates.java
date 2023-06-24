@@ -39,7 +39,7 @@ public final class TriadOfFates extends CardImpl {
 
     public TriadOfFates(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -58,7 +58,7 @@ public final class TriadOfFates extends CardImpl {
         ability.addCost(new TapSourceCost());
         target = new TargetCreaturePermanent(filterCounter);
         ability.addTarget(target);
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
         this.addAbility(ability);
 
         // {B}, {T}: Exile target creature that has a fate counter on it. Its controller draws two cards.

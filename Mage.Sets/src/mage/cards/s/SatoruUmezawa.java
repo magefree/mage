@@ -6,7 +6,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -28,7 +27,7 @@ public final class SatoruUmezawa extends CardImpl {
     public SatoruUmezawa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.NINJA);
         this.power = new MageInt(2);

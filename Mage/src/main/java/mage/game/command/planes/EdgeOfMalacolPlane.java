@@ -18,7 +18,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.command.Plane;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
@@ -36,7 +35,6 @@ public class EdgeOfMalacolPlane extends Plane {
 
     public EdgeOfMalacolPlane() {
         this.setPlaneType(Planes.PLANE_EDGE_OF_MALACOL);
-        this.setExpansionSetCodeForImage("PCA");
 
         // If a creature you control would untap during your untap step, put two +1/+1 counters on it instead.
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.COMMAND, new EdgeOfMalacolEffect());
@@ -56,6 +54,15 @@ public class EdgeOfMalacolPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private EdgeOfMalacolPlane(final EdgeOfMalacolPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public EdgeOfMalacolPlane copy() {
+        return new EdgeOfMalacolPlane(this);
     }
 }
 
@@ -90,7 +97,7 @@ class EdgeOfMalacolEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // Prevent untap event of creatures of target player
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
+        if (game.getTurnStepType() == PhaseStep.UNTAP) {
             Plane cPlane = game.getState().getCurrentPlane();
             if (cPlane == null) {
                 return false;

@@ -16,6 +16,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -65,6 +66,9 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
                              Set<UUID> targets, Cards cards, QueryType queryType, int min, int max, boolean required,
                              Map<String, Serializable> options, List<String> messages) {
         super(playerId);
+
+        CardUtil.checkSetParamForSerializationCompatibility(choices);
+
         this.queryType = queryType;
         this.message = message;
         this.playerId = playerId;

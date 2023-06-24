@@ -6,13 +6,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.emblems.TeferiWhoSlowsTheSunsetEmblem;
 import mage.game.permanent.Permanent;
@@ -31,7 +27,7 @@ public final class TeferiWhoSlowsTheSunset extends CardImpl {
     public TeferiWhoSlowsTheSunset(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEFERI);
         this.setStartingLoyalty(4);
 

@@ -25,7 +25,7 @@ public final class InfernalKirin extends CardImpl {
 
     public InfernalKirin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIRIN);
         this.subtype.add(SubType.SPIRIT);
 

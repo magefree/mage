@@ -38,7 +38,7 @@ public final class GeistflameReservoir extends CardImpl {
                 .setText("it deals that much damage to any target"), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveVariableCountersSourceCost(
-                CounterType.CHARGE.createInstance(), "Remove any number of charge counters from {this}"
+                CounterType.CHARGE, "Remove any number of charge counters from {this}"
         ));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

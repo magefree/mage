@@ -21,7 +21,10 @@ public final class GiftOfTusks extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Until end of turn, target creature loses all abilities and becomes a green Elephant with base power and toughness 3/3.
-        Effect effect = new BecomesCreatureTargetEffect(new ElephantToken(), true, false, Duration.EndOfTurn);
+        Effect effect = new BecomesCreatureTargetEffect(
+                new ElephantToken(),
+                true, false, Duration.EndOfTurn)
+                .withDurationRuleAtStart(true);
         effect.setText("Until end of turn, target creature loses all abilities and becomes a green Elephant with base power and toughness 3/3");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

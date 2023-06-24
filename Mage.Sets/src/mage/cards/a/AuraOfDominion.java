@@ -41,7 +41,7 @@ public final class AuraOfDominion extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Untap));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new GenericManaCost(1));
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         this.addAbility(ability);

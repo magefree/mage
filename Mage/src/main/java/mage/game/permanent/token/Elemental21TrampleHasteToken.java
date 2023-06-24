@@ -7,7 +7,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author weirddan455
  */
 public final class Elemental21TrampleHasteToken extends TokenImpl {

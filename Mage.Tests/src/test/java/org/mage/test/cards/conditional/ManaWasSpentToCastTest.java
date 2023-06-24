@@ -1,9 +1,7 @@
 package org.mage.test.cards.conditional;
 
-import com.sun.org.apache.bcel.internal.generic.POP;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
-import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;

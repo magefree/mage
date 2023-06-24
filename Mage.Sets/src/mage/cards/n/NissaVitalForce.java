@@ -35,7 +35,7 @@ public final class NissaVitalForce extends CardImpl {
 
     public NissaVitalForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
 
         this.setStartingLoyalty(5);
@@ -44,7 +44,7 @@ public final class NissaVitalForce extends CardImpl {
         LoyaltyAbility ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
         ability.addEffect(new BecomesCreatureTargetEffect(
                 new NissaVitalForceToken(), false, true, Duration.UntilYourNextTurn
-        ).setText("Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land"));
+        ).withDurationRuleAtStart(true).setText("Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land"));
         ability.addTarget(new TargetLandPermanent(filter));
         this.addAbility(ability);
 

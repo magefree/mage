@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -28,7 +27,7 @@ public final class ArgothianTreefolk extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Prevent all damage that would be dealt to Argothian Treefolk by artifact sources.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect(CardType.ARTIFACT)));
+        this.addAbility(new SimpleStaticAbility(new ArgothianTreefolkPreventionEffect()));
     }
 
     private ArgothianTreefolk(final ArgothianTreefolk card) {
@@ -41,28 +40,29 @@ public final class ArgothianTreefolk extends CardImpl {
     }
 }
 
-class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffect {
+// cannot use PreventAllDamageToSourceByPermanentsEffect: "artifact sources" not "artifacts"
+class ArgothianTreefolkPreventionEffect extends PreventAllDamageToSourceEffect {
 
-    private CardType cardType;
-
-    public PreventDamageToSourceByCardTypeEffect() {
-        this(null);
+    public ArgothianTreefolkPreventionEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "prevent all damage that would be dealt to {this} by artifact sources";
     }
 
-    public PreventDamageToSourceByCardTypeEffect(CardType cardT) {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Prevent all damage that would be dealt to {this} by artifact sources";
-        cardType = cardT;
+    private ArgothianTreefolkPreventionEffect(final ArgothianTreefolkPreventionEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ArgothianTreefolkPreventionEffect copy() {
+        return new ArgothianTreefolkPreventionEffect(this);
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            MageObject sourceObject = game.getObject(event.getSourceId());
-            if (sourceObject != null && sourceObject.getCardType(game).contains(cardType)) {
-                return event.getTargetId().equals(source.getSourceId());
-            }
+        if (!super.applies(event, source, game)) {
+            return false;
         }
-        return false;
+        MageObject sourceObject = game.getObject(event.getSourceId());
+        return sourceObject != null && sourceObject.isArtifact(game);
     }
 }

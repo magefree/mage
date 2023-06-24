@@ -7,15 +7,11 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 
 /**
@@ -26,7 +22,7 @@ public final class GrowingRitesOfItlimoc extends CardImpl {
     public GrowingRitesOfItlimoc(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.secondSideCardClazz = mage.cards.i.ItlimocCradleOfTheSun.class;
 

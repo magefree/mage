@@ -42,7 +42,6 @@ public class NayaPlane extends Plane {
 
     public NayaPlane() {
         this.setPlaneType(Planes.PLANE_NAYA);
-        this.setExpansionSetCodeForImage("PCA");
 
         // You may play any number of lands on each of your turns
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new PlayAdditionalLandsAllEffect(Integer.MAX_VALUE));
@@ -63,5 +62,14 @@ public class NayaPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private NayaPlane(final NayaPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public NayaPlane copy() {
+        return new NayaPlane(this);
     }
 }

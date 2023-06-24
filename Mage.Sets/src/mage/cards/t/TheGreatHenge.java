@@ -31,16 +31,10 @@ import java.util.UUID;
  */
 public final class TheGreatHenge extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-    }
-
     public TheGreatHenge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{7}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {X} less to cast, where X is the greatest power among creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheGreatHengeCostReductionEffect()));
@@ -53,7 +47,7 @@ public final class TheGreatHenge extends CardImpl {
         // Whenever a nontoken creature enters the battlefield under your control, put a +1/+1 counter on it and draw a card.
         ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                filter, false, SetTargetPointer.PERMANENT, "Whenever a nontoken creature " +
+                StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT, "Whenever a nontoken creature " +
                 "enters the battlefield under your control, put a +1/+1 counter on it and draw a card."
         );
         ability.addEffect(new DrawCardSourceControllerEffect(1));

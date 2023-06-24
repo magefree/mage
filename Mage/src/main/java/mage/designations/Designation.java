@@ -2,9 +2,8 @@ package mage.designations;
 
 import mage.MageInt;
 import mage.MageObject;
+import mage.MageObjectImpl;
 import mage.ObjectColor;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -15,69 +14,48 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.GameLog;
 import mage.util.SubTypes;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 /**
  * @author LevelX2
  */
-public abstract class Designation implements MageObject {
+public abstract class Designation extends MageObjectImpl {
 
-    private static final List<CardType> emptySet = new ArrayList<>();
-    private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCostsImpl emptyCost = new ManaCostsImpl<>();
 
-    private String name;
     private final DesignationType designationType;
-    private UUID id;
-    private final FrameStyle frameStyle;
-    private boolean copy;
-    private MageObject copyFrom; // copied card INFO (used to call original adjusters)
-    private Abilities<Ability> abilites = new AbilitiesImpl<>();
-    private String expansionSetCodeForImage;
     private final boolean unique; // can a designation be added multiple times (false) or only once to an object (true)
 
-    public Designation(DesignationType designationType, String expansionSetCode) {
-        this(designationType, expansionSetCode, true);
+    private boolean copy;
+    private MageObject copyFrom; // copied card INFO (used to call original adjusters)
+
+    public Designation(DesignationType designationType) {
+        this(designationType, true);
     }
 
-    public Designation(DesignationType designationType, String expansionSetCode, boolean unique) {
-        this.name = designationType.toString();
+    public Designation(DesignationType designationType, boolean unique) {
+        super(UUID.randomUUID());
         this.designationType = designationType;
-        this.id = UUID.randomUUID();
-        this.frameStyle = FrameStyle.M15_NORMAL;
-        this.expansionSetCodeForImage = expansionSetCode;
         this.unique = unique;
+        this.name = designationType.toString();
+        this.frameStyle = FrameStyle.M15_NORMAL;
     }
 
     public Designation(final Designation designation) {
-        this.name = designation.name;
+        super(designation);
         this.designationType = designation.designationType;
-        this.id = designation.id;
+        this.unique = designation.unique;
         this.frameStyle = designation.frameStyle;
         this.copy = designation.copy;
         this.copyFrom = (designation.copyFrom != null ? designation.copyFrom.copy() : null);
-        this.abilites = designation.abilites.copy();
-        this.expansionSetCodeForImage = designation.expansionSetCodeForImage;
-        this.unique = designation.unique;
     }
 
     @Override
     public abstract Designation copy();
-
-    @Override
-    public FrameStyle getFrameStyle() {
-        return frameStyle;
-    }
-
-    public void assignNewId() {
-        this.id = UUID.randomUUID();
-    }
 
     @Override
     public void setCopy(boolean isCopy, MageObject copyFrom) {
@@ -95,67 +73,24 @@ public abstract class Designation implements MageObject {
         return this.copyFrom;
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String getIdName() {
-        return getName() + " [" + getId().toString().substring(0, 3) + ']';
-    }
-
-    @Override
-    public String getImageName() {
-        return this.name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void addAbility(Ability ability) {
-        ability.setSourceId(id);
-        abilites.add(ability);
-        abilites.addAll(ability.getSubAbilities());
-    }
-
-    @Override
-    public Abilities<Ability> getAbilities() {
-        return abilites;
+        ability.setSourceId(this.objectId);
+        this.abilities.add(ability);
+        this.abilities.addAll(ability.getSubAbilities());
     }
 
     @Override
     public ObjectColor getFrameColor(Game game) {
-        return emptyColor;
-    }
-
-    @Override
-    public UUID getId() {
-        return this.id;
+        return ObjectColor.COLORLESS;
     }
 
     public DesignationType getDesignationType() {
         return designationType;
     }
 
-    public void setExpansionSetCodeForImage(String expansionSetCodeForImage) {
-        this.expansionSetCodeForImage = expansionSetCodeForImage;
-    }
-
-    public String getExpansionSetCodeForImage() {
-        return expansionSetCodeForImage;
-    }
-
-    @Override
-    public String getLogName() {
-        return GameLog.getColoredObjectIdName(this);
-    }
-
     @Override
     public List<CardType> getCardType(Game game) {
-        return emptySet;
+        return Collections.emptyList();
     }
 
     @Override
@@ -174,8 +109,8 @@ public abstract class Designation implements MageObject {
     }
 
     @Override
-    public EnumSet<SuperType> getSuperType() {
-        return EnumSet.noneOf(SuperType.class);
+    public List<SuperType> getSuperType(Game game) {
+        return Collections.emptyList();
     }
 
     @Override
@@ -185,12 +120,12 @@ public abstract class Designation implements MageObject {
 
     @Override
     public ObjectColor getColor() {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
@@ -214,15 +149,6 @@ public abstract class Designation implements MageObject {
     }
 
     @Override
-    public int getStartingLoyalty() {
-        return 0;
-    }
-
-    @Override
-    public void setStartingLoyalty(int startingLoyalty) {
-    }
-
-    @Override
     public int getZoneChangeCounter(Game game) {
         return 1; // Emblems can't move zones until now so return always 1
     }
@@ -239,14 +165,6 @@ public abstract class Designation implements MageObject {
 
     @Override
     public void removePTCDA() {
-    }
-
-    /**
-     * @param game
-     * @param controllerId
-     */
-    public void start(Game game, UUID controllerId) {
-
     }
 
     @Override

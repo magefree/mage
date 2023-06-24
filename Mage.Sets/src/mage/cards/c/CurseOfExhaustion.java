@@ -33,7 +33,7 @@ public final class CurseOfExhaustion extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted player can't cast more than one spell each turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CurseOfExhaustionEffect()));

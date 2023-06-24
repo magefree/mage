@@ -30,7 +30,7 @@ public final class WitnessProtection extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature loses all abilities and is a green and white Citizen creature with base power and toughness 1/1 named Legitimate Businessperson.
         this.addAbility(new SimpleStaticAbility(new WitnessProtectionEffect()));

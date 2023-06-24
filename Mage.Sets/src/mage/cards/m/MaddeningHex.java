@@ -38,7 +38,7 @@ public final class MaddeningHex extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted player casts a noncreature spell, roll a d6. Maddening Hex deals damage to that player equal to the result. Then attach Maddening Hex to another one of your opponents chosen at random.
@@ -128,14 +128,27 @@ class MaddeningHexEffect extends OneShotEffect {
             return true;
         }
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
+
         if (player != null) {
             opponents.remove(player.getId());
         }
+
+        // If there is no one to re-attach to, then we're done
+        if (opponents.isEmpty()) {
+            return true;
+        }
+
+        if (player != null) {
+            player.removeAttachment(permanent, source, game);
+        }
+
         Player opponent = game.getPlayer(RandomUtil.randomFromCollection(opponents));
         if (opponent == null) {
             return true;
         }
         opponent.addAttachment(permanent.getId(), source, game);
+
+        game.informPlayers(permanent.getLogName() + " is now attached to " + opponent.getLogName() + ".");
         return true;
     }
 }

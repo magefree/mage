@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandFromBattlefieldSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.abilities.keyword.ChannelAbility;
@@ -30,7 +29,7 @@ public final class ShigekiJukaiVisionary extends CardImpl {
     public ShigekiJukaiVisionary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(1);

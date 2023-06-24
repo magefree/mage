@@ -1,4 +1,3 @@
-
 package mage.game.permanent;
 
 import java.util.UUID;
@@ -22,5 +21,10 @@ public class PermanentMeld extends PermanentCard {
         } else {
             return this.getCard().getManaValue();
         }
+    }
+
+    @Override
+    public boolean isTransformable() {
+        return false;
     }
 }

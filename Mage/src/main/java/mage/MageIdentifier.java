@@ -7,14 +7,17 @@ package mage;
  * @author LevelX2
  */
 public enum MageIdentifier {
+    CastFromGraveyardOnceWatcher,
     CemeteryIlluminatorWatcher,
     GisaAndGeralfWatcher,
+    DanithaNewBenaliasLightWatcher,
     HaukensInsightWatcher,
     KaradorGhostChieftainWatcher,
     KessDissidentMageWatcher,
-    LurrusOfTheDreamDenWatcher,
     MuldrothaTheGravetideWatcher,
     ShareTheSpoilsWatcher,
     WishWatcher,
-    GlimpseTheCosmosWatcher
+    GlimpseTheCosmosWatcher,
+    SerraParagonWatcher,
+    OneWithTheMultiverseWatcher
 }

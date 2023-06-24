@@ -28,7 +28,7 @@ public final class VivienOnTheHunt extends CardImpl {
     public VivienOnTheHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
         this.setStartingLoyalty(4);
 
@@ -126,7 +126,7 @@ class VivienOnTheHuntMillEffect extends OneShotEffect {
         TargetCard target = new TargetCard(
                 0, Integer.MAX_VALUE, Zone.ALL, StaticFilters.FILTER_CARD_CREATURE
         );
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
         return true;
     }

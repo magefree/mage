@@ -34,7 +34,7 @@ public final class AwakenTheAncient extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted Mountain is a 7/7 red Giant creature with haste. It's still a land.

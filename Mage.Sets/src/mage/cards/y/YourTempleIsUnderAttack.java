@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
+import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
@@ -34,7 +35,7 @@ public final class YourTempleIsUnderAttack extends CardImpl {
                 new DrawCardSourceControllerEffect(2).setText("you")
         ).addEffect(new DrawCardTargetEffect(2)
                 .setText("and target opponent each draw two cards")
-        ).withFlavorWord("Strike a Deal"));
+        ).addTarget(new TargetOpponent()).withFlavorWord("Strike a Deal"));
     }
 
     private YourTempleIsUnderAttack(final YourTempleIsUnderAttack card) {

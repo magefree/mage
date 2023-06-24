@@ -5,9 +5,10 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.CardImpl;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class MockCard extends CardImpl {
     // PlaneswalkerEntersWithLoyaltyAbility of the card... but the MockCard
     // only has MockAbilities.
     private final int startingLoyalty;
+    private final int startingDefense;
 
     // mana cost extra info for multiple mana drawing
     // warning, don't use ManaCost objects here due too much memory consumptions
@@ -33,13 +35,13 @@ public class MockCard extends CardImpl {
     protected List<String> manaCostRightStr;
     protected List<String> manaCostStr;
     protected String adventureSpellName;
-    protected boolean isModalDoubleFacesCard;
+    protected boolean isModalDoubleFacedCard;
     protected int manaValue;
 
     public MockCard(CardInfo card) {
         super(null, card.getName());
-        this.cardNumber = card.getCardNumber();
-        this.expansionSetCode = card.getSetCode();
+        this.setExpansionSetCode(card.getSetCode());
+        this.setCardNumber(card.getCardNumber());
         this.power = mageIntFromString(card.getPower());
         this.toughness = mageIntFromString(card.getToughness());
         this.rarity = card.getRarity();
@@ -65,30 +67,23 @@ public class MockCard extends CardImpl {
         this.nightCard = card.isNightCard();
 
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
-            this.secondSideCard = new MockCard(CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode()));
+            this.secondSideCard = new MockCard(CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber()));
         }
 
         if (card.isAdventureCard()) {
             this.adventureSpellName = card.getAdventureSpellName();
         }
 
-        if (card.isModalDoubleFacesCard()) {
-            ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card.getCard();
+        if (card.isModalDoubleFacedCard()) {
+            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card.getCard();
             CardInfo mdfSecondSide = new CardInfo(mdfCard.getRightHalfCard());
             this.secondSideCard = new MockCard(mdfSecondSide);
-            this.isModalDoubleFacesCard = true;
+            this.isModalDoubleFacedCard = true;
         }
 
-        switch (card.getStartingLoyalty()) {
-            case "X":
-                this.startingLoyalty = -2;
-                break;
-            case "":
-                this.startingLoyalty = -1;
-                break;
-            default:
-                this.startingLoyalty = Integer.parseInt(card.getStartingLoyalty());
-        }
+        this.startingLoyalty = CardUtil.convertLoyaltyOrDefense(card.getStartingLoyalty());
+        this.startingDefense = CardUtil.convertLoyaltyOrDefense(card.getStartingDefense());
+
         this.flipCardName = card.getFlipCardName();
         for (String ruleText : card.getRules()) {
             this.addAbility(textAbilityFromString(ruleText));
@@ -99,17 +94,23 @@ public class MockCard extends CardImpl {
         super(card);
 
         this.startingLoyalty = card.startingLoyalty;
+        this.startingDefense = card.startingDefense;
         this.manaCostLeftStr = new ArrayList<>(card.manaCostLeftStr);
         this.manaCostRightStr = new ArrayList<>(card.manaCostRightStr);
         this.manaCostStr = new ArrayList<>(card.manaCostStr);
         this.adventureSpellName = card.adventureSpellName;
-        this.isModalDoubleFacesCard = card.isModalDoubleFacesCard;
+        this.isModalDoubleFacedCard = card.isModalDoubleFacedCard;
         this.manaValue = card.manaValue;
     }
 
     @Override
     public int getStartingLoyalty() {
         return startingLoyalty;
+    }
+
+    @Override
+    public int getStartingDefense() {
+        return startingDefense;
     }
 
     @Override
@@ -153,7 +154,7 @@ public class MockCard extends CardImpl {
 
         if (adventureSpellName != null) {
             return getName() + ADVENTURE_NAME_SEPARATOR + adventureSpellName;
-        } else if (isModalDoubleFacesCard) {
+        } else if (isModalDoubleFacedCard) {
             return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + this.secondSideCard.getName();
         } else {
             return getName();
@@ -177,6 +178,6 @@ public class MockCard extends CardImpl {
     @Override
     public boolean isTransformable() {
         // must enable toggle mode in deck editor (switch between card sides);
-        return super.isTransformable() || this.isModalDoubleFacesCard || this.secondSideCard != null;
+        return super.isTransformable() || this.isModalDoubleFacedCard || this.secondSideCard != null;
     }
 }

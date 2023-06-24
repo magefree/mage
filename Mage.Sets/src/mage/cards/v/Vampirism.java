@@ -36,12 +36,13 @@ public final class Vampirism extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Vampirism enters the battlefield, draw a card at the beginning of the next turn's upkeep.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse)), false));
+                new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse))
+                .setText("draw a card at the beginning of the next turn's upkeep"), false));
 
         // Enchanted creature gets +1/+1 for each other creature you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VampirismBoostEnchantedEffect()));

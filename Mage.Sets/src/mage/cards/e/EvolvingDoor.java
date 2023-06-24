@@ -15,6 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -69,7 +70,7 @@ class EvolvingDoorEffect extends OneShotEffect {
 
     static {
         for (int count = 1; count <= 6; count++) {
-            FilterCard filter = new FilterCard(
+            FilterCard filter = new FilterCreatureCard(
                     "creature card that's exactly " +
                             CardUtil.numberToText(count) +
                             " color" + (count > 0 ? "s" : "")

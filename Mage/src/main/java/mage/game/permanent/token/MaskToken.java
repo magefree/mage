@@ -25,7 +25,7 @@ public final class MaskToken extends TokenImpl {
         subtype.add(SubType.AURA);
 
         TargetPermanent auraTarget = new TargetPermanent();
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         ability.addTarget(auraTarget);
         ability.addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(ability);

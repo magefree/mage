@@ -38,7 +38,7 @@ public final class IcewindStalwart extends CardImpl {
 
         // Protection Fighting Style — When Icewind Stalwart enters the battlefield, exile up to one target non-Warrior creature you control, then return it to the battlefield under its owner's control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect());
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability.withFlavorWord("Protection Fighting Style"));
     }

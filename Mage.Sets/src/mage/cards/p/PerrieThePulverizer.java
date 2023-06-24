@@ -40,7 +40,7 @@ public final class PerrieThePulverizer extends CardImpl {
     public PerrieThePulverizer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RHINO);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -58,7 +58,7 @@ public final class PerrieThePulverizer extends CardImpl {
                 .setText("target creature you control gains trample"));
         ability.addEffect(new BoostTargetEffect(
                 PerrieThePulverizerValue.instance, PerrieThePulverizerValue.instance, Duration.EndOfTurn
-        ).setText("and gets +X/+X, where X is the number of different kinds of counters among permanents you control"));
+        ).setText("and gets +X/+X until end of turn, where X is the number of different kinds of counters among permanents you control"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

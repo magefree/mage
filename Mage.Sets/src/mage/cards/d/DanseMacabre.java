@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -50,13 +51,6 @@ public final class DanseMacabre extends CardImpl {
 
 class DanseMacabreEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("nontoken creature you control");
-
-    static {
-        filter.add(TokenPredicate.FALSE);
-    }
-
     DanseMacabreEffect() {
         super(Outcome.Benefit);
         staticText = "each player sacrifices a nontoken creature. Roll a d20 " +
@@ -87,11 +81,11 @@ class DanseMacabreEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null || game.getBattlefield().count(
-                    filter, source.getControllerId(), source, game
+                    StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN, source.getControllerId(), source, game
             ) < 1) {
                 continue;
             }
-            TargetPermanent target = new TargetPermanent(filter);
+            TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN);
             target.setNotTarget(true);
             player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());

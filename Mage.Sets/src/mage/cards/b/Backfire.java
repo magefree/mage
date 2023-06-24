@@ -30,7 +30,7 @@ public final class Backfire extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted creature deals damage to you, Backfire deals that much damage to that creature's controller.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DamageAttachedControllerEffect(SavedDamageValue.MUCH), "enchanted creature", false, true, false, TargetController.YOU));

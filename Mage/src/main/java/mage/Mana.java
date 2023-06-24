@@ -1,5 +1,6 @@
 package mage;
 
+import mage.abilities.condition.Condition;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
@@ -8,10 +9,8 @@ import mage.util.Copyable;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.BiFunction;
 
 /**
  * WARNING, all mana operations must use overflow check, see usage of CardUtil.addWithOverflowCheck and same methods
@@ -320,32 +319,51 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
-     * Increases the given mana by one.
+     * Increases this mana by one of the passed in ManaType.
      *
      * @param manaType the type of mana to increase by one.
      */
     public void increase(ManaType manaType) {
+        increaseOrDecrease(manaType, true);
+    }
+
+    /**
+     * Decreases this mana by onw of the passed in ManaType.
+     *
+     * @param manaType the type of mana to increase by one.
+     */
+    public void decrease(ManaType manaType) {
+        increaseOrDecrease(manaType, false);
+    }
+
+    /**
+     * Helper function for increase and decrease to not have the code duplicated.
+     * @param manaType
+     * @param increase
+     */
+    private void increaseOrDecrease(ManaType manaType, boolean increase) {
+        BiFunction<Integer, Integer, Integer> overflowIncOrDec = increase ? CardUtil::overflowInc : CardUtil::overflowDec;
         switch (manaType) {
             case WHITE:
-                white = CardUtil.overflowInc(white, 1);
+                white = overflowIncOrDec.apply(white, 1);
                 break;
             case BLUE:
-                blue = CardUtil.overflowInc(blue, 1);
+                blue = overflowIncOrDec.apply(blue, 1);
                 break;
             case BLACK:
-                black = CardUtil.overflowInc(black, 1);
+                black = overflowIncOrDec.apply(black, 1);
                 break;
             case RED:
-                red = CardUtil.overflowInc(red, 1);
+                red = overflowIncOrDec.apply(red, 1);
                 break;
             case GREEN:
-                green = CardUtil.overflowInc(green, 1);
+                green = overflowIncOrDec.apply(green, 1);
                 break;
             case COLORLESS:
-                colorless = CardUtil.overflowInc(colorless, 1);
+                colorless = overflowIncOrDec.apply(colorless, 1);
                 break;
             case GENERIC:
-                generic = CardUtil.overflowInc(generic, 1);
+                generic = overflowIncOrDec.apply(generic, 1);
                 break;
         }
     }
@@ -397,6 +415,13 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      */
     public void increaseColorless() {
         colorless = CardUtil.overflowInc(colorless, 1);
+    }
+
+    public void increaseAny() {
+        any = CardUtil.overflowInc(any, 1);
+    }
+    public void decreaseAny() {
+        any = CardUtil.overflowDec(any, 1);
     }
 
     /**
@@ -477,14 +502,11 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return the total count of all combined mana.
      */
     public int count() {
-        return white
-                + blue
-                + black
-                + red
-                + green
-                + generic
-                + colorless
-                + any;
+        int sum = countColored();
+        sum = CardUtil.overflowInc(sum, generic);
+        sum = CardUtil.overflowInc(sum, colorless);
+
+        return sum;
     }
 
     /**
@@ -493,12 +515,13 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @return the total count of all colored mana.
      */
     public int countColored() {
-        return white
-                + blue
-                + black
-                + red
-                + green
-                + any;
+        int sum = CardUtil.overflowInc(white, blue);
+        sum = CardUtil.overflowInc(sum, black);
+        sum = CardUtil.overflowInc(sum, red);
+        sum = CardUtil.overflowInc(sum, green);
+        sum = CardUtil.overflowInc(sum, any);
+
+        return sum;
     }
 
     /**
@@ -1103,7 +1126,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             case GREEN:
                 return green;
             case COLORLESS:
-                return CardUtil.overflowInc(generic, colorless);
+                return CardUtil.overflowInc(generic, colorless); // TODO: This seems like a mistake
         }
         return 0;
     }
@@ -1206,77 +1229,114 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
     }
 
+    public boolean isMoreValuableThan(Mana that) {
+        // Use of == is intentional since getMoreValuableMana returns one of its inputs.
+        return this == Mana.getMoreValuableMana(this, that);
+    }
+
     /**
      * Returns the mana that is more colored or has a greater amount but does
-     * not contain one less mana in any color but generic.
+     * not contain one less mana in any type but generic.
+     * <p>
+     * See tests ManaTest.moreValuableManaTest for several examples
      *
      * Examples:
+     *      {1}       and {R}       -> {R}
+     *      {2}       and {1}{W}    -> {1}{W}
+     *      {3}       and {1}{W}    -> {1}{W}
      *      {1}{W}{R} and {G}{W}{R} -> {G}{W}{R}
-     *      {G}{W}{R} and {G}{W}{R} -> {G}{W}{R}
+     *      {G}{W}{R} and {G}{W}{R} -> null
      *      {G}{W}{B} and {G}{W}{R} -> null
+     *      {C}       and {ANY}     -> null
      *
      * @param mana1     The 1st mana to compare.
      * @param mana2     The 2nd mana to compare.
-     * @return          The greater of the two manas, or null if they're the same
+     * @return          The greater of the two manas, or null if they're the same OR they cannot be compared
      */
     public static Mana getMoreValuableMana(final Mana mana1, final Mana mana2) {
-        String conditionString1 = "";
-        String conditionString2 = "";
-        if (mana1 instanceof ConditionalMana) {
-            conditionString1 = ((ConditionalMana) mana1).getConditionString();
-        }
-        if (mana2 instanceof ConditionalMana) {
-            conditionString2 = ((ConditionalMana) mana2).getConditionString();
-        }
-        if (!conditionString1.equals(conditionString2)) {
+        if (mana1.equals(mana2)) {
             return null;
         }
+
+        boolean mana1IsConditional = mana1 instanceof ConditionalMana;
+        boolean mana2IsConditional = mana2 instanceof ConditionalMana;
+        if (mana1IsConditional != mana2IsConditional) {
+            return null;
+        }
+
+        if (mana1IsConditional) {
+            List<Condition> conditions1 = ((ConditionalMana) mana1).getConditions();
+            List<Condition> conditions2 = ((ConditionalMana) mana2).getConditions();
+            if (!Objects.equals(conditions1, conditions2)) {
+                return null;
+            }
+        }
+
+        // Set one mana as moreMana and one as lessMana.
         Mana moreMana;
         Mana lessMana;
-        if (mana2.countColored() > mana1.countColored() || mana2.getAny() > mana1.getAny() || mana2.count() > mana1.count()) {
+        if (mana2.any > mana1.any
+                || mana2.colorless > mana1.colorless
+                || mana2.countColored() > mana1.countColored()
+                || (mana2.countColored() == mana1.countColored()
+                        && mana2.colorless == mana1.colorless
+                        && mana2.count() > mana1.count())) {
             moreMana = mana2;
             lessMana = mana1;
         } else {
             moreMana = mana1;
             lessMana = mana2;
         }
-        int anyDiff = CardUtil.overflowDec(mana2.getAny(), mana1.getAny());
-        if (lessMana.getWhite() > moreMana.getWhite()) {
-            anyDiff = CardUtil.overflowDec(anyDiff, CardUtil.overflowDec(lessMana.getWhite(), moreMana.getWhite()));
-            if (anyDiff < 0) {
-                return null;
-            }
-        }
-        if (lessMana.getRed() > moreMana.getRed()) {
-            anyDiff = CardUtil.overflowDec(anyDiff, CardUtil.overflowDec(lessMana.getRed(), moreMana.getRed()));
-            if (anyDiff < 0) {
-                return null;
-            }
-        }
-        if (lessMana.getGreen() > moreMana.getGreen()) {
-            anyDiff = CardUtil.overflowDec(anyDiff, CardUtil.overflowDec(lessMana.getGreen(), moreMana.getGreen()));
-            if (anyDiff < 0) {
-                return null;
-            }
-        }
-        if (lessMana.getBlue() > moreMana.getBlue()) {
-            anyDiff = CardUtil.overflowDec(anyDiff, CardUtil.overflowDec(lessMana.getBlue(), moreMana.getBlue()));
-            if (anyDiff < 0) {
-                return null;
-            }
-        }
-        if (lessMana.getBlack() > moreMana.getBlack()) {
-            anyDiff = CardUtil.overflowDec(anyDiff, CardUtil.overflowDec(lessMana.getBlack(), moreMana.getBlack()));
-            if (anyDiff < 0) {
-                return null;
-            }
-        }
-        if (lessMana.getColorless() > moreMana.getColorless()) {
-            return null; // Any (color) can't produce colorless mana
-        }
-        if (lessMana.getAny() > moreMana.getAny()) {
+
+        if (lessMana.any > moreMana.any) {
             return null;
         }
+        if (lessMana.colorless > moreMana.colorless) {
+            return null; // Any (color) can't produce colorless mana
+        }
+
+        int anyDiff = CardUtil.overflowDec(moreMana.any, lessMana.any);
+
+        int whiteDiff = CardUtil.overflowDec(lessMana.white, moreMana.white);
+        if (whiteDiff > 0) {
+            anyDiff = CardUtil.overflowDec(anyDiff, whiteDiff);
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+
+        int redDiff = CardUtil.overflowDec(lessMana.red, moreMana.red);
+        if (redDiff > 0) {
+            anyDiff = CardUtil.overflowDec(anyDiff, redDiff);
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+
+        int greenDiff = CardUtil.overflowDec(lessMana.green, moreMana.green);
+        if (greenDiff > 0) {
+            anyDiff = CardUtil.overflowDec(anyDiff, greenDiff);
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+
+        int blueDiff = CardUtil.overflowDec(lessMana.blue, moreMana.blue);
+        if (blueDiff > 0) {
+            anyDiff = CardUtil.overflowDec(anyDiff, blueDiff);
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+
+        int blackDiff = CardUtil.overflowDec(lessMana.black, moreMana.black);
+        if (blackDiff > 0) {
+            anyDiff = CardUtil.overflowDec(anyDiff, blackDiff);
+            if (anyDiff < 0) {
+                return null;
+            }
+        }
+
         return moreMana;
     }
 
@@ -1323,9 +1383,27 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 && any == mana.any;
     }
 
+    /**
+     * Hardcoding here versus using Objects.hash in order to increase performance since this is
+     * called thousands of times by {@link mage.abilities.mana.ManaOptions#addManaWithCost(List, Game)}
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(white, blue, black, red, green, generic, colorless, any, flag);
+        long result = 1;
+
+        result = 31 * result + white;
+        result = 31 * result + blue;
+        result = 31 * result + black;
+        result = 31 * result + red;
+        result = 31 * result + green;
+        result = 31 * result + generic;
+        result = 31 * result + colorless;
+        result = 31 * result + any;
+        result = 31 * result + (flag ? 1 : 0);
+
+        return Long.hashCode(result);
     }
 
     /**

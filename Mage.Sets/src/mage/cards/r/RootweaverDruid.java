@@ -88,7 +88,7 @@ class RootweaverDruidEffect extends OneShotEffect {
                 continue;
             }
             target = new TargetCardInLibrary();
-            player.choose(outcome, cards, target, game);
+            player.choose(outcome, cards, target, source, game);
             mine.addAll(target.getTargets());
             cards.removeAll(target.getTargets());
             theirs.addAll(cards);

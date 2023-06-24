@@ -1,5 +1,6 @@
 package org.mage.card.arcane;
 
+import mage.MageInt;
 import mage.ObjectColor;
 import mage.cards.ArtRect;
 import mage.cards.FrameStyle;
@@ -54,6 +55,7 @@ import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
  * @author stravant@gmail.com, JayDi85
  * <p>
  * Base rendering class for new border cards
+ * M15 frame style, for another styles see https://www.mtg.onl/evolution-of-magic-token-card-frame-design/
  */
 public class ModernCardRenderer extends CardRenderer {
 
@@ -368,7 +370,7 @@ public class ModernCardRenderer extends CardRenderer {
     }
 
     private float getTypeLineYFrac() {
-        if (cardView.isToken() && cardView.getCardNumber() == null) {
+        if (cardView.isToken() && cardView.getCardNumber().isEmpty()) {
             return TYPE_LINE_Y_FRAC_TOKEN;
         } else if (cardView.getFrameStyle().isFullArt()) {
             return TYPE_LINE_Y_FRAC_FULL_ART;
@@ -530,37 +532,37 @@ public class ModernCardRenderer extends CardRenderer {
                         g.setPaint(getSpiralLandTextboxColor(twoColors.get(0), twoColors.get(1), true));
 
                         // Horizontal bars
-                        g.fillRect(totalContentInset + 1                     , typeLineY + boxHeight + 1                                           , contentWidth - 2                      , height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 2*height_of_spiral, typeLineY + boxHeight + 1 + 2*height_of_spiral                      , contentWidth - 2 - 4*height_of_spiral , height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 4*height_of_spiral, typeLineY + boxHeight + 1 + 4*height_of_spiral                      , contentWidth - 2 - 8*height_of_spiral , height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 6*height_of_spiral, typeLineY + boxHeight + 1 + 6*height_of_spiral                      , contentWidth - 2 - 12*height_of_spiral, height_of_spiral);
+                        g.fillRect(totalContentInset + 1, typeLineY + boxHeight + 1, contentWidth - 2, height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, contentWidth - 2 - 4 * height_of_spiral, height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, contentWidth - 2 - 8 * height_of_spiral, height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, contentWidth - 2 - 12 * height_of_spiral, height_of_spiral);
 
-                        g.fillRect(totalContentInset + 1 + 6*height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 7*height_of_spiral, contentWidth - 2 - 12*height_of_spiral, height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 4*height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 5*height_of_spiral, contentWidth - 2 - 8*height_of_spiral , height_of_spiral);
-                        g.fillRect(totalContentInset + 1 + 2*height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 3*height_of_spiral, contentWidth - 2 - 4*height_of_spiral , height_of_spiral);
-                        g.fillRect(totalContentInset + 1                     , typeLineY + boxHeight + 1 + total_height_of_box - height_of_spiral  , contentWidth - 2                      , height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 7 * height_of_spiral, contentWidth - 2 - 12 * height_of_spiral, height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 5 * height_of_spiral, contentWidth - 2 - 8 * height_of_spiral, height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + total_height_of_box - 3 * height_of_spiral, contentWidth - 2 - 4 * height_of_spiral, height_of_spiral);
+                        g.fillRect(totalContentInset + 1, typeLineY + boxHeight + 1 + total_height_of_box - height_of_spiral, contentWidth - 2, height_of_spiral);
 
                         // Vertical bars
-                        g.fillRect(totalContentInset + 1                     , typeLineY + boxHeight + 1                     , height_of_spiral, total_height_spiral - 1                      );
-                        g.fillRect(totalContentInset + 1 + 2*height_of_spiral, typeLineY + boxHeight + 1 + 2*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4*height_of_spiral );
-                        g.fillRect(totalContentInset + 1 + 4*height_of_spiral, typeLineY + boxHeight + 1 + 4*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8*height_of_spiral );
-                        g.fillRect(totalContentInset + 1 + 6*height_of_spiral, typeLineY + boxHeight + 1 + 6*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12*height_of_spiral);
+                        g.fillRect(totalContentInset + 1, typeLineY + boxHeight + 1, height_of_spiral, total_height_spiral - 1);
+                        g.fillRect(totalContentInset + 1 + 2 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4 * height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 4 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8 * height_of_spiral);
+                        g.fillRect(totalContentInset + 1 + 6 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12 * height_of_spiral);
 
-                        g.fillRect(totalContentInset + contentWidth - 7*height_of_spiral, typeLineY + boxHeight + 1 + 6*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12*height_of_spiral);
-                        g.fillRect(totalContentInset + contentWidth - 5*height_of_spiral, typeLineY + boxHeight + 1 + 4*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8*height_of_spiral );
-                        g.fillRect(totalContentInset + contentWidth - 3*height_of_spiral, typeLineY + boxHeight + 1 + 2*height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4*height_of_spiral );
-                        g.fillRect(totalContentInset + contentWidth - 1*height_of_spiral, typeLineY + boxHeight + 1 + 0*height_of_spiral, height_of_spiral, total_height_spiral - 1                      );
+                        g.fillRect(totalContentInset + contentWidth - 7 * height_of_spiral, typeLineY + boxHeight + 1 + 6 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 12 * height_of_spiral);
+                        g.fillRect(totalContentInset + contentWidth - 5 * height_of_spiral, typeLineY + boxHeight + 1 + 4 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 8 * height_of_spiral);
+                        g.fillRect(totalContentInset + contentWidth - 3 * height_of_spiral, typeLineY + boxHeight + 1 + 2 * height_of_spiral, height_of_spiral, total_height_spiral - 1 - 4 * height_of_spiral);
+                        g.fillRect(totalContentInset + contentWidth - 1 * height_of_spiral, typeLineY + boxHeight + 1 + 0 * height_of_spiral, height_of_spiral, total_height_spiral - 1);
                     }
                 }
             } else {
                 g.fillRect(
-                    totalContentInset + 1, typeLineY,
-                    contentWidth - 2, cardHeight - borderWidth * 3 - typeLineY - 1);
+                        totalContentInset + 1, typeLineY,
+                        contentWidth - 2, cardHeight - borderWidth * 3 - typeLineY - 1);
             }
         }
 
         // If it's a planeswalker, extend the textbox left border by some
-        if (cardView.isPlanesWalker()) {
+        if (cardView.isPlaneswalker()) {
             g.setPaint(borderPaint);
             g.fillRect(
                     totalContentInset, typeLineY + boxHeight,
@@ -1044,7 +1046,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Is it a creature?
         boolean isVehicle = cardView.getSubTypes().contains(SubType.VEHICLE);
-        if (cardView.isCreature() || isVehicle) {
+        if (cardView.showPT()) {
 
             // draws p/t by parts
             int ptDeviderSpace = 1;  // Arial font is too narrow for devider (2/2) and needs extra space
@@ -1093,19 +1095,35 @@ public class ModernCardRenderer extends CardRenderer {
             g.setColor(defaultTextColor);
             g.setFont(ptTextFont);
 
+            // real PT info
+            MageInt currentPower;
+            MageInt currentToughness;
+            if (cardView.getOriginalCard() != null) {
+                // card
+                currentPower = cardView.getOriginalCard().getPower();
+                currentToughness = cardView.getOriginalCard().getToughness();
+            } else if (cardView.getOriginalToken() != null) {
+                // token
+                currentPower = cardView.getOriginalToken().getPower();
+                currentToughness = cardView.getOriginalToken().getToughness();
+            } else {
+                currentPower = null;
+                currentToughness = null;
+            }
+
             // draws
             int ptEmptySpace = (partBoxWidth - ptContentWidth) / 2;
             int ptPosStart1 = x + contentInset + ptEmptySpace;
             int ptPosStart2 = ptPosStart1 + ptTextWidth1 + ptDeviderSpace;
             int ptPosStart3 = ptPosStart2 + ptTextWidth2 + ptDeviderSpace;
             // p
-            g.setColor(CardRendererUtils.getCardTextColor(cardView.getOriginalCard().getPower(), false, defaultTextColor, defaultTextLight));
+            g.setColor(CardRendererUtils.getCardTextColor(currentPower, false, defaultTextColor, defaultTextLight));
             g.drawString(ptText1, ptPosStart1, curY - ptTextOffset - 1); // left
             // /
             g.setColor(defaultTextColor);
             g.drawString(ptText2, ptPosStart2, curY - ptTextOffset - 1); // center
             // t
-            g.setColor(CardRendererUtils.getCardTextColor(cardView.getOriginalCard().getToughness(), CardRendererUtils.isCardWithDamage(cardView), defaultTextColor, defaultTextLight));
+            g.setColor(CardRendererUtils.getCardTextColor(currentToughness, CardRendererUtils.isCardWithDamage(cardView), defaultTextColor, defaultTextLight));
             g.drawString(ptText3, ptPosStart3, curY - ptTextOffset - 1); // right
             //
             g.setColor(defaultTextColor);
@@ -1116,7 +1134,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Is it a walker? (But don't draw the box if it's a non-permanent view
         // of a walker without a starting loyalty (EG: Arlin Kord's flipped side).
-        if (cardView.isPlanesWalker()
+        if (cardView.isPlaneswalker()
                 && (cardView instanceof PermanentView || !cardView.getStartingLoyalty().equals("0"))) {
             // Draw the PW loyalty box
             int w = partBoxWidth;
@@ -1124,26 +1142,15 @@ public class ModernCardRenderer extends CardRenderer {
             int x = cardWidth - partBoxWidth - borderWidth;
             int y = curY - h;
 
-            Polygon symbol = new Polygon(
-                    new int[]{
-                            x + w / 2,
-                            (int) (x + w * 0.9),
-                            x + w,
-                            (int) (x + w * 0.6),
-                            x + w / 2,
-                            (int) (x + w * 0.4),
-                            x,
-                            (int) (x + w * 0.1),},
-                    new int[]{
-                            y + h,
-                            (int) (y + 0.8 * h),
-                            y,
-                            (int) (y - 0.2 * h),
-                            y,
-                            (int) (y - 0.2 * h),
-                            y,
-                            (int) (y + 0.8 * h),},
-                    8);
+            Polygon symbol = new Polygon();
+            symbol.addPoint(x + w / 2, y + h);
+            symbol.addPoint((int) (x + w * 0.9), (int) (y + 0.8 * h));
+            symbol.addPoint(x + w, y);
+            symbol.addPoint((int) (x + w * 0.6), (int) (y - 0.2 * h));
+            symbol.addPoint(x + w / 2, y);
+            symbol.addPoint((int) (x + w * 0.4), (int) (y - 0.2 * h));
+            symbol.addPoint(x, y);
+            symbol.addPoint((int) (x + w * 0.1), (int) (y + 0.8 * h));
 
             // Draw + stroke
             g.setColor(Color.black);
@@ -1165,6 +1172,59 @@ public class ModernCardRenderer extends CardRenderer {
             g.setColor(Color.white);
             int loyaltyWidth = g.getFontMetrics().stringWidth(loyalty);
             g.drawString(loyalty, x + (w - loyaltyWidth) / 2, y + ptTextHeight + (h - ptTextHeight) / 2);
+
+            // Advance
+            curY -= (int) (1.2 * y);
+        }
+
+        // Is it a battle?
+        if (cardView.isBattle()
+                && (cardView instanceof PermanentView || !cardView.getStartingDefense().equals("0"))) {
+            // Draw the PW loyalty box
+            int w = 3 * partBoxWidth / 4;
+            int h = 3 * partBoxWidth / 4;
+            int x = cardWidth - w - borderWidth;
+            int y = curY - h;
+
+            Polygon symbol = new Polygon();
+            symbol.addPoint(x + (0 * w) / 80, y + (2 * h) / 80);
+            symbol.addPoint(x + (12 * w) / 80, y + (30 * h) / 80);
+            symbol.addPoint(x + (3 * w) / 80, y + (40 * h) / 80);
+            symbol.addPoint(x + (12 * w) / 80, y + (50 * h) / 80);
+            symbol.addPoint(x + (0 * w) / 80, y + (78 * h) / 80);
+            symbol.addPoint(x + (30 * w) / 80, y + (71 * h) / 80);
+            symbol.addPoint(x + (40 * w) / 80, y + (80 * h) / 80);
+            symbol.addPoint(x + (50 * w) / 80, y + (71 * h) / 80);
+            symbol.addPoint(x + (80 * w) / 80, y + (78 * h) / 80);
+            symbol.addPoint(x + (68 * w) / 80, y + (50 * h) / 80);
+            symbol.addPoint(x + (77 * w) / 80, y + (40 * h) / 80);
+            symbol.addPoint(x + (68 * w) / 80, y + (30 * h) / 80);
+            symbol.addPoint(x + (80 * w) / 80, y + (2 * h) / 80);
+            symbol.addPoint(x + (48 * w) / 80, y + (9 * h) / 80);
+            symbol.addPoint(x + (40 * w) / 80, y + (0 * h) / 80);
+            symbol.addPoint(x + (32 * w) / 80, y + (9 * h) / 80);
+
+
+            // Draw + stroke
+            g.setColor(Color.black);
+            g.fillPolygon(symbol);
+            g.setColor(new Color(200, 200, 200));
+            g.setStroke(new BasicStroke(2));
+            g.drawPolygon(symbol);
+            g.setStroke(new BasicStroke(1));
+
+            // Loyalty number
+            String defense;
+            if (cardView instanceof PermanentView) {
+                defense = cardView.getDefense();
+            } else {
+                defense = cardView.getStartingDefense();
+            }
+
+            g.setFont(ptTextFont);
+            g.setColor(Color.white);
+            int defenseWidth = g.getFontMetrics().stringWidth(defense);
+            g.drawString(defense, x + 1 + (w - defenseWidth) / 2, y - 1 + ptTextHeight + (h - ptTextHeight) / 2);
 
             // Advance
             curY -= (int) (1.2 * y);
@@ -1769,7 +1829,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     private static Color getLessOpaqueColor(Color color, boolean lessOpaqueRulesTextBox) {
         if (lessOpaqueRulesTextBox) {
-            Color lessOpaque = new Color (color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() - 50);
+            Color lessOpaque = new Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() - 50);
             return lessOpaque;
         }
         return color;

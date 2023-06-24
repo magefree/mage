@@ -25,7 +25,7 @@ public final class CelestialKirin extends CardImpl {
 
     public CelestialKirin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIRIN);
         this.subtype.add(SubType.SPIRIT);
 

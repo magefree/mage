@@ -128,4 +128,9 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     public int getSourceObjectZoneChangeCounter() {
         return ability.getSourceObjectZoneChangeCounter();
     }
+
+    @Override
+    public boolean caresAboutManaColor() {
+        return condition.caresAboutManaColor();
+    }
 }

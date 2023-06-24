@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CovenCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.hint.common.CovenHint;
 import mage.abilities.keyword.FlyingAbility;
@@ -35,7 +34,7 @@ public final class SigardaChampionOfLight extends CardImpl {
     public SigardaChampionOfLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

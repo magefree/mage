@@ -50,7 +50,7 @@ public final class MinscBooTimelessHeroes extends CardImpl {
     public MinscBooTimelessHeroes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINSC);
         this.setStartingLoyalty(3);
 

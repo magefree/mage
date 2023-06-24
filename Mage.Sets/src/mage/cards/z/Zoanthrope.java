@@ -36,7 +36,7 @@ public final class Zoanthrope extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Warp Blast -- When Zoanthrope enters the battlefield, it deals X damage to any target.
         Ability ability = new EntersBattlefieldTriggeredAbility(

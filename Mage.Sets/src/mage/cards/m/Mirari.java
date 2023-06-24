@@ -25,7 +25,7 @@ public final class Mirari extends CardImpl {
 
     public Mirari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever you cast an instant or sorcery spell, you may pay {3}. If you do, copy that spell. You may choose new targets for the copy.
         this.addAbility(new MirariTriggeredAbility());

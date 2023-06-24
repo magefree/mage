@@ -496,7 +496,7 @@ public class BestowTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Song of the Dryads", 1);
 
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
-        Assert.assertEquals("Player should be able to create 1 green mana", "{G}", options.get(0).toString());
+        Assert.assertEquals("Player should be able to create 1 green mana", "{G}", options.getAtIndex(0).toString());
 
         assertPermanentCount(playerA, "Nighthowler", 1);
         assertPowerToughness(playerA, "Nighthowler", 2, 2);

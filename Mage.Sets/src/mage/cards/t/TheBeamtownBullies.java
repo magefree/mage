@@ -18,14 +18,17 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.FilterOpponent;
+import mage.filter.FilterPlayer;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.other.ActivePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetOpponentWhoseTurnItIs;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -36,15 +39,17 @@ import java.util.UUID;
 public final class TheBeamtownBullies extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("nonlegendary creature card");
+    private static final FilterPlayer playerFilter = new FilterOpponent();
 
     static {
         filter.add(Predicates.not(SuperType.LEGENDARY.getPredicate()));
         filter.add(CardType.CREATURE.getPredicate());
+        playerFilter.add(ActivePlayerPredicate.instance);
     }
     public TheBeamtownBullies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.DEVIL);
         this.subtype.add(SubType.WARRIOR);
@@ -59,6 +64,8 @@ public final class TheBeamtownBullies extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new TheBeamtownBulliesEffect(), new TapSourceCost());
 
         // Choose a non-legendary creature to put on the battlefield under their control
+
+        ability.addTarget(new TargetPlayer(1, 1, false, playerFilter));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
 
         this.addAbility(ability);
@@ -85,17 +92,12 @@ class TheBeamtownBulliesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // Ability is targeted
-        TargetPlayer targetOpponent = new TargetOpponentWhoseTurnItIs(game);
-        Player controller = game.getPlayer(source.getControllerId());
-        controller.chooseTarget(Outcome.Neutral, targetOpponent, source, game);
-        Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
+        Player opponent = game.getPlayer(source.getFirstTarget());
 
-        // check to ensure it is the chosen opponent's turn
-        if (opponent != null && opponent.getId().equals(game.getActivePlayerId()))
+        if (opponent != null)
         {
             // Put the chosen card onto the battlefield under opponents control
-            Card card = game.getCard(source.getTargets().getFirstTarget());
+            Card card = game.getCard(source.getTargets().get(1).getFirstTarget());
             if (card == null || !opponent.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                 return false;
             }

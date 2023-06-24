@@ -34,7 +34,7 @@ public final class AwakenedAwareness extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Awakened Awareness enters the battlefield, put X +1/+1 counters on enchanted permanent.
         this.addAbility(new EntersBattlefieldTriggeredAbility(

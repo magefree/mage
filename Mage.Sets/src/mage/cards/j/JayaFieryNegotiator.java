@@ -31,7 +31,7 @@ public final class JayaFieryNegotiator extends CardImpl {
     public JayaFieryNegotiator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JAYA);
         this.setStartingLoyalty(4);
 

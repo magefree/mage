@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -10,18 +9,18 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT;
 import mage.game.command.Emblem;
 import mage.target.TargetPermanent;
 
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT;
+
 /**
- *
  * @author spjspj
  */
 public final class TezzeretTheSchemerEmblem extends Emblem {
 
     public TezzeretTheSchemerEmblem() {
-        this.setName("Emblem Tezzeret");
+        super("Emblem Tezzeret");
 
         Effect effect = new AddCardTypeTargetEffect(Duration.EndOfGame, CardType.ARTIFACT, CardType.CREATURE);
         effect.setText("target artifact you control becomes an artifact creature");
@@ -31,7 +30,14 @@ public final class TezzeretTheSchemerEmblem extends Emblem {
         ability.addEffect(effect);
         ability.addTarget(new TargetPermanent(FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         this.getAbilities().add(ability);
+    }
 
-        this.setExpansionSetCodeForImage("AER");
+    private TezzeretTheSchemerEmblem(final TezzeretTheSchemerEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public TezzeretTheSchemerEmblem copy() {
+        return new TezzeretTheSchemerEmblem(this);
     }
 }

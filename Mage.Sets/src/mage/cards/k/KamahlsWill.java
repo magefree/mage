@@ -38,14 +38,14 @@ public final class KamahlsWill extends CardImpl {
 
         // • Until end of turn, any number of target lands you control become 1/1 Elemental creatures with vigilance, indestructible, and haste. They're still lands.
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(
-                new CreatureToken(1, 1, "")
+                new CreatureToken(1, 1, "1/1 Elemental creatures with vigilance, indestructible, and haste")
                         .withSubType(SubType.ELEMENTAL)
                         .withAbility(VigilanceAbility.getInstance())
                         .withAbility(IndestructibleAbility.getInstance())
                         .withAbility(HasteAbility.getInstance()),
                 false, true, Duration.EndOfTurn
-        ).setText("until end of turn, any number of target lands you control become 1/1 Elemental creatures " +
-                "with vigilance, indestructible, and haste. They're still lands"));
+        ).withDurationRuleAtStart(true)/*.setText("until end of turn, any number of target lands you control become 1/1 Elemental creatures " +
+                "with vigilance, indestructible, and haste. They're still lands")*/);
         this.getSpellAbility().addTarget(new TargetPermanent(
                 0, Integer.MAX_VALUE, StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS, false
         ));

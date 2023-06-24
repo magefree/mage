@@ -92,7 +92,7 @@ class WordOfCommandEffect extends OneShotEffect {
 
             // Look at target opponent's hand and choose a card from it
             TargetCard targetCard = new TargetCard(Zone.HAND, new FilterCard());
-            if (controller.choose(Outcome.Discard, targetPlayer.getHand(), targetCard, game)) {
+            if (controller.choose(Outcome.Discard, targetPlayer.getHand(), targetCard, source, game)) {
                 card = game.getCard(targetCard.getFirstTarget());
             }
 

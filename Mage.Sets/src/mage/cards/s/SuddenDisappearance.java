@@ -69,7 +69,7 @@ class SuddenDisappearanceEffect extends OneShotEffect {
                     targets.add(card.getId());
                 }
                 Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true);
-                effect.setText("Return the exiled cards to the battlefield under their owner's control at the beginning of the next end step");
+                effect.setText("Return the exiled cards to the battlefield under their owner's control");
                 effect.setTargetPointer(new FixedTargets(targets, game));
                 game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
             }

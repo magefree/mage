@@ -7,7 +7,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author weirddan455
  */
 public final class BlackBirdToken extends TokenImpl {

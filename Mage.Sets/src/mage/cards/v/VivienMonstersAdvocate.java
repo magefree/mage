@@ -27,10 +27,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -43,7 +40,7 @@ public final class VivienMonstersAdvocate extends CardImpl {
     public VivienMonstersAdvocate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
         this.setStartingLoyalty(3);
 
@@ -77,8 +74,9 @@ public final class VivienMonstersAdvocate extends CardImpl {
 class VivienMonstersAdvocateTokenEffect extends OneShotEffect {
 
     private static final Token token = new BeastToken();
-    private static final Set<String> choices
-            = Arrays.asList("Vigilance", "Reach", "Trample").stream().collect(Collectors.toSet());
+    private static final Set<String> choices = new LinkedHashSet<>(Arrays.asList(
+            "Vigilance", "Reach", "Trample"
+    ));
 
     VivienMonstersAdvocateTokenEffect() {
         super(Outcome.Benefit);

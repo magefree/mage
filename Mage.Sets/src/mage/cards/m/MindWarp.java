@@ -59,7 +59,7 @@ class MindWarpEffect extends OneShotEffect {
         }
         int amountToDiscard = source.getManaCostsToPay().getX();
         TargetCard target = new TargetCardInHand(amountToDiscard, StaticFilters.FILTER_CARD_CARDS);
-        you.choose(outcome, targetPlayer.getHand(), target, game);
+        you.choose(outcome, targetPlayer.getHand(), target, source, game);
         targetPlayer.discard(new CardsImpl(target.getTargets()), false, source, game);
         return true;
     }

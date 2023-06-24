@@ -5,7 +5,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.mana.AddManaOfAnyTypeProducedEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +33,7 @@ public final class KinnanBonderProdigy extends CardImpl {
     public KinnanBonderProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);

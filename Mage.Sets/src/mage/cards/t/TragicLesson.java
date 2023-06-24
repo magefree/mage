@@ -11,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
@@ -42,12 +42,6 @@ public final class TragicLesson extends CardImpl {
 
 class TragicLessonEffect extends OneShotEffect {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land you control");
-
-    static {
-        filter.add(CardType.LAND.getPredicate());
-    }
-
     public TragicLessonEffect() {
         super(Outcome.Discard);
         staticText = "Then discard a card unless you return a land you control to its owner's hand.";
@@ -67,8 +61,8 @@ class TragicLessonEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
 
         if (controller != null
-                && controller.chooseUse(Outcome.Discard, "Do you want to return a land you control to its owner's hand? If you don't, you must discard 1 card", source, game)) {
-            Cost cost = new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter));
+                && controller.chooseUse(Outcome.Discard, "Return a land you control to its owner's hand?", source, game)) {
+            Cost cost = new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_A_LAND));
             if (cost.canPay(source, source, controller.getId(), game)) {
                 if (cost.pay(source, game, source, controller.getId(), false, null)) {
                     return true;                    

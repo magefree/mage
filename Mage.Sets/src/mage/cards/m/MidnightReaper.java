@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -19,14 +20,6 @@ import mage.filter.predicate.permanent.TokenPredicate;
  * @author TheElk801
  */
 public final class MidnightReaper extends CardImpl {
-
-    private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("a nontoken creature you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(TokenPredicate.FALSE);
-    }
 
     public MidnightReaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -38,7 +31,7 @@ public final class MidnightReaper extends CardImpl {
 
         // Whenever a nontoken creature you control dies, Midnight Reaper deals 1 damage to you and you draw a card.
         Ability ability = new DiesCreatureTriggeredAbility(
-                new DamageControllerEffect(1), false, filter
+                new DamageControllerEffect(1), false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN
         );
         ability.addEffect(
                 new DrawCardSourceControllerEffect(1)

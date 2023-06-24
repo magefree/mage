@@ -85,6 +85,6 @@ class GloomshriekerEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return true;
+        return false;
     }
 }

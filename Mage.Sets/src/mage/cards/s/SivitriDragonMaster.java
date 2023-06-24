@@ -35,7 +35,7 @@ public final class SivitriDragonMaster extends CardImpl {
 
     public SivitriDragonMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SIVITRI);
 
         this.setStartingLoyalty(4);
@@ -52,7 +52,7 @@ public final class SivitriDragonMaster extends CardImpl {
 
         // -3: Search your library for a Dragon card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true
+                new TargetCardInLibrary(filter), true
         ), -3));
 
         // -7: Destroy all non-Dragon creatures.

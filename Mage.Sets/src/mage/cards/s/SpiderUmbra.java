@@ -29,7 +29,7 @@ public final class SpiderUmbra extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+1 and has reach.
         Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(

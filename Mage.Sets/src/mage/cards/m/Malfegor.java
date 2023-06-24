@@ -27,7 +27,7 @@ public final class Malfegor extends CardImpl {
     public Malfegor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{R}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);

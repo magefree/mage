@@ -5,7 +5,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.*;
-import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +15,6 @@ import java.util.stream.Collectors;
  * @author BetaSteward_at_googlemail.com
  */
 public class Targets extends ArrayList<Target> {
-
-    private static final Logger logger = Logger.getLogger(Targets.class);
 
     public Targets(Target... targets) {
         for (Target target : targets) {
@@ -144,42 +141,6 @@ public class Targets extends ArrayList<Target> {
         if (this.size() > 0) {
             return this.get(0).getFirstTarget();
         }
-        return null;
-    }
-
-    public Target getEffectTarget(TargetPointer targetPointer) {
-        boolean proccessed = false;
-
-        if (targetPointer instanceof FirstTargetPointer) {
-            proccessed = true;
-            if (this.size() > 0) {
-                return this.get(0);
-            }
-        }
-
-        if (targetPointer instanceof SecondTargetPointer) {
-            proccessed = true;
-            if (this.size() > 1) {
-                return this.get(1);
-            }
-        }
-
-        if (targetPointer instanceof ThirdTargetPointer) {
-            proccessed = true;
-            if (this.size() > 2) {
-                return this.get(2);
-            }
-        }
-
-        if (targetPointer instanceof FixedTarget || targetPointer instanceof FixedTargets) {
-            // fixed target = direct ID, you can't find target type and description
-            proccessed = true;
-        }
-
-        if (!proccessed) {
-            logger.error("Unknown target pointer " + (targetPointer != null ? targetPointer : "null"), new Throwable());
-        }
-
         return null;
     }
 

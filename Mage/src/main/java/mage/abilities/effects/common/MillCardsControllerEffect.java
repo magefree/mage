@@ -25,6 +25,7 @@ public class MillCardsControllerEffect extends OneShotEffect {
     public MillCardsControllerEffect(DynamicValue numberCards) {
         super(Outcome.Discard);
         this.numberCards = numberCards;
+        setText();
     }
 
     public MillCardsControllerEffect(final MillCardsControllerEffect effect) {
@@ -45,12 +46,16 @@ public class MillCardsControllerEffect extends OneShotEffect {
         ).isEmpty();
     }
 
-    @Override
-    public String getText(Mode mode) {
-        if (numberCards instanceof StaticValue) {
-            return "mill " + (((StaticValue) numberCards).getValue() > 1 ?
-                    CardUtil.numberToText(numberCards.toString()) + " cards" : "a card");
+    private void setText() {
+        StringBuilder sb = new StringBuilder("mill ");
+        String value = numberCards.toString();
+        sb.append(CardUtil.numberToText(value, "a"));
+        sb.append(value.equals("1") ? " card" : " cards");
+        String message = numberCards.getMessage();
+        if (!message.isEmpty()) {
+            sb.append(value.equals("X") ? ", where X is " : " for each ");
+            sb.append(message);
         }
-        return "mill X cards, where X is " + numberCards.getMessage();
+        staticText = sb.toString();
     }
 }

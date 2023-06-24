@@ -24,7 +24,7 @@ public final class FrostRaptor extends CardImpl {
 
     public FrostRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

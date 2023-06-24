@@ -120,7 +120,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
             }
         }
 
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
+        if (game.getTurnStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             if (handledTargetsDuringTurn.containsKey(event.getTargetId())
                     && !handledTargetsDuringTurn.get(event.getTargetId())
                     && getTargetPointer().getTargets(game, source).contains(event.getTargetId())) {

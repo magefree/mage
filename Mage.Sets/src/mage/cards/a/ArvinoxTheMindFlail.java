@@ -41,7 +41,7 @@ public final class ArvinoxTheMindFlail extends CardImpl {
     public ArvinoxTheMindFlail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{4}{B}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);

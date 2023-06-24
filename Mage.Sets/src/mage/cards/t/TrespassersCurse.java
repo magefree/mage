@@ -36,7 +36,7 @@ public final class TrespassersCurse extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever a creature enters the battlefield under enchanted player's control, that player loses 1 life and you gain 1 life.

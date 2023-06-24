@@ -31,7 +31,7 @@ public final class SecondWind extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Untap));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
         
         // {tap}: Tap enchanted creature.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapEnchantedEffect(), new TapSourceCost()));

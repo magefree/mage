@@ -5,8 +5,6 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -22,8 +20,6 @@ public final class DemonBerserkerToken extends TokenImpl {
         toughness = new MageInt(3);
 
         addAbility(new MenaceAbility());
-
-        availableImageSetCodes.addAll(Arrays.asList("KHM"));
     }
 
     private DemonBerserkerToken(final DemonBerserkerToken token) {

@@ -229,7 +229,6 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
      * life (as Griselbrand’s activated ability does) or sacrifice a creature
      * (as Fling does), that spell or ability can’t be cast or activated.
      */
-    
     @Test
     public void testGriselbrandCantPay() {
         setStrictChooseMode(true);
@@ -244,6 +243,5 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-
     }
 }

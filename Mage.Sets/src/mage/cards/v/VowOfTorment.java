@@ -30,7 +30,7 @@ public final class VowOfTorment extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2, has menace, and can't attack you or a planeswalker you control.
@@ -38,7 +38,7 @@ public final class VowOfTorment extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 new MenaceAbility(), AttachmentType.AURA, Duration.WhileOnBattlefield
         ).setText(", has menace"));
-        ability.addEffect(new CantAttackControllerAttachedEffect(AttachmentType.AURA)
+        ability.addEffect(new CantAttackControllerAttachedEffect(AttachmentType.AURA, true)
                 .setText(", and can't attack you or planeswalkers you control. " +
                         "<i>(It can't be blocked except by two or more creatures.)</i>"));
         this.addAbility(ability);

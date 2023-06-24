@@ -38,7 +38,7 @@ public final class OverwhelmingSplendor extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.LoseAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Creatures enchanted player controls lose all abilities and have base power and toughness 1/1.

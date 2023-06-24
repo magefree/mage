@@ -1,15 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class RakdosGuildmageGoblinToken extends TokenImpl {
@@ -22,8 +18,6 @@ public final class RakdosGuildmageGoblinToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("GK2");
     }
 
     public RakdosGuildmageGoblinToken(final RakdosGuildmageGoblinToken token) {

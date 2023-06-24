@@ -35,7 +35,7 @@ public final class PuppetMaster extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When enchanted creature dies, return that card to its owner's hand. If that card is returned to its owner’s hand this way, you may pay {U}{U}{U}. If you do, return Puppet Master to its owner’s hand.

@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -7,17 +6,15 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.AnotherTargetPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -33,17 +30,18 @@ public final class DroolingGroodion extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{B}{G}, Sacrifice a creature: Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DroolingGroodionEffect(), new ManaCostsImpl<>("{2}{B}{G}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 2), new ManaCostsImpl<>("{2}{B}{G}"));
+        ability.addEffect(new BoostTargetEffect(-2, -2).setTargetPointer(new SecondTargetPointer()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
 
-        TargetCreaturePermanent target = new TargetCreaturePermanent(new FilterCreaturePermanent("creature (first target)"));
+        TargetCreaturePermanent target = new TargetCreaturePermanent();
         target.setTargetTag(1);
+        target.withChooseHint("gets +2/+2");
         ability.addTarget(target);
 
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature (second target");
-        filter.add(new AnotherTargetPredicate(2));
-        target = new TargetCreaturePermanent(filter);
+        target = new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE_TARGET_2);
         target.setTargetTag(2);
+        target.withChooseHint("gets -2/-2");
         ability.addTarget(target);
 
         this.addAbility(ability);
@@ -56,37 +54,5 @@ public final class DroolingGroodion extends CardImpl {
     @Override
     public DroolingGroodion copy() {
         return new DroolingGroodion(this);
-    }
-}
-
-class DroolingGroodionEffect extends ContinuousEffectImpl {
-
-    public DroolingGroodionEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        this.staticText = "Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn";
-    }
-
-    public DroolingGroodionEffect(final DroolingGroodionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DroolingGroodionEffect copy() {
-        return new DroolingGroodionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            permanent.addPower(2);
-            permanent.addToughness(2);
-        }
-        permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (permanent != null) {
-            permanent.addPower(-2);
-            permanent.addToughness(-2);
-        }
-        return true;
     }
 }

@@ -28,7 +28,7 @@ public final class SythisHarvestsHand extends CardImpl {
     public SythisHarvestsHand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NYMPH);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

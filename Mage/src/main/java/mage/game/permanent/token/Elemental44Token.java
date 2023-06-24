@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -19,8 +17,6 @@ public final class Elemental44Token extends TokenImpl {
         subtype.add(SubType.ELEMENTAL);
         power = new MageInt(4);
         toughness = new MageInt(4);
-
-        availableImageSetCodes = Arrays.asList("STX");
     }
 
     private Elemental44Token(final Elemental44Token token) {

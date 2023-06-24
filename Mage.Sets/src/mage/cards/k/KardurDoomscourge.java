@@ -28,7 +28,7 @@ public final class KardurDoomscourge extends CardImpl {
     public KardurDoomscourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(4);

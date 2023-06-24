@@ -62,6 +62,8 @@ class DeicideExileEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
             return false;
         }
         controller.moveCards(targetEnchantment, Zone.EXILED, source, game);
+        game.getState().processAction(game);
+
         // 4/26/2014
         // Deicide looks at the card in exile, not the permanent that was exiled, to determine
         // if it is a God. For each of the Gods in the Theros block, it won't matter what your

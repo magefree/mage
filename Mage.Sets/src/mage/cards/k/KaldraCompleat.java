@@ -25,7 +25,7 @@ public final class KaldraCompleat extends CardImpl {
     public KaldraCompleat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{7}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Living weapon

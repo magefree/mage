@@ -26,7 +26,7 @@ public final class ShorikaiGenesisEngine extends CardImpl {
     public ShorikaiGenesisEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

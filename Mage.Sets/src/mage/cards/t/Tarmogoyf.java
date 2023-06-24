@@ -1,22 +1,15 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
-import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
-import mage.game.Game;
 
 import java.util.UUID;
 
@@ -38,8 +31,8 @@ public final class Tarmogoyf extends CardImpl {
         // Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBasePowerToughnessSourceEffect(powerValue, toughnessValue, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a, false)
-                        .setText("{this}'s power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1")
+                new SetBasePowerToughnessSourceEffect(powerValue, toughnessValue, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a)
+                        .setText("{this}'s power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1")
         ));
     }
 

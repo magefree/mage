@@ -4,11 +4,11 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.ExploitCreatureTriggeredAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.ExploitAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 
 /**

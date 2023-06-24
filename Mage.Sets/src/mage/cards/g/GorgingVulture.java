@@ -49,7 +49,7 @@ class GorgingVultureEffect extends OneShotEffect {
 
     GorgingVultureEffect() {
         super(Outcome.Benefit);
-        staticText = "mill four cards. You gain 1 life for each creature card put into your graveyard this way.";
+        staticText = "mill four cards. You gain 1 life for each creature card milled this way.";
     }
 
     private GorgingVultureEffect(final GorgingVultureEffect effect) {

@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -41,9 +40,7 @@ public final class TheWorldSpell extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
                 new LookLibraryAndPickControllerEffect(
-                        7, 1, filter,
-                        LookLibraryControllerEffect.PutCards.HAND,
-                        LookLibraryControllerEffect.PutCards.BOTTOM_RANDOM
+                        7, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM
                 )
         );
 
@@ -91,7 +88,7 @@ class TheWorldSpellEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand(0, 2, filter);
-        player.choose(outcome, player.getHand(), target, game);
+        player.choose(outcome, player.getHand(), target, source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
     }
 }

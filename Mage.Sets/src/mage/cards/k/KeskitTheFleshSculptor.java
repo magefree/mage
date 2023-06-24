@@ -6,11 +6,11 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
@@ -39,7 +39,7 @@ public final class KeskitTheFleshSculptor extends CardImpl {
     public KeskitTheFleshSculptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);

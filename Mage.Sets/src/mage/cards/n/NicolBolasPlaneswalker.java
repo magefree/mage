@@ -34,7 +34,7 @@ public final class NicolBolasPlaneswalker extends CardImpl {
 
     public NicolBolasPlaneswalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOLAS);
 
         this.setStartingLoyalty(5);

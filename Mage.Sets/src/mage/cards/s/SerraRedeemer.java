@@ -6,14 +6,12 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SetTargetPointer;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 import java.util.UUID;
 
@@ -27,6 +25,7 @@ public final class SerraRedeemer extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public SerraRedeemer(UUID ownerId, CardSetInfo setInfo) {

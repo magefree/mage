@@ -18,7 +18,7 @@ import java.util.*;
  * @author LevelX2
  */
 
-public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl implements SourceEffect {
+public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
 
     protected Map<UUID, Ability> turnFaceUpAbilityMap = new HashMap<>();
     protected FilterPermanent filter;
@@ -72,7 +72,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                 switch (layer) {
                     case TypeChangingEffects_4:
                         permanent.setName("");
-                        permanent.getSuperType().clear();
+                        permanent.removeAllSuperTypes(game);
                         permanent.removeAllCardTypes(game);
                         permanent.addCardType(game, CardType.CREATURE);
                         permanent.removeAllSubTypes(game);

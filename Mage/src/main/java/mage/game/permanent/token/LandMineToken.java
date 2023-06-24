@@ -1,5 +1,3 @@
-
-
 package mage.game.permanent.token;
 
 import mage.abilities.Ability;
@@ -16,7 +14,6 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author spjspj
  */
 public final class LandMineToken extends TokenImpl {
@@ -29,9 +26,7 @@ public final class LandMineToken extends TokenImpl {
 
     public LandMineToken() {
         super("Land Mine", "colorless artifact token named Land Mine with \"{R}, Sacrifice this artifact: This artifact deals 2 damage to target attacking creature without flying.\"");
-        this.setOriginalExpansionSetCode("M15");
         cardType.add(CardType.ARTIFACT);
-
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));

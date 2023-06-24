@@ -5,8 +5,6 @@ import mage.abilities.keyword.ProwessAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -20,8 +18,6 @@ public final class MonkRedToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(new ProwessAbility());
-
-        availableImageSetCodes = Arrays.asList("DMU");
     }
 
     public MonkRedToken(final MonkRedToken token) {

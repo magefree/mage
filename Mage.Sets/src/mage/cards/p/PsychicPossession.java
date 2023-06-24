@@ -37,7 +37,7 @@ public final class PsychicPossession extends CardImpl {
         TargetPlayer auraTarget = new TargetOpponent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.DrawCard));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Skip your draw step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
@@ -91,7 +91,7 @@ class PsychicPossessionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted opponent draws a card, you may draw a card";
+        return "Whenever enchanted opponent draws a card, you may draw a card.";
     }
 
 }

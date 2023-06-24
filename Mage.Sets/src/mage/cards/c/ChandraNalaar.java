@@ -24,7 +24,7 @@ public final class ChandraNalaar extends CardImpl {
 
     public ChandraNalaar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
         this.setStartingLoyalty(6);

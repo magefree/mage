@@ -18,7 +18,7 @@ public final class TamiyosNotebookToken extends TokenImpl {
 
     public TamiyosNotebookToken() {
         super("Tamiyo's Notebook", "Tamiyo's Notebook, a legendary colorless artifact token with \"Spells you cast cost {2} less to cast\" and \"{T}: Draw a card.\"");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.cardType.add(CardType.ARTIFACT);
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)));
         this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost()));

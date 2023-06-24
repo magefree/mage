@@ -178,6 +178,7 @@ public class MageServerImpl implements MageServer {
                 throw new MageException("Wrong client version " + version + ", expecting version " + Main.getVersion());
             }
             if (!adminPassword.equals(this.adminPassword)) {
+                Thread.sleep(3000);
                 throw new MageException("Wrong password");
             }
             return managerFactory.sessionManager().connectAdmin(sessionId);
@@ -733,6 +734,16 @@ public class MageServerImpl implements MageServer {
             managerFactory.sessionManager().getSession(sessionId).ifPresent(session -> {
                 UUID userId = session.getUserId();
                 managerFactory.draftManager().sendCardMark(draftId, userId, cardPick);
+            });
+        });
+    }
+    
+    @Override
+    public void setBoosterLoaded(final UUID draftId, final String sessionId) throws MageException {
+        execute("setBoosterLoaded", sessionId, () -> {
+            managerFactory.sessionManager().getSession(sessionId).ifPresent(session -> {
+                UUID userId = session.getUserId();
+                managerFactory.draftManager().setBoosterLoaded(draftId, userId);
             });
         });
     }

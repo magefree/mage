@@ -31,7 +31,7 @@ public final class TamiyoTheMoonSage extends CardImpl {
 
     public TamiyoTheMoonSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TAMIYO);
 
         this.setStartingLoyalty(4);
@@ -82,7 +82,7 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
 
     @Override
     public String toString() {
-        return "a";
+        return "1";
     }
 
     @Override

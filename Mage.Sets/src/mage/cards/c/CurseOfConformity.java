@@ -32,7 +32,7 @@ public final class CurseOfConformity extends CardImpl {
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Nonlegendary creatures enchanted player controls have base power and toughness 3/3 and lose all creature types.
         this.addAbility(new SimpleStaticAbility(new CurseOfConformityEffect()));

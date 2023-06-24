@@ -27,7 +27,7 @@ public final class BloodOnTheSnow extends CardImpl {
     public BloodOnTheSnow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Choose one —
         // • Destroy all creatures.

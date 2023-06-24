@@ -32,7 +32,7 @@ public final class Halfdane extends CardImpl {
 
     public Halfdane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -86,7 +86,7 @@ class HalfdaneUpkeepEffect extends OneShotEffect {
 class HalfdaneSetBasePowerToughnessEffect extends SetBasePowerToughnessSourceEffect {
 
     public HalfdaneSetBasePowerToughnessEffect(int power, int toughness) {
-        super(power, toughness, Duration.UntilYourNextTurn, SubLayer.SetPT_7b, true);
+        super(power, toughness, Duration.UntilYourNextTurn, SubLayer.SetPT_7b);
     }
 
     public HalfdaneSetBasePowerToughnessEffect(final HalfdaneSetBasePowerToughnessEffect effect) {
@@ -95,7 +95,7 @@ class HalfdaneSetBasePowerToughnessEffect extends SetBasePowerToughnessSourceEff
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (super.isInactive(source, game) && game.getStep().getType().isAfter(PhaseStep.UPKEEP)) {
+        if (super.isInactive(source, game) && game.getTurnStepType().isAfter(PhaseStep.UPKEEP)) {
             return true;
         }
         return false;

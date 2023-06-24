@@ -19,7 +19,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -88,7 +87,7 @@ class ArcaneAdaptationEffect extends ContinuousEffectImpl {
             }
         }
         // in Exile
-        for (Card card : game.getState().getExile().getAllCards(game)) {
+        for (Card card : game.getState().getExile().getAllCards(game, source.getControllerId())) {
             if (card.isCreature(game) && !card.hasSubtype(subType, game)) {
                 game.getState().getCreateMageObjectAttribute(card, game).getSubtype().add(subType);
             }
@@ -109,10 +108,9 @@ class ArcaneAdaptationEffect extends ContinuousEffectImpl {
                 }
             }
         }
-        // TODO: Why is this not using the for-in loop like all the others?
+
         // creature spells you control
-        for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext(); ) {
-            StackObject stackObject = iterator.next();
+        for (StackObject stackObject : game.getStack()) {
             if (stackObject instanceof Spell
                     && stackObject.isControlledBy(source.getControllerId())
                     && stackObject.isCreature(game)

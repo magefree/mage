@@ -31,7 +31,7 @@ public final class InventorsFair extends CardImpl {
 
     public InventorsFair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life.
         this.addAbility(new InventorsFairAbility());

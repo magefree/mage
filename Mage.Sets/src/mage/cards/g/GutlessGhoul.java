@@ -25,7 +25,7 @@ public final class GutlessGhoul extends CardImpl {
 
     public GutlessGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

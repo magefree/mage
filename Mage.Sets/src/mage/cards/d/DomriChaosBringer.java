@@ -8,7 +8,6 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
@@ -35,7 +34,7 @@ public final class DomriChaosBringer extends CardImpl {
     public DomriChaosBringer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOMRI);
         this.setStartingLoyalty(5);
 

@@ -39,7 +39,7 @@ public final class MyojinOfCleansingFire extends CardImpl {
 
     public MyojinOfCleansingFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(4);
@@ -48,10 +48,10 @@ public final class MyojinOfCleansingFire extends CardImpl {
         this.getSpellAbility().addWatcher(new CastFromHandWatcher());
 
         // Myojin of Cleansing Fire enters the battlefield with a divinity counter on it if you cast it from your hand.
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), CastFromHandSourcePermanentCondition.instance, ""), "{this} enters the battlefield with a divinity counter on it if you cast it from your hand"));
-        // Myojin of Cleansing Fire is indestructible as long as it has a divinity counter on it.
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), CastFromHandSourcePermanentCondition.instance, ""), "with a divinity counter on it if you cast it from your hand"));
+        // Myojin of Cleansing Fire has indestructible as long as it has a divinity counter on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
-                new SourceHasCounterCondition(CounterType.DIVINITY), "{this} is indestructible as long as it has a divinity counter on it")));
+                new SourceHasCounterCondition(CounterType.DIVINITY), "{this} has indestructible as long as it has a divinity counter on it")));
         // Remove a divinity counter from Myojin of Cleansing Fire: Destroy all other creatures.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance())));
     }

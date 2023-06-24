@@ -25,7 +25,7 @@ public final class MagaTraitorToMortals extends CardImpl {
 
     public MagaTraitorToMortals(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{B}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 

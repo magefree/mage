@@ -11,7 +11,7 @@ import mage.util.CardUtil;
 /**
  * @author LevelX2
  */
-public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implements SourceEffect {
+public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl {
 
     private final DynamicValue dynamicValue;
     private final int lessThan;

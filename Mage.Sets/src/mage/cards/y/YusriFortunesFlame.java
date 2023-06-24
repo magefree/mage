@@ -23,7 +23,7 @@ public final class YusriFortunesFlame extends CardImpl {
     public YusriFortunesFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EFREET);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

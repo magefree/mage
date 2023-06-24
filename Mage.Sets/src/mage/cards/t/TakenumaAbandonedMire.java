@@ -28,7 +28,7 @@ public final class TakenumaAbandonedMire extends CardImpl {
     public TakenumaAbandonedMire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());
@@ -87,7 +87,7 @@ class TakenumaAbandonedMireEffect extends OneShotEffect {
         }
         TargetCard target = new TargetCardInGraveyard(filter);
         target.setNotTarget(true);
-        player.choose(outcome, player.getGraveyard(), target, game);
+        player.choose(outcome, player.getGraveyard(), target, source, game);
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
     }
 }

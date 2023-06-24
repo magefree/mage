@@ -44,7 +44,7 @@ public final class SarythTheVipersFang extends CardImpl {
     public SarythTheVipersFang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(3);

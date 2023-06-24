@@ -25,7 +25,7 @@ public final class Indestructibility extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted permanent is indestructible.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(

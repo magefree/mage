@@ -1,5 +1,6 @@
-
 package mage.counters;
+
+import mage.util.CardUtil;
 
 import java.io.Serializable;
 import org.apache.log4j.Logger;
@@ -57,20 +58,6 @@ public class Counter implements Serializable {
     }
 
     /**
-     * Decreases the {@code count} by one. Will not allow the count to be less
-     * than 0. If an attempt is made to make the count be less than zero, the
-     * call will be logged.
-     */
-    public void decrease() {
-        if (count > 0) {
-            count--;
-        } else {
-            logger.warn("An attempt was made to set the counter '" + name
-                    + "' to less than 0. Setting to 0.");
-        }
-    }
-
-    /**
      * Decreases the {@code count} by the passed in {@code amount}. Will not
      * allow the count to be less than 0. If an attempt is made to make the
      * count be less than zero, the call will be logged.
@@ -103,6 +90,15 @@ public class Counter implements Serializable {
      */
     public int getCount() {
         return count;
+    }
+
+    /**
+     * Returns a full description of this {@link Counter}, e.g. "a +1/+1 counter" or "two -1/-1 counters"
+     *
+     * @return a full description of this {@link Counter}
+     */
+    public String getDescription() {
+        return CardUtil.numberToText(Math.max(count, 1), CounterType.findArticle(name)) + ' ' + name + (count > 1 ? " counters" : " counter");
     }
 
     /**

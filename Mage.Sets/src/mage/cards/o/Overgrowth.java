@@ -29,13 +29,13 @@ public final class Overgrowth extends CardImpl {
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Whenever enchanted land is tapped for mana, its controller adds {G}{G}.
         this.addAbility(new EnchantedTappedTriggeredManaAbility(new AddManaToManaPoolTargetControllerEffect(
                 Mana.GreenMana(2), "their"
-        )));
+        ).setText("its controller adds an additional {G}{G}")));
     }
 
     private Overgrowth(final Overgrowth card) {

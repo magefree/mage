@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -19,8 +17,6 @@ public final class FrogLizardToken extends TokenImpl {
         subtype.add(SubType.LIZARD);
         power = new MageInt(3);
         toughness = new MageInt(3);
-
-        availableImageSetCodes = Arrays.asList("GTC", "RNA", "C15", "C21");
     }
 
     public FrogLizardToken(final FrogLizardToken token) {

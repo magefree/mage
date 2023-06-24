@@ -36,7 +36,6 @@ public class TazeemPlane extends Plane {
 
     public TazeemPlane() {
         this.setPlaneType(Planes.PLANE_TAZEEM);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Creatures can't block
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new TazeemCantBlockAllEffect());
@@ -57,6 +56,15 @@ public class TazeemPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private TazeemPlane(final TazeemPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public TazeemPlane copy() {
+        return new TazeemPlane(this);
     }
 }
 

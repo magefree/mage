@@ -20,7 +20,10 @@ public final class NewCapennaCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Aether Snap", 241, Rarity.RARE, mage.cards.a.AetherSnap.class));
+        cards.add(new SetCardInfo("Aerial Extortionist", 11, Rarity.RARE, mage.cards.a.AerialExtortionist.class));
+        cards.add(new SetCardInfo("Agent's Toolkit", 66, Rarity.RARE, mage.cards.a.AgentsToolkit.class));
         cards.add(new SetCardInfo("Agitator Ant", 263, Rarity.RARE, mage.cards.a.AgitatorAnt.class));
+        cards.add(new SetCardInfo("Anhelo, the Painter", 1, Rarity.MYTHIC, mage.cards.a.AnheloThePainter.class));
         cards.add(new SetCardInfo("Ajani Unyielding", 324, Rarity.MYTHIC, mage.cards.a.AjaniUnyielding.class));
         cards.add(new SetCardInfo("Alela, Artful Provocateur", 325, Rarity.MYTHIC, mage.cards.a.AlelaArtfulProvocateur.class));
         cards.add(new SetCardInfo("Angelic Sleuth", 12, Rarity.RARE, mage.cards.a.AngelicSleuth.class));
@@ -49,6 +52,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bedevil", 331, Rarity.RARE, mage.cards.b.Bedevil.class));
         cards.add(new SetCardInfo("Bellowing Mauler", 33, Rarity.RARE, mage.cards.b.BellowingMauler.class));
         cards.add(new SetCardInfo("Bennie Bracks, Zoologist", 86, Rarity.MYTHIC, mage.cards.b.BennieBracksZoologist.class));
+        cards.add(new SetCardInfo("Bess, Soul Nourisher", 67, Rarity.RARE, mage.cards.b.BessSoulNourisher.class));
         cards.add(new SetCardInfo("Blasphemous Act", 264, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Blighted Woodland", 388, Rarity.UNCOMMON, mage.cards.b.BlightedWoodland.class));
         cards.add(new SetCardInfo("Bloodsoaked Champion", 243, Rarity.RARE, mage.cards.b.BloodsoakedChampion.class));
@@ -85,6 +89,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Crash the Party", 57, Rarity.RARE, mage.cards.c.CrashTheParty.class));
         cards.add(new SetCardInfo("Creeping Tar Pit", 396, Rarity.RARE, mage.cards.c.CreepingTarPit.class));
         cards.add(new SetCardInfo("Crumbling Necropolis", 397, Rarity.UNCOMMON, mage.cards.c.CrumblingNecropolis.class));
+        cards.add(new SetCardInfo("Cryptic Pursuit", 70, Rarity.RARE, mage.cards.c.CrypticPursuit.class));
         cards.add(new SetCardInfo("Crystalline Giant", 364, Rarity.RARE, mage.cards.c.CrystallineGiant.class));
         cards.add(new SetCardInfo("Cultivate", 285, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Currency Converter", 81, Rarity.RARE, mage.cards.c.CurrencyConverter.class));
@@ -98,6 +103,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Deathreap Ritual", 336, Rarity.UNCOMMON, mage.cards.d.DeathreapRitual.class));
         cards.add(new SetCardInfo("Declaration in Stone", 196, Rarity.RARE, mage.cards.d.DeclarationInStone.class));
         cards.add(new SetCardInfo("Deep Analysis", 218, Rarity.COMMON, mage.cards.d.DeepAnalysis.class));
+        cards.add(new SetCardInfo("Denry Klin, Editor in Chief", 71, Rarity.RARE, mage.cards.d.DenryKlinEditorInChief.class));
         cards.add(new SetCardInfo("Determined Iteration", 45, Rarity.RARE, mage.cards.d.DeterminedIteration.class));
         cards.add(new SetCardInfo("Devoted Druid", 286, Rarity.UNCOMMON, mage.cards.d.DevotedDruid.class));
         cards.add(new SetCardInfo("Dig Through Time", 219, Rarity.RARE, mage.cards.d.DigThroughTime.class));
@@ -123,6 +129,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fact or Fiction", 221, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Fallen Shinobi", 338, Rarity.RARE, mage.cards.f.FallenShinobi.class));
         cards.add(new SetCardInfo("False Floor", 82, Rarity.RARE, mage.cards.f.FalseFloor.class));
+        cards.add(new SetCardInfo("Family's Favor", 59, Rarity.RARE, mage.cards.f.FamilysFavor.class));
         cards.add(new SetCardInfo("Farseek", 290, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Fathom Mage", 339, Rarity.RARE, mage.cards.f.FathomMage.class));
         cards.add(new SetCardInfo("Feed the Swarm", 250, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
@@ -199,6 +206,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Magus of the Wheel", 271, Rarity.RARE, mage.cards.m.MagusOfTheWheel.class));
         cards.add(new SetCardInfo("Make an Example", 37, Rarity.RARE, mage.cards.m.MakeAnExample.class));
         cards.add(new SetCardInfo("March of the Multitudes", 346, Rarity.MYTHIC, mage.cards.m.MarchOfTheMultitudes.class));
+        cards.add(new SetCardInfo("Mari, the Killing Quill", 89, Rarity.RARE, mage.cards.m.MariTheKillingQuill.class));
         cards.add(new SetCardInfo("Martial Coup", 206, Rarity.RARE, mage.cards.m.MartialCoup.class));
         cards.add(new SetCardInfo("Mask of Riddles", 347, Rarity.UNCOMMON, mage.cards.m.MaskOfRiddles.class));
         cards.add(new SetCardInfo("Mask of the Schemer", 28, Rarity.RARE, mage.cards.m.MaskOfTheSchemer.class));
@@ -216,6 +224,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nadir Kraken", 228, Rarity.RARE, mage.cards.n.NadirKraken.class));
         cards.add(new SetCardInfo("Naya Panorama", 417, Rarity.COMMON, mage.cards.n.NayaPanorama.class));
         cards.add(new SetCardInfo("Nesting Grounds", 418, Rarity.RARE, mage.cards.n.NestingGrounds.class));
+        cards.add(new SetCardInfo("Next of Kin", 62, Rarity.RARE, mage.cards.n.NextOfKin.class));
         cards.add(new SetCardInfo("Nightmare Unmaking", 253, Rarity.RARE, mage.cards.n.NightmareUnmaking.class));
         cards.add(new SetCardInfo("Noxious Gearhulk", 254, Rarity.MYTHIC, mage.cards.n.NoxiousGearhulk.class));
         cards.add(new SetCardInfo("Oblivion Stone", 373, Rarity.RARE, mage.cards.o.OblivionStone.class));
@@ -223,13 +232,16 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Oracle's Vault", 374, Rarity.RARE, mage.cards.o.OraclesVault.class));
         cards.add(new SetCardInfo("Orzhov Advokist", 207, Rarity.UNCOMMON, mage.cards.o.OrzhovAdvokist.class));
         cards.add(new SetCardInfo("Orzhov Signet", 375, Rarity.UNCOMMON, mage.cards.o.OrzhovSignet.class));
+        cards.add(new SetCardInfo("Oskar, Rubbish Reclaimer", 77, Rarity.RARE, mage.cards.o.OskarRubbishReclaimer.class));
         cards.add(new SetCardInfo("Outpost Siege", 272, Rarity.RARE, mage.cards.o.OutpostSiege.class));
         cards.add(new SetCardInfo("Overgrown Battlement", 303, Rarity.UNCOMMON, mage.cards.o.OvergrownBattlement.class));
         cards.add(new SetCardInfo("Painful Truths", 255, Rarity.RARE, mage.cards.p.PainfulTruths.class));
         cards.add(new SetCardInfo("Park Heights Maverick", 63, Rarity.RARE, mage.cards.p.ParkHeightsMaverick.class));
+        cards.add(new SetCardInfo("Parnesse, the Subtle Brush", 8, Rarity.MYTHIC, mage.cards.p.ParnesseTheSubtleBrush.class));
         cards.add(new SetCardInfo("Path of Ancestry", 419, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 208, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
         cards.add(new SetCardInfo("Perrie, the Pulverizer", 5, Rarity.MYTHIC, mage.cards.p.PerrieThePulverizer.class));
+        cards.add(new SetCardInfo("Phabine, Boss's Confidant", 9, Rarity.MYTHIC, mage.cards.p.PhabineBosssConfidant.class));
         cards.add(new SetCardInfo("Planar Outburst", 209, Rarity.RARE, mage.cards.p.PlanarOutburst.class));
         cards.add(new SetCardInfo("Ponder", 229, Rarity.COMMON, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Port Town", 420, Rarity.RARE, mage.cards.p.PortTown.class));
@@ -242,14 +254,17 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Protection Racket", 39, Rarity.RARE, mage.cards.p.ProtectionRacket.class));
         cards.add(new SetCardInfo("Puppeteer Clique", 257, Rarity.RARE, mage.cards.p.PuppeteerClique.class));
         cards.add(new SetCardInfo("Quietus Spike", 377, Rarity.RARE, mage.cards.q.QuietusSpike.class));
+        cards.add(new SetCardInfo("Rain of Riches", 50, Rarity.RARE, mage.cards.r.RainOfRiches.class));
         cards.add(new SetCardInfo("Rakdos Signet", 378, Rarity.UNCOMMON, mage.cards.r.RakdosSignet.class));
         cards.add(new SetCardInfo("Rampant Growth", 304, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Reign of the Pit", 258, Rarity.RARE, mage.cards.r.ReignOfThePit.class));
         cards.add(new SetCardInfo("Rekindling Phoenix", 273, Rarity.MYTHIC, mage.cards.r.RekindlingPhoenix.class));
+        cards.add(new SetCardInfo("Resourceful Defense", 19, Rarity.RARE, mage.cards.r.ResourcefulDefense.class));
         cards.add(new SetCardInfo("Rishkar's Expertise", 306, Rarity.RARE, mage.cards.r.RishkarsExpertise.class));
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 305, Rarity.RARE, mage.cards.r.RishkarPeemaRenegade.class));
         cards.add(new SetCardInfo("Rite of the Raging Storm", 274, Rarity.UNCOMMON, mage.cards.r.RiteOfTheRagingStorm.class));
         cards.add(new SetCardInfo("River's Rebuke", 231, Rarity.RARE, mage.cards.r.RiversRebuke.class));
+        cards.add(new SetCardInfo("Riveteers Confluence", 79, Rarity.RARE, mage.cards.r.RiveteersConfluence.class));
         cards.add(new SetCardInfo("Roalesk, Apex Hybrid", 349, Rarity.MYTHIC, mage.cards.r.RoaleskApexHybrid.class));
         cards.add(new SetCardInfo("Rogue's Passage", 422, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Rose Room Treasurer", 51, Rarity.RARE, mage.cards.r.RoseRoomTreasurer.class));
@@ -267,15 +282,19 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shadowblood Ridge", 426, Rarity.RARE, mage.cards.s.ShadowbloodRidge.class));
         cards.add(new SetCardInfo("Shadowmage Infiltrator", 351, Rarity.UNCOMMON, mage.cards.s.ShadowmageInfiltrator.class));
         cards.add(new SetCardInfo("Shamanic Revelation", 311, Rarity.RARE, mage.cards.s.ShamanicRevelation.class));
+        cards.add(new SetCardInfo("Shield Broker", 29, Rarity.RARE, mage.cards.s.ShieldBroker.class));
         cards.add(new SetCardInfo("Silent-Blade Oni", 352, Rarity.RARE, mage.cards.s.SilentBladeOni.class));
+        cards.add(new SetCardInfo("Sinister Concierge", 30, Rarity.RARE, mage.cards.s.SinisterConcierge.class));
         cards.add(new SetCardInfo("Skyboon Evangelist", 20, Rarity.RARE, mage.cards.s.SkyboonEvangelist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skyboon Evangelist", 121, Rarity.RARE, mage.cards.s.SkyboonEvangelist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skyclave Shade", 260, Rarity.RARE, mage.cards.s.SkyclaveShade.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 427, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Skyship Plunderer", 232, Rarity.UNCOMMON, mage.cards.s.SkyshipPlunderer.class));
+        cards.add(new SetCardInfo("Skyway Robber", 31, Rarity.RARE, mage.cards.s.SkywayRobber.class));
         cards.add(new SetCardInfo("Slippery Bogbonder", 312, Rarity.RARE, mage.cards.s.SlipperyBogbonder.class));
         cards.add(new SetCardInfo("Smoldering Marsh", 428, Rarity.RARE, mage.cards.s.SmolderingMarsh.class));
         cards.add(new SetCardInfo("Smuggler's Share", 21, Rarity.RARE, mage.cards.s.SmugglersShare.class));
+        cards.add(new SetCardInfo("Smuggler's Buggy", 84, Rarity.RARE, mage.cards.s.SmugglersBuggy.class));
         cards.add(new SetCardInfo("Sol Ring", 379, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 380, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Spellbinding Soprano", 53, Rarity.RARE, mage.cards.s.SpellbindingSoprano.class));
@@ -287,10 +306,12 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Stolen Identity", 233, Rarity.RARE, mage.cards.s.StolenIdentity.class));
         cards.add(new SetCardInfo("Storm of Forms", 32, Rarity.RARE, mage.cards.s.StormOfForms.class));
         cards.add(new SetCardInfo("Strionic Resonator", 381, Rarity.RARE, mage.cards.s.StrionicResonator.class));
+        cards.add(new SetCardInfo("Syrix, Carrier of the Flame", 80, Rarity.RARE, mage.cards.s.SyrixCarrierOfTheFlame.class));
         cards.add(new SetCardInfo("Sun Titan", 210, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 430, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Sunken Hollow", 431, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 382, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
+        cards.add(new SetCardInfo("Swindler's Scheme", 88, Rarity.RARE, mage.cards.s.SwindlersScheme.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 211, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Sylvan Offering", 314, Rarity.RARE, mage.cards.s.SylvanOffering.class));
         cards.add(new SetCardInfo("Talrand's Invocation", 234, Rarity.UNCOMMON, mage.cards.t.TalrandsInvocation.class));
@@ -301,11 +322,13 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Triumph", 437, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Temple of the False God", 436, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Temur Sabertooth", 315, Rarity.UNCOMMON, mage.cards.t.TemurSabertooth.class));
+        cards.add(new SetCardInfo("Tenuous Truce", 87, Rarity.RARE, mage.cards.t.TenuousTruce.class));
         cards.add(new SetCardInfo("Terminate", 353, Rarity.UNCOMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Tezzeret's Gambit", 235, Rarity.RARE, mage.cards.t.TezzeretsGambit.class));
         cards.add(new SetCardInfo("The Beamtown Bullies", 6, Rarity.MYTHIC, mage.cards.t.TheBeamtownBullies.class));
         cards.add(new SetCardInfo("Thief of Sanity", 354, Rarity.RARE, mage.cards.t.ThiefOfSanity.class));
         cards.add(new SetCardInfo("Thragtusk", 316, Rarity.RARE, mage.cards.t.Thragtusk.class));
+        cards.add(new SetCardInfo("Threefold Signal", 93, Rarity.MYTHIC, mage.cards.t.ThreefoldSignal.class));
         cards.add(new SetCardInfo("Thriving Bluff", 438, Rarity.COMMON, mage.cards.t.ThrivingBluff.class));
         cards.add(new SetCardInfo("Thriving Grove", 439, Rarity.COMMON, mage.cards.t.ThrivingGrove.class));
         cards.add(new SetCardInfo("Thriving Heath", 440, Rarity.COMMON, mage.cards.t.ThrivingHeath.class));
@@ -322,6 +345,7 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Twinning Staff", 383, Rarity.RARE, mage.cards.t.TwinningStaff.class));
         cards.add(new SetCardInfo("Urban Evolution", 355, Rarity.UNCOMMON, mage.cards.u.UrbanEvolution.class));
         cards.add(new SetCardInfo("Utter End", 356, Rarity.RARE, mage.cards.u.UtterEnd.class));
+        cards.add(new SetCardInfo("Vazi, Keen Negotiator", 92, Rarity.RARE, mage.cards.v.VaziKeenNegotiator.class));
         cards.add(new SetCardInfo("Victimize", 261, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Vivid Creek", 444, Rarity.UNCOMMON, mage.cards.v.VividCreek.class));
         cards.add(new SetCardInfo("Vivid Grove", 445, Rarity.UNCOMMON, mage.cards.v.VividGrove.class));
@@ -331,7 +355,9 @@ public final class NewCapennaCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Roots", 319, Rarity.COMMON, mage.cards.w.WallOfRoots.class));
         cards.add(new SetCardInfo("Warstorm Surge", 277, Rarity.RARE, mage.cards.w.WarstormSurge.class));
         cards.add(new SetCardInfo("Waste Management", 40, Rarity.RARE, mage.cards.w.WasteManagement.class));
+        cards.add(new SetCardInfo("Wave of Rats", 41, Rarity.RARE, mage.cards.w.WaveOfRats.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 384, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
+        cards.add(new SetCardInfo("Weathered Sentinels", 85, Rarity.RARE, mage.cards.w.WeatheredSentinels.class));
         cards.add(new SetCardInfo("Whirler Rogue", 238, Rarity.UNCOMMON, mage.cards.w.WhirlerRogue.class));
         cards.add(new SetCardInfo("Wickerbough Elder", 320, Rarity.COMMON, mage.cards.w.WickerboughElder.class));
         cards.add(new SetCardInfo("Windbrisk Heights", 447, Rarity.RARE, mage.cards.w.WindbriskHeights.class));

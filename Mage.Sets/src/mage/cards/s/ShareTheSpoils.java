@@ -27,8 +27,8 @@ import java.util.UUID;
  */
 public final class ShareTheSpoils extends CardImpl {
 
-    public ShareTheSpoils(UUID ownderId, CardSetInfo setInfo) {
-        super(ownderId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+    public ShareTheSpoils(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
         // When Share the Spoils enters the battlefield or an opponent loses the game,
         // exile the top card of each player’s library.exile the top card of each player’s library.

@@ -34,18 +34,18 @@ import java.util.UUID;
 public final class BelakorTheDarkMaster extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DEMON, "Demons you control");
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
     private static final Hint hint = new ValueHint("Demons you control", xValue);
     private static final FilterPermanent filter2 = new FilterControlledPermanent(SubType.DEMON, "another Demon");
 
     static {
-        filter.add(AnotherPredicate.instance);
+        filter2.add(AnotherPredicate.instance);
     }
 
     public BelakorTheDarkMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(6);

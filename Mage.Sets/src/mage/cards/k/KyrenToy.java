@@ -38,7 +38,7 @@ public final class KyrenToy extends CardImpl {
 
         // {T}, Remove X charge counters from Kyren Toy: Add X mana of {C}, and then add {C}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD, new KyrenToyManaEffect(), new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance(1)));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE));
         this.addAbility(ability);
     }
 

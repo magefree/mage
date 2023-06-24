@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CopyStackAbilityEffect;
+import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
@@ -40,7 +40,7 @@ public final class RingsOfBrighthearth extends CardImpl {
 class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
 
     RingsOfBrighthearthTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackAbilityEffect(), new GenericManaCost(2)));
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackObjectEffect(), new GenericManaCost(2)));
     }
 
     private RingsOfBrighthearthTriggeredAbility(final RingsOfBrighthearthTriggeredAbility ability) {
@@ -66,7 +66,7 @@ class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
         if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
             return false;
         }
-        this.getEffects().setValue("stackAbility", stackAbility);
+        this.getEffects().setValue("stackObject", stackAbility);
         return true;
     }
 

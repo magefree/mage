@@ -17,7 +17,7 @@ public final class SivitriScarzam extends CardImpl {
 
     public SivitriScarzam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
 
         this.power = new MageInt(6);

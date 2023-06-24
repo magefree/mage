@@ -33,7 +33,7 @@ public final class SleepWithTheFishes extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Sleep with the Fishes enters the battlefield, tap enchanted creature and you create a 1/1 blue Fish creature token with "This creature can't be blocked."
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect());

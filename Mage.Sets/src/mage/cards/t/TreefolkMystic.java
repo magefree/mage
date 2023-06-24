@@ -1,20 +1,14 @@
-
 package mage.cards.t;
 
-import java.util.LinkedList;
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.common.BlocksOrBecomesBlockedSourceTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
+import mage.abilities.effects.common.DestroyAllAttachedToTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -30,7 +24,9 @@ public final class TreefolkMystic extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Treefolk Mystic blocks or becomes blocked by a creature, destroy all Auras attached to that creature.
-        this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new TreefolkMysticEffect(), false));
+        this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(
+                new DestroyAllAttachedToTargetEffect(StaticFilters.FILTER_PERMANENT_AURAS, "that creature")
+        ));
     }
 
     private TreefolkMystic(final TreefolkMystic card) {
@@ -40,38 +36,5 @@ public final class TreefolkMystic extends CardImpl {
     @Override
     public TreefolkMystic copy() {
         return new TreefolkMystic(this);
-    }
-}
-
-class TreefolkMysticEffect extends OneShotEffect {
-
-    public TreefolkMysticEffect() {
-        super(Outcome.DestroyPermanent);
-        this.staticText = "destroy all Auras attached to that creature";
-    }
-
-    public TreefolkMysticEffect(final TreefolkMysticEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TreefolkMysticEffect copy() {
-        return new TreefolkMysticEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            LinkedList<UUID> attachments = new LinkedList();
-            attachments.addAll(permanent.getAttachments());
-            for (UUID uuid : attachments) {
-                Permanent aura = game.getPermanent(uuid);
-                if (aura != null && aura.hasSubtype(SubType.AURA, game)) {
-                    aura.destroy(source, game, false);
-                }
-            }
-        }
-        return false;
     }
 }

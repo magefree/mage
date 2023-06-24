@@ -100,7 +100,7 @@ class ExtraplanarLensImprintEffect extends OneShotEffect {
 class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
 
     public ExtraplanarLensTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddManaOfAnyTypeProducedEffect());
+        super(Zone.BATTLEFIELD, new AddManaOfAnyTypeProducedEffect().setText("its controller adds one mana of any type that land produced"));
         setTriggerPhrase("Whenever a land with the same name as the exiled card is tapped for mana, ");
     }
 

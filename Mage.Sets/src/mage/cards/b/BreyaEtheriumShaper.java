@@ -32,7 +32,7 @@ public final class BreyaEtheriumShaper extends CardImpl {
     public BreyaEtheriumShaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{U}{B}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

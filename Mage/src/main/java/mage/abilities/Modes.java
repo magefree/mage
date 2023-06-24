@@ -208,9 +208,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             return realMaxModes;
         }
 
-        // use case: make all modes chooseable
+        // use case: make two modes chooseable (all cards that use this currently go from one to two)
         if (moreCondition != null && moreCondition.apply(game, source)) {
-            realMaxModes = this.size();
+            realMaxModes = 2;
         }
 
         // use case: limit max modes by opponents (wtf?!)
@@ -490,7 +490,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             } else if (this.getMinModes() == this.getMaxModes(null, null)) {
                 sb.append(CardUtil.numberToText(this.getMinModes()));
             } else {
-                throw new UnsupportedOperationException("no text available for this selection of min and max modes");
+                throw new UnsupportedOperationException(String.format("no text available for this selection of min and max modes (%d and %d)",
+                        this.getMinModes(), this.getMaxModes(null, null)));
             }
         } else {
             sb.append(chooseText);

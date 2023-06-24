@@ -25,7 +25,7 @@ public final class OathOfGideon extends CardImpl {
 
     public OathOfGideon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // When Oath of Gideon enters the battlefield, create two 1/1 Kor Ally creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KorAllyToken(), 2), false));

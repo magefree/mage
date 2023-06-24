@@ -94,4 +94,37 @@ public class CastSplitCardsWithFuseTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Juggernaut", 1);
         assertGraveyardCount(playerB, "Absolute Grace", 1);
     }
+
+    @Test
+    public void testProtectionFromFusedSpell() {
+        // https://github.com/magefree/mage/issues/9545
+
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 5);
+        // INSTANT
+        // Turn {2}{U}
+        // Until end of turn, target creature loses all abilities and becomes a red Weird with base power and toughness 0/1.
+        // Burn {1}{R}
+        // Burn deals 2 damage to any target.
+        // Fuse (You may cast one or both halves of this card from your hand.)
+        addCard(Zone.HAND, playerA, "Turn // Burn");
+
+        // {R}: Keeper of Kookus gains protection from red until end of turn.
+        addCard(Zone.BATTLEFIELD, playerB, "Keeper of Kookus");
+        addCard(Zone.BATTLEFIELD, playerB, "Suq'Ata Lancer");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "fused Turn // Burn");
+        addTarget(playerA, "Keeper of Kookus");
+        addTarget(playerA, "Suq'Ata Lancer");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{R}: ");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Turn // Burn", 1);
+        assertGraveyardCount(playerB, "Suq'Ata Lancer", 1);
+        assertPermanentCount(playerB, "Keeper of Kookus", 1);
+        assertPowerToughness(playerB, "Keeper of Kookus", 1, 1);
+    }
 }

@@ -24,7 +24,7 @@ public final class OrahSkyclaveHierophant extends CardImpl {
     public OrahSkyclaveHierophant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOR);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(3);

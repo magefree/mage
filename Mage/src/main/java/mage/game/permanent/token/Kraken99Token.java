@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -18,8 +16,6 @@ public final class Kraken99Token extends TokenImpl {
         subtype.add(SubType.KRAKEN);
         power = new MageInt(9);
         toughness = new MageInt(9);
-
-        availableImageSetCodes = Arrays.asList("BNG", "C14", "DDO", "C21", "A25");
     }
 
     public Kraken99Token(final Kraken99Token token) {

@@ -1,14 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-
-import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class GiantToken extends TokenImpl {
@@ -20,8 +16,6 @@ public final class GiantToken extends TokenImpl {
         color.setRed(true);
         power = new MageInt(4);
         toughness = new MageInt(4);
-
-        availableImageSetCodes = Arrays.asList("TSR");
     }
 
     public GiantToken(final GiantToken token) {

@@ -1,18 +1,17 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.keyword.ProtectionFromEverythingAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.game.Game;
 
 import java.util.UUID;
 
@@ -45,10 +44,10 @@ public final class Hexdrinker extends LevelerCard {
         // Protection from everything
         this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(
-                        3, 7, new AbilitiesImpl(new ProtectionAbility(filter)), 4, 4
+                        3, 7, new AbilitiesImpl<>(new ProtectionAbility(filter)), 4, 4
                 ),
                 new LevelerCardBuilder.LevelAbility(
-                        8, -1, new AbilitiesImpl(new HexdrinkerProtectionAbility()), 6, 6
+                        8, -1, new AbilitiesImpl<>(new ProtectionFromEverythingAbility()), 6, 6
                 )
         ));
 
@@ -62,26 +61,5 @@ public final class Hexdrinker extends LevelerCard {
     @Override
     public Hexdrinker copy() {
         return new Hexdrinker(this);
-    }
-}
-
-class HexdrinkerProtectionAbility extends ProtectionAbility {
-
-    HexdrinkerProtectionAbility() {
-        super(new FilterCard("everything"));
-    }
-
-    private HexdrinkerProtectionAbility(final HexdrinkerProtectionAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public HexdrinkerProtectionAbility copy() {
-        return new HexdrinkerProtectionAbility(this);
-    }
-
-    @Override
-    public boolean canTarget(MageObject source, Game game) {
-        return false;
     }
 }

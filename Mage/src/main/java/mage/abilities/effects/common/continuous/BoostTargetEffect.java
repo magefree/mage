@@ -11,10 +11,8 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 import mage.util.CardUtil;
 
-import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -83,27 +81,8 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (mode == null || mode.getTargets().isEmpty()) {
-            sb.append("it gets ");
-        } else {
-            Target target = mode.getTargets().get(0);
-            if (target.getMaxNumberOfTargets() > 1) {
-                if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                    sb.append("up to ");
-                }
-                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" get ");
-            } else {
-                if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                    sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
-                }
-                if (!target.getTargetName().toLowerCase(Locale.ENGLISH).startsWith("another")) {
-                    sb.append("target ");
-                }
-                sb.append(target.getTargetName()).append(" gets ");
-            }
-        }
-        sb.append(CardUtil.getBoostText(power, toughness, duration));
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " get " : " gets ") +
+                CardUtil.getBoostText(power, toughness, duration);
     }
 }

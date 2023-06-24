@@ -23,7 +23,7 @@ public final class TrostaniDiscordant extends CardImpl {
     public TrostaniDiscordant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRYAD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);

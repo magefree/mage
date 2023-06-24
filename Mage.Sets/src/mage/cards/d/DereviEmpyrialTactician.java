@@ -34,7 +34,7 @@ public final class DereviEmpyrialTactician extends CardImpl {
 
     public DereviEmpyrialTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.WIZARD);
 

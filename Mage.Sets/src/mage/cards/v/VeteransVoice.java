@@ -45,7 +45,7 @@ public final class VeteransVoice extends CardImpl {
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Tap enchanted creature: Target creature other than the creature tapped this way gets +2/+1 until end of turn. Activate this ability only if enchanted creature is untapped.
         this.addAbility(new ActivateIfConditionActivatedAbility(

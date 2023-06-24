@@ -8,7 +8,6 @@ import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.hint.common.MorbidHint;

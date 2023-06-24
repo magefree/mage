@@ -34,7 +34,7 @@ public final class MarrowGnawer extends CardImpl {
 
     public MarrowGnawer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RAT);
         this.subtype.add(SubType.ROGUE);
 

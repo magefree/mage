@@ -54,7 +54,7 @@ public final class BornToDrive extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // As long as enchanted permanent is a creature, it gets +1/+1 for each creature and/or Vehicle you control.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(

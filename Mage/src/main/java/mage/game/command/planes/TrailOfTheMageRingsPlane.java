@@ -43,14 +43,13 @@ public class TrailOfTheMageRingsPlane extends Plane {
 
     public TrailOfTheMageRingsPlane() {
         this.setPlaneType(Planes.PLANE_TRAIL_OF_THE_MAGE_RINGS);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Instant and sorcery spells have rebound
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new TrailOfTheMageRingsReboundEffect());
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, you may search your library for an instant or sorcery card, reveal it, put it into your hand, then shuffle your library
-        Effect chaosEffect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterInstantOrSorceryCard()), true, true);
+        Effect chaosEffect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, new FilterInstantOrSorceryCard()), true);
         Target chaosTarget = null;
 
         List<Effect> chaosEffects = new ArrayList<Effect>();
@@ -63,6 +62,15 @@ public class TrailOfTheMageRingsPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private TrailOfTheMageRingsPlane(final TrailOfTheMageRingsPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public TrailOfTheMageRingsPlane copy() {
+        return new TrailOfTheMageRingsPlane(this);
     }
 }
 

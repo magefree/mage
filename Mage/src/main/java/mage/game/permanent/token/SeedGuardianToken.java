@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -22,8 +20,6 @@ public final class SeedGuardianToken extends TokenImpl {
         subtype.add(SubType.ELEMENTAL);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
-
-        availableImageSetCodes = Arrays.asList("CHK", "OGW");
     }
 
     public SeedGuardianToken(final SeedGuardianToken token) {

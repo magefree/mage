@@ -65,7 +65,8 @@ public class GameEvent implements Serializable {
         //player events
         /* ZONE_CHANGE
          targetId    id of the zone changing object
-         sourceId    sourceId of the ability with the object moving effect (WARNING, can be null if it move of fizzled spells)
+         sourceId    sourceId of the ability with the object moving effect
+                     WARNING: can be null if moved by game rules (e.g. draw in draw step, discard in cleanup step, fizzled spell)
          playerId    controller of the moved object
          amount      not used for this event
          flag        not used for this event
@@ -111,7 +112,12 @@ public class GameEvent implements Serializable {
          flag        true = comabat damage - other damage = false
          */
         DAMAGED_PLAYER,
+
+        /* DAMAGED_PLAYER_BATCH
+         combines all player damaged events in one single event
+         */
         DAMAGED_PLAYER_BATCH,
+
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage, can be null for default events like combat
@@ -200,7 +206,6 @@ public class GameEvent implements Serializable {
          playerId    player that tries to use this ability
          */
         TRIGGERED_ABILITY,
-        ABILITY_TRIGGERED,
         RESOLVING_ABILITY,
         /* COPY_STACKOBJECT
          targetId    id of the spell/ability to copy
@@ -305,8 +310,9 @@ public class GameEvent implements Serializable {
         SHUFFLE_LIBRARY, LIBRARY_SHUFFLED,
         ENCHANT_PLAYER, ENCHANTED_PLAYER,
         CAN_TAKE_MULLIGAN,
-        SCRY, SCRIED,
+        SCRY, SCRIED, SCRY_TO_BOTTOM,
         SURVEIL, SURVEILED,
+        PROLIFERATE, PROLIFERATED,
         FATESEALED,
         FLIP_COIN, COIN_FLIPPED,
         REPLACE_ROLLED_DIE, // for Clam-I-Am workaround only
@@ -341,8 +347,7 @@ public class GameEvent implements Serializable {
          */
         UNTAP, UNTAPPED,
         FLIP, FLIPPED,
-        UNFLIP, UNFLIPPED,
-        TRANSFORM, TRANSFORMING, TRANSFORMED,
+        TRANSFORMING, TRANSFORMED,
         ADAPT,
         BECOMES_MONSTROUS,
         /* BECOMES_EXERTED
@@ -387,9 +392,15 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         OPTION_USED,
+
         DAMAGE_PERMANENT,
         DAMAGED_PERMANENT,
+
+        /*  DAMAGED_PERMANENT_BATCH
+         combine all permanent damage events to single event
+         */
         DAMAGED_PERMANENT_BATCH,
+
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
          targetId    id of the permanent to destroy
@@ -451,7 +462,7 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         GAINED_CONTROL,
-        CREATE_TOKEN, CREATED_TOKEN,
+        CREATE_TOKEN, CREATED_TOKEN, CREATED_TOKENS,
         /* REGENERATE
          targetId    id of the creature to regenerate
          sourceId    sourceId of the effect doing the regeneration
@@ -482,6 +493,7 @@ public class GameEvent implements Serializable {
         ROOM_ENTERED,
         VENTURE, VENTURED,
         DUNGEON_COMPLETED,
+        TEMPTED_BY_RING, RING_BEARER_CHOSEN,
         REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
         FORETOLD, // targetId   id of card foretold
         FORETELL, // targetId   id of card foretell  playerId   id of the controller

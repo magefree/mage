@@ -34,14 +34,14 @@ public final class OnThinIce extends CardImpl {
     public OnThinIce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.AURA);
 
         // Enchant snow land you control
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When On Thin Ice enters the battlefield, exile target creature an opponent controls until On Thin Ice leaves the battlefield.

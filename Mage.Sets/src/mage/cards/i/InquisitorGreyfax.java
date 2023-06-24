@@ -30,7 +30,7 @@ public final class InquisitorGreyfax extends CardImpl {
     public InquisitorGreyfax(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.INQUISITOR);
         this.power = new MageInt(3);
@@ -39,7 +39,7 @@ public final class InquisitorGreyfax extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // Unquestioned Wisdom -- Other creatures you control get +1/+0 and have vigilance.
+        // Unquestionable Wisdom -- Other creatures you control get +1/+0 and have vigilance.
         Ability ability = new SimpleStaticAbility(new BoostControlledEffect(
                 1, 0, Duration.WhileOnBattlefield, true
         ));
@@ -47,7 +47,7 @@ public final class InquisitorGreyfax extends CardImpl {
                 VigilanceAbility.getInstance(), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_CONTROLLED_CREATURE, true
         ).setText("and have vigilance"));
-        this.addAbility(ability.withFlavorWord("Unquestioned Wisdom"));
+        this.addAbility(ability.withFlavorWord("Unquestionable Wisdom"));
 
         // Hunt for Heresy -- {1}, {T}: Tap target creature an opponent controls. Investigate.
         ability = new SimpleActivatedAbility(new TapTargetEffect(), new GenericManaCost(1));

@@ -22,7 +22,7 @@ public final class DovinArchitectOfLaw extends CardImpl {
     public DovinArchitectOfLaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOVIN);
         this.setStartingLoyalty(5);
 

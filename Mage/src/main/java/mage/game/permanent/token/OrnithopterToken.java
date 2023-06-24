@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -21,8 +19,6 @@ public final class OrnithopterToken extends TokenImpl {
         toughness = new MageInt(2);
 
         addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("DMU");
     }
 
     public OrnithopterToken(final OrnithopterToken token) {

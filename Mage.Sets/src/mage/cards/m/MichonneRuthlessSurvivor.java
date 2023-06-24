@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedSourceCondition;
 import mage.abilities.decorator.ConditionalRequirementEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.combat.MustBeBlockedByAllSourceEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
@@ -16,7 +16,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.WalkerToken;
-import mage.game.permanent.token.ZombieToken;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -29,7 +28,7 @@ public final class MichonneRuthlessSurvivor extends CardImpl {
     public MichonneRuthlessSurvivor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -40,7 +39,7 @@ public final class MichonneRuthlessSurvivor extends CardImpl {
 
         // As long as Michonne is equipped, she must be blocked if able.
         this.addAbility(new SimpleStaticAbility(new ConditionalRequirementEffect(
-                new MustBeBlockedByAllSourceEffect(), EquippedSourceCondition.instance,
+                new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield), EquippedSourceCondition.instance,
                 "as long as {this} is equipped, she must be blocked if able"
         )));
 

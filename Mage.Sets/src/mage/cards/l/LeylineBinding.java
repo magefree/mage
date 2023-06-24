@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
@@ -35,6 +34,7 @@ public final class LeylineBinding extends CardImpl {
         // Domain -- This spell costs {1} less to cast for each basic land type among lands you control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(DomainValue.REGULAR)
+                .setText("This spell costs {1} less to cast for each basic land type among lands you control")
         ).setAbilityWord(AbilityWord.DOMAIN).addHint(DomainHint.instance));
 
         // When Leyline Binding enters the battlefield, exile target nonland permanent an opponent controls until Leyline Binding leaves the battlefield.

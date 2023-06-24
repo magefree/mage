@@ -59,7 +59,7 @@ class MongrelPackAbility extends ZoneChangeTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            if (game.getPhase().getType() == TurnPhase.COMBAT) {
+            if (game.getTurnPhaseType() == TurnPhase.COMBAT) {
                 return true;
             }
         }

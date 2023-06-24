@@ -44,7 +44,7 @@ public final class Gigantiform extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has base power and toughness 8/8 and has trample.
         this.addAbility(new GigantiformAbility());
@@ -71,7 +71,7 @@ class GigantiformAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA));
         Ability ability = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
-                new SetBasePowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true)
+                new SetBasePowerToughnessSourceEffect(8, 8, Duration.WhileOnBattlefield, SubLayer.SetPT_7b)
         );
         this.addEffect(new GainAbilityAttachedEffect(ability, AttachmentType.AURA));
     }

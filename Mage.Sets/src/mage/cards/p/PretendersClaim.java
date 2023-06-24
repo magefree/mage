@@ -26,7 +26,7 @@ public final class PretendersClaim extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Whenever enchanted creature becomes blocked, tap all lands defending player controls.
         this.addAbility(new BecomesBlockedAttachedTriggeredAbility(

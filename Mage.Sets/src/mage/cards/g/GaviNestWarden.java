@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DrawSecondCardTriggeredAbility;
+import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.CyclingDiscardCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -30,7 +30,7 @@ public final class GaviNestWarden extends CardImpl {
     public GaviNestWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
@@ -40,7 +40,7 @@ public final class GaviNestWarden extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CyclingZeroCostEffect()), new GaviNestWardenWatcher());
 
         // Whenever you draw your second card each turn, create a 2/2 red and white Dinosaur Cat creature token.
-        this.addAbility(new DrawSecondCardTriggeredAbility(new CreateTokenEffect(new DinosaurCatToken()), false));
+        this.addAbility(new DrawNthCardTriggeredAbility(new CreateTokenEffect(new DinosaurCatToken()), false, 2));
     }
 
     private GaviNestWarden(final GaviNestWarden card) {

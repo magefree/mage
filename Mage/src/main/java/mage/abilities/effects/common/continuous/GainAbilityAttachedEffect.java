@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
+import mage.abilities.LoyaltyAbility;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -140,11 +141,13 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         } else {
             sb.append("gains ");
         }
-        boolean quotes = (ability instanceof SimpleActivatedAbility) || (ability instanceof TriggeredAbility);
+        boolean quotes = ability instanceof SimpleActivatedAbility
+                || ability instanceof TriggeredAbility
+                || ability instanceof LoyaltyAbility;
         if (quotes) {
             sb.append('"');
         }
-        sb.append(ability.getRule("this " + targetObjectName));
+        sb.append(ability.getRule("This " + targetObjectName));
         if (quotes) {
             sb.append('"');
         }
@@ -152,7 +155,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
             sb.append(' ').append(duration);
         }
         if (doesntRemoveItself) {
-            sb.append(" This effect doesn't remove {this}.");
+            sb.append(". This effect doesn't remove {this}.");
         }
         return sb.toString();
     }

@@ -26,7 +26,7 @@ public final class GiselaBladeOfGoldnight extends CardImpl {
 
     public GiselaBladeOfGoldnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(5);

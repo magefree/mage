@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -65,26 +64,28 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
+        StringBuilder sb = new StringBuilder();
         if (amountToPrevent == Integer.MAX_VALUE) {
-            StringBuilder sb = new StringBuilder();
             sb.append("Prevent all");
             if (onlyCombat) {
                 sb.append(" combat");
             }
             sb.append(" damage target ");
-            sb.append(mode.getTargets().get(0).getTargetName()).append(" would deal ").append(duration.toString());
-            return sb.toString();
         } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Prevent the next ").append(amountToPrevent);
+            sb.append("Prevent the next ");
+            sb.append(amountToPrevent);
             if (onlyCombat) {
-                sb.append("combat ");
+                sb.append(" combat");
             }
             sb.append(" damage that ");
-            sb.append(mode.getTargets().get(0).getTargetName()).append(" would deal ").append(duration.toString());
-            return sb.toString();
         }
-
+        sb.append(mode.getTargets().get(0).getTargetName());
+        sb.append(" would deal ");
+        if (duration == Duration.EndOfTurn) {
+            sb.append("this turn");
+        } else {
+            sb.append(duration);
+        }
+        return sb.toString();
     }
-
 }

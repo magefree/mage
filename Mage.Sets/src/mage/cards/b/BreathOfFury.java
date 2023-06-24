@@ -36,7 +36,7 @@ public final class BreathOfFury extends CardImpl {
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When enchanted creature deals combat damage to a player, sacrifice it and attach Breath of Fury to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase.
@@ -97,7 +97,7 @@ class BreathOfFuryEffect extends OneShotEffect {
 
     public BreathOfFuryEffect() {
         super(Outcome.Benefit);
-        staticText = "sacrifice enchanted creature and attach {this} to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase";
+        staticText = "sacrifice it and attach {this} to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase";
     }
 
     public BreathOfFuryEffect(final BreathOfFuryEffect effect) {

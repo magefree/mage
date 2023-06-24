@@ -183,13 +183,12 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void setCanPayLifeCost(boolean canPayLifeCost) {
-
+    public void setPayLifeCostLevel(PayLifeCostLevel playLifeCostLevel) {
     }
 
     @Override
-    public boolean getCanPayLifeCost() {
-        return false;
+    public PayLifeCostLevel getPayLifeCostLevel() {
+        return PayLifeCostLevel.none;
     }
 
     @Override
@@ -273,16 +272,6 @@ public class PlayerStub implements Player {
 
     @Override
     public void setLandsPerTurn(int landsPerTurn) {
-
-    }
-
-    @Override
-    public int getLoyaltyUsePerTurn() {
-        return 0;
-    }
-
-    @Override
-    public void setLoyaltyUsePerTurn(int loyaltyUsePerTurn) {
 
     }
 
@@ -558,11 +547,6 @@ public class PlayerStub implements Player {
 
     @Override
     public boolean cast(SpellAbility ability, Game game, boolean noMana, ApprovingObject approvingObject) {
-        return false;
-    }
-
-    @Override
-    public boolean putInHand(Card card, Game game) {
         return false;
     }
 
@@ -851,7 +835,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         return false;
     }
 
@@ -1221,6 +1205,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean moveCardsToHandWithInfo(Cards cards, Ability source, Game game, boolean withName) {
+        return false;
+    }
+
+    @Override
     public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, Ability source, Game game, Zone fromZone, boolean withName) {
         return false;
     }
@@ -1431,6 +1420,20 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public UUID getRingBearerId() {
+        return null;
+    }
+
+    @Override
+    public Permanent getRingBearer(Game game) {
+        return null;
+    }
+
+    @Override
+    public void chooseRingBearer(Game game) {
+    }
+
+    @Override
     public UserData getControllingPlayersUserData(Game game) {
         return null;
     }
@@ -1440,4 +1443,8 @@ public class PlayerStub implements Player {
         return card.getSpellAbility();
     }
 
+    @Override
+    public ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana) {
+        return card.getSpellAbility();
+    }
 }

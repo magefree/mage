@@ -26,7 +26,7 @@ public final class SaplingOfColfenor extends CardImpl {
 
     public SaplingOfColfenor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B/G}{B/G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TREEFOLK);
         this.subtype.add(SubType.SHAMAN);
 

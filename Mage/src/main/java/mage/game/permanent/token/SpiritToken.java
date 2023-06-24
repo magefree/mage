@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author Loki
  */
@@ -17,37 +15,6 @@ public final class SpiritToken extends TokenImpl {
         subtype.add(SubType.SPIRIT);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("C16", "EMA", "NEO", "VOC", "A25", "2X2");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
-            setTokenType(1);
-        }
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEO")) {
-            setTokenType(1);
-        }
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
-            setTokenType(1);
-        }
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("A25")) {
-            setTokenType(1);
-        }
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("VOC")) {
-            setTokenType(1);
-        }
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("2X2")) {
-            setTokenType(1);
-        }
     }
 
     public SpiritToken(final SpiritToken token) {

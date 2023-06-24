@@ -6,13 +6,13 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.filter.StaticFilters;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -42,7 +42,7 @@ public final class VivienReid extends CardImpl {
     public VivienReid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIVIEN);
         this.setStartingLoyalty(5);
 

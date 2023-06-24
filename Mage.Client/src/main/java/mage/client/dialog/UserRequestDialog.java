@@ -58,16 +58,19 @@ public class UserRequestDialog extends MageDialog {
         this.lblText.setText(text);
         if (userRequestMessage.getButton1Text() != null) {
             this.btn1.setText(userRequestMessage.getButton1Text());
+            this.btn1.setFocusable(false);
         } else {
             this.btn1.setVisible(false);
         }
         if (userRequestMessage.getButton2Text() != null) {
             this.btn2.setText(userRequestMessage.getButton2Text());
+            this.btn2.setFocusable(false);
         } else {
             this.btn2.setVisible(false);
         }
         if (userRequestMessage.getButton3Text() != null) {
             this.btn3.setText(userRequestMessage.getButton3Text());
+            this.btn3.setFocusable(false);
         } else {
             this.btn3.setVisible(false);
         }

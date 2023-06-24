@@ -32,7 +32,7 @@ public final class ThunderTotem extends CardImpl {
         // {1}{W}{W}: Thunder Totem becomes a 2/2 white Spirit artifact creature with flying and first strike until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD, 
-                new BecomesCreatureSourceEffect(new ThunderTotemToken(), "", Duration.EndOfTurn),
+                new BecomesCreatureSourceEffect(new ThunderTotemToken(), CardType.ARTIFACT, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}{W}{W}")));
     }
 

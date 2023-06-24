@@ -10,7 +10,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
+import mage.abilities.effects.common.continuous.AddCreatureTypeAdditionEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -158,7 +158,7 @@ class GraveBetrayalReplacementEffect extends ReplacementEffectImpl {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
             creature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
-            ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
+            ContinuousEffect effect = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, true);
             effect.setTargetPointer(new FixedTarget(creature.getId(), creature.getZoneChangeCounter(game) + 1));
             game.addEffect(effect, source);
             //discard(); why?

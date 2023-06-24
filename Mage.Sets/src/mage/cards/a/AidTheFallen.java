@@ -30,12 +30,11 @@ public final class AidTheFallen extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(
                 StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
-        ).withChooseHint("returns a creature card to your hand"));
+        ));
 
         // • Return target planeswalker card from your graveyard to your hand.
         Mode mode = new Mode(new ReturnFromGraveyardToHandTargetEffect());
-        mode.addTarget(new TargetCardInYourGraveyard(filter)
-                .withChooseHint("returns a planeswalker card to your hand"));
+        mode.addTarget(new TargetCardInYourGraveyard(filter));
         this.getSpellAbility().addMode(mode);
     }
 

@@ -48,7 +48,7 @@ public final class KenkuArtificer extends CardImpl {
                 new CreatureToken(0, 0, "", SubType.HOMUNCULUS)
                         .withType(CardType.ARTIFACT)
                         .withAbility(FlyingAbility.getInstance()),
-                false, false, Duration.EndOfTurn
+                false, false, Duration.Custom
         ).setText("That artifact becomes a 0/0 Homunculus artifact creature with flying"));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ARTIFACT_NON_CREATURE));
         this.addAbility(ability.withFlavorWord("Homunculus Servant"));

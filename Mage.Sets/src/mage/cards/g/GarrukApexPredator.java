@@ -40,7 +40,7 @@ public final class GarrukApexPredator extends CardImpl {
 
     public GarrukApexPredator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{5}{B}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
         this.setStartingLoyalty(5);

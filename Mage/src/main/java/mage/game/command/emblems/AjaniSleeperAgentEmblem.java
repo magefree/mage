@@ -20,10 +20,18 @@ public final class AjaniSleeperAgentEmblem extends Emblem {
 
     // You get an emblem with "Whenever you cast a creature or planeswalker spell, target opponent gets two poison counters."
     public AjaniSleeperAgentEmblem() {
-        this.setName("Emblem Ajani");
-        this.setExpansionSetCodeForImage("DMU");
+        super("Emblem Ajani");
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, new AddPoisonCounterTargetEffect(2), filter, false, false);
         ability.addTarget(new TargetOpponent());
         this.getAbilities().add(ability);
+    }
+
+    private AjaniSleeperAgentEmblem(final AjaniSleeperAgentEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public AjaniSleeperAgentEmblem copy() {
+        return new AjaniSleeperAgentEmblem(this);
     }
 }

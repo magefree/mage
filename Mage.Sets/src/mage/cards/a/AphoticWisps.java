@@ -32,9 +32,7 @@ public final class AphoticWisps extends CardImpl {
         effect.setText("and gains fear until end of turn");
         this.getSpellAbility().addEffect(effect);
         // Draw a card.
-        effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("<br>Draw a card");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private AphoticWisps(final AphoticWisps card) {

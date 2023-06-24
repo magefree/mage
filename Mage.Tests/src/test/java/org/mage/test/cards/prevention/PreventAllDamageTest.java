@@ -101,17 +101,15 @@ public class PreventAllDamageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Abbey Griffin", 1); // (2/2)
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1); // (2/2)
-        
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
         addCard(Zone.HAND, playerB, "Lightning Bolt", 2); // Instant {R}
         // Fire Ambush deals 3 damage to any target.
         addCard(Zone.HAND, playerB, "Fire Ambush", 2); // Sorcery {1}{R}
-        
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Energy Storm");
 
         attack(1, playerA, "Abbey Griffin");
-        
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Abbey Griffin");
 
@@ -122,8 +120,8 @@ public class PreventAllDamageTest extends CardTestPlayerBase {
         attack(2, playerB, "Silvercoat Lion");
 
         setChoice(playerA, false); //  Pay {1}?  Energy Storm - CumulativeUpkeepAbility: Cumulative upkeep {1}
-        
-        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);        
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertGraveyardCount(playerA, "Energy Storm", 1);
@@ -135,5 +133,56 @@ public class PreventAllDamageTest extends CardTestPlayerBase {
 
         assertLife(playerA, 18);
         assertLife(playerB, 18);
+    }
+
+    @Test
+    public void test_ArmoredTransport() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Armored Transport");
+        addCard(Zone.BATTLEFIELD, playerB, "Armored Transport");
+
+        attack(1, playerA, "Armored Transport");
+        block(1, playerB, "Armored Transport", "Armored Transport");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Armored Transport", 1);
+        assertGraveyardCount(playerB, "Armored Transport", 1);
+    }
+
+    @Test
+    public void test_HazeFrog() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Glory Seeker");
+        addCard(Zone.BATTLEFIELD, playerA, "Jwari Scuttler");
+        addCard(Zone.BATTLEFIELD, playerA, "Lagac Lizard");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Daggerback Basilisk");
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 5);
+        addCard(Zone.HAND, playerB, "Haze Frog");
+
+        attack(1, playerA, "Glory Seeker");
+        attack(1, playerA, "Jwari Scuttler");
+        attack(1, playerA, "Lagac Lizard");
+
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, "Haze Frog");
+
+        block(1, playerB, "Daggerback Basilisk", "Lagac Lizard");
+        block(1, playerB, "Haze Frog", "Glory Seeker");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Glory Seeker", 1); // blocked by the one creature not being prevented
+        assertPermanentCount(playerA, "Jwari Scuttler", 1);
+        assertPermanentCount(playerA, "Lagac Lizard", 1);
+
+        assertPermanentCount(playerB, "Daggerback Basilisk", 1);
+        assertPermanentCount(playerB, "Haze Frog", 1);
+
+        assertLife(playerB, 20);
     }
 }

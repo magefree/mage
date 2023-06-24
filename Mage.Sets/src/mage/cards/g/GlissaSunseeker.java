@@ -29,8 +29,8 @@ public final class GlissaSunseeker extends CardImpl {
 
     public GlissaSunseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.ELF);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.ELF, SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

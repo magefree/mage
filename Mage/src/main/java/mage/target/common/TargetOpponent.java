@@ -1,6 +1,7 @@
 package mage.target.common;
 
 import mage.filter.FilterOpponent;
+import mage.filter.FilterPlayer;
 import mage.target.TargetPlayer;
 
 /**
@@ -16,7 +17,11 @@ public class TargetOpponent extends TargetPlayer {
     }
 
     public TargetOpponent(boolean notTarget) {
-        super(1, 1, notTarget, filter);
+        this(1, 1, notTarget);
+    }
+
+    public TargetOpponent(int minNumTargets, int maxNumTargets, boolean notTarget) {
+        super(minNumTargets, maxNumTargets, notTarget, filter);
     }
 
     private TargetOpponent(final TargetOpponent target) {

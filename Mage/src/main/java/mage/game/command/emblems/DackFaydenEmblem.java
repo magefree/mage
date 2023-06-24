@@ -1,42 +1,42 @@
-
 package mage.game.command.emblems;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.targetpointer.FixedTargets;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class DackFaydenEmblem extends Emblem {
 
     public DackFaydenEmblem() {
-        this.setName("Emblem Dack");
+        super("Emblem Dack");
         this.getAbilities().add(new DackFaydenEmblemTriggeredAbility());
+    }
 
-        availableImageSetCodes = Arrays.asList("CNS", "EMA", "MED");
+    private DackFaydenEmblem(final DackFaydenEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public DackFaydenEmblem copy() {
+        return new DackFaydenEmblem(this);
     }
 }
 

@@ -40,7 +40,7 @@ public final class AerialModification extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // As long as enchanted permanent is a Vehicle, it's a creature in addition to its other types.

@@ -43,16 +43,17 @@ public class StackAbilityView extends CardView {
         this.sourceCard.setMageObjectType(mageObjectType);
         this.name = "Ability";
         this.loyalty = "";
+        this.defense = "";
 
         this.cardTypes = ability.getCardType(game);
         this.subTypes = ability.getSubtype(game);
-        this.superTypes = ability.getSuperType();
+        this.superTypes = ability.getSuperType(game);
         this.color = ability.getColor(game);
         this.manaCostLeftStr = String.join("", ability.getManaCostSymbols());
         this.manaCostRightStr = "";
         this.cardTypes = ability.getCardType(game);
         this.subTypes = ability.getSubtype(game);
-        this.superTypes = ability.getSuperType();
+        this.superTypes = ability.getSuperType(game);
         this.color = ability.getColor(game);
         this.power = ability.getPower().toString();
         this.toughness = ability.getToughness().toString();
@@ -154,11 +155,10 @@ public class StackAbilityView extends CardView {
                         stackObjectTarget = (StackObject) mo;
                     }
                     if (stackObjectTarget != null) {
-                        this.rules.add("<span color='green'><i>Targeted ability related to this card: " + game.getCard(stackObjectTarget.getSourceId()).getIdName());
+                        this.rules.add("<span color='green'><i>Target on stack: " + stackObjectTarget.getIdName());
                     }
                 }
             }
-
         }
     }
 

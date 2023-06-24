@@ -33,7 +33,7 @@ public final class BearUmbra extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +2/+2 and has "Whenever this creature attacks, untap all lands you control."
         Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2));

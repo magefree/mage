@@ -1,11 +1,11 @@
 package mage.cards.g;
 
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 

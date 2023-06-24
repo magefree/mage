@@ -1,30 +1,27 @@
-
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.effects.common.continuous.LifeTotalCantChangeControllerEffect;
-import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.keyword.ProtectionFromEverythingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class TeferisProtection extends CardImpl {
@@ -56,18 +53,18 @@ class TeferisProtectionEffect extends OneShotEffect {
 
     /**
      * 25.08.2017 The following rulings focus on the “protection from” keyword
-     *
+     * <p>
      * 25.08.2017 If a player has protection from everything, it means three
      * things: 1) All damage that would be dealt to that player is prevented. 2)
      * Auras can't be attached to that player. 3) That player can't be the
      * target of spells or abilities.
-     *
+     * <p>
      * 25.08.2017 Nothing other than the specified events are prevented or
      * illegal. An effect that doesn't target you could still cause you to
      * discard cards, for example. Creatures can still attack you while you have
      * protection from everything, although combat damage that they would deal
      * to you will be prevented.
-     *
+     * <p>
      * 25.08.2017 Gaining protection from everything causes a spell or ability
      * on the stack to have an illegal target if it targets you. As a spell or
      * ability tries to resolve, if all its targets are illegal, that spell or
@@ -89,7 +86,7 @@ class TeferisProtectionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            game.addEffect(new GainAbilityControllerEffect(new TeferisProtectionAbility(), Duration.UntilYourNextTurn), source);
+            game.addEffect(new GainAbilityControllerEffect(new ProtectionFromEverythingAbility(), Duration.UntilYourNextTurn), source);
             return true;
         }
         return false;
@@ -98,27 +95,6 @@ class TeferisProtectionEffect extends OneShotEffect {
     @Override
     public TeferisProtectionEffect copy() {
         return new TeferisProtectionEffect(this);
-    }
-}
-
-class TeferisProtectionAbility extends ProtectionAbility {
-
-    public TeferisProtectionAbility() {
-        super(new FilterCard("everything"));
-    }
-
-    public TeferisProtectionAbility(final TeferisProtectionAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public TeferisProtectionAbility copy() {
-        return new TeferisProtectionAbility(this);
-    }
-    
-    @Override
-    public boolean canTarget(MageObject source, Game game) {
-        return false;
     }
 }
 

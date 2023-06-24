@@ -1,7 +1,5 @@
 package mage.game.command.emblems;
 
-import java.util.Arrays;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -19,19 +17,29 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.watchers.common.CastFromGraveyardWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class JayaBallardEmblem extends Emblem {
     // You get an emblem with "You may cast instant and sorcery cards from your graveyard. If a card cast this way would be put into your graveyard, exile it instead."
 
     public JayaBallardEmblem() {
-        setName("Emblem Jaya Ballard");
-        availableImageSetCodes = Arrays.asList("DOM", "MED");
+        super("Emblem Jaya Ballard");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new JayaBallardCastFromGraveyardEffect());
         ability.addEffect(new JayaBallardReplacementEffect());
+        ability.addWatcher(new CastFromGraveyardWatcher());
         this.getAbilities().add(ability);
+    }
+
+    private JayaBallardEmblem(final JayaBallardEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public JayaBallardEmblem copy() {
+        return new JayaBallardEmblem(this);
     }
 }
 
@@ -119,7 +127,7 @@ class JayaBallardReplacementEffect extends ReplacementEffectImpl {
                 CastFromGraveyardWatcher watcher = game.getState().getWatcher(CastFromGraveyardWatcher.class);
                 return watcher != null
                         && watcher.spellWasCastFromGraveyard(event.getTargetId(),
-                                game.getState().getZoneChangeCounter(event.getTargetId()));
+                        game.getState().getZoneChangeCounter(event.getTargetId()));
             }
         }
         return false;

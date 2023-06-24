@@ -30,7 +30,6 @@ import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -133,16 +132,16 @@ class MechtitanCoreTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return tokenIds.contains(event.getTargetId())
-                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD;
+        if (tokenIds.contains(event.getTargetId()) && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+            tokenIds.remove(event.getTargetId());
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean isInactive(Game game) {
-        return tokenIds
-                .stream()
-                .map(game::getPermanent)
-                .noneMatch(Objects::nonNull);
+        return tokenIds.isEmpty();
     }
 
     @Override

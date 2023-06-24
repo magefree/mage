@@ -151,7 +151,7 @@ class MoveAuraEffect extends OneShotEffect {
 
     public MoveAuraEffect() {
         super(Outcome.AIDontUseIt);
-        staticText = "Attach target Aura enchanting a permanent to another permanent with the same controller.";
+        staticText = "Attach target Aura attached to a permanent to another permanent with the same controller.";
     }
 
     public MoveAuraEffect(final MoveAuraEffect effect) {

@@ -34,7 +34,7 @@ public final class CurseArtifact extends CardImpl {
         TargetPermanent auraTarget = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of the upkeep of enchanted artifact's controller, Curse Artifact deals 2 damage to that player unless they sacrifice that artifact.
         Cost cost = new SacrificeAttachedCost();

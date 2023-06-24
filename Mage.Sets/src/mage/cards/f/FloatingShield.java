@@ -38,7 +38,7 @@ public final class FloatingShield extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Protect));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // As Floating Shield enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Protect)));

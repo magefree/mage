@@ -84,6 +84,20 @@ class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
     public String getRule() {
         return "Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered";
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), this.creatureType);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+
+        return this.creatureType == ((CavernOfSoulsManaBuilder) obj).creatureType;
+    }
 }
 
 class CavernOfSoulsConditionalMana extends ConditionalMana {

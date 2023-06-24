@@ -72,7 +72,7 @@ class FeastOfWormsEffect extends OneShotEffect {
         if (permanent != null) {
             targetPlayer = game.getPlayer(permanent.getControllerId());
         }
-        if (targetPlayer != null && permanent != null && (permanent.isLegendary())) {
+        if (targetPlayer != null && permanent != null && (permanent.isLegendary(game))) {
             FilterControlledPermanent filter = new FilterControlledLandPermanent("land to sacrifice");
             filter.add(new ControllerIdPredicate(targetPlayer.getId()));
             TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);

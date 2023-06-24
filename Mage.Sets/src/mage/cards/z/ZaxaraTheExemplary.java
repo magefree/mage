@@ -33,7 +33,7 @@ public final class ZaxaraTheExemplary extends CardImpl {
     public ZaxaraTheExemplary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(2);
@@ -83,10 +83,10 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell == null || !spell.getSpellAbility().getManaCostsToPay().containsX()) {
-            game.getState().setValue(this.getSourceId() + ZaxaraTheExemplary.needPrefix, spell);
-            return true;
+            return false;
         }
-        return false;
+        game.getState().setValue(this.getSourceId() + ZaxaraTheExemplary.needPrefix, spell);
+        return true;
     }
 
     @Override

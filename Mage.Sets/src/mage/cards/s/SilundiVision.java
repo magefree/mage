@@ -2,11 +2,11 @@ package mage.cards.s;
 
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
@@ -15,7 +15,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SilundiVision extends ModalDoubleFacesCard {
+public final class SilundiVision extends ModalDoubleFacedCard {
 
     public SilundiVision(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

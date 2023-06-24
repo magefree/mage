@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import mage.abilities.Ability;
@@ -7,7 +6,7 @@ import mage.abilities.costs.common.GainLifeOpponentCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,12 +32,11 @@ public final class RoarOfJukai extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.subtype.add(SubType.ARCANE);
 
-
         // If you control a Forest, each blocked creature gets +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new RoarOfJukaiEffect());
 
         // Splice onto Arcane-An opponent gains 5 life.
-        this.addAbility(new SpliceOntoArcaneAbility(new GainLifeOpponentCost(5)));
+        this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, new GainLifeOpponentCost(5)));
     }
 
     private RoarOfJukai(final RoarOfJukai card) {

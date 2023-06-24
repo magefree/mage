@@ -29,7 +29,7 @@ public final class EightAndAHalfTails extends CardImpl {
 
     public EightAndAHalfTails(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FOX);
         this.subtype.add(SubType.CLERIC);
 

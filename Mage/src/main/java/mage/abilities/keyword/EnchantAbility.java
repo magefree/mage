@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 
 import mage.constants.Zone;
 import mage.abilities.StaticAbility;
+import mage.target.Target;
 
 /**
  *
@@ -13,9 +14,9 @@ public class EnchantAbility extends StaticAbility {
 
     protected String targetName;
 
-    public EnchantAbility(String targetName) {
+    public EnchantAbility(Target target) {
         super(Zone.BATTLEFIELD, null);
-        this.targetName = targetName;
+        this.targetName = target.getTargetName();
     }
 
     public EnchantAbility(final EnchantAbility ability) {

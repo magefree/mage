@@ -78,6 +78,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Chain of Vapor", 73, Rarity.UNCOMMON, mage.cards.c.ChainOfVapor.class));
         cards.add(new SetCardInfo("Charging Slateback", 194, Rarity.COMMON, mage.cards.c.ChargingSlateback.class));
         cards.add(new SetCardInfo("Choking Tethers", 74, Rarity.COMMON, mage.cards.c.ChokingTethers.class));
+        cards.add(new SetCardInfo("Circle of Solace", 13, Rarity.RARE, mage.cards.c.CircleOfSolace.class));
         cards.add(new SetCardInfo("Clone", 75, Rarity.RARE, mage.cards.c.Clone.class));
         cards.add(new SetCardInfo("Commando Raid", 195, Rarity.UNCOMMON, mage.cards.c.CommandoRaid.class));
         cards.add(new SetCardInfo("Complicate", 76, Rarity.UNCOMMON, mage.cards.c.Complicate.class));
@@ -328,6 +329,7 @@ public final class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Taunting Elf", 290, Rarity.COMMON, mage.cards.t.TauntingElf.class));
         cards.add(new SetCardInfo("Tempting Wurm", 291, Rarity.RARE, mage.cards.t.TemptingWurm.class));
         cards.add(new SetCardInfo("Tephraderm", 239, Rarity.RARE, mage.cards.t.Tephraderm.class));
+        cards.add(new SetCardInfo("Thoughtbound Primoc", 240, Rarity.UNCOMMON, mage.cards.t.ThoughtboundPrimoc.class));
         cards.add(new SetCardInfo("Thrashing Mudspawn", 177, Rarity.UNCOMMON, mage.cards.t.ThrashingMudspawn.class));
         cards.add(new SetCardInfo("Threaten", 241, Rarity.UNCOMMON, mage.cards.t.Threaten.class));
         cards.add(new SetCardInfo("Thunder of Hooves", 242, Rarity.UNCOMMON, mage.cards.t.ThunderOfHooves.class));

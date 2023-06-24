@@ -31,7 +31,7 @@ public abstract class ContinuousRuleModifyingEffectImpl extends ContinuousEffect
     // They work technical like a replacement effect that replaces the event completely.
     // But player isn't asked to choose order of effects if multiple are applied to the same event.
     public ContinuousRuleModifyingEffectImpl(Duration duration, Outcome outcome) {
-        this(duration, outcome, true, false);
+        this(duration, outcome, false, true);
     }
 
     /**

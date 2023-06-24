@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class Deck implements Serializable, Copyable<Deck> {
 
-    static final int MAX_CARDS_PER_DECK = 1000;
+    static final int MAX_CARDS_PER_DECK = 2000;
 
     private String name;
     private final Set<Card> cards = new LinkedHashSet<>();
@@ -137,16 +137,31 @@ public class Deck implements Serializable, Copyable<Deck> {
         // Try WORKAROUND for Card DB error: Try to read a card that does exist
         CardInfo cardInfo = CardRepository.instance.findCard("Silvercoat Lion");
         if (cardInfo == null) {
-            // DB seems to have a problem - try to restart the DB
+            // DB seems to have a problem - try to restart the DB (useless in 99%)
             CardRepository.instance.closeDB();
             CardRepository.instance.openDB();
             cardInfo = CardRepository.instance.findCard("Silvercoat Lion");
             Logger.getLogger(Deck.class).error("Tried to restart the DB: " + (cardInfo == null ? "not successful" : "successful"));
         }
-        return new GameException("Card not found - " + deckCardInfo.getCardName() + " - " + deckCardInfo.getSetCode() + "/" + deckCardInfo.getCardNum() + " for deck - " + deckName + '\n'
-                + "Possible reason is, that you use cards in your deck, that are only supported in newer versions of the server.\n"
-                + "So it can help to use the same card from another set, that's already supported from this server.");
 
+        if (cardInfo != null) {
+            // it's ok, just unknown card
+            String cardError = String.format("Card not found - %s - %s - %s in deck %s.",
+                    deckCardInfo.getCardName(),
+                    deckCardInfo.getSetCode(),
+                    deckCardInfo.getCardNum(),
+                    deckName
+            );
+            cardError += "\n\nPossible reasons:";
+            cardError += "\n - deck problem: un-implemented card or outdated set (fix it by open in deck editor);";
+            cardError += "\n - server problem: memory issue (load your deck again or wait a server's restart).";
+            return new GameException(cardError);
+        } else {
+            // critical error, server must be restarted
+            // TODO: add auto-restart task here someday (with a docker support)
+            //  see https://github.com/magefree/mage/issues/8130
+            return new GameException("Problems detected on the server side (memory issue), wait for a restart.");
+        }
     }
 
     private static Card createCard(DeckCardInfo deckCardInfo, boolean mockCards, Map<String, CardInfo> cardInfoCache) {

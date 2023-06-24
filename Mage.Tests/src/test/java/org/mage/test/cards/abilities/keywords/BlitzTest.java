@@ -105,6 +105,54 @@ public class BlitzTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void testTenaciousUnderdogTwice() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
+        addCard(Zone.GRAVEYARD, playerA, underdog);
+        addCard(Zone.HAND, playerA, "Go for the Throat");
+        addCard(Zone.LIBRARY, playerA, "Plains", 5);
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, underdog + withBlitz);
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Go for the Throat", underdog);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, underdog + withBlitz);
+        // There are two delayed triggers, only one will actually sacrifice the underdog.
+        setChoice(playerA, "At the beginning of the");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+
+        execute();
+
+        assertHandCount(playerA, "Plains", 2);
+        assertLife(playerA, 16);
+        assertGraveyardCount(playerA, underdog, 1);
+    }
+
+
+    @Test
+    public void testTenaciousUnderdogSTP() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.GRAVEYARD, playerA, underdog);
+        addCard(Zone.LIBRARY, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains");
+        addCard(Zone.HAND, playerB, "Swords to Plowshares");
+
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, underdog + withBlitz);
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Swords to Plowshares", underdog);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.UPKEEP);
+
+        execute();
+
+        assertHandCount(playerA, "Plains", 0);
+        assertLife(playerA, 20 - 2 + 3);
+        assertGraveyardCount(playerA, underdog, 0);
+    }
+
+    @Test
     public void testTenaciousUnderdogBlitz() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
         addCard(Zone.GRAVEYARD, playerA, underdog);

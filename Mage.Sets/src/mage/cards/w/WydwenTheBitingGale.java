@@ -25,7 +25,7 @@ public final class WydwenTheBitingGale extends CardImpl {
 
     public WydwenTheBitingGale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.WIZARD);
 

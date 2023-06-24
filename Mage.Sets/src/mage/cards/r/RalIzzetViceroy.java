@@ -6,12 +6,12 @@ import mage.abilities.dynamicvalue.common.InstantSorceryExileGraveyardCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.command.emblems.RalIzzetViceroyEmblem;
@@ -31,7 +31,7 @@ public final class RalIzzetViceroy extends CardImpl {
     public RalIzzetViceroy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RAL);
         this.setStartingLoyalty(5);
 

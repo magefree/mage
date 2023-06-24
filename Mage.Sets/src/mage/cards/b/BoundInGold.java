@@ -32,7 +32,7 @@ public final class BoundInGold extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Removal));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // Enchanted permanent can't attack, block, or crew Vehicles,

@@ -28,7 +28,7 @@ public final class SevinneTheChronoclasm extends CardImpl {
     public SevinneTheChronoclasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);

@@ -41,7 +41,7 @@ public final class TangleKelp extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // When Tangle Kelp enters the battlefield, tap enchanted creature.
@@ -101,7 +101,7 @@ class DontUntapIfAttackedLastTurnEnchantedEffect extends ContinuousRuleModifying
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
+        if (game.getTurnStepType() == PhaseStep.UNTAP) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
                 Permanent permanent = game.getPermanent(enchantment.getAttachedTo());

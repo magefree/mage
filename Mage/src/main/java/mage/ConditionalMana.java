@@ -12,9 +12,12 @@ import mage.game.Game;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
+ * If subclassing and adding extra field, you must be sure to override equals() and hashCode to include the new fields.
+ *
  * @author nantuko
  */
 public class ConditionalMana extends Mana implements Serializable, Emptiable {
@@ -188,11 +191,17 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
     }
 
     public String getConditionString() {
-        String condStr = "[";
+        StringBuilder sb = new StringBuilder();
+
+        sb.append('[');
         for (Condition condition : conditions) {
-            condStr += condition.getManaText();
+            sb.append('{');
+            sb.append(condition.getManaText());
+            sb.append('}');
         }
-        return condStr + "]";
+        sb.append(']');
+
+        return sb.toString();
     }
 
     public void add(ManaType manaType, int amount) {
@@ -219,5 +228,43 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
                 generic += amount;
                 break;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), conditions, staticText, scope, manaProducerId, manaProducerOriginalId);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // Check Mana.equals(). If that's isn't equal no need to check further.
+        if (!super.equals(o)) {
+            return false;
+        }
+        ConditionalMana that = (ConditionalMana) o;
+
+        if (!Objects.equals(this.staticText, that.staticText)) {
+            return false;
+        }
+        if (!Objects.equals(this.manaProducerId, that.manaProducerId)) {
+            return false;
+        }
+        if (!Objects.equals(this.manaProducerOriginalId, that.manaProducerOriginalId)) {
+            return false;
+        }
+        if (!Objects.equals(this.scope, that.scope)) {
+            return false;
+        }
+        if (this.conditions == null || that.conditions == null
+                || this.conditions.size() != that.conditions.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.conditions.size(); i++) {
+            if (!(Objects.equals(this.conditions.get(i), that.conditions.get(i)))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

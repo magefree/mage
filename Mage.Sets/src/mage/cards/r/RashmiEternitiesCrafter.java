@@ -31,7 +31,7 @@ public final class RashmiEternitiesCrafter extends CardImpl {
 
     public RashmiEternitiesCrafter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);

@@ -67,7 +67,7 @@ class EntrailsFeasterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && source.getSourceId() != null) {
-            Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
+            Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
             TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
             target.setNotTarget(true);
             if (target.canChoose(controller.getId(), source, game) && controller.chooseUse(outcome, "Exile a creature card from a graveyard?", source, game)) {

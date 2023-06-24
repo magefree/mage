@@ -35,7 +35,7 @@ public final class YannikScavengingSentinel extends CardImpl {
     public YannikScavengingSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HYENA);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);

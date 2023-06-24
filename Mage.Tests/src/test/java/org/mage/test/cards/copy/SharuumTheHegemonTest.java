@@ -55,25 +55,25 @@ public class SharuumTheHegemonTest extends CardTestPlayerBase {
         setChoice(playerA, true);
         setChoice(playerA, "Sharuum the Hegemon"); // what creature to clone
 
-        addTarget(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
+        setChoice(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
         setChoice(playerA, "Whenever {this} or another creature dies"); // blood first
         addTarget(playerA, playerB); // damage by blood
         setChoice(playerA, true); // return
         // addTarget(playerA, "Sharuum the Hegemon"); // return real sharuum (Autochosen, only target)
 
-        addTarget(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
+        setChoice(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
         setChoice(playerA, "Whenever {this} or another creature dies"); // blood first
         addTarget(playerA, playerB); // damage by blood
         setChoice(playerA, true); // return
         // addTarget(playerA, "Sharuum the Hegemon"); // return real sharuum (Autochosen, only target
 
-        addTarget(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
+        setChoice(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
         setChoice(playerA, "Whenever {this} or another creature dies"); // blood first
         addTarget(playerA, playerB); // damage by blood
         setChoice(playerA, true); // return
         // addTarget(playerA, "Sharuum the Hegemon"); // return real sharuum (Autochosen, only target)
 
-        addTarget(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
+        setChoice(playerA, "Sharuum the Hegemon[only copy]"); // which legend to keep
         setChoice(playerA, "Whenever {this} or another creature dies"); // blood first
         addTarget(playerA, playerB); // damage by blood
         setChoice(playerA, false); // Don't use it anymore

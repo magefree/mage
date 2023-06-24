@@ -46,6 +46,11 @@ public class SunburstAbility extends EntersBattlefieldAbility {
         return isCreature ? ruleCreature : ruleNonCreature;
     }
 
+    @Override
+    public boolean caresAboutManaColor() {
+        return true;
+    }
+
 }
 
 class SunburstEffect extends OneShotEffect {

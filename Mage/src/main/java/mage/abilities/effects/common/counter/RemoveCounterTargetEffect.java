@@ -8,13 +8,12 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.Outcome;
 import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -41,7 +40,7 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent p = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (p != null) {
             Counter toRemove = (counter == null ? selectCounterType(game, source, p) : counter);
             if (toRemove != null && p.getCounters(game).getCount(toRemove.getName()) >= toRemove.getCount()) {
@@ -52,7 +51,7 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
                 }
             }
         } else {
-            Card c = game.getCard(targetPointer.getFirst(game, source));
+            Card c = game.getCard(getTargetPointer().getFirst(game, source));
             if (c != null && counter != null && c.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
                 c.removeCounters(counter.getName(), counter.getCount(), source, game);
                 if (!game.isSimulation()) {
@@ -71,7 +70,7 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
             String counterName = null;
             if (permanent.getCounters(game).size() > 1) {
                 Choice choice = new ChoiceImpl(true);
-                Set<String> choices = new HashSet<>();
+                Set<String> choices = new LinkedHashSet<>();
                 for (Counter counterOnPermanent : permanent.getCounters(game).values()) {
                     if (permanent.getCounters(game).getCount(counterOnPermanent.getName()) > 0) {
                         choices.add(counterOnPermanent.getName());
@@ -106,15 +105,9 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
-        String text = "remove ";
-        if (counter == null) {
-            text += "a counter";
-        } else {
-            text += CardUtil.numberToText(counter.getCount(), CounterType.findArticle(counter.getName())) + ' ' + counter.getName();
-            text += counter.getCount() > 1 ? " counters" : " counter";
-        }
-        text += " from target " + (mode.getTargets().isEmpty() ? " object" : mode.getTargets().get(0).getTargetName());
-        return text;
+        return "remove "
+                + (counter == null ? "a counter" : counter.getDescription())
+                + " from "
+                + getTargetPointer().describeTargets(mode.getTargets(), "that creature");
     }
 }

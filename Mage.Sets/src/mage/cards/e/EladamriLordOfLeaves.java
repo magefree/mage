@@ -29,7 +29,7 @@ public final class EladamriLordOfLeaves extends CardImpl {
 
     public EladamriLordOfLeaves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
 

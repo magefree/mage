@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CopyStackAbilityEffect;
+import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -55,7 +55,7 @@ public final class BattlemagesBracers extends CardImpl {
 class BattlemagesBracersTriggeredAbility extends TriggeredAbilityImpl {
 
     BattlemagesBracersTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackAbilityEffect(), new GenericManaCost(1)));
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackObjectEffect(), new GenericManaCost(1)));
     }
 
     private BattlemagesBracersTriggeredAbility(final BattlemagesBracersTriggeredAbility ability) {
@@ -82,7 +82,7 @@ class BattlemagesBracersTriggeredAbility extends TriggeredAbilityImpl {
         if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
             return false;
         }
-        getEffects().setValue("stackAbility", stackAbility);
+        getEffects().setValue("stackObject", stackAbility);
         return true;
     }
 

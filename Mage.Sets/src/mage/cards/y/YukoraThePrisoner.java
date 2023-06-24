@@ -32,7 +32,7 @@ public final class YukoraThePrisoner extends CardImpl {
 
     public YukoraThePrisoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.SPIRIT);
 

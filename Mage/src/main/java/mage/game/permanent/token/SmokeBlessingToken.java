@@ -13,8 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -31,14 +29,12 @@ public final class SmokeBlessingToken extends TokenImpl {
         subtype.add(SubType.AURA);
 
         TargetPermanent auraTarget = new TargetPermanent();
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         ability.addTarget(auraTarget);
         ability.addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(ability);
 
         this.addAbility(new DiesAttachedTriggeredAbility(new SmokeBlessingTokenEffect(), "enchanted creature"));
-
-        availableImageSetCodes = Arrays.asList("NEC");
     }
 
     public SmokeBlessingToken(final SmokeBlessingToken token) {

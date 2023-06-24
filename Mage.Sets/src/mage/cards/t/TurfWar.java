@@ -114,6 +114,7 @@ class TurfWarTriggeredAbility extends TriggeredAbilityImpl {
 
     public TurfWarTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TurfWarControlEffect());
+        setTriggerPhrase("Whenever a creature deals combat damage to a player, if that player controls one or more lands with contested counters on them, ");
     }
 
     private TurfWarTriggeredAbility(final TurfWarTriggeredAbility ability) {
@@ -154,11 +155,6 @@ class TurfWarTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public String getTriggerPhrase() {
-        return "Whenever a creature deals combat damage to a player, if that player controls one or more lands with contested counters on them, ";
     }
 }
 

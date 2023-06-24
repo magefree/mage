@@ -20,7 +20,7 @@ public final class Blur extends CardImpl {
 
         // Exile target creature you control, then return that card to the battlefield under its owner's control.
         this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
+        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).concatBy(", then"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Draw a card.

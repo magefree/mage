@@ -13,20 +13,27 @@ import mage.players.Player;
  */
 public class DamageWithPowerFromOneToAnotherTargetEffect extends OneShotEffect {
 
-    String firstTargetName;
+    private final String firstTargetName;
+    private final int multiplier;
 
     public DamageWithPowerFromOneToAnotherTargetEffect() {
-        this((String) null);
+        this("");
     }
 
     public DamageWithPowerFromOneToAnotherTargetEffect(String firstTargetName) {
+        this(firstTargetName, 1);
+    }
+
+    public DamageWithPowerFromOneToAnotherTargetEffect(String firstTargetName, int multiplier) {
         super(Outcome.Damage);
         this.firstTargetName = firstTargetName;
+        this.multiplier = multiplier;
     }
 
     public DamageWithPowerFromOneToAnotherTargetEffect(final DamageWithPowerFromOneToAnotherTargetEffect effect) {
         super(effect);
         this.firstTargetName = effect.firstTargetName;
+        this.multiplier = effect.multiplier;
     }
 
     @Override
@@ -64,10 +71,8 @@ public class DamageWithPowerFromOneToAnotherTargetEffect extends OneShotEffect {
             throw new IllegalStateException("It must have two targets, but found " + mode.getTargets().size());
         }
 
-        String targetName = mode.getTargets().get(1).getTargetName();
-        // Target creature you control deals damage equal to its power to target creature you don't control
-        String sb = (this.firstTargetName != null ? this.firstTargetName : "Target " + mode.getTargets().get(0).getTargetName()) +
-                " deals damage equal to its power to " + (targetName.contains("other") ? "" : "target ") + targetName;
-        return sb;
+        return (firstTargetName.isEmpty() ? mode.getTargets().get(0).getDescription() : firstTargetName) +
+                " deals damage equal to" + (multiplier == 2 ? " twice" : "") +
+                " its power to " + mode.getTargets().get(1).getDescription();
     }
 }

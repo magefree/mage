@@ -14,7 +14,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
@@ -30,7 +30,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class ReidaneGodOfTheWorthy extends ModalDoubleFacesCard {
+public final class ReidaneGodOfTheWorthy extends ModalDoubleFacedCard {
 
     private static final FilterPermanent filter = new FilterLandPermanent("snow lands your opponents control");
 
@@ -40,15 +40,16 @@ public final class ReidaneGodOfTheWorthy extends ModalDoubleFacesCard {
     }
 
     public ReidaneGodOfTheWorthy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{W}",
-                "Valkmira, Protector's Shield", new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{3}{W}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{W}",
+                "Valkmira, Protector's Shield",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{3}{W}"
         );
 
         // 1.
         // Reidane, God of the Worthy
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(2), new MageInt(3));
 
         // Flying
@@ -66,8 +67,6 @@ public final class ReidaneGodOfTheWorthy extends ModalDoubleFacesCard {
         // 2.
         // Valkmira, Protector's Shield
         // Legendary Artifact
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-
         // If a source an opponent controls would deal damage to you or a permanent you control, prevent 1 of that damage.
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new ValkmiraProtectorsShieldPreventionEffect()));
 

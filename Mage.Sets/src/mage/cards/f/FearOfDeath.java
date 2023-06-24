@@ -40,7 +40,7 @@ public final class FearOfDeath extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // When Fear of Death enters the battlefield, mill two cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(2)));

@@ -48,6 +48,7 @@ class KamisFlareEffect extends OneShotEffect {
 
     static {
         filter.add(ModifiedPredicate.instance);
+        filter.add(CardType.CREATURE.getPredicate());
     }
 
     private static final Hint hint = new ConditionHint(

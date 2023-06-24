@@ -7,7 +7,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -35,7 +34,7 @@ public final class OathOfNissa extends CardImpl {
 
     public OathOfNissa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // When Oath of Nissa enters the battlefield, look at the top three cards of your library.
         // You may reveal a creature, land, or planeswalker card from among them and put it into your hand.

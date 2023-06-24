@@ -30,7 +30,7 @@ public final class Thermopod extends CardImpl {
 
     public Thermopod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SLUG);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

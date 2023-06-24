@@ -5,8 +5,6 @@ import mage.abilities.common.CrewIncreasedPowerAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -19,8 +17,6 @@ public final class PilotToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(new CrewIncreasedPowerAbility("this creature"));
-
-        availableImageSetCodes = Arrays.asList("NEO");
     }
 
     public PilotToken(final PilotToken token) {

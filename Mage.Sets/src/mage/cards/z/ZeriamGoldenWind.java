@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.permanent.token.GoblinRogueToken;
 import mage.game.permanent.token.GriffinToken;
 
 /**
@@ -29,7 +28,7 @@ public final class ZeriamGoldenWind extends CardImpl {
     public ZeriamGoldenWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GRIFFIN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

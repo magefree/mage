@@ -42,7 +42,7 @@ public final class LinvalaShieldOfSeaGate extends CardImpl {
     public LinvalaShieldOfSeaGate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);

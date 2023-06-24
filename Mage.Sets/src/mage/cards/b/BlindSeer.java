@@ -21,7 +21,7 @@ public final class BlindSeer extends CardImpl {
 
     public BlindSeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

@@ -24,7 +24,7 @@ public final class ZilorthaStrengthIncarnate extends CardImpl {
 
     public ZilorthaStrengthIncarnate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(3);

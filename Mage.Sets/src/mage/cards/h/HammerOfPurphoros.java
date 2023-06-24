@@ -30,7 +30,7 @@ public final class HammerOfPurphoros extends CardImpl {
 
     public HammerOfPurphoros(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{1}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,

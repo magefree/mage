@@ -35,7 +35,7 @@ public final class LilianaDeathWielder extends CardImpl {
 
     public LilianaDeathWielder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{5}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
 
         this.setStartingLoyalty(5);

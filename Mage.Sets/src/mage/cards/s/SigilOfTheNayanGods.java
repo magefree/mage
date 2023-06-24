@@ -36,7 +36,7 @@ public final class SigilOfTheNayanGods extends CardImpl {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+1 for each creature you control.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(filter, 1);

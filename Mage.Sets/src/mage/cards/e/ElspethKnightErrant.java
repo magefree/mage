@@ -29,14 +29,13 @@ public final class ElspethKnightErrant extends CardImpl {
 
     public ElspethKnightErrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELSPETH);
 
         this.setStartingLoyalty(4);
 
         // +1: Create a 1/1 white Soldier creature token.
         Token token = new SoldierToken();
-        token.setOriginalExpansionSetCode("ALA"); // to get the right image
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(token), 1));
 
         // +1: Target creature gets +3/+3 and gains flying until end of turn.

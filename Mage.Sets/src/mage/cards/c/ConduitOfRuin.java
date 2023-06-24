@@ -52,7 +52,7 @@ public final class ConduitOfRuin extends CardImpl {
 
         // When you cast Conduit of Ruin, you may search your library for a colorless creature card with converted mana cost 7 or greater, then shuffle your library and put that card on top of it.
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        this.addAbility(new CastSourceTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true, true), true));
+        this.addAbility(new CastSourceTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true), true));
 
         // The first creature spell you cast each turn costs {2} less to cast.
         Effect effect = new SpellsCostReductionControllerEffect(filterCost, 2);

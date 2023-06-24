@@ -46,7 +46,7 @@ public final class BaruWurmspeaker extends CardImpl {
     public BaruWurmspeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(3);
@@ -58,7 +58,7 @@ public final class BaruWurmspeaker extends CardImpl {
         ));
         ability.addEffect(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter2
-        ));
+        ).setText("and have trample"));
         this.addAbility(ability);
 
         // {7}{G}, {T}: Create a 4/4 green Wurm creature token. This ability costs {X} less to activate, whre X is the greatest power among Wurms you control.

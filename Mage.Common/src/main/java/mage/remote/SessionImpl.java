@@ -603,6 +603,14 @@ public class SessionImpl implements Session {
     }
 
     @Override
+    public Boolean isServerReady() {
+        // Is server works fine, possible use cases:
+        // - client connected by network, but can't process register/login process due errors like wrong username
+        // - client connected to broken server that has a wrong config or broken/miss libraries
+        return isConnected() && serverState != null && serverState.getGameTypes().size() > 0;
+    }
+
+    @Override
     public PlayerType[] getPlayerTypes() {
         return serverState.getPlayerTypes();
     }
@@ -986,6 +994,20 @@ public class SessionImpl implements Session {
             handleThrowable(t);
         }
         return null;
+    }
+    
+    @Override
+    public boolean setBoosterLoaded(UUID draftId) {
+        try {
+            if (isConnected()) {
+                server.setBoosterLoaded(draftId, sessionId);
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
     }
 
     @Override

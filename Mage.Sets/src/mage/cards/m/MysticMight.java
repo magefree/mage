@@ -38,7 +38,7 @@ public final class MysticMight extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(new FilterControlledLandPermanent());
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Cumulative upkeep {1}{U}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}{U}")));

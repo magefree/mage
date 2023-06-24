@@ -12,7 +12,7 @@ import mage.MageInt;
 public final class SubterraneanTremorsLizardToken extends TokenImpl {
 
     public SubterraneanTremorsLizardToken() {
-        super("Lizard Token", "an 8/8 red Lizard creature token");
+        super("Lizard Token", "8/8 red Lizard creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.LIZARD);

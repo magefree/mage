@@ -1,19 +1,16 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class HammerOfPurphorosGolemToken extends TokenImpl {
 
     public HammerOfPurphorosGolemToken() {
         super("Golem Token", "3/3 colorless Golem enchantment artifact creature token");
-        setOriginalExpansionSetCode("THS");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);

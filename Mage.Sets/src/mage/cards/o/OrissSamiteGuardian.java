@@ -32,7 +32,7 @@ public final class OrissSamiteGuardian extends CardImpl {
 
     public OrissSamiteGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
 

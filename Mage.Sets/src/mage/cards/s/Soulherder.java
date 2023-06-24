@@ -50,7 +50,7 @@ public final class Soulherder extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new ExileTargetForSourceEffect(), TargetController.YOU, true
         );
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).concatBy(", then"));
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
     }

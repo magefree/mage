@@ -42,7 +42,7 @@ public final class LiesaForgottenArchangel extends CardImpl {
     public LiesaForgottenArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

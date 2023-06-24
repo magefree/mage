@@ -3,11 +3,11 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
@@ -33,7 +33,7 @@ public final class HaraldKingOfSkemfar extends CardImpl {
     public HaraldKingOfSkemfar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);

@@ -34,7 +34,7 @@ public final class Narcolepsy extends CardImpl {
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        EnchantAbility ability = new EnchantAbility(auraTarget.getTargetName());
+        EnchantAbility ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
         // At the beginning of each upkeep, if enchanted creature is untapped, tap it.

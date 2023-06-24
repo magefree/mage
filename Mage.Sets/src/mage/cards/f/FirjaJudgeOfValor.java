@@ -3,12 +3,12 @@ package mage.cards.f;
 import mage.MageInt;
 import mage.abilities.common.CastSecondSpellTriggeredAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 
@@ -22,7 +22,7 @@ public final class FirjaJudgeOfValor extends CardImpl {
     public FirjaJudgeOfValor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);

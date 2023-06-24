@@ -80,7 +80,7 @@ class GhastlyConscriptionEffect extends OneShotEffect {
             for (Card card : cardsToManifest) {
                 ManaCosts manaCosts = null;
                 if (card.isCreature(game)) {
-                    manaCosts = card.getSpellAbility().getManaCosts();
+                    manaCosts = card.getSpellAbility() != null ? card.getSpellAbility().getManaCosts() : null;
                     if (manaCosts == null) {
                         manaCosts = new ManaCostsImpl<>("{0}");
                     }

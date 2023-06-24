@@ -37,7 +37,7 @@ public final class JiwariTheEarthAflame extends CardImpl {
 
     public JiwariTheEarthAflame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(3);

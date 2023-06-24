@@ -69,7 +69,18 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
 
     @Override
     public ManaOptions getOptions() {
-        return options;
+        return getOptions(true);
+    }
+
+    @Override
+    public ManaOptions getOptions(boolean canPayLifeCost) {
+        if (!canPayLifeCost && this.isPhyrexian()) {
+            ManaOptions optionsFiltered = new ManaOptions();
+            optionsFiltered.add(this.cost);
+            return optionsFiltered;
+        } else {
+            return options;
+        }
     }
 
     @Override

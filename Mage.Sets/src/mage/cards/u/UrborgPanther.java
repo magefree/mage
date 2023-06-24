@@ -65,7 +65,7 @@ public class UrborgPanther extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(
                         1, 1, filterCard
-                )),
+                ), false, true),
                 new CompositeCost(new CompositeCost(
                         new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter1)),
                         new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter2)),

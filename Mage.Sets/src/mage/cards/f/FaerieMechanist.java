@@ -4,11 +4,11 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
@@ -21,10 +21,9 @@ public final class FaerieMechanist extends CardImpl {
     public FaerieMechanist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{U}");
 
-        this.subtype.add(SubType.FAERIE);
-        this.subtype.add(SubType.ARTIFICER);
-    this.power = new MageInt(2);
-    this.toughness = new MageInt(2);
+        this.subtype.add(SubType.FAERIE, SubType.ARTIFICER);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Faerie Mechanist enters the battlefield, look at the top three cards of your library. 

@@ -55,6 +55,24 @@ public class SpellAbility extends ActivatedAbilityImpl {
         this.cardName = ability.cardName;
     }
 
+    @Override
+    public boolean canChooseTarget(Game game, UUID playerId) {
+        if (SpellAbilityType.SPLIT_FUSED.equals(getSpellAbilityType())) {
+            Card card = game.getCard(getSourceId());
+            if (card == null) {
+                return false;
+            }
+            SpellAbility left = ((SplitCard) card).getLeftHalfCard().getSpellAbility();
+            SpellAbility right = ((SplitCard) card).getRightHalfCard().getSpellAbility();
+            return canChooseTargetAbility(left, left.getModes(), game, playerId) && canChooseTargetAbility(right, right.getModes(), game, playerId);
+        }
+        return super.canChooseTarget(game, playerId);
+    }
+
+    public boolean canSpliceOnto(Ability abilityToModify, Game game) {
+        return canChooseTargetAbility(abilityToModify, getModes(), game, abilityToModify.getControllerId());
+    }
+
     /*
      * 7/5/19 - jgray1206 - Moved null != game.getContinuesEffects()... into this method instead of having it in
      *                      canActivate. There are abilities that directly use this method that should know when spells

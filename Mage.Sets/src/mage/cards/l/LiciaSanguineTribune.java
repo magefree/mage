@@ -32,7 +32,7 @@ public final class LiciaSanguineTribune extends CardImpl {
     public LiciaSanguineTribune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{W}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(4);

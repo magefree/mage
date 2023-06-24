@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 public final class GiantWizardToken extends TokenImpl {
 
     public GiantWizardToken() {
@@ -16,8 +14,6 @@ public final class GiantWizardToken extends TokenImpl {
         subtype.add(SubType.WIZARD);
         power = new MageInt(4);
         toughness = new MageInt(4);
-
-        availableImageSetCodes = Arrays.asList("KHM");
     }
 
     public GiantWizardToken(final GiantWizardToken token) {

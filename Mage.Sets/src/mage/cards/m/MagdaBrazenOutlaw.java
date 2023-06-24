@@ -40,7 +40,7 @@ public final class MagdaBrazenOutlaw extends CardImpl {
     public MagdaBrazenOutlaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DWARF);
         this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(2);
@@ -58,7 +58,7 @@ public final class MagdaBrazenOutlaw extends CardImpl {
 
         // Sacrifice five Treasures: Search your library for an artifact or Dragon card, put that card onto the battlefield, then shuffle your library.
         this.addAbility(new SimpleActivatedAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter3)),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter3), false, true),
                 new SacrificeTargetCost(new TargetControlledPermanent(5, filter4))
         ));
     }

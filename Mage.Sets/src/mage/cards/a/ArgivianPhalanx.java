@@ -30,7 +30,9 @@ public final class ArgivianPhalanx extends CardImpl {
 
         // This spell costs {1} less to cast for each creature you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(CreaturesYouControlCount.instance)
+                Zone.ALL,
+                new SpellCostReductionSourceEffect(CreaturesYouControlCount.instance)
+                        .setText("This spell costs {1} less to cast for each creature you control.")
         ).addHint(CreaturesYouControlHint.instance));
 
         // Vigilance
