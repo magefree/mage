@@ -31,9 +31,11 @@ jobs:
             const mustache = require('mustache')
             const fs = require('fs')
             
-            console.log(${{ steps.setimplissues.outputs.issues }})
-            
-            const issues = JSON.parse(${{ steps.setimplissues.outputs.issues }})
+            const issues = github.rest.issues({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'tracking set'
+            });
             console.log("Found list of existing issues:", issues)
             
             issues.forEach(issue => {
