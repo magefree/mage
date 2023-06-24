@@ -31,7 +31,7 @@ jobs:
             const mustache = require('mustache')
             const fs = require('fs')
             
-            const issues = github.rest.issues({
+            const issues = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
               labels: 'tracking set'
