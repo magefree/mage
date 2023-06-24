@@ -76,14 +76,14 @@ jobs:
                 const cardPath = path.join('Mage.Sets', 'src', 'mage', 'cards', className.substring(0, 1), `${className.charAt(0).toUpperCase()+className.slice(1)}.java`);
                 if (fs.existsSync(cardPath)) {
                   implemented.push({
-                    pr: false, //TODO: check to see if there is a PR for this card
+                    pr: true, //TODO: check to see if there is a PR for this card
                     name: cardData[0],
                     cleanName: cleanCardName,
                     scryfall: `https://scryfall.com/search?q=!"${cleanCardName}"+e:${set[1]}`
                   });
                 } else {
                   unimplemented.push({
-                    pr: true, //TODO: check to see if there is a PR for this card
+                    pr: false, //TODO: check to see if there is a PR for this card
                     name: cardData[0],
                     cleanName: cleanCardName,
                     scryfall: `https://scryfall.com/search?q=!"${cleanCardName}"+e:${set[1]}`
