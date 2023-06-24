@@ -45,7 +45,7 @@ jobs:
             const cardsData = fs.readFileSync(path.join('Utils', 'mtg-cards-data.txt'), 'utf8')
               .split('\n')
               .map(line => line.split('|'));
-            const cardIssueTemplate = fs.readFileSync(path.join('.github', 'templates', 'set-tracking-issue.md');
+            const cardIssueTemplate = fs.readFileSync(path.join('.github', 'templates', 'set-tracking-issue.md'));
             
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
