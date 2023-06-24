@@ -82,13 +82,19 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Sol Ring"); // to cast Pestilent Spirit
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Hoarding Broodlord"); // tap Swamp, lose 8 life, find Shock
+        addTarget(playerA, "Shock");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Covetous Urge", playerB); // tap four Islands, find Pestilent Spirit
+        setChoice(playerA, "Pestilent Spirit");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}{C}", 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pestilent Spirit"); // tap Sol Ring and Hoarding Broodlord
+        addTarget(playerA, "Hoarding Broodlord"); // convoke to pay B
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "Firesong and Sunspeaker"); // convoke, lethal, gain 2 life
+        addTarget(playerA, "Firesong and Sunspeaker"); // convoke to pay R
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -112,9 +118,11 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2); // to cast Searing Blood
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Covetous Urge", playerB); // tap four Islands, find Searing Blood
+        setChoice(playerA, "Searing Blood");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Searing Blood", "Walking Corpse");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
