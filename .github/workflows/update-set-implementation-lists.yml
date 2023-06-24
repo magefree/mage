@@ -96,7 +96,7 @@ jobs:
                   hasImplementedCards: implemented.length > 0,
                   unimplementedCards: unimplemented,
                   implementedCards: implemented,
-                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${String.join('"OR!"', cleanCards)}"+e:${set[1]}`
+                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${cleanCards.join('"OR!"')}"+e:${set[1]}`
                 });
                 issuesToUpdate.push(foundIssue);
               } else {
@@ -107,7 +107,7 @@ jobs:
                     hasImplementedCards: implemented.length > 0,
                     unimplementedCards: unimplemented,
                     implementedCards: implemented,
-                    unimplementedScryfallLink: `https://scryfall.com/search?q=!"${String.join('"OR!"', cleanCards)}"+e:${set[1]}`
+                    unimplementedScryfallLink: `https://scryfall.com/search?q=!"${cleanCards.join('"OR!"')}"+e:${set[1]}`
                   })
                 });
               }
