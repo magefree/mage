@@ -26,7 +26,9 @@ jobs:
             const fs = require('fs')
             
             // Disable mustache html-escape
-            mustache.escape = identity;
+            mustache.escape = function(str) {
+              return str;
+            };
             
             // https://stackoverflow.com/a/2970667
             function toCamelCase(str) {
