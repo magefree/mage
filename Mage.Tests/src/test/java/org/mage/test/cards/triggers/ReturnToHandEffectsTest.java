@@ -92,6 +92,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wind Zendikon", "Mountain");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Disfigure", "Mountain");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         // ZCC is 2 for perm, 3 for card
@@ -115,6 +116,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wind Zendikon", "Tangled Vale");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Disfigure", "Tangled Vale");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         // ZCC is 2 for perm, 1 for card (?!)
@@ -138,6 +140,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wind Zendikon", "Riverglide Pathway");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Disfigure", "Riverglide Pathway");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         // ZCC is 2 for perm, 1 for card (?!)
@@ -161,6 +164,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wind Zendikon", "Lavaglide Pathway");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Disfigure", "Lavaglide Pathway");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         // ZCC is 2 for perm, 1 for card (?!)
@@ -184,6 +188,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Demonic Vigor", "Dryad Sophisticate");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Disfigure", "Dryad Sophisticate");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         // ZCC is 3 for perm, 4 for card
@@ -207,6 +212,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Demonic Vigor", "Tangled Florahedron");
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Disfigure", "Tangled Florahedron");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         // ZCC is 3 for perm, 2 for card (?!)
@@ -236,6 +242,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Disfigure", "Dryad Sophisticate");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         // ZCC is 7 for perm, 8 for card
@@ -265,6 +272,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.POSTCOMBAT_MAIN);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Disfigure", "Tangled Florahedron");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         // ZCC is 7 for perm, 4 for card (?!)
@@ -295,6 +303,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.BEGIN_COMBAT, 1);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Coat with Venom", "Carrion Feeder");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         // ZCC is 3 for perm, 6 for card, so should not return
