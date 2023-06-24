@@ -32,12 +32,20 @@ jobs:
             const path = require('path')
             const fs = require('fs')
             
+            // https://stackoverflow.com/a/2970667
+            function toCamelCase(str) {
+              return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+                return index === 0 ? word.toLowerCase() : word.toUpperCase();
+              }).replace(/\s+/g, '')
+            }
+            
             const setsData = fs.readFileSync(path.join('Utils', 'mtg-sets-data.txt'), 'utf8')
               .split('\n')
               .map(line => line.split('|'));
             const cardsData = fs.readFileSync(path.join('Utils', 'mtg-cards-data.txt'), 'utf8')
               .split('\n')
               .map(line => line.split('|'));
+            const cardIssueTemplate = fs.readFileSync(path.join('.github', 'templates', 'set-tracking-issue.md');
             
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
@@ -59,12 +67,48 @@ jobs:
                 }
                 return true;
               });
+              
+              const cards = cardsData.filter(card => card[1] === set[0]);
+              const unimplemented = [];
+              const implemented = [];
+              
+              cards.forEach(cardData => {
+                const className = toCamelCase(cardData[0]);
+                const cleanCardName = cardData[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase();
+                if (fs.existsSync(path.join('Mage.Sets', 'src', 'mage', 'cards', className.substring(0, 1), `${className}.java`)) {
+                  implemented.push({
+                    pr: false, //TODO: check to see if there is a PR for this card
+                    name: cardData[0],
+                    scryfall: `https://scryfall.com/search?q=!"${cleanCardName}"&nbsp;e:${set[1]}`
+                  });
+                } else {
+                  unimplemented.push({
+                    pr: true, //TODO: check to see if there is a PR for this card
+                    name: cardData[0],
+                    scryfall: `https://scryfall.com/search?q=!"${cleanCardName}"&nbsp;e:${set[1]}`
+                  });
+                }
+              });
+              const cleanCards = cards.map(card => card[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase());
               if(foundIssue !== undefined) {
+                foundIssue.body = mustache.render(cardIssueTemplate, {
+                  hasUnimplementedCards: unimplemented.length > 0,
+                  hasImplementedCards: implemented.length > 0,
+                  unimplementedCards: unimplemented,
+                  implementedCards: implemented,
+                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${String.join('"OR!"', cleanCards)}"+e:${set[1]}`
+                });
                 issuesToUpdate.push(foundIssue);
               } else {
                 issuesToCreate.push({
                   title: `${set[1]}: ${set[0]} Set Card Implementation Tracking`,
-                  body: `Placeholder`
+                  body: mustache.render(cardIssueTemplate, {
+                  hasUnimplementedCards: unimplemented.length > 0,
+                  hasImplementedCards: implemented.length > 0,
+                  unimplementedCards: unimplemented,
+                  implementedCards: implemented,
+                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${String.join('"OR!"', cleanCards)}"+e:${set[1]}`
+                });
                 });
               }
             });
