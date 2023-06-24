@@ -197,9 +197,9 @@ jobs:
       - name: commit
         run: |
           # Setup git config
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          # git config user.name github-actions
+          # git config user.email github-actions@github.com
           # Stage the Set-implementation-list.md file, commit, then push
-          git add .
+          git add ./wiki/*
           git commit -m "Update Set-implementation-list.md"
           git push
