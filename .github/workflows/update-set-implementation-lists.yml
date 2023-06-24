@@ -1,0 +1,37 @@
+name: Update set implementation lists
+on:
+  # push:
+  #  branches: [master]
+  workflow_dispatch:
+concurrency:
+  group: set-impl
+  cancel-in-progress: true
+jobs:
+  update-set-impl-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get issues
+        uses: actions-cool/issues-helper@v3.4.0
+        id: setimplissues
+        with:
+          actions: 'find-issues'
+          labels: 'tracking set'
+      - uses: github/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install mustache
+      - name: Update issues
+        uses: actions/github-script@v2.1.0
+        id: updateissues
+        with:
+          script: |
+            const mustache = require('mustache')
+            const fs = require('fs')
+            
+            const issues = JSON.parse(${{ steps.setimplissues.outputs.issues }})
+            console.log("Found list of existing issues:", issues)
+            
+            issues.forEach(issue => {
+              console.log(issue.title);
+            })
