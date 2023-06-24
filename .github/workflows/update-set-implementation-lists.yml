@@ -22,8 +22,7 @@ jobs:
           node-version: 16
       - run: npm install mustache
         shell: bash
-      - name: Update issues
-        uses: actions/github-script@v2.1.0
+      - uses: actions/github-script@v2.1.0
         id: updateissues
         with:
           script: |
