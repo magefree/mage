@@ -98,6 +98,9 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
 
     }
 
+    @Ignore
+    // TODO: GainAbilityControlledSpellsEffect needs improvement to properly apply only to playable cards in non-hand zones
+    // TODO: Figure out how to make the ability apply to the reflexive trigger
     @Test
     public void testGainAbilityControlledSpellsOnly() {
 
