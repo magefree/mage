@@ -4,7 +4,7 @@ on:
     branches: [master]
     paths:
       - wiki/**
-      - .github/workflows/wiki.yml
+      - .github/workflows/publish-wiki.yml
 concurrency:
   group: wiki
   cancel-in-progress: true
