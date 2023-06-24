@@ -74,14 +74,14 @@ jobs:
                     pr: false, //TODO: check to see if there is a PR for this card
                     name: cardData[0],
                     cleanName: cleanCardName,
-                    scryfall: `https://scryfall.com/search?q=!"${cleanCardName}"&nbsp;e:${set[1]}`
+                    scryfall: `https://scryfall.com/search?q=!"${cleanCardName}"+e:${set[1]}`
                   });
                 } else {
                   unimplemented.push({
                     pr: true, //TODO: check to see if there is a PR for this card
                     name: cardData[0],
                     cleanName: cleanCardName,
-                    scryfall: `https://scryfall.com/search?q=!"${cleanCardName}"&nbsp;e:${set[1]}`
+                    scryfall: `https://scryfall.com/search?q=!"${cleanCardName}"+e:${set[1]}`
                   });
                 }
               });
