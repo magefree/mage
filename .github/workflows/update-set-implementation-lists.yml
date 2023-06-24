@@ -118,4 +118,42 @@ jobs:
             
             console.log("Issues to update: ", issuesToUpdate);
             console.log("Issues to create: ", issuesToCreate);
+  update-set-impl-wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install mustache
+        shell: bash
+        
+      - uses: actions/github-script@v6.4.1
+        id: updateissues
+        with:
+          script: |
+            const mustache = require('mustache')
+            const path = require('path')
+            const fs = require('fs')
             
+            // Disable mustache html-escape
+            mustache.escape = function(str) {
+              return str;
+            };
+            
+            const setImplementationTemplate = fs.readFileSync(path.join('.github', 'templates', 'set-tracking-wiki.md'), 'utf8');
+            
+            const setsData = fs.readFileSync(path.join('Utils', 'mtg-sets-data.txt'), 'utf8')
+              .split('\n')
+              .map(line => line.split('|'));
+              
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'tracking set'
+            });
+            console.log("Found list of existing issues:", issues);
+            
+            const content = mustache.render(setImplementationTemplate, {});
+            
+            fs.writeFile(path.join('wiki', 'Set-implementation-list.md'), content); 
