@@ -10,7 +10,7 @@ Don't worry about moving things from in progress to completed either, this issue
 {{#hasUnimplementedCards}}
 # Unimplemented Cards
 
-{#unimplementedCards}}
+{{#unimplementedCards}}
 * [{{#pr}}*{{/pr}}{{^pr}} {{/pr}}]  In progress -- [{{name}}]({{scryfall}})
 {{/unimplementedCards}}
 
