@@ -194,3 +194,11 @@ jobs:
             } catch (err) {
               console.error(err);
             }
+      - name: commit
+        run: |
+          # Setup git config
+          
+          # Stage the Set-implementation-list.md file, commit, then push
+          git add ./wiki/Set-implementation-list.md
+          git commit -m Update Set-implementation-list.md
+          git push origin master
