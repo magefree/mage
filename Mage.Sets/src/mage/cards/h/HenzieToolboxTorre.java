@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.BlitzAbility;
@@ -16,14 +15,10 @@ import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -33,10 +28,8 @@ public class HenzieToolboxTorre extends CardImpl {
 
     public HenzieToolboxTorre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
-
-        addSuperType(SuperType.LEGENDARY);
-        addSubType(SubType.DEVIL, SubType.ROGUE);
-
+        this.supertype.add(SuperType.LEGENDARY);
+        this.subtype.add(SubType.DEVIL, SubType.ROGUE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
@@ -61,7 +54,7 @@ public class HenzieToolboxTorre extends CardImpl {
     }
 }
 
-// Must use custom effect rather than GainAbilitySpellsEffect since the BlitzAbility requires the card object passed to the initializer
+// Must use custom effect rather than GainAbilityControlledSpellsEffect since the BlitzAbility requires the card object passed to the initializer
 class HenzieToolboxTorreGainBlitzEffect extends ContinuousEffectImpl {
 
     private static final FilterObject<MageObject> filter = new FilterObject<>("creature spell you cast with mana value 4 or greater");
@@ -95,7 +88,7 @@ class HenzieToolboxTorreGainBlitzEffect extends ContinuousEffectImpl {
 
         // TODO: This is not correct yet. Need to account for opponent's cards that you exile and can then play
         //       e.g. Gonti, Lord of Luxury
-        //       This will need https://github.com/magefree/mage/issues/9521 completed before being able to implemente correctly
+        //       This will need https://github.com/magefree/mage/issues/9521 completed before being able to implement correctly
 //        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
 //            for (Card card : game.getExile().getAllCards(game, playerId)) {
 //                if (filter.match(card, game)) {
@@ -103,7 +96,7 @@ class HenzieToolboxTorreGainBlitzEffect extends ContinuousEffectImpl {
 //                }
 //            }
 //        }
-        for (Card card : game.getExile().getAllCards(game)) {
+        for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
             if (card.isOwnedBy(source.getControllerId()) && filter.match(card, game)) {
                 game.getState().addOtherAbility(card, new BlitzAbility(card, card.getManaCost().getMana().toString()));
                 applied = true;
