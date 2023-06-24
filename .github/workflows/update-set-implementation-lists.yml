@@ -177,7 +177,7 @@ jobs:
               });
               sets.push({
                 name: set[0],
-                issueLink: foundIssue === undefined ? "https://www.github.com/mage/magefree" : foundIssue.url,
+                issueLink: foundIssue === undefined ? "https://www.github.com/mage/magefree" : foundIssue.html_url,
                 total: cards.length,
                 missing: cards.length - implementedCount
               });
