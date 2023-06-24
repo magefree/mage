@@ -68,8 +68,7 @@ class InsidiousDreamsEffect extends OneShotEffect {
                 0, GetXValue.instance.calculate(game, source, this), StaticFilters.FILTER_CARD_CARDS
         );
         controller.searchLibrary(target, source, game);
-        Cards chosen = new CardsImpl();
-        target.getTargets().stream().forEach(cardId -> controller.getLibrary().getCard(cardId, game));
+        Cards chosen = new CardsImpl(target.getTargets());
         controller.shuffleLibrary(source, game);
         controller.putCardsOnTopOfLibrary(chosen, game, source, true);
         return true;

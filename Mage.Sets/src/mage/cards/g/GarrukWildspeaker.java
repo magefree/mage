@@ -30,7 +30,7 @@ public final class GarrukWildspeaker extends CardImpl {
 
     public GarrukWildspeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
         this.setStartingLoyalty(3);

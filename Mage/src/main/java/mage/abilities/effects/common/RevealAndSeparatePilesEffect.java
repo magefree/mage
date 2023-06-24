@@ -92,7 +92,11 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
                     Target targetOpponent = new TargetOpponent(true);
                     controller.chooseTarget(Outcome.Neutral, targetOpponent, source, game);
                     opponent = game.getPlayer(targetOpponent.getFirstTarget());
-                    game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to " + message);
+                    if (opponent != null) {
+                        game.informPlayers(controller.getLogName() + " chose " + opponent.getLogName() + " to " + message);
+                    } else {
+                        game.informPlayers(controller.getLogName() + " chose nothing" + " to " + message);
+                    }
                 }
                 return opponent;
         }
@@ -106,7 +110,7 @@ public class RevealAndSeparatePilesEffect extends OneShotEffect {
         Player separatingPlayer = this.getExecutingPlayer(controller, game, source, playerWhoSeparates, "separate the revealed cards");
         TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, filter);
         List<Card> pile1 = new ArrayList<>();
-        separatingPlayer.choose(Outcome.Neutral, cards, target, game);
+        separatingPlayer.choose(Outcome.Neutral, cards, target, source, game);
         target.getTargets()
                 .stream()
                 .map(game::getCard)

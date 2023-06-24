@@ -577,7 +577,7 @@ public enum WizardCardsImageSource implements CardImageSource {
 
     private void getLandVariations(LinkedHashMap<String, String> setLinks, String cardSet, int multiverseId, String cardName) throws IOException, NumberFormatException {
         CardCriteria criteria = new CardCriteria();
-        criteria.nameExact(cardName);
+        criteria.name(cardName);
         criteria.setCodes(cardSet);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
 

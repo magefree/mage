@@ -93,7 +93,7 @@ class KitesailFreebooterExileEffect extends OneShotEffect {
                 FilterCard filter = new FilterNonlandCard("noncreature, nonland card to exile");
                 filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
                 TargetCard target = new TargetCard(Zone.HAND, filter);
-                if (opponent.getHand().count(filter, game) > 0 && controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
+                if (opponent.getHand().count(filter, game) > 0 && controller.choose(Outcome.Exile, opponent.getHand(), target, source, game)) {
                     Card card = opponent.getHand().get(target.getFirstTarget(), game);
                     // If source permanent leaves the battlefield before its triggered ability resolves, the target card won't be exiled.
                     if (card != null && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {

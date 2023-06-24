@@ -38,7 +38,7 @@ public final class YawgmothsVileOffering extends CardImpl {
 
     public YawgmothsVileOffering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)
         this.addAbility(new LegendarySpellAbility());

@@ -47,7 +47,7 @@ public final class IcebreakerKraken extends CardImpl {
     public IcebreakerKraken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}{U}{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.KRAKEN);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

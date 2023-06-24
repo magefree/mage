@@ -9,8 +9,6 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -29,8 +27,6 @@ public final class ShardToken extends TokenImpl {
         cost.setText("Sacrifice this enchantment");
         ability.addCost(cost);
         this.addAbility(ability);
-
-        availableImageSetCodes = Arrays.asList("KHM");
     }
 
     public ShardToken(final ShardToken token) {

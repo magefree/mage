@@ -38,6 +38,7 @@ public class ManaPool implements Serializable {
     private final List<ManaPoolItem> poolBookmark = new ArrayList<>(); // mana pool bookmark for rollback purposes
 
     private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>();
+    private boolean manaBecomesBlack = false;
     private boolean manaBecomesColorless = false;
 
     private static final class ConditionalManaInfo {
@@ -71,6 +72,7 @@ public class ManaPool implements Serializable {
             poolBookmark.add(item.copy());
         }
         this.doNotEmptyManaTypes.addAll(pool.doNotEmptyManaTypes);
+        this.manaBecomesBlack = pool.manaBecomesBlack;
         this.manaBecomesColorless = pool.manaBecomesColorless;
     }
 
@@ -225,11 +227,20 @@ public class ManaPool implements Serializable {
 
     public void clearEmptyManaPoolRules() {
         doNotEmptyManaTypes.clear();
+        this.manaBecomesBlack = false;
         this.manaBecomesColorless = false;
     }
 
     public void addDoNotEmptyManaType(ManaType manaType) {
         doNotEmptyManaTypes.add(manaType);
+    }
+
+    public void setManaBecomesBlack(boolean manaBecomesBlack) {
+        this.manaBecomesBlack = manaBecomesBlack;
+    }
+
+    public boolean isManaBecomesBlack() {
+        return manaBecomesBlack;
     }
 
     public void setManaBecomesColorless(boolean manaBecomesColorless) {
@@ -271,18 +282,24 @@ public class ManaPool implements Serializable {
 
     private int emptyItem(ManaPoolItem item, Emptiable toEmpty, Game game, ManaType manaType) {
         if (item.getDuration() == Duration.EndOfTurn
-                && game.getPhase().getType() != TurnPhase.END) {
+                && game.getTurnPhaseType() != TurnPhase.END) {
             return 0;
         }
-        if (!manaBecomesColorless) {
+        if (manaBecomesBlack) {
             int amount = toEmpty.get(manaType);
             toEmpty.clear(manaType);
-            return amount;
+            toEmpty.add(ManaType.BLACK, amount);
+            return 0;
+        }
+        if (manaBecomesColorless) {
+            int amount = toEmpty.get(manaType);
+            toEmpty.clear(manaType);
+            toEmpty.add(ManaType.COLORLESS, amount);
+            return 0;
         }
         int amount = toEmpty.get(manaType);
         toEmpty.clear(manaType);
-        toEmpty.add(ManaType.COLORLESS, amount);
-        return 0;
+        return amount;
     }
 
     public Mana getMana() {

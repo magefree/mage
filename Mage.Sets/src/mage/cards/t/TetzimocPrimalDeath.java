@@ -35,7 +35,7 @@ public final class TetzimocPrimalDeath extends CardImpl {
     public TetzimocPrimalDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(6);

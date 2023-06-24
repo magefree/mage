@@ -30,7 +30,7 @@ public final class MoraugFuryOfAkoum extends CardImpl {
     public MoraugFuryOfAkoum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(6);
@@ -63,7 +63,7 @@ enum MoraugFuryOfAkoumCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.isActivePlayer(source.getControllerId()) && game.getPhase().getType().isMain();
+        return game.isActivePlayer(source.getControllerId()) && game.getTurnPhaseType().isMain();
     }
 }
 
@@ -113,7 +113,7 @@ class MoraugFuryOfAkoumCombatEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TurnPhase turnPhase = game.getPhase().getType();
+        TurnPhase turnPhase = game.getTurnPhaseType();
         for (TurnMod turnMod : game.getState().getTurnMods()) {
             if ("moraug".equals(turnMod.getNote())
                     && turnMod.getPlayerId().equals(source.getControllerId())

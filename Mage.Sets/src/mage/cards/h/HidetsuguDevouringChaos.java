@@ -31,7 +31,7 @@ public final class HidetsuguDevouringChaos extends CardImpl {
     public HidetsuguDevouringChaos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(4);

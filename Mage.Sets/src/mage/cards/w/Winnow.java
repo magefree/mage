@@ -28,7 +28,7 @@ public final class Winnow extends CardImpl {
         this.getSpellAbility().addEffect(new WinnowEffect());
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Winnow(final Winnow card) {

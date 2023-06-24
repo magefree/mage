@@ -37,7 +37,7 @@ public final class HerdMigration extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 Zone.HAND,
                 new SearchLibraryPutInHandEffect(
-                        new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A), true, true
+                        new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A), true
                 ), new ManaCostsImpl<>("{1}{G}")
         );
         ability.addCost(new DiscardSourceCost());

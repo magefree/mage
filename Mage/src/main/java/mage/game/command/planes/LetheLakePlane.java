@@ -7,8 +7,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.constants.Planes;
@@ -29,7 +29,6 @@ public class LetheLakePlane extends Plane {
 
     public LetheLakePlane() {
         this.setPlaneType(Planes.PLANE_LETHE_LAKE);
-        this.setExpansionSetCodeForImage("PCA");
 
         // At the beginning of your upkeep, put the top ten cards of your libary into your graveyard
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, new PutLibraryIntoGraveTargetEffect(10).setText("that player mills 10 cards"), TargetController.ANY, false, true);
@@ -50,5 +49,14 @@ public class LetheLakePlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private LetheLakePlane(final LetheLakePlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public LetheLakePlane copy() {
+        return new LetheLakePlane(this);
     }
 }

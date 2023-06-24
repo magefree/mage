@@ -43,7 +43,7 @@ public final class BlizzardStrix extends CardImpl {
     public BlizzardStrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
@@ -96,7 +96,6 @@ class BlizzardStrixEffect extends OneShotEffect {
         //create delayed triggered ability
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                 new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false)
-                        .setText("Return that card to the battlefield under its owner's control at the beginning of the next end step")
                         .setTargetPointer(new FixedTarget(source.getFirstTarget(), game))
         ), source);
         return true;

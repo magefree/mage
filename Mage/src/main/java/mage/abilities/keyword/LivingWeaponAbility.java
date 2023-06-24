@@ -21,7 +21,7 @@ public class LivingWeaponAbility extends EntersBattlefieldTriggeredAbility {
     }
 
     @Override
-    public EntersBattlefieldTriggeredAbility copy() {
+    public LivingWeaponAbility copy() {
         return new LivingWeaponAbility(this);
     }
 }

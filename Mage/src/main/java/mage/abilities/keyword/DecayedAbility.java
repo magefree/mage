@@ -18,7 +18,7 @@ public class DecayedAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, new CantBlockSourceEffect(Duration.WhileOnBattlefield));
         this.addSubAbility(new AttacksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())
-        )));
+        ).setText("sacrifice it at end of combat")).setTriggerPhrase("When {this} attacks, "));
     }
 
     private DecayedAbility(final DecayedAbility ability) {

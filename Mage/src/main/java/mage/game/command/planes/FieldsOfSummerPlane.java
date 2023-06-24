@@ -13,7 +13,6 @@ import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.constants.*;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Plane;
@@ -33,7 +32,6 @@ public class FieldsOfSummerPlane extends Plane {
 
     public FieldsOfSummerPlane() {
         this.setPlaneType(Planes.PLANE_FIELDS_OF_SUMMER);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Whenever a player casts a spell, that player may gain 2 life
         SpellCastAllTriggeredAbility ability = new SpellCastAllTriggeredAbility(Zone.COMMAND, new FieldsOfSummerEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.PLAYER);
@@ -53,6 +51,15 @@ public class FieldsOfSummerPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private FieldsOfSummerPlane(final FieldsOfSummerPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public FieldsOfSummerPlane copy() {
+        return new FieldsOfSummerPlane(this);
     }
 }
 

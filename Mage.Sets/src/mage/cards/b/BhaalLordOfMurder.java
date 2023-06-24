@@ -43,7 +43,7 @@ public final class BhaalLordOfMurder extends CardImpl {
     public BhaalLordOfMurder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

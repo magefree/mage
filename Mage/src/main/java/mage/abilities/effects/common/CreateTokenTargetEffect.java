@@ -27,7 +27,11 @@ public class CreateTokenTargetEffect extends OneShotEffect {
     }
 
     public CreateTokenTargetEffect(Token token, int amount) {
-        this(token, StaticValue.get(amount));
+        this(token, amount, false);
+    }
+
+    public CreateTokenTargetEffect(Token token, int amount, boolean tapped) {
+        this(token, StaticValue.get(amount), tapped, false);
     }
 
     public CreateTokenTargetEffect(Token token, DynamicValue amount) {
@@ -93,9 +97,9 @@ public class CreateTokenTargetEffect extends OneShotEffect {
             if (token.getDescription().endsWith("token")) {
                 sb.append("s");
             }
-            int tokenLocation = sb.indexOf("token");
+            int tokenLocation = sb.indexOf("token ");
             if (tokenLocation != -1) {
-                sb.replace(tokenLocation, tokenLocation + 6, "tokens");
+                sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
             }
         }
         if (attacking) {

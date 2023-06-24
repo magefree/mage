@@ -7,7 +7,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
-import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.ReachAbility;
@@ -71,7 +70,7 @@ class EzzarootChannelerEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, Math.max(0, ControllerLifeCount.instance.calculate(game, source, this)));
+        CardUtil.reduceCost(abilityToModify, Math.max(0, ControllerGotLifeCount.instance.calculate(game, source, this)));
         return true;
     }
 

@@ -70,7 +70,7 @@ public class Exile implements Serializable, Copyable<Exile> {
         return allCards.stream().filter(card -> filter.match(card, game)).collect(Collectors.toList());
     }
 
-    @Deprecated // TODO: must use related request due game range
+    @Deprecated // TODO: must use related request due game range like getAllCardsByRange
     public List<Card> getAllCards(Game game) {
         return getAllCards(game, null);
     }

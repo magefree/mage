@@ -27,7 +27,7 @@ public final class MengHuoBarbarianKing extends CardImpl {
 
     public MengHuoBarbarianKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BARBARIAN);
         this.subtype.add(SubType.SOLDIER);

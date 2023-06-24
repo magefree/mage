@@ -42,7 +42,7 @@ public final class SorinLordOfInnistrad extends CardImpl {
 
     public SorinLordOfInnistrad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
 
         this.setStartingLoyalty(3);

@@ -34,7 +34,7 @@ public final class AzorTheLawbringer extends CardImpl {
 
     public AzorTheLawbringer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);

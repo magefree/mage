@@ -5,8 +5,6 @@ import mage.abilities.keyword.ReachAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author fireshoes
  */
@@ -21,8 +19,6 @@ public final class SpiderToken extends TokenImpl {
         toughness = new MageInt(2);
 
         this.addAbility(ReachAbility.getInstance());
-
-        availableImageSetCodes.addAll(Arrays.asList("C15", "EMN", "ISD", "SHM", "MH1", "THB", "MID", "UMA", "NCC", "CMA", "CLB", "2X2"));
     }
 
     public SpiderToken(final SpiderToken token) {

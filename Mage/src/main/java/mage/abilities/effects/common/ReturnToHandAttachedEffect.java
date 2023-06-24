@@ -3,6 +3,7 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -36,7 +37,8 @@ public class ReturnToHandAttachedEffect extends OneShotEffect {
             return false;
         }
         Card card = permanent.getMainCard();
-        if (permanent.getZoneChangeCounter(game) + 1 != card.getZoneChangeCounter(game)) {
+        // TODO: Once MDFC ZCC increments are fixed properly, can remove this special case. For now must allow so effect works.
+        if (permanent.getZoneChangeCounter(game) + 1 != card.getZoneChangeCounter(game) && !(card instanceof ModalDoubleFacedCard)) {
             return false;
         }
         return player.moveCards(card, Zone.HAND, source, game);

@@ -68,7 +68,7 @@ public final class TournamentUtil {
         } else {
             criteria.ignoreSetsWithSnowLands();
         }
-        criteria.rarities(Rarity.LAND).nameExact(landName);
+        criteria.rarities(Rarity.LAND).name(landName);
         List<CardInfo> lands = CardRepository.instance.findCards(criteria);
         List<Card> cards = new ArrayList<>();
         if (!lands.isEmpty()) {

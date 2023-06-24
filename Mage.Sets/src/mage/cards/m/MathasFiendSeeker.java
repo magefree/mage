@@ -38,7 +38,7 @@ public final class MathasFiendSeeker extends CardImpl {
     public MathasFiendSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

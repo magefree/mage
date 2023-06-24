@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -6,18 +5,15 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author spjspj
  */
 public final class VenserTheSojournerEmblem extends Emblem {
@@ -27,13 +23,20 @@ public final class VenserTheSojournerEmblem extends Emblem {
      */
 
     public VenserTheSojournerEmblem() {
-        this.setName("Emblem Venser");
+        super("Emblem Venser");
         Ability ability = new VenserTheSojournerSpellCastTriggeredAbility(new ExileTargetEffect(), false);
         Target target = new TargetPermanent();
         ability.addTarget(target);
         this.getAbilities().add(ability);
+    }
 
-        this.setExpansionSetCodeForImage("DDI");
+    private VenserTheSojournerEmblem(final VenserTheSojournerEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public VenserTheSojournerEmblem copy() {
+        return new VenserTheSojournerEmblem(this);
     }
 }
 

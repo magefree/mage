@@ -10,8 +10,6 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -30,8 +28,6 @@ public final class BloodToken extends TokenImpl {
         ability.addCost(new DiscardCardCost());
         ability.addCost(new SacrificeSourceCost().setText("Sacrifice this artifact"));
         this.addAbility(ability);
-
-        availableImageSetCodes = Arrays.asList("VOW");
     }
 
     public BloodToken(final BloodToken token) {

@@ -50,7 +50,7 @@ public class TimotharBaronOfBats extends CardImpl {
     public TimotharBaronOfBats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.VAMPIRE);
         this.addSubType(SubType.NOBLE);
 

@@ -39,7 +39,7 @@ public final class UlashtTheHateSeed extends CardImpl {
 
     public UlashtTheHateSeed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HELLION);
         this.subtype.add(SubType.HYDRA);
 

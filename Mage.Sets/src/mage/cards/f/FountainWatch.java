@@ -12,22 +12,13 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author spjspj
  */
 public final class FountainWatch extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("Artifacts and Enchantments");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.ARTIFACT.getPredicate(),
-                CardType.ENCHANTMENT.getPredicate()));
-    }
 
     public FountainWatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
@@ -37,7 +28,7 @@ public final class FountainWatch extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Artifacts and enchantments you control have shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ARTIFACTS_AND_ENCHANTMENTS, false)));
     }
 
     private FountainWatch(final FountainWatch card) {

@@ -115,7 +115,7 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
         FilterCreaturePermanent filter = new FilterCreaturePermanent("chosen creature type");
         filter.add(typeChoice.getPredicate());
         ContinuousEffect effectPowerToughness = new SetBasePowerToughnessSourceEffect(
-                new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
+                new PermanentsOnBattlefieldCount(filter));
         effectPowerToughness.setText("");
         SimpleStaticAbility setPT = new SimpleStaticAbility(Zone.ALL, effectPowerToughness);
         GainAbilityTargetEffect gainAbility = new GainAbilityTargetEffect(setPT, Duration.EndOfGame);

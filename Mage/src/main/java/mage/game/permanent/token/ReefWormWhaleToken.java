@@ -6,8 +6,6 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -22,8 +20,6 @@ public final class ReefWormWhaleToken extends TokenImpl {
         toughness = new MageInt(6);
 
         addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new Kraken99Token())));
-
-        availableImageSetCodes.addAll(Arrays.asList("C14", "A25", "C21"));
     }
 
     public ReefWormWhaleToken(final ReefWormWhaleToken token) {

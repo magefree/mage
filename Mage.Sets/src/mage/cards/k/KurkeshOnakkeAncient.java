@@ -26,7 +26,7 @@ public final class KurkeshOnakkeAncient extends CardImpl {
 
     public KurkeshOnakkeAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.SPIRIT);
 

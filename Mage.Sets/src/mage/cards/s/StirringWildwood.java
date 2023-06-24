@@ -30,7 +30,7 @@ public final class StirringWildwood extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new StirringWildwoodToken(), "land", Duration.EndOfTurn), new ManaCostsImpl<>("{1}{G}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new StirringWildwoodToken(), CardType.LAND, Duration.EndOfTurn).withDurationRuleAtStart(true), new ManaCostsImpl<>("{1}{G}{W}")));
     }
 
     private StirringWildwood(final StirringWildwood card) {

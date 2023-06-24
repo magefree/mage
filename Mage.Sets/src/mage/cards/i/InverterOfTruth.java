@@ -55,8 +55,8 @@ class InverterOfTruthEffect extends OneShotEffect {
 
     InverterOfTruthEffect() {
         super(Outcome.Benefit);
-        staticText = "exile all cards from your library face down, " +
-                "then shuffle all cards from your graveyard into your library";
+        staticText = "exile all cards from your library face down, "
+                + "then shuffle all cards from your graveyard into your library";
     }
 
     private InverterOfTruthEffect(final InverterOfTruthEffect effect) {
@@ -75,12 +75,11 @@ class InverterOfTruthEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(player.getLibrary().getCards(game));
-        player.moveCards(cards, Zone.EXILED, source, game);
-        cards.removeIf(uuid -> game.getState().getZone(uuid) != Zone.EXILED);
         cards.getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
                 .forEach(card -> card.setFaceDown(true, game));
+        player.moveCards(cards, Zone.EXILED, source, game);
         player.shuffleCardsToLibrary(player.getGraveyard(), game, source);
         return true;
     }

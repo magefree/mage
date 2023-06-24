@@ -135,9 +135,9 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
                 game.getState().getCreateMageObjectAttribute(card, game).getColor().setColor(colorless);
 
                 // mdf cards
-                if (card instanceof ModalDoubleFacesCard) {
-                    ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-                    ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+                if (card instanceof ModalDoubleFacedCard) {
+                    ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+                    ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
                     game.getState().getCreateMageObjectAttribute(leftHalfCard, game).getColor().setColor(colorless);
                     game.getState().getCreateMageObjectAttribute(rightHalfCard, game).getColor().setColor(colorless);
                 }

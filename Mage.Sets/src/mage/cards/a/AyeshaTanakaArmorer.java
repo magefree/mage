@@ -48,7 +48,7 @@ public final class AyeshaTanakaArmorer extends CardImpl {
     public AyeshaTanakaArmorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.ARTIFICER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

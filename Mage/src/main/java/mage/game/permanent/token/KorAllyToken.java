@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 public final class KorAllyToken extends TokenImpl {
 
     public KorAllyToken() {
@@ -16,8 +14,6 @@ public final class KorAllyToken extends TokenImpl {
         color.setWhite(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("BFZ", "ZNC");
     }
 
     public KorAllyToken(final KorAllyToken token) {

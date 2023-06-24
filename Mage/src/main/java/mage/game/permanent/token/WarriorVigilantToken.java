@@ -1,8 +1,4 @@
-
-
 package mage.game.permanent.token;
-
-import java.util.Arrays;
 
 import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
@@ -10,7 +6,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author fireshoes
  */
 public final class WarriorVigilantToken extends TokenImpl {
@@ -23,7 +18,6 @@ public final class WarriorVigilantToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(VigilanceAbility.getInstance());
-        availableImageSetCodes.addAll(Arrays.asList("AKH", "DMC"));
     }
 
     public WarriorVigilantToken(final WarriorVigilantToken token) {
@@ -31,7 +25,7 @@ public final class WarriorVigilantToken extends TokenImpl {
     }
 
     @Override
-        public WarriorVigilantToken copy() {
+    public WarriorVigilantToken copy() {
         return new WarriorVigilantToken(this);
     }
 }

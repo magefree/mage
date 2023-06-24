@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 
-import static org.hamcrest.CoreMatchers.is;
-
 /**
  * Created by IGOUDT on 25-2-2017.
  */
@@ -22,6 +20,6 @@ public class ContinuousEffectImplTest {
         BoostTargetEffect ghe = new BoostTargetEffect(0,0, Duration.Custom);
         ghe.setDependedToType(DependencyType.AuraAddingRemoving);
         Set<UUID> x = ghe.isDependentTo(new ArrayList<>());
-        Assert.assertThat(x.size(), is(0));
+        Assert.assertEquals(0, x.size());
     }
 }

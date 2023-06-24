@@ -49,7 +49,11 @@ public class MomirGame extends GameImpl {
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null) {
-                CardInfo cardInfo = CardRepository.instance.findCard("Momir Vig, Simic Visionary");
+                CardInfo cardInfo = CardRepository.instance.findCardWithPreferredSetAndNumber("Momir Vig, Simic Visionary", "DIS", "118");
+                if (cardInfo == null) {
+                    // how-to fix: make sure that a Momir Emblem and a source card uses same set (DIS - Dissension)
+                    throw new IllegalStateException("Wrong code usage: momir card and emblem must exists in the same set (DIS)");
+                }
                 addEmblem(new MomirEmblem(), cardInfo.getCard(), playerId);
             }
         }

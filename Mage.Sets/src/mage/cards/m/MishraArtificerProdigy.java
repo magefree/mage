@@ -32,7 +32,7 @@ public final class MishraArtificerProdigy extends CardImpl {
 
     public MishraArtificerProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(4);
@@ -120,14 +120,14 @@ class MishraArtificerProdigyEffect extends OneShotEffect {
             if (controller.chooseUse(Outcome.Neutral, "Search your graveyard?", source, game)) {
                 // You can't fail to find the card in your graveyard because it's not hidden
                 TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(1, 1, filter);
-                if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, game)) {
+                if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, source, game)) {
                     card = game.getCard(target.getFirstTarget());
                 }
             }
             // Hand
             if (card == null && controller.chooseUse(Outcome.Neutral, "Search your hand?", source, game)) {
                 TargetCardInHand target = new TargetCardInHand(0, 1, filter);
-                if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, game)) {
+                if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, source, game)) {
                     card = game.getCard(target.getFirstTarget());
                 }
             }

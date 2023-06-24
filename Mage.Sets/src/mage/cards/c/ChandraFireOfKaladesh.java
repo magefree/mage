@@ -12,15 +12,12 @@ import mage.abilities.condition.common.SourceDealtDamageCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
+import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetPlayerOrPlaneswalker;
@@ -39,13 +36,13 @@ public final class ChandraFireOfKaladesh extends CardImpl {
 
     public ChandraFireOfKaladesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.secondSideCardClazz = ChandraRoaringFlame.class;
+        this.secondSideCardClazz = mage.cards.c.ChandraRoaringFlame.class;
 
         // Whenever you cast a red spell, untap Chandra, Fire of Kaladesh.
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false));
@@ -53,7 +50,7 @@ public final class ChandraFireOfKaladesh extends CardImpl {
         // {T}: Chandra, Fire of Kaladesh deals 1 damage to target player. If Chandra has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.        
         this.addAbility(new TransformAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addEffect(new ConditionalOneShotEffect(new ExileAndReturnTransformedSourceEffect(Pronoun.SHE), new SourceDealtDamageCondition(3)));
+        ability.addEffect(new ConditionalOneShotEffect(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED,Pronoun.SHE), new SourceDealtDamageCondition(3)));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
 

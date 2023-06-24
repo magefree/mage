@@ -5,8 +5,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -22,8 +20,6 @@ public final class VoiceOfTheWoodsElementalToken extends TokenImpl {
         toughness = new MageInt(7);
 
         addAbility(TrampleAbility.getInstance());
-
-        availableImageSetCodes.addAll(Arrays.asList("DD1", "EVG", "KHC"));
     }
 
     public VoiceOfTheWoodsElementalToken(final VoiceOfTheWoodsElementalToken token) {

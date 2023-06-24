@@ -42,7 +42,7 @@ public class AminatouTheFateshifter extends CardImpl {
 
     public AminatouTheFateshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{W}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AMINATOU);
 
         this.setStartingLoyalty(3);
@@ -53,7 +53,7 @@ public class AminatouTheFateshifter extends CardImpl {
 
         // −1: Exile another target permanent you own, then return it to the battlefield under your control.
         ability = new LoyaltyAbility(new ExileTargetForSourceEffect(), -1);
-        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(false));
+        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect().concatBy(", then"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 

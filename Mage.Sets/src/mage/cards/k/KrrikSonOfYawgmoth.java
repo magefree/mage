@@ -42,7 +42,7 @@ public final class KrrikSonOfYawgmoth extends CardImpl {
     public KrrikSonOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B/P}{B/P}{B/P}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
         this.subtype.add(SubType.MINION);

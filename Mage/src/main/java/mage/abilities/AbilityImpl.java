@@ -19,7 +19,6 @@ import mage.abilities.hint.Hint;
 import mage.abilities.icon.CardIcon;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
-import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.Dungeon;
@@ -53,7 +52,7 @@ public abstract class AbilityImpl implements Ability {
     private static final List<Ability> emptyAbilities = new ArrayList<>();
 
     protected UUID id;
-    protected UUID originalId;
+    protected UUID originalId; // TODO: delete originalId???
     protected AbilityType abilityType;
     protected UUID controllerId;
     protected UUID sourceId;
@@ -437,7 +436,7 @@ public abstract class AbilityImpl implements Ability {
 
                 case FLASHBACK:
                 case MADNESS:
-                case DISTURB:
+                case TRANSFORMED:
                     // from Snapcaster Mage:
                     // If you cast a spell from a graveyard using its flashback ability, you can't pay other alternative costs
                     // (such as that of Foil). (2018-12-07)
@@ -823,7 +822,7 @@ public abstract class AbilityImpl implements Ability {
             rule = ruleStart;
         }
         String prefix;
-        if (this instanceof TriggeredAbility) {
+        if (this instanceof TriggeredAbility || this instanceof EntersBattlefieldAbility) {
             prefix = null;
         } else if (abilityWord != null) {
             prefix = abilityWord.formatWord();
@@ -937,6 +936,21 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void addMode(Mode mode) {
         getModes().addMode(mode);
+
+        // runtime check: modes must have good settings
+        int currentMin = getModes().getMinModes();
+        int currentMax = getModes().getMaxModes(null, null);
+        boolean isFine = true;
+        if (currentMin < 0 || currentMax < 0) {
+            isFine = false;
+        }
+        if (currentMin > 0 && currentMin > currentMax) {
+            isFine = false;
+        }
+        if (!isFine) {
+            throw new IllegalArgumentException(String.format("Wrong code usage: you must setup correct min and max modes (%d, %d) for %s",
+                    currentMin, currentMax, this));
+        }
     }
 
     @Override

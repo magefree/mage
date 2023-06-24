@@ -35,7 +35,7 @@ public final class AstarionTheDecadent extends CardImpl {
     public AstarionTheDecadent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ROGUE);

@@ -49,7 +49,7 @@ public final class SorinImperiousBloodlord extends CardImpl {
     public SorinImperiousBloodlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
         this.setStartingLoyalty(4);
 

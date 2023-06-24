@@ -16,40 +16,26 @@ import mage.target.common.TargetCardInLibrary;
 public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
 
     protected boolean tapped;
-    protected boolean forceShuffle;
     protected boolean ownerIsController;
 
-    public SearchLibraryPutInPlayTargetPlayerEffect(TargetCardInLibrary target) {
-        this(target, false, true, Outcome.PutCardInPlay);
-    }
-
     public SearchLibraryPutInPlayTargetPlayerEffect(TargetCardInLibrary target, boolean tapped) {
-        this(target, tapped, true, Outcome.PutCardInPlay);
+        this(target, tapped, false);
     }
 
-    public SearchLibraryPutInPlayTargetPlayerEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle) {
-        this(target, tapped, forceShuffle, Outcome.PutCardInPlay);
-    }
-
-    public SearchLibraryPutInPlayTargetPlayerEffect(TargetCardInLibrary target, boolean tapped, Outcome outcome) {
-        this(target, tapped, true, outcome);
-    }
-
-    public SearchLibraryPutInPlayTargetPlayerEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, Outcome outcome) {
-        this(target, tapped, forceShuffle, outcome, false);
-    }
-
-    public SearchLibraryPutInPlayTargetPlayerEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, Outcome outcome, boolean ownerIsController) {
-        super(target, outcome);
+    public SearchLibraryPutInPlayTargetPlayerEffect(TargetCardInLibrary target, boolean tapped, boolean ownerIsController) {
+        super(target, Outcome.PutCardInPlay);
         this.tapped = tapped;
-        this.forceShuffle = forceShuffle;
         this.ownerIsController = ownerIsController;
+        if (target.getDescription().contains("land")) {
+            this.outcome = Outcome.PutLandInPlay;
+        } else if (target.getDescription().contains("creature")) {
+            this.outcome = Outcome.PutCreatureInPlay;
+        }
     }
 
     public SearchLibraryPutInPlayTargetPlayerEffect(final SearchLibraryPutInPlayTargetPlayerEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
-        this.forceShuffle = effect.forceShuffle;
         this.ownerIsController = effect.ownerIsController;
     }
 
@@ -70,12 +56,8 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
                 player.shuffleLibrary(source, game);
                 return true;
             }
-
-            if (forceShuffle) {
-                player.shuffleLibrary(source, game);
-            }
+            player.shuffleLibrary(source, game);
         }
-
         return false;
     }
 
@@ -87,9 +69,9 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
         return getTargetPointer().describeTargets(mode.getTargets(), "that player")
             + " searches their library for "
             + target.getDescription()
-            + (forceShuffle ? ", " : " and ")
+            + ", "
             + (target.getMaxNumberOfTargets() > 1 ? "puts them onto the battlefield" : "puts it onto the battlefield")
             + (tapped ? " tapped" : "")
-            + (forceShuffle ? ", then shuffles" : ". If that player does, they shuffle");
+            + ", then shuffles";
     }
 }

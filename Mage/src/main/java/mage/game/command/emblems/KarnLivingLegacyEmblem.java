@@ -25,13 +25,21 @@ public final class KarnLivingLegacyEmblem extends Emblem {
 
     // -7: You get an emblem with "Tap an untapped artifact you control: This emblem deals 1 damage to any target."
     public KarnLivingLegacyEmblem() {
-        this.setName("Emblem Karn");
-        this.setExpansionSetCodeForImage("DMU");
+        super("Emblem Karn");
         Ability ability = new SimpleActivatedAbility(
                 Zone.COMMAND, new DamageTargetEffect(1, "this emblem"),
                 new TapTargetCost(new TargetControlledPermanent(filter))
         );
         ability.addTarget(new TargetAnyTarget());
         this.getAbilities().add(ability);
+    }
+
+    private KarnLivingLegacyEmblem(final KarnLivingLegacyEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public KarnLivingLegacyEmblem copy() {
+        return new KarnLivingLegacyEmblem(this);
     }
 }

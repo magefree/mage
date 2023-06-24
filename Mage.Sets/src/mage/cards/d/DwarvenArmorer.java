@@ -2,6 +2,7 @@
 package mage.cards.d;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -60,7 +61,7 @@ public final class DwarvenArmorer extends CardImpl {
 
 class DwarvenArmorerEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("+0/+1");

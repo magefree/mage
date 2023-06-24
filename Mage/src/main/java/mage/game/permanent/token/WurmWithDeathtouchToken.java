@@ -5,8 +5,6 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -21,29 +19,6 @@ public final class WurmWithDeathtouchToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(DeathtouchAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("C14", "SOM", "2XM", "CM2");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode().equals("C14")) {
-            this.setTokenType(1);
-        }
-        if (getOriginalExpansionSetCode().equals("SOM")) {
-            this.setTokenType(1);
-        }
-        if (getOriginalExpansionSetCode().equals("CM2")) {
-            this.setTokenType(1);
-        }
-        if (getOriginalExpansionSetCode().equals("2XM")) {
-            this.setTokenType(1);
-        }
-        if (getOriginalExpansionSetCode().equals("CM2")) {
-            this.setTokenType(1);
-        }
     }
 
     public WurmWithDeathtouchToken(final WurmWithDeathtouchToken token) {

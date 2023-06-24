@@ -34,7 +34,7 @@ public final class BenBenAkkiHermit extends CardImpl {
 
     public BenBenAkkiHermit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN, SubType.SHAMAN);
 
         this.power = new MageInt(1);

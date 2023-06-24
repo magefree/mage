@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -39,7 +38,7 @@ public final class FungalBehemoth extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Fungal Behemoth's power and toughness are each equal to the number of +1/+1 counters on creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new P1P1CountersOnControlledCreaturesCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new P1P1CountersOnControlledCreaturesCount())));
 
         // Suspend X-{X}{G}{G}. X can't be 0.
         this.addAbility(new SuspendAbility(Integer.MAX_VALUE, new ManaCostsImpl<>("{G}{G}"), this, true));

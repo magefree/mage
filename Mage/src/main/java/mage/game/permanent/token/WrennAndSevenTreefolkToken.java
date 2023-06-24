@@ -6,11 +6,8 @@ import mage.abilities.dynamicvalue.common.LandsYouControlCount;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-
-import java.util.Arrays;
 
 /**
  * @author TheElk801
@@ -26,10 +23,8 @@ public final class WrennAndSevenTreefolkToken extends TokenImpl {
         toughness = new MageInt(0);
         this.addAbility(ReachAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(
-                LandsYouControlCount.instance, Duration.EndOfGame
+                LandsYouControlCount.instance
         ).setText("this creature's power and toughness are each equal to the number of lands you control")));
-
-        availableImageSetCodes.addAll(Arrays.asList("MID"));
     }
 
     public WrennAndSevenTreefolkToken(final WrennAndSevenTreefolkToken token) {

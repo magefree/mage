@@ -22,7 +22,7 @@ public final class RaisedByGiants extends CardImpl {
     public RaisedByGiants(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have base power and toughness 10/10 and are Giants in addition to their other types.

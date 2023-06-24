@@ -49,7 +49,7 @@ public final class SquealingDevil extends CardImpl {
         this.addAbility(ability);
 
         // When Squealing Devil enters the battlefield, sacrifice it unless {B} was spent to cast it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.B)), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(ManaWasSpentCondition.BLACK), false));
 
     }
 

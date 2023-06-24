@@ -29,7 +29,7 @@ public final class GreensleevesMaroSorcerer extends CardImpl {
 
     public GreensleevesMaroSorcerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(0);
@@ -40,7 +40,7 @@ public final class GreensleevesMaroSorcerer extends CardImpl {
 
         // Greensleeves, Maro-Sorcerer's power and toughness are each equal to the number of lands you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerToughnessSourceEffect(LandsYouControlCount.instance, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(LandsYouControlCount.instance)
         ));
 
         // Whenever a land enters the battlefield under your control, create a 3/3 green Badger creature token.

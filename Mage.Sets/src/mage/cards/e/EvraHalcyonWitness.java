@@ -32,7 +32,7 @@ public final class EvraHalcyonWitness extends CardImpl {
     public EvraHalcyonWitness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -88,7 +88,7 @@ class EvraHalcyonWitnessEffect extends OneShotEffect {
                 //      For example, say Evra is enchanted with Dub (which makes it 6/6) and your life total is 7.
                 //      After the exchange, Evra would be a 9/6 creature (its power became 7, which was then modified by Dub) and your life total would be 6.
                 //      (2018-04-27)
-                game.addEffect(new SetBasePowerToughnessSourceEffect(StaticValue.get(life), null, Duration.Custom, SubLayer.SetPT_7b, true), source);
+                game.addEffect(new SetBasePowerToughnessSourceEffect(StaticValue.get(life), null, Duration.Custom, SubLayer.SetPT_7b), source);
                 return true;
             }
         }

@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.constants.AbilityType;
+import mage.constants.AbilityWord;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,6 +55,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
         this.triggersOnce = ability.triggersOnce;
         this.doOnlyOnce = ability.doOnlyOnce;
+        this.triggerEvent = ability.triggerEvent;
         this.triggerPhrase = ability.triggerPhrase;
     }
 
@@ -110,12 +112,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public boolean checkUsedAlready(Game game) {
         if (!doOnlyOnce) {
-            return true;
+            return false;
         }
         Integer lastTurnUsed = (Integer) game.getState().getValue(
                 CardUtil.getCardZoneString("lastTurnUsed" + originalId, sourceId, game)
         );
-        return lastTurnUsed == null || lastTurnUsed != game.getTurnNum();
+        return lastTurnUsed != null && lastTurnUsed == game.getTurnNum();
     }
 
     public TriggeredAbility setDoOnlyOnce(boolean doOnlyOnce) {
@@ -138,6 +140,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             MageObject object = game.getObject(getSourceId());
             Player player = game.getPlayer(this.getControllerId());
             if (player == null || object == null
+                    || (doOnlyOnce && checkUsedAlready(game))
                     || !player.chooseUse(
                     getEffects().getOutcome(this),
                     this.getRule(object.getLogName()), this, game
@@ -198,22 +201,41 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         newRule.insert(4, "may ");
                         superRule = newRule.toString();
                     }
-                } else if (this.getTargets().isEmpty()
+                } else if (!ruleLow.startsWith("{this}")
+                        && (this.getTargets().isEmpty()
                         || ruleLow.startsWith("attach")
+                        || ruleLow.startsWith("change")
                         || ruleLow.startsWith("counter")
                         || ruleLow.startsWith("destroy")
+                        || ruleLow.startsWith("distribute")
+                        || ruleLow.startsWith("sacrifice")
                         || ruleLow.startsWith("exchange")
                         || ruleLow.startsWith("exile")
                         || ruleLow.startsWith("gain")
                         || ruleLow.startsWith("goad")
+                        || ruleLow.startsWith("have")
+                        || ruleLow.startsWith("move")
+                        || ruleLow.startsWith("prevent")
                         || ruleLow.startsWith("put")
                         || ruleLow.startsWith("remove")
                         || ruleLow.startsWith("return")
+                        || ruleLow.startsWith("shuffle")
+                        || ruleLow.startsWith("turn")
                         || ruleLow.startsWith("tap")
-                        || ruleLow.startsWith("untap")) {
+                        || ruleLow.startsWith("untap"))) {
                     sb.append("you may ");
                 } else if (!ruleLow.startsWith("its controller may")) {
                     sb.append("you may have ");
+                    superRule = superRule
+                            .replaceAll(" becomes ", " become ")
+                            .replaceAll(" blocks ", " block ")
+                            .replaceAll(" deals ", " deal ")
+                            .replaceAll(" discards ", " discard ")
+                            .replaceAll(" gains ", " gain ")
+                            .replaceAll(" gets ", " get ")
+                            .replaceAll(" loses ", " lose ")
+                            .replaceAll(" mills ", " mill ")
+                            .replaceAll(" sacrifices ", " sacrifice ");
                 }
 
             }
@@ -325,6 +347,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public boolean isOptional() {
         return optional;
+    }
+
+    @Override
+    public TriggeredAbilityImpl setAbilityWord(AbilityWord abilityWord) {
+        super.setAbilityWord(abilityWord);
+        return this;
     }
 
     public static boolean isInUseableZoneDiesTrigger(TriggeredAbility source, GameEvent event, Game game) {

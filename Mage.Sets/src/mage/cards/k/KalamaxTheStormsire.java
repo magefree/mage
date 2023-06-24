@@ -32,7 +32,7 @@ public final class KalamaxTheStormsire extends CardImpl {
     public KalamaxTheStormsire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(4);

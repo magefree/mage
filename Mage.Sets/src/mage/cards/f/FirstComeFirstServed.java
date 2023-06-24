@@ -1,9 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -18,8 +14,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
- *
  * @author L_J
  */
 public final class FirstComeFirstServed extends CardImpl {
@@ -31,7 +30,7 @@ public final class FirstComeFirstServed extends CardImpl {
     }
 
     public FirstComeFirstServed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // Each attacking or blocking creature with the lowest collector number among attacking or blocking creatures has first strike.
         GainAbilityAllEffect gainEffect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
@@ -49,14 +48,17 @@ public final class FirstComeFirstServed extends CardImpl {
 }
 
 class FirstComeFirstServedPredicate implements Predicate<Permanent> {
-    
+
+    private static final Pattern partNumberPattern = Pattern.compile("\\d+");
+
     @Override
     public boolean apply(Permanent input, Game game) {
         if (input instanceof PermanentCard) {
             int lowestNumber = Integer.MAX_VALUE;
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterAttackingOrBlockingCreature(), game)) {
+                // token don't have card number
                 int number = parseCardNumber(permanent);
-                if (lowestNumber > number) {
+                if (number > 0 && lowestNumber > number) {
                     lowestNumber = number;
                 }
             }
@@ -64,11 +66,18 @@ class FirstComeFirstServedPredicate implements Predicate<Permanent> {
         }
         return false;
     }
-    
+
     public int parseCardNumber(Permanent input) {
         String str = input.getCardNumber();
-        Matcher matcher = Pattern.compile("\\d+").matcher(str);
-        matcher.find();
-        return Integer.parseInt(matcher.group());
+        if (str == null || str.isEmpty()) {
+            // token don't have card number
+            return 0;
+        }
+        Matcher matcher = partNumberPattern.matcher(str);
+        if (matcher.find()) {
+            return Integer.parseInt(matcher.group());
+        } else {
+            throw new IllegalStateException("Unknown card number format [" + input.getCardNumber() + "] for permanent " + input.getName());
+        }
     }
 }

@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public final class RendFlesh extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Non-Spirit creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Spirit creature");
 
     static {
         filter.add(Predicates.not(SubType.SPIRIT.getPredicate()));

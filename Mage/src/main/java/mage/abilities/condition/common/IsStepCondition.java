@@ -26,7 +26,7 @@ public class IsStepCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return phaseStep == game.getStep().getType() && (!onlyDuringYourSteps || game.isActivePlayer(source.getControllerId()));
+        return phaseStep == game.getTurnStepType() && (!onlyDuringYourSteps || game.isActivePlayer(source.getControllerId()));
     }
 
     @Override

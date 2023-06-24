@@ -35,7 +35,7 @@ public final class ZacamaPrimalCalamity extends CardImpl {
     public ZacamaPrimalCalamity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(9);

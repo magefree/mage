@@ -32,7 +32,7 @@ public final class BragoKingEternal extends CardImpl {
 
     public BragoKingEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT, SubType.NOBLE);
 
         this.power = new MageInt(2);

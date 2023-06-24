@@ -1,8 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -13,21 +10,23 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class KalonianHydra extends CardImpl {
 
     public KalonianHydra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.subtype.add(SubType.HYDRA);
 
         this.power = new MageInt(0);
@@ -35,11 +34,14 @@ public final class KalonianHydra extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // Kalonian Hydra enters the battlefield with four +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
+                CounterType.P1P1.createInstance(4), true
+        ), "with four +1/+1 counters on it"));
+
         // Whenever Kalonian Hydra attacks, double the number of +1/+1 counters on each creature you control.
         this.addAbility(new AttacksTriggeredAbility(new KalonianHydraEffect(), false));
-
     }
 
     private KalonianHydra(final KalonianHydra card) {

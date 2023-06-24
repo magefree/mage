@@ -36,7 +36,7 @@ public final class BorosFuryShield extends CardImpl {
         // If {R} was spent to cast Boros Fury-Shield, it deals damage to that creature's controller equal to the creature's power.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new BorosFuryShieldDamageEffect(),
-                new ManaWasSpentCondition(ColoredManaSymbol.R), "If {R} was spent to cast this spell, it deals damage to that creature's controller equal to the creature's power"));
+                ManaWasSpentCondition.RED, "If {R} was spent to cast this spell, it deals damage to that creature's controller equal to the creature's power"));
     }
 
     private BorosFuryShield(final BorosFuryShield card) {

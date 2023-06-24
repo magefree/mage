@@ -7,6 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect;
@@ -28,7 +29,7 @@ public final class GenjuOfTheRealm extends CardImpl {
     public GenjuOfTheRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{U}{B}{R}{G}");
         this.subtype.add(SubType.AURA);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Enchant Land
         TargetPermanent auraTarget = new TargetLandPermanent();
@@ -42,7 +43,9 @@ public final class GenjuOfTheRealm extends CardImpl {
         this.addAbility(ability2);
 
         // When enchanted land is put into a graveyard, you may return Genju of the Realm from your graveyard to your hand.
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(false, true), "enchanted land", true, false);
+        Effect effect = new ReturnToHandSourceEffect(false, true);
+        effect.setText("you may return {this} from your graveyard to your hand");
+        Ability ability3 = new DiesAttachedTriggeredAbility(effect, "enchanted land", true, false);
         this.addAbility(ability3);
     }
 
@@ -59,7 +62,7 @@ public final class GenjuOfTheRealm extends CardImpl {
 
         SpiritToken() {
             super("Spirit", "legendary 8/12 Spirit creature with trample");
-            addSuperType(SuperType.LEGENDARY);
+            this.supertype.add(SuperType.LEGENDARY);
             cardType.add(CardType.CREATURE);
             this.color.setWhite(true);
             this.color.setBlue(true);

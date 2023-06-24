@@ -1,12 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class OctopusToken extends TokenImpl {
@@ -18,7 +16,6 @@ public final class OctopusToken extends TokenImpl {
         subtype.add(SubType.OCTOPUS);
         power = new MageInt(8);
         toughness = new MageInt(8);
-        this.setOriginalExpansionSetCode("BFZ");
     }
 
     public OctopusToken(final OctopusToken token) {

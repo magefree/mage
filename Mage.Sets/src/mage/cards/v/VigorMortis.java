@@ -49,7 +49,7 @@ public final class VigorMortis extends CardImpl {
 
 class VigorMortisReplacementEffect extends ReplacementEffectImpl {
 
-    private static final Condition condition = new ManaWasSpentCondition(ColoredManaSymbol.G);
+    private static final Condition condition = ManaWasSpentCondition.GREEN;
 
     VigorMortisReplacementEffect() {
         super(Duration.EndOfStep, Outcome.BoostCreature);

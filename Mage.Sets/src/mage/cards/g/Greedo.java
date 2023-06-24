@@ -41,7 +41,7 @@ public final class Greedo extends CardImpl {
 
     public Greedo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RODIAN);
         this.subtype.add(SubType.HUNTER);
         this.power = new MageInt(4);

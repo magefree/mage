@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author North
  */
@@ -18,8 +16,6 @@ public final class GolemToken extends TokenImpl {
         subtype.add(SubType.GOLEM);
         power = new MageInt(3);
         toughness = new MageInt(3);
-
-        availableImageSetCodes = Arrays.asList("MM2", "SOM", "MH1", "M20", "CMR", "2XM");
     }
 
     public GolemToken(final GolemToken token) {
@@ -28,10 +24,5 @@ public final class GolemToken extends TokenImpl {
 
     public GolemToken copy() {
         return new GolemToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
     }
 }

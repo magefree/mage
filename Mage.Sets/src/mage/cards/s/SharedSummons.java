@@ -22,7 +22,7 @@ public final class SharedSummons extends CardImpl {
 
         // Search your library for up to two creature cards with different names, reveal them, put them into your hand, then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(
-                new TargetCardWithDifferentNameInLibrary(0, 2, filter), true, true
+                new TargetCardWithDifferentNameInLibrary(0, 2, filter), true
         ));
     }
 

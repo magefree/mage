@@ -78,7 +78,7 @@ class InscribedTabletEffect extends OneShotEffect {
             Card land = game.getCard(target.getFirstTarget());
             if (land != null) {
                 cards.remove(land);
-                landToHand = controller.moveCards(land, Zone.HAND, source, game);
+                landToHand = controller.moveCardToHandWithInfo(land, source, game, true);
             }
         }
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);

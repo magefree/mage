@@ -6,6 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -18,7 +19,7 @@ import java.util.UUID;
 public final class RelicOfLegends extends CardImpl {
 
     private static final FilterControlledPermanent filter
-            = new FilterControlledPermanent("untapped legendary creature you control");
+            = new FilterControlledCreaturePermanent("untapped legendary creature you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);

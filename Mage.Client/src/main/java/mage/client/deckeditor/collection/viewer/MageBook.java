@@ -5,10 +5,7 @@ import mage.cards.CardDimensions;
 import mage.cards.ExpansionSet;
 import mage.cards.MageCard;
 import mage.cards.Sets;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.cards.repository.ExpansionRepository;
+import mage.cards.repository.*;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
@@ -27,10 +24,10 @@ import mage.game.command.Plane;
 import mage.game.draft.RateCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
-import org.mage.plugins.card.images.CardDownloadData;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -39,16 +36,13 @@ import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.lang.Math.min;
-import static org.mage.plugins.card.images.DownloadPicturesService.getTokenCardUrls;
 
 /**
  * Card viewer (mage book) with cards and page flipping
@@ -238,116 +232,75 @@ public class MageBook extends JComponent {
         List<Object> res = new ArrayList<>();
 
         // tokens
-        List<CardDownloadData> allTokens = getTokenCardUrls();
-        for (CardDownloadData token : allTokens) {
-            if (token.getSet().equals(currentSet)) {
-                try {
-                    String className = token.getName();
-                    className = className.replaceAll("[^a-zA-Z0-9]", "");
-                    className = "mage.game.permanent.token." + className + "Token";
-                    if (token.getTokenClassName() != null && token.getTokenClassName().length() > 0) {
-                        if (token.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*token.*")) {
-                            className = token.getTokenClassName();
-                            className = "mage.game.permanent.token." + className;
-                        } else if (token.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*emblem.*")) {
-                            continue;
-                        }
-                    }
-                    Class<?> c = Class.forName(className);
-                    Constructor<?> cons = c.getConstructor();
-                    Object newToken = cons.newInstance();
-                    if (newToken instanceof Token) {
-                        ((Token) newToken).setOriginalExpansionSetCode(currentSet);
-                        ((Token) newToken).setExpansionSetCodeForImage(currentSet);
-                        ((Token) newToken).setTokenType(token.getType());
-                        res.add(newToken);
-                    }
-                } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    // Swallow exception
-                }
+        List<TokenInfo> allTokens = TokenRepository.instance.getByType(TokenType.TOKEN)
+                .stream()
+                .filter(token -> token.getSetCode().equals(currentSet))
+                .collect(Collectors.toList());
+        allTokens.forEach(token -> {
+            TokenImpl newToken = TokenImpl.createTokenByClassName(token.getFullClassFileName());
+            if (newToken != null) {
+                newToken.setExpansionSetCode(currentSet);
+                newToken.setImageNumber(token.getImageNumber());
+                res.add(newToken);
             }
-        }
+        });
 
         // emblems
-        List<CardDownloadData> allEmblems = getTokenCardUrls();
-        for (CardDownloadData emblem : allEmblems) {
-            if (emblem.getSet().equals(currentSet)) {
-                try {
-                    String className = emblem.getName();
-                    if (emblem.getTokenClassName() != null && emblem.getTokenClassName().length() > 0) {
-                        if (emblem.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*emblem.*")) {
-                            className = emblem.getTokenClassName();
-                            className = "mage.game.command.emblems." + className;
-                        }
-                    } else {
-                        continue;
-                    }
-                    Class<?> c = Class.forName(className);
-                    Constructor<?> cons = c.getConstructor();
-                    Object newEmblem = cons.newInstance();
-                    if (newEmblem instanceof Emblem) {
-                        ((Emblem) newEmblem).setExpansionSetCodeForImage(currentSet);
-                        res.add(newEmblem);
-                    }
-                } catch (ClassNotFoundException | InvocationTargetException | IllegalArgumentException | IllegalAccessException | InstantiationException | SecurityException | NoSuchMethodException ex) {
-                    // Swallow exception
+        List<TokenInfo> allEmblems = TokenRepository.instance.getByType(TokenType.EMBLEM)
+                .stream()
+                .filter(token -> token.getSetCode().equals(currentSet))
+                .collect(Collectors.toList());
+        allEmblems.forEach(token -> {
+            try {
+                Class<?> c = Class.forName(token.getFullClassFileName());
+                Constructor<?> cons = c.getConstructor();
+                Object newEmblem = cons.newInstance();
+                if (newEmblem instanceof Emblem) {
+                    ((Emblem) newEmblem).setExpansionSetCode(currentSet);
+                    res.add(newEmblem);
                 }
+            } catch (Exception e) {
+                // ignore error
             }
-        }
+        });
 
         // planes
-        List<CardDownloadData> allPlanes = getTokenCardUrls();
-        for (CardDownloadData plane : allPlanes) {
-            if (plane.getSet().equals(currentSet)) {
-                try {
-                    String className = plane.getName();
-                    if (plane.getTokenClassName() != null && plane.getTokenClassName().length() > 0) {
-                        if (plane.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*plane.*")) {
-                            className = plane.getTokenClassName();
-                            className = "mage.game.command.planes." + className;
-                        }
-                    } else {
-                        continue;
-                    }
-                    Class<?> c = Class.forName(className);
-                    Constructor<?> cons = c.getConstructor();
-                    Object newPlane = cons.newInstance();
-                    if (newPlane instanceof Plane) {
-                        ((Plane) newPlane).setExpansionSetCodeForImage(currentSet);
-                        res.add(newPlane);
-                    }
-                } catch (ClassNotFoundException | InvocationTargetException | IllegalArgumentException | IllegalAccessException | InstantiationException | SecurityException | NoSuchMethodException ex) {
-                    // Swallow exception
+        List<TokenInfo> allPlanes = TokenRepository.instance.getByType(TokenType.PLANE)
+                .stream()
+                .filter(token -> token.getSetCode().equals(currentSet))
+                .collect(Collectors.toList());
+        allPlanes.forEach(token -> {
+            try {
+                Class<?> c = Class.forName(token.getFullClassFileName());
+                Constructor<?> cons = c.getConstructor();
+                Object newPlane = cons.newInstance();
+                if (newPlane instanceof Plane) {
+                    ((Plane) newPlane).setExpansionSetCode(currentSet);
+                    res.add(newPlane);
                 }
+            } catch (Exception e) {
+                // ignore error
             }
-        }
+        });
 
         // dungeons
-        List<CardDownloadData> allDungeons = getTokenCardUrls();
-        for (CardDownloadData dungeon : allDungeons) {
-            if (dungeon.getSet().equals(currentSet)) {
-                try {
-                    String className = dungeon.getName();
-                    if (dungeon.getTokenClassName() != null && dungeon.getTokenClassName().length() > 0) {
-                        if (dungeon.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*dungeon.*")) {
-                            className = dungeon.getTokenClassName();
-                            className = "mage.game.command.dungeons." + className;
-                        }
-                    } else {
-                        continue;
-                    }
-                    Class<?> c = Class.forName(className);
-                    Constructor<?> cons = c.getConstructor();
-                    Object newDungeon = cons.newInstance();
-                    if (newDungeon instanceof Dungeon) {
-                        ((Dungeon) newDungeon).setExpansionSetCodeForImage(currentSet);
-                        res.add(newDungeon);
-                    }
-                } catch (ClassNotFoundException | InvocationTargetException | IllegalArgumentException | IllegalAccessException | InstantiationException | SecurityException | NoSuchMethodException ex) {
-                    // Swallow exception
+        List<TokenInfo> allDungeons = TokenRepository.instance.getByType(TokenType.DUNGEON)
+                .stream()
+                .filter(token -> token.getSetCode().equals(currentSet))
+                .collect(Collectors.toList());
+        allDungeons.forEach(token -> {
+            try {
+                Class<?> c = Class.forName(token.getFullClassFileName());
+                Constructor<?> cons = c.getConstructor();
+                Object newDungeon = cons.newInstance();
+                if (newDungeon instanceof Dungeon) {
+                    ((Dungeon) newDungeon).setExpansionSetCode(currentSet);
+                    res.add(newDungeon);
                 }
+            } catch (Exception e) {
+                // ignore error
             }
-        }
+        });
 
         return res;
     }
@@ -436,8 +389,10 @@ public class MageBook extends JComponent {
             draftRating.setHorizontalAlignment(SwingConstants.CENTER);
             draftRating.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
             if (card.getOriginalCard() != null) {
+                // card
                 draftRating.setText("draft rating: " + RateCard.rateCard(card.getOriginalCard(), null));
             } else {
+                // token
                 draftRating.setText("");
             }
             jLayeredPane.add(draftRating);
@@ -448,7 +403,7 @@ public class MageBook extends JComponent {
         if (cardDimension == null) {
             cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
         }
-        PermanentToken newToken = new PermanentToken(token, null, token.getOriginalExpansionSetCode(), null);
+        PermanentToken newToken = new PermanentToken(token, null, null);
         newToken.removeSummoningSickness();
         PermanentView theToken = new PermanentView(newToken, null, null, null);
         theToken.setInViewerOnly(true);

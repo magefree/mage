@@ -23,7 +23,7 @@ public final class AngusMackenzie extends CardImpl {
 
     public AngusMackenzie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
 
@@ -62,7 +62,7 @@ class BeforeCombatDamageCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-            PhaseStep phaseStep = game.getStep().getType();
+            PhaseStep phaseStep = game.getTurnStepType();
             if(phaseStep.getIndex() < PhaseStep.FIRST_COMBAT_DAMAGE.getIndex()) {
                 return true;
             }

@@ -148,7 +148,7 @@
 
      public void updateDraft(DraftView draftView) {
          if (draftView.getSets().size() != 3) {
-             // Random draft
+             // Random draft - TODO: can we access the type of draft here?
              this.txtPack1.setText("Random Boosters");
              this.txtPack2.setText("Random Boosters");
              this.txtPack3.setText("Random Boosters");
@@ -171,6 +171,7 @@
          int left = draftView.getPlayers().size() - right;
          int height = left * 18;
          lblTableImage.setSize(new Dimension(lblTableImage.getWidth(), height));
+         // TODO: Can we fix this for Rich Draft where there is no direction?
          Image tableImage = ImageHelper.getImageFromResources(draftView.getBoosterNum() % 2 == 1 ? "/draft/table_left.png" : "/draft/table_right.png");
          BufferedImage resizedTable = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(tableImage, BufferedImage.TYPE_INT_ARGB), lblTableImage.getWidth(), lblTableImage.getHeight());
          lblTableImage.setIcon(new ImageIcon(resizedTable));
@@ -304,7 +305,9 @@
              countdown.start();
          }
          
-         SessionHandler.setBoosterLoaded(draftId); // confirm to the server that the booster has been loaded
+         if (!draftBooster.isEmptyGrid()) {
+            SessionHandler.setBoosterLoaded(draftId); // confirm to the server that the booster has been successfully loaded, otherwise the server will re-send the booster
+         }
      }
 
      private void loadCardsToPickedCardsArea(SimpleCardsView pickedCards) {
@@ -429,10 +432,11 @@
      }
 
      private String getCurrentSetCode() {
-         if (!setCodes.isEmpty()) {
+         // TODO: Record set codes for random drafts correctly
+         if (setCodes.size() >= packNo) {
              return setCodes.get(packNo - 1);
          } else {
-             return "";
+             return "   ";
          }
      }
 
@@ -524,6 +528,7 @@
          draftLeftPane.setVerifyInputWhenFocusTarget(false);
 
          btnQuitTournament.setText("Quit Tournament");
+         btnQuitTournament.setFocusable(false);
          btnQuitTournament.addActionListener(evt -> btnQuitTournamentActionPerformed(evt));
 
          lblPack1.setText("Pack 1:");
@@ -823,8 +828,8 @@
 
      private void btnQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTournamentActionPerformed
          UserRequestMessage message = new UserRequestMessage("Confirm quit tournament", "Are you sure you want to quit the draft tournament?");
-         message.setButton1("Yes", PlayerAction.CLIENT_QUIT_DRAFT_TOURNAMENT);
-         message.setButton2("No", null);
+         message.setButton1("No", null);
+         message.setButton2("Yes", PlayerAction.CLIENT_QUIT_DRAFT_TOURNAMENT);
          message.setTournamentId(draftId);
          MageFrame.getInstance().showUserRequestDialog(message);
      }//GEN-LAST:event_btnQuitTournamentActionPerformed

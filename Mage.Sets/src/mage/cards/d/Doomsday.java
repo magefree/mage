@@ -68,7 +68,7 @@ class DoomsdayEffect extends OneShotEffect {
             int number = Math.min(5, allCards.size());
             TargetCard target = new TargetCard(number, number, Zone.ALL, new FilterCard());
 
-            if (controller.choose(Outcome.Benefit, allCards, target, game)) {
+            if (controller.choose(Outcome.Benefit, allCards, target, source, game)) {
                 Cards toLibrary = new CardsImpl(target.getTargets());
                 allCards.removeAll(toLibrary);
                 // Exile the rest

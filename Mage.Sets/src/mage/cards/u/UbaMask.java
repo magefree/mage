@@ -92,7 +92,7 @@ class UbaMaskPlayEffect extends AsThoughEffectImpl {
 
     public UbaMaskPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "Each player may play cards they exiled with {this} this turn";
+        staticText = "Each player may play lands and cast spells from among cards they exiled with {this} this turn";
     }
 
     public UbaMaskPlayEffect(final UbaMaskPlayEffect effect) {

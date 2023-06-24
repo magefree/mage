@@ -63,7 +63,7 @@ class IcequakeEffect extends OneShotEffect {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller != null) {
                 permanent.destroy(source, game, false);
-                if (permanent.isSnow()) {
+                if (permanent.isSnow(game)) {
                     controller.damage(1, source.getSourceId(), source, game);
                 }
                 return true;

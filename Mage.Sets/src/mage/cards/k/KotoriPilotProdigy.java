@@ -27,13 +27,13 @@ public final class KotoriPilotProdigy extends CardImpl {
     private static final FilterPermanent filter2 = new FilterArtifactCreaturePermanent("artifact creature you control");
 
     static {
-        filter.add(TargetController.YOU.getControllerPredicate());
+        filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
     public KotoriPilotProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MOONFOLK);
         this.subtype.add(SubType.PILOT);
         this.power = new MageInt(2);

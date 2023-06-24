@@ -17,25 +17,14 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author LoneFox
  */
 public final class BelzenlokDemonToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("DOM"));
-    }
-
     public BelzenlokDemonToken() {
         super("Demon Token", "6/6 black Demon creature token with flying, trample, and "
                 + "\"At the beginning of your upkeep, sacrifice another creature. If you can't, this creature deals 6 damage to you.\"");
-        availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.DEMON);
@@ -53,14 +42,6 @@ public final class BelzenlokDemonToken extends TokenImpl {
     @Override
     public BelzenlokDemonToken copy() {
         return new BelzenlokDemonToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode().equals("C14")) {
-            this.setTokenType(2);
-        }
     }
 }
 

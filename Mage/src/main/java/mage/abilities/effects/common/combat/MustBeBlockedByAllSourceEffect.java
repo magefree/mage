@@ -28,7 +28,8 @@ public class MustBeBlockedByAllSourceEffect extends RequirementEffect {
     public MustBeBlockedByAllSourceEffect(Duration duration, FilterCreaturePermanent filter) {
         super(duration);
         this.filter = filter;
-        staticText = "All " + filter.getMessage() + " able to block {this} do so";
+        staticText = "All " + filter.getMessage() + " able to block {this}"
+                + (duration.equals(Duration.EndOfTurn) ? " this turn " : " ") + "do so";
     }
 
     public MustBeBlockedByAllSourceEffect(final MustBeBlockedByAllSourceEffect effect) {

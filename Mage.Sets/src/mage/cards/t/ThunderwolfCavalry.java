@@ -11,6 +11,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
 
@@ -21,6 +22,10 @@ public final class ThunderwolfCavalry extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterControlledCreaturePermanent("other creature you control");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     public ThunderwolfCavalry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

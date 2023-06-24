@@ -524,7 +524,13 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     private final CardTypeCounter planeswalkerCounter = new CardTypeCounter() {
         @Override
         protected boolean is(CardView card) {
-            return card.isPlanesWalker();
+            return card.isPlaneswalker();
+        }
+    };
+    private final CardTypeCounter battleCounter = new CardTypeCounter() {
+        @Override
+        protected boolean is(CardView card) {
+            return card.isBattle();
         }
     };
     private final CardTypeCounter tribalCounter = new CardTypeCounter() {
@@ -542,6 +548,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
             instantCounter,
             planeswalkerCounter,
             sorceryCounter,
+            battleCounter,
             tribalCounter
     };
 

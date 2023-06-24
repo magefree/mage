@@ -44,7 +44,7 @@ public final class LichsMastery extends CardImpl {
     public LichsMastery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());

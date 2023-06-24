@@ -38,7 +38,7 @@ public final class SarkhanUnbroken extends CardImpl {
 
     public SarkhanUnbroken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
 
         this.setStartingLoyalty(4);

@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -18,8 +16,6 @@ public final class Demon33Token extends TokenImpl {
         subtype.add(SubType.DEMON);
         power = new MageInt(3);
         toughness = new MageInt(3);
-
-        availableImageSetCodes.addAll(Arrays.asList("CLB"));
     }
 
     public Demon33Token(final Demon33Token token) {

@@ -20,7 +20,7 @@ import java.util.UUID;
 /**
  * @author weirddan455
  */
-public final class EsikaGodOfTheTree extends ModalDoubleFacesCard {
+public final class EsikaGodOfTheTree extends ModalDoubleFacedCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creatures");
 
@@ -29,15 +29,16 @@ public final class EsikaGodOfTheTree extends ModalDoubleFacesCard {
     }
 
     public EsikaGodOfTheTree(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{1}{G}{G}",
-                "The Prismatic Bridge", new CardType[]{CardType.ENCHANTMENT}, new SubType[]{}, "{W}{U}{B}{R}{G}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{1}{G}{G}",
+                "The Prismatic Bridge",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ENCHANTMENT}, new SubType[]{}, "{W}{U}{B}{R}{G}"
         );
 
         // 1.
         // Esika, God of the Tree
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(1), new MageInt(4));
 
         // Vigilance
@@ -55,8 +56,6 @@ public final class EsikaGodOfTheTree extends ModalDoubleFacesCard {
         // 2.
         // The Prismatic Bridge
         // Legendary Enchantment
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-
         // At the beginning of your upkeep, reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
         this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD, new PrismaticBridgeEffect(), TargetController.YOU, false, false

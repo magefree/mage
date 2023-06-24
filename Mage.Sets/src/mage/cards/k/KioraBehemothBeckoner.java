@@ -30,7 +30,7 @@ public final class KioraBehemothBeckoner extends CardImpl {
     public KioraBehemothBeckoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G/U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIORA);
         this.setStartingLoyalty(7);
 

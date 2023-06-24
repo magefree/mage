@@ -1,8 +1,5 @@
 package mage.cards.v;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -18,10 +15,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
-import mage.constants.*;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
+import mage.cards.ModalDoubleFacedCard;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -38,22 +35,26 @@ import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
-public final class ValkiGodOfLies extends ModalDoubleFacesCard {
+public final class ValkiGodOfLies extends ModalDoubleFacedCard {
 
     public ValkiGodOfLies(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{1}{B}",
-                "Tibalt, Cosmic Impostor", new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.TIBALT}, "{5}{B}{R}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{1}{B}",
+                "Tibalt, Cosmic Impostor",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.TIBALT}, "{5}{B}{R}"
         );
 
         // 1.
         // Valki, God of Lies
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(2), new MageInt(1));
 
         // When Valki enters the battlefield, each opponent reveals their hand. For each opponent, exile a creature card they revealed this way until Valki leaves the battlefield.
@@ -65,7 +66,6 @@ public final class ValkiGodOfLies extends ModalDoubleFacesCard {
         // 2.
         // Tibalt, Cosmic Impostor
         // Legendary Planeswalker — Tibalt
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getRightHalfCard().setStartingLoyalty(5);
 
         // As Tibalt enters the battlefield, you get an emblem with “You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells.”
@@ -125,7 +125,7 @@ class ValkiGodOfLiesRevealExileEffect extends OneShotEffect {
                     TargetCard targetToExile = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
                     targetToExile.withChooseHint("card to exile");
                     targetToExile.setNotTarget(true);
-                    if (controller.choose(Outcome.Exile, opponent.getHand(), targetToExile, game)) {
+                    if (controller.choose(Outcome.Exile, opponent.getHand(), targetToExile, source, game)) {
                         Card targetedCardToExile = game.getCard(targetToExile.getFirstTarget());
                         if (targetedCardToExile != null
                                 && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
@@ -242,7 +242,7 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
             Cards cards = game.getExile().getExileZone(exileId);
             if (cards != null
                     && !cards.isEmpty()
-                    && controller.choose(Outcome.Benefit, cards, target, game)) {
+                    && controller.choose(Outcome.Benefit, cards, target, source, game)) {
                 Card chosenExiledCard = game.getCard(target.getFirstTarget());
                 if (chosenExiledCard != null) {
                     ContinuousEffect copyEffect = new CopyEffect(Duration.WhileOnBattlefield, chosenExiledCard.getMainCard(), source.getSourceId());

@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -19,13 +17,6 @@ public final class PhyrexianGermToken extends TokenImpl {
         subtype.add(SubType.GERM);
         power = new MageInt(0);
         toughness = new MageInt(0);
-
-        availableImageSetCodes = Arrays.asList("C14", "C15", "C16", "MBS", "MM2", "PC2", "MH2", "NEC", "2XM", "CM2", "CMA", "PCA");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
     }
 
     public PhyrexianGermToken(final PhyrexianGermToken token) {

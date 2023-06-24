@@ -24,7 +24,7 @@ public final class ObekaBruteChronologist extends CardImpl {
     public ObekaBruteChronologist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);

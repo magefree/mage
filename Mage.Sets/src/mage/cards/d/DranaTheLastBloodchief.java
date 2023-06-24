@@ -34,7 +34,7 @@ public final class DranaTheLastBloodchief extends CardImpl {
     public DranaTheLastBloodchief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(4);
@@ -93,7 +93,7 @@ class DranaTheLastBloodchiefEffect extends OneShotEffect {
         }
         TargetCard target = new TargetCardInGraveyard(filter);
         target.setNotTarget(true);
-        player.choose(outcome, controller.getGraveyard(), target, game);
+        player.choose(outcome, controller.getGraveyard(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

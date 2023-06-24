@@ -34,7 +34,7 @@ public final class AyliEternalPilgrim extends CardImpl {
 
     public AyliEternalPilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOR, SubType.CLERIC);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

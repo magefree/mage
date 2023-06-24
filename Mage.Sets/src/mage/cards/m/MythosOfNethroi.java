@@ -42,8 +42,8 @@ public final class MythosOfNethroi extends CardImpl {
 class MythosOfNethroiEffect extends OneShotEffect {
 
     private static final Condition condition = new CompoundCondition(
-            new ManaWasSpentCondition(ColoredManaSymbol.G),
-            new ManaWasSpentCondition(ColoredManaSymbol.W)
+            ManaWasSpentCondition.GREEN,
+            ManaWasSpentCondition.WHITE
     );
 
     MythosOfNethroiEffect() {

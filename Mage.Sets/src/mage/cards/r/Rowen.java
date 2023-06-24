@@ -72,7 +72,7 @@ class RowenAbility extends TriggeredAbilityImpl {
                     lastTriggeredTurn = game.getTurnNum();
                     controller.revealCards(sourcePermanent.getName(), new CardsImpl(card), game);
                     this.getEffects().clear();
-                    if (card.isLand(game) && card.isBasic()) {
+                    if (card.isLand(game) && card.isBasic(game)) {
                         this.addEffect(new DrawCardSourceControllerEffect(1));
                     }
                     return true;

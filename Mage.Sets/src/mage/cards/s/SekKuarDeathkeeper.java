@@ -32,7 +32,7 @@ public final class SekKuarDeathkeeper extends CardImpl {
 
     public SekKuarDeathkeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.SHAMAN);
 

@@ -1,20 +1,17 @@
-
-
 package mage.game.permanent.token;
+
 import mage.MageInt;
+import mage.abilities.keyword.SpaceflightAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.abilities.keyword.SpaceflightAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class RebelStarshipToken extends TokenImpl {
 
     public RebelStarshipToken() {
         super("B-Wing Token", "2/3 blue Rebel Starship artifact creature tokens with spaceflight name B-Wing");
-        this.setOriginalExpansionSetCode("SWS");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         cardType.add(CardType.CREATURE);

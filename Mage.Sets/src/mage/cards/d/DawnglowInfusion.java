@@ -26,10 +26,10 @@ public final class DawnglowInfusion extends CardImpl {
         DynamicValue xValue = ManacostVariableValue.REGULAR;
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GainLifeEffect(xValue),
-                new ManaWasSpentCondition(ColoredManaSymbol.G), "You gain X life if {G} was spent to cast this spell"));
+                ManaWasSpentCondition.GREEN, "You gain X life if {G} was spent to cast this spell"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GainLifeEffect(xValue),
-                new ManaWasSpentCondition(ColoredManaSymbol.W), "and X life if {W} was spent to cast this spell"));
+                ManaWasSpentCondition.WHITE, "and X life if {W} was spent to cast this spell"));
         this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {G}{W} was spent.)</i>"));
     }
 

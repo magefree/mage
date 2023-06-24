@@ -30,7 +30,7 @@ public final class JarJarBinks extends CardImpl {
 
     public JarJarBinks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GUNGAN);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
@@ -75,7 +75,7 @@ class JarJarBinksEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent jarJar = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent jarJar = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null && jarJar != null && opponent != null) {

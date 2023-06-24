@@ -39,7 +39,7 @@ public final class LordWindgrace extends CardImpl {
     public LordWindgrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WINDGRACE);
         this.setStartingLoyalty(5);
 

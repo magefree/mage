@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -32,7 +33,7 @@ public final class OliviaCrimsonBride extends CardImpl {
     public OliviaCrimsonBride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(3);
@@ -102,7 +103,7 @@ class OliviaCrimsonBrideEffect extends OneShotEffect {
 
 class OliviaCrimsonBrideAbility extends StateTriggeredAbility {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterControlledPermanent();
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());

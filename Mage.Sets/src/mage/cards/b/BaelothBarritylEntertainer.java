@@ -48,7 +48,7 @@ public final class BaelothBarritylEntertainer extends CardImpl {
     public BaelothBarritylEntertainer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);

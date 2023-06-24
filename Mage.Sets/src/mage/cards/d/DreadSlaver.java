@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesBlackZombieAdditionEffect;
+import mage.abilities.effects.common.continuous.AddCreatureTypeAdditionEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -67,7 +67,7 @@ class DreadSlaverEffect extends OneShotEffect {
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
+                ContinuousEffect effect = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, true);
                 effect.setTargetPointer(new FixedTarget(card.getId(), game));
                 game.addEffect(effect, source);
                 return true;

@@ -45,7 +45,7 @@ public final class StoicFarmer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new ConditionalOneShotEffect(
                         new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true),
-                        new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)),
+                        new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true),
                         condition, "search your library for a basic Plains card and reveal it. " +
                         "If an opponent controls more lands than you, put it onto the battlefield tapped. " +
                         "Otherwise put it into your hand. Then shuffle"

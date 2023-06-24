@@ -23,7 +23,7 @@ public final class BounteousKirin extends CardImpl {
 
     public BounteousKirin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KIRIN, SubType.SPIRIT);
 
         this.power = new MageInt(4);

@@ -128,8 +128,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
                     try {
                         if (plane != null && !planesVisited.contains(plane.getName())) {
                             foundNextPlane = true;
-                            plane.setControllerId(controller.getId());
-                            game.addPlane(plane, null, controller.getId());
+                            game.addPlane(plane, controller.getId());
                         }
                     } catch (Exception ex) {
                     }

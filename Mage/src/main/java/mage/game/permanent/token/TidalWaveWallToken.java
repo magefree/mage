@@ -1,15 +1,11 @@
-
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class TidalWaveWallToken extends TokenImpl {
@@ -22,8 +18,6 @@ public final class TidalWaveWallToken extends TokenImpl {
         power = new MageInt(5);
         toughness = new MageInt(5);
         this.addAbility(DefenderAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("EMA", "DDT");
     }
 
     public TidalWaveWallToken(final TidalWaveWallToken token) {

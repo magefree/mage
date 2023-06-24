@@ -88,6 +88,6 @@ class PhyrexianObliteratorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a source deals damage to {this}, that source's controller sacrifices that many permanents";
+        return "Whenever a source deals damage to {this}, that source's controller sacrifices that many permanents.";
     }
 }

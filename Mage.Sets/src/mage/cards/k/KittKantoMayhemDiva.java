@@ -38,7 +38,7 @@ public final class KittKantoMayhemDiva extends CardImpl {
     public KittKantoMayhemDiva(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.BARD);
         this.subtype.add(SubType.DRUID);

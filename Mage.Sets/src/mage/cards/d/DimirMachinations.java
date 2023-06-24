@@ -71,7 +71,7 @@ class DimirMachinationsEffect extends OneShotEffect {
             if (!cards.isEmpty()) {
                 controller.lookAtCards(source, null, cards, game);
                 TargetCard targetExile = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, new FilterCard("cards to exile"));
-                if (controller.choose(Outcome.Exile, cards, targetExile, game)) {
+                if (controller.choose(Outcome.Exile, cards, targetExile, source, game)) {
                     Cards toExile = new CardsImpl(targetExile.getTargets());
                     controller.moveCards(toExile, Zone.EXILED, source, game);
                     cards.removeAll(toExile);

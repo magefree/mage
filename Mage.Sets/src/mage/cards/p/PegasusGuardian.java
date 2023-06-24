@@ -42,7 +42,7 @@ public final class PegasusGuardian extends AdventureCard {
         // Rescue the Foal
         // Exile target creature you control, then return that card to the battlefield under its owner's control.
         this.getSpellCard().getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellCard().getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
+        this.getSpellCard().getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).concatBy(", then"));
         this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 

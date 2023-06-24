@@ -43,7 +43,7 @@ public final class ErebosBleakHearted extends CardImpl {
     public ErebosBleakHearted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);

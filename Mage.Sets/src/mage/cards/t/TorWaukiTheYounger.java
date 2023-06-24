@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetAnyTarget;
 import mage.util.CardUtil;
@@ -28,7 +28,7 @@ public final class TorWaukiTheYounger extends CardImpl {
     public TorWaukiTheYounger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARCHER);
         this.power = new MageInt(3);
@@ -84,7 +84,7 @@ class TorWaukiTheYoungerEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(game.getControllerId(event.getSourceId()))
                 && !source.getSourceId().equals(event.getSourceId())
-                && !((DamagedEvent) event).isCombatDamage();
+                && !((DamageEvent) event).isCombatDamage();
     }
 
     @Override

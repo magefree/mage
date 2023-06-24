@@ -27,7 +27,7 @@ public final class NullChamber extends CardImpl {
     public NullChamber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-        this.addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // As Null Chamber enters the battlefield, you and an opponent each name a card other than a basic land card.
         // The named cards can't be played.

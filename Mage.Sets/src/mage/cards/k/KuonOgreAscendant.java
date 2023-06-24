@@ -29,7 +29,7 @@ public final class KuonOgreAscendant extends CardImpl {
 
     public KuonOgreAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.MONK);
 
@@ -44,8 +44,7 @@ public final class KuonOgreAscendant extends CardImpl {
                 Zone.BATTLEFIELD,
                 new FlipSourceEffect(new KuonsEssenceToken()),
                 TargetController.ANY,
-                KuonOgreAscendantCondition.instance, false),
-                new CreaturesDiedWatcher());
+                KuonOgreAscendantCondition.instance, false));
     }
 
     private KuonOgreAscendant(final KuonOgreAscendant card) {
@@ -62,7 +61,7 @@ class KuonsEssenceToken extends TokenImpl {
 
     KuonsEssenceToken() {
         super("Kuon's Essence", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.ENCHANTMENT);
 
         color.setBlack(true);

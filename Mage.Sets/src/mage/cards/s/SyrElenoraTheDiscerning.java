@@ -22,7 +22,7 @@ public final class SyrElenoraTheDiscerning extends CardImpl {
     public SyrElenoraTheDiscerning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(0);
@@ -30,7 +30,7 @@ public final class SyrElenoraTheDiscerning extends CardImpl {
 
         // Syr Elenora the Discerning's power is equal to the number of cards in your hand.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerSourceEffect(CardsInControllerHandCount.instance, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerSourceEffect(CardsInControllerHandCount.instance)
         ));
 
         // When Syr Elenora enters the battlefield, draw a card.

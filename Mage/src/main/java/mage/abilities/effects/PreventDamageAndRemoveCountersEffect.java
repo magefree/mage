@@ -12,17 +12,23 @@ import mage.game.permanent.Permanent;
  */
 public class PreventDamageAndRemoveCountersEffect extends PreventionEffectImpl {
     private final boolean thatMany;
+    private final boolean whileHasCounter;
 
-    public PreventDamageAndRemoveCountersEffect(boolean thatMany) {
+    public PreventDamageAndRemoveCountersEffect(boolean thatMany, boolean whileHasCounter, boolean textFromIt) {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
         this.thatMany = thatMany;
-        staticText = "If damage would be dealt to {this} while it has a +1/+1 counter on it, " +
-                "prevent that damage and remove " + (thatMany ? "that many +1/+1 counters" : "a +1/+1 counter") + " from it";
+        this.whileHasCounter = whileHasCounter;
+        staticText = "If damage would be dealt to {this}" +
+                (whileHasCounter ? " while it has a +1/+1 counter on it" : "") +
+                ", prevent that damage and remove " +
+                (thatMany ? "that many +1/+1 counters" : "a +1/+1 counter") +
+                " from " + (textFromIt ? "it" : "{this}");
     }
 
-    private PreventDamageAndRemoveCountersEffect(final PreventDamageAndRemoveCountersEffect effect) {
+    protected PreventDamageAndRemoveCountersEffect(final PreventDamageAndRemoveCountersEffect effect) {
         super(effect);
         this.thatMany = effect.thatMany;
+        this.whileHasCounter = effect.whileHasCounter;
     }
 
     @Override
@@ -56,6 +62,6 @@ public class PreventDamageAndRemoveCountersEffect extends PreventionEffectImpl {
         return super.applies(event, source, game)
                 && permanent != null
                 && event.getTargetId().equals(source.getSourceId())
-                && permanent.getCounters(game).containsKey(CounterType.P1P1);
+                && (!whileHasCounter || permanent.getCounters(game).containsKey(CounterType.P1P1));
     }
 }

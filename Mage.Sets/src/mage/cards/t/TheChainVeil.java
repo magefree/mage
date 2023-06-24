@@ -30,7 +30,7 @@ public final class TheChainVeil extends CardImpl {
 
     public TheChainVeil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your end step, if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(

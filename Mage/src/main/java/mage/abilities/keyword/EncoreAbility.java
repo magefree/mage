@@ -17,9 +17,9 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
-import mage.util.CardUtil;
+import mage.util.functions.CopyTokenFunction;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -85,8 +85,7 @@ class EncoreEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        EmptyToken token = new EmptyToken();
-        CardUtil.copyTo(token).from(card, game);
+        Token token = CopyTokenFunction.createTokenCopy(card, game);
         Set<MageObjectReference> addedTokens = new HashSet<>();
         int opponentCount = OpponentsCount.instance.calculate(game, source, this);
         if (opponentCount < 1) {

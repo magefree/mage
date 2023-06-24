@@ -1,7 +1,6 @@
 package mage.abilities.common;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -19,10 +18,10 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.Targets;
 import mage.util.CardUtil;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 /**
  * @author LevelX2
@@ -34,7 +33,7 @@ public class SagaAbility extends SimpleStaticAbility {
     private final boolean readAhead;
 
     public SagaAbility(Card card) {
-        this(card, SagaChapter.CHAPTER_III);
+        this(card, SagaChapter.CHAPTER_III, false);
     }
 
     public SagaAbility(Card card, SagaChapter maxChapter) {
@@ -44,7 +43,7 @@ public class SagaAbility extends SimpleStaticAbility {
     public SagaAbility(Card card, SagaChapter maxChapter, boolean readAhead) {
         super(Zone.ALL, null);
         this.maxChapter = maxChapter;
-        this.showSacText = card.getSecondCardFace() == null;
+        this.showSacText = card.getSecondCardFace() == null && !card.isNightCard();
         this.readAhead = readAhead;
         this.setRuleVisible(true);
         this.setRuleAtTheTop(true);
@@ -64,6 +63,14 @@ public class SagaAbility extends SimpleStaticAbility {
         addChapterEffect(card, chapter, chapter, new Effects(effects));
     }
 
+    public void addChapterEffect(Card card, SagaChapter chapter, Effects effects, Target target) {
+        addChapterEffect(card, chapter, chapter, effects, target);
+    }
+
+    public void addChapterEffect(Card card, SagaChapter chapter, Consumer<TriggeredAbility> applier) {
+        addChapterEffect(card, chapter, chapter, applier);
+    }
+
     public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effect effect) {
         addChapterEffect(card, fromChapter, toChapter, new Effects(effect), (Target) null);
     }
@@ -76,34 +83,37 @@ public class SagaAbility extends SimpleStaticAbility {
         addChapterEffect(card, fromChapter, toChapter, effect, target, false);
     }
 
-    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effect effect, Target target, boolean optional) {
-        addChapterEffect(card, fromChapter, toChapter, new Effects(effect), new Targets(target), optional);
-    }
-
     public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Target target) {
-        addChapterEffect(card, fromChapter, toChapter, effects, new Targets(target));
+        addChapterEffect(card, fromChapter, toChapter, effects, target, false);
     }
 
-    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Targets targets) {
-        addChapterEffect(card, fromChapter, toChapter, effects, targets, false);
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effect effect, Target target, boolean optional) {
+        addChapterEffect(card, fromChapter, toChapter, new Effects(effect), target, optional);
     }
 
-    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Targets targets, boolean optional, Mode... modes) {
-        for (int i = fromChapter.getNumber(); i <= toChapter.getNumber(); i++) {
-            ChapterTriggeredAbility ability = new ChapterTriggeredAbility(null, SagaChapter.getChapter(i), toChapter, optional, readAhead);
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Consumer<TriggeredAbility> applier) {
+        addChapterEffect(card, fromChapter, toChapter, false, applier);
+    }
+
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Target target, boolean optional) {
+        addChapterEffect(card, fromChapter, toChapter, optional, ability -> {
             for (Effect effect : effects) {
                 if (effect != null) {
                     ability.addEffect(effect.copy());
                 }
             }
-            for (Target target : targets) {
-                if (target != null) {
-                    ability.addTarget(target.copy());
-                }
+            if (target != null) {
+                ability.addTarget(target.copy());
             }
-            for (Mode mode : modes) {
-                ability.addMode(mode.copy());
-            }
+        });
+    }
+
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, boolean optional, Consumer<TriggeredAbility> applier) {
+        for (int i = fromChapter.getNumber(); i <= toChapter.getNumber(); i++) {
+            ChapterTriggeredAbility ability = new ChapterTriggeredAbility(
+                    SagaChapter.getChapter(i), toChapter, optional, readAhead
+            );
+            applier.accept(ability);
             if (i > fromChapter.getNumber()) {
                 ability.setRuleVisible(false);
             }
@@ -194,14 +204,14 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
     private final SagaChapter chapterFrom, chapterTo;
     private final boolean readAhead;
 
-    public ChapterTriggeredAbility(Effect effect, SagaChapter chapterFrom, SagaChapter chapterTo, boolean optional, boolean readAhead) {
-        super(Zone.ALL, effect, optional);
+    ChapterTriggeredAbility(SagaChapter chapterFrom, SagaChapter chapterTo, boolean optional, boolean readAhead) {
+        super(Zone.ALL, null, optional);
         this.chapterFrom = chapterFrom;
         this.chapterTo = chapterTo;
         this.readAhead = readAhead;
     }
 
-    public ChapterTriggeredAbility(final ChapterTriggeredAbility ability) {
+    private ChapterTriggeredAbility(final ChapterTriggeredAbility ability) {
         super(ability);
         this.chapterFrom = ability.chapterFrom;
         this.chapterTo = ability.chapterTo;

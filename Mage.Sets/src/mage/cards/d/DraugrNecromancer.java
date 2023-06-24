@@ -29,7 +29,7 @@ public final class DraugrNecromancer extends CardImpl {
     public DraugrNecromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(4);
@@ -77,6 +77,7 @@ class DraugrNecromancerReplacementEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null
                 || permanent == null
+                || (permanent instanceof PermanentToken)
                 || !controller.hasOpponent(permanent.getControllerId(), game)) {
             return false;
         }
@@ -181,8 +182,8 @@ class DraugrNecromancerSpendAnyManaEffect extends AsThoughEffectImpl implements 
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
             } else if (card instanceof AdventureCard) {
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
-            } else if (card instanceof ModalDoubleFacesCard) {
-                cardState = game.getLastKnownInformationCard(((ModalDoubleFacesCard) card).getLeftHalfCard().getId(), Zone.EXILED);
+            } else if (card instanceof ModalDoubleFacedCard) {
+                cardState = game.getLastKnownInformationCard(((ModalDoubleFacedCard) card).getLeftHalfCard().getId(), Zone.EXILED);
             } else {
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
             }
@@ -192,7 +193,7 @@ class DraugrNecromancerSpendAnyManaEffect extends AsThoughEffectImpl implements 
 
     @Override
     public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        if (mana.getSourceObject().isSnow()) {
+        if (mana.getSourceObject() != null && mana.getSourceObject().isSnow(game)) {
             return mana.getFirstAvailable();
         }
         return null;

@@ -26,7 +26,9 @@ public final class AlluringSiren extends CardImpl {
         this.subtype.add(SubType.SIREN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+
+        // {T}: Target creature an opponent controls attacks you this turn if able.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn, TargetController.YOU), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
     }

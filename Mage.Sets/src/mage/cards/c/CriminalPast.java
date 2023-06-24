@@ -28,7 +28,7 @@ public final class CriminalPast extends CardImpl {
     public CriminalPast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have menace and "This creature gets +X/+0, where X is the number of creature cards in your graveyard."

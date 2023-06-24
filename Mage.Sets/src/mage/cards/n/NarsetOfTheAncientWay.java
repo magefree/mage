@@ -35,7 +35,7 @@ public final class NarsetOfTheAncientWay extends CardImpl {
     public NarsetOfTheAncientWay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NARSET);
         this.setStartingLoyalty(4);
 

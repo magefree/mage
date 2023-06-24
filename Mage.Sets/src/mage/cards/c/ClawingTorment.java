@@ -36,7 +36,7 @@ public final class ClawingTorment extends CardImpl {
         // Enchant artifact creature
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE);
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         this.addAbility(new EnchantAbility(auraTarget));
 
         // As long as enchanted permanent is a creature, it gets -1/-1 and can't block.

@@ -36,7 +36,7 @@ public final class TheBigIdea extends CardImpl {
     public TheBigIdea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BRAINIAC);
         this.subtype.add(SubType.VILLAIN);
         this.power = new MageInt(4);

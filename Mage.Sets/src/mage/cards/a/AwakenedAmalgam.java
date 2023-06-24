@@ -13,7 +13,6 @@ import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -34,7 +33,7 @@ public final class AwakenedAmalgam extends CardImpl {
 
         // Awakened Amalgam's power and toughness are each equal to the number of differently named lands you control.
         DynamicValue value = (new AwakenedAmalgamLandNamesCount());
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value)));
     }
 
     private AwakenedAmalgam(final AwakenedAmalgam card) {
@@ -52,9 +51,6 @@ class AwakenedAmalgamLandNamesCount implements DynamicValue {
     public AwakenedAmalgamLandNamesCount() {
     }
 
-    public AwakenedAmalgamLandNamesCount(AwakenedAmalgamLandNamesCount dynamicValue) {
-    }
-
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Set<String> landNames = new HashSet<>();
@@ -68,7 +64,7 @@ class AwakenedAmalgamLandNamesCount implements DynamicValue {
 
     @Override
     public AwakenedAmalgamLandNamesCount copy() {
-        return new AwakenedAmalgamLandNamesCount(this);
+        return this;
     }
 
     @Override

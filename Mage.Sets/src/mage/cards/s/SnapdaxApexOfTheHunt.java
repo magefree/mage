@@ -34,7 +34,7 @@ public final class SnapdaxApexOfTheHunt extends CardImpl {
     public SnapdaxApexOfTheHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DINOSAUR);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.NIGHTMARE);

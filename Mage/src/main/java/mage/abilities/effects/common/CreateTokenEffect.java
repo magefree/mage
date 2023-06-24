@@ -43,6 +43,10 @@ public class CreateTokenEffect extends OneShotEffect {
         this(token, amount, false, false);
     }
 
+    public CreateTokenEffect(Token token, int amount, boolean tapped) {
+        this(token, amount, tapped, false);
+    }
+
     public CreateTokenEffect(Token token, int amount, boolean tapped, boolean attacking) {
         this(token, StaticValue.get(amount), tapped, attacking);
     }

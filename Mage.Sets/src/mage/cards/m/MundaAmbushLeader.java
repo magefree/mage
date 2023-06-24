@@ -28,7 +28,7 @@ public final class MundaAmbushLeader extends CardImpl {
 
     public MundaAmbushLeader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOR);
         this.subtype.add(SubType.ALLY);
         this.power = new MageInt(3);

@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -21,20 +19,6 @@ public final class WhiteBlackSpiritToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes.addAll(Arrays.asList("GTC", "EVE", "MH1", "C15", "C21", "UMA", "RNA"));
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode().equals("UMA")) {
-            this.setTokenType(2);
-        }
-        if (getOriginalExpansionSetCode().equals("C15")) {
-            this.setTokenType(2);
-        }
     }
 
     public WhiteBlackSpiritToken(final WhiteBlackSpiritToken token) {
