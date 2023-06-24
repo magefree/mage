@@ -25,6 +25,9 @@ jobs:
             const path = require('path')
             const fs = require('fs')
             
+            // Disable mustache html-escape
+            mustache.escape = identity;
+            
             // https://stackoverflow.com/a/2970667
             function toCamelCase(str) {
               return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
