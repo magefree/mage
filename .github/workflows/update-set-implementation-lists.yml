@@ -11,13 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Get issues
-        uses: actions-cool/issues-helper@v3.4.0
-        id: setimplissues
-        with:
-          actions: 'find-issues'
-          labels: 'tracking set'
-        
       - uses: actions/setup-node@v3
         with:
           node-version: 16
