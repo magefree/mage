@@ -199,6 +199,6 @@ jobs:
           # Setup git config
           
           # Stage the Set-implementation-list.md file, commit, then push
-          git add ./wiki/Set-implementation-list.md
+          git add -A
           git commit -m Update Set-implementation-list.md
-          git push origin master
+          git push
