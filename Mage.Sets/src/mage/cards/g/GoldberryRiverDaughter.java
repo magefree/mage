@@ -66,7 +66,7 @@ public final class GoldberryRiverDaughter extends CardImpl {
 class GoldberryRiverDaughterFromEffect extends OneShotEffect {
     GoldberryRiverDaughterFromEffect() {
         super(Outcome.Neutral);
-        staticText = "Move a counter of each kind not on Goldberry, River-Daughter from another target permanent you control onto Goldberry.";
+        staticText = "Move a counter of each kind not on {this} from another target permanent you control onto Goldberry.";
     }
 
     private GoldberryRiverDaughterFromEffect(final GoldberryRiverDaughterFromEffect effect) {

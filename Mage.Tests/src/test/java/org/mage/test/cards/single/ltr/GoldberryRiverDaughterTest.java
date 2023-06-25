@@ -1,0 +1,58 @@
+package org.mage.test.cards.single.ltr;
+
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+
+public class GoldberryRiverDaughterTest extends CardTestPlayerBase {
+    static final String goldberry = "Goldberry, River-Daughter";
+    static final String ability1 = "{T}: Move a counter of each kind not on {this} from another target permanent you control onto Goldberry.";
+    static final String ability2 = "{U}, {T}: Move one or more counters from Goldberry onto another target permanent you control. If you do, draw a card.";
+
+    @Test
+    // Author: alexander-novo
+    // Happy path test - remove some counters from something. Then put some of them on something else.
+    public void testHappyPath() {
+        CounterType counter1 = CounterType.ACORN;
+        CounterType counter2 = CounterType.AEGIS;
+        String island = "Island";
+
+        // Bolt will be our first spell - to make sure it doesn't trigger
+        // Isamaru will be our second spell - to make sure we get two, since it's legendary
+        addCard(Zone.BATTLEFIELD, playerA, goldberry, 1);
+        addCard(Zone.BATTLEFIELD, playerA, island, 1);
+
+        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, island, counter1, 2);
+        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, island, counter2, 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, ability1, island);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+
+        checkPermanentCounters("First Ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, island, counter1, 1);
+        checkPermanentCounters("First Ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, island, counter2, 0);
+        checkPermanentCounters("First Ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, goldberry, counter1, 1);
+        checkPermanentCounters("First Ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, goldberry, counter2, 1);
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, ability2, island);
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN, 1);
+        setChoiceAmount(playerA, 1, 0); // aegis, acorn counters
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertCounterCount(island, counter1, 1);
+        assertCounterCount(island, counter2, 1);
+        assertCounterCount(goldberry, counter1, 1);
+        assertCounterCount(goldberry, counter2, 0);
+    }
+
+    // Unhappy path - Try to remove some counters from something when some of those counters are already on Goldberry
+
+    // Unhappy path - Try to not move a counter from Goldberry even though she has a counter on her
+
+    // Unhappy path - Activate second ability with no counters on Goldberry
+}
