@@ -8,7 +8,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
@@ -48,7 +47,7 @@ public final class EarthquakeDragon extends CardImpl {
         // This spell costs {X} less to cast, where X is the total mana value of Dragons you control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(EarthquakeDragonValue.instance)
-        ).addHint(DevotionCount.W.getHint()).setRuleAtTheTop(true));
+        ).addHint(hint).setRuleAtTheTop(true));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
