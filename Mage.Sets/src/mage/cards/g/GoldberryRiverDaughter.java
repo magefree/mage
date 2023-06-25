@@ -139,13 +139,19 @@ class GoldberryRiverDaughterToEffect extends OneShotEffect {
         boolean hasChosen = false; // Enforces the one or more rule by keeping track of whether or not a counter has already been chosen to move
         while (it.hasNext()) {
             Map.Entry<String, Counter> entry = it.next();
-            int num = controller.getAmount(
-                    // Enforce one or more rule. If this is the last choice and we haven't chosen a counter to remove - force a pick of 1 or more.
-                    it.hasNext() || hasChosen ? 0 : 1,
-                    entry.getValue().getCount(),
-                    "Choose how many " + entry.getKey() +
-                            " counters to move from " + fromPermanent.getLogName(),
-                    game);
+            // Enforce one or more rule. If this is the last choice and we haven't chosen a counter to remove - force a pick of 1 or more.
+            int minimum = it.hasNext() || hasChosen ? 0 : 1;
+            int num;
+            // Sanity check. Make sure the returned value is at least the minimum.
+            do {
+                num = controller.getAmount(
+                        minimum,
+                        entry.getValue().getCount(),
+                        "Choose how many " + entry.getKey() +
+                                " counters to move from " + fromPermanent.getLogName(),
+                        game);
+            } while (num < minimum);
+
             hasChosen |= num > 0;
             int newAmount = num + counterMap.getOrDefault(entry.getKey(), 0);
             counterMap.put(entry.getKey(), newAmount);
