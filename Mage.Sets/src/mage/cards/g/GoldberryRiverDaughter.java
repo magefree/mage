@@ -154,16 +154,17 @@ class GoldberryRiverDaughterToEffect extends OneShotEffect {
         // Move the counters. Make sure some counters were actually moved.
         boolean movedCounters = false;
         for (String counterName : counterMap.keySet()) {
-            if (counterMap.get(counterName) > 0) {
+            Integer amount = counterMap.get(counterName);
+            if (amount > 0) {
                 movedCounters |= toPermanent.addCounters(
-                        CounterType.findByName(counterName).createInstance(counterMap.get(counterName)),
+                        CounterType.findByName(counterName).createInstance(amount),
                         source,
                         game);
-                fromPermanent.removeCounters(counterName, counterMap.get(counterName), source, game);
+                fromPermanent.removeCounters(counterName, amount, source, game);
                 game.informPlayers(
                         controller.getLogName() + "moved " +
-                                counterMap.get(counterName) + " " +
-                                counterName + "counter" + (counterMap.get(counterName) > 1 ? "s" : "") +
+                                amount + " " +
+                                counterName + "counter" + (amount > 1 ? "s" : "") +
                                 "from " + fromPermanent.getLogName() +
                                 "to " + toPermanent.getLogName() + ".");
             }
