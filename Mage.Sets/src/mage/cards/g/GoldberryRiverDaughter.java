@@ -134,12 +134,7 @@ class GoldberryRiverDaughterToEffect extends OneShotEffect {
             return false;
         }
 
-        // TODO: Use player.getMultiAmmount for better UI (also for ResourcefulDefense)
-
-        // Counter name and how many to move
-        Map<String, Integer> counterMap = new HashMap<>();
         List<Counter> counters = new ArrayList<>(fromPermanent.getCounters(game).values());
-
         counters.sort((c1, c2) -> c1.getName().compareTo(c2.getName()));
 
         int total;
