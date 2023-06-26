@@ -12,6 +12,7 @@ import mage.constants.CardType;
 import mage.constants.MultiAmountType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
@@ -105,11 +106,11 @@ class ResourcefulDefenseMoveCounterEffect extends OneShotEffect {
         int total;
         List<Integer> choices;
         do {
-            choices = controller.getMultiAmountWithIndividualConstraints(Outcome.Neutral, messages, 1,
+            choices = controller.getMultiAmountWithIndividualConstraints(Outcome.Neutral, messages, 0,
                     max, MultiAmountType.COUNTERS, game);
 
             total = choices.stream().reduce(0, Integer::sum);
-        } while (total < 1);
+        } while (total < 0);
 
         // Move the counters. Make sure some counters were actually moved.
         for (int i = 0; i < choices.size(); i++) {
@@ -118,6 +119,7 @@ class ResourcefulDefenseMoveCounterEffect extends OneShotEffect {
             if (amount > 0) {
                 String counterName = counters.get(i).getName();
 
+                toPermanent.addCounters(CounterType.findByName(counterName).createInstance(amount), source, game);
                 fromPermanent.removeCounters(counterName, amount, source, game);
                 game.informPlayers(
                         controller.getLogName() + "moved " +
