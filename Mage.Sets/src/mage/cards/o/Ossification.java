@@ -4,8 +4,6 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.constants.*;
 import mage.abilities.effects.common.AttachEffect;
@@ -52,7 +50,6 @@ public final class Ossification extends CardImpl {
         // When Ossification enters the battlefield, exile target creature or planeswalker an opponent controls until Ossification leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(filter2));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
         this.addAbility(ability);
     }
 

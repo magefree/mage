@@ -3,10 +3,8 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -48,7 +46,6 @@ public final class KitesailFreebooter extends CardImpl {
         // When Kitesail Freebooter enters the battlefield, target opponent reveals their hand. You choose a noncreature, nonland card from it. Exile that card until Kitesail Freebooter leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new KitesailFreebooterExileEffect());
         ability.addTarget(new TargetOpponent());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility(Zone.HAND)));
         this.addAbility(ability);
     }
 
@@ -96,7 +93,7 @@ class KitesailFreebooterExileEffect extends OneShotEffect {
                         return true;
                     }
                     // If source permanent leaves the battlefield before its triggered ability resolves, the target card won't be exiled.
-                    Effect effect = new ExileUntilSourceLeavesEffect();
+                    Effect effect = new ExileUntilSourceLeavesEffect(Zone.HAND);
                     effect.setTargetPointer(new FixedTarget(card, game));
                     return effect.apply(game, source);
                 }

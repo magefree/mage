@@ -3,10 +3,8 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -42,7 +40,6 @@ public final class BrainMaggot extends CardImpl {
         // When Brain Maggot enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card until Brain Maggot leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BrainMaggotExileEffect());
         ability.addTarget(new TargetOpponent());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility(Zone.HAND)));
         this.addAbility(ability);
     }
 
@@ -89,7 +86,7 @@ class BrainMaggotExileEffect extends OneShotEffect {
                         return true;
                     }
                     // If source permanent leaves the battlefield before its triggered ability resolves, the target card won't be exiled.
-                    Effect effect = new ExileUntilSourceLeavesEffect();
+                    Effect effect = new ExileUntilSourceLeavesEffect(Zone.HAND);
                     effect.setTargetPointer(new FixedTarget(card, game));
                     return effect.apply(game, source);
                 }
