@@ -36,7 +36,7 @@ import mage.abilities.hint.common.CountersOnPermanentsHint;
  */
 public final class TomBombadil extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SAGA);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.SAGA, "Sagas you control");
     private static final CountersOnPermanentsCondition condition = new CountersOnPermanentsCondition(filter,
             CounterType.LORE, ComparisonType.MORE_THAN, 3);
     private static final CountersOnPermanentsHint hint = new CountersOnPermanentsHint(condition);
@@ -57,7 +57,7 @@ public final class TomBombadil extends CardImpl {
                 condition,
                 "As long as there are four or more lore counters among Sagas you control, {this} has hexproof"));
         ability.addEffect(new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), condition, "and has indestructible"));
+                new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), condition, "and indestructible"));
         this.addAbility(ability.addHint(hint));
 
         // Whenever the final chapter ability of a Saga you control resolves, reveal

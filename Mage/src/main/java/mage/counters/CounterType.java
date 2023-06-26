@@ -93,6 +93,7 @@ public enum CounterType {
     HIT("hit"),
     HOOFPRINT("hoofprint"),
     HONE("hone"),
+    HOPE("hope"),
     HOUR("hour", "an"),
     HOURGLASS("hourglass", "an"),
     HUNGER("hunger"),
@@ -225,7 +226,7 @@ public enum CounterType {
     }
 
     CounterType(String name) {
-        this(name, "aeiou".contains("" + name.charAt(0)) ? "an" : "a");
+        this(name, "aeiou".contains( String.valueOf( name.charAt( 0 ) ) ) ? "an" : "a");
     }
 
     CounterType(String name, String article) {

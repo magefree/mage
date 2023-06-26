@@ -77,7 +77,7 @@ class TouchTheSpiritRealmEffect extends OneShotEffect {
         }
         Card card = permanent.getMainCard();
         player.moveCardsToExile(permanent, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
-        ReturnToBattlefieldUnderOwnerControlTargetEffect returnEffect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true);
+        ReturnToBattlefieldUnderOwnerControlTargetEffect returnEffect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
         returnEffect.setTargetPointer(new FixedTarget(card,game));
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnEffect), source);
         return true;
