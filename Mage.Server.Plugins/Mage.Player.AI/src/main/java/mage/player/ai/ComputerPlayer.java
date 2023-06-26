@@ -2169,11 +2169,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
+            int min, int max, MultiAmountType type, Game game) {
         log.debug("getMultiAmount");
 
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
         if (needCount == 0) {
             return defaultList;
         }
@@ -2188,7 +2189,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // GOOD effect
         // values must be stable, so AI must able to simulate it and choose correct actions
         // fill max values as much as possible
-        return MultiAmountType.prepareMaxValues(needCount, min, max);
+        return MultiAmountType.prepareMaxValues(messages, min, max);
     }
 
     @Override

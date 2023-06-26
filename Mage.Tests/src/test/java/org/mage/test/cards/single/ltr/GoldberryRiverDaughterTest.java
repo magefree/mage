@@ -36,7 +36,7 @@ public class GoldberryRiverDaughterTest extends CardTestPlayerBase {
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, ability2, island);
         waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN, 1);
-        setChoiceAmount(playerA, 1, 0); // aegis, acorn counters
+        setChoiceAmount(playerA, 0, 1); // acorn, aegis counters
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);

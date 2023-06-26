@@ -18,7 +18,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.util.MultiAmountMessage;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author alexander_novo
@@ -135,33 +138,31 @@ class GoldberryRiverDaughterToEffect extends OneShotEffect {
 
         // Counter name and how many to move
         Map<String, Integer> counterMap = new HashMap<>();
-        Iterator<Map.Entry<String, Counter>> it = fromPermanent.getCounters(game).entrySet().iterator();
-        boolean hasChosen = false; // Enforces the one or more rule by keeping track of whether or not a counter has already been chosen to move
-        while (it.hasNext()) {
-            Map.Entry<String, Counter> entry = it.next();
-            // Enforce one or more rule. If this is the last choice and we haven't chosen a counter to remove - force a pick of 1 or more.
-            int minimum = it.hasNext() || hasChosen ? 0 : 1;
-            int num;
-            // Sanity check. Make sure the returned value is at least the minimum.
-            do {
-                num = controller.getAmount(
-                        minimum,
-                        entry.getValue().getCount(),
-                        "Choose how many " + entry.getKey() +
-                                " counters to move from " + fromPermanent.getLogName(),
-                        game);
-            } while (num < minimum);
+        List<Counter> counters = new ArrayList<>(fromPermanent.getCounters(game).values());
 
-            hasChosen |= num > 0;
-            int newAmount = num + counterMap.getOrDefault(entry.getKey(), 0);
-            counterMap.put(entry.getKey(), newAmount);
-        }
+        counters.sort((c1, c2) -> c1.getName().compareTo(c2.getName()));
+
+        int total;
+        List<Integer> choices;
+        do {
+            List<MultiAmountMessage> messages = counters.stream()
+                    .map(c -> new MultiAmountMessage(c.getName(), 0, c.getCount())).collect(Collectors.toList());
+            int max = messages.stream().map(m -> m.max).reduce(0, Integer::sum);
+
+            choices = controller.getMultiAmountWithIndividualConstraints(Outcome.Neutral, messages, 1,
+                    max, MultiAmountType.COUNTERS, game);
+
+            total = choices.stream().reduce(0, Integer::sum);
+        } while (total < 1);
 
         // Move the counters. Make sure some counters were actually moved.
         boolean movedCounters = false;
-        for (String counterName : counterMap.keySet()) {
-            Integer amount = counterMap.get(counterName);
+        for (int i = 0; i < choices.size(); i++) {
+            Integer amount = choices.get(i);
+
             if (amount > 0) {
+                String counterName = counters.get(i).getName();
+
                 movedCounters |= toPermanent.addCounters(
                         CounterType.findByName(counterName).createInstance(amount),
                         source,
