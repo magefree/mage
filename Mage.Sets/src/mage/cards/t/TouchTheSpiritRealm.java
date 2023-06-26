@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
@@ -37,7 +37,7 @@ public final class TouchTheSpiritRealm extends CardImpl {
         // Touch the Spirit Realm leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
         this.addAbility(ability);
         
         // Channel - {1}{W}, Discard Touch the Spirit Realm: Exile target artifact or creature.

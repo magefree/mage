@@ -3,9 +3,8 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -56,7 +55,7 @@ class HixusPrisonWardenTriggeredAbility extends TriggeredAbilityImpl {
 
     public HixusPrisonWardenTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileUntilSourceLeavesEffect());
-        addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
         setTriggerPhrase("Whenever a creature deals combat damage to you, if {this} entered the battlefield this turn, ");
     }
 

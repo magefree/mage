@@ -3,7 +3,7 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.keyword.CrewAbility;
@@ -47,7 +47,7 @@ public final class MysteriousLimousine extends CardImpl {
 
         // Whenever Mysterious Limousine enters the battlefield or attacks, exile up to one other target creature until Mysterious Limousine leaves the battlefield. If a creature is put into exile this way, return each other card exiled with Mysterious Limousine to the battlefield under its owner's control.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new MysteriousLimousineEffect());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
 

@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -41,7 +41,7 @@ public final class ChainsOfCustody extends CardImpl {
         //exile until leaves the battlefield
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND)); //more than just creatures
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
         this.addAbility(ability);
 
         // ward 2

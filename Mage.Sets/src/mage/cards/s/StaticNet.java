@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
@@ -28,7 +28,7 @@ public final class StaticNet extends CardImpl {
         // When Static Net enters the battlefield, exile target nonland permanent an opponent controls until Static Net leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
         this.addAbility(ability);
 
         // When Static Net enters the battlefield, you gain 2 life and create a tapped Powerstone token.

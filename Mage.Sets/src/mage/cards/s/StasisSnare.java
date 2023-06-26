@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -27,7 +27,7 @@ public final class StasisSnare extends CardImpl {
         // When Stasis Snare enters the battlefield, exile target creature an opponent controls until Stasis Snare leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
         this.addAbility(ability);
     }
 

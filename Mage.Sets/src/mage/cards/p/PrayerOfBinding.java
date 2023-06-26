@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -29,7 +29,7 @@ public final class PrayerOfBinding extends CardImpl {
 
         // When Prayer of Binding enters the battlefield, exile up to one target nonland permanent an opponent controls until Prayer of Binding leaves the battlefield. You gain 2 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
         ability.addEffect(new GainLifeEffect(2));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND));
         this.addAbility(ability);

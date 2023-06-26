@@ -3,7 +3,7 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.Card;
@@ -96,7 +96,7 @@ class DeputyOfDetentionExileEffect extends OneShotEffect {
 
         if (!toExile.isEmpty()) {
             controller.moveCardsToExile(toExile, source, game, true, CardUtil.getCardExileZoneId(game, source), permanent.getIdName());
-            new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()).apply(game, source);
+            new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()).apply(game, source);
         }
         return true;
     }

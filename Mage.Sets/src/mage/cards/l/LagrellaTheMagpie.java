@@ -5,7 +5,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -48,7 +48,7 @@ public final class LagrellaTheMagpie extends CardImpl {
 
         // When Lagrella, the Magpie enters the battlefield, exile any number of other target creatures controlled by different players until Lagrella leaves the battlefield. When an exiled card enters the battlefield under your control this way, put two +1/+1 counters on it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LagrellaTheMagpieEffect(), false);
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
         ability.addTarget(new LagrellaTheMagpieTarget());
         this.addAbility(ability);
     }

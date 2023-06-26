@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class TemporaryLockdown extends CardImpl {
 
         // When Temporary Lockdown enters the battlefield, exile each nonland permanent with mana value 2 or less until Temporary Lockdown leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TemporaryLockdownEffect());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledAbility()));
         this.addAbility(ability);
     }
 
