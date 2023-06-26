@@ -166,8 +166,8 @@ class GoldberryRiverDaughterToEffect extends OneShotEffect {
                 game.informPlayers(
                         controller.getLogName() + "moved " +
                                 amount + " " +
-                                counterName + "counter" + (amount > 1 ? "s" : "") +
-                                "from " + fromPermanent.getLogName() +
+                                counterName + " counter" + (amount > 1 ? "s" : "") +
+                                " from " + fromPermanent.getLogName() +
                                 "to " + toPermanent.getLogName() + ".");
             }
         }
