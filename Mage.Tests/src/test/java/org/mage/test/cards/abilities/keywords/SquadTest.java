@@ -59,8 +59,8 @@ public class SquadTest extends CardTestPlayerBase {
     }
 
     @Test
-    //@Ignore
-    // TODO: enable test after replicate ability will be supported by AI
+    @Ignore
+    // TODO: enable test after squad/replicate ability will be supported by AI
     public void test_Squad_NotUsed_AI() {
         addCard(Zone.BATTLEFIELD, playerA, swamp, 5 - 1); // haven't all mana
         addCard(Zone.HAND, playerA, flagellant);
@@ -237,12 +237,10 @@ public class SquadTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7); // 3 + 2 + 2
 
         /*
-         * Lithoform Engine
-         * {4}
-         * Legendary Artifact
-         * {2}, {T}: Copy target activated or triggered ability you control. You may choose new targets for the copy. <------- using this one.
-         * {3}, {T}: Copy target instant or sorcery spell you control. You may choose new targets for the copy.
-         * {4}, {T}: Copy target permanent spell you control. (The copy becomes a token.)
+         * Strionic Resonator
+         * {2}
+         * Artifact
+         * {2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy.
          */
         addCard(Zone.BATTLEFIELD, playerA, "Strionic Resonator", 1);
 
@@ -286,7 +284,7 @@ public class SquadTest extends CardTestPlayerBase {
 
     @Ignore
     @Test
-    //TODO: Enable after fixing, also affects Kicker
+    //TODO: Enable after fixing clones activating it if they have the same zcc. Also affects Kicker
     public void test_CloneMustNotCopySquad() {
         addCard(Zone.BATTLEFIELD, playerA, swamp, 8); // 3 + 2 + 3
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
