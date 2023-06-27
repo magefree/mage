@@ -2051,7 +2051,8 @@ public class HumanPlayer extends PlayerImpl {
             int min, int max, MultiAmountType type, Game game) {
         int needCount = messages.size();
         List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
-        if (needCount == 0) {
+        if (needCount == 0 || (needCount == 1 && min == max)
+                || messages.stream().map(m -> m.min == m.max).reduce(true, Boolean::logicalAnd)) {
             return defaultList;
         }
 

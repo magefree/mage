@@ -41,9 +41,21 @@ public enum MultiAmountType {
 
         int total = res.stream().reduce(0, Integer::sum);
 
-        // fill values
+        // Fill values until we reach the overall minimum. Do this by filling values up until either their max or however much is leftover, starting with the first option.
         if (min > 0 && total < min) {
-            res.set(0, res.get(0) + min - total);
+            int left = min - total;
+            for (int i = 0; i < res.size(); i++) {
+                // How much space there is left to add to 
+                if (constraints.get(i).max == Integer.MAX_VALUE || constraints.get(i).max - res.get(i) > left) {
+                    res.set(i, res.get(i) + left);
+                    break;
+                } else {
+                    int add = constraints.get(i).max - res.get(i);
+                    res.set(i, constraints.get(i).max);
+
+                    left -= add;
+                }
+            }
         }
 
         return res;
