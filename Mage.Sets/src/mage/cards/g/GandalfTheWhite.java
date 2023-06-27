@@ -78,42 +78,37 @@ class GandalfTheWhiteDoublingEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.NUMBER_OF_TRIGGERS || event.getType() == GameEvent.EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.NUMBER_OF_TRIGGERS;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event instanceof NumberOfTriggersEvent) {
-            NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
-            // Only triggers of the controller of Gandalf
-            if (source.isControlledBy(event.getPlayerId())) {
-                GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
-                // 1) EtB triggers
-                if (sourceEvent != null
-                        && sourceEvent.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                        && sourceEvent instanceof EntersTheBattlefieldEvent) {
-                    EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
-                    // Only for entering artifacts or legendaries
-                    if (entersTheBattlefieldEvent.getTarget().isArtifact(game)
-                            || entersTheBattlefieldEvent.getTarget().isLegendary(game)) {
-                        // Only for triggers of permanents
-                        if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
-                            return true;
-                        }
-                    }
+        NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
+        // Only triggers of the controller of Gandalf
+        if (source.isControlledBy(event.getPlayerId())) {
+            GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+            // 1) EtB triggers
+            if (sourceEvent != null
+                    && sourceEvent.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
+                    && sourceEvent instanceof EntersTheBattlefieldEvent) {
+                EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
+                // Only for entering artifacts or legendaries
+                if (entersTheBattlefieldEvent.getTarget().isArtifact(game)
+                        || entersTheBattlefieldEvent.getTarget().isLegendary(game)) {
+                    // Only for triggers of permanents
+                    return game.getPermanent(numberOfTriggersEvent.getSourceId()) != null;
                 }
-                // 2) LtB triggers
-                if (sourceEvent != null
-                        && game.getPermanentOrLKIBattlefield(numberOfTriggersEvent.getSourceId()) != null
-                        && sourceEvent.getType() == GameEvent.EventType.ZONE_CHANGE
-                        && sourceEvent instanceof ZoneChangeEvent) {
-                    ZoneChangeEvent zEvent = (ZoneChangeEvent) sourceEvent;
-                    // Only for leaving artifacts or legendaries
-                    if ((zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.BATTLEFIELD)
-                            && (zEvent.getTarget().isLegendary(game) || zEvent.getTarget().isArtifact(game))) {
-                        // Only for triggers of permanents
-                        return game.getPermanentOrLKIBattlefield(numberOfTriggersEvent.getSourceId()) != null;
-                    }
+            }
+            // 2) LtB triggers
+            if (sourceEvent != null
+                    && sourceEvent.getType() == GameEvent.EventType.ZONE_CHANGE
+                    && sourceEvent instanceof ZoneChangeEvent) {
+                ZoneChangeEvent zEvent = (ZoneChangeEvent) sourceEvent;
+                // Only for leaving artifacts or legendaries
+                if ((zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.BATTLEFIELD)
+                        && (zEvent.getTarget().isLegendary(game) || zEvent.getTarget().isArtifact(game))) {
+                    // Only for triggers of permanents
+                    return game.getPermanentOrLKIBattlefield(numberOfTriggersEvent.getSourceId()) != null;
                 }
             }
         }
