@@ -69,6 +69,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Elven Farsight", 161, Rarity.COMMON, mage.cards.e.ElvenFarsight.class));
         cards.add(new SetCardInfo("Elvish Mariner", 283, Rarity.RARE, mage.cards.e.ElvishMariner.class));
         cards.add(new SetCardInfo("Enraged Huorn", 162, Rarity.COMMON, mage.cards.e.EnragedHuorn.class));
+        cards.add(new SetCardInfo("Ent's Fury", 164, Rarity.COMMON, mage.cards.e.EntsFury.class));
         cards.add(new SetCardInfo("Ent-Draught Basin", 238, Rarity.UNCOMMON, mage.cards.e.EntDraughtBasin.class));
         cards.add(new SetCardInfo("Entish Restoration", 163, Rarity.UNCOMMON, mage.cards.e.EntishRestoration.class));
         cards.add(new SetCardInfo("Eomer of the Riddermark", 121, Rarity.UNCOMMON, mage.cards.e.EomerOfTheRiddermark.class));
