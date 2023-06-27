@@ -119,4 +119,27 @@ public class GoldberryRiverDaughterTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, 0);
     }
+
+    @Test
+    // Author: alexander-novo
+    // Bug - Goldberry doesn't seem to get some of the effects from some of the counters she takes
+    public void testM1M1Counters() {
+        CounterType counter = CounterType.M1M1;
+        String island = "Island";
+
+        addCard(Zone.BATTLEFIELD, playerA, goldberry, 1);
+        addCard(Zone.BATTLEFIELD, playerA, island, 1);
+
+        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerA, island, counter, 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, ability1, island);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertCounterCount(goldberry, counter, 1);
+        assertPowerToughness(playerA, goldberry, 0, 2);
+    }
 }
