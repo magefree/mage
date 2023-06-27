@@ -10,12 +10,16 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.effects.common.replacement.CreaturesOppCtrlAreExiledOnDeathReplacementEffect;
-import mage.constants.*;
+import mage.abilities.effects.common.replacement.CreaturesAreExiledOnDeathReplacementEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -53,7 +57,9 @@ public final class LiesaForgottenArchangel extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new LiesaForgottenArchangelReturnToHandEffect(), false, filter, true));
 
         // If a creature an opponent controls would die, exile it instead.
-        this.addAbility(new SimpleStaticAbility(new CreaturesOppCtrlAreExiledOnDeathReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(
+            new CreaturesAreExiledOnDeathReplacementEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE)
+        ));
     }
 
     private LiesaForgottenArchangel(final LiesaForgottenArchangel card) {

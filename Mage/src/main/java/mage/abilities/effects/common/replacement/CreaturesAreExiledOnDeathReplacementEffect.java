@@ -5,29 +5,33 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author Susucr
  */
-public class CreaturesOppCtrlAreExiledOnDeathReplacementEffect extends ReplacementEffectImpl {
+public class CreaturesAreExiledOnDeathReplacementEffect extends ReplacementEffectImpl {
 
-    public CreaturesOppCtrlAreExiledOnDeathReplacementEffect() {
+    private FilterPermanent filter;
+
+    public CreaturesAreExiledOnDeathReplacementEffect(FilterPermanent filter) {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "If a creature an opponent controls would die, exile it instead";
+        staticText = "If " + CardUtil.addArticle(filter.getMessage()) + " would die, exile it instead";
     }
 
-    private CreaturesOppCtrlAreExiledOnDeathReplacementEffect(final CreaturesOppCtrlAreExiledOnDeathReplacementEffect effect) {
+    private CreaturesAreExiledOnDeathReplacementEffect(final CreaturesAreExiledOnDeathReplacementEffect effect) {
         super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
-    public CreaturesOppCtrlAreExiledOnDeathReplacementEffect copy() {
-        return new CreaturesOppCtrlAreExiledOnDeathReplacementEffect(this);
+    public CreaturesAreExiledOnDeathReplacementEffect copy() {
+        return new CreaturesAreExiledOnDeathReplacementEffect(this);
     }
 
     @Override
@@ -44,13 +48,15 @@ public class CreaturesOppCtrlAreExiledOnDeathReplacementEffect extends Replaceme
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            Permanent permanent = zEvent.getTarget();
-            if (permanent != null && permanent.isCreature()) {
-                Player player = game.getPlayer(source.getControllerId());
-                return player != null && player.hasOpponent(permanent.getControllerId(), game);
-            }
+        if (!zEvent.isDiesEvent()) {
+            return false;
         }
-        return false;
+
+        Permanent permanent = zEvent.getTarget();
+        if (permanent == null) {
+            return false;
+        }
+
+        return filter.match(permanent, source.getControllerId(), source, game);
     }
 }
