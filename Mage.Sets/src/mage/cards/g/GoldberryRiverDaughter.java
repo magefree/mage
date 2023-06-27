@@ -100,7 +100,8 @@ class GoldberryRiverDaughterFromEffect extends OneShotEffect {
 
         for (Counter counter : fromCounters) {
             fromPermanent.removeCounters(counter.getName(), 1, source, game);
-            toPermanent.addCounters(new Counter(counter.getName()), source.getControllerId(), source, game);
+            toPermanent.addCounters(CounterType.findByName(counter.getName()).createInstance(1),
+                    source.getControllerId(), source, game);
         }
         return true;
     }
