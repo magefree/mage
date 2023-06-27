@@ -3,13 +3,11 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.replacement.CreaturesAreExiledOnDeathReplacementEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -20,11 +18,7 @@ import mage.cards.Cards;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 import mage.util.CardUtil;
@@ -47,7 +41,6 @@ public final class VoidMaw extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
             new CreaturesAreExiledOnDeathReplacementEffect(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE)
         ));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidMawEffect()));
 
         // Put a card exiled with Void Maw into its owner's graveyard: Void Maw gets +2/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new VoidMawCost()));
