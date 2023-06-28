@@ -19,7 +19,7 @@ import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author anonymous
+ * @author TiagoMDG
  */
 public final class StriderRangerOfTheNorth extends CardImpl {
 
