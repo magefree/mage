@@ -56,7 +56,7 @@ public final class SarumanTheWhiteHand extends CardImpl {
         // Goblins and Orcs you control have ward {2}.
         this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(
-                    new WardAbility(new GenericManaCost(2)),
+                    new WardAbility(new GenericManaCost(2), false),
                     Duration.WhileOnBattlefield,
                     orcAndGoblinFilter
                 )
