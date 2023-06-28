@@ -29,6 +29,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Bag End Porter", 153, Rarity.COMMON, mage.cards.b.BagEndPorter.class));
         cards.add(new SetCardInfo("Banish from Edoras", 1, Rarity.COMMON, mage.cards.b.BanishFromEdoras.class));
         cards.add(new SetCardInfo("Barad-dur", 253, Rarity.RARE, mage.cards.b.BaradDur.class));
+        cards.add(new SetCardInfo("Barrow-Blade", 237, Rarity.UNCOMMON, mage.cards.b.BarrowBlade.class));
         cards.add(new SetCardInfo("Battle-Scarred Goblin", 115, Rarity.COMMON, mage.cards.b.BattleScarredGoblin.class));
         cards.add(new SetCardInfo("Bilbo's Ring", 298, Rarity.RARE, mage.cards.b.BilbosRing.class));
         cards.add(new SetCardInfo("Bilbo, Retired Burglar", 196, Rarity.UNCOMMON, mage.cards.b.BilboRetiredBurglar.class));
