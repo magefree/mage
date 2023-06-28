@@ -52,8 +52,7 @@ class EntsFuryEffect extends OneShotEffect {
     public EntsFuryEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put a +1/+1 counter on target creature you control if its power is 4 or greater. " +
-                "Then that creature gets +1/+1 until end of turn and fights target creature you don’t control. " +
-                "<i>(Each deals damage equal to its power to the other.)</i>";
+                "Then that creature gets +1/+1 until end of turn and fights target creature you don't control.";
     }
 
     public EntsFuryEffect(final EntsFuryEffect effect) {
@@ -81,6 +80,6 @@ class EntsFuryEffect extends OneShotEffect {
         ContinuousEffect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         effect.setTargetPointer(new FixedTarget(permanent, game));
         game.addEffect(effect, source);
-        return new FightTargetsEffect().apply(game, source);
+        return new FightTargetsEffect(false).apply(game, source);
     }
 }
