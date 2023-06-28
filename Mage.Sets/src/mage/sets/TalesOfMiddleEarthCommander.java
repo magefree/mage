@@ -156,6 +156,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Merry, Warden of Isengard", 61, Rarity.RARE, mage.cards.m.MerryWardenOfIsengard.class));
         cards.add(new SetCardInfo("Minamo, School at Water's Edge", 369, Rarity.MYTHIC, mage.cards.m.MinamoSchoolAtWatersEdge.class));
         cards.add(new SetCardInfo("Mind Stone", 282, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
+        cards.add(new SetCardInfo("Mirkwood Elk", 41, Rarity.RARE, mage.cards.m.MirkwoodElk.class));
         cards.add(new SetCardInfo("Model of Unity", 78, Rarity.RARE, mage.cards.m.ModelOfUnity.class));
         cards.add(new SetCardInfo("Monstrosity of the Lake", 22, Rarity.RARE, mage.cards.m.MonstrosityOfTheLake.class));
         cards.add(new SetCardInfo("Mortify", 269, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
