@@ -23,7 +23,7 @@ import mage.players.Player;
 
 /**
  *
- * @author anonymous
+ * @author TiagoMDG
  */
 public final class GandalfWhiteRider extends CardImpl {
 
