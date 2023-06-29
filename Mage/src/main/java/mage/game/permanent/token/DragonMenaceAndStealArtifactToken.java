@@ -30,7 +30,7 @@ public class DragonMenaceAndStealArtifactToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
         addAbility(new MenaceAbility(false));
 
-        addAbility(new TokenTriggeredAbility());
+        addAbility(new DragonTokenTriggeredAbility());
     }
 
     public DragonMenaceAndStealArtifactToken(final DragonMenaceAndStealArtifactToken token) { super(token); }
@@ -39,17 +39,17 @@ public class DragonMenaceAndStealArtifactToken extends TokenImpl {
 
 }
 
-class TokenTriggeredAbility extends TriggeredAbilityImpl {
+class DragonTokenTriggeredAbility extends TriggeredAbilityImpl {
 
-    public TokenTriggeredAbility() {
+    public DragonTokenTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.EndOfGame));
         this.addTarget(new TargetArtifactPermanent());
     }
 
-    public TokenTriggeredAbility(final TokenTriggeredAbility ability) { super(ability); }
+    public DragonTokenTriggeredAbility(final DragonTokenTriggeredAbility ability) { super(ability); }
 
     @Override
-    public TokenTriggeredAbility copy() { return new TokenTriggeredAbility(this); }
+    public DragonTokenTriggeredAbility copy() { return new DragonTokenTriggeredAbility(this); }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
