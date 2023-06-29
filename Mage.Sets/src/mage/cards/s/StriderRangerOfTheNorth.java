@@ -61,7 +61,7 @@ class StriderRangerOfTheNorthEffect extends OneShotEffect {
 
     StriderRangerOfTheNorthEffect() {
         super(Outcome.Benefit);
-        this.staticText = "target creature gets +1/+1 until end of turn. Then if that creature has power 4 " +
+        this.staticText = "Then if that creature has power 4 " +
                 "or greater, it gains first strike until end of turn.";
     }
 
