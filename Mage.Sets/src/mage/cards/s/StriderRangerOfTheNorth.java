@@ -37,10 +37,13 @@ public final class StriderRangerOfTheNorth extends CardImpl {
         // Then if that creature has power 4 or greater, it gains first strike until end of turn.
 
         LandfallAbility ability = new LandfallAbility(
-                new StriderRangerOfTheNorthEffect(), false
+                new BoostTargetEffect(1, 1, Duration.EndOfTurn), false
         );
 
+        ability.addEffect(new StriderRangerOfTheNorthEffect());
+
         ability.addTarget(new TargetCreaturePermanent());
+
         this.addAbility(ability);
     }
 
@@ -78,14 +81,11 @@ class StriderRangerOfTheNorthEffect extends OneShotEffect {
             return false;
         }
 
-        // Add temporary +1/+1 effect until end of turn
-        ContinuousEffect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
-        effect.setTargetPointer(new FixedTarget(permanent, game));
-        game.addEffect(effect, source);
-
         // Checks if the creature's power is 4 or greater and then add First Strike until end of turn
-        if (permanent.getPower().getValue() + 1  >= 4) {
-            ContinuousEffect firstStrike = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        if (permanent.getPower().getValue() >= 4) {
+            ContinuousEffect firstStrike = new GainAbilityTargetEffect(
+                    FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+
             firstStrike.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(firstStrike, source);
         }
