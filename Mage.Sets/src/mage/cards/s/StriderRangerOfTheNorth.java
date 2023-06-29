@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -18,14 +19,13 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author TiagoMDG
  */
 public final class StriderRangerOfTheNorth extends CardImpl {
 
     public StriderRangerOfTheNorth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.RANGER);
@@ -56,13 +56,13 @@ public final class StriderRangerOfTheNorth extends CardImpl {
 
 class StriderRangerOfTheNorthEffect extends OneShotEffect {
 
-    public StriderRangerOfTheNorthEffect() {
+    StriderRangerOfTheNorthEffect() {
         super(Outcome.Benefit);
         this.staticText = "target creature gets +1/+1 until end of turn. Then if that creature has power 4 " +
-                            "or greater, it gains first strike until end of turn.";
+                "or greater, it gains first strike until end of turn.";
     }
 
-    public StriderRangerOfTheNorthEffect(final StriderRangerOfTheNorthEffect effect) {
+    StriderRangerOfTheNorthEffect(final StriderRangerOfTheNorthEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class StriderRangerOfTheNorthEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null){
+        if (permanent == null) {
             return false;
         }
 
@@ -84,11 +84,10 @@ class StriderRangerOfTheNorthEffect extends OneShotEffect {
         game.addEffect(effect, source);
 
         // Checks if the creature's power is 4 or greater and then add First Strike until end of turn
-        if (permanent.getPower().getValue() >= 4){
+        if (permanent.getPower().getValue() + 1  >= 4) {
             ContinuousEffect firstStrike = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
             firstStrike.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(firstStrike, source);
-            return true;
         }
 
         return true;
