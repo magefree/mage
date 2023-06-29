@@ -15,7 +15,7 @@ import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 
 import mage.game.Game;
@@ -26,11 +26,9 @@ import mage.game.stack.Spell;
  */
 public final class SarumanTheWhiteHand extends CardImpl {
 
-    private static final FilterSpell nonCreatureFilter = new FilterSpell("a noncreature spell");
     private static final FilterPermanent orcAndGoblinFilter = new FilterPermanent("Goblins and Orcs");
 
     static {
-        nonCreatureFilter.add(Predicates.not(CardType.CREATURE.getPredicate()));
         orcAndGoblinFilter.add(Predicates.or(
                 SubType.ORC.getPredicate(),
                 SubType.GOBLIN.getPredicate()
@@ -49,7 +47,7 @@ public final class SarumanTheWhiteHand extends CardImpl {
         // Whenever you cast a noncreature spell, amass Orcs X, where X is that spell's mana value.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new SarumanTheWhiteHandEffect(),
-                nonCreatureFilter,
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE,
                 false
         ));
 
