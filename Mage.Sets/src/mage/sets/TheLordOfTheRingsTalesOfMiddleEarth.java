@@ -240,6 +240,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Stalwarts of Osgiliath", 33, Rarity.COMMON, mage.cards.s.StalwartsOfOsgiliath.class));
         cards.add(new SetCardInfo("Stern Scolding", 71, Rarity.UNCOMMON, mage.cards.s.SternScolding.class));
         cards.add(new SetCardInfo("Stew the Coneys", 189, Rarity.UNCOMMON, mage.cards.s.StewTheConeys.class));
+        cards.add(new SetCardInfo("Stone of Erech", 251, Rarity.UNCOMMON, mage.cards.s.StoneOfErech.class));
         cards.add(new SetCardInfo("Storm of Saruman", 72, Rarity.MYTHIC, mage.cards.s.StormOfSaruman.class));
         cards.add(new SetCardInfo("Surrounded by Orcs", 73, Rarity.COMMON, mage.cards.s.SurroundedByOrcs.class));
         cards.add(new SetCardInfo("Swamp", 266, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
