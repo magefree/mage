@@ -25,7 +25,7 @@ import mage.constants.Zone;
  */
 public final class MirkwoodElk extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Elf card from your graveyard");
+    private static final FilterCard filter = new FilterCard("Elf card");
 
     static {
         filter.add(SubType.ELF.getPredicate());
@@ -61,7 +61,7 @@ public final class MirkwoodElk extends CardImpl {
 
 class MirkwoodElkEffect extends OneShotEffect {
 
-    public MirkwoodElkEffect() {
+    MirkwoodElkEffect() {
         super(Outcome.Benefit);
         this.staticText = "return target Elf card from your graveyard to your hand. You gain life equal to that card's power.";
     }
