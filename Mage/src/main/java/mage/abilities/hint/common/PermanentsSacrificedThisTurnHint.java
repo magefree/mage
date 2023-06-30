@@ -9,11 +9,11 @@ import mage.game.Game;
 /**
  * @author Susucr
  */
-public enum PermanentsSacrifiedThisTurnHint implements Hint {
+public enum PermanentsSacrificedThisTurnHint implements Hint {
     instance;
 
     private static final Hint hint = new ValueHint(
-            "Permanents sacrified this turn", PermanentsSacrificedThisTurnCount.instance
+            "Permanents sacrificed this turn", PermanentsSacrificedThisTurnCount.instance
     );
 
     @Override
@@ -22,7 +22,7 @@ public enum PermanentsSacrifiedThisTurnHint implements Hint {
     }
 
     @Override
-    public PermanentsSacrifiedThisTurnHint copy() {
+    public PermanentsSacrificedThisTurnHint copy() {
         return this;
     }
 }

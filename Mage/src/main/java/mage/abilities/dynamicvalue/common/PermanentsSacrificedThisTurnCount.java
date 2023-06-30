@@ -34,7 +34,7 @@ public enum PermanentsSacrificedThisTurnCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "permanents sacrified this turn";
+        return "permanents sacrificed this turn";
     }
 
 }
