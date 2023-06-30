@@ -18,6 +18,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
+import mage.watchers.common.PermanentsSacrificedWatcher;
 
 import java.util.UUID;
 
@@ -44,10 +45,14 @@ public final class TheBalrogDurinsBane extends CardImpl {
         this.toughness = new MageInt(5);
 
         // This spell costs {1} less to cast for each permanent sacrificed this turn.
-        this.addAbility(new SimpleStaticAbility(
-            Zone.ALL, new SpellCostReductionSourceEffect(PermanentsSacrificedThisTurnCount.instance)
-            .setText("this spell costs {1} less to cast for each permanent sacrificed this turn")
-        ).addHint(PermanentsSacrificedThisTurnHint.instance).setRuleAtTheTop(true));
+        this.addAbility(
+            new SimpleStaticAbility(
+                Zone.ALL,
+                new SpellCostReductionSourceEffect(PermanentsSacrificedThisTurnCount.instance)
+                    .setText("this spell costs {1} less to cast for each permanent sacrificed this turn")
+            ).addHint(PermanentsSacrificedThisTurnHint.instance).setRuleAtTheTop(true),
+            new PermanentsSacrificedWatcher()
+        );
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
