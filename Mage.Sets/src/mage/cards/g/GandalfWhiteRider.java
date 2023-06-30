@@ -81,13 +81,17 @@ class GandalfWhiteRiderDyingEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+
         if (controller == null) {
             return false;
         }
-        Card card = (Card) getValue("permanentLeftBattlefield");
-        if (card != null) {
-            controller.putCardOnTopXOfLibrary(card, game, source, 5, true);
+
+        Card card = game.getCard(source.getSourceId());
+        Card zoneCounter = (Card) getValue("permanentLeftBattlefield");
+
+        if (card == null || card.getZoneChangeCounter(game) - 1 != zoneCounter.getZoneChangeCounter(game)) {
+            return false;
         }
-        return true;
+        return controller.putCardOnTopXOfLibrary(card, game, source, 5, true);
     }
 }
