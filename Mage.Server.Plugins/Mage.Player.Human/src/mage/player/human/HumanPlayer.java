@@ -1003,6 +1003,8 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
 
+            // TODO: check that all skips and stops used from real controlling player
+            //  like holdingPriority (is it a bug here?)
             if (getJustActivatedType() != null && !holdingPriority) {
                 if (controllingPlayer.getUserData().isPassPriorityCast()
                         && getJustActivatedType() == AbilityType.SPELL) {
