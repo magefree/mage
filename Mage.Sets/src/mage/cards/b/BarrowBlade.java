@@ -37,7 +37,7 @@ public final class BarrowBlade extends CardImpl {
 
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), true));
+        this.addAbility(new EquipAbility(1, true));
     }
 
     private BarrowBlade(final BarrowBlade card) {
