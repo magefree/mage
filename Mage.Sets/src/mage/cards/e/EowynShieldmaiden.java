@@ -1,8 +1,7 @@
 package mage.cards.e;
 
-import java.util.*;
-
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -12,16 +11,18 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.constants.*;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.HumanKnightToken;
 import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  *
@@ -87,6 +88,7 @@ enum EowynShieldmaidenCondition implements Condition {
         EowynShieldmaidenWatcher watcher = game.getState().getWatcher(EowynShieldmaidenWatcher.class);
         return watcher != null
             && watcher.hasPlayerHadAnotherHumanEnterThisTurn(
+                game,
                 source.getSourcePermanentOrLKI(game),
                 source.getControllerId());
     }
@@ -94,8 +96,8 @@ enum EowynShieldmaidenCondition implements Condition {
 
 class EowynShieldmaidenWatcher extends Watcher {
 
-    // Map players UUID to theirs humans UUID that entered this turn.
-    private final Map<UUID, Set<UUID>> humanEnterings = new HashMap<>();
+    // Map players UUID to theirs humans MageObjectReference that entered this turn.
+    private final Map<UUID, Set<MageObjectReference>> humanEnterings = new HashMap<>();
 
     EowynShieldmaidenWatcher() {
         super(WatcherScope.GAME);
@@ -103,7 +105,7 @@ class EowynShieldmaidenWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && !game.isSimulation()) {
 
             // Is the thing entering an human?
             Permanent permanent = game.getPermanent(event.getTargetId());
@@ -113,8 +115,10 @@ class EowynShieldmaidenWatcher extends Watcher {
 
             // Then, stores the info about that event for latter.
             UUID playerId = event.getPlayerId();
-            Set<UUID> setForThatPlayer = this.humanEnterings.getOrDefault(playerId, new HashSet<>());
-            setForThatPlayer.add(permanent.getId());
+            Set<MageObjectReference> setForThatPlayer = this.humanEnterings.getOrDefault(playerId, new HashSet<>());
+
+            MageObjectReference humanMOR = new MageObjectReference(permanent.getId(), game);
+            setForThatPlayer.add(humanMOR);
             this.humanEnterings.put(playerId, setForThatPlayer);
         }
     }
@@ -125,17 +129,18 @@ class EowynShieldmaidenWatcher extends Watcher {
         this.humanEnterings.clear();
     }
 
-    boolean hasPlayerHadAnotherHumanEnterThisTurn(Permanent sourcePermanent, UUID playerId) {
+    boolean hasPlayerHadAnotherHumanEnterThisTurn(Game game, Permanent sourcePermanent, UUID playerId) {
         // The trick there is that we need to exclude the sourcePermanent of the trigger (Eowyn most likely),
         //     from the humans that entered the battlefield this turn under the player.
-        UUID sourceId = null;
-        if(sourcePermanent != null)
-            sourceId = sourcePermanent.getId();
 
-        UUID finalSourceId = sourceId;
-        Set<UUID> setForThePlayer = this.humanEnterings.getOrDefault(playerId, new HashSet<>());
+        // we do use MageObjectReference for when eowyn is entering the battlefield
+        //    multiple time in the same turn (flickered for instance)
+        MageObjectReference sourceMOR = sourcePermanent == null ? null
+            : new MageObjectReference(sourcePermanent.getId(), game);
+
+        Set<MageObjectReference> setForThePlayer = this.humanEnterings.getOrDefault(playerId, new HashSet<>());
         return setForThePlayer.stream().anyMatch(
-            humanUUID -> finalSourceId == null || humanUUID != finalSourceId
+            humanMOR -> sourceMOR == null || !(humanMOR.equals(sourceMOR))
         );
     }
 }
