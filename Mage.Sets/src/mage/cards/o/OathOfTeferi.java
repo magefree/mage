@@ -12,8 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -27,12 +25,6 @@ import java.util.UUID;
  */
 public final class OathOfTeferi extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another target permanent you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public OathOfTeferi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
 
@@ -40,7 +32,7 @@ public final class OathOfTeferi extends CardImpl {
 
         // When Oath of Teferi enters the battlefield, exile another target permanent you control. Return it to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new EntersBattlefieldTriggeredAbility(new OathOfTeferiBlinkEffect());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_PERMANENT));
         this.addAbility(ability);
 
         // You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.
