@@ -371,6 +371,13 @@ public final class StaticFilters {
         FILTER_CONTROLLED_A_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_PERMANENT = new FilterControlledPermanent("another target permanent you control");
+
+    static {
+        FILTER_CONTROLLED_ANOTHER_PERMANENT.add(AnotherPredicate.instance);
+        FILTER_CONTROLLED_ANOTHER_PERMANENT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENTS = new FilterControlledPermanent("permanents you control");
 
     static {
