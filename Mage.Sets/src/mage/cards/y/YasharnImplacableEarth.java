@@ -38,7 +38,7 @@ public final class YasharnImplacableEarth extends CardImpl {
     public YasharnImplacableEarth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.BOAR);
         this.power = new MageInt(4);
@@ -150,7 +150,7 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
             return false;
         }
 
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY || permanent == null) {
+        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && permanent == null) {
             return false;
         }
 

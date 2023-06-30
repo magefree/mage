@@ -49,7 +49,7 @@ public class ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility extends Triggere
                 || !permanent.hasSubtype(planeswalkerSubType, game)) {
             return false;
         }
-        this.getEffects().setValue("stackAbility", stackAbility);
+        this.getEffects().setValue("stackObject", stackAbility);
         return true;
     }
 }

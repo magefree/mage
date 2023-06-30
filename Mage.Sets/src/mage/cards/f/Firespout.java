@@ -35,10 +35,10 @@ public final class Firespout extends CardImpl {
         // Firespout deals 3 damage to each creature without flying if {R} was spent to cast Firespout and 3 damage to each creature with flying if {G} was spent to cast it.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageAllEffect(3, filter1),
-                new ManaWasSpentCondition(ColoredManaSymbol.R), "{this} deals 3 damage to each creature without flying if {R} was spent to cast this spell"));
+                ManaWasSpentCondition.RED, "{this} deals 3 damage to each creature without flying if {R} was spent to cast this spell"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageAllEffect(3, filter2),
-                new ManaWasSpentCondition(ColoredManaSymbol.G), "and 3 damage to each creature with flying if {G} was spent to cast this spell. <i>(Do both if {R}{G} was spent.)</i>"));
+                ManaWasSpentCondition.GREEN, "and 3 damage to each creature with flying if {G} was spent to cast this spell. <i>(Do both if {R}{G} was spent.)</i>"));
     }
 
     private Firespout(final Firespout card) {

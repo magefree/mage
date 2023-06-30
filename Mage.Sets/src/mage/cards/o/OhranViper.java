@@ -23,7 +23,7 @@ public final class OhranViper extends CardImpl {
 
     public OhranViper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SNAKE);
 
         this.power = new MageInt(1);

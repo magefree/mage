@@ -31,7 +31,7 @@ public final class EvenTheScore extends CardImpl {
                         new ManaCostsImpl<>("{U}{U}{U}"),
                         EvenTheScoreCondition.instance
                 )
-        ).setRuleAtTheTop(true), new CardsDrawnThisTurnWatcher());
+        ).setRuleAtTheTop(true));
 
         // Draw X cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));

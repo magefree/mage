@@ -22,7 +22,7 @@ public final class ArchelosLagoonMystic extends CardImpl {
     public ArchelosLagoonMystic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TURTLE);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);

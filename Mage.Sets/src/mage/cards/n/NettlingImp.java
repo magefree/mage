@@ -104,7 +104,6 @@ class NettlingImpDelayedDestroyEffect extends OneShotEffect {
         effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));
         AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility
                 = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect, TargetController.ANY, new InvertCondition(TargetAttackedThisTurnCondition.instance));
-        delayedAbility.getDuration();
         delayedAbility.getTargets().addAll(source.getTargets());
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return true;

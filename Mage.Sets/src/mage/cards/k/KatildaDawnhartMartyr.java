@@ -43,7 +43,7 @@ public final class KatildaDawnhartMartyr extends CardImpl {
     public KatildaDawnhartMartyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(0);
@@ -61,7 +61,7 @@ public final class KatildaDawnhartMartyr extends CardImpl {
 
         // Katilda, Dawnhart Martyr's power and toughness are each equal to the number of permanents you control that are Spirits and/or enchantments.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)
         ).addHint(hint));
 
         // Disturb {3}{W}{W}

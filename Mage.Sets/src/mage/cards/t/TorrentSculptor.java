@@ -9,7 +9,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -29,7 +29,7 @@ import static mage.constants.Outcome.Benefit;
 /**
  * @author TheElk801
  */
-public final class TorrentSculptor extends ModalDoubleFacesCard {
+public final class TorrentSculptor extends ModalDoubleFacedCard {
 
     public TorrentSculptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

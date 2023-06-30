@@ -115,7 +115,7 @@ public class SuspendAbility extends SpecialAction {
      * Gives the card the SuspendAbility
      *
      * @param suspend - amount of time counters, if Integer.MAX_VALUE is set
-     *                there will be {X} costs and X counters added
+     *                there will be {X} costs and X counters added with X can't be 0 limit
      * @param cost    - null is used for temporary gained suspend ability
      * @param card    - card that has the suspend ability
      */

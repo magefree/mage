@@ -22,7 +22,7 @@ public final class BairdStewardOfArgive extends CardImpl {
     public BairdStewardOfArgive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.SOLDIER);
 
         this.power = new MageInt(2);

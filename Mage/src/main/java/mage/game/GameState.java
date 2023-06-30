@@ -7,6 +7,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.cards.*;
+import mage.constants.PhaseStep;
+import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.designations.Designation;
 import mage.filter.common.FilterCreaturePermanent;
@@ -22,6 +24,8 @@ import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
+import mage.game.turn.Phase;
+import mage.game.turn.Step;
 import mage.game.turn.Turn;
 import mage.game.turn.TurnMods;
 import mage.players.Player;
@@ -37,6 +41,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
@@ -86,9 +91,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Battlefield battlefield;
     private int turnNum = 1;
     private int stepNum = 0;
-    private UUID turnId = null;
-    private boolean extraTurn = false;
-    private boolean legendaryRuleActive = true;
+    private UUID extraTurnId = null; // id of the current extra turn (null on normal turn or after game stopped)
     private boolean gameOver;
     private boolean paused;
     private ContinuousEffects effects;
@@ -158,8 +161,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
         this.stepNum = state.stepNum;
-        this.extraTurn = state.extraTurn;
-        this.legendaryRuleActive = state.legendaryRuleActive;
+        this.extraTurnId = state.extraTurnId;
         this.effects = state.effects.copy();
         for (TriggeredAbility trigger : state.triggered) {
             this.triggered.add(trigger.copy());
@@ -226,8 +228,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         companion.clear();
         turnNum = 1;
         stepNum = 0;
-        extraTurn = false;
-        legendaryRuleActive = true;
+        extraTurnId = null;
         gameOver = false;
         specialActions.clear();
         cardState.clear();
@@ -263,8 +264,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.battlefield = state.battlefield;
         this.turnNum = state.turnNum;
         this.stepNum = state.stepNum;
-        this.extraTurn = state.extraTurn;
-        this.legendaryRuleActive = state.legendaryRuleActive;
+        this.extraTurnId = state.extraTurnId;
         this.effects = state.effects;
         this.triggered = state.triggered;
         this.triggers = state.triggers;
@@ -576,6 +576,19 @@ public class GameState implements Serializable, Copyable<GameState> {
         return turn;
     }
 
+    public PhaseStep getTurnStepType() {
+        Turn turn = this.getTurn();
+        Phase phase = turn != null ? turn.getPhase() : null;
+        Step step = phase != null ? phase.getStep() : null;
+        return step != null ? step.getType() : null;
+    }
+
+    public TurnPhase getTurnPhaseType() {
+        Turn turn = this.getTurn();
+        Phase phase = turn != null ? turn.getPhase() : null;
+        return phase != null ? phase.getType() : null;
+    }
+
     public Combat getCombat() {
         return combat;
     }
@@ -602,20 +615,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.turnNum = turnNum;
     }
 
-    public UUID getTurnId() {
-        return this.turnId;
+    public UUID getExtraTurnId() {
+        return this.extraTurnId;
     }
 
-    public void setTurnId(UUID turnId) {
-        this.turnId = turnId;
+    public void setExtraTurnId(UUID extraTurnId) {
+        this.extraTurnId = extraTurnId;
     }
 
     public boolean isExtraTurn() {
-        return extraTurn;
-    }
-
-    public void setExtraTurn(boolean extraTurn) {
-        this.extraTurn = extraTurn;
+        return this.extraTurnId != null;
     }
 
     public boolean isGameOver() {
@@ -799,16 +808,19 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
+        // combine damages per type (player or permanent)
         boolean flag = false;
         for (GameEvent event : simultaneousEvents) {
             if ((event instanceof DamagedBatchEvent)
                     && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
+                // old batch
                 ((DamagedBatchEvent) event).addEvent(damagedEvent);
                 flag = true;
                 break;
             }
         }
         if (!flag) {
+            // new batch
             addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
         }
     }
@@ -1082,6 +1094,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         return values.get(valueId);
     }
 
+    public Object computeValueIfAbsent(String valueId, Function<String, ?> mappingFunction) {
+        return values.computeIfAbsent(valueId, mappingFunction);
+    }
+
     /**
      * Return values list starting with searching key.
      * <p>
@@ -1162,8 +1178,6 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param ability
      */
     public void addOtherAbility(Card attachedTo, Ability ability) {
-        checkWrongDynamicAbilityUsage(attachedTo, ability);
-
         addOtherAbility(attachedTo, ability, true);
     }
 
@@ -1181,6 +1195,12 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         Ability newAbility;
         if (ability instanceof MageSingleton || !copyAbility) {
+            // Avoid adding another instance of an ability where multiple copies are redundant
+            if (attachedTo.getAbilities().contains(ability)
+                    || (getAllOtherAbilities(attachedTo.getId()) != null
+                    && getAllOtherAbilities(attachedTo.getId()).contains(ability))) {
+                return;
+            }
             newAbility = ability;
         } else {
             // must use new id, so you can add multiple instances of the same ability
@@ -1224,7 +1244,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         // All gained abilities have to be removed to prevent adding it multiple times
         triggers.removeAllGainedAbilities();
         getContinuousEffects().removeAllTemporaryEffects();
-        this.setLegendaryRuleActive(true);
         for (CardState state : cardState.values()) {
             state.clearAbilities();
         }
@@ -1242,14 +1261,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public boolean isPaused() {
         return this.paused;
-    }
-
-    public boolean isLegendaryRuleActive() {
-        return legendaryRuleActive;
-    }
-
-    public void setLegendaryRuleActive(boolean legendaryRuleActive) {
-        this.legendaryRuleActive = legendaryRuleActive;
     }
 
     /**
@@ -1350,19 +1361,19 @@ public class GameState implements Serializable, Copyable<GameState> {
             copiedParts.add(rightCopied);
             // sync parts
             ((SplitCard) copiedCard).setParts(leftCopied, rightCopied);
-        } else if (copiedCard instanceof ModalDoubleFacesCard) {
+        } else if (copiedCard instanceof ModalDoubleFacedCard) {
             // left
-            ModalDoubleFacesCardHalf leftOriginal = ((ModalDoubleFacesCard) copiedCard).getLeftHalfCard();
-            ModalDoubleFacesCardHalf leftCopied = leftOriginal.copy();
+            ModalDoubleFacedCardHalf leftOriginal = ((ModalDoubleFacedCard) copiedCard).getLeftHalfCard();
+            ModalDoubleFacedCardHalf leftCopied = leftOriginal.copy();
             prepareCardForCopy(leftOriginal, leftCopied, newController);
             copiedParts.add(leftCopied);
             // right
-            ModalDoubleFacesCardHalf rightOriginal = ((ModalDoubleFacesCard) copiedCard).getRightHalfCard();
-            ModalDoubleFacesCardHalf rightCopied = rightOriginal.copy();
+            ModalDoubleFacedCardHalf rightOriginal = ((ModalDoubleFacedCard) copiedCard).getRightHalfCard();
+            ModalDoubleFacedCardHalf rightCopied = rightOriginal.copy();
             prepareCardForCopy(rightOriginal, rightCopied, newController);
             copiedParts.add(rightCopied);
             // sync parts
-            ((ModalDoubleFacesCard) copiedCard).setParts(leftCopied, rightCopied);
+            ((ModalDoubleFacedCard) copiedCard).setParts(leftCopied, rightCopied);
         } else if (copiedCard instanceof AdventureCard) {
             // right
             AdventureCardSpell rightOriginal = ((AdventureCard) copiedCard).getSpellCard();
@@ -1376,10 +1387,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         // main part prepare (must be called after other parts cause it change ids for all)
         prepareCardForCopy(mainCardToCopy, copiedCard, newController);
 
+        // 707.12. An effect that instructs a player to cast a copy of an object (and not just copy a spell) follows the rules for casting spells, except that the copy is created in the same zone the object is in and then cast while another spell or ability is resolving.
+        Zone copyToZone = game.getState().getZone(mainCardToCopy.getId());
+        if (copyToZone == Zone.BATTLEFIELD) {
+            throw new UnsupportedOperationException("Cards cannot be copied while on the Battlefield");
+        }
+
         // add all parts to the game
         copiedParts.forEach(card -> {
             copiedCards.put(card.getId(), card);
-            addCard(card);
+            addCard(card, copyToZone);
         });
 
         // copied cards removes from game after battlefield/stack leaves, so remember it here as workaround to fix freeze, see https://github.com/magefree/mage/issues/5437
@@ -1447,21 +1464,22 @@ public class GameState implements Serializable, Copyable<GameState> {
     boolean isDaytime() {
         return isDaytime;
     }
-    
+
     @Override
     public String toString() {
         return CardUtil.getTurnInfo(this);
     }
 
-    public boolean setReverseTurnOrder(boolean reverse){
-        if(this.reverseTurnOrder&&reverse){
+    public boolean setReverseTurnOrder(boolean reverse) {
+        if (this.reverseTurnOrder && reverse) {
             this.reverseTurnOrder = false;
         } else {
             this.reverseTurnOrder = reverse;
         }
         return this.reverseTurnOrder;
     }
-    public boolean getReverseTurnOrder(){
+
+    public boolean getReverseTurnOrder() {
         return this.reverseTurnOrder;
     }
 }

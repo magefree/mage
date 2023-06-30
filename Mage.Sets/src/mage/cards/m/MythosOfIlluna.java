@@ -47,8 +47,8 @@ public final class MythosOfIlluna extends CardImpl {
 class MythosOfIllunaEffect extends OneShotEffect {
 
     private static final Condition condition = new CompoundCondition(
-            new ManaWasSpentCondition(ColoredManaSymbol.R),
-            new ManaWasSpentCondition(ColoredManaSymbol.G)
+            ManaWasSpentCondition.RED,
+            ManaWasSpentCondition.GREEN
     );
 
     MythosOfIllunaEffect() {

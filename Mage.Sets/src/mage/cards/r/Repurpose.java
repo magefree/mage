@@ -28,7 +28,7 @@ public final class Repurpose extends CardImpl {
 
         // Return up to one target creature card from graveyard to your hand.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
-        effect.setTargetPointer(SecondTargetPointer.getInstance());
+        effect.setTargetPointer(new SecondTargetPointer());
         effect.setText("Return up to one target creature card from graveyard to your hand.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));

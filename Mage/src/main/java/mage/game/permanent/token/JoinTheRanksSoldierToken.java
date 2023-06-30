@@ -1,19 +1,16 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class JoinTheRanksSoldierToken extends TokenImpl {
 
     public JoinTheRanksSoldierToken() {
         super("Soldier Ally Token", "1/1 white Soldier Ally creature token");
-        this.setOriginalExpansionSetCode("WWK");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.SOLDIER);

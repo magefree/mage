@@ -1,10 +1,8 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.UntapSourceEffect;
@@ -13,31 +11,28 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Wehk
  */
 public final class StoneSeederHierophant extends CardImpl {
 
     public StoneSeederHierophant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Whenever a land enters the battlefield under your control, untap Stone-Seeder Hierophant.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new FilterControlledLandPermanent("a land"), false, null, true));
+        this.addAbility(new LandfallAbility(new UntapSourceEffect()));
 
         // {tap}: Untap target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        Target target = new TargetLandPermanent();
-        ability.addTarget(target);
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }
 

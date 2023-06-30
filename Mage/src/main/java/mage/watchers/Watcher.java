@@ -91,6 +91,7 @@ public abstract class Watcher implements Serializable {
 
             Constructor<? extends Watcher> constructor = (Constructor<? extends Watcher>) constructors.get(0);
 
+            // collect all fields
             constructor.setAccessible(true);
             Object[] args = new Object[constructor.getParameterCount()];
             for (int index = 0; index < constructor.getParameterTypes().length; index++) {
@@ -108,17 +109,32 @@ public abstract class Watcher implements Serializable {
             List<Field> allFields = new ArrayList<>();
             allFields.addAll(Arrays.asList(getClass().getDeclaredFields()));
             allFields.addAll(Arrays.asList(getClass().getSuperclass().getDeclaredFields()));
+
+            // copy field's values
             for (Field field : allFields) {
                 if (!Modifier.isStatic(field.getModifiers())) {
-
                     field.setAccessible(true);
+
                     if (field.getType() == Set.class) {
+                        // Set<UUID, xxx>
                         ((Set) field.get(watcher)).clear();
                         ((Set) field.get(watcher)).addAll((Set) field.get(this));
                     } else if (field.getType() == Map.class || field.getType() == HashMap.class) {
+                        // Map<UUID, xxx>
                         ParameterizedType parameterizedType = (ParameterizedType) field.getGenericType();
                         Type valueType = parameterizedType.getActualTypeArguments()[1];
-                        if (valueType.getTypeName().contains("Set")) {
+                        if (valueType.getTypeName().contains("SortedSet")) {
+                            // Map<UUID, SortedSet<Object>>
+                            Map<Object, Set<Object>> source = (Map<Object, Set<Object>>) field.get(this);
+                            Map<Object, Set<Object>> target = (Map<Object, Set<Object>>) field.get(watcher);
+                            target.clear();
+                            for (Map.Entry<Object, Set<Object>> e : source.entrySet()) {
+                                Set<Object> set = new TreeSet<>();
+                                set.addAll(e.getValue());
+                                target.put(e.getKey(), set);
+                            }
+                        } else if (valueType.getTypeName().contains("Set")) {
+                            // Map<UUID, Set<Object>>
                             Map<Object, Set<Object>> source = (Map<Object, Set<Object>>) field.get(this);
                             Map<Object, Set<Object>> target = (Map<Object, Set<Object>>) field.get(watcher);
                             target.clear();
@@ -128,6 +144,7 @@ public abstract class Watcher implements Serializable {
                                 target.put(e.getKey(), set);
                             }
                         } else if (valueType.getTypeName().contains("PlayerList")) {
+                            // Map<UUID, PlayerList>
                             Map<Object, PlayerList> source = (Map<Object, PlayerList>) field.get(this);
                             Map<Object, PlayerList> target = (Map<Object, PlayerList>) field.get(watcher);
                             target.clear();
@@ -136,6 +153,7 @@ public abstract class Watcher implements Serializable {
                                 target.put(e.getKey(), list);
                             }
                         } else if (valueType.getTypeName().endsWith("Cards")) {
+                            // Map<UUID, Cards>
                             Map<Object, Cards> source = (Map<Object, Cards>) field.get(this);
                             Map<Object, Cards> target = (Map<Object, Cards>) field.get(watcher);
                             target.clear();
@@ -144,6 +162,7 @@ public abstract class Watcher implements Serializable {
                                 target.put(e.getKey(), list);
                             }
                         } else if (valueType instanceof Class &&  Arrays.stream(((Class) valueType).getInterfaces()).anyMatch(c -> c.equals(Copyable.class))) {
+                            // Map<UUID, Copyable>
                             Map<Object, Copyable> source = (Map<Object, Copyable>) field.get(this);
                             Map<Object, Copyable> target = (Map<Object, Copyable>) field.get(watcher);
                             target.clear();
@@ -152,6 +171,7 @@ public abstract class Watcher implements Serializable {
                                 target.put(e.getKey(), object);
                             }
                         } else if (valueType.getTypeName().contains("List")) {
+                            // Map<UUID, List<Object>>
                             Map<Object, List<Object>> source = (Map<Object, List<Object>>) field.get(this);
                             Map<Object, List<Object>> target = (Map<Object, List<Object>>) field.get(watcher);
                             target.clear();
@@ -161,6 +181,7 @@ public abstract class Watcher implements Serializable {
                                 target.put(e.getKey(), list);
                             }
                         } else if (valueType.getTypeName().contains("Map")) {
+                            // Map<UUID, Map<UUID, Object>>
                             Map<Object, Map<Object, Object>> source = (Map<Object, Map<Object, Object>>) field.get(this);
                             Map<Object, Map<Object, Object>> target = (Map<Object, Map<Object, Object>>) field.get(watcher);
                             target.clear();
@@ -170,14 +191,17 @@ public abstract class Watcher implements Serializable {
                                 target.put(e.getKey(), map);
                             }
                         } else {
+                            // Map<UUID, Object>
                             // TODO: add additional tests to find unsupported watcher data
 
                             ((Map) field.get(watcher)).putAll((Map) field.get(this));
                         }
                     } else if (field.getType() == List.class) {
+                        // List<Object>
                         ((List) field.get(watcher)).clear();
                         ((List) field.get(watcher)).addAll((List) field.get(this));
                     } else {
+                        // Object
                         field.set(watcher, field.get(this));
                     }
                 }

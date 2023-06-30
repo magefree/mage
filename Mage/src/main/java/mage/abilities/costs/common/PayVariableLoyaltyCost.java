@@ -57,7 +57,7 @@ public class PayVariableLoyaltyCost extends VariableCostImpl {
             return 0;
         }
 
-        int maxValue = permanent.getCounters(game).getCount(CounterType.LOYALTY.getName());
+        int maxValue = permanent.getCounters(game).getCount(CounterType.LOYALTY);
 
         // apply cost modification
         if (source instanceof LoyaltyAbility) {

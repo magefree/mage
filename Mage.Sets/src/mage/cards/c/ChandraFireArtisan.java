@@ -10,6 +10,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.*;
 import mage.constants.*;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -26,7 +27,7 @@ public final class ChandraFireArtisan extends CardImpl {
     public ChandraFireArtisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.setStartingLoyalty(4);
 
@@ -68,7 +69,7 @@ class ChandraFireArtisanTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getAmount() == 0 || !event.getData().equals("loyalty")
+        if (event.getAmount() == 0 || !event.getData().equals(CounterType.LOYALTY.getName())
                 || !event.getTargetId().equals(this.getSourceId())) {
             return false;
         }

@@ -1,5 +1,3 @@
-
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -7,18 +5,16 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author FenrisulfrX
  */
 public final class MinionToken extends TokenImpl {
-    
+
     public MinionToken() {
         this("DDE");
     }
-    
+
     public MinionToken(String setCode) {
         super("Phyrexian Minion Token", "X/X black Phyrexian Minion creature token");
-        this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PHYREXIAN);
         subtype.add(SubType.MINION);

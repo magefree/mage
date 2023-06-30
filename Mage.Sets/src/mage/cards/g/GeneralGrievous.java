@@ -25,7 +25,7 @@ public final class GeneralGrievous extends CardImpl {
 
     public GeneralGrievous(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KALEESH);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

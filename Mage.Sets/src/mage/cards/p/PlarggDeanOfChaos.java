@@ -16,7 +16,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -32,7 +32,7 @@ import java.util.UUID;
 /**
  * @author htrajan
  */
-public final class PlarggDeanOfChaos extends ModalDoubleFacesCard {
+public final class PlarggDeanOfChaos extends ModalDoubleFacedCard {
 
     private static final FilterCreaturePermanent tappedFilter = new FilterCreaturePermanent("tapped creatures you control");
     private static final FilterCreaturePermanent untappedFilter = new FilterCreaturePermanent("untapped creatures you control");
@@ -46,14 +46,16 @@ public final class PlarggDeanOfChaos extends ModalDoubleFacesCard {
     }
 
     public PlarggDeanOfChaos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ORC, SubType.SHAMAN}, "{1}{R}",
-                "Augusta, Dean of Order", new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.CLERIC}, "{2}{W}");
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ORC, SubType.SHAMAN}, "{1}{R}",
+                "Augusta, Dean of Order",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.CLERIC}, "{2}{W}"
+        );
 
         // 1.
         // Plargg, Dean of Chaos
         // Legendary Creature - Orc Shaman
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(2, 2);
 
         // {T}, Discard a card: Draw a card.
@@ -69,7 +71,6 @@ public final class PlarggDeanOfChaos extends ModalDoubleFacesCard {
         // 2.
         // Augusta, Dean of Order
         // Legendary Creature - Human Cleric
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getRightHalfCard().setPT(1, 3);
 
         // Other tapped creatures you control get +1/+0.
@@ -120,7 +121,7 @@ class PlarggDeanOfChaosEffect extends OneShotEffect {
             Card eligibleCard = null;
             for (Card card : controller.getLibrary().getCards(game)) {
                 toReveal.add(card);
-                if (!card.isLand(game) && !card.isLegendary() && card.getManaValue() < 4) {
+                if (!card.isLand(game) && !card.isLegendary(game) && card.getManaValue() < 4) {
                     eligibleCard = card;
                     break;
                 }

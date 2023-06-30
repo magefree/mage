@@ -19,10 +19,10 @@ public final class ThrummingStone extends CardImpl {
 
     public ThrummingStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Spells you cast have Ripple 4
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new RippleAbility(4), new FilterCard("Spells"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new RippleAbility(4), new FilterCard("Spells you cast"))));
     }
 
     private ThrummingStone(final ThrummingStone card) {

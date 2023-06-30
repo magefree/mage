@@ -25,7 +25,7 @@ public final class JenaraAsuraOfWar extends CardImpl {
     public JenaraAsuraOfWar (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");
         this.subtype.add(SubType.ANGEL);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
 
         

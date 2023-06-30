@@ -35,7 +35,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class Leviathan extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Islands");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands");
     static {
         filter.add(SubType.ISLAND.getPredicate());
     }
@@ -82,7 +82,7 @@ public final class Leviathan extends CardImpl {
 
 class LeviathanCostToAttackBlockEffect extends PayCostToAttackBlockEffectImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Islands");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands");
     static {
         filter.add(SubType.ISLAND.getPredicate());
     }

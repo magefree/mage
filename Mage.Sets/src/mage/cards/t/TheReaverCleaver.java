@@ -25,7 +25,7 @@ public final class TheReaverCleaver extends CardImpl {
 
     public TheReaverCleaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 and has trample and “Whenever this creature deals

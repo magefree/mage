@@ -43,7 +43,7 @@ public final class TheTarrasque extends CardImpl {
     public TheTarrasque(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);

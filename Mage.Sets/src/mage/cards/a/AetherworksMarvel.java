@@ -29,7 +29,7 @@ public final class AetherworksMarvel extends CardImpl {
 
     public AetherworksMarvel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever a permanent you control is put into a graveyard, you get {E}.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(

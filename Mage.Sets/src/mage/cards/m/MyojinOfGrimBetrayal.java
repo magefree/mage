@@ -40,7 +40,7 @@ public class MyojinOfGrimBetrayal extends CardImpl {
     public MyojinOfGrimBetrayal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);

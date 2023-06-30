@@ -26,7 +26,7 @@ public final class AtarkaWorldRender extends CardImpl {
 
     public AtarkaWorldRender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);

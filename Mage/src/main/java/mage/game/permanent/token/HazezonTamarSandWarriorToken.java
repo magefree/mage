@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -6,7 +5,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class HazezonTamarSandWarriorToken extends TokenImpl {
@@ -21,7 +19,6 @@ public final class HazezonTamarSandWarriorToken extends TokenImpl {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        setOriginalExpansionSetCode("DMC");
     }
 
     public HazezonTamarSandWarriorToken(final HazezonTamarSandWarriorToken token) {

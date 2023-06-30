@@ -18,7 +18,7 @@ public final class RevivingDose extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private RevivingDose(final RevivingDose card) {

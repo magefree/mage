@@ -8,10 +8,10 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.PowerstoneToken;
@@ -25,7 +25,7 @@ public final class TheManaRig extends CardImpl {
 
     public TheManaRig(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever you cast a multicolored spell, create a tapped Powerstone token.
         this.addAbility(new SpellCastControllerTriggeredAbility(

@@ -21,6 +21,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -41,7 +42,7 @@ public final class MyrkulLordOfBones extends CardImpl {
     public MyrkulLordOfBones(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
@@ -101,9 +102,9 @@ class MyrkulLordOfBonesEffect extends OneShotEffect {
         }
         player.moveCards(card, Zone.EXILED, source, game);
         return new CreateTokenCopyTargetEffect().setSavedPermanent(
-                new PermanentCard(card, source.getControllerId(), game)
+                new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game)
         ).setPermanentModifier((token, g) -> {
-            token.getCardType().clear();
+            token.removeAllCardTypes();
             token.addCardType(CardType.ENCHANTMENT);
             token.retainAllEnchantmentSubTypes(g);
         }).apply(game, source);

@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -39,7 +38,7 @@ public final class DihadaBinderOfWills extends CardImpl {
 
 public DihadaBinderOfWills(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{W}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DIHADA);
 
         this.setStartingLoyalty(5);

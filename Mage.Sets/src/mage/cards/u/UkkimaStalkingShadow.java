@@ -27,7 +27,7 @@ public final class UkkimaStalkingShadow extends CardImpl {
     public UkkimaStalkingShadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WHALE);
         this.subtype.add(SubType.WOLF);
         this.power = new MageInt(2);

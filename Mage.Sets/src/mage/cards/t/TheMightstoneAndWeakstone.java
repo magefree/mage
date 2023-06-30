@@ -27,12 +27,15 @@ public final class TheMightstoneAndWeakstone extends CardImpl {
     public TheMightstoneAndWeakstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.POWERSTONE);
+
+        this.meldsWithClazz = mage.cards.u.UrzaLordProtector.class;
+        this.meldsToClazz = mage.cards.u.UrzaPlaneswalker.class;
 
         // When The Mightstone and Weakstone enters the battlefield, choose one --
         // * Draw two cards.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2));
 
         // * Target creature gets -5/-5 until end of turn.
         ability.addMode(new Mode(new BoostTargetEffect(-5, -5)).addTarget(new TargetCreaturePermanent()));
@@ -43,7 +46,7 @@ public final class TheMightstoneAndWeakstone extends CardImpl {
 
         // (Melds with Urza, Lord Protector)
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new InfoEffect("<i>(Melds with Urza, Lord Protector)</i>")
+                Zone.ALL, new InfoEffect("<i>(Melds with Urza, Lord Protector.)</i>")
         ));
     }
 

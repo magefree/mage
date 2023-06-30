@@ -31,7 +31,7 @@ public final class LilaHospitalityHostess extends CardImpl {
     public LilaHospitalityHostess(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.EMPLOYEE);
         this.power = new MageInt(3);

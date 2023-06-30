@@ -29,8 +29,8 @@ public final class SvellaIceShaper extends CardImpl {
     public SvellaIceShaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.TROLL);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);

@@ -30,7 +30,7 @@ public final class UmoriTheCollector extends CardImpl {
     public UmoriTheCollector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B/G}{B/G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OOZE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);

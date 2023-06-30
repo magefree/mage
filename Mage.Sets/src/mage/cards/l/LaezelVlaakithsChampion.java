@@ -11,6 +11,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ public final class LaezelVlaakithsChampion extends CardImpl {
     public LaezelVlaakithsChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GITH);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
@@ -59,7 +60,7 @@ class LaezelVlaakithsChampionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmountForCounters(event.getAmount() + 1, true);
+        event.setAmountForCounters(CardUtil.overflowInc(event.getAmount(), 1), true);
         return false;
     }
 
@@ -70,13 +71,16 @@ class LaezelVlaakithsChampionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!source.isControlledBy(event.getPlayerId())) {
+        if (event.getAmount() <= 0 || !source.isControlledBy(event.getPlayerId())) {
             return false;
         }
         if (source.isControlledBy(event.getTargetId())) {
             return true;
         }
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = game.getPermanentEntering(event.getTargetId());
+        if (permanent == null) {
+            permanent = game.getPermanent(event.getTargetId());
+        }
         return permanent != null
                 && (permanent.isCreature(game) || permanent.isPlaneswalker(game))
                 && permanent.isControlledBy(source.getControllerId());

@@ -6,8 +6,6 @@ import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -22,7 +20,6 @@ public final class NinjaToken extends TokenImpl {
         toughness = new MageInt(1);
 
         this.addAbility(new SimpleStaticAbility(new CantBeBlockedSourceEffect().setText("this creature can't be blocked")));
-        availableImageSetCodes = Arrays.asList("NEO");
     }
 
     private NinjaToken(final NinjaToken token) {

@@ -23,7 +23,7 @@ public final class MomentaryBlink extends CardImpl {
         // Exile target creature you control, then return it to the battlefield under its owner's control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false));
+        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
 
         // Flashback {3}{U}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{3}{U}")));

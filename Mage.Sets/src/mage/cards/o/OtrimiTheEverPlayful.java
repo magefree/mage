@@ -35,7 +35,7 @@ public final class OtrimiTheEverPlayful extends CardImpl {
     public OtrimiTheEverPlayful(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(6);

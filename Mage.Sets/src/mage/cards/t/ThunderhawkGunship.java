@@ -13,9 +13,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.AstartesWarriorToken;
 
 import java.util.UUID;
+import mage.game.permanent.token.WhiteAstartesWarriorToken;
 
 /**
  * @author TheElk801
@@ -34,7 +34,7 @@ public final class ThunderhawkGunship extends CardImpl {
 
         // When Thunderhawk Gunship enters the battlefield, create two 2/2 white Astartes Warrior creature tokens with vigilance.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new CreateTokenEffect(new AstartesWarriorToken(), 2)
+                new CreateTokenEffect(new WhiteAstartesWarriorToken(), 2)
         ));
 
         // Whenever Thunderhawk Gunship attacks, attacking creatures you control gain flying until end of turn.

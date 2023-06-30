@@ -11,7 +11,6 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -40,7 +39,7 @@ public final class BogbrewWitch extends CardImpl {
         // {2}, {T}: Search your library for a card named Festering Newt or Bubbling Cauldron, put it onto the battlefield tapped, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(1, 1, new FilterCard(filter));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutCardInPlay),
+                new SearchLibraryPutInPlayEffect(target, true),
                 new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

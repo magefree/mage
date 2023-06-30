@@ -17,7 +17,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 
@@ -87,7 +86,7 @@ class AkkiLavarunnerAbility extends TriggeredAbilityImpl {
 class TokTokVolcanoBorn extends TokenImpl {
     TokTokVolcanoBorn() {
         super("Tok-Tok, Volcano Born", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.GOBLIN);

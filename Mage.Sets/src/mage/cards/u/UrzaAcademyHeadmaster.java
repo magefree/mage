@@ -10,7 +10,6 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.*;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.*;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
@@ -52,7 +51,7 @@ public final class UrzaAcademyHeadmaster extends CardImpl {
 
     public UrzaAcademyHeadmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{W}{U}{B}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.URZA);
 
         this.setStartingLoyalty(4);
@@ -287,7 +286,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 12: // (altered) LILIANA VESS 2
                                 sb.append("Search your library for a card and put that card into your hand. Then shuffle.");
-                                effects.add(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("a card")), false, true));
+                                effects.add(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("a card")), false));
                                 break;
                             case 13: // (double) LILIANA OF THE VEIL 2
                                 sb.append("Target player sacrifices two creatures.");

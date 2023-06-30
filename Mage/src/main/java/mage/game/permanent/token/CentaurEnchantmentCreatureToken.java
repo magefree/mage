@@ -1,4 +1,3 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
@@ -6,7 +5,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author LevelX2
  */
 public final class CentaurEnchantmentCreatureToken extends TokenImpl {
@@ -19,7 +17,6 @@ public final class CentaurEnchantmentCreatureToken extends TokenImpl {
         subtype.add(SubType.CENTAUR);
         power = new MageInt(3);
         toughness = new MageInt(3);
-        this.setOriginalExpansionSetCode("BNG");
     }
 
     public CentaurEnchantmentCreatureToken(final CentaurEnchantmentCreatureToken token) {

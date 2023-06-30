@@ -81,7 +81,7 @@ class ShiftyDoppelgangerExileEffect extends OneShotEffect {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
-        player.choose(Outcome.PutCreatureInPlay, player.getHand(), target, game);
+        player.choose(Outcome.PutCreatureInPlay, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

@@ -111,9 +111,9 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, copyFromObject);
 
-        permanent.getSuperType().clear();
-        for (SuperType type : copyFromObject.getSuperType()) {
-            permanent.addSuperType(type);
+        permanent.removeAllSuperTypes(game);
+        for (SuperType type : copyFromObject.getSuperType(game)) {
+            permanent.addSuperType(game, type);
         }
 
         permanent.removeAllAbilities(source.getSourceId(), game);
@@ -133,6 +133,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.getPower().setModifiedBaseValue(copyFromObject.getPower().getModifiedBaseValue());
         permanent.getToughness().setModifiedBaseValue(copyFromObject.getToughness().getModifiedBaseValue());
         permanent.setStartingLoyalty(copyFromObject.getStartingLoyalty());
+        permanent.setStartingDefense(copyFromObject.getStartingDefense());
         if (copyFromObject instanceof Permanent) {
             Permanent targetPermanent = (Permanent) copyFromObject;
             permanent.setTransformed(targetPermanent.isTransformed());
@@ -141,14 +142,8 @@ public class CopyEffect extends ContinuousEffectImpl {
             permanent.setFlipCardName(targetPermanent.getFlipCardName());
         }
 
-        // to get the image of the copied permanent copy number und expansionCode
-        if (copyFromObject instanceof PermanentCard) {
-            permanent.setCardNumber(((PermanentCard) copyFromObject).getCard().getCardNumber());
-            permanent.setExpansionSetCode(((PermanentCard) copyFromObject).getCard().getExpansionSetCode());
-        } else if (copyFromObject instanceof PermanentToken || copyFromObject instanceof Card) {
-            permanent.setCardNumber(((Card) copyFromObject).getCardNumber());
-            permanent.setExpansionSetCode(((Card) copyFromObject).getExpansionSetCode());
-        }
+        CardUtil.copySetAndCardNumber(permanent, copyFromObject);
+
         return true;
     }
 
@@ -173,8 +168,9 @@ public class CopyEffect extends ContinuousEffectImpl {
         return applier;
     }
 
-    public void setApplier(CopyApplier applier) {
+    public CopyEffect setApplier(CopyApplier applier) {
         this.applier = applier;
+        return this;
     }
 
 }

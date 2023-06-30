@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,14 +24,14 @@ public final class ScionOfHalaster extends CardImpl {
     public ScionOfHalaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have "The first time you would draw a card each turn, instead look at the top two cards of your library. Put one of them into your graveyard and the other back on top of your library. Then draw a card."
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
-               new SimpleStaticAbility(new ScionOfHalasterReplacementEffect()),
+                new SimpleStaticAbility(new ScionOfHalasterReplacementEffect()),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
-        )), new CardsDrawnThisTurnWatcher());
+        )));
     }
 
     private ScionOfHalaster(final ScionOfHalaster card) {
@@ -68,7 +67,7 @@ class ScionOfHalasterReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        new LookLibraryAndPickControllerEffect(2, 1, LookLibraryControllerEffect.PutCards.GRAVEYARD, LookLibraryControllerEffect.PutCards.TOP_ANY).apply(game, source);
+        new LookLibraryAndPickControllerEffect(2, 1, PutCards.GRAVEYARD, PutCards.TOP_ANY).apply(game, source);
         Player you = game.getPlayer(event.getPlayerId());
         if (you != null) {
             you.drawCards(1, source, game, event);

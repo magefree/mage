@@ -31,7 +31,7 @@ public final class KaradorGhostChieftain extends CardImpl {
 
     public KaradorGhostChieftain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{B}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CENTAUR);
         this.subtype.add(SubType.SPIRIT);
 

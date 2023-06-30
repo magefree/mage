@@ -27,7 +27,7 @@ public final class KiraGreatGlassSpinner extends CardImpl {
     public KiraGreatGlassSpinner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add(SubType.SPIRIT);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

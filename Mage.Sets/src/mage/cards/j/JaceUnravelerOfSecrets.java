@@ -27,7 +27,7 @@ public final class JaceUnravelerOfSecrets extends CardImpl {
 
     public JaceUnravelerOfSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
         this.setStartingLoyalty(5);

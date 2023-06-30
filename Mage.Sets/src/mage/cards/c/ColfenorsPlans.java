@@ -117,8 +117,8 @@ class ColfenorsPlansPlayCardEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId) == Zone.EXILED) {
-            ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            return zone != null && zone.contains(objectId);
+            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+            return exileZone != null && exileZone.contains(objectId);
         }
         return false;
     }

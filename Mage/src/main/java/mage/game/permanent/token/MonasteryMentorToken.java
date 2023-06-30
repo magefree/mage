@@ -1,15 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.ProwessAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class MonasteryMentorToken extends TokenImpl {
@@ -22,8 +18,6 @@ public final class MonasteryMentorToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(new ProwessAbility());
-
-        availableImageSetCodes = Arrays.asList("FRF", "2X2");
     }
 
     public MonasteryMentorToken(final MonasteryMentorToken token) {

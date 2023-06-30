@@ -22,7 +22,7 @@ public final class SilvosRogueElemental extends CardImpl {
 
     public SilvosRogueElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(8);

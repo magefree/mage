@@ -30,7 +30,7 @@ public final class RowanKenrith extends CardImpl {
     public RowanKenrith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ROWAN);
         this.setStartingLoyalty(4);
 
@@ -92,7 +92,7 @@ class RowanKenrithAttackEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        return (game.getPhase().getType() == TurnPhase.END
+        return (game.getTurnPhaseType() == TurnPhase.END
                 && this.isYourNextTurn(game));
     }
 

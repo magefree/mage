@@ -18,7 +18,7 @@ public final class BorealShelf extends CardImpl {
 
     public BorealShelf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Boreal Shelf enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

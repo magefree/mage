@@ -34,7 +34,7 @@ public final class HaukensInsight extends CardImpl {
     public HaukensInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.color.setBlue(true);
         // Back half of Jacob Hauken, Inspector
         this.nightCard = true;
@@ -83,7 +83,8 @@ class HaukensInsightExileEffect extends OneShotEffect {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                 MageObject sourceObject = source.getSourceObject(game);
                 String exileName = sourceObject == null ? null : sourceObject.getIdName();
-                controller.moveCardsToExile(card, source, game, true, exileId, exileName);
+                card.setFaceDown(true, game);
+                controller.moveCardsToExile(card, source, game, false, exileId, exileName);
                 if (game.getState().getZone(card.getId()) == Zone.EXILED) {
                     card.setFaceDown(true, game);
                     HaukensInsightLookEffect effect = new HaukensInsightLookEffect(controller.getId());

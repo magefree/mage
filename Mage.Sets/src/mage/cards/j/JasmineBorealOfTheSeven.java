@@ -23,7 +23,7 @@ public final class JasmineBorealOfTheSeven extends CardImpl {
     private static final FilterCreaturePermanent your_creatures_filter
             = new FilterCreaturePermanent("creatures you control with no abilities");
     private static final FilterCreaturePermanent with_abilities_filter
-            = new FilterCreaturePermanent("by creatures with abilities");
+            = new FilterCreaturePermanent("creatures with abilities");
 
     static {
         spell_filter.add(NoAbilityPredicate.instance);
@@ -36,7 +36,7 @@ public final class JasmineBorealOfTheSeven extends CardImpl {
     public JasmineBorealOfTheSeven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);

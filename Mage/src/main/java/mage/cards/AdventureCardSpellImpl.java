@@ -46,11 +46,6 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
     }
 
     @Override
-    public String getImageName() {
-        return adventureCardParent.getImageName();
-    }
-
-    @Override
     public String getExpansionSetCode() {
         return adventureCardParent.getExpansionSetCode();
     }

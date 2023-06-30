@@ -700,7 +700,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         if (gameInCheckPlayableState(game)) {
             return true;
         }
@@ -719,8 +719,8 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         while (canRespond()) {
-            boolean required = target.isRequired(null, game);
-            int count = cards.count(target.getFilter(), abilityControllerId, game);
+            boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
+            int count = cards.count(target.getFilter(), abilityControllerId, source, game);
             if (count == 0
                     || target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
@@ -729,7 +729,7 @@ public class HumanPlayer extends PlayerImpl {
             List<UUID> chosenTargets = target.getTargets();
             List<UUID> possibleTargets = new ArrayList<>();
             for (UUID cardId : cards) {
-                if (target.canTarget(abilityControllerId, cardId, null, cards, game)) {
+                if (target.canTarget(abilityControllerId, cardId, source, cards, game)) {
                     possibleTargets.add(cardId);
                 }
             }
@@ -738,7 +738,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, null, game, possibleTargets);
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
 
             if (responseId == null) {
                 Map<String, Serializable> options = getOptions(target, null);
@@ -761,7 +761,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (target.getTargets().contains(responseId)) { // if already included remove it with
                     target.remove(responseId);
                 } else {
-                    if (target.canTarget(abilityControllerId, responseId, null, cards, game)) {
+                    if (target.canTarget(abilityControllerId, responseId, source, cards, game)) {
                         target.add(responseId, game);
                         if (target.doneChoosing()) {
                             return true;
@@ -802,7 +802,7 @@ public class HumanPlayer extends PlayerImpl {
 
         while (canRespond()) {
             boolean required = target.isRequiredExplicitlySet() ? target.isRequired() : target.isRequired(source);
-            int count = cards.count(target.getFilter(), abilityControllerId, game);
+            int count = cards.count(target.getFilter(), abilityControllerId, source, game);
             if (count == 0
                     || target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
@@ -1003,6 +1003,8 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
 
+            // TODO: check that all skips and stops used from real controlling player
+            //  like holdingPriority (is it a bug here?)
             if (getJustActivatedType() != null && !holdingPriority) {
                 if (controllingPlayer.getUserData().isPassPriorityCast()
                         && getJustActivatedType() == AbilityType.SPELL) {
@@ -1022,7 +1024,7 @@ public class HumanPlayer extends PlayerImpl {
             boolean quickStop = false;
             if (isGameUnderControl()) { // TODO: remove to enable quick stop for controlling player
                 // if was attacked - always stop BEFORE blocker step (to cast extra spells)
-                if (game.getTurn().getStepType() == PhaseStep.DECLARE_ATTACKERS
+                if (game.getTurnStepType() == PhaseStep.DECLARE_ATTACKERS
                         && game.getCombat().getPlayerDefenders(game).contains(playerId)) {
                     FilterCreatureForCombatBlock filter = filterCreatureForCombatBlock.copy();
                     filter.add(new ControllerIdPredicate(playerId));
@@ -1044,7 +1046,7 @@ public class HumanPlayer extends PlayerImpl {
                 }
 
                 if (passedUntilEndStepBeforeMyTurn) {
-                    if (game.getTurn().getStepType() != PhaseStep.END_TURN) {
+                    if (game.getTurnStepType() != PhaseStep.END_TURN) {
                         // other step
                         if (passWithManaPoolCheck(game)) {
                             return false;
@@ -1080,8 +1082,8 @@ public class HumanPlayer extends PlayerImpl {
                     }
 
                     if (passedUntilNextMain) {
-                        if (game.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN
-                                || game.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN) {
+                        if (game.getTurnStepType() == PhaseStep.POSTCOMBAT_MAIN
+                                || game.getTurnStepType() == PhaseStep.PRECOMBAT_MAIN) {
                             // it's main step
                             if (!skippedAtLeastOnce
                                     || (!playerId.equals(game.getActivePlayerId())
@@ -1103,7 +1105,7 @@ public class HumanPlayer extends PlayerImpl {
                     }
 
                     if (passedUntilEndOfTurn) {
-                        if (game.getTurn().getStepType() == PhaseStep.END_TURN) {
+                        if (game.getTurnStepType() == PhaseStep.END_TURN) {
                             // it's end of turn step
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
@@ -1257,10 +1259,10 @@ public class HumanPlayer extends PlayerImpl {
         MageObject object = game.getObject(response.getUUID());
 
         // mdf cards
-        if (object instanceof ModalDoubleFacesCardHalf) {
+        if (object instanceof ModalDoubleFacedCardHalf) {
             if (!Zone.BATTLEFIELD.equals(game.getState().getZone(object.getId()))
                     && !Zone.STACK.equals(game.getState().getZone(object.getId()))) {
-                return ((ModalDoubleFacesCardHalf) object).getMainCard().getId();
+                return ((ModalDoubleFacedCardHalf) object).getMainCard().getId();
             }
         }
 
@@ -1271,16 +1273,16 @@ public class HumanPlayer extends PlayerImpl {
         try {
 
             if (playerId.equals(game.getActivePlayerId())) {
-                return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getStep().getType());
+                return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getTurnStepType());
             } else {
-                return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getStep().getType());
+                return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getTurnStepType());
             }
         } catch (NullPointerException ex) {
             if (controllingPlayer.getUserData() != null) {
                 if (controllingPlayer.getUserData().getUserSkipPrioritySteps() != null) {
                     if (game.getStep() != null) {
-                        if (game.getStep().getType() == null) {
-                            logger.error("game.getStep().getType() == null");
+                        if (game.getTurnStepType() == null) {
+                            logger.error("game.getTurnStepType() == null");
                         }
                     } else {
                         logger.error("game.getStep() == null");
@@ -1795,7 +1797,7 @@ public class HumanPlayer extends PlayerImpl {
             declareAttacker(attackerId, possibleDefender.iterator().next(), game, true);
             return true;
         } else {
-            TargetDefender target = new TargetDefender(possibleDefender, attackerId);
+            TargetDefender target = new TargetDefender(possibleDefender);
             if (forcedToAttack) {
                 StringBuilder sb = new StringBuilder(target.getTargetName());
                 Permanent attacker = game.getPermanent(attackerId);
@@ -1814,7 +1816,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected UUID selectDefenderForAllAttack(Set<UUID> defenders, Game game) {
-        TargetDefender target = new TargetDefender(defenders, null);
+        TargetDefender target = new TargetDefender(defenders);
         if (chooseTarget(Outcome.Damage, target, null, game)) {
             return getFixedResponseUUID(game);
         }
@@ -2217,7 +2219,7 @@ public class HumanPlayer extends PlayerImpl {
             if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
                 if (mainCard instanceof SplitCard
                         || mainCard instanceof AdventureCard
-                        || mainCard instanceof ModalDoubleFacesCard) {
+                        || mainCard instanceof ModalDoubleFacedCard) {
                     return false;
                 }
             }
@@ -2273,6 +2275,53 @@ public class HumanPlayer extends PlayerImpl {
                         return useableAbilities.get(responseId);
                     }
                 }
+            }
+        }
+
+        // default ability (example: on disconnect or cancel)
+        return card.getSpellAbility();
+    }
+
+    @Override
+    public ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana) {
+        if (gameInCheckPlayableState(game)) {
+            return null;
+        }
+
+        // TODO: add canRespond cycle?
+        if (!canRespond()) {
+            return null;
+        }
+
+        MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
+        if (object != null) {
+            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = new LinkedHashMap<>(PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana));
+
+            if (canPlayLand() && isActivePlayer(game)) {
+                for (Ability ability : card.getAbilities(game)) {
+                    if (ability instanceof PlayLandAbility) {
+                        useableAbilities.put(ability.getId(), (PlayLandAbility) ability);
+                    }
+                }
+            }
+
+            switch (useableAbilities.size()) {
+                case 0:
+                    return card.getSpellAbility();
+                case 1:
+                    return useableAbilities.values().iterator().next();
+                default:
+                    updateGameStatePriority("chooseLandOrSpellAbility", game);
+                    prepareForResponse(game);
+                    if (!isExecutingMacro()) {
+                        String message = "Choose spell or ability to play" + (noMana ? " for FREE" : "") + "<br>" + object.getLogName();
+                        game.fireGetChoiceEvent(playerId, message, object, new ArrayList<>(useableAbilities.values()));
+                    }
+                    waitForResponse(game);
+                    ActivatedAbility response = useableAbilities.get(getFixedResponseUUID(game));
+                    if (response != null) {
+                        return response;
+                    }
             }
         }
 
@@ -2659,7 +2708,7 @@ public class HumanPlayer extends PlayerImpl {
             }
             // TODO: chooseUse and other dialogs must be under controlling player
             if (!chooseUse(Outcome.Detriment, GameLog.getPlayerConfirmColoredText("You still have mana in your mana pool. Pass regardless?")
-                    + GameLog.getSmallSecondLineText(activePlayerText + " / " + game.getStep().getType().toString() + priorityPlayerText), null, game)) {
+                    + GameLog.getSmallSecondLineText(activePlayerText + " / " + game.getTurnStepType().toString() + priorityPlayerText), null, game)) {
                 sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, game, null);
                 return false;
             }

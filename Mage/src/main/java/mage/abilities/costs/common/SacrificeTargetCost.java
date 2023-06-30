@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.SacrificeCost;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledPermanent;
@@ -19,7 +20,7 @@ import java.util.UUID;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class SacrificeTargetCost extends CostImpl {
+public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
 
     private final List<Permanent> permanents = new ArrayList<>();
 

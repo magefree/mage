@@ -29,7 +29,7 @@ public final class LordOfTresserhorn extends CardImpl {
 
     public LordOfTresserhorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(10);

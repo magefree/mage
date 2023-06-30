@@ -40,7 +40,7 @@ public final class BaruFistOfKrosa extends CardImpl {
 
     public BaruFistOfKrosa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.DRUID);
 
         this.power = new MageInt(4);

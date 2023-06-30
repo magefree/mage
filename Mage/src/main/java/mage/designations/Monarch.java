@@ -19,7 +19,7 @@ import mage.target.targetpointer.FixedTarget;
 public class Monarch extends Designation {
 
     public Monarch() {
-        super(DesignationType.THE_MONARCH, "CN2");
+        super(DesignationType.THE_MONARCH);
         addAbility(new MonarchDrawTriggeredAbility());
         addAbility(new MonarchDealsCombatDamageToAPlayerTriggeredAbility());
     }

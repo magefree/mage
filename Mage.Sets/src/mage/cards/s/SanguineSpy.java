@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
@@ -10,25 +9,21 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.hint.common.DifferentManaValuesInGraveHint;
-import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class SanguineSpy extends CardImpl {
@@ -48,7 +43,7 @@ public final class SanguineSpy extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // {1}, Sacrifice another creature: Look at the top card of your library. You may put that card into your graveyard.
-        Ability ability = new SimpleActivatedAbility(new SanguineSpyEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new SurveilEffect(1), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
 
@@ -57,9 +52,8 @@ public final class SanguineSpy extends CardImpl {
                 new BeginningOfYourEndStepTriggeredAbility(
                         new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new PayLifeCost(2)),
                         false
-                ),
-                DifferentManaValuesInGraveCondition.FIVE,
-                "At the beginning of your end step, if there are five or more mana values among cards in your graveyard, you may pay 2 life. If you do, draw a card."
+                ), DifferentManaValuesInGraveCondition.FIVE, "At the beginning of your end step, if there are " +
+                "five or more mana values among cards in your graveyard, you may pay 2 life. If you do, draw a card."
         ).addHint(DifferentManaValuesInGraveHint.instance));
     }
 
@@ -70,39 +64,5 @@ public final class SanguineSpy extends CardImpl {
     @Override
     public SanguineSpy copy() {
         return new SanguineSpy(this);
-    }
-}
-
-class SanguineSpyEffect extends OneShotEffect {
-
-    public SanguineSpyEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Look at the top card of your library. You may put that card into your graveyard";
-    }
-
-    private SanguineSpyEffect(final SanguineSpyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SanguineSpyEffect copy() {
-        return new SanguineSpyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        Card card = player.getLibrary().getFromTop(game);
-        if (card == null) {
-            return false;
-        }
-        player.lookAtCards("Top card of your library", card, game);
-        if (player.chooseUse(Outcome.AIDontUseIt, "Put the top card of your library into your graveyard?", source, game)) {
-            player.moveCards(card, Zone.GRAVEYARD, source, game);
-        }
-        return true;
     }
 }

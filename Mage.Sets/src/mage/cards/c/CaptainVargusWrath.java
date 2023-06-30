@@ -28,7 +28,7 @@ public final class CaptainVargusWrath extends CardImpl {
     public CaptainVargusWrath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(1);

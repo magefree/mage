@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author LoneFox
  */
@@ -18,8 +16,6 @@ public final class HumanToken extends TokenImpl {
         subtype.add(SubType.HUMAN);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes.addAll(Arrays.asList("DKA", "AVR", "FNMP", "RNA", "ELD", "C19", "C20", "MID", "VOW", "NCC", "DDQ", "CLB", "DMC"));
     }
 
     public HumanToken(final HumanToken token) {
@@ -29,17 +25,5 @@ public final class HumanToken extends TokenImpl {
     @Override
     public HumanToken copy() {
         return new HumanToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode().equals("VOW")) {
-            this.setTokenType(2);
-        }
-        if (getOriginalExpansionSetCode().equals("AVR")) {
-            this.setTokenType(2);
-        }
     }
 }

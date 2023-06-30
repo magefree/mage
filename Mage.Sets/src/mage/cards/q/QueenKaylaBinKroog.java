@@ -28,7 +28,7 @@ public final class QueenKaylaBinKroog extends CardImpl {
     public QueenKaylaBinKroog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(2);
@@ -78,7 +78,7 @@ class QueenKaylaBinKroogEffect extends OneShotEffect {
         Cards cards = player.discard(player.getHand(), false, source, game);
         player.drawCards(cards.size(), source, game);
         TargetCard target = new QueenKaylaBinKroogTarget();
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;
     }

@@ -35,7 +35,7 @@ public final class Arcbond extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
         // Choose target creature. Whenever that creature is dealt damage this turn, it deals that much damage to each other creature and each player.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ArcbondDelayedTriggeredAbility(), true, true));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ArcbondDelayedTriggeredAbility()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
@@ -64,7 +64,6 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public void init(Game game) {
-        super.init(game);
         // because target can already be gone from battlefield if triggered ability resolves, we need to hold an own object reference
         targetObject = new MageObjectReference(getTargets().getFirstTarget(), game);
         if (targetObject != null) {

@@ -23,8 +23,7 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -38,16 +37,10 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class TheScorpionGod extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public TheScorpionGod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
@@ -57,7 +50,7 @@ public final class TheScorpionGod extends CardImpl {
 
         // {1}{B}{R}: Put a -1/-1 counter on another target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.M1M1.createInstance()), new ManaCostsImpl<>("{1}{B}{R}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
 
         // When The Scorpion God dies, return it to its owner's hand at the beginning of the next end step.

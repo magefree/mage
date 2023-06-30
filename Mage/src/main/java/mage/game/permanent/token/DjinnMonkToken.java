@@ -1,15 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class DjinnMonkToken extends TokenImpl {
@@ -23,8 +19,6 @@ public final class DjinnMonkToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("DTK", "IMA");
     }
 
     public DjinnMonkToken(final DjinnMonkToken token) {

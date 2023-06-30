@@ -27,7 +27,7 @@ public final class StartlingDevelopment extends CardImpl {
                         4, 4, "blue Serpent with base power and toughness 4/4"
                 ).withColor("U").withSubType(SubType.SERPENT),
                 false, false, Duration.EndOfTurn
-        ).setRemoveSubtypes(true));
+        ).withDurationRuleAtStart(true).setRemoveSubtypes(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Cycling {1}

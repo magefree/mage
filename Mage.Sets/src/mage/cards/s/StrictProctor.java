@@ -1,6 +1,8 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
@@ -12,10 +14,10 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import mage.game.stack.StackAbility;
 
 /**
  * @author TheElk801
@@ -25,8 +27,7 @@ public final class StrictProctor extends CardImpl {
     public StrictProctor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.subtype.add(SubType.SPIRIT);
-        this.subtype.add(SubType.CLERIC);
+        this.subtype.add(SubType.SPIRIT, SubType.CLERIC);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
@@ -64,16 +65,16 @@ class StrictProctorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // retrieve the event that led to the trigger triggering
-        // verify that it is a ETB event
-        StackAbility stackAbilityOfTriggeredAbility = (StackAbility) game.getObject(event.getTargetId());
-        if (stackAbilityOfTriggeredAbility == null
-                || stackAbilityOfTriggeredAbility.getSourceId() == null) {
+        StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+        if (stackObject == null) {
             return false;
         }
-        GameEvent triggeringEvent = (GameEvent) game.getState().getValue("triggeringEvent" + stackAbilityOfTriggeredAbility.getSourceId());
-        if (triggeringEvent == null
-                || triggeringEvent.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+        Ability ability = stackObject.getStackAbility();
+        if (!(ability instanceof TriggeredAbility)) {
+            return false;
+        }
+        GameEvent triggerEvent = ((TriggeredAbility) ability).getTriggerEvent();
+        if (triggerEvent == null || triggerEvent.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             return false;
         }
         // set the target to the ability that gets triggered from the enter the battlefield trigger

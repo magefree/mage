@@ -30,7 +30,7 @@ public final class IntercessorsArrest extends CardImpl {
         // Enchant permanent
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted permanent can't attack, block, or crew Vehicles. Its activated abilities can't be activated unless they're mana abilities.

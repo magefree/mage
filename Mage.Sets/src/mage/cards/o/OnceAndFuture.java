@@ -9,6 +9,8 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
@@ -21,6 +23,12 @@ import java.util.UUID;
  */
 public final class OnceAndFuture extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("other card from your graveyard");
+
+    static {
+        filter.add(new AnotherTargetPredicate(2));
+    }
+
     public OnceAndFuture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");
 
@@ -28,11 +36,11 @@ public final class OnceAndFuture extends CardImpl {
         // Adamant — If at least three green mana was spent to cast this spell, instead return those cards to your hand and exile Once and Future.
         this.getSpellAbility().addEffect(new OnceAndFutureEffect());
 
-        Target target = new TargetCardInYourGraveyard().withChooseHint("To put in your hand");
+        Target target = new TargetCardInYourGraveyard().withChooseHint("to put in your hand");
         target.setTargetTag(1);
         this.getSpellAbility().addTarget(target);
 
-        target = new TargetCardInYourGraveyard(0, 1).withChooseHint("To put on top of your library");
+        target = new TargetCardInYourGraveyard(0, 1, filter).withChooseHint("to put on top of your library");
         target.setTargetTag(2);
         this.getSpellAbility().addTarget(target);
 
@@ -75,26 +83,16 @@ class OnceAndFutureEffect extends OneShotEffect {
         }
         Card card1 = game.getCard(source.getFirstTarget());
         Card card2 = game.getCard(source.getTargets().get(1).getFirstTarget());
-        if (card1 == null) {
-            card1 = card2;
-            card2 = null;
-        }
-        if (card1 == null) {
-            return false;
-        }
-        if (card2 == null) {
-            player.putInHand(card1, game);
-            return new ExileSpellEffect().apply(game, source);
-        }
-        if (AdamantCondition.GREEN.apply(game, source)) {
-            Cards cards = new CardsImpl();
-            cards.add(card1);
+        if (getCondition().apply(game, source)) {
+            Cards cards = new CardsImpl(card1);
             cards.add(card2);
             player.moveCards(cards, Zone.HAND, source, game);
-            return new ExileSpellEffect().apply(game, source);
+        } else {
+            player.moveCards(card1, Zone.HAND, source, game);
+            game.getState().processAction(game);
+            player.putCardsOnTopOfLibrary(card2, game, source, true);
         }
-        player.putInHand(card1, game);
-        player.putCardsOnTopOfLibrary(new CardsImpl(card2), game, source, false);
+        game.getState().processAction(game);
         return new ExileSpellEffect().apply(game, source);
     }
 

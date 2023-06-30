@@ -19,7 +19,6 @@ public final class DragonSpiritToken extends TokenImpl {
         power = new MageInt(5);
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());
-        setOriginalExpansionSetCode("NEO");
     }
 
     public DragonSpiritToken(final DragonSpiritToken token) {

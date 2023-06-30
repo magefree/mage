@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -21,8 +19,6 @@ public final class MelokuTheCloudedMirrorToken extends TokenImpl {
         toughness = new MageInt(1);
 
         addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("CHK", "MMA", "MH1", "CMR");
     }
 
     public MelokuTheCloudedMirrorToken(final MelokuTheCloudedMirrorToken token) {
@@ -31,10 +27,5 @@ public final class MelokuTheCloudedMirrorToken extends TokenImpl {
 
     public MelokuTheCloudedMirrorToken copy() {
         return new MelokuTheCloudedMirrorToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
     }
 }

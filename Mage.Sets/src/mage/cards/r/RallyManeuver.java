@@ -44,11 +44,11 @@ public final class RallyManeuver extends CardImpl {
         this.getSpellAbility().addTarget(target.withChooseHint("+0/+2 and lifelink"));
         this.getSpellAbility().addEffect(new BoostTargetEffect(0, 2)
                 .setText("Up to one other target creature gets +0/+2")
-                .setTargetPointer(SecondTargetPointer.getInstance())
+                .setTargetPointer(new SecondTargetPointer())
         );
         this.getSpellAbility().addEffect(
                 new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, "and gains lifelink until end of turn")
-                .setTargetPointer(SecondTargetPointer.getInstance())
+                .setTargetPointer(new SecondTargetPointer())
         );
     }
 

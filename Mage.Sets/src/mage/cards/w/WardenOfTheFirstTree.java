@@ -43,7 +43,7 @@ public final class WardenOfTheFirstTree extends CardImpl {
                 Duration.Custom, SubType.HUMAN, SubType.WARRIOR
         ).setText("{this} becomes a Human Warrior"), new ManaCostsImpl<>("{1}{W/B}"));
         ability.addEffect(new SetBasePowerToughnessSourceEffect(
-                3, 3, Duration.Custom, SubLayer.SetPT_7b, true
+                3, 3, Duration.Custom, SubLayer.SetPT_7b
         ).setText("with base power and toughness 3/3"));
         this.addAbility(ability);
 

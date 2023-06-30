@@ -6,7 +6,6 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.RevealLibraryPickControllerEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
@@ -43,7 +42,7 @@ public final class TheLadyOfOtaria extends CardImpl {
     public TheLadyOfOtaria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -56,9 +55,7 @@ public final class TheLadyOfOtaria extends CardImpl {
         // At the beginning of each end step, if a land you controlled was put into your graveyard from the battlefield this turn, reveal the top four cards of your library. Put any number of Dwarf cards from among them into your hand and the rest on the bottom of your library in a random order.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new RevealLibraryPickControllerEffect(
-                        4, Integer.MAX_VALUE, filter2,
-                        LookLibraryControllerEffect.PutCards.HAND,
-                        LookLibraryControllerEffect.PutCards.BOTTOM_RANDOM, false
+                        4, Integer.MAX_VALUE, filter2, PutCards.HAND, PutCards.BOTTOM_RANDOM, false
                 ), TargetController.ANY, TheLadyOfOtariaCondition.instance, false
         ).addHint(TheLadyOfOtariaCondition.getHint()), new TheLadyOfOtariaWatcher());
     }

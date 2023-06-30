@@ -46,6 +46,10 @@ class DustOfMomentsEffect extends OneShotEffect {
     private static final FilterPermanentOrSuspendedCard filter = new FilterPermanentOrSuspendedCard();
     private final boolean remove;
 
+    static {
+        filter.getPermanentFilter().add(CounterType.TIME.getPredicate());
+    }
+
     DustOfMomentsEffect(boolean remove) {
         super(Outcome.Benefit);
         this.remove = remove;
@@ -53,7 +57,7 @@ class DustOfMomentsEffect extends OneShotEffect {
                 " two time counters " +
                 (remove ? "from" : "on") +
                 " each permanent" +
-                (remove ? "" : "with a time counter on it") +
+                (remove ? "" : " with a time counter on it") +
                 " and each suspended card";
     }
 

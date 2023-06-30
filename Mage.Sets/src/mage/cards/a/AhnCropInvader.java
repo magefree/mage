@@ -18,9 +18,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -29,13 +27,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AhnCropInvader extends CardImpl {
-
-    private static final FilterControlledPermanent filter
-            = new FilterControlledCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public AhnCropInvader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -63,7 +54,7 @@ public final class AhnCropInvader extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new BoostSourceEffect(2, 0, Duration.EndOfTurn), new GenericManaCost(1)
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         this.addAbility(ability);
     }
 

@@ -70,7 +70,7 @@ class RevivalExperimentEffect extends OneShotEffect {
         int toBattlefield = cards
                 .stream()
                 .map(game.getState()::getZone)
-                .filter(Zone.EXILED::equals)
+                .filter(Zone.BATTLEFIELD::equals)
                 .mapToInt(x -> 1)
                 .sum();
         player.loseLife(3 * toBattlefield, game, source, false);

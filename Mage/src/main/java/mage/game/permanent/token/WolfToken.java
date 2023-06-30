@@ -3,9 +3,6 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.util.RandomUtil;
-
-import java.util.Arrays;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -20,22 +17,6 @@ public final class WolfToken extends TokenImpl {
         subtype.add(SubType.WOLF);
         power = new MageInt(2);
         toughness = new MageInt(2);
-
-        availableImageSetCodes = Arrays.asList("BNG", "C14", "C15", "CMA", "CNS", "ISD",
-                "LRW", "M10", "M14", "MM2", "SHM", "SOI", "SOM", "V10", "ZEN", "WAR", "M20",
-                "THB", "AFR", "MID", "VOW", "2XM", "A25", "CLB");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ISD")) {
-            this.setTokenType(2);
-        }
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CMA")) {
-            this.setTokenType(RandomUtil.nextInt(2) + 1); // 2 images
-        }
     }
 
     public WolfToken(final WolfToken token) {

@@ -4,12 +4,12 @@ import java.util.UUID;
 
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.PutCards;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
@@ -41,7 +41,7 @@ public final class SlimefootsSurvey extends CardImpl {
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filter), true));
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
-                DomainValue.REGULAR, 1, LookLibraryControllerEffect.PutCards.TOP_ANY, LookLibraryControllerEffect.PutCards.BOTTOM_RANDOM, true
+                DomainValue.REGULAR, 1, PutCards.TOP_ANY, PutCards.BOTTOM_RANDOM, true
         ));
     }
 

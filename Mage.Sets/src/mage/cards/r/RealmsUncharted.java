@@ -83,14 +83,15 @@ class RealmsUnchartedEffect extends OneShotEffect {
             targetOpponent.setNotTarget(true);
             player.choose(outcome, targetOpponent, source, game);
             Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
-            Cards cardsToKeep = new CardsImpl();
-            cardsToKeep.addAll(cards);
-            TargetCard targetDiscard = new TargetCard(2, Zone.LIBRARY, filter2);
-            if (opponent.choose(Outcome.Discard, cards, targetDiscard, game)) {
-                cardsToKeep.removeIf(targetDiscard.getTargets()::contains);
-                cards.removeAll(cardsToKeep);
+            if (opponent != null) {
+                Cards cardsToKeep = new CardsImpl(cards);
+                TargetCard targetDiscard = new TargetCard(2, Zone.LIBRARY, filter2);
+                if (opponent.choose(Outcome.Discard, cards, targetDiscard, source, game)) {
+                    cardsToKeep.removeIf(targetDiscard.getTargets()::contains);
+                    cards.removeAll(cardsToKeep);
+                }
+                player.moveCards(cardsToKeep, Zone.HAND, source, game);
             }
-            player.moveCards(cardsToKeep, Zone.HAND, source, game);
         }
 
         player.moveCards(cards, Zone.GRAVEYARD, source, game);

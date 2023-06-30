@@ -19,7 +19,6 @@ public final class InsectInfectToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(InfectAbility.getInstance());
-        setOriginalExpansionSetCode("SOM");
     }
 
     public InsectInfectToken(final InsectInfectToken token) {

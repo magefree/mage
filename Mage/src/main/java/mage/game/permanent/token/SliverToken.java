@@ -1,14 +1,10 @@
-
-
 package mage.game.permanent.token;
 
-import java.util.Arrays;
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author LoneFox
  */
 public final class SliverToken extends TokenImpl {
@@ -19,7 +15,6 @@ public final class SliverToken extends TokenImpl {
         subtype.add(SubType.SLIVER);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        availableImageSetCodes.addAll(Arrays.asList("M14", "M15"));
     }
 
     public SliverToken(final SliverToken token) {

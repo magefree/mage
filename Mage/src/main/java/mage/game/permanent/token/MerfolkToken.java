@@ -1,14 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-
-import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class MerfolkToken extends TokenImpl {
@@ -20,8 +16,6 @@ public final class MerfolkToken extends TokenImpl {
         subtype.add(SubType.MERFOLK);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("ZEN", "DMC");
     }
 
     public MerfolkToken(final MerfolkToken token) {

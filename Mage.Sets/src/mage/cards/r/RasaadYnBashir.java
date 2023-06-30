@@ -31,7 +31,7 @@ public final class RasaadYnBashir extends CardImpl {
     public RasaadYnBashir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(0);

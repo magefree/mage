@@ -12,7 +12,7 @@ import mage.target.TargetPermanent;
 public class TargetLandPermanent extends TargetPermanent {
 
     public TargetLandPermanent() {
-        this(1, 1, StaticFilters.FILTER_LAND, false);
+        this(1);
     }
 
     public TargetLandPermanent(FilterLandPermanent filter) {
@@ -20,11 +20,11 @@ public class TargetLandPermanent extends TargetPermanent {
     }
 
     public TargetLandPermanent(int numTargets) {
-        this(numTargets, numTargets, StaticFilters.FILTER_LAND, false);
+        this(numTargets, numTargets);
     }
 
     public TargetLandPermanent(int numTargets, int maxNumTargets) {
-        this(numTargets, maxNumTargets, StaticFilters.FILTER_LAND, false);
+        this(numTargets, maxNumTargets, maxNumTargets > 1 ? StaticFilters.FILTER_LANDS : StaticFilters.FILTER_LAND, false);
     }
 
     public TargetLandPermanent(int minNumTargets, int maxNumTargets, FilterLandPermanent filter, boolean notTarget) {

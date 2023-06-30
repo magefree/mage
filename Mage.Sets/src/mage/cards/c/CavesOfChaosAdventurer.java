@@ -86,10 +86,10 @@ class CavesOfChaosAdventurerEffect extends OneShotEffect {
         player.moveCards(card, Zone.EXILED, source, game);
         if (CompletedDungeonWatcher.checkPlayer(source.getControllerId(), game)) {
             game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(
-                    Zone.EXILED, TargetController.YOU, Duration.Custom, true
+                    Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, true
             ).setTargetPointer(new FixedTarget(card, game)), source);
         } else {
-            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
+            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
         }
         return true;
     }

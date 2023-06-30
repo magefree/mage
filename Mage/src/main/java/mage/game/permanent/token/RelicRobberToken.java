@@ -10,8 +10,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 
-import java.util.Arrays;
-
 public final class RelicRobberToken extends TokenImpl {
 
     public RelicRobberToken() {
@@ -29,8 +27,6 @@ public final class RelicRobberToken extends TokenImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(
                 1, "this creature"
         ), TargetController.YOU, false));
-
-        availableImageSetCodes = Arrays.asList("ZNR");
     }
 
     public RelicRobberToken(final RelicRobberToken token) {

@@ -36,7 +36,7 @@ public final class JaredCarthalion extends CardImpl {
 
     public JaredCarthalion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{W}{U}{B}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JARED);
 
         this.setStartingLoyalty(5);

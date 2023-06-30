@@ -12,8 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -21,15 +20,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class WarehouseThief extends CardImpl {
-
-    public static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact or creature");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.ARTIFACT.getPredicate(),
-                CardType.CREATURE.getPredicate()
-        ));
-    }
 
     public WarehouseThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -44,7 +34,7 @@ public final class WarehouseThief extends CardImpl {
                 new ExileTopXMayPlayUntilEndOfTurnEffect(1, false, Duration.UntilEndOfYourNextTurn), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(filter));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -14,7 +10,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author Noahsark
  */
 public class LoseAbilitySourceEffect extends ContinuousEffectImpl {
@@ -28,7 +23,7 @@ public class LoseAbilitySourceEffect extends ContinuousEffectImpl {
     public LoseAbilitySourceEffect(Ability ability, Duration duration) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
         this.ability = ability;
-        staticText = "{this} loses " + ability.getRule() + ' ' + duration.toString();
+        staticText = ("{this} loses " + ability.getRule() + ' ' + duration.toString()).trim();
     }
 
     public LoseAbilitySourceEffect(final LoseAbilitySourceEffect effect) {

@@ -6,25 +6,22 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.CantBeTargetedSourceEffect;
+import mage.abilities.effects.common.PreventAllDamageToSourceByPermanentsEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
-import mage.filter.predicate.permanent.BlockedByIdPredicate;
+import mage.filter.predicate.permanent.BlockingOrBlockedBySourcePredicate;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.Target;
@@ -36,10 +33,12 @@ import java.util.UUID;
  */
 public final class WallOfShadows extends CardImpl {
 
-    private static final FilterObject filter = new FilterStackObject("spells that can target only Walls or of abilities that can target only Walls");
+    private static final FilterPermanent filterPrevent = new FilterCreaturePermanent("creatures it's blocking");
+    private static final FilterObject filterCantTarget = new FilterStackObject("spells that can target only Walls or of abilities that can target only Walls");
 
     static {
-        filter.add(CanTargetOnlyWallsPredicate.instance);
+        filterPrevent.add(BlockingOrBlockedBySourcePredicate.BLOCKED_BY);
+        filterCantTarget.add(CanTargetOnlyWallsPredicate.instance);
     }
 
     public WallOfShadows(UUID ownerId, CardSetInfo setInfo) {
@@ -52,10 +51,10 @@ public final class WallOfShadows extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Prevent all damage that would be dealt to Wall of Vapor by creatures it's blocking.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WallOfShadowsEffect()));
+        this.addAbility(new SimpleStaticAbility(new PreventAllDamageToSourceByPermanentsEffect(filterPrevent)));
 
         // Wall of Shadows can't be the target of spells that can target only Walls or of abilities that can target only Walls.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBeTargetedSourceEffect(filterCantTarget, Duration.WhileOnBattlefield)));
     }
 
     private WallOfShadows(final WallOfShadows card) {
@@ -65,40 +64,6 @@ public final class WallOfShadows extends CardImpl {
     @Override
     public WallOfShadows copy() {
         return new WallOfShadows(this);
-    }
-}
-
-class WallOfShadowsEffect extends PreventionEffectImpl {
-
-    WallOfShadowsEffect() {
-        super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false);
-        staticText = "Prevent all damage that would be dealt to {this} by creatures it's blocking";
-    }
-
-    private WallOfShadowsEffect(final WallOfShadowsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WallOfShadowsEffect copy() {
-        return new WallOfShadowsEffect(this);
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!super.applies(event, source, game)
-                || !(event instanceof DamageEvent)
-                || event.getAmount() <= 0) {
-            return false;
-        }
-        DamageEvent damageEvent = (DamageEvent) event;
-        if (!event.getTargetId().equals(source.getSourceId())) {
-            return false;
-        }
-        Permanent permanent = game.getPermanentOrLKIBattlefield(damageEvent.getSourceId());
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new BlockedByIdPredicate(source.getSourceId()));
-        return permanent != null && filter.match(permanent, game);
     }
 }
 

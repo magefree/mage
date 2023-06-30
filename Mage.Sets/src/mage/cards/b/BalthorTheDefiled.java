@@ -31,7 +31,7 @@ public final class BalthorTheDefiled extends CardImpl {
 
     public BalthorTheDefiled(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE, SubType.DWARF);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

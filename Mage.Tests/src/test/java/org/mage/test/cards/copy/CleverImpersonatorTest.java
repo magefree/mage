@@ -144,7 +144,7 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clever Impersonator");
         setChoice(playerA, "Jace, Vryn's Prodigy");
-        addTarget(playerA, "Jace, Vryn's Prodigy[only copy]"); // keep the copied Jace
+        setChoice(playerA, "Jace, Vryn's Prodigy[only copy]"); // keep the copied Jace
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card");
         setChoice(playerA, "Pillarfield Ox");

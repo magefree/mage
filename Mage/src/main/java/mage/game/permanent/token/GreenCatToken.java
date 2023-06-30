@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -18,8 +16,6 @@ public final class GreenCatToken extends TokenImpl {
         subtype.add(SubType.CAT);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes.addAll(Arrays.asList("6ED", "M21"));
     }
 
     public GreenCatToken(final GreenCatToken token) {

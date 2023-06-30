@@ -1,6 +1,7 @@
 package mage.abilities.costs;
 
 import mage.abilities.costs.mana.VariableManaCost;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -44,8 +45,8 @@ public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements Optio
     }
 
     /**
-     * Returns the complete text for the addional cost or if onlyCost is true
-     * only the pure text fore the included native cost
+     * Returns the complete text for the additional cost or if onlyCost is true
+     * only the pure text for the included native cost
      *
      * @param onlyCost
      * @return
@@ -55,7 +56,7 @@ public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements Optio
         if (onlyCost) {
             return getText();
         } else {
-            return name + delimiter + getText();
+            return name + delimiter + getText() + (delimiter.equals("&mdash;") ? "." : "");
         }
     }
 
@@ -68,7 +69,7 @@ public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements Optio
     public String getReminderText() {
         String replace = "";
         if (reminderText != null && !reminderText.isEmpty()) {
-            replace = reminderText.replace("{cost}", this.getText(true));
+            replace = reminderText.replace("{cost}", CardUtil.getTextWithFirstCharLowerCase(this.getText(true)));
         }
         return replace;
     }

@@ -877,7 +877,7 @@ public class GameController implements GameCallback {
     private void informOthers(UUID playerId) throws MageException {
         StringBuilder message = new StringBuilder();
         if (game.getStep() != null) {
-            message.append(game.getStep().getType().toString()).append(" - ");
+            message.append(game.getTurnStepType().toString()).append(" - ");
         }
         message.append("Waiting for ").append(game.getPlayer(playerId).getLogName());
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
@@ -896,10 +896,10 @@ public class GameController implements GameCallback {
         if (players != null && !players.isEmpty()) {
             controller = game.getPlayer(players.get(0));
         }
-        if (controller == null || game.getStep() == null || game.getStep().getType() == null) {
+        if (controller == null || game.getStep() == null || game.getTurnStepType() == null) {
             return;
         }
-        final String message = new StringBuilder(game.getStep().getType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
+        final String message = new StringBuilder(game.getTurnStepType().toString()).append(" - Waiting for ").append(controller.getName()).toString();
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
             boolean skip = players.stream().anyMatch(playerId -> entry.getKey().equals(playerId));
             if (!skip) {
@@ -917,14 +917,21 @@ public class GameController implements GameCallback {
 
     private void error(String message, Exception ex) {
         StringBuilder sb = new StringBuilder();
-        sb.append(message).append(ex.toString());
+        sb.append(message);
+        sb.append("\n");
+        sb.append("\n");
+        sb.append(ex);
         sb.append("\nServer version: ").append(Main.getVersion().toString());
-        sb.append('\n');
+        sb.append("\nStack trace:");
+        sb.append("\n");
         for (StackTraceElement e : ex.getStackTrace()) {
-            sb.append(e.toString()).append('\n');
+            sb.append(e.toString()).append("\n");
         }
+        String mes = sb.toString();
+
+        // send error for each player
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
-            entry.getValue().gameError(sb.toString());
+            entry.getValue().gameError(mes);
         }
     }
 
@@ -1205,8 +1212,8 @@ public class GameController implements GameCallback {
         sb.append(state.getStepNum());
         sb.append("<br>getTurn: ");
         sb.append(state.getTurn());
-        sb.append("<br>getTurnId: ");
-        sb.append(state.getTurnId());
+        sb.append("<br>getExtraTurnId: ");
+        sb.append(state.getExtraTurnId());
         sb.append("<br>getTurnMods: ");
         sb.append(state.getTurnMods());
         sb.append("<br>getTurnNum: ");
@@ -1296,10 +1303,10 @@ public class GameController implements GameCallback {
         sb.append("<font color='red'>FIX command called by ").append(user.getName()).append("</font>");
         sb.append("<font size='-2'>"); // font resize start for all next logs
         sb.append("<br>Game ID: ").append(game.getId());
-        if (game.getTurn().getPhaseType() == null) {
+        if (game.getTurnPhaseType() == null) {
             sb.append("<br>Phase: not started").append(" Step: not started");
         } else {
-            sb.append("<br>Phase: ").append(game.getTurn().getPhaseType().toString()).append(" Step: ").append(game.getTurn().getStepType().toString());
+            sb.append("<br>Phase: ").append(game.getTurnPhaseType().toString()).append(" Step: ").append(game.getTurnStepType().toString());
         }
         // pings info
         sb.append("<br>");

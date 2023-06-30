@@ -15,14 +15,21 @@ public final class NarsetOfTheAncientWayEmblem extends Emblem {
 
     // −6: You get an emblem with "Whenever you cast a noncreature spell, this emblem deals 2 damage to any target."
     public NarsetOfTheAncientWayEmblem() {
-        this.setName("Emblem Narset");
+        super("Emblem Narset");
         Ability ability = new SpellCastControllerTriggeredAbility(
                 Zone.COMMAND, new DamageTargetEffect(2, "this emblem"),
                 StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, false
         );
         ability.addTarget(new TargetAnyTarget());
         this.getAbilities().add(ability);
+    }
 
-        this.setExpansionSetCodeForImage("IKO");
+    private NarsetOfTheAncientWayEmblem(final NarsetOfTheAncientWayEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public NarsetOfTheAncientWayEmblem copy() {
+        return new NarsetOfTheAncientWayEmblem(this);
     }
 }

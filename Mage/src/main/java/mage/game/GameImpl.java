@@ -36,9 +36,12 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.permanent.LegendRuleAppliesPredicate;
 import mage.game.combat.Combat;
+import mage.game.combat.CombatGroup;
 import mage.game.command.*;
 import mage.game.command.dungeons.UndercityDungeon;
+import mage.game.command.emblems.TheRingEmblem;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.mulligan.Mulligan;
@@ -47,6 +50,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
+import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
@@ -326,13 +330,13 @@ public abstract class GameImpl implements Game {
                 Card rightCard = ((SplitCard) card).getRightHalfCard();
                 rightCard.setOwnerId(ownerId);
                 addCardToState(rightCard);
-            } else if (card instanceof ModalDoubleFacesCard) {
+            } else if (card instanceof ModalDoubleFacedCard) {
                 // left
-                Card leftCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+                Card leftCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
                 leftCard.setOwnerId(ownerId);
                 addCardToState(leftCard);
                 // right
-                Card rightCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+                Card rightCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
                 rightCard.setOwnerId(ownerId);
                 addCardToState(rightCard);
             } else if (card instanceof AdventureCard) {
@@ -560,6 +564,34 @@ public abstract class GameImpl implements Game {
         fireEvent(GameEvent.getEvent(GameEvent.EventType.VENTURED, playerId, null, playerId));
     }
 
+    private TheRingEmblem getOrCreateTheRing(UUID playerId) {
+        TheRingEmblem emblem = state
+                .getCommand()
+                .stream()
+                .filter(TheRingEmblem.class::isInstance)
+                .map(TheRingEmblem.class::cast)
+                .filter(commandObject -> commandObject.isControlledBy(playerId))
+                .findFirst()
+                .orElse(null);
+        if (emblem != null) {
+            return emblem;
+        }
+        TheRingEmblem newEmblem = new TheRingEmblem(playerId);
+        state.addCommandObject(newEmblem);
+        return newEmblem;
+    }
+
+    @Override
+    public void temptWithTheRing(UUID playerId) {
+        Player player = getPlayer(playerId);
+        if (player == null) {
+            return;
+        }
+        player.chooseRingBearer(this);
+        getOrCreateTheRing(playerId).addNextAbility(this);
+        fireEvent(GameEvent.getEvent(GameEvent.EventType.TEMPTED_BY_RING, player.getRingBearerId(), null, playerId));
+    }
+
     @Override
     public boolean hasDayNight() {
         return state.isHasDayNight();
@@ -674,8 +706,8 @@ public abstract class GameImpl implements Game {
                 spell = (Spell) obj;
             } else if (obj != null) {
                 logger.error(String.format(
-                        "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
-                        obj.getClass().getName(), obj.getName()),
+                                "getSpellOrLKIStack got non-spell id %s correlating to non-spell object %s.",
+                                obj.getClass().getName(), obj.getName()),
                         new Throwable()
                 );
             }
@@ -1001,25 +1033,26 @@ public abstract class GameImpl implements Game {
     private boolean playExtraTurns() {
         //20091005 - 500.7
         TurnMod extraTurn = getNextExtraTurn();
-        while (extraTurn != null) {
-            GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, extraTurn.getPlayerId());
-            if (!replaceEvent(event)) {
-                Player extraPlayer = this.getPlayer(extraTurn.getPlayerId());
-                if (extraPlayer != null && extraPlayer.canRespond()) {
-                    state.setExtraTurn(true);
-                    state.setTurnId(extraTurn.getId());
-                    if (!this.isSimulation()) {
-                        informPlayers(extraPlayer.getLogName() + " takes an extra turn");
-                    }
-                    if (!playTurn(extraPlayer)) {
-                        return false;
+        try {
+            while (extraTurn != null) {
+                GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, extraTurn.getPlayerId());
+                if (!replaceEvent(event)) {
+                    Player extraPlayer = this.getPlayer(extraTurn.getPlayerId());
+                    if (extraPlayer != null && extraPlayer.canRespond()) {
+                        state.setExtraTurnId(extraTurn.getId());
+                        if (!this.isSimulation()) {
+                            informPlayers(extraPlayer.getLogName() + " takes an extra turn");
+                        }
+                        if (!playTurn(extraPlayer)) {
+                            return false;
+                        }
                     }
                 }
+                extraTurn = getNextExtraTurn();
             }
-            extraTurn = getNextExtraTurn();
+        } finally {
+            state.setExtraTurnId(null);
         }
-        state.setTurnId(null);
-        state.setExtraTurn(false);
         return true;
     }
 
@@ -1275,7 +1308,7 @@ public abstract class GameImpl implements Game {
         if (gameOptions.planeChase) {
             Plane plane = Plane.createRandomPlane();
             plane.setControllerId(startingPlayerId);
-            addPlane(plane, null, startingPlayerId);
+            addPlane(plane, startingPlayerId);
             state.setPlaneChase(this, gameOptions.planeChase);
         }
     }
@@ -1298,6 +1331,8 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new BlockingOrBlockedWatcher());
         newWatchers.add(new EndStepCountWatcher());
         newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
+        newWatchers.add(new CreaturesDiedWatcher());
+        newWatchers.add(new TemptedByTheRingWatcher());
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
@@ -1396,6 +1431,27 @@ public abstract class GameImpl implements Game {
             logger.debug("END of gameId: " + this.getId());
             endTime = new Date();
             state.endGame();
+
+            // inform players about face down cards
+            state.getBattlefield().getAllPermanents()
+                    .stream()
+                    .filter(permanent -> permanent.isFaceDown(this))
+                    .map(permanent -> {
+                        Player player = this.getPlayer(permanent.getControllerId());
+                        Card card = permanent.getMainCard();
+                        if (card != null) {
+                            return String.format("Face down card reveal: %s had %s",
+                                    (player == null ? "Unknown" : player.getLogName()),
+                                    card.getLogName());
+                        } else {
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .sorted()
+                    .forEach(this::informPlayers);
+
+            // cancel all player dialogs/feedbacks
             for (Player player : state.getPlayers().values()) {
                 player.abort();
             }
@@ -1581,14 +1637,15 @@ public abstract class GameImpl implements Game {
                         String info = this.getStack().stream().map(MageObject::toString).collect(Collectors.joining("\n"));
                         logger.info(String.format("\nStack before error %d: \n%s\n", this.getStack().size(), info));
 
-                        // rollback game to prev state
-                        GameState restoredState = restoreState(rollbackBookmark, "Game exception: " + ex.getMessage());
-                        rollbackBookmark = 0;
-
+                        // too many errors - end game
                         if (errorContinueCounter > 15) {
                             throw new MageException("Iterated player priority after game exception too often, game ends! Last error:\n "
                                     + ex.getMessage());
                         }
+
+                        // rollback game to prev state
+                        GameState restoredState = restoreState(rollbackBookmark, "Game exception: " + ex.getMessage());
+                        rollbackBookmark = 0;
 
                         if (restoredState != null) {
                             this.informPlayers(String.format("Auto-restored to %s due game error: %s", restoredState, ex.getMessage()));
@@ -1795,18 +1852,18 @@ public abstract class GameImpl implements Game {
         for (Ability ability : newEmblem.getAbilities()) {
             ability.setSourceId(newEmblem.getId());
         }
-        state.addCommandObject(newEmblem);
+
+        state.addCommandObject(newEmblem); // TODO: generate image for emblem here?
     }
 
     /**
      * @param plane
-     * @param sourceObject
-     * @param toPlayerId   controller and owner of the plane (may only be one
-     *                     per game..)
+     * @param toPlayerId controller and owner of the plane (may only be one
+     *                   per game..)
      * @return boolean - whether the plane was added successfully or not
      */
     @Override
-    public boolean addPlane(Plane plane, MageObject sourceObject, UUID toPlayerId) {
+    public boolean addPlane(Plane plane, UUID toPlayerId) {
         // Implementing planechase as if it were 901.15. Single Planar Deck Option
         // Here, can enforce the world plane restriction (the Grand Melee format may have some impact on this implementation)
 
@@ -1817,7 +1874,7 @@ public abstract class GameImpl implements Game {
             }
         }
         Plane newPlane = plane.copy();
-        newPlane.setSourceObject(sourceObject);
+        newPlane.setSourceObject();
         newPlane.setControllerId(toPlayerId);
         newPlane.assignNewId();
         newPlane.getAbilities().newId();
@@ -1887,9 +1944,10 @@ public abstract class GameImpl implements Game {
             newBluePrint.reset(this);
 
             //getState().addCard(permanent);
-            if (copyFromPermanent.isMorphed() || copyFromPermanent.isManifested()
+            if (copyFromPermanent.isMorphed()
+                    || copyFromPermanent.isManifested()
                     || copyFromPermanent.isFaceDown(this)) {
-                MorphAbility.setPermanentToFaceDownCreature(newBluePrint, this);
+                MorphAbility.setPermanentToFaceDownCreature(newBluePrint, copyFromPermanent, this);
             }
             newBluePrint.assignNewId();
             if (copyFromPermanent.isTransformed()) {
@@ -1984,10 +2042,7 @@ public abstract class GameImpl implements Game {
             newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
             newAbility.setSourcePermanentTransformCount(this);
         }
-        newAbility.initOnAdding(this);
-        // ability.init is called as the ability triggeres not now.
-        // If a FixedTarget pointer is already set from the effect setting up this delayed ability
-        // it has to be already initialized so it won't be overwitten as the ability triggers
+        newAbility.init(this);
         getState().addDelayedTriggeredAbility(newAbility);
         return newAbility.getId();
     }
@@ -2149,7 +2204,7 @@ public abstract class GameImpl implements Game {
             for (Card card : commanders) {
                 Zone currentZone = this.getState().getZone(card.getId());
                 String currentZoneInfo = (currentZone == null ? "(error)" : "(" + currentZone.name() + ")");
-                if (player.chooseUse(Outcome.Benefit, "Move " + card.getIdName()
+                if (player.chooseUse(Outcome.Benefit, "Move " + card.getLogName()
                                 + " to the command zone or leave it in current zone " + currentZoneInfo + "?", "You can only make this choice once per object",
                         "Move to command", "Leave in current zone " + currentZoneInfo, null, this)) {
                     toMove.add(card);
@@ -2343,7 +2398,7 @@ public abstract class GameImpl implements Game {
                     }
                 }
             }
-            if (perm.isWorld()) {
+            if (perm.isWorld(this)) {
                 worldEnchantment.add(perm);
             }
             if (perm.hasSubtype(SubType.AURA, this)) {
@@ -2478,7 +2533,44 @@ public abstract class GameImpl implements Game {
                     somethingHappened = true;
                 }
             }
-            if (this.getState().isLegendaryRuleActive() && StaticFilters.FILTER_PERMANENT_LEGENDARY.match(perm, this)) {
+
+            if (perm.isBattle(this)) {
+                if (perm
+                        .getCounters(this)
+                        .getCount(CounterType.DEFENSE) == 0
+                        && this.getStack()
+                        .stream()
+                        .filter(StackAbility.class::isInstance)
+                        .filter(stackObject -> stackObject.getStackAbility() instanceof TriggeredAbilityImpl)
+                        .map(StackObject::getSourceId)
+                        .noneMatch(perm.getId()::equals)
+                        && this.state
+                        .getTriggered(perm.getControllerId())
+                        .stream()
+                        .filter(TriggeredAbility.class::isInstance)
+                        .map(Ability::getSourceId)
+                        .noneMatch(perm.getId()::equals)) {
+                    if (movePermanentToGraveyardWithInfo(perm)) {
+                        somethingHappened = true;
+                    }
+                } else if (this
+                        .getCombat()
+                        .getGroups()
+                        .stream()
+                        .map(CombatGroup::getDefenderId)
+                        .filter(Objects::nonNull)
+                        .noneMatch(perm.getId()::equals)
+                        && this.getPlayer(perm.getProtectorId()) == null
+                        || perm.isControlledBy(perm.getProtectorId())) {
+                    perm.chooseProtector(this, null);
+                    if (this.getPlayer(perm.getProtectorId()) == null) {
+                        movePermanentToGraveyardWithInfo(perm);
+                    }
+                    somethingHappened = true;
+                }
+            }
+
+            if (perm.isLegendary(this) && perm.legendRuleApplies()) {
                 legendary.add(perm);
             }
             if (StaticFilters.FILTER_PERMANENT_EQUIPMENT.match(perm, this)) {
@@ -2518,21 +2610,24 @@ public abstract class GameImpl implements Game {
                     }
                 }
             }
-            //20091005 - 704.5q If a creature is attached to an object or player, it becomes unattached and remains on the battlefield.
+            //20091005 - 704.5q If a creature or battle is attached to an object or player, it becomes unattached and remains on the battlefield.
             // Similarly, if a permanent that's neither an Aura, an Equipment, nor a Fortification is attached to an object or player,
             // it becomes unattached and remains on the battlefield.
             if (!perm.getAttachments().isEmpty()) {
                 for (UUID attachmentId : perm.getAttachments()) {
                     Permanent attachment = getPermanent(attachmentId);
-                    if (attachment != null
-                            && (attachment.isCreature(this)
-                            || !(attachment.hasSubtype(SubType.AURA, this)
+                    if (attachment == null) {
+                        continue;
+                    }
+                    if ((!attachment.isCreature(this) && !attachment.isBattle(this))
+                            && (attachment.hasSubtype(SubType.AURA, this)
                             || attachment.hasSubtype(SubType.EQUIPMENT, this)
-                            || attachment.hasSubtype(SubType.FORTIFICATION, this)))) {
-                        if (perm.removeAttachment(attachment.getId(), null, this)) {
-                            somethingHappened = true;
-                            break;
-                        }
+                            || attachment.hasSubtype(SubType.FORTIFICATION, this))) {
+                        continue;
+                    }
+                    if (perm.removeAttachment(attachment.getId(), null, this)) {
+                        somethingHappened = true;
+                        break;
                     }
                 }
             }
@@ -2571,22 +2666,24 @@ public abstract class GameImpl implements Game {
                 filterLegendName.add(SuperType.LEGENDARY.getPredicate());
                 filterLegendName.add(new NamePredicate(legend.getName()));
                 filterLegendName.add(new ControllerIdPredicate(legend.getControllerId()));
-                if (getBattlefield().contains(filterLegendName, legend.getControllerId(), null, this, 2)) {
-                    if (!replaceEvent(GameEvent.getEvent(GameEvent.EventType.DESTROY_PERMANENT_BY_LEGENDARY_RULE, legend.getId(), legend.getControllerId()))) {
-                        Player controller = this.getPlayer(legend.getControllerId());
-                        if (controller != null) {
-                            Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
-                            targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
-                            controller.chooseTarget(Outcome.Benefit, targetLegendaryToKeep, null, this);
-                            for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
-                                if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
-                                    movePermanentToGraveyardWithInfo(dupLegend);
-                                }
-                            }
-                        }
-                        return true;
+                filterLegendName.add(LegendRuleAppliesPredicate.instance);
+                if (!getBattlefield().contains(filterLegendName, legend.getControllerId(), null, this, 2)) {
+                    continue;
+                }
+                Player controller = this.getPlayer(legend.getControllerId());
+                if (controller == null) {
+                    continue;
+                }
+                Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
+                targetLegendaryToKeep.setNotTarget(true);
+                targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
+                controller.choose(Outcome.Benefit, targetLegendaryToKeep, null, this);
+                for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
+                    if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
+                        movePermanentToGraveyardWithInfo(dupLegend);
                     }
                 }
+                return true;
             }
         }
         //704.5k  - World Enchantments
@@ -2883,6 +2980,16 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
+    public PhaseStep getTurnStepType() {
+        return state.getTurnStepType();
+    }
+
+    @Override
+    public TurnPhase getTurnPhaseType() {
+        return state.getTurnPhaseType();
+    }
+
+    @Override
     public Phase getPhase() {
         return state.getTurn().getPhase();
     }
@@ -2919,7 +3026,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public boolean isMainPhase() {
-        return state.getTurn().getStepType() == PhaseStep.PRECOMBAT_MAIN || state.getTurn().getStepType() == PhaseStep.POSTCOMBAT_MAIN;
+        return state.getTurnStepType() == PhaseStep.PRECOMBAT_MAIN || state.getTurnStepType() == PhaseStep.POSTCOMBAT_MAIN;
     }
 
     @Override
@@ -3056,7 +3163,7 @@ public abstract class GameImpl implements Game {
                     addedAgain = true;
                     Plane plane = Plane.createRandomPlane();
                     plane.setControllerId(aplayer.getId());
-                    addPlane(plane, null, aplayer.getId());
+                    addPlane(plane, aplayer.getId());
                 }
             }
         }

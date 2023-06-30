@@ -33,20 +33,19 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class UvildaDeanOfPerfection extends ModalDoubleFacesCard {
+public final class UvildaDeanOfPerfection extends ModalDoubleFacedCard {
 
     public UvildaDeanOfPerfection(UUID ownerId, CardSetInfo setInfo) {
         super(
                 ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DJINN, SubType.WIZARD}, "{2}{U}",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DJINN, SubType.WIZARD}, "{2}{U}",
                 "Nassari, Dean of Expression",
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.EFREET, SubType.SHAMAN}, "{3}{R}{R}"
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.EFREET, SubType.SHAMAN}, "{3}{R}{R}"
         );
 
         // 1.
         // Uvilda, Dean of Perfection
         // Legendary Creature - Djinn Wizard
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(2, 2);
 
         // {T}: You may exile an instant or sorcery card from your hand and put three hone counters on it. It gains "At the beginning of your upkeep, if this card is exiled, remove a hone counter from it" and "When the last hone counter is removed from this card, if it's exiled, you may cast it. It costs {4} less to cast this way."
@@ -57,7 +56,6 @@ public final class UvildaDeanOfPerfection extends ModalDoubleFacesCard {
         // 2.
         // Nassari, Dean of Expression
         // Legendary Creature - Efreet Shaman
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getRightHalfCard().setPT(4, 4);
 
         // At the beginning of your upkeep, exile the top card of each opponent's library. Until end of turn, you may cast spells from among those exiled cards, and you many spend mana as though it were mana of any color to cast those spells.
@@ -109,7 +107,7 @@ class UvildaDeanOfPerfectionEffect extends OneShotEffect {
         TargetCard target = new TargetCardInHand(
                 0, 1, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY
         );
-        player.choose(outcome, player.getHand(), target, game);
+        player.choose(outcome, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;
@@ -199,7 +197,7 @@ class UvildaDeanOfPerfectionTriggeredAbility extends TriggeredAbilityImpl {
                 && sourceObject instanceof Card
                 && ((Card) sourceObject).getCounters(game).getCount(CounterType.HONE) == 0
                 && event.getAmount() > 0
-                && event.getData().equals("hone");
+                && event.getData().equals(CounterType.HONE.getName());
     }
 
     @Override

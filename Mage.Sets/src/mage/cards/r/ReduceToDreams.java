@@ -19,7 +19,7 @@ public final class ReduceToDreams extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         // Return all artifacts and enchantments to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(StaticFilters.FILTER_PERMANENT_ARTIFACTS_AND_ENCHANTMENTS));
     }
 
     private ReduceToDreams(final ReduceToDreams card) {

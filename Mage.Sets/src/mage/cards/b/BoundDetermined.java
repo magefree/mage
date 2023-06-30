@@ -46,7 +46,7 @@ public final class BoundDetermined extends SplitCard {
         // Other spells you control can't be countered this turn.
         // Draw a card.
         getRightHalfCard().getSpellAbility().addEffect(new DeterminedEffect());
-        getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
 
     }
 

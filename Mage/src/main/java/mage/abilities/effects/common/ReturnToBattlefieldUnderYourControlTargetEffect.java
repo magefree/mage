@@ -20,17 +20,13 @@ import java.util.UUID;
 public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffect {
 
     private boolean returnFromExileZoneOnly;
-    private boolean tapped;
-    private boolean attacking;
-    private String returnName = "that card";
-    private String returnUnderControlName = "your";
 
     public ReturnToBattlefieldUnderYourControlTargetEffect() {
         this(false);
     }
 
     public ReturnToBattlefieldUnderYourControlTargetEffect(boolean returnFromExileZoneOnly) {
-        this(returnFromExileZoneOnly, false, false);
+        this(returnFromExileZoneOnly, "that card");
     }
 
     /**
@@ -38,31 +34,15 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
      *                                return it or that card - false
      *                                return exiled card - true
      */
-    public ReturnToBattlefieldUnderYourControlTargetEffect(boolean returnFromExileZoneOnly, boolean tapped, boolean attacking) {
+    public ReturnToBattlefieldUnderYourControlTargetEffect(boolean returnFromExileZoneOnly, String description) {
         super(Outcome.Benefit);
         this.returnFromExileZoneOnly = returnFromExileZoneOnly;
-        this.tapped = tapped;
-        this.attacking = attacking;
-
-        updateText();
+        staticText = "return " + description + " to the battlefield under your control";
     }
 
     public ReturnToBattlefieldUnderYourControlTargetEffect(final ReturnToBattlefieldUnderYourControlTargetEffect effect) {
         super(effect);
         this.returnFromExileZoneOnly = effect.returnFromExileZoneOnly;
-        this.tapped = effect.tapped;
-        this.attacking = effect.attacking;
-        this.returnName = effect.returnName;
-        this.returnUnderControlName = effect.returnUnderControlName;
-
-        updateText();
-    }
-
-    private void updateText() {
-        this.staticText = ", then return " + returnName + " to the battlefield under " + returnUnderControlName + " control"
-                + (tapped ? " tapped" : "")
-                + (tapped && attacking ? " and" : "")
-                + (attacking ? " attacking" : "");
     }
 
     @Override
@@ -98,23 +78,11 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
             } else {
                 cardsToBattlefield.addAll(getTargetPointer().getTargets(game, source));
             }
-
-            for (Card card : cardsToBattlefield.getCards(game)) {
-                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, false, null)) {
-                    if (attacking) {
-                        game.getCombat().addAttackingCreature(card.getId(), game);
-                    }
-                }
+            if (!cardsToBattlefield.isEmpty()) {
+                controller.moveCards(cardsToBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, false, null);
             }
             return true;
         }
         return false;
-    }
-
-    public ReturnToBattlefieldUnderYourControlTargetEffect withReturnNames(String returnName, String returnUnderControlName) {
-        this.returnName = returnName;
-        this.returnUnderControlName = returnUnderControlName;
-        updateText();
-        return this;
     }
 }

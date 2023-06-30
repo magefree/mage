@@ -29,7 +29,7 @@ public final class JaceTheMindSculptor extends CardImpl {
 
     public JaceTheMindSculptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
         this.setStartingLoyalty(3);

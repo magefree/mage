@@ -69,7 +69,7 @@ public class ChampionAbility extends StaticAbility {
             case 1:
                 SubType subType = subTypes.get(0);
                 this.objectDescription = subType.getDescription();
-                filter = new FilterControlledPermanent(subType, "another " + subType + " you control");
+                filter = new FilterControlledPermanent(subType, "another " + subType);
                 filter.add(AnotherPredicate.instance);
                 break;
             case 2:

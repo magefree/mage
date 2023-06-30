@@ -38,7 +38,7 @@ public final class ErtaiResurrected extends CardImpl {
     public ErtaiResurrected(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);

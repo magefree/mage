@@ -1,19 +1,20 @@
 
 package mage.abilities.effects.common.combat;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
  * http://tappedout.net/mtg-questions/must-be-blocked-if-able-effect-makes-other-attacking-creatures-essentially-unblockable/
- *
+ * <p>
  * When you Declare Blockers, you choose an arrangement for your blockers, then
  * check to see if there are any restrictions or requirements.
- *
+ * <p>
  * If any restrictions are violated, the block is illegal. (For example, trying
  * to block with Sightless Ghoul) If any requirements are violated, the least
  * possible number of requirements must be violated, otherwise the block is
@@ -35,12 +36,8 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 public class MustBeBlockedByAtLeastOneSourceEffect extends RequirementEffect {
-    
-    private int minNumberOfBlockers;
 
-    public MustBeBlockedByAtLeastOneSourceEffect() {
-        this(Duration.EndOfTurn);
-    }
+    private int minNumberOfBlockers;
 
     public MustBeBlockedByAtLeastOneSourceEffect(Duration duration) {
         this(duration, 1);

@@ -43,7 +43,7 @@ public final class KoglaTheTitanApe extends CardImpl {
     public KoglaTheTitanApe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.APE);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);

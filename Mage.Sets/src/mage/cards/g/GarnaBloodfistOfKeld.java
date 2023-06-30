@@ -35,7 +35,7 @@ public final class GarnaBloodfistOfKeld extends CardImpl {
     public GarnaBloodfistOfKeld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(4);

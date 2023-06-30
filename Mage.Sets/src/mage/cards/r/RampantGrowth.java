@@ -21,7 +21,7 @@ public final class RampantGrowth extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         // Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true));
     }
 
     private RampantGrowth(final RampantGrowth card) {

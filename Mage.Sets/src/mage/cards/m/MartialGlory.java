@@ -25,7 +25,7 @@ public final class MartialGlory extends CardImpl {
         // Target creature gets +0/+3 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("+0/+3"));
         this.getSpellAbility().addEffect(new BoostTargetEffect(0, 3, Duration.EndOfTurn)
-                .setTargetPointer(SecondTargetPointer.getInstance())
+                .setTargetPointer(new SecondTargetPointer())
                 .concatBy("<br>"));
     }
 

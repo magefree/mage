@@ -31,18 +31,18 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     protected List<UUID> attackerOrder = new ArrayList<>();
     protected Map<UUID, UUID> players = new HashMap<>();
     protected boolean blocked;
-    protected UUID defenderId; // planeswalker or player
+    protected UUID defenderId; // planeswalker or player, can be null after remove from combat (e.g. due damage)
     protected UUID defendingPlayerId;
-    protected boolean defenderIsPlaneswalker;
+    protected boolean defenderIsPermanent;
 
     /**
-     * @param defenderId             the player that controls the defending permanents
-     * @param defenderIsPlaneswalker is the defending permanent a planeswalker
-     * @param defendingPlayerId      regular controller of the defending permanents
+     * @param defenderId          the player that controls the defending permanents
+     * @param defenderIsPermanent is the defender a permanent
+     * @param defendingPlayerId   regular controller of the defending permanents
      */
-    public CombatGroup(UUID defenderId, boolean defenderIsPlaneswalker, UUID defendingPlayerId) {
+    public CombatGroup(UUID defenderId, boolean defenderIsPermanent, UUID defendingPlayerId) {
         this.defenderId = defenderId;
-        this.defenderIsPlaneswalker = defenderIsPlaneswalker;
+        this.defenderIsPermanent = defenderIsPermanent;
         this.defendingPlayerId = defendingPlayerId;
     }
 
@@ -55,7 +55,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         this.blocked = group.blocked;
         this.defenderId = group.defenderId;
         this.defendingPlayerId = group.defendingPlayerId;
-        this.defenderIsPlaneswalker = group.defenderIsPlaneswalker;
+        this.defenderIsPermanent = group.defenderIsPermanent;
     }
 
     public boolean hasFirstOrDoubleStrike(Game game) {
@@ -66,6 +66,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     }
 
+    /**
+     *
+     * @return can be null
+     */
     public UUID getDefenderId() {
         return defenderId;
     }
@@ -130,11 +134,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                             }
                         }
                         if (ability.getSupertype() != null) {
-                            if (perm.getSuperType().contains(ability.getSupertype())) {
+                            if (perm.getSuperType(game).contains(ability.getSupertype())) {
                                 for (UUID bandedId : creatureIds) {
                                     if (!bandedId.equals(creatureId)) {
                                         Permanent banded = game.getPermanent(bandedId);
-                                        if (banded != null && banded.getSuperType().contains(ability.getSupertype())) {
+                                        if (banded != null && banded.getSuperType(game).contains(ability.getSupertype())) {
                                             return true;
                                         }
                                     }
@@ -217,7 +221,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 permanent.applyDamage(game);
             }
         }
-        if (defenderIsPlaneswalker) {
+        if (defenderIsPermanent) {
             Permanent permanent = game.getPermanent(defenderId);
             if (permanent != null) {
                 permanent.applyDamage(game);
@@ -545,46 +549,44 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
         }
     }
+
     /**
      * Do damage to attacked player or planeswalker
+     *
      * @param attacker
      * @param amount
      * @param game
      * @param damageToDefenderController excess damage to defender's controller (example: trample over planeswalker)
      */
     private void defenderDamage(Permanent attacker, int amount, Game game, boolean damageToDefenderController) {
-        UUID affectedDefenderId = this.defenderId;
-        if (damageToDefenderController) {
-            affectedDefenderId = game.getControllerId(this.defenderId);
-        }
+        UUID affectedDefenderId = damageToDefenderController ? game.getControllerId(this.defenderId) : this.defenderId;
 
         // on planeswalker
-        Permanent planeswalker = game.getPermanent(affectedDefenderId);
-        if (planeswalker != null) {
-            // apply excess damage from "trample over planeswaslkers" ability (example: Thrasta, Tempest's Roar)
-            if (hasTrampleOverPlaneswalkers(attacker)) {
-                int lethalDamage = planeswalker.getLethalDamage(attacker.getId(), game);
-                if (lethalDamage >= amount) {
-                    // normal damage
-                    planeswalker.markDamage(amount, attacker.getId(), null, game, true, true);
-                } else {
-                    // damage with excess (additional damage to planeswalker's controller)
-                    planeswalker.markDamage(lethalDamage, attacker.getId(), null, game, true, true);
-                    amount -= lethalDamage;
-                    if (amount > 0) {
-                        defenderDamage(attacker, amount, game, true);
-                    }
-                }
-            } else {
-                // normal damage
-                planeswalker.markDamage(amount, attacker.getId(), null, game, true, true);
+        Permanent permanent = game.getPermanent(affectedDefenderId);
+        if (permanent == null) {// on player
+            Player defender = game.getPlayer(affectedDefenderId);
+            if (defender != null) {
+                defender.damage(amount, attacker.getId(), null, game, true, true);
             }
+            return;
         }
-
-        // on player
-        Player defender = game.getPlayer(affectedDefenderId);
-        if (defender != null) {
-            defender.damage(amount, attacker.getId(), null, game, true, true);
+        // apply excess damage from "trample over planeswaslkers" ability (example: Thrasta, Tempest's Roar)
+        if (permanent.isPlaneswalker(game) && hasTrampleOverPlaneswalkers(attacker)) {
+            int lethalDamage = permanent.getLethalDamage(attacker.getId(), game);
+            if (lethalDamage >= amount) {
+                // normal damage
+                permanent.markDamage(amount, attacker.getId(), null, game, true, true);
+            } else {
+                // damage with excess (additional damage to permanent's controller)
+                permanent.markDamage(lethalDamage, attacker.getId(), null, game, true, true);
+                amount -= lethalDamage;
+                if (amount > 0) {
+                    defenderDamage(attacker, amount, game, true);
+                }
+            }
+        } else {
+            // normal damage
+            permanent.markDamage(amount, attacker.getId(), null, game, true, true);
         }
     }
 
@@ -661,15 +663,15 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public void pickAttackerOrder(UUID playerId, Game game) {
-        if (attackers.isEmpty()) {
+        Player player = game.getPlayer(playerId);
+        if (attackers.isEmpty() || player == null) {
             return;
         }
-        Player player = game.getPlayer(playerId);
         List<UUID> attackerList = new ArrayList<>(attackers);
-        attackerOrder.clear();
+        List<UUID> newAttackerOrder = new ArrayList<>();
         while (true) {
             if (attackerList.size() == 1) {
-                attackerOrder.add(attackerList.get(0));
+                newAttackerOrder.add(attackerList.get(0));
                 break;
             } else {
                 List<Permanent> attackerPerms = new ArrayList<>();
@@ -680,12 +682,19 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 if (attackerId == null) {
                     break;
                 }
-                attackerOrder.add(attackerId);
+                newAttackerOrder.add(attackerId);
                 attackerList.remove(attackerId);
             }
         }
-        if (!game.isSimulation() && attackerOrder.size() > 1) {
-            logDamageAssignmentOrder("Creatures blocked by ", blockers, attackerOrder, game);
+        if (attackerOrder.isEmpty() || newAttackerOrder.size() == attackerOrder.size()) {
+            attackerOrder.clear();
+            attackerOrder.addAll(newAttackerOrder);
+
+            if (!game.isSimulation() && attackerOrder.size() > 1) {
+                logDamageAssignmentOrder("Creatures blocked by ", blockers, attackerOrder, game);
+            }
+        } else {
+            game.informPlayers(player.getLogName() +  " try to skip choose attacker order");
         }
     }
 
@@ -717,20 +726,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         game.informPlayers(sb.toString());
     }
 
-    public int totalAttackerDamage(Game game) {
-        int total = 0;
-        for (UUID attackerId : attackers) {
-            total += getDamageValueFromPermanent(game.getPermanent(attackerId), game);
-        }
-        return total;
+    public boolean isDefenderIsPermanent() {
+        return defenderIsPermanent;
     }
 
-    public boolean isDefenderIsPlaneswalker() {
-        return defenderIsPlaneswalker;
-    }
-
-    public boolean removeAttackedPlaneswalker(UUID planeswalkerId) {
-        if (defenderIsPlaneswalker && defenderId.equals(planeswalkerId)) {
+    public boolean removeAttackedPermanent(UUID permanentId) {
+        if (defenderIsPermanent && defenderId.equals(permanentId)) {
             defenderId = null;
             return true;
         }
@@ -874,36 +875,36 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public boolean changeDefenderPostDeclaration(UUID newDefenderId, Game game) {
-        if (!defenderId.equals(newDefenderId)) {
-            for (UUID attackerId : attackers) { // changing defender will remove a banded attacker from its current band
-                Permanent attacker = game.getPermanent(attackerId);
-                if (attacker != null && attacker.getBandedCards() != null) {
-                    for (UUID bandedId : attacker.getBandedCards()) {
-                        Permanent banded = game.getPermanent(bandedId);
-                        if (banded != null) {
-                            banded.removeBandedCard(attackerId);
-                        }
+        if (defenderId.equals(newDefenderId)) {
+            return false;
+        }
+        for (UUID attackerId : attackers) { // changing defender will remove a banded attacker from its current band
+            Permanent attacker = game.getPermanent(attackerId);
+            if (attacker != null && attacker.getBandedCards() != null) {
+                for (UUID bandedId : attacker.getBandedCards()) {
+                    Permanent banded = game.getPermanent(bandedId);
+                    if (banded != null) {
+                        banded.removeBandedCard(attackerId);
                     }
                 }
-                attacker.clearBandedCards();
             }
-            Permanent permanent = game.getPermanent(newDefenderId);
-            if (permanent != null) {
-                defenderId = newDefenderId;
-                defendingPlayerId = permanent.getControllerId();
-                defenderIsPlaneswalker = true;
-                return true;
-            } else {
-                Player defender = game.getPlayer(newDefenderId);
-                if (defender != null) {
-                    defenderId = newDefenderId;
-                    defendingPlayerId = newDefenderId;
-                    defenderIsPlaneswalker = false;
-                    return true;
-                }
-            }
+            attacker.clearBandedCards();
         }
-        return false;
+        Permanent permanent = game.getPermanent(newDefenderId);
+        if (permanent != null) {
+            defenderId = newDefenderId;
+            defendingPlayerId = permanent.isBattle(game) ? permanent.getProtectorId() : permanent.getControllerId();
+            defenderIsPermanent = true;
+            return true;
+        }
+        Player defender = game.getPlayer(newDefenderId);
+        if (defender == null) {
+            return false;
+        }
+        defenderId = newDefenderId;
+        defendingPlayerId = newDefenderId;
+        defenderIsPermanent = false;
+        return true;
     }
 
     /**

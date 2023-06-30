@@ -34,7 +34,7 @@ public final class BrunaLightOfAlabaster extends CardImpl {
 
     public BrunaLightOfAlabaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(5);
@@ -121,7 +121,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 && countHand > 0
                 && controller.chooseUse(Outcome.Benefit, "Attach an Aura from your hand?", source, game)) {
             TargetCard targetAura = new TargetCard(Zone.HAND, filterAuraCard);
-            if (!controller.choose(Outcome.Benefit, controller.getHand(), targetAura, game)) { continue; }
+            if (!controller.choose(Outcome.Benefit, controller.getHand(), targetAura, source, game)) { continue; }
 
             Card aura = game.getCard(targetAura.getFirstTarget());
             if (aura == null) { continue; }
@@ -139,7 +139,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 && countGraveyard > 0
                 && controller.chooseUse(Outcome.Benefit, "Attach an Aura from your graveyard?", source, game)) {
             TargetCard targetAura = new TargetCard(Zone.GRAVEYARD, filterAuraCard);
-            if (!controller.choose(Outcome.Benefit, controller.getGraveyard(), targetAura, game)) { continue; }
+            if (!controller.choose(Outcome.Benefit, controller.getGraveyard(), targetAura, source, game)) { continue; }
 
             Card aura = game.getCard(targetAura.getFirstTarget());
             if (aura == null) { continue; }

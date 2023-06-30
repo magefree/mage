@@ -87,13 +87,19 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect 
             if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE
                     && target.getMinNumberOfTargets() == 0) {
                 sb.append("any number of ");
+            } else if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+                sb.append("up to ");
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+                sb.append(' ');
             } else if (target.getMaxNumberOfTargets() > 1) {
-                if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
-                    sb.append("up to ");
-                }
-                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()));
+                sb.append(' ');
             }
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+            String targetName = mode.getTargets().get(0).getTargetName();
+            if (!targetName.contains("target ")) {
+                sb.append("target ");
+            }
+            sb.append(targetName);
         }
         sb.append(yourGrave ? " to" : " onto");
         sb.append(" the battlefield");

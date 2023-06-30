@@ -25,6 +25,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -89,17 +90,23 @@ class NestingGroundsEffect extends OneShotEffect {
         Permanent toPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (fromPermanent == null
                 || toPermanent == null
-                || controller == null) {
+                || controller == null
+                || fromPermanent.getCounters(game).size() == 0) {
             return false;
         }
 
-        Set<String> possibleChoices = new HashSet<>(fromPermanent.getCounters(game).keySet());
-        if (possibleChoices.size() == 0) {
-            return false;
+        if (fromPermanent.getCounters(game).size() == 1) {
+            for (Counter counter : fromPermanent.getCounters(game).values()) {
+                fromPermanent.removeCounters(counter.getName(), 1, source, game);
+                toPermanent.addCounters(new Counter(counter.getName()), source.getControllerId(), source, game);
+            }
+            return true;
         }
 
         Choice choice = new ChoiceImpl();
+        Set<String> possibleChoices = new LinkedHashSet<>(fromPermanent.getCounters(game).keySet());
         choice.setChoices(possibleChoices);
+        choice.setMessage("Choose a counter");
         if (controller.choose(outcome, choice, game)) {
             String chosen = choice.getChoice();
             if (fromPermanent.getCounters(game).containsKey(chosen)) {

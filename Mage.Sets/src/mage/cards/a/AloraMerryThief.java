@@ -26,7 +26,7 @@ public final class AloraMerryThief extends CardImpl {
     public AloraMerryThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HALFLING);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(3);

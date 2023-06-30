@@ -2,17 +2,12 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
-import java.util.Arrays;
-
 /**
- *
  * @author spjspj
  */
 public final class SpyMasterGoblinToken extends TokenImpl {
@@ -26,8 +21,6 @@ public final class SpyMasterGoblinToken extends TokenImpl {
         toughness = new MageInt(1);
 
         this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES)));
-
-        availableImageSetCodes = Arrays.asList("C16", "CLB");
     }
 
     public SpyMasterGoblinToken(final SpyMasterGoblinToken token) {

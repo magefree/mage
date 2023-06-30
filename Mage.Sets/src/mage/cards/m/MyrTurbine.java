@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.permanent.token.MyrToken;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
@@ -25,12 +26,12 @@ import mage.target.common.TargetControlledPermanent;
 public final class MyrTurbine extends CardImpl {
 
     private static final FilterCreatureCard filterCard = new FilterCreatureCard("Myr creature card");
-    private static final FilterControlledPermanent filterMyr = new FilterControlledPermanent("Myr you control");
+    private static final FilterControlledPermanent filterMyr = new FilterControlledPermanent("untapped Myr you control");
 
     static {
         filterCard.add(SubType.MYR.getPredicate());
+        filterMyr.add(TappedPredicate.UNTAPPED);
         filterMyr.add(SubType.MYR.getPredicate());
-
     }
 
     public MyrTurbine(UUID ownerId, CardSetInfo setInfo) {

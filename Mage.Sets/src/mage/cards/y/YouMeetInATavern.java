@@ -2,12 +2,12 @@ package mage.cards.y;
 
 import mage.abilities.Mode;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.effects.common.LookLibraryControllerEffect.PutCards;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.PutCards;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;

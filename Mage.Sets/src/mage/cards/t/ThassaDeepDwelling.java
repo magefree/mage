@@ -42,7 +42,7 @@ public final class ThassaDeepDwelling extends CardImpl {
     public ThassaDeepDwelling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
@@ -59,7 +59,7 @@ public final class ThassaDeepDwelling extends CardImpl {
                 new ExileTargetForSourceEffect(),
                 TargetController.YOU, false
         );
-        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect());
+        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect().concatBy(", then"));
         ability.addTarget(new TargetPermanent(
                 0, 1, filterOther, false
         ));

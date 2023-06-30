@@ -1,13 +1,11 @@
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class WhiteBlueBirdToken extends TokenImpl {
@@ -21,9 +19,8 @@ public final class WhiteBlueBirdToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("GK2");
     }
+
     public WhiteBlueBirdToken(final WhiteBlueBirdToken token) {
         super(token);
     }

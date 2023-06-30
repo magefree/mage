@@ -31,9 +31,7 @@ public final class Insist extends CardImpl {
         this.getSpellAbility().addWatcher(new InsistWatcher());
 
         // Draw a card.
-        Effect effect = new DrawCardSourceControllerEffect(1);
-        effect.setText("<br><br>Draw a card");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Insist(final Insist card) {

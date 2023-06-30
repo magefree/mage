@@ -23,6 +23,9 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     protected boolean loseName;
     protected boolean keepAbilities;
     protected boolean removeSubtypes = false;
+    protected boolean loseOtherCardTypes;
+
+    protected boolean durationRuleAtStart = false; // put duration rule to the start of the rules instead end
 
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration) {
         this(token, loseAllAbilities, stillALand, duration, false);
@@ -32,23 +35,29 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         this(token, loseAllAbilities, stillALand, duration, loseName, false);
     }
 
+    public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration, boolean loseName, boolean keepAbilities) {
+        this(token, loseAllAbilities, stillALand, duration, loseName, keepAbilities, false);
+    }
+
     /**
      * @param token
-     * @param loseAllAbilities loses all subtypes, colors and abilities
-     * @param stillALand add rule text, "it's still a land"
-     * @param loseName permanent lose name and get's it from token
-     * @param keepAbilities lose types/colors, but keep abilities (example:
-     * Scale Up)
+     * @param loseAllAbilities   loses all creature subtypes, colors and abilities
+     * @param stillALand         add rule text, "it's still a land"
+     * @param loseName           permanent loses name and gets it from token
+     * @param keepAbilities      lose subtypes/colors, but keep abilities (example:
+     *                           Scale Up)
      * @param duration
+     * @param loseOtherCardTypes permanent loses other (original) card types, exclusively obtains card types of token
      */
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration, boolean loseName,
-            boolean keepAbilities) {
+                                       boolean keepAbilities, boolean loseOtherCardTypes) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.loseAllAbilities = loseAllAbilities;
         this.addStillALandText = stillALand;
         this.loseName = loseName;
         this.keepAbilities = keepAbilities;
+        this.loseOtherCardTypes = loseOtherCardTypes;
         this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
@@ -59,7 +68,9 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         this.addStillALandText = effect.addStillALandText;
         this.loseName = effect.loseName;
         this.keepAbilities = effect.keepAbilities;
+        this.loseOtherCardTypes = effect.loseOtherCardTypes;
         this.dependencyTypes.add(DependencyType.BecomeCreature);
+        this.durationRuleAtStart = effect.durationRuleAtStart;
     }
 
     @Override
@@ -83,18 +94,22 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     break;
 
                 case TypeChangingEffects_4:
+                    if (loseOtherCardTypes) {
+                        permanent.removeAllCardTypes(game);
+                    }
+                    if (loseAllAbilities) {
+                        permanent.removeAllCreatureTypes(game);
+                    }
+                    if (keepAbilities || removeSubtypes) {
+                        permanent.removeAllSubTypes(game);
+                    }
                     for (CardType t : token.getCardType(game)) {
                         permanent.addCardType(game, t);
                     }
-                    if (loseAllAbilities || removeSubtypes) {
-                        permanent.removeAllCreatureTypes(game);
-                    }
                     permanent.copySubTypesFrom(game, token);
 
-                    for (SuperType t : token.getSuperType()) {
-                        if (!permanent.getSuperType().contains(t)) {
-                            permanent.addSuperType(t);
-                        }
+                    for (SuperType t : token.getSuperType(game)) {
+                        permanent.addSuperType(game, t);
                     }
 
                     break;
@@ -158,31 +173,54 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                 || layer == Layer.TextChangingEffects_3;
     }
 
+    public BecomesCreatureTargetEffect withDurationRuleAtStart(boolean durationRuleAtStart) {
+        this.durationRuleAtStart = durationRuleAtStart;
+        return this;
+    }
+
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
+        if (durationRuleAtStart && duration != Duration.Custom) {
+            sb.append(duration.toString());
+            sb.append(", ");
+        }
+
         Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1) {
+        if (target.getMaxNumberOfTargets() != Integer.MAX_VALUE) {
             if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
                 sb.append("up to ");
+                if (target.getMaxNumberOfTargets() == 1) {
+                    sb.append("one ");
+                }
             }
+        }
+
+        if (target.getMaxNumberOfTargets() > 1) {
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName());
             if (loseAllAbilities) {
-                sb.append(" lose all their abilities and ");
+                sb.append(" lose all their abilities and");
             }
-            sb.append(" each become ");
+            if (target.getMaxNumberOfTargets() != Integer.MAX_VALUE) {
+                sb.append(" each");
+            }
+            sb.append(" become ");
         } else {
             sb.append("target ").append(target.getTargetName());
             if (loseAllAbilities && !keepAbilities) {
-                sb.append(" loses all abilities and ");
+                sb.append(" loses all abilities and");
             }
             sb.append(" becomes a ");
         }
         sb.append(token.getDescription());
-        sb.append(' ').append(duration.toString());
+
+        if (!durationRuleAtStart && duration != Duration.Custom) {
+            sb.append(' ').append(duration.toString());
+        }
+
         if (addStillALandText) {
             if (!sb.toString().endsWith("\" ")) {
                 sb.append(". ");

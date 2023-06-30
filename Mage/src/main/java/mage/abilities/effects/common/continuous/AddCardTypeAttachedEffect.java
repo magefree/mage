@@ -6,6 +6,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  * @author nantuko
@@ -15,11 +16,13 @@ public class AddCardTypeAttachedEffect extends ContinuousEffectImpl {
     private final CardType addedCardType;
     private final AttachmentType attachmentType;
 
-    public AddCardTypeAttachedEffect(CardType addedCardType, Duration duration, AttachmentType attachmentType) {
-        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
+    public AddCardTypeAttachedEffect(CardType addedCardType, AttachmentType attachmentType) {
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedCardType = addedCardType;
         this.attachmentType = attachmentType;
-        setText();
+        staticText = "and is " +
+                CardUtil.addArticle(CardUtil.getTextWithFirstCharLowerCase(addedCardType.toString())) +
+                " in addition to its other types";
     }
 
     public AddCardTypeAttachedEffect(final AddCardTypeAttachedEffect effect) {
@@ -45,10 +48,4 @@ public class AddCardTypeAttachedEffect extends ContinuousEffectImpl {
         return new AddCardTypeAttachedEffect(this);
     }
 
-    private void setText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(attachmentType.verb());
-        sb.append(" creature becomes ").append(addedCardType.toString()).append(" in addition to its other types"); //TODO add attacked card type detection
-        staticText = sb.toString();
-    }
 }

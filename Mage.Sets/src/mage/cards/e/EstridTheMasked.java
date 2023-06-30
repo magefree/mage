@@ -43,7 +43,7 @@ public final class EstridTheMasked extends CardImpl {
     public EstridTheMasked(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{G}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ESTRID);
         this.setStartingLoyalty(3);
 

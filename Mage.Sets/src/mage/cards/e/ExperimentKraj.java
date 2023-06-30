@@ -28,7 +28,7 @@ public final class ExperimentKraj extends CardImpl {
 
     public ExperimentKraj(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OOZE);
         this.subtype.add(SubType.MUTANT);
 

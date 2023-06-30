@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CopyStackAbilityEffect;
+import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
@@ -47,7 +47,7 @@ public final class IllusionistsBracers extends CardImpl {
 class IllusionistsBracersTriggeredAbility extends TriggeredAbilityImpl {
 
     IllusionistsBracersTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CopyStackAbilityEffect());
+        super(Zone.BATTLEFIELD, new CopyStackObjectEffect());
     }
 
     private IllusionistsBracersTriggeredAbility(final IllusionistsBracersTriggeredAbility ability) {
@@ -74,7 +74,7 @@ class IllusionistsBracersTriggeredAbility extends TriggeredAbilityImpl {
         if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
             return false;
         }
-        this.getEffects().setValue("stackAbility", stackAbility);
+        this.getEffects().setValue("stackObject", stackAbility);
         return true;
     }
 

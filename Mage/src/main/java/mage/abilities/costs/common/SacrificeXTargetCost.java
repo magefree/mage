@@ -2,6 +2,7 @@ package mage.abilities.costs.common;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.SacrificeCost;
 import mage.abilities.costs.VariableCostImpl;
 import mage.abilities.costs.VariableCostType;
 import mage.filter.Filter;
@@ -12,7 +13,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author LevelX2
  */
-public class SacrificeXTargetCost extends VariableCostImpl {
+public class SacrificeXTargetCost extends VariableCostImpl implements SacrificeCost {
 
     protected final FilterControlledPermanent filter;
     private final int minValue;

@@ -42,7 +42,7 @@ class BileBlightEffect extends BoostAllEffect {
 
     public BileBlightEffect() {
         super(-3, -3, Duration.EndOfTurn);
-        staticText = "Target creature and all creatures with the same name as that creature get -3/-3 until end of turn";
+        staticText = "Target creature and all other creatures with the same name as that creature get -3/-3 until end of turn";
     }
 
     public BileBlightEffect(final BileBlightEffect effect) {
@@ -53,19 +53,21 @@ class BileBlightEffect extends BoostAllEffect {
     public void init(Ability source, Game game) {
         super.init(source, game);
         affectedObjectList.clear();
-        if (this.affectedObjectsSet) {
-            Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (target != null) {
-                if (CardUtil.haveEmptyName(target)) { // face down creature
-                    affectedObjectList.add(new MageObjectReference(target, game));
-                } else {
-                    String name = target.getName();
-                    for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                        if (CardUtil.haveSameNames(perm, name, game)) {
-                            affectedObjectList.add(new MageObjectReference(perm, game));
-                        }
-                    }
-                }
+        if (!this.affectedObjectsSet) {
+            return;
+        }
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (target == null) {
+            return;
+        }
+        if (CardUtil.haveEmptyName(target)) { // face down creature
+            affectedObjectList.add(new MageObjectReference(target, game));
+            return;
+        }
+        String name = target.getName();
+        for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
+            if (CardUtil.haveSameNames(perm, name, game)) {
+                affectedObjectList.add(new MageObjectReference(perm, game));
             }
         }
     }

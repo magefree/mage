@@ -7,15 +7,11 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.Arrays;
-
 /**
- *
  * @author weirddan455
  */
 public class SpiritClericToken extends TokenImpl {
@@ -31,9 +27,7 @@ public class SpiritClericToken extends TokenImpl {
         toughness = new MageInt(0);
 
         // This creature’s power and toughness are each equal to the number of Spirits you control.
-        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(SpiritClericTokenValue.instance, Duration.EndOfGame)));
-
-        availableImageSetCodes = Arrays.asList("VOW");
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(SpiritClericTokenValue.instance)));
     }
 
     private SpiritClericToken(final SpiritClericToken token) {

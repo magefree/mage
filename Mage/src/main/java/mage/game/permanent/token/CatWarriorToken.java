@@ -1,17 +1,15 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
+import mage.abilities.keyword.ForestwalkAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import mage.MageInt;
-import mage.constants.CardType;
-import mage.abilities.keyword.ForestwalkAbility;
-import mage.constants.SubType;
-
 /**
- *
  * @author spjspj
  */
 public final class CatWarriorToken extends TokenImpl {
@@ -24,7 +22,6 @@ public final class CatWarriorToken extends TokenImpl {
 
     public CatWarriorToken() {
         super("Cat Warrior Token", "2/2 green Cat Warrior creature token with forestwalk");
-        availableImageSetCodes = tokenImageSets;
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.color.setGreen(true);

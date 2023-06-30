@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Controllable;
 import mage.game.Game;
-import mage.game.permanent.token.AstartesWarriorToken;
+import mage.game.permanent.token.WhiteAstartesWarriorToken;
 
 import java.util.Map;
 import java.util.UUID;
@@ -39,7 +39,7 @@ public final class BirthOfTheImperium extends CardImpl {
         // I -- Create a 2/2 white Astartes Warrior creature token with vigilance for each opponent you have.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I,
-                new CreateTokenEffect(new AstartesWarriorToken(), OpponentsCount.instance)
+                new CreateTokenEffect(new WhiteAstartesWarriorToken(), OpponentsCount.instance)
                         .setText("create a 2/2 white Astartes Warrior creature " +
                                 "token with vigilance for each opponent you have")
         );
@@ -82,11 +82,11 @@ enum BirthOfTheImperiumValue implements DynamicValue {
                 .map(Controllable::getControllerId)
                 .collect(Collectors.toMap(Function.identity(), x -> 1, Integer::sum));
         int yourCreatures = map.getOrDefault(sourceAbility.getControllerId(), 0);
-        return yourCreatures > 0 ? game
+        return yourCreatures > 0 ? (int) (2 * game
                 .getOpponents(sourceAbility.getControllerId())
                 .stream().mapToInt(uuid -> map.getOrDefault(uuid, 0))
                 .filter(x -> x < yourCreatures)
-                .sum() : 0;
+                .count()) : 0;
     }
 
     @Override
@@ -101,6 +101,6 @@ enum BirthOfTheImperiumValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return "1";
+        return "two";
     }
 }

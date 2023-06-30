@@ -1,15 +1,11 @@
-
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class XenagosSatyrToken extends TokenImpl {
@@ -24,9 +20,8 @@ public final class XenagosSatyrToken extends TokenImpl {
         toughness = new MageInt(2);
 
         this.addAbility(HasteAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("THS", "CLB");
     }
+
     public XenagosSatyrToken(final XenagosSatyrToken token) {
         super(token);
     }

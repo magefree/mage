@@ -21,10 +21,10 @@ public class Standard extends Constructed {
 
         setCodes.addAll(makeLegalSets());
 
-        banned.add("Alrund's Epiphany");
-        banned.add("Divide by Zero");
-        banned.add("Faceless Haven");
-        banned.add("Omnath, Locus of Creation");
+        banned.add("The Meathook Massacre");
+        banned.add("Fable of the Mirror-Breaker");
+        banned.add("Reckoner Bankbuster");
+        banned.add("Invoke Despair");
     }
 
     private static boolean isFallSet(ExpansionSet set) {

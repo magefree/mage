@@ -4,7 +4,7 @@ import mage.abilities.MageSingleton;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.AdventureCard;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
 import mage.cards.repository.CardRepository;
 import mage.constants.PhaseStep;
@@ -716,10 +716,10 @@ public class CopySpellTest extends CardTestPlayerBase {
 
     @Test
     public void test_SimpleCopy_MDFC() {
-        ModalDoubleFacesCard sourceCard = (ModalDoubleFacesCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
-        ModalDoubleFacesCard originalCard = (ModalDoubleFacesCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
+        ModalDoubleFacedCard sourceCard = (ModalDoubleFacedCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
+        ModalDoubleFacedCard originalCard = (ModalDoubleFacedCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
         prepareZoneAndZCC(originalCard);
-        ModalDoubleFacesCard copiedCard = (ModalDoubleFacesCard) currentGame.copyCard(originalCard, null, playerA.getId());
+        ModalDoubleFacedCard copiedCard = (ModalDoubleFacedCard) currentGame.copyCard(originalCard, null, playerA.getId());
         // main
         Assert.assertNotEquals("main - id must be different", originalCard.getId(), copiedCard.getId());
         Assert.assertEquals("main - rules must be same", originalCard.getRules(), copiedCard.getRules());

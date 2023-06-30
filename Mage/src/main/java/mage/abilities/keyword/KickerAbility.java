@@ -103,7 +103,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
     public final OptionalAdditionalCost addKickerCost(Cost cost) {
         OptionalAdditionalCost newCost = new OptionalAdditionalCostImpl(
-                keywordText, "-", reminderText, cost);
+                keywordText, "&mdash;", reminderText, cost);
         addKickerCostAndSetup(newCost);
         return newCost;
     }

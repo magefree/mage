@@ -17,6 +17,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetAnyTarget;
 
@@ -28,7 +29,7 @@ public final class LatullaKeldonOverseer extends CardImpl {
 
     public LatullaKeldonOverseer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(3);
@@ -37,7 +38,7 @@ public final class LatullaKeldonOverseer extends CardImpl {
         // {X}{R}, {tap}, Discard two cards: Latulla, Keldon Overseer deals X damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl<>("{X}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, 2, new FilterCard("two cards"))));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

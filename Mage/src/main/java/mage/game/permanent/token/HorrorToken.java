@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -18,8 +16,6 @@ public final class HorrorToken extends TokenImpl {
         subtype.add(SubType.HORROR);
         power = new MageInt(4);
         toughness = new MageInt(4);
-
-        availableImageSetCodes = Arrays.asList("RAV", "C21");
     }
 
     public HorrorToken(final HorrorToken token) {

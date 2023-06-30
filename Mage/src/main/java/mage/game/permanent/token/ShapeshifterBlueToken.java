@@ -5,8 +5,6 @@ import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -21,17 +19,6 @@ public final class ShapeshifterBlueToken extends TokenImpl {
         toughness = new MageInt(2);
 
         addAbility(new ChangelingAbility());
-
-        availableImageSetCodes = Arrays.asList("KHM", "CLB");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("CLB")) {
-            this.setTokenType(4);
-        }
     }
 
     private ShapeshifterBlueToken(final ShapeshifterBlueToken token) {

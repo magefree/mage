@@ -37,7 +37,7 @@ public final class BasriKet extends CardImpl {
     public BasriKet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{W}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BASRI);
         this.setStartingLoyalty(3);
 

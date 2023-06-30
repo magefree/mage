@@ -25,7 +25,7 @@ public final class UrgorosTheEmptyOne extends CardImpl {
     public UrgorosTheEmptyOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPECTER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

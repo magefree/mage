@@ -5,8 +5,6 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -21,8 +19,6 @@ public final class HumanMonkToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(new GreenManaAbility());
-
-        availableImageSetCodes = Arrays.asList("NEO");
     }
 
     public HumanMonkToken(final HumanMonkToken token) {

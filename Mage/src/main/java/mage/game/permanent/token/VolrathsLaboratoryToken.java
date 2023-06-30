@@ -10,6 +10,10 @@ import mage.constants.SubType;
  */
 public final class VolrathsLaboratoryToken extends TokenImpl {
 
+    public VolrathsLaboratoryToken() {
+        this(new ObjectColor(), SubType.BEAR);
+    }
+
     public VolrathsLaboratoryToken(ObjectColor color, SubType type) {
         super(type.getDescription() + " Token", "2/2 creature token of the chosen color and type");
         cardType.add(CardType.CREATURE);

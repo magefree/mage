@@ -41,7 +41,7 @@ public final class ZevlorElturelExile extends CardImpl {
     public ZevlorElturelExile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TIEFLING);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(4);

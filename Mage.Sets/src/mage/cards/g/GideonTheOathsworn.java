@@ -32,7 +32,7 @@ public final class GideonTheOathsworn extends CardImpl {
     public GideonTheOathsworn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
         this.setStartingLoyalty(4);
 
@@ -41,7 +41,7 @@ public final class GideonTheOathsworn extends CardImpl {
 
         // +2: Until end of turn, Gideon, the Oathsworn becomes a 5/5 white Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
         Ability ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(
-                new GideonTheOathswornToken(), "planeswalker", Duration.EndOfTurn
+                new GideonTheOathswornToken(), CardType.PLANESWALKER, Duration.EndOfTurn
         ), 2);
         ability.addEffect(new PreventAllDamageToSourceEffect(
                 Duration.EndOfTurn

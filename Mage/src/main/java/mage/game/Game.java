@@ -136,14 +136,18 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     PlayerList getPlayerList();
 
+    default Set<UUID> getOpponents(UUID playerId) {
+        return getOpponents(playerId, false);
+    }
+
     /**
-     * Returns a Set of opponents in range for the given playerId This return
-     * also a player, that has dies this turn.
+     * Returns a Set of opponents in range for the given playerId
      *
      * @param playerId
+     * @param excludeDeadPlayers Determines if players who have lost are excluded from the list
      * @return
      */
-    default Set<UUID> getOpponents(UUID playerId) {
+    default Set<UUID> getOpponents(UUID playerId, boolean excludeDeadPlayers) {
         Player player = getPlayer(playerId);
         if (player == null) {
             return new HashSet<>();
@@ -151,6 +155,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
         return player.getInRange().stream()
                 .filter(opponentId -> !opponentId.equals(playerId))
+                .filter(opponentId -> !excludeDeadPlayers || !getPlayer(opponentId).hasLost())
                 .collect(Collectors.toSet());
     }
 
@@ -175,6 +180,19 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Turn getTurn();
 
+    /**
+     * @return can return null in non started games
+     */
+    PhaseStep getTurnStepType();
+
+    /**
+     * @return can return null in non started games
+     */
+    TurnPhase getTurnPhaseType();
+
+    /**
+     * @return can return null in non started games
+     */
     Phase getPhase();
 
     Step getStep();
@@ -187,6 +205,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     /**
      * Id of the player the current turn it is.
+     *
+     * Player can be under control of another player, so search a real GUI's controller by Player->getTurnControlledBy
      *
      * @return
      */
@@ -380,13 +400,15 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId);
 
-    boolean addPlane(Plane plane, MageObject sourceObject, UUID toPlayerId);
+    boolean addPlane(Plane plane, UUID toPlayerId);
 
     void addCommander(Commander commander);
 
     Dungeon addDungeon(Dungeon dungeon, UUID playerId);
 
     void ventureIntoDungeon(UUID playerId, boolean undercity);
+
+    void temptWithTheRing(UUID playerId);
 
     /**
      * Tells whether the current game has day or night, defaults to false
@@ -534,8 +556,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     /**
      * Function to call for a player to take the initiative.
      *
-     * @param source        The ability granting initiative.
-     * @param initiativeId  UUID of the player taking the initiative
+     * @param source       The ability granting initiative.
+     * @param initiativeId UUID of the player taking the initiative
      */
     void takeInitiative(Ability source, UUID initiativeId);
 
@@ -663,6 +685,6 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     void setGameStopped(boolean gameStopped);
 
     boolean isGameStopped();
-    
+
     boolean isTurnOrderReversed();
 }

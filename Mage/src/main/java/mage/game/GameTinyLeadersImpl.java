@@ -140,7 +140,7 @@ class DefaultCommander extends CardImpl {
 
     public DefaultCommander(UUID ownerId, String commanderName, String manaString) {
         super(ownerId, new CardSetInfo(commanderName, "", "999", Rarity.RARE), new CardType[]{CardType.CREATURE}, manaString);
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         if (manaString.contains("{G}")) {
             this.color.setGreen(true);

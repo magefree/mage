@@ -84,13 +84,6 @@ public class Turn implements Serializable {
         return null;
     }
 
-    public PhaseStep getStepType() {
-        if (currentPhase != null && currentPhase.getStep() != null) {
-            return currentPhase.getStep().getType();
-        }
-        return null;
-    }
-
     /**
      * @param game
      * @param activePlayer
@@ -148,8 +141,8 @@ public class Turn implements Serializable {
     public void resumePlay(Game game, boolean wasPaused) {
         activePlayerId = game.getActivePlayerId();
         UUID priorityPlayerId = game.getPriorityPlayerId();
-        TurnPhase phaseType = game.getPhase().getType();
-        PhaseStep stepType = game.getStep().getType();
+        TurnPhase phaseType = game.getTurnPhaseType();
+        PhaseStep stepType = game.getTurnStepType();
 
         Iterator<Phase> it = phases.iterator();
         Phase phase;

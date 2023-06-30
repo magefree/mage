@@ -5,11 +5,17 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
+ * Token builder for token effects
+ * <p>
+ * Use it for custom tokens (tokens without public class and image)
+ *
  * @author JayDi85
  */
 public final class CreatureToken extends TokenImpl {
@@ -23,7 +29,7 @@ public final class CreatureToken extends TokenImpl {
     }
 
     public CreatureToken(int power, int toughness, String description) {
-        this(power, toughness, description, null);
+        this(power, toughness, description, (SubType[]) null);
     }
 
     public CreatureToken(int power, int toughness, String description, SubType... extraSubTypes) {
@@ -35,6 +41,11 @@ public final class CreatureToken extends TokenImpl {
         if (extraSubTypes != null) {
             this.subtype.addAll(Arrays.asList(extraSubTypes));
         }
+    }
+
+    public CreatureToken withName(String name) {
+        this.setName(name);
+        return this;
     }
 
     public CreatureToken withAbility(Ability ability) {
@@ -68,5 +79,25 @@ public final class CreatureToken extends TokenImpl {
 
     public CreatureToken copy() {
         return new CreatureToken(this);
+    }
+
+    private static String AutoGenerateTokenName(Token token) {
+        // 111.4. A spell or ability that creates a token sets both its name and its subtype(s).
+        // If the spell or ability doesn’t specify the name of the token,
+        // its name is the same as its subtype(s) plus the word “Token.”
+        // Once a token is on the battlefield, changing its name doesn’t change its subtype(s), and vice versa.
+        return token.getSubtype()
+                .stream()
+                .map(SubType::getDescription)
+                .collect(Collectors.joining(" ")) + " Token";
+    }
+
+    @Override
+    public String getName() {
+        String name = super.getName();
+        if (name.isEmpty()) {
+            name = AutoGenerateTokenName(this);
+        }
+        return name;
     }
 }

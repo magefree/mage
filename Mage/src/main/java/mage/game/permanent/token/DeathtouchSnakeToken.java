@@ -1,13 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class DeathtouchSnakeToken extends TokenImpl {
@@ -20,8 +18,6 @@ public final class DeathtouchSnakeToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(DeathtouchAbility.getInstance());
-
-        setOriginalExpansionSetCode("AKH");
     }
 
     public DeathtouchSnakeToken(final DeathtouchSnakeToken token) {

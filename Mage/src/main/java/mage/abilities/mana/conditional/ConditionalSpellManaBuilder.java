@@ -14,7 +14,6 @@ import mage.game.Game;
 import mage.game.command.Commander;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import sun.font.CreatedFontTracker;
 
 import java.util.Objects;
 import java.util.UUID;

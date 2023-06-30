@@ -27,7 +27,7 @@ public final class DarettiIngeniousIconoclast extends CardImpl {
 
     public DarettiIngeniousIconoclast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DARETTI);
 
         this.setStartingLoyalty(3);

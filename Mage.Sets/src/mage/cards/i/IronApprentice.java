@@ -73,7 +73,7 @@ class IronApprenticeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        Permanent permanent = (Permanent) getValue("permanentLeftBattlefield");
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (permanent == null || creature == null) {
             return false;

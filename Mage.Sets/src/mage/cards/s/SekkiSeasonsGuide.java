@@ -29,7 +29,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class SekkiSeasonsGuide extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("eight Spirits");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Spirits");
 
     static {
         filter.add(SubType.SPIRIT.getPredicate());
@@ -37,7 +37,7 @@ public final class SekkiSeasonsGuide extends CardImpl {
 
     public SekkiSeasonsGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(0);
@@ -52,7 +52,7 @@ public final class SekkiSeasonsGuide extends CardImpl {
         // Sacrifice eight Spirits: Return Sekki from your graveyard to the battlefield.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
                 new SacrificeTargetCost(new TargetControlledPermanent(8, 8, filter, true))));
     }
 
