@@ -1,11 +1,11 @@
 package mage.cards.g;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -16,20 +16,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author TiagoMDG
  */
 public final class GandalfWhiteRider extends CardImpl {
 
     public GandalfWhiteRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.subtype.add(SubType.WIZARD);
@@ -44,7 +40,7 @@ public final class GandalfWhiteRider extends CardImpl {
 
         // Adds ability that whenever you cast a spell it gives a temporary +1/+0 effect until end of turn
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new BoostControlledEffect(1, 0, Duration.EndOfTurn).setText("creatures you control get +1/+0 until end of turn"),
+                new BoostControlledEffect(1, 0, Duration.EndOfTurn),
                 StaticFilters.FILTER_SPELL_A,
                 false
         );
@@ -53,7 +49,7 @@ public final class GandalfWhiteRider extends CardImpl {
         ability.addEffect(new ScryEffect(1, false));
 
         this.addAbility(ability);
-        this.addAbility(new GandalfWhiteRiderTriggeredAbility(new GandalfWhiteRiderDyingEffect(), true));
+        this.addAbility(new DiesSourceTriggeredAbility(new GandalfWhiteRiderDyingEffect(), true));
     }
 
     private GandalfWhiteRider(final GandalfWhiteRider card) {
@@ -63,44 +59,6 @@ public final class GandalfWhiteRider extends CardImpl {
     @Override
     public GandalfWhiteRider copy() {
         return new GandalfWhiteRider(this);
-    }
-}
-
-class GandalfWhiteRiderTriggeredAbility extends TriggeredAbilityImpl{
-
-    public GandalfWhiteRiderTriggeredAbility(Effect effect) {
-        this(effect, false);
-    }
-    public GandalfWhiteRiderTriggeredAbility(Effect effect, boolean optional){
-        super(Zone.ALL, effect, optional);
-        setTriggerPhrase("When {this} dies, ");
-    }
-
-    GandalfWhiteRiderTriggeredAbility(GandalfWhiteRiderTriggeredAbility ability){
-        super(ability);
-    }
-
-    @Override
-    public GandalfWhiteRiderTriggeredAbility copy(){
-        return new GandalfWhiteRiderTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        Permanent permanent = zEvent.getTarget();
-        if (permanent != null && zEvent.isDiesEvent()
-                && permanent.getId().equals(this.getSourceId())
-                &&
-                permanent.isOwnedBy(permanent.getControllerId())) {
-            return true;
-        }
-        return false;
     }
 }
 
@@ -126,7 +84,7 @@ class GandalfWhiteRiderDyingEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Card card = (Card) source.getSourceObjectIfItStillExists(game);
+        Card card = (Card) getValue("permanentLeftBattlefield");
         if (card != null) {
             controller.putCardOnTopXOfLibrary(card, game, source, 5, true);
         }
