@@ -12,6 +12,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -127,10 +128,8 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         costTags = source.getCostsTagMap();
         if (costTags.size() == 0 && source.getSourcePermanentOrLKI(game) != null) {
             //Get Permanent's cost info
-            game.debugMessage(game.getPermanentCostsTags().toString());
-            MageObjectReference mor = new MageObjectReference(source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game);
-            game.debugMessage(mor.getZoneChangeCounter()+"/"+mor.getSourceId()+", "+source.getSourceObjectZoneChangeCounter());
-            game.debugMessage("sources: "+source.getClass().getSimpleName()+","+getSourceObjectZoneChangeCounter()+", "+source.getSourceObject(game).getClass().getSimpleName());
+            int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
+            MageObjectReference mor = new MageObjectReference(source.getSourceId(), zcc, game);
             costTags = game.getPermanentCostsTags().get(mor);
             if (costTags == null) return 0;
         }
