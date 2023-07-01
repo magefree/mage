@@ -251,6 +251,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 266, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarming of Moria", 150, Rarity.COMMON, mage.cards.s.SwarmingOfMoria.class));
         cards.add(new SetCardInfo("Tale of Tinuviel", 34, Rarity.UNCOMMON, mage.cards.t.TaleOfTinuviel.class));
+        cards.add(new SetCardInfo("The Balrog, Durin's Bane", 195, Rarity.RARE, mage.cards.t.TheBalrogDurinsBane.class));
         cards.add(new SetCardInfo("The Balrog, Flame of Udun", 297, Rarity.RARE, mage.cards.t.TheBalrogFlameOfUdun.class));
         cards.add(new SetCardInfo("The Bath Song", 40, Rarity.UNCOMMON, mage.cards.t.TheBathSong.class));
         cards.add(new SetCardInfo("The Battle of Bywater", 2, Rarity.RARE, mage.cards.t.TheBattleOfBywater.class));
