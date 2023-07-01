@@ -230,6 +230,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Shagrat, Loot Bearer", 228, Rarity.RARE, mage.cards.s.ShagratLootBearer.class));
         cards.add(new SetCardInfo("Shelob's Ambush", 108, Rarity.COMMON, mage.cards.s.ShelobsAmbush.class));
         cards.add(new SetCardInfo("Shire Scarecrow", 249, Rarity.COMMON, mage.cards.s.ShireScarecrow.class));
+        cards.add(new SetCardInfo("Shire Shirriff", 30, Rarity.UNCOMMON, mage.cards.s.ShireShirriff.class));
         cards.add(new SetCardInfo("Shire Terrace", 261, Rarity.COMMON, mage.cards.s.ShireTerrace.class));
         cards.add(new SetCardInfo("Shortcut to Mushrooms", 187, Rarity.UNCOMMON, mage.cards.s.ShortcutToMushrooms.class));
         cards.add(new SetCardInfo("Shower of Arrows", 188, Rarity.COMMON, mage.cards.s.ShowerOfArrows.class));
