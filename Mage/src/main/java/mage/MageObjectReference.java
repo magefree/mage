@@ -24,6 +24,10 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
 
     private final UUID sourceId;
     private final int zoneChangeCounter;
+    @Override
+    public String toString(){
+        return "MOR("+zoneChangeCounter+","+sourceId+")";
+    }
 
     public MageObjectReference(MageObject mageObject, Game game) {
         this(mageObject, game, 0);

@@ -1,9 +1,6 @@
 package mage.game.stack;
 
-import mage.MageInt;
-import mage.MageObject;
-import mage.Mana;
-import mage.ObjectColor;
+import mage.*;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
@@ -320,6 +317,7 @@ public class Spell extends StackObjectImpl implements Card {
                     flag = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
                 }
                 if (flag) {
+                    game.getPermanentCostsTags().put(new MageObjectReference(permId, game),this.getSpellAbility().getCostsTagMap());
                     if (bestow) {
                         // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
                         // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
@@ -357,6 +355,7 @@ public class Spell extends StackObjectImpl implements Card {
             if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     Permanent permanent = game.getPermanent(card.getId());
+                    game.getPermanentCostsTags().put(new MageObjectReference(card.getId(), game),this.getSpellAbility().getCostsTagMap());
                     if (permanent instanceof PermanentCard) {
                         ((PermanentCard) permanent).getCard().addCardType(game, CardType.CREATURE);
                         ((PermanentCard) permanent).getCard().removeSubType(game, SubType.AURA);
@@ -372,13 +371,20 @@ public class Spell extends StackObjectImpl implements Card {
                 counter(null, /*this.getSpellAbility()*/ game);
                 return false;
             }
-        } else if (isCopy()) {
-            Token token = CopyTokenFunction.createTokenCopy(card, game, this);
-            // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
-            token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false);
-            return true;
-        } else {
-            return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
+        } else{
+            if (isCopy()) {
+                Token token = CopyTokenFunction.createTokenCopy(card, game, this);
+                // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
+                token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false);
+                result = true;
+            } else {
+                MageObjectReference mor = new MageObjectReference(getSpellAbility(),0);
+                game.getPermanentCostsTags().put(mor,getSpellAbility().getCostsTagMap());
+                mor = new MageObjectReference(getSpellAbility(),1);
+                game.getPermanentCostsTags().put(mor,getSpellAbility().getCostsTagMap());
+                result = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
+            }
+            return result;
         }
     }
 

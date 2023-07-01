@@ -3,6 +3,9 @@ package mage.game;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
@@ -103,6 +106,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Zone> zones = new HashMap<>();
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, CardState> cardState = new HashMap<>();
+    private Map<MageObjectReference, Map<String, Integer>> permanentCostsTags = new HashMap<>();
     private Map<UUID, MageObjectAttribute> mageObjectAttribute = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
@@ -191,6 +195,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<UUID, CardState> entry : state.cardState.entrySet()) {
             cardState.put(entry.getKey(), entry.getValue().copy());
         }
+        getPermanentCostsTags().putAll(state.getPermanentCostsTags());
         for (Map.Entry<UUID, MageObjectAttribute> entry : state.mageObjectAttribute.entrySet()) {
             mageObjectAttribute.put(entry.getKey(), entry.getValue().copy());
         }
@@ -233,6 +238,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         gameOver = false;
         specialActions.clear();
         cardState.clear();
+        permanentCostsTags.clear();
         combat.clear();
         turnMods.clear();
         watchers.clear();
@@ -282,6 +288,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.zones = state.zones;
         this.simultaneousEvents = state.simultaneousEvents;
         this.cardState = state.cardState;
+        this.permanentCostsTags = state.permanentCostsTags;
         this.mageObjectAttribute = state.mageObjectAttribute;
         this.zoneChangeCounter = state.zoneChangeCounter;
         this.copiedCards = state.copiedCards;
@@ -654,6 +661,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public SpecialActions getSpecialActions() {
         return this.specialActions;
+    }
+
+    public Map<MageObjectReference, Map<String, Integer>> getPermanentCostsTags() {
+        return permanentCostsTags;
     }
 
     public void endGame() {

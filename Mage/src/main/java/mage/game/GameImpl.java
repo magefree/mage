@@ -2,12 +2,15 @@ package mage.game;
 
 import mage.MageException;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
@@ -737,6 +740,11 @@ public abstract class GameImpl implements Game {
     @Override
     public Map<UUID, Permanent> getPermanentsEntering() {
         return permanentsEntering;
+    }
+
+    @Override
+    public Map<MageObjectReference, Map<String, Integer>> getPermanentCostsTags() {
+        return state.getPermanentCostsTags();
     }
 
     @Override

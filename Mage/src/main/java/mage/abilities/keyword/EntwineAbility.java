@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.*;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -12,7 +13,9 @@ import mage.players.Player;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * 702.40. Entwine
@@ -34,7 +37,6 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
     protected static final String reminderText = "You may {cost} in addition to any other costs to use all modes.";
 
     protected OptionalAdditionalCost entwineCost;
-    protected Set<String> activations = new HashSet<>(); // same logic as KickerAbility: activations per zoneChangeCounter
 
     public EntwineAbility(String manaString) {
         super(Zone.STACK, null);
@@ -62,7 +64,6 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
         if (ability.entwineCost != null) {
             this.entwineCost = ability.entwineCost.copy();
         }
-        this.activations.addAll(ability.activations);
     }
 
     @Override
@@ -97,7 +98,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
                     ability.getCosts().add(cost.copy());
                 }
             }
-            activateEntwine(game, ability);
+            ability.getCostsTagMap().put("Entwine",1);
         }
     }
 
@@ -135,23 +136,13 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
         if (entwineCost != null) {
             entwineCost.reset();
         }
-
-        String key = getActivationKey(source, game);
-        this.activations.remove(key);
-    }
-
-    private void activateEntwine(Game game, Ability source) {
-        String key = getActivationKey(source, game);
-        this.activations.add(key);
     }
 
     public boolean costWasActivated(Ability ability, Game game) {
-        String key = getActivationKey(ability, game);
-        return this.activations.contains(key);
+        Map<String, Integer> map = ability.getCostsTagMap();
+        if (map == null) return false;
+        Integer entwineCheck = map.get("Entwine");
+        return entwineCheck != null && entwineCheck.equals(1);
     }
 
-    private String getActivationKey(Ability source, Game game) {
-        // same logic as KickerAbility
-        return KickerAbility.getActivationKey(source, game);
-    }
 }

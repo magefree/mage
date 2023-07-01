@@ -1,6 +1,8 @@
 package mage.abilities.dynamicvalue.common;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
@@ -23,7 +25,9 @@ public enum ManacostVariableValue implements DynamicValue {
             if (this == END_GAME) {
                 return watcher.getLastXValue(sourceAbility, true);
             } else {
-                return watcher.getLastXValue(sourceAbility, false);
+                MageObjectReference mor = new MageObjectReference(sourceAbility.getSourcePermanentOrLKI(game).getBasicMageObject(game), game);
+                return game.getPermanentCostsTags().get(mor).get("X");
+                //return watcher.getLastXValue(sourceAbility, false);
             }
         }
         return 0;

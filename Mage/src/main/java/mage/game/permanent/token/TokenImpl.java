@@ -1,9 +1,6 @@
 package mage.game.permanent.token;
 
-import mage.MageInt;
-import mage.MageObject;
-import mage.MageObjectImpl;
-import mage.ObjectColor;
+import mage.*;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
@@ -281,6 +278,12 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 // tokens zcc must simulate card's zcc to keep copied card/spell settings
                 // (example: etb's kicker ability of copied creature spell, see tests with Deathforge Shaman)
                 newPermanent.updateZoneChangeCounter(game, emptyEvent);
+
+                MageObjectReference mor = new MageObjectReference(newPermanent.getId(),newPermanent.getZoneChangeCounter(game),game);
+                game.debugMessage("Token "+mor+" : "+source);
+                if (source != null && source.getCostsTagMap() != null) {
+                    game.getPermanentCostsTags().put(mor, source.getCostsTagMap());
+                }
             }
 
             // check ETB effects
