@@ -2006,6 +2006,13 @@ public class ScryfallImageSupportTokens {
             put("ODY/Wurm", "https://api.scryfall.com/cards/pr2/6/en?format=image");
             put("ODY/Zombie", "https://api.scryfall.com/cards/pr2/4/en?format=image");
 
+            // DIS
+            put("DIS/Emblem Momir", "https://api.scryfall.com/cards/pmoa/61/en?format=image");
+
+            // MUL
+            put("MUL/Elemental", "https://api.scryfall.com/cards/tmul/2/en?format=image");
+            put("MUL/Phyrexian Myr", "https://api.scryfall.com/cards/tmul/1/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

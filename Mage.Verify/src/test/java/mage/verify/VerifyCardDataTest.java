@@ -5,10 +5,7 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.LegendarySpellAbility;
-import mage.abilities.common.SagaAbility;
-import mage.abilities.common.WerewolfBackTriggeredAbility;
-import mage.abilities.common.WerewolfFrontTriggeredAbility;
+import mage.abilities.common.*;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
@@ -134,6 +131,8 @@ public class VerifyCardDataTest {
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
+        skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
+        skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
@@ -1367,7 +1366,14 @@ public class VerifyCardDataTest {
         List<Card> cardsList = new ArrayList<>(CardScanner.getAllCards());
         Map<String, List<Card>> setsWithTokens = new HashMap<>();
         for (Card card : cardsList) {
-            String allRules = String.join(" ", card.getRules()).toLowerCase(Locale.ENGLISH);
+            // must check all card parts (example: Mila, Crafty Companion with Lukka Emblem)
+            String allRules = CardUtil.getObjectPartsAsObjects(card)
+                    .stream()
+                    .map(obj -> (Card) obj)
+                    .map(Card::getRules)
+                    .flatMap(Collection::stream)
+                    .map(r -> r.toLowerCase(Locale.ENGLISH))
+                    .collect(Collectors.joining("; "));
             if ((allRules.contains("create") && allRules.contains("token"))
                     || (allRules.contains("get") && allRules.contains("emblem"))) {
                 List<Card> sourceCards = setsWithTokens.getOrDefault(card.getExpansionSetCode(), null);
@@ -1403,8 +1409,12 @@ public class VerifyCardDataTest {
                     String needTokenName = token.getName()
                             .replace(" Token", "")
                             .replace("Emblem ", "");
-                    // need add card name, so it will skip no name emblems like Sarkhan, the Dragonspeaker
+                    // cards with emblems don't use emblem's name, so check it in card name itself (example: Sarkhan, the Dragonspeaker)
+                    // also must check all card parts (example: Mila, Crafty Companion with Lukka Emblem)
                     if (sourceCards.stream()
+                            .map(CardUtil::getObjectPartsAsObjects)
+                            .flatMap(Collection::stream)
+                            .map(obj -> (Card) obj)
                             .map(card -> card.getName() + " - " + String.join(", ", card.getRules()))
                             .noneMatch(s -> s.contains(needTokenName))) {
                         warningsList.add("info, tok-data has un-used tokens: "
@@ -1732,6 +1742,11 @@ public class VerifyCardDataTest {
         // special check: back side in TDFC must be only night card
         if (card.getSecondCardFace() != null && !card.getSecondCardFace().isNightCard()) {
             fail(card, "abilities", "the back face of a double-faced card should be nightCard = true");
+        }
+
+        // special check: siege ability must be used in double faced cards only
+        if (card.getAbilities().containsClass(SiegeAbility.class) && card.getSecondCardFace() == null) {
+            fail(card, "abilities", "miss second side settings in card with siege ability");
         }
 
         // special check: legendary spells need to have legendary spell ability

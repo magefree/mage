@@ -206,6 +206,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     /**
      * Id of the player the current turn it is.
      *
+     * Player can be under control of another player, so search a real GUI's controller by Player->getTurnControlledBy
+     *
      * @return
      */
     UUID getActivePlayerId();

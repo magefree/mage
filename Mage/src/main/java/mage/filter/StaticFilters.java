@@ -371,6 +371,13 @@ public final class StaticFilters {
         FILTER_CONTROLLED_A_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_PERMANENT = new FilterControlledPermanent("another target permanent you control");
+
+    static {
+        FILTER_CONTROLLED_ANOTHER_PERMANENT.add(AnotherPredicate.instance);
+        FILTER_CONTROLLED_ANOTHER_PERMANENT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENTS = new FilterControlledPermanent("permanents you control");
 
     static {
@@ -558,6 +565,13 @@ public final class StaticFilters {
                 CardType.CREATURE.getPredicate()
         ));
         FILTER_OPPONENTS_PERMANENT_ARTIFACT_OR_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_ANOTHER_CREATURE = new FilterCreaturePermanent("another creature");
+
+    static {
+        FILTER_ANOTHER_CREATURE.add(AnotherPredicate.instance);
+        FILTER_ANOTHER_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_ANOTHER_TARGET_CREATURE = new FilterCreaturePermanent("another target creature");

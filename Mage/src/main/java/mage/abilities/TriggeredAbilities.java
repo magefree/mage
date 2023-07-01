@@ -64,10 +64,12 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
             if (event == null || !game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
                 if (object != null) {
                     boolean controllerSet = false;
-                    if (ability.getZone() != Zone.COMMAND && event != null
+                    if (ability.getZone() != Zone.COMMAND
+                            && event != null
                             && event.getTargetId() != null
                             && ability.isLeavesTheBattlefieldTrigger()
-                            && game.getLKI().get(Zone.BATTLEFIELD) != null && game.getLKI().get(Zone.BATTLEFIELD).containsKey(ability.getSourceId())) {
+                            && game.getLKI().get(Zone.BATTLEFIELD) != null
+                            && game.getLKI().get(Zone.BATTLEFIELD).containsKey(ability.getSourceId())) {
                         // need to check if object was face down for dies and destroy events because the ability triggers in the new zone, zone counter -1 is used
                         Permanent permanent = (Permanent) game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD, ability.getSourceObjectZoneChangeCounter() - 1);
                         if (permanent != null) {
@@ -93,7 +95,8 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
 
                 if (ability.checkTrigger(event, game) && ability.checkTriggeredAlready(game) && !ability.checkUsedAlready(game)) {
                     NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability, event);
-                    if (!game.replaceEvent(numberOfTriggersEvent)) {
+                    // event == null - state based triggers like StateTriggeredAbility, must be ignored for number event
+                    if (event == null || !game.replaceEvent(numberOfTriggersEvent)) {
                         for (int i = 0; i < numberOfTriggersEvent.getAmount(); i++) {
                             ability.trigger(game, ability.getControllerId(), event);
                         }

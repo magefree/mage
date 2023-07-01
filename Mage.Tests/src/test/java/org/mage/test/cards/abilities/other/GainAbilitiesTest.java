@@ -66,6 +66,71 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
                 ).count());
     }
 
+    @Test
+    public void testGainAbilityControlledSpells() {
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+
+        addCard(Zone.GRAVEYARD, playerA, "Hoarding Broodlord"); // gives Pestilent Spirit convoke
+        addCard(Zone.HAND, playerA, "Reanimate"); // to put Hoarding Broodlord in play
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1); // to cast Reanimate
+        addCard(Zone.BATTLEFIELD, playerA, "Firesong and Sunspeaker"); // gives Shock lifelink
+        addCard(Zone.LIBRARY, playerA, "Shock", 1); // to find with Hoarding Broodlord
+        addCard(Zone.HAND, playerA, "Covetous Urge"); // makes Pestilent Spirit castable from exile
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4); // to cast Covetous Urge
+        addCard(Zone.HAND, playerB, "Pestilent Spirit"); // gives Shock deathtouch
+        addCard(Zone.BATTLEFIELD, playerA, "Sol Ring"); // to cast Pestilent Spirit
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Hoarding Broodlord"); // tap Swamp, lose 8 life, find Shock
+        addTarget(playerA, "Shock");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Covetous Urge", playerB); // tap four Islands, find Pestilent Spirit
+        setChoice(playerA, "Pestilent Spirit");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}{C}", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pestilent Spirit"); // tap Sol Ring and Hoarding Broodlord
+        addTarget(playerA, "Hoarding Broodlord"); // convoke to pay B
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "Firesong and Sunspeaker"); // convoke, lethal, gain 2 life
+        addTarget(playerA, "Firesong and Sunspeaker"); // convoke to pay R
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20 - 8 + 2); // confirms lifelink ability was added to Shock
+        assertGraveyardCount(playerA, "Firesong and Sunspeaker", 1); // must be lethal damage, confirms deathtouch ability added
+        assertTapped("Hoarding Broodlord", true); // confirms convoke ability added
+
+    }
+
+    @Ignore
+    // TODO: GainAbilityControlledSpellsEffect needs improvement to properly apply only to playable cards in non-hand zones
+    // TODO: Figure out how to make the ability apply to the reflexive trigger
+    @Test
+    public void testGainAbilityControlledSpellsOnly() {
+
+        addCard(Zone.BATTLEFIELD, playerB, "Firesong and Sunspeaker"); // shouldn't give Searing Blood lifelink
+        addCard(Zone.BATTLEFIELD, playerA, "Walking Corpse"); // creature to target
+        addCard(Zone.HAND, playerA, "Covetous Urge"); // makes Searing Blood castable from exile
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4); // to cast Covetous Urge
+        addCard(Zone.HAND, playerB, "Searing Blood"); // to find with Covetous Urge
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2); // to cast Searing Blood
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Covetous Urge", playerB); // tap four Islands, find Searing Blood
+        setChoice(playerA, "Searing Blood");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Searing Blood", "Walking Corpse");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Walking Corpse", 1);
+        assertLife(playerB, 20); // lifelink should not apply
+        assertLife(playerA, 20 - 3);
+
+    }
 
     /**
      * Reported bug: https://github.com/magefree/mage/issues/9565

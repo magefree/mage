@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,6 +14,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +35,7 @@ public final class LeovoldEmissaryOfTrest extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeovoldEmissaryOfTrestEffect()), new CardsAmountDrawnThisTurnWatcher());
 
         // Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
-        this.addAbility(new TargetOfOpponentsSpellOrAbilityTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
+        this.addAbility(new TargetOfOpponentsSpellOrAbilityTriggeredAbility(new DrawCardSourceControllerEffect(1), true, false));
     }
 
     private LeovoldEmissaryOfTrest(final LeovoldEmissaryOfTrest card) {

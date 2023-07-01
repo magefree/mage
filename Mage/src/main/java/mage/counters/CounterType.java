@@ -93,6 +93,7 @@ public enum CounterType {
     HIT("hit"),
     HOOFPRINT("hoofprint"),
     HONE("hone"),
+    HOPE("hope"),
     HOUR("hour", "an"),
     HOURGLASS("hourglass", "an"),
     HUNGER("hunger"),
@@ -100,6 +101,7 @@ public enum CounterType {
     INCARNATION("incarnation"),
     INDESTRUCTIBLE("indestructible"),
     INFECTION("infection"),
+    INFLUENCE("influence"),
     INGENUITY("ingenuity"),
     INTEL("intel"),
     INTERVENTION("intervention"),
@@ -163,6 +165,7 @@ public enum CounterType {
     REJECTION("rejection"),
     REPAIR("repair"),
     REPRIEVE("reprieve"),
+    RIBBON("ribbon"),
     RITUAL("ritual"),
     ROPE("rope"),
     RUST("rust"),
@@ -223,7 +226,7 @@ public enum CounterType {
     }
 
     CounterType(String name) {
-        this(name, "aeiou".contains("" + name.charAt(0)) ? "an" : "a");
+        this(name, "aeiou".contains( String.valueOf( name.charAt( 0 ) ) ) ? "an" : "a");
     }
 
     CounterType(String name, String article) {

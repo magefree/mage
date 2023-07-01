@@ -5,10 +5,10 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.HateCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.common.ReturnTargetToOwnersLibraryPermanentEffect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,18 +31,16 @@ public final class SithManipulator extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Sith Manipulator enters the battlefield, return target creature to its owner's hand.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()),
-                new InvertCondition(HateCondition.instance),
-                "When Sith Manipulator enters the battlefield, return target creature to its owner's hand");
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
-
         // <i>Hate</i> &mdash; If opponent lost life from source other than combat damage this turn, put that card on top of its owner's library instead.
-        ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnTargetToOwnersLibraryPermanentEffect(true)),
+        Effect effect = new ConditionalOneShotEffect(
+                new PutOnLibraryTargetEffect(true),
+                new ReturnToHandTargetEffect(),
                 HateCondition.instance,
-                "<i>Hate</i> &mdash; If opponent lost life from source other than combat damage this turn, put that card on top of its owner's library instead");
+                "return target creature to its owner's hand." +
+                        "<br><i>Hate</i> &mdash; If opponent lost life from source other than combat damage this turn, " +
+                        "put that card on top of its owner's library instead"
+        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
 

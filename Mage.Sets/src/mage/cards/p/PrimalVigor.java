@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.events.CreateTokenEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -96,7 +97,7 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmountForCounters(event.getAmount() * 2, true);
+        event.setAmountForCounters(CardUtil.overflowMultiply(event.getAmount(), 2), true);
         return false;
     }
 

@@ -114,6 +114,7 @@
 |Generate|EMBLEM:MOM|Emblem Wrenn|||WrennAndRealmbreakerEmblem|
 |Generate|EMBLEM:MOC|Emblem Elspeth|||ElspethSunsChampionEmblem|
 |Generate|EMBLEM:MOC|Emblem Teferi|||TeferisTalentEmblem|
+|Generate|EMBLEM:DIS|Emblem Momir|||MomirEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -2019,3 +2020,7 @@
 |Generate|TOK:MOC|Vampire Knight|||VampireKnightToken|
 |Generate|TOK:MOC|Warrior|||WarriorToken|
 |Generate|TOK:MOC|Zombie Knight|||ZombieKnightToken|
+
+# MUL
+|Generate|TOK:MUL|Elemental|||Elemental31TrampleHasteToken|
+|Generate|TOK:MUL|Phyrexian Myr|||BrudicladTelchorMyrToken|

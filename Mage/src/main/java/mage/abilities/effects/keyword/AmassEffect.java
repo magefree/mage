@@ -85,8 +85,10 @@ public class AmassEffect extends OneShotEffect {
         if (permanent == null) {
             return null;
         }
-        game.addEffect(new AddCardSubTypeTargetEffect(subType, Duration.Custom)
-                .setTargetPointer(new FixedTarget(permanent, game)), source);
+        if (!permanent.hasSubtype(subType, game)) {
+            game.addEffect(new AddCardSubTypeTargetEffect(subType, Duration.Custom)
+                    .setTargetPointer(new FixedTarget(permanent, game)), source);
+        }
         if (xValue > 0) {
             permanent.addCounters(
                     CounterType.P1P1.createInstance(xValue),

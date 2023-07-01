@@ -42,7 +42,7 @@ public final class ThereAndBackAgain extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
                 new Effects(
-                        new CantBlockTargetEffect(Duration.WhileControlled), new TheRingTemptsYouEffect()
+                        new CantBlockTargetEffect(Duration.WhileControlled).setText("Up to one target creature can't block for as long as you control {this}"), new TheRingTemptsYouEffect()
                 ), new TargetCreaturePermanent(0, 1)
         );
 
