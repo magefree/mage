@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -40,8 +39,8 @@ public class OrcishBowmasters extends CardImpl {
                 new OrTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "{this}"),
                     new EntersBattlefieldTriggeredAbility(null, false),
                     new OpponentDrawCardExceptFirstCardDrawStepTriggeredAbility(Zone.BATTLEFIELD, null, false)
-                    .setTriggerPhrase("When {this} enters the battlefield and whenever an opponent draws a card " +
-                            "except the first one they draw in each of their draw steps, "));
+                ).setTriggerPhrase("When {this} enters the battlefield and whenever an opponent draws a card " +
+                    "except the first one they draw in each of their draw steps, ");
         triggeredAbility.addTarget(new TargetAnyTarget());
 
         Effect amass = new AmassEffect(1, SubType.ORC);
