@@ -2,7 +2,6 @@
 package mage.abilities.effects.common.search;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -84,7 +83,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
 
                 // cards in Library
                 Cards cardsInLibrary = new CardsImpl();
-                cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
+                cardsInLibrary.addAllCards(targetPlayer.getLibrary().getCards(game));
                 cardsCount = (cardName.isEmpty() ? 0 : cardsInLibrary.count(filter, game));
                 filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
                 TargetCardInLibrary targetLib = new TargetCardInLibrary(0, cardsCount, filter);

@@ -101,7 +101,7 @@ class NecromentiaEffect extends OneShotEffect {
 
             // cards in Library
             Cards cardsInLibrary = new CardsImpl();
-            cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
+            cardsInLibrary.addAllCards(targetPlayer.getLibrary().getCards(game));
             cardsCount = (cardName.isEmpty() ? 0 : cardsInLibrary.count(filter, game));
             if (cardsCount > 0) {
                 filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());

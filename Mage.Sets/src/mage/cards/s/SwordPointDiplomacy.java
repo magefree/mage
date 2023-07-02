@@ -67,7 +67,7 @@ class SwordPointDiplomacyEffect extends OneShotEffect {
         }
         int amount = Math.min(controller.getLibrary().size(), 3);
         CardsImpl cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, amount));
+        cards.addAllCards(controller.getLibrary().getTopCards(game, amount));
         controller.revealCards(sourceObject.getIdName(), cards, game);
         Set<Card> cardsList = cards.getCards(game);
         Cards cardsToHand = new CardsImpl();
