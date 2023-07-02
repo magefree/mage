@@ -73,9 +73,7 @@ class BoneyardParleyEffect extends OneShotEffect {
         if (player != null) {
             Cards cards = new CardsImpl();
             for (Target target : source.getTargets()) {
-                for (UUID cardId : target.getTargets()) {
-                    cards.add(cardId);
-                }
+                cards.addAll(target.getTargets());
             }
             if (!cards.isEmpty() && player.moveCards(cards, Zone.EXILED, source, game)) {
                 TargetOpponent targetOpponent = new TargetOpponent(true);
@@ -109,23 +107,9 @@ class BoneyardParleyEffect extends OneShotEffect {
                         pile1Set.addAll(pile1);
                         pile2Set.addAll(pile2);
 
-//                        Cards toBattlefield = new CardsImpl();
-//                        Cards toGraveyard = new CardsImpl();
-//
-//                        if (pile1Zone == Zone.BATTLEFIELD) {
-//                            toBattlefield.addAllCards(pile1);
-//                            toGraveyard.addAllCards(pile2);
-//                        } else {
-//                            toBattlefield.addAllCards(pile2);
-//                            toGraveyard.addAllCards(pile1);
-//                        }
                         player.moveCards(pile1Set, pile1Zone, source, game, false, false, false, null);
                         player.moveCards(pile2Set, pile2Zone, source, game, false, false, false, null);
 
-//                        StringBuilder sb = new StringBuilder("Pile 1, going to ").append(pile1Zone == Zone.BATTLEFIELD ? "Battlefield" : "Graveyard").append(": ");
-//                        game.informPlayers(sb.toString());
-//                        sb = new StringBuilder("Pile 2, going to ").append(pile2Zone == Zone.BATTLEFIELD ? "Battlefield" : "Graveyard").append(':');
-//                        game.informPlayers(sb.toString());
                     }
                     return true;
                 }
