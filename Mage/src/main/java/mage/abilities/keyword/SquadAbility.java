@@ -1,6 +1,5 @@
 package mage.abilities.keyword;
 
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -10,7 +9,6 @@ import mage.abilities.costs.*;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.CreateTokenCopySourceEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -19,7 +17,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.Map;
-import java.util.stream.Stream;
 
 /**
  * @author notgreat
@@ -28,6 +25,7 @@ public class SquadAbility extends EntersBattlefieldTriggeredAbility {
     public SquadAbility() {
         super(new SquadEffectETB());
         addSubAbility(new SquadCostAbility());
+		this.setRuleVisible(false);
     }
 
     private SquadAbility(final SquadAbility ability) {
@@ -61,7 +59,7 @@ public class SquadAbility extends EntersBattlefieldTriggeredAbility {
     @Override
     public String getRule() {
         return "Squad <i>(When this creature enters the battlefield, if its squad cost was paid, "
-                + "create a token that’s a copy of it for each time its squad cost was paid.)</i>";
+                + "create a token that is a copy of it for each time its squad cost was paid.)</i>";
     }
 }
 
@@ -104,7 +102,6 @@ class SquadCostAbility extends StaticAbility implements OptionalAdditionalSource
     public SquadCostAbility(Cost cost) {
         super(Zone.STACK, null);
         setSquadCost(cost);
-        //Note that I get subabilities list's position 0 to modify the zcc/count references
     }
 
     private SquadCostAbility(final SquadCostAbility ability) {
@@ -127,28 +124,6 @@ class SquadCostAbility extends StaticAbility implements OptionalAdditionalSource
 
     private void reset() {
         cost.reset();
-    }
-
-    protected static int get_zcc(Ability source, Game game) {
-        // Squad/Kicker activates in STACK zone so all zcc must be from "stack moment"
-        // Use cases:
-        // * resolving spell have same zcc (example: check kicker status in sorcery/instant);
-        // * copied spell have same zcc as source spell (see Spell.copySpell and zcc sync);
-        // * creature/token from resolved spell have +1 zcc after moved to battlefield (example: check kicker status in ETB triggers/effects);
-
-        // find object info from the source ability (it can be a permanent or a spell on stack, on the moment of trigger/resolve)
-        MageObject sourceObject = source.getSourceObject(game);
-        Zone sourceObjectZone = game.getState().getZone(sourceObject.getId());
-        int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
-
-        // find "stack moment" zcc:
-        // * permanent cards enters from STACK to BATTLEFIELD (+1 zcc)
-        // * permanent tokens enters from OUTSIDE to BATTLEFIELD (+1 zcc, see prepare code in TokenImpl.putOntoBattlefieldHelper)
-        // * spells and copied spells resolves on STACK (zcc not changes)
-        if (sourceObjectZone != Zone.STACK) {
-            --zcc;
-        }
-        return zcc;
     }
 
     @Override
