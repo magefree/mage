@@ -41,8 +41,6 @@ import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author BetaSteward_at_googlemail.com

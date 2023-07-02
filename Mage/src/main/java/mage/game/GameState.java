@@ -3,9 +3,6 @@ package mage.game;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
@@ -194,7 +191,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<UUID, CardState> entry : state.cardState.entrySet()) {
             cardState.put(entry.getKey(), entry.getValue().copy());
         }
-        getPermanentCostsTags().putAll(state.getPermanentCostsTags());
+        for (Map.Entry<MageObjectReference, Map<String, Integer>> entry : state.permanentCostsTags.entrySet()) {
+            permanentCostsTags.put(entry.getKey(), new HashMap<>(entry.getValue()));
+        }
         for (Map.Entry<UUID, MageObjectAttribute> entry : state.mageObjectAttribute.entrySet()) {
             mageObjectAttribute.put(entry.getKey(), entry.getValue().copy());
         }

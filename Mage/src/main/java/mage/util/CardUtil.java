@@ -3,6 +3,7 @@ package mage.util;
 import com.google.common.collect.ImmutableList;
 import mage.ApprovingObject;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.condition.Condition;
@@ -1546,6 +1547,26 @@ public final class CardUtil {
             zcc = game.getState().getZoneChangeCounter(source.getSourceId());
         }
         return zcc;
+    }
+
+    /**
+     * Find cost tags of the permanent source of the source ability, works in any moment (even before source ability activated)
+     * <p>
+     * Used for kicker and other similar effects
+     *
+     * @param game
+     * @param source
+     * @return CostTags mappings of the source object
+     */
+    public static Map<String, Integer> getSourceCostTags(Game game, Ability source){
+        Map<String, Integer> costTags;
+        costTags = source.getCostsTagMap(); //Abilities always have a tag map
+        if (costTags.size() == 0 && source.getSourcePermanentOrLKI(game) != null) {
+            int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
+            MageObjectReference mor = new MageObjectReference(source.getSourceId(), zcc, game);
+            costTags = game.getPermanentCostsTags().get(mor);
+        }
+        return costTags;
     }
 
     public static String addCostVerb(String text) {

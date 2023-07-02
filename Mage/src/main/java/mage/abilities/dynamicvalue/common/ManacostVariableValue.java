@@ -1,8 +1,6 @@
 package mage.abilities.dynamicvalue.common;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
@@ -28,9 +26,7 @@ public enum ManacostVariableValue implements DynamicValue {
             if (this == END_GAME) {
                 return watcher.getLastXValue(sourceAbility, true);
             } else {
-                int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, sourceAbility);
-                MageObjectReference mor = new MageObjectReference(sourceAbility.getSourceId(),zcc,game);
-                Map<String, Integer> map = game.getPermanentCostsTags().get(mor);
+                Map<String, Integer> map = CardUtil.getSourceCostTags(game, sourceAbility);
                 if (map != null) {
                     return map.getOrDefault("X",0);
                 }

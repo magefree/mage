@@ -1,6 +1,5 @@
 package mage.abilities.keyword;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -38,21 +37,14 @@ public class SquadAbility extends EntersBattlefieldTriggeredAbility {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, this);
-        SquadEffectETB effect = (SquadEffectETB)getEffects().get(0);
-        Map<String, Integer> costTags;
-        costTags = getCostsTagMap();
-        if (costTags.size() == 0 && getSourcePermanentOrLKI(game) != null) {
-            //Get Permanent's cost info
-            MageObjectReference mor = new MageObjectReference(getSourceId(), zcc, game);
-            costTags = game.getPermanentCostsTags().get(mor);
-            if (costTags == null) return false;
-        }
-        int squadCount = costTags.entrySet().stream().filter(x -> x.getKey().equals("Squad"))
-                .mapToInt(Map.Entry::getValue).sum();
-        if (squadCount > 0){
-            effect.activationCount = squadCount;
-            return true;
+        Map<String, Integer> costTags = CardUtil.getSourceCostTags(game, this);
+        if (costTags != null) {
+            int squadCount = costTags.getOrDefault("Squad",0);
+            if (squadCount > 0) {
+                SquadEffectETB effect = (SquadEffectETB) getEffects().get(0);
+                effect.activationCount = squadCount;
+                return true;
+            }
         }
         return false;
     }

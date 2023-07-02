@@ -46,9 +46,7 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
             }
         }
         if (permanent != null) {
-            int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
-            MageObjectReference mor = new MageObjectReference(source.getSourceId(), zcc, game);
-            Map<String, Integer> costTags = game.getPermanentCostsTags().get(mor);
+            Map<String, Integer> costTags = CardUtil.getSourceCostTags(game, source);
             if (costTags != null){
                 int amount = costTags.getOrDefault("X",0);
                 if (amount > 0) {
