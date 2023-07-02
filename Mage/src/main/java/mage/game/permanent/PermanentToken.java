@@ -35,12 +35,6 @@ public class PermanentToken extends PermanentImpl {
         if (this.token.isEntersTransformed()) {
             TransformAbility.transformPermanent(this, this.token.getBackFace(), game, null);
         }
-
-        // token's ZCC must be synced with original token to keep abilities settings
-        // Example: kicker ability and kicked status
-        if (game != null) { // game == null in GUI for card viewer's tokens
-            this.setZoneChangeCounter(this.token.getZoneChangeCounter(game), game);
-        }
     }
 
     public PermanentToken(final PermanentToken permanent) {

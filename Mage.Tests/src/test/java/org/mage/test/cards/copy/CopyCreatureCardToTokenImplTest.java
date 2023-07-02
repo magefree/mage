@@ -20,36 +20,34 @@ public class CopyCreatureCardToTokenImplTest extends CardTestPlayerBase {
      * either.
      */
     @Test
-    @Ignore
     public void testTokenTriggeresETBEffect() {
-        // Flying
-        // Sphinx spells you cast cost {2} less to cast.
-        // Whenever Unesh, Criosphinx Sovereign or another Sphinx enters the battlefield
-        // under your control, reveal the top four cards of your library. An opponent seperates
-        // those cards into two piles. Put one pile into your hand and the other into your graveyard.
-        addCard(Zone.GRAVEYARD, playerA, "Unesh, Criosphinx Sovereign", 1); // Sphinx 4/4
+        //Swapped to Aven of Enduring Hope since dividing cards is complicated in tests
+        //Flying
+        //When Aven of Enduring Hope enters the battlefield, you gain 3 life.
+        addCard(Zone.GRAVEYARD, playerA, "Aven of Enduring Hope", 1);
 
         // Exile X target creature cards from your graveyard. For each card exiled this way,
         // create a token that's a copy of that card, except it's a 4/4 black Zombie.
         addCard(Zone.HAND, playerA, "Hour of Eternity"); // Sorcery {X}{X}{U}{U}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hour of Eternity", "Unesh, Criosphinx Sovereign");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hour of Eternity");
         setChoice(playerA, "X=1");
+        addTarget(playerA, "Aven of Enduring Hope");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
 
-        assertLife(playerA, 20);
+        assertLife(playerA, 23);
         assertLife(playerB, 20);
 
         assertGraveyardCount(playerA, "Hour of Eternity", 1);
-        assertPermanentCount(playerA, "Unesh, Criosphinx Sovereign", 1);
-        assertGraveyardCount(playerA, "Unesh, Criosphinx Sovereign", 0);
-        assertExileCount(playerA, "Unesh, Criosphinx Sovereign", 1);
-
-        assertHandCount(playerA, 3);
-        assertGraveyardCount(playerA, 2);
+        assertPermanentCount(playerA, "Aven of Enduring Hope", 1);
+        assertGraveyardCount(playerA, "Aven of Enduring Hope", 0);
+        assertExileCount(playerA, "Aven of Enduring Hope", 1);
+        assertPowerToughness(playerA, "Aven of Enduring Hope",4,4);
+        assertGraveyardCount(playerA, 1);
     }
 
     /* https://github.com/magefree/mage/issues/5904
