@@ -82,6 +82,7 @@ public class CostCopyInteractionsTests extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
+        assertPermanentCount(playerA,"Defenders of Humanity",2);
         assertPermanentCount(playerA,"Astartes Warrior Token",1);
     }
     @Test
