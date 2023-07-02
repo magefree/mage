@@ -9,8 +9,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
-
 /**
  * @author TiagoMDG
  */
@@ -48,29 +46,37 @@ public class BlocksOrBlockedByCreatureAttachedTriggeredAbility extends Triggered
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent blockingCreature = game.getPermanent(event.getSourceId());
         Permanent blockedCreature = game.getPermanent(event.getTargetId());
-        Permanent attachedCreature = game.getPermanent(game.getPermanent(sourceId).getAttachedTo());
+        Permanent attachment = game.getPermanent(sourceId);
 
-        if (blockingCreature != null && blockedCreature != null && attachedCreature != null) {
-            if (!selfTarget) {
-                if (blockedCreature.equals(attachedCreature)) {
-                    getEffects().setTargetPointer(new FixedTarget(blockingCreature, game));
-                    return true;
-                }
+        if (attachment == null || blockingCreature == null || blockedCreature == null) {
+            return false;
+        }
 
-                if (blockingCreature.equals(attachedCreature)) {
-                    getEffects().setTargetPointer(new FixedTarget(blockedCreature, game));
-                    return true;
-                }
-            } else {
-                if (blockedCreature.equals(attachedCreature)) {
-                    getEffects().setTargetPointer(new FixedTarget(blockedCreature, game));
-                    return true;
-                }
+        Permanent attachedCreature = game.getPermanent(attachment.getAttachedTo());
 
-                if (blockingCreature.equals(attachedCreature)) {
-                    getEffects().setTargetPointer(new FixedTarget(blockingCreature, game));
-                    return true;
-                }
+        if (attachedCreature == null) {
+            return false;
+        }
+
+        if (!selfTarget) {
+            if (blockedCreature.equals(attachedCreature)) {
+                getEffects().setTargetPointer(new FixedTarget(blockingCreature, game));
+                return true;
+            }
+
+            if (blockingCreature.equals(attachedCreature)) {
+                getEffects().setTargetPointer(new FixedTarget(blockedCreature, game));
+                return true;
+            }
+        } else {
+            if (blockedCreature.equals(attachedCreature)) {
+                getEffects().setTargetPointer(new FixedTarget(blockedCreature, game));
+                return true;
+            }
+
+            if (blockingCreature.equals(attachedCreature)) {
+                getEffects().setTargetPointer(new FixedTarget(blockingCreature, game));
+                return true;
             }
         }
         return false;
