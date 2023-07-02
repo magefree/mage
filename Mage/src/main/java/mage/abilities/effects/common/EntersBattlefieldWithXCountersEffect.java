@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
@@ -9,9 +10,11 @@ import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -43,18 +46,16 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
             }
         }
         if (permanent != null) {
-            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-            if (spellAbility != null
-                    && spellAbility.getSourceId().equals(source.getSourceId())
-                    && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
-                if (spellAbility.getSourceId().equals(source.getSourceId())) { // put into play by normal cast
-                    int amount = spellAbility.getManaCostsToPay().getX();
-                    if (amount > 0) {
-                        Counter counterToAdd = counter.copy();
-                        counterToAdd.add(amount - counter.getCount());
-                        List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-                        permanent.addCounters(counterToAdd, source.getControllerId(), source, game, appliedEffects);
-                    }
+            int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
+            MageObjectReference mor = new MageObjectReference(source.getSourceId(), zcc, game);
+            Map<String, Integer> costTags = game.getPermanentCostsTags().get(mor);
+            if (costTags != null){
+                int amount = costTags.getOrDefault("X",0);
+                if (amount > 0) {
+                    Counter counterToAdd = counter.copy();
+                    counterToAdd.add(amount - counter.getCount());
+                    List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                    permanent.addCounters(counterToAdd, source.getControllerId(), source, game, appliedEffects);
                 }
             }
         }

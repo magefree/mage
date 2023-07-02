@@ -314,10 +314,13 @@ public class Spell extends StackObjectImpl implements Card {
                     }
                 } else {
                     permId = card.getId();
+                    MageObjectReference mor = new MageObjectReference(getSpellAbility(),0);
+                    game.getPermanentCostsTags().put(mor,getSpellAbility().getCostsTagMap());
+                    mor = new MageObjectReference(getSpellAbility(),1);
+                    game.getPermanentCostsTags().put(mor,getSpellAbility().getCostsTagMap());
                     flag = controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
                 }
                 if (flag) {
-                    game.getPermanentCostsTags().put(new MageObjectReference(permId, game),this.getSpellAbility().getCostsTagMap());
                     if (bestow) {
                         // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
                         // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
@@ -355,7 +358,6 @@ public class Spell extends StackObjectImpl implements Card {
             if (SpellAbilityCastMode.BESTOW.equals(this.getSpellAbility().getSpellAbilityCastMode())) {
                 if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {
                     Permanent permanent = game.getPermanent(card.getId());
-                    game.getPermanentCostsTags().put(new MageObjectReference(card.getId(), game),this.getSpellAbility().getCostsTagMap());
                     if (permanent instanceof PermanentCard) {
                         ((PermanentCard) permanent).getCard().addCardType(game, CardType.CREATURE);
                         ((PermanentCard) permanent).getCard().removeSubType(game, SubType.AURA);

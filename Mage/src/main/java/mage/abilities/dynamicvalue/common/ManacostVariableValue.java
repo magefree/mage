@@ -6,7 +6,10 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
+import mage.util.CardUtil;
 import mage.watchers.common.ManaSpentToCastWatcher;
+
+import java.util.Map;
 
 public enum ManacostVariableValue implements DynamicValue {
 
@@ -25,8 +28,12 @@ public enum ManacostVariableValue implements DynamicValue {
             if (this == END_GAME) {
                 return watcher.getLastXValue(sourceAbility, true);
             } else {
-                MageObjectReference mor = new MageObjectReference(sourceAbility.getSourcePermanentOrLKI(game).getBasicMageObject(game), game);
-                return game.getPermanentCostsTags().get(mor).get("X");
+                int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, sourceAbility);
+                MageObjectReference mor = new MageObjectReference(sourceAbility.getSourceId(),zcc,game);
+                Map<String, Integer> map = game.getPermanentCostsTags().get(mor);
+                if (map != null) {
+                    return map.getOrDefault("X",0);
+                }
                 //return watcher.getLastXValue(sourceAbility, false);
             }
         }
