@@ -36,7 +36,7 @@ public final class Ferocity extends CardImpl {
         this.addAbility(new BlocksOrBlockedAttachedTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on it"),
                 AttachmentType.AURA,
-                true, true
+                true
         ));
     }
 

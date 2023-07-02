@@ -10,57 +10,40 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- * @author awjackson & TiagoMDG
+ * @author awjackson
  */
 public class BlocksOrBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
+    // Type of attachment: AURA or EQUIPMENT
     private final AttachmentType attachmentType;
-    private final boolean selfTarget;
 
-    public BlocksOrBlockedAttachedTriggeredAbility(Effect effect, AttachmentType attachmentType, boolean selfTarget) {
-        this(effect, attachmentType, selfTarget, false);
+    public BlocksOrBlockedAttachedTriggeredAbility(Effect effect, AttachmentType attachmentType) {
+        this(effect, attachmentType, false);
     }
 
-    public BlocksOrBlockedAttachedTriggeredAbility(Effect effect, AttachmentType attachmentType, boolean selfTarget, boolean optional) {
+    public BlocksOrBlockedAttachedTriggeredAbility(Effect effect, AttachmentType attachmentType, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         setTriggerPhrase("Whenever " + attachmentType.verb().toLowerCase() + " creature blocks or becomes blocked, ");
         this.attachmentType = attachmentType;
-        this.selfTarget = selfTarget;
     }
 
     public BlocksOrBlockedAttachedTriggeredAbility(final BlocksOrBlockedAttachedTriggeredAbility ability) {
         super(ability);
         this.attachmentType = ability.attachmentType;
-        this.selfTarget = ability.selfTarget;
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+        return event.getType() == GameEvent.EventType.CREATURE_BLOCKS
+                || event.getType() == GameEvent.EventType.CREATURE_BLOCKED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent creature = game.getPermanent(event.getTargetId());
-        Permanent equipment = game.getPermanent(sourceId);
-
         if (creature == null || !creature.getAttachments().contains(getSourceId())) {
             return false;
         }
-
-        if (!selfTarget) {
-            if (event.getSourceId().equals(equipment.getAttachedTo())) {
-                Permanent blocks = game.getPermanent(event.getTargetId());
-                getEffects().setTargetPointer(new FixedTarget(blocks, game));
-            }
-
-            if (event.getTargetId().equals(equipment.getAttachedTo())) {
-                Permanent blockedBy = game.getPermanent(event.getSourceId());
-                getEffects().setTargetPointer(new FixedTarget(blockedBy, game));
-            }
-            return true;
-        }
-
         getEffects().setTargetPointer(new FixedTarget(creature, game));
         return true;
     }

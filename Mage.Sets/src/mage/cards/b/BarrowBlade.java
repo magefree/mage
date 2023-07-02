@@ -3,6 +3,7 @@ package mage.cards.b;
 import java.util.UUID;
 
 import mage.abilities.common.BlocksOrBlockedAttachedTriggeredAbility;
+import mage.abilities.common.BlocksOrBlockedByCreatureAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesTargetEffect;
@@ -25,7 +26,7 @@ public final class BarrowBlade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
 
         // Whenever equipped creature blocks or becomes blocked by a creature, that creature loses all abilities until end of turn.
-        this.addAbility(new BlocksOrBlockedAttachedTriggeredAbility(
+        this.addAbility(new BlocksOrBlockedByCreatureAttachedTriggeredAbility(
                 new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn)
                         .setText("that creature loses all abilities " +
                                 "until end of turn."), AttachmentType.EQUIPMENT, false));
