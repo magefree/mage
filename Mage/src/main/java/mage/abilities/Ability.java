@@ -26,7 +26,9 @@ import mage.watchers.Watcher;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * Practically everything in the game is started from an Ability. This interface
@@ -142,6 +144,12 @@ public interface Ability extends Controllable, Serializable {
      * @return All {@link ManaCosts} that must be paid.
      */
     ManaCosts<ManaCost> getManaCostsToPay();
+    /**
+     * Gets a map of the cost tags (set while casting)
+     *
+     * @return All {@link Costs} that must be paid.
+     */
+    Map<String, Integer> getCostsTagMap();
 
     /**
      * Adds a {@link ManaCost} to this ability that must be paid before this

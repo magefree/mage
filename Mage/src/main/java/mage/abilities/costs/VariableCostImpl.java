@@ -149,6 +149,7 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
                 || stackObject != null)) {
             xValue = controller.announceXCost(getMinValue(source, game), getMaxValue(source, game),
                     "Announce the number of " + actionText, game, source, this);
+            source.getCostsTagMap().put("X",xValue);
         }
         return xValue;
     }

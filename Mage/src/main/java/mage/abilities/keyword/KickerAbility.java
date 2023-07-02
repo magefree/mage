@@ -1,6 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -11,12 +12,14 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Stream;
 
 /**
  * 20121001 702.31. Kicker 702.31a Kicker is a static ability that functions
@@ -55,8 +58,6 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     protected static final String KICKER_REMINDER_COST = "You may {cost} in addition "
             + "to any other costs as you cast this spell.";
 
-    protected Map<String, Integer> activations = new ConcurrentHashMap<>(); // zoneChangeCounter, activations
-
     protected String keywordText;
     protected String reminderText;
     protected List<OptionalAdditionalCost> kickerCosts = new LinkedList<>();
@@ -86,7 +87,6 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         }
         this.keywordText = ability.keywordText;
         this.reminderText = ability.reminderText;
-        this.activations.putAll(ability.activations);
     }
 
     @Override
@@ -119,32 +119,29 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         for (OptionalAdditionalCost cost : kickerCosts) {
             cost.reset();
         }
-        activations.clear();
     }
 
     private int getKickedCounterStrict(Game game, Ability source, String needKickerCost) {
-        String key;
-        if (needKickerCost.isEmpty()) {
-            // need all kickers
-            key = getActivationKey(source, "", game);
-        } else {
-            // need only cost related kickers
-            key = getActivationKey(source, needKickerCost, game);
+
+        Map<String, Integer> costTags;
+        String activationKey = "Kicker";
+        costTags = source.getCostsTagMap();
+        if (costTags.size() == 0 && source.getSourcePermanentOrLKI(game) != null) {
+            //Get Permanent's cost info
+            int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
+            MageObjectReference mor = new MageObjectReference(source.getSourceId(), zcc, game);
+            costTags = game.getPermanentCostsTags().get(mor);
+            if (costTags == null) return 0;
         }
 
-        int totalActivations = 0;
-        if (kickerCosts.size() > 1) {
-            for (String activationKey : activations.keySet()) {
-                if (activationKey.startsWith(key) && activations.get(activationKey) > 0) {
-                    totalActivations += activations.get(activationKey);
-                }
-            }
-        } else {
-            if (activations.containsKey(key) && activations.get(key) > 0) {
-                totalActivations += activations.get(key);
-            }
+        if (!needKickerCost.isEmpty()) {
+            // need only cost related kickers
+            activationKey += needKickerCost;
         }
-        return totalActivations;
+        String finalActivationKey = activationKey;
+        Stream<Map.Entry<String, Integer>> tagStream = costTags.entrySet().stream()
+                .filter(x -> x.getKey().startsWith(finalActivationKey));
+        return tagStream.mapToInt(Map.Entry::getValue).sum();
     }
 
     /**
@@ -186,47 +183,10 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     }
 
     private void activateKicker(OptionalAdditionalCost kickerCost, Ability source, Game game) {
-        int amount = 1;
-        String key = getActivationKey(source, kickerCost.getText(true), game);
-        if (activations.containsKey(key)) {
-            amount += activations.get(key);
-        }
-        activations.put(key, amount);
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.KICKED, source.getSourceId(), source, source.getControllerId()));
-    }
-
-    /**
-     * Return activation zcc key for searching spell's settings in source object
-     *
-     * @param source
-     * @param game
-     * @return
-     */
-    public static String getActivationKey(Ability source, Game game) {
-        // Kicker activates in STACK zone so all zcc must be from "stack moment"
-        // Use cases:
-        // * resolving spell have same zcc (example: check kicker status in sorcery/instant);
-        // * copied spell have same zcc as source spell (see Spell.copySpell and zcc sync);
-        // * creature/token from resolved spell have +1 zcc after moved to battlefield (example: check kicker status in ETB triggers/effects);
-
-        // find object info from the source ability (it can be a permanent or a spell on stack, on the moment of trigger/resolve)
-        MageObject sourceObject = source.getSourceObject(game);
-        Zone sourceObjectZone = game.getState().getZone(sourceObject.getId());
-        int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
-
-        // find "stack moment" zcc:
-        // * permanent cards enters from STACK to BATTLEFIELD (+1 zcc)
-        // * permanent tokens enters from OUTSIDE to BATTLEFIELD (+1 zcc, see prepare code in TokenImpl.putOntoBattlefieldHelper)
-        // * spells and copied spells resolves on STACK (zcc not changes)
-        if (sourceObjectZone != Zone.STACK) {
-            --zcc;
-        }
-
-        return zcc + "";
-    }
-
-    private String getActivationKey(Ability source, String costText, Game game) {
-        return getActivationKey(source, game) + ((kickerCosts.size() > 1) ? costText : "");
+        String activationKey = "Kicker"+kickerCost.getText(true);
+        Integer next = source.getCostsTagMap().getOrDefault(activationKey,0)+1;
+        source.getCostsTagMap().put(activationKey,next);
     }
 
     @Override

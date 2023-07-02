@@ -41,6 +41,8 @@ import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -82,6 +84,7 @@ public abstract class AbilityImpl implements Ability {
     protected MageIdentifier identifier; // used to identify specific ability (e.g. to match with corresponding watcher)
     protected String appendToRule = null;
     protected int sourcePermanentTransformCount = 0;
+    protected Map<String, Integer> costsTagMap = new HashMap<>();
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -138,6 +141,7 @@ public abstract class AbilityImpl implements Ability {
         this.activated = ability.activated;
         this.appendToRule = ability.appendToRule;
         this.sourcePermanentTransformCount = ability.sourcePermanentTransformCount;
+        this.costsTagMap.putAll(ability.getCostsTagMap());
     }
 
     @Override
@@ -629,6 +633,7 @@ public abstract class AbilityImpl implements Ability {
                     }
                     manaCostsToPay.add(new ManaCostsImpl<>(manaString.toString()));
                     manaCostsToPay.setX(xValue * xValueMultiplier, amountMana);
+                    getCostsTagMap().put("X",xValue * xValueMultiplier);
                 }
                 variableManaCost.setPaid();
             }
@@ -709,6 +714,16 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public ManaCosts<ManaCost> getManaCostsToPay() {
         return manaCostsToPay;
+    }
+
+    /**
+     * Accessed to see what was optional/variable costs were paid
+     *
+     * @return
+     */
+    @Override
+    public Map<String, Integer> getCostsTagMap() {
+        return costsTagMap;
     }
 
     @Override
