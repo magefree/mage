@@ -9,6 +9,10 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
 /**
+ * Game's step
+ *
+ * Warning, don't use a changeable data in step's implementations
+ * TODO: implement copyable<> interface and copy usage in GameState
  *
  * @author BetaSteward_at_googlemail.com
  */

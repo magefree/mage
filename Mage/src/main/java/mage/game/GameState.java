@@ -91,8 +91,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Battlefield battlefield;
     private int turnNum = 1;
     private int stepNum = 0;
-    private UUID turnId = null;
-    private boolean extraTurn = false;
+    private UUID extraTurnId = null; // id of the current extra turn (null on normal turn or after game stopped)
     private boolean gameOver;
     private boolean paused;
     private ContinuousEffects effects;
@@ -162,7 +161,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
         this.stepNum = state.stepNum;
-        this.extraTurn = state.extraTurn;
+        this.extraTurnId = state.extraTurnId;
         this.effects = state.effects.copy();
         for (TriggeredAbility trigger : state.triggered) {
             this.triggered.add(trigger.copy());
@@ -229,7 +228,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         companion.clear();
         turnNum = 1;
         stepNum = 0;
-        extraTurn = false;
+        extraTurnId = null;
         gameOver = false;
         specialActions.clear();
         cardState.clear();
@@ -265,7 +264,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.battlefield = state.battlefield;
         this.turnNum = state.turnNum;
         this.stepNum = state.stepNum;
-        this.extraTurn = state.extraTurn;
+        this.extraTurnId = state.extraTurnId;
         this.effects = state.effects;
         this.triggered = state.triggered;
         this.triggers = state.triggers;
@@ -616,20 +615,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.turnNum = turnNum;
     }
 
-    public UUID getTurnId() {
-        return this.turnId;
+    public UUID getExtraTurnId() {
+        return this.extraTurnId;
     }
 
-    public void setTurnId(UUID turnId) {
-        this.turnId = turnId;
+    public void setExtraTurnId(UUID extraTurnId) {
+        this.extraTurnId = extraTurnId;
     }
 
     public boolean isExtraTurn() {
-        return extraTurn;
-    }
-
-    public void setExtraTurn(boolean extraTurn) {
-        this.extraTurn = extraTurn;
+        return this.extraTurnId != null;
     }
 
     public boolean isGameOver() {

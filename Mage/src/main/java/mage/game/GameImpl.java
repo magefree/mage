@@ -1033,25 +1033,26 @@ public abstract class GameImpl implements Game {
     private boolean playExtraTurns() {
         //20091005 - 500.7
         TurnMod extraTurn = getNextExtraTurn();
-        while (extraTurn != null) {
-            GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, extraTurn.getPlayerId());
-            if (!replaceEvent(event)) {
-                Player extraPlayer = this.getPlayer(extraTurn.getPlayerId());
-                if (extraPlayer != null && extraPlayer.canRespond()) {
-                    state.setExtraTurn(true);
-                    state.setTurnId(extraTurn.getId());
-                    if (!this.isSimulation()) {
-                        informPlayers(extraPlayer.getLogName() + " takes an extra turn");
-                    }
-                    if (!playTurn(extraPlayer)) {
-                        return false;
+        try {
+            while (extraTurn != null) {
+                GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, extraTurn.getPlayerId());
+                if (!replaceEvent(event)) {
+                    Player extraPlayer = this.getPlayer(extraTurn.getPlayerId());
+                    if (extraPlayer != null && extraPlayer.canRespond()) {
+                        state.setExtraTurnId(extraTurn.getId());
+                        if (!this.isSimulation()) {
+                            informPlayers(extraPlayer.getLogName() + " takes an extra turn");
+                        }
+                        if (!playTurn(extraPlayer)) {
+                            return false;
+                        }
                     }
                 }
+                extraTurn = getNextExtraTurn();
             }
-            extraTurn = getNextExtraTurn();
+        } finally {
+            state.setExtraTurnId(null);
         }
-        state.setTurnId(null);
-        state.setExtraTurn(false);
         return true;
     }
 

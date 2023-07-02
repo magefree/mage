@@ -79,6 +79,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Visionary", 240, Rarity.COMMON, mage.cards.e.ElvishVisionary.class));
         cards.add(new SetCardInfo("Elvish Warmaster", 241, Rarity.RARE, mage.cards.e.ElvishWarmaster.class));
         cards.add(new SetCardInfo("Ensnaring Bridge", 350, Rarity.MYTHIC, mage.cards.e.EnsnaringBridge.class));
+        cards.add(new SetCardInfo("Eowyn, Shieldmaiden", 1, Rarity.MYTHIC, mage.cards.e.EowynShieldmaiden.class));
         cards.add(new SetCardInfo("Erestor of the Council", 53, Rarity.RARE, mage.cards.e.ErestorOfTheCouncil.class));
         cards.add(new SetCardInfo("Essence Warden", 242, Rarity.COMMON, mage.cards.e.EssenceWarden.class));
         cards.add(new SetCardInfo("Everflowing Chalice", 278, Rarity.UNCOMMON, mage.cards.e.EverflowingChalice.class));
@@ -156,8 +157,10 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Merry, Warden of Isengard", 61, Rarity.RARE, mage.cards.m.MerryWardenOfIsengard.class));
         cards.add(new SetCardInfo("Minamo, School at Water's Edge", 369, Rarity.MYTHIC, mage.cards.m.MinamoSchoolAtWatersEdge.class));
         cards.add(new SetCardInfo("Mind Stone", 282, Rarity.UNCOMMON, mage.cards.m.MindStone.class));
+        cards.add(new SetCardInfo("Mirkwood Elk", 41, Rarity.RARE, mage.cards.m.MirkwoodElk.class));
         cards.add(new SetCardInfo("Model of Unity", 78, Rarity.RARE, mage.cards.m.ModelOfUnity.class));
         cards.add(new SetCardInfo("Monstrosity of the Lake", 22, Rarity.RARE, mage.cards.m.MonstrosityOfTheLake.class));
+        cards.add(new SetCardInfo("Moria Scavenger", 63, Rarity.RARE, mage.cards.m.MoriaScavenger.class));
         cards.add(new SetCardInfo("Mortify", 269, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mouth of Ronom", 370, Rarity.MYTHIC, mage.cards.m.MouthOfRonom.class));
         cards.add(new SetCardInfo("Murmuring Bosk", 320, Rarity.RARE, mage.cards.m.MurmuringBosk.class));
@@ -197,6 +200,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sam, Loyal Attendant", 7, Rarity.MYTHIC, mage.cards.s.SamLoyalAttendant.class));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 327, Rarity.UNCOMMON, mage.cards.s.SandsteppeCitadel.class));
         cards.add(new SetCardInfo("Sanguine Bond", 208, Rarity.RARE, mage.cards.s.SanguineBond.class));
+        cards.add(new SetCardInfo("Saruman, the White Hand", 8, Rarity.MYTHIC, mage.cards.s.SarumanTheWhiteHand.class));
         cards.add(new SetCardInfo("Sauron, Lord of the Rings", 4, Rarity.MYTHIC, mage.cards.s.SauronLordOfTheRings.class));
         cards.add(new SetCardInfo("Savvy Hunter", 271, Rarity.UNCOMMON, mage.cards.s.SavvyHunter.class));
         cards.add(new SetCardInfo("Scattered Groves", 328, Rarity.RARE, mage.cards.s.ScatteredGroves.class));
@@ -228,6 +232,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Conviction", 285, Rarity.UNCOMMON, mage.cards.t.TalismanOfConviction.class));
         cards.add(new SetCardInfo("Talisman of Progress", 286, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 337, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
+        cards.add(new SetCardInfo("The Balrog of Moria", 46, Rarity.RARE, mage.cards.t.TheBalrogOfMoria.class));
         cards.add(new SetCardInfo("The Gaffer", 12, Rarity.RARE, mage.cards.t.TheGaffer.class));
         cards.add(new SetCardInfo("The Great Henge", 348, Rarity.MYTHIC, mage.cards.t.TheGreatHenge.class));
         cards.add(new SetCardInfo("The Ozolith", 351, Rarity.MYTHIC, mage.cards.t.TheOzolith.class));
@@ -253,6 +258,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Village Bell-Ringer", 181, Rarity.COMMON, mage.cards.v.VillageBellRinger.class));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 343, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class));
         cards.add(new SetCardInfo("Visions of Glory", 182, Rarity.RARE, mage.cards.v.VisionsOfGlory.class));
+        cards.add(new SetCardInfo("Wake the Dragon", 74, Rarity.RARE, mage.cards.w.WakeTheDragon.class));
         cards.add(new SetCardInfo("Wasteland", 376, Rarity.MYTHIC, mage.cards.w.Wasteland.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 290, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Weathered Wayfarer", 183, Rarity.RARE, mage.cards.w.WeatheredWayfarer.class));

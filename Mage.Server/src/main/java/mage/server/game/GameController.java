@@ -1212,8 +1212,8 @@ public class GameController implements GameCallback {
         sb.append(state.getStepNum());
         sb.append("<br>getTurn: ");
         sb.append(state.getTurn());
-        sb.append("<br>getTurnId: ");
-        sb.append(state.getTurnId());
+        sb.append("<br>getExtraTurnId: ");
+        sb.append(state.getExtraTurnId());
         sb.append("<br>getTurnMods: ");
         sb.append(state.getTurnMods());
         sb.append("<br>getTurnNum: ");
