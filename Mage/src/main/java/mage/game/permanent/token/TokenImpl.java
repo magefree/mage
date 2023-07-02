@@ -280,7 +280,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 newPermanent.updateZoneChangeCounter(game, emptyEvent);
 
                 MageObjectReference mor = new MageObjectReference(newPermanent.getId(),newPermanent.getZoneChangeCounter(game),game);
-                game.debugMessage("Token "+mor+" : "+source);
                 if (source != null && source.getCostsTagMap() != null) {
                     game.getPermanentCostsTags().put(mor, source.getCostsTagMap());
                 }
