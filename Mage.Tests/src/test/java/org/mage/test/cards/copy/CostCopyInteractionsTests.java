@@ -46,7 +46,7 @@ public class CostCopyInteractionsTests extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Endless One");
         setChoice(playerA, "X=1"); // with Kicker
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major");;
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major");
         addTarget(playerA, "Endless One");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
