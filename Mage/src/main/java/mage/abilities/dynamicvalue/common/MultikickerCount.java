@@ -16,7 +16,7 @@ public enum MultikickerCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return KickerAbility.getSourceObjectKickedCount(game, sourceAbility);
+        return KickerAbility.getKickedCounter(game, sourceAbility);
     }
 
     @Override

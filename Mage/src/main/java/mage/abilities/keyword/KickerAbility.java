@@ -121,11 +121,19 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         }
     }
 
-    private String getActivationKey(String needKickerCost){
+    private static String getActivationKey(String needKickerCost){
         return "kickerActivation"+needKickerCost;
     }
-    private int getKickedCounterStrict(Game game, Ability source, String needKickerCost) {
 
+    /**
+     * Return total kicker activations with the specified Cost (blank for all kickers/multikickers)
+     *
+     * @param game
+     * @param source
+     * @param needKickerCost use cost.getText(true)
+     * @return
+     */
+    public static int getKickedCounterStrict(Game game, Ability source, String needKickerCost) {
         Map<String, Integer> costTags;
         costTags = CardUtil.getSourceCostTags(game, source);
         String finalActivationKey = getActivationKey(needKickerCost);
@@ -141,7 +149,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
      * @param source
      * @return
      */
-    public int getKickedCounter(Game game, Ability source) {
+    public static int getKickedCounter(Game game, Ability source) {
         return getKickedCounterStrict(game, source, "");
     }
 
@@ -280,35 +288,10 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
      * @return
      */
     public static int getSpellKickedCount(Game game, UUID spellId) {
-        int count = 0;
         Spell spell = game.getSpellOrLKIStack(spellId);
         if (spell != null) {
-            for (Ability ability : spell.getAbilities(game)) {
-                if (ability instanceof KickerAbility) {
-                    count += ((KickerAbility) ability).getKickedCounter(game, spell.getSpellAbility());
-                }
-            }
+            return KickerAbility.getKickedCounter(game, spell.getSpellAbility());
         }
-        return count;
-    }
-
-    /**
-     * Find source object's kicked stats. Can be used in any places, e.g. in ETB effects
-     *
-     * @param game
-     * @param abilityToCheck
-     * @return
-     */
-    public static int getSourceObjectKickedCount(Game game, Ability abilityToCheck) {
-        MageObject sourceObject = abilityToCheck.getSourceObject(game);
-        int count = 0;
-        if (sourceObject instanceof Card) {
-            for (Ability ability : ((Card) sourceObject).getAbilities(game)) {
-                if (ability instanceof KickerAbility) {
-                    count += ((KickerAbility) ability).getKickedCounter(game, abilityToCheck);
-                }
-            }
-        }
-        return count;
+        return 0;
     }
 }
