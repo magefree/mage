@@ -4,18 +4,13 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.*;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Stream;
 
 /**
  * 702.40. Entwine
@@ -35,6 +30,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
 
     private static final String keywordText = "Entwine";
     protected static final String reminderText = "You may {cost} in addition to any other costs to use all modes.";
+    protected static final String ENTWINE_ACTIVATION_VALUE_KEY = "entwineActivation";
 
     protected OptionalAdditionalCost entwineCost;
 
@@ -98,7 +94,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
                     ability.getCosts().add(cost.copy());
                 }
             }
-            ability.getCostsTagMap().put("Entwine",1);
+            ability.getCostsTagMap().put(ENTWINE_ACTIVATION_VALUE_KEY,1);
         }
     }
 
@@ -139,10 +135,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
     }
 
     public boolean costWasActivated(Ability ability, Game game) {
-        Map<String, Integer> map = ability.getCostsTagMap();
-        if (map == null) return false;
-        Integer entwineCheck = map.get("Entwine");
-        return entwineCheck != null && entwineCheck.equals(1);
+        return ability.getCostsTagMap().containsKey(ENTWINE_ACTIVATION_VALUE_KEY);
     }
 
 }

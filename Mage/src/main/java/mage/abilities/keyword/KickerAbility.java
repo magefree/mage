@@ -1,24 +1,19 @@
 package mage.abilities.keyword;
 
-import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 /**
@@ -134,12 +129,12 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
      * @return
      */
     public static int getKickedCounterStrict(Game game, Ability source, String needKickerCost) {
-        Map<String, Integer> costTags;
+        Map<String, Object> costTags;
         costTags = CardUtil.getSourceCostTags(game, source);
         String finalActivationKey = getActivationKey(needKickerCost);
-        Stream<Map.Entry<String, Integer>> tagStream = costTags.entrySet().stream()
+        Stream<Map.Entry<String, Object>> tagStream = costTags.entrySet().stream()
                 .filter(x -> x.getKey().startsWith(finalActivationKey));
-        return tagStream.mapToInt(Map.Entry::getValue).sum();
+        return tagStream.mapToInt(x -> (int)x.getValue()).sum();
     }
 
     /**
@@ -183,7 +178,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     private void activateKicker(OptionalAdditionalCost kickerCost, Ability source, Game game) {
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.KICKED, source.getSourceId(), source, source.getControllerId()));
         String activationKey = getActivationKey(kickerCost.getText(true));
-        Integer next = source.getCostsTagMap().getOrDefault(activationKey,0)+1;
+        Integer next = (int)source.getCostsTagMap().getOrDefault(activationKey,0)+1;
         source.getCostsTagMap().put(activationKey,next);
     }
 

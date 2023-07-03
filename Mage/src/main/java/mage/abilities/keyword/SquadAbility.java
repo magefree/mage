@@ -15,8 +15,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.Map;
-
 /**
  * @author notgreat
  */
@@ -123,8 +121,8 @@ class SquadETBAbility extends EntersBattlefieldTriggeredAbility {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        Map<String, Integer> costTags = CardUtil.getSourceCostTags(game, this);
-        int squadCount = costTags.getOrDefault(SquadAbility.SQUAD_ACTIVATION_VALUE_KEY,0);
+        int squadCount = (int)CardUtil.getSourceCostTags(game, this)
+                .getOrDefault(SquadAbility.SQUAD_ACTIVATION_VALUE_KEY,0);
         if (squadCount > 0) {
             SquadEffectETB effect = (SquadEffectETB) getEffects().get(0);
             effect.activationCount = squadCount;

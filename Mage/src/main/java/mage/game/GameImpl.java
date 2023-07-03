@@ -741,7 +741,7 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public Map<MageObjectReference, Map<String, Integer>> getPermanentCostsTags() {
+    public Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags() {
         return state.getPermanentCostsTags();
     }
 

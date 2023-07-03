@@ -118,7 +118,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     Map<UUID, Permanent> getPermanentsEntering();
 
     Map<Zone, Map<UUID, MageObject>> getLKI();
-    Map<MageObjectReference, Map<String, Integer>> getPermanentCostsTags();
+    Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags();
 
     // Result must be checked for null. Possible errors search pattern: (\S*) = game.getCard.+\n(?!.+\1 != null)
     Card getCard(UUID cardId);

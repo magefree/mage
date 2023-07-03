@@ -82,7 +82,7 @@ public abstract class AbilityImpl implements Ability {
     protected MageIdentifier identifier; // used to identify specific ability (e.g. to match with corresponding watcher)
     protected String appendToRule = null;
     protected int sourcePermanentTransformCount = 0;
-    protected Map<String, Integer> costsTagMap = new HashMap<>();
+    protected Map<String, Object> costsTagMap = new HashMap<>();
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -720,7 +720,7 @@ public abstract class AbilityImpl implements Ability {
      * @return
      */
     @Override
-    public Map<String, Integer> getCostsTagMap() {
+    public Map<String, Object> getCostsTagMap() {
         return costsTagMap;
     }
 

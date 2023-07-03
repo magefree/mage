@@ -145,10 +145,11 @@ public interface Ability extends Controllable, Serializable {
     ManaCosts<ManaCost> getManaCostsToPay();
     /**
      * Gets a map of the cost tags (set while casting)
+     * Note that tag entries should always be immutable
      *
      * @return All {@link Costs} that must be paid.
      */
-    Map<String, Integer> getCostsTagMap();
+    Map<String, Object> getCostsTagMap();
 
     /**
      * Adds a {@link ManaCost} to this ability that must be paid before this

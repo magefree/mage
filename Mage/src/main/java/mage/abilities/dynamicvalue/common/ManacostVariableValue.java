@@ -5,9 +5,6 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.util.CardUtil;
-import mage.watchers.common.ManaSpentToCastWatcher;
-
-import java.util.Map;
 
 public enum ManacostVariableValue implements DynamicValue {
     REGULAR, // if you need X on cast/activate (in stack) - reset each turn
@@ -18,8 +15,7 @@ public enum ManacostVariableValue implements DynamicValue {
         if (this == REGULAR) {
             return sourceAbility.getManaCostsToPay().getX();
         }
-        Map<String, Integer> map = CardUtil.getSourceCostTags(game, sourceAbility);
-        return map.getOrDefault("X",0);
+        return (int)CardUtil.getSourceCostTags(game, sourceAbility).getOrDefault("X",0);
     }
 
     @Override

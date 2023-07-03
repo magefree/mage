@@ -34,7 +34,6 @@ import mage.util.functions.StackObjectCopyApplier;
 import mage.watchers.Watcher;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -391,7 +390,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
         return ability.getManaCostsToPay();
     }
     @Override
-    public Map<String, Integer> getCostsTagMap() {
+    public Map<String, Object> getCostsTagMap() {
         return ability.getCostsTagMap();
     }
 

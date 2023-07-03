@@ -102,7 +102,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Zone> zones = new HashMap<>();
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, CardState> cardState = new HashMap<>();
-    private Map<MageObjectReference, Map<String, Integer>> permanentCostsTags = new HashMap<>();
+    private Map<MageObjectReference, Map<String, Object>> permanentCostsTags = new HashMap<>();
     private Map<UUID, MageObjectAttribute> mageObjectAttribute = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
@@ -191,7 +191,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<UUID, CardState> entry : state.cardState.entrySet()) {
             cardState.put(entry.getKey(), entry.getValue().copy());
         }
-        for (Map.Entry<MageObjectReference, Map<String, Integer>> entry : state.permanentCostsTags.entrySet()) {
+        for (Map.Entry<MageObjectReference, Map<String, Object>> entry : state.permanentCostsTags.entrySet()) {
             permanentCostsTags.put(entry.getKey(), new HashMap<>(entry.getValue()));
         }
         for (Map.Entry<UUID, MageObjectAttribute> entry : state.mageObjectAttribute.entrySet()) {
@@ -657,7 +657,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         return this.specialActions;
     }
 
-    public Map<MageObjectReference, Map<String, Integer>> getPermanentCostsTags() {
+    //Note: The Objects here should always be immutables
+    public Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags() {
         return permanentCostsTags;
     }
 

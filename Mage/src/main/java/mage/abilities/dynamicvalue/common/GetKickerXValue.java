@@ -6,8 +6,6 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.util.CardUtil;
 
-import java.util.Map;
-
 
 /**
  * Kicker {X}
@@ -21,11 +19,7 @@ public enum GetKickerXValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         // Currently identical logic to the Manacost X value
         // which should be fine since you can only have one X at a time
-        Map<String, Integer> map = CardUtil.getSourceCostTags(game, sourceAbility);
-        if (map != null) {
-            return map.getOrDefault("X",0);
-        }
-        return 0;
+        return (int)CardUtil.getSourceCostTags(game, sourceAbility).getOrDefault("X",0);
     }
 
     @Override

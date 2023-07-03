@@ -1579,8 +1579,8 @@ public final class CardUtil {
      * @param source
      * @return CostTags mappings of the source object, or a blank map if not found
      */
-    public static Map<String, Integer> getSourceCostTags(Game game, Ability source){
-        Map<String, Integer> costTags;
+    public static Map<String, Object> getSourceCostTags(Game game, Ability source){
+        Map<String, Object> costTags;
         costTags = source.getCostsTagMap(); //Abilities always have a tag map
         if (costTags.size() == 0 && source.getSourcePermanentOrLKI(game) != null) {
             costTags = game.getPermanentCostsTags().get(getSourceReference(game, source));

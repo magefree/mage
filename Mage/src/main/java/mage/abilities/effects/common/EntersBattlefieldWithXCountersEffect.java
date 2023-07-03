@@ -1,9 +1,6 @@
 package mage.abilities.effects.common;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
@@ -14,7 +11,6 @@ import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -46,8 +42,7 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
             }
         }
         if (permanent != null) {
-            Map<String, Integer> costTags = CardUtil.getSourceCostTags(game, source);
-            int amount = costTags.getOrDefault("X",0);
+            int amount = (int)CardUtil.getSourceCostTags(game, source).getOrDefault("X",0);
             if (amount > 0) {
                 Counter counterToAdd = counter.copy();
                 counterToAdd.add(amount - counter.getCount());
