@@ -11,9 +11,7 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.icon.CardIcon;
-import mage.abilities.icon.other.CommanderCardIcon;
-import mage.abilities.icon.other.FaceDownCardIcon;
-import mage.abilities.icon.other.VariableCostCardIcon;
+import mage.abilities.icon.CardIconImpl;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.*;
 import mage.cards.mock.MockCard;
@@ -435,13 +433,13 @@ public class CardView extends SimpleCardView {
             });
             // face down
             if (permanent.isFaceDown(game)) {
-                this.cardIcons.add(FaceDownCardIcon.instance);
+                this.cardIcons.add(CardIconImpl.FACE_DOWN);
             }
             // commander
             if (game != null) {
                 Player owner = game.getPlayer(game.getOwnerId(permanent));
                 if (owner != null && game.isCommanderObject(owner, permanent)) {
-                    this.cardIcons.add(CommanderCardIcon.instance);
+                    this.cardIcons.add(CardIconImpl.COMMANDER);
                 }
             }
         } else {
@@ -475,7 +473,7 @@ public class CardView extends SimpleCardView {
                     // other like Stack (can show x icon on stack only, so use normal source)
                     costX = ManacostVariableValue.REGULAR.calculate(game, card.getSpellAbility(), null);
                 }
-                this.cardIcons.add(new VariableCostCardIcon(costX));
+                this.cardIcons.add(CardIconImpl.variableCost(costX));
             }
         }
 

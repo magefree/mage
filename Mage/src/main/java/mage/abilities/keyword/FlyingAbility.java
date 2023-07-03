@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.icon.abilities.FlyingAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -22,7 +22,7 @@ public class FlyingAbility extends EvasionAbility implements MageSingleton {
 
     static {
         instance = new FlyingAbility();
-        instance.addIcon(FlyingAbilityIcon.instance);
+        instance.addIcon(CardIconImpl.ABILITY_FLYING);
     }
 
     private Object readResolve() throws ObjectStreamException {
