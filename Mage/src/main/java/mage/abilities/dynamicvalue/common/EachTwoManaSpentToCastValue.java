@@ -33,7 +33,7 @@ public enum EachTwoManaSpentToCastValue implements DynamicValue {
         Mana payment = game
                 .getState()
                 .getWatcher(ManaSpentToCastWatcher.class)
-                .getLastManaPayment(CardUtil.getSourceReference(game, sourceAbility));
+                .getLastManaPayment(CardUtil.getSourceStackMomentReference(game, sourceAbility));
         if (payment == null) {
             return 0;
         }

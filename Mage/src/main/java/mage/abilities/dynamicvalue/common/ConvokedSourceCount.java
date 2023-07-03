@@ -4,24 +4,25 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.keyword.ConvokeAbility;
 import mage.game.Game;
-import mage.watchers.common.ConvokeWatcher;
+import mage.util.CardUtil;
+
+import java.util.HashSet;
 
 /**
  * @author TheElk801
  */
 public enum ConvokedSourceCount implements DynamicValue {
-    PERMANENT(-1),
-    SPELL(0);
-    private final int offset;
-
-    ConvokedSourceCount(int offset) {
-        this.offset = offset;
-    }
+    instance;
 
     @Override
+    @SuppressWarnings("unchecked")
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return ConvokeWatcher.getConvokingCreatures(new MageObjectReference(game.getObject(sourceAbility), game, offset), game).size();
+        HashSet<MageObjectReference> convokingCreatures =
+                (HashSet<MageObjectReference>) CardUtil.getSourceCostTags(game, sourceAbility)
+                .getOrDefault(ConvokeAbility.convokingCreaturesKey,new HashSet<>());
+        return convokingCreatures.size();
     }
 
     @Override
@@ -32,10 +33,5 @@ public enum ConvokedSourceCount implements DynamicValue {
     @Override
     public String getMessage() {
         return "creature that convoked it";
-    }
-
-    @Override
-    public String toString() {
-        return "1";
     }
 }

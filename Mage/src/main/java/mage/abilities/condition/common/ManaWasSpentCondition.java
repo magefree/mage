@@ -34,7 +34,7 @@ public enum ManaWasSpentCondition implements Condition {
         }
         ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
         if (watcher != null) {
-            Mana payment = watcher.getLastManaPayment(CardUtil.getSourceReference(game, source));
+            Mana payment = watcher.getLastManaPayment(CardUtil.getSourceStackMomentReference(game, source));
             if (payment != null) {
                 return payment.getColor(coloredManaSymbol) > 0;
             }

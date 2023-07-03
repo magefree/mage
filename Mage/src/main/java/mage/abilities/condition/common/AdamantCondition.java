@@ -43,7 +43,7 @@ public enum AdamantCondition implements Condition {
         if (watcher == null) {
             return false;
         }
-        Mana payment = watcher.getLastManaPayment(CardUtil.getSourceReference(game, source));
+        Mana payment = watcher.getLastManaPayment(CardUtil.getSourceStackMomentReference(game, source));
         if (payment == null) {
             return false;
         }

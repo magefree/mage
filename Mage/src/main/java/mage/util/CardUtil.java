@@ -1549,7 +1549,7 @@ public final class CardUtil {
         return zcc;
     }
 
-    public static MageObjectReference getSourceReference(Game game, Ability source){
+    public static MageObjectReference getSourceStackMomentReference(Game game, Ability source){
         // Squad/Kicker activates in STACK zone so all zcc must be from "stack moment"
         // Use cases:
         // * resolving spell have same zcc (example: check kicker status in sorcery/instant);
@@ -1583,7 +1583,7 @@ public final class CardUtil {
         Map<String, Object> costTags;
         costTags = source.getCostsTagMap(); //Abilities always have a tag map
         if (costTags.size() == 0 && source.getSourcePermanentOrLKI(game) != null) {
-            costTags = game.getPermanentCostsTags().get(getSourceReference(game, source));
+            costTags = game.getPermanentCostsTags().get(getSourceStackMomentReference(game, source));
         }
         if (costTags != null) {
             return costTags;

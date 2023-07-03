@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageObjectReference;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -30,12 +31,8 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.watchers.common.ConvokeWatcher;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 502.46. Convoke
@@ -72,6 +69,7 @@ import java.util.UUID;
 public class ConvokeAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
 
     private static final FilterControlledCreaturePermanent filterUntapped = new FilterControlledCreaturePermanent();
+    public static String convokingCreaturesKey = "convokingCreatures";
 
     static {
         filterUntapped.add(TappedPredicate.UNTAPPED);
@@ -80,7 +78,6 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
     public ConvokeAbility() {
         super(Zone.ALL, null); // all AlternateManaPaymentAbility must use ALL zone to calculate playable abilities
         this.setRuleAtTheTop(true);
-        this.addWatcher(new ConvokeWatcher());
         this.addHint(new ValueHint("Untapped creatures you control", new PermanentsOnBattlefieldCount(filterUntapped)));
     }
 
@@ -265,6 +262,19 @@ class ConvokeEffect extends OneShotEffect {
                         manaName = "colorless";
                     }
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CONVOKED, perm.getId(), source, source.getControllerId()));
+                    //Add the convoked creatures to a set, note that the tag map's entries must be immutable
+                    //So create a new set from the old one rather than updating in-place
+                    Map<String, Object> tagMap = ((Spell)source.getSourceObject(game)).getSpellAbility().getCostsTagMap();
+                    HashSet<MageObjectReference> newSet = new HashSet<>();
+                    if (tagMap.containsKey(ConvokeAbility.convokingCreaturesKey)){
+                        @SuppressWarnings("unchecked")
+                        HashSet<MageObjectReference> oldMap = (HashSet<MageObjectReference>)tagMap.get(ConvokeAbility.convokingCreaturesKey);
+                        newSet.addAll(oldMap);
+                    }
+                    newSet.add(new MageObjectReference(perm, game));
+                    tagMap.put(ConvokeAbility.convokingCreaturesKey,newSet);
+                    source.getCostsTagMap().getOrDefault(ConvokeAbility.convokingCreaturesKey,new HashSet<MageObjectReference>());
+
                     game.informPlayers("Convoke: " + controller.getLogName() + " taps " + perm.getLogName() + " to pay one " + manaName + " mana");
 
                     // can't use mana abilities after that (convoke cost must be payed after mana abilities only)

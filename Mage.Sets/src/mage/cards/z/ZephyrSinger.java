@@ -11,9 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ConvokedSourcePredicate;
+import mage.filter.common.FilterCreatureConvokingSource;
 
 import java.util.UUID;
 
@@ -21,13 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ZephyrSinger extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature that convoked it");
-
-    static {
-        filter.add(ConvokedSourcePredicate.PERMANENT);
-    }
-
     public ZephyrSinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
@@ -47,7 +38,7 @@ public final class ZephyrSinger extends CardImpl {
 
         // When Zephyr Singer enters the battlefield, put a flying counter on each creature that convoked it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new AddCountersAllEffect(CounterType.FLYING.createInstance(), filter)
+                new AddCountersAllEffect(CounterType.FLYING.createInstance(), new FilterCreatureConvokingSource())
         ));
     }
 
