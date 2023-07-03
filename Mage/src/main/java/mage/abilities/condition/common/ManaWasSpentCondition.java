@@ -1,6 +1,5 @@
 package mage.abilities.condition.common;
 
-import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
@@ -35,7 +34,6 @@ public enum ManaWasSpentCondition implements Condition {
         }
         ManaSpentToCastWatcher watcher = game.getState().getWatcher(ManaSpentToCastWatcher.class);
         if (watcher != null) {
-            game.debugMessage("Access "+CardUtil.getSourceReference(game, source));
             Mana payment = watcher.getLastManaPayment(CardUtil.getSourceReference(game, source));
             if (payment != null) {
                 return payment.getColor(coloredManaSymbol) > 0;

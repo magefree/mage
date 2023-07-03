@@ -40,7 +40,6 @@ public class ManaSpentToCastWatcher extends Watcher {
                 Spell spell = (Spell) game.getObject(event.getTargetId());
                 if (spell != null) {
                     manaMap.put(new MageObjectReference(spell.getSpellAbility()), spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay());
-                    game.debugMessage("Insert "+spell.getClass().getSimpleName()+", map:"+manaMap);
                 }
                 return;
             case AT_END_OF_TURN:

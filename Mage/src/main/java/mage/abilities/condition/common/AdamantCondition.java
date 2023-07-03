@@ -1,6 +1,5 @@
 package mage.abilities.condition.common;
 
-import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
