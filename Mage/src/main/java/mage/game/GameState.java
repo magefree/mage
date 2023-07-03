@@ -698,6 +698,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         game.applyEffects();
     }
 
+    //Removes the cost tags if the corresponding permanent is no longer on the battlefield
+    //Only use if the stack is empty and nothing can refer to them anymore (such as at EOT, the current behavior)
     public void cleanupPermanentCostsTags(Game game){
         getPermanentCostsTags().entrySet().removeIf(entry ->
             !(entry.getKey().zoneCounterIsCurrent(game))

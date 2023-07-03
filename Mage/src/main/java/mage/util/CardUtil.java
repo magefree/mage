@@ -1549,8 +1549,29 @@ public final class CardUtil {
         return zcc;
     }
 
+    public static MageObjectReference getSourceReference(Game game, Ability source){
+        // Squad/Kicker activates in STACK zone so all zcc must be from "stack moment"
+        // Use cases:
+        // * resolving spell have same zcc (example: check kicker status in sorcery/instant);
+        // * copied spell have same zcc as source spell (see Spell.copySpell and zcc sync);
+        // * creature/token from resolved spell have +1 zcc after moved to battlefield (example: check kicker status in ETB triggers/effects);
+
+        // find object info from the source ability (it can be a permanent or a spell on stack, on the moment of trigger/resolve)
+        MageObject sourceObject = source.getSourceObject(game);
+        Zone sourceObjectZone = game.getState().getZone(sourceObject.getId());
+        int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
+        // find "stack moment" zcc:
+        // * permanent cards enters from STACK to BATTLEFIELD (+1 zcc)
+        // * permanent tokens enters from OUTSIDE to BATTLEFIELD (+1 zcc, see prepare code in TokenImpl.putOntoBattlefieldHelper)
+        // * spells and copied spells resolves on STACK (zcc not changes)
+        if (sourceObjectZone != Zone.STACK) {
+            --zcc;
+        }
+        return new MageObjectReference(source.getSourceId(), zcc, game);
+    }
     /**
-     * Find cost tags of the permanent source of the source ability, works in any moment (even before source ability activated)
+     * Find cost tags of either the source ability, or the permanent source of the ability
+     * works in any moment (even before source ability activated)
      * <p>
      * Used for kicker and other similar effects
      *
@@ -1562,25 +1583,7 @@ public final class CardUtil {
         Map<String, Integer> costTags;
         costTags = source.getCostsTagMap(); //Abilities always have a tag map
         if (costTags.size() == 0 && source.getSourcePermanentOrLKI(game) != null) {
-            // Squad/Kicker activates in STACK zone so all zcc must be from "stack moment"
-            // Use cases:
-            // * resolving spell have same zcc (example: check kicker status in sorcery/instant);
-            // * copied spell have same zcc as source spell (see Spell.copySpell and zcc sync);
-            // * creature/token from resolved spell have +1 zcc after moved to battlefield (example: check kicker status in ETB triggers/effects);
-
-            // find object info from the source ability (it can be a permanent or a spell on stack, on the moment of trigger/resolve)
-            MageObject sourceObject = source.getSourceObject(game);
-            Zone sourceObjectZone = game.getState().getZone(sourceObject.getId());
-            int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
-            // find "stack moment" zcc:
-            // * permanent cards enters from STACK to BATTLEFIELD (+1 zcc)
-            // * permanent tokens enters from OUTSIDE to BATTLEFIELD (+1 zcc, see prepare code in TokenImpl.putOntoBattlefieldHelper)
-            // * spells and copied spells resolves on STACK (zcc not changes)
-            if (sourceObjectZone != Zone.STACK) {
-                --zcc;
-            }
-            MageObjectReference mor = new MageObjectReference(source.getSourceId(), zcc, game);
-            costTags = game.getPermanentCostsTags().get(mor);
+            costTags = game.getPermanentCostsTags().get(getSourceReference(game, source));
         }
         if (costTags != null) {
             return costTags;

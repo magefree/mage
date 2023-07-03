@@ -33,6 +33,33 @@ public class ManaWasSpentToCastTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Abzan Banner", 0);
     }
 
+    //ManaWasSpentCondition gives false negative after permanent leaves battlefield
+    //Fixed by using MageObjectReference instead of UUID
+    @Test
+    public void testArtifactWillBeDestroyedAfterDeath() {
+        // Tin Street Hooligan - Creature 2/1   {1}{R}
+        // When Tin Street Hooligan enters the battlefield, if {G} was spent to cast Tin Street Hooligan, destroy target artifact.
+        addCard(Zone.HAND, playerA, "Tin Street Hooligan");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerB, "Abzan Banner");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tin Street Hooligan");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN,true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB,"Lightning Bolt","Tin Street Hooligan");
+
+        // Abzan Banner is auto-chosen since only possible target
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Tin Street Hooligan", 0);
+        assertPermanentCount(playerB, "Abzan Banner", 0);
+        assertGraveyardCount(playerA, 1);
+        assertGraveyardCount(playerB, 2);
+    }
     @Test
     public void testArtifactWontBeDestroyed() {
         // Tin Street Hooligan - Creature 2/1   {1}{R}

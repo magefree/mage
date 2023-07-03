@@ -1,5 +1,6 @@
 package mage.watchers.common;
 
+import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.constants.WatcherScope;
@@ -8,6 +9,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -24,7 +26,7 @@ import java.util.UUID;
  */
 public class ManaSpentToCastWatcher extends Watcher {
 
-    private final Map<UUID, Mana> manaMap = new HashMap<>();
+    private final Map<MageObjectReference, Mana> manaMap = new HashMap<>();
 
     public ManaSpentToCastWatcher() {
         super(WatcherScope.GAME);
@@ -37,19 +39,16 @@ public class ManaSpentToCastWatcher extends Watcher {
             case SPELL_CAST:
                 Spell spell = (Spell) game.getObject(event.getTargetId());
                 if (spell != null) {
-                    manaMap.put(spell.getSourceId(), spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay());
+                    manaMap.put(new MageObjectReference(spell.getSpellAbility()), spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay());
+                    game.debugMessage("Insert "+spell.getClass().getSimpleName()+", map:"+manaMap);
                 }
                 return;
-            case ZONE_CHANGE:
-                if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-                    manaMap.remove(event.getTargetId());
-                }
+            case AT_END_OF_TURN:
+                manaMap.clear();
         }
     }
 
-    public Mana getLastManaPayment(UUID sourceId) {
-        return manaMap.getOrDefault(sourceId, null);
-    }
+    public Mana getLastManaPayment(MageObjectReference source) {return manaMap.getOrDefault(source, null);}
 
     @Override
     public void reset() {
