@@ -37,7 +37,7 @@ public class CleanupStep extends Step {
         //20100423 - 514.2
         game.getBattlefield().endOfTurn(activePlayerId, game);
         game.getState().removeEotEffects(game);
-        game.getPermanentCostsTags().clear();
+        game.getState().cleanupPermanentCostsTags(game);
     }
 
     @Override

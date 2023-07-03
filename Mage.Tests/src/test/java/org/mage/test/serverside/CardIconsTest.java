@@ -144,7 +144,7 @@ public class CardIconsTest extends CardTestPlayerBase {
                     .orElse(null);
             Assert.assertNotNull("copied card must be in battlefield", copiedCardView);
             Assert.assertEquals("copied must have x cost card icons", 1, copiedCardView.getCardIcons().size());
-            Assert.assertEquals("copied x cost text", "x=0", copiedCardView.getCardIcons().get(0).getText());
+            Assert.assertEquals("copied x cost text", "x=2", copiedCardView.getCardIcons().get(0).getText());
         });
 
         setStrictChooseMode(true);

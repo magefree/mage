@@ -698,6 +698,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         game.applyEffects();
     }
 
+    public void cleanupPermanentCostsTags(Game game){
+        getPermanentCostsTags().entrySet().removeIf(entry ->
+            !(entry.getKey().zoneCounterIsCurrent(game))
+        );
+    }
+
     public void addEffect(ContinuousEffect effect, Ability source) {
         addEffect(effect, null, source);
     }
