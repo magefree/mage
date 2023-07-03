@@ -1556,17 +1556,36 @@ public final class CardUtil {
      *
      * @param game
      * @param source
-     * @return CostTags mappings of the source object
+     * @return CostTags mappings of the source object, or a blank map if not found
      */
     public static Map<String, Integer> getSourceCostTags(Game game, Ability source){
         Map<String, Integer> costTags;
         costTags = source.getCostsTagMap(); //Abilities always have a tag map
         if (costTags.size() == 0 && source.getSourcePermanentOrLKI(game) != null) {
+            // Squad/Kicker activates in STACK zone so all zcc must be from "stack moment"
+            // Use cases:
+            // * resolving spell have same zcc (example: check kicker status in sorcery/instant);
+            // * copied spell have same zcc as source spell (see Spell.copySpell and zcc sync);
+            // * creature/token from resolved spell have +1 zcc after moved to battlefield (example: check kicker status in ETB triggers/effects);
+
+            // find object info from the source ability (it can be a permanent or a spell on stack, on the moment of trigger/resolve)
+            MageObject sourceObject = source.getSourceObject(game);
+            Zone sourceObjectZone = game.getState().getZone(sourceObject.getId());
             int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
+            // find "stack moment" zcc:
+            // * permanent cards enters from STACK to BATTLEFIELD (+1 zcc)
+            // * permanent tokens enters from OUTSIDE to BATTLEFIELD (+1 zcc, see prepare code in TokenImpl.putOntoBattlefieldHelper)
+            // * spells and copied spells resolves on STACK (zcc not changes)
+            if (sourceObjectZone != Zone.STACK) {
+                --zcc;
+            }
             MageObjectReference mor = new MageObjectReference(source.getSourceId(), zcc, game);
             costTags = game.getPermanentCostsTags().get(mor);
         }
-        return costTags;
+        if (costTags != null) {
+            return costTags;
+        }
+        return new HashMap<>(0);
     }
 
     public static String addCostVerb(String text) {

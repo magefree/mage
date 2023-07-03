@@ -24,7 +24,8 @@ public class SquadAbility extends EntersBattlefieldTriggeredAbility {
     public SquadAbility() {
         super(new SquadEffectETB());
         addSubAbility(new SquadCostAbility());
-		this.setRuleVisible(false);
+		this.setRuleVisible(false); //The CostAbility should probably be the main one
+        //But the subability copying bug breaks that, whereas copying the CostAbility doesn't really matter
     }
 
     private SquadAbility(final SquadAbility ability) {
@@ -38,13 +39,11 @@ public class SquadAbility extends EntersBattlefieldTriggeredAbility {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         Map<String, Integer> costTags = CardUtil.getSourceCostTags(game, this);
-        if (costTags != null) {
-            int squadCount = costTags.getOrDefault("Squad",0);
-            if (squadCount > 0) {
-                SquadEffectETB effect = (SquadEffectETB) getEffects().get(0);
-                effect.activationCount = squadCount;
-                return true;
-            }
+        int squadCount = costTags.getOrDefault("Squad",0);
+        if (squadCount > 0) {
+            SquadEffectETB effect = (SquadEffectETB) getEffects().get(0);
+            effect.activationCount = squadCount;
+            return true;
         }
         return false;
     }

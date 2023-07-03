@@ -274,8 +274,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 game.getPermanentsEntering().put(newPermanent.getId(), newPermanent);
                 newPermanent.setTapped(tapped);
 
-                MageObjectReference mor = new MageObjectReference(newPermanent.getId(),newPermanent.getZoneChangeCounter(game),game);
                 if (source != null && source.getCostsTagMap() != null) {
+                    MageObjectReference mor = new MageObjectReference(newPermanent.getId(),0,game);
                     game.getPermanentCostsTags().put(mor, source.getCostsTagMap());
                 }
             }

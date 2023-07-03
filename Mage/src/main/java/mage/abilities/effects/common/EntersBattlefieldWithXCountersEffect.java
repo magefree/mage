@@ -47,14 +47,12 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
         }
         if (permanent != null) {
             Map<String, Integer> costTags = CardUtil.getSourceCostTags(game, source);
-            if (costTags != null){
-                int amount = costTags.getOrDefault("X",0);
-                if (amount > 0) {
-                    Counter counterToAdd = counter.copy();
-                    counterToAdd.add(amount - counter.getCount());
-                    List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
-                    permanent.addCounters(counterToAdd, source.getControllerId(), source, game, appliedEffects);
-                }
+            int amount = costTags.getOrDefault("X",0);
+            if (amount > 0) {
+                Counter counterToAdd = counter.copy();
+                counterToAdd.add(amount - counter.getCount());
+                List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                permanent.addCounters(counterToAdd, source.getControllerId(), source, game, appliedEffects);
             }
         }
         return true;

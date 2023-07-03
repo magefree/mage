@@ -27,9 +27,7 @@ public enum ManacostVariableValue implements DynamicValue {
                 return watcher.getLastXValue(sourceAbility, true);
             } else {
                 Map<String, Integer> map = CardUtil.getSourceCostTags(game, sourceAbility);
-                if (map != null) {
-                    return map.getOrDefault("X",0);
-                }
+                return map.getOrDefault("X",0);
                 //return watcher.getLastXValue(sourceAbility, false);
             }
         }

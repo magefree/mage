@@ -125,15 +125,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
         Map<String, Integer> costTags;
         String activationKey = "Kicker";
-        costTags = source.getCostsTagMap();
-        if (costTags.size() == 0 && source.getSourcePermanentOrLKI(game) != null) {
-            //Get Permanent's cost info
-            int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
-            MageObjectReference mor = new MageObjectReference(source.getSourceId(), zcc, game);
-            costTags = game.getPermanentCostsTags().get(mor);
-            if (costTags == null) return 0;
-        }
-
+        costTags = CardUtil.getSourceCostTags(game, source);
         if (!needKickerCost.isEmpty()) {
             // need only cost related kickers
             activationKey += needKickerCost;
