@@ -37,7 +37,8 @@ public class WardAbility extends TriggeredAbilityImpl {
         this.showAbilityHint = showAbilityHint;
         this.whereXIs = null;
 
-        this.addIcon(new CardIconImpl(CardIconType.ABILITY_HEXPROOF, getRuleWithoutHint()));
+        this.addIcon(new CardIconImpl(CardIconType.ABILITY_HEXPROOF,
+                CardUtil.getTextWithFirstCharUpperCase(getRuleWithoutHint())));
     }
 
     public WardAbility(DynamicValue genericMana) {
@@ -51,7 +52,8 @@ public class WardAbility extends TriggeredAbilityImpl {
         this.cost = null;
         this.showAbilityHint = false;
 
-        this.addIcon(new CardIconImpl(CardIconType.ABILITY_HEXPROOF, getRuleWithoutHint()));
+        this.addIcon(new CardIconImpl(CardIconType.ABILITY_HEXPROOF,
+                CardUtil.getTextWithFirstCharUpperCase(getRuleWithoutHint())));
     }
 
     private WardAbility(final WardAbility ability) {

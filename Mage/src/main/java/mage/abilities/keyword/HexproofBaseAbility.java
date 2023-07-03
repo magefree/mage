@@ -10,6 +10,7 @@ import mage.abilities.icon.CardIconType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.*;
 
@@ -71,6 +72,7 @@ public abstract class HexproofBaseAbility extends SimpleStaticAbility implements
         }
 
         // dynamic icon (example: colored hexproof)
-        return Collections.singletonList(new CardIconImpl(CardIconType.ABILITY_HEXPROOF, getCardIconHint(game)));
+        return Collections.singletonList(new CardIconImpl(CardIconType.ABILITY_HEXPROOF,
+                CardUtil.getTextWithFirstCharUpperCase(getCardIconHint(game))));
     }
 }
