@@ -111,7 +111,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Aether Figment", 3, 3, Filter.ComparisonScope.All);
     }
 
-    @Ignore // currently fails
     @Test
     public void testSurgeTrigger() {
         makeTester();
@@ -120,6 +119,7 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Reckless Bushwhacker");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Memnite");
+        waitStackResolved(1,PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reckless Bushwhacker with surge");
 
         setStopAt(1, PhaseStep.END_TURN);
