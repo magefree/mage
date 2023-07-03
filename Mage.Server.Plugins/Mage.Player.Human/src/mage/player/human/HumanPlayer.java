@@ -540,7 +540,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
+            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
@@ -640,7 +640,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
+            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
@@ -896,7 +896,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
+            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
