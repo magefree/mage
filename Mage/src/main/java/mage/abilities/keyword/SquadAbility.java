@@ -20,93 +20,34 @@ import java.util.Map;
 /**
  * @author notgreat
  */
-public class SquadAbility extends EntersBattlefieldTriggeredAbility {
-    public static final String SQUAD_ACTIVATION_VALUE_KEY = "squadActivationCount";
-    public SquadAbility() {
-        super(new SquadEffectETB());
-        addSubAbility(new SquadCostAbility());
-		this.setRuleVisible(false); //The CostAbility should probably be the main one
-        //But the subability copying bug breaks that, whereas copying the CostAbility doesn't really matter
-    }
 
-    private SquadAbility(final SquadAbility ability) {
-        super(ability);
-    }
-    @Override
-    public SquadAbility copy() {
-        return new SquadAbility(this);
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        Map<String, Integer> costTags = CardUtil.getSourceCostTags(game, this);
-        int squadCount = costTags.getOrDefault(SQUAD_ACTIVATION_VALUE_KEY,0);
-        if (squadCount > 0) {
-            SquadEffectETB effect = (SquadEffectETB) getEffects().get(0);
-            effect.activationCount = squadCount;
-            return true;
-        }
-        return false;
-    }
-    @Override
-    public String getRule() {
-        return "Squad <i>(When this creature enters the battlefield, if its squad cost was paid, "
-                + "create a token that is a copy of it for each time its squad cost was paid.)</i>";
-    }
-}
-
-class SquadEffectETB extends OneShotEffect {
-    Integer activationCount;
-
-    SquadEffectETB() {
-        super(Outcome.Benefit);
-    }
-
-    private SquadEffectETB(final SquadEffectETB effect) {
-        super(effect);
-        this.activationCount = effect.activationCount;
-    }
-
-    @Override
-    public SquadEffectETB copy() {
-        return new SquadEffectETB(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (activationCount != null) {
-            CreateTokenCopySourceEffect effect = new CreateTokenCopySourceEffect(activationCount);
-            return effect.apply(game, source);
-        }
-        return true;
-    }
-}
-
-class SquadCostAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
+public class SquadAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
     protected OptionalAdditionalCost cost;
     protected static final String SQUAD_KEYWORD = "Squad";
     protected static final String SQUAD_REMINDER = "You may pay an additional "
             + "{cost} any number of times as you cast this spell.";
-    public SquadCostAbility() {
+    protected static final String SQUAD_ACTIVATION_VALUE_KEY = "squadActivationCount";
+    public SquadAbility() {
         this(new GenericManaCost(2));
     }
 
-    public SquadCostAbility(Cost cost) {
+    public SquadAbility(Cost cost) {
         super(Zone.STACK, null);
         setSquadCost(cost);
+        addSubAbility(new SquadETBAbility());
     }
 
-    private SquadCostAbility(final SquadCostAbility ability) {
+    private SquadAbility(final SquadAbility ability) {
         super(ability);
         this.cost = ability.cost.copy();
     }
 
     @Override
-    public SquadCostAbility copy() {
-        return new SquadCostAbility(this);
+    public SquadAbility copy() {
+        return new SquadAbility(this);
     }
 
-    public final void setSquadCost(Cost cost) {
+    private void setSquadCost(Cost cost) {
         OptionalAdditionalCost newCost = new OptionalAdditionalCostImpl(
                 SQUAD_KEYWORD, SQUAD_REMINDER, cost);
         newCost.setRepeatable(true);
@@ -148,7 +89,7 @@ class SquadCostAbility extends StaticAbility implements OptionalAdditionalSource
                 again = false;
             }
         }
-        ability.getCostsTagMap().put(SquadAbility.SQUAD_ACTIVATION_VALUE_KEY,cost.getActivateCount());
+        ability.getCostsTagMap().put(SQUAD_ACTIVATION_VALUE_KEY,cost.getActivateCount());
     }
 
     @Override
@@ -162,7 +103,65 @@ class SquadCostAbility extends StaticAbility implements OptionalAdditionalSource
     @Override
     public String getRule() {
         return "Squad "+cost.getText()+" <i>(As an additional cost to cast this spell, you may pay "+
-            cost.getText()+"any number of times. When this creature enters the battlefield, "+
-            "create that many tokens that are copies of it.)</i>";
+                cost.getText()+"any number of times. When this creature enters the battlefield, "+
+                "create that many tokens that are copies of it.)</i>";
+    }
+}
+class SquadETBAbility extends EntersBattlefieldTriggeredAbility {
+    public SquadETBAbility() {
+        super(new SquadEffectETB());
+		this.setRuleVisible(false);
+    }
+
+    private SquadETBAbility(final SquadETBAbility ability) {
+        super(ability);
+    }
+    @Override
+    public SquadETBAbility copy() {
+        return new SquadETBAbility(this);
+    }
+
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        Map<String, Integer> costTags = CardUtil.getSourceCostTags(game, this);
+        int squadCount = costTags.getOrDefault(SquadAbility.SQUAD_ACTIVATION_VALUE_KEY,0);
+        if (squadCount > 0) {
+            SquadEffectETB effect = (SquadEffectETB) getEffects().get(0);
+            effect.activationCount = squadCount;
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public String getRule() {
+        return "Squad <i>(When this creature enters the battlefield, if its squad cost was paid, "
+                + "create a token that is a copy of it for each time its squad cost was paid.)</i>";
+    }
+}
+
+class SquadEffectETB extends OneShotEffect {
+    Integer activationCount;
+
+    SquadEffectETB() {
+        super(Outcome.Benefit);
+    }
+
+    private SquadEffectETB(final SquadEffectETB effect) {
+        super(effect);
+        this.activationCount = effect.activationCount;
+    }
+
+    @Override
+    public SquadEffectETB copy() {
+        return new SquadEffectETB(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (activationCount != null) {
+            CreateTokenCopySourceEffect effect = new CreateTokenCopySourceEffect(activationCount);
+            return effect.apply(game, source);
+        }
+        return true;
     }
 }
