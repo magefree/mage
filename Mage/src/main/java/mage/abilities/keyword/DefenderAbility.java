@@ -2,7 +2,7 @@ package mage.abilities.keyword;
 
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-import mage.abilities.icon.abilities.DefenderAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
 import mage.constants.Zone;
 
 import java.io.ObjectStreamException;
@@ -16,7 +16,7 @@ public class DefenderAbility extends StaticAbility implements MageSingleton {
 
     static {
         instance = new DefenderAbility();
-        instance.addIcon(DefenderAbilityIcon.instance);
+        instance.addIcon(CardIconImpl.ABILITY_DEFENDER);
     }
 
     private Object readResolve() throws ObjectStreamException {
