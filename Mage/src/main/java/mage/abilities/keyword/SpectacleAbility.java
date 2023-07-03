@@ -54,7 +54,7 @@ public class SpectacleAbility extends SpellAbility {
     @Override
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
-            this.costsTagMap.put("Spectacle",1);
+            this.costsTagMap.put(SPECTACLE_ACTIVATION_VALUE_KEY,1);
             return true;
         }
         return false;

@@ -18,7 +18,7 @@ public enum SpectacleCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if (source.getAbilityType() == AbilityType.TRIGGERED) {
-            return CardUtil.getSourceCostTags(game, source).containsKey("Spectacle");
+            return CardUtil.getSourceCostTags(game, source).containsKey(SpectacleAbility.SPECTACLE_ACTIVATION_VALUE_KEY);
         } else {
             return source instanceof SpectacleAbility;
         }

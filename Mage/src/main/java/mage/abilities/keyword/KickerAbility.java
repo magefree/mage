@@ -121,16 +121,14 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         }
     }
 
+    private String getActivationKey(String needKickerCost){
+        return "kickerActivation"+needKickerCost;
+    }
     private int getKickedCounterStrict(Game game, Ability source, String needKickerCost) {
 
         Map<String, Integer> costTags;
-        String activationKey = "Kicker";
         costTags = CardUtil.getSourceCostTags(game, source);
-        if (!needKickerCost.isEmpty()) {
-            // need only cost related kickers
-            activationKey += needKickerCost;
-        }
-        String finalActivationKey = activationKey;
+        String finalActivationKey = getActivationKey(needKickerCost);
         Stream<Map.Entry<String, Integer>> tagStream = costTags.entrySet().stream()
                 .filter(x -> x.getKey().startsWith(finalActivationKey));
         return tagStream.mapToInt(Map.Entry::getValue).sum();
@@ -176,7 +174,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
     private void activateKicker(OptionalAdditionalCost kickerCost, Ability source, Game game) {
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.KICKED, source.getSourceId(), source, source.getControllerId()));
-        String activationKey = "Kicker"+kickerCost.getText(true);
+        String activationKey = getActivationKey(kickerCost.getText(true));
         Integer next = source.getCostsTagMap().getOrDefault(activationKey,0)+1;
         source.getCostsTagMap().put(activationKey,next);
     }

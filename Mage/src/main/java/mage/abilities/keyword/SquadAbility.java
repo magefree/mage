@@ -21,6 +21,7 @@ import java.util.Map;
  * @author notgreat
  */
 public class SquadAbility extends EntersBattlefieldTriggeredAbility {
+    public static final String SQUAD_ACTIVATION_VALUE_KEY = "squadActivationCount";
     public SquadAbility() {
         super(new SquadEffectETB());
         addSubAbility(new SquadCostAbility());
@@ -39,7 +40,7 @@ public class SquadAbility extends EntersBattlefieldTriggeredAbility {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         Map<String, Integer> costTags = CardUtil.getSourceCostTags(game, this);
-        int squadCount = costTags.getOrDefault("Squad",0);
+        int squadCount = costTags.getOrDefault(SQUAD_ACTIVATION_VALUE_KEY,0);
         if (squadCount > 0) {
             SquadEffectETB effect = (SquadEffectETB) getEffects().get(0);
             effect.activationCount = squadCount;
@@ -147,7 +148,7 @@ class SquadCostAbility extends StaticAbility implements OptionalAdditionalSource
                 again = false;
             }
         }
-        ability.getCostsTagMap().put("Squad",cost.getActivateCount());
+        ability.getCostsTagMap().put(SquadAbility.SQUAD_ACTIVATION_VALUE_KEY,cost.getActivateCount());
     }
 
     @Override
