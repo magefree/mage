@@ -59,7 +59,7 @@ public final class ShelobChildOfUngoliant extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Other Spiders you control have deathtouch and ward {2}.
         Ability buff = new SimpleStaticAbility(new GainAbilityControlledEffect(
@@ -148,6 +148,7 @@ class ShelobChildOfUngoliantTriggeredAbility extends TriggeredAbilityImpl {
     public ShelobChildOfUngoliantTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
         this.addWatcher(new ShelobChildOfUngoliantWatcher());
+        this.setTriggerPhrase("Whenever another creature dealt damage this turn by a Spider you controlled dies, ");
     }
 
     public ShelobChildOfUngoliantTriggeredAbility(final ShelobChildOfUngoliantTriggeredAbility ability) {
@@ -215,10 +216,11 @@ class ShelobChildOfUngoliantEffect extends OneShotEffect {
             return false;
         }
 
-        return new CreateTokenCopyTargetEffect().setSavedPermanent(copyFrom).setPermanentModifier(
-            (token, g) -> {
-                token.removeAllSubTypes(game);
+        return new CreateTokenCopyTargetEffect().setSavedPermanent(copyFrom)
+            .setPermanentModifier((token) -> {
                 token.removeAllCardTypes();
+                // We keep artifact subtypes, clearing the rest.
+                token.getSubtype().retainAll(SubType.getArtifactTypes());
                 token.addCardType(CardType.ARTIFACT);
                 token.addSubType(SubType.FOOD);
 

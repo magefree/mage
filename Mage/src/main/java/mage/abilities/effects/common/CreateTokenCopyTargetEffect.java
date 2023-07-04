@@ -34,7 +34,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     @FunctionalInterface
     public interface PermanentModifier {
-        void apply(Token token, Game game);
+        void apply(Token token);
     }
 
     private final Set<Class<? extends Ability>> abilityClazzesToRemove;
@@ -241,7 +241,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
         additionalAbilities.stream().forEach(token::addAbility);
         if (permanentModifier != null) {
-            permanentModifier.apply(token, game);
+            permanentModifier.apply(token);
         }
 
         if (!this.abilityClazzesToRemove.isEmpty()) {
