@@ -281,8 +281,14 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 game.getPermanentsEntering().put(newPermanent.getId(), newPermanent);
                 newPermanent.setTapped(tapped);
 
+                ZoneChangeEvent emptyEvent = new ZoneChangeEvent(newPermanent, newPermanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD);
+                // tokens zcc must simulate card's zcc to keep copied card/spell settings
+                // (example: old etb's kicker ability of copied creature spell, see tests with Deathforge Shaman)
+                // But those now use the costsTags system
+                newPermanent.updateZoneChangeCounter(game, emptyEvent);
+
                 if (source != null && source.getCostsTagMap() != null) {
-                    MageObjectReference mor = new MageObjectReference(newPermanent.getId(),0,game);
+                    MageObjectReference mor = new MageObjectReference(newPermanent.getId(),newPermanent.getZoneChangeCounter(game)-1,game);
                     game.getPermanentCostsTags().put(mor, source.getCostsTagMap());
                 }
             }
