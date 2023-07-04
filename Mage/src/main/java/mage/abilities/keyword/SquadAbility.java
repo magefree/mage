@@ -25,7 +25,6 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
     protected static final String SQUAD_REMINDER = "You may pay an additional "
             + "{cost} any number of times as you cast this spell.";
     protected static final String SQUAD_ACTIVATION_VALUE_KEY = "squadActivationCount";
-    protected static final String SQUAD_COUNT_EFFECT_KEY = "squadEffectCount";
     public SquadAbility() {
         this(new GenericManaCost(2));
     }
@@ -124,11 +123,7 @@ class SquadETBAbility extends EntersBattlefieldTriggeredAbility {
     public boolean checkInterveningIfClause(Game game) {
         int squadCount = (int)CardUtil.getSourceCostTags(game, this)
                 .getOrDefault(SquadAbility.SQUAD_ACTIVATION_VALUE_KEY,0);
-        if (squadCount > 0) {
-            getEffects().setValue(SquadAbility.SQUAD_COUNT_EFFECT_KEY,squadCount);
-            return true;
-        }
-        return false;
+        return (squadCount > 0);
     }
     @Override
     public String getRule() {
@@ -154,11 +149,9 @@ class SquadEffectETB extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Integer activationCount = (Integer)getValue(SquadAbility.SQUAD_COUNT_EFFECT_KEY);
-        if (activationCount != null) {
-            CreateTokenCopySourceEffect effect = new CreateTokenCopySourceEffect(activationCount);
-            return effect.apply(game, source);
-        }
-        return true;
+        int squadCount = (int)CardUtil.getSourceCostTags(game, source)
+                .getOrDefault(SquadAbility.SQUAD_ACTIVATION_VALUE_KEY,0);
+        CreateTokenCopySourceEffect effect = new CreateTokenCopySourceEffect(squadCount);
+        return effect.apply(game, source);
     }
 }
