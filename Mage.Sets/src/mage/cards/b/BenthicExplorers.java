@@ -159,7 +159,7 @@ class BenthicExplorersManaEffect extends ManaEffect {
 
         List<UUID> untapped = (List<UUID>) game.getState()
                 .getValue("UntapTargetCost" + source.getSourceId().toString());
-        Permanent land = game.getPermanent(untapped.get(0));
+        Permanent land = game.getPermanentOrLKIBattlefield(untapped.get(0));
         if (land == null) { return types; }
 
         Abilities<ActivatedManaAbilityImpl> mana = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);
