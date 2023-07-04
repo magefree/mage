@@ -131,7 +131,7 @@ public class CopyTokenFunction {
             // the source (the Token) has still this ability
             ability.newOriginalId();
 
-            target.addAbilityWithoutSubabilities(ability);
+            target.addAbility(ability, false);
         }
 
         target.setPower(sourceObj.getPower().getBaseValue());

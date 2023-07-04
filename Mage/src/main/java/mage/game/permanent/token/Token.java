@@ -22,7 +22,7 @@ public interface Token extends MageObject {
     List<UUID> getLastAddedTokenIds();
 
     void addAbility(Ability ability);
-    void addAbilityWithoutSubabilities(Ability ability);
+    void addAbility(Ability ability, boolean withSubabilities);
 
     void removeAbility(Ability abilityToRemove);
 

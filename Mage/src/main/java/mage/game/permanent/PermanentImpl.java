@@ -392,26 +392,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public Ability addAbility(Ability ability, UUID sourceId, Game game) {
-        // singleton abilities -- only one instance
-        // other abilities -- any amount of instances
-        if (!abilities.containsKey(ability.getId())) {
-            Ability copyAbility = ability.copy();
-            copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
-            copyAbility.setControllerId(controllerId);
-            copyAbility.setSourceId(objectId);
-            // triggered abilities must be added to the state().triggers
-            // still as long as the prev. permanent is known to the LKI (e.g. Showstopper) so gained dies triggered ability will trigger
-            if (game != null) {
-                // game is null in cards viewer window (MageBook)
-                game.getState().addAbility(copyAbility, sourceId, this);
-            }
-            abilities.add(copyAbility);
-            abilities.addAll(copyAbility.getSubAbilities());
-            return copyAbility;
-        }
-        return null;
+        return addAbility(ability, sourceId, game, true);
     }
-    public Ability addAbilityWithoutSubabilities(Ability ability, UUID sourceId, Game game) {
+    @Override
+    public Ability addAbility(Ability ability, UUID sourceId, Game game, boolean withSubabilities) {
         // singleton abilities -- only one instance
         // other abilities -- any amount of instances
         if (!abilities.containsKey(ability.getId())) {
@@ -426,6 +410,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 game.getState().addAbility(copyAbility, sourceId, this);
             }
             abilities.add(copyAbility);
+            if (withSubabilities) {
+                abilities.addAll(copyAbility.getSubAbilities());
+            }
             return copyAbility;
         }
         return null;
