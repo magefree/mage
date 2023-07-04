@@ -361,7 +361,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 countryname = "Unknown";
             }
             basicTooltipText = "<HTML>Name: " + player.getName()
-                    + "<br/>Country: " + countryname
+                    + "<br/>Flag: " + countryname
                     + "<br/>Constructed rating: " + player.getUserData().getConstructedRating()
                     + "<br/>Limited rating: " + player.getUserData().getLimitedRating()
                     + "<br/>Deck hash code: " + player.getDeckHashCode()
