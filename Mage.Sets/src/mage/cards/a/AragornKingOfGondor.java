@@ -19,6 +19,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -47,6 +48,7 @@ public final class AragornKingOfGondor extends CardImpl {
 
         // Whenever Aragorn attacks, up to one target creature can't block this turn. If you're the monarch, creatures can't block this turn.
         Ability ability = new AttacksTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
         ability.addEffect(new ConditionalOneShotEffect(new AddContinuousEffectToGame(
                 new CantBlockAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.EndOfTurn)
         ), MonarchIsSourceControllerCondition.instance, "If you're the monarch, creatures can't block this turn"));
