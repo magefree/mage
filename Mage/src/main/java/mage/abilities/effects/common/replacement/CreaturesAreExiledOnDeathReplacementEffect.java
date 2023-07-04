@@ -22,6 +22,7 @@ public class CreaturesAreExiledOnDeathReplacementEffect extends ReplacementEffec
     public CreaturesAreExiledOnDeathReplacementEffect(FilterPermanent filter) {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If " + CardUtil.addArticle(filter.getMessage()) + " would die, exile it instead";
+        this.filter = filter;
     }
 
     private CreaturesAreExiledOnDeathReplacementEffect(final CreaturesAreExiledOnDeathReplacementEffect effect) {
