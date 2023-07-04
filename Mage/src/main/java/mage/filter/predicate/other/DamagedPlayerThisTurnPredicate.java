@@ -29,49 +29,48 @@ public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredica
 
     @Override
     public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
-        Controllable object = input.getObject();
-        UUID objectId = object.getId();
+        UUID objectId = input.getObject().getId();
         UUID playerId = input.getPlayerId();
 
         switch (controller) {
             case YOU:
-                PlayerDamagedBySourceWatcher watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, playerId);
-                if (watcher != null) {
-                    return watcherApplies(watcher, objectId, game);
+                if (playerDealtDamageBy(playerId, objectId, game)) {
+                    return true;
                 }
                 break;
             case OPPONENT:
                 for (UUID opponentId : game.getOpponents(playerId)) {
-                    watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, opponentId);
-                    if (watcher != null) {
-                        return watcherApplies(watcher, objectId, game);
+                    if (playerDealtDamageBy(opponentId, objectId, game)) {
+                        return true;
                     }
                 }
                 break;
             case NOT_YOU:
                 for (UUID notYouId : game.getState().getPlayersInRange(playerId, game)) {
                     if (!notYouId.equals(playerId)) {
-                        watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, notYouId);
-                        if (watcher != null) {
-                            return watcherApplies(watcher, objectId, game);
+                        if (playerDealtDamageBy(notYouId, objectId, game)) {
+                            return true;
                         }
                     }
                 }
                 break;
             case ANY:
                 for (UUID anyId : game.getState().getPlayersInRange(playerId, game)) {
-                    watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, anyId);
-                    if (watcher != null) {
-                        return watcherApplies(watcher, objectId, game);
+                    if (playerDealtDamageBy(anyId, objectId, game)) {
+                        return true;
                     }
                 }
-                return true;
+                break;
         }
 
         return false;
     }
 
-    private boolean watcherApplies(PlayerDamagedBySourceWatcher watcher, UUID objectId, Game game) {
+    private boolean playerDealtDamageBy(UUID playerId, UUID objectId, Game game) {
+        PlayerDamagedBySourceWatcher watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, playerId);
+        if (watcher == null) {
+            return false;
+        }
         if (combatDamageOnly) {
             return watcher.hasSourceDoneCombatDamage(objectId, game);
         }
