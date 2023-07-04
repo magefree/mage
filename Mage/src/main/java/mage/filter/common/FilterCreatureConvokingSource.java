@@ -13,7 +13,7 @@ import java.util.UUID;
 
 /**
  *
- * @author TheElk801
+ * @author notgreat
  */
 public class FilterCreatureConvokingSource extends FilterCreaturePermanent {
 
