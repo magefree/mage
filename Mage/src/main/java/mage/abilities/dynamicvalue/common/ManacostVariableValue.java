@@ -8,7 +8,7 @@ import mage.util.CardUtil;
 
 public enum ManacostVariableValue implements DynamicValue {
     REGULAR, // if you need X on cast/activate (in stack) - reset each turn
-    ETB; // if you need X after ETB (in battlefield) - keep until end of turn
+    ETB; // if you need X after ETB (in battlefield) - keep until turn end after leaving battlefield
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {

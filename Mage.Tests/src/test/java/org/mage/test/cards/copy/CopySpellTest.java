@@ -575,7 +575,7 @@ public class CopySpellTest extends CardTestPlayerBase {
     public void test_CopiedSpellsETBCounters() {
         // testing:
         // - x in copied creature spell (copy x)
-        // - copied spells enters as tokens and it hasn't ETB, see rules below
+        // - copied spells enters as tokens correctly ETB, see rules below
 
         // 0/0
         // Capricopian enters the battlefield with X +1/+1 counters on it.
@@ -617,11 +617,12 @@ public class CopySpellTest extends CardTestPlayerBase {
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Grenzo, Dungeon Warden", "Grenzo, Dungeon Warden");
 
-        // "The rules that apply to a permanent spell becoming a permanent apply to a copy of a spell becoming a token."
-        // - Double Major (2021-04-16)
         // 608.3f If the object that’s resolving is a copy of a permanent spell, it will become a token permanent
         //   as it is put onto the battlefield in any of the steps above.
-        // Thus, both copies enters with counters.
+        // 111.12. A copy of a permanent spell becomes a token as it resolves. The token has the characteristics of
+        //   the spell that became that token. The token is not “created” for the purposes of any replacement effects
+        //   or triggered abilities that refer to creating a token.
+        // The tokens must enter with counters
 
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Capricopian", 2);
@@ -631,7 +632,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        // counters checks, have to check if it's a card or a token since token copies don't trigger isCopy()
+        // counters checks, have to check if it's a card or a token since token copies have isCopy()=false
         int originalCounters = currentGame.getBattlefield().getAllActivePermanents().stream()
                 .filter(p -> p.getName().equals("Grenzo, Dungeon Warden"))
                 .filter(p -> p instanceof PermanentCard)

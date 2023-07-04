@@ -1549,7 +1549,16 @@ public final class CardUtil {
         return zcc;
     }
 
-    public static MageObjectReference getSourceStackMomentReference(Game game, Ability source){
+    /**
+     * Create a MageObjectReference of the ability's source
+     * Subtract 1 zcc if not on the stack, referencing when it was on the stack if it's a resolved permanent.
+     * works in any moment (even before source ability activated)
+     *
+     * @param game
+     * @param ability
+     * @return MageObjectReference to the ability's source stack moment
+     */
+    public static MageObjectReference getSourceStackMomentReference(Game game, Ability ability){
         // Squad/Kicker activates in STACK zone so all zcc must be from "stack moment"
         // Use cases:
         // * resolving spell have same zcc (example: check kicker status in sorcery/instant);
@@ -1557,9 +1566,9 @@ public final class CardUtil {
         // * creature/token from resolved spell have +1 zcc after moved to battlefield (example: check kicker status in ETB triggers/effects);
 
         // find object info from the source ability (it can be a permanent or a spell on stack, on the moment of trigger/resolve)
-        MageObject sourceObject = source.getSourceObject(game);
+        MageObject sourceObject = ability.getSourceObject(game);
         Zone sourceObjectZone = game.getState().getZone(sourceObject.getId());
-        int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
+        int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, ability);
         // find "stack moment" zcc:
         // * permanent cards enters from STACK to BATTLEFIELD (+1 zcc)
         // * permanent tokens enters from OUTSIDE to BATTLEFIELD (+1 zcc, see prepare code in TokenImpl.putOntoBattlefieldHelper)
@@ -1567,7 +1576,7 @@ public final class CardUtil {
         if (sourceObjectZone != Zone.STACK) {
             --zcc;
         }
-        return new MageObjectReference(source.getSourceId(), zcc, game);
+        return new MageObjectReference(ability.getSourceId(), zcc, game);
     }
     /**
      * Find cost tags of either the source ability, or the permanent source of the ability

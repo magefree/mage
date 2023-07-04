@@ -261,20 +261,19 @@ class ConvokeEffect extends OneShotEffect {
                         manaPool.unlockManaType(ManaType.COLORLESS);
                         manaName = "colorless";
                     }
-                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CONVOKED, perm.getId(), source, source.getControllerId()));
                     //Add the convoked creatures to a set, note that the tag map's entries must be immutable
                     //So create a new set from the old one rather than updating in-place
                     Map<String, Object> tagMap = ((Spell)source.getSourceObject(game)).getSpellAbility().getCostsTagMap();
                     HashSet<MageObjectReference> newSet = new HashSet<>();
                     if (tagMap.containsKey(ConvokeAbility.convokingCreaturesKey)){
                         @SuppressWarnings("unchecked")
-                        HashSet<MageObjectReference> oldMap = (HashSet<MageObjectReference>)tagMap.get(ConvokeAbility.convokingCreaturesKey);
-                        newSet.addAll(oldMap);
+                        HashSet<MageObjectReference> oldSet = (HashSet<MageObjectReference>)tagMap.get(ConvokeAbility.convokingCreaturesKey);
+                        newSet.addAll(oldSet);
                     }
                     newSet.add(new MageObjectReference(perm, game));
                     tagMap.put(ConvokeAbility.convokingCreaturesKey,newSet);
-                    source.getCostsTagMap().getOrDefault(ConvokeAbility.convokingCreaturesKey,new HashSet<MageObjectReference>());
 
+                    game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CONVOKED, perm.getId(), source, source.getControllerId()));
                     game.informPlayers("Convoke: " + controller.getLogName() + " taps " + perm.getLogName() + " to pay one " + manaName + " mana");
 
                     // can't use mana abilities after that (convoke cost must be payed after mana abilities only)

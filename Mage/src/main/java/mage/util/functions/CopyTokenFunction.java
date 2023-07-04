@@ -130,7 +130,7 @@ public class CopyTokenFunction {
             // otherwise there are problems to check for created continuous effects to check if
             // the source (the Token) has still this ability
             ability.newOriginalId();
-
+            //Don't re-add subabilities since they've already in sourceObj's abilities list
             target.addAbility(ability, false);
         }
 

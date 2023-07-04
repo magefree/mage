@@ -8,7 +8,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author LevelX2
+ * @author notgreat
  */
 public class SpectacleTest extends CardTestPlayerBase {
 

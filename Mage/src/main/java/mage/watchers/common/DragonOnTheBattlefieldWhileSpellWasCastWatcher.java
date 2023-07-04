@@ -35,7 +35,8 @@ public class DragonOnTheBattlefieldWhileSpellWasCastWatcher extends Watcher {
         // a Dragon card was revealed as an additional cost. The copy wasn't cast, so whether you controlled
         // a Dragon won't matter. (2015-02-25)
 
-        // TODO: Should only check if you controlled a Dragon as you cast, currently also does "if you revealed a Dragon card"
+        // TODO: Should only check if you controlled a Dragon as you cast, reveal should be stored in costTags
+        // Currently: revealed a Dragon card or controlled a Dragon as you cast the spell
         if (spell != null
                 && spell
                 .getSpellAbility()
