@@ -16,8 +16,15 @@ public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredica
 
     private final TargetController controller;
 
+    private final boolean combatDamageOnly;
+
     public DamagedPlayerThisTurnPredicate(TargetController controller) {
+        this(controller, false);
+    }
+
+    public DamagedPlayerThisTurnPredicate(TargetController controller, boolean combatDamageOnly) {
         this.controller = controller;
+        this.combatDamageOnly = combatDamageOnly;
     }
 
     @Override
@@ -29,6 +36,9 @@ public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredica
             case YOU:
                 PlayerDamagedBySourceWatcher watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, playerId);
                 if (watcher != null) {
+                    if (combatDamageOnly) {
+                        return watcher.hasSourceDoneCombatDamage(object.getId(), game);
+                    }
                     return watcher.hasSourceDoneDamage(object.getId(), game);
                 }
                 break;
@@ -36,6 +46,9 @@ public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredica
                 for (UUID opponentId : game.getOpponents(playerId)) {
                     watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, opponentId);
                     if (watcher != null) {
+                        if (combatDamageOnly) {
+                            return watcher.hasSourceDoneCombatDamage(object.getId(), game);
+                        }
                         return watcher.hasSourceDoneDamage(object.getId(), game);
                     }
                 }
@@ -45,6 +58,9 @@ public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredica
                     if (!notYouId.equals(playerId)) {
                         watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, notYouId);
                         if (watcher != null) {
+                            if (combatDamageOnly) {
+                                return watcher.hasSourceDoneCombatDamage(object.getId(), game);
+                            }
                             return watcher.hasSourceDoneDamage(object.getId(), game);
                         }
                     }
@@ -54,6 +70,9 @@ public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredica
                 for (UUID anyId : game.getState().getPlayersInRange(playerId, game)) {
                     watcher = game.getState().getWatcher(PlayerDamagedBySourceWatcher.class, anyId);
                     if (watcher != null) {
+                        if (combatDamageOnly) {
+                            return watcher.hasSourceDoneCombatDamage(object.getId(), game);
+                        }
                         return watcher.hasSourceDoneDamage(object.getId(), game);
                     }
                 }
