@@ -50,7 +50,7 @@ public class CantBlockTargetEffect extends RestrictionEffect {
         if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
             sb.append("any number of ");
         } else if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+            if (target.getMinNumberOfTargets() == 0) {
                 sb.append("up to ");
             }
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');

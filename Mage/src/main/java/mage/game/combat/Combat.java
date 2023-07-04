@@ -477,8 +477,11 @@ public class Combat implements Serializable, Copyable<Combat> {
                 // if creature is goaded then we start with assumption that it needs to attack any player
                 mustAttack = true;
                 // Filter out the planeswalkers
-                defendersForcedToAttack.addAll(defenders.stream().map(game::getPlayer).filter(Objects::nonNull).map(Player::getId).collect(Collectors.toSet()));
-//                defendersForcedToAttack.addAll(defenders);
+                defendersForcedToAttack.addAll(defenders.stream()
+                        .map(game::getPlayer)
+                        .filter(Objects::nonNull)
+                        .map(Player::getId)
+                        .collect(Collectors.toSet()));
             }
             if (!mustAttack) {
                 continue;

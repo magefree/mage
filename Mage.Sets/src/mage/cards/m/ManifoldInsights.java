@@ -63,11 +63,11 @@ class ManifoldInsightsEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             Cards topLib = new CardsImpl();
-            topLib.addAll(controller.getLibrary().getTopCards(game, 10));
+            topLib.addAllCards(controller.getLibrary().getTopCards(game, 10));
             controller.revealCards(sourceObject.getIdName(), topLib, game);
             Cards chosenCards = new CardsImpl();
             if (game.getOpponents(controller.getId()).size() >= topLib.getCards(StaticFilters.FILTER_CARD_NON_LAND, game).size()) {
-                chosenCards.addAll(topLib.getCards(StaticFilters.FILTER_CARD_NON_LAND, game));
+                chosenCards.addAllCards(topLib.getCards(StaticFilters.FILTER_CARD_NON_LAND, game));
                 topLib.removeAll(chosenCards);
             } else if (!topLib.getCards(StaticFilters.FILTER_CARD_NON_LAND, game).isEmpty()) {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {

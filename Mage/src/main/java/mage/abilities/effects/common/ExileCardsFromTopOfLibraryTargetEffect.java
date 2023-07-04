@@ -47,7 +47,7 @@ public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             Cards cards = new CardsImpl();
-            cards.addAll(targetPlayer.getLibrary().getTopCards(game, amount));
+            cards.addAllCards(targetPlayer.getLibrary().getTopCards(game, amount));
             return targetPlayer.moveCards(cards, Zone.EXILED, source, game);
         }
         return false;

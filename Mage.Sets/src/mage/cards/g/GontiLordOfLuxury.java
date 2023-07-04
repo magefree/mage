@@ -85,7 +85,7 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
             return false;
         }
         Cards topCards = new CardsImpl();
-        topCards.addAll(opponent.getLibrary().getTopCards(game, 4));
+        topCards.addAllCards(opponent.getLibrary().getTopCards(game, 4));
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to exile"));
         controller.choose(outcome, topCards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());

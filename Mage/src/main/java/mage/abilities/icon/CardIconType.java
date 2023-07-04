@@ -30,6 +30,7 @@ public enum CardIconType {
     ABILITY_INDESTRUCTIBLE("prepared/ankh.svg", CardIconCategory.ABILITY, 100),
     ABILITY_VIGILANCE("prepared/eye.svg", CardIconCategory.ABILITY, 100),
     ABILITY_CLASS_LEVEL("prepared/hexagon-fill.svg", CardIconCategory.ABILITY, 100),
+    ABILITY_REACH("prepared/child-reaching.svg", CardIconCategory.ABILITY, 100),
     //
     OTHER_FACEDOWN("prepared/reply-fill.svg", CardIconCategory.ABILITY, 100),
     OTHER_COST_X("prepared/square-fill.svg", CardIconCategory.ABILITY, 100),

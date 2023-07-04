@@ -32,11 +32,11 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     }
 
     public CardsImpl(List<? extends Card> cards) {
-        this.addAll(cards);
+        this.addAllCards(cards);
     }
 
     public CardsImpl(Set<? extends Card> cards) {
-        this.addAll(cards);
+        this.addAllCards(cards);
     }
 
     public CardsImpl(Collection<UUID> cardIds) {
@@ -80,23 +80,19 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     }
 
     @Override
-    public void setOwner(UUID ownerId, Game game) {
-        this.ownerId = ownerId;
-        for (UUID card : this) {
-            game.getCard(card).setOwnerId(ownerId);
-        }
-    }
-
-    @Override
     public Card getRandom(Game game) {
         if (this.isEmpty()) {
             return null;
         }
-        MageObject object = game.getObject(RandomUtil.randomFromCollection(this)); // neccessary if permanent tokens are in the collection
-        if (object instanceof Card) {
-            return (Card) object;
-        }
-        return null;
+
+        // neccessary if permanent tokens are in the collection
+        Set<MageObject> cardsForRandomPick = this
+                .stream().map(uuid -> game.getObject(uuid))
+                .filter(Objects::nonNull)
+                .filter(mageObject -> mageObject instanceof Card)
+                .collect(Collectors.toSet());
+
+        return (Card) RandomUtil.randomFromCollection(cardsForRandomPick);
     }
 
     @Override
@@ -134,9 +130,14 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         return cards;
     }
 
+    // TODO: Why is this used a completely different implementation than the version without the filter?
     @Override
     public Set<Card> getCards(FilterCard filter, Game game) {
-        return stream().map(game::getCard).filter(Objects::nonNull).filter(card -> filter.match(card, game)).collect(Collectors.toSet());
+        return stream()
+                .map(game::getCard)
+                .filter(Objects::nonNull)
+                .filter(card -> filter.match(card, game))
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -176,17 +177,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     }
 
     @Override
-    public void addAll(List<? extends Card> cards) {
-        if (cards != null) {
-            cards.stream()
-                    .filter(Objects::nonNull)
-                    .map(MageItem::getId)
-                    .forEach(this::add);
-        }
-    }
-
-    @Override
-    public void addAll(Set<? extends Card> cards) {
+    public void addAllCards(Collection<? extends Card> cards) {
         if (cards != null) {
             cards.stream()
                     .filter(Objects::nonNull)
@@ -197,13 +188,15 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Collection<Card> getUniqueCards(Game game) {
-        Map<String, Card> cards = new HashMap<>();
+        Map<String, Card> cards = new HashMap<>(this.size());
+
         for (UUID cardId : this) {
             Card card = game.getCard(cardId);
             if (card != null) {
                 cards.putIfAbsent(card.getName(), card);
             }
         }
+
         return cards.values();
     }
 

@@ -29,6 +29,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Bag End Porter", 153, Rarity.COMMON, mage.cards.b.BagEndPorter.class));
         cards.add(new SetCardInfo("Banish from Edoras", 1, Rarity.COMMON, mage.cards.b.BanishFromEdoras.class));
         cards.add(new SetCardInfo("Barad-dur", 253, Rarity.RARE, mage.cards.b.BaradDur.class));
+        cards.add(new SetCardInfo("Barrow-Blade", 237, Rarity.UNCOMMON, mage.cards.b.BarrowBlade.class));
         cards.add(new SetCardInfo("Battle-Scarred Goblin", 115, Rarity.COMMON, mage.cards.b.BattleScarredGoblin.class));
         cards.add(new SetCardInfo("Bilbo's Ring", 298, Rarity.RARE, mage.cards.b.BilbosRing.class));
         cards.add(new SetCardInfo("Bilbo, Retired Burglar", 196, Rarity.UNCOMMON, mage.cards.b.BilboRetiredBurglar.class));
@@ -270,7 +271,9 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Trailblazer's Boots", 398, Rarity.RARE, mage.cards.t.TrailblazersBoots.class));
         cards.add(new SetCardInfo("Treason of Isengard", 74, Rarity.COMMON, mage.cards.t.TreasonOfIsengard.class));
         cards.add(new SetCardInfo("Troll of Khazad-dum", 111, Rarity.COMMON, mage.cards.t.TrollOfKhazadDum.class));
+        cards.add(new SetCardInfo("Ugluk of the White Hand", 235, Rarity.UNCOMMON, mage.cards.u.UglukOfTheWhiteHand.class));
         cards.add(new SetCardInfo("Uruk-hai Berserker", 112, Rarity.COMMON, mage.cards.u.UrukHaiBerserker.class));
+        cards.add(new SetCardInfo("Voracious Fell Beast", 113, Rarity.UNCOMMON, mage.cards.v.VoraciousFellBeast.class));
         cards.add(new SetCardInfo("War of the Last Alliance", 36, Rarity.RARE, mage.cards.w.WarOfTheLastAlliance.class));
         cards.add(new SetCardInfo("Warbeast of Gorgoroth", 152, Rarity.COMMON, mage.cards.w.WarbeastOfGorgoroth.class));
         cards.add(new SetCardInfo("Westfold Rider", 37, Rarity.COMMON, mage.cards.w.WestfoldRider.class));

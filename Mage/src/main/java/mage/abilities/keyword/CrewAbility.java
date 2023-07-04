@@ -11,7 +11,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeSourceEffect;
 import mage.abilities.hint.HintUtils;
-import mage.abilities.icon.abilities.CrewAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
+import mage.abilities.icon.CardIconType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -47,7 +48,7 @@ public class CrewAbility extends SimpleActivatedAbility {
                 Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE
         ), new CrewCost(value, altCost));
         this.addEffect(new CrewEventEffect());
-        this.addIcon(CrewAbilityIcon.instance);
+        this.addIcon(new CardIconImpl(CardIconType.ABILITY_CREW, "Crew " + value));
         this.value = value;
         if (altCost != null) {
             this.addSubAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect(

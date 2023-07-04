@@ -41,6 +41,10 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         for (TriggeredAbility ability : triggeredAbilities) {
             //Remove useless data
             ability.getEffects().clear();
+
+            for(Watcher watcher : ability.getWatchers()) {
+                super.addWatcher(watcher);
+            }
         }
         setTriggerPhrase(generateTriggerPhrase());
     }

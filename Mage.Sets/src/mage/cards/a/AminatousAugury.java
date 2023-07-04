@@ -95,7 +95,7 @@ class AminatousAuguryEffect extends OneShotEffect {
         }
 
         Cards cardsToCast = new CardsImpl();
-        cardsToCast.addAll(auguryExileZone.getCards(game));
+        cardsToCast.addAllCards(auguryExileZone.getCards(game));
 
         // put a land card from among them onto the battlefield
         TargetCard target = new TargetCard(Zone.EXILED, StaticFilters.FILTER_CARD_LAND_A);
