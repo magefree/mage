@@ -142,19 +142,11 @@ public class CopyTokenFunction {
 
     private Token from(Card source, Game game, Spell spell) {
         apply(source, game);
-
-        // token's ZCC must be synced with original card to keep abilities settings
-        // Example: kicker ability and kicked status
         if (spell != null) {
-            // copied spell puts to battlefield as token, so that token's ZCC must be synced with spell instead card (card can be moved before resolve)
-            target.setZoneChangeCounter(spell.getZoneChangeCounter(game), game);
             // Copy starting loyalty from spell (Ob Nixilis, the Adversary)
             target.setStartingLoyalty(spell.getStartingLoyalty());
             target.setStartingDefense(spell.getStartingDefense());
-        } else {
-            target.setZoneChangeCounter(source.getZoneChangeCounter(game), game);
         }
-
         return target;
     }
 }

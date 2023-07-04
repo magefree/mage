@@ -74,10 +74,8 @@ public class BlitzTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy + withBlitz);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major",decoy);
-        //addTarget(playerA,decoy);
 
-        //Not sure how to arrange stack correctly with StrictChooseMode
-        //setStrictChooseMode(true);
+        //Auto-stack triggers without StrictChooseMode
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
