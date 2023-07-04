@@ -350,7 +350,7 @@ public abstract class TargetImpl implements Target {
                 }
             } else {
                 // Try to autochoosen
-                UUID autoChosenId = tryToAutoChoose(playerId, source, game);
+                UUID autoChosenId = required ? tryToAutoChoose(playerId, source, game) : null;
                 if (autoChosenId != null) {
                     addTarget(autoChosenId, source, game);
                 } else if (!targetController.chooseTarget(outcome, this, source, game)) { // If couldn't autochoose ask player
