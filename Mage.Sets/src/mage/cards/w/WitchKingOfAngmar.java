@@ -6,6 +6,7 @@ import mage.abilities.common.CombatDamageDealtToYouTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
+import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.keyword.TheRingTemptsYouEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -20,7 +21,7 @@ import java.util.UUID;
 
 /**
  *
- * @author bobby.mccann
+ * @author bobby-mccann
  */
 public final class WitchKingOfAngmar extends CardImpl {
 
@@ -44,15 +45,21 @@ public final class WitchKingOfAngmar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever one or more creatures deal combat damage to you, each opponent sacrifices a creature that dealt combat damage to you this turn. The Ring tempts you.
-        Ability ability = new CombatDamageDealtToYouTriggeredAbility(new SacrificeOpponentsEffect(filter));
-        ability.addEffect(new TheRingTemptsYouEffect());
-        this.addAbility(ability);
+        {
+            Ability ability = new CombatDamageDealtToYouTriggeredAbility(new SacrificeOpponentsEffect(filter));
+            ability.addEffect(new TheRingTemptsYouEffect());
+            this.addAbility(ability);
+        }
 
         // Discard a card: Witch-king of Angmar gains indestructible until end of turn. Tap it.
-        this.addAbility(new SimpleActivatedAbility(
-                new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new DiscardCardCost()
-        ));
+        {
+            Ability ability = new SimpleActivatedAbility(
+                    new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
+                    new DiscardCardCost()
+            );
+            ability.addEffect(new TapSourceEffect().setText("tap it"));
+            this.addAbility(ability);
+        }
     }
 
     private WitchKingOfAngmar(final WitchKingOfAngmar card) {
