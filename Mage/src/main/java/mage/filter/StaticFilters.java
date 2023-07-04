@@ -953,6 +953,12 @@ public final class StaticFilters {
         FILTER_SPELL_AN_ENCHANTMENT.setLockedFilter(true);
     }
 
+    public static final FilterSpell FILTER_SPELL_AN_ARTIFACT = new FilterArtifactSpell("an artifact spell");
+
+    static {
+        FILTER_SPELL_AN_ARTIFACT.setLockedFilter(true);
+    }
+
     public static final FilterSpell FILTER_SPELL_KICKED_A = new FilterSpell("a kicked spell");
 
     static {

@@ -10,7 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterArtifactSpell;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -30,8 +30,7 @@ public final class MirranSpy extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast an artifact spell, you may untap target creature.
-        FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
-        SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new UntapTargetEffect(), filter, true);
+        SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new UntapTargetEffect(), StaticFilters.FILTER_SPELL_AN_ARTIFACT, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
