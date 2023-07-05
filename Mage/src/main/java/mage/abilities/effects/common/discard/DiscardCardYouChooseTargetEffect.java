@@ -25,11 +25,11 @@ import java.util.UUID;
  */
 public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
 
-    private FilterCard filter;
-    private TargetController targetController;
+    private final FilterCard filter;
+    private final TargetController targetController;
     private DynamicValue numberCardsToReveal;
     private final DynamicValue numberCardsToDiscard;
-    private boolean revealAllCards;
+    private final boolean revealAllCards;
     private boolean optional = false;
 
     public DiscardCardYouChooseTargetEffect() {
@@ -148,18 +148,16 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         player.revealCards(sourceCard != null ? sourceCard.getIdName() + " ("
                 + sourceCard.getZoneChangeCounter(game) + ')' : "Discard", revealedCards, game);
 
-        boolean result = true;
         int filteredCardsCount = revealedCards.count(filter, source.getControllerId(), source, game);
         int numberToDiscard = Math.min(this.numberCardsToDiscard.calculate(game, source, this), filteredCardsCount);
         if (numberToDiscard <= 0) {
-            return result;
+            return true;
         }
         TargetCard target = new TargetCard(optional ? 0 : numberToDiscard, numberToDiscard, Zone.HAND, filter);
         if (!controller.choose(Outcome.Benefit, revealedCards, target, source, game)) {
-            return result;
+            return true;
         }
-        result = !player.discard(new CardsImpl(target.getTargets()), false, source, game).isEmpty();
-        return result;
+        return !player.discard(new CardsImpl(target.getTargets()), false, source, game).isEmpty();
     }
 
     @Override
