@@ -70,7 +70,7 @@ public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredica
                 }
                 return false;
             default:
-                return false;
+                throw new UnsupportedOperationException("TargetController not supported");
         }
     }
 
