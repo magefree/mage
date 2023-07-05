@@ -99,7 +99,7 @@ class KinzuOfTheBleakCovenEffect extends OneShotEffect {
         player.moveCards(card, Zone.EXILED, source, game);
         return new CreateTokenCopyTargetEffect().setSavedPermanent(
                 new PermanentCard(card, source.getControllerId(), game)
-        ).setPermanentModifier((token, g) -> {
+        ).setPermanentModifier((token) -> {
             token.setPower(1);                             // 1/1
             token.setToughness(1);
             token.addAbility(new ToxicAbility(1)); // Add Toxic (is additive)
