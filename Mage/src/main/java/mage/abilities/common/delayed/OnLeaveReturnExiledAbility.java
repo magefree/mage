@@ -30,21 +30,25 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class OnLeaveReturnExiledToBattlefieldAbility extends DelayedTriggeredAbility {
+public class OnLeaveReturnExiledAbility extends DelayedTriggeredAbility {
 
-    public OnLeaveReturnExiledToBattlefieldAbility() {
-        super(new ReturnExiledPermanentsEffect(), Duration.OneUse);
+    public OnLeaveReturnExiledAbility() {
+        this(Zone.BATTLEFIELD);
+    }
+
+    public OnLeaveReturnExiledAbility(Zone zone) {
+        super(new ReturnExiledPermanentsEffect(zone), Duration.OneUse);
         this.usesStack = false;
         this.setRuleVisible(false);
     }
 
-    public OnLeaveReturnExiledToBattlefieldAbility(final OnLeaveReturnExiledToBattlefieldAbility ability) {
+    public OnLeaveReturnExiledAbility(final OnLeaveReturnExiledAbility ability) {
         super(ability);
     }
 
     @Override
-    public OnLeaveReturnExiledToBattlefieldAbility copy() {
-        return new OnLeaveReturnExiledToBattlefieldAbility(this);
+    public OnLeaveReturnExiledAbility copy() {
+        return new OnLeaveReturnExiledAbility(this);
     }
 
     @Override
@@ -66,13 +70,17 @@ public class OnLeaveReturnExiledToBattlefieldAbility extends DelayedTriggeredAbi
 
 class ReturnExiledPermanentsEffect extends OneShotEffect {
 
-    public ReturnExiledPermanentsEffect() {
+    private final Zone zone;
+
+    ReturnExiledPermanentsEffect(Zone zone) {
         super(Outcome.Benefit);
+        this.zone = zone;
         this.staticText = "Return exiled permanents";
     }
 
     public ReturnExiledPermanentsEffect(final ReturnExiledPermanentsEffect effect) {
         super(effect);
+        this.zone = effect.zone;
     }
 
     @Override
@@ -87,7 +95,7 @@ class ReturnExiledPermanentsEffect extends OneShotEffect {
         if (sourceObject != null && controller != null) {
             ExileZone exile = getExileIfPossible(game, source);
             if (exile != null) {
-                return controller.moveCards(new LinkedHashSet<>(exile.getCards(game)), Zone.BATTLEFIELD, source, game, false, false, true, null);
+                return controller.moveCards(new LinkedHashSet<>(exile.getCards(game)), zone, source, game, false, false, true, null);
             }
         }
         return false;

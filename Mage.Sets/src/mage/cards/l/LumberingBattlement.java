@@ -4,11 +4,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
@@ -52,9 +51,7 @@ public final class LumberingBattlement extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Lumbering Battlement enters the battlefield, exile any number of other nontoken creatures you control until it leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new LumberingBattlementEffect());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LumberingBattlementEffect()));
 
         // Lumbering Battlement gets +2/+2 for each card exiled with it.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
@@ -116,10 +113,12 @@ class LumberingBattlementEffect extends OneShotEffect {
                 cards.add(permanent);
             }
         }
-        return player.moveCardsToExile(
+        player.moveCardsToExile(
                 cards, source, game, true,
                 CardUtil.getCardExileZoneId(game, source), sourcePerm.getIdName()
         );
+        game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
+        return true;
     }
 }
 

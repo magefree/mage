@@ -2,11 +2,13 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
+
 import mage.util.CardUtil;
 
 /**
@@ -15,12 +17,28 @@ import mage.util.CardUtil;
  */
 public class ExileUntilSourceLeavesEffect extends OneShotEffect {
 
+    private final Zone returnToZone;
+
+    /**
+     * Exiles target(s) until source leaves battlefield
+     * Includes effect that returns exiled card to battlefield when source leaves
+     */
     public ExileUntilSourceLeavesEffect() {
+        this(Zone.BATTLEFIELD);
+    }
+
+    /**
+     * Exiles target(s) until source leaves battlefield
+     * @param returnToZone The zone to which the exiled card will be returned when source leaves
+     */
+    public ExileUntilSourceLeavesEffect(Zone returnToZone) {
         super(Outcome.Removal);
+        this.returnToZone = returnToZone;
     }
 
     public ExileUntilSourceLeavesEffect(final ExileUntilSourceLeavesEffect effect) {
         super(effect);
+        this.returnToZone = effect.returnToZone;
     }
 
     @Override
@@ -32,7 +50,7 @@ public class ExileUntilSourceLeavesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
 
-        // If Banishing Light leaves the battlefield before its triggered ability resolves, the target permanent won't be exiled.
+        // If source permanent leaves the battlefield before its triggered ability resolves, the target permanent won't be exiled.
         if (permanent == null) {
             return false;
         }
@@ -41,7 +59,11 @@ public class ExileUntilSourceLeavesEffect extends OneShotEffect {
         if (targetPointer != null) {  // Grasping Giant
             effect.setTargetPointer(targetPointer);
         }
-        return effect.apply(game, source);
+        if (effect.apply(game, source)) {
+            game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(returnToZone), source);
+            return true;
+        }
+        return false;
     }
 
     @Override
