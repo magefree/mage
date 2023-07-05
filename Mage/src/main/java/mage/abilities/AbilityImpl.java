@@ -214,16 +214,14 @@ public abstract class AbilityImpl implements Ability {
             } else {
                 game.addEffect((ContinuousEffect) effect, this);
             }
+
             /**
              * All restrained trigger events are fired now. To restrain the
              * events is mainly neccessary because of the movement of multiple
              * object at once. If the event is fired directly as one object
              * moved, other objects are not already in the correct zone to check
              * for their effects. (e.g. Valakut, the Molten Pinnacle)
-             */
-            game.getState().handleSimultaneousEvent(game);
-            game.resetShortLivingLKI();
-            /**
+             * <p>
              * game.applyEffects() has to be done at least for every effect that
              * moves cards/permanent between zones, or changes control of
              * objects so Static effects work as intended if dependant from the
@@ -231,8 +229,7 @@ public abstract class AbilityImpl implements Ability {
              * abilities with replacement effects deactivated too late Example:
              * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
              */
-            game.applyEffects();
-            game.getState().getTriggers().checkStateTriggers(game);
+            game.getState().processAction(game);
         }
         return result;
     }

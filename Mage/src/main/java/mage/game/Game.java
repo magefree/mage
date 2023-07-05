@@ -465,6 +465,13 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source);
 
+    /**
+     * Inner game engine call to reset game objects to actual versions
+     * (reset all objects and apply all effects due layer system)
+     * <p>
+     * Warning, if you need to process object moves in the middle of the effect/ability
+     * then call game.getState().processAction(game) instead
+     */
     void applyEffects();
 
     boolean checkStateAndTriggered();
