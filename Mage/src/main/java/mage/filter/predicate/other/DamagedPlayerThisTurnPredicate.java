@@ -1,5 +1,6 @@
 package mage.filter.predicate.other;
 
+import mage.abilities.Ability;
 import mage.constants.TargetController;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -35,24 +36,18 @@ public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredica
 
         switch (controller) {
             case YOU:
-                if (playerDealtDamageBy(playerId, objectId, game)) {
-                    return true;
-                }
-                break;
-            case OWNER:
-                Permanent permanent = game.getPermanent(input.getSource().getSourceId());
-                UUID ownerId = permanent.getOwnerId();
-                if (playerDealtDamageBy(ownerId, objectId, game)) {
-                    return true;
-                }
-                break;
+                return playerDealtDamageBy(playerId, objectId, game);
+            case CONTROLLER:
+                return game.getAbility(input.getSource().getId(), input.getSourceId()).map(
+                        ability -> playerDealtDamageBy(ability.getControllerId(), objectId, game)
+                ).orElse(false);
             case OPPONENT:
                 for (UUID opponentId : game.getOpponents(playerId)) {
                     if (playerDealtDamageBy(opponentId, objectId, game)) {
                         return true;
                     }
                 }
-                break;
+                return false;
             case NOT_YOU:
                 for (UUID notYouId : game.getState().getPlayersInRange(playerId, game)) {
                     if (!notYouId.equals(playerId)) {
@@ -61,17 +56,17 @@ public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredica
                         }
                     }
                 }
-                break;
+                return false;
             case ANY:
                 for (UUID anyId : game.getState().getPlayersInRange(playerId, game)) {
                     if (playerDealtDamageBy(anyId, objectId, game)) {
                         return true;
                     }
                 }
-                break;
+                return false;
+            default:
+                return false;
         }
-
-        return false;
     }
 
     private boolean playerDealtDamageBy(UUID playerId, UUID objectId, Game game) {

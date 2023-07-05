@@ -22,6 +22,7 @@ public enum TargetController {
     OPPONENT,
     TEAM,
     OWNER,
+    CONTROLLER,
     CONTROLLER_ATTACHED_TO,
     NEXT,
     EACH_PLAYER,

@@ -27,10 +27,10 @@ public final class WitchKingOfAngmar extends CardImpl {
 
     private static final FilterCreaturePermanent filter
             // TODO: get this to be the right text
-            = new FilterCreaturePermanent("creature that dealt combat damage to {this}'s owner this turn");
+            = new FilterCreaturePermanent("creature that dealt combat damage to the creature's controller this turn");
 
     static {
-        filter.add(new DamagedPlayerThisTurnPredicate(TargetController.OWNER, true));
+        filter.add(new DamagedPlayerThisTurnPredicate(TargetController.CONTROLLER, true));
     }
 
     public WitchKingOfAngmar(UUID ownerId, CardSetInfo setInfo) {
