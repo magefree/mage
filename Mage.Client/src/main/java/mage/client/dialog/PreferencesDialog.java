@@ -909,7 +909,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(main_gamelog, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(main_battlefield, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -2447,8 +2447,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabAvatarsLayout.setVerticalGroup(
             tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabAvatarsLayout.createSequentialGroup()
-                .add(avatarPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 504, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 4, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Avatars", tabAvatars);
