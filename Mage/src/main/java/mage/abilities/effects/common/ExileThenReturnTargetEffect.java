@@ -63,6 +63,7 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
         }
         controller.moveCards(toFlicker, Zone.EXILED, source, game);
         game.getState().processAction(game);
+        game.getState().getTriggers().checkStateTriggers(game);
         for (Card card : toFlicker) {
             putCards.moveCard(
                     yourControl ? controller : game.getPlayer(card.getOwnerId()),
