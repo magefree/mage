@@ -280,6 +280,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Warbeast of Gorgoroth", 152, Rarity.COMMON, mage.cards.w.WarbeastOfGorgoroth.class));
         cards.add(new SetCardInfo("Westfold Rider", 37, Rarity.COMMON, mage.cards.w.WestfoldRider.class));
         cards.add(new SetCardInfo("Willow-Wind", 76, Rarity.COMMON, mage.cards.w.WillowWind.class));
+        cards.add(new SetCardInfo("Witch-king of Angmar", 114, Rarity.MYTHIC, mage.cards.w.WitchKingOfAngmar.class));
         cards.add(new SetCardInfo("Witch-king, Bringer of Ruin", 293, Rarity.RARE, mage.cards.w.WitchKingBringerOfRuin.class));
         cards.add(new SetCardInfo("Wizard's Rockets", 252, Rarity.COMMON, mage.cards.w.WizardsRockets.class));
         cards.add(new SetCardInfo("Wose Pathfinder", 190, Rarity.COMMON, mage.cards.w.WosePathfinder.class));
