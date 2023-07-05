@@ -42,7 +42,7 @@ public class WitchKingOfAngmarTest extends CardTestPlayerBase {
 
     @Test
     public void testIndestructible() {
-        addCard(Zone.BATTLEFIELD, playerA, witchKing, 1, true);
+        addCard(Zone.BATTLEFIELD, playerA, witchKing, 1);
         addCard(Zone.HAND, playerA, "Swamp", 5);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discard a card:");
