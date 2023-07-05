@@ -5,6 +5,7 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
 
 import java.util.UUID;
@@ -35,6 +36,13 @@ public class DamagedPlayerThisTurnPredicate implements ObjectSourcePlayerPredica
         switch (controller) {
             case YOU:
                 if (playerDealtDamageBy(playerId, objectId, game)) {
+                    return true;
+                }
+                break;
+            case OWNER:
+                Permanent permanent = game.getPermanent(input.getSource().getSourceId());
+                UUID ownerId = permanent.getOwnerId();
+                if (playerDealtDamageBy(ownerId, objectId, game)) {
                     return true;
                 }
                 break;

@@ -26,10 +26,11 @@ import java.util.UUID;
 public final class WitchKingOfAngmar extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature that dealt combat damage to you this turn");
+            // TODO: get this to be the right text
+            = new FilterCreaturePermanent("creature that dealt combat damage to {this}'s owner this turn");
 
     static {
-        filter.add(new DamagedPlayerThisTurnPredicate(TargetController.YOU, true));
+        filter.add(new DamagedPlayerThisTurnPredicate(TargetController.OWNER, true));
     }
 
     public WitchKingOfAngmar(UUID ownerId, CardSetInfo setInfo) {
