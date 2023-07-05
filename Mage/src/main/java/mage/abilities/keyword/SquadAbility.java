@@ -32,7 +32,7 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
     public SquadAbility(Cost cost) {
         super(Zone.STACK, null);
         setSquadCost(cost);
-        addSubAbility(new SquadETBAbility());
+        addSubAbility(new SquadTriggerAbility());
     }
 
     private SquadAbility(final SquadAbility ability) {
@@ -105,18 +105,18 @@ public class SquadAbility extends StaticAbility implements OptionalAdditionalSou
                 "create that many tokens that are copies of it.)</i>";
     }
 }
-class SquadETBAbility extends EntersBattlefieldTriggeredAbility {
-    public SquadETBAbility() {
+class SquadTriggerAbility extends EntersBattlefieldTriggeredAbility {
+    public SquadTriggerAbility() {
         super(new SquadEffectETB());
-		this.setRuleVisible(false);
+        this.setRuleVisible(false);
     }
 
-    private SquadETBAbility(final SquadETBAbility ability) {
+    private SquadTriggerAbility(final SquadTriggerAbility ability) {
         super(ability);
     }
     @Override
-    public SquadETBAbility copy() {
-        return new SquadETBAbility(this);
+    public SquadTriggerAbility copy() {
+        return new SquadTriggerAbility(this);
     }
 
     @Override

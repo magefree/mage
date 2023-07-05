@@ -150,7 +150,10 @@ public class CopyTokenFunction {
             // Copy starting loyalty from spell (Ob Nixilis, the Adversary)
             target.setStartingLoyalty(spell.getStartingLoyalty());
             target.setStartingDefense(spell.getStartingDefense());
+        } else {
+            target.setZoneChangeCounter(source.getZoneChangeCounter(game), game);
         }
+
         return target;
     }
 }

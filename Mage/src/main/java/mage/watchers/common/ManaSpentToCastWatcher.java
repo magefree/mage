@@ -42,7 +42,7 @@ public class ManaSpentToCastWatcher extends Watcher {
                     manaMap.put(new MageObjectReference(spell.getSpellAbility()), spell.getSpellAbility().getManaCostsToPay().getUsedManaToPay());
                 }
                 return;
-            case AT_END_OF_TURN:
+            case PLAY_TURN:
                 manaMap.clear();
         }
     }
