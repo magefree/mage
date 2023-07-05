@@ -62,6 +62,7 @@ public abstract class CostImpl implements Cost {
     @Override
     public void clearPaid() {
         paid = false;
+        targets.clearChosen();
     }
 
     @Override

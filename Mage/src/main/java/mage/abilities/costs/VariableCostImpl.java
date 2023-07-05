@@ -89,6 +89,7 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
     @Override
     public void clearPaid() {
         paid = false;
+        targets.clearChosen();
         amountPaid = 0;
     }
 

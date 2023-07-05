@@ -127,7 +127,7 @@ public class OrCost implements Cost {
     @Override
     public void clearPaid() {
         selectedCost = null;
-        costs.stream().forEach(Cost::clearPaid);
+        costs.forEach(Cost::clearPaid);
     }
 
     @Override

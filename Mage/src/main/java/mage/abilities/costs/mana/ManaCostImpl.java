@@ -85,9 +85,9 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
 
     @Override
     public void clearPaid() {
+        super.clearPaid();
         payment.clear();
         usedManaToPay.clear();
-        super.clearPaid();
     }
 
     @Override
