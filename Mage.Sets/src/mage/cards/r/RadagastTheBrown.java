@@ -38,7 +38,7 @@ public final class RadagastTheBrown extends CardImpl {
 
     static {
         cardFilter.add(CardType.CREATURE.getPredicate());
-        cardFilter.add(SharesACreatureTypeWithCreaturesYouControl.FALSE);
+        cardFilter.add(SharesACreatureTypeWithCreaturesYouControl.DOES_NOT);
     }
 
     public RadagastTheBrown(UUID ownerId, CardSetInfo setInfo) {
@@ -103,8 +103,8 @@ class TargetManaValue implements DynamicValue {
 }
 
 enum SharesACreatureTypeWithCreaturesYouControl implements Predicate<Card> {
-    TRUE(true),
-    FALSE(false);
+    DOES(true),
+    DOES_NOT(false);
     private final boolean doesShare;
 
     SharesACreatureTypeWithCreaturesYouControl(boolean doesShare) {
