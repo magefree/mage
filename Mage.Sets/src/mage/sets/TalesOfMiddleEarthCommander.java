@@ -193,6 +193,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reclamation Sage", 259, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class));
         cards.add(new SetCardInfo("Reflecting Pool", 373, Rarity.MYTHIC, mage.cards.r.ReflectingPool.class));
         cards.add(new SetCardInfo("Rejuvenating Springs", 325, Rarity.RARE, mage.cards.r.RejuvenatingSprings.class));
+        cards.add(new SetCardInfo("Relic of Sauron", 79, Rarity.RARE, mage.cards.r.RelicOfSauron.class));
         cards.add(new SetCardInfo("Revenge of Ravens", 207, Rarity.UNCOMMON, mage.cards.r.RevengeOfRavens.class));
         cards.add(new SetCardInfo("Riders of Rohan", 67, Rarity.RARE, mage.cards.r.RidersOfRohan.class));
         cards.add(new SetCardInfo("Rings of Brighthearth", 352, Rarity.MYTHIC, mage.cards.r.RingsOfBrighthearth.class));
