@@ -45,7 +45,7 @@ public final class FealtyToTheRealm extends CardImpl {
         Ability ability = new SimpleStaticAbility(
                 new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA)
         );
-        ability.addEffect(new CantAttackControllerAttachedEffect(AttachmentType.AURA, false));
+        ability.addEffect(new CantAttackControllerAttachedEffect(AttachmentType.AURA, false).setText("and can't attack you"));
         this.addAbility(ability);
     }
 

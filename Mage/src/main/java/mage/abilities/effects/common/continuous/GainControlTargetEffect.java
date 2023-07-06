@@ -139,11 +139,14 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
         Target target = mode.getTargets().get(0);
         StringBuilder sb = new StringBuilder("gain control of ");
         if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
+            if (target.getMinNumberOfTargets() == 0) {
                 sb.append("up to ");
             }
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ");
         } else if (!target.getTargetName().startsWith("another")) {
+            if (target.getMinNumberOfTargets() == 0) {
+                sb.append("up to one ");
+            }
             sb.append("target ");
         }
         sb.append(mode.getTargets().get(0).getTargetName());

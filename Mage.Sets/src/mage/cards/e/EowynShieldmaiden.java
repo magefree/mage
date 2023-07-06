@@ -66,7 +66,8 @@ public final class EowynShieldmaiden extends CardImpl {
             + "if another Human entered the battlefield "
             + "under your control this turn, create two "
             + "2/2 red Human Knight creature tokens with "
-            + "trample and haste."
+            + "trample and haste. "
+            + "Then if you control six or more Humans, draw a card."
         ), new EowynShieldmaidenWatcher());
     }
 
@@ -140,7 +141,7 @@ class EowynShieldmaidenWatcher extends Watcher {
 
         Set<MageObjectReference> setForThePlayer = this.humanEnterings.getOrDefault(playerId, new HashSet<>());
         return setForThePlayer.stream().anyMatch(
-            humanMOR -> sourceMOR == null || !(humanMOR.equals(sourceMOR))
+            humanMOR -> !(humanMOR.equals(sourceMOR))
         );
     }
 }

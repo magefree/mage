@@ -49,7 +49,7 @@ public final class HauntOfTheDeadMarshes extends CardImpl {
 
         // {2}{B}: Return Haunt of the Dead Marshes from your graveyard to the battlefield tapped. Activate only if you control a legendary creature.
         this.addAbility(new ConditionalActivatedAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true),
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true, false),
                 new ManaCostsImpl<>("{2}{B}"), condition
         ).addHint(hint));
     }

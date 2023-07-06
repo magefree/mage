@@ -7,7 +7,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -82,7 +81,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
             return staticText;
         }
         return getTargetPointer().describeTargets(mode.getTargets(), "it") +
-                (getTargetPointer().isPlural(mode.getTargets()) ? " get " : " gets ") +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " each get " : " gets ") +
                 CardUtil.getBoostText(power, toughness, duration);
     }
 }

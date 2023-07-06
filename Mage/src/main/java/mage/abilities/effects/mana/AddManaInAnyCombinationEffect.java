@@ -13,7 +13,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -180,7 +179,12 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
             for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
                 i++;
                 if (i > 1) {
-                    sb.append(" and/or ");
+                    if (i == manaSymbols.size()) {
+                        sb.append(" and/or ");
+                    } else {
+                        sb.append(", ");
+                    }
+
                 }
                 sb.append('{').append(coloredManaSymbol.toString()).append('}');
             }

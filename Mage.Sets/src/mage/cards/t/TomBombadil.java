@@ -26,7 +26,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.abilities.hint.common.CountersOnPermanentsHint;
@@ -81,6 +80,7 @@ class TomBombadilTriggeredAbility extends TriggeredAbilityImpl {
 
     public TomBombadilTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TomBombadilEffect(), false);
+        setTriggerPhrase("Whenever the final chapter ability of a Saga you control resolves, ");
     }
 
     public TomBombadilTriggeredAbility(final TomBombadilTriggeredAbility ability) {
@@ -139,10 +139,6 @@ class TomBombadilTriggeredAbility extends TriggeredAbilityImpl {
         return SagaAbility.isFinalAbility(triggeredAbility, maxChapter);
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever the final chapter ability of a Saga you control resolves, reveal cards from the top of your library until you reveal a Saga card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.";
-    }
 }
 
 // From PrismaticBridgeEffect

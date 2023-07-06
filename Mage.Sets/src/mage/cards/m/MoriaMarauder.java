@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class MoriaMarauder extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent("a Goblin or Orc");
+    private static final FilterPermanent filter = new FilterControlledPermanent("a Goblin or Orc you control");
 
     static {
         filter.add(Predicates.or(

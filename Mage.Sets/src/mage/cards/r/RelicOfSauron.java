@@ -38,7 +38,7 @@ public final class RelicOfSauron extends CardImpl {
                 new GenericManaCost(3)
         );
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new DiscardControllerEffect(1));
+        ability.addEffect(new DiscardControllerEffect(1).concatBy(", then"));
         this.addAbility(ability);
 
     }

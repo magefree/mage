@@ -23,8 +23,8 @@ public final class EntishRestoration extends CardImpl {
     private static final FilterCard filter = new FilterBasicLandCard("basic land cards");
 
     private static final String rule = "Search your library for up to two basic land cards, " +
-        "put them onto the battlefield tapped, then shuffle." +
-        "If " + FerociousCondition.instance.toString() + ", instead search your library for up" +
+        "put them onto the battlefield tapped, then shuffle. " +
+        "If " + FerociousCondition.instance.toString() + ", instead search your library for up " +
         "to three basic land cards, put them onto the battlefield tapped, then shuffle.";
 
     public EntishRestoration(UUID ownerId, CardSetInfo setInfo) {
