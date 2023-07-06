@@ -56,7 +56,7 @@ public final class Glamdring extends CardImpl {
         this.addAbility(
                 new DealsDamageToAPlayerAttachedTriggeredAbility(
                         new CastFromHandForFreeEffect(filter),
-                        "equipped creature", true
+                        "equipped creature", false
                 )
         );
 
