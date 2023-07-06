@@ -28,6 +28,7 @@ public class FilterCompareManaValue extends FilterCard {
 
     @Override
     public boolean match(Card card, UUID playerId, Ability source, Game game) {
-        return ComparisonType.compare(card.getManaValue(), comparisonType, value.calculate(game, source, null));
+        return super.match(card, playerId, source, game) &&
+                ComparisonType.compare(card.getManaValue(), comparisonType, value.calculate(game, source, null));
     }
 }
