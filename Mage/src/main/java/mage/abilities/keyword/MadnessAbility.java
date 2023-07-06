@@ -138,7 +138,7 @@ class MadnessReplacementEffect extends ReplacementEffectImpl {
 
         // TODO, deal with deprecated call
         if (controller.moveCards(card, Zone.EXILED, source, game)) {
-            game.applyEffects(); // needed to add Madness ability to cards (e.g. by Falkenrath Gorger)
+            game.getState().processAction(game); // needed to add Madness ability to cards (e.g. by Falkenrath Gorger)
             GameEvent gameEvent = new MadnessCardExiledEvent(card.getId(), source, controller.getId());
             game.fireEvent(gameEvent);
         }

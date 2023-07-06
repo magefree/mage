@@ -119,7 +119,6 @@ class EvolvedSleeperPhyrexianEffect extends OneShotEffect {
             permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
         }
         Player player = game.getPlayer(source.getControllerId());
-        game.applyEffects();
         player.drawCards(1, source, game);
         player.loseLife(1, game, source, false);
         return true;

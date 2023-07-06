@@ -196,7 +196,7 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
                 }
             }
         }
-        game.applyEffects();
+        game.getState().processAction(game);
 
         // Return the exiled auras
         Set<Card> returningAuras = new HashSet<>();
