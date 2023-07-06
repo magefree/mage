@@ -5,8 +5,10 @@ package mage.constants;
  */
 public enum ComparisonType {
     FEWER_THAN("<", "fewer", "than"),
+    FEWER_THAN_OR_EQUAL_TO("<=", "fewer", "than or equal to"),
     EQUAL_TO("==", "equal", "to"),
-    MORE_THAN(">", "more", "than");
+    MORE_THAN(">", "more", "than"),
+    MORE_THAN_OR_EQUAL_TO(">=", "more", "than or equal to");
 
     String operator;
     String text1;
@@ -39,6 +41,10 @@ public enum ComparisonType {
                 return source < target;
             case EQUAL_TO:
                 return source == target;
+            case MORE_THAN_OR_EQUAL_TO:
+                return source >= target;
+            case FEWER_THAN_OR_EQUAL_TO:
+                return source <= target;
             default:
                 throw new IllegalArgumentException("comparison rules for " + comparison + " missing");
         }

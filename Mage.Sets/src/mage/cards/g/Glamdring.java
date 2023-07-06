@@ -5,6 +5,7 @@ import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.dynamicvalue.common.TriggerDamageDone;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -16,6 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterCompareManaValue;
 import mage.filter.predicate.Predicates;
 
 import java.util.UUID;
@@ -25,14 +27,13 @@ import java.util.UUID;
  * @author bobby-mccann
  */
 public final class Glamdring extends CardImpl {
-    private static final FilterCard filter = new FilterCard("an instant or sorcery spell from your hand with mana value less than or equal to that damage");
+    private static final FilterCard filter = new FilterCompareManaValue(ComparisonType.FEWER_THAN_OR_EQUAL_TO, new TriggerDamageDone());
     static {
         filter.add(Predicates.or(
                 CardType.INSTANT.getPredicate(),
                 CardType.SORCERY.getPredicate()
         ));
-        // TODO: figure out how to get the damage value
-//        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, DamageDoneWatcher))
+        filter.setMessage("an instant or sorcery spell from your hand with mana value less than or equal to that damage");
     }
 
     public Glamdring(UUID ownerId, CardSetInfo setInfo) {
