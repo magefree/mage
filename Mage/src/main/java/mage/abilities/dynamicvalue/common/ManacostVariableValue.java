@@ -10,11 +10,13 @@ public enum ManacostVariableValue implements DynamicValue {
     REGULAR, // if you need X on cast/activate (in stack) - reset each turn
     ETB; // if you need X after ETB (in battlefield) - keep until turn end after leaving battlefield
 
+    //Note: both versions now use the same logic entirely, as does GetXValue.
+    //Maybe combine them all?
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        if (this == REGULAR) {
+        /*if (this == REGULAR) {
             return sourceAbility.getManaCostsToPay().getX();
-        }
+        }*/
         return (int)CardUtil.getSourceCostTags(game, sourceAbility).getOrDefault("X",0);
     }
 
