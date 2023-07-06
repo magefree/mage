@@ -111,7 +111,7 @@ class CunningRhetoricEffect extends OneShotEffect {
             return false;
         }
         opponent.moveCards(card, Zone.EXILED, source, game);
-        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
+        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
         return true;
     }
 }

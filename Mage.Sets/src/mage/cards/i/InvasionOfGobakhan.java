@@ -87,45 +87,11 @@ class InvasionOfGobakhanEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(card, Zone.EXILED, source, game);
-        game.addEffect(new InvasionOfGobakhanCastEffect(card, game), source);
+        CardUtil.makeCardPlayableOrCastable(
+            game, source, card, Duration.Custom,
+            false, null, card.getOwnerId(), null);
         game.addEffect(new InvasionOfGobakhanCostEffect(card, game), source);
         return true;
-    }
-}
-
-class InvasionOfGobakhanCastEffect extends AsThoughEffectImpl {
-
-    private final MageObjectReference mor;
-
-    public InvasionOfGobakhanCastEffect(Card card, Game game) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.mor = new MageObjectReference(card, game);
-    }
-
-    private InvasionOfGobakhanCastEffect(final InvasionOfGobakhanCastEffect effect) {
-        super(effect);
-        this.mor = effect.mor;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public InvasionOfGobakhanCastEffect copy() {
-        return new InvasionOfGobakhanCastEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = mor.getCard(game);
-        if (card == null) {
-            discard();
-            return false;
-        }
-        return mor.refersTo(CardUtil.getMainCardId(game, sourceId), game)
-                && card.isOwnedBy(affectedControllerId);
     }
 }
 

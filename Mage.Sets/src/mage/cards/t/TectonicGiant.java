@@ -21,6 +21,7 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -125,54 +126,9 @@ class TectonicGiantEffect extends OneShotEffect {
         if (card == null) {
             return true;
         }
-        ContinuousEffect effect = new TectonicGiantMayPlayEffect();
-        effect.setTargetPointer(new FixedTarget(card.getId()));
-        game.addEffect(effect, source);
+
+        CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, null);
 
         return true;
-    }
-}
-
-class TectonicGiantMayPlayEffect extends AsThoughEffectImpl {
-
-    private int castOnTurn = 0;
-
-    TectonicGiantMayPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.staticText = "Until the end of your next turn, you may play that card.";
-    }
-
-    private TectonicGiantMayPlayEffect(final TectonicGiantMayPlayEffect effect) {
-        super(effect);
-        castOnTurn = effect.castOnTurn;
-    }
-
-    @Override
-    public TectonicGiantMayPlayEffect copy() {
-        return new TectonicGiantMayPlayEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        castOnTurn = game.getTurnNum();
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        return castOnTurn != game.getTurnNum()
-                && game.getPhase().getStep().getType() == PhaseStep.END_TURN
-                && game.isActivePlayer(source.getControllerId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return source.isControlledBy(affectedControllerId)
-                && getTargetPointer().getTargets(game, source).contains(sourceId);
     }
 }

@@ -3,19 +3,16 @@ package mage.cards.g;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -84,13 +81,15 @@ class GalesRedirectionEffect extends RollDieWithResultTableEffect {
         if (card == null || !Zone.EXILED.match(game.getState().getZone(card.getId()))) {
             return true;
         }
-        if (result >= 15) {
-            game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(
-                    Zone.EXILED, TargetController.YOU, Duration.Custom, true
-            ).setTargetPointer(new FixedTarget(card, game)), source);
-        } else if (result >= 1) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
+
+        if(result < 1) {
+            return true;
         }
+        CardUtil.SimpleCastManaAdjustment adjust = null;
+        if (result >= 15) {
+            adjust = CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST;
+        }
+        CardUtil.makeCardCastable(game, source, card, Duration.Custom, adjust);
         return true;
     }
 }

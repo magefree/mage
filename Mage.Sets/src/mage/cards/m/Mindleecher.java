@@ -12,6 +12,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -89,50 +90,11 @@ class MindleecherEffect extends OneShotEffect {
         }
         cards.getCards(game).stream().forEach(card -> card.setFaceDown(true, game));
         for (Card card : cards.getCards(game)) {
-            game.addEffect(new MindleecherCastFromExileEffect(controller.getId())
-                    .setTargetPointer(new FixedTarget(card, game)), source);
+            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, null);
             game.addEffect(new MindleecherLookEffect(controller.getId())
                     .setTargetPointer(new FixedTarget(card, game)), source);
         }
         return true;
-    }
-}
-
-class MindleecherCastFromExileEffect extends AsThoughEffectImpl {
-
-    private final UUID authorizedPlayerId;
-
-    MindleecherCastFromExileEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.authorizedPlayerId = authorizedPlayerId;
-        staticText = "For as long as that card remains exiled, you may play it";
-    }
-
-    private MindleecherCastFromExileEffect(final MindleecherCastFromExileEffect effect) {
-        super(effect);
-        this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public MindleecherCastFromExileEffect copy() {
-        return new MindleecherCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-        if (cardId == null) {
-            this.discard(); // card is no longer in the origin zone, effect can be discarded
-            return false;
-        }
-        return objectId.equals(cardId)
-                && affectedControllerId.equals(authorizedPlayerId)
-                && game.getCard(objectId) != null;
     }
 }
 

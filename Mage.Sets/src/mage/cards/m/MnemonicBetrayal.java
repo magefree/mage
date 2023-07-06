@@ -91,7 +91,8 @@ class MnemonicBetrayalExileEffect extends OneShotEffect {
             if (card.isLand(game)) {
                 continue;
             }
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+            CardUtil.makeCardCastable(game, source, card, Duration.EndOfTurn,
+                CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE);
         }
         cards.retainZone(Zone.EXILED, game);
         game.addDelayedTriggeredAbility(new MnemonicBetrayalDelayedTriggeredAbility(

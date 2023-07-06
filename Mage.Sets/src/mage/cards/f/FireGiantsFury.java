@@ -3,8 +3,6 @@ package mage.cards.f;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -13,7 +11,10 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
@@ -160,60 +161,11 @@ class FireGiantsFuryDelayedEffect extends OneShotEffect {
                 controller.moveCardsToExile(cards, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceCard != null ? sourceCard.getIdName() : "");
 
                 for (Card card : cards) {
-                    ContinuousEffect effect = new FireGiantsFuryMayPlayEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId(), game));
-                    game.addEffect(effect, source);
+                    CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, null);
                 }
-
             }
             return true;
         }
         return false;
-    }
-}
-
-class FireGiantsFuryMayPlayEffect extends AsThoughEffectImpl {
-
-    private int castOnTurn = 0;
-
-    public FireGiantsFuryMayPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.staticText = "Until the end of your next turn, you may play that card.";
-    }
-
-    private FireGiantsFuryMayPlayEffect(final FireGiantsFuryMayPlayEffect effect) {
-        super(effect);
-        castOnTurn = effect.castOnTurn;
-    }
-
-    @Override
-    public FireGiantsFuryMayPlayEffect copy() {
-        return new FireGiantsFuryMayPlayEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        castOnTurn = game.getTurnNum();
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (castOnTurn != game.getTurnNum() && game.getPhase().getStep().getType() == PhaseStep.END_TURN) {
-            return game.isActivePlayer(source.getControllerId());
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        UUID objectIdToCast = CardUtil.getMainCardId(game, sourceId);
-        return source.isControlledBy(affectedControllerId)
-                && getTargetPointer().getTargets(game, source).contains(objectIdToCast);
     }
 }

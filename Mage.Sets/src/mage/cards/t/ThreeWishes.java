@@ -1,29 +1,24 @@
 
 package mage.cards.t;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -70,9 +65,7 @@ class ThreeWishesExileEffect extends OneShotEffect {
             for (Card card : topThreeCards) {
                 if (controller.moveCardsToExile(card, source, game, true, exileId, "Three Wishes")) {
                     card.setFaceDown(true, game);
-                    ContinuousEffect effect = new ThreeWishesPlayFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
+                    CardUtil.makeCardPlayable(game, source, card, Duration.UntilYourNextTurn, null);
                 }
             }
             DelayedTriggeredAbility delayed = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(new ThreeWishesPutIntoGraveyardEffect());
@@ -156,39 +149,5 @@ class ThreeWishesLookAtCardEffect extends AsThoughEffectImpl {
             }
         }
         return false;
-    }
-}
-
-class ThreeWishesPlayFromExileEffect extends AsThoughEffectImpl {
-
-    ThreeWishesPlayFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.UntilYourNextTurn, Outcome.Benefit);
-        staticText = "Until your next turn, you may play those cards";
-    }
-
-    ThreeWishesPlayFromExileEffect(final ThreeWishesPlayFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ThreeWishesPlayFromExileEffect copy() {
-        return new ThreeWishesPlayFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), 0);
-        ExileZone exile = game.getExile().getExileZone(exileId);
-        return exile != null
-                && getTargetPointer().getFirst(game, source) != null
-                && getTargetPointer().getFirst(game, source).equals(sourceId)
-                && source.isControlledBy(affectedControllerId)
-                && game.getState().getZone(sourceId) == Zone.EXILED
-                && exile.contains(sourceId);
     }
 }

@@ -144,7 +144,7 @@ class BreechesBrazenPlundererEffect extends OneShotEffect {
             return false;
         }
         for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
         }
         return true;
     }

@@ -85,7 +85,8 @@ class MezzioMuggerEffect extends OneShotEffect {
         }
         player.moveCards(cards, Zone.EXILED, source, game);
         for (Card card : cards) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn,
+                CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
         }
         return true;
     }

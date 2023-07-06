@@ -40,7 +40,8 @@ class TibaltCosmicImpostorPlayFromExileEffect extends AsThoughEffectImpl {
 
     TibaltCosmicImpostorPlayFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells";
+        staticText = "You may play cards exiled with Tibalt, Cosmic Impostor, " +
+            "and you may spend mana as though it were mana of any color to cast those spells";
     }
 
     TibaltCosmicImpostorPlayFromExileEffect(final TibaltCosmicImpostorPlayFromExileEffect effect) {
@@ -80,7 +81,7 @@ class TibaltCosmicImpostorPlayFromExileEffect extends AsThoughEffectImpl {
         if (exileZone.contains(mainCardId)
                 && affectedControllerId.equals(source.getControllerId())
                 && game.getState().getZone(mainCardId).equals(Zone.EXILED)) {
-            CardUtil.makeCardPlayable(game, source, cardInExile, Duration.Custom, true);
+            CardUtil.makeCardPlayable(game, source, cardInExile, Duration.Custom, CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
             return true;
         }
         return false;

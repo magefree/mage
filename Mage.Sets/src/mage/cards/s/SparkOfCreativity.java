@@ -1,16 +1,12 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageObject;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -19,6 +15,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -78,51 +77,10 @@ class SparkOfCreativityEffect extends OneShotEffect {
                     }
                 }
                 // If you don't, you may play that card until end of turn
-                game.addEffect(new SparkOfCreativityPlayEffect(new MageObjectReference(card, game)), source);
-
+                CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, null);
             }
             return true;
         }
         return false;
     }
-}
-
-class SparkOfCreativityPlayEffect extends AsThoughEffectImpl {
-
-    private final MageObjectReference objectReference;
-
-    public SparkOfCreativityPlayEffect(MageObjectReference objectReference) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        this.objectReference = objectReference;
-        staticText = "you may play that card until end of turn";
-    }
-
-    public SparkOfCreativityPlayEffect(final SparkOfCreativityPlayEffect effect) {
-        super(effect);
-        this.objectReference = effect.objectReference;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public SparkOfCreativityPlayEffect copy() {
-        return new SparkOfCreativityPlayEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectReference.refersTo(objectId, game) && affectedControllerId.equals(source.getControllerId())) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                return true;
-            } else {
-                discard();
-            }
-        }
-        return false;
-    }
-
 }

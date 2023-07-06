@@ -1,32 +1,24 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.watchers.common.CastSpellLastTurnWatcher;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -83,46 +75,10 @@ class VancesBlastingCannonsExileEffect extends OneShotEffect {
                 String exileName = sourcePermanent.getIdName() + (card.isLand(game) ? "" : " <this card may be cast the turn it was exiled");
                 controller.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);
                 if (game.getState().getZone(card.getId()) == Zone.EXILED && !card.isLand(game)) {
-                    ContinuousEffect effect = new CastFromNonHandZoneTargetEffect(Duration.EndOfTurn);
-                    effect.setTargetPointer(new FixedTarget(card, game));
-                    game.addEffect(effect, source);
+                    CardUtil.makeCardCastable(game, source, card, Duration.EndOfTurn, null);
                 }
             }
             return true;
-        }
-        return false;
-    }
-}
-
-class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
-
-    public CastFromNonHandZoneTargetEffect(Duration duration) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
-        staticText = "If it's a nonland card, you may cast that card this turn";
-    }
-
-    public CastFromNonHandZoneTargetEffect(final CastFromNonHandZoneTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public CastFromNonHandZoneTargetEffect copy() {
-        return new CastFromNonHandZoneTargetEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (getTargetPointer().getTargets(game, source).contains(objectId)
-                && source.isControlledBy(affectedControllerId)) {
-            Card card = game.getCard(objectId);
-            if (card != null) {
-                return true;
-            }
         }
         return false;
     }

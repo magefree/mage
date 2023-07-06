@@ -3,7 +3,6 @@ package mage.abilities.common;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.Mode;
 import mage.abilities.costs.common.ExileSourceFromHandCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -67,8 +66,8 @@ class CastExiledFromHandCardEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .map(MageObjectReference.class::cast)
                 .map(mor -> mor.getCard(game))
-                .ifPresent(card -> CardUtil.makeCardPlayable(
-                        game, source, card, Duration.Custom, false
+                .ifPresent(card -> CardUtil.makeCardCastable(
+                        game, source, card, Duration.Custom, null
                 ));
         return true;
     }

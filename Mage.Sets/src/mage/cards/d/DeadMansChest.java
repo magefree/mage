@@ -3,24 +3,21 @@ package mage.cards.d;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.Set;
@@ -88,97 +85,13 @@ class DeadMansChestEffect extends OneShotEffect {
                 if (!cards.isEmpty()) {
                     controller.moveCardsToExile(cards, source, game, true, source.getSourceId(), sourceObject.getName());
                     for (Card card : cards) {
-                        if (!card.isLand(game)) {
-                            ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.Custom);
-                            effect.setTargetPointer(new FixedTarget(card, game));
-                            game.addEffect(effect, source);
-                            effect = new DeadMansChestSpendManaEffect();
-                            effect.setTargetPointer(new FixedTarget(card, game));
-                            game.addEffect(effect, source);
-                        }
+                        CardUtil.makeCardCastable(game, source, card, Duration.EndOfGame,
+                            CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE);
                     }
                 }
             }
             return true;
         }
         return false;
-    }
-}
-
-class DeadMansChestCastFromExileEffect extends AsThoughEffectImpl {
-
-    public DeadMansChestCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        staticText = "You may cast nonland cards from among them as long as they remain exiled";
-    }
-
-    public DeadMansChestCastFromExileEffect(final DeadMansChestCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public DeadMansChestCastFromExileEffect copy() {
-        return new DeadMansChestCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(getTargetPointer().getFirst(game, source))) {
-            return affectedControllerId.equals(source.getControllerId());
-        } else {
-            if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
-                // object has moved zone so effect can be discarted
-                this.discard();
-            }
-        }
-        return false;
-    }
-}
-
-class DeadMansChestSpendManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
-
-    public DeadMansChestSpendManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
-        staticText = "and you may spend mana as though it were mana of any type to cast those spells";
-    }
-
-    public DeadMansChestSpendManaEffect(final DeadMansChestSpendManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public DeadMansChestSpendManaEffect copy() {
-        return new DeadMansChestSpendManaEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
-                && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
-            // if the card moved from exile to spell the zone change counter is increased by 1 (effect must applies before and on stack, use isCheckPlayableMode?)
-            return source.isControlledBy(affectedControllerId);
-        } else {
-            if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
-                // object has moved zone so effect can be discarted
-                this.discard();
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        return mana.getFirstAvailable();
     }
 }

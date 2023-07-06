@@ -18,6 +18,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -75,9 +76,8 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
                 if (game.getState().getZone(card.getId()) == Zone.EXILED
                         && !card.isCreature(game)
                         && !card.isLand(game)) {
-                    ContinuousEffect effect = new NarsetEnlightenedMasterCastFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(card, game));
-                    game.addEffect(effect, source);
+                    CardUtil.makeCardCastable(game, source, card, Duration.EndOfTurn,
+                        CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST);
                 }
             }
             return true;
@@ -88,39 +88,5 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
     @Override
     public NarsetEnlightenedMasterExileEffect copy() {
         return new NarsetEnlightenedMasterExileEffect(this);
-    }
-}
-
-class NarsetEnlightenedMasterCastFromExileEffect extends AsThoughEffectImpl {
-
-    public NarsetEnlightenedMasterCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Until end of turn, you may cast noncreature cards exiled with {this} this turn without paying their mana costs";
-    }
-
-    public NarsetEnlightenedMasterCastFromExileEffect(final NarsetEnlightenedMasterCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public NarsetEnlightenedMasterCastFromExileEffect copy() {
-        return new NarsetEnlightenedMasterCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(getTargetPointer().getFirst(game, source))
-                && affectedControllerId.equals(source.getControllerId())) {
-            Player player = game.getPlayer(affectedControllerId);
-            if (player != null) {
-                return allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
-            }
-        }
-        return false;
     }
 }

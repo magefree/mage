@@ -7,7 +7,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CompletedDungeonCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -15,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.common.CompletedDungeonWatcher;
 
@@ -84,13 +82,13 @@ class CavesOfChaosAdventurerEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.EXILED, source, game);
+
+        CardUtil.SimpleCastManaAdjustment adjust = null;
         if (CompletedDungeonWatcher.checkPlayer(source.getControllerId(), game)) {
-            game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(
-                    Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, true
-            ).setTargetPointer(new FixedTarget(card, game)), source);
-        } else {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+            adjust = CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST;
         }
+
+        CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, adjust);
         return true;
     }
 }

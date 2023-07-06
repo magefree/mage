@@ -18,6 +18,7 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.watchers.common.SpellsCastWatcher;
 
 import java.util.List;
@@ -77,9 +78,8 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
             if (revealedCard.isInstant(game)
                     || revealedCard.isSorcery(game)) {
                 opponent.moveCardToExileWithInfo(revealedCard, source.getSourceId(), "Planeswalker's Mischief", source, game, Zone.HAND, true);
-                AsThoughEffect effect = new PlaneswalkersMischiefCastFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(revealedCard.getId()));
-                game.addEffect(effect, source);
+                CardUtil.makeCardCastable(game, source, revealedCard, Duration.Custom,
+                    CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST);
                 OneShotEffect effect2 = new ReturnFromExileEffect(Zone.HAND);
                 Condition condition = new PlaneswalkersMischiefCondition(source.getSourceId(), revealedCard.getId());
                 ConditionalOneShotEffect effect3 = new ConditionalOneShotEffect(effect2, condition, "if you haven't cast it, return it to its owner's hand.");
@@ -87,42 +87,6 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
                 delayedAbility.addWatcher(new SpellsCastWatcher());
                 game.addDelayedTriggeredAbility(delayedAbility, source);
                 return true;
-            }
-        }
-        return false;
-    }
-}
-
-class PlaneswalkersMischiefCastFromExileEffect extends AsThoughEffectImpl {
-
-    PlaneswalkersMischiefCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        staticText = "You may cast that card without paying its mana cost as long as it remains exiled";
-    }
-
-    PlaneswalkersMischiefCastFromExileEffect(final PlaneswalkersMischiefCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public PlaneswalkersMischiefCastFromExileEffect copy() {
-        return new PlaneswalkersMischiefCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (targetPointer.getTargets(game, source).contains(objectId)
-                && game.getState().getZone(objectId) == Zone.EXILED) {
-            Player player = game.getPlayer(source.getControllerId());
-            Card card = game.getCard(objectId);
-            if (player != null
-                    && card != null) {
-                return allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
             }
         }
         return false;

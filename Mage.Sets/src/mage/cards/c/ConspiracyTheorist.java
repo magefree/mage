@@ -127,7 +127,7 @@ class ConspiracyTheoristEffect extends OneShotEffect {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null && controller.moveCards(card, Zone.EXILED, source, game)) {
                         // you may cast it this turn
-                        CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+                        CardUtil.makeCardCastable(game, source, card, Duration.EndOfTurn, null);
                     }
                 }
             }

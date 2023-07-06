@@ -83,7 +83,7 @@ class SoulfireEruptionEffect extends OneShotEffect {
                 continue;
             }
             controller.moveCards(card, Zone.EXILED, source, game);
-            game.addEffect(new SoulfireEruptionCastEffect().setTargetPointer(new FixedTarget(card, game)), source);
+            CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, null);
             if (card.getManaValue() < 1) {
                 continue;
             }
@@ -95,33 +95,5 @@ class SoulfireEruptionEffect extends OneShotEffect {
             }
         }
         return true;
-    }
-}
-
-class SoulfireEruptionCastEffect extends AsThoughEffectImpl {
-
-    SoulfireEruptionCastEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.UntilEndOfYourNextTurn, Outcome.Benefit);
-    }
-
-    private SoulfireEruptionCastEffect(final SoulfireEruptionCastEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public SoulfireEruptionCastEffect copy() {
-        return new SoulfireEruptionCastEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        return source.isControlledBy(affectedControllerId)
-                && objectId.equals(getTargetPointer().getFirst(game, source));
     }
 }

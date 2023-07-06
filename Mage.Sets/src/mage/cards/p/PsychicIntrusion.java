@@ -106,96 +106,13 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
                     UUID exileId = CardUtil.getCardExileZoneId(game, source);
                     controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source, game, fromHand ? Zone.HAND : Zone.GRAVEYARD, true);
                     // allow to cast the card
-                    ContinuousEffect effect = new PsychicIntrusionCastFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
                     // and you may spend mana as though it were mana of any color to cast it
-                    effect = new PsychicIntrusionSpendAnyManaEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
+                    CardUtil.makeCardCastable(game, source, card, Duration.Custom,
+                        CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
                 }
                 return true;
             }
         }
         return false;
-    }
-}
-
-class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
-
-    public PsychicIntrusionCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        staticText = "You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
-    }
-
-    public PsychicIntrusionCastFromExileEffect(final PsychicIntrusionCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public PsychicIntrusionCastFromExileEffect copy() {
-        return new PsychicIntrusionCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        if (objectId.equals(getTargetPointer().getFirst(game, source))) {
-            return affectedControllerId.equals(source.getControllerId());
-        } else {
-            if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
-                // object has moved zone so effect can be discarted
-                this.discard();
-            }
-        }
-        return false;
-    }
-}
-
-class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
-
-    public PsychicIntrusionSpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
-        staticText = "you may spend mana as though it were mana of any color to cast it";
-    }
-
-    public PsychicIntrusionSpendAnyManaEffect(final PsychicIntrusionSpendAnyManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public PsychicIntrusionSpendAnyManaEffect copy() {
-        return new PsychicIntrusionSpendAnyManaEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
-        if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
-                && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
-            // if the card moved from exile to spell the zone change counter is increased by 1 (effect must applies before and on stack, use isCheckPlayableMode?)
-            return source.isControlledBy(affectedControllerId);
-        } else {
-            if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
-                // object has moved zone so effect can be discarted
-                this.discard();
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        return mana.getFirstAvailable();
     }
 }

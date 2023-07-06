@@ -79,12 +79,10 @@ class TobiasBeckettEffect extends OneShotEffect {
                     if (card != null && sourceObject != null) {
                         // move card to exile
                         controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source, game, Zone.LIBRARY, true);
-                        // Add effects only if the card has a spellAbility (e.g. not for lands).
-                        if (card.getSpellAbility() != null) {
-                            // allow to cast the card
-                            // and you may spend mana as though it were mana of any color to cast it
-                            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
-                        }
+                        // allow to cast the card
+                        // and you may spend mana as though it were mana of any type to cast it
+                        CardUtil.makeCardCastable(game, source, card, Duration.Custom,
+                            CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE);
                     }
                     return true;
                 }

@@ -139,7 +139,8 @@ class RamirezDePietroPillagerEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.EXILED, source, game);
-        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, false, source.getControllerId(), null);
+        CardUtil.makeCardPlayableOrCastable(game, source, card, Duration.Custom,
+            true, null, source.getControllerId(), null);
         return true;
     }
 }

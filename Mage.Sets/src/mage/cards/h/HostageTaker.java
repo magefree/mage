@@ -90,8 +90,9 @@ class HostageTakerExileEffect extends OneShotEffect {
         // move card to exile
         UUID exileId = CardUtil.getCardExileZoneId(game, source);
         controller.moveCardToExileWithInfo(card, exileId, permanent.getIdName(), source, game, Zone.BATTLEFIELD, true);
-        // allow to cast the card and you may spend mana as though it were mana of any color to cast it
-        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
+        // allow to cast the card and you may spend mana as though it were mana of any type to cast it
+        CardUtil.makeCardCastable(game, source, card, Duration.Custom,
+            CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE);
         game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
         return true;
     }

@@ -119,9 +119,7 @@ class VivienChampionOfTheWildsEffect extends OneShotEffect {
         effect.setTargetPointer(new FixedTarget(cardToExile, game));
         game.addEffect(effect, source);
         if (cardToExile.isCreature(game)) {
-            effect = new VivienChampionOfTheWildsCastFromExileEffect(player.getId());
-            effect.setTargetPointer(new FixedTarget(cardToExile, game));
-            game.addEffect(effect, source);
+            CardUtil.makeCardCastable(game, source, cardToExile, Duration.Custom, null);
         }
 
         // put the rest on the bottom of your library in any order
@@ -165,44 +163,5 @@ class VivienChampionOfTheWildsLookEffect extends AsThoughEffectImpl {
         }
         return affectedControllerId.equals(authorizedPlayerId)
                 && objectId.equals(cardId);
-    }
-}
-
-class VivienChampionOfTheWildsCastFromExileEffect extends AsThoughEffectImpl {
-
-    private final UUID authorizedPlayerId;
-
-    VivienChampionOfTheWildsCastFromExileEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.authorizedPlayerId = authorizedPlayerId;
-    }
-
-    private VivienChampionOfTheWildsCastFromExileEffect(final VivienChampionOfTheWildsCastFromExileEffect effect) {
-        super(effect);
-        this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public VivienChampionOfTheWildsCastFromExileEffect copy() {
-        return new VivienChampionOfTheWildsCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-        if (cardId == null) {
-            this.discard(); // card is no longer in the origin zone, effect can be discarded
-        } else if (objectId.equals(cardId)
-                && affectedControllerId.equals(authorizedPlayerId)) {
-            Card card = game.getCard(objectId);
-            // TODO: Allow to cast Zoetic Cavern face down
-            return card != null && !card.isLand(game);
-        }
-        return false;
     }
 }

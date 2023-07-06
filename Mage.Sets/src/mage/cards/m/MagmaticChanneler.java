@@ -24,6 +24,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -107,38 +108,8 @@ class MagmaticChannelerExileEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        game.addEffect(new MagmaticChannelerCastFromExileEffect(new MageObjectReference(card, game)), source);
+
+        CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, null);
         return true;
-    }
-}
-
-class MagmaticChannelerCastFromExileEffect extends AsThoughEffectImpl {
-
-    private final MageObjectReference mor;
-
-    MagmaticChannelerCastFromExileEffect(MageObjectReference mor) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        this.mor = mor;
-    }
-
-    private MagmaticChannelerCastFromExileEffect(final MagmaticChannelerCastFromExileEffect effect) {
-        super(effect);
-        this.mor = effect.mor;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public MagmaticChannelerCastFromExileEffect copy() {
-        return new MagmaticChannelerCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.isControlledBy(affectedControllerId)
-                && mor.refersTo(objectId, game);
     }
 }

@@ -109,100 +109,17 @@ class PredatorsHourEffect extends OneShotEffect {
             exileZones.add(exileZoneId);
 
             // You may play the card
-            ContinuousEffect effect = new PredatorsHourPlayFromExileEffect();
-            effect.setTargetPointer(new FixedTarget(topCard.getId(), game));
-            game.addEffect(effect, source);
-
             // And you may spend mana as though it were mana of any color to cast it
-            effect = new PredatorsHourSpendAnyManaEffect();
-            effect.setTargetPointer(new FixedTarget(topCard.getId(), game));
-            game.addEffect(effect, source);
+            CardUtil.makeCardPlayable(game, source, topCard, Duration.Custom,
+                CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
 
             // For as long as that card remains exiled, you may look at it
-            effect = new PredatorsHourLookEffect(controller.getId());
+            ContinuousEffect effect = new PredatorsHourLookEffect(controller.getId());
             effect.setTargetPointer(new FixedTarget(topCard.getId(), game));
             game.addEffect(effect, source);
         }
 
         return true;
-    }
-}
-
-class PredatorsHourPlayFromExileEffect extends AsThoughEffectImpl {
-
-    public PredatorsHourPlayFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        staticText = "You may look at and play that card for as long as it remains exiled, " +
-                "and you may spend mana as though it were mana of any color to cast that spell.";
-    }
-
-    private PredatorsHourPlayFromExileEffect(final PredatorsHourPlayFromExileEffect effect) { super(effect); }
-
-    @Override
-    public boolean apply(Game game, Ability source) { return true; }
-
-    @Override
-    public PredatorsHourPlayFromExileEffect copy() { return new PredatorsHourPlayFromExileEffect(this); }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID targetId = getTargetPointer().getFirst(game, source);
-        if (targetId == null) {
-            // card is no longer in the origin zone, effect can be discarded
-            this.discard();
-            return false;
-        }
-        Card theCard = game.getCard(objectId);
-        if (theCard == null ) { return false; }
-
-        // for split cards
-        objectId = theCard.getMainCard().getId();
-
-        if (objectId.equals(targetId)  && affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            return card != null;
-        }
-        return false;
-    }
-}
-
-class PredatorsHourSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
-
-    public PredatorsHourSpendAnyManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);
-        staticText = "you may spend mana as though it were mana of any color to cast that spell";
-    }
-
-    private PredatorsHourSpendAnyManaEffect(final PredatorsHourSpendAnyManaEffect effect) { super(effect); }
-
-    @Override
-    public boolean apply(Game game, Ability source) { return true; }
-
-    @Override
-    public PredatorsHourSpendAnyManaEffect copy() { return new PredatorsHourSpendAnyManaEffect(this); }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Card theCard = game.getCard(objectId);
-        if (theCard == null) { return false; }
-
-        // for split cards
-        objectId = theCard.getMainCard().getId();
-
-        if (objectId.equals(((FixedTarget) getTargetPointer()).getTarget())
-                && game.getState().getZoneChangeCounter(objectId) <= ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1) {
-            // if the card moved from exile to spell the zone change counter is increased by 1 (effect must applies before and on stack, use isCheckPlayableMode?)
-            return source.isControlledBy(affectedControllerId);
-        } else if (((FixedTarget) getTargetPointer()).getTarget().equals(objectId)) {
-            // object has moved zone so effect can be discarded
-            this.discard();
-        }
-        return false;
-    }
-
-    @Override
-    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
-        return mana.getFirstAvailable();
     }
 }
 

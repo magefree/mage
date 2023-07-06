@@ -100,7 +100,7 @@ class AuthorOfShadowsEffect extends OneShotEffect {
         ExileZone exileZone = game.getExile().createZone(exileZoneId, exileZoneName);
         game.getExile().moveToAnotherZone(card, game, exileZone);
 
-        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
+        CardUtil.makeCardCastable(game, source, card, Duration.Custom, CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
         return true;
     }
 }

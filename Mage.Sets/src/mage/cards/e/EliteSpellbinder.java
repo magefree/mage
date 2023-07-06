@@ -1,11 +1,9 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
@@ -20,6 +18,8 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -87,45 +87,11 @@ class EliteSpellbinderEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(card, Zone.EXILED, source, game);
-        game.addEffect(new EliteSpellbinderCastEffect(card, game), source);
+        CardUtil.makeCardPlayableOrCastable(
+            game, source, card, Duration.Custom,
+            false, null, card.getOwnerId(), null);
         game.addEffect(new EliteSpellbinderCostEffect(card, game), source);
         return true;
-    }
-}
-
-class EliteSpellbinderCastEffect extends AsThoughEffectImpl {
-
-    private final MageObjectReference mor;
-
-    public EliteSpellbinderCastEffect(Card card, Game game) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.mor = new MageObjectReference(card, game);
-    }
-
-    private EliteSpellbinderCastEffect(final EliteSpellbinderCastEffect effect) {
-        super(effect);
-        this.mor = effect.mor;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public EliteSpellbinderCastEffect copy() {
-        return new EliteSpellbinderCastEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = mor.getCard(game);
-        if (card == null) {
-            discard();
-            return false;
-        }
-        return mor.refersTo(CardUtil.getMainCardId(game, sourceId), game)
-                && card.isOwnedBy(affectedControllerId);
     }
 }
 

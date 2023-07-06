@@ -10,6 +10,7 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.decks.CardNameUtil;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -70,48 +71,14 @@ class SoulPartitionEffect extends OneShotEffect {
         controller.moveCards(permanent, Zone.EXILED, source, game);
         Card card = game.getCard(targetId);
         if (card != null && game.getState().getZone(targetId) == Zone.EXILED) {
-            game.addEffect(new SoulPartitionCastEffect(card, game), source);
+            CardUtil.makeCardPlayableOrCastable(
+                game, source, card, Duration.Custom,
+                false, null, card.getOwnerId(), null);
             if (controller.hasOpponent(card.getOwnerId(), game)) {
                 game.addEffect(new SoulPartitionCostEffect(card, game), source);
             }
         }
         return true;
-    }
-}
-
-class SoulPartitionCastEffect extends AsThoughEffectImpl {
-
-    private final MageObjectReference mor;
-
-    public SoulPartitionCastEffect(Card card, Game game) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.mor = new MageObjectReference(card, game);
-    }
-
-    private SoulPartitionCastEffect(final SoulPartitionCastEffect effect) {
-        super(effect);
-        this.mor = effect.mor;
-    }
-
-    @Override
-    public SoulPartitionCastEffect copy() {
-        return new SoulPartitionCastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = mor.getCard(game);
-        if (card == null) {
-            discard();
-            return false;
-        }
-        return mor.refersTo(CardUtil.getMainCardId(game, sourceId), game)
-                && card.isOwnedBy(affectedControllerId);
     }
 }
 

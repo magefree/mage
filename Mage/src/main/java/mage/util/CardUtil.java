@@ -43,6 +43,7 @@ import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import org.apache.log4j.Logger;
 
+import javax.annotation.Nullable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -1186,8 +1187,24 @@ public final class CardUtil {
         }
     }
 
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor) {
-        makeCardPlayable(game, source, card, duration, anyColor, null, null);
+    /**
+     * Groups together the most usual ways a card's payment is adjusted
+     * by card effects that allow play or cast.
+     */
+    public enum SimpleCastManaAdjustment {
+        AS_THOUGH_ANY_MANA_TYPE,
+        AS_THOUGH_ANY_MANA_COLOR,
+        WITHOUT_PAYING_MANA_COST,
+    }
+
+    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration,
+                                        @Nullable SimpleCastManaAdjustment manaAdjustment) {
+        makeCardPlayableOrCastable(game, source, card, duration, false, manaAdjustment, null, null);
+    }
+
+    public static void makeCardCastable(Game game, Ability source, Card card, Duration duration,
+                                        @Nullable SimpleCastManaAdjustment manaAdjustment) {
+        makeCardPlayableOrCastable(game, source, card, duration, true, manaAdjustment, null, null);
     }
 
     /**
@@ -1199,19 +1216,55 @@ public final class CardUtil {
      * @param game
      * @param card
      * @param duration
-     * @param anyColor
-     * @param condition can be null
+     * @param isCastNotPlay true for effects that allow to cast but not play
+     * @param manaAdjustment
+     *              a mana adjustment applied to the payment of the affected card.
+     *              null if no adjustment needs to be applied.
+     * @param playerId
+     *              the player allowed to cast/play.
+     *              null for that player to be the source's controller.
+     * @param condition
+     *              optional additional condition on when the card is allowed to be played/cast.
      */
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, UUID playerId, Condition condition) {
+    public static void makeCardPlayableOrCastable(
+        Game game,
+        Ability source,
+        Card card,
+        Duration duration,
+        boolean isCastNotPlay,
+        @Nullable SimpleCastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId,
+        @Nullable Condition condition
+    ) {
         // Effect can be used for cards in zones and permanents on battlefield
         // PermanentCard's ZCC is static, but we need updated ZCC from the card (after moved to another zone)
         // So there is a workaround to get actual card's ZCC
         // Example: Hostage Taker
         UUID objectId = card.getMainCard().getId();
         int zcc = game.getState().getZoneChangeCounter(objectId);
-        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
-        if (anyColor) {
-            game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
+
+        if(isCastNotPlay){
+            // TODO: make distinction between play and cast.
+            game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
+        }
+        else {
+            game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
+        }
+
+        if (manaAdjustment != null) {
+            switch(manaAdjustment){
+                case AS_THOUGH_ANY_MANA_TYPE:
+                    // TODO: make a distinct effect for "as though it were mana of any type"
+                case AS_THOUGH_ANY_MANA_COLOR:
+                    game.addEffect(
+                        new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition)
+                            .setTargetPointer(new FixedTarget(objectId, zcc)),
+                        source);
+                    break;
+                case WITHOUT_PAYING_MANA_COST:
+                    // TODO make a separate effect similar to PlayFromNotOwnHandZoneTargetEffect
+                    break;
+            }
         }
     }
 

@@ -89,9 +89,9 @@ class MarchOfRecklessJoyEffect extends OneShotEffect {
                 CardUtil.getSourceName(game, source)
         );
         for (Card card : cards) {
-            CardUtil.makeCardPlayable(
-                    game, source, card, Duration.UntilEndOfYourNextTurn,
-                    false, null, MarchOfRecklessJoyCondition.instance
+            CardUtil.makeCardPlayableOrCastable(
+                    game, source, card, Duration.UntilEndOfYourNextTurn, false,
+                    null, null, MarchOfRecklessJoyCondition.instance
             );
         }
         return true;

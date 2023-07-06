@@ -82,7 +82,7 @@ class PraetorsGraspEffect extends OneShotEffect {
                             + "card face down to exile");
                     card.moveToExile(exileId, sourceObject.getIdName(), source, game);
                     card.setFaceDown(true, game);
-                    game.addEffect(new PraetorsGraspPlayEffect(card.getId()), source);
+                    CardUtil.makeCardPlayable(game, source, card, Duration.Custom, null);
                     game.addEffect(new PraetorsGraspRevealEffect(card.getId()), source);
                 }
             }
@@ -91,53 +91,6 @@ class PraetorsGraspEffect extends OneShotEffect {
         }
         return false;
     }
-}
-
-class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
-
-    private UUID cardId;
-
-    public PraetorsGraspPlayEffect(UUID cardId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        this.cardId = cardId;
-        staticText = "You may look at and play that card for as long as it remains exiled";
-    }
-
-    public PraetorsGraspPlayEffect(final PraetorsGraspPlayEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public PraetorsGraspPlayEffect copy() {
-        return new PraetorsGraspPlayEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId.equals(cardId)
-                && affectedControllerId.equals(source.getControllerId())) {
-            Player controller = game.getPlayer(source.getControllerId());
-            UUID exileId = CardUtil.getExileZoneId(cardId.toString() + game.getState().getZoneChangeCounter(cardId), game);
-            if (exileId != null
-                    && controller != null) {
-                ExileZone exileZone = game.getExile().getExileZone(exileId);
-                if (exileZone != null
-                        && exileZone.contains(cardId)) {
-                    return true;
-                } else {
-                    discard();
-                }
-            }
-        }
-        return false;
-    }
-
 }
 
 class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
