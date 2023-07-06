@@ -1,19 +1,20 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.*;
 import mage.constants.*;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 import mage.watchers.common.PlayerLostLifeWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -86,8 +87,8 @@ class FlorianVoldarenScionEffect extends OneShotEffect {
                     }
                     if (selectedCard != null) {
                         cards.remove(selectedCard);
-                        PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
-                                game, source, selectedCard, TargetController.YOU, Duration.EndOfTurn, false, false, false
+                        CardUtil.exileAndMakePlayable(
+                            game, source, selectedCard, Duration.EndOfTurn, null, null
                         );
                     }
                     if (!cards.isEmpty()) {

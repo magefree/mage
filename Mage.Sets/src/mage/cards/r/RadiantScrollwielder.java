@@ -7,7 +7,6 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
@@ -22,6 +21,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.HashMap;
@@ -102,9 +102,8 @@ class RadiantScrollwielderEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
-                game, source, card, TargetController.YOU,
-                Duration.EndOfTurn, false, false, true
+        CardUtil.exileAndMakeCastable(
+            game, source, card, Duration.EndOfTurn, null, null
         );
         game.addEffect(new RadiantScrollwielderReplacementEffect(card, game), source);
         return true;

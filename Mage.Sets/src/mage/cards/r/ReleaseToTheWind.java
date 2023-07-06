@@ -2,17 +2,16 @@ package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -43,7 +42,8 @@ class ReleaseToTheWindEffect extends OneShotEffect {
 
     public ReleaseToTheWindEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost";
+        this.staticText = "Exile target nonland permanent. For as long as that card remains exiled, " +
+            "its owner may cast it without paying its mana cost";
     }
 
     public ReleaseToTheWindEffect(final ReleaseToTheWindEffect effect) {
@@ -63,7 +63,8 @@ class ReleaseToTheWindEffect extends OneShotEffect {
             return false;
         }
 
-        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, targetPermanent,
-                TargetController.OWNER, Duration.Custom, true, false, true);
+        return CardUtil.exileAndMakeCastable(game, source, targetPermanent,
+            Duration.Custom, CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST,
+            targetPermanent.getOwnerId());
     }
 }

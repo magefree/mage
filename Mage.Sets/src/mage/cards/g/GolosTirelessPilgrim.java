@@ -6,7 +6,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -16,6 +15,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.Set;
 import java.util.UUID;
@@ -74,8 +74,10 @@ class GolosTirelessPilgrimEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cards = player.getLibrary().getTopCards(game, 3);
-        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, cards,
-                TargetController.YOU, Duration.EndOfTurn, true, false, false);
+        return CardUtil.exileCardsAndMakePlayable(
+            game, source, cards, Duration.EndOfTurn,
+            CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST,
+            null);
     }
 
     @Override

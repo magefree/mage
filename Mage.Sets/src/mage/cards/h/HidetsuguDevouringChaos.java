@@ -9,7 +9,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -20,6 +19,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -88,10 +88,8 @@ class HidetsuguDevouringChaosEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
-                game, source, card, TargetController.YOU, Duration.EndOfTurn,
-                false, false, false
-        );
+        CardUtil.exileAndMakePlayable(game, source, card,
+            Duration.EndOfTurn, null, null);
         if (card.isLand(game)) {
             return true;
         }

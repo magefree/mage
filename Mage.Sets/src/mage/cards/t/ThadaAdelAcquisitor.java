@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -14,6 +13,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -71,9 +71,8 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_ARTIFACT);
         controller.searchLibrary(target, source, game, damagedPlayer.getId());
         Card card = damagedPlayer.getLibrary().getCard(target.getFirstTarget(), game);
-        PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
-                game, source, card, TargetController.YOU, Duration.EndOfTurn,
-                false, false, false
+        CardUtil.exileAndMakePlayable(
+            game, source, card, Duration.EndOfTurn, null, null
         );
         damagedPlayer.shuffleLibrary(source, game);
         return true;

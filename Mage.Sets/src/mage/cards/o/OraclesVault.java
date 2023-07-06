@@ -9,14 +9,18 @@ import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -74,8 +78,12 @@ class OraclesVaultFreeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, controller.getLibrary().getFromTop(game),
-                    TargetController.YOU, Duration.EndOfTurn, true, false, false);
+            Card card = controller.getLibrary().getFromTop(game);
+            return CardUtil.exileAndMakePlayable(
+                game, source, card, Duration.EndOfTurn,
+                CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST,
+                null
+            );
         }
         return false;
     }

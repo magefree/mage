@@ -8,13 +8,13 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
 import java.util.Set;
@@ -54,7 +54,9 @@ class MagusOfTheMindEffect extends OneShotEffect {
 
     MagusOfTheMindEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Shuffle your library, then exile the top X cards, where X is one plus the number of spells cast this turn. Until end of turn, you may play cards exiled this way without paying their mana costs";
+        this.staticText = "Shuffle your library, then exile the top X cards, where X is one plus " +
+            "the number of spells cast this turn. Until end of turn, you may play cards exiled " +
+            "this way without paying their mana costs";
     }
 
     MagusOfTheMindEffect(final MagusOfTheMindEffect effect) {
@@ -79,8 +81,10 @@ class MagusOfTheMindEffect extends OneShotEffect {
             controller.shuffleLibrary(source, game);
             if (controller.getLibrary().hasCards()) {
                 Set<Card> cards = controller.getLibrary().getTopCards(game, stormCount);
-                return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, cards,
-                        TargetController.YOU, Duration.EndOfTurn, true, false, false);
+                return CardUtil.exileCardsAndMakePlayable(
+                    game, source, cards, Duration.EndOfTurn,
+                    CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST,
+                    null);
             }
             return true;
         }

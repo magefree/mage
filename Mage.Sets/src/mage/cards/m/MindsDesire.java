@@ -2,16 +2,15 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -44,7 +43,8 @@ class MindsDesireEffect extends OneShotEffect {
 
     MindsDesireEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost";
+        this.staticText = "Shuffle your library. Then exile the top card of your library. " +
+            "Until end of turn, you may play that card without paying its mana cost";
     }
 
     MindsDesireEffect(final MindsDesireEffect effect) {
@@ -61,8 +61,11 @@ class MindsDesireEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.shuffleLibrary(source, game);
-            return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, controller.getLibrary().getFromTop(game),
-                    TargetController.YOU, Duration.EndOfTurn, true, false, false);
+            return CardUtil.exileAndMakePlayable(
+                game, source, controller.getLibrary().getFromTop(game),
+                Duration.EndOfTurn, CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST,
+                null
+            );
         }
         return false;
     }

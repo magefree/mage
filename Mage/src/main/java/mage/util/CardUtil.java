@@ -1268,6 +1268,123 @@ public final class CardUtil {
         }
     }
 
+    public static boolean exileAndMakePlayable(
+        Game game,
+        Ability source,
+        Card card,
+        Duration duration,
+        @Nullable SimpleCastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId) {
+
+        if (card == null) {
+            return true;
+        }
+        Set<Card> cards = new HashSet<>();
+        cards.add(card);
+        return exileCardsAndMakePlayable(game, source, cards, duration, manaAdjustment, playerId);
+    }
+
+    public static boolean exileCardsAndMakePlayable(
+        Game game,
+        Ability source,
+        Set<Card> cards,
+        Duration duration,
+        @Nullable SimpleCastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId
+    ) {
+        return exileCardsAndMakePlayableOrCastable(game, source, cards, duration, false, manaAdjustment, playerId);
+    }
+
+    public static boolean exileAndMakeCastable(
+        Game game,
+        Ability source,
+        Card card,
+        Duration duration,
+        @Nullable SimpleCastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId) {
+
+        if (card == null) {
+            return true;
+        }
+        Set<Card> cards = new HashSet<>();
+        cards.add(card);
+        return exileCardsAndMakeCastable(game, source, cards, duration, manaAdjustment, playerId);
+    }
+
+    public static boolean exileCardsAndMakeCastable(
+        Game game,
+        Ability source,
+        Set<Card> cards,
+        Duration duration,
+        @Nullable SimpleCastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId
+    ) {
+        return exileCardsAndMakePlayableOrCastable(game, source, cards, duration, true, manaAdjustment, playerId);
+    }
+
+    /**
+     * Exiles the cards and let the allowed player play them from exile for the given duration
+     * Supports:
+     *  - cards (use any side)
+     *  - permanents (use permanent, not permanent's card)
+     *
+     * @param game
+     * @param source
+     * @param cards
+     * @param duration
+     * @param isCastNotPlay  true for effects that allow to cast but not play
+     * @param manaAdjustment
+     *              a mana adjustment applied to the payment of the affected card.
+     *              null if no adjustment needs to be applied.
+     * @param playerId
+     *              the player allowed to cast/play.
+     *              null for that player to be the source's controller.
+     */
+    public static boolean exileCardsAndMakePlayableOrCastable(
+        Game game,
+        Ability source,
+        Set<Card> cards,
+        Duration duration,
+        boolean isCastNotPlay,
+        @Nullable SimpleCastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId
+    ) {
+        if (cards == null || cards.isEmpty()) {
+            return true;
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
+            return false;
+        }
+        UUID exileId = CardUtil.getExileZoneId(
+            controller.getId().toString()
+                + "-" + game.getState().getTurnNum()
+                + "-" + sourceObject.getIdName(), game
+        );
+        String exileName = sourceObject.getIdName() + " free play"
+            + (Duration.EndOfTurn.equals(duration) ? " on turn " + game.getState().getTurnNum() : "")
+            + " for " + controller.getName();
+        if (Duration.EndOfTurn.equals(duration)) {
+            game.getExile().createZone(exileId, exileName).setCleanupOnEndTurn(true);
+        }
+        if (!controller.moveCardsToExile(cards, source, game, true, exileId, exileName)) {
+            return false;
+        }
+
+        // get real cards (if it was called on permanent instead card, example: Release to the Wind)
+        Set<Card> cardsToPlay = cards
+            .stream()
+            .map(Card::getMainCard)
+            .filter(card -> Zone.EXILED.equals(game.getState().getZone(card.getId())))
+            .collect(Collectors.toSet());
+
+        for (Card card : cardsToPlay) {
+            makeCardPlayableOrCastable(game, source, card, duration, isCastNotPlay, manaAdjustment, playerId, null);
+        }
+        return true;
+    }
+
     public interface SpellCastTracker {
 
         boolean checkCard(Card card, Game game);

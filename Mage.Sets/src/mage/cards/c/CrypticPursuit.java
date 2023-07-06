@@ -5,12 +5,14 @@ import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.keyword.ManifestEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -18,6 +20,7 @@ import mage.filter.predicate.card.FaceDownPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -86,10 +89,8 @@ class CrypticPursuitExileAndPlayEffect extends OneShotEffect {
             return false;
         }
 
-        PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
-                game, source, card, TargetController.YOU,
-                Duration.UntilEndOfYourNextTurn,
-                false, false, true
+        CardUtil.exileAndMakeCastable(
+            game, source, card, Duration.UntilEndOfYourNextTurn, null, null
         );
 
         return false;

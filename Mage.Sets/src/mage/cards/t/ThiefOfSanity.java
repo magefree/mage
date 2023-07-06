@@ -5,7 +5,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -13,7 +12,6 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
@@ -101,7 +99,7 @@ class ThiefOfSanityEffect extends OneShotEffect {
                         CardUtil.makeCardCastable(game, source, card, Duration.Custom,
                             CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE);
                         // For as long as that card remains exiled, you may look at it
-                        effect = new ThiefOfSanityLookEffect(controller.getId());
+                        ContinuousEffect effect = new ThiefOfSanityLookEffect(controller.getId());
                         effect.setTargetPointer(new FixedTarget(card.getId(), game));
                         game.addEffect(effect, source);
                     }

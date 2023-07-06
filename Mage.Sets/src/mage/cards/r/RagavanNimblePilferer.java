@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.DashAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -14,6 +13,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -79,8 +79,10 @@ class RagavanNimblePilfererEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
-                game, source, card, TargetController.YOU, Duration.EndOfTurn, false, false, true
+        CardUtil.exileAndMakeCastable(
+            game, source, card, Duration.EndOfTurn, null, null
         );
+
+        return true;
     }
 }

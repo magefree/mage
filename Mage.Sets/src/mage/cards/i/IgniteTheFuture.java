@@ -3,7 +3,6 @@ package mage.cards.i;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -12,6 +11,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.Set;
 import java.util.UUID;
@@ -24,7 +24,8 @@ public final class IgniteTheFuture extends CardImpl {
     public IgniteTheFuture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
-        // Exile the top three cards of your library. Until the end of your next turn, you may play those cards. If this spell was cast from a graveyard, you may play cards this way without paying their mana costs.
+        // Exile the top three cards of your library. Until the end of your next turn, you may play those cards.
+        // If this spell was cast from a graveyard, you may play cards this way without paying their mana costs.
         this.getSpellAbility().addEffect(new IgniteTheFutureEffect());
 
         // Flashback {7}{R}
@@ -68,7 +69,9 @@ class IgniteTheFutureEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cards = controller.getLibrary().getTopCards(game, 3);
-        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, cards,
-                TargetController.YOU, Duration.UntilEndOfYourNextTurn, Zone.GRAVEYARD.equals(spell.getFromZone()), false, false);
+        return CardUtil.exileCardsAndMakePlayable(
+            game, source, cards, Duration.UntilEndOfYourNextTurn,
+            Zone.GRAVEYARD.equals(spell.getFromZone()) ? CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST : null,
+            null);
     }
 }

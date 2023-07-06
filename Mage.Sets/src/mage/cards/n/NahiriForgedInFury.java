@@ -7,7 +7,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AffinityEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.cards.Card;
@@ -19,6 +18,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.EquippedPredicate;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -92,7 +92,13 @@ class NahiriForgedInFuryEffect extends OneShotEffect {
             return false;
         }
         boolean withoutMana = card.hasSubtype(SubType.EQUIPMENT, game);
-        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, card, TargetController.YOU,
-                Duration.EndOfTurn, withoutMana, false, false);
+        // TODO: this is incorrect for Halvar, God of Battle and Toralf, God of Fury,
+        //       that are mdfc with one face being an equipment.
+        CardUtil.exileAndMakePlayable(
+            game, source, card, Duration.EndOfTurn,
+            withoutMana ? CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST : null,
+            null);
+
+        return true;
     }
 }

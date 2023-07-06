@@ -10,7 +10,6 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.abilities.mana.SimpleManaAbility;
@@ -26,6 +25,7 @@ import mage.game.Game;
 import mage.game.permanent.token.KarnConstructToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,8 +98,10 @@ class UrzaLordHighArtificerEffect extends OneShotEffect {
         }
         controller.shuffleLibrary(source, game);
         Card card = controller.getLibrary().getFromTop(game);
-        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, card,
-                TargetController.YOU, Duration.EndOfTurn, true, false, false);
+        return CardUtil.exileAndMakePlayable(
+            game, source, card, Duration.EndOfTurn,
+            CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST,
+            null);
     }
 }
 

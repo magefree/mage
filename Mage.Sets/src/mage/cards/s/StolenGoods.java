@@ -1,21 +1,19 @@
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -44,7 +42,8 @@ class StolenGoodsEffect extends OneShotEffect {
 
     public StolenGoodsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Target opponent exiles cards from the top of their library until they exile a nonland card. Until end of turn, you may cast that card without paying its mana cost";
+        this.staticText = "Target opponent exiles cards from the top of their library until they exile a nonland card. " +
+            "Until end of turn, you may cast that card without paying its mana cost";
     }
 
     public StolenGoodsEffect(final StolenGoodsEffect effect) {
@@ -71,7 +70,10 @@ class StolenGoodsEffect extends OneShotEffect {
             if (card.isLand(game)) {
                 opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
             } else {
-                PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, card, TargetController.YOU, Duration.EndOfTurn, true, false, true);
+                CardUtil.exileAndMakeCastable(
+                    game, source, card, Duration.EndOfTurn,
+                    CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST, null
+                );
                 break;
             }
         } while (card != null && card.isLand(game));

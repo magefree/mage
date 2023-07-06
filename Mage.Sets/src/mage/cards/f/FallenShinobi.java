@@ -3,15 +3,17 @@ package mage.cards.f;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -70,7 +72,9 @@ class FallenShinobiEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, player.getLibrary().getTopCards(game, 2),
-                TargetController.YOU, Duration.EndOfTurn, true, false, false);
+
+        return CardUtil.exileCardsAndMakeCastable(
+            game, source, player.getLibrary().getTopCards(game, 2),
+            Duration.EndOfTurn, CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST, null);
     }
 }

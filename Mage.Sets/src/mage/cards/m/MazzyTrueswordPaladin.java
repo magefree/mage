@@ -20,6 +20,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.Set;
 import java.util.UUID;
@@ -132,10 +133,8 @@ class MazzyExileEffect extends OneShotEffect {
         if (aura == null) {
             return false;
         }
-        PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
-                game, source, aura, TargetController.YOU,
-                Duration.UntilEndOfYourNextTurn,
-                false, false, true
+        CardUtil.exileAndMakeCastable(
+            game, source, aura, Duration.UntilEndOfYourNextTurn, null, null
         );
         return true;
     }

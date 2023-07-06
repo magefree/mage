@@ -7,7 +7,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
@@ -17,6 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -87,7 +87,8 @@ class AerialExtortionistExileEffect extends OneShotEffect {
             return false;
         }
 
-        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, targetPermanent,
-                TargetController.OWNER, Duration.Custom, false, false, true);
+        return CardUtil.exileAndMakeCastable(
+            game, source, targetPermanent,
+            Duration.Custom, null, targetPermanent.getOwnerId());
     }
 }

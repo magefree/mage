@@ -2,16 +2,15 @@ package mage.cards.h;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -61,10 +60,12 @@ class HurlThroughHellEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(
-                game, source, permanent, TargetController.YOU,
-                Duration.UntilEndOfYourNextTurn,
-                false, true, true
+
+        CardUtil.exileAndMakeCastable(
+            game, source, permanent,
+            Duration.UntilEndOfYourNextTurn,
+            CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR,
+            null
         );
         return true;
     }
