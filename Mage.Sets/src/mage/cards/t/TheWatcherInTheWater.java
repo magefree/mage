@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 public final class TheWatcherInTheWater extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.TENTACLE);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.TENTACLE, "a Tentacle you control");
     private static final FilterPermanent filter2 = new FilterPermanent(SubType.KRAKEN, "Kraken");
 
     public TheWatcherInTheWater(UUID ownerId, CardSetInfo setInfo) {

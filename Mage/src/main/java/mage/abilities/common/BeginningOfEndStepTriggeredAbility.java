@@ -129,16 +129,15 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
             case ENCHANTED:
                 return "At the beginning of enchanted player's end step, " + generateConditionString();
             case MONARCH:
-                return "At the beginning the monarch's end step, " + generateConditionString();
+                return "At the beginning of the monarch's end step, " + generateConditionString();
         }
         return "";
     }
 
     private String generateConditionString() {
         if (interveningIfClauseCondition == null) {
-            switch (getZone()) {
-                case GRAVEYARD:
-                    return "if {this} is in your graveyard, ";
+            if (getZone() == Zone.GRAVEYARD) {
+                return "if {this} is in your graveyard, ";
             }
             return "";
         }

@@ -21,7 +21,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -39,8 +39,8 @@ import java.util.*;
  */
 public final class ShelobChildOfUngoliant extends CardImpl {
 
-    private static FilterControlledCreaturePermanent filterSpiders =
-        new FilterControlledCreaturePermanent(SubType.SPIDER, "other spiders you control");
+    private static final FilterControlledPermanent filterSpiders =
+        new FilterControlledPermanent(SubType.SPIDER, "other Spiders");
 
     static {
         filterSpiders.add(AnotherPredicate.instance);
@@ -65,7 +65,7 @@ public final class ShelobChildOfUngoliant extends CardImpl {
         Ability buff = new SimpleStaticAbility(new GainAbilityControlledEffect(
             DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield,
             filterSpiders
-        ).setText("other Spiders you control have deathtouch"));
+        ));
         buff.addEffect(new GainAbilityControlledEffect(
             new WardAbility(new ManaCostsImpl<>("{2}")), Duration.WhileOnBattlefield,
             filterSpiders
@@ -93,8 +93,8 @@ public final class ShelobChildOfUngoliant extends CardImpl {
 }
 
 class ShelobChildOfUngoliantWatcher extends Watcher {
-    private static FilterControlledCreaturePermanent spiderFilter =
-        new FilterControlledCreaturePermanent(SubType.SPIDER,"spiders you controlled");
+    private static final FilterControlledPermanent spiderFilter =
+        new FilterControlledPermanent(SubType.SPIDER,"spiders you controlled");
 
     // We store every permanent, as a non-creature may be dealt damage,
     // then become a creature then die.

@@ -1,9 +1,8 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.Mana;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.mana.BasicManaEffect;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.mana.ActivateOncePerTurnManaAbility;
 import mage.cards.CardImpl;
@@ -31,7 +30,7 @@ public final class ShireScarecrow extends CardImpl {
 
         // {1}: Add one mana of any color. Activate only once each turn.
         this.addAbility(new ActivateOncePerTurnManaAbility(
-                Zone.BATTLEFIELD, new BasicManaEffect(Mana.AnyMana(1)), new GenericManaCost(1)
+                Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new GenericManaCost(1)
         ));
     }
 

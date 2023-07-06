@@ -31,7 +31,7 @@ public final class IsildursFatefulStrike extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // (You may cast a legendary instant only if you control a legendary creature or planeswalker.)
-        this.addAbility(new LegendarySpellAbility());
+        this.addAbility(new LegendarySpellAbility(true));
 
         // Destroy target creature. If its controller has more than four cards in hand, they exile cards from their hand equal to the difference.
         this.getSpellAbility().addEffect(new IsildursFatefulStrikeEffect());

@@ -53,7 +53,7 @@ class GaladrielOfLothlorienEffect extends OneShotEffect {
 
     GaladrielOfLothlorienEffect() {
         super(Outcome.Benefit);
-        staticText = "reveal the top card of your library. If a land card is revealed this way, put it onto the battlefield tapped";
+        staticText = "you may reveal the top card of your library. If a land card is revealed this way, put it onto the battlefield tapped";
     }
 
     private GaladrielOfLothlorienEffect(final GaladrielOfLothlorienEffect effect) {

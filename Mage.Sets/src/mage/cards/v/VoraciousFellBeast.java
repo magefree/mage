@@ -59,7 +59,7 @@ class VoraciousFellBeastEffect extends OneShotEffect {
 
     VoraciousFellBeastEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Each opponent sacrifices a creature. " +
+        this.staticText = "each opponent sacrifices a creature. " +
             "Create a Food token for each creature sacrificed this way";
     }
 

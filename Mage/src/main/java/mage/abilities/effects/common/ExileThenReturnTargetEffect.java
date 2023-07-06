@@ -80,12 +80,12 @@ public class ExileThenReturnTargetEffect extends OneShotEffect {
         sb.append(getTargetPointer().describeTargets(mode.getTargets(), "that permanent"));
         sb.append(", then return ");
         if (getTargetPointer().isPlural(mode.getTargets())) {
-            sb.append(textThatCard ? "those cards " : "them");
+            sb.append(textThatCard ? "those cards " : "them ");
             sb.append(putCards.getMessage(false, false).replace("onto", "to"));
             sb.append(" under ");
             sb.append(this.yourControl ? "your" : "their owner's");
         } else {
-            sb.append(textThatCard ? "that card " : "it");
+            sb.append(textThatCard ? "that card " : "it ");
             sb.append(putCards.getMessage(false, false).replace("onto", "to"));
             sb.append(" under ");
             sb.append(this.yourControl ? "your" : "its owner's");

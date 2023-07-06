@@ -45,7 +45,7 @@ public final class ShireShirriff extends CardImpl {
         // When you do, exile target creature an opponent controls until Shire Shirriff leaves the battlefield.
         ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(
             new ExileUntilSourceLeavesEffect(), false,
-            "exile target creature an opponent controls until {this} leaves the battlefield."
+            "exile target creature an opponent controls until {this} leaves the battlefield"
         );
         reflexive.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
 
