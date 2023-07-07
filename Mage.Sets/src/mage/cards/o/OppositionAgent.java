@@ -103,8 +103,8 @@ class OppositionAgentReplacementEffect extends ReplacementEffectImpl {
 
         // You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them
         for (Card card : cardsToExile) {
-            // the source ability is tied to the effect so we need to keep it active to work correctly
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfGame,
+            CardUtil.makeCardPlayable(
+                game, source, card, Duration.EndOfGame,
                 CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
         }
 

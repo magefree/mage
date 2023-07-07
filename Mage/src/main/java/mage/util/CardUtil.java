@@ -1278,7 +1278,9 @@ public final class CardUtil {
         int zcc = game.getState().getZoneChangeCounter(objectId);
 
         game.addEffect(new CanPlayCardControllerEffect(
-            game, objectId, zcc, duration, playerId, condition,
+            game, objectId, zcc, duration,
+            playerId == null ? source.getControllerId() : playerId,
+            condition,
             manaAdjustment == CastManaAdjustment.WITHOUT_PAYING_MANA_COST,
             isCastNotPlay
         ), source);
