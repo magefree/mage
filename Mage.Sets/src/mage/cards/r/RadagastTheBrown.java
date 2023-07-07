@@ -15,6 +15,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -35,11 +36,22 @@ public final class RadagastTheBrown extends CardImpl {
         etbFilter.add(TokenPredicate.FALSE);
     }
 
-    static final FilterCard cardFilter = new FilterCard("creature card that doesn't share a creature type with a creature you control");
-
+    static final FilterCreatureCard cardFilter = new FilterCreatureCard("creature card that doesn't share a creature type with a creature you control");
     static {
-        cardFilter.add(CardType.CREATURE.getPredicate());
-        cardFilter.add(SharesACreatureTypeWithCreaturesYouControl.DOES_NOT);
+        cardFilter.add((Predicate<Card>) (card, game) -> {
+            UUID playerId = card.getOwnerId();
+            List<Permanent> creaturesYouControl = game.getBattlefield().getActivePermanents(
+                    StaticFilters.FILTER_CONTROLLED_CREATURE,
+                    playerId,
+                    game
+            );
+            for (Permanent creature : creaturesYouControl) {
+                if (creature.shareCreatureTypes(game, card)) {
+                    return false;
+                }
+            }
+            return true;
+        });
     }
 
     public RadagastTheBrown(UUID ownerId, CardSetInfo setInfo) {
@@ -75,30 +87,5 @@ public final class RadagastTheBrown extends CardImpl {
     @Override
     public RadagastTheBrown copy() {
         return new RadagastTheBrown(this);
-    }
-}
-
-enum SharesACreatureTypeWithCreaturesYouControl implements Predicate<Card> {
-    DOES(true),
-    DOES_NOT(false);
-    private final boolean doesShare;
-
-    SharesACreatureTypeWithCreaturesYouControl(boolean doesShare) {
-        this.doesShare = doesShare;
-    }
-    @Override
-    public boolean apply(Card card, Game game) {
-        UUID playerId = card.getOwnerId();
-        List<Permanent> creaturesYouControl = game.getBattlefield().getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_CREATURE,
-                playerId,
-                game
-        );
-        for (Permanent creature : creaturesYouControl) {
-            if (creature.shareCreatureTypes(game, card)) {
-                return doesShare;
-            }
-        }
-        return !doesShare;
     }
 }
