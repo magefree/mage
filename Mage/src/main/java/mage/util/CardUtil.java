@@ -1251,14 +1251,13 @@ public final class CardUtil {
         UUID objectId = card.getMainCard().getId();
         int zcc = game.getState().getZoneChangeCounter(objectId);
 
-        if(isCastNotPlay){
-            // TODO: make distinction between play and cast.
-            game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
-        }
-        else {
-            game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
-        }
+        game.addEffect(new CanPlayCardControllerEffect(
+            game, objectId, zcc, duration, playerId, condition,
+            manaAdjustment == CastManaAdjustment.WITHOUT_PAYING_MANA_COST,
+            isCastNotPlay
+        ), source);
 
+        // TODO: should those be subability of the main effect?
         switch(manaAdjustment){
             case AS_THOUGH_ANY_MANA_TYPE:
                 // TODO: make a distinct effect for "as though it were mana of any type"
@@ -1269,7 +1268,7 @@ public final class CardUtil {
                     source);
                 break;
             case WITHOUT_PAYING_MANA_COST:
-                // TODO make a separate effect similar to PlayFromNotOwnHandZoneTargetEffect
+                // Handled by the effect.
                 break;
             case NONE:
                 break;
