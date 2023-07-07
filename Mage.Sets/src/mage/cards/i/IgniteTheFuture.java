@@ -71,7 +71,9 @@ class IgniteTheFutureEffect extends OneShotEffect {
         Set<Card> cards = controller.getLibrary().getTopCards(game, 3);
         return CardUtil.exileCardsAndMakePlayable(
             game, source, cards, Duration.UntilEndOfYourNextTurn,
-            Zone.GRAVEYARD.equals(spell.getFromZone()) ? CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST : null,
+            Zone.GRAVEYARD.equals(spell.getFromZone())
+                ? CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST
+                : CardUtil.CastManaAdjustment.NONE,
             null, null);
     }
 }

@@ -96,7 +96,9 @@ class NahiriForgedInFuryEffect extends OneShotEffect {
         //       that are mdfc with one face being an equipment.
         CardUtil.exileAndMakePlayable(
             game, source, card, Duration.EndOfTurn,
-            withoutMana ? CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST : null,
+            withoutMana
+                ? CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST
+                : CardUtil.CastManaAdjustment.NONE,
             null, null);
 
         return true;
