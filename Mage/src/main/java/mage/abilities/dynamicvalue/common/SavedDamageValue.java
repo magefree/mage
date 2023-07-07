@@ -10,7 +10,8 @@ import mage.game.Game;
  */
 public enum SavedDamageValue implements DynamicValue {
     MANY("many"),
-    MUCH("much");
+    MUCH("much"),
+    DAMAGE("damage");
 
     private final String message;
 

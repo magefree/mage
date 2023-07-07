@@ -4,8 +4,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.dynamicvalue.common.TriggerDamageDone;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -27,7 +27,7 @@ import java.util.UUID;
  * @author bobby-mccann
  */
 public final class Glamdring extends CardImpl {
-    private static final FilterCard filter = new FilterCompareManaValue(ComparisonType.FEWER_THAN_OR_EQUAL_TO, new TriggerDamageDone());
+    private static final FilterCard filter = new FilterCompareManaValue(ComparisonType.FEWER_THAN_OR_EQUAL_TO, SavedDamageValue.DAMAGE);
     static {
         filter.add(Predicates.or(
                 CardType.INSTANT.getPredicate(),
