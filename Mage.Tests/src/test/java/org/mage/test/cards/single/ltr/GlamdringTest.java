@@ -66,7 +66,7 @@ public class GlamdringTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Brainstorm", 5);
         addCard(Zone.BATTLEFIELD, playerB, "Elder Deep-Fiend", 2, true);
         attack(1, playerA, "Blur Sliver");
-        setChoice(playerA, "In Garruk's Wake"); // 9 mana, so we shouldn't be able to choose it
+        setChoice(playerA, "In Garruk's Wake"); // We now do enough damage to cast it
         setChoice(playerA, "Yes");
 
         setStopAt(1, PhaseStep.FIRST_COMBAT_DAMAGE);

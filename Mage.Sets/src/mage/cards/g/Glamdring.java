@@ -62,7 +62,7 @@ public final class Glamdring extends CardImpl {
         );
 
         // Equip {3}
-        this.addAbility(new EquipAbility(3));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private Glamdring(final Glamdring card) {
