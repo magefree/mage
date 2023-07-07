@@ -3,6 +3,7 @@ package org.mage.test.cards.enchantments;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -25,7 +26,8 @@ public class SkullclampTest extends CardTestPlayerBase {
      * 704.5n.)
      *
      */
-
+    @Test
+    @Ignore
     public void testPerniciousDeed() {
         // Equipped creature gets +1/-1.
         // Whenever equipped creature dies, draw two cards.
