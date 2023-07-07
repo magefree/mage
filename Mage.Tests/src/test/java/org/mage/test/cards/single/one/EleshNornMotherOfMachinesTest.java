@@ -28,8 +28,11 @@ public class EleshNornMotherOfMachinesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Arashin Cleric");
+
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
         execute();
+
         assertLife(playerA, 20);
     }
 
@@ -59,6 +62,7 @@ public class EleshNornMotherOfMachinesTest extends CardTestPlayerBase {
         setChoice(playerA, true); // Yes to the bloodghast trigger.
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
         execute();
 
         assertPermanentCount(playerA, "Bloodghast", 1);
