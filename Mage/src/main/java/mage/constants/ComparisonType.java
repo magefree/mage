@@ -4,33 +4,21 @@ package mage.constants;
  * Created by IGOUDT on 5-3-2017.
  */
 public enum ComparisonType {
-    FEWER_THAN("<", "fewer", "than"),
-    FEWER_THAN_OR_EQUAL_TO("<=", "fewer", "than or equal to"),
-    EQUAL_TO("==", "equal", "to"),
-    MORE_THAN(">", "more", "than"),
-    MORE_THAN_OR_EQUAL_TO(">=", "more", "than or equal to");
+    FEWER_THAN("<"),
+    OR_LESS("<="),
+    EQUAL_TO("=="),
+    MORE_THAN(">"),
+    OR_GREATER(">=");
 
-    String operator;
-    String text1;
-    String text2;
+    final String operator;
 
-    ComparisonType(String op, String text1, String text2) {
+    ComparisonType(String op) {
         this.operator = op;
-        this.text1 = text1;
-        this.text2 = text2;
     }
 
     @Override
     public String toString() {
         return operator;
-    }
-
-    public String getText1() {
-        return text1;
-    }
-
-    public String getText2() {
-        return text2;
     }
 
     public static boolean compare(int source, ComparisonType comparison, int target) {
@@ -41,9 +29,9 @@ public enum ComparisonType {
                 return source < target;
             case EQUAL_TO:
                 return source == target;
-            case MORE_THAN_OR_EQUAL_TO:
+            case OR_GREATER:
                 return source >= target;
-            case FEWER_THAN_OR_EQUAL_TO:
+            case OR_LESS:
                 return source <= target;
             default:
                 throw new IllegalArgumentException("comparison rules for " + comparison + " missing");

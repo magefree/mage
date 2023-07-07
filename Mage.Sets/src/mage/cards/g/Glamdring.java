@@ -27,7 +27,7 @@ import java.util.UUID;
  * @author bobby-mccann
  */
 public final class Glamdring extends CardImpl {
-    private static final FilterCard filter = new FilterCompareManaValue(ComparisonType.FEWER_THAN_OR_EQUAL_TO, SavedDamageValue.DAMAGE);
+    private static final FilterCard filter = new FilterCompareManaValue(ComparisonType.OR_LESS, SavedDamageValue.DAMAGE);
     static {
         filter.add(Predicates.or(
                 CardType.INSTANT.getPredicate(),
