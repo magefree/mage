@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
@@ -55,14 +56,15 @@ public final class RadagastTheBrown extends CardImpl {
         // You may reveal a creature card from among them that doesn't share a creature type with a creature you control
         // and put it into your hand.
         // Put the rest on the bottom of your library in a random order.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD,
+        this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new LookLibraryAndPickControllerEffect(
-                        new TargetManaValue(), 1,
+                        TargetManaValue.instance, 1,
                         cardFilter,
                         PutCards.HAND, PutCards.BOTTOM_RANDOM
                 ),
-                etbFilter, false
+                etbFilter,
+                false,
+                true
         ));
     }
 
@@ -76,24 +78,18 @@ public final class RadagastTheBrown extends CardImpl {
     }
 }
 
-class TargetManaValue implements DynamicValue {
+enum TargetManaValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
-        if (!(source instanceof EntersBattlefieldAllTriggeredAbility)) {
-            return 0;
-        }
-        UUID enteredId = ((EntersBattlefieldControlledTriggeredAbility) source).getTriggerEvent().getTargetId();
-        Permanent enteredBattlefield = game.getPermanent(enteredId);
-        if (enteredBattlefield == null) {
-            return 0;
-        }
-        return enteredBattlefield.getManaValue();
+        Permanent permanent = (Permanent) effect.getValue("permanentEnteringBattlefield");
+        return permanent == null ? 0 : permanent.getManaValue();
     }
 
     @Override
     public DynamicValue copy() {
-        return new TargetManaValue();
+        return instance;
     }
 
     @Override
