@@ -65,6 +65,6 @@ class ReleaseToTheWindEffect extends OneShotEffect {
 
         return CardUtil.exileAndMakeCastable(game, source, targetPermanent,
             Duration.Custom, CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST,
-            targetPermanent.getOwnerId());
+            targetPermanent.getOwnerId(), null);
     }
 }

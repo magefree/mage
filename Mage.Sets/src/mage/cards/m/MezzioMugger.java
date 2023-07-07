@@ -84,7 +84,7 @@ class MezzioMuggerEffect extends OneShotEffect {
             return false;
         }
         CardUtil.exileCardsAndMakePlayable(game, source, cards, Duration.EndOfTurn,
-            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR, null);
+            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR, null, null);
         return true;
     }
 }

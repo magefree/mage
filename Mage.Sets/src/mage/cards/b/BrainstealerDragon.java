@@ -6,7 +6,9 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
@@ -15,7 +17,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -87,7 +91,7 @@ class BrainstealerDragonExileEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
+        Set<Card> cards = new HashSet<>();
         game.getOpponents(source.getControllerId())
                 .stream()
                 .map(game::getPlayer)
@@ -95,14 +99,11 @@ class BrainstealerDragonExileEffect extends OneShotEffect {
                 .map(Player::getLibrary)
                 .map(library -> library.getFromTop(game))
                 .forEach(cards::add);
-        player.moveCards(cards, Zone.EXILED, source, game);
-        for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayableOrCastable(
-                    game, source, card, Duration.Custom, false,
-                    CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR,
-                    source.getControllerId(), null
-            );
-        }
+        CardUtil.exileCardsAndMakePlayable(
+            game, source, cards, Duration.Custom,
+            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR,
+            source.getControllerId(), null
+        );
         return true;
     }
 }

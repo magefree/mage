@@ -149,7 +149,7 @@ class GrenzoHavocRaiserEffect extends OneShotEffect {
                     // allow to cast the card
                     // and you may spend mana as though it were mana of any color to cast it
                     CardUtil.exileAndMakeCastable(game, source, card, Duration.EndOfTurn,
-                        CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR, null);
+                        CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR, null, null);
                 }
                 return true;
             }

@@ -160,9 +160,9 @@ class CurseOfHospitalityEffect extends OneShotEffect {
         if (player == null) {
             return true;
         }
-        CardUtil.makeCardPlayableOrCastable(
+        CardUtil.makeCardPlayable(
             game, source, card, Duration.EndOfTurn,
-            false, CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR,
+            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR,
             player.getId(), null);
         return true;
     }

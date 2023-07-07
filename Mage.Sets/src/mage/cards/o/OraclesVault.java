@@ -82,7 +82,7 @@ class OraclesVaultFreeEffect extends OneShotEffect {
             return CardUtil.exileAndMakePlayable(
                 game, source, card, Duration.EndOfTurn,
                 CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST,
-                null
+                null, null
             );
         }
         return false;

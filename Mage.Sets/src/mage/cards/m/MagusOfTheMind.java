@@ -84,7 +84,7 @@ class MagusOfTheMindEffect extends OneShotEffect {
                 return CardUtil.exileCardsAndMakePlayable(
                     game, source, cards, Duration.EndOfTurn,
                     CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST,
-                    null);
+                    null, null);
             }
             return true;
         }

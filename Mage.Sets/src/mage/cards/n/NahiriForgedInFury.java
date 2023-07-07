@@ -97,7 +97,7 @@ class NahiriForgedInFuryEffect extends OneShotEffect {
         CardUtil.exileAndMakePlayable(
             game, source, card, Duration.EndOfTurn,
             withoutMana ? CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST : null,
-            null);
+            null, null);
 
         return true;
     }

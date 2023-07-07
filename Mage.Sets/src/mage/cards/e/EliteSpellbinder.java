@@ -86,10 +86,9 @@ class EliteSpellbinderEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        controller.moveCards(card, Zone.EXILED, source, game);
-        CardUtil.makeCardPlayableOrCastable(
+        CardUtil.exileAndMakePlayable(
             game, source, card, Duration.Custom,
-            false, null, card.getOwnerId(), null);
+            null, card.getOwnerId(), null);
         game.addEffect(new EliteSpellbinderCostEffect(card, game), source);
         return true;
     }

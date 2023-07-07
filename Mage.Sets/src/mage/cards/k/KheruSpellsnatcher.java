@@ -80,7 +80,7 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
                     return CardUtil.exileAndMakeCastable(
                         game, source, (Card) card, Duration.Custom,
                         CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST,
-                        null
+                        null, null
                     );
                 }
             }

@@ -1203,18 +1203,44 @@ public final class CardUtil {
         makeCardPlayable(game, source, card, duration, CastManaAdjustment.NONE);
     }
 
+    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration,
+                                        @Nonnull CastManaAdjustment manaAdjustment) {
+        makeCardPlayable(game, source, card, duration, manaAdjustment, null, null);
+    }
+
+    public static void makeCardPlayable(
+        Game game,
+        Ability source,
+        Card card,
+        Duration duration,
+        @Nonnull CastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId,
+        @Nullable Condition condition
+    ) {
+        makeCardPlayableOrCastable(game, source, card, duration,
+            false, manaAdjustment, playerId, condition);
+    }
+
     public static void makeCardCastable(Game game, Ability source, Card card, Duration duration) {
         makeCardCastable(game, source, card, duration, CastManaAdjustment.NONE);
     }
 
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration,
-                                        @Nonnull CastManaAdjustment manaAdjustment) {
-        makeCardPlayableOrCastable(game, source, card, duration, false, manaAdjustment, null, null);
-    }
-
     public static void makeCardCastable(Game game, Ability source, Card card, Duration duration,
                                         @Nonnull CastManaAdjustment manaAdjustment) {
-        makeCardPlayableOrCastable(game, source, card, duration, true, manaAdjustment, null, null);
+        makeCardCastable(game, source, card, duration, manaAdjustment, null, null);
+    }
+
+    public static void makeCardCastable(
+        Game game,
+        Ability source,
+        Card card,
+        Duration duration,
+        @Nonnull CastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId,
+        @Nullable Condition condition
+    ) {
+        makeCardPlayableOrCastable(game, source, card, duration,
+            true, manaAdjustment, playerId, condition);
     }
 
     /**
@@ -1232,9 +1258,9 @@ public final class CardUtil {
      *              the player allowed to cast/play.
      *              null for that player to be the source's controller.
      * @param condition
-     *              optional additional condition on when the card is allowed to be played/cast.
+     *              optional additional condition checked when the spell is allowed to be played/cast.
      */
-    public static void makeCardPlayableOrCastable(
+    private static void makeCardPlayableOrCastable(
         Game game,
         Ability source,
         Card card,
@@ -1283,7 +1309,7 @@ public final class CardUtil {
     ) {
         return exileAndMakePlayable(
             game, source, card, duration,
-            CastManaAdjustment.NONE, null);
+            CastManaAdjustment.NONE, null, null);
     }
 
     public static boolean exileAndMakePlayable(
@@ -1292,14 +1318,17 @@ public final class CardUtil {
         Card card,
         Duration duration,
         @Nonnull CastManaAdjustment manaAdjustment,
-        @Nullable UUID playerId) {
+        @Nullable UUID playerId,
+        @Nullable Condition condition) {
 
         if (card == null) {
             return true;
         }
         Set<Card> cards = new HashSet<>();
         cards.add(card);
-        return exileCardsAndMakePlayable(game, source, cards, duration, manaAdjustment, playerId);
+        return exileCardsAndMakePlayable(
+            game, source, cards, duration,
+            manaAdjustment, playerId, condition);
     }
 
     public static boolean exileCardsAndMakePlayable(
@@ -1310,7 +1339,7 @@ public final class CardUtil {
     ) {
         return exileCardsAndMakePlayable(
             game, source, cards, duration,
-            CastManaAdjustment.NONE, null);
+            CastManaAdjustment.NONE, null, null);
     }
 
     public static boolean exileCardsAndMakePlayable(
@@ -1319,9 +1348,12 @@ public final class CardUtil {
         Set<Card> cards,
         Duration duration,
         @Nonnull CastManaAdjustment manaAdjustment,
-        @Nullable UUID playerId
+        @Nullable UUID playerId,
+        @Nullable Condition condition
     ) {
-        return exileCardsAndMakePlayableOrCastable(game, source, cards, duration, false, manaAdjustment, playerId);
+        return exileCardsAndMakePlayableOrCastable(
+            game, source, cards, duration,
+            false, manaAdjustment, playerId, condition);
     }
 
     public static boolean exileAndMakeCastable(
@@ -1332,7 +1364,7 @@ public final class CardUtil {
 
         return exileAndMakeCastable(
             game, source, card, duration,
-            CastManaAdjustment.NONE, null);
+            CastManaAdjustment.NONE, null, null);
     }
 
     public static boolean exileAndMakeCastable(
@@ -1341,14 +1373,15 @@ public final class CardUtil {
         Card card,
         Duration duration,
         @Nonnull CastManaAdjustment manaAdjustment,
-        @Nullable UUID playerId) {
+        @Nullable UUID playerId,
+        @Nullable Condition condition) {
 
         if (card == null) {
             return true;
         }
         Set<Card> cards = new HashSet<>();
         cards.add(card);
-        return exileCardsAndMakeCastable(game, source, cards, duration, manaAdjustment, playerId);
+        return exileCardsAndMakeCastable(game, source, cards, duration, manaAdjustment, playerId, condition);
     }
 
     public static boolean exileCardsAndMakeCastable(
@@ -1359,7 +1392,7 @@ public final class CardUtil {
     ) {
         return exileCardsAndMakeCastable(
             game, source, cards, duration,
-            CastManaAdjustment.NONE, null);
+            CastManaAdjustment.NONE, null, null);
     }
 
     public static boolean exileCardsAndMakeCastable(
@@ -1368,11 +1401,12 @@ public final class CardUtil {
         Set<Card> cards,
         Duration duration,
         @Nonnull CastManaAdjustment manaAdjustment,
-        @Nullable UUID playerId
+        @Nullable UUID playerId,
+        @Nullable Condition condition
     ) {
         return exileCardsAndMakePlayableOrCastable(
             game, source, cards, duration,
-            true, manaAdjustment, playerId);
+            true, manaAdjustment, playerId, condition);
     }
 
     /**
@@ -1392,15 +1426,18 @@ public final class CardUtil {
      * @param playerId
      *              the player allowed to cast/play.
      *              null for that player to be the source's controller.
+     * @param condition
+     *              optional additional condition checked when the spell is allowed to be played/cast.
      */
-    public static boolean exileCardsAndMakePlayableOrCastable(
+    private static boolean exileCardsAndMakePlayableOrCastable(
         Game game,
         Ability source,
         Set<Card> cards,
         Duration duration,
         boolean isCastNotPlay,
         @Nonnull CastManaAdjustment manaAdjustment,
-        @Nullable UUID playerId
+        @Nullable UUID playerId,
+        @Nullable Condition condition
     ) {
         if (cards == null || cards.isEmpty()) {
             return true;
@@ -1433,7 +1470,7 @@ public final class CardUtil {
             .collect(Collectors.toSet());
 
         for (Card card : cardsToPlay) {
-            makeCardPlayableOrCastable(game, source, card, duration, isCastNotPlay, manaAdjustment, playerId, null);
+            makeCardPlayableOrCastable(game, source, card, duration, isCastNotPlay, manaAdjustment, playerId, condition);
         }
         return true;
     }

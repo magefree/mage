@@ -64,7 +64,7 @@ class MindsDesireEffect extends OneShotEffect {
             return CardUtil.exileAndMakePlayable(
                 game, source, controller.getLibrary().getFromTop(game),
                 Duration.EndOfTurn, CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST,
-                null
+                null, null
             );
         }
         return false;

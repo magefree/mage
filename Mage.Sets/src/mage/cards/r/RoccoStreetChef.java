@@ -82,10 +82,9 @@ class RoccoStreetChefEffect extends OneShotEffect {
             if (card == null) {
                 continue;
             }
-            player.moveCards(card, Zone.EXILED, source, game);
-            CardUtil.makeCardPlayableOrCastable(
+            CardUtil.exileAndMakePlayable(
                     game, source, card, Duration.UntilYourNextEndStep,
-                    false, null, playerId, null
+                    null, playerId, null
             );
         }
         return true;

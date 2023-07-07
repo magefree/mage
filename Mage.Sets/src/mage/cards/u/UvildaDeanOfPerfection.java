@@ -293,7 +293,7 @@ class NassariDeanOfExpressionEffect extends OneShotEffect {
                 .forEach(cards::add);
         CardUtil.exileCardsAndMakeCastable(
             game, source, cards, Duration.EndOfTurn,
-            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR, null);
+            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR, null, null);
         return true;
     }
 }

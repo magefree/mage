@@ -65,7 +65,7 @@ class HurlThroughHellEffect extends OneShotEffect {
             game, source, permanent,
             Duration.UntilEndOfYourNextTurn,
             CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR,
-            null
+            null, null
         );
         return true;
     }

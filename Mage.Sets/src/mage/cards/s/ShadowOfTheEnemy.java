@@ -85,7 +85,7 @@ class ShadowOfTheEnemyEffect extends OneShotEffect {
         // and you may spend mana as though it were mana of any color to cast it
         CardUtil.exileCardsAndMakeCastable(
             game, source, cards, Duration.EndOfGame,
-            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR, null);
+            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR, null, null);
 
         return true;
     }

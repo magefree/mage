@@ -1,22 +1,20 @@
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.decks.CardNameUtil;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -71,9 +69,9 @@ class SoulPartitionEffect extends OneShotEffect {
         controller.moveCards(permanent, Zone.EXILED, source, game);
         Card card = game.getCard(targetId);
         if (card != null && game.getState().getZone(targetId) == Zone.EXILED) {
-            CardUtil.makeCardPlayableOrCastable(
+            CardUtil.makeCardPlayable(
                 game, source, card, Duration.Custom,
-                false, null, card.getOwnerId(), null);
+                null, card.getOwnerId(), null);
             if (controller.hasOpponent(card.getOwnerId(), game)) {
                 game.addEffect(new SoulPartitionCostEffect(card, game), source);
             }

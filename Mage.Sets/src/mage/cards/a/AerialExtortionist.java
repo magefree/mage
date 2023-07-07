@@ -89,6 +89,6 @@ class AerialExtortionistExileEffect extends OneShotEffect {
 
         return CardUtil.exileAndMakeCastable(
             game, source, targetPermanent,
-            Duration.Custom, null, targetPermanent.getOwnerId());
+            Duration.Custom, null, targetPermanent.getOwnerId(), null);
     }
 }

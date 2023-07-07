@@ -75,6 +75,6 @@ class FallenShinobiEffect extends OneShotEffect {
 
         return CardUtil.exileCardsAndMakeCastable(
             game, source, player.getLibrary().getTopCards(game, 2),
-            Duration.EndOfTurn, CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST, null);
+            Duration.EndOfTurn, CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST, null, null);
     }
 }

@@ -87,9 +87,9 @@ class InvasionOfGobakhanEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(card, Zone.EXILED, source, game);
-        CardUtil.makeCardPlayableOrCastable(
+        CardUtil.makeCardPlayable(
             game, source, card, Duration.Custom,
-            false, null, card.getOwnerId(), null);
+            null, card.getOwnerId(), null);
         game.addEffect(new InvasionOfGobakhanCostEffect(card, game), source);
         return true;
     }

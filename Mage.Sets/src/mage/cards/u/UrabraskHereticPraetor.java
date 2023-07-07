@@ -91,13 +91,10 @@ class UrabraskHereticPraetorEffect extends ReplacementEffectImpl {
             return false;
         }
         Card card = player.getLibrary().getFromTop(game);
-        if (card != null) {
-            player.moveCards(card, Zone.EXILED, source, game);
-            CardUtil.makeCardPlayableOrCastable(
-                    game, source, card, Duration.EndOfTurn,
-                    false, null, player.getId(), null
-            );
-        }
+        CardUtil.exileAndMakePlayable(
+            game, source, card, Duration.EndOfTurn,
+            null, player.getId(), null
+        );
         discard();
         return true;
     }

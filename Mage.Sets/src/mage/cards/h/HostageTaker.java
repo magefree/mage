@@ -90,7 +90,7 @@ class HostageTakerExileEffect extends OneShotEffect {
         // move card to exile
         // allow to cast the card and you may spend mana as though it were mana of any type to cast it
         CardUtil.exileAndMakeCastable(game, source, card, Duration.Custom,
-            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE, null);
+            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE, null, null);
         game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
         return true;
     }
