@@ -28,7 +28,7 @@ public class EntersBattlefieldThisOrAnotherTriggeredAbility extends EntersBattle
     }
 
     public EntersBattlefieldThisOrAnotherTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyControlled) {
-        super(zone, effect, filter, optional, setTargetPointer, null, onlyControlled, true);
+        super(zone, effect, filter, optional, setTargetPointer, null, onlyControlled);
         this.onlyControlled = onlyControlled;
     }
 
