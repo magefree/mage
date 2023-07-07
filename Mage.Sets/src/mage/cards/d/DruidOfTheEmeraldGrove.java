@@ -108,7 +108,7 @@ class DruidOfTheEmeraldGroveEffect extends RollDieWithResultTableEffect {
                     break;
                 default:
                     TargetCard target = new TargetCardInLibrary();
-                    player.choose(outcome, target, source, game);
+                    player.choose(outcome, cards, target, source, game);
                     card = cards.get(target.getFirstTarget(), game);
             }
             if (card != null) {
@@ -119,7 +119,7 @@ class DruidOfTheEmeraldGroveEffect extends RollDieWithResultTableEffect {
                 cards.remove(card);
             }
             player.moveCards(cards, Zone.HAND, source, game);
-        } else if (amount != 20) {
+        } else {
             player.moveCards(
                     cards.getCards(game), Zone.BATTLEFIELD, source, game,
                     true, false, false, null
