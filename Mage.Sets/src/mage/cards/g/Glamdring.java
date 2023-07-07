@@ -70,7 +70,7 @@ public final class Glamdring extends CardImpl {
 }
 
 class GlamdringEffect extends OneShotEffect {
-    public GlamdringEffect() {
+    GlamdringEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may cast an instant or sorcery spell from your hand with mana value less than or equal to that damage without paying its mana cost";
     }
@@ -85,7 +85,7 @@ class GlamdringEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public GlamdringEffect copy() {
         return new GlamdringEffect();
     }
 }
