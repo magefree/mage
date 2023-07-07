@@ -1,15 +1,16 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.PermanentEnteringBattlefieldManaValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.PutCards;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -74,26 +75,6 @@ public final class RadagastTheBrown extends CardImpl {
     @Override
     public RadagastTheBrown copy() {
         return new RadagastTheBrown(this);
-    }
-}
-
-enum PermanentEnteringBattlefieldManaValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability source, Effect effect) {
-        Permanent permanent = (Permanent) effect.getValue("permanentEnteringBattlefield");
-        return permanent == null ? 0 : permanent.getManaValue();
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "that creature's mana value";
     }
 }
 
