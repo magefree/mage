@@ -2,8 +2,6 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -14,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -58,7 +57,7 @@ public final class RadagastTheBrown extends CardImpl {
         // Put the rest on the bottom of your library in a random order.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new LookLibraryAndPickControllerEffect(
-                        TargetManaValue.instance, 1,
+                        PermanentEnteringBattlefieldManaValue.instance, 1,
                         cardFilter,
                         PutCards.HAND, PutCards.BOTTOM_RANDOM
                 ),
@@ -78,7 +77,7 @@ public final class RadagastTheBrown extends CardImpl {
     }
 }
 
-enum TargetManaValue implements DynamicValue {
+enum PermanentEnteringBattlefieldManaValue implements DynamicValue {
     instance;
 
     @Override
@@ -110,7 +109,7 @@ enum SharesACreatureTypeWithCreaturesYouControl implements Predicate<Card> {
     public boolean apply(Card card, Game game) {
         UUID playerId = card.getOwnerId();
         List<Permanent> creaturesYouControl = game.getBattlefield().getActivePermanents(
-                new FilterControlledCreaturePermanent(),
+                StaticFilters.FILTER_CONTROLLED_CREATURE,
                 playerId,
                 game
         );
