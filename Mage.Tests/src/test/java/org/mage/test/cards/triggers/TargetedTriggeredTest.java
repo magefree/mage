@@ -21,7 +21,6 @@ public class TargetedTriggeredTest extends CardTestPlayerBase {
      *
      */
     @Test
-    //@Ignore
     // this does not currently work in test (????), because the target event will be fired earlier during tests,
     // so the zone change counter for the fixed target of the counterspell will not work
     // UPDATE: seems to work fine now? 04/19/2017 escplan9
@@ -120,12 +119,11 @@ public class TargetedTriggeredTest extends CardTestPlayerBase {
     }
     
     /*
-    NOTE: test is failing due to card bug as of 04/20/2017. See issue #3180
+    NOTE: test was failing due to card bug, resolved as of 04/20/2017. See issue #3180
     I had a Glyph Keeper on board (cloned with Vizier of many faces). -- note this test is a simplified version, next test will test on the Clone if needed
     First I played a Soulstinger and targeted the Glyph Keeper, the ability was countered. Then on the same main phase I played a Cartouche of Strength targeting the Glyph Keeper, that was also countered. 
     Only the first should have been countered.
     */
-    @Ignore // This scenario works fine in the game.
     public void testGlyphKeeperCountersFirstAbilityButNotSecondOne() {
         
         /*

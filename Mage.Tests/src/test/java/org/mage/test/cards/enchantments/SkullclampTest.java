@@ -25,9 +25,7 @@ public class SkullclampTest extends CardTestPlayerBase {
      * 704.5n.)
      *
      */
-    
-    // This test does not work, but the example works in the game fine.
-    @Ignore
+
     public void testPerniciousDeed() {
         // Equipped creature gets +1/-1.
         // Whenever equipped creature dies, draw two cards.

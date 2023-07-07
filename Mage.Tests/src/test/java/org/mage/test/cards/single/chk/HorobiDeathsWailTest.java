@@ -10,7 +10,6 @@ public class HorobiDeathsWailTest extends CardTestPlayerBase {
 
     // issue 7772
     @Test
-    @Ignore
     public void animateDeadOnHorobi(){
         // Animate Dead
         addCard(Zone.HAND, playerA, "Animate Dead");
