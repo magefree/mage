@@ -7,6 +7,7 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.cost.CastFromHandForFreeEffect;
@@ -17,8 +18,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCompareManaValue;
-import mage.filter.predicate.Predicates;
+import mage.filter.common.FilterInstantOrSorceryCard;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.game.Game;
 
 import java.util.UUID;
 
@@ -27,14 +29,6 @@ import java.util.UUID;
  * @author bobby-mccann
  */
 public final class Glamdring extends CardImpl {
-    private static final FilterCard filter = new FilterCompareManaValue(ComparisonType.OR_LESS, SavedDamageValue.DAMAGE);
-    static {
-        filter.add(Predicates.or(
-                CardType.INSTANT.getPredicate(),
-                CardType.SORCERY.getPredicate()
-        ));
-        filter.setMessage("an instant or sorcery spell from your hand with mana value less than or equal to that damage");
-    }
 
     public Glamdring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
@@ -56,7 +50,7 @@ public final class Glamdring extends CardImpl {
         // Whenever equipped creature deals combat damage to a player, you may cast an instant or sorcery spell from your hand with mana value less than or equal to that damage without paying its mana cost.
         this.addAbility(
                 new DealsDamageToAPlayerAttachedTriggeredAbility(
-                        new CastFromHandForFreeEffect(filter),
+                        new GlamdringEffect(),
                         "equipped creature", false
                 )
         );
@@ -72,5 +66,26 @@ public final class Glamdring extends CardImpl {
     @Override
     public Glamdring copy() {
         return new Glamdring(this);
+    }
+}
+
+class GlamdringEffect extends OneShotEffect {
+    public GlamdringEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "you may cast an instant or sorcery spell from your hand with mana value less than or equal to that damage without paying its mana cost";
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        FilterCard filter = new FilterInstantOrSorceryCard("an instant or sorcery spell from your hand with mana value less than or equal to that damage");
+        filter.add(new ManaValuePredicate(
+                ComparisonType.OR_LESS, SavedDamageValue.DAMAGE.calculate(game, source, this)
+        ));
+        return new CastFromHandForFreeEffect(filter).apply(game, source);
+    }
+
+    @Override
+    public Effect copy() {
+        return new GlamdringEffect();
     }
 }
