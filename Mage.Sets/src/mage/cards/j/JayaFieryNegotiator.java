@@ -108,7 +108,7 @@ class JayaFieryNegotiatorExileEffect extends OneShotEffect {
             player.moveCardsToExile(exileCards, source, game, true, CardUtil.getExileZoneId(game, source), "Jaya, Fiery Negotiator");
         }
         if (card != null) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, null);
+            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn);
         }
         return true;
     }

@@ -80,9 +80,8 @@ class PraetorsGraspEffect extends OneShotEffect {
                 if (exileId != null) {
                     game.informPlayers(controller.getLogName() + " moves the searched "
                             + "card face down to exile");
-                    card.moveToExile(exileId, sourceObject.getIdName(), source, game);
+                    CardUtil.exileAndMakePlayable(game, source, card, Duration.Custom);
                     card.setFaceDown(true, game);
-                    CardUtil.makeCardPlayable(game, source, card, Duration.Custom, null);
                     game.addEffect(new PraetorsGraspRevealEffect(card.getId()), source);
                 }
             }

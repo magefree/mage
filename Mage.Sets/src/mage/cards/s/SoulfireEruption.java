@@ -1,18 +1,18 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.Collection;
@@ -82,8 +82,7 @@ class SoulfireEruptionEffect extends OneShotEffect {
             if (card == null) {
                 continue;
             }
-            controller.moveCards(card, Zone.EXILED, source, game);
-            CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, null);
+            CardUtil.exileAndMakePlayable(game, source, card, Duration.UntilEndOfYourNextTurn);
             if (card.getManaValue() < 1) {
                 continue;
             }

@@ -89,9 +89,7 @@ class CrypticPursuitExileAndPlayEffect extends OneShotEffect {
             return false;
         }
 
-        CardUtil.exileAndMakeCastable(
-            game, source, card, Duration.UntilEndOfYourNextTurn, null, null
-        );
+        CardUtil.exileAndMakeCastable(game, source, card, Duration.UntilEndOfYourNextTurn);
 
         return false;
     }

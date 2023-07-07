@@ -87,9 +87,7 @@ class FlorianVoldarenScionEffect extends OneShotEffect {
                     }
                     if (selectedCard != null) {
                         cards.remove(selectedCard);
-                        CardUtil.exileAndMakePlayable(
-                            game, source, selectedCard, Duration.EndOfTurn, null, null
-                        );
+                        CardUtil.exileAndMakePlayable(game, source, selectedCard, Duration.EndOfTurn);
                     }
                     if (!cards.isEmpty()) {
                         controller.putCardsOnBottomOfLibrary(cards, game, source, false);

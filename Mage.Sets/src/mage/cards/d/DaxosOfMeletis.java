@@ -86,12 +86,10 @@ class DaxosOfMeletisEffect extends OneShotEffect {
                     controller.moveCardsToExile(card, source, game, true, exileId, sourceObject.getIdName());
                     // player gains life
                     controller.gainLife(card.getManaValue(), game, source);
-                    // Add effects only if the card has a spellAbility (e.g. not for lands).
-                    if (card.getSpellAbility() != null) {
-                        // allow to cast the card
-                        // and you may spend mana as though it were mana of any color to cast it
-                        CardUtil.makeCardCastable(game, source, card, Duration.EndOfTurn, CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
-                    }
+                    // allow to cast the card
+                    // and you may spend mana as though it were mana of any color to cast it
+                    CardUtil.makeCardCastable(game, source, card, Duration.EndOfTurn,
+                        CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
                 }
                 return true;
             }

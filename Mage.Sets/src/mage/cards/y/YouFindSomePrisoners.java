@@ -82,7 +82,7 @@ class YouFindSomePrisonersEffect extends OneShotEffect {
         Card card = cards.get(target.getFirstTarget(), game);
         if (card != null) {
             CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn,
-                CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
+                CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
         }
         return true;
     }

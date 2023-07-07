@@ -143,18 +143,13 @@ class GrenzoHavocRaiserEffect extends OneShotEffect {
             Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
             if (damagedPlayer != null) {
                 MageObject sourceObject = game.getObject(source);
-                UUID exileId = CardUtil.getCardExileZoneId(game, source);
                 Card card = damagedPlayer.getLibrary().getFromTop(game);
                 if (card != null && sourceObject != null) {
-                    // move card to exile
-                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source, game, Zone.LIBRARY, true);
-                    // Add effects only if the card has a spellAbility (e.g. not for lands).
-                    if (card.getSpellAbility() != null) {
-                        // allow to cast the card
-                        // and you may spend mana as though it were mana of any color to cast it
-                        CardUtil.makeCardCastable(game, source, card, Duration.EndOfTurn,
-                            CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
-                    }
+                    // exile the card,
+                    // allow to cast the card
+                    // and you may spend mana as though it were mana of any color to cast it
+                    CardUtil.exileAndMakeCastable(game, source, card, Duration.EndOfTurn,
+                        CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR, null);
                 }
                 return true;
             }

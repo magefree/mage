@@ -81,7 +81,8 @@ class TibaltCosmicImpostorPlayFromExileEffect extends AsThoughEffectImpl {
         if (exileZone.contains(mainCardId)
                 && affectedControllerId.equals(source.getControllerId())
                 && game.getState().getZone(mainCardId).equals(Zone.EXILED)) {
-            CardUtil.makeCardPlayable(game, source, cardInExile, Duration.Custom, CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
+            CardUtil.makeCardPlayable(game, source, cardInExile, Duration.Custom,
+                CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
             return true;
         }
         return false;

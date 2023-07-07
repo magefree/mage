@@ -76,7 +76,7 @@ class PropheticFlamespeakerExileEffect extends OneShotEffect {
             if (card != null) {
                 if (controller.moveCardsToExile(card, source, game, true, source.getSourceId(),
                         CardUtil.createObjectRealtedWindowTitle(source, game, "<this card may be played the turn it was exiled>"))) {
-                    CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, null);
+                    CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn);
                 }
             }
             return true;

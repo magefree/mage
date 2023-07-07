@@ -88,8 +88,7 @@ class HidetsuguDevouringChaosEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        CardUtil.exileAndMakePlayable(game, source, card,
-            Duration.EndOfTurn, null, null);
+        CardUtil.exileAndMakePlayable(game, source, card, Duration.EndOfTurn);
         if (card.isLand(game)) {
             return true;
         }

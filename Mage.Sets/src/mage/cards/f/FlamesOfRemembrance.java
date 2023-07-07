@@ -73,10 +73,7 @@ class FlamesOfRemembranceExileEffect extends OneShotEffect {
         if (controller != null) {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, amount.calculate(game, source, this)));
             if (!cards.isEmpty()) {
-                controller.moveCardsToExile(cards.getCards(game), source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, ""));
-                for (Card card: cards.getCards(game)) {
-                    CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, null);
-                }
+                CardUtil.exileCardsAndMakePlayable(game, source, cards.getCards(game), Duration.EndOfTurn);
             }
             return true;
         }

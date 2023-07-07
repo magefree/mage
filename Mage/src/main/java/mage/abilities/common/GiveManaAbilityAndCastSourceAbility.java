@@ -67,7 +67,7 @@ class CastExiledFromHandCardEffect extends OneShotEffect {
                 .map(MageObjectReference.class::cast)
                 .map(mor -> mor.getCard(game))
                 .ifPresent(card -> CardUtil.makeCardCastable(
-                        game, source, card, Duration.Custom, null
+                        game, source, card, Duration.Custom
                 ));
         return true;
     }

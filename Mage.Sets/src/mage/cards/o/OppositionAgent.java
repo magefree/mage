@@ -105,7 +105,7 @@ class OppositionAgentReplacementEffect extends ReplacementEffectImpl {
         for (Card card : cardsToExile) {
             // the source ability is tied to the effect so we need to keep it active to work correctly
             CardUtil.makeCardPlayable(game, source, card, Duration.EndOfGame,
-                CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
+                CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
         }
 
         // return false all the time

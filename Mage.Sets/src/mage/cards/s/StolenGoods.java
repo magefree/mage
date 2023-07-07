@@ -72,7 +72,7 @@ class StolenGoodsEffect extends OneShotEffect {
             } else {
                 CardUtil.exileAndMakeCastable(
                     game, source, card, Duration.EndOfTurn,
-                    CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST, null
+                    CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST, null
                 );
                 break;
             }

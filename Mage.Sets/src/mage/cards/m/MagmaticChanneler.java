@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,7 +11,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.hint.Hint;
@@ -109,7 +107,7 @@ class MagmaticChannelerExileEffect extends OneShotEffect {
             return false;
         }
 
-        CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, null);
+        CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn);
         return true;
     }
 }

@@ -2,21 +2,19 @@ package mage.cards.p;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -103,12 +101,10 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
                 }
                 if (card != null) {
                     // move card to exile
-                    UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source, game, fromHand ? Zone.HAND : Zone.GRAVEYARD, true);
                     // allow to cast the card
                     // and you may spend mana as though it were mana of any color to cast it
-                    CardUtil.makeCardCastable(game, source, card, Duration.Custom,
-                        CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
+                    CardUtil.exileAndMakeCastable(game, source, card, Duration.Custom,
+                        CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR, null);
                 }
                 return true;
             }

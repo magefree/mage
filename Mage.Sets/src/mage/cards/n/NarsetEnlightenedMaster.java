@@ -1,13 +1,9 @@
 package mage.cards.n;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HexproofAbility;
@@ -17,8 +13,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -73,11 +71,11 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
             Set<Card> cards = player.getLibrary().getTopCards(game, 4);
             player.moveCards(cards, Zone.EXILED, source, game);
             for (Card card : cards) {
+                // TODO: this is not quite right with mdfc creature/non-creature.
                 if (game.getState().getZone(card.getId()) == Zone.EXILED
-                        && !card.isCreature(game)
-                        && !card.isLand(game)) {
+                        && !card.isCreature(game)) {
                     CardUtil.makeCardCastable(game, source, card, Duration.EndOfTurn,
-                        CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST);
+                        CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST);
                 }
             }
             return true;

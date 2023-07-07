@@ -100,7 +100,7 @@ class UrzaLordHighArtificerEffect extends OneShotEffect {
         Card card = controller.getLibrary().getFromTop(game);
         return CardUtil.exileAndMakePlayable(
             game, source, card, Duration.EndOfTurn,
-            CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST,
+            CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST,
             null);
     }
 }

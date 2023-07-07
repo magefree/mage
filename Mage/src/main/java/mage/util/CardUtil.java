@@ -43,6 +43,7 @@ import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import org.apache.log4j.Logger;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -1191,19 +1192,28 @@ public final class CardUtil {
      * Groups together the most usual ways a card's payment is adjusted
      * by card effects that allow play or cast.
      */
-    public enum SimpleCastManaAdjustment {
+    public enum CastManaAdjustment {
+        NONE,
         AS_THOUGH_ANY_MANA_TYPE,
         AS_THOUGH_ANY_MANA_COLOR,
         WITHOUT_PAYING_MANA_COST,
     }
 
+    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration) {
+        makeCardPlayable(game, source, card, duration, CastManaAdjustment.NONE);
+    }
+
+    public static void makeCardCastable(Game game, Ability source, Card card, Duration duration) {
+        makeCardCastable(game, source, card, duration, CastManaAdjustment.NONE);
+    }
+
     public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration,
-                                        @Nullable SimpleCastManaAdjustment manaAdjustment) {
+                                        @Nonnull CastManaAdjustment manaAdjustment) {
         makeCardPlayableOrCastable(game, source, card, duration, false, manaAdjustment, null, null);
     }
 
     public static void makeCardCastable(Game game, Ability source, Card card, Duration duration,
-                                        @Nullable SimpleCastManaAdjustment manaAdjustment) {
+                                        @Nonnull CastManaAdjustment manaAdjustment) {
         makeCardPlayableOrCastable(game, source, card, duration, true, manaAdjustment, null, null);
     }
 
@@ -1217,9 +1227,7 @@ public final class CardUtil {
      * @param card
      * @param duration
      * @param isCastNotPlay true for effects that allow to cast but not play
-     * @param manaAdjustment
-     *              a mana adjustment applied to the payment of the affected card.
-     *              null if no adjustment needs to be applied.
+     * @param manaAdjustment a mana adjustment applied to the payment of the affected card.
      * @param playerId
      *              the player allowed to cast/play.
      *              null for that player to be the source's controller.
@@ -1232,7 +1240,7 @@ public final class CardUtil {
         Card card,
         Duration duration,
         boolean isCastNotPlay,
-        @Nullable SimpleCastManaAdjustment manaAdjustment,
+        @Nonnull CastManaAdjustment manaAdjustment,
         @Nullable UUID playerId,
         @Nullable Condition condition
     ) {
@@ -1251,20 +1259,20 @@ public final class CardUtil {
             game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
         }
 
-        if (manaAdjustment != null) {
-            switch(manaAdjustment){
-                case AS_THOUGH_ANY_MANA_TYPE:
-                    // TODO: make a distinct effect for "as though it were mana of any type"
-                case AS_THOUGH_ANY_MANA_COLOR:
-                    game.addEffect(
-                        new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition)
-                            .setTargetPointer(new FixedTarget(objectId, zcc)),
-                        source);
-                    break;
-                case WITHOUT_PAYING_MANA_COST:
-                    // TODO make a separate effect similar to PlayFromNotOwnHandZoneTargetEffect
-                    break;
-            }
+        switch(manaAdjustment){
+            case AS_THOUGH_ANY_MANA_TYPE:
+                // TODO: make a distinct effect for "as though it were mana of any type"
+            case AS_THOUGH_ANY_MANA_COLOR:
+                game.addEffect(
+                    new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition)
+                        .setTargetPointer(new FixedTarget(objectId, zcc)),
+                    source);
+                break;
+            case WITHOUT_PAYING_MANA_COST:
+                // TODO make a separate effect similar to PlayFromNotOwnHandZoneTargetEffect
+                break;
+            case NONE:
+                break;
         }
     }
 
@@ -1272,8 +1280,19 @@ public final class CardUtil {
         Game game,
         Ability source,
         Card card,
+        Duration duration
+    ) {
+        return exileAndMakePlayable(
+            game, source, card, duration,
+            CastManaAdjustment.NONE, null);
+    }
+
+    public static boolean exileAndMakePlayable(
+        Game game,
+        Ability source,
+        Card card,
         Duration duration,
-        @Nullable SimpleCastManaAdjustment manaAdjustment,
+        @Nonnull CastManaAdjustment manaAdjustment,
         @Nullable UUID playerId) {
 
         if (card == null) {
@@ -1288,8 +1307,19 @@ public final class CardUtil {
         Game game,
         Ability source,
         Set<Card> cards,
+        Duration duration
+    ) {
+        return exileCardsAndMakePlayable(
+            game, source, cards, duration,
+            CastManaAdjustment.NONE, null);
+    }
+
+    public static boolean exileCardsAndMakePlayable(
+        Game game,
+        Ability source,
+        Set<Card> cards,
         Duration duration,
-        @Nullable SimpleCastManaAdjustment manaAdjustment,
+        @Nonnull CastManaAdjustment manaAdjustment,
         @Nullable UUID playerId
     ) {
         return exileCardsAndMakePlayableOrCastable(game, source, cards, duration, false, manaAdjustment, playerId);
@@ -1299,8 +1329,19 @@ public final class CardUtil {
         Game game,
         Ability source,
         Card card,
+        Duration duration) {
+
+        return exileAndMakeCastable(
+            game, source, card, duration,
+            CastManaAdjustment.NONE, null);
+    }
+
+    public static boolean exileAndMakeCastable(
+        Game game,
+        Ability source,
+        Card card,
         Duration duration,
-        @Nullable SimpleCastManaAdjustment manaAdjustment,
+        @Nonnull CastManaAdjustment manaAdjustment,
         @Nullable UUID playerId) {
 
         if (card == null) {
@@ -1315,11 +1356,24 @@ public final class CardUtil {
         Game game,
         Ability source,
         Set<Card> cards,
+        Duration duration
+    ) {
+        return exileCardsAndMakeCastable(
+            game, source, cards, duration,
+            CastManaAdjustment.NONE, null);
+    }
+
+    public static boolean exileCardsAndMakeCastable(
+        Game game,
+        Ability source,
+        Set<Card> cards,
         Duration duration,
-        @Nullable SimpleCastManaAdjustment manaAdjustment,
+        @Nonnull CastManaAdjustment manaAdjustment,
         @Nullable UUID playerId
     ) {
-        return exileCardsAndMakePlayableOrCastable(game, source, cards, duration, true, manaAdjustment, playerId);
+        return exileCardsAndMakePlayableOrCastable(
+            game, source, cards, duration,
+            true, manaAdjustment, playerId);
     }
 
     /**
@@ -1346,7 +1400,7 @@ public final class CardUtil {
         Set<Card> cards,
         Duration duration,
         boolean isCastNotPlay,
-        @Nullable SimpleCastManaAdjustment manaAdjustment,
+        @Nonnull CastManaAdjustment manaAdjustment,
         @Nullable UUID playerId
     ) {
         if (cards == null || cards.isEmpty()) {

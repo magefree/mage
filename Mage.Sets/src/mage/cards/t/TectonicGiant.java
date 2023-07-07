@@ -1,13 +1,10 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.*;
@@ -20,8 +17,9 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -127,7 +125,7 @@ class TectonicGiantEffect extends OneShotEffect {
             return true;
         }
 
-        CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, null);
+        CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn);
 
         return true;
     }

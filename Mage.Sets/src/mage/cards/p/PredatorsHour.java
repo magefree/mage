@@ -4,7 +4,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -13,7 +12,6 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
@@ -111,7 +109,7 @@ class PredatorsHourEffect extends OneShotEffect {
             // You may play the card
             // And you may spend mana as though it were mana of any color to cast it
             CardUtil.makeCardPlayable(game, source, topCard, Duration.Custom,
-                CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
+                CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
 
             // For as long as that card remains exiled, you may look at it
             ContinuousEffect effect = new PredatorsHourLookEffect(controller.getId());

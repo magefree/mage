@@ -79,9 +79,7 @@ class RagavanNimblePilfererEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        CardUtil.exileAndMakeCastable(
-            game, source, card, Duration.EndOfTurn, null, null
-        );
+        CardUtil.exileAndMakeCastable(game, source, card, Duration.EndOfTurn);
 
         return true;
     }

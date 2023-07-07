@@ -3,14 +3,12 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
 import java.util.Set;
@@ -63,7 +61,7 @@ public class ExileTopXMayPlayUntilEndOfTurnEffect extends OneShotEffect {
         cards.removeIf(card -> !Zone.EXILED.equals(game.getState().getZone(card.getId())));
         if (!cards.isEmpty()) {
             for(Card card: cards){
-                CardUtil.makeCardPlayable(game, source, card, duration, null);
+                CardUtil.makeCardPlayable(game, source, card, duration);
             }
         }
         return true;

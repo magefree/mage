@@ -77,10 +77,11 @@ class ShowdownOfTheSkaldsEffect extends OneShotEffect {
         if (controller != null) {
             Set<Card> cards = controller.getLibrary().getTopCards(game, 4);
             Card sourceCard = game.getCard(source.getSourceId());
-            controller.moveCardsToExile(cards, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceCard != null ? sourceCard.getIdName() : "");
+            controller.moveCardsToExile(cards, source, game, true,
+                CardUtil.getCardExileZoneId(game, source), sourceCard != null ? sourceCard.getIdName() : "");
 
             for (Card card : cards) {
-                CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, null);
+                CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn);
             }
 
             return true;

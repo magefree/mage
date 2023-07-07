@@ -64,7 +64,7 @@ class CommuneWithLavaEffect extends OneShotEffect {
             controller.moveCardsToExile(cards, source, game, true, CardUtil.getCardExileZoneId(game, source), sourceCard.getIdName());
 
             for (Card card : cards) {
-                CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, null);
+                CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn);
             }
 
             return true;

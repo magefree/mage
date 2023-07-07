@@ -65,7 +65,7 @@ class ThreeWishesExileEffect extends OneShotEffect {
             for (Card card : topThreeCards) {
                 if (controller.moveCardsToExile(card, source, game, true, exileId, "Three Wishes")) {
                     card.setFaceDown(true, game);
-                    CardUtil.makeCardPlayable(game, source, card, Duration.UntilYourNextTurn, null);
+                    CardUtil.makeCardPlayable(game, source, card, Duration.UntilYourNextTurn);
                 }
             }
             DelayedTriggeredAbility delayed = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(new ThreeWishesPutIntoGraveyardEffect());

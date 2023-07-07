@@ -99,7 +99,7 @@ class IxhelScionOfAtraxaEffect extends OneShotEffect {
             // you may play that card
             // you may spend mana as though it were many of any color to cast it
             CardUtil.makeCardPlayable(game, source, topCard, Duration.Custom,
-                CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
+                CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
             // for as long as that card remains exiled, you may look at it
             ContinuousEffect effect = new IxhelScionOfAtraxaLookEffect(source.getControllerId());
             effect.setTargetPointer(new FixedTarget(topCard.getId(), game));

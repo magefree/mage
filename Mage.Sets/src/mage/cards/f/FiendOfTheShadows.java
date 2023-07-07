@@ -89,7 +89,7 @@ class FiendOfTheShadowsEffect extends OneShotEffect {
                 card, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source),
                 source, game, Zone.HAND, true
         );
-        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, null);
+        CardUtil.makeCardPlayable(game, source, card, Duration.Custom);
         return true;
     }
 }

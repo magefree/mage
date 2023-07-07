@@ -71,9 +71,7 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_ARTIFACT);
         controller.searchLibrary(target, source, game, damagedPlayer.getId());
         Card card = damagedPlayer.getLibrary().getCard(target.getFirstTarget(), game);
-        CardUtil.exileAndMakePlayable(
-            game, source, card, Duration.EndOfTurn, null, null
-        );
+        CardUtil.exileAndMakePlayable(game, source, card, Duration.EndOfTurn);
         damagedPlayer.shuffleLibrary(source, game);
         return true;
     }

@@ -85,9 +85,9 @@ class GalesRedirectionEffect extends RollDieWithResultTableEffect {
         if(result < 1) {
             return true;
         }
-        CardUtil.SimpleCastManaAdjustment adjust = null;
+        CardUtil.CastManaAdjustment adjust = CardUtil.CastManaAdjustment.NONE;
         if (result >= 15) {
-            adjust = CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST;
+            adjust = CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST;
         }
         CardUtil.makeCardCastable(game, source, card, Duration.Custom, adjust);
         return true;

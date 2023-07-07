@@ -100,7 +100,7 @@ class SiphonInsightEffect extends OneShotEffect {
             // allow to cast the card
             // and you may spend mana as though it were mana of any color to cast it
             CardUtil.makeCardPlayable(game, source, card, Duration.Custom,
-                CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
+                CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
             // For as long as that card remains exiled, you may look at it
             ContinuousEffect effect = new SiphonInsightLookEffect(controller.getId());
             effect.setTargetPointer(new FixedTarget(card.getId(), game));

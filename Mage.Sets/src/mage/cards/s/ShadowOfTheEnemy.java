@@ -2,20 +2,17 @@ package mage.cards.s;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.Set;
@@ -83,12 +80,13 @@ class ShadowOfTheEnemyEffect extends OneShotEffect {
             return true;
         }
 
-        player.moveCardsToExile(cards, source, game, true, source.getSourceId(), sourceObject.getName());
-        for (Card card : cards) {
-            // allow to cast the card
-            // and you may spend mana as though it were mana of any color to cast it
-            CardUtil.makeCardCastable(game, source, card, Duration.EndOfGame, CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
-        }
+        // exile the cards
+        // allow to cast the cards
+        // and you may spend mana as though it were mana of any color to cast it
+        CardUtil.exileCardsAndMakeCastable(
+            game, source, cards, Duration.EndOfGame,
+            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR, null);
+
         return true;
     }
 }

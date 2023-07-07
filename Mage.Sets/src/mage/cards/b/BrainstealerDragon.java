@@ -99,7 +99,7 @@ class BrainstealerDragonExileEffect extends OneShotEffect {
         for (Card card : cards.getCards(game)) {
             CardUtil.makeCardPlayableOrCastable(
                     game, source, card, Duration.Custom, false,
-                    CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR,
+                    CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR,
                     source.getControllerId(), null
             );
         }

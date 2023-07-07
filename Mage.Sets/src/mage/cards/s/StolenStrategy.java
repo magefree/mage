@@ -73,10 +73,10 @@ class StolenStrategyEffect extends OneShotEffect {
             Card card = damagedPlayer.getLibrary().getFromTop(game);
             if (card != null && sourceObject != null) {
                 // move card to exile
-                controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source, game, Zone.LIBRARY, true);
                 // allow to cast the card
                 // and you may spend mana as though it were mana of any color to cast it
-                CardUtil.makeCardCastable(game, source, card, Duration.EndOfTurn, CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR);
+                CardUtil.exileAndMakeCastable(game, source, card, Duration.EndOfTurn,
+                    CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR, null);
             }
         }
         return true;

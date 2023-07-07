@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -133,9 +132,7 @@ class MazzyExileEffect extends OneShotEffect {
         if (aura == null) {
             return false;
         }
-        CardUtil.exileAndMakeCastable(
-            game, source, aura, Duration.UntilEndOfYourNextTurn, null, null
-        );
+        CardUtil.exileAndMakeCastable(game, source, aura, Duration.UntilEndOfYourNextTurn);
         return true;
     }
 }

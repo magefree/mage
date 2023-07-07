@@ -102,9 +102,7 @@ class RadiantScrollwielderEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        CardUtil.exileAndMakeCastable(
-            game, source, card, Duration.EndOfTurn, null, null
-        );
+        CardUtil.exileAndMakeCastable(game, source, card, Duration.EndOfTurn);
         game.addEffect(new RadiantScrollwielderReplacementEffect(card, game), source);
         return true;
     }

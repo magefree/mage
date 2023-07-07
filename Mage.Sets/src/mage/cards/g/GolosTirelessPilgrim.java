@@ -76,7 +76,7 @@ class GolosTirelessPilgrimEffect extends OneShotEffect {
         Set<Card> cards = player.getLibrary().getTopCards(game, 3);
         return CardUtil.exileCardsAndMakePlayable(
             game, source, cards, Duration.EndOfTurn,
-            CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST,
+            CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST,
             null);
     }
 

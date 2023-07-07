@@ -118,8 +118,9 @@ class VivienChampionOfTheWildsEffect extends OneShotEffect {
         ContinuousEffect effect = new VivienChampionOfTheWildsLookEffect(player.getId());
         effect.setTargetPointer(new FixedTarget(cardToExile, game));
         game.addEffect(effect, source);
+        // TODO: this needs to be a spell check, not card check. Thanks mdfc!
         if (cardToExile.isCreature(game)) {
-            CardUtil.makeCardCastable(game, source, cardToExile, Duration.Custom, null);
+            CardUtil.makeCardCastable(game, source, cardToExile, Duration.Custom);
         }
 
         // put the rest on the bottom of your library in any order

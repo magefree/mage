@@ -7,8 +7,6 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.AsThoughEffect;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.*;
@@ -17,7 +15,6 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.common.SpellsCastWatcher;
 
@@ -79,7 +76,7 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
                     || revealedCard.isSorcery(game)) {
                 opponent.moveCardToExileWithInfo(revealedCard, source.getSourceId(), "Planeswalker's Mischief", source, game, Zone.HAND, true);
                 CardUtil.makeCardCastable(game, source, revealedCard, Duration.Custom,
-                    CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST);
+                    CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST);
                 OneShotEffect effect2 = new ReturnFromExileEffect(Zone.HAND);
                 Condition condition = new PlaneswalkersMischiefCondition(source.getSourceId(), revealedCard.getId());
                 ConditionalOneShotEffect effect3 = new ConditionalOneShotEffect(effect2, condition, "if you haven't cast it, return it to its owner's hand.");

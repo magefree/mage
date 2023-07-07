@@ -82,7 +82,7 @@ class TobiasBeckettEffect extends OneShotEffect {
                         // allow to cast the card
                         // and you may spend mana as though it were mana of any type to cast it
                         CardUtil.makeCardCastable(game, source, card, Duration.Custom,
-                            CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE);
+                            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE);
                     }
                     return true;
                 }

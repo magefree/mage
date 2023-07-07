@@ -90,8 +90,7 @@ class NahirisWarcraftingEffect extends OneShotEffect {
         player.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
-            player.moveCards(card, Zone.EXILED, source, game);
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, null);
+            CardUtil.exileAndMakePlayable(game, source, card, Duration.EndOfTurn);
         }
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);

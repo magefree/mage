@@ -77,7 +77,7 @@ class SparkOfCreativityEffect extends OneShotEffect {
                     }
                 }
                 // If you don't, you may play that card until end of turn
-                CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, null);
+                CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn);
             }
             return true;
         }

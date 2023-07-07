@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.UntapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -17,7 +16,6 @@ import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -83,7 +81,7 @@ class KnacksawCliqueEffect extends OneShotEffect {
                 Card card = library.getFromTop(game);
                 if (card != null) {
                     opponent.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getName(), source, game, Zone.LIBRARY, true);
-                    CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, null);
+                    CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn);
                 }
             }
             return true;

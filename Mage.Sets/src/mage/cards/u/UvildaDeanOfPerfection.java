@@ -16,7 +16,9 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -27,7 +29,9 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -279,7 +283,7 @@ class NassariDeanOfExpressionEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
+        Set<Card> cards = new HashSet<>();
         game.getOpponents(source.getControllerId())
                 .stream()
                 .map(game::getPlayer)
@@ -287,14 +291,9 @@ class NassariDeanOfExpressionEffect extends OneShotEffect {
                 .map(Player::getLibrary)
                 .map(p -> p.getFromTop(game))
                 .forEach(cards::add);
-        player.moveCards(cards, Zone.EXILED, source, game);
-        cards.retainZone(Zone.EXILED, game);
-        if (cards.isEmpty()) {
-            return false;
-        }
-        for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardCastable(game, source, card, Duration.EndOfTurn, null);
-        }
+        CardUtil.exileCardsAndMakeCastable(
+            game, source, cards, Duration.EndOfTurn,
+            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR, null);
         return true;
     }
 }

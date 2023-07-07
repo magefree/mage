@@ -94,7 +94,7 @@ class DireFleetDaredevilEffect extends OneShotEffect {
                     if (targetCard != null) {
                         // you may cast and spend mana as any type
                         CardUtil.makeCardCastable(game, source, targetCard, Duration.EndOfTurn,
-                            CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE);
+                            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_TYPE);
                         // exile from graveyard
                         ContinuousEffect effect = new DireFleetDaredevilReplacementEffect();
                         effect.setTargetPointer(new FixedTarget(targetCard, game));

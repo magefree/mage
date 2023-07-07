@@ -64,7 +64,7 @@ class HurlThroughHellEffect extends OneShotEffect {
         CardUtil.exileAndMakeCastable(
             game, source, permanent,
             Duration.UntilEndOfYourNextTurn,
-            CardUtil.SimpleCastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR,
+            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR,
             null
         );
         return true;

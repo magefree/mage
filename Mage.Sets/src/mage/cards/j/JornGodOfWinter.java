@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -21,7 +20,6 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -96,7 +94,7 @@ class KaldringTheRimestaffEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (card != null) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, null);
+            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn);
             ContinuousEffect effect = new KaldringTheRimestaffTapEffect(card.getId());
             game.addEffect(effect, source);
             return true;

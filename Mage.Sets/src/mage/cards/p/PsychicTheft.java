@@ -91,7 +91,7 @@ class PsychicTheftEffect extends OneShotEffect {
         }
         controller.moveCardToExileWithInfo(chosenCard, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source), source, game, Zone.HAND, true);
 
-        CardUtil.makeCardCastable(game, source, chosenCard, Duration.Custom, null);
+        CardUtil.makeCardCastable(game, source, chosenCard, Duration.Custom);
 
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                 new ConditionalOneShotEffect(

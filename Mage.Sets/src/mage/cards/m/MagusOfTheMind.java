@@ -83,7 +83,7 @@ class MagusOfTheMindEffect extends OneShotEffect {
                 Set<Card> cards = controller.getLibrary().getTopCards(game, stormCount);
                 return CardUtil.exileCardsAndMakePlayable(
                     game, source, cards, Duration.EndOfTurn,
-                    CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST,
+                    CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST,
                     null);
             }
             return true;

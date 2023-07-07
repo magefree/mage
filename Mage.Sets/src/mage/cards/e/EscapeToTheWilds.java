@@ -1,15 +1,15 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
 import mage.cards.*;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -62,11 +62,10 @@ class EscapeToTheWildsEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 5));
-        Card sourceCard = game.getCard(source.getSourceId());
         controller.moveCards(cards, Zone.EXILED, source, game);
 
         cards.getCards(game).stream().forEach(card -> {
-            CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn, null);
+            CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn);
         });
         game.addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn), source);
         return true;

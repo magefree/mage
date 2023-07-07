@@ -83,9 +83,9 @@ class CavesOfChaosAdventurerEffect extends OneShotEffect {
         }
         player.moveCards(card, Zone.EXILED, source, game);
 
-        CardUtil.SimpleCastManaAdjustment adjust = null;
+        CardUtil.CastManaAdjustment adjust = CardUtil.CastManaAdjustment.NONE;
         if (CompletedDungeonWatcher.checkPlayer(source.getControllerId(), game)) {
-            adjust = CardUtil.SimpleCastManaAdjustment.WITHOUT_PAYING_MANA_COST;
+            adjust = CardUtil.CastManaAdjustment.WITHOUT_PAYING_MANA_COST;
         }
 
         CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, adjust);

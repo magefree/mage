@@ -125,10 +125,7 @@ class ConspiracyTheoristEffect extends OneShotEffect {
             if (validTarget && controller.chooseUse(Outcome.Benefit, "Exile a card?", source, game)) {
                 if (controller.choose(Outcome.Benefit, cards, target, source, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null && controller.moveCards(card, Zone.EXILED, source, game)) {
-                        // you may cast it this turn
-                        CardUtil.makeCardCastable(game, source, card, Duration.EndOfTurn, null);
-                    }
+                    CardUtil.exileAndMakeCastable(game, source, card, Duration.EndOfTurn);
                 }
             }
             return true;

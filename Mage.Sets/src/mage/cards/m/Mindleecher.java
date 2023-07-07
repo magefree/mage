@@ -90,7 +90,7 @@ class MindleecherEffect extends OneShotEffect {
         }
         cards.getCards(game).stream().forEach(card -> card.setFaceDown(true, game));
         for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, null);
+            CardUtil.makeCardPlayable(game, source, card, Duration.Custom);
             game.addEffect(new MindleecherLookEffect(controller.getId())
                     .setTargetPointer(new FixedTarget(card, game)), source);
         }
