@@ -15,8 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -25,12 +24,6 @@ import mage.game.permanent.Permanent;
  * @author weirddan455
  */
 public final class GarnaBloodfistOfKeld extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public GarnaBloodfistOfKeld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{R}");
@@ -50,7 +43,7 @@ public final class GarnaBloodfistOfKeld extends CardImpl {
                         "draw a card if it was attacking. Otherwise, {this} deals 1 damage to each opponent"
                 ),
                 false,
-                filter
+                StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL
         ));
     }
 

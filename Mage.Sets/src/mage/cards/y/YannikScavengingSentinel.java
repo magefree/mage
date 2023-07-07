@@ -14,9 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -63,13 +61,6 @@ public final class YannikScavengingSentinel extends CardImpl {
 
 class YannikScavengingSentinelEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     YannikScavengingSentinelEffect() {
         super(Outcome.Benefit);
         staticText = "exile another creature you control until {this} leaves the battlefield. " +
@@ -91,10 +82,10 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (player == null || sourcePermanent == null
-                || game.getBattlefield().count(filter, source.getControllerId(), source, game) < 1) {
+                || game.getBattlefield().count(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        TargetPermanent target = new TargetPermanent(filter);
+        TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL);
         target.setNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
