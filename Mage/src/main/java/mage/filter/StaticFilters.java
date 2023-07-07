@@ -50,10 +50,10 @@ public final class StaticFilters {
         FILTER_CARD_CARDS.setLockedFilter(true);
     }
 
-    public static final FilterCard FILTER_CARD_ENTCHANTMENT = new FilterEnchantmentCard();
+    public static final FilterCard FILTER_CARD_ENCHANTMENT = new FilterEnchantmentCard();
 
     static {
-        FILTER_CARD_ENTCHANTMENT.setLockedFilter(true);
+        FILTER_CARD_ENCHANTMENT.setLockedFilter(true);
     }
 
     public static final FilterArtifactCard FILTER_CARD_ARTIFACT = new FilterArtifactCard();
@@ -632,6 +632,13 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_ANOTHER_CREATURE.add(AnotherPredicate.instance);
         FILTER_CONTROLLED_ANOTHER_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterControlledCreaturePermanent FILTER_ANOTHER_CREATURE_YOU_CONTROL = new FilterControlledCreaturePermanent("another creature you control");
+
+    static {
+        FILTER_ANOTHER_CREATURE_YOU_CONTROL.add(AnotherPredicate.instance);
+        FILTER_ANOTHER_CREATURE_YOU_CONTROL.setLockedFilter(true);
     }
 
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_UNTAPPED_CREATURE = new FilterControlledCreaturePermanent("untapped creature you control");

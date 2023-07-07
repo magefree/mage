@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -16,8 +15,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,12 +51,6 @@ public final class TemurSabertooth extends CardImpl {
 
 class TemurSabertoothEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public TemurSabertoothEffect() {
         super(Outcome.Detriment);
         this.staticText = "You may return another creature you control to its owner's hand. If you do, {this} gains indestructible until end of turn";
@@ -77,7 +69,7 @@ class TemurSabertoothEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetPermanent(1, 1, filter, true);
+            Target target = new TargetPermanent(1, 1, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, true);
             if (target.canChoose(controller.getId(), source, game)) {
                 if (controller.chooseUse(outcome, "Return another creature to hand?", source, game)
                         && controller.chooseTarget(outcome, target, source, game)) {
