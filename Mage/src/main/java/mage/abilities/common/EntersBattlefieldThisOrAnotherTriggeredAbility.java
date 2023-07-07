@@ -39,13 +39,18 @@ public class EntersBattlefieldThisOrAnotherTriggeredAbility extends EntersBattle
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!super.checkTrigger(event, game)) {
-            return false;
-        }
+        // We're calling super.checkTrigger here for the side effects:
+        // - Set the target pointer
+        // - PermanentEnteringBattlefield
+        // - PermanentEnteringControllerId
+        super.checkTrigger(event, game);
+
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent == null) {
             return false;
         }
+
+        // If the permanent entering is 'this' permanent, it applies:
         if (permanent.getId().equals(getSourceId())) {
             return true;
         }
