@@ -5145,6 +5145,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         return ringBearerId;
     }
 
+    // Used as key for ther permanent's info.
+    private static final String ringbearerInfoKey = "IS_RINGBEARER";
+
     @Override
     public Permanent getRingBearer(Game game) {
         if (ringBearerId == null) {
@@ -5155,44 +5158,71 @@ public abstract class PlayerImpl implements Player, Serializable {
             return bearer;
         }
         ringBearerId = null;
+        bearer.addInfo(ringbearerInfoKey, null, game);
         return null;
     }
 
+    // 701.52a Certain spells and abilities have the text “the Ring tempts you.” Each time the Ring tempts
+    // you, choose a creature you control. That creature becomes your Ring-bearer until another
+    // creature becomes your Ring-bearer or another player gains control of it.
     @Override
     public void chooseRingBearer(Game game) {
         Permanent currentBearer = getRingBearer(game);
         int creatureCount = game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game
         );
-        boolean mustChoose;
-        if (currentBearer == null) {
-            if (creatureCount > 0) {
-                mustChoose = true;
-            } else {
-                return;
-            }
-        } else if (currentBearer.isCreature(game)) {
-            if (creatureCount > 1) {
-                mustChoose = false;
-            } else {
-                return;
-            }
-        } else if (creatureCount > 0) {
-            mustChoose = false;
+        if(creatureCount == 0) {
+            game.informPlayers(getLogName() + " has no creature to be Ring-bearer.");
+            return;
+        }
+
+        // There should always be a creature at the end.
+        UUID newBearerId;
+        if(creatureCount == 1){
+            // Only one creature, it will be the Ring-bearer.
+            // The player does not have to make any choice.
+            newBearerId = game.getBattlefield().getActivePermanents(
+                    StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game
+            ).get(0).getId();
         } else {
-            return;
+            // Multiple possible Ring-bearer.
+            // Asking first if the player wants to change Ring-bearer.
+            boolean mustChoose = currentBearer == null || !(currentBearer.isCreature(game));
+            boolean choosing = mustChoose;
+            if (!mustChoose) {
+                choosing = chooseUse(Outcome.Neutral, "Choose a new Ring-bearer?", null, game);
+            }
+
+            if (choosing) {
+                TargetPermanent target = new TargetControlledCreaturePermanent();
+                target.setNotTarget(true);
+                target.withChooseHint("to be your Ring-bearer");
+                choose(Outcome.Neutral, target, null, game);
+
+                newBearerId = target.getFirstTarget();
+            }
+            else {
+                newBearerId = ringBearerId;
+            }
         }
-        if (!mustChoose && !chooseUse(Outcome.Neutral, "Choose a new Ring-bearer?", null, game)) {
-            return;
-        }
-        TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
-        target.withChooseHint("to be your Ring-bearer");
-        choose(Outcome.Neutral, target, null, game);
-        UUID newBearerId = target.getFirstTarget();
-        if (game.getPermanent(newBearerId) != null) {
+
+        if(ringBearerId != null && ringBearerId == newBearerId) {
+            // Oracle Ruling for Call of the Ring
+            //
+            // If the creature you choose as your Ring-bearer was already your Ring-bearer,
+            // that still counts as choosing that creature as your Ring-bearer for the purpose
+            // f abilities that trigger "whenever you choose a creature as your Ring-bearer"
+            // or abilities that care about which creature was chosen as your Ring-bearer.
+            // (2023-06-16)
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.RING_BEARER_CHOSEN, currentBearer.getId(), null, getId()));
+            game.informPlayers(getLogName() + " did not choose a new Ring-bearer. " +
+                "It is still " + currentBearer.getLogName() + ".");
+        } else {
+            Permanent ringBearer = game.getPermanent(newBearerId);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.RING_BEARER_CHOSEN, newBearerId, null, getId()));
+            game.informPlayers(getLogName() + " has chosen " + ringBearer.getLogName() + " as Ring-bearer.");
             this.ringBearerId = newBearerId;
+            ringBearer.addInfo(ringbearerInfoKey, CardUtil.addToolTipMarkTags("Is " + getLogName() + "'s Ring-bearer"), game);
         }
     }
 

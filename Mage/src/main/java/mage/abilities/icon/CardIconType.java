@@ -15,6 +15,7 @@ public enum CardIconType {
         but CENTER and END order can be different)
      */
 
+    OTHER_RINGBEARER("prepared/cog.svg", CardIconCategory.ABILITY, 10),
     PLAYABLE_COUNT("prepared/cog.svg", CardIconCategory.PLAYABLE_COUNT, 100),
     //
     ABILITY_FLYING("prepared/feather-alt.svg", CardIconCategory.ABILITY, 100),

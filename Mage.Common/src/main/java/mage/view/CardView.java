@@ -435,11 +435,19 @@ public class CardView extends SimpleCardView {
             if (permanent.isFaceDown(game)) {
                 this.cardIcons.add(CardIconImpl.FACE_DOWN);
             }
-            // commander
             if (game != null) {
                 Player owner = game.getPlayer(game.getOwnerId(permanent));
+                // commander
                 if (owner != null && game.isCommanderObject(owner, permanent)) {
                     this.cardIcons.add(CardIconImpl.COMMANDER);
+                }
+                Player controller = game.getPlayer(game.getControllerId(permanent.getId()));
+                if (controller != null) {
+                    Permanent ringBearer = controller.getRingBearer(game);
+                    // Ring-bearer
+                    if(ringBearer != null && ringBearer.getId() == permanent.getId()) {
+                        this.cardIcons.add(CardIconImpl.RINGBEARER);
+                    }
                 }
             }
         } else {
