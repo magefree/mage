@@ -106,7 +106,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected int timesLoyaltyUsed = 0;
     protected int loyaltyActivationsAvailable = 1;
     protected int transformCount = 0;
-    protected Map<String, String> info;
+    protected Map<String, String> info = new LinkedHashMap<>(); // additional info for permanent's rules
     protected int createOrder;
     protected boolean legendRuleApplies = true;
 
@@ -156,10 +156,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 markedDamage.add(new MarkedDamageInfo(mdi.counter.copy(), mdi.sourceObject, mdi.addCounters));
             }
         }
-        if (permanent.info != null) {
-            info = new HashMap<>();
-            info.putAll(permanent.info);
-        }
+        this.info.putAll(permanent.info);
         this.counters = permanent.counters.copy();
         this.attachedTo = permanent.attachedTo;
         this.attachedToZoneChangeCounter = permanent.attachedToZoneChangeCounter;
