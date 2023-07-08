@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -39,7 +39,7 @@ public final class BloodFunnel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2)));
 
         // Whenever you cast a noncreature spell, counter that spell unless you sacrifice a creature.
-        Effect effect = new CounterUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        Effect effect = new CounterUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         effect.setText("counter that spell unless you sacrifice a creature");
         this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD,
                 effect,
