@@ -107,7 +107,7 @@ public class CardState implements Serializable, Copyable<CardState> {
 
     public void clear() {
         counters.clear();
-        info = null;
+        info.clear();
         clearAbilities();
         lostAllAbilities = false;
     }
