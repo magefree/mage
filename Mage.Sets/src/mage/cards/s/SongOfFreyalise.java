@@ -17,7 +17,7 @@ import mage.constants.Duration;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURES;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -35,18 +35,18 @@ public final class SongOfFreyalise extends CardImpl {
 
         // I, II — Until your next turn, creatures you control gain "T: Add one mana of any color."
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
-                new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.UntilYourNextTurn, FILTER_CONTROLLED_CREATURES)
+                new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.UntilYourNextTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
                         .setText("Until your next turn, creatures you control gain \"{T}: Add one mana of any color.\"")
         );
 
         // III — Put a +1/+1 counter on each creature you control. Those creatures gain vigilance, trample, and indestructible until end of turn.
         Effects effects = new Effects();
-        effects.add(new AddCountersAllEffect(CounterType.P1P1.createInstance(), FILTER_CONTROLLED_CREATURES));
-        effects.add(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, FILTER_CONTROLLED_CREATURES)
+        effects.add(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURES));
+        effects.add(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
                 .setText("Those creatures gain vigilance"));
-        effects.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, FILTER_CONTROLLED_CREATURES)
+        effects.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
                 .setText(", trample"));
-        effects.add(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, FILTER_CONTROLLED_CREATURES)
+        effects.add(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
                 .setText("and indestructible until end of turn"));
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III, effects);
         this.addAbility(sagaAbility);
