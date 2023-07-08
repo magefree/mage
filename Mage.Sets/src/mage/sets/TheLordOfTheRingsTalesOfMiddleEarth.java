@@ -39,6 +39,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Bombadil's Song", 154, Rarity.COMMON, mage.cards.b.BombadilsSong.class));
         cards.add(new SetCardInfo("Book of Mazarbul", 116, Rarity.UNCOMMON, mage.cards.b.BookOfMazarbul.class));
         cards.add(new SetCardInfo("Borne Upon a Wind", 44, Rarity.RARE, mage.cards.b.BorneUponAWind.class));
+        cards.add(new SetCardInfo("Boromir, Warden of the Tower", 4, Rarity.RARE, mage.cards.b.BoromirWardenOfTheTower.class));
         cards.add(new SetCardInfo("Brandywine Farmer", 155, Rarity.COMMON, mage.cards.b.BrandywineFarmer.class));
         cards.add(new SetCardInfo("Breaking of the Fellowship", 117, Rarity.COMMON, mage.cards.b.BreakingOfTheFellowship.class));
         cards.add(new SetCardInfo("Butterbur, Bree Innkeeper", 197, Rarity.UNCOMMON, mage.cards.b.ButterburBreeInnkeeper.class));
