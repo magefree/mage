@@ -13,26 +13,23 @@ public class CaldaiaGuardianTest extends CardTestPlayerBase {
         removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, "Mountain", 10);
         addCard(Zone.BATTLEFIELD, playerA, "Breeding Pool", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
 
         addCard(Zone.BATTLEFIELD, playerA, guardian);
-        addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Altar");
         addCard(Zone.HAND, playerA, "Croaking Counterpart");
+        addCard(Zone.HAND, playerA, "Doom Blade");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Croaking Counterpart");
         addTarget(playerA, guardian);
 
-        // This sacs the 4/3 Guardian, making two triggers:
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice a creature:");
-        addTarget(playerA, guardian+" [no copy]");
-        setChoice(playerA, "Whenever"); // Choose trigger order
-
-        // This sacs the 1/1 token, which should make another trigger:
-        activateAbility(1, PhaseStep.END_TURN, playerA, "Sacrifice a creature:");
-        addTarget(playerA, guardian);
+        // This kills the 4/3 Guardian, making two triggers:
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Doom Blade");
+        addTarget(playerA, guardian+"[no copy]");
+//        setChoice(playerA, "Whenever"); // Choose trigger order
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Citizen", 6);
+        assertPermanentCount(playerA, "Citizen Token", 4);
     }
 }
