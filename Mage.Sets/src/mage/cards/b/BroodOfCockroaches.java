@@ -12,13 +12,12 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author mpouedras
@@ -53,7 +52,7 @@ class BroodOfCockroachesEffect extends OneShotEffect {
     private static final String effectText = "at the beginning of the next end step, you lose 1 life and return {this} to your hand.";
 
     BroodOfCockroachesEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = effectText;
     }
 

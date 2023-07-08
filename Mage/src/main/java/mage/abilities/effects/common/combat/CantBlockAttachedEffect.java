@@ -9,8 +9,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-import static mage.constants.Duration.EndOfTurn;
-
 /**
  * @author North
  */
@@ -35,7 +33,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
         if (!filter.getMessage().equals("creature")) {
             sb.append(' ').append(filter.getMessage());
         }
-        if (duration == EndOfTurn) {
+        if (duration == Duration.EndOfTurn) {
             sb.append(" this turn");
         } else if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());

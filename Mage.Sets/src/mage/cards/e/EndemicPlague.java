@@ -18,7 +18,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 
 /**
  * @author TheElk801
@@ -29,7 +29,7 @@ public final class EndemicPlague extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // As an additional cost to cast Endemic Plague, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         // Destroy all creatures that share a creature type with the sacrificed creature. They can't be regenerated.
         this.getSpellAbility().addEffect(new EndemicPlagueEffect());

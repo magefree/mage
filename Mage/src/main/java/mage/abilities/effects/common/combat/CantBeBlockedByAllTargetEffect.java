@@ -8,8 +8,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import static mage.constants.Duration.EndOfTurn;
-
 /**
  * @author LevelX2
  */
@@ -50,7 +48,7 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
         return "target "
                 + mode.getTargets().get(0).getTargetName()
                 + " can't be blocked "
-                + (duration == EndOfTurn ? "this turn " : "")
+                + (duration == Duration.EndOfTurn ? "this turn " : "")
                 + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
                 + filterBlockedBy.getMessage();
     }
