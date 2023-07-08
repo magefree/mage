@@ -35,7 +35,7 @@ public enum CardIconType {
     OTHER_FACEDOWN("prepared/reply-fill.svg", CardIconCategory.ABILITY, 100),
     OTHER_COST_X("prepared/square-fill.svg", CardIconCategory.ABILITY, 100),
     //
-    RINGBEARER("prepared/ringbearer.svg", CardIconCategory.RINGBEARER, 100),
+    RINGBEARER("prepared/ring.svg", CardIconCategory.RINGBEARER, 100),
     COMMANDER("prepared/crown.svg", CardIconCategory.COMMANDER, 100), // TODO: fix big size, see CardIconsPanel
     //
     SYSTEM_COMBINED("prepared/square-fill.svg", CardIconCategory.SYSTEM, 1000), // inner usage, must use last order
