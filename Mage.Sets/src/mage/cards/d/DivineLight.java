@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -7,8 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -16,17 +14,11 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class DivineLight extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
     public DivineLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}");
 
         // Prevent all damage that would be dealt this turn to creatures you control.
-        this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter)
+        this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
                 .setText("Prevent all damage that would be dealt this turn to creatures you control.")
         );
     }
