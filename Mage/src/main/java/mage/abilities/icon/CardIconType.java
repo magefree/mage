@@ -15,7 +15,6 @@ public enum CardIconType {
         but CENTER and END order can be different)
      */
 
-    OTHER_RINGBEARER("prepared/cog.svg", CardIconCategory.ABILITY, 10),
     PLAYABLE_COUNT("prepared/cog.svg", CardIconCategory.PLAYABLE_COUNT, 100),
     //
     ABILITY_FLYING("prepared/feather-alt.svg", CardIconCategory.ABILITY, 100),
@@ -36,6 +35,7 @@ public enum CardIconType {
     OTHER_FACEDOWN("prepared/reply-fill.svg", CardIconCategory.ABILITY, 100),
     OTHER_COST_X("prepared/square-fill.svg", CardIconCategory.ABILITY, 100),
     //
+    RINGBEARER("prepared/ringbearer.svg", CardIconCategory.RINGBEARER, 100),
     COMMANDER("prepared/crown.svg", CardIconCategory.COMMANDER, 100), // TODO: fix big size, see CardIconsPanel
     //
     SYSTEM_COMBINED("prepared/square-fill.svg", CardIconCategory.SYSTEM, 1000), // inner usage, must use last order

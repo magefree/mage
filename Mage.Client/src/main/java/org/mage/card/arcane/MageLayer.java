@@ -62,6 +62,7 @@ public class MageLayer extends MageCard {
     CardIconsPanel iconsAbilitiesPanel;
     CardIconsPanel iconsPlayablePanel;
     CardIconsPanel iconsCommanderPanel;
+    CardIconsPanel iconsRingBearerPanel;
 
     public MageLayer(MageCard mainPanel, CardIconRenderSettings iconsRender) {
         this.mainPanel = mainPanel;
@@ -142,6 +143,7 @@ public class MageLayer extends MageCard {
         this.iconsAbilitiesPanel = null;
         this.iconsPlayablePanel = null;
         this.iconsCommanderPanel = null;
+        this.iconsRingBearerPanel = null;
 
         if (this.iconsRender.isDebugMode()) {
             // DEBUG MODE -- only one debug panel
@@ -157,6 +159,10 @@ public class MageLayer extends MageCard {
                 // commander
                 this.iconsCommanderPanel = CardIconsPanelFactory.createCommanderPanel();
                 this.iconsPanels.add(this.iconsCommanderPanel);
+
+                // ringbearer
+                this.iconsRingBearerPanel = CardIconsPanelFactory.createRingBearerPanel();
+                this.iconsPanels.add(this.iconsRingBearerPanel);
             }
             // playable amount
             if (PreferencesDialog.getRenderIconsForPlayable()) {
@@ -337,6 +343,11 @@ public class MageLayer extends MageCard {
             // commander panel (top center)
             if (iconsCommanderPanel != null && category == CardIconCategory.COMMANDER) {
                 newIcons.get(iconsCommanderPanel).add(cardIcon);
+            }
+
+            // Ring-bearer panel (right)
+            if (iconsRingBearerPanel != null && category == CardIconCategory.RINGBEARER) {
+                newIcons.get(iconsRingBearerPanel).add(cardIcon);
             }
         });
         this.iconsPanels.forEach(panel -> panel.updateIcons(newIcons.get(panel)));

@@ -18,3 +18,4 @@ Icons sources:
   * bootstrap icons: https://github.com/twbs/icons
   * font awesome: https://github.com/FortAwesome/Font-Awesome
   * pixabay: https://pixabay.com/
+  * icons8: https://icons8.com/

@@ -43,6 +43,16 @@ public class CardIconsPanelFactory {
         );
     }
 
+    public static CardIconsPanel createRingBearerPanel() {
+        return new CardIconsPanel(
+            CardIconPosition.RIGHT,
+            CardIconOrder.CENTER,
+            CardIconColor.GOLD,
+            1,
+            30
+        );
+    }
+
     public static CardIconsPanel createDebugPanel(CardIconRenderSettings render) {
         return new CardIconsPanel(render);
     }
