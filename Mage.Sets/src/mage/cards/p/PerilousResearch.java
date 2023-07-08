@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,7 +21,7 @@ public final class PerilousResearch extends CardImpl {
 
         // Draw two cards, then sacrifice a permanent.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
-        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_A, 1, ", then"));
+        this.getSpellAbility().addEffect(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_A, 1, ", then"));
     }
 
     private PerilousResearch(final PerilousResearch card) {
