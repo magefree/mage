@@ -23,7 +23,7 @@ public class CaldaiaGuardianTest extends CardTestPlayerBase {
 
         // This sacs the 4/3 Guardian, making two triggers:
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Sacrifice a creature:");
-        addTarget(playerA, guardian);
+        addTarget(playerA, guardian+" [no copy]");
         setChoice(playerA, "Whenever"); // Choose trigger order
 
         // This sacs the 1/1 token, which should make another trigger:

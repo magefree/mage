@@ -78,6 +78,9 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID targetId = event.getTargetId();
         Permanent permanent = game.getPermanent(targetId);
+        if (!filter.match(permanent, getControllerId(), this, game)) {
+            return false;
+        }
         this.getEffects().setValue("permanentEnteringBattlefield", permanent);
         this.getEffects().setValue("permanentEnteringControllerId", permanent.getControllerId());
         switch (setTargetPointer) {
@@ -86,9 +89,10 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
                 break;
             case PERMANENT:
                 this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
+                break;
             default:
         }
-        return filter.match(permanent, getControllerId(), this, game);
+        return true;
     }
 
     @Override

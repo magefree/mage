@@ -4,16 +4,12 @@ import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterPermanentThisOrAnother;
 
 /**
  * @author TheElk801
  */
 public class EntersBattlefieldThisOrAnotherTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
-
-    private final boolean onlyControlled;
 
     public EntersBattlefieldThisOrAnotherTriggeredAbility(Effect effect, FilterPermanent filter) {
         this(effect, filter, false, false);
@@ -28,36 +24,13 @@ public class EntersBattlefieldThisOrAnotherTriggeredAbility extends EntersBattle
     }
 
     public EntersBattlefieldThisOrAnotherTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyControlled) {
-        super(zone, effect, filter, optional, setTargetPointer, null, onlyControlled);
-        this.onlyControlled = onlyControlled;
+        super(zone, effect,
+                new FilterPermanentThisOrAnother(filter, onlyControlled),
+                optional, setTargetPointer, null, onlyControlled);
     }
 
     private EntersBattlefieldThisOrAnotherTriggeredAbility(final EntersBattlefieldThisOrAnotherTriggeredAbility ability) {
         super(ability);
-        this.onlyControlled = ability.onlyControlled;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        // We're calling super.checkTrigger here for the side effects:
-        // - Set the target pointer
-        // - PermanentEnteringBattlefield
-        // - PermanentEnteringControllerId
-        super.checkTrigger(event, game);
-
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null) {
-            return false;
-        }
-
-        // If the permanent entering is 'this' permanent, it applies:
-        if (permanent.getId().equals(getSourceId())) {
-            return true;
-        }
-        if (onlyControlled && !permanent.isControlledBy(this.getControllerId())) {
-            return false;
-        }
-        return filter.match(permanent, getControllerId(), this, game);
     }
 
     @Override
