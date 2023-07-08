@@ -5,8 +5,6 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class CaldaiaGuardianTest extends CardTestPlayerBase {
     private static final String guardian = "Caldaia Guardian";
     @Test
