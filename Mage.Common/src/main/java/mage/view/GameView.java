@@ -315,6 +315,10 @@ public class GameView implements Serializable {
         return priorityTime;
     }
 
+    public int getBufferTime() {
+        return bufferTime;
+    }
+
     public UUID getActivePlayerId() {
         return activePlayerId;
     }

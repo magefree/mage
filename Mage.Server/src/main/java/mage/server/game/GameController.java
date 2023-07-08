@@ -142,7 +142,7 @@ public class GameController implements GameCallback {
                                 if (initPlayerId == null) {
                                     throw new MageException("INIT_TIMER: playerId can't be null");
                                 }
-                                createPlayerTimer(event.getPlayerId(), game.getPriorityTime());
+                                createPlayerTimer(event.getPlayerId(), game.getPriorityTime(), game.getBufferTime());
                                 break;
                             case RESUME_TIMER:
                                 playerId = event.getPlayerId();
@@ -153,7 +153,8 @@ public class GameController implements GameCallback {
                                 if (timer == null) {
                                     Player player = game.getState().getPlayer(playerId);
                                     if (player != null) {
-                                        timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
+                                        timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft(),
+                                                game.getBufferTime());
                                     } else {
                                         throw new MageException("RESUME_TIMER: player can't be null");
                                     }
@@ -251,9 +252,10 @@ public class GameController implements GameCallback {
      *
      * @param playerId
      * @param count
+     * @param buffer The amount of buffer to tick down before ticking down count
      * @return
      */
-    private PriorityTimer createPlayerTimer(UUID playerId, int count) {
+    private PriorityTimer createPlayerTimer(UUID playerId, int count, int buffer) {
         final UUID initPlayerId = playerId;
         long delayMs = 250L; // run each 250 ms
 
@@ -262,7 +264,7 @@ public class GameController implements GameCallback {
             logger.debug("Player has no time left to end the match: " + initPlayerId + ". Conceding.");
         };
 
-        PriorityTimer timer = new PriorityTimer(count, delayMs, executeOnNoTimeLeft);
+        PriorityTimer timer = new PriorityTimer(count, buffer, delayMs, executeOnNoTimeLeft);
         timer.init(game.getId());
         timers.put(playerId, timer);
         return timer;

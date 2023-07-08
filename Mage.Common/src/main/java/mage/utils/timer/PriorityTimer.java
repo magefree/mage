@@ -16,8 +16,10 @@ public class PriorityTimer extends TimerTask {
 
     private final long delay;
     private final Action taskOnTimeout;
+    private final int buffer;
 
     private int count;
+    private int bufferCount;
     private Action taskOnTick;
     private States state = States.NONE;
 
@@ -29,8 +31,9 @@ public class PriorityTimer extends TimerTask {
         FINISHED
     }
 
-    public PriorityTimer(int count, long delay, Action taskOnTimeout) {
+    public PriorityTimer(int count, int buffer, long delay, Action taskOnTimeout) {
         this.count = count;
+        this.buffer = buffer;
         this.delay = delay;
         this.taskOnTimeout = taskOnTimeout;
     }
@@ -50,6 +53,8 @@ public class PriorityTimer extends TimerTask {
             throw new IllegalStateException("Timer has already finished its work");
         }
         state = States.RUNNING;
+        // Set buffer time
+        this.bufferCount = buffer;
     }
 
     public void pause() {
@@ -66,6 +71,8 @@ public class PriorityTimer extends TimerTask {
             throw new IllegalStateException("Timer has already finished its work");
         }
         state = States.RUNNING;
+        // Reset buffer time whenever we resume
+        bufferCount = buffer;
     }
 
     public int getCount() {
@@ -83,7 +90,13 @@ public class PriorityTimer extends TimerTask {
     @Override
     public void run() {
         if (state == States.RUNNING) {
-            count--;
+            // Count down buffer time first
+            if (bufferCount > 0) {
+                bufferCount--;
+            } else {
+                count--;
+            }
+
             if (taskOnTick != null) {
                 try {
                     taskOnTick.execute();

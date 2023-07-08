@@ -88,7 +88,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         deadBackgroundColor = currentTheme.getPlayerPanel_deadBackgroundColor();
     }
 
-    public void init(UUID gameId, UUID playerId, boolean controlled, BigCard bigCard, int priorityTime) {
+    public void init(UUID gameId, UUID playerId, boolean controlled, BigCard bigCard, int priorityTime,
+            int bufferTime) {
         this.gameId = gameId;
         this.playerId = playerId;
         this.bigCard = bigCard;
@@ -98,7 +99,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         if (priorityTime > 0) {
             long delay = 1000L;
 
-            timer = new PriorityTimer(priorityTime, delay, () -> {
+            timer = new PriorityTimer(priorityTime, bufferTime, delay, () -> {
                 // do nothing
             });
             final PriorityTimer pt = timer;
