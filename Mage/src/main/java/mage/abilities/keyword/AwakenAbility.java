@@ -31,7 +31,7 @@ public class AwakenAbility extends SpellAbility {
 
     private static final Logger logger = Logger.getLogger(AwakenAbility.class);
 
-    static private String filterMessage = "a land you control to awake";
+    private static String filterMessage = "a land you control to awake";
 
     private String rule;
     private int awakenValue;

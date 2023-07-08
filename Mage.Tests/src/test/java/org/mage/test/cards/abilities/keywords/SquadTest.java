@@ -39,9 +39,9 @@ public class SquadTest extends CardTestPlayerBase {
      * Arco-Flagellant can’t block.
      * Endurant — Pay 3 life: Arco-Flagellant gains indestructible until end of turn.
      */
-    private final static String flagellant = "Arco-Flagellant";
+    private static final String flagellant = "Arco-Flagellant";
 
-    private final static String swamp = "Swamp";
+    private static final String swamp = "Swamp";
 
     @Test
     public void test_Squad_NotUsed_Manual() {

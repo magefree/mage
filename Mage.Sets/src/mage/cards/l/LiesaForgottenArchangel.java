@@ -31,7 +31,7 @@ import mage.game.Game;
  */
 public final class LiesaForgottenArchangel extends CardImpl {
 
-    private final static FilterControlledCreaturePermanent filter
+    private static final FilterControlledCreaturePermanent filter
             = new FilterControlledCreaturePermanent("another nontoken creature you control");
 
     static {

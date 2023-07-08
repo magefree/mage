@@ -17,7 +17,6 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -74,7 +73,7 @@ public class ExertAbility extends SimpleStaticAbility {
 
 class ExertReplacementEffect extends ReplacementEffectImpl {
 
-    final private boolean exertOnlyOncePerTurn;
+    private final boolean exertOnlyOncePerTurn;
 
     public ExertReplacementEffect(boolean exertOnlyOncePerTurn) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

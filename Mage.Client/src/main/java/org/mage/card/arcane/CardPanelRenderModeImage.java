@@ -37,7 +37,7 @@ public class CardPanelRenderModeImage extends CardPanel {
 
     private static final long serialVersionUID = -3272134219262184411L;
 
-    private final static SoftValuesLoadingCache<Key, BufferedImage> IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(CardPanelRenderModeImage::createImage));
+    private static final SoftValuesLoadingCache<Key, BufferedImage> IMAGE_CACHE = ImageCaches.register(SoftValuesLoadingCache.from(CardPanelRenderModeImage::createImage));
 
     private static final int WIDTH_LIMIT = 90; // card width limit to create smaller counter
 

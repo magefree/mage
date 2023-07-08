@@ -7,8 +7,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 public class ValkiGodOfLiesTest extends CardTestPlayerBase {
 
-    private final static String valki = "Valki, God of Lies";
-    private final static String kraken = "Kraken Hatchling";
+    private static final String valki = "Valki, God of Lies";
+    private static final String kraken = "Kraken Hatchling";
 
     @Test
     public void testBecomeCopyOfExiledCreatureCard() {
