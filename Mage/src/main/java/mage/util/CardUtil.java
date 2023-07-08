@@ -1121,7 +1121,7 @@ public final class CardUtil {
                 return rules;
             }
 
-            // debug state
+            // additional effect's info from card.addInfo methods
             rules.addAll(game.getState().getCardState(cardId).getInfo().values());
 
             // ability hints
