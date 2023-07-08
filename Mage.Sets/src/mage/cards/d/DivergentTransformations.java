@@ -10,7 +10,6 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,7 +28,7 @@ public final class DivergentTransformations extends CardImpl {
         this.addAbility(new UndauntedAbility());
         // Exile two target creatures. For each of those creatures, its controller reveals cards from the top of their library until they reveal a creature card, puts that card onto the battlefield, then shuffles the rest into their library.
         this.getSpellAbility().addEffect(new DivergentTransformationsEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, FILTER_PERMANENT_CREATURES, false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
 
     }
 
