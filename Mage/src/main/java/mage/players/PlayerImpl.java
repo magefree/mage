@@ -5168,22 +5168,24 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void chooseRingBearer(Game game) {
         Permanent currentBearer = getRingBearer(game);
-        int creatureCount = game.getBattlefield().count(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game
-        );
-        if(creatureCount == 0) {
+        List<UUID> ids = game.getBattlefield()
+            .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game)
+            .stream()
+            .filter(p -> p != null)
+            .map(p -> p.getId())
+            .collect(Collectors.toList());
+
+        if(ids.isEmpty()) {
             game.informPlayers(getLogName() + " has no creature to be Ring-bearer.");
             return;
         }
 
         // There should always be a creature at the end.
         UUID newBearerId;
-        if(creatureCount == 1){
+        if(ids.size() == 1){
             // Only one creature, it will be the Ring-bearer.
             // The player does not have to make any choice.
-            newBearerId = game.getBattlefield().getActivePermanents(
-                    StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game
-            ).get(0).getId();
+            newBearerId = ids.get(0);
         } else {
             // Multiple possible Ring-bearer.
             // Asking first if the player wants to change Ring-bearer.

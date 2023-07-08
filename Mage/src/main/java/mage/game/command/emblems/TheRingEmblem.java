@@ -20,6 +20,7 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.TemptedByTheRingWatcher;
 
@@ -88,11 +89,15 @@ public final class TheRingEmblem extends Emblem {
         ability.setControllerId(this.getControllerId());
         game.getState().addAbility(ability, this);
 
-        game.informPlayers(game.getPlayer(
-            this.getControllerId()).getLogName() +
-            " gains a new Ring ability: \"" +
-            logText +
-            "\"");
+        UUID controllerId = getControllerId();
+        String name = "";
+        if(getControllerId() != null){
+            Player player = game.getPlayer(controllerId);
+            if(player != null){
+                name = player.getLogName();
+            }
+        }
+        game.informPlayers(name + " gains a new Ring ability: \"" + logText + "\"");
     }
 }
 

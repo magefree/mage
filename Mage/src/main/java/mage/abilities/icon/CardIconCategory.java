@@ -11,5 +11,4 @@ public enum CardIconCategory {
     PLAYABLE_COUNT, // on bottom left corner
     SYSTEM, // example: too many icons combines in the one icon (on left side)
     COMMANDER, // example: commander (on top center icon)
-    RINGBEARER // on right side
 }
