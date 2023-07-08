@@ -25,7 +25,7 @@ public class RisenReefTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Air Elemental");
         // We get two triggers, so we have to choose which one to put on the stack first (they're identical):
-        setChoice(playerA, "Whenever Elemental enters the battlefield under your control, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. If you don't put the card onto the battlefield, put it into your hand.");
+        setChoice(playerA, "Whenever");
         // Put both lands onto the battlefield:
         setChoice(playerA, "Yes", 2);
 
