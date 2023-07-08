@@ -364,6 +364,14 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="cbTimeLimit">
     </Component>
+    <Component class="javax.swing.JLabel" name="lbBufferTime">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Buffer Time:"/>
+        <Property name="toolTipText" type="java.lang.String" value="The extra time a player gets whenever the timer starts before their normal time limit starts going down."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbBufferTime">
+    </Component>
     <Component class="javax.swing.JLabel" name="lblGameType">
       <Properties>
         <Property name="text" type="java.lang.String" value="Game Type:"/>
