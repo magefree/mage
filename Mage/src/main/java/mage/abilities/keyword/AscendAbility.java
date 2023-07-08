@@ -4,7 +4,6 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import static mage.abilities.keyword.AscendAbility.ASCEND_RULE;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -70,7 +69,7 @@ class AscendContinuousEffect extends ContinuousEffectImpl {
 
     public AscendContinuousEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = ASCEND_RULE;
+        staticText = AscendAbility.ASCEND_RULE;
     }
 
     public AscendContinuousEffect(final AscendContinuousEffect effect) {
