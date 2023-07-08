@@ -75,6 +75,15 @@ class GlamdringEffect extends OneShotEffect {
         this.staticText = "you may cast an instant or sorcery spell from your hand with mana value less than or equal to that damage without paying its mana cost";
     }
 
+    private GlamdringEffect(final GlamdringEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GlamdringEffect copy() {
+        return new GlamdringEffect(this);
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
         FilterCard filter = new FilterInstantOrSorceryCard("an instant or sorcery spell from your hand with mana value less than or equal to that damage");
@@ -82,10 +91,5 @@ class GlamdringEffect extends OneShotEffect {
                 ComparisonType.OR_LESS, SavedDamageValue.DAMAGE.calculate(game, source, this)
         ));
         return new CastFromHandForFreeEffect(filter).apply(game, source);
-    }
-
-    @Override
-    public GlamdringEffect copy() {
-        return new GlamdringEffect();
     }
 }
