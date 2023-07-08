@@ -198,6 +198,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Riders of Rohan", 67, Rarity.RARE, mage.cards.r.RidersOfRohan.class));
         cards.add(new SetCardInfo("Rings of Brighthearth", 352, Rarity.MYTHIC, mage.cards.r.RingsOfBrighthearth.class));
         cards.add(new SetCardInfo("Rogue's Passage", 326, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
+        cards.add(new SetCardInfo("Sail into the West", 68, Rarity.RARE, mage.cards.s.SailIntoTheWest.class));
         cards.add(new SetCardInfo("Sam, Loyal Attendant", 7, Rarity.MYTHIC, mage.cards.s.SamLoyalAttendant.class));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 327, Rarity.UNCOMMON, mage.cards.s.SandsteppeCitadel.class));
         cards.add(new SetCardInfo("Sanguine Bond", 208, Rarity.RARE, mage.cards.s.SanguineBond.class));
