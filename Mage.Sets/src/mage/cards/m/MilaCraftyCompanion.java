@@ -30,8 +30,6 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.Objects;
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -133,7 +131,7 @@ class MilaCraftyCompanionTriggeredAbility extends TriggeredAbilityImpl {
 class LukkaWaywardBonderDiscardEffect extends OneShotEffect {
 
     LukkaWaywardBonderDiscardEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "you may discard a card. If you do, draw a card. " +
                 "If a creature card was discarded this way, draw two cards instead";
     }

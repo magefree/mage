@@ -33,8 +33,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -82,7 +80,7 @@ class LumberingBattlementEffect extends OneShotEffect {
     }
 
     LumberingBattlementEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "exile any number of other nontoken creatures you control until it leaves the battlefield";
     }
 

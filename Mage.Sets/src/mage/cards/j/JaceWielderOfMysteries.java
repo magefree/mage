@@ -9,18 +9,13 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
-
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801
@@ -60,7 +55,7 @@ public final class JaceWielderOfMysteries extends CardImpl {
 class JaceWielderOfMysteriesContinuousEffect extends ReplacementEffectImpl {
 
     JaceWielderOfMysteriesContinuousEffect() {
-        super(Duration.WhileOnBattlefield, Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card while your library has no cards in it, you win the game instead";
     }
 
@@ -107,7 +102,7 @@ class JaceWielderOfMysteriesContinuousEffect extends ReplacementEffectImpl {
 class JaceWielderOfMysteriesEffect extends OneShotEffect {
 
     JaceWielderOfMysteriesEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "Draw seven cards. Then if your library has no cards in it, you win the game.";
     }
 
