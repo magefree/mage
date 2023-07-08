@@ -12,11 +12,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
 /**
  * @author noxx
@@ -31,9 +30,7 @@ public final class BloodflowConnoisseur extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice a creature: Put a +1/+1 counter on Bloodflow Connoisseur.
-        Cost abilityCost = new SacrificeTargetCost(
-                new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-        );
+        Cost abilityCost = new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
