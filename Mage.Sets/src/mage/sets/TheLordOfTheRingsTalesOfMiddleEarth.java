@@ -86,6 +86,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Fall of Gil-galad", 165, Rarity.RARE, mage.cards.f.FallOfGilGalad.class));
         cards.add(new SetCardInfo("Fangorn, Tree Shepherd", 166, Rarity.RARE, mage.cards.f.FangornTreeShepherd.class));
         cards.add(new SetCardInfo("Faramir, Field Commander", 14, Rarity.UNCOMMON, mage.cards.f.FaramirFieldCommander.class));
+        cards.add(new SetCardInfo("Faramir, Prince of Ithilien", 202, Rarity.RARE, mage.cards.f.FaramirPrinceOfIthilien.class));
         cards.add(new SetCardInfo("Fear, Fire, Foes!", 125, Rarity.UNCOMMON, mage.cards.f.FearFireFoes.class));
         cards.add(new SetCardInfo("Fiery Inscription", 126, Rarity.UNCOMMON, mage.cards.f.FieryInscription.class));
         cards.add(new SetCardInfo("Fire of Orthanc", 127, Rarity.COMMON, mage.cards.f.FireOfOrthanc.class));
