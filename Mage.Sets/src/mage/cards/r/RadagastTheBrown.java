@@ -37,21 +37,9 @@ public final class RadagastTheBrown extends CardImpl {
     }
 
     static final FilterCreatureCard cardFilter = new FilterCreatureCard("creature card that doesn't share a creature type with a creature you control");
+
     static {
-        cardFilter.add((Predicate<Card>) (card, game) -> {
-            UUID playerId = card.getOwnerId();
-            List<Permanent> creaturesYouControl = game.getBattlefield().getActivePermanents(
-                    StaticFilters.FILTER_CONTROLLED_CREATURE,
-                    playerId,
-                    game
-            );
-            for (Permanent creature : creaturesYouControl) {
-                if (creature.shareCreatureTypes(game, card)) {
-                    return false;
-                }
-            }
-            return true;
-        });
+        cardFilter.add(RadagastTheBrownPredicate.instance);
     }
 
     public RadagastTheBrown(UUID ownerId, CardSetInfo setInfo) {
@@ -87,5 +75,23 @@ public final class RadagastTheBrown extends CardImpl {
     @Override
     public RadagastTheBrown copy() {
         return new RadagastTheBrown(this);
+    }
+}
+
+enum RadagastTheBrownPredicate implements Predicate<Card> {
+    instance;
+    public boolean apply(Card card, Game game) {
+        UUID playerId = card.getOwnerId();
+        List<Permanent> creaturesYouControl = game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_CREATURE,
+                playerId,
+                game
+        );
+        for (Permanent creature : creaturesYouControl) {
+            if (creature.shareCreatureTypes(game, card)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
