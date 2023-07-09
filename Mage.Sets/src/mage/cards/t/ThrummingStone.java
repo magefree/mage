@@ -20,9 +20,9 @@ public final class ThrummingStone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
         this.supertype.add(SuperType.LEGENDARY);
 
-        // Spells you cast have Ripple 4
+        // Spells you cast have ripple 4.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new RippleAbility(4), StaticFilters.FILTER_CARD)
-                .setText("spells you cast have Ripple 4")));
+                .setText("spells you cast have ripple 4")));
     }
 
     private ThrummingStone(final ThrummingStone card) {
