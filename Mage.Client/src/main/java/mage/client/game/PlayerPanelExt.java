@@ -88,8 +88,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         deadBackgroundColor = currentTheme.getPlayerPanel_deadBackgroundColor();
     }
 
-    public void init(UUID gameId, UUID playerId, boolean controlled, BigCard bigCard, int priorityTime,
-            int bufferTime) {
+    public void init(UUID gameId, UUID playerId, boolean controlled, BigCard bigCard, int priorityTime) {
         this.gameId = gameId;
         this.playerId = playerId;
         this.bigCard = bigCard;
@@ -99,15 +98,19 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         if (priorityTime > 0) {
             long delay = 1000L;
 
-            timer = new PriorityTimer(priorityTime, bufferTime, delay, () -> {
+            timer = new PriorityTimer(priorityTime, delay, () -> {
                 // do nothing
             });
             final PriorityTimer pt = timer;
             timer.setTaskOnTick(() -> {
-                int priorityTimeValue = pt.getCount();
+                int priorityTimeValue = pt.getCount() + pt.getBufferCount();
                 String text = getPriorityTimeLeftString(priorityTimeValue);
+
                 PlayerPanelExt.this.avatar.setTopText(text);
+                PlayerPanelExt.this.avatar.setTopTextColor(pt.getBufferCount() > 0 ? Color.GREEN : null);
                 PlayerPanelExt.this.timerLabel.setText(text);
+                PlayerPanelExt.this.timerLabel
+                        .setForeground(pt.getBufferCount() > 0 ? Color.GREEN.darker().darker() : Color.BLACK);
                 PlayerPanelExt.this.avatar.repaint();
             });
             timer.init(gameId);
@@ -305,8 +308,13 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             if (player.getPriorityTimeLeft() != Integer.MAX_VALUE) {
                 String priorityTimeValue = getPriorityTimeLeftString(player);
                 this.timer.setCount(player.getPriorityTimeLeft());
+                this.timer.setBufferCount(player.getBufferTimeLeft());
                 this.avatar.setTopText(priorityTimeValue);
                 this.timerLabel.setText(priorityTimeValue);
+
+                this.avatar.setTopTextColor(player.getBufferTimeLeft() > 0 ? Color.GREEN : null);
+                this.timerLabel
+                        .setForeground(player.getBufferTimeLeft() > 0 ? Color.GREEN.darker().darker() : Color.BLACK);
             }
             if (player.isTimerActive()) {
                 this.timer.resume();
@@ -397,7 +405,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private String getPriorityTimeLeftString(PlayerView player) {
-        int priorityTimeLeft = player.getPriorityTimeLeft();
+        int priorityTimeLeft = player.getPriorityTimeLeft() + player.getBufferTimeLeft();
         return getPriorityTimeLeftString(priorityTimeLeft);
     }
 

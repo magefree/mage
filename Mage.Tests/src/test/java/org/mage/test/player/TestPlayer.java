@@ -3838,6 +3838,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void setBufferTimeLeft(int timeLeft) {
+        computerPlayer.setBufferTimeLeft(timeLeft);
+    }
+
+    @Override
+    public int getBufferTimeLeft() {
+        return computerPlayer.getBufferTimeLeft();
+    }
+
+    @Override
     public boolean hasQuit() {
         return computerPlayer.hasQuit();
     }

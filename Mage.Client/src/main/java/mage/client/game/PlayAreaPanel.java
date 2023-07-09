@@ -57,8 +57,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
      * @param gamePanel
      * @param options
      */
-    public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, int priorityTime, int bufferTime,
-            GamePanel gamePanel, PlayAreaPanelOptions options) {
+    public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, int priorityTime, GamePanel gamePanel,
+            PlayAreaPanelOptions options) {
         this.gamePanel = gamePanel;
         this.options = options;
         initComponents();
@@ -74,7 +74,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.add(popupMenu);
         setGUISize();
 
-        init(player, bigCard, gameId, priorityTime, bufferTime);
+        init(player, bigCard, gameId, priorityTime);
         update(null, player, null);
     }
 
@@ -510,8 +510,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
     }
 
-    public final void init(PlayerView player, BigCard bigCard, UUID gameId, int priorityTime, int bufferTime) {
-        this.playerPanel.init(gameId, player.getPlayerId(), player.getControlled(), bigCard, priorityTime, bufferTime);
+    public final void init(PlayerView player, BigCard bigCard, UUID gameId, int priorityTime) {
+        this.playerPanel.init(gameId, player.getPlayerId(), player.getControlled(), bigCard, priorityTime);
         this.battlefieldPanel.init(gameId, bigCard);
         this.gameId = gameId;
         this.playerId = player.getPlayerId();
