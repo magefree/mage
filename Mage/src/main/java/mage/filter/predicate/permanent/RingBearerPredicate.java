@@ -12,6 +12,6 @@ public enum RingBearerPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return input.isRingBearer(game);
+        return input.isRingBearer();
     }
 }

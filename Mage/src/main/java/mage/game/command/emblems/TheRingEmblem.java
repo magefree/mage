@@ -84,14 +84,14 @@ public final class TheRingEmblem extends Emblem {
             default:
                 return;
         }
+        UUID controllerId = this.getControllerId();
         this.getAbilities().add(ability);
         ability.setSourceId(this.getId());
-        ability.setControllerId(this.getControllerId());
+        ability.setControllerId(controllerId);
         game.getState().addAbility(ability, this);
 
-        UUID controllerId = getControllerId();
         String name = "";
-        if(getControllerId() != null){
+        if(controllerId  != null){
             Player player = game.getPlayer(controllerId);
             if(player != null){
                 name = player.getLogName();
@@ -106,7 +106,7 @@ enum TheRingEmblemPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return input.isRingBearer(game);
+        return input.isRingBearer();
     }
 }
 
@@ -160,7 +160,7 @@ class TheRingEmblemEvasionEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         return permanent.isControlledBy(source.getControllerId())
-                && permanent.isRingBearer(game);
+                && permanent.isRingBearer();
     }
 
     @Override
@@ -196,7 +196,7 @@ class TheRingEmblemTriggeredAbility extends TriggeredAbilityImpl {
         if (attacker == null
                 || blocker == null
                 || attacker.isControlledBy(getControllerId())
-                || !attacker.isRingBearer(game)) {
+                || !attacker.isRingBearer()) {
             return false;
         }
         this.getEffects().setTargetPointer(new FixedTarget(blocker, game));

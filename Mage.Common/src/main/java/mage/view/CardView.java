@@ -441,14 +441,10 @@ public class CardView extends SimpleCardView {
                 if (owner != null && game.isCommanderObject(owner, permanent)) {
                     this.cardIcons.add(CardIconImpl.COMMANDER);
                 }
-                Player controller = game.getPlayer(game.getControllerId(permanent.getId()));
-                if (controller != null) {
-                    Permanent ringBearer = controller.getRingBearer(game);
-                    // Ring-bearer
-                    if(ringBearer != null && ringBearer.getId() == permanent.getId()) {
-                        this.cardIcons.add(CardIconImpl.RINGBEARER);
-                    }
-                }
+            }
+            // Ring-bearer
+            if (permanent.isRingBearer()) {
+                this.cardIcons.add(CardIconImpl.RINGBEARER);
             }
         } else {
             if (card.isCopy()) {

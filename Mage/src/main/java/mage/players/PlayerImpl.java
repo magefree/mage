@@ -177,8 +177,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     // mana colors the player can handle like Phyrexian mana
     protected FilterMana phyrexianColors;
 
-    protected UUID ringBearerId = null;
-
     // Used during available mana calculation to give back possible available net mana from triggered mana abilities (No need to copy)
     protected final List<List<Mana>> availableTriggeredManaList = new ArrayList<>();
 
@@ -288,7 +286,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         this.payManaMode = player.payManaMode;
         this.phyrexianColors = player.getPhyrexianColors() != null ? player.phyrexianColors.copy() : null;
-        this.ringBearerId = player.ringBearerId;
         for (Designation object : player.designations) {
             this.designations.add(object.copy());
         }
@@ -375,8 +372,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         this.phyrexianColors = player.getPhyrexianColors() != null ? player.getPhyrexianColors().copy() : null;
-
-        this.ringBearerId = player.getRingBearerId();
 
         this.designations.clear();
         for (Designation object : player.getDesignations()) {
@@ -5141,25 +5136,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public UUID getRingBearerId() {
-        return ringBearerId;
-    }
-
-    // Used as key for ther permanent's info.
-    private static final String ringbearerInfoKey = "IS_RINGBEARER";
-
-    @Override
     public Permanent getRingBearer(Game game) {
-        if (ringBearerId == null) {
-            return null;
-        }
-        Permanent bearer = game.getPermanent(ringBearerId);
-        if (bearer != null && bearer.isControlledBy(getId())) {
-            return bearer;
-        }
-        ringBearerId = null;
-        bearer.addInfo(ringbearerInfoKey, null, game);
-        return null;
+        return game.getBattlefield()
+            .getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_RINGBEARER,
+                getId(),null, game)
+            .stream()
+            .filter(p -> p != null)
+            .findFirst()
+            .orElse(null);
     }
 
     // 701.52a Certain spells and abilities have the text “the Ring tempts you.” Each time the Ring tempts
@@ -5168,6 +5153,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void chooseRingBearer(Game game) {
         Permanent currentBearer = getRingBearer(game);
+        UUID currentBearerId = currentBearer == null ? null : currentBearer.getId();
+
         List<UUID> ids = game.getBattlefield()
             .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game)
             .stream()
@@ -5204,11 +5191,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 newBearerId = target.getFirstTarget();
             }
             else {
-                newBearerId = ringBearerId;
+                newBearerId = currentBearerId;
             }
         }
 
-        if(ringBearerId != null && ringBearerId == newBearerId) {
+        if(currentBearerId != null && currentBearerId == newBearerId) {
             // Oracle Ruling for Call of the Ring
             //
             // If the creature you choose as your Ring-bearer was already your Ring-bearer,
@@ -5223,8 +5210,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             Permanent ringBearer = game.getPermanent(newBearerId);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.RING_BEARER_CHOSEN, newBearerId, null, getId()));
             game.informPlayers(getLogName() + " has chosen " + ringBearer.getLogName() + " as Ring-bearer.");
-            this.ringBearerId = newBearerId;
-            ringBearer.addInfo(ringbearerInfoKey, CardUtil.addToolTipMarkTags("Is " + getLogName() + "'s Ring-bearer"), game);
+
+            // The setRingBearer method is taking care of removing
+            // the status from the current ring bearer, if existing.
+            ringBearer.setRingBearer(game, true);
         }
     }
 

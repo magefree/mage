@@ -19,7 +19,7 @@ public enum SourceIsRingBearerCondition implements Condition {
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .filter(Objects::nonNull)
                 .filter(permanent -> permanent.isControlledBy(source.getControllerId()))
-                .map(permanent -> permanent.isRingBearer(game))
+                .map(permanent -> permanent.isRingBearer())
                 .orElse(false);
     }
 

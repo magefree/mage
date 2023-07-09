@@ -589,7 +589,10 @@ public abstract class GameImpl implements Game {
         }
         player.chooseRingBearer(this);
         getOrCreateTheRing(playerId).addNextAbility(this);
-        fireEvent(GameEvent.getEvent(GameEvent.EventType.TEMPTED_BY_RING, player.getRingBearerId(), null, playerId));
+
+        Permanent ringbearer = player.getRingBearer(this);
+        UUID ringbearerId = ringbearer == null ? null : ringbearer.getId();
+        fireEvent(GameEvent.getEvent(GameEvent.EventType.TEMPTED_BY_RING, ringbearerId, null, playerId));
     }
 
     @Override

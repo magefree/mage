@@ -53,14 +53,13 @@ import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
+import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -4425,11 +4424,6 @@ public class TestPlayer implements Player {
     @Override
     public FilterMana getPhyrexianColors() {
         return computerPlayer.getPhyrexianColors();
-    }
-
-    @Override
-    public UUID getRingBearerId() {
-        return computerPlayer.getRingBearerId();
     }
 
     @Override
