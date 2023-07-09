@@ -812,7 +812,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             UUID controllerId = beforeResetControllerId;
             Player controller = controllerId == null ? null : game.getPlayer(controllerId);
             String controllerName = controller == null ? "" : controller.getLogName();
-            game.informPlayers(controllerName + " has lost control of " + getLogName() + ". It is not longer a Ring-bearer.");
+            game.informPlayers(controllerName + " has lost control of " + getLogName() + ". It is no longer a Ring-bearer.");
 
             this.setRingBearer(game, false);
         }
