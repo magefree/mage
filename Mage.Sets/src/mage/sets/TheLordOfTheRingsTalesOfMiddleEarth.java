@@ -193,6 +193,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Palantir of Orthanc", 247, Rarity.MYTHIC, mage.cards.p.PalantirOfOrthanc.class));
         cards.add(new SetCardInfo("Pelargir Survivor", 64, Rarity.COMMON, mage.cards.p.PelargirSurvivor.class));
         cards.add(new SetCardInfo("Peregrin Took", 181, Rarity.UNCOMMON, mage.cards.p.PeregrinTook.class));
+        cards.add(new SetCardInfo("Phial of Galadriel", 248, Rarity.RARE, mage.cards.p.PhialOfGaladriel.class));
         cards.add(new SetCardInfo("Pippin's Bravery", 182, Rarity.COMMON, mage.cards.p.PippinsBravery.class));
         cards.add(new SetCardInfo("Pippin, Guard of the Citadel", 218, Rarity.RARE, mage.cards.p.PippinGuardOfTheCitadel.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
