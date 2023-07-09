@@ -30,7 +30,7 @@ public final class Counterbalance extends CardImpl {
 
 
         // Whenever an opponent casts a spell, you may reveal the top card of your library. If you do, counter that spell if it has the same converted mana cost as the revealed card.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new CounterbalanceEffect(), StaticFilters.FILTER_SPELL, true, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new CounterbalanceEffect(), StaticFilters.FILTER_SPELL_A, true, SetTargetPointer.SPELL));
     }
 
     private Counterbalance(final Counterbalance card) {

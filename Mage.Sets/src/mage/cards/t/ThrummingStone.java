@@ -7,8 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -21,8 +20,9 @@ public final class ThrummingStone extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
         this.supertype.add(SuperType.LEGENDARY);
 
-        // Spells you cast have Ripple 4
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new RippleAbility(4), new FilterCard("Spells you cast"))));
+        // Spells you cast have ripple 4.
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new RippleAbility(4), StaticFilters.FILTER_CARD)
+                .setText("spells you cast have ripple 4")));
     }
 
     private ThrummingStone(final ThrummingStone card) {

@@ -18,6 +18,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -25,7 +26,7 @@ import mage.players.Player;
  */
 public class CumulativeUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
 
-    private Cost cumulativeCost;
+    private final Cost cumulativeCost;
 
     public CumulativeUpkeepAbility(Cost cumulativeCost) {
         super(new AddCountersSourceEffect(CounterType.AGE.createInstance()), TargetController.YOU, false);
@@ -46,12 +47,14 @@ public class CumulativeUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder("Cumulative upkeep");
-        if (!(cumulativeCost instanceof ManaCost || cumulativeCost instanceof OrCost)) {
-            sb.append("&mdash;");
-        } else {
+        if (cumulativeCost instanceof ManaCost || cumulativeCost instanceof OrCost) {
             sb.append(' ');
+            sb.append(cumulativeCost.getText());
+        } else {
+            sb.append("&mdash;");
+            sb.append(CardUtil.getTextWithFirstCharUpperCase(cumulativeCost.getText()));
+            sb.append(".");
         }
-        sb.append(cumulativeCost.getText());
         return sb.toString();
     }
 }
