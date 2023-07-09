@@ -4,10 +4,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
 import mage.abilities.MageSingleton;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.DomainValue;
-import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.*;
 import mage.filter.Filter;
@@ -229,9 +225,15 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     public boolean isYourNextEndCombatStep(Game game) {
-        return effectStartingOnTurn < game.getTurnNum()
+        return effectStartingOnTurn < game.getTurnNum() // This feels wrong with extra combats
                 && game.isActivePlayer(startingControllerId)
                 && game.getPhase().getType() == TurnPhase.POSTCOMBAT_MAIN;
+    }
+
+    public boolean isYourNextUpkeepStep(Game game) {
+        return effectStartingOnTurn < game.getTurnNum() // This feels wrong with extra upkeep steps.
+            && game.isActivePlayer(startingControllerId)
+            && game.getStep().getType() == PhaseStep.UPKEEP;
     }
 
     @Override
@@ -244,6 +246,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             case UntilEndOfYourNextTurn:
             case UntilYourNextEndStep:
             case UntilYourNextEndCombatStep:
+            case UntilYourNextUpkeepStep:
                 break;
             default:
                 return false;
@@ -289,6 +292,11 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             case UntilYourNextEndCombatStep:
                 if (player != null && player.isInGame()) {
                     return this.isYourNextEndCombatStep(game);
+                }
+                break;
+            case UntilYourNextUpkeepStep:
+                if (player != null && player.isInGame()) {
+                    return this.isYourNextUpkeepStep(game);
                 }
                 break;
         }

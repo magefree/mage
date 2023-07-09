@@ -61,6 +61,10 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                 case UntilYourNextEndStep:
                     canRemove = entry.isYourNextEndStep(game);
                     break;
+                // why do we not remove UntilYourNextEndCombatStep there?
+                case UntilYourNextUpkeepStep:
+                    canRemove = entry.isYourNextUpkeepStep(game);
+                    break;
                 default:
                     canRemove = false;
             }
@@ -156,6 +160,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                     case UntilEndOfYourNextTurn:
                     case UntilYourNextEndCombatStep:
                     case UntilYourNextEndStep:
+                    case UntilYourNextUpkeepStep:
                         // until your turn effects continue until real turn reached, their used it's own inactive method
                         // 514.2 Second, the following actions happen simultaneously: all damage marked on permanents
                         // (including phased-out permanents) is removed and all "until end of turn" and "this turn" effects end.
