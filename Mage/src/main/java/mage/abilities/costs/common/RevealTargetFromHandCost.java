@@ -1,8 +1,5 @@
 package mage.abilities.costs.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -15,6 +12,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  *
  * @author jeffwadsworth
@@ -25,9 +26,12 @@ public class RevealTargetFromHandCost extends CostImpl {
     protected int numberCardsRevealed = 0;
     protected List<Card> revealedCards;
 
+    private boolean allowNoReveal;
+
     public RevealTargetFromHandCost(TargetCardInHand target) {
         this.addTarget(target);
-        this.text = (target.getNumberOfTargets() == 0 ? "you may reveal " : "reveal ") + target.getDescription();
+        this.allowNoReveal = target.getNumberOfTargets() == 0;
+        this.text = "reveal " + target.getDescription();
         this.revealedCards = new ArrayList<>();
     }
 
@@ -36,6 +40,7 @@ public class RevealTargetFromHandCost extends CostImpl {
         this.manaValues = cost.manaValues;
         this.numberCardsRevealed = cost.numberCardsRevealed;
         this.revealedCards = new ArrayList<>(cost.revealedCards);
+        this.allowNoReveal = cost.allowNoReveal;
     }
 
     @Override
@@ -62,7 +67,11 @@ public class RevealTargetFromHandCost extends CostImpl {
                 paid = true; // e.g. for optional additional costs.  example: Dragonlord's Prerogative also true if 0 cards shown
                 return paid;
             }
+        } else if(allowNoReveal) {
+            paid = true; // optional reveal with nothing to reveal.
+            return paid;
         }
+
         paid = false;
         return paid;
     }
@@ -81,7 +90,7 @@ public class RevealTargetFromHandCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return allowNoReveal || targets.canChoose(controllerId, source, game);
     }
 
     @Override
