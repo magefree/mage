@@ -222,6 +222,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Saruman of Many Colors", 223, Rarity.MYTHIC, mage.cards.s.SarumanOfManyColors.class));
         cards.add(new SetCardInfo("Saruman the White", 67, Rarity.UNCOMMON, mage.cards.s.SarumanTheWhite.class));
         cards.add(new SetCardInfo("Saruman's Trickery", 68, Rarity.UNCOMMON, mage.cards.s.SarumansTrickery.class));
+        cards.add(new SetCardInfo("Sauron's Ransom", 225, Rarity.RARE, mage.cards.s.SauronsRansom.class));
         cards.add(new SetCardInfo("Sauron, the Dark Lord", 224, Rarity.MYTHIC, mage.cards.s.SauronTheDarkLord.class));
         cards.add(new SetCardInfo("Sauron, the Lidless Eye", 288, Rarity.MYTHIC, mage.cards.s.SauronTheLidlessEye.class));
         cards.add(new SetCardInfo("Sauron, the Necromancer", 106, Rarity.RARE, mage.cards.s.SauronTheNecromancer.class));
