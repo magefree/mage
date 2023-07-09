@@ -34,7 +34,7 @@ public class FilterPermanentThisOrAnother extends FilterPermanent {
         }
     }
 
-    public FilterPermanentThisOrAnother(FilterPermanentThisOrAnother filter) {
+    private FilterPermanentThisOrAnother(FilterPermanentThisOrAnother filter) {
         super(filter);
         this.otherFilter = filter.otherFilter.copy();
         this.onlyControlled = filter.onlyControlled;
