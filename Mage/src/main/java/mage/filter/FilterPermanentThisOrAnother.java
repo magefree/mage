@@ -12,7 +12,7 @@ public class FilterPermanentThisOrAnother extends FilterPermanent {
     final boolean onlyControlled;
 
     public FilterPermanentThisOrAnother(FilterPermanent otherFilter, boolean onlyControlled) {
-        this(otherFilter, onlyControlled, "this or another " + otherFilter.getMessage());
+        this(otherFilter, onlyControlled, generateFilterMessage(otherFilter));
     }
     public FilterPermanentThisOrAnother(FilterPermanent otherFilter, boolean onlyControlled, String name) {
         super(name);
@@ -43,5 +43,17 @@ public class FilterPermanentThisOrAnother extends FilterPermanent {
     @Override
     public FilterPermanentThisOrAnother copy() {
         return new FilterPermanentThisOrAnother(this);
+    }
+
+    protected static String generateFilterMessage(FilterPermanent otherFilter) {
+        // Remove the indefinite article from the beginning of the message:
+        String otherFilterMessage = otherFilter.getMessage();
+        if (otherFilterMessage.startsWith("a ")) {
+            otherFilterMessage = otherFilterMessage.substring(2);
+        } else if (otherFilterMessage.startsWith("an ")) {
+            otherFilterMessage = otherFilterMessage.substring(3);
+        }
+
+        return "{this} or another " + otherFilterMessage;
     }
 }
