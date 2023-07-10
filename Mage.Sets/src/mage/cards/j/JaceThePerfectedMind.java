@@ -6,7 +6,7 @@ import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.CompleatedAbility;
 import mage.cards.CardImpl;
@@ -46,7 +46,7 @@ public final class JaceThePerfectedMind extends CardImpl {
         ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);
         // -X: Target player mills three times X cards.
-        Ability ability3 = new LoyaltyAbility(new MillCardsTargetXEffect(new MultipliedValue
+        Ability ability3 = new LoyaltyAbility(new MillCardsTargetEffect(new MultipliedValue
                 (GetXLoyaltyValue.instance, 3)).setText("Target player mills three times X cards."));
         ability3.addTarget(new TargetPlayer());
         this.addAbility(ability3);

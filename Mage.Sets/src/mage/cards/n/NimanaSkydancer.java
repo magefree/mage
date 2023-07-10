@@ -3,7 +3,7 @@ package mage.cards.n;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class NimanaSkydancer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Nimana Skydancer enters the battlefield, target opponent mills two cards.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsTargetXEffect(2));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsTargetEffect(2));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

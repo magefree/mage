@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class ReitoSentinel extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // When Reito Sentinel enters the battlefield, target player mills three cards.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsTargetXEffect(3));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsTargetEffect(3));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

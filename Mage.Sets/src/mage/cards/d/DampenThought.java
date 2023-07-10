@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.SpliceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +21,7 @@ public final class DampenThought extends CardImpl {
 
 
         // Target player mills 4 cards.
-        this.getSpellAbility().addEffect(new MillCardsTargetXEffect(4));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer().withChooseHint("mills 4 cards"));
         // Splice onto Arcane {1}{U}
         this.addAbility(new SpliceAbility(SpliceAbility.ARCANE, "{1}{U}"));

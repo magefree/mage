@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class GnawingVermin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Gnawing Vermin enters the battlefield, target player mills two cards.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsTargetXEffect(2));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsTargetEffect(2));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

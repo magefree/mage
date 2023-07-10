@@ -2,13 +2,14 @@
 package mage.cards.m;
 
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -39,7 +40,7 @@ public final class MesmericOrb extends CardImpl {
 class MesmericOrbTriggeredAbility extends TriggeredAbilityImpl {
 
     MesmericOrbTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new MillCardsTargetXEffect(1), false);
+        super(Zone.BATTLEFIELD, new MillCardsTargetEffect(1), false);
     }
 
     private MesmericOrbTriggeredAbility(final MesmericOrbTriggeredAbility ability) {

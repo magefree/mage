@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +24,7 @@ public final class CrosstownCourier extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Crosstown Courier deals combat damage to a player, that player puts that many cards from the top of their library into their graveyard.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MillCardsTargetXEffect(SavedDamageValue.MANY), false, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MillCardsTargetEffect(SavedDamageValue.MANY), false, true));
     }
 
     private CrosstownCourier(final CrosstownCourier card) {

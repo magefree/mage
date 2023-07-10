@@ -1,6 +1,6 @@
 package mage.cards.d;
 
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,7 +22,7 @@ public final class DealGoneBad extends CardImpl {
         // Target creature gets -3/-3 until end of turn. Target player mills three cards.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -3));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new MillCardsTargetXEffect(3)
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(3)
                 .setText("Target player mills three cards")
                 .setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().addTarget(new TargetPlayer());

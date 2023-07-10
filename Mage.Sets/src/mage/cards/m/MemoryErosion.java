@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,7 +22,7 @@ public final class MemoryErosion extends CardImpl {
         // Whenever an opponent casts a spell, that player puts the top two cards of their library into their graveyard.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new MillCardsTargetXEffect(2),
+                new MillCardsTargetEffect(2),
                 StaticFilters.FILTER_SPELL_A,
                 false,
                 SetTargetPointer.PLAYER

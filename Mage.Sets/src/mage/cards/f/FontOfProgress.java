@@ -7,7 +7,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class FontOfProgress extends CardImpl {
         ));
 
         // {3}, {T}: Target player mills X cards, where X is the number of oil counters on Font of Progress.
-        Ability ability = new SimpleActivatedAbility(new MillCardsTargetXEffect(xValue)
+        Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(xValue)
                 .setText("target player mills X cards, where X is the number of oil counters on {this}"), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());

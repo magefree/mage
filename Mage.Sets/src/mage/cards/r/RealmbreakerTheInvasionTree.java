@@ -8,7 +8,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.Card;
@@ -47,7 +47,7 @@ public final class RealmbreakerTheInvasionTree extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // {2}, {T}: Target opponent mills three cards. Put a land card from their graveyard onto the battlefield tapped under your control. It gains "If this land would leave the battlefield, exile it instead of putting it anywhere else."
-        Ability ability = new SimpleActivatedAbility(new MillCardsTargetXEffect(3), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(3), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new RealmbreakerTheInvasionTreeEffect());
         ability.addTarget(new TargetOpponent());

@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class StreamOfThought extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
         // Target player mills four cards. You shuffle up to four cards from your graveyard into your library.
-        this.getSpellAbility().addEffect(new MillCardsTargetXEffect(4));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(4));
         this.getSpellAbility().addEffect(new StreamOfThoughtEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 

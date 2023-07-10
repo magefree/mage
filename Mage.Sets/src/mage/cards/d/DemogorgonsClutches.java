@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class DemogorgonsClutches extends CardImpl {
         // Target opponent discards two cards, mills two cards, and loses 2 life.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
 
-        Effect effect = new MillCardsTargetXEffect(2);
+        Effect effect = new MillCardsTargetEffect(2);
         effect.setText(", mills two cards");
         this.getSpellAbility().addEffect(effect);
 

@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.common.InstantOrSorcerySpellManaBuilder;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class PelargirSurvivor extends CardImpl {
 
         // {5}{U}, {T}: Target player mills three cards.
         Ability ability = new SimpleActivatedAbility(
-                new MillCardsTargetXEffect(3), new ManaCostsImpl<>("{5}{U}")
+                new MillCardsTargetEffect(3), new ManaCostsImpl<>("{5}{U}")
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());

@@ -8,7 +8,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
@@ -39,7 +39,7 @@ public final class KrydleOfBaldursGate extends CardImpl {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new LoseLifeTargetEffect(1), false, true
         );
-        ability.addEffect(new MillCardsTargetXEffect(1).setText("and mills a card"));
+        ability.addEffect(new MillCardsTargetEffect(1).setText("and mills a card"));
         ability.addEffect(new GainLifeEffect(1).concatBy(", then"));
         ability.addEffect(new ScryEffect(1, false).concatBy("and"));
         this.addAbility(ability);

@@ -6,7 +6,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -52,7 +52,7 @@ public final class WitherbloomCommand extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
 
         // • Target player mills three cards, then you return a land card from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new MillCardsTargetXEffect(3));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(3));
         this.getSpellAbility().addEffect(new WitherbloomCommandEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 

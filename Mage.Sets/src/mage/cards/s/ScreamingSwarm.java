@@ -9,7 +9,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.MillCardsTargetXEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -42,7 +42,7 @@ public final class ScreamingSwarm extends CardImpl {
 
         // Whenever you attack with one or more creatures, target player mills that many cards.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(
-                new MillCardsTargetXEffect(ScreamingSwarmValue.instance)
+                new MillCardsTargetEffect(ScreamingSwarmValue.instance)
                         .setText("target player mills that many cards"),
                 1
         ).setTriggerPhrase("Whenever you attack with one or more creatures, ");

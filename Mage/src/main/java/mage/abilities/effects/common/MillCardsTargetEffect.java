@@ -11,24 +11,24 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author LevelX2
  */
 public class MillCardsTargetEffect extends OneShotEffect {
 
-    private DynamicValue amount;
+    private final DynamicValue numberCards;
 
-    public MillCardsTargetEffect(int amount) {
-        this(StaticValue.get(amount));
+    public MillCardsTargetEffect(int numberCards) {
+        this(StaticValue.get(numberCards));
     }
 
-    public MillCardsTargetEffect(DynamicValue amount) {
-        super(Outcome.Detriment);
-        this.amount = amount;
+    public MillCardsTargetEffect(DynamicValue numberCards) {
+        super(Outcome.Discard);
+        this.numberCards = numberCards;
     }
 
     public MillCardsTargetEffect(final MillCardsTargetEffect effect) {
         super(effect);
-        this.amount = effect.amount.copy();
+        this.numberCards = effect.numberCards;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class MillCardsTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            player.millCards(amount.calculate(game, source, this), source, game);
+            player.millCards(numberCards.calculate(game, source, this), source, game);
             return true;
         }
         return false;
@@ -52,26 +52,23 @@ public class MillCardsTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        String message = amount.getMessage();
-
         if (!mode.getTargets().isEmpty()) {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+            sb.append("target ");
+            sb.append(mode.getTargets().get(0).getTargetName());
         } else {
-            sb.append("that target");
+            sb.append("that player");
         }
-
         sb.append(" mills ");
+        String message = numberCards.getMessage();
         if (message.isEmpty()) {
-            if (amount.toString().equals("1")) {
+            if (numberCards.toString().equals("1")) {
                 sb.append("a card");
             } else {
-                sb.append(CardUtil.numberToText(amount.toString())).append(" cards");
+                sb.append(CardUtil.numberToText(numberCards.toString()));
+                sb.append(" cards");
             }
         } else {
             sb.append("X cards, where X is the number of ");
-        }
-
-        if (!message.isEmpty()) {
             sb.append(message);
         }
         return sb.toString();
