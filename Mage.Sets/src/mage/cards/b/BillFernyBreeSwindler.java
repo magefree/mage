@@ -4,19 +4,20 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.RemoveFromCombatSourceEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -46,11 +47,9 @@ public final class BillFernyBreeSwindler extends CardImpl {
         );
         ability.addMode(
                 // * Target opponent gains control of target Horse you control. If they do, remove Bill Ferny from combat and create three Treasure tokens.
-                new Mode(new GainControlTargetEffect(Duration.Custom, true))
+                new Mode(new BillFerneyEffect())
                         .addTarget(new TargetOpponent())
                         .addTarget(new TargetControlledPermanent(horseYouControl))
-                        .addEffect(new RemoveFromCombatSourceEffect())
-                        .addEffect(new CreateTokenEffect(new TreasureToken(), 3))
         );
         this.addAbility(ability);
     }
@@ -62,5 +61,38 @@ public final class BillFernyBreeSwindler extends CardImpl {
     @Override
     public BillFernyBreeSwindler copy() {
         return new BillFernyBreeSwindler(this);
+    }
+}
+
+class BillFerneyEffect extends OneShotEffect {
+
+    public BillFerneyEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Target opponent gains control of target Horse you control. If they do, remove Bill Ferny from combat and create three Treasure tokens.";
+    }
+
+    private BillFerneyEffect(BillFerneyEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public BillFerneyEffect copy() {
+        return new BillFerneyEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        UUID opponentToGainControl = targetPointer.getFirst(game, source);
+        game.addEffect(new GainControlTargetEffect(
+                Duration.Custom, true, opponentToGainControl
+        ).setTargetPointer(new FixedTarget(permanent.getId(), game)), source);
+        game.getState().processAction(game);
+        if (permanent.isControlledBy(opponentToGainControl)) {
+            new RemoveFromCombatSourceEffect().apply(game, source);
+            new CreateTokenEffect(new TreasureToken(), 3).apply(game, source);
+            return true;
+        }
+        return false;
     }
 }
