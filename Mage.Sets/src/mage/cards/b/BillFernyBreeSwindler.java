@@ -4,19 +4,16 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.RemoveFromCombatSourceEffect;
+import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
@@ -49,13 +46,10 @@ public final class BillFernyBreeSwindler extends CardImpl {
         );
         ability.addMode(
                 // * Target opponent gains control of target Horse you control. If they do, remove Bill Ferny from combat and create three Treasure tokens.
-                new Mode(
-                        new DoIfCostPaid(
-                                new RemoveFromCombatSourceEffect(),
-                                new GainControlOfHorseCost()
-                        ))
+                new Mode(new GainControlTargetEffect(Duration.Custom, true))
                         .addTarget(new TargetOpponent())
                         .addTarget(new TargetControlledPermanent(horseYouControl))
+                        .addEffect(new RemoveFromCombatSourceEffect())
                         .addEffect(new CreateTokenEffect(new TreasureToken(), 3))
         );
         this.addAbility(ability);
@@ -68,32 +62,5 @@ public final class BillFernyBreeSwindler extends CardImpl {
     @Override
     public BillFernyBreeSwindler copy() {
         return new BillFernyBreeSwindler(this);
-    }
-
-    private static class GainControlOfHorseCost extends CostImpl {
-        public GainControlOfHorseCost() {
-            this.text = "Target opponent gains control of target Horse you control";
-        }
-
-        @Override
-        public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-            return true;
-        }
-
-        @Override
-        public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-            UUID opponentId;
-            opponentId = source.getFirstTarget();
-            Permanent horse = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-            if (horse == null) {
-                return false;
-            }
-            return horse.changeControllerId(opponentId, game, source);
-        }
-
-        @Override
-        public Cost copy() {
-            return new GainControlOfHorseCost();
-        }
     }
 }
