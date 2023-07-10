@@ -5203,17 +5203,19 @@ public abstract class PlayerImpl implements Player, Serializable {
             // f abilities that trigger "whenever you choose a creature as your Ring-bearer"
             // or abilities that care about which creature was chosen as your Ring-bearer.
             // (2023-06-16)
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.RING_BEARER_CHOSEN, currentBearer.getId(), null, getId()));
             game.informPlayers(getLogName() + " did not choose a new Ring-bearer. " +
-                "It is still " + currentBearer.getLogName() + ".");
+                "It is still " + (currentBearer == null ? "" : currentBearer.getLogName()) + ".");
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.RING_BEARER_CHOSEN, currentBearerId, null, getId()));
         } else {
             Permanent ringBearer = game.getPermanent(newBearerId);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.RING_BEARER_CHOSEN, newBearerId, null, getId()));
-            game.informPlayers(getLogName() + " has chosen " + ringBearer.getLogName() + " as Ring-bearer.");
+            if(ringBearer != null){
+                // The setRingBearer method is taking care of removing
+                // the status from the current ring bearer, if existing.
+                ringBearer.setRingBearer(game, true);
 
-            // The setRingBearer method is taking care of removing
-            // the status from the current ring bearer, if existing.
-            ringBearer.setRingBearer(game, true);
+                game.informPlayers(getLogName() + " has chosen " + ringBearer.getLogName() + " as Ring-bearer.");
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.RING_BEARER_CHOSEN, newBearerId, null, getId()));
+            }
         }
     }
 

@@ -1691,14 +1691,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             // That creature becomes your Ring-bearer until another creature
             // becomes your Ring-bearer or another player gains control of it.
             Player player = game.getPlayer(getControllerId());
+            String playername = "";
             if(player != null){
+                playername = player.getLogName();
                 Permanent existingRingbearer = player.getRingBearer(game);
                 if(existingRingbearer != null && existingRingbearer.getId() != this.getId()){
                     existingRingbearer.setRingBearer(game, false);
                 }
             }
 
-            addInfo(ringbearerInfoKey, CardUtil.addToolTipMarkTags("Is " + getLogName() + "'s Ring-bearer"), game);
+            addInfo(ringbearerInfoKey, CardUtil.addToolTipMarkTags("Is " + playername + "'s Ring-bearer"), game);
         }
         else {
             addInfo(ringbearerInfoKey, null, game);
