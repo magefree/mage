@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,7 +41,7 @@ public final class ZellixSanityFlayer extends CardImpl {
         this.addAbility(new ZellixSanityFlayerTriggeredAbility());
 
         // {1}, {T}: Target player mills three cards.
-        Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(3), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new MillCardsTargetXEffect(3), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

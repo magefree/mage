@@ -3,7 +3,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,7 +23,7 @@ public final class FlintGolem extends CardImpl {
 
         // Whenever Flint Golem becomes blocked, defending player mills three cards
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(
-                new MillCardsTargetEffect(3).setText("defending player mills three cards"),
+                new MillCardsTargetXEffect(3).setText("defending player mills three cards"),
                 false, true));
     }
 

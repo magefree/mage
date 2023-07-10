@@ -7,7 +7,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.MenaceAbility;
@@ -58,7 +58,7 @@ public final class CaptainNghathrod extends CardImpl {
 
         // Whenever a Horror you control deals combat damage to a player, that player mills that many cards.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
-                new MillCardsTargetEffect(SavedDamageValue.MANY).setText("that player mills that many cards"),
+                new MillCardsTargetXEffect(SavedDamageValue.MANY).setText("that player mills that many cards"),
                 filter, false, SetTargetPointer.PLAYER, true, true
         ));
 

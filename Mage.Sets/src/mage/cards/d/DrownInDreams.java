@@ -6,7 +6,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +35,7 @@ public final class DrownInDreams extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer().withChooseHint("draws X cards"));
 
         // • Target player mills twice X cards.
-        Mode mode = new Mode(new MillCardsTargetEffect(xValue).setText("target player mills twice X cards"));
+        Mode mode = new Mode(new MillCardsTargetXEffect(xValue).setText("target player mills twice X cards"));
         mode.addTarget(new TargetPlayer().withChooseHint("mills twice X cards"));
         this.getSpellAbility().addMode(mode);
     }

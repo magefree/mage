@@ -13,27 +13,27 @@ import mage.util.CardUtil;
 /**
  * @author LevelX2
  */
-public class MillCardsTargetEffect extends OneShotEffect {
+public class MillCardsTargetXEffect extends OneShotEffect {
 
     private final DynamicValue numberCards;
 
-    public MillCardsTargetEffect(int numberCards) {
+    public MillCardsTargetXEffect(int numberCards) {
         this(StaticValue.get(numberCards));
     }
 
-    public MillCardsTargetEffect(DynamicValue numberCards) {
+    public MillCardsTargetXEffect(DynamicValue numberCards) {
         super(Outcome.Discard);
         this.numberCards = numberCards;
     }
 
-    public MillCardsTargetEffect(final MillCardsTargetEffect effect) {
+    public MillCardsTargetXEffect(final MillCardsTargetXEffect effect) {
         super(effect);
         this.numberCards = effect.numberCards;
     }
 
     @Override
-    public MillCardsTargetEffect copy() {
-        return new MillCardsTargetEffect(this);
+    public MillCardsTargetXEffect copy() {
+        return new MillCardsTargetXEffect(this);
     }
 
     @Override

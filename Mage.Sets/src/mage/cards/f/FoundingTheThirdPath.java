@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.common.ExileTargetCardCopyAndCastEffect;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.abilities.effects.common.cost.CastFromHandForFreeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +43,7 @@ public final class FoundingTheThirdPath extends CardImpl {
         // II -- Target player mills four cards.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
-                new MillCardsTargetEffect(4), new TargetPlayer()
+                new MillCardsTargetXEffect(4), new TargetPlayer()
         );
 
         // III -- Exile target instant or sorcery card from your graveyard. Copy it. You may cast the copy.

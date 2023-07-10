@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +30,7 @@ public final class DrownyardAmalgam extends CardImpl {
         this.toughness = new MageInt(6);
 
         // When Drownyard Amalgam enters the battlefield, target player mills three cards.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsTargetEffect(3));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsTargetXEffect(3));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

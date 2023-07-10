@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -33,7 +33,7 @@ public final class NecronDeathmark extends CardImpl {
 
         // Synaptic Disintegrator -- When Necron Deathmark enters the battlefield, destroy up to one target creature and target player mills three cards.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability.addEffect(new MillCardsTargetEffect(3)
+        ability.addEffect(new MillCardsTargetXEffect(3)
                 .setText("and target player mills three cards")
                 .setTargetPointer(new SecondTargetPointer()));
         ability.addTarget(new TargetCreaturePermanent(0, 1));

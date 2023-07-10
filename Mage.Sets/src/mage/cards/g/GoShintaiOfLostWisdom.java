@@ -7,7 +7,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DoWhenCostPaid;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
@@ -45,7 +45,7 @@ public final class GoShintaiOfLostWisdom extends CardImpl {
 
         // At the beginning of your end step, you may pay {1}. When you do, target player mills X cards, where X is the number of Shrines you control.
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new MillCardsTargetEffect(xValue), false,
+                new MillCardsTargetXEffect(xValue), false,
                 "target player mills X cards, where X is the number of Shrines you control"
         );
         ability.addTarget(new TargetPlayer());

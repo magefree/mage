@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,7 +19,7 @@ public final class AtrociousExperiment extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Target player mills two cards, draws two cards, and loses 2 life.
-        this.getSpellAbility().addEffect(new MillCardsTargetEffect(2));
+        this.getSpellAbility().addEffect(new MillCardsTargetXEffect(2));
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2).setText(", draws two cards"));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2).setText(", and loses 2 life"));
         this.getSpellAbility().addTarget(new TargetPlayer());

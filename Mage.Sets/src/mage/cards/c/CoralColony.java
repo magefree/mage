@@ -7,7 +7,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.DefenderAbility;
@@ -49,7 +49,7 @@ public final class CoralColony extends CardImpl {
 
         // {1}{U}, {T}: Target player mills X cards, where X is the number of creatures you control with defender.
         String ruleText = "target player mills X cards, where X is the number of creatures you control with defender";
-        Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(xValue).setText(ruleText), new ManaCostsImpl<>("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(new MillCardsTargetXEffect(xValue).setText(ruleText), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability.addHint(hint));

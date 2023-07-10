@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +27,7 @@ public final class Riddlekeeper extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever a creature attacks you or a planeswalker you control, that creature's controller puts the top two cards of their library into their graveyard.
-        Effect effect = new MillCardsTargetEffect(2);
+        Effect effect = new MillCardsTargetXEffect(2);
         effect.setText("that creature's controller mills two cards");
         this.addAbility(new AttacksAllTriggeredAbility(effect, false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PLAYER, true, true));
     }

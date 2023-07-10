@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -72,7 +72,7 @@ class SharedTraumaEffect extends OneShotEffect {
 
             if (xSum > 0) {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Effect effect = new MillCardsTargetEffect(xSum);
+                    Effect effect = new MillCardsTargetXEffect(xSum);
                     effect.setTargetPointer(new FixedTarget(playerId));
                     effect.apply(game, source);
                 }
@@ -84,4 +84,3 @@ class SharedTraumaEffect extends OneShotEffect {
         return false;
     }
 }
-

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.abilities.effects.keyword.AmassEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class TheMouthOfSauron extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When The Mouth of Sauron enters the battlefield, target player mills three cards. Then amass Orcs X, where X is the number of instant and sorcery cards in that player's graveyard.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsTargetEffect(3));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsTargetXEffect(3));
         ability.addEffect(new TheMouthOfSauronEffect());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

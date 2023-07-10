@@ -11,7 +11,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
@@ -49,7 +49,7 @@ public final class LordOfTheForsaken extends CardImpl {
 
         // {B}, Sacrifice another creature: Target player mills three cards.
         Ability ability = new SimpleActivatedAbility(
-                new MillCardsTargetEffect(3), new ManaCostsImpl<>("{B}")
+                new MillCardsTargetXEffect(3), new ManaCostsImpl<>("{B}")
         );
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE

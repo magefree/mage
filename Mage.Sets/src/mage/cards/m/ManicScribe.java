@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.MillCardsEachPlayerEffect;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +38,7 @@ public final class ManicScribe extends CardImpl {
         // that player puts the top three cards of their library into their graveyard.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        Zone.BATTLEFIELD, new MillCardsTargetEffect(3),
+                        Zone.BATTLEFIELD, new MillCardsTargetXEffect(3),
                         TargetController.OPPONENT, false, true
                 ), DeliriumCondition.instance, "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, " +
                 "if there are four or more card types among cards in your graveyard, that player mills three cards."

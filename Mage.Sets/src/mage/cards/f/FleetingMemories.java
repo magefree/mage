@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPlayer;
 
 /**
@@ -55,7 +54,7 @@ public final class FleetingMemories extends CardImpl {
 class FleetingMemoriesTriggeredAbility extends TriggeredAbilityImpl {
 
     public FleetingMemoriesTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new MillCardsTargetEffect(3));
+        super(Zone.BATTLEFIELD, new MillCardsTargetXEffect(3));
         setLeavesTheBattlefieldTrigger(true);
         setTriggerPhrase("Whenever you sacrifice a Clue, ");
     }

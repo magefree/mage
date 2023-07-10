@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -69,7 +69,7 @@ class ToweringWaveMysticTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         this.getEffects().clear();
-        this.addEffect(new MillCardsTargetEffect(event.getAmount()));
+        this.addEffect(new MillCardsTargetXEffect(event.getAmount()));
         return true;
     }
 

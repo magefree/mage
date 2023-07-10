@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.common.SourceDealsDamageToThisTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
-import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetXEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class BelltowerSphinx extends CardImpl {
 
         // Whenever a source deals damage to Belltower Sphinx, that source's controller mills that many cards.
         this.addAbility(new SourceDealsDamageToThisTriggeredAbility(
-                new MillCardsTargetEffect(SavedDamageValue.MANY)
+                new MillCardsTargetXEffect(SavedDamageValue.MANY)
                         .setText("that source's controller mills that many cards")
         ));
     }
