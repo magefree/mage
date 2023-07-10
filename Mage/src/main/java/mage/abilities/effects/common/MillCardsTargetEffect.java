@@ -13,27 +13,27 @@ import mage.util.CardUtil;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
+public class MillCardsTargetEffect extends OneShotEffect {
 
     private DynamicValue amount;
 
-    public PutLibraryIntoGraveTargetEffect(int amount) {
+    public MillCardsTargetEffect(int amount) {
         this(StaticValue.get(amount));
     }
 
-    public PutLibraryIntoGraveTargetEffect(DynamicValue amount) {
+    public MillCardsTargetEffect(DynamicValue amount) {
         super(Outcome.Detriment);
         this.amount = amount;
     }
 
-    public PutLibraryIntoGraveTargetEffect(final PutLibraryIntoGraveTargetEffect effect) {
+    public MillCardsTargetEffect(final MillCardsTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
     }
 
     @Override
-    public PutLibraryIntoGraveTargetEffect copy() {
-        return new PutLibraryIntoGraveTargetEffect(this);
+    public MillCardsTargetEffect copy() {
+        return new MillCardsTargetEffect(this);
     }
 
     @Override

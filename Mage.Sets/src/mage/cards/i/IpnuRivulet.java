@@ -8,7 +8,7 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -46,7 +46,7 @@ public final class IpnuRivulet extends CardImpl {
         this.addAbility(manaAbility);
 
         // {1}{U}, {t}, Sacrifice a Desert: Target player puts the top four cards of their library into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(4), new ManaCostsImpl<>("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(4), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         ability.addTarget(new TargetPlayer());
