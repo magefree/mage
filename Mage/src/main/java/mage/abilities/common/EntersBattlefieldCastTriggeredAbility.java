@@ -59,13 +59,7 @@ public class EntersBattlefieldCastTriggeredAbility extends EntersBattlefieldAllT
     public EntersBattlefieldCastTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean mustCast,
             boolean optional,
             SetTargetPointer setTargetPointer, String rule, boolean controlledText) {
-        this(zone, effect, filter, mustCast, optional, setTargetPointer, rule, controlledText, false);
-    }
-
-    protected EntersBattlefieldCastTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean mustCast,
-            boolean optional,
-            SetTargetPointer setTargetPointer, String rule, boolean controlledText, boolean thisOrAnother) {
-        super(zone, effect, filter, optional, setTargetPointer, rule, controlledText, thisOrAnother);
+        super(zone, effect, filter, optional, setTargetPointer, rule, controlledText);
 
         this.mustCast = mustCast;
         this.addWatcher(new PermanentWasCastWatcher());
