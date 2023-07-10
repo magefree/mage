@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class StartledAwake extends CardImpl {
 
         // Target opponent puts the top thirteen cards of their library into their graveyard.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(13));
 
         // {3}{U}{U}: Put Startled Awake from your graveyard onto the battlefield transformed. Activate this ability only any time you could cast a sorcery.
         this.addAbility(new TransformAbility());

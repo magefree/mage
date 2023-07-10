@@ -89,7 +89,7 @@ public class SacrificeEffect extends OneShotEffect {
         if (preText != null) {
             sb.append(preText);
         }
-        if (preText != null && (preText.endsWith("player") || preText.endsWith("opponent"))) {
+        if (preText != null && (preText.endsWith("player") || preText.endsWith("opponent") || preText.endsWith("controller"))) {
             sb.append(" sacrifices ");
         } else {
             if (preText == null || preText.isEmpty()) {

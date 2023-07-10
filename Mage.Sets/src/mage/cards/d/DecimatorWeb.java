@@ -8,7 +8,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class DecimatorWeb extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new AddCountersTargetEffect(CounterType.POISON.createInstance()));
-        ability.addEffect(new PutLibraryIntoGraveTargetEffect(6));
+        ability.addEffect(new MillCardsTargetEffect(6));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

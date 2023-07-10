@@ -39,7 +39,7 @@ public final class BoromirWardenOfTheTower extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever an opponent casts a spell, if no mana was spent to cast it, counter that spell.
-        this.addAbility(new SpellCastOpponentNoManaSpentTriggeredAbility(new CounterTargetEffect()));
+        this.addAbility(new SpellCastOpponentNoManaSpentTriggeredAbility(new CounterTargetEffect().setText("counter that spell")));
 
         // Sacrifice Boromir, Warden of the Tower: Creatures you control gain indestructible until end of turn. The Ring tempts you.
         Ability ability = new SimpleActivatedAbility(new GainAbilityAllEffect(

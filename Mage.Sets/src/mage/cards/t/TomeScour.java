@@ -3,7 +3,7 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,7 +19,7 @@ public final class TomeScour extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(5));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(5));
     }
 
     private TomeScour(final TomeScour card) {

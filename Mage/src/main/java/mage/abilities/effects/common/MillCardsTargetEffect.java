@@ -59,11 +59,17 @@ public class MillCardsTargetEffect extends OneShotEffect {
             sb.append("that player");
         }
         sb.append(" mills ");
-        if (numberCards.toString().equals("1")) {
-            sb.append("a card");
+        String message = numberCards.getMessage();
+        if (message.isEmpty()) {
+            if (numberCards.toString().equals("1")) {
+                sb.append("a card");
+            } else {
+                sb.append(CardUtil.numberToText(numberCards.toString()));
+                sb.append(" cards");
+            }
         } else {
-            sb.append(CardUtil.numberToText(numberCards.toString()));
-            sb.append(" cards");
+            sb.append("X cards, where X is the number of ");
+            sb.append(message);
         }
         return sb.toString();
     }
