@@ -31,10 +31,6 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
         this.amount = effect.amount.copy();
     }
 
-    public void setAmount(DynamicValue value) {
-        this.amount = value;
-    }
-
     @Override
     public PutLibraryIntoGraveTargetEffect copy() {
         return new PutLibraryIntoGraveTargetEffect(this);
