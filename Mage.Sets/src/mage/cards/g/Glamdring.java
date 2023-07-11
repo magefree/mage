@@ -88,7 +88,7 @@ class GlamdringEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         FilterCard filter = new FilterInstantOrSorceryCard("an instant or sorcery spell from your hand with mana value less than or equal to that damage");
         filter.add(new ManaValuePredicate(
-                ComparisonType.OR_LESS, SavedDamageValue.DAMAGE.calculate(game, source, this)
+                ComparisonType.OR_LESS, SavedDamageValue.MUCH.calculate(game, source, this)
         ));
         return new CastFromHandForFreeEffect(filter).apply(game, source);
     }
