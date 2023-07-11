@@ -26,10 +26,7 @@ import java.util.UUID;
  * @author bobby-mccann
  */
 public final class BillFernyBreeSwindler extends CardImpl {
-    private static final FilterControlledPermanent horseYouControl = new FilterControlledPermanent("Horse you control");
-    static {
-        horseYouControl.add(SubType.HORSE.getPredicate());
-    }
+    private static final FilterControlledPermanent horseYouControl = new FilterControlledPermanent(SubType.HORSE);
 
     public BillFernyBreeSwindler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
