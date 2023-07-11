@@ -44,7 +44,7 @@ public final class BillFernyBreeSwindler extends CardImpl {
         );
         ability.addMode(
                 // * Target opponent gains control of target Horse you control. If they do, remove Bill Ferny from combat and create three Treasure tokens.
-                new Mode(new BillFerneyEffect())
+                new Mode(new BillFernyEffect())
                         .addTarget(new TargetOpponent())
                         .addTarget(new TargetControlledPermanent(
                                 new FilterControlledPermanent(SubType.HORSE)
@@ -63,23 +63,23 @@ public final class BillFernyBreeSwindler extends CardImpl {
     }
 }
 
-class BillFerneyEffect extends OneShotEffect {
+class BillFernyEffect extends OneShotEffect {
 
     private static final Effect create3TreasureTokens = new CreateTokenEffect(new TreasureToken(), 3);
     private static final Effect removeFromCombat = new RemoveFromCombatSourceEffect();
 
-    public BillFerneyEffect() {
+    public BillFernyEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent gains control of target Horse you control. If they do, remove Bill Ferny from combat and create three Treasure tokens.";
     }
 
-    private BillFerneyEffect(BillFerneyEffect effect) {
+    private BillFernyEffect(BillFernyEffect effect) {
         super(effect);
     }
 
     @Override
-    public BillFerneyEffect copy() {
-        return new BillFerneyEffect(this);
+    public BillFernyEffect copy() {
+        return new BillFernyEffect(this);
     }
 
     @Override
