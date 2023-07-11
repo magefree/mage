@@ -24,11 +24,41 @@ public class BillFernyBreeSwindlerTest extends CardTestPlayerBase {
         addTarget(playerA, horse);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
-        showBattlefield("after", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
         execute();
 
         assertPermanentCount(playerB, horse, 1);
         assertPermanentCount(playerA, bill, 1);
         assertPermanentCount(playerA, "Treasure Token", 3);
+    }
+
+    @Test
+    public void phantasmalImageTest() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, bill);
+        addCard(Zone.BATTLEFIELD, playerA, horse);
+        addCard(Zone.BATTLEFIELD, playerA, "Horseshoe Crab"); // not a horse
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Phantasmal Image");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Iron Golem"); // has to block
+
+        // Create a copy of the horse, but it gets sacrificed when it becomes a target:
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, horse);
+
+        attack(1, playerA, bill);
+        setModeChoice(playerA, "2");
+        addTarget(playerA, playerB);
+        addTarget(playerA, horse+"[only copy]");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerB, horse, 0); // Opponent never got the horse
+        assertPermanentCount(playerA, bill, 0); // Died to Iron Golem
+        assertPermanentCount(playerA, "Treasure Token", 0); // No treasure tokens created
+        assertPermanentCount(playerA, horse, 1); // Normal horse still remains
     }
 }

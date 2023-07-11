@@ -83,6 +83,9 @@ class BillFerneyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        if (permanent == null) {
+            return false;
+        }
         UUID opponentToGainControl = targetPointer.getFirst(game, source);
         game.addEffect(new GainControlTargetEffect(
                 Duration.Custom, true, opponentToGainControl
