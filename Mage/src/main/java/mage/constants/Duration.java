@@ -13,7 +13,7 @@ public enum Duration {
     EndOfTurn("until end of turn", true, true),
     UntilYourNextTurn("until your next turn", true, true),
     UntilYourNextEndStep("until your next end step", true, true),
-    UntilYourNextEndCombatStep("until your next end of combat step", false, true), // why is onlyValidIfNoZoneChange not true?
+    UntilEndCombatOfYourNextTurn("until your next end of combat step", true, true),
     UntilYourNextUpkeepStep("until your next upkeep", true, true),
     UntilEndOfYourNextTurn("until the end of your next turn", true, true),
     UntilSourceLeavesBattlefield("until {this} leaves the battlefield", true, false), // supported for continuous layered effects

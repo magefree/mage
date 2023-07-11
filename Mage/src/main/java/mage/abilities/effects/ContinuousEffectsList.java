@@ -61,10 +61,6 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                 case UntilYourNextEndStep:
                     canRemove = entry.isYourNextEndStep(game);
                     break;
-                // why do we not remove UntilYourNextEndCombatStep there?
-                case UntilYourNextUpkeepStep:
-                    canRemove = entry.isYourNextUpkeepStep(game);
-                    break;
                 default:
                     canRemove = false;
             }
@@ -158,7 +154,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                     case Custom:
                     case UntilYourNextTurn:
                     case UntilEndOfYourNextTurn:
-                    case UntilYourNextEndCombatStep:
+                    case UntilEndCombatOfYourNextTurn:
                     case UntilYourNextEndStep:
                     case UntilYourNextUpkeepStep:
                         // until your turn effects continue until real turn reached, their used it's own inactive method
