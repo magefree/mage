@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.RemoveFromCombatSourceEffect;
@@ -26,7 +27,6 @@ import java.util.UUID;
  * @author bobby-mccann
  */
 public final class BillFernyBreeSwindler extends CardImpl {
-    private static final FilterControlledPermanent horseYouControl = new FilterControlledPermanent(SubType.HORSE);
 
     public BillFernyBreeSwindler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -46,7 +46,9 @@ public final class BillFernyBreeSwindler extends CardImpl {
                 // * Target opponent gains control of target Horse you control. If they do, remove Bill Ferny from combat and create three Treasure tokens.
                 new Mode(new BillFerneyEffect())
                         .addTarget(new TargetOpponent())
-                        .addTarget(new TargetControlledPermanent(horseYouControl))
+                        .addTarget(new TargetControlledPermanent(
+                                new FilterControlledPermanent(SubType.HORSE)
+                        ))
         );
         this.addAbility(ability);
     }
@@ -62,6 +64,9 @@ public final class BillFernyBreeSwindler extends CardImpl {
 }
 
 class BillFerneyEffect extends OneShotEffect {
+
+    private static final Effect create3TreasureTokens = new CreateTokenEffect(new TreasureToken(), 3);
+    private static final Effect removeFromCombat = new RemoveFromCombatSourceEffect();
 
     public BillFerneyEffect() {
         super(Outcome.Benefit);
@@ -89,8 +94,8 @@ class BillFerneyEffect extends OneShotEffect {
         ).setTargetPointer(new FixedTarget(permanent.getId(), game)), source);
         game.getState().processAction(game);
         if (permanent.isControlledBy(opponentToGainControl)) {
-            new RemoveFromCombatSourceEffect().apply(game, source);
-            new CreateTokenEffect(new TreasureToken(), 3).apply(game, source);
+            removeFromCombat.apply(game, source);
+            create3TreasureTokens.apply(game, source);
             return true;
         }
         return false;
