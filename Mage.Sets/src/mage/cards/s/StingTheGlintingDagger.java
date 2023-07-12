@@ -57,7 +57,7 @@ public final class StingTheGlintingDagger extends CardImpl {
         )));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
     private StingTheGlintingDagger(final StingTheGlintingDagger card) {
