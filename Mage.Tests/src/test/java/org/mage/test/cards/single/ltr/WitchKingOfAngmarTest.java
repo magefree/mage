@@ -29,9 +29,6 @@ public class WitchKingOfAngmarTest extends CardTestPlayerBase {
         // Choose which creature to sacrifice
         addTarget(playerB, watchwolf);
 
-        // The ring tempts you choice:
-        setChoice(playerA, witchKing);
-
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 

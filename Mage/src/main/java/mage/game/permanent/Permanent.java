@@ -420,7 +420,9 @@ public interface Permanent extends Card, Controllable {
 
     boolean isManifested();
 
-    boolean isRingBearer(Game game);
+    boolean isRingBearer();
+
+    void setRingBearer(Game game, boolean value);
 
     @Override
     Permanent copy();

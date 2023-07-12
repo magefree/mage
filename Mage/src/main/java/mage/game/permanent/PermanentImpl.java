@@ -72,6 +72,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean renowned;
     protected boolean manifested = false;
     protected boolean morphed = false;
+    protected boolean ringBearerFlag = false;
     protected int classLevel = 1;
     protected final Set<UUID> goadingPlayers = new HashSet<>();
     protected UUID originalControllerId;
@@ -165,6 +166,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.transformed = permanent.transformed;
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
+        this.ringBearerFlag = permanent.ringBearerFlag;
         this.classLevel = permanent.classLevel;
         this.goadingPlayers.addAll(permanent.goadingPlayers);
         this.pairedPermanent = permanent.pairedPermanent;
@@ -801,11 +803,24 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return true;
     }
 
+    // Losing control of a ring bearer clear its status.
+    public void removeUncontrolledRingBearer(Game game){
+        if(isRingBearer()) {
+            UUID controllerId = beforeResetControllerId;
+            Player controller = controllerId == null ? null : game.getPlayer(controllerId);
+            String controllerName = controller == null ? "" : controller.getLogName();
+            game.informPlayers(controllerName + " has lost control of " + getLogName() + ". It is no longer a Ring-bearer.");
+
+            this.setRingBearer(game, false);
+        }
+    }
+
     @Override
     public boolean checkControlChanged(Game game) {
         if (!controllerId.equals(beforeResetControllerId)) {
             this.removeFromCombat(game);
             this.controlledFromStartOfControllerTurn = false;
+            this.removeUncontrolledRingBearer(game);
 
             this.getAbilities(game).setControllerId(controllerId);
             game.getContinuousEffects().setController(objectId, controllerId);
@@ -1656,6 +1671,41 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.renowned = value;
     }
 
+    // Used as key for the ring bearer info.
+    private static final String ringbearerInfoKey = "IS_RINGBEARER";
+
+    @Override
+    public void setRingBearer(Game game, boolean value) {
+        if(value == this.ringBearerFlag){
+            return;
+        }
+
+        if(value) {
+            // The player may have another Ringbearer. We need to clear it if so.
+            //
+            // 701.52a Certain spells and abilities have the text “the Ring tempts you.”
+            // Each time the Ring tempts you, choose a creature you control.
+            // That creature becomes your Ring-bearer until another creature
+            // becomes your Ring-bearer or another player gains control of it.
+            Player player = game.getPlayer(getControllerId());
+            String playername = "";
+            if(player != null){
+                playername = player.getLogName();
+                Permanent existingRingbearer = player.getRingBearer(game);
+                if(existingRingbearer != null && existingRingbearer.getId() != this.getId()){
+                    existingRingbearer.setRingBearer(game, false);
+                }
+            }
+
+            addInfo(ringbearerInfoKey, CardUtil.addToolTipMarkTags("Is " + playername + "'s Ring-bearer"), game);
+        }
+        else {
+            addInfo(ringbearerInfoKey, null, game);
+        }
+
+        this.ringBearerFlag = value;
+    }
+
     @Override
     public int getClassLevel() {
         return classLevel;
@@ -1811,10 +1861,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean isRingBearer(Game game) {
-        Player player = game.getPlayer(getControllerId());
-        return player != null && this.equals(player.getRingBearer(game));
-    }
+    public boolean isRingBearer() { return ringBearerFlag; }
 
     @Override
     public boolean fight(Permanent fightTarget, Ability source, Game game) {

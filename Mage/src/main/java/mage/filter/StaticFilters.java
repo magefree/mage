@@ -11,6 +11,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.*;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.filter.predicate.permanent.AttachedOrShareCreatureTypePredicate;
+import mage.filter.predicate.permanent.RingBearerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -662,6 +663,13 @@ public final class StaticFilters {
                 Predicates.not(CardType.LAND.getPredicate())
         );
         FILTER_CONTROLLED_PERMANENT_NON_LAND.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_RINGBEARER = new FilterControlledPermanent("the controlled Ring-bearer");
+
+    static {
+        FILTER_CONTROLLED_RINGBEARER.add(RingBearerPredicate.instance);
+        FILTER_CONTROLLED_RINGBEARER.setLockedFilter(true);
     }
 
     public static final FilterLandPermanent FILTER_LAND = new FilterLandPermanent();

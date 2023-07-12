@@ -1080,8 +1080,6 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     FilterMana getPhyrexianColors();
 
-    UUID getRingBearerId();
-
     Permanent getRingBearer(Game game);
 
     void chooseRingBearer(Game game);

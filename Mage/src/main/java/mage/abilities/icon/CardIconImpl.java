@@ -14,6 +14,7 @@ public class CardIconImpl implements CardIcon, Serializable {
     // Utility Icons
     public static final CardIconImpl FACE_DOWN = new CardIconImpl(CardIconType.OTHER_FACEDOWN, "Card is face down");
     public static final CardIconImpl COMMANDER = new CardIconImpl(CardIconType.COMMANDER, "Card is commander");
+    public static final CardIconImpl RINGBEARER = new CardIconImpl(CardIconType.RINGBEARER, "Ring-bearer");
 
     // Ability Icons
     public static final CardIconImpl ABILITY_CREW = new CardIconImpl(CardIconType.ABILITY_CREW,
