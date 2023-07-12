@@ -4,10 +4,6 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
 import mage.abilities.MageSingleton;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.DomainValue;
-import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.*;
 import mage.filter.Filter;
@@ -62,6 +58,10 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     private boolean startingTurnWasActive; // effect started during related players turn and related players turn was already active
     private int effectStartingOnTurn = 0; // turn the effect started
     private int effectStartingEndStep = 0;
+    private int nextTurnNumber = Integer.MAX_VALUE; // effect is waiting for a step during your next turn, we store it if found.
+                                                    // set to the turn number on your next turn.
+    private int effectStartingStepNum = 0; // Some continuous are waiting for the next step of a kind.
+                                           // Avoid miscancelling if the start step is of that kind.
 
     public ContinuousEffectImpl(Duration duration, Outcome outcome) {
         super(outcome);
@@ -96,6 +96,8 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.dependencyTypes = effect.dependencyTypes;
         this.dependendToTypes = effect.dependendToTypes;
         this.characterDefining = effect.characterDefining;
+        this.nextTurnNumber = effect.nextTurnNumber;
+        this.effectStartingStepNum = effect.effectStartingStepNum;
     }
 
     @Override
@@ -215,6 +217,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                 && activePlayerId.equals(startingController); // you can't use "game" for active player cause it's called from tests/cheat too
         this.effectStartingOnTurn = game.getTurnNum();
         this.effectStartingEndStep = EndStepCountWatcher.getCount(startingController, game);
+        this.effectStartingStepNum = game.getState().getStepNum();
     }
 
     @Override
@@ -228,10 +231,24 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         return EndStepCountWatcher.getCount(startingControllerId, game) > effectStartingEndStep;
     }
 
-    public boolean isYourNextEndCombatStep(Game game) {
-        return effectStartingOnTurn < game.getTurnNum()
-                && game.isActivePlayer(startingControllerId)
-                && game.getPhase().getType() == TurnPhase.POSTCOMBAT_MAIN;
+    public boolean isEndCombatOfYourNextTurn(Game game) {
+        int currentTurn = game.getTurnNum();
+        if(nextTurnNumber != Integer.MAX_VALUE && nextTurnNumber < currentTurn){
+            return false; // This is a turn after your next turn.
+        }
+        if(nextTurnNumber == Integer.MAX_VALUE && isYourNextTurn(game)) {
+            nextTurnNumber = currentTurn;
+        }
+
+        return isYourNextTurn(game)
+            && game.getPhase().getType() == TurnPhase.POSTCOMBAT_MAIN;
+    }
+
+    public boolean isYourNextUpkeepStep(Game game) {
+        return (effectStartingOnTurn < game.getTurnNum() ||
+                effectStartingStepNum < game.getState().getStepNum())
+            && game.isActivePlayer(startingControllerId)
+            && game.getStep().getType() == PhaseStep.UPKEEP;
     }
 
     @Override
@@ -243,7 +260,8 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             case UntilYourNextTurn:
             case UntilEndOfYourNextTurn:
             case UntilYourNextEndStep:
-            case UntilYourNextEndCombatStep:
+            case UntilEndCombatOfYourNextTurn:
+            case UntilYourNextUpkeepStep:
                 break;
             default:
                 return false;
@@ -286,9 +304,14 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                     return this.isYourNextEndStep(game);
                 }
                 break;
-            case UntilYourNextEndCombatStep:
+            case UntilEndCombatOfYourNextTurn:
                 if (player != null && player.isInGame()) {
-                    return this.isYourNextEndCombatStep(game);
+                    return this.isEndCombatOfYourNextTurn(game);
+                }
+                break;
+            case UntilYourNextUpkeepStep:
+                if (player != null && player.isInGame()) {
+                    return this.isYourNextUpkeepStep(game);
                 }
                 break;
         }

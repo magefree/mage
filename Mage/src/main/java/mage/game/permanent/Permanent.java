@@ -115,7 +115,7 @@ public interface Permanent extends Card, Controllable {
 
     int getAttachedToZoneChangeCounter();
 
-    void attachTo(UUID permanentId, Ability source, Game game);
+    void attachTo(UUID attachToObjectId, Ability source, Game game);
 
     void unattach(Game game);
 
