@@ -1001,6 +1001,10 @@ public class ContinuousEffects implements Serializable {
             activeLayerEffects = getLayeredEffects(game, "layer_1");
         }
 
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+            permanent.saveCopiableValues(game);
+        }
+
         layer = filterLayeredEffects(activeLayerEffects, Layer.ControlChangingEffects_2);
         // apply control changing effects multiple times if it's needed
         // for cases when control over permanents with change control abilities is changed

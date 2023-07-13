@@ -110,14 +110,21 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected Map<String, String> info = new LinkedHashMap<>(); // additional info for permanent's rules
     protected int createOrder;
     protected boolean legendRuleApplies = true;
+    private final CopiableValues copiableValues;
 
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<UUID>());
+
+    PermanentImpl() {
+        super(null, "");
+        this.copiableValues = null;
+    }
 
     public PermanentImpl(UUID ownerId, UUID controllerId, String name) {
         super(ownerId, name);
         this.originalControllerId = controllerId;
         this.controllerId = controllerId;
         this.counters = new Counters();
+        this.copiableValues = new CopiableValues();
     }
 
     public PermanentImpl(UUID id, UUID ownerId, UUID controllerId, String name) {
@@ -125,6 +132,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.originalControllerId = controllerId;
         this.controllerId = controllerId;
         this.counters = new Counters();
+        this.copiableValues = new CopiableValues();
     }
 
     public PermanentImpl(final PermanentImpl permanent) {
@@ -180,6 +188,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.morphed = permanent.morphed;
         this.manifested = permanent.manifested;
         this.createOrder = permanent.createOrder;
+        if (permanent.copiableValues != null) {
+            this.copiableValues = new CopiableValues();
+            this.copiableValues.copyFrom(permanent.copiableValues, null);
+        } else {
+            this.copiableValues = null;
+        }
     }
 
     @Override
@@ -219,6 +233,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.goadingPlayers.clear();
         this.loyaltyActivationsAvailable = 1;
         this.legendRuleApplies = true;
+    }
+
+    @Override
+    public void saveCopiableValues(Game game) {
+        this.copiableValues.copyFrom(this, game);
+    }
+
+    @Override
+    public Permanent getCopiableValues() {
+        return copiableValues;
     }
 
     @Override

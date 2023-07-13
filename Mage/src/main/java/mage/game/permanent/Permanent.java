@@ -446,4 +446,8 @@ public interface Permanent extends Card, Controllable {
         this.getPower().setBoostedValue(this.getToughness().getValue());
         this.getToughness().setBoostedValue(power);
     }
+
+    void saveCopiableValues(Game game);
+
+    Permanent getCopiableValues();
 }
