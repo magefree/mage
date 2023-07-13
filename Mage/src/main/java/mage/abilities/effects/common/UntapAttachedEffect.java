@@ -1,25 +1,29 @@
-
-
 package mage.abilities.effects.common;
 
+import mage.constants.AttachmentType;
 import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
  * @author LevelX
  */
-public class UntapEnchantedEffect extends OneShotEffect {
+public class UntapAttachedEffect extends OneShotEffect {
 
-    public UntapEnchantedEffect() {
-        super(Outcome.Untap);
-        staticText = "untap enchanted creature";
+    public UntapAttachedEffect() {
+        this(AttachmentType.AURA, "creature");
     }
 
-    public UntapEnchantedEffect(final UntapEnchantedEffect effect) {
+    public UntapAttachedEffect(AttachmentType attachmentType, String name) {
+        super(Outcome.Untap);
+        staticText = "untap " + CardUtil.getTextWithFirstCharLowerCase(attachmentType.verb()) + ' ' + name;
+    }
+
+    public UntapAttachedEffect(final UntapAttachedEffect effect) {
         super(effect);
     }
 
@@ -37,8 +41,8 @@ public class UntapEnchantedEffect extends OneShotEffect {
     }
 
     @Override
-    public UntapEnchantedEffect copy() {
-        return new UntapEnchantedEffect(this);
+    public UntapAttachedEffect copy() {
+        return new UntapAttachedEffect(this);
     }
 
 }

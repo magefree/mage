@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.UntapEnchantedEffect;
+import mage.abilities.effects.common.UntapAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -45,7 +45,7 @@ public final class StingTheGlintingDagger extends CardImpl {
 
         // At the beginning of each combat, untap equipped creature.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-            new UntapEnchantedEffect().setText("untap equipped creature"), //TODO: rename the effect and add AttachmentType to it?
+            new UntapAttachedEffect(AttachmentType.EQUIPMENT, "creature"),
             TargetController.ANY, false));
 
         // Equipped creature has first strike as long as it's blocking or blocked by a Goblin or Orc.
@@ -85,16 +85,16 @@ enum StingTheGlintingDaggerCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sting = game.getPermanent(source.getSourceId());
-        if(sting == null){
+        if (sting == null) {
             return false;
         }
 
         Permanent equippedCreature = game.getPermanent(sting.getAttachedTo());
-        if(equippedCreature == null){
+        if (equippedCreature == null) {
             return false;
         }
 
-        if(equippedCreature.isAttacking() && equippedCreature.isBlocked(game)){
+        if (equippedCreature.isAttacking() && equippedCreature.isBlocked(game)) {
             // equipped creature is currently blocked, time to look for blocking goblin or orc.
             UUID controllerId = equippedCreature.getControllerId();
 
@@ -103,7 +103,7 @@ enum StingTheGlintingDaggerCondition implements Condition {
                 .stream()
                 .anyMatch(p -> BlockingOrBlockedWatcher.check(equippedCreature, p, game));
 
-        } else if(equippedCreature.getBlocking() > 0) {
+        } else if (equippedCreature.getBlocking() > 0) {
             // equipped creature is currently blocking, time to look for blocked goblin or orc.
             UUID controllerId = equippedCreature.getControllerId();
 
