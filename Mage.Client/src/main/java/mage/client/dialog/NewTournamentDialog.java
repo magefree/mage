@@ -927,8 +927,9 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void setNumberOfSwissRoundsMin(int numPlayers) {
-        // set the number of minimum swiss rounds related to the number of players
-        int minRounds = (int) Math.ceil(Math.log(numPlayers + 1) / Math.log(2));
+        // set 3 rounds default if more than 4 players
+        // don't set 4 rounds by default, as 3 rounds generally preferred
+        int minRounds = (numPlayers + 1 > 4) ? 3 : 2;
         int newValue = Math.max((Integer) spnNumRounds.getValue(), minRounds);
         this.spnNumRounds.setModel(new SpinnerNumberModel(newValue, 2, 10, 1));
         this.pack();
