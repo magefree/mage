@@ -28,6 +28,7 @@ public class ClashEffectTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, rascal);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Sylvan Echoes" , 1); // Whenever you clash and win, you may draw a card.
 
         // Default: both players have only lands with mana value 0
         // Add card with greater mana value to one player's library so that they win the clash
@@ -46,9 +47,6 @@ public class ClashEffectTest extends CardTestPlayerBase {
         setChoice(playerA, false); // put revealed card to bottom of library
         setChoice(playerB, true); // put revealed card to top of library
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
-
     }
 
     @Test
@@ -56,6 +54,8 @@ public class ClashEffectTest extends CardTestPlayerBase {
         prepareClashing();
         addCard(Zone.LIBRARY, playerA, "Divination", 1);
         performClashing();
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
         assertPowerToughness(playerA, rascal, 3, 3);
     }
 
@@ -64,13 +64,19 @@ public class ClashEffectTest extends CardTestPlayerBase {
         prepareClashing();
         addCard(Zone.LIBRARY, playerB, "Divination", 1);
         performClashing();
+        setChoice(playerB, true); // Draw a card from Sylvan Echoes
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
         assertPowerToughness(playerA, rascal, 2, 2);
+        assertHandCount(playerB, "Divination", 1);
     }
 
     @Test
     public void testClashNoWin() {
         prepareClashing();
         performClashing();
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
         assertPowerToughness(playerA, rascal, 2, 2);
     }
 

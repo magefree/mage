@@ -149,11 +149,11 @@ public class ClashEffect extends OneShotEffect {
         // fire CLASHED events with info about winner
         game.fireEvent(new GameEvent(
                 GameEvent.EventType.CLASHED, controller.getId(), source,
-                opponent.getId(), 0, cmcController > cmcOpponent
+                opponent.getId(), 0, cmcOpponent > cmcController
         ));
         game.fireEvent(new GameEvent(
                 GameEvent.EventType.CLASHED, opponent.getId(), source,
-                controller.getId(), 0, cmcOpponent > cmcController
+                controller.getId(), 0, cmcController > cmcOpponent
         ));
 
         // set opponent to DoIfClashWonEffect
