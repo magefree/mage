@@ -34,7 +34,7 @@ public final class BewitchingLeechcraft extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Tap));
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When Bewitching Leechcraft enters the battlefield, tap enchanted creature.
@@ -42,7 +42,7 @@ public final class BewitchingLeechcraft extends CardImpl {
 
         // Enchanted creature has "If this creature would untap during your untap step,
         // remove a +1/+1 counter from it instead. If you do, untap it."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
             new GainAbilityAttachedEffect(
                 new SimpleStaticAbility(new BewitchingLeechcraftReplacementEffect()),
                 AttachmentType.AURA
@@ -68,7 +68,7 @@ class BewitchingLeechcraftReplacementEffect extends ReplacementEffectImpl {
             "remove a +1/+1 counter from it instead. If you do, untap it.";
     }
 
-    public BewitchingLeechcraftReplacementEffect(final BewitchingLeechcraftReplacementEffect effect) {
+    private BewitchingLeechcraftReplacementEffect(final BewitchingLeechcraftReplacementEffect effect) {
         super(effect);
     }
 
@@ -79,8 +79,7 @@ class BewitchingLeechcraftReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UNTAP
-            && game.getTurnStepType() == PhaseStep.UNTAP;
+        return event.getType() == GameEvent.EventType.UNTAP;
     }
 
     @Override
@@ -102,8 +101,7 @@ class BewitchingLeechcraftReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent eventPermanent = game.getPermanent(event.getTargetId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        return eventPermanent != null && sourcePermanent != null && sourcePermanent == eventPermanent;
+        return game.getTurnStepType() == PhaseStep.UNTAP
+            && event.getTargetId().equals(source.getSourceId());
     }
 }
