@@ -80,4 +80,56 @@ public class ClashEffectTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, rascal, 2, 2);
     }
 
+    @Test
+    public void testHoardersGreed() {
+
+        setStrictChooseMode(true);
+
+        removeAllCardsFromLibrary(playerA);
+        removeAllCardsFromLibrary(playerB);
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerB, "Island", 5);
+        addCard(Zone.LIBRARY, playerA, "Island", 5);
+        addCard(Zone.LIBRARY, playerA, "Wastes", 1);
+        addCard(Zone.LIBRARY, playerA, "Razorfield Thresher", 1);
+        addCard(Zone.LIBRARY, playerA, "Phyrexian Hulk", 1);
+        addCard(Zone.LIBRARY, playerA, "Stone Golem", 1);
+        addCard(Zone.LIBRARY, playerA, "Gilded Sentinel", 1);
+        addCard(Zone.LIBRARY, playerA, "Stonework Puma", 1);
+        addCard(Zone.LIBRARY, playerA, "Field Creeper", 1);
+        addCard(Zone.LIBRARY, playerA, "Metallic Sliver", 1);
+        addCard(Zone.LIBRARY, playerA, "Memnite", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.HAND, playerA, "Hoarder's Greed", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hoarder's Greed");
+        // Draw two cards (Memnite and Metallic Sliver), lose 2 life, clash:
+        setChoice(playerA, "PlayerB");
+        setChoice(playerA, false); // Field Creeper to bottom of library
+        setChoice(playerB, true);
+        // Clash won. Draw two cards (Stonework Puma and Gilded Sentinel), lose 2 life, clash:
+        setChoice(playerA, "PlayerB");
+        setChoice(playerA, false); // Stone Golem to bottom of library
+        setChoice(playerB, true);
+        // Clash won. Draw two cards (Phyrexian Hulk and Razorfield Thresher), lose 2 life, clash:
+        setChoice(playerA, "PlayerB");
+        setChoice(playerA, true); // Wastes to top of library
+        setChoice(playerB, true);
+        // No winner in this clash.
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20 - (2 * 3));
+        assertHandCount(playerA, "Memnite", 1);
+        assertHandCount(playerA, "Metallic Sliver", 1);
+        assertHandCount(playerA, "Field Creeper", 0);
+        assertHandCount(playerA, "Stonework Puma", 1);
+        assertHandCount(playerA, "Gilded Sentinel", 1);
+        assertHandCount(playerA, "Stone Golem", 0);
+        assertHandCount(playerA, "Phyrexian Hulk", 1);
+        assertHandCount(playerA, "Razorfield Thresher", 1);
+
+    }
+
 }

@@ -146,14 +146,14 @@ public class ClashEffect extends OneShotEffect {
         if (cardOpponent != null) {
             opponent.moveCardToLibraryWithInfo(cardOpponent, source, game, Zone.LIBRARY, topOpponent, true);
         }
-        // fire CLASHED events with info about winner
-        game.fireEvent(new GameEvent(
-                GameEvent.EventType.CLASHED, controller.getId(), source,
-                opponent.getId(), 0, cmcOpponent > cmcController
-        ));
+        // fire CLASHED events with info about winner (flag is true if playerId won; other player is targetId)
         game.fireEvent(new GameEvent(
                 GameEvent.EventType.CLASHED, opponent.getId(), source,
                 controller.getId(), 0, cmcController > cmcOpponent
+        ));
+        game.fireEvent(new GameEvent(
+                GameEvent.EventType.CLASHED, controller.getId(), source,
+                opponent.getId(), 0, cmcOpponent > cmcController
         ));
 
         // set opponent to DoIfClashWonEffect
