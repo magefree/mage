@@ -3,8 +3,10 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -12,9 +14,16 @@ import mage.game.events.GameEvent;
  */
 public class PhaseInTriggeredAbility extends TriggeredAbilityImpl {
 
-    public PhaseInTriggeredAbility(Effect effect, boolean optional) {
+    private FilterPermanent filter;
+
+    public PhaseInTriggeredAbility(Effect effect, FilterPermanent filter) {
+        this(effect, filter, false);
+    }
+
+    public PhaseInTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("When {this} phases in, ");
+        this.filter = filter;
+        setTriggerPhrase("Whenever " + filter.getMessage() + " phases in, ");
     }
 
     public PhaseInTriggeredAbility(final PhaseInTriggeredAbility ability) {
@@ -33,6 +42,7 @@ public class PhaseInTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return getSourceId().equals(event.getTargetId());
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && filter.match(permanent, getControllerId(), this, game);
     }
 }

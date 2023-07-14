@@ -2,7 +2,6 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
@@ -20,27 +19,20 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterPermanent filterTarget;
     private final FilterStackObject filterStack;
-    private final SetTargetPointer setTargetPointer;
 
     public BecomesTargetTriggeredAbility(Effect effect, FilterPermanent filterTarget) {
         this(effect, filterTarget, StaticFilters.FILTER_SPELL_OR_ABILITY_A);
     }
 
     public BecomesTargetTriggeredAbility(Effect effect, FilterPermanent filterTarget, FilterStackObject filterStack) {
-        this(effect, filterTarget, filterStack, SetTargetPointer.NONE);
+        this(effect, filterTarget, filterStack, false);
     }
 
     public BecomesTargetTriggeredAbility(Effect effect, FilterPermanent filterTarget, FilterStackObject filterStack,
-                                         SetTargetPointer setTargetPointer) {
-        this(effect, filterTarget, filterStack, setTargetPointer, false);
-    }
-
-    public BecomesTargetTriggeredAbility(Effect effect, FilterPermanent filterTarget, FilterStackObject filterStack,
-                                         SetTargetPointer setTargetPointer, boolean optional) {
+                                         boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filterTarget = filterTarget;
         this.filterStack = filterStack;
-        this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever " + filterTarget.getMessage() + " becomes the target of "
                                      + filterStack.getMessage() + ", ");
     }
@@ -49,7 +41,6 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
         this.filterTarget = ability.filterTarget;
         this.filterStack = ability.filterStack;
-        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -75,20 +66,7 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
 
-        switch (setTargetPointer) {
-            case PLAYER:
-                this.getEffects().stream()
-                        .forEach(effect -> effect.setTargetPointer(
-                                new FixedTarget(sourceObject.getControllerId(), game)
-                        ));
-                break;
-            case SPELL:
-                this.getEffects().stream()
-                        .forEach(effect -> effect.setTargetPointer(
-                                new FixedTarget(sourceObject.getId(), game)
-                        ));
-                break;
-        }
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
 
         return true;
     }
