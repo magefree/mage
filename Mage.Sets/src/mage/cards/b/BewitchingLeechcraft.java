@@ -62,7 +62,7 @@ public final class BewitchingLeechcraft extends CardImpl {
 
 class BewitchingLeechcraftReplacementEffect extends ReplacementEffectImpl {
 
-    public BewitchingLeechcraftReplacementEffect() {
+    BewitchingLeechcraftReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Detriment);
         staticText = "If this creature would untap during your untap step, " +
             "remove a +1/+1 counter from it instead. If you do, untap it.";
