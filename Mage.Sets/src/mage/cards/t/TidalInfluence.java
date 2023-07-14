@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 public final class TidalInfluence extends CardImpl {
 
-    private static final FilterPermanent filterName = new FilterPermanent("if no permanents named Tidal Influence are on the battlefield");
+    private static final FilterPermanent filterName = new FilterPermanent("no permanents named Tidal Influence are on the battlefield");
     private static final FilterCreaturePermanent filterBlue = new FilterCreaturePermanent("all blue creatures");
 
     static {
