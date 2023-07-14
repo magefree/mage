@@ -31,10 +31,7 @@ public final class GollumSchemingGuide extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever Gollum, Scheming Guide attacks, look at the top two cards of your library,
-        // put them back in any order, then choose land or nonland. An opponent guesses whether
-        // the top card of your library is the chosen kind. Reveal that card. If they guessed right,
-        // remove Gollum from combat. Otherwise, you draw a card and Gollum can't be blocked this turn.
+        // Whenever Gollum, Scheming Guide attacks, look at the top two cards of your library, put them back in any order, then choose land or nonland. An opponent guesses whether the top card of your library is the chosen kind. Reveal that card. If they guessed right, remove Gollum from combat. Otherwise, you draw a card and Gollum can't be blocked this turn.
         this.addAbility(new AttacksTriggeredAbility(new GollumSchemingGuideEffect()));
     }
 
