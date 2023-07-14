@@ -119,6 +119,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Gimli, Mournful Avenger", 209, Rarity.RARE, mage.cards.g.GimliMournfulAvenger.class));
         cards.add(new SetCardInfo("Glamdring", 239, Rarity.MYTHIC, mage.cards.g.Glamdring.class));
         cards.add(new SetCardInfo("Gloin, Dwarf Emissary", 132, Rarity.RARE, mage.cards.g.GloinDwarfEmissary.class));
+        cards.add(new SetCardInfo("Glorfindel, Dauntless Rescuer", 171, Rarity.UNCOMMON, mage.cards.g.GlorfindelDauntlessRescuer.class));
         cards.add(new SetCardInfo("Glorious Gale", 51, Rarity.COMMON, mage.cards.g.GloriousGale.class));
         cards.add(new SetCardInfo("Goblin Assailant", 295, Rarity.COMMON, mage.cards.g.GoblinAssailant.class));
         cards.add(new SetCardInfo("Goblin Fireleaper", 133, Rarity.UNCOMMON, mage.cards.g.GoblinFireleaper.class));
