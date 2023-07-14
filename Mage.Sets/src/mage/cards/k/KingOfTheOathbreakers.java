@@ -42,15 +42,13 @@ public final class KingOfTheOathbreakers extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever King of the Oathbreakers or another Spirit you control
-        // becomes the target of a spell, it phases out.
+        // Whenever King of the Oathbreakers or another Spirit you control becomes the target of a spell, it phases out.
         this.addAbility(new BecomesTargetTriggeredAbility(
             new PhaseOutTargetEffect("it"),
             filter, StaticFilters.FILTER_SPELL_A
         ));
 
-        // Whenever King of the Oathbreakers or another Spirit you control phases in,
-        // create a tapped 1/1 white Spirit creature token with flying.
+        // Whenever King of the Oathbreakers or another Spirit you control phases in, create a tapped 1/1 white Spirit creature token with flying.
         this.addAbility(new PhaseInTriggeredAbility(
             new CreateTokenEffect(new SpiritWhiteToken(), 1, true),
             filter
