@@ -45,9 +45,7 @@ public final class EomerMarshalOfRohan extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // Whenever one or more other attacking legendary creatures you control die,
-        // untap all creatures you control. After this phase, there is an additional combat phase.
-        // This ability triggers only once each turn.
+        // Whenever one or more other attacking legendary creatures you control die, untap all creatures you control. After this phase, there is an additional combat phase. This ability triggers only once each turn.
         Ability ability = new DiesCreatureTriggeredAbility(
             new UntapAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE), false, filter
         ).setTriggersOnceEachTurn(true);
