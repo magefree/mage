@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -14,6 +16,7 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.ManaPoolItem;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -49,7 +52,7 @@ public final class SharkeyTyrantOfTheShire extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SharkeyTyrantOfTheShireContinousEffect(filter)));
 
         // Mana of any type can be spent to activate Sharkey's abilities.
-        // TODO.
+        this.addAbility(new SimpleStaticAbility(new SharkeyTyrantOfTheShireAsThoughEffect()));
     }
 
     private SharkeyTyrantOfTheShire(final SharkeyTyrantOfTheShire card) {
@@ -95,7 +98,7 @@ class SharkeyTyrantOfTheShireReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
-        if (object instanceof Permanent && filter.match((Permanent)object, game)) {
+        if (object instanceof Permanent && filter.match((Permanent)object, source.getControllerId(), source, game)) {
             Optional<Ability> ability = object.getAbilities().get(event.getTargetId());
             if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
                 return true;
@@ -103,7 +106,6 @@ class SharkeyTyrantOfTheShireReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-
 }
 
 
@@ -135,21 +137,48 @@ class SharkeyTyrantOfTheShireContinousEffect extends ContinuousEffectImpl {
             return false;
         }
         for (Ability ability : game.getState()
-            .getBattlefield()
-            .getActivePermanents(filter, source.getControllerId(), source, game)
-            .stream()
-            .map(permanent -> permanent.getAbilities(game))
-            .flatMap(Collection::stream)
-            .filter(Objects::nonNull)
-            .filter(ability -> ability.getAbilityType() == AbilityType.ACTIVATED) // Mana abilities are separated in their own AbilityType.Mana
-            .collect(Collectors.toList())) {
-            // optimization to disallow the adding of duplicate
-            if(perm.getAbilities(game)
+                .getBattlefield()
+                .getActivePermanents(filter, source.getControllerId(), source, game)
                 .stream()
-                .noneMatch(ability.getClass()::isInstance)) {
-                perm.addAbility(ability, source.getSourceId(), game);
-            }
+                .map(permanent -> permanent.getAbilities(game))
+                .flatMap(Collection::stream)
+                .filter(Objects::nonNull)
+                .filter(ability -> ability.getAbilityType() == AbilityType.ACTIVATED) // Mana abilities are separated in their own AbilityType.Mana
+                .collect(Collectors.toList())) {
+            perm.addAbility(ability, source.getSourceId(), game);
         }
         return true;
+    }
+}
+
+class SharkeyTyrantOfTheShireAsThoughEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
+
+    SharkeyTyrantOfTheShireAsThoughEffect() {
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "Mana of any type can be spent to activate Sharkey's abilities";
+    }
+
+    private SharkeyTyrantOfTheShireAsThoughEffect(SharkeyTyrantOfTheShireAsThoughEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SharkeyTyrantOfTheShireAsThoughEffect copy() {
+        return new SharkeyTyrantOfTheShireAsThoughEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return objectId.equals(source.getSourceId());
+    }
+
+    @Override
+    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+        return mana.getFirstAvailable();
     }
 }
