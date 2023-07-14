@@ -80,7 +80,7 @@ class CaptivatingGlanceEffect extends OneShotEffect {
         if (controller != null
                 && captivatingGlance != null) {
             Permanent enchantedCreature = game.getPermanent(captivatingGlance.getAttachedTo());
-            clashResult = ClashEffect.getInstance().apply(game, source);
+            clashResult = new ClashEffect().apply(game, source);
             if (enchantedCreature != null) {
                 if (clashResult) {
                     ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, controller.getId());

@@ -2,7 +2,6 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -15,7 +14,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
-import java.io.ObjectStreamException;
 import java.util.UUID;
 
 /**
@@ -53,26 +51,20 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ClashEffect extends OneShotEffect implements MageSingleton {
+public class ClashEffect extends OneShotEffect {
 
-    private static final ClashEffect instance = new ClashEffect();
-
-    protected Object readResolve() throws ObjectStreamException {
-        return instance;
-    }
-
-    private ClashEffect() {
+    public ClashEffect() {
         super(Outcome.Benefit);
         this.staticText = "Clash with an opponent";
     }
 
-    public static ClashEffect getInstance() {
-        return instance;
+    protected ClashEffect(final ClashEffect effect) {
+        super(effect);
     }
 
     @Override
     public ClashEffect copy() {
-        return instance;
+        return new ClashEffect(this);
     }
 
     @Override
