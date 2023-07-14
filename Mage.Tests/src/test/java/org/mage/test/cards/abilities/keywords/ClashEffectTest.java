@@ -5,6 +5,9 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+/**
+ * @author xenohedron
+ */
 public class ClashEffectTest extends CardTestPlayerBase {
 
     /**
@@ -32,6 +35,7 @@ public class ClashEffectTest extends CardTestPlayerBase {
         removeAllCardsFromLibrary(playerB);
         addCard(Zone.LIBRARY, playerA, "Island", 4);
         addCard(Zone.LIBRARY, playerB, "Island", 4);
+        skipInitShuffling();
 
     }
 
