@@ -75,7 +75,7 @@ class SharkeyTyrantOfTheShireReplacementEffect extends ReplacementEffectImpl {
         staticText = "Activated abilities of lands your opponents control can't be activated unless they're mana abilities";
     }
 
-    public SharkeyTyrantOfTheShireReplacementEffect(final SharkeyTyrantOfTheShireReplacementEffect effect) {
+    private SharkeyTyrantOfTheShireReplacementEffect(final SharkeyTyrantOfTheShireReplacementEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
