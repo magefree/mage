@@ -20,7 +20,7 @@ public final class SoulFeast extends CardImpl {
 
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new GainLifeEffect(4));
+        this.getSpellAbility().addEffect(new GainLifeEffect(4).concatBy("and"));
     }
 
     private SoulFeast(final SoulFeast card) {
