@@ -40,8 +40,7 @@ public final class BewitchingLeechcraft extends CardImpl {
         // When Bewitching Leechcraft enters the battlefield, tap enchanted creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
 
-        // Enchanted creature has "If this creature would untap during your untap step,
-        // remove a +1/+1 counter from it instead. If you do, untap it."
+        // Enchanted creature has "If this creature would untap during your untap step, remove a +1/+1 counter from it instead. If you do, untap it."
         this.addAbility(new SimpleStaticAbility(
             new GainAbilityAttachedEffect(
                 new SimpleStaticAbility(new BewitchingLeechcraftReplacementEffect()),
