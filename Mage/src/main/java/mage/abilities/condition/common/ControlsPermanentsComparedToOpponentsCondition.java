@@ -40,12 +40,9 @@ public class ControlsPermanentsComparedToOpponentsCondition implements Condition
     @Override
     public String toString() {
         switch (type) {
-            case EQUAL_TO: return String.format("equal %s to each opponent", filterPermanent.getMessage());
-            case FEWER_THAN: return String.format("fewer %s than each opponent", filterPermanent.getMessage());
-            case MORE_THAN: return String.format("more %s than each opponent", filterPermanent.getMessage());
-            case OR_LESS: return String.format("fewer or equal %s than each opponent", filterPermanent.getMessage());
-            case OR_GREATER: return String.format("more or equal %s than each opponent", filterPermanent.getMessage());
-            default: throw new IllegalArgumentException("comparison rules for " + type + " missing");
+            case FEWER_THAN: return String.format("you control fewer %s than each opponent", filterPermanent.getMessage());
+            case MORE_THAN: return String.format("you control more %s than each opponent", filterPermanent.getMessage());
+            default: return "";
         }
     }
 

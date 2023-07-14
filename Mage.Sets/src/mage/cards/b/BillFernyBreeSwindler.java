@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BecomesBlockedAllTriggeredAbility;
+import mage.abilities.common.BecomesBlockedSourceTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -38,7 +38,7 @@ public final class BillFernyBreeSwindler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Bill Ferny, Bree Swindler becomes blocked, choose one --
-        Ability ability = new BecomesBlockedAllTriggeredAbility(
+        Ability ability = new BecomesBlockedSourceTriggeredAbility(
                 // * Create a Treasure token.
                 new CreateTokenEffect(new TreasureToken()), false
         );

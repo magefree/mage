@@ -32,7 +32,8 @@ public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl
     public CantBeBlockedByMoreThanOneSourceEffect(int amount, Duration duration) {
         super(duration, Outcome.Benefit);
         this.amount = amount;
-        staticText = "{this} can't be blocked by more than " + CardUtil.numberToText(amount) + " creature" + (amount > 1 ? "s" : "");
+        staticText = "{this} can't be blocked by more than " + CardUtil.numberToText(amount) + " creature" + (amount > 1 ? "s" : "")
+        + (duration == Duration.EndOfTurn ? " each combat this turn" : "");
     }
 
     public CantBeBlockedByMoreThanOneSourceEffect(final CantBeBlockedByMoreThanOneSourceEffect effect) {
@@ -49,10 +50,8 @@ public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent perm = game.getPermanent(source.getSourceId());
         if (perm != null) {
-            switch (layer) {
-                case RulesEffects:
-                    perm.setMaxBlockedBy(amount);
-                    break;
+            if (layer == Layer.RulesEffects) {
+                perm.setMaxBlockedBy(amount);
             }
             return true;
         }

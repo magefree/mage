@@ -42,7 +42,7 @@ public final class GlorfindelDauntlessRescuer extends CardImpl {
         Mode mode = new Mode(
             new BoostSourceEffect(1, 1, Duration.EndOfTurn).setText("")
         );
-        mode.addEffect(new CantBeBlockedByMoreThanOneSourceEffect());
+        mode.addEffect(new CantBeBlockedByMoreThanOneSourceEffect(1, Duration.EndOfTurn));
 
         ability.addMode(mode);
         ability.getModes().setChooseText("choose one and {this} gets +1/+1 until end of turn.");
