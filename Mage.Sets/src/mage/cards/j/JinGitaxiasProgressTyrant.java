@@ -47,12 +47,12 @@ public final class JinGitaxiasProgressTyrant extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new CopySourceSpellEffect().setText("copy that spell. You may choose new targets for the copy"),
                 filter, false, true
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
 
         // Whenever an opponent casts an artifact, instant, or sorcery spell, counter that spell. This ability triggers only once each turn.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 new JinGitaxiasProgressTyrantEffect(), filter, false
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
     }
 
     private JinGitaxiasProgressTyrant(final JinGitaxiasProgressTyrant card) {

@@ -29,7 +29,7 @@ public final class WhisperingWizard extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new CreateTokenEffect(new SpiritWhiteToken()),
                 StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
     }
 
     private WhisperingWizard(final WhisperingWizard card) {

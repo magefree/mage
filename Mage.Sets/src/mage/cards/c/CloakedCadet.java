@@ -50,7 +50,7 @@ class CloakedCadetTriggeredAbility extends TriggeredAbilityImpl {
 
     CloakedCadetTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
-        this.setTriggersOnce(true);
+        this.setTriggersOnceEachTurn(true);
         setTriggerPhrase("Whenever one or more +1/+1 counters are put on one or more Humans you control, ");
     }
 

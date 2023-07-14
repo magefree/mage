@@ -41,7 +41,7 @@ public final class GloinDwarfEmissary extends CardImpl {
         // Whenever you cast a historic spell, create a Treasure token. This ability triggers only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new CreateTokenEffect(new TreasureToken()), filter, false
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
 
         // {T}, Sacrifice a Treasure: Goad target creature.
         Ability ability = new SimpleActivatedAbility(new GoadTargetEffect(), new TapSourceCost());

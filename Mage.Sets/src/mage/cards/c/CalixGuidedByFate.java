@@ -56,7 +56,7 @@ public final class CalixGuidedByFate extends CardImpl {
         // Whenever Calix or an enchanted creature you control deals combat damage to a player, you may create a token that's a copy of a nonlegendary enchantment you control. Do this only once each turn.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new CalixGuidedByFateEffect(), filter, true, SetTargetPointer.NONE, true
-        ).setDoOnlyOnce(true));
+        ).setDoOnlyOnceEachTurn(true));
     }
 
     private CalixGuidedByFate(final CalixGuidedByFate card) {

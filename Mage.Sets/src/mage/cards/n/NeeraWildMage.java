@@ -41,7 +41,7 @@ public final class NeeraWildMage extends CardImpl {
         // Then put the rest on the bottom of your library in a random order.
         // This ability triggers only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(new NeeraWildMageEffect(), StaticFilters.FILTER_SPELL_A,
-                true, true).setTriggersOnce(true));
+                true, true).setTriggersOnceEachTurn(true));
     }
 
     private NeeraWildMage(final NeeraWildMage card) {

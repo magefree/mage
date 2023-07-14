@@ -54,7 +54,7 @@ public final class ForgeNeverwinterCharlatan extends CardImpl {
         this.addAbility(new SacrificeAllTriggeredAbility(
                 new CreateTokenEffect(new TreasureToken(), 1, true),
                 StaticFilters.FILTER_PERMANENT_CREATURE, TargetController.ANY, false
-        ).setTriggersOnce(true).setTriggerPhrase("Whenever one or more players sacrifice one or more creatures, "));
+        ).setTriggersOnceEachTurn(true).setTriggerPhrase("Whenever one or more players sacrifice one or more creatures, "));
     }
 
     private ForgeNeverwinterCharlatan(final ForgeNeverwinterCharlatan card) {
