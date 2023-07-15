@@ -19,8 +19,8 @@ public interface CompanionCondition extends Serializable {
 
     /**
      * @param deck         The set of cards to check.
-     * @param startingHandSize
+     * @param minimumDeckSize
      * @return Whether the companion is valid for that deck.
      */
-    boolean isLegal(Set<Card> deck, int startingHandSize);
+    boolean isLegal(Set<Card> deck, int minimumDeckSize);
 }

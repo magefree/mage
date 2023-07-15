@@ -72,8 +72,8 @@ enum YorionSkyNomadCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingHandSize) {
-        return deck.size() >= startingHandSize + 20;
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
+        return deck.size() >= minimumDeckSize + 20;
     }
 }
 

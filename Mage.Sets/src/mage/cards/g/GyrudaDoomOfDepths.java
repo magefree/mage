@@ -59,7 +59,7 @@ enum GyrudaDoomOfDepthsCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingHandSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         return deck
                 .stream()
                 .mapToInt(MageObject::getManaValue)
