@@ -25,7 +25,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
         setTriggerPhrase("Whenever {this} deals combat damage to a player, ");
     }
 
-    public DealsCombatDamageToAPlayerTriggeredAbility(final DealsCombatDamageToAPlayerTriggeredAbility ability) {
+    protected DealsCombatDamageToAPlayerTriggeredAbility(final DealsCombatDamageToAPlayerTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }

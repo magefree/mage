@@ -19,7 +19,7 @@ public class DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility extends Tr
     }
 
 
-    public DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(final DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility ability) {
+    protected DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(final DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility ability) {
         super(ability);
     }
 

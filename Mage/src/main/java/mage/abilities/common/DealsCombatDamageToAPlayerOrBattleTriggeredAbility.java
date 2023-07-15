@@ -19,7 +19,7 @@ public class DealsCombatDamageToAPlayerOrBattleTriggeredAbility extends Triggere
     }
 
 
-    public DealsCombatDamageToAPlayerOrBattleTriggeredAbility(final DealsCombatDamageToAPlayerOrBattleTriggeredAbility ability) {
+    protected DealsCombatDamageToAPlayerOrBattleTriggeredAbility(final DealsCombatDamageToAPlayerOrBattleTriggeredAbility ability) {
         super(ability);
     }
 
