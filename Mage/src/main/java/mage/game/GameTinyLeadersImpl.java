@@ -17,7 +17,6 @@ import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.CommanderInfoWatcher;
-import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,7 +32,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
     protected boolean startingPlayerSkipsDraw = true;
 
     public GameTinyLeadersImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 50);
+        super(attackOption, range, mulligan, startLife, 50, 7);
     }
 
     public GameTinyLeadersImpl(final GameTinyLeadersImpl game) {

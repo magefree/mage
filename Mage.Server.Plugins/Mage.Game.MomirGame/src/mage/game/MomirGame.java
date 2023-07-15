@@ -1,7 +1,6 @@
 
 package mage.game;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
@@ -17,6 +16,8 @@ import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author nigelzor
@@ -26,7 +27,7 @@ public class MomirGame extends GameImpl {
     private int numPlayers;
 
     public MomirGame(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 60);
+        super(attackOption, range, mulligan, startLife, 60, 7);
     }
 
     public MomirGame(final MomirGame game) {

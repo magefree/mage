@@ -32,7 +32,7 @@ public abstract class GameCommanderImpl extends GameImpl {
     protected boolean startingPlayerSkipsDraw = true;
 
     public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int minimumDeckSize) {
-        super(attackOption, range, mulligan, startingLife, minimumDeckSize);
+        super(attackOption, range, mulligan, startingLife, minimumDeckSize, 7);
     }
 
     public GameCommanderImpl(final GameCommanderImpl game) {
