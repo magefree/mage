@@ -99,6 +99,11 @@ public class GameEvent implements Serializable {
         DISCARDED_CARD,
         DISCARDED_CARDS,
         CYCLE_CARD, CYCLED_CARD, CYCLE_DRAW,
+        /* CLASHED (one event fired for each player involved)
+         playerId    the id of the clashing player
+         flag        true = playerId won the clash
+         targetId    the id of the other player in the clash
+         */
         CLASH, CLASHED,
         DAMAGE_PLAYER,
         MILL_CARDS,
@@ -107,9 +112,9 @@ public class GameEvent implements Serializable {
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage
-         playerId    the id of the damged player
+         playerId    the id of the damaged player
          amount      amount of damage
-         flag        true = comabat damage - other damage = false
+         flag        true = combat damage - other damage = false
          */
         DAMAGED_PLAYER,
 
@@ -121,7 +126,7 @@ public class GameEvent implements Serializable {
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage, can be null for default events like combat
-         playerId    the id of the damged player
+         playerId    the id of the damaged player
          amount      amount of damage
          flag        is it combat damage
          */
@@ -134,7 +139,7 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the ability which caused the lose
          playerId    the id of the player loosing life
          amount      amount of life loss
-         flag        true = from comabat damage - other from non combat damage
+         flag        true = from combat damage - other from non combat damage
          */
         PLAY_LAND, LAND_PLAYED,
         CREATURE_CHAMPIONED,
@@ -333,7 +338,7 @@ public class GameEvent implements Serializable {
         TAP,
         /* TAPPED,
          targetId    tapped permanent
-         sourceId    id of the abilitity's source (can be null for standard tap actions like combat)
+         sourceId    id of the ability's source (can be null for standard tap actions like combat)
          playerId    controller of the tapped permanent
          amount      not used for this event
          flag        is it tapped for combat
@@ -441,7 +446,7 @@ public class GameEvent implements Serializable {
         /* LOST_CONTROL
          targetId    id of the creature that lost control
          sourceId    null
-         playerId    player that controlles the creature before
+         playerId    player that controls the creature before
          amount      not used for this event
          flag        not used for this event
          */

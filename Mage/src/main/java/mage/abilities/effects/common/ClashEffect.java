@@ -2,8 +2,6 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -13,11 +11,10 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
-import java.io.ObjectStreamException;
+import java.util.UUID;
 
 /**
  * 1. The controller of the spell or ability chooses an opponent. (This doesn't
@@ -54,24 +51,14 @@ import java.io.ObjectStreamException;
  *
  * @author LevelX2
  */
-public class ClashEffect extends OneShotEffect implements MageSingleton {
+public class ClashEffect extends OneShotEffect {
 
-    private static final ClashEffect instance = new ClashEffect();
-
-    private Object readResolve() throws ObjectStreamException {
-        return instance;
-    }
-
-    private ClashEffect() {
+    public ClashEffect() {
         super(Outcome.Benefit);
         this.staticText = "Clash with an opponent";
     }
 
-    public static ClashEffect getInstance() {
-        return instance;
-    }
-
-    public ClashEffect(final ClashEffect effect) {
+    protected ClashEffect(final ClashEffect effect) {
         super(effect);
     }
 
@@ -94,7 +81,6 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
         // choose opponent
         Target target = new TargetOpponent(true);
         target.setTargetName("an opponent to clash with");
-        target.setNotTarget(true);
         if (!controller.choose(Outcome.Benefit, target, source, game)) {
             return false;
         }
@@ -133,32 +119,26 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
             message.append(" no card");
         }
         message.append(" - ");
-        if (!game.isSimulation()) {
-            if (cmcController > cmcOpponent) {
-                message.append(controller.getLogName()).append(" won the clash");
-                game.informPlayer(controller, "You won the clash!");
-            } else if (cmcController < cmcOpponent) {
-                message.append(opponent.getLogName()).append(" won the clash");
-                game.informPlayer(controller, opponent.getName() + " won the clash!");
-            } else {
-                message.append(" no winner ");
-            }
-            game.informPlayers(message.toString());
+        if (cmcController > cmcOpponent) {
+            message.append(controller.getLogName()).append(" won the clash");
+        } else if (cmcController < cmcOpponent) {
+            message.append(opponent.getLogName()).append(" won the clash");
+        } else {
+            message.append(" no winner ");
         }
-        // decide to put the cards on top or on the buttom of library in turn order beginning with the active player in turn order
-        PlayerList playerList = game.getPlayerList().copy();
-        playerList.setCurrent(game.getActivePlayerId());
-        Player nextPlayer;
-        do {
-            Player current = playerList.getCurrent(game);
-            if (cardController != null && current.getId().equals(controller.getId())) {
-                topController = current.chooseUse(Outcome.Detriment, "Put " + cardController.getLogName() + " back on top of your library? (otherwise it goes to bottom)", source, game);
+        game.informPlayers(message.toString());
+        // decide to put the cards on top or on the bottom of library in turn order beginning with the active player in turn order
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
             }
-            if (cardOpponent != null && current.getId().equals(opponent.getId())) {
-                topOpponent = current.chooseUse(Outcome.Detriment, "Put " + cardOpponent.getLogName() + " back on top of your library? (otherwise it goes to bottom)", source, game);
+            if (cardController != null && player.getId().equals(controller.getId())) {
+                topController = player.chooseUse(Outcome.Detriment, "Put " + cardController.getLogName() + " back on top of your library? (otherwise it goes to bottom)", source, game);
+            } else if (cardOpponent != null && player.getId().equals(opponent.getId())) {
+                topOpponent = player.chooseUse(Outcome.Detriment, "Put " + cardOpponent.getLogName() + " back on top of your library? (otherwise it goes to bottom)", source, game);
             }
-            nextPlayer = playerList.getNext(game, false);
-        } while (nextPlayer != null && !nextPlayer.getId().equals(game.getActivePlayerId()));
+        }
         // put the cards back to library
         if (cardController != null) {
             controller.moveCardToLibraryWithInfo(cardController, source, game, Zone.LIBRARY, topController, true);
@@ -166,14 +146,14 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
         if (cardOpponent != null) {
             opponent.moveCardToLibraryWithInfo(cardOpponent, source, game, Zone.LIBRARY, topOpponent, true);
         }
-        // fire CLASHED event with info about who won
-        game.fireEvent(new GameEvent(
-                GameEvent.EventType.CLASHED, controller.getId(), source,
-                opponent.getId(), 0, cmcController > cmcOpponent
-        ));
+        // fire CLASHED events with info about winner (flag is true if playerId won; other player is targetId)
         game.fireEvent(new GameEvent(
                 GameEvent.EventType.CLASHED, opponent.getId(), source,
-                controller.getId(), 0, cmcOpponent > cmcController
+                controller.getId(), 0, cmcController > cmcOpponent
+        ));
+        game.fireEvent(new GameEvent(
+                GameEvent.EventType.CLASHED, controller.getId(), source,
+                opponent.getId(), 0, cmcOpponent > cmcController
         ));
 
         // set opponent to DoIfClashWonEffect
