@@ -39,7 +39,7 @@ public final class DramaticFinale extends CardImpl {
         // Whenever one or more nontoken creatures you control die, create a 2/1 white and black Inkling creature token with flying. This ability triggers only once each turn.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new CreateTokenEffect(new InklingToken()), false, filter
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
     }
 
     private DramaticFinale(final DramaticFinale card) {

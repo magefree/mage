@@ -24,8 +24,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     protected boolean optional;
     protected boolean leavesTheBattlefieldTrigger;
-    private boolean triggersOnce = false;
-    private boolean doOnlyOnce = false;
+    private boolean triggersOnceEachTurn = false;
+    private boolean doOnlyOnceEachTurn = false;
     private GameEvent triggerEvent = null;
     private String triggerPhrase = null; // TODO: This should be change to final and all constructers to set a value
 
@@ -52,8 +52,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         super(ability);
         this.optional = ability.optional;
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
-        this.triggersOnce = ability.triggersOnce;
-        this.doOnlyOnce = ability.doOnlyOnce;
+        this.triggersOnceEachTurn = ability.triggersOnceEachTurn;
+        this.doOnlyOnceEachTurn = ability.doOnlyOnceEachTurn;
         this.triggerEvent = ability.triggerEvent;
         this.triggerPhrase = ability.triggerPhrase;
     }
@@ -68,7 +68,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     private final void setLastTrigger(Game game) {
-        if (!triggersOnce) {
+        if (!triggersOnceEachTurn) {
             return;
         }
         game.getState().setValue(CardUtil.getCardZoneString(
@@ -94,7 +94,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public boolean checkTriggeredAlready(Game game) {
-        if (!triggersOnce) {
+        if (!triggersOnceEachTurn) {
             return true;
         }
         Integer lastTurnTriggered = (Integer) game.getState().getValue(
@@ -103,14 +103,14 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return lastTurnTriggered == null || lastTurnTriggered != game.getTurnNum();
     }
 
-    public TriggeredAbility setTriggersOnce(boolean triggersOnce) {
-        this.triggersOnce = triggersOnce;
+    public TriggeredAbility setTriggersOnceEachTurn(boolean triggersOnce) {
+        this.triggersOnceEachTurn = triggersOnce;
         return this;
     }
 
     @Override
     public boolean checkUsedAlready(Game game) {
-        if (!doOnlyOnce) {
+        if (!doOnlyOnceEachTurn) {
             return false;
         }
         Integer lastTurnUsed = (Integer) game.getState().getValue(
@@ -119,9 +119,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return lastTurnUsed != null && lastTurnUsed == game.getTurnNum();
     }
 
-    public TriggeredAbility setDoOnlyOnce(boolean doOnlyOnce) {
+    public TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce) {
         this.optional = true;
-        this.doOnlyOnce = doOnlyOnce;
+        this.doOnlyOnceEachTurn = doOnlyOnce;
         return this;
     }
 
@@ -139,7 +139,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             MageObject object = game.getObject(getSourceId());
             Player player = game.getPlayer(this.getControllerId());
             if (player == null || object == null
-                    || (doOnlyOnce && checkUsedAlready(game))
+                    || (doOnlyOnceEachTurn && checkUsedAlready(game))
                     || !player.chooseUse(
                     getEffects().getOutcome(this),
                     this.getRule(object.getLogName()), this, game
@@ -151,7 +151,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         if (!super.resolve(game)) {
             return false;
         }
-        if (doOnlyOnce) {
+        if (doOnlyOnceEachTurn) {
             game.getState().setValue(CardUtil.getCardZoneString(
                     "lastTurnUsed" + originalId, sourceId, game
             ), game.getTurnNum());
@@ -239,10 +239,10 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
             }
             sb.append(superRule);
-            if (triggersOnce) {
+            if (triggersOnceEachTurn) {
                 sb.append(" This ability triggers only once each turn.");
             }
-            if (doOnlyOnce) {
+            if (doOnlyOnceEachTurn) {
                 sb.append(" Do this only once each turn.");
             }
         }

@@ -33,7 +33,7 @@ public final class ThopterShop extends CardImpl {
         // Whenever one or more artifact creatures you control die, draw a card. This ability triggers only once each turn.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), false, filter
-        ).setTriggersOnce(true).setTriggerPhrase("Whenever one or more artifact creatures you control die, "));
+        ).setTriggersOnceEachTurn(true).setTriggerPhrase("Whenever one or more artifact creatures you control die, "));
 
         // {2}{W}, {T}: Create a 1/1 colorless Thopter artifact creature token with flying.
         Ability ability = new SimpleActivatedAbility(

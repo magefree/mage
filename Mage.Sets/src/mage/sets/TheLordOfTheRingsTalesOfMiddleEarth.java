@@ -78,6 +78,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Ent-Draught Basin", 238, Rarity.UNCOMMON, mage.cards.e.EntDraughtBasin.class));
         cards.add(new SetCardInfo("Entish Restoration", 163, Rarity.UNCOMMON, mage.cards.e.EntishRestoration.class));
         cards.add(new SetCardInfo("Eomer of the Riddermark", 121, Rarity.UNCOMMON, mage.cards.e.EomerOfTheRiddermark.class));
+        cards.add(new SetCardInfo("Eomer, Marshal of Rohan", 120, Rarity.RARE, mage.cards.e.EomerMarshalOfRohan.class));
         cards.add(new SetCardInfo("Eowyn, Fearless Knight", 201, Rarity.RARE, mage.cards.e.EowynFearlessKnight.class));
         cards.add(new SetCardInfo("Eowyn, Lady of Rohan", 10, Rarity.UNCOMMON, mage.cards.e.EowynLadyOfRohan.class));
         cards.add(new SetCardInfo("Erebor Flamesmith", 122, Rarity.COMMON, mage.cards.e.EreborFlamesmith.class));

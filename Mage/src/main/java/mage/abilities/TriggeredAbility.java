@@ -41,7 +41,7 @@ public interface TriggeredAbility extends Ability {
 
     boolean checkUsedAlready(Game game);
 
-    TriggeredAbility setTriggersOnce(boolean triggersOnce);
+    TriggeredAbility setTriggersOnceEachTurn(boolean triggersOnce);
 
     boolean checkInterveningIfClause(Game game);
 
