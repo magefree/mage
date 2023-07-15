@@ -4207,7 +4207,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
-    protected void addVariableXOptions(List<Ability> options, Ability option, int targetNum,  Game game) {
+    protected void addVariableXOptions(List<Ability> options, Ability option, int targetNum, Game game) {
         addTargetOptions(options, option, targetNum, game);
     }
 
