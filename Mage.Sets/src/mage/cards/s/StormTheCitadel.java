@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -37,9 +37,8 @@ public final class StormTheCitadel extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
 
         // Until end of turn, creatures you control get +2/+2 and gain "Whenever this creature deals combat damage to a creature or planeswalker, destroy target artifact or enchantment defending player controls."
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DestroyTargetEffect(), false
-        ).setOrPlaneswalker(true);
+        Ability ability = new DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(
+                new DestroyTargetEffect(), false);
         ability.addTarget(new TargetPermanent(filter));
 
         this.getSpellAbility().addEffect(new BoostControlledEffect(
