@@ -176,10 +176,13 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
             for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
                 i++;
                 if (i > 1) {
+                    if (manaSymbols.size() > 2) {
+                        sb.append(",");
+                    }
                     if (i == manaSymbols.size()) {
-                        sb.append(", and/or ");
+                        sb.append(" and/or ");
                     } else {
-                        sb.append(", ");
+                        sb.append(" ");
                     }
 
                 }

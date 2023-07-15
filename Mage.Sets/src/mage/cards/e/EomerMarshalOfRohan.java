@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 
@@ -24,8 +24,8 @@ import java.util.UUID;
  */
 public final class EomerMarshalOfRohan extends CardImpl {
 
-    private static final FilterCreaturePermanent filter
-        = new FilterCreaturePermanent("one or more other attacking legendary creatures");
+    private static final FilterControlledCreaturePermanent filter
+        = new FilterControlledCreaturePermanent("one or more other attacking legendary creatures you control");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -47,7 +47,7 @@ public final class EomerMarshalOfRohan extends CardImpl {
 
         // Whenever one or more other attacking legendary creatures you control die, untap all creatures you control. After this phase, there is an additional combat phase. This ability triggers only once each turn.
         Ability ability = new DiesCreatureTriggeredAbility(
-            new UntapAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE), false, filter
+            new UntapAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES), false, filter
         ).setTriggersOnceEachTurn(true);
         ability.addEffect(new AdditionalCombatPhaseEffect());
         this.addAbility(ability);
