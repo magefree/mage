@@ -38,7 +38,7 @@ public final class AutumnsVeil extends CardImpl {
         this.getSpellAbility().addEffect(new CantBeCounteredControlledEffect(filterTarget1, filterSource, Duration.EndOfTurn));
 
         // and creatures you control can't be the targets of blue or black spells this turn.
-        this.getSpellAbility().addEffect(new CantBeTargetedAllEffect(filterTarget2, filterSource, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new CantBeTargetedAllEffect(filterTarget2, filterSource, Duration.EndOfTurn).concatBy(", and"));
     }
 
     private AutumnsVeil(final AutumnsVeil card) {
@@ -51,4 +51,3 @@ public final class AutumnsVeil extends CardImpl {
     }
 
 }
-

@@ -22,7 +22,7 @@ public class ChangeATargetOfTargetSpellAbilityToSourceEffect extends OneShotEffe
 
     public ChangeATargetOfTargetSpellAbilityToSourceEffect() {
         super(Outcome.Neutral);
-        staticText = "Change a target of target spell or ability to {this}";
+        staticText = "change a target of target spell or ability to {this}";
     }
 
     public ChangeATargetOfTargetSpellAbilityToSourceEffect(final ChangeATargetOfTargetSpellAbilityToSourceEffect effect) {

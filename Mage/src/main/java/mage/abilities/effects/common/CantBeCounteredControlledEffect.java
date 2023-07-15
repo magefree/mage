@@ -82,6 +82,9 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
         if (filterSource != null) {
             sb.append(" by ").append(filterSource.getMessage());
         }
+        if (duration == Duration.EndOfTurn) {
+            sb.append(" this turn");
+        }
         staticText = sb.toString();
     }
 
