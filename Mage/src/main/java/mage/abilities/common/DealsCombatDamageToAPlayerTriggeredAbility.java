@@ -18,7 +18,6 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     protected String text;
     protected boolean onlyOpponents;
     private boolean orPlaneswalker = false;
-    private boolean orBattle = false;
 
     public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
@@ -46,16 +45,10 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
         this.setTargetPointer = ability.setTargetPointer;
         this.onlyOpponents = ability.onlyOpponents;
         this.orPlaneswalker = ability.orPlaneswalker;
-        this.orBattle = ability.orBattle;
     }
 
     public DealsCombatDamageToAPlayerTriggeredAbility setOrPlaneswalker(boolean orPlaneswalker) {
         this.orPlaneswalker = orPlaneswalker;
-        return this;
-    }
-
-    public DealsCombatDamageToAPlayerTriggeredAbility setOrBattle(boolean orBattle) {
-        this.orBattle = orBattle;
         return this;
     }
 
@@ -85,8 +78,7 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
             case DAMAGED_PERMANENT:
                 Permanent permanent = game.getPermanent(event.getTargetId());
                 if (permanent == null
-                        || (!orPlaneswalker || !permanent.isPlaneswalker(game))
-                        && (!orBattle || !permanent.isBattle(game))) {
+                        || (!orPlaneswalker || !permanent.isPlaneswalker(game))) {
                     return false;
                 }
         }
@@ -111,7 +103,6 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
         return "Whenever {this} deals combat damage to "
                 + (onlyOpponents ? "an opponent" : "a player")
                 + (orPlaneswalker ? " or planeswalker" : "")
-                + (orBattle ? " or battle" : "")
                 + ", ";
     }
 }
