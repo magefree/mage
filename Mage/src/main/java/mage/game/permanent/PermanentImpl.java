@@ -979,7 +979,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
      */
     private int doDamage(int damageAmount, UUID attackerId, Ability source, Game game, boolean preventable, boolean combat, boolean markDamage, List<UUID> appliedEffects) {
         int damageDone = 0;
-        if (damageAmount < 1 || !canDamage(game.getObject(attackerId), game)) {
+        if (damageAmount < 1) {
             return 0;
         }
         DamageEvent event = new DamagePermanentEvent(objectId, attackerId, controllerId, damageAmount, preventable, combat);
@@ -1310,13 +1310,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
         }
         return game.getContinuousEffects().preventedByRuleModification(new StayAttachedEvent(this.getId(), attachment.getId(), source), null, game, silentMode);
-    }
-
-    protected boolean canDamage(MageObject source, Game game) {
-        //noxx: having protection doesn't prevents from dealing damage
-        // instead it adds damage prevention
-        //return (!hasProtectionFrom(source, game));
-        return true;
     }
 
     @Override
