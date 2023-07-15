@@ -722,7 +722,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public Cards discard(int amount, boolean random, boolean payForCost, Ability source, Game game) {
         if (random) {
-            return discard(getRandomToDiscard(amount, game), payForCost, source, game);
+            return discard(getRandomToDiscard(amount, source, game), payForCost, source, game);
         }
         return discard(amount, amount, payForCost, source, game);
     }
@@ -772,7 +772,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return toDiscard;
     }
 
-    private Cards getRandomToDiscard(int amount, Game game) {
+    private Cards getRandomToDiscard(int amount, Ability source, Game game) {
         Cards toDiscard = new CardsImpl();
         Cards theHand = getHand().copy();
         for (int i = 0; i < amount; i++) {
@@ -3420,7 +3420,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param game
      * @return
      */
-    protected boolean canPlay(ActivatedAbility ability, ManaOptions availableMana, Game game) {
+    protected boolean canPlay(ActivatedAbility ability, ManaOptions availableMana, MageObject sourceObject, Game game) {
         if (!(ability instanceof ActivatedManaAbilityImpl)) {
             ActivatedAbility copy = ability.copy(); // Copy is needed because cost reduction effects modify e.g. the mana to activate/cast the ability
             if (!copy.canActivate(playerId, game).canActivate()) {
@@ -3726,7 +3726,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return findActivatedAbilityFromAlternativeSourceCost(object, manaFull, ability, game);
         } else if (ability instanceof ActivatedAbility) {
             // all other activated ability
-            if (canPlay((ActivatedAbility) ability, manaFull, game)) {
+            if (canPlay((ActivatedAbility) ability, manaFull, object, game)) {
                 return (ActivatedAbility) ability;
             }
         }
@@ -3757,7 +3757,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     || (null != game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST_AS_INSTANT, playAbility, this.getId(), game)))) {
                 canUse = canPlayCardByAlternateCost((Card) object, availableMana, playAbility, game);
             } else {
-                canUse = canPlay(playAbility, availableMana, game); // canPlay already checks alternative source costs and all conditions
+                canUse = canPlay(playAbility, availableMana, object, game); // canPlay already checks alternative source costs and all conditions
             }
 
             if (canUse) {
@@ -4175,7 +4175,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         } else if (!ability.getTargets().getUnchosen().isEmpty()) {
             // TODO: Handle other variable costs than mana costs
             if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
-                addVariableXOptions(options, ability, game);
+                addVariableXOptions(options, ability, 0, game);
             } else {
                 addTargetOptions(options, ability, 0, game);
             }
@@ -4195,7 +4195,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             newOption.getModes().setActiveMode(mode);
             if (!newOption.getTargets().getUnchosen().isEmpty()) {
                 if (!newOption.getManaCosts().getVariableCosts().isEmpty()) {
-                    addVariableXOptions(options, newOption, game);
+                    addVariableXOptions(options, newOption, 0, game);
                 } else {
                     addTargetOptions(options, newOption, 0, game);
                 }
@@ -4207,8 +4207,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
-    protected void addVariableXOptions(List<Ability> options, Ability option, Game game) {
-        addTargetOptions(options, option, 0, game);
+    protected void addVariableXOptions(List<Ability> options, Ability option, int targetNum,  Game game) {
+        addTargetOptions(options, option, targetNum, game);
     }
 
     protected void addTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {

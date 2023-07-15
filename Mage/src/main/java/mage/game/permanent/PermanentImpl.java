@@ -145,7 +145,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.deathtouched = permanent.deathtouched;
         this.markedLifelink = permanent.markedLifelink;
 
-        this.connectedCards.putAll(permanent.connectedCards);
+        for (Map.Entry<String, List<UUID>> entry : permanent.connectedCards.entrySet()) {
+            this.connectedCards.put(entry.getKey(), new ArrayList<>(entry.getValue()));
+        }
         if (permanent.dealtDamageByThisTurn != null) {
             dealtDamageByThisTurn = new HashSet<>(permanent.dealtDamageByThisTurn);
         }
@@ -663,9 +665,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (!phasedIn && !replaceEvent(EventType.PHASE_IN, game) && (!onlyDirect || !indirectPhase)) {
             this.phasedIn = true;
             this.indirectPhase = false;
-            if (!game.isSimulation()) {
-                game.informPlayers(getLogName() + " phased in");
-            }
+            game.informPlayers(getLogName() + " phased in");
             for (UUID attachedId : this.getAttachments()) {
                 Permanent attachedPerm = game.getPermanent(attachedId);
                 if (attachedPerm != null) {
@@ -695,9 +695,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             this.removeFromCombat(game);
             this.phasedIn = false;
             this.indirectPhase = indirectPhase;
-            if (!game.isSimulation()) {
-                game.informPlayers(getLogName() + " phased out");
-            }
+            game.informPlayers(getLogName() + " phased out");
             fireEvent(EventType.PHASED_OUT, game);
             return true;
         }
@@ -1312,19 +1310,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             // this means destroy was successful, if object movement to graveyard will be replaced (e.g. commander to command zone) it's still
             // handled as successful destroying (but not as successful "dies this way" for destroying).
             if (moveToZone(Zone.GRAVEYARD, source, game, false)) {
-                if (!game.isSimulation()) {
-                    String logName;
-                    Card card = game.getCard(this.getId());
-                    if (card != null) {
-                        logName = card.getLogName();
-                    } else {
-                        logName = this.getLogName();
-                    }
-                    if (this.isCreature(game)) {
-                        game.informPlayers(logName + " died" + CardUtil.getSourceLogName(game, " by ", source, "", ""));
-                    } else {
-                        game.informPlayers(logName + " was destroyed" + CardUtil.getSourceLogName(game, " by ", source, "", ""));
-                    }
+                String logName;
+                Card card = game.getCard(this.getId());
+                if (card != null) {
+                    logName = card.getLogName();
+                } else {
+                    logName = this.getLogName();
+                }
+                if (this.isCreature(game)) {
+                    game.informPlayers(logName + " died" + CardUtil.getSourceLogName(game, " by ", source, "", ""));
+                } else {
+                    game.informPlayers(logName + " was destroyed" + CardUtil.getSourceLogName(game, " by ", source, "", ""));
                 }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DESTROYED_PERMANENT, objectId, source, controllerId));
             }
@@ -1341,7 +1337,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             // so the return value of the moveToZone is not taken into account here
             moveToZone(Zone.GRAVEYARD, source, game, false);
             Player player = game.getPlayer(getControllerId());
-            if (player != null && !game.isSimulation()) {
+            if (player != null) {
                 game.informPlayers(player.getLogName() + " sacrificed " + this.getLogName() + CardUtil.getSourceLogName(game, source));
             }
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.SACRIFICED_PERMANENT, objectId, source, controllerId));
