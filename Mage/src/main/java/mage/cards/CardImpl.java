@@ -54,10 +54,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean morphCard;
     protected List<UUID> attachments = new ArrayList<>();
 
-    public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
+    protected CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
         this(ownerId, setInfo, cardTypes, costs, SpellAbilityType.BASE);
     }
-    public CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs, SpellAbilityType spellAbilityType) {
+    protected CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs, SpellAbilityType spellAbilityType) {
         this(ownerId, setInfo.getName());
 
         this.rarity = setInfo.getRarity();
@@ -113,7 +113,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.name = name;
     }
 
-    public CardImpl(final CardImpl card) {
+    protected CardImpl(final CardImpl card) {
         super(card);
         ownerId = card.ownerId;
         rarity = card.rarity;
@@ -729,10 +729,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters) {
-        if (this instanceof Permanent) {
-            if (!((Permanent) this).isPhasedIn()) {
-                return false;
-            }
+        if (this instanceof Permanent && !((Permanent) this).isPhasedIn()) {
+            return false;
         }
 
         boolean returnCode = true;
