@@ -40,7 +40,7 @@ public final class UglukOfTheWhiteHand extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(
             new UglukOfTheWhiteHandEffect(),
             false,
-            StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
+            StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL,
             true
         ));
     }
@@ -58,7 +58,7 @@ public final class UglukOfTheWhiteHand extends CardImpl {
 
 class UglukOfTheWhiteHandEffect extends OneShotEffect {
 
-    private static FilterPermanent filterOrcOrGoblin = new FilterCreaturePermanent();
+    private static final FilterPermanent filterOrcOrGoblin = new FilterCreaturePermanent();
 
     static {
         filterOrcOrGoblin.add(

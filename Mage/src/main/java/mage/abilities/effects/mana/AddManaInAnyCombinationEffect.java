@@ -134,12 +134,9 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
         int manaAmount = amount.calculate(game, source, this);
         List<Integer> manaList = player.getMultiAmount(this.outcome, manaStrings, manaAmount, manaAmount, MultiAmountType.MANA, game);
 
-        // Covert choices to mana
+        // Convert choices to mana
         for (int i = 0; i < size; i++) {
-            ColoredManaSymbol coloredManaSymbol = manaSymbols.get(i);
-            int amount = manaList.get(i);
-
-            mana.add(new Mana(coloredManaSymbol, amount));
+            mana.add(new Mana(manaSymbols.get(i), manaList.get(i)));
         }
         return mana;
     }
@@ -180,7 +177,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
                 i++;
                 if (i > 1) {
                     if (i == manaSymbols.size()) {
-                        sb.append(" and/or ");
+                        sb.append(", and/or ");
                     } else {
                         sb.append(", ");
                     }
