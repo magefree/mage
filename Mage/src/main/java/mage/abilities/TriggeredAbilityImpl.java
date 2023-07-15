@@ -29,11 +29,11 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     private GameEvent triggerEvent = null;
     private String triggerPhrase = null; // TODO: This should be change to final and all constructers to set a value
 
-    public TriggeredAbilityImpl(Zone zone, Effect effect) {
+    protected TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
     }
 
-    public TriggeredAbilityImpl(Zone zone, Effect effect, boolean optional) {
+    protected TriggeredAbilityImpl(Zone zone, Effect effect, boolean optional) {
         super(AbilityType.TRIGGERED, zone);
         setLeavesTheBattlefieldTrigger(false);
         if (effect != null) {
@@ -42,14 +42,13 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         this.optional = optional;
 
         // verify check: DoIfCostPaid effect already asks about action (optional), so no needs to ask it again in triggered ability
-        if (effect instanceof DoIfCostPaid) {
-            if (this.optional && ((DoIfCostPaid) effect).isOptional()) {
+        if (effect instanceof DoIfCostPaid && (this.optional && ((DoIfCostPaid) effect).isOptional())) {
                 throw new IllegalArgumentException("DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): " + this.getClass().getSimpleName());
-            }
+
         }
     }
 
-    public TriggeredAbilityImpl(final TriggeredAbilityImpl ability) {
+    protected TriggeredAbilityImpl(final TriggeredAbilityImpl ability) {
         super(ability);
         this.optional = ability.optional;
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
@@ -227,15 +226,15 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 } else if (!ruleLow.startsWith("its controller may")) {
                     sb.append("you may have ");
                     superRule = superRule
-                            .replaceAll(" becomes ", " become ")
-                            .replaceAll(" blocks ", " block ")
-                            .replaceAll(" deals ", " deal ")
-                            .replaceAll(" discards ", " discard ")
-                            .replaceAll(" gains ", " gain ")
-                            .replaceAll(" gets ", " get ")
-                            .replaceAll(" loses ", " lose ")
-                            .replaceAll(" mills ", " mill ")
-                            .replaceAll(" sacrifices ", " sacrifice ");
+                            .replace(" becomes ", " become ")
+                            .replace(" blocks ", " block ")
+                            .replace(" deals ", " deal ")
+                            .replace(" discards ", " discard ")
+                            .replace(" gains ", " gain ")
+                            .replace(" gets ", " get ")
+                            .replace(" loses ", " lose ")
+                            .replace(" mills ", " mill ")
+                            .replace(" sacrifices ", " sacrifice ");
                 }
 
             }
