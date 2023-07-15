@@ -27,7 +27,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     private boolean triggersOnceEachTurn = false;
     private boolean doOnlyOnceEachTurn = false;
     private GameEvent triggerEvent = null;
-    private String triggerPhrase = null; // TODO: This should be change to final and all constructers to set a value
+    private String triggerPhrase = null; // TODO: This could be changed to final if all constructors set a value
 
     protected TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
@@ -67,7 +67,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
     }
 
-    private final void setLastTrigger(Game game) {
+    private void setLastTrigger(Game game) {
         if (!triggersOnceEachTurn) {
             return;
         }
@@ -188,7 +188,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
         sb.append(prefix);
 
-        sb.append(triggerPhrase == null ? getTriggerPhrase() : triggerPhrase);
+        sb.append(triggerPhrase == null ? "" : triggerPhrase);
 
         String superRule = super.getRule(true);
         if (!superRule.isEmpty()) {
@@ -248,12 +248,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
 
         return sb.toString();
-    }
-
-    @Override
-    @Deprecated
-    public String getTriggerPhrase() {
-        return "";
     }
 
     @Override

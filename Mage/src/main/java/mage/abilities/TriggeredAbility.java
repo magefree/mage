@@ -58,12 +58,5 @@ public interface TriggeredAbility extends Ability {
 
     GameEvent getTriggerEvent();
 
-    /**
-     * Don't override this. Use setTriggerPhrase instead and let the base class handle it.
-     * @return
-     */
-    @Deprecated
-    String getTriggerPhrase();
-
     TriggeredAbility setTriggerPhrase(String triggerPhrase);
 }
