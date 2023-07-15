@@ -12,6 +12,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
@@ -41,10 +42,10 @@ public final class VraskaSchemingGorgon extends CardImpl {
         this.addAbility(loyaltyAbility);
 
         // -10: Until end of turn, creatures you control gain deathtouch and "Whenever this creature deals damage to an opponent, that player loses the game."
-        loyaltyAbility = new LoyaltyAbility(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn)
+        loyaltyAbility = new LoyaltyAbility(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
                 .setText("Until end of turn, creatures you control gain deathtouch"), -10);
         TriggeredAbility triggeredAbility = new VraskaSchemingGorgonTriggeredAbility(new LoseGameTargetPlayerEffect());
-        loyaltyAbility.addEffect(new GainAbilityControlledEffect(triggeredAbility, Duration.EndOfTurn)
+        loyaltyAbility.addEffect(new GainAbilityControlledEffect(triggeredAbility, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES)
                 .setText("and \"Whenever this creature deals damage to an opponent, that player loses the game.\""));
         this.addAbility(loyaltyAbility);
     }
