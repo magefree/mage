@@ -29,7 +29,7 @@ import mage.target.TargetPermanent;
  */
 public final class NettlevineBlight extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature or land permanent");
+    private static final FilterPermanent filter = new FilterPermanent("creature or land");
 
     static {
         filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
