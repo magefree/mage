@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -30,7 +30,7 @@ public final class CursedMonstrosity extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Cursed Monstrosity becomes the target of a spell or ability, sacrifice it unless you discard a land card.
-        this.addAbility(new BecomesTargetTriggeredAbility(
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(
                             new SacrificeSourceUnlessPaysEffect(
                             new DiscardTargetCost(new TargetCardInHand(new FilterLandCard()))
                 )));

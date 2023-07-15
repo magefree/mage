@@ -1,6 +1,6 @@
 package org.mage.test.cards.copy;
 
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.PhaseStep;
@@ -629,7 +629,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertTrue("Phantasmal Image should not be a creature", !staffA.isCreature(currentGame));
         assertTrue("Phantasmal Image should not be an Illusion", !staffA.hasSubtype(SubType.ILLUSION, currentGame));
         assertTrue("Phantasmal Image should not be a Construct", !staffA.hasSubtype(SubType.CONSTRUCT, currentGame));
-        assertTrue("Phantasmal Image should have the sacrifice trigger", staffA.getAbilities(currentGame).containsClass(BecomesTargetTriggeredAbility.class));
+        assertTrue("Phantasmal Image should have the sacrifice trigger", staffA.getAbilities(currentGame).containsClass(SourceBecomesTargetTriggeredAbility.class));
 
         Permanent staffB = getPermanent("Chimeric Staff", playerB);
         assertTrue("Chimeric Staff should be an artifact", staffB.isArtifact(currentGame));
@@ -659,7 +659,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertTrue("Phantasmal Image should be a Rogue", cloakA.hasSubtype(SubType.ROGUE, currentGame));
         assertTrue("Phantasmal Image should be an Illusion", cloakA.hasSubtype(SubType.ILLUSION, currentGame));
         assertTrue("Phantasmal Image should be an Equipment", cloakA.hasSubtype(SubType.EQUIPMENT, currentGame));
-        assertTrue("Phantasmal Image should have the sacrifice trigger", cloakA.getAbilities(currentGame).containsClass(BecomesTargetTriggeredAbility.class));
+        assertTrue("Phantasmal Image should have the sacrifice trigger", cloakA.getAbilities(currentGame).containsClass(SourceBecomesTargetTriggeredAbility.class));
 
         Permanent cloakB = getPermanent("Cloak and Dagger", playerB);
         assertTrue("Cloak and Dagger should be an artifact", cloakB.isArtifact(currentGame));

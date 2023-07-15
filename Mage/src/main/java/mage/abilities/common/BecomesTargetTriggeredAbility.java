@@ -2,46 +2,45 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- * @author North
+ * @author Susucr
  */
 public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final FilterStackObject filter;
-    private final SetTargetPointer setTargetPointer;
+    private final FilterPermanent filterTarget;
+    private final FilterStackObject filterStack;
 
-    public BecomesTargetTriggeredAbility(Effect effect) {
-        this(effect, StaticFilters.FILTER_SPELL_OR_ABILITY_A);
+    public BecomesTargetTriggeredAbility(Effect effect, FilterPermanent filterTarget) {
+        this(effect, filterTarget, StaticFilters.FILTER_SPELL_OR_ABILITY_A);
     }
 
-    public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
-        this(effect, filter, SetTargetPointer.NONE);
+    public BecomesTargetTriggeredAbility(Effect effect, FilterPermanent filterTarget, FilterStackObject filterStack) {
+        this(effect, filterTarget, filterStack, false);
     }
 
-    public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter, SetTargetPointer setTargetPointer) {
-        this(effect, filter, setTargetPointer, false);
-    }
-
-    public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter, SetTargetPointer setTargetPointer, boolean optional) {
+    public BecomesTargetTriggeredAbility(Effect effect, FilterPermanent filterTarget, FilterStackObject filterStack,
+                                         boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.filter = filter;
-        this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("When {this} becomes the target of " + filter.getMessage() + ", ");
+        this.filterTarget = filterTarget;
+        this.filterStack = filterStack;
+        setTriggerPhrase("Whenever " + filterTarget.getMessage() + " becomes the target of "
+                                     + filterStack.getMessage() + ", ");
     }
 
     public BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter;
-        this.setTargetPointer = ability.setTargetPointer;
+        this.filterTarget = ability.filterTarget;
+        this.filterStack = ability.filterStack;
     }
 
     @Override
@@ -57,24 +56,18 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-        if (!event.getTargetId().equals(getSourceId())
-                || !filter.match(sourceObject, getControllerId(), this, game)) {
+        if (sourceObject == null
+            || !filterStack.match(sourceObject, getControllerId(), this, game)) {
             return false;
         }
-        switch (setTargetPointer) {
-            case PLAYER:
-                this.getEffects().stream()
-                        .forEach(effect -> effect.setTargetPointer(
-                                new FixedTarget(sourceObject.getControllerId(), game)
-                        ));
-                break;
-            case SPELL:
-                this.getEffects().stream()
-                        .forEach(effect -> effect.setTargetPointer(
-                                new FixedTarget(sourceObject.getId(), game)
-                        ));
-                break;
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (permanent == null
+            || !filterTarget.match(permanent, getControllerId(), this, game)) {
+            return false;
         }
+
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+
         return true;
     }
 }
