@@ -14,7 +14,6 @@ import mage.target.targetpointer.FixedTarget;
 public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
 
     protected final boolean setTargetPointer;
-    protected String text;
     protected boolean onlyOpponents;
 
     public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
@@ -31,15 +30,8 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
         this.onlyOpponents = onlyOpponents;
     }
 
-    public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional, String text, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.text = text;
-        this.setTargetPointer = setTargetPointer;
-    }
-
     public DealsCombatDamageToAPlayerTriggeredAbility(final DealsCombatDamageToAPlayerTriggeredAbility ability) {
         super(ability);
-        this.text = ability.text;
         this.setTargetPointer = ability.setTargetPointer;
         this.onlyOpponents = ability.onlyOpponents;
     }
@@ -68,14 +60,6 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
             getAllEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
         }
         return true;
-    }
-
-    @Override
-    public String getRule() {
-        if (text == null || text.isEmpty()) {
-            return super.getRule();
-        }
-        return text;
     }
 
     // TODO: This class needs refactoring to specify onlyOppontns and OrPLaneswalkers in constructor
