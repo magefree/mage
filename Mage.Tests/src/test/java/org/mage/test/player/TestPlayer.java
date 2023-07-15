@@ -992,7 +992,7 @@ public class TestPlayer implements Player {
                         // show battlefield
                         if (params[0].equals(SHOW_COMMAND_BATTLEFIELD) && params.length == 1) {
                             printStart(game, action.getActionName());
-                            printPermanents(game, game.getBattlefield().getAllActivePermanents(computerPlayer.getId()));
+                            printPermanents(game, game.getBattlefield().getAllActivePermanents(computerPlayer.getId()), this);
                             printEnd();
                             actions.remove(action);
                             wasProccessed = true;
@@ -1199,8 +1199,8 @@ public class TestPlayer implements Player {
         }
     }
 
-    private void printPermanents(Game game, List<Permanent> cards) {
-        System.out.println("Total permanents: " + cards.size());
+    private void printPermanents(Game game, List<Permanent> cards, Player controller) {
+        System.out.println(String.format("Total permanents from %s: %d", controller.getName(), cards.size()));
 
         List<String> data = cards.stream()
                 .map(c -> (((c instanceof PermanentToken) ? "[T] " : "[C] ")
@@ -1382,7 +1382,7 @@ public class TestPlayer implements Player {
 
         if (foundCount != count) {
             printStart(game, "Permanents of " + player.getName());
-            printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()));
+            printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()), this);
             printEnd();
             Assert.fail(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances, but found " + foundCount);
         }
@@ -1400,7 +1400,7 @@ public class TestPlayer implements Player {
 
         if (foundCount != count) {
             printStart(game, "Permanents of " + player.getName());
-            printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()));
+            printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()), this);
             printEnd();
             Assert.fail(action.getActionName() + " - must have " + count + (tapped ? " tapped " : " untapped ")
                     + "permanents with name " + permanentName + ", but found " + foundCount);
@@ -2019,6 +2019,10 @@ public class TestPlayer implements Player {
                 if (!choices.isEmpty()) {
                     System.out.println(String.join("\n", choices));
                 }
+                game.getState().getPlayers().values().forEach(player -> {
+                    System.out.println();
+                    printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()), player);
+                });
                 printEnd();
             }
             if (choiceType.equals("target")) {
@@ -2026,6 +2030,10 @@ public class TestPlayer implements Player {
                 if (!targets.isEmpty()) {
                     System.out.println(String.join("\n", targets));
                 }
+                game.getState().getPlayers().values().forEach(player -> {
+                    System.out.println();
+                    printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()), player);
+                });
                 printEnd();
             }
             Assert.fail("Missing " + choiceType.toUpperCase(Locale.ENGLISH) + " def for"
