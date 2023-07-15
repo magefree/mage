@@ -144,7 +144,7 @@ public abstract class GameImpl implements Game {
     private boolean saveGame = false; // replay code, not done
     private int priorityTime; // match time limit
     private final int startingLife;
-    private final int startingHandSize;
+    private final int minimumDeckSize;
     protected transient PlayerList playerList; // auto-generated from state, don't copy
 
     // infinite loop check (temporary data, do not copy)
@@ -156,7 +156,7 @@ public abstract class GameImpl implements Game {
     // temporary store for income concede commands, don't copy
     private final LinkedList<UUID> concedingPlayers = new LinkedList<>();
 
-    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int startingHandSize) {
+    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int minimumDeckSize) {
         this.id = UUID.randomUUID();
         this.range = range;
         this.mulligan = mulligan;
@@ -164,7 +164,7 @@ public abstract class GameImpl implements Game {
         this.state = new GameState();
         this.startingLife = startingLife;
         this.executingRollback = false;
-        this.startingHandSize = startingHandSize;
+        this.minimumDeckSize = minimumDeckSize;
 
         initGameDefaultWatchers();
     }
@@ -251,7 +251,7 @@ public abstract class GameImpl implements Game {
         this.saveGame = game.saveGame;
         this.priorityTime = game.priorityTime;
         this.startingLife = game.startingLife;
-        this.startingHandSize = game.startingHandSize;
+        this.minimumDeckSize = game.minimumDeckSize;
         //this.playerList = game.playerList; // auto-generated list, don't copy
 
         // loop check code, no need to copy
@@ -1173,7 +1173,7 @@ public abstract class GameImpl implements Game {
                 for (Ability ability : card.getAbilities(this)) {
                     if (ability instanceof CompanionAbility) {
                         CompanionAbility companionAbility = (CompanionAbility) ability;
-                        if (companionAbility.isLegal(cards, startingHandSize)) {
+                        if (companionAbility.isLegal(cards, minimumDeckSize)) {
                             potentialCompanions.add(card);
                             break;
                         }

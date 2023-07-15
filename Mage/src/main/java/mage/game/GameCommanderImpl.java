@@ -16,7 +16,6 @@ import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
-import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -32,8 +31,8 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     protected boolean startingPlayerSkipsDraw = true;
 
-    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int startingHandSize) {
-        super(attackOption, range, mulligan, startingLife, startingHandSize);
+    public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int minimumDeckSize) {
+        super(attackOption, range, mulligan, startingLife, minimumDeckSize);
     }
 
     public GameCommanderImpl(final GameCommanderImpl game) {
