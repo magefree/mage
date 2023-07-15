@@ -120,7 +120,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
     }
 
     @Override
-    protected void addVariableXOptions(List<Ability> options, Ability ability, int targetNum, Game game) {
+    protected void addVariableXOptions(List<Ability> options, Ability ability, Game game) {
         // calculate the mana that can be used for the x part
         int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
 
@@ -161,7 +161,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
                         newAbility.adjustTargets(game);
                         // add the different possible target option for the specific X value
                         if (!newAbility.getTargets().getUnchosen().isEmpty()) {
-                            addTargetOptions(options, newAbility, targetNum, game);
+                            addTargetOptions(options, newAbility, 0, game);
                         }
                     }
 
