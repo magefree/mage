@@ -1285,7 +1285,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             game.fireEvent(landEventBefore);
 
             if (moveCards(card, Zone.BATTLEFIELD, playLandAbility, game, false, false, false, null)) {
-                landsPlayed++;
+                incrementLandsPlayed();
                 GameEvent landEventAfter = GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED,
                         card.getId(), playLandAbility, playerId, activationStatus.getApprovingObject());
                 landEventAfter.setZone(cardZoneBefore);
@@ -1645,6 +1645,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
         return useable;
+    }
+
+    @Override
+    public void incrementLandsPlayed() {
+        landsPlayed++;
     }
 
     @Override
