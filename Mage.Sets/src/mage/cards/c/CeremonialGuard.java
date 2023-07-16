@@ -29,7 +29,8 @@ public final class CeremonialGuard extends CardImpl {
         // When Ceremonial Guard attacks or blocks, destroy it at end of combat.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(
                 new CreateDelayedTriggeredAbilityEffect(
-                        new AtTheEndOfCombatDelayedTriggeredAbility(new DestroySourceEffect())), 
+                        new AtTheEndOfCombatDelayedTriggeredAbility(new DestroySourceEffect().setText("destroy it at end of combat"))
+                                .setTriggerPhrase("")),
                 false));
     }
 

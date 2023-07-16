@@ -58,8 +58,8 @@ class MaskOfTheMimicEffect extends OneShotEffect {
 
     MaskOfTheMimicEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for a card with the same name as target nontoken creature "
-                + "and put that card onto the battlefield. Then shuffle.";
+        this.staticText = "Search your library for a card with the same name as target nontoken creature,"
+                + " put that card onto the battlefield, then shuffle.";
     }
 
     MaskOfTheMimicEffect(final MaskOfTheMimicEffect effect) {

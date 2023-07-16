@@ -63,7 +63,7 @@ public final class HakimLoreweaver extends CardImpl {
         this.addAbility(ability);
 
         // {U}{U}, {tap}: Destroy all Auras attached to Hakim.
-        Ability ability2 = new SimpleActivatedAbility(new HakimLoreweaverEffect(), new ManaCostsImpl<>("{U}{U}"));
+        Ability ability2 = new SimpleActivatedAbility(new HakimLoreweaverDestroyEffect(), new ManaCostsImpl<>("{U}{U}"));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
     }

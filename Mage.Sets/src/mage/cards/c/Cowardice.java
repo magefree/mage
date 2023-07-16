@@ -63,7 +63,7 @@ class CowardiceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand";
+        return "Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand.";
     }
 
     @Override

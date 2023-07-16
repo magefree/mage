@@ -78,6 +78,6 @@ class MisersCageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "at the beginning of each opponent's upkeep, if that player has five or more cards in hand, {this} deals 2 damage to that player";
+        return "at the beginning of each opponent's upkeep, if that player has five or more cards in hand, {this} deals 2 damage to that player.";
     }
 }

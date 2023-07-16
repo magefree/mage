@@ -31,7 +31,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  */
 public final class Aggression extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creature");
 
     static {
         filter.add(Predicates.not(SubType.WALL.getPredicate()));

@@ -35,7 +35,8 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
 
     public GainAbilitySourceEffect(Ability ability, Duration duration, boolean onCard) {
         this(ability, duration, onCard, false);
-        staticText = "{this} gains " + ability.getRule() + ' ' + duration.toString();
+        staticText = "{this} gains " + ability.getRule()
+                + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
     }
 
     public GainAbilitySourceEffect(Ability ability, Duration duration, boolean onCard, boolean noStaticText) {
