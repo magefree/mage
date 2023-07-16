@@ -28,7 +28,7 @@ public class SkulkAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "Skulk <i>(This creature can't be blocked by creatures with greater power.)</i>";
+        return "skulk <i>(This creature can't be blocked by creatures with greater power.)</i>";
     }
 
 }
