@@ -90,7 +90,9 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
         } else {
             sb.append("spells");
         }
-        if (!duration.toString().isEmpty()) {
+        if (duration == Duration.EndOfTurn) {
+            sb.append(" this turn");
+        } else if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
         }
         staticText = sb.toString();
