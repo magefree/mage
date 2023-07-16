@@ -3187,6 +3187,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void resetLandsPlayed() {
+        computerPlayer.resetLandsPlayed();
+    }
+
+    @Override
     public int getLandsPlayed() {
         return computerPlayer.getLandsPlayed();
     }

@@ -210,6 +210,7 @@ public interface Player extends MageItem, Copyable<Player> {
     Cards getHand();
 
     void incrementLandsPlayed();
+    void resetLandsPlayed();
 
     int getLandsPlayed();
 

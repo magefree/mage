@@ -485,7 +485,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void beginTurn(Game game) {
-        this.landsPlayed = 0;
+        resetLandsPlayed();
         updateRange(game);
     }
 
@@ -1650,6 +1650,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void incrementLandsPlayed() {
         landsPlayed++;
+    }
+
+    @Override
+    public void resetLandsPlayed() {
+        landsPlayed = 0;
     }
 
     @Override
