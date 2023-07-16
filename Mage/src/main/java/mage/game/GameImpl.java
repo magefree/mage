@@ -144,6 +144,7 @@ public abstract class GameImpl implements Game {
     private boolean saveGame = false; // replay code, not done
     private int priorityTime; // match time limit
     private final int startingLife;
+    private final int startingHandSize;
     private final int minimumDeckSize;
     protected transient PlayerList playerList; // auto-generated from state, don't copy
 
@@ -156,13 +157,14 @@ public abstract class GameImpl implements Game {
     // temporary store for income concede commands, don't copy
     private final LinkedList<UUID> concedingPlayers = new LinkedList<>();
 
-    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int minimumDeckSize) {
+    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startingLife, int minimumDeckSize, int startingHandSize) {
         this.id = UUID.randomUUID();
         this.range = range;
         this.mulligan = mulligan;
         this.attackOption = attackOption;
         this.state = new GameState();
         this.startingLife = startingLife;
+        this.startingHandSize = startingHandSize;
         this.executingRollback = false;
         this.minimumDeckSize = minimumDeckSize;
 
@@ -251,6 +253,7 @@ public abstract class GameImpl implements Game {
         this.saveGame = game.saveGame;
         this.priorityTime = game.priorityTime;
         this.startingLife = game.startingLife;
+        this.startingHandSize = game.startingHandSize;
         this.minimumDeckSize = game.minimumDeckSize;
         //this.playerList = game.playerList; // auto-generated list, don't copy
 
@@ -1253,7 +1256,6 @@ public abstract class GameImpl implements Game {
         sendStartMessage(choosingPlayer, startingPlayer);
 
         //20091005 - 103.3
-        int startingHandSize = 7;
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (!gameOptions.testMode || player.getLife() == 0) {
