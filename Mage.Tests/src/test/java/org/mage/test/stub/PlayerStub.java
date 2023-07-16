@@ -261,6 +261,14 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void incrementLandsPlayed() {
+    }
+
+    @Override
+    public void resetLandsPlayed() {
+    }
+
+    @Override
     public int getLandsPlayed() {
         return 0;
     }
