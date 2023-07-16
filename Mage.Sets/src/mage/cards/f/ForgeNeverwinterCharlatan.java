@@ -5,6 +5,7 @@ import mage.abilities.common.SacrificeAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -28,6 +29,7 @@ import java.util.UUID;
 public final class ForgeNeverwinterCharlatan extends CardImpl {
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.TREASURE));
+    private static final DynamicValue twiceXValue = new MultipliedValue(xValue, 2);
     private static final Hint hint = new ValueHint("Treasures you control", xValue);
 
     public ForgeNeverwinterCharlatan(UUID ownerId, CardSetInfo setInfo) {
@@ -47,7 +49,7 @@ public final class ForgeNeverwinterCharlatan extends CardImpl {
 
         // Forge, Neverwinter Charlatan gets +2/+0 for each Treasure you control.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                xValue, StaticValue.get(0), Duration.WhileOnBattlefield
+                twiceXValue, StaticValue.get(0), Duration.WhileOnBattlefield
         ).setText("{this} gets +2/+0 for each Treasure you control")).addHint(hint));
 
         // Whenever one or more players sacrifice one or more creatures, you create a tapped Treasure token. This ability triggers only once each turn.
