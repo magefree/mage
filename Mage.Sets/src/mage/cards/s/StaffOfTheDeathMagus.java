@@ -34,7 +34,8 @@ public final class StaffOfTheDeathMagus extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Whenever you cast a black spell or a Swamp enters the battlefield under your control, you gain 1 life.
-        this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1),
+        this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), false,
+                "Whenever you cast a black spell or a Swamp enters the battlefield under your control, ",
                 new SpellCastControllerTriggeredAbility(null, filterSpell,false),
                 new EntersBattlefieldControlledTriggeredAbility(null, filterLand)));
 

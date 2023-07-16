@@ -37,7 +37,7 @@ public final class MantleOfWebs extends CardImpl {
         // Enchanted creature gets +1/+3 and has reach.
         Ability ability1 = new SimpleStaticAbility(new BoostEnchantedEffect(1, 3));
         ability1.addEffect(new GainAbilityAttachedEffect(ReachAbility.getInstance(), AttachmentType.AURA).setText("and has reach"));
-        this.addAbility(ability);
+        this.addAbility(ability1);
     }
 
     private MantleOfWebs(final MantleOfWebs card) {

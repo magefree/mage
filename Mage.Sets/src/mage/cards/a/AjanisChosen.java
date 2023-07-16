@@ -7,7 +7,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.CatToken;
@@ -21,6 +21,8 @@ import java.util.UUID;
  */
 public final class AjanisChosen extends CardImpl {
 
+    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("an enchantment");
+
     public AjanisChosen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.subtype.add(SubType.CAT);
@@ -31,7 +33,7 @@ public final class AjanisChosen extends CardImpl {
 
         // Whenever an enchantment enters the battlefield under your control, create a 2/2 white Cat creature token. If that enchantment is an Aura, you may attach it to the token.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new AjanisChosenEffect(), StaticFilters.FILTER_PERMANENT_ENCHANTMENT,
+                Zone.BATTLEFIELD, new AjanisChosenEffect(), filter,
                 false, SetTargetPointer.PERMANENT, null));
     }
 

@@ -37,7 +37,7 @@ public final class TricksOfTheTrade extends CardImpl {
 
         // Enchanted creature gets +2/+0 and can't be blocked.
         Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 0));
-        ability.addEffect(new CantBeBlockedAttachedEffect(AttachmentType.AURA));
+        ability.addEffect(new CantBeBlockedAttachedEffect(AttachmentType.AURA).setText("and can't be blocked"));
         this.addAbility(ability);
     }
 

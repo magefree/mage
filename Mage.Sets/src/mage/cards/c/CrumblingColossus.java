@@ -29,7 +29,7 @@ public final class CrumblingColossus extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         this.addAbility(new AttacksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect()))
-                .setText("sacrifice it at end of combat"), false));
+                .setText("sacrifice it at end of combat"), false).setTriggerPhrase("When {this} attacks, "));
     }
 
     private CrumblingColossus(final CrumblingColossus card) {

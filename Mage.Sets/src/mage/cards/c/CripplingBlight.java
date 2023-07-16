@@ -34,7 +34,7 @@ public final class CripplingBlight extends CardImpl {
 
         // Enchanted creature gets -1/-1 and can't block.
         Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(-1, -1));
-        ability.addEffect(new CantBlockAttachedEffect(AttachmentType.AURA).concatBy("and"));
+        ability.addEffect(new CantBlockAttachedEffect(AttachmentType.AURA).setText("and can't block"));
         this.addAbility(ability);
     }
 

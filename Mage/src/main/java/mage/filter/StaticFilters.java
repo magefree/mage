@@ -26,6 +26,10 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public final class StaticFilters {
 
+    // Hide constructor - not to be instantiated
+    private StaticFilters() {
+    }
+
     public static final FilterSpiritOrArcaneCard FILTER_SPIRIT_OR_ARCANE_CARD = new FilterSpiritOrArcaneCard();
 
     static {
@@ -260,7 +264,6 @@ public final class StaticFilters {
     static {
         FILTER_PERMANENT_ENCHANTMENT.setLockedFilter(true);
     }
-
 
     public static final FilterEnchantmentPermanent FILTER_PERMANENT_ENCHANTMENTS = new FilterEnchantmentPermanent("enchantments");
 
