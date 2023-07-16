@@ -78,7 +78,7 @@ class WillbreakerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a creature an opponent controls becomes the target of a spell or ability you control, "
-                + "gain control of that creature for as long as you control {this}";
+                + "gain control of that creature for as long as you control {this}.";
     }
 
     @Override

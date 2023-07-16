@@ -55,7 +55,7 @@ class BoonweaverGiantEffect extends OneShotEffect {
 
     public BoonweaverGiantEffect() {
         super(Outcome.UnboostCreature);
-        this.staticText = "you may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to {this}." +
+        this.staticText = "you may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to {this}. " +
                 "If you search your library this way, shuffle.";
     }
 

@@ -11,7 +11,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -74,7 +73,7 @@ public class ProtectionAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "protection from " + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove auras.");
+        return "protection from " + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove Auras.");
     }
 
     public boolean canTarget(MageObject source, Game game) {

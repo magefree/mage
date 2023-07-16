@@ -17,7 +17,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -69,17 +68,14 @@ class GuardianOfTheAgesTriggerAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game){
         Permanent creature = game.getPermanent(event.getSourceId());
-        if (creature != null && filter.match(creature, game)
-               && game.getOpponents(this.getControllerId()).contains(creature.getControllerId())
-               && game.getPermanent(this.getSourceId()).getAbilities().contains(DefenderAbility.getInstance())) {
-           return true;
-        }
-        return false;
+        return creature != null && filter.match(creature, game)
+                && game.getOpponents(this.getControllerId()).contains(creature.getControllerId())
+                && game.getPermanent(this.getSourceId()).getAbilities().contains(DefenderAbility.getInstance());
     }
     
     @Override
     public String getRule(){
-        return "Whenever a creature attacks you or a planeswalker you control, if {this} has defender, it loses defender and gains trample.";
+        return "When a creature attacks you or a planeswalker you control, if {this} has defender, it loses defender and gains trample.";
     }
     
     @Override

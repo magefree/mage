@@ -80,7 +80,7 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
             case YOU:
                 return "At the beginning of combat on your turn, " + generateZoneString();
             case OPPONENT:
-                return "At the beginning of each opponent's combat step, " + generateZoneString();
+                return "At the beginning of combat on each opponent's turn, " + generateZoneString();
             case EACH_PLAYER:
                 return "At the beginning of combat on each player's turn, " + generateZoneString();
             case ANY:
