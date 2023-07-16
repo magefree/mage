@@ -51,7 +51,7 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
 
     KurkeshOnakkeAncientTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackObjectEffect(), new GenericManaCost(1)));
-        setTriggerPhrase("Whenever you activate an ability of an artifact, if it isn't a mana ability");
+        setTriggerPhrase("Whenever you activate an ability of an artifact, if it isn't a mana ability, ");
     }
 
     KurkeshOnakkeAncientTriggeredAbility(final KurkeshOnakkeAncientTriggeredAbility ability) {

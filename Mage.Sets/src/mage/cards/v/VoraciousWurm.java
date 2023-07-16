@@ -28,7 +28,8 @@ public final class VoraciousWurm extends CardImpl {
         // Voracious Wurm enters the battlefield with X +1/+1 counters on it, where X is the amount of life you've gained this turn.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(
                 CounterType.P1P1.createInstance(0), ControllerGotLifeCount.instance, true
-        )).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        ), "with X +1/+1 counters on it, where X is the amount of life you've gained this turn")
+                .addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private VoraciousWurm(final VoraciousWurm card) {

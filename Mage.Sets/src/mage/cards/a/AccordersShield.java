@@ -1,10 +1,9 @@
-
-
 package mage.cards.a;
 
 import java.util.UUID;
+
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -22,9 +21,13 @@ public final class AccordersShield extends CardImpl {
     public AccordersShield (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
         this.subtype.add(SubType.EQUIPMENT);
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 3)));
+
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(0, 3));
+        ability.addEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT).setText("and has vigilance"));
+        this.addAbility(ability);
+
+        this.addAbility(new EquipAbility(3));
+
     }
 
     public AccordersShield (final AccordersShield card) {
