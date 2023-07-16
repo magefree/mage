@@ -36,7 +36,7 @@ public final class ImposingVisage extends CardImpl {
 
         // Enchanted creature has menace. (It can't be blocked except by two or more creatures.)
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.AURA)
-                .setText("enchanted creature has menace. <i>(It can’t be blocked except by two or more creatures.)</i>")));
+                .setText("enchanted creature has menace. <i>(It can't be blocked except by two or more creatures.)</i>")));
     }
 
     private ImposingVisage(final ImposingVisage card) {
