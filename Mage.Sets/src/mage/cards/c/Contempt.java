@@ -42,7 +42,8 @@ public final class Contempt extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature attacks, return it and Contempt to their owners' hands at end of combat.
-        this.addAbility(new AttacksAttachedTriggeredAbility(new ContemptEffect(), AttachmentType.AURA, false));
+        this.addAbility(new AttacksAttachedTriggeredAbility(new ContemptEffect(), AttachmentType.AURA, false)
+                .setTriggerPhrase("When enchanted creature attacks, "));
 
     }
 

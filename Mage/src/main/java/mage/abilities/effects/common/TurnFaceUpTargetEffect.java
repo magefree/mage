@@ -41,6 +41,6 @@ public class TurnFaceUpTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        return "turn target " + mode.getTargets().get(0).getTargetName() + " face-up";
+        return "turn target " + mode.getTargets().get(0).getTargetName() + " face up";
     }
 }

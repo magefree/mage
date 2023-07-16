@@ -121,7 +121,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         if (excludeSource) {
-            sb.append("Other ");
+            sb.append("other ");
         }
         String gainedAbility = ability.getRule();
         sb.append(filter.getMessage()).append(" you control ");

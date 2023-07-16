@@ -43,7 +43,7 @@ class ChainOfPlasmaEffect extends OneShotEffect {
 
     ChainOfPlasmaEffect() {
         super(Outcome.Damage);
-        this.staticText = "{this} deals 3 damage to any target. Then that player or that creature's controller may discard a card. If the player does, they may copy this spell and may choose a new target for that copy.";
+        this.staticText = "{this} deals 3 damage to any target. Then that player or that permanent's controller may discard a card. If the player does, they may copy this spell and may choose a new target for that copy.";
     }
 
     ChainOfPlasmaEffect(final ChainOfPlasmaEffect effect) {
