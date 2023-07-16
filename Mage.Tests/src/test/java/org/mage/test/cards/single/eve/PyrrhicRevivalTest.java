@@ -2,7 +2,6 @@ package org.mage.test.cards.single.eve;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -22,7 +21,6 @@ public class PyrrhicRevivalTest extends CardTestPlayerBase {
     // 1/1
     private static final String sanctifier = "Cathedral Sanctifier";
 
-    @Ignore
     @Test
     public void test_PyrrhicRevival() {
         addCard(Zone.GRAVEYARD, playerA, sanctifier, 2);
