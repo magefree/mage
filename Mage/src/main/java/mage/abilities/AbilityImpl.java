@@ -527,6 +527,7 @@ public abstract class AbilityImpl implements Ability {
                 ((Cost) variableCost).setPaid();
                 String message = controller.getLogName() + " announces a value of " + xValue + " (" + variableCost.getActionText() + ')';
                 announceString.append(message);
+                getCostsTagMap().put("X",xValue);
             }
         }
         return announceString.toString();
