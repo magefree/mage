@@ -74,6 +74,10 @@ class GorgingVultureEffect extends OneShotEffect {
                 .filter(card1 -> card1.isCreature(game))
                 .mapToInt(card -> game.getState().getZone(card.getId()) == Zone.GRAVEYARD ? 1 : 0)
                 .sum();
-        return player.gainLife(lifeToGain, game, source) > 0;
+        if (lifeToGain > 0) {
+            game.getState().processAction(game);
+            player.gainLife(lifeToGain, game, source);
+        }
+        return true;
     }
 }
