@@ -21,7 +21,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * @author jeffwadsworth
+ * @author jeffwadsworth, Susucr
  */
 public final class PyrrhicRevival extends CardImpl {
 
