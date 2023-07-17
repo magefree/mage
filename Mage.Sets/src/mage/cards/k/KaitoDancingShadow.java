@@ -171,9 +171,11 @@ class KaitoDancingShadowIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent kaito = source.getSourcePermanentIfItStillExists(game);
-        if (kaito != null) {
-            kaito.setLoyaltyActivationsAvailable(2);
+        if (kaito == null) {
+            discard();
+            return false;
         }
+        kaito.setLoyaltyActivationsAvailable(2);
         return true;
     }
 
