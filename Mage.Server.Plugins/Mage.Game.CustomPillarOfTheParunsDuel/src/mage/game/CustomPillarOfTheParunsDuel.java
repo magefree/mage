@@ -14,11 +14,41 @@ import mage.players.Player;
 import java.util.UUID;
 
 /**
+ * This is a custom match mode for a non-official format,
+ * derived from limited (drafting from cubes or custom sets),
+ * that focuses on allowing the players to cast multicolor
+ * spells more easily.
+ * <p>
+ * This is done by having each player conjure a Pillar of the Paruns
+ * in play on their first turn, instead of their land drop.
+ * It then lets player play multicolor spells of many combinations,
+ * in a limited deck, while adding some new layer of strategy
+ * during the draft.
+ * <p>
+ * For balance reason, I did introduce the 6 starting hand size,
+ * as the extra Pillar of the Paruns is like a 7th card, and I
+ * did not want the player on the draw to discard to handsize.
+ * <p> <p>
+ * To summarize, this uses the default rules for a 1v1 limited match,
+ * with two additional custom rules: <p>
+ * -> At the beginning of each player's first main phase, that player
+ * conjure into play a Pillar of the Paruns. This does count as a
+ * land drop for the turn. <p>
+ * -> The starting hand size is 6, not 7.
+ * <p> <p>
+ * I did took the inspiration for the mode from this cube list (not
+ * sure it is the original source for the idea, but i did not found
+ * anything else but a youtube video discussing that cube): <p>
+ * https://cubecobra.com/cube/overview/allgoldcube
+ * <p>
+ * And I am working on a remastered set with: <p>
+ * https://cubecobra.com/cube/overview/parunsmaster
+ *
  * @author Susucr
  */
-public class PillarOfTheParunsDuel extends GameImpl {
+public class CustomPillarOfTheParunsDuel extends GameImpl {
 
-    public PillarOfTheParunsDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan) {
+    public CustomPillarOfTheParunsDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan) {
         super(attackOption, range, mulligan, 20, 40, 6);
     }
 
@@ -26,20 +56,20 @@ public class PillarOfTheParunsDuel extends GameImpl {
     protected void init(UUID choosingPlayerId) {
         super.init(choosingPlayerId);
 
-        getPlayers().forEach((playerId,p) -> {
+        getPlayers().forEach((playerId, p) -> {
             addDelayedTriggeredAbility(new AtTheBeginOfPlayerFirstMainPhase(playerId, "Pillar of the Paruns"), null);
         });
 
         state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
     }
 
-    public PillarOfTheParunsDuel(final PillarOfTheParunsDuel game) {
+    public CustomPillarOfTheParunsDuel(final CustomPillarOfTheParunsDuel game) {
         super(game);
     }
 
     @Override
     public MatchType getGameType() {
-        return new PillarOfTheParunsDuelType();
+        return new CustomPillarOfTheParunsDuelType();
     }
 
     @Override
@@ -48,8 +78,8 @@ public class PillarOfTheParunsDuel extends GameImpl {
     }
 
     @Override
-    public PillarOfTheParunsDuel copy() {
-        return new PillarOfTheParunsDuel(this);
+    public CustomPillarOfTheParunsDuel copy() {
+        return new CustomPillarOfTheParunsDuel(this);
     }
 
 }

@@ -7,16 +7,16 @@ import mage.game.mulligan.Mulligan;
 /**
  * @author Susucr
  */
-public class PillarOfTheParunsDuelMatch extends MatchImpl {
+public class CustomPillarOfTheParunsDuelMatch extends MatchImpl {
 
-    public PillarOfTheParunsDuelMatch(MatchOptions options) {
+    public CustomPillarOfTheParunsDuelMatch(MatchOptions options) {
         super(options);
     }
 
     @Override
     public void startGame() throws GameException {
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
-        PillarOfTheParunsDuel game = new PillarOfTheParunsDuel(options.getAttackOption(), options.getRange(), mulligan);
+        CustomPillarOfTheParunsDuel game = new CustomPillarOfTheParunsDuel(options.getAttackOption(), options.getRange(), mulligan);
         game.setStartMessage(this.createGameStartMessage());
         initGame(game);
 

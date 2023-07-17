@@ -169,7 +169,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>mage-game-pillaroftheparunsduel</artifactId>
+            <artifactId>mage-game-custompillaroftheparunsduel</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>

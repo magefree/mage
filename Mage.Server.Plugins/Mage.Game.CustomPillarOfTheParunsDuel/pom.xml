@@ -10,9 +10,9 @@
         <version>1.4.50</version>
     </parent>
 
-    <artifactId>mage-game-pillaroftheparunsduel</artifactId>
+    <artifactId>mage-game-custompillaroftheparunsduel</artifactId>
     <packaging>jar</packaging>
-    <name>Mage Game Pillar of the Paruns Two Player Duel</name>
+    <name>Mage Game Custom Pillar of the Paruns Two Player Duel</name>
 
     <dependencies>
         <dependency>
@@ -47,7 +47,7 @@
 
         </plugins>
 
-        <finalName>mage-game-pillaroftheparunsduel</finalName>
+        <finalName>mage-game-custompillaroftheparunsduel</finalName>
     </build>
 
     <properties/>
