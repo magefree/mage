@@ -26,8 +26,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     protected boolean leavesTheBattlefieldTrigger;
     private boolean triggersOnceEachTurn = false;
     private boolean doOnlyOnceEachTurn = false;
+    protected boolean replaceRuleText = true;
     private GameEvent triggerEvent = null;
-    private String triggerPhrase = null; // TODO: This could be changed to final if all constructors set a value
+    private String triggerPhrase = null;
 
     protected TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
@@ -54,6 +55,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
         this.triggersOnceEachTurn = ability.triggersOnceEachTurn;
         this.doOnlyOnceEachTurn = ability.doOnlyOnceEachTurn;
+        this.replaceRuleText = ability.replaceRuleText;
         this.triggerEvent = ability.triggerEvent;
         this.triggerPhrase = ability.triggerPhrase;
     }
@@ -103,11 +105,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return lastTurnTriggered == null || lastTurnTriggered != game.getTurnNum();
     }
 
-    public TriggeredAbility setTriggersOnceEachTurn(boolean triggersOnce) {
-        this.triggersOnceEachTurn = triggersOnce;
-        return this;
-    }
-
     @Override
     public boolean checkUsedAlready(Game game) {
         if (!doOnlyOnceEachTurn) {
@@ -119,9 +116,22 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return lastTurnUsed != null && lastTurnUsed == game.getTurnNum();
     }
 
+    @Override
+    public TriggeredAbility setTriggersOnceEachTurn(boolean triggersOnce) {
+        this.triggersOnceEachTurn = triggersOnce;
+        return this;
+    }
+
+    @Override
     public TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce) {
         this.optional = true;
         this.doOnlyOnceEachTurn = doOnlyOnce;
+        return this;
+    }
+
+    @Override
+    public TriggeredAbility setReplaceRuleText(boolean replaceRuleText) {
+        this.replaceRuleText = replaceRuleText;
         return this;
     }
 
@@ -202,41 +212,25 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                     }
                 } else if (!ruleLow.startsWith("{this}")
                         && (this.getTargets().isEmpty()
-                        || ruleLow.startsWith("attach")
-                        || ruleLow.startsWith("change")
-                        || ruleLow.startsWith("counter")
-                        || ruleLow.startsWith("destroy")
-                        || ruleLow.startsWith("distribute")
-                        || ruleLow.startsWith("sacrifice")
-                        || ruleLow.startsWith("exchange")
-                        || ruleLow.startsWith("exile")
-                        || ruleLow.startsWith("gain")
-                        || ruleLow.startsWith("goad")
-                        || ruleLow.startsWith("have")
-                        || ruleLow.startsWith("move")
-                        || ruleLow.startsWith("prevent")
-                        || ruleLow.startsWith("put")
-                        || ruleLow.startsWith("remove")
-                        || ruleLow.startsWith("return")
-                        || ruleLow.startsWith("shuffle")
-                        || ruleLow.startsWith("turn")
-                        || ruleLow.startsWith("tap")
-                        || ruleLow.startsWith("untap"))) {
+                        || startsWithVerb(ruleLow))) {
                     sb.append("you may ");
                 } else if (!ruleLow.startsWith("its controller may")) {
                     sb.append("you may have ");
-                    superRule = superRule
-                            .replace(" becomes ", " become ")
-                            .replace(" blocks ", " block ")
-                            .replace(" deals ", " deal ")
-                            .replace(" discards ", " discard ")
-                            .replace(" gains ", " gain ")
-                            .replace(" gets ", " get ")
-                            .replace(" loses ", " lose ")
-                            .replace(" mills ", " mill ")
-                            .replace(" sacrifices ", " sacrifice ");
+                    superRule = ruleWithFixedVerbGrammar(superRule);
                 }
-
+            }
+            if (replaceRuleText
+                    && triggerPhrase != null
+                    && triggerPhrase.contains("{this}")
+                    && !triggerPhrase.contains("other")
+                    && !triggerPhrase.contains(" of a ")
+                    && !triggerPhrase.contains(" by a ")
+                    && !triggerPhrase.contains(" to a ")
+                    && !triggerPhrase.contains(" blocks a ")
+                    && (superRule.startsWith("{this}")
+                    || superRule.startsWith("sacrifice {this}")
+            )) {
+                superRule = superRule.replace("{this} ", "it ");
             }
             sb.append(superRule);
             if (triggersOnceEachTurn) {
@@ -246,8 +240,42 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 sb.append(" Do this only once each turn.");
             }
         }
-
         return sb.toString();
+    }
+
+    private static boolean startsWithVerb(String ruleLow) {
+        return ruleLow.startsWith("attach")
+                || ruleLow.startsWith("change")
+                || ruleLow.startsWith("counter")
+                || ruleLow.startsWith("destroy")
+                || ruleLow.startsWith("distribute")
+                || ruleLow.startsWith("sacrifice")
+                || ruleLow.startsWith("exchange")
+                || ruleLow.startsWith("exile")
+                || ruleLow.startsWith("gain")
+                || ruleLow.startsWith("goad")
+                || ruleLow.startsWith("have")
+                || ruleLow.startsWith("move")
+                || ruleLow.startsWith("prevent")
+                || ruleLow.startsWith("put")
+                || ruleLow.startsWith("remove")
+                || ruleLow.startsWith("return")
+                || ruleLow.startsWith("shuffle")
+                || ruleLow.startsWith("turn")
+                || ruleLow.startsWith("tap")
+                || ruleLow.startsWith("untap");
+    }
+
+    private static String ruleWithFixedVerbGrammar(String rule) {
+        return rule.replace(" becomes ", " become ")
+                .replace(" blocks ", " block ")
+                .replace(" deals ", " deal ")
+                .replace(" discards ", " discard ")
+                .replace(" gains ", " gain ")
+                .replace(" gets ", " get ")
+                .replace(" loses ", " lose ")
+                .replace(" mills ", " mill ")
+                .replace(" sacrifices ", " sacrifice ");
     }
 
     @Override

@@ -43,6 +43,10 @@ public interface TriggeredAbility extends Ability {
 
     TriggeredAbility setTriggersOnceEachTurn(boolean triggersOnce);
 
+    TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce);
+
+    TriggeredAbility setReplaceRuleText(boolean replaceRuleText);
+
     boolean checkInterveningIfClause(Game game);
 
     boolean isOptional();
