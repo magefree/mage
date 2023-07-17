@@ -17,14 +17,13 @@ import mage.target.common.TargetOpponent;
 import java.util.UUID;
 
 /**
- *
  * @author Susucr
  */
 public final class GollumSchemingGuide extends CardImpl {
 
     public GollumSchemingGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HALFLING);
         this.subtype.add(SubType.HORROR);
@@ -47,21 +46,22 @@ public final class GollumSchemingGuide extends CardImpl {
 
 class GollumSchemingGuideEffect extends OneShotEffect {
 
-    GollumSchemingGuideEffect(){
+    GollumSchemingGuideEffect() {
         super(Outcome.Benefit);
         this.staticText = "look at the top two cards of your library, " +
             "put them back in any order, then choose land or nonland. " +
             "An opponent guesses whether the top card of your library " +
             "is the chosen kind. Reveal that card. If they guessed right, " +
-            "remove Gollum from combat. Otherwise, you draw a card and Gollum " +
+            "remove {this} from combat. Otherwise, you draw a card and {this} " +
             "can't be blocked this turn";
     }
 
-    private GollumSchemingGuideEffect(final GollumSchemingGuideEffect effect){
+    private GollumSchemingGuideEffect(final GollumSchemingGuideEffect effect) {
         super(effect);
     }
 
-    @Override public GollumSchemingGuideEffect copy(){
+    @Override
+    public GollumSchemingGuideEffect copy() {
         return new GollumSchemingGuideEffect(this);
     }
 
@@ -78,10 +78,9 @@ class GollumSchemingGuideEffect extends OneShotEffect {
         // put them back in any order
         PutCards.TOP_ANY.moveCards(player, cards, source, game);
 
-
         // then choose land or nonland.
         boolean guessLand = player.chooseUse(Outcome.Neutral,
-            "What should the opponent guess?",
+            "Choose land or nonland (opponent must then guess)",
             "", "land", "nonland", source, game);
 
         // choose an opponent.
@@ -114,7 +113,7 @@ class GollumSchemingGuideEffect extends OneShotEffect {
             game.informPlayers(opponent.getLogName() + " guessed right.");
 
             // remove Gollum from combat.
-            Permanent gollum = game.getPermanent(source.getSourceId());
+            Permanent gollum = source.getSourcePermanentIfItStillExists(game);
             if (gollum != null) {
                 gollum.removeFromCombat(game);
             }
@@ -125,7 +124,7 @@ class GollumSchemingGuideEffect extends OneShotEffect {
             player.drawCards(1, source, game);
 
             // and Gollum can't be blocked this turn
-            Permanent gollum = game.getPermanent(source.getSourceId());
+            Permanent gollum = source.getSourcePermanentIfItStillExists(game);
             if (gollum != null) {
                 game.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn), source);
             }
