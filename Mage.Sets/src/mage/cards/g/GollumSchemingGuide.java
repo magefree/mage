@@ -84,8 +84,7 @@ class GollumSchemingGuideEffect extends OneShotEffect {
             "", "land", "nonland", source, game);
 
         // choose an opponent.
-        TargetOpponent targetOpponent = new TargetOpponent();
-        targetOpponent.setNotTarget(true);
+        TargetOpponent targetOpponent = new TargetOpponent(true);
         if (!player.choose(Outcome.Neutral, targetOpponent, source, game)) {
             return false;
         }
