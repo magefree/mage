@@ -85,6 +85,7 @@ class OutOfTimePhaseOutEffect extends OneShotEffect {
             Permanent outOfTime = game.getPermanent(source.getSourceId());
             if (outOfTime != null) {
                 new PhaseOutAllEffect(new ArrayList<>(creatureIds)).apply(game, source);
+                game.getState().processAction(game);
                 new AddCountersSourceEffect(CounterType.TIME.createInstance(numCreatures)).apply(game, source);
                 game.getState().setValue("phasedOutCreatures"
                         + source.getId().toString(), creatureIds);

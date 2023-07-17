@@ -96,7 +96,10 @@ class TymaretChosenFromDeathEffect extends OneShotEffect {
                 .filter(Zone.EXILED::equals)
                 .mapToInt(x -> 1)
                 .sum();
-        player.gainLife(lifeGain, game, source);
+        if (lifeGain > 0) {
+            game.getState().processAction(game);
+            player.gainLife(lifeGain, game, source);
+        }
         return true;
     }
 }
