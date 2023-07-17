@@ -15,14 +15,13 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 
-import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class PyrrhicRevival extends CardImpl {
 
@@ -66,22 +65,22 @@ class PyrrhicRevivalEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Set<Card> toBattlefield = new HashSet<>();
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (Card card : player.getGraveyard().getCards(game)) {
-                    if (card != null && card.isCreature(game)) {
-                        toBattlefield.add(card);
-                    }
-                }
-            }
-        }
+
+        Set<Card> toBattlefield =
+            game.getState().getPlayersInRange(source.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .flatMap(p -> p.getGraveyard().getCards(game).stream())
+                .filter(c -> c != null && c.isCreature(game))
+                .collect(Collectors.toSet());
+
         Effect returnEffect =
             new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(
                 CounterType.M1M1.createInstance(),
                 true,
                 true);
+
         returnEffect.setTargetPointer(new FixedTargets(toBattlefield, game));
         returnEffect.apply(game, source);
 

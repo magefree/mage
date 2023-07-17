@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -28,7 +27,7 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
     }
 
     public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter counter, boolean additional) {
-        this(counter, additional,false);
+        this(counter, additional, false);
     }
 
     public ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(Counter counter, boolean additional, boolean underOwnerControl) {
@@ -50,7 +49,7 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID targetId: getTargetPointer().getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             AddCounterTargetReplacementEffect counterEffect = new AddCounterTargetReplacementEffect(counter);
             counterEffect.setTargetPointer(new FixedTarget(targetId, game));
             game.addEffect(counterEffect, source);
@@ -80,11 +79,10 @@ public class ReturnFromGraveyardToBattlefieldWithCounterTargetEffect extends Ret
         if (counter.getCount() != 1) {
             sb.append('s');
         }
-        if(targetPointer instanceof FirstTargetPointer){
-            sb.append(" on it");
-        }
-        else {
+        if (targetPointer.isPlural(mode.getTargets())) {
             sb.append(" on them");
+        } else {
+            sb.append(" on it");
         }
         return sb.toString();
     }
