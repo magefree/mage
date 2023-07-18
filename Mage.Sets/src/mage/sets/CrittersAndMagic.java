@@ -87,9 +87,9 @@ public final class CrittersAndMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Growth", 62, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Gods Willing", 10, Rarity.COMMON, mage.cards.g.GodsWilling.class));
         cards.add(new SetCardInfo("Green Elemental Blast", 63, Rarity.COMMON, mage.cards.g.GreenElementalBlast.class));
-        cards.add(new SetCardInfo("Indatha Triome", 101, Rarity.UNCOMMON, mage.cards.i.IndathaTriome.class));
-        cards.add(new SetCardInfo("Jetmir's Garden", 102, Rarity.UNCOMMON, mage.cards.j.JetmirsGarden.class));
-        cards.add(new SetCardInfo("Ketria Triome", 103, Rarity.UNCOMMON, mage.cards.k.KetriaTriome.class));
+        cards.add(new SetCardInfo("Indatha Triome", 102, Rarity.UNCOMMON, mage.cards.i.IndathaTriome.class));
+        cards.add(new SetCardInfo("Jetmir's Garden", 103, Rarity.UNCOMMON, mage.cards.j.JetmirsGarden.class));
+        cards.add(new SetCardInfo("Ketria Triome", 104, Rarity.UNCOMMON, mage.cards.k.KetriaTriome.class));
         cards.add(new SetCardInfo("Little Buggy",64, Rarity.COMMON, mage.cards.l.LittleBuggy.class));
         cards.add(new SetCardInfo("Little Doggy",11, Rarity.COMMON, mage.cards.l.LittleDoggy.class));
         cards.add(new SetCardInfo("Little Fishy",65, Rarity.COMMON, mage.cards.l.LittleFishy.class));
@@ -111,7 +111,7 @@ public final class CrittersAndMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Lord Rhino",86, Rarity.UNCOMMON, mage.cards.l.LordRhino.class));
         cards.add(new SetCardInfo("Lord Snail",87, Rarity.UNCOMMON, mage.cards.l.LordSnail.class));
         cards.add(new SetCardInfo("Meditative Buggy",88, Rarity.RARE, mage.cards.m.MeditativeBuggy.class));
-        cards.add(new SetCardInfo("Meditative Doggy",89, Rarity.RARE, mage.cards.m.MeditativeDoggy.class));
+        cards.add(new SetCardInfo("Meditative Doggy",89, Rarity.RARE, mage.cards.m.MeditativeFishy.class));
         cards.add(new SetCardInfo("Meditative Fishy",90, Rarity.RARE, mage.cards.m.MeditativeFishy.class));
         cards.add(new SetCardInfo("Meditative Ghost",91, Rarity.RARE, mage.cards.m.MeditativeGhost.class));
         cards.add(new SetCardInfo("Meditative Kitty",92, Rarity.RARE, mage.cards.m.MeditativeKitty.class));
@@ -121,13 +121,14 @@ public final class CrittersAndMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Meditative Rhino",96, Rarity.RARE, mage.cards.m.MeditativeRhino.class));
         cards.add(new SetCardInfo("Meditative Snail",97, Rarity.RARE, mage.cards.m.MeditativeSnail.class));
         cards.add(new SetCardInfo("Ominous Parcel",100, Rarity.COMMON, mage.cards.o.OminousParcel.class));
-        cards.add(new SetCardInfo("Raffine's Tower",104, Rarity.UNCOMMON, mage.cards.r.RaffinesTower.class));
-        cards.add(new SetCardInfo("Raugrin Triome",105, Rarity.UNCOMMON, mage.cards.r.RaugrinTriome.class));
+        cards.add(new SetCardInfo("Raffine's Tower",105, Rarity.UNCOMMON, mage.cards.r.RaffinesTower.class));
+        cards.add(new SetCardInfo("Raugrin Triome",106, Rarity.UNCOMMON, mage.cards.r.RaugrinTriome.class));
         cards.add(new SetCardInfo("Red Elemental Blast",52, Rarity.COMMON, mage.cards.r.RedElementalBlast.class));
         cards.add(new SetCardInfo("Ritual of Soot",39, Rarity.RARE, mage.cards.r.RitualOfSoot.class));
-        cards.add(new SetCardInfo("Savai Triome",106, Rarity.UNCOMMON, mage.cards.s.SavaiTriome.class));
-        cards.add(new SetCardInfo("Sparas Headquarters",107, Rarity.UNCOMMON, mage.cards.s.SparasHeadquarters.class));
+        cards.add(new SetCardInfo("Savai Triome",107, Rarity.UNCOMMON, mage.cards.s.SavaiTriome.class));
+        cards.add(new SetCardInfo("Sparas Headquarters",108, Rarity.UNCOMMON, mage.cards.s.SparasHeadquarters.class));
         cards.add(new SetCardInfo("Planar Disruption",13, Rarity.UNCOMMON, mage.cards.p.PlanarDisruption.class));
+        cards.add(new SetCardInfo("Springjaw Trap",101, Rarity.COMMON, mage.cards.s.SpringjawTrap.class));
         cards.add(new SetCardInfo("The Massive Critter",2, Rarity.RARE, mage.cards.t.TheMassiveCritter.class));
         cards.add(new SetCardInfo("Tough Buggy",66, Rarity.COMMON, mage.cards.t.ToughBuggy.class));
         cards.add(new SetCardInfo("Tough Doggy",14, Rarity.COMMON, mage.cards.t.ToughDoggy.class));
@@ -139,9 +140,9 @@ public final class CrittersAndMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Tough Penguin",28, Rarity.COMMON, mage.cards.t.ToughPenguin.class));
         cards.add(new SetCardInfo("Tough Rhino",54, Rarity.COMMON, mage.cards.t.ToughRhino.class));
         cards.add(new SetCardInfo("Tough Snail",41, Rarity.COMMON, mage.cards.t.ToughSnail.class));
-        cards.add(new SetCardInfo("Xander's Lounge",108, Rarity.UNCOMMON, mage.cards.x.XandersLounge.class));
-        cards.add(new SetCardInfo("Zagoth Triome",109, Rarity.UNCOMMON, mage.cards.z.ZagothTriome.class));
-        cards.add(new SetCardInfo("Ziatora's Proving Ground",110, Rarity.UNCOMMON, mage.cards.z.ZiatorasProvingGround.class));
+        cards.add(new SetCardInfo("Xander's Lounge",109, Rarity.UNCOMMON, mage.cards.x.XandersLounge.class));
+        cards.add(new SetCardInfo("Zagoth Triome",110, Rarity.UNCOMMON, mage.cards.z.ZagothTriome.class));
+        cards.add(new SetCardInfo("Ziatora's Proving Ground",111, Rarity.UNCOMMON, mage.cards.z.ZiatorasProvingGround.class));
         
     }
 
