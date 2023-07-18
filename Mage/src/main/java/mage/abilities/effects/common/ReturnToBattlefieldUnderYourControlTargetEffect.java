@@ -20,13 +20,18 @@ import java.util.UUID;
 public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffect {
 
     private boolean returnFromExileZoneOnly;
+    private boolean tapped;
 
     public ReturnToBattlefieldUnderYourControlTargetEffect() {
         this(false);
     }
 
     public ReturnToBattlefieldUnderYourControlTargetEffect(boolean returnFromExileZoneOnly) {
-        this(returnFromExileZoneOnly, "that card");
+        this(returnFromExileZoneOnly, false, "that card");
+    }
+
+    public ReturnToBattlefieldUnderYourControlTargetEffect(boolean returnFromExileZoneOnly, boolean tapped) {
+        this(returnFromExileZoneOnly, tapped, "that card");
     }
 
     /**
@@ -34,15 +39,17 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
      *                                return it or that card - false
      *                                return exiled card - true
      */
-    public ReturnToBattlefieldUnderYourControlTargetEffect(boolean returnFromExileZoneOnly, String description) {
+    public ReturnToBattlefieldUnderYourControlTargetEffect(boolean returnFromExileZoneOnly, boolean tapped, String description) {
         super(Outcome.Benefit);
         this.returnFromExileZoneOnly = returnFromExileZoneOnly;
-        staticText = "return " + description + " to the battlefield under your control";
+        this.tapped = tapped;
+        staticText = "return " + description + " to the battlefield " + (tapped ? "tapped " : "") + "under your control";
     }
 
     public ReturnToBattlefieldUnderYourControlTargetEffect(final ReturnToBattlefieldUnderYourControlTargetEffect effect) {
         super(effect);
         this.returnFromExileZoneOnly = effect.returnFromExileZoneOnly;
+        this.tapped = effect.tapped;
     }
 
     @Override
@@ -79,7 +86,7 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
                 cardsToBattlefield.addAll(getTargetPointer().getTargets(game, source));
             }
             if (!cardsToBattlefield.isEmpty()) {
-                controller.moveCards(cardsToBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, false, null);
+                controller.moveCards(cardsToBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, tapped, false, false, null);
             }
             return true;
         }

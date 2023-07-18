@@ -10,7 +10,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
-import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -67,11 +66,10 @@ public final class ShelobDreadWeaver extends CardImpl {
         this.addAbility(ability);
 
         // {X}{1}{B}: Put target creature card with mana value X exiled with Shelob onto the battlefield tapped under your control.
-        Ability ability2 = new SimpleActivatedAbility(new ReturnToBattlefieldUnderYourControlTargetEffect()
+        Ability ability2 = new SimpleActivatedAbility(new ReturnToBattlefieldUnderYourControlTargetEffect(false, true)
                 .setText("Put target creature card with mana value X exiled with {this} onto the battlefield tapped under your control"),
                 new ManaCostsImpl<>("{X}{1}{B}"));
         ability2.setTargetAdjuster(ShelobDreadWeaverAdjuster.instance);
-        ability2.addEffect(new TapTargetEffect());
         this.addAbility(ability2);
     }
 
