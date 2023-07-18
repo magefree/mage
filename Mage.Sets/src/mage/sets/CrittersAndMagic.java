@@ -1,15 +1,8 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.collation.BoosterCollator;
-import mage.collation.BoosterStructure;
-import mage.collation.CardRun;
-import mage.collation.RarityConfiguration;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author ChesseTheWasp
