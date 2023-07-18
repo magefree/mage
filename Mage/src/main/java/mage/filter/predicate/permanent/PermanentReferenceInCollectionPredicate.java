@@ -27,7 +27,6 @@ public class PermanentReferenceInCollectionPredicate implements Predicate<Perman
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return (references != null &&
-                references.contains(new MageObjectReference(input, game)));
+        return (references.contains(new MageObjectReference(input, game)));
     }
 }
