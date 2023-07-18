@@ -152,8 +152,9 @@ class KaitoDancingShadowWatcher extends Watcher {
     }
 
     //Return the set of permanents that the controller controlled which dealt combat damage to the player
+    //Returns empty set if there were none
     public Set<MageObjectReference> getPermanents(UUID controllerID, UUID damagedPlayerID) {
-        return permanents.get(controllerID).stream()
+        return permanents.getOrDefault(controllerID, Collections.emptyList()).stream()
                 .filter((mor) -> damagedPlayerID.equals(damageTarget.get(mor)))
                 .collect(Collectors.toSet());
     }
