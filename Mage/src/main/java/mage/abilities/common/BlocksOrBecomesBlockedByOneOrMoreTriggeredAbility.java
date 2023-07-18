@@ -32,6 +32,7 @@ public class BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility extends Triggered
     public BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional, String rule) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
+        this.replaceRuleText = false;
         this.rule = rule;
         setTriggerPhrase("Whenever {this} blocks or becomes blocked by one or more " + (filter != null ? filter.getMessage() : "creatures") + ", ");
     }
