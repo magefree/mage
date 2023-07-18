@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 
 /**
  *
- * @author @stwalsh4118
+ * @author notgreat
  */
 public final class KaitoDancingShadow extends CardImpl {
 
@@ -146,10 +146,8 @@ class KaitoDancingShadowWatcher extends Watcher {
         }
         MageObjectReference mor = new MageObjectReference(creature, game);
         damageTarget.put(mor, event.getPlayerId());
-        game.debugMessage("damageTarget: "+damageTarget);
 
-        List<MageObjectReference> list;
-        list = permanents.computeIfAbsent(creature.getControllerId(), (key) -> new ArrayList<>());
+        List<MageObjectReference> list = permanents.computeIfAbsent(creature.getControllerId(), (key) -> new ArrayList<>());
         list.add(mor);
     }
 
