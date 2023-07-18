@@ -214,6 +214,8 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Selfless Squire", 176, Rarity.RARE, mage.cards.s.SelflessSquire.class));
         cards.add(new SetCardInfo("Shadowspear", 353, Rarity.MYTHIC, mage.cards.s.Shadowspear.class));
         cards.add(new SetCardInfo("Shared Animosity", 226, Rarity.RARE, mage.cards.s.SharedAnimosity.class));
+        cards.add(new SetCardInfo("Shelob, Dread Weaver", 29, Rarity.RARE, mage.cards.s.ShelobDreadWeaver.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Shelob, Dread Weaver", 112, Rarity.RARE, mage.cards.s.ShelobDreadWeaver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shineshadow Snarl", 331, Rarity.RARE, mage.cards.s.ShineshadowSnarl.class));
         cards.add(new SetCardInfo("Shinka, the Bloodsoaked Keep", 374, Rarity.MYTHIC, mage.cards.s.ShinkaTheBloodsoakedKeep.class));
         cards.add(new SetCardInfo("Shiny Impetus", 227, Rarity.UNCOMMON, mage.cards.s.ShinyImpetus.class));
