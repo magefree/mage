@@ -53,6 +53,7 @@ Mage.Server.Plugins/Mage.Game.PennyDreadfulCommanderFreeForAll/target
 Mage.Server.Plugins/Mage.Game.FreeformCommanderDuel/target/
 Mage.Server.Plugins/Mage.Game.FreeformCommanderFreeForAll/target/
 Mage.Server.Plugins/Mage.Game.FreeformUnlimitedCommander/target/
+Mage.Server.Plugins/Mage.Game.CustomPillarOfTheParunsDuel/target/
 Mage.Server.Plugins/Mage.Game.TinyLeadersDuel/target
 Mage.Server.Plugins/Mage.Game.TwoPlayerDuel/target
 Mage.Server.Plugins/Mage.Player.AI.DraftBot/target
