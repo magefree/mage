@@ -31,7 +31,7 @@ public final class CrittersAndMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Alchemists Gift", 29, Rarity.COMMON, mage.cards.a.AlchemistsGift.class));
         cards.add(new SetCardInfo("Big Buggy", 30, Rarity.COMMON, mage.cards.b.BigBuggy.class));
         cards.add(new SetCardInfo("Big Doggy", 43, Rarity.COMMON, mage.cards.b.BigDoggy.class));
-        cards.add(new SetCardInfo("Big Snail", 16, Rarity.COMMON, mage.cards.b.BigSnail.class));
+        cards.add(new SetCardInfo("Big Fishy", 16, Rarity.COMMON, mage.cards.b.BigFishy.class));
         cards.add(new SetCardInfo("Big Ghost", 3, Rarity.COMMON, mage.cards.b.BigGhost.class));
         cards.add(new SetCardInfo("Big Kitty", 55, Rarity.COMMON, mage.cards.b.BigKitty.class));
         cards.add(new SetCardInfo("Big Lizard", 31, Rarity.COMMON, mage.cards.b.BigLizard.class));
@@ -92,7 +92,7 @@ public final class CrittersAndMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Little Otter",24, Rarity.COMMON, mage.cards.l.LittleOtter.class));
         cards.add(new SetCardInfo("Little Penguin",25, Rarity.COMMON, mage.cards.l.LittlePenguin.class));
         cards.add(new SetCardInfo("Little Rhino",51, Rarity.COMMON, mage.cards.l.LittleRhino.class));
-        cards.add(new SetCardInfo("Little Otter",38, Rarity.COMMON, mage.cards.l.LittleSnail.class));
+        cards.add(new SetCardInfo("Little Snail",38, Rarity.COMMON, mage.cards.l.LittleSnail.class));
         cards.add(new SetCardInfo("Lord Buggy",78, Rarity.UNCOMMON, mage.cards.l.LordBuggy.class));
         cards.add(new SetCardInfo("Lord Doggy",79, Rarity.UNCOMMON, mage.cards.l.LordDoggy.class));
         cards.add(new SetCardInfo("Lord Fishy",80, Rarity.UNCOMMON, mage.cards.l.LordFishy.class));
