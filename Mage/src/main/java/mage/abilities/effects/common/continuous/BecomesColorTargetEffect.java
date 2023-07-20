@@ -135,15 +135,14 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
-        sb.append(" becomes ");
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "it"));
+        sb.append(getTargetPointer().isPlural(mode.getTargets()) ? " become " : " becomes ");
         if (setColor == null) {
             sb.append("the color of your choice");
         } else {
             sb.append(setColor.getDescription());
         }
-        if (!duration.toString().equals("")) {
+        if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
         }
         return sb.toString();
