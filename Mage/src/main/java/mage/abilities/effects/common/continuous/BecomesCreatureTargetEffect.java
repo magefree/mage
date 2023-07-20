@@ -7,8 +7,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -71,6 +69,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         this.loseOtherCardTypes = effect.loseOtherCardTypes;
         this.dependencyTypes.add(DependencyType.BecomeCreature);
         this.durationRuleAtStart = effect.durationRuleAtStart;
+        this.removeSubtypes = effect.removeSubtypes;
     }
 
     @Override
@@ -184,52 +183,24 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        if (durationRuleAtStart && duration != Duration.Custom) {
+        if (durationRuleAtStart && !duration.toString().isEmpty()) {
             sb.append(duration.toString());
             sb.append(", ");
         }
-
-        Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() != Integer.MAX_VALUE) {
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("up to ");
-                if (target.getMaxNumberOfTargets() == 1) {
-                    sb.append("one ");
-                }
-            }
+        sb.append(getTargetPointer().describeTargets(mode.getTargets(), "that creature"));
+        sb.append(getTargetPointer().isPlural(mode.getTargets()) ? " each" : "");
+        if (loseAllAbilities && !keepAbilities) {
+            sb.append(getTargetPointer().isPlural(mode.getTargets()) ?
+                    " lose all their abilities and" :
+                    " loses all abilities and");
         }
-
-        if (target.getMaxNumberOfTargets() > 1) {
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName());
-            if (loseAllAbilities) {
-                sb.append(" lose all their abilities and");
-            }
-            if (target.getMaxNumberOfTargets() != Integer.MAX_VALUE) {
-                sb.append(" each");
-            }
-            sb.append(" become ");
-        } else {
-            sb.append("target ").append(target.getTargetName());
-            if (loseAllAbilities && !keepAbilities) {
-                sb.append(" loses all abilities and");
-            }
-            sb.append(" becomes a ");
-        }
+        sb.append(getTargetPointer().isPlural(mode.getTargets()) ? " become " : " becomes a ");
         sb.append(token.getDescription());
-
-        if (!durationRuleAtStart && duration != Duration.Custom) {
+        if (!durationRuleAtStart && !duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
         }
-
         if (addStillALandText) {
-            if (!sb.toString().endsWith("\" ")) {
-                sb.append(". ");
-            }
-            if (target.getMaxNumberOfTargets() > 1) {
-                sb.append("They're still lands");
-            } else {
-                sb.append("It's still a land");
-            }
+            sb.append(getTargetPointer().isPlural(mode.getTargets()) ? ". They're still lands" : ". It's still a land");
         }
         return sb.toString().replace(" .", ".");
     }
