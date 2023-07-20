@@ -2038,3 +2038,19 @@
 |Generate|TOK:LTR|Spirit|||SpiritWhiteToken|
 |Generate|TOK:LTR|Tentacle|||TentacleToken|
 |Generate|TOK:LTR|Treasure|||TreasureToken|
+
+# LTC
+|Generate|TOK:LTC|Beast|||BeastToken|
+|Generate|TOK:LTC|Bird|1||SwanSongBirdToken|
+|Generate|TOK:LTC|Bird|2||GwaihirBirdToken|
+|Generate|TOK:LTC|Dragon|||DragonMenaceAndStealArtifactToken|
+|Generate|TOK:LTC|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:LTC|Goat|||GoatToken|
+|Generate|TOK:LTC|Goblin|||GoblinToken|
+|Generate|TOK:LTC|Halfling|||HalflingToken|
+|Generate|TOK:LTC|Human|||HumanToken|
+|Generate|TOK:LTC|Human Knight|||HumanKnightToken|
+|Generate|TOK:LTC|Insect|||InsectDeathToken|
+|Generate|TOK:LTC|Soldier|||SoldierLifelinkToken|
+|Generate|TOK:LTC|Treefolk|||SylvanOfferingTreefolkToken|
+|Generate|TOK:LTC|Wraith|||WraithToken|

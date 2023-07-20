@@ -2027,6 +2027,22 @@ public class ScryfallImageSupportTokens {
             put("LTR/Tentacle", "https://api.scryfall.com/cards/tltr/4/en?format=image");
             put("LTR/Treasure", "https://api.scryfall.com/cards/tltr/12/en?format=image");
 
+            // LTC
+            put("LTC/Beast", "https://api.scryfall.com/cards/tltc/10/en?format=image");
+            put("LTC/Bird/1", "https://api.scryfall.com/cards/tltc/6/en?format=image");
+            put("LTC/Bird/2", "https://api.scryfall.com/cards/tltc/1/en?format=image");
+            put("LTC/Dragon", "https://api.scryfall.com/cards/tltc/14/en?format=image");
+            put("LTC/Elf Warrior", "https://api.scryfall.com/cards/tltc/11/en?format=image");
+            put("LTC/Goat", "https://api.scryfall.com/cards/tltc/2/en?format=image");
+            put("LTC/Goblin", "https://api.scryfall.com/cards/tltc/8/en?format=image");
+            put("LTC/Halfling", "https://api.scryfall.com/cards/tltc/3/en?format=image");
+            put("LTC/Human", "https://api.scryfall.com/cards/tltc/4/en?format=image");
+            put("LTC/Human Knight", "https://api.scryfall.com/cards/tltc/9/en?format=image");
+            put("LTC/Insect", "https://api.scryfall.com/cards/tltc/12/en?format=image");
+            put("LTC/Soldier", "https://api.scryfall.com/cards/tltc/5/en?format=image");
+            put("LTC/Treefolk", "https://api.scryfall.com/cards/tltc/13/en?format=image");
+            put("LTC/Wraith", "https://api.scryfall.com/cards/tltc/7/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
