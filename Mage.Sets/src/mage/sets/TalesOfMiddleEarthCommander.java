@@ -125,6 +125,8 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Grey Host Reinforcements", 98, Rarity.RARE, mage.cards.g.GreyHostReinforcements.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Growth Spiral", 267, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Guttersnipe", 220, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
+        cards.add(new SetCardInfo("Gwaihir, Greatest of the Eagles", 15, Rarity.RARE, mage.cards.g.GwaihirGreatestOfTheEagles.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gwaihir, Greatest of the Eagles", 99, Rarity.RARE, mage.cards.g.GwaihirGreatestOfTheEagles.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haldir, Lorien Lieutenant", 39, Rarity.RARE, mage.cards.h.HaldirLorienLieutenant.class));
         cards.add(new SetCardInfo("Harmonize", 248, Rarity.UNCOMMON, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Harsh Mentor", 221, Rarity.RARE, mage.cards.h.HarshMentor.class));
