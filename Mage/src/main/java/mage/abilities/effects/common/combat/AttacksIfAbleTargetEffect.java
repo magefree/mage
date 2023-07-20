@@ -76,23 +76,9 @@ public class AttacksIfAbleTargetEffect extends RequirementEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("target ");
-        sb.append(mode.getTargets().get(0).getTargetName());
-        switch (this.mustAttacks) {
-            case YOU:
-                sb.append(" attacks you");
-                break;
-            case ANY:
-            default:
-                sb.append(" attacks");
-                break;
-        }
-        if (this.duration == Duration.EndOfTurn) {
-            sb.append(" this turn if able");
-        } else {
-            sb.append(" each combat if able");
-        }
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " attack " : " attacks ") +
+                (this.mustAttacks == TargetController.YOU ? "you " : "") +
+                (this.duration == Duration.EndOfTurn ? "this turn if able" : "each combat if able");
     }
 }
