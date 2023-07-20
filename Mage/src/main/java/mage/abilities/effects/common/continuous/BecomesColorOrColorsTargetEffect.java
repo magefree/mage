@@ -92,15 +92,9 @@ public class BecomesColorOrColorsTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (!mode.getTargets().isEmpty()) {
-            sb.append("target ");
-            sb.append(mode.getTargets().get(0).getFilter().getMessage());
-            sb.append(" becomes the color or colors of your choice");
-            if (!duration.toString().isEmpty()) {
-                sb.append(' ').append(duration.toString());
-            }
-        }
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " become " : " becomes ") +
+                "the color or colors of your choice"
+                + (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
     }
 }

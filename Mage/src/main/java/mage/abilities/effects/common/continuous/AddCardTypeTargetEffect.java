@@ -67,8 +67,8 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes ");
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "it"));
+        sb.append(getTargetPointer().isPlural(mode.getTargets()) ? " become " : " becomes ");
         boolean article = false;
         for (CardType cardType : addedCardTypes) {
             if (!article) {
