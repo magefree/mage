@@ -2013,6 +2013,20 @@ public class ScryfallImageSupportTokens {
             put("MUL/Elemental", "https://api.scryfall.com/cards/tmul/2/en?format=image");
             put("MUL/Phyrexian Myr", "https://api.scryfall.com/cards/tmul/1/en?format=image");
 
+            // LTR
+            put("LTR/Ballistic Boulder", "https://api.scryfall.com/cards/tltr/8/en?format=image");
+            put("LTR/Food/1", "https://api.scryfall.com/cards/tltr/9/en?format=image");
+            put("LTR/Food/2", "https://api.scryfall.com/cards/tltr/10/en?format=image");
+            put("LTR/Food/3", "https://api.scryfall.com/cards/tltr/11/en?format=image");
+            put("LTR/Human Soldier/1", "https://api.scryfall.com/cards/tltr/1/en?format=image");
+            put("LTR/Human Soldier/2", "https://api.scryfall.com/cards/tltr/2/en?format=image");
+            put("LTR/Orc Army/1", "https://api.scryfall.com/cards/tltr/5/en?format=image");
+            put("LTR/Orc Army/2", "https://api.scryfall.com/cards/tltr/6/en?format=image");
+            put("LTR/Smaug", "https://api.scryfall.com/cards/tltr/7/en?format=image");
+            put("LTR/Spirit", "https://api.scryfall.com/cards/tltr/3/en?format=image");
+            put("LTR/Tentacle", "https://api.scryfall.com/cards/tltr/4/en?format=image");
+            put("LTR/Treasure", "https://api.scryfall.com/cards/tltr/12/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

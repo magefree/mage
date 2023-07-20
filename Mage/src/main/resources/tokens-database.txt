@@ -2024,3 +2024,17 @@
 # MUL
 |Generate|TOK:MUL|Elemental|||Elemental31TrampleHasteToken|
 |Generate|TOK:MUL|Phyrexian Myr|||BrudicladTelchorMyrToken|
+
+# LTR
+|Generate|TOK:LTR|Ballistic Boulder|||BallisticBoulder|
+|Generate|TOK:LTR|Food|1||FoodToken|
+|Generate|TOK:LTR|Food|2||FoodToken|
+|Generate|TOK:LTR|Food|3||FoodToken|
+|Generate|TOK:LTR|Human Soldier|1||HumanSoldierToken|
+|Generate|TOK:LTR|Human Soldier|2||HumanSoldierToken|
+|Generate|TOK:LTR|Orc Army|1||OrcArmyToken|
+|Generate|TOK:LTR|Orc Army|2||OrcArmyToken|
+|Generate|TOK:LTR|Smaug|||SmaugToken|
+|Generate|TOK:LTR|Spirit|||SpiritWhiteToken|
+|Generate|TOK:LTR|Tentacle|||TentacleToken|
+|Generate|TOK:LTR|Treasure|||TreasureToken|
