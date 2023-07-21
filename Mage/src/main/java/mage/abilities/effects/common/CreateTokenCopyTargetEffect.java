@@ -20,7 +20,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
-import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.EmptyCopyApplier;
@@ -60,7 +59,9 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final int tokenPower;
     private final int tokenToughness;
     private boolean useLKI = false;
-    private PermanentModifier permanentModifier = null;
+    private PermanentModifier permanentModifier = null; // TODO: miss copy constructor? Make serializable?
+
+    // TODO: These constructors are a mess. Copy effects need to be reworked altogether, hopefully clean it up then.
 
     public CreateTokenCopyTargetEffect(boolean useLKI) {
         this();
@@ -303,19 +304,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             }
             sb.append("tokens that are copies of ");
         }
-        if (mode.getTargets().isEmpty()) {
-            throw new UnsupportedOperationException("Using default rule generation of target effect without having a target object");
-        }
-        if (mode.getTargets().get(0).getMinNumberOfTargets() == 0) {
-            sb.append("up to ");
-            sb.append(CardUtil.numberToText(mode.getTargets().get(0).getMaxNumberOfTargets()));
-            sb.append(' ');
-        }
-        String targetName = mode.getTargets().get(0).getTargetName();
-        if (!targetName.startsWith("another target")) {
-            sb.append("target ");
-        }
-        sb.append(targetName);
+        sb.append(getTargetPointer().describeTargets(mode.getTargets(), "it"));
 
         if (attacking) {
             sb.append(" that are");
