@@ -18,6 +18,7 @@ public final class CommanderMasters extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = false; //temporary
 
+        cards.add(new SetCardInfo("Abstruse Archaic", 712, Rarity.RARE, mage.cards.a.AbstruseArchaic.class));
         cards.add(new SetCardInfo("Abundance", 884, Rarity.RARE, mage.cards.a.Abundance.class));
         cards.add(new SetCardInfo("Ajani Steadfast", 813, Rarity.MYTHIC, mage.cards.a.AjaniSteadfast.class));
         cards.add(new SetCardInfo("All Is Dust", 800, Rarity.MYTHIC, mage.cards.a.AllIsDust.class));
