@@ -87,6 +87,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 420, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commandeer", 80, Rarity.RARE, mage.cards.c.Commandeer.class));
         cards.add(new SetCardInfo("Commodore Guff", 706, Rarity.MYTHIC, mage.cards.c.CommodoreGuff.class));
+        cards.add(new SetCardInfo("Composer of Spring", 739, Rarity.RARE, mage.cards.c.ComposerOfSpring.class));
         cards.add(new SetCardInfo("Constricting Sliver", 818, Rarity.UNCOMMON, mage.cards.c.ConstrictingSliver.class));
         cards.add(new SetCardInfo("Courser of Kruphix", 888, Rarity.RARE, mage.cards.c.CourserOfKruphix.class));
         cards.add(new SetCardInfo("Crashing Drawbridge", 944, Rarity.COMMON, mage.cards.c.CrashingDrawbridge.class));
