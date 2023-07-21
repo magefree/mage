@@ -2200,6 +2200,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                 int preventedDamage = event.getAmount();
                 event.setAmount(0);
                 game.fireEvent(new PreventedDamageEvent(playerId, attackerId, source, playerId, preventedDamage));
+                game.informPlayers(preventedDamage + " damage from " + attacker.getLogName() + " to " + getLogName()
+                        + (preventedDamage > 1 ? " were" : "was") + " prevented because of protection");
                 return 0;
             }
         }
