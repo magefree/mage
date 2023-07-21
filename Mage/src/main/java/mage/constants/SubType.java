@@ -128,7 +128,8 @@ public enum SubType {
     CYBORG("Cyborg", SubTypeSet.CreatureType, true), // Star Wars
     CYCLOPS("Cyclops", SubTypeSet.CreatureType),
     // D
-    DATHOMIRIAN("Dathomirian", SubTypeSet.CreatureType, true), // Star Wars
+    DALEK("Dalek", SubTypeSet.CreatureType),
+    DATHOMIRIAN("Dathomirian", SubTypeSet.CreatureType, true), // Star Wars,
     DAUTHI("Dauthi", SubTypeSet.CreatureType),
     DEMIGOD("Demigod", SubTypeSet.CreatureType),
     DEMON("Demon", SubTypeSet.CreatureType),

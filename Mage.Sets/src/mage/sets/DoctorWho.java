@@ -18,6 +18,7 @@ public final class DoctorWho extends ExpansionSet {
     private DoctorWho() {
         super("Doctor Who", "WHO", ExpansionSet.buildDate(2023, 10, 13), SetType.SUPPLEMENTAL);
 
+        cards.add(new SetCardInfo("Exterminate!", 68, Rarity.UNCOMMON, mage.cards.e.Exterminate.class));
         cards.add(new SetCardInfo("Forest", 205, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 199, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 203, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
