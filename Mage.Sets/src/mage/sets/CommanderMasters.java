@@ -426,6 +426,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Talisman of Creativity", 979, Rarity.UNCOMMON, mage.cards.t.TalismanOfCreativity.class));
         cards.add(new SetCardInfo("Talisman of Progress", 980, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
         cards.add(new SetCardInfo("Talrand, Sky Summoner", 124, Rarity.RARE, mage.cards.t.TalrandSkySummoner.class));
+        cards.add(new SetCardInfo("Taunting Sliver", 727, Rarity.RARE, mage.cards.t.TauntingSliver.class));
         cards.add(new SetCardInfo("Teferi, Temporal Archmage", 125, Rarity.RARE, mage.cards.t.TeferiTemporalArchmage.class));
         cards.add(new SetCardInfo("Temple of Enlightenment", 1041, Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class));
         cards.add(new SetCardInfo("Temple of Epiphany", 1042, Rarity.RARE, mage.cards.t.TempleOfEpiphany.class));
