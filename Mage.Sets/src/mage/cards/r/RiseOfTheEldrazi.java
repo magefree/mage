@@ -25,7 +25,7 @@ public final class RiseOfTheEldrazi extends CardImpl {
         // This spell can't be countered.
         this.addAbility(new CantBeCounteredSourceAbility());
 
-        // Destroy target permanent. Target player draws four cards. Take an extra turn ater this one.
+        // Destroy target permanent. Target player draws four cards. Take an extra turn after this one.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(4).setTargetPointer(new SecondTargetPointer()));

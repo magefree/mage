@@ -46,7 +46,7 @@ public final class ComposerOfSpring extends CardImpl {
                 condition, "you may put a land card from your hand onto the battlefield tapped. " +
                 "If you control six or more enchantments, instead you may put a creature " +
                 "or land card from your hand onto the battlefield tapped"
-        ), false, false));
+        ), false, false).addHint(hint));
     }
 
     private ComposerOfSpring(final ComposerOfSpring card) {

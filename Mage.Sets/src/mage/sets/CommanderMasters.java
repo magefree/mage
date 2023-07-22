@@ -15,7 +15,7 @@ public final class CommanderMasters extends ExpansionSet {
     private CommanderMasters() {
         super("Commander Masters", "CMM", ExpansionSet.buildDate(2023, 8, 4), SetType.SUPPLEMENTAL);
         this.blockName = "Commander Masters";
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.hasBoosters = false; //temporary
 
         cards.add(new SetCardInfo("Abrade", 203, Rarity.COMMON, mage.cards.a.Abrade.class));
