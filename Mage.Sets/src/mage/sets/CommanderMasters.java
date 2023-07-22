@@ -94,6 +94,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Calix, Destiny's Hand", 918, Rarity.MYTHIC, mage.cards.c.CalixDestinysHand.class));
         cards.add(new SetCardInfo("Campfire", 374, Rarity.COMMON, mage.cards.c.Campfire.class));
         cards.add(new SetCardInfo("Canopy Vista", 989, Rarity.RARE, mage.cards.c.CanopyVista.class));
+        cards.add(new SetCardInfo("Capricious Sliver", 734, Rarity.RARE, mage.cards.c.CapriciousSliver.class));
         cards.add(new SetCardInfo("Captain Ripley Vance", 209, Rarity.UNCOMMON, mage.cards.c.CaptainRipleyVance.class));
         cards.add(new SetCardInfo("Capture of Jingzhou", 79, Rarity.MYTHIC, mage.cards.c.CaptureOfJingzhou.class));
         cards.add(new SetCardInfo("Carrier Thrall", 142, Rarity.COMMON, mage.cards.c.CarrierThrall.class));
