@@ -64,6 +64,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Bane of Bala Ged", 802, Rarity.UNCOMMON, mage.cards.b.BaneOfBalaGed.class));
         cards.add(new SetCardInfo("Bastion of Remembrance", 138, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
         cards.add(new SetCardInfo("Battle Screech", 17, Rarity.COMMON, mage.cards.b.BattleScreech.class));
+        cards.add(new SetCardInfo("Battle at the Helvault", 719, Rarity.RARE, mage.cards.b.BattleAtTheHelvault.class));
         cards.add(new SetCardInfo("Battle for Bretagard", 916, Rarity.RARE, mage.cards.b.BattleForBretagard.class));
         cards.add(new SetCardInfo("Beanstalk Giant", 275, Rarity.UNCOMMON, mage.cards.b.BeanstalkGiant.class));
         cards.add(new SetCardInfo("Binding the Old Gods", 917, Rarity.UNCOMMON, mage.cards.b.BindingTheOldGods.class));
