@@ -106,6 +106,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Champion of the Flame", 210, Rarity.COMMON, mage.cards.c.ChampionOfTheFlame.class));
         cards.add(new SetCardInfo("Champion's Helm", 375, Rarity.RARE, mage.cards.c.ChampionsHelm.class));
         cards.add(new SetCardInfo("Chandra, Awakened Inferno", 875, Rarity.MYTHIC, mage.cards.c.ChandraAwakenedInferno.class));
+        cards.add(new SetCardInfo("Chandra, Legacy of Fire", 735, Rarity.RARE, mage.cards.c.ChandraLegacyOfFire.class));
         cards.add(new SetCardInfo("Chandra, Torch of Defiance", 876, Rarity.MYTHIC, mage.cards.c.ChandraTorchOfDefiance.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 376, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Cinder Glade", 991, Rarity.RARE, mage.cards.c.CinderGlade.class));
