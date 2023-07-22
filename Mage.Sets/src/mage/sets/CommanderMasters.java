@@ -62,6 +62,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Bonescythe Sliver", 815, Rarity.RARE, mage.cards.b.BonescytheSliver.class));
         cards.add(new SetCardInfo("Bonesplitter Sliver", 874, Rarity.COMMON, mage.cards.b.BonesplitterSliver.class));
         cards.add(new SetCardInfo("Boompile", 371, Rarity.RARE, mage.cards.b.Boompile.class));
+        cards.add(new SetCardInfo("Boon of the Spirit Realm", 720, Rarity.RARE, mage.cards.b.BoonOfTheSpiritRealm.class));
         cards.add(new SetCardInfo("Boros Signet", 942, Rarity.COMMON, mage.cards.b.BorosSignet.class));
         cards.add(new SetCardInfo("Braids, Conjurer Adept", 76, Rarity.RARE, mage.cards.b.BraidsConjurerAdept.class));
         cards.add(new SetCardInfo("Brass Knuckles", 372, Rarity.COMMON, mage.cards.b.BrassKnuckles.class));
