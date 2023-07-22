@@ -466,6 +466,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Twilight Prophet", 193, Rarity.MYTHIC, mage.cards.t.TwilightProphet.class));
         cards.add(new SetCardInfo("Two-Headed Sliver", 883, Rarity.COMMON, mage.cards.t.TwoHeadedSliver.class));
         cards.add(new SetCardInfo("Tyrite Sanctum", 1049, Rarity.RARE, mage.cards.t.TyriteSanctum.class));
+        cards.add(new SetCardInfo("Ugin's Mastery", 718, Rarity.RARE, mage.cards.u.UginsMastery.class));
         cards.add(new SetCardInfo("Ugin, the Ineffable", 811, Rarity.RARE, mage.cards.u.UginTheIneffable.class));
         cards.add(new SetCardInfo("Ulamog's Crusher", 6, Rarity.COMMON, mage.cards.u.UlamogsCrusher.class));
         cards.add(new SetCardInfo("Ulamog, the Ceaseless Hunger", 5, Rarity.MYTHIC, mage.cards.u.UlamogTheCeaselessHunger.class));
