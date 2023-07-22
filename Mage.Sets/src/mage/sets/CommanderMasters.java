@@ -305,6 +305,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Omen of the Hunt", 906, Rarity.COMMON, mage.cards.o.OmenOfTheHunt.class));
         cards.add(new SetCardInfo("Omen of the Sun", 831, Rarity.COMMON, mage.cards.o.OmenOfTheSun.class));
         cards.add(new SetCardInfo("Omnath, Locus of Mana", 310, Rarity.MYTHIC, mage.cards.o.OmnathLocusOfMana.class));
+        cards.add(new SetCardInfo("Ondu Spiritdancer", 723, Rarity.RARE, mage.cards.o.OnduSpiritdancer.class));
         cards.add(new SetCardInfo("Opulent Palace", 1017, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
         cards.add(new SetCardInfo("Oreskos Explorer", 832, Rarity.UNCOMMON, mage.cards.o.OreskosExplorer.class));
         cards.add(new SetCardInfo("Ornithopter of Paradise", 966, Rarity.COMMON, mage.cards.o.OrnithopterOfParadise.class));
