@@ -12,8 +12,10 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.OrcArmyToken;
+import mage.game.permanent.token.SliverArmyToken;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.ZombieArmyToken;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -64,9 +66,14 @@ public class AmassEffect extends OneShotEffect {
         switch (subType) {
             case ORC:
                 return new OrcArmyToken();
-            default:
             case ZOMBIE:
                 return new ZombieArmyToken();
+            case SLIVER:
+                return new SliverArmyToken();
+            default:
+                return new CreatureToken(
+                        0, 0, "", subType, SubType.ARMY
+                ).withColor("B");
         }
     }
 

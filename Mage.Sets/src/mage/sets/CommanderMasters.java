@@ -239,6 +239,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Kykar, Wind's Fury", 343, Rarity.RARE, mage.cards.k.KykarWindsFury.class));
         cards.add(new SetCardInfo("Land Tax", 37, Rarity.MYTHIC, mage.cards.l.LandTax.class));
         cards.add(new SetCardInfo("Lavabelly Sliver", 927, Rarity.UNCOMMON, mage.cards.l.LavabellySliver.class));
+        cards.add(new SetCardInfo("Lazotep Sliver", 733, Rarity.RARE, mage.cards.l.LazotepSliver.class));
         cards.add(new SetCardInfo("Lifeblood Hydra", 303, Rarity.RARE, mage.cards.l.LifebloodHydra.class));
         cards.add(new SetCardInfo("Lightning Greaves", 398, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Lorthos, the Tidemaker", 103, Rarity.RARE, mage.cards.l.LorthosTheTidemaker.class));
