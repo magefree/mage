@@ -119,7 +119,7 @@ public abstract class TargetImpl implements Target {
             sb.append(CardUtil.numberToText(max));
             sb.append(' ');
         }
-        if (!isNotTarget() && !getTargetName().contains("target")) {
+        if (!isNotTarget() && !getTargetName().contains("target ") && !getTargetName().endsWith("any target")) {
             sb.append("target ");
         }
         if (isNotTarget() && min == 1 && max == 1) {

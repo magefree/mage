@@ -60,7 +60,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         this.applier = applier;
     }
 
-    public CopyTargetSpellEffect(final CopyTargetSpellEffect effect) {
+    protected CopyTargetSpellEffect(final CopyTargetSpellEffect effect) {
         super(effect);
         this.useLKI = effect.useLKI;
         this.useController = effect.useController;
@@ -104,16 +104,8 @@ public class CopyTargetSpellEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("copy ");
-        if (!mode.getTargets().isEmpty()) {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-        } else {
-            sb.append(copyThatSpellName);
-        }
-        if (chooseTargets) {
-            sb.append(". You may choose new targets for the copy");
-        }
-        return sb.toString();
+        return "copy " +
+                getTargetPointer().describeTargets(mode.getTargets(), copyThatSpellName) +
+                (chooseTargets ? ". You may choose new targets for the copy" : "");
     }
 }
