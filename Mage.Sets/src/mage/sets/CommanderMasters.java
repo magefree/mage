@@ -227,6 +227,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Flux Channeler", 847, Rarity.UNCOMMON, mage.cards.f.FluxChanneler.class));
         cards.add(new SetCardInfo("Fog Bank", 848, Rarity.UNCOMMON, mage.cards.f.FogBank.class));
         cards.add(new SetCardInfo("Font of Fertility", 895, Rarity.COMMON, mage.cards.f.FontOfFertility.class));
+        cards.add(new SetCardInfo("For the Ancestors", 740, Rarity.RARE, mage.cards.f.ForTheAncestors.class));
         cards.add(new SetCardInfo("Forebear's Blade", 384, Rarity.UNCOMMON, mage.cards.f.ForebearsBlade.class));
         cards.add(new SetCardInfo("Forest", 449, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forge of Heroes", 995, Rarity.COMMON, mage.cards.f.ForgeOfHeroes.class));
