@@ -337,6 +337,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Reliquary Tower", 425, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Repeated Reverberation", 879, Rarity.RARE, mage.cards.r.RepeatedReverberation.class));
         cards.add(new SetCardInfo("Righteous Confluence", 53, Rarity.RARE, mage.cards.r.RighteousConfluence.class));
+        cards.add(new SetCardInfo("Rise of the Eldrazi", 716, Rarity.RARE, mage.cards.r.RiseOfTheEldrazi.class));
         cards.add(new SetCardInfo("Rishkar, Peema Renegade", 317, Rarity.UNCOMMON, mage.cards.r.RishkarPeemaRenegade.class));
         cards.add(new SetCardInfo("Rocky Tar Pit", 1021, Rarity.UNCOMMON, mage.cards.r.RockyTarPit.class));
         cards.add(new SetCardInfo("Rogue's Passage", 426, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
