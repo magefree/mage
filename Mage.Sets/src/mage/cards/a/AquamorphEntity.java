@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.MageInt;
@@ -53,8 +52,8 @@ public final class AquamorphEntity extends CardImpl {
 
 class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
 
-    private static final String choice51 = "a 5/1 creature";
-    private static final String choice15 = "a 1/5 creature";
+    private static final String choice51 = "5/1";
+    private static final String choice15 = "1/5";
 
     AquamorphEntityReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -78,18 +77,18 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
-                if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
-                    return true;
+        switch (event.getType()) {
+            case ENTERS_THE_BATTLEFIELD:
+                if (!event.getTargetId().equals(source.getSourceId())) {
+                    return false;
                 }
-            }
+                Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
+                return sourcePermanent != null && !sourcePermanent.isFaceDown(game);
+            case TURNFACEUP:
+                return event.getTargetId().equals(source.getSourceId());
+            default:
+                return false;
         }
-        if (event.getType() == GameEvent.EventType.TURNFACEUP) {
-            return event.getTargetId().equals(source.getSourceId());
-        }
-        return false;
     }
 
     @Override
@@ -100,20 +99,20 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
         } else {
             permanent = game.getPermanent(event.getTargetId());
         }
-        if (permanent == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || permanent == null) {
             return false;
         }
         Choice choice = new ChoiceImpl(true);
-        choice.setMessage("Choose what the creature becomes to");
+        choice.setMessage("Choose what " + permanent.getIdName() + " becomes as it " +
+                (event instanceof EntersTheBattlefieldEvent ? "enters the battlefield" : "is turned face up"));
         choice.getChoices().add(choice51);
         choice.getChoices().add(choice15);
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && !controller.choose(Outcome.Neutral, choice, game)) {
-            discard();
+        if (!controller.choose(Outcome.Neutral, choice, game)) {
             return false;
         }
-        int power = 0;
-        int toughness = 0;
+        int power;
+        int toughness;
         switch (choice.getChoice()) {
             case choice51:
                 power = 5;
@@ -123,8 +122,18 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
                 power = 1;
                 toughness = 5;
                 break;
+            default:
+                return false;
         }
-        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a), source);
+        /* TODO: The chosen characteristics are copiable values; make sure this is handled correctly
+         * 707.2. When copying an object, the copy acquires the copiable values of the original object's characteristics...
+         * The copiable values are the values derived from the text printed on the object
+         * (that text being name, mana cost, color indicator, card type, subtype, supertype, rules text, power, toughness, and/or loyalty),
+         * as modified by other copy effects, by its face-down status,
+         * and by "as ... enters the battlefield" and "as ... is turned face up" abilities
+         * that set power and toughness (and may also set additional characteristics).
+         */
+        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
         return false;
     }
 
