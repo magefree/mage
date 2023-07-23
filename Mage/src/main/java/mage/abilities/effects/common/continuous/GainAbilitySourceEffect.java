@@ -65,6 +65,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+        this.affectedObjectsSet = true; // always sets characteristics of source object
         if (!onCard && Duration.WhileOnBattlefield != duration) {
             // If source permanent is no longer onto battlefield discard the effect
             if (source.getSourcePermanentIfItStillExists(game) == null) {
@@ -72,13 +73,11 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
                 return;
             }
         }
-        if (affectedObjectsSet) {
-            Permanent permanent = game.getPermanentEntering(source.getSourceId());
-            if (permanent != null) {
-                affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1, game));
-            } else {
-                affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
-            }
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
+        if (permanent != null) {
+            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1, game));
+        } else {
+            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
         }
     }
 
@@ -86,11 +85,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         if (onCard) {
             Card card;
-            if (affectedObjectsSet) {
-                card = affectedObjectList.get(0).getCard(game);
-            } else {
-                card = game.getCard(source.getSourceId());
-            }
+            card = affectedObjectList.get(0).getCard(game);
             if (card != null) {
                 // add ability to card only once
                 game.getState().addOtherAbility(card, ability);
@@ -98,14 +93,13 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
             }
         } else {
             Permanent permanent;
-            if (affectedObjectsSet) {
-                permanent = affectedObjectList.get(0).getPermanent(game);
-            } else {
-                permanent = game.getPermanent(source.getSourceId());
-            }
+            permanent = affectedObjectList.get(0).getPermanent(game);
             if (permanent != null) {
                 permanent.addAbility(ability, source.getSourceId(), game);
                 return true;
+            } else {
+                this.discard();
+                return false;
             }
         }
         if (duration == Duration.Custom) {
