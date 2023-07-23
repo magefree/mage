@@ -319,6 +319,8 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Jace, Architect of Thought", 851, Rarity.MYTHIC, mage.cards.j.JaceArchitectOfThought.class));
         cards.add(new SetCardInfo("Jace, Mirror Mage", 852, Rarity.MYTHIC, mage.cards.j.JaceMirrorMage.class));
         cards.add(new SetCardInfo("Jade Mage", 298, Rarity.COMMON, mage.cards.j.JadeMage.class));
+        cards.add(new SetCardInfo("Jaya's Phoenix", 738, Rarity.RARE, mage.cards.j.JayasPhoenix.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Jaya's Phoenix", 768, Rarity.RARE, mage.cards.j.JayasPhoenix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jazal Goldmane", 32, Rarity.RARE, mage.cards.j.JazalGoldmane.class));
         cards.add(new SetCardInfo("Jet Medallion", 395, Rarity.RARE, mage.cards.j.JetMedallion.class));
         cards.add(new SetCardInfo("Jeweled Lotus", 396, Rarity.MYTHIC, mage.cards.j.JeweledLotus.class));
