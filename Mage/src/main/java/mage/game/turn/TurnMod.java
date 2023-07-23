@@ -125,6 +125,7 @@ public class TurnMod implements Serializable {
         if (mod.subsequentTurnMod != null) {
             this.subsequentTurnMod = mod.subsequentTurnMod.copy();
         }
+        this.note = mod.note;
     }
 
     public UUID getPlayerId() {
