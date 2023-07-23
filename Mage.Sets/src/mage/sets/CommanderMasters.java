@@ -697,6 +697,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Victimize", 195, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Vindictive Lich", 196, Rarity.RARE, mage.cards.v.VindictiveLich.class));
         cards.add(new SetCardInfo("Vizier of Tumbling Sands", 131, Rarity.COMMON, mage.cards.v.VizierOfTumblingSands.class));
+        cards.add(new SetCardInfo("Vronos, Masked Inquisitor", 729, Rarity.RARE, mage.cards.v.VronosMaskedInquisitor.class));
         cards.add(new SetCardInfo("Vulshok Battlegear", 418, Rarity.COMMON, mage.cards.v.VulshokBattlegear.class));
         cards.add(new SetCardInfo("Wake the Dead", 197, Rarity.RARE, mage.cards.w.WakeTheDead.class));
         cards.add(new SetCardInfo("Wakening Sun's Avatar", 68, Rarity.RARE, mage.cards.w.WakeningSunsAvatar.class));
