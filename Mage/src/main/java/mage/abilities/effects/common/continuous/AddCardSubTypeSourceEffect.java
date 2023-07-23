@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -27,9 +28,7 @@ public class AddCardSubTypeSourceEffect extends ContinuousEffectImpl {
     public AddCardSubTypeSourceEffect(Duration duration, boolean inAddition, SubType... addedSubType) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.inAddition = inAddition;
-        for (SubType cardType : addedSubType) {
-            this.addedSubTypes.add(cardType);
-        }
+        this.addedSubTypes.addAll(Arrays.asList(addedSubType));
     }
 
     private AddCardSubTypeSourceEffect(final AddCardSubTypeSourceEffect effect) {
@@ -41,13 +40,23 @@ public class AddCardSubTypeSourceEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+        Permanent permanent = game.getPermanentEntering(source.getSourceId());
+        if (permanent != null) {
+            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()) + 1, game));
+        } else {
+            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+        }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && affectedObjectList.contains(new MageObjectReference(permanent, game))) {
+        int offset = 0;
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(source.getSourceId());
+            offset++;
+        }
+        if (permanent != null && affectedObjectList.contains(new MageObjectReference(permanent, game, offset))) {
             if (!inAddition) {
                 permanent.removeAllCreatureTypes(game);
             }
