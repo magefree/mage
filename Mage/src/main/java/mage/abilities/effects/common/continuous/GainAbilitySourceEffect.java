@@ -97,11 +97,14 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl {
             if (permanent != null) {
                 permanent.addAbility(ability, source.getSourceId(), game);
                 return true;
+            } else {
+                this.discard();
+                return false;
             }
         }
         if (duration == Duration.Custom) {
             this.discard();
         }
-        return false;
+        return true;
     }
 }
