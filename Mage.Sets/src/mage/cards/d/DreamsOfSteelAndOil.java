@@ -68,7 +68,7 @@ class DreamsOfSteelAndOilEffect extends OneShotEffect {
 
         HashSet<Card> toExile = new HashSet<>();
         opponent.revealCards(source, opponent.getHand(), game);
-        FilterCard filter = new FilterCard("artifact or creature card form " + opponent.getName() + "'s hand");
+        FilterCard filter = new FilterCard("artifact or creature card from " + opponent.getName() + "'s hand");
         filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
         TargetCard target = new TargetCard(Zone.HAND, filter);
         target.setNotTarget(true);

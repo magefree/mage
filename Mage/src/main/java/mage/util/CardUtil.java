@@ -972,7 +972,8 @@ public final class CardUtil {
         if (text.startsWith("a ")
                 || text.startsWith("an ")
                 || text.startsWith("another ")
-                || text.startsWith("any ")) {
+                || text.startsWith("any ")
+                || text.startsWith("one ")) {
             return text;
         }
         return (!text.isEmpty() && vowels.contains(text.substring(0, 1))) ? "an " + text : "a " + text;
