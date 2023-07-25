@@ -1,30 +1,29 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetCopiableCharacteristicsSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
- * @author fireshoes
+ * @author xenohedron
  */
 public final class MoltenSentry extends CardImpl {
-
-    private static final String rule = "As {this} enters the battlefield, flip a coin. If the coin comes up heads, {this} enters the battlefield as a "
-            + "5/2 creature with haste. If it comes up tails, {this} enters the battlefield as a 2/5 creature with defender.";
 
     public MoltenSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
@@ -34,7 +33,7 @@ public final class MoltenSentry extends CardImpl {
 
         // As Molten Sentry enters the battlefield, flip a coin. If the coin comes up heads, Molten Sentry enters the battlefield as a 5/2 creature with haste.
         // If it comes up tails, Molten Sentry enters the battlefield as a 2/5 creature with defender.
-        this.addAbility(new EntersBattlefieldAbility(new MoltenSentryEffect(), null, rule, ""));
+        this.addAbility(new AsEntersBattlefieldAbility(new MoltenSentryEffect()));
     }
 
     private MoltenSentry(final MoltenSentry card) {
@@ -49,11 +48,13 @@ public final class MoltenSentry extends CardImpl {
 
 class MoltenSentryEffect extends OneShotEffect {
 
-    public MoltenSentryEffect() {
-        super(Outcome.Damage);
+    MoltenSentryEffect() {
+        super(Outcome.AddAbility);
+        staticText = "flip a coin. If the coin comes up heads, {this} enters the battlefield as a 5/2 creature with haste." +
+                " If it comes up tails, {this} enters the battlefield as a 2/5 creature with defender.";
     }
 
-    public MoltenSentryEffect(MoltenSentryEffect effect) {
+    private MoltenSentryEffect(MoltenSentryEffect effect) {
         super(effect);
     }
 
@@ -65,27 +66,58 @@ class MoltenSentryEffect extends OneShotEffect {
             return false;
         }
 
-        int power;
-        int toughness;
-        Ability gainedAbility;
+        Token characteristics;
         if (controller.flipCoin(source, game, false)) {
             game.informPlayers("Heads: " + permanent.getLogName() + " enters the battlefield as a 5/2 creature with haste");
-            power = 5;
-            toughness = 2;
-            gainedAbility = HasteAbility.getInstance();
+            characteristics = new MoltenSentry52Token();
         } else {
             game.informPlayers("Tails: " + permanent.getLogName() + " enters the battlefield as a 2/5 creature with defender");
-            power = 2;
-            toughness = 5;
-            gainedAbility = DefenderAbility.getInstance();
+            characteristics = new MoltenSentry25Token();
         }
-        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a), source);
-        game.addEffect(new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield), source);
+        game.addEffect(new SetCopiableCharacteristicsSourceEffect(characteristics), source);
         return true;
     }
 
     @Override
     public MoltenSentryEffect copy() {
         return new MoltenSentryEffect(this);
+    }
+}
+
+class MoltenSentry52Token extends TokenImpl {
+
+    MoltenSentry52Token() {
+        super("", "5/2 creature with haste");
+        cardType.add(CardType.CREATURE);
+        power = new MageInt(5);
+        toughness = new MageInt(2);
+        this.addAbility(HasteAbility.getInstance());
+    }
+
+    private MoltenSentry52Token(final MoltenSentry52Token token) {
+        super(token);
+    }
+
+    public MoltenSentry52Token copy() {
+        return new MoltenSentry52Token(this);
+    }
+}
+
+class MoltenSentry25Token extends TokenImpl {
+
+    MoltenSentry25Token() {
+        super("", "2/5 creature with defender");
+        cardType.add(CardType.CREATURE);
+        power = new MageInt(2);
+        toughness = new MageInt(5);
+        this.addAbility(DefenderAbility.getInstance());
+    }
+
+    private MoltenSentry25Token(final MoltenSentry25Token token) {
+        super(token);
+    }
+
+    public MoltenSentry25Token copy() {
+        return new MoltenSentry25Token(this);
     }
 }

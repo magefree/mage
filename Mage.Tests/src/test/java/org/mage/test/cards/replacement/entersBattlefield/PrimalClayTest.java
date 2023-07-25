@@ -41,7 +41,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, clay);
-        setChoice(playerA, "a 3/3 artifact creature");
+        setChoice(playerA, "3/3 artifact creature");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -56,7 +56,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, clay);
-        setChoice(playerA, "a 2/2 artifact creature with flying");
+        setChoice(playerA, "2/2 artifact creature with flying");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -72,7 +72,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, clay);
-        setChoice(playerA, "a 1/6 Wall artifact creature with defender");
+        setChoice(playerA, "1/6 Wall artifact creature with defender");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -93,7 +93,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
         // Destroy all creatures with power 3 or greater. Then create a Food token for each creature you control.
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, clay);
-        setChoice(playerA, "a 3/3 artifact creature");
+        setChoice(playerA, "3/3 artifact creature");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cryptoplasm);
 
@@ -122,7 +122,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, clay);
-        setChoice(playerA, "a 1/6 Wall artifact creature with defender");
+        setChoice(playerA, "1/6 Wall artifact creature with defender");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cryptoplasm);
 
@@ -150,12 +150,12 @@ public class PrimalClayTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, plasma);
-        setChoice(playerA, "a 1/6 creature with defender");
+        setChoice(playerA, "1/6 creature with defender");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, clone);
         setChoice(playerB, true); // whether to copy
         setChoice(playerB, plasma); // what to copy
-        setChoice(playerB, "a 2/2 creature with flying"); // new choice as ETB
+        setChoice(playerB, "2/2 creature with flying"); // new choice as ETB
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -247,11 +247,11 @@ public class PrimalClayTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, clay);
-        setChoice(playerA, "a 2/2 artifact creature with flying");
+        setChoice(playerA, "2/2 artifact creature with flying");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cloudshift, clay);
-        setChoice(playerA, "a 3/3 artifact creature");
+        setChoice(playerA, "3/3 artifact creature");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -269,11 +269,11 @@ public class PrimalClayTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, clay);
-        setChoice(playerA, "a 1/6 Wall artifact creature with defender");
+        setChoice(playerA, "1/6 Wall artifact creature with defender");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cloudshift, clay);
-        setChoice(playerA, "a 3/3 artifact creature");
+        setChoice(playerA, "3/3 artifact creature");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
