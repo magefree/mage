@@ -483,6 +483,14 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_ENCHANTMENT.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT = new FilterControlledPermanent("another enchantment");
+
+    static {
+        FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT.add(AnotherPredicate.instance);
+        FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT.add(CardType.ENCHANTMENT.getPredicate());
+        FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_LAND = new FilterControlledLandPermanent();
 
     static {
@@ -623,6 +631,14 @@ public final class StaticFilters {
 
     static {
         FILTER_CONTROLLED_CREATURES.setLockedFilter(true);
+    }
+
+
+    public static final FilterControlledCreaturePermanent FILTER_OTHER_CONTROLLED_CREATURES = new FilterControlledCreaturePermanent("other creatures you control");
+
+    static {
+        FILTER_OTHER_CONTROLLED_CREATURES.add(AnotherPredicate.instance);
+        FILTER_OTHER_CONTROLLED_CREATURES.setLockedFilter(true);
     }
 
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_A_CREATURE = new FilterControlledCreaturePermanent("a creature you control");

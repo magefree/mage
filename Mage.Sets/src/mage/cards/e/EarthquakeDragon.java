@@ -1,14 +1,13 @@
 package mage.cards.e;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.TotalPermanentsManaValue;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.hint.Hint;
@@ -23,7 +22,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
 
 import java.util.UUID;
 
@@ -32,8 +30,12 @@ import java.util.UUID;
  */
 public final class EarthquakeDragon extends CardImpl {
 
+
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DRAGON);
+
+    private static final DynamicValue xValue = new TotalPermanentsManaValue(filter);
     private static final Hint hint = new ValueHint(
-            "Total mana value of Dragons you control", EarthquakeDragonValue.instance
+        "Total mana value of Dragons you control", xValue
     );
 
     public EarthquakeDragon(UUID ownerId, CardSetInfo setInfo) {
@@ -46,8 +48,10 @@ public final class EarthquakeDragon extends CardImpl {
 
         // This spell costs {X} less to cast, where X is the total mana value of Dragons you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(EarthquakeDragonValue.instance)
-        ).addHint(hint).setRuleAtTheTop(true));
+                Zone.ALL,
+                new SpellCostReductionSourceEffect(xValue)
+            ).addHint(hint).setRuleAtTheTop(true)
+        );
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
@@ -70,35 +74,5 @@ public final class EarthquakeDragon extends CardImpl {
     @Override
     public EarthquakeDragon copy() {
         return new EarthquakeDragon(this);
-    }
-}
-
-enum EarthquakeDragonValue implements DynamicValue {
-    instance;
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DRAGON);
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game
-                .getBattlefield()
-                .getActivePermanents(filter, sourceAbility.getControllerId(), sourceAbility, game)
-                .stream()
-                .mapToInt(MageObject::getManaValue)
-                .sum();
-    }
-
-    @Override
-    public EarthquakeDragonValue copy() {
-        return this;
-    }
-
-    @Override
-    public String getMessage() {
-        return "the total mana value of Dragons you control";
-    }
-
-    @Override
-    public String toString() {
-        return "X";
     }
 }
