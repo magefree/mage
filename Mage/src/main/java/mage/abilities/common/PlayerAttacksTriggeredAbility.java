@@ -4,7 +4,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -52,7 +51,7 @@ public class PlayerAttacksTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    private PlayerAttacksTriggeredAbility(final PlayerAttacksTriggeredAbility ability) {
+    protected PlayerAttacksTriggeredAbility(final PlayerAttacksTriggeredAbility ability) {
         super(ability);
 
         this.setTarget = ability.setTarget;
