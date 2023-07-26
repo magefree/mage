@@ -38,18 +38,18 @@ public final class FlayerOfLoyalties extends CardImpl {
         trigger.addEffect(new UntapTargetEffect().setText("Untap that creature."));
         trigger.addEffect(new SetBasePowerToughnessTargetEffect(
             10, 10, Duration.EndOfTurn
-        ).setText("Until end of turn, it has base power and toughness 10/10, "));
+        ).setText("Until end of turn, it has base power and toughness 10/10"));
         trigger.addEffect(new GainAbilityTargetEffect(
-            TrampleAbility.getInstance(), Duration.EndOfTurn, "and gains trample, "
-        ));
+            TrampleAbility.getInstance(), Duration.EndOfTurn, "gains trample"
+        ).concatBy(", and"));
 
         TriggeredAbility annihilator = new AnnihilatorAbility(2);
         trigger.addEffect(new GainAbilityTargetEffect(
-            annihilator, Duration.EndOfTurn, "annihilator 2, "
-        ));
+            annihilator, Duration.EndOfTurn, "annihilator 2"
+        ).concatBy(","));
         trigger.addEffect(new GainAbilityTargetEffect(
-            HasteAbility.getInstance(), Duration.EndOfTurn, "and haste."
-        ));
+            HasteAbility.getInstance(), Duration.EndOfTurn, "haste"
+        ).concatBy(", and"));
 
         trigger.addTarget(new TargetCreaturePermanent());
         this.addAbility(trigger);
