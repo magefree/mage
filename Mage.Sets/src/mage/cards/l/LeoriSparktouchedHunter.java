@@ -95,9 +95,7 @@ class LeoriSparktouchedHunterEffect extends OneShotEffect {
             return false;
         }
 
-        if (controller != null) {
-            game.informPlayers(controller.getLogName() + " has chosen " + subType);
-        }
+        game.informPlayers(controller.getLogName() + " has chosen " + subType);
 
         game.addDelayedTriggeredAbility(
             new LeoriSparktouchedHunterTriggeredAbility(subType),
