@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.PlayerAttacksTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -38,7 +40,11 @@ public final class MirkwoodTrapper extends CardImpl {
         this.addAbility(new MirkwoodTrapperTriggerAttackYou());
 
         // Whenever a player attacks, if they aren't attacking you, that player chooses an attacking creature. It gets +2/+0 until end of turn.
-        this.addAbility(new MirkwoodTrapperTriggerAttack());
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+            new PlayerAttacksTriggeredAbility(new MirkwoodTrapperEffect(), true),
+            NotAttackingSourceControllerCondition.instance,
+            "Whenever a player attacks, if they aren't attacking you, that player chooses an attacking creature. It gets +2/+0 until end of turn."
+        ));
     }
 
     private MirkwoodTrapper(final MirkwoodTrapper card) {
@@ -79,28 +85,20 @@ class MirkwoodTrapperTriggerAttackYou extends TriggeredAbilityImpl {
     }
 }
 
-class MirkwoodTrapperTriggerAttack extends PlayerAttacksTriggeredAbility {
-
-    MirkwoodTrapperTriggerAttack() {
-        super(new MirkwoodTrapperEffect(), true);
-        this.setTriggerPhrase("whenever a player attacks, if they aren't attacking you, ");
-    }
-
-    private MirkwoodTrapperTriggerAttack(final MirkwoodTrapperTriggerAttack ability) {
-        super(ability);
-    }
+enum NotAttackingSourceControllerCondition implements Condition {
+    instance;
 
     @Override
-    public MirkwoodTrapperTriggerAttack copy() {
-        return new MirkwoodTrapperTriggerAttack(this);
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        return !game.getCombat()
+    public boolean apply(Game game, Ability source) {
+        return game.getCombat()
             .getPlayerDefenders(game, false)
             .stream()
-            .anyMatch(pId -> pId.equals(getControllerId()));
+            .noneMatch(pId -> pId.equals(source.getControllerId()));
+    }
+
+    @Override
+    public String toString() {
+        return "they aren't attacking you";
     }
 }
 
@@ -145,6 +143,4 @@ class MirkwoodTrapperEffect extends OneShotEffect {
 
         return true;
     }
-
-
 }

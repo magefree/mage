@@ -17,7 +17,7 @@ public class TargetAttackingCreature extends TargetPermanent {
     }
 
     public TargetAttackingCreature(int minNumTargets, int maxNumTargets) {
-        super(minNumTargets, maxNumTargets, StaticFilters.FILTER_ATTACKING_CREATURE, false);
+        this(minNumTargets, maxNumTargets, false);
     }
 
     public TargetAttackingCreature(int minNumTargets, int maxNumTargets, boolean notTarget) {
