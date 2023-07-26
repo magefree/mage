@@ -34,6 +34,10 @@ public final class MegatronDestructiveForce extends CardImpl {
         this.subtype.add(SubType.VEHICLE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
+        this.color.setRed(true);
+        this.color.setWhite(true);
+        this.color.setBlack(true);
+        this.nightCard = true;
 
         // Living metal
         this.addAbility(new LivingMetalAbility());
