@@ -89,10 +89,11 @@ public class SelectCopiableCharacteristicsSourceEffect extends OneShotEffect {
             } else {
                 sb.append(description);
             }
-            if (i < last) {
+            if (i <= last && last >= 2) {
                 sb.append(", ");
-            } else if (i == last) {
-                sb.append(", or ");
+            }
+            if (i == last) {
+                sb.append("or ");
             }
             if (!token.getSubtype().isEmpty()) {
                 setType = true;
