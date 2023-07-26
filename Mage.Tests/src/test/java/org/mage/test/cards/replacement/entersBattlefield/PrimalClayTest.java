@@ -83,6 +83,29 @@ public class PrimalClayTest extends CardTestPlayerBase {
         assertSubtype(clay, SubType.WALL);
     }
 
+    @Test  // TODO: Failing
+    public void testClayCopyOnBattlefield() {
+        addCard(Zone.HAND, playerA, clay);
+        addCard(Zone.HAND, playerA, cryptoplasm);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, clay);
+        setChoice(playerA, "3/3 artifact creature");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cryptoplasm);
+
+        // cryptoplasm trigger at next upkeep
+        setChoice(playerA, true); // whether to copy
+        addTarget(playerA, clay); // what to copy
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, cryptoplasm, 0);
+        assertPermanentCount(playerA, clay, 2);
+    }
+
     @Test
     public void testClayCopyPTOnBattlefield() {
         addCard(Zone.HAND, playerA, clay);
@@ -112,8 +135,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, cryptoplasm, 1);
     }
 
-    @Ignore("Chosen characteristics of Primal Clay should be copiable values")
-    @Test
+    @Test // TODO: Failing
     public void testClayCopySubtypeOnBattlefield() {
         addCard(Zone.HAND, playerA, clay);
         addCard(Zone.HAND, playerA, cryptoplasm);
@@ -164,7 +186,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, plasma, 1, 6);
         assertPowerToughness(playerB, plasma, 2, 2);
         assertAbility(playerB, plasma, FlyingAbility.getInstance(), true);
-        //assertAbility(playerB, plasma, DefenderAbility.getInstance(), true); TODO: this is a copiable value
+        assertAbility(playerB, plasma, DefenderAbility.getInstance(), true); // TODO: this is a copiable value
     }
 
     @Test
