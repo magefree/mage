@@ -9,8 +9,8 @@ import mage.game.events.GameEvent;
 
 public class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public DamageCantBePreventedEffect(Duration duration, String staticText, boolean messageToUser, boolean messageToLog) {
-        super(duration, Outcome.Benefit, messageToUser, messageToLog);
+    public DamageCantBePreventedEffect(Duration duration, String staticText) {
+        super(duration, Outcome.Benefit);
         this.staticText = staticText;
     }
 
