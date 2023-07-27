@@ -431,6 +431,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Norn's Annex", 829, Rarity.RARE, mage.cards.n.NornsAnnex.class));
         cards.add(new SetCardInfo("Not of This World", 807, Rarity.UNCOMMON, mage.cards.n.NotOfThisWorld.class));
         cards.add(new SetCardInfo("Nyx Weaver", 933, Rarity.UNCOMMON, mage.cards.n.NyxWeaver.class));
+        cards.add(new SetCardInfo("Nyxborn Behemoth", 742, Rarity.RARE, mage.cards.n.NyxbornBehemoth.class));
         cards.add(new SetCardInfo("Oath of Gideon", 830, Rarity.RARE, mage.cards.o.OathOfGideon.class));
         cards.add(new SetCardInfo("Oath of Jace", 854, Rarity.RARE, mage.cards.o.OathOfJace.class));
         cards.add(new SetCardInfo("Oath of Teferi", 934, Rarity.RARE, mage.cards.o.OathOfTeferi.class));
