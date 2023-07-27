@@ -79,13 +79,20 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     @Override
     public void addAbility(Ability ability) {
+        addAbility(ability, true);
+    }
+    @Override
+    public void addAbility(Ability ability, boolean withSubabilities) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
-        abilities.addAll(ability.getSubAbilities());
+        if (withSubabilities) {
+            abilities.addAll(ability.getSubAbilities());
+        }
 
         // TODO: remove all override and backFace changes (bug example: active transform ability in back face)
         if (backFace != null) {
             backFace.addAbility(ability);
+            // Maybe supposed to add subabilities here too?
         }
     }
 
