@@ -278,6 +278,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 return rules;
             }
 
+            // ability hints already collected in super call
+
             // restrict hints
             List<String> restrictHints = new ArrayList<>();
             if (HintUtils.RESTRICT_HINTS_ENABLE) {
@@ -344,7 +346,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
             // total hints
             if (!restrictHints.isEmpty()) {
-                rules.add(HintUtils.HINT_START_MARK);
+                if (rules.stream().noneMatch(s -> s.contains(HintUtils.HINT_START_MARK))) {
+                    rules.add(HintUtils.HINT_START_MARK);
+                }
                 HintUtils.appendHints(rules, restrictHints);
             }
 
