@@ -12,7 +12,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
 import mage.cards.Card;
@@ -279,18 +278,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 return rules;
             }
 
-            // ability hints
-            List<String> abilityHints = new ArrayList<>();
-            if (HintUtils.ABILITY_HINTS_ENABLE) {
-                for (Ability ability : getAbilities(game)) {
-                    for (Hint hint : ability.getHints()) {
-                        String s = hint.getText(game, ability);
-                        if (s != null && !s.isEmpty()) {
-                            abilityHints.add(s);
-                        }
-                    }
-                }
-            }
+            // ability hints already collected in super call
 
             // restrict hints
             List<String> restrictHints = new ArrayList<>();
@@ -357,9 +345,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
 
             // total hints
-            if (!abilityHints.isEmpty() || !restrictHints.isEmpty()) {
-                rules.add(HintUtils.HINT_START_MARK);
-                HintUtils.appendHints(rules, abilityHints);
+            if (!restrictHints.isEmpty()) {
+                if (rules.stream().noneMatch(s -> s.contains(HintUtils.HINT_START_MARK))) {
+                    rules.add(HintUtils.HINT_START_MARK);
+                }
                 HintUtils.appendHints(rules, restrictHints);
             }
 
