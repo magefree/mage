@@ -145,6 +145,8 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Danitha Capashen, Paragon", 20, Rarity.UNCOMMON, mage.cards.d.DanithaCapashenParagon.class));
         cards.add(new SetCardInfo("Daretti, Scrap Savant", 213, Rarity.RARE, mage.cards.d.DarettiScrapSavant.class));
         cards.add(new SetCardInfo("Darksteel Ingot", 378, Rarity.UNCOMMON, mage.cards.d.DarksteelIngot.class));
+        cards.add(new SetCardInfo("Darksteel Monolith", 743, Rarity.RARE, mage.cards.d.DarksteelMonolith.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Darksteel Monolith", 778, Rarity.RARE, mage.cards.d.DarksteelMonolith.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darksteel Mutation", 21, Rarity.UNCOMMON, mage.cards.d.DarksteelMutation.class));
         cards.add(new SetCardInfo("Day's Undoing", 85, Rarity.RARE, mage.cards.d.DaysUndoing.class));
         cards.add(new SetCardInfo("Deadly Recluse", 282, Rarity.COMMON, mage.cards.d.DeadlyRecluse.class));
