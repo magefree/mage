@@ -30,12 +30,10 @@ public class CantBeBlockedTargetEffect extends EvasionEffect {
     public CantBeBlockedTargetEffect(FilterCreaturePermanent filter, Duration duration) {
         super(duration, Outcome.Benefit);
         this.filter = filter;
-        this.staticCantBeBlockedMessage =
-            new StringBuilder("can't be blocked ")
-                .append(filter.getMessage().startsWith("except by") ? "" : "by ")
-                .append(filter.getMessage())
-                .toString();
-        staticText = new StringBuilder("{this} ").append(this.staticCantBeBlockedMessage).toString();
+        this.staticCantBeBlockedMessage = "can't be blocked "
+            + (filter.getMessage().startsWith("except by") ? "" : "by ")
+            + (filter.getMessage());
+        staticText = "{this} " + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedTargetEffect(final CantBeBlockedTargetEffect effect) {

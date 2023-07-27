@@ -18,16 +18,11 @@ public class CantBeBlockedByCreaturesAttachedEffect extends EvasionEffect {
     public CantBeBlockedByCreaturesAttachedEffect(Duration duration, FilterCreaturePermanent filter, AttachmentType attachmentType) {
         super(duration);
         this.filter = filter;
-        this.staticCantBeBlockedMessage =
-                new StringBuilder("can't be blocked ")
-                        .append(filter.getMessage().startsWith("except by") ? "" : "by ")
-                        .append(filter.getMessage())
-                        .toString();
-        staticText =
-                new StringBuilder(attachmentType.verb())
-                        .append(" creature ")
-                        .append(this.staticCantBeBlockedMessage)
-                        .toString();
+        this.staticCantBeBlockedMessage = "can't be blocked "
+                + (filter.getMessage().startsWith("except by") ? "" : "by ")
+                + (filter.getMessage());
+        staticText = attachmentType.verb() + " creature "
+                + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedByCreaturesAttachedEffect(final CantBeBlockedByCreaturesAttachedEffect effect) {

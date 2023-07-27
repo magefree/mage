@@ -17,16 +17,11 @@ public class CantBeBlockedByCreaturesSourceEffect extends EvasionEffect {
     public CantBeBlockedByCreaturesSourceEffect(FilterCreaturePermanent filter, Duration duration) {
         super(duration);
         this.filter = filter;
-        this.staticCantBeBlockedMessage =
-                new StringBuilder("can't be blocked ")
-                        .append(duration == Duration.EndOfTurn ? "this turn " : "")
-                        .append(filter.getMessage().startsWith("except by") ? "" : "by ")
-                        .append(filter.getMessage())
-                        .toString();
-        staticText =
-                new StringBuilder("{this} ")
-                        .append(this.staticCantBeBlockedMessage)
-                        .toString();
+        this.staticCantBeBlockedMessage = "can't be blocked "
+                + (duration == Duration.EndOfTurn ? "this turn " : "")
+                + (filter.getMessage().startsWith("except by") ? "" : "by ")
+                + (filter.getMessage());
+        staticText = "{this} " + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedByCreaturesSourceEffect(final CantBeBlockedByCreaturesSourceEffect effect) {

@@ -24,15 +24,10 @@ public class CantBeBlockedByOneEffect extends EvasionEffect {
     public CantBeBlockedByOneEffect(int amount, Duration duration) {
         super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
-        this.staticCantBeBlockedMessage =
-                new StringBuilder("can't be blocked except by ")
-                        .append(CardUtil.numberToText(amount))
-                        .append(" or more creatures")
-                        .toString();
-        staticText =
-                new StringBuilder("{this} ")
-                        .append(this.staticCantBeBlockedMessage)
-                        .toString();
+        this.staticCantBeBlockedMessage = "can't be blocked except by "
+                + (CardUtil.numberToText(amount))
+                + " or more creatures";
+        staticText = "{this} " + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedByOneEffect(final CantBeBlockedByOneEffect effect) {

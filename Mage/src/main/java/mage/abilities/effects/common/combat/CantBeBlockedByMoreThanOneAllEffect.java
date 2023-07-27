@@ -32,23 +32,11 @@ public class CantBeBlockedByMoreThanOneAllEffect extends EvasionEffect {
         super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
-        this.staticCantBeBlockedMessage =
-                new StringBuilder("can't be blocked by more than ")
-                        .append(CardUtil.numberToText(amount))
-                        .append(" creature")
-                        .append(amount > 1 ? "s" : "")
-                        .append(duration == Duration.EndOfTurn ? " each combat this turn" : "")
-                        .toString();
-        staticText =
-                new StringBuilder("{this} ")
-                        .append(this.staticCantBeBlockedMessage)
-                        .toString();
-        staticText =
-                new StringBuilder("Each ")
-                        .append(filter.getMessage())
-                        .append(" ")
-                        .append(this.staticCantBeBlockedMessage)
-                        .toString();
+        this.staticCantBeBlockedMessage = "can't be blocked by more than "
+                + (CardUtil.numberToText(amount)) + " creature" + (amount > 1 ? "s" : "")
+                + (duration == Duration.EndOfTurn ? " each combat this turn" : "");
+        staticText = "Each " + filter.getMessage() + " "
+                + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedByMoreThanOneAllEffect(final CantBeBlockedByMoreThanOneAllEffect effect) {

@@ -28,19 +28,13 @@ public class CantBeBlockedByOneAllEffect extends EvasionEffect {
         super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
-        this.staticCantBeBlockedMessage =
-                new StringBuilder("can't be blocked")
-                        .append(duration == Duration.EndOfTurn ? " this turn" : "")
-                        .append(" except by ")
-                        .append(CardUtil.numberToText(amount))
-                        .append(" or more creatures")
-                        .toString();
-        staticText =
-                new StringBuilder("each ")
-                        .append(filter.getMessage())
-                        .append(" ")
-                        .append(this.staticCantBeBlockedMessage)
-                        .toString();
+        this.staticCantBeBlockedMessage = "can't be blocked"
+                + (duration == Duration.EndOfTurn ? " this turn" : "")
+                + (" except by ")
+                + (CardUtil.numberToText(amount))
+                + (" or more creatures");
+        staticText = "Each " + (filter.getMessage()) + " "
+                + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedByOneAllEffect(final CantBeBlockedByOneAllEffect effect) {

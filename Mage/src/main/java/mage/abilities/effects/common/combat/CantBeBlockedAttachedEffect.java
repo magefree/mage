@@ -16,11 +16,8 @@ public class CantBeBlockedAttachedEffect extends EvasionEffect {
         super(Duration.WhileOnBattlefield);
 
         this.staticCantBeBlockedMessage = "can't be blocked";
-        this.staticText =
-            new StringBuilder(attachmentType.verb())
-                .append(" creature ")
-                .append(this.staticCantBeBlockedMessage)
-                .toString();
+        this.staticText = attachmentType.verb() + " creature "
+            + this.staticCantBeBlockedMessage;
     }
 
     private CantBeBlockedAttachedEffect(final CantBeBlockedAttachedEffect effect) {

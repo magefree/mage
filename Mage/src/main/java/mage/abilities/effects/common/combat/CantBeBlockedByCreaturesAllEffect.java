@@ -19,18 +19,13 @@ public class CantBeBlockedByCreaturesAllEffect extends EvasionEffect {
         super(duration);
         this.filterCreatures = filterCreatures;
         this.filterBlockedBy = filterBlockedBy;
-        this.staticCantBeBlockedMessage =
-                new StringBuilder("can't be blocked ")
-                        .append(duration == Duration.EndOfTurn ? "this turn " : "")
-                        .append(filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
-                        .append(filterBlockedBy.getMessage())
-                        .toString();
+        this.staticCantBeBlockedMessage = "can't be blocked "
+                + (duration == Duration.EndOfTurn ? "this turn " : "")
+                + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
+                + (filterBlockedBy.getMessage());
 
-        staticText =
-                new StringBuilder(filterCreatures.getMessage())
-                        .append(" ")
-                        .append(this.staticCantBeBlockedMessage)
-                        .toString();
+        staticText = filterCreatures.getMessage() + " "
+                + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedByCreaturesAllEffect(final CantBeBlockedByCreaturesAllEffect effect) {

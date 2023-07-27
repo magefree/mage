@@ -24,16 +24,11 @@ public class CantBeBlockedByOneAttachedEffect extends EvasionEffect {
         super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
         this.attachmentType = attachmentType;
-        this.staticCantBeBlockedMessage =
-                new StringBuilder("can't be blocked except by ")
-                        .append(CardUtil.numberToText(amount))
-                        .append(" or more creatures")
-                        .toString();
-        staticText =
-                new StringBuilder(attachmentType.verb())
-                        .append(" creature ")
-                        .append(this.staticCantBeBlockedMessage)
-                        .toString();
+        this.staticCantBeBlockedMessage = "can't be blocked except by "
+                + (CardUtil.numberToText(amount))
+                + " or more creatures";
+        staticText = attachmentType.verb() + " creature "
+                + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedByOneAttachedEffect(final CantBeBlockedByOneAttachedEffect effect) {

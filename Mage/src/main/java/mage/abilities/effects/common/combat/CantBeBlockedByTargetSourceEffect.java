@@ -22,10 +22,8 @@ public class CantBeBlockedByTargetSourceEffect extends EvasionEffect {
     public CantBeBlockedByTargetSourceEffect(Duration duration) {
         super(duration);
         // TODO: this is not great hint. Better than nothing?
-        this.staticCantBeBlockedMessage =
-            new StringBuilder("can't be blocked by the [targetted creatures]")
-                .append((duration == Duration.EndOfTurn ? " this turn" : ""))
-                .toString();
+        this.staticCantBeBlockedMessage = "can't be blocked by the [targetted creatures]"
+            + (duration == Duration.EndOfTurn ? " this turn" : "");
     }
 
     protected CantBeBlockedByTargetSourceEffect(final CantBeBlockedByTargetSourceEffect effect) {
@@ -52,9 +50,8 @@ public class CantBeBlockedByTargetSourceEffect extends EvasionEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "it"))
-            .append(" can't block {this}")
-            .append((duration == Duration.EndOfTurn ? " this turn" : ""))
-            .toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it")
+            + " can't block {this}"
+            + (duration == Duration.EndOfTurn ? " this turn" : "");
     }
 }

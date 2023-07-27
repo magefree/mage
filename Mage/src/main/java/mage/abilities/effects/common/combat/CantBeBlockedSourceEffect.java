@@ -17,11 +17,9 @@ public class CantBeBlockedSourceEffect extends EvasionEffect {
 
     public CantBeBlockedSourceEffect(Duration duration) {
         super(duration);
-        this.staticCantBeBlockedMessage =
-            new StringBuilder("can't be blocked")
-                .append(this.duration == Duration.EndOfTurn ? " this turn" : "")
-                .toString();
-        staticText = new StringBuilder("{this} ").append(this.staticCantBeBlockedMessage).toString();
+        this.staticCantBeBlockedMessage = "can't be blocked"
+            + (this.duration == Duration.EndOfTurn ? " this turn" : "");
+        staticText = "{this} " + this.staticCantBeBlockedMessage;
     }
 
     public CantBeBlockedSourceEffect(CantBeBlockedSourceEffect effect) {

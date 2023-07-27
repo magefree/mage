@@ -18,15 +18,10 @@ public class CantBeBlockedByAllSourceEffect extends EvasionEffect {
         super(duration);
         this.filterBlockedBy = filterBlockedBy;
 
-        this.staticCantBeBlockedMessage =
-                new StringBuilder("can't be blocked")
-                        .append((filterBlockedBy.getMessage().startsWith("except by") ? "" : "by "))
-                        .append(filterBlockedBy.getMessage())
-                        .toString();
-        this.staticText =
-                new StringBuilder("{this} ")
-                        .append(this.staticCantBeBlockedMessage)
-                        .toString();
+        this.staticCantBeBlockedMessage = "can't be blocked"
+                + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
+                + (filterBlockedBy.getMessage());
+        this.staticText = "{this} " + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedByAllSourceEffect(final CantBeBlockedByAllSourceEffect effect) {
