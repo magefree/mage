@@ -25,6 +25,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Denial", 184, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
         cards.add(new SetCardInfo("Arcane Signet", 273, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archivist of Gondor", 18, Rarity.RARE, mage.cards.a.ArchivistOfGondor.class));
+        cards.add(new SetCardInfo("Arwen, Weaver of Hope", 35, Rarity.RARE, mage.cards.a.ArwenWeaverOfHope.class));
         cards.add(new SetCardInfo("Asceticism", 233, Rarity.RARE, mage.cards.a.Asceticism.class));
         cards.add(new SetCardInfo("Ash Barrens", 295, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
         cards.add(new SetCardInfo("Banishing Light", 161, Rarity.UNCOMMON, mage.cards.b.BanishingLight.class));
