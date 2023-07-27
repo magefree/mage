@@ -802,29 +802,62 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             if (attacker != null && this.blocked) {
                 // Check if there are enough blockers to have a legal block
                 if (attacker.getMinBlockedBy() > 1 && !blockers.isEmpty() && blockers.size() < attacker.getMinBlockedBy()) {
+                    Set<UUID> blockingPlayersId = new HashSet<>();
                     for (UUID blockerId : new ArrayList<>(blockers)) {
                         game.getCombat().removeBlocker(blockerId, game);
+
+                        // Collect the ids of controllers of blocking player.
+                        Permanent permanent = game.getPermanent(blockerId);
+                        if (permanent != null && permanent.getControllerId() != null) {
+                            blockingPlayersId.add(permanent.getControllerId());
+                        }
                     }
                     blockers.clear();
                     blockerOrder.clear();
-                    if (!game.isSimulation()) {
-                        game.informPlayers(attacker.getLogName() + " can't be blocked except by " + attacker.getMinBlockedBy() + " or more creatures. Blockers discarded.");
+
+                    // Both log a message to all players, and a popup for the blocking player(s).
+                    String message = " can't be blocked except by "
+                        + attacker.getMinBlockedBy() + " or more creatures."
+                        + " Blockers discarded.";
+                    game.informPlayers(attacker.getLogName() + message);
+
+                    for (UUID controllerId : blockingPlayersId) {
+                        Player player = game.getPlayer(controllerId);
+                        if (player != null) {
+                            game.informPlayer(player, attacker.getIdName() + message);
+                        }
                     }
+
                     blockWasLegal = false;
                 }
                 // Check if there are too many blockers (maxBlockedBy = 0 means no restrictions)
                 if (attacker.getMaxBlockedBy() > 0 && attacker.getMaxBlockedBy() < blockers.size()) {
+                    Set<UUID> blockingPlayersId = new HashSet<>();
                     for (UUID blockerId : new ArrayList<>(blockers)) {
                         game.getCombat().removeBlocker(blockerId, game);
+
+                        // Collect the ids of controllers of blocking player.
+                        Permanent permanent = game.getPermanent(blockerId);
+                        if (permanent != null && permanent.getControllerId() != null) {
+                            blockingPlayersId.add(permanent.getControllerId());
+                        }
                     }
                     blockers.clear();
                     blockerOrder.clear();
-                    if (!game.isSimulation()) {
-                        game.informPlayers(new StringBuilder(attacker.getLogName())
-                                .append(" can't be blocked by more than ").append(attacker.getMaxBlockedBy())
-                                .append(attacker.getMaxBlockedBy() == 1 ? " creature." : " creatures.")
-                                .append(" Blockers discarded.").toString());
+
+                    // Both log a message to all players, and a popup for the blocking player(s).
+                    String message = " can't be blocked by more than "
+                        + attacker.getMaxBlockedBy() + (attacker.getMaxBlockedBy() == 1 ? " creature." : " creatures.")
+                        + " Blockers discarded.";
+                    game.informPlayers(attacker.getLogName() + message);
+
+                    for (UUID controllerId : blockingPlayersId) {
+                        Player player = game.getPlayer(controllerId);
+                        if (player != null) {
+                            game.informPlayer(player, attacker.getIdName() + message);
+                        }
                     }
+
                     blockWasLegal = false;
                 }
             }

@@ -1230,7 +1230,11 @@ public class Combat implements Serializable, Copyable<Combat> {
                         if (!effect.canBlockCheckAfter(ability, game, true)) {
                             if (controller.isHuman()) {
                                 controller.resetPlayerPassedActions();
-                                game.informPlayer(controller, blockingCreature.getLogName() + " can't block this way.");
+                                
+                                // Both write a line in the logs, and popup a message to the blocking player, for full clarity.
+                                String message = " can't block this way.";
+                                game.informPlayer(controller, blockingCreature.getIdName() + message);
+                                game.informPlayers(blockingCreature.getLogName() + message);
                                 return false;
                             } else {
                                 // remove blocking creatures for AI
@@ -1251,7 +1255,14 @@ public class Combat implements Serializable, Copyable<Combat> {
                         if (effect.cantBeBlockedCheckAfter(attackingCreature, ability, game, true)) {
                             if (controller.isHuman()) {
                                 controller.resetPlayerPassedActions();
-                                game.informPlayer(controller, attackingCreature.getLogName() + " can't be blocked this way.");
+
+                                // Both write a line in the logs, and popup a message to the blocking player, for full clarity.
+                                String message = " can't be blocked this way.";
+                                if (effect.hasCantBeBlockedMessage(attackingCreature, ability, game)) {
+                                    message += " It " + effect.getCantBeBlockedMessage(attackingCreature, ability, game);
+                                }
+                                game.informPlayer(controller, attackingCreature.getIdName() + message);
+                                game.informPlayers(attackingCreature.getLogName() + message);
                                 return false;
                             } else {
                                 // remove blocking creatures for AI
