@@ -352,6 +352,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Lavabelly Sliver", 927, Rarity.UNCOMMON, mage.cards.l.LavabellySliver.class));
         cards.add(new SetCardInfo("Lazotep Sliver", 733, Rarity.RARE, mage.cards.l.LazotepSliver.class));
         cards.add(new SetCardInfo("Legion Vanguard", 170, Rarity.COMMON, mage.cards.l.LegionVanguard.class));
+        cards.add(new SetCardInfo("Leori, Sparktouched Hunter", 709, Rarity.MYTHIC, mage.cards.l.LeoriSparktouchedHunter.class));
         cards.add(new SetCardInfo("Letter of Acceptance", 397, Rarity.COMMON, mage.cards.l.LetterOfAcceptance.class));
         cards.add(new SetCardInfo("Lifeblood Hydra", 303, Rarity.RARE, mage.cards.l.LifebloodHydra.class));
         cards.add(new SetCardInfo("Lightning Greaves", 398, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
