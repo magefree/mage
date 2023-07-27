@@ -14,7 +14,7 @@ import java.util.List;
 public class TotalPermanentsManaValue implements DynamicValue {
 
     private final String message;
-    private final Hint hint;
+    private final ValueHint hint;
     private final FilterPermanent filter;
 
     public TotalPermanentsManaValue(FilterPermanent filter) {
@@ -23,9 +23,15 @@ public class TotalPermanentsManaValue implements DynamicValue {
         this.hint = new ValueHint("Total mana value of " + filter.getMessage(), this);
     }
 
+    private TotalPermanentsManaValue(final TotalPermanentsManaValue value) {
+        this.filter = value.filter.copy();
+        this.message = value.message;
+        this.hint = value.hint.copy();
+    }
+
     @Override
-    public DynamicValue copy() {
-        return this;
+    public TotalPermanentsManaValue copy() {
+        return new TotalPermanentsManaValue(this);
     }
 
     @Override
