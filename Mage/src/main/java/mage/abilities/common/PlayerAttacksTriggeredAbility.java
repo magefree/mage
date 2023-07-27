@@ -51,7 +51,7 @@ public class PlayerAttacksTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    protected PlayerAttacksTriggeredAbility(final PlayerAttacksTriggeredAbility ability) {
+    private PlayerAttacksTriggeredAbility(final PlayerAttacksTriggeredAbility ability) {
         super(ability);
 
         this.setTarget = ability.setTarget;
