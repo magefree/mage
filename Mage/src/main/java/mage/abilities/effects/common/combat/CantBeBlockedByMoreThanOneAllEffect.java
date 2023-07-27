@@ -68,7 +68,7 @@ public class CantBeBlockedByMoreThanOneAllEffect extends EvasionEffect {
             return false;
         }
 
-        permanent.setMinBlockedBy(amount);
+        permanent.setMaxBlockedBy(amount);
         return true;
     }
 }
