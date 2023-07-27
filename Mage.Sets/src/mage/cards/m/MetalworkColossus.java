@@ -4,12 +4,9 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.TotalPermanentsManaValue;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -36,10 +33,7 @@ public final class MetalworkColossus extends CardImpl {
         filterCostReduction.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
-    private static final DynamicValue xValue = new TotalPermanentsManaValue(filterCostReduction);
-    private static final Hint hint = new ValueHint(
-        "Total mana value of noncreature artifacts you control", xValue
-    );
+    private static final TotalPermanentsManaValue xValue = new TotalPermanentsManaValue(filterCostReduction);
 
     public MetalworkColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{11}");
@@ -51,7 +45,7 @@ public final class MetalworkColossus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SpellCostReductionSourceEffect(xValue)
-            ).addHint(hint).setRuleAtTheTop(true)
+            ).addHint(xValue.getHint()).setRuleAtTheTop(true)
         );
 
         // Sacrifice two artifacts: Return Metalwork Colossus from your graveyard to your hand.

@@ -6,11 +6,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.TotalPermanentsManaValue;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -30,7 +28,6 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class NyxbornBehemoth extends CardImpl {
-    private static final String message = "Total mana value of noncreature enchantments you control";
 
     private static final FilterPermanent filter = new FilterControlledEnchantmentPermanent("noncreature enchantments you control");
 
@@ -38,7 +35,7 @@ public final class NyxbornBehemoth extends CardImpl {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
-    private static final DynamicValue xValue = new TotalPermanentsManaValue(filter);
+    private static final TotalPermanentsManaValue xValue = new TotalPermanentsManaValue(filter);
 
     public NyxbornBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{10}{G}{G}");
@@ -51,7 +48,7 @@ public final class NyxbornBehemoth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SpellCostReductionSourceEffect(xValue)
-            ).addHint(new ValueHint(message, xValue)).setRuleAtTheTop(true)
+            ).addHint(xValue.getHint()).setRuleAtTheTop(true)
         );
 
         // Trample

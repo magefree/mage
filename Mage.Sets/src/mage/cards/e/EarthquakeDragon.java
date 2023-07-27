@@ -6,12 +6,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.TotalPermanentsManaValue;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -33,10 +30,7 @@ public final class EarthquakeDragon extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DRAGON);
 
-    private static final DynamicValue xValue = new TotalPermanentsManaValue(filter);
-    private static final Hint hint = new ValueHint(
-        "Total mana value of Dragons you control", xValue
-    );
+    private static final TotalPermanentsManaValue xValue = new TotalPermanentsManaValue(filter);
 
     public EarthquakeDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{14}{G}");
@@ -50,7 +44,7 @@ public final class EarthquakeDragon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SpellCostReductionSourceEffect(xValue)
-            ).addHint(hint).setRuleAtTheTop(true)
+            ).addHint(xValue.getHint()).setRuleAtTheTop(true)
         );
 
         // Flying
