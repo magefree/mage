@@ -6,7 +6,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.Card;
@@ -59,9 +59,9 @@ public final class AyeshaTanakaArmorer extends CardImpl {
         )));
 
         // Ayesha can't be blocked as long as defending player controls three or more artifacts.
-        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), condition, "{this} can't be blocked " +
-                "as long as defending player controls three or more artifacts"
+        this.addAbility(new SimpleStaticAbility(new ConditionalEvasionEffect(
+            new CantBeBlockedSourceEffect(), condition, "{this} can't be blocked " +
+            "as long as defending player controls three or more artifacts"
         )));
     }
 

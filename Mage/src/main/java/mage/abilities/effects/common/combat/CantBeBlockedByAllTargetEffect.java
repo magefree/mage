@@ -2,7 +2,7 @@ package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -11,13 +11,19 @@ import mage.game.permanent.Permanent;
 /**
  * @author LevelX2
  */
-public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
+public class CantBeBlockedByAllTargetEffect extends EvasionEffect {
 
     private final FilterCreaturePermanent filterBlockedBy;
 
     public CantBeBlockedByAllTargetEffect(FilterCreaturePermanent filterBlockedBy, Duration duration) {
         super(duration);
         this.filterBlockedBy = filterBlockedBy;
+        this.staticCantBeBlockedMessage =
+            new StringBuilder("can't be blocked ")
+                .append(duration == Duration.EndOfTurn ? "this turn " : "")
+                .append(filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
+                .append(filterBlockedBy.getMessage())
+                .toString();
     }
 
     protected CantBeBlockedByAllTargetEffect(final CantBeBlockedByAllTargetEffect effect) {
@@ -31,8 +37,8 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !filterBlockedBy.match(blocker, source.getControllerId(), source, game);
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return filterBlockedBy.match(blocker, source.getControllerId(), source, game);
     }
 
     @Override
@@ -45,10 +51,9 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return getTargetPointer().describeTargets(mode.getTargets(), "it")
-                + " can't be blocked "
-                + (duration == Duration.EndOfTurn ? "this turn " : "")
-                + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
-                + filterBlockedBy.getMessage();
+        return new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "it"))
+            .append(" ")
+            .append(this.staticCantBeBlockedMessage)
+            .toString();
     }
 }

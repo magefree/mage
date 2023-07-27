@@ -46,6 +46,7 @@ public class ContinuousEffects implements Serializable {
     private ContinuousEffectsList<ContinuousRuleModifyingEffect> continuousRuleModifyingEffects = new ContinuousEffectsList<>();
     private ContinuousEffectsList<ReplacementEffect> replacementEffects = new ContinuousEffectsList<>();
     private ContinuousEffectsList<PreventionEffect> preventionEffects = new ContinuousEffectsList<>();
+    private ContinuousEffectsList<EvasionEffect> evasionEffects = new ContinuousEffectsList<>();
     private ContinuousEffectsList<RequirementEffect> requirementEffects = new ContinuousEffectsList<>();
     private ContinuousEffectsList<RestrictionEffect> restrictionEffects = new ContinuousEffectsList<>();
     private ContinuousEffectsList<RestrictionUntapNotMoreThanEffect> restrictionUntapNotMoreThanEffects = new ContinuousEffectsList<>();
@@ -72,6 +73,7 @@ public class ContinuousEffects implements Serializable {
         continuousRuleModifyingEffects = effect.continuousRuleModifyingEffects.copy();
         replacementEffects = effect.replacementEffects.copy();
         preventionEffects = effect.preventionEffects.copy();
+        evasionEffects = effect.evasionEffects.copy();
         requirementEffects = effect.requirementEffects.copy();
         restrictionEffects = effect.restrictionEffects.copy();
         restrictionUntapNotMoreThanEffects = effect.restrictionUntapNotMoreThanEffects.copy();
@@ -93,6 +95,7 @@ public class ContinuousEffects implements Serializable {
         allEffectsLists.add(continuousRuleModifyingEffects);
         allEffectsLists.add(replacementEffects);
         allEffectsLists.add(preventionEffects);
+        allEffectsLists.add(evasionEffects);
         allEffectsLists.add(requirementEffects);
         allEffectsLists.add(restrictionEffects);
         allEffectsLists.add(restrictionUntapNotMoreThanEffects);
@@ -105,6 +108,10 @@ public class ContinuousEffects implements Serializable {
 
     public ContinuousEffects copy() {
         return new ContinuousEffects(this);
+    }
+
+    public List<EvasionEffect> getEvasionEffects() {
+        return evasionEffects;
     }
 
     public List<RequirementEffect> getRequirementEffects() {
@@ -120,6 +127,7 @@ public class ContinuousEffects implements Serializable {
         continuousRuleModifyingEffects.removeEndOfCombatEffects();
         replacementEffects.removeEndOfCombatEffects();
         preventionEffects.removeEndOfCombatEffects();
+        evasionEffects.removeEndOfCombatEffects();
         requirementEffects.removeEndOfCombatEffects();
         restrictionEffects.removeEndOfCombatEffects();
         for (ContinuousEffectsList asThoughtlist : asThoughEffectsMap.values()) {
@@ -134,6 +142,7 @@ public class ContinuousEffects implements Serializable {
         continuousRuleModifyingEffects.removeEndOfTurnEffects(game);
         replacementEffects.removeEndOfTurnEffects(game);
         preventionEffects.removeEndOfTurnEffects(game);
+        evasionEffects.removeEndOfTurnEffects(game);
         requirementEffects.removeEndOfTurnEffects(game);
         restrictionEffects.removeEndOfTurnEffects(game);
         for (ContinuousEffectsList asThoughtlist : asThoughEffectsMap.values()) {
@@ -148,6 +157,7 @@ public class ContinuousEffects implements Serializable {
         continuousRuleModifyingEffects.removeInactiveEffects(game);
         replacementEffects.removeInactiveEffects(game);
         preventionEffects.removeInactiveEffects(game);
+        evasionEffects.removeInactiveEffects(game);
         requirementEffects.removeInactiveEffects(game);
         restrictionEffects.removeInactiveEffects(game);
         restrictionUntapNotMoreThanEffects.removeInactiveEffects(game);
@@ -242,8 +252,27 @@ public class ContinuousEffects implements Serializable {
 
     private List<ContinuousEffect> filterLayeredEffects(List<ContinuousEffect> effects, Layer layer) {
         return effects.stream()
-                .filter(effect -> effect.hasLayer(layer))
-                .collect(Collectors.toList());
+            .filter(effect -> effect.hasLayer(layer))
+            .collect(Collectors.toList());
+    }
+
+    public Map<EvasionEffect, Set<Ability>> getApplicableEvasionEffects(Permanent permanent, Game game) {
+        Map<EvasionEffect, Set<Ability>> effects = new HashMap<>();
+        for (EvasionEffect effect : evasionEffects) {
+            Set<Ability> abilities = evasionEffects.getAbility(effect.getId());
+            Set<Ability> applicableAbilities = new HashSet<>();
+            for (Ability ability : abilities) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, ability instanceof MageSingleton ? permanent : null, null)) {
+                    if (effect.applies(permanent, ability, game)) {
+                        applicableAbilities.add(ability);
+                    }
+                }
+            }
+            if (!applicableAbilities.isEmpty()) {
+                effects.put(effect, abilities);
+            }
+        }
+        return effects;
     }
 
     public Map<RequirementEffect, Set<Ability>> getApplicableRequirementEffects(Permanent permanent, boolean playerRealted, Game game) {
@@ -1286,6 +1315,9 @@ public class ContinuousEffects implements Serializable {
             case PREVENTION:
                 preventionEffects.addEffect((PreventionEffect) effect, source);
                 break;
+            case EVASION:
+                evasionEffects.addEffect((EvasionEffect) effect, source);
+                break;
             case RESTRICTION:
                 restrictionEffects.addEffect((RestrictionEffect) effect, source);
                 break;
@@ -1437,6 +1469,7 @@ public class ContinuousEffects implements Serializable {
         logger.info("continuousRuleModifyingEffects ...: " + continuousRuleModifyingEffects.size());
         logger.info("replacementEffects ...............: " + replacementEffects.size());
         logger.info("preventionEffects ................: " + preventionEffects.size());
+        logger.info("evasionEffects ...................: " + evasionEffects.size());
         logger.info("requirementEffects ...............: " + requirementEffects.size());
         logger.info("restrictionEffects ...............: " + restrictionEffects.size());
         logger.info("restrictionUntapNotMoreThanEffects: " + restrictionUntapNotMoreThanEffects.size());
@@ -1449,15 +1482,16 @@ public class ContinuousEffects implements Serializable {
         logger.info("applyCounters ....................: " + (applyCounters != null ? "exists" : "null"));
         logger.info("auraReplacementEffect ............: " + (continuousRuleModifyingEffects != null ? "exists" : "null"));
         Map<String, TraceInfo> orderedEffects = new TreeMap<>();
-        traceAddContinuousEffects(orderedEffects, layeredEffects, game, "layeredEffects................");
-        traceAddContinuousEffects(orderedEffects, continuousRuleModifyingEffects, game, "continuousRuleModifyingEffects");
-        traceAddContinuousEffects(orderedEffects, replacementEffects, game, "replacementEffects............");
-        traceAddContinuousEffects(orderedEffects, preventionEffects, game, "preventionEffects.............");
-        traceAddContinuousEffects(orderedEffects, requirementEffects, game, "requirementEffects............");
-        traceAddContinuousEffects(orderedEffects, restrictionEffects, game, "restrictionEffects............");
-        traceAddContinuousEffects(orderedEffects, restrictionUntapNotMoreThanEffects, game, "restrictionUntapNotMore...");
-        traceAddContinuousEffects(orderedEffects, costModificationEffects, game, "costModificationEffects.......");
-        traceAddContinuousEffects(orderedEffects, spliceCardEffects, game, "spliceCardEffects.............");
+        traceAddContinuousEffects(orderedEffects, layeredEffects,/*******************/game, "layeredEffects................");
+        traceAddContinuousEffects(orderedEffects, continuousRuleModifyingEffects,/***/game, "continuousRuleModifyingEffects");
+        traceAddContinuousEffects(orderedEffects, replacementEffects,/***************/game, "replacementEffects............");
+        traceAddContinuousEffects(orderedEffects, preventionEffects,/****************/game, "preventionEffects.............");
+        traceAddContinuousEffects(orderedEffects, evasionEffects,/*******************/game, "evasionEffects................");
+        traceAddContinuousEffects(orderedEffects, requirementEffects,/***************/game, "requirementEffects............");
+        traceAddContinuousEffects(orderedEffects, restrictionEffects,/***************/game, "restrictionEffects............");
+        traceAddContinuousEffects(orderedEffects, restrictionUntapNotMoreThanEffects, game, "restrictionUntapNotMore.......");
+        traceAddContinuousEffects(orderedEffects, costModificationEffects,/**********/game, "costModificationEffects.......");
+        traceAddContinuousEffects(orderedEffects, spliceCardEffects,/****************/game, "spliceCardEffects.............");
         for (Map.Entry<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> entry : asThoughEffectsMap.entrySet()) {
             traceAddContinuousEffects(orderedEffects, entry.getValue(), game, entry.getKey().toString());
         }

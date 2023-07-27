@@ -7,7 +7,7 @@ import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
@@ -141,11 +141,15 @@ class TheRingEmblemLegendaryEffect extends ContinuousEffectImpl {
     }
 }
 
-class TheRingEmblemEvasionEffect extends RestrictionEffect {
+class TheRingEmblemEvasionEffect extends EvasionEffect {
 
     TheRingEmblemEvasionEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "and can't be blocked by creatures with greater power";
+        this.staticCantBeBlockedMessage = "can't be blocked by creatures with greater power";
+        staticText =
+            new StringBuilder("and ")
+                .append(this.staticCantBeBlockedMessage)
+                .toString();
     }
 
     private TheRingEmblemEvasionEffect(final TheRingEmblemEvasionEffect effect) {
@@ -164,8 +168,8 @@ class TheRingEmblemEvasionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return blocker.getPower().getValue() <= attacker.getPower().getValue();
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return blocker.getPower().getValue() > attacker.getPower().getValue();
     }
 }
 

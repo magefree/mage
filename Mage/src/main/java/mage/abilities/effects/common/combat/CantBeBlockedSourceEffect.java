@@ -1,7 +1,7 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -9,7 +9,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author North
  */
-public class CantBeBlockedSourceEffect extends RestrictionEffect {
+public class CantBeBlockedSourceEffect extends EvasionEffect {
 
     public CantBeBlockedSourceEffect() {
         this(Duration.WhileOnBattlefield);
@@ -17,10 +17,11 @@ public class CantBeBlockedSourceEffect extends RestrictionEffect {
 
     public CantBeBlockedSourceEffect(Duration duration) {
         super(duration);
-        this.staticText = "{this} can't be blocked";
-        if (this.duration == Duration.EndOfTurn) {
-            this.staticText += " this turn";
-        }
+        this.staticCantBeBlockedMessage =
+            new StringBuilder("can't be blocked")
+                .append(this.duration == Duration.EndOfTurn ? " this turn" : "")
+                .toString();
+        staticText = new StringBuilder("{this} ").append(this.staticCantBeBlockedMessage).toString();
     }
 
     public CantBeBlockedSourceEffect(CantBeBlockedSourceEffect effect) {
@@ -33,8 +34,8 @@ public class CantBeBlockedSourceEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return false;
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return true;
     }
 
     @Override

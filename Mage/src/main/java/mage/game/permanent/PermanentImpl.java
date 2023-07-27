@@ -7,10 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.RequirementEffect;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.*;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
@@ -280,9 +277,19 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
             // ability hints already collected in super call
 
-            // restrict hints
+            // restrict hints, evasion hints, and requirement hints.
             List<String> restrictHints = new ArrayList<>();
             if (HintUtils.RESTRICT_HINTS_ENABLE) {
+                // evasion
+                for (Map.Entry<EvasionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableEvasionEffects(this, game).entrySet()) {
+                    for (Ability ability : entry.getValue()) {
+                        String cantBeBlockedMessage = entry.getKey().cantBeBlockedMessage(this, ability, game);
+                        if (cantBeBlockedMessage != null) {
+                            restrictHints.add(HintUtils.prepareText(cantBeBlockedMessage + addSourceObjectName(game, ability), null, HintUtils.HINT_ICON_EVASION));
+                        }
+                    }
+                }
+
                 // restrict
                 for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
                     for (Ability ability : entry.getValue()) {
@@ -1475,10 +1482,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
             }
         }
-        // check also attacker's restriction effects
-        for (Map.Entry<RestrictionEffect, Set<Ability>> restrictionEntry : game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
-            for (Ability ability : restrictionEntry.getValue()) {
-                if (!restrictionEntry.getKey().canBeBlocked(attacker, this, ability, game, true)) {
+        // check also attacker's evasion effects
+        for (Map.Entry<EvasionEffect, Set<Ability>> evasionEntry : game.getContinuousEffects().getApplicableEvasionEffects(attacker, game).entrySet()) {
+            for (Ability ability : evasionEntry.getValue()) {
+                if (evasionEntry.getKey().cantBeBlocked(attacker, this, ability, game, true)) {
                     return false;
                 }
             }

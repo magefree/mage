@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
@@ -41,9 +41,9 @@ public final class BilbosRing extends CardImpl {
                 new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT),
                 MyTurnCondition.instance, "as long as it's your turn, equipped creature has hexproof"
         ));
-        ability.addEffect(new ConditionalRestrictionEffect(
-                new CantBeBlockedAttachedEffect(AttachmentType.EQUIPMENT),
-                MyTurnCondition.instance, "and can't be blocked"
+        ability.addEffect(new ConditionalEvasionEffect(
+            new CantBeBlockedAttachedEffect(AttachmentType.EQUIPMENT),
+            MyTurnCondition.instance, "and can't be blocked"
         ));
         this.addAbility(ability.addHint(MyTurnHint.instance));
 

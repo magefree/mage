@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
@@ -29,7 +30,8 @@ public class ShadowAbility extends EvasionAbility implements MageSingleton {
     }
 
     private ShadowAbility() {
-        this.addEffect(new ShadowEffect());
+        this.addEffect(new ShadowBlockEffect());
+        this.addEffect(new ShadowEvasionEffect());
     }
 
     @Override
@@ -44,13 +46,42 @@ public class ShadowAbility extends EvasionAbility implements MageSingleton {
 
 }
 
-class ShadowEffect extends RestrictionEffect implements MageSingleton {
+class ShadowEvasionEffect extends EvasionEffect implements MageSingleton {
 
-    public ShadowEffect() {
+    ShadowEvasionEffect() {
         super(Duration.EndOfGame);
     }
 
-    protected ShadowEffect(final ShadowEffect effect) {
+    protected ShadowEvasionEffect(final ShadowEvasionEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getAbilities().containsKey(ShadowAbility.getInstance().getId());
+    }
+
+    @Override
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return !blocker.getAbilities().containsKey(ShadowAbility.getInstance().getId())
+            && null == game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SHADOW, null, blocker.getControllerId(), game);
+    }
+
+    @Override
+    public ShadowEvasionEffect copy() {
+        return new ShadowEvasionEffect(this);
+    }
+}
+
+
+class ShadowBlockEffect extends RestrictionEffect implements MageSingleton {
+
+    ShadowBlockEffect() {
+        super(Duration.EndOfGame);
+    }
+
+    private ShadowBlockEffect(final ShadowBlockEffect effect) {
+>>>>>>> 1151368355 (refactor all Evasion abilities. add hints to most of them.)
         super(effect);
     }
 
@@ -68,13 +99,7 @@ class ShadowEffect extends RestrictionEffect implements MageSingleton {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return blocker.getAbilities().containsKey(ShadowAbility.getInstance().getId())
-                || null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SHADOW, null, blocker.getControllerId(), game);
-    }
-
-    @Override
-    public ShadowEffect copy() {
-        return new ShadowEffect(this);
+    public ShadowBlockEffect copy() {
+        return new ShadowBlockEffect(this);
     }
 }

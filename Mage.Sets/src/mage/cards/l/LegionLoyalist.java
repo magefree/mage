@@ -3,7 +3,7 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.BattalionAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -54,11 +54,12 @@ public final class LegionLoyalist extends CardImpl {
     }
 }
 
-class CantBeBlockedByTokenEffect extends RestrictionEffect {
+class CantBeBlockedByTokenEffect extends EvasionEffect {
 
     public CantBeBlockedByTokenEffect() {
         super(Duration.EndOfTurn);
-        staticText = "Creatures you control can't be blocked by tokens this turn";
+        this.staticCantBeBlockedMessage = "can't be blocked by tokens this turn";
+        staticText = "Creatures you control " + this.staticCantBeBlockedMessage;
     }
 
     private CantBeBlockedByTokenEffect(final CantBeBlockedByTokenEffect effect) {
@@ -79,7 +80,7 @@ class CantBeBlockedByTokenEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return !(blocker instanceof PermanentToken);
     }
 

@@ -4,7 +4,7 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DefendingPlayerControlsSourceAttackingCondition;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ public final class Tanglewalker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Each creature you control can't be blocked as long as defending player controls an artifact land.
-        Effect effect = new ConditionalRestrictionEffect(
+        Effect effect = new ConditionalEvasionEffect(
                 new CantBeBlockedAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES, Duration.WhileOnBattlefield),
                 new DefendingPlayerControlsSourceAttackingCondition(filter));
         effect.setText("Each creature you control can't be blocked as long as defending player controls an artifact land");

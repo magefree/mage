@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.AdventureCard;
@@ -34,11 +34,11 @@ public final class SwordCoastSerpent extends AdventureCard {
         this.toughness = new MageInt(6);
 
         // Sword Coast Serpent can't be blocked as long as you've cast a noncreature spell this turn.
-        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalEvasionEffect(
                 new CantBeBlockedSourceEffect(), SwordCoastSerpentCondition.instance,
                 "{this} can't be blocked as long as you've cast a noncreature spell this turn"
         )));
-
+        
         // Capsizing Wave
         // Return target creature to its owner's hand.
         this.getSpellCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());

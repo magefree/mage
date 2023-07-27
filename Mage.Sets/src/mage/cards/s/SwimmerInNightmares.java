@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
@@ -50,9 +50,9 @@ public final class SwimmerInNightmares extends CardImpl {
         )).addHint(new ValueHint("Max cards in single graveyard", SwimmerInNightmaresCardsInSingleGraveyardValue.instance)));
 
         // Swimmer in Nightmares can't be blocked as long as you control an Ashiok planeswalker.
-        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), condition,
-                "{this} can't be blocked as long as you control an Ashiok planeswalker"
+        this.addAbility(new SimpleStaticAbility(new ConditionalEvasionEffect(
+            new CantBeBlockedSourceEffect(), condition,
+            "{this} can't be blocked as long as you control an Ashiok planeswalker"
         )).addHint(new ConditionHint(condition, "You control an Ashiok planeswalker")));
     }
 

@@ -2,7 +2,7 @@ package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -11,7 +11,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class CantBeBlockedByTargetSourceEffect extends RestrictionEffect {
+public class CantBeBlockedByTargetSourceEffect extends EvasionEffect {
 
     /**
      * Target creature(s) cant block the source creature
@@ -21,6 +21,11 @@ public class CantBeBlockedByTargetSourceEffect extends RestrictionEffect {
 
     public CantBeBlockedByTargetSourceEffect(Duration duration) {
         super(duration);
+        // TODO: this is not great hint. Better than nothing?
+        this.staticCantBeBlockedMessage =
+            new StringBuilder("can't be blocked by the [targetted creatures]")
+                .append((duration == Duration.EndOfTurn ? " this turn" : ""))
+                .toString();
     }
 
     protected CantBeBlockedByTargetSourceEffect(final CantBeBlockedByTargetSourceEffect effect) {
@@ -33,8 +38,8 @@ public class CantBeBlockedByTargetSourceEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !this.getTargetPointer().getTargets(game, source).contains(blocker.getId());
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return this.getTargetPointer().getTargets(game, source).contains(blocker.getId());
     }
 
     @Override
@@ -47,8 +52,9 @@ public class CantBeBlockedByTargetSourceEffect extends RestrictionEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
-                " can't block {this}" +
-                (duration == Duration.EndOfTurn ? " this turn" : "");
+        return new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "it"))
+            .append(" can't block {this}")
+            .append((duration == Duration.EndOfTurn ? " this turn" : ""))
+            .toString();
     }
 }

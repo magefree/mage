@@ -3,8 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceAttackingAloneCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.keyword.DisturbAbility;
 import mage.cards.CardImpl;
@@ -29,10 +28,10 @@ public final class GutterSkulker extends CardImpl {
         this.secondSideCardClazz = mage.cards.g.GutterShortcut.class;
 
         // Gutter Skulker can't be blocked as long as it's attacking alone.
-        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(Duration.WhileOnBattlefield),
-                SourceAttackingAloneCondition.instance,
-                "{this} can't be blocked as long as it's attacking alone"
+        this.addAbility(new SimpleStaticAbility(new ConditionalEvasionEffect(
+            new CantBeBlockedSourceEffect(Duration.WhileOnBattlefield),
+            SourceAttackingAloneCondition.instance,
+            "{this} can't be blocked as long as it's attacking alone"
         )));
 
         // Disturb {3}{U}

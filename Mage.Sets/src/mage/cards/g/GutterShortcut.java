@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
@@ -42,9 +42,9 @@ public final class GutterShortcut extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't be blocked as long as it's attacking alone.
-        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedAttachedEffect(AttachmentType.AURA), GutterShortcutCondition.instance,
-                "enchanted creature can't be blocked as long as it's attacking alone"
+        this.addAbility(new SimpleStaticAbility(new ConditionalEvasionEffect(
+            new CantBeBlockedAttachedEffect(AttachmentType.AURA), GutterShortcutCondition.instance,
+            "enchanted creature can't be blocked as long as it's attacking alone"
         )));
 
         // If Gutter Shortcut would be put into a graveyard from anywhere, exile it instead.

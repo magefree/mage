@@ -5,7 +5,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DefendingPlayerControlsSourceAttackingCondition;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
@@ -30,7 +30,7 @@ public final class ScrapdiverSerpent extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Scrapdiver Serpent can't be blocked as long as defending player controls an artifact
-        Effect effect = new ConditionalRestrictionEffect(
+        Effect effect = new ConditionalEvasionEffect(
                 new CantBeBlockedSourceEffect(),
                 new DefendingPlayerControlsSourceAttackingCondition(new FilterArtifactPermanent()));
         effect.setText("{this} can't be blocked as long as defending player controls an artifact");

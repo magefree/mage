@@ -4,36 +4,36 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.FixedCondition;
 import mage.abilities.condition.LockedInCondition;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * @author LevelX2
+ * @author Susucr
  */
-public class ConditionalRestrictionEffect extends RestrictionEffect {
+public class ConditionalEvasionEffect extends EvasionEffect {
 
-    protected RestrictionEffect effect;
-    protected RestrictionEffect otherwiseEffect;
+    protected EvasionEffect effect;
+    protected EvasionEffect otherwiseEffect;
     protected Condition condition;
     protected boolean conditionState;
     protected Condition baseCondition;
     protected boolean initDone = false;
 
-    public ConditionalRestrictionEffect(RestrictionEffect effect, Condition condition) {
+    public ConditionalEvasionEffect(EvasionEffect effect, Condition condition) {
         this(effect, condition, null);
     }
 
-    public ConditionalRestrictionEffect(RestrictionEffect effect, Condition condition, String text) {
+    public ConditionalEvasionEffect(EvasionEffect effect, Condition condition, String text) {
         this(effect.getDuration(), effect, condition, null, text);
     }
 
-    public ConditionalRestrictionEffect(Duration duration, RestrictionEffect effect, Condition condition, RestrictionEffect otherwiseEffect) {
+    public ConditionalEvasionEffect(Duration duration, EvasionEffect effect, Condition condition, EvasionEffect otherwiseEffect) {
         this(duration, effect, condition, otherwiseEffect, null);
     }
 
-    public ConditionalRestrictionEffect(Duration duration, RestrictionEffect effect, Condition condition, RestrictionEffect otherwiseEffect, String text) {
+    public ConditionalEvasionEffect(Duration duration, EvasionEffect effect, Condition condition, EvasionEffect otherwiseEffect, String text) {
         super(duration);
         this.effect = effect;
         this.baseCondition = condition;
@@ -43,11 +43,11 @@ public class ConditionalRestrictionEffect extends RestrictionEffect {
         }
     }
 
-    protected ConditionalRestrictionEffect(final ConditionalRestrictionEffect effect) {
+    public ConditionalEvasionEffect(final ConditionalEvasionEffect effect) {
         super(effect);
-        this.effect = (RestrictionEffect) effect.effect.copy();
+        this.effect = (EvasionEffect) effect.effect.copy();
         if (effect.otherwiseEffect != null) {
-            this.otherwiseEffect = (RestrictionEffect) effect.otherwiseEffect.copy();
+            this.otherwiseEffect = (EvasionEffect) effect.otherwiseEffect.copy();
         }
         this.condition = effect.condition;
         this.conditionState = effect.conditionState;
@@ -95,48 +95,28 @@ public class ConditionalRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canAttack(Game game, boolean canUseChooseDialogs) {
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         if (conditionState) {
-            return effect.canAttack(game, canUseChooseDialogs);
+            return effect.cantBeBlocked(attacker, blocker, source, game, canUseChooseDialogs);
         } else if (otherwiseEffect != null) {
-            return otherwiseEffect.canAttack(game, canUseChooseDialogs);
+            return otherwiseEffect.cantBeBlocked(attacker, blocker, source, game, canUseChooseDialogs);
         }
         return true;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public String cantBeBlockedMessage(Permanent attacker, Ability source, Game game) {
         if (conditionState) {
-            return effect.canBlock(attacker, blocker, source, game, canUseChooseDialogs);
+            return effect.cantBeBlockedMessage(attacker, source, game);
         } else if (otherwiseEffect != null) {
-            return otherwiseEffect.canBlock(attacker, blocker, source, game, canUseChooseDialogs);
+            return otherwiseEffect.cantBeBlockedMessage(attacker, source, game);
         }
-        return true;
+        return null;
     }
 
     @Override
-    public boolean canBeUntapped(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (conditionState) {
-            return effect.canBeUntapped(permanent, source, game, canUseChooseDialogs);
-        } else if (otherwiseEffect != null) {
-            return otherwiseEffect.canBeUntapped(permanent, source, game, canUseChooseDialogs);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game, boolean canUseChooseDialogs) {
-        if (conditionState) {
-            return effect.canUseActivatedAbilities(permanent, source, game, canUseChooseDialogs);
-        } else if (otherwiseEffect != null) {
-            return otherwiseEffect.canUseActivatedAbilities(permanent, source, game, canUseChooseDialogs);
-        }
-        return true;
-    }
-
-    @Override
-    public ConditionalRestrictionEffect copy() {
-        return new ConditionalRestrictionEffect(this);
+    public ConditionalEvasionEffect copy() {
+        return new ConditionalEvasionEffect(this);
     }
 
     @Override

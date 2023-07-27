@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,7 +44,7 @@ public final class KrakenOfTheStraits extends CardImpl {
     }
 }
 
-class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffect {
+class CantBeBlockedByCreaturesWithLessPowerEffect extends EvasionEffect {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands");
 
@@ -56,6 +56,7 @@ class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffect {
 
     public CantBeBlockedByCreaturesWithLessPowerEffect() {
         super(Duration.WhileOnBattlefield);
+        this.staticCantBeBlockedMessage = "can't be blocked by creatures with power less than the number of Islands you control";
         staticText = "Creatures with power less than the number of Islands you control can't block {this}";
     }
 
@@ -69,8 +70,8 @@ class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return blocker.getPower().getValue() >= dynamicValue.calculate(game, source, this);
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return blocker.getPower().getValue() < dynamicValue.calculate(game, source, this);
     }
 
     @Override

@@ -3,6 +3,7 @@ package mage.game.combat;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.BandingAbility;
@@ -1240,14 +1241,14 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             }
         }
-        // Restrictions applied because of attacking creatures
+        // Evasion of attacking creatures
         for (UUID attackingCreatureId : this.getAttackers()) {
             Permanent attackingCreature = game.getPermanent(attackingCreatureId);
             if (attackingCreature != null) {
-                for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(attackingCreature, game).entrySet()) {
-                    RestrictionEffect effect = entry.getKey();
+                for (Map.Entry<EvasionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableEvasionEffects(attackingCreature, game).entrySet()) {
+                    EvasionEffect effect = entry.getKey();
                     for (Ability ability : entry.getValue()) {
-                        if (!effect.canBeBlockedCheckAfter(attackingCreature, ability, game, true)) {
+                        if (effect.cantBeBlockedCheckAfter(attackingCreature, ability, game, true)) {
                             if (controller.isHuman()) {
                                 controller.resetPlayerPassedActions();
                                 game.informPlayer(controller, attackingCreature.getLogName() + " can't be blocked this way.");

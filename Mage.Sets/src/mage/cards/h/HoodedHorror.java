@@ -3,7 +3,7 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleEvasionAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,13 +42,14 @@ public final class HoodedHorror extends CardImpl {
     }
 }
 
-class HoodedHorrorCantBeBlockedEffect extends RestrictionEffect {
+class HoodedHorrorCantBeBlockedEffect extends EvasionEffect {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public HoodedHorrorCantBeBlockedEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "{this} can't be blocked as long as defending player controls the most creatures or is tied for the most";
+        this.staticCantBeBlockedMessage = "can't be blocked as long as defending player controls the most creatures or is tied for the most";
+        staticText = "{this} " + this.staticCantBeBlockedMessage;
     }
 
     public HoodedHorrorCantBeBlockedEffect(final HoodedHorrorCantBeBlockedEffect effect) {
@@ -61,7 +62,7 @@ class HoodedHorrorCantBeBlockedEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int maxCreatures = 0;

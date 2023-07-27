@@ -2,19 +2,16 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.AttachmentType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.abilities.effects.EvasionEffect;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
  */
-public class CantBeBlockedByOneAttachedEffect extends ContinuousEffectImpl {
+public class CantBeBlockedByOneAttachedEffect extends EvasionEffect {
 
     protected int amount;
     protected AttachmentType attachmentType;
@@ -24,10 +21,19 @@ public class CantBeBlockedByOneAttachedEffect extends ContinuousEffectImpl {
     }
 
     public CantBeBlockedByOneAttachedEffect(AttachmentType attachmentType, int amount, Duration duration) {
-        super(duration, Outcome.Benefit);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
         this.attachmentType = attachmentType;
-        staticText = attachmentType.verb() + " creature can't be blocked except by " + amount + " or more creatures";
+        this.staticCantBeBlockedMessage =
+                new StringBuilder("can't be blocked except by ")
+                        .append(CardUtil.numberToText(amount))
+                        .append(" or more creatures")
+                        .toString();
+        staticText =
+                new StringBuilder(attachmentType.verb())
+                        .append(" creature ")
+                        .append(this.staticCantBeBlockedMessage)
+                        .toString();
     }
 
     protected CantBeBlockedByOneAttachedEffect(final CantBeBlockedByOneAttachedEffect effect) {
@@ -42,29 +48,14 @@ public class CantBeBlockedByOneAttachedEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        switch (layer) {
-            case RulesEffects:
-                Permanent attachment = game.getPermanent(source.getSourceId());
-                if (attachment != null && attachment.getAttachedTo() != null) {
-                    Permanent perm = game.getPermanent(attachment.getAttachedTo());
-                    if (perm != null) {
-                        perm.setMinBlockedBy(amount);
-                        return true;
-                    }
-                }
-                break;
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        Permanent attachment = game.getPermanent(source.getSourceId());
+        if (attachment != null && attachment.getAttachedTo() != null) {
+            if (permanent != null && permanent.getId().equals(attachment.getAttachedTo())) {
+                permanent.setMinBlockedBy(amount);
+                return true;
+            }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

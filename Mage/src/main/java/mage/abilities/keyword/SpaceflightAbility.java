@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
 import mage.game.Game;
@@ -26,7 +27,8 @@ public class SpaceflightAbility extends EvasionAbility implements MageSingleton 
     }
 
     private SpaceflightAbility() {
-        this.addEffect(new SpaceFlightEffect());
+        this.addEffect(new SpaceFlightBlockEffect());
+        this.addEffect(new SpaceFlightEvasionEffect());
     }
 
     @Override
@@ -41,13 +43,13 @@ public class SpaceflightAbility extends EvasionAbility implements MageSingleton 
 
 }
 
-class SpaceFlightEffect extends RestrictionEffect implements MageSingleton {
+class SpaceFlightBlockEffect extends RestrictionEffect implements MageSingleton {
 
-    public SpaceFlightEffect() {
+    SpaceFlightBlockEffect() {
         super(Duration.EndOfGame);
     }
 
-    protected SpaceFlightEffect(final SpaceFlightEffect effect) {
+    protected SpaceFlightBlockEffect(final SpaceFlightBlockEffect effect) {
         super(effect);
     }
 
@@ -65,14 +67,36 @@ class SpaceFlightEffect extends RestrictionEffect implements MageSingleton {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return blocker.getAbilities().containsKey(SpaceflightAbility.getInstance().getId())
-                || blocker.getAbilities().containsKey(CanBlockSpaceflightAbility.getInstance().getId());
+    public SpaceFlightBlockEffect copy() {
+        return new SpaceFlightBlockEffect(this);
+    }
+
+}
+
+class SpaceFlightEvasionEffect extends EvasionEffect implements MageSingleton {
+
+    SpaceFlightEvasionEffect() {
+        super(Duration.EndOfGame);
+    }
+
+    private SpaceFlightEvasionEffect(final SpaceFlightEvasionEffect effect) {
+        super(effect);
     }
 
     @Override
-    public SpaceFlightEffect copy() {
-        return new SpaceFlightEffect(this);
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getAbilities().containsKey(SpaceflightAbility.getInstance().getId());
+    }
+
+    @Override
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return !blocker.getAbilities().containsKey(SpaceflightAbility.getInstance().getId())
+                && !blocker.getAbilities().containsKey(CanBlockSpaceflightAbility.getInstance().getId());
+    }
+
+    @Override
+    public SpaceFlightEvasionEffect copy() {
+        return new SpaceFlightEvasionEffect(this);
     }
 
 }

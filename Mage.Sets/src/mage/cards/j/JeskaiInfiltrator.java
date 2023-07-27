@@ -1,9 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -12,7 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CreatureCountCondition;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
@@ -21,15 +18,14 @@ import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.Fa
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +41,10 @@ public final class JeskaiInfiltrator extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Jeskai Infiltrator can't be blocked as long as you control no other creatures.
-        Effect effect = new ConditionalRestrictionEffect(new CantBeBlockedSourceEffect(), new CreatureCountCondition(1, TargetController.YOU));
+        Effect effect = new ConditionalEvasionEffect(
+            new CantBeBlockedSourceEffect(),
+            new CreatureCountCondition(1, TargetController.YOU)
+        );
         effect.setText("{this} can't be blocked as long as you control no other creatures");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

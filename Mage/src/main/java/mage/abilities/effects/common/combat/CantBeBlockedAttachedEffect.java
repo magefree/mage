@@ -1,7 +1,7 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.AttachmentType;
 import mage.constants.Duration;
 import mage.game.Game;
@@ -10,14 +10,20 @@ import mage.game.permanent.Permanent;
 /**
  * @author North
  */
-public class CantBeBlockedAttachedEffect extends RestrictionEffect {
+public class CantBeBlockedAttachedEffect extends EvasionEffect {
 
     public CantBeBlockedAttachedEffect(AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield);
-        this.staticText = attachmentType.verb() + " creature can't be blocked";
+
+        this.staticCantBeBlockedMessage = "can't be blocked";
+        this.staticText =
+            new StringBuilder(attachmentType.verb())
+                .append(" creature ")
+                .append(this.staticCantBeBlockedMessage)
+                .toString();
     }
 
-    public CantBeBlockedAttachedEffect(CantBeBlockedAttachedEffect effect) {
+    private CantBeBlockedAttachedEffect(final CantBeBlockedAttachedEffect effect) {
         super(effect);
     }
 
@@ -27,8 +33,8 @@ public class CantBeBlockedAttachedEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return false;
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return true;
     }
 
     @Override

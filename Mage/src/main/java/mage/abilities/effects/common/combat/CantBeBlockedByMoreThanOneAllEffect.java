@@ -1,23 +1,21 @@
 
 package mage.abilities.effects.common.combat;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-
 import mage.util.CardUtil;
 
 /**
  * @author Quercitron
  */
-public class CantBeBlockedByMoreThanOneAllEffect extends ContinuousEffectImpl {
+public class CantBeBlockedByMoreThanOneAllEffect extends EvasionEffect {
 
     private FilterPermanent filter;
     protected int amount;
@@ -31,11 +29,26 @@ public class CantBeBlockedByMoreThanOneAllEffect extends ContinuousEffectImpl {
     }
 
     public CantBeBlockedByMoreThanOneAllEffect(int amount, FilterPermanent filter, Duration duration) {
-        super(duration, Outcome.Benefit);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
-        staticText = new StringBuilder("Each ").append(filter.getMessage()).append(" can't be blocked by more than ")
-                .append(CardUtil.numberToText(amount)).append(" creature").append(amount > 1 ? "s" : "").toString();
+        this.staticCantBeBlockedMessage =
+                new StringBuilder("can't be blocked by more than ")
+                        .append(CardUtil.numberToText(amount))
+                        .append(" creature")
+                        .append(amount > 1 ? "s" : "")
+                        .append(duration == Duration.EndOfTurn ? " each combat this turn" : "")
+                        .toString();
+        staticText =
+                new StringBuilder("{this} ")
+                        .append(this.staticCantBeBlockedMessage)
+                        .toString();
+        staticText =
+                new StringBuilder("Each ")
+                        .append(filter.getMessage())
+                        .append(" ")
+                        .append(this.staticCantBeBlockedMessage)
+                        .toString();
     }
 
     protected CantBeBlockedByMoreThanOneAllEffect(final CantBeBlockedByMoreThanOneAllEffect effect) {
@@ -50,24 +63,12 @@ public class CantBeBlockedByMoreThanOneAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        switch (layer) {
-            case RulesEffects:
-                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                    perm.setMaxBlockedBy(amount);
-                }
-                break;
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent == null || !filter.match(permanent, source.getControllerId(), source, game)) {
+            return false;
         }
+
+        permanent.setMinBlockedBy(amount);
         return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

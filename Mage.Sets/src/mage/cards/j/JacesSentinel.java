@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -41,10 +41,10 @@ public final class JacesSentinel extends CardImpl {
                 new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "As long as you control a Jace planeswalker, {this} gets +1/+0"));
-        ability.addEffect(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(),
-                new PermanentsOnTheBattlefieldCondition(filter),
-                "and can't be blocked"));
+        ability.addEffect(new ConditionalEvasionEffect(
+            new CantBeBlockedSourceEffect(),
+            new PermanentsOnTheBattlefieldCondition(filter),
+            "and can't be blocked"));
         this.addAbility(ability);
     }
 

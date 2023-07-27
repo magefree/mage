@@ -1,13 +1,13 @@
 package mage.abilities.effects;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -70,24 +70,6 @@ public abstract class RestrictionEffect extends ContinuousEffectImpl {
     }
 
     public boolean canBlockCheckAfter(Ability source, Game game, boolean canUseChooseDialogs) {
-        return true;
-    }
-
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return true;
-    }
-
-    /**
-     * Called for all attackers after all blocking decisions are made
-     *
-     * @param attacker
-     * @param source
-     * @param game
-     * @param canUseChooseDialogs
-     * @return true = block is ok false = block is not valid (human: back to
-     * defining blockers, AI: remove blocker)
-     */
-    public boolean canBeBlockedCheckAfter(Permanent attacker, Ability source, Game game, boolean canUseChooseDialogs) {
         return true;
     }
 

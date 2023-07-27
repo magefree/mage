@@ -3,7 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -42,9 +42,9 @@ public class IntimidateAbility extends EvasionAbility implements MageSingleton {
     }
 }
 
-class IntimidateEffect extends RestrictionEffect implements MageSingleton {
+class IntimidateEffect extends EvasionEffect implements MageSingleton {
 
-    public IntimidateEffect() {
+    IntimidateEffect() {
         super(Duration.EndOfGame);
     }
 
@@ -58,15 +58,9 @@ class IntimidateEffect extends RestrictionEffect implements MageSingleton {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        boolean result = false;
-        if (blocker.isArtifact(game) && (blocker.isCreature(game))) {
-            result = true;
-        }
-        if (attacker.getColor(game).shares(blocker.getColor(game))) {
-            result = true;
-        }
-        return result;
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return !blocker.isArtifact(game)
+                && !(attacker.getColor(game).shares(blocker.getColor(game)));
     }
 
     @Override

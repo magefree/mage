@@ -1,7 +1,7 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -13,7 +13,7 @@ import mage.util.CardUtil;
 /**
  * @author North
  */
-public class CantBeBlockedByOneEffect extends ContinuousEffectImpl {
+public class CantBeBlockedByOneEffect extends EvasionEffect {
 
     protected int amount;
 
@@ -24,7 +24,15 @@ public class CantBeBlockedByOneEffect extends ContinuousEffectImpl {
     public CantBeBlockedByOneEffect(int amount, Duration duration) {
         super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
-        staticText = "{this} can't be blocked except by " + CardUtil.numberToText(amount) + " or more creatures";
+        this.staticCantBeBlockedMessage =
+                new StringBuilder("can't be blocked except by ")
+                        .append(CardUtil.numberToText(amount))
+                        .append(" or more creatures")
+                        .toString();
+        staticText =
+                new StringBuilder("{this} ")
+                        .append(this.staticCantBeBlockedMessage)
+                        .toString();
     }
 
     protected CantBeBlockedByOneEffect(final CantBeBlockedByOneEffect effect) {
@@ -38,12 +46,12 @@ public class CantBeBlockedByOneEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent perm = source.getSourcePermanentIfItStillExists(game);
-        if (perm != null) {
-            perm.setMinBlockedBy(amount);
-            return true;
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent == null || !permanent.getId().equals(source.getSourceId())) {
+            return false;
         }
-        return false;
+
+        permanent.setMinBlockedBy(amount);
+        return true;
     }
 }

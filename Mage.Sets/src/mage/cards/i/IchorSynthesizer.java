@@ -7,7 +7,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -47,8 +47,8 @@ public final class IchorSynthesizer extends CardImpl {
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
                 condition, "as long as {this} has four or more oil counters on it, it gets +2/+0"
         ));
-        ability.addEffect(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), condition, "and can't be blocked"
+        ability.addEffect(new ConditionalEvasionEffect(
+            new CantBeBlockedSourceEffect(), condition, "and can't be blocked"
         ));
         this.addAbility(ability);
     }
