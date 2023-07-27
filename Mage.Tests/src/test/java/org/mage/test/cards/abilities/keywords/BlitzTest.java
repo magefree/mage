@@ -6,6 +6,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -63,6 +64,45 @@ public class BlitzTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, decoy, 0);
+        assertGraveyardCount(playerA, decoy, 1);
+        assertHandCount(playerA, 1);
+    }
+    @Ignore //Copies of a Blitz creature should have Blitz activated, currently do not
+    @Test
+    public void testBlitzCopy() {
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 6);
+        addCard(Zone.HAND, playerA, decoy);
+        addCard(Zone.HAND, playerA, "Double Major");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy + withBlitz);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major",decoy);
+
+        //Auto-stack triggers without StrictChooseMode
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, decoy, 0);
+        assertGraveyardCount(playerA, decoy, 1);
+        assertGraveyardCount(playerA, "Double Major", 1);
+        assertHandCount(playerA, 2);
+    }
+    @Test
+    public void testBlitzClone() {
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 8);
+        addCard(Zone.HAND, playerA, decoy);
+        addCard(Zone.HAND, playerA, "Clone");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy + withBlitz);
+        waitStackResolved(1,PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA,true);
+        setChoice(playerA,decoy);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, decoy, 1);
         assertGraveyardCount(playerA, decoy, 1);
         assertHandCount(playerA, 1);
     }

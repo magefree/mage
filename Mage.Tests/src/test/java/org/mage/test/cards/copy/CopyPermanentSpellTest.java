@@ -78,7 +78,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Dead Weight", 2);
     }
 
-    @Ignore // currently fails
     @Test
     public void testKickerTrigger() {
         makeTester();
@@ -96,7 +95,6 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Grizzly Bears", 4, 2);
     }
 
-    @Ignore // currently fails
     @Test
     public void testKickerReplacement() {
         makeTester();
@@ -122,6 +120,7 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Reckless Bushwhacker");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Memnite");
+        waitStackResolved(1,PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reckless Bushwhacker with surge");
 
         setStopAt(1, PhaseStep.END_TURN);
