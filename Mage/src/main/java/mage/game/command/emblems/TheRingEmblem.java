@@ -146,10 +146,7 @@ class TheRingEmblemEvasionEffect extends EvasionEffect {
     TheRingEmblemEvasionEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticCantBeBlockedMessage = "can't be blocked by creatures with greater power";
-        staticText =
-            new StringBuilder("and ")
-                .append(this.staticCantBeBlockedMessage)
-                .toString();
+        staticText = "and " + this.staticCantBeBlockedMessage;
     }
 
     private TheRingEmblemEvasionEffect(final TheRingEmblemEvasionEffect effect) {

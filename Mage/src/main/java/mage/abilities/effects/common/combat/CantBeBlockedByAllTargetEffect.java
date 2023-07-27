@@ -49,9 +49,7 @@ public class CantBeBlockedByAllTargetEffect extends EvasionEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "it"))
-            .append(" ")
-            .append(this.staticCantBeBlockedMessage)
-            .toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it")
+            + " " + this.staticCantBeBlockedMessage;
     }
 }
