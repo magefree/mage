@@ -225,6 +225,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Firewake Sliver", 923, Rarity.UNCOMMON, mage.cards.f.FirewakeSliver.class));
         cards.add(new SetCardInfo("Fists of Flame", 223, Rarity.COMMON, mage.cards.f.FistsOfFlame.class));
         cards.add(new SetCardInfo("Flawless Maneuver", 24, Rarity.RARE, mage.cards.f.FlawlessManeuver.class));
+        cards.add(new SetCardInfo("Flayer of Loyalties", 715, Rarity.RARE, mage.cards.f.FlayerOfLoyalties.class));
         cards.add(new SetCardInfo("Flood Plain", 994, Rarity.UNCOMMON, mage.cards.f.FloodPlain.class));
         cards.add(new SetCardInfo("Flux Channeler", 847, Rarity.UNCOMMON, mage.cards.f.FluxChanneler.class));
         cards.add(new SetCardInfo("Fog Bank", 848, Rarity.UNCOMMON, mage.cards.f.FogBank.class));
