@@ -49,7 +49,7 @@ public final class DefendersOfHumanity extends CardImpl {
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(
-                        new WhiteAstartesWarriorToken(), GetXValue.instance
+                        new WhiteAstartesWarriorToken(), ManacostVariableValue.REGULAR
                 ), new ManaCostsImpl<>("{X}{2}{W}"), condition
         ).addHint(CreaturesYouControlHint.instance).addHint(MyTurnHint.instance);
         ability.addCost(new ExileSourceCost());
