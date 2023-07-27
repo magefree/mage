@@ -28,7 +28,6 @@ public final class DarksteelMonolith extends CardImpl {
 
     public DarksteelMonolith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{8}");
-        this.supertype.add(SuperType.LEGENDARY);
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
