@@ -2124,20 +2124,12 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (damage < 1) {
             return 0;
         }
-        if (!canDamage(game.getObject(attackerId), game)) {
-            MageObject sourceObject = game.getObject(attackerId);
-            game.informPlayers(damage + " damage "
-                    + (sourceObject == null ? "" : "from " + sourceObject.getLogName())
-                    + " to " + getLogName()
-                    + (damage > 1 ? " were" : "was") + " prevented because of protection");
-            return 0;
-        }
         DamageEvent event = new DamagePlayerEvent(playerId, attackerId, playerId, damage, preventable, combatDamage);
         event.setAppliedEffects(appliedEffects);
         if (game.replaceEvent(event)) {
             return 0;
         }
-        int actualDamage = event.getAmount();
+        int actualDamage = checkProtectionAbilities(event, attackerId, source, game);
         if (actualDamage < 1) {
             return 0;
         }
@@ -2198,6 +2190,22 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.fireEvent(damagedEvent);
         game.getState().addSimultaneousDamage(damagedEvent, game);
         return actualDamage;
+    }
+
+    private int checkProtectionAbilities(GameEvent event, UUID attackerId, Ability source, Game game) {
+        MageObject attacker = game.getObject(attackerId);
+        if (attacker != null && hasProtectionFrom(attacker, game)) {
+            GameEvent preventEvent = new PreventDamageEvent(playerId, attackerId, source, playerId, event.getAmount(), ((DamageEvent) event).isCombatDamage());
+            if (!game.replaceEvent(preventEvent)) {
+                int preventedDamage = event.getAmount();
+                event.setAmount(0);
+                game.fireEvent(new PreventedDamageEvent(playerId, attackerId, source, playerId, preventedDamage));
+                game.informPlayers(preventedDamage + " damage from " + attacker.getLogName() + " to " + getLogName()
+                        + (preventedDamage > 1 ? " were" : "was") + " prevented because of protection");
+                return 0;
+            }
+        }
+        return event.getAmount();
     }
 
     @Override
@@ -2265,15 +2273,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         event.setData(name);
         event.setAmount(finalAmount);
         game.fireEvent(event);
-    }
-
-    protected boolean canDamage(MageObject source, Game game) {
-        for (ProtectionAbility ability : abilities.getProtectionAbilities()) {
-            if (!ability.canTarget(source, game)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override
