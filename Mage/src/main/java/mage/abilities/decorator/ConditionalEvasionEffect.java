@@ -101,17 +101,28 @@ public class ConditionalEvasionEffect extends EvasionEffect {
         } else if (otherwiseEffect != null) {
             return otherwiseEffect.cantBeBlocked(attacker, blocker, source, game, canUseChooseDialogs);
         }
-        return true;
+        return false;
     }
 
     @Override
-    public String cantBeBlockedMessage(Permanent attacker, Ability source, Game game) {
+    public boolean hasCantBeBlockedMessage(Permanent attacker, Ability source, Game game) {
         if (conditionState) {
-            return effect.cantBeBlockedMessage(attacker, source, game);
+            return effect.hasCantBeBlockedMessage(attacker, source, game);
         } else if (otherwiseEffect != null) {
-            return otherwiseEffect.cantBeBlockedMessage(attacker, source, game);
+            return otherwiseEffect.hasCantBeBlockedMessage(attacker, source, game);
         }
-        return null;
+        return false;
+    }
+
+    @Override
+    public String getCantBeBlockedMessage(Permanent attacker, Ability source, Game game) {
+        if (conditionState) {
+            return effect.getCantBeBlockedMessage(attacker, source, game);
+        } else if (otherwiseEffect != null) {
+            return otherwiseEffect.getCantBeBlockedMessage(attacker, source, game);
+        }
+
+        throw new UnsupportedOperationException("Message was requested on false condition without otherwiseEffect.");
     }
 
     @Override

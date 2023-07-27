@@ -42,10 +42,25 @@ public abstract class EvasionEffect extends ContinuousEffectImpl {
         return false;
     }
 
+
     /**
-     * If the effect prevents blocking, this returns the message to display as an hint on the evasive permanent.
+     * Is there an hint to continuously display on the evasive permanent?
+     * Note: all EvasionEffect do not want to display hint (keyworded ones for instance)
      */
-    public String cantBeBlockedMessage(Permanent attacker, Ability source, Game game) {
+    public boolean hasCantBeBlockedMessage(Permanent attacker, Ability source, Game game) {
+        return null != this.staticCantBeBlockedMessage;
+    }
+
+    /**
+     * If the effect prevents blocking, and there is a message to display in an hint on the evasive permanent,
+     * returns the message.
+     * <p>
+     * Call hasCantBeBlockedMessage before-end to check if there is a message.
+     */
+    public String getCantBeBlockedMessage(Permanent attacker, Ability source, Game game) {
+        if (this.staticCantBeBlockedMessage == null) {
+            throw new UnsupportedOperationException("Message was requested while not defined.");
+        }
         return this.staticCantBeBlockedMessage;
     }
 
