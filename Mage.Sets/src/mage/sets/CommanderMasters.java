@@ -658,6 +658,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Thriving Moor", 433, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
         cards.add(new SetCardInfo("Thrummingbird", 858, Rarity.UNCOMMON, mage.cards.t.Thrummingbird.class));
         cards.add(new SetCardInfo("Thryx, the Sudden Storm", 127, Rarity.UNCOMMON, mage.cards.t.ThryxTheSuddenStorm.class));
+        cards.add(new SetCardInfo("Titan of Littjara", 728, Rarity.RARE, mage.cards.t.TitanOfLittjara.class));
         cards.add(new SetCardInfo("Titan's Presence", 810, Rarity.UNCOMMON, mage.cards.t.TitansPresence.class));
         cards.add(new SetCardInfo("Tomb of the Spirit Dragon", 1048, Rarity.UNCOMMON, mage.cards.t.TombOfTheSpiritDragon.class));
         cards.add(new SetCardInfo("Tooth and Nail", 327, Rarity.RARE, mage.cards.t.ToothAndNail.class));
