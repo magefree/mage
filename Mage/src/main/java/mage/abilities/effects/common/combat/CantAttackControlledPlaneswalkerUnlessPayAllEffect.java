@@ -12,7 +12,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- * @author LevelX2
+ * @author Susucr
  */
 public class CantAttackControlledPlaneswalkerUnlessPayAllEffect extends PayCostToAttackBlockEffectImpl {
 
