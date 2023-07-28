@@ -26,14 +26,7 @@ public class Brawl extends Constructed {
         // Copy of standard sets
         setCodes.addAll(Standard.makeLegalSets());
 
-        banned.add("Golos, Tireless Pilgrim");
-        banned.add("Drannith Magistrate");
-        banned.add("Lutri, the Spellchaser");
-        banned.add("Oko, Thief of Crowns");
-        banned.add("Sorcerous Spyglass");
-        banned.add("Teferi, Time Raveler");
-        banned.add("Omnath, Locus of Creation");
-        banned.add("Winota, Joiner of Forces");
+        banned.add("Pithing Needle");
     }
 
     @Override
