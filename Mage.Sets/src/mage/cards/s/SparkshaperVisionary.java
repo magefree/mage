@@ -14,7 +14,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledPlaneswalkerPermanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.common.TargetControlledPermanent;
 
@@ -24,6 +25,9 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class SparkshaperVisionary extends CardImpl {
+
+    public static final FilterControlledPermanent filter =
+        new FilterControlledPlaneswalkerPermanent("planeswalkers you control");
 
     public SparkshaperVisionary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -49,7 +53,7 @@ public final class SparkshaperVisionary extends CardImpl {
 
         triggeredAbility.addTarget(
             new TargetControlledPermanent(0, Integer.MAX_VALUE,
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKERS, false
+                filter, false
             )
         );
 
