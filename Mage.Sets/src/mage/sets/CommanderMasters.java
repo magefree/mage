@@ -559,6 +559,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Sigil of the Empty Throne", 836, Rarity.RARE, mage.cards.s.SigilOfTheEmptyThrone.class));
         cards.add(new SetCardInfo("Silent Arbiter", 972, Rarity.RARE, mage.cards.s.SilentArbiter.class));
         cards.add(new SetCardInfo("Sinew Sliver", 837, Rarity.COMMON, mage.cards.s.SinewSliver.class));
+        cards.add(new SetCardInfo("Skittering Cicada", 717, Rarity.RARE, mage.cards.s.SkitteringCicada.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 1035, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
         cards.add(new SetCardInfo("Skyline Despot", 254, Rarity.UNCOMMON, mage.cards.s.SkylineDespot.class));
         cards.add(new SetCardInfo("Skyshroud Claim", 321, Rarity.COMMON, mage.cards.s.SkyshroudClaim.class));
