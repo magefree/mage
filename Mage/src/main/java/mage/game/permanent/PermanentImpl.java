@@ -341,6 +341,14 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     }
                 }
 
+                // Goaded hints.
+                for (UUID playerId : getGoadingPlayers()) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        restrictHints.add(HintUtils.prepareText("Goaded by " + player.getLogName(), null, HintUtils.HINT_ICON_REQUIRE));
+                    }
+                }
+
                 restrictHints.sort(String::compareTo);
             }
 
