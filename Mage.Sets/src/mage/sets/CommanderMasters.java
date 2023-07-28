@@ -92,6 +92,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Burnished Hart", 373, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
         cards.add(new SetCardInfo("Cabal Patriarch", 140, Rarity.UNCOMMON, mage.cards.c.CabalPatriarch.class));
         cards.add(new SetCardInfo("Cadaver Imp", 141, Rarity.COMMON, mage.cards.c.CadaverImp.class));
+        cards.add(new SetCardInfo("Calamity of the Titans", 713, Rarity.RARE, mage.cards.c.CalamityOfTheTitans.class));
         cards.add(new SetCardInfo("Calix, Destiny's Hand", 918, Rarity.MYTHIC, mage.cards.c.CalixDestinysHand.class));
         cards.add(new SetCardInfo("Campfire", 374, Rarity.COMMON, mage.cards.c.Campfire.class));
         cards.add(new SetCardInfo("Canopy Vista", 989, Rarity.RARE, mage.cards.c.CanopyVista.class));
