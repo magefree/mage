@@ -38,8 +38,12 @@ public final class GhoulishImpetus extends CardImpl {
 
         // Enchanted creature gets +1/+1, has deathtouch, and is goaded.
         Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));
-        ability.addEffect(new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.AURA).concatBy(", "));
-        ability.addEffect(new GoadAttachedEffect().concatBy(", and"));
+        ability.addEffect(
+            new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.AURA)
+                .setText("has deathtouch")
+                .concatBy(",")
+        );
+        ability.addEffect(new GoadAttachedEffect().concatBy(","));
         this.addAbility(ability);
 
         // When enchanted creature dies, return Ghoulish Impetus to the battlefield at the beginning of the next end step.
