@@ -524,7 +524,7 @@ public final class StaticFilters {
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_PLANESWALKERS = new FilterControlledPlaneswalkerPermanent("planeswalkers you control");
 
     static {
-        FILTER_CONTROLLED_PERMANENT_PLANESWALKER.setLockedFilter(true);
+        FILTER_CONTROLLED_PERMANENT_PLANESWALKERS.setLockedFilter(true);
     }
     
     public static final FilterPermanent FILTER_OPPONENTS_PERMANENT = new FilterPermanent("permanent an opponent controls");
