@@ -40,11 +40,11 @@ public class ManifestEffect extends OneShotEffect {
     private ManifestEffect(DynamicValue amount, boolean isPlural) {
         super(Outcome.PutCreatureInPlay);
         this.amount = amount;
-        this.staticText = setText();
         this.isPlural = isPlural;
+        this.staticText = setText();
     }
 
-    public ManifestEffect(final ManifestEffect effect) {
+    private ManifestEffect(final ManifestEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.isPlural = effect.isPlural;
