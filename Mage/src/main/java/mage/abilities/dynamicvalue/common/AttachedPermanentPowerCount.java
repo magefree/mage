@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -15,13 +16,22 @@ public enum AttachedPermanentPowerCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent attachment = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
-        if (attachment == null) {
+        Permanent attachmentPermanent = game.getPermanent(sourceAbility.getSourceId());
+        if (attachmentPermanent == null) {
+            attachmentPermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD, sourceAbility.getSourceObjectZoneChangeCounter());
+        }
+        if (attachmentPermanent == null || attachmentPermanent.getAttachedTo() == null) {
             return 0;
         }
-        Permanent permanent = game.getPermanentOrLKIBattlefield(attachment.getAttachedTo());
-        if (permanent != null && (permanent.getPower().getValue() >= 0)) {
-            return permanent.getPower().getValue();
+        Permanent attached;
+        if (effect.getValue("attachedTo") instanceof Permanent) {
+            // This way is needed to obtain correct LKI (e.g. Persist)
+            attached = (Permanent) effect.getValue("attachedTo");
+        } else {
+            attached = game.getPermanentOrLKIBattlefield(attachmentPermanent.getAttachedTo());
+        }
+        if (attached != null && attached.getPower().getValue() >= 0) {
+            return attached.getPower().getValue();
         }
         return 0;
     }
