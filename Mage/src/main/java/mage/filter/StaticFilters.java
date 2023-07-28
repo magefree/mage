@@ -520,7 +520,7 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_PERMANENT_PLANESWALKER.setLockedFilter(true);
     }
-    
+
     public static final FilterPermanent FILTER_OPPONENTS_PERMANENT = new FilterPermanent("permanent an opponent controls");
 
     static {
