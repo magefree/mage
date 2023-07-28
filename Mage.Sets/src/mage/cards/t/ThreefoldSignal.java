@@ -35,7 +35,10 @@ public class ThreefoldSignal extends CardImpl {
         //  (When you cast it, copy it for each time you paid its replicate cost.
         //   You may choose new targets for the copies.
         //   A copy of a permanent spell becomes a token.)
-        this.addAbility(new SimpleStaticAbility(new EachSpellYouCastHasReplicateEffect(filter, new GenericManaCost(3))));
+        this.addAbility(new SimpleStaticAbility(new EachSpellYouCastHasReplicateEffect(filter,
+                "When you cast it, copy it for each time you paid its replicate cost. " +
+                        "You may choose new targets for the copies. A copy of a permanent spell becomes a token.",
+                new GenericManaCost(3))));
     }
 
     private ThreefoldSignal(final ThreefoldSignal card) {
