@@ -247,6 +247,8 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Furycalm Snarl", 999, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Galerider Sliver", 849, Rarity.RARE, mage.cards.g.GaleriderSliver.class));
         cards.add(new SetCardInfo("Gargadon", 226, Rarity.COMMON, mage.cards.g.Gargadon.class));
+        cards.add(new SetCardInfo("Gatewatch Beacon", 721, Rarity.RARE, mage.cards.g.GatewatchBeacon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gatewatch Beacon", 754, Rarity.RARE, mage.cards.g.GatewatchBeacon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gavony Silversmith", 25, Rarity.COMMON, mage.cards.g.GavonySilversmith.class));
         cards.add(new SetCardInfo("Geier Reach Sanitarium", 1000, Rarity.RARE, mage.cards.g.GeierReachSanitarium.class));
         cards.add(new SetCardInfo("Gemhide Sliver", 896, Rarity.COMMON, mage.cards.g.GemhideSliver.class));
