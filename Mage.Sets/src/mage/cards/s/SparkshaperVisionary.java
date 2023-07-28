@@ -43,10 +43,11 @@ public final class SparkshaperVisionary extends CardImpl {
                 new BecomesCreatureTargetEffect(
                     new SparkshaperVisionaryToken(),
                     false, false, Duration.EndOfTurn,
-                    false, false, true
+                    false, true, true
                 ).setText("choose any number of target planeswalkers you control. Until end of turn, "
                     + "they become 3/3 blue Bird creatures with flying, hexproof, and "
-                    + "\"Whenever this creature deals combat damage to a player, scry 1.\""),
+                    + "\"Whenever this creature deals combat damage to a player, scry 1.\""
+                    + " <i>(They're no longer planeswalkers. Loyalty abilities can still be activated.)</i>"),
                 TargetController.YOU,
                 false
             );
@@ -84,7 +85,7 @@ class SparkshaperVisionaryToken extends TokenImpl {
         this.addAbility(HexproofAbility.getInstance());
 
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-            new ScryEffect(1),
+            new ScryEffect(1, false),
             false
         ));
     }
