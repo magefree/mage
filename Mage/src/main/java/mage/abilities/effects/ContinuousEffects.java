@@ -172,24 +172,15 @@ public class ContinuousEffects implements Serializable {
         return getLayeredEffects(game, "main");
     }
 
-    /**
-     * Return effects list ordered by timestamps (timestamps are automaticity
-     * generates from new/old lists on same layer)
-     *
-     * @param game
-     * @param timestampGroupName workaround to fix broken timestamps on effect's
-     *                           add/remove between different layers
-     * @return effects list ordered by timestamp
-     */
-    public synchronized List<ContinuousEffect> getLayeredEffects(Game game, String timestampGroupName) {
+    private synchronized List<ContinuousEffect> collectLayerEffects(Game game, ContinuousEffectsList<?> effects) {
         List<ContinuousEffect> layerEffects = new ArrayList<>();
-        for (ContinuousEffect effect : layeredEffects) {
+        for (ContinuousEffect effect : effects) {
             switch (effect.getDuration()) {
                 case WhileOnBattlefield:
                 case WhileControlled:
                 case WhileOnStack:
                 case WhileInGraveyard:
-                    Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
+                    Set<Ability> abilities = effects.getAbility(effect.getId());
                     if (!abilities.isEmpty()) {
                         for (Ability ability : abilities) {
                             // If e.g. triggerd abilities (non static) created the effect, the ability must not be in usable zone (e.g. Unearth giving Haste effect)
@@ -206,6 +197,23 @@ public class ContinuousEffects implements Serializable {
                     layerEffects.add(effect);
             }
         }
+        return layerEffects;
+    }
+
+    /**
+     * Return effects list ordered by timestamps (timestamps are automaticity
+     * generates from new/old lists on same layer)
+     *
+     * @param game
+     * @param timestampGroupName workaround to fix broken timestamps on effect's
+     *                           add/remove between different layers
+     * @return effects list ordered by timestamp
+     */
+    public synchronized List<ContinuousEffect> getLayeredEffects(Game game, String timestampGroupName) {
+        List<ContinuousEffect> layerEffects = new ArrayList<>();
+        layerEffects.addAll(collectLayerEffects(game, layeredEffects));
+        // Some evasion effects do apply during the RulesEffect Layer.
+        layerEffects.addAll(collectLayerEffects(game, evasionEffects));
 
         updateTimestamps(timestampGroupName, layerEffects);
         layerEffects.sort(Comparator.comparingLong(ContinuousEffect::getOrder));
@@ -1191,6 +1199,13 @@ public class ContinuousEffects implements Serializable {
         layer = filterLayeredEffects(activeLayerEffects, Layer.RulesEffects);
         for (ContinuousEffect effect : layer) {
             Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
+
+            // Some evasion effects are using the layer system to alter
+            // the evading permanent.
+            if (abilities.isEmpty()) {
+                abilities = evasionEffects.getAbility(effect.getId());
+            }
+
             for (Ability ability : abilities) {
                 effect.apply(Layer.RulesEffects, SubLayer.NA, ability, game);
             }
@@ -1257,6 +1272,13 @@ public class ContinuousEffects implements Serializable {
 
     private void applyContinuousEffect(ContinuousEffect effect, Layer currentLayer, Game game) {
         Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
+
+        // Some evasion effects are using the layer system to alter
+        // the evading permanent.
+        if (abilities.isEmpty()) {
+            abilities = evasionEffects.getAbility(effect.getId());
+        }
+
         for (Ability ability : abilities) {
             //effect.apply(currentLayer, SubLayer.NA, ability, game);
             if (isAbilityStillExists(game, ability, effect)) {
@@ -1317,12 +1339,6 @@ public class ContinuousEffects implements Serializable {
                 break;
             case EVASION:
                 evasionEffects.addEffect((EvasionEffect) effect, source);
-                // Some evasion effects are using the layer system to alter
-                // the evading permanent. They are listed as both evasionEffects,
-                // and layeredEffects.
-                if (effect.getLayer() == Layer.RulesEffects) {
-                    layeredEffects.addEffect(effect, source);
-                }
                 break;
             case RESTRICTION:
                 restrictionEffects.addEffect((RestrictionEffect) effect, source);
