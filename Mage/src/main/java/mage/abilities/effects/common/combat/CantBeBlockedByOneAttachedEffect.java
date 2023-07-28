@@ -47,10 +47,25 @@ public class CantBeBlockedByOneAttachedEffect extends EvasionEffect {
         Permanent attachment = game.getPermanent(source.getSourceId());
         if (attachment != null && attachment.getAttachedTo() != null) {
             if (permanent != null && permanent.getId().equals(attachment.getAttachedTo())) {
-                permanent.setMinBlockedBy(amount);
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent attachment = game.getPermanent(source.getSourceId());
+        if (attachment == null || attachment.getAttachedTo() == null) {
+            return false;
+        }
+
+        Permanent perm = game.getPermanent(attachment.getAttachedTo());
+        if (perm == null) {
+            return false;
+        }
+
+        perm.setMinBlockedBy(amount);
+        return true;
     }
 }

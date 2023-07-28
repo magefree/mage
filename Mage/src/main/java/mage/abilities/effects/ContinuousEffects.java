@@ -1317,6 +1317,12 @@ public class ContinuousEffects implements Serializable {
                 break;
             case EVASION:
                 evasionEffects.addEffect((EvasionEffect) effect, source);
+                // Some evasion effects are using the layer system to alter
+                // the evading permanent. They are listed as both evasionEffects,
+                // and layeredEffects.
+                if (effect.getLayer() == Layer.RulesEffects) {
+                    layeredEffects.addEffect(effect, source);
+                }
                 break;
             case RESTRICTION:
                 restrictionEffects.addEffect((RestrictionEffect) effect, source);

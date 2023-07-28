@@ -50,11 +50,16 @@ public class CantBeBlockedByOneAllEffect extends EvasionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent == null || !filter.match(permanent, source.getControllerId(), source, game)) {
-            return false;
-        }
+        return permanent != null && filter.match(permanent, source.getControllerId(), source, game);
+    }
 
-        permanent.setMinBlockedBy(amount);
-        return true;
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean doneSomething = false;
+        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+            perm.setMinBlockedBy(amount);
+            doneSomething = true;
+        }
+        return doneSomething;
     }
 }
