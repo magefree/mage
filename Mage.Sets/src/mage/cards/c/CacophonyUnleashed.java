@@ -49,7 +49,8 @@ public final class CacophonyUnleashed extends CardImpl {
         this.addAbility(
             new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new BecomesCreatureSourceEffect(new CacophonyUnleashedToken(), CardType.ENCHANTMENT, Duration.EndOfTurn)
-                    .setText("until end of turn, Cacophony Unleashed becomes a legendary 6/6 Nightmare God creature with menace and deathtouch. It's still an enchantment."),
+                    .setText("until end of turn, Cacophony Unleashed becomes a legendary 6/6 Nightmare God "
+                        + "creature with menace and deathtouch. It's still an enchantment."),
                 StaticFilters.FILTER_PERMANENT_ENCHANTMENT,
                 false, true
             )
@@ -68,7 +69,7 @@ public final class CacophonyUnleashed extends CardImpl {
 
 class CacophonyUnleashedToken extends TokenImpl {
 
-    public CacophonyUnleashedToken() {
+    CacophonyUnleashedToken() {
         super("", "legendary 6/6 Nightmare God creature with menace and deathtouch");
         supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
@@ -80,7 +81,7 @@ class CacophonyUnleashedToken extends TokenImpl {
         addAbility(DeathtouchAbility.getInstance());
     }
 
-    public CacophonyUnleashedToken(final CacophonyUnleashedToken token) {
+    private CacophonyUnleashedToken(final CacophonyUnleashedToken token) {
         super(token);
     }
 
