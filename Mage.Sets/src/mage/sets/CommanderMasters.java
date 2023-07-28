@@ -581,6 +581,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Soul of New Phyrexia", 974, Rarity.MYTHIC, mage.cards.s.SoulOfNewPhyrexia.class));
         cards.add(new SetCardInfo("Sower of Discord", 187, Rarity.RARE, mage.cards.s.SowerOfDiscord.class));
         cards.add(new SetCardInfo("Spark Double", 856, Rarity.RARE, mage.cards.s.SparkDouble.class));
+        cards.add(new SetCardInfo("Sparkshaper Visionary", 726, Rarity.RARE, mage.cards.s.SparkshaperVisionary.class));
         cards.add(new SetCardInfo("Spatial Contortion", 809, Rarity.UNCOMMON, mage.cards.s.SpatialContortion.class));
         cards.add(new SetCardInfo("Spectator Seating", 427, Rarity.RARE, mage.cards.s.SpectatorSeating.class));
         cards.add(new SetCardInfo("Spectral Grasp", 58, Rarity.COMMON, mage.cards.s.SpectralGrasp.class));
