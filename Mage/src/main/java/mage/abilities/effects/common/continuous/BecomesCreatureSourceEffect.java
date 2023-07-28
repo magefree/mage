@@ -105,6 +105,9 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
                     permanent.removeAllCardTypes(game);
                     permanent.removeAllSubTypes(game);
                 }
+                for (SuperType superType : token.getSuperType(game)) {
+                    permanent.addSuperType(game, superType);
+                }
                 for (CardType cardType : token.getCardType(game)) {
                     permanent.addCardType(game, cardType);
                 }
