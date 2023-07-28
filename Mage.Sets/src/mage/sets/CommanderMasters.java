@@ -502,6 +502,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Realmwalker", 909, Rarity.RARE, mage.cards.r.Realmwalker.class));
         cards.add(new SetCardInfo("Reassembling Skeleton", 183, Rarity.UNCOMMON, mage.cards.r.ReassemblingSkeleton.class));
         cards.add(new SetCardInfo("Regal Behemoth", 316, Rarity.RARE, mage.cards.r.RegalBehemoth.class));
+        cards.add(new SetCardInfo("Regal Sliver", 724, Rarity.RARE, mage.cards.r.RegalSliver.class));
         cards.add(new SetCardInfo("Rejuvenating Springs", 424, Rarity.RARE, mage.cards.r.RejuvenatingSprings.class));
         cards.add(new SetCardInfo("Reliquary Tower", 425, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Renowned Weaponsmith", 114, Rarity.COMMON, mage.cards.r.RenownedWeaponsmith.class));
