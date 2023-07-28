@@ -256,6 +256,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thrill of Possibility", 229, Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class));
         cards.add(new SetCardInfo("Throne of the High City", 339, Rarity.RARE, mage.cards.t.ThroneOfTheHighCity.class));
         cards.add(new SetCardInfo("Tireless Provisioner", 262, Rarity.UNCOMMON, mage.cards.t.TirelessProvisioner.class));
+        cards.add(new SetCardInfo("Too Greedily, Too Deep", 72, Rarity.RARE, mage.cards.t.TooGreedilyTooDeep.class));
         cards.add(new SetCardInfo("Toxic Deluge", 209, Rarity.RARE, mage.cards.t.ToxicDeluge.class));
         cards.add(new SetCardInfo("Trading Post", 288, Rarity.RARE, mage.cards.t.TradingPost.class));
         cards.add(new SetCardInfo("Tranquil Cove", 340, Rarity.COMMON, mage.cards.t.TranquilCove.class));
