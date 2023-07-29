@@ -21,6 +21,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
     private final String attachedDescription;
     private final boolean diesRuleText;
     protected SetTargetPointer setTargetPointer;
+    private final boolean rememberSource; // if true, setTargetPointer will be set to the aura/equipement.
 
     public DiesAttachedTriggeredAbility(Effect effect, String attachedDescription) {
         this(effect, attachedDescription, false);
@@ -36,10 +37,16 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     public DiesAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional,
                                         boolean diesRuleText, SetTargetPointer setTargetPointer) {
+        this(effect, attachedDescription, optional, diesRuleText, setTargetPointer, false);
+    }
+
+    public DiesAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional,
+                                        boolean diesRuleText, SetTargetPointer setTargetPointer, boolean rememberSource) {
         super(Zone.ALL, effect, optional); // because the trigger only triggers if the object was attached, it doesn't matter where the Attachment was moved to (e.g. by replacement effect) after the trigger triggered, so Zone.all
         this.attachedDescription = attachedDescription;
         this.diesRuleText = diesRuleText;
         this.setTargetPointer = setTargetPointer;
+        this.rememberSource = rememberSource;
         setTriggerPhrase(generateTriggerPhrase());
     }
 
@@ -48,6 +55,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
         this.attachedDescription = ability.attachedDescription;
         this.diesRuleText = ability.diesRuleText;
         this.setTargetPointer = ability.setTargetPointer;
+        this.rememberSource = ability.rememberSource;
     }
 
     @Override
@@ -111,16 +119,23 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
                 }
             }
         }
-        // set targetpointer to the creature that died
         if (setTargetPointer == SetTargetPointer.CARD
                 || setTargetPointer == SetTargetPointer.PERMANENT) {
             Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
-            if (attachment != null
+            if (rememberSource) {
+                // set targetpointer to the attachement
+                if (attachment != null) {
+                    getEffects().setTargetPointer(new FixedTarget(attachment.getId()));
+                }
+            } else {
+                // set targetpointer to the creature that died
+                if (attachment != null
                     && attachment.getAttachedTo() != null) {
-                Permanent attachedTo = (Permanent) game.getLastKnownInformation(attachment.getAttachedTo(),
+                    Permanent attachedTo = (Permanent) game.getLastKnownInformation(attachment.getAttachedTo(),
                         Zone.BATTLEFIELD, attachment.getAttachedToZoneChangeCounter());
-                if (attachedTo != null) {
-                    getEffects().setTargetPointer(new FixedTarget(attachedTo.getId()));
+                    if (attachedTo != null) {
+                        getEffects().setTargetPointer(new FixedTarget(attachedTo.getId()));
+                    }
                 }
             }
         }

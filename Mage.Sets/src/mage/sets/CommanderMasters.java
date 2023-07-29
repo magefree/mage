@@ -261,6 +261,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Ghost of Ramirez DePietro", 97, Rarity.UNCOMMON, mage.cards.g.GhostOfRamirezDePietro.class));
         cards.add(new SetCardInfo("Ghostly Flicker", 98, Rarity.COMMON, mage.cards.g.GhostlyFlicker.class));
         cards.add(new SetCardInfo("Ghoulcaller Gisa", 161, Rarity.RARE, mage.cards.g.GhoulcallerGisa.class));
+        cards.add(new SetCardInfo("Ghoulish Impetus", 732, Rarity.RARE, mage.cards.g.GhoulishImpetus.class));
         cards.add(new SetCardInfo("Gideon Jura", 822, Rarity.MYTHIC, mage.cards.g.GideonJura.class));
         cards.add(new SetCardInfo("Gilded Lotus", 387, Rarity.RARE, mage.cards.g.GildedLotus.class));
         cards.add(new SetCardInfo("Gisela, Blade of Goldnight", 338, Rarity.RARE, mage.cards.g.GiselaBladeOfGoldnight.class));
