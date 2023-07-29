@@ -70,7 +70,7 @@ public final class MegatronTyrant extends CardImpl {
 class MegatronTyrantCantCastSpellsEffect extends ContinuousRuleModifyingEffectImpl {
 
     MegatronTyrantCantCastSpellsEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Your opponents can't cast spells during combat.";
     }
 
