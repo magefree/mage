@@ -32,7 +32,7 @@ public class CantAttackYouUnlessPayAllEffect extends PayCostToAttackBlockEffectI
         // text replacing [!] in "unless their controller pays [...] for each [!]"
         final String secondText;
 
-        private Scope(boolean attackingYou, boolean attackingControlledPlaneswalkers, String firstText, String secondText) {
+        Scope(boolean attackingYou, boolean attackingControlledPlaneswalkers, String firstText, String secondText) {
             this.attackingYou = attackingYou;
             this.attackingControlledPlaneswalkers = attackingControlledPlaneswalkers;
             this.firstText = firstText;
