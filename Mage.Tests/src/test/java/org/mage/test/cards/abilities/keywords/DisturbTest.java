@@ -31,12 +31,12 @@ public class DisturbTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
-        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter with Disturb", true);
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb", true);
 
         // cast with disturb
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter with Disturb");
-        checkStackObject("on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter with Disturb", 1);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb");
+        checkStackObject("on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb", 1);
         runCode("check stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             // Stack must contain another card side, so spell/card characteristics must be diff from main side (only mana value is same)
             Spell spell = (Spell) game.getStack().getFirst();
@@ -92,10 +92,10 @@ public class DisturbTest extends CardTestPlayerBase {
 
         addCustomEffect_SpellCostModification(playerA, -1);
 
-        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter with Disturb", true);
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb", true);
 
         // cast with disturb
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter with Disturb");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb");
         runCode("check stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             Spell spell = (Spell) game.getStack().getFirst();
             Assert.assertEquals("mana value must be from main side", 2, spell.getManaValue());
@@ -121,7 +121,7 @@ public class DisturbTest extends CardTestPlayerBase {
         //
         addCustomEffect_SpellCostModification(playerA, 1);
 
-        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter with Disturb", false);
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb", false);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -145,11 +145,11 @@ public class DisturbTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
 
-        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter with Disturb", true);
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb", true);
 
         // cast with disturb
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter with Disturb");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb");
         // prepare copy of spell
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major", "Hook-Haunt Drifter", "Hook-Haunt Drifter");
         checkStackSize("before copy spell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
@@ -181,10 +181,10 @@ public class DisturbTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Counterspell", 1); // {U}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
-        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter with Disturb", true);
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb", true);
 
         // cast with disturb
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter with Disturb");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb");
         // counter it
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Counterspell", "Hook-Haunt Drifter", "Hook-Haunt Drifter");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -213,7 +213,7 @@ public class DisturbTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.HAND, playerA, lightningBolt);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + ghastlyMimictry + " with Disturb");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + ghastlyMimictry + " using Disturb");
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();

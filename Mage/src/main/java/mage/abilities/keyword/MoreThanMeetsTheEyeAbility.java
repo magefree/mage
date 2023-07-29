@@ -22,9 +22,10 @@ public class MoreThanMeetsTheEyeAbility extends SpellAbility {
         this.newId();
 
         // getSecondFaceSpellAbility() already verified that second face exists
-        this.setCardName(card.getSecondCardFace().getName() + " with Disturb");
+        this.setCardName(card.getSecondCardFace().getName());
+
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
-        this.spellAbilityCastMode = SpellAbilityCastMode.TRANSFORMED;
+        this.setSpellAbilityCastMode(SpellAbilityCastMode.MORE_THAN_MEETS_THE_EYE);
 
         this.manaCost = manaCost;
         this.getManaCosts().clear();
@@ -63,7 +64,7 @@ public class MoreThanMeetsTheEyeAbility extends SpellAbility {
     @Override
     public String getRule() {
         return "More Than Meets The Eye " + this.manaCost
-                + " <i>(You may cast this card converted for" + this.manaCost + ".)</i>";
+            + " <i>(You may cast this card converted for " + this.manaCost + ".)</i>";
     }
 }
 
