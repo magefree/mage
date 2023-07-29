@@ -34,9 +34,8 @@ public final class ArchonOfAbsolution extends CardImpl {
 
         // Creatures can't attack you or a planeswalker you control unless their controller pays {1} for each of those creatures.
         this.addAbility(new SimpleStaticAbility(new CantAttackYouUnlessPayAllEffect(
-                new ManaCostsImpl<>("{1}"), true
-        ).setText("creatures can't attack you or planeswalkers you control " +
-                "unless their controller pays {1} for each of those creatures")));
+            new ManaCostsImpl<>("{1}"), CantAttackYouUnlessPayAllEffect.Scope.YOU_AND_CONTROLLED_PLANESWALKERS
+        )));
     }
 
     private ArchonOfAbsolution(final ArchonOfAbsolution card) {

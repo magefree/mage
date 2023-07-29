@@ -43,7 +43,7 @@ public final class SivitriDragonMaster extends CardImpl {
         // +1: Until your next turn, creatures can’t attack you or planeswalkers you
         // control unless their controller pays 2 life for each of those creatures.
         ContinuousEffect effect = new CantAttackYouUnlessPayAllEffect(
-                new PayLifeCost(2), true
+            new PayLifeCost(2), CantAttackYouUnlessPayAllEffect.Scope.YOU_AND_CONTROLLED_PLANESWALKERS
         );
         effect.setDuration(Duration.UntilYourNextTurn);
         effect.setText("until your next turn, creatures can't attack you or planeswalkers you control " +
