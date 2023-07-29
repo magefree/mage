@@ -1,6 +1,7 @@
 package mage.cards.n;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.FinalChapterAbilityResolvesTriggeredAbility;
 import mage.abilities.common.SacrificePermanentTriggeredAbility;
@@ -17,6 +18,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -77,7 +79,17 @@ class NarciFableSingerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int value = (int) getValue("SAGA_MANACOST");
+        FixedTarget fixedTarget = targetPointer.getFixedTarget(game, source);
+        if (fixedTarget == null) {
+            return false;
+        }
+
+        MageObject saga = game.getObject(fixedTarget.getTarget());
+        if (saga == null) {
+            return false;
+        }
+
+        int value = saga.getManaValue();
         if (value > 0) {
             new LoseLifeOpponentsEffect(value).apply(game, source);
             new GainLifeEffect(value).apply(game, source);
