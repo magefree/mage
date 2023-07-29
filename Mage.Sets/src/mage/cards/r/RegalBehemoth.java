@@ -81,6 +81,6 @@ class RegalBehemothTriggeredManaAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever you tap a land for mana while you're the monarch, add one mana of any color.";
+        return "Whenever you tap a land for mana while you're the monarch, add an additional one mana of any color.";
     }
 }

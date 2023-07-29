@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -13,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
-
 
 /**
  * @author noxx
@@ -36,7 +34,7 @@ public final class AvacynAngelOfHope extends CardImpl {
         // Other permanents you control are indestructible.
         FilterControlledPermanent filter = new FilterControlledPermanent("Other permanents you control");
         Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true);
-        effect.setText("Other permanents you control are indestructible");
+        effect.setText("Other permanents you control have indestructible");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
