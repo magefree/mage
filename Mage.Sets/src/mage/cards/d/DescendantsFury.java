@@ -12,17 +12,15 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.PermanentInListPredicate;
+import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.TargetPointer;
-import mage.watchers.common.DamageThisCombatWatcher;
+import mage.watchers.common.DamagedPlayerThisCombatWatcher;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author Susucr
@@ -42,7 +40,7 @@ public final class DescendantsFury extends CardImpl {
                 true
         );
 
-        ability.addWatcher(new DamageThisCombatWatcher());
+        ability.addWatcher(new DamagedPlayerThisCombatWatcher());
         this.addAbility(ability);
     }
 
@@ -72,7 +70,7 @@ class DescendantsFurySacrificeCost extends CostImpl implements SacrificeCost {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        DamageThisCombatWatcher watcher = game.getState().getWatcher(DamageThisCombatWatcher.class);
+        DamagedPlayerThisCombatWatcher watcher = game.getState().getWatcher(DamagedPlayerThisCombatWatcher.class);
         if (watcher == null) {
             return false;
         }
@@ -86,19 +84,9 @@ class DescendantsFurySacrificeCost extends CostImpl implements SacrificeCost {
             return false;
         }
 
-        List<Permanent> possibleSacrifice =
-                watcher.getPermanents(controller.getId(), damagedPlayer.getId())
-                       .stream()
-                       .map(p -> p.getPermanent(game))
-                       .filter(p -> p != null && controller.canPaySacrificeCost(p, source, controllerId, game))
-                       .collect(Collectors.toList());
-
-        if (possibleSacrifice.isEmpty()) {
-            return false;
-        }
-
         FilterControlledPermanent filter = new FilterControlledPermanent();
-        filter.add(new PermanentInListPredicate(possibleSacrifice));
+        filter.add(new PermanentReferenceInCollectionPredicate(
+                watcher.getPermanents(controller.getId(), damagedPlayer.getId())));
 
         TargetControlledPermanent target = new TargetControlledPermanent(0, 1, filter, true);
 
@@ -112,7 +100,7 @@ class DescendantsFurySacrificeCost extends CostImpl implements SacrificeCost {
         }
 
         if (permanent.sacrifice(source, game)) {
-            source.getEffects().setValue("SACRIFICED_PERMANENT", permanent.getId());
+            source.getEffects().setValue("SACRIFICED_PERMANENT", permanent);
             return true;
         }
 
@@ -121,7 +109,7 @@ class DescendantsFurySacrificeCost extends CostImpl implements SacrificeCost {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        DamageThisCombatWatcher watcher = game.getState().getWatcher(DamageThisCombatWatcher.class);
+        DamagedPlayerThisCombatWatcher watcher = game.getState().getWatcher(DamagedPlayerThisCombatWatcher.class);
         if (watcher == null) {
             return false;
         }
@@ -163,12 +151,7 @@ class DescendantsFuryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID sacrificeId = (UUID) getValue("SACRIFICED_PERMANENT");
-        if (sacrificeId == null) {
-            return false;
-        }
-
-        Permanent permanent = game.getPermanentOrLKIBattlefield(sacrificeId);
+        Permanent permanent = (Permanent) getValue("SACRIFICED_PERMANENT");
         if (permanent == null) {
             return false;
         }

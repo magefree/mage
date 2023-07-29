@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 /**
  * @author notgreat
  */
-public class DamageThisCombatWatcher extends Watcher {
-    // Watch over creatures that dealt combat damage to a player the last combat.
+public class DamagedPlayerThisCombatWatcher extends Watcher {
+    // Watch over creatures that dealt combat damage to a player the last damage phase of current combat.
 
     //A creature you control that dealt damage to a player - does not apply across multiple combat steps
 
@@ -24,7 +24,7 @@ public class DamageThisCombatWatcher extends Watcher {
     //MOR -> Player they dealt damage to
     private final Map<MageObjectReference, UUID> damageTarget = new HashMap<>();
 
-    public DamageThisCombatWatcher() {
+    public DamagedPlayerThisCombatWatcher() {
         super(WatcherScope.GAME);
     }
 

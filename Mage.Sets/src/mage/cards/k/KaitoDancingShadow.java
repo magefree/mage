@@ -21,7 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.DroneToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.watchers.common.DamageThisCombatWatcher;
+import mage.watchers.common.DamagedPlayerThisCombatWatcher;
 
 import java.util.UUID;
 
@@ -40,7 +40,7 @@ public final class KaitoDancingShadow extends CardImpl {
 
         // Whenever one or more creatures you control deal combat damage to a player, you may return one of them to its owner's hand. If you do, you may activate loyalty abilities of Kaito twice this turn rather than only once.
         Ability ability = new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, new KaitoDancingShadowEffect(), true);
-        ability.addWatcher(new DamageThisCombatWatcher());
+        ability.addWatcher(new DamagedPlayerThisCombatWatcher());
         this.addAbility(ability);
 
         // +1: Up to one target creature can't attack or block until your next turn.
@@ -84,7 +84,7 @@ class KaitoDancingShadowEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DamageThisCombatWatcher watcher = game.getState().getWatcher(DamageThisCombatWatcher.class);
+        DamagedPlayerThisCombatWatcher watcher = game.getState().getWatcher(DamagedPlayerThisCombatWatcher.class);
         if (watcher == null) {
             return false;
         }
