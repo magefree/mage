@@ -112,7 +112,9 @@ public class ConditionalEvasionEffect extends EvasionEffect {
             return otherwiseEffect.cantBeBlockedMessage(attacker, source, game);
         }
 
-        return null; // null is expected when the condition is false and there is no otherwise.
+        // null is expected when the condition is false and there is no otherwise.
+        // The meaning for that is to not display an hint.
+        return null;
     }
 
     @Override
