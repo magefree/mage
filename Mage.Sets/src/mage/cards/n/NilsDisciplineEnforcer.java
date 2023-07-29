@@ -111,7 +111,7 @@ class NilsDisciplineEnforcerCountersEffect extends OneShotEffect {
 class NilsDisciplineEnforcerEffect extends CantAttackYouUnlessPayAllEffect {
 
     NilsDisciplineEnforcerEffect() {
-        super(null, Scope.YOU_AND_CONTROLLED_PLANESWALKERS);
+        super(Duration.WhileOnBattlefield, new ManaCostsImpl<>("{X}"), Scope.YOU_AND_CONTROLLED_PLANESWALKERS);
         staticText = "Each creature with one or more counters on it can't attack you or planeswalkers you control "
             + "unless its controller pays {X}, where X is the number of counters on that creature.";
     }

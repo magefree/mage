@@ -43,19 +43,20 @@ public class CantAttackYouUnlessPayAllEffect extends PayCostToAttackBlockEffectI
     private final FilterCreaturePermanent filterCreaturePermanent;
     private final Scope scope; // Describe which attacked objects this effect cares about.
 
-    public CantAttackYouUnlessPayAllEffect(Cost cost) {
-        this(cost, Scope.YOU_ONLY);
+    public CantAttackYouUnlessPayAllEffect(Duration duration, Cost cost) {
+        this(duration, cost, Scope.YOU_ONLY);
     }
 
-    public CantAttackYouUnlessPayAllEffect(Cost cost, Scope scope) {
-        this(cost, scope, StaticFilters.FILTER_PERMANENT_CREATURES);
+    public CantAttackYouUnlessPayAllEffect(Duration duration, Cost cost, Scope scope) {
+        this(duration, cost, scope, StaticFilters.FILTER_PERMANENT_CREATURES);
     }
 
-    public CantAttackYouUnlessPayAllEffect(Cost cost, Scope scope, FilterCreaturePermanent filter) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK, cost);
+    public CantAttackYouUnlessPayAllEffect(Duration duration, Cost cost, Scope scope, FilterCreaturePermanent filter) {
+        super(duration, Outcome.Detriment, RestrictType.ATTACK, cost);
         this.scope = scope;
         this.filterCreaturePermanent = filter;
-        staticText = filter.getMessage()
+        staticText = duration.toString()
+            + filterCreaturePermanent.getMessage()
             + " can't attack " + scope.firstText
             + " unless their controller pays "
             + (cost == null ? "" : cost.getText())

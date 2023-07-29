@@ -11,6 +11,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -53,7 +54,7 @@ public final class ArchangelOfTithes extends CardImpl {
 class ArchangelOfTithesPayManaToAttackAllEffect extends CantAttackYouUnlessPayAllEffect {
 
     ArchangelOfTithesPayManaToAttackAllEffect() {
-        super(new ManaCostsImpl<>("{1}"), Scope.YOU_AND_CONTROLLED_PLANESWALKERS);
+        super(Duration.WhileOnBattlefield, new ManaCostsImpl<>("{1}"), Scope.YOU_AND_CONTROLLED_PLANESWALKERS);
         staticText = "As long as {this} is untapped, creatures can't attack you or planeswalkers you control unless their controller pays {1} for each of those creatures.";
     }
 

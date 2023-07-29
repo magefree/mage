@@ -11,6 +11,7 @@ import mage.abilities.effects.common.combat.CantAttackYouUnlessPayAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPlaneswalkerCard;
@@ -34,7 +35,11 @@ public final class OnakkeOathkeeper extends CardImpl {
         // Creatures can't attack planeswalkers you control unless their controller pays {1} for each creature they control that's attacking a planeswalker you control.
         this.addAbility(new SimpleStaticAbility(
             Zone.BATTLEFIELD,
-            new CantAttackYouUnlessPayAllEffect(new ManaCostsImpl<>("{1}"), CantAttackYouUnlessPayAllEffect.Scope.CONTROLLED_PLANESWALKERS_ONLY)
+            new CantAttackYouUnlessPayAllEffect(
+                Duration.WhileOnBattlefield,
+                new ManaCostsImpl<>("{1}"),
+                CantAttackYouUnlessPayAllEffect.Scope.CONTROLLED_PLANESWALKERS_ONLY
+            )
         ));
 
         // {4}{W}{W}, Exile Onakke Oathkeeper from your graveyard: Return target planeswalker card from your graveyard to the battlefield.

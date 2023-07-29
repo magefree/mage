@@ -8,10 +8,7 @@ import mage.abilities.effects.common.combat.CantAttackYouUnlessPayAllEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 
 import java.util.UUID;
 
@@ -35,7 +32,11 @@ public final class BairdStewardOfArgive extends CardImpl {
         // Creatures can't attack you or a planeswalker you control unless their controller pays {1} for each of those creatures.
         this.addAbility(new SimpleStaticAbility(
             Zone.BATTLEFIELD,
-            new CantAttackYouUnlessPayAllEffect(new ManaCostsImpl<>("{1}"), CantAttackYouUnlessPayAllEffect.Scope.YOU_AND_CONTROLLED_PLANESWALKERS)
+            new CantAttackYouUnlessPayAllEffect(
+                Duration.WhileOnBattlefield,
+                new ManaCostsImpl<>("{1}"),
+                CantAttackYouUnlessPayAllEffect.Scope.YOU_AND_CONTROLLED_PLANESWALKERS
+            )
         ));
     }
 
