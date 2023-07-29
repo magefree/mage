@@ -283,11 +283,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 // evasion
                 for (Map.Entry<EvasionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableEvasionEffects(this, game).entrySet()) {
                     for (Ability ability : entry.getValue()) {
-                        if (entry.getKey().hasCantBeBlockedMessage(this, ability, game)) {
-                            String cantBeBlockedMessage = entry.getKey().getCantBeBlockedMessage(this, ability, game);
+                        String evasionMessage = entry.getKey().cantBeBlockedMessage(this, ability, game);
+                        if (evasionMessage != null) {
                             restrictHints.add(HintUtils.prepareText(
-                                cantBeBlockedMessage.substring(0, 1).toUpperCase()
-                                    + cantBeBlockedMessage.substring(1)
+                                evasionMessage.substring(0, 1).toUpperCase()
+                                    + evasionMessage.substring(1)
                                     + addSourceObjectName(game, ability, this),
                                 null,
                                 HintUtils.HINT_ICON_EVASION

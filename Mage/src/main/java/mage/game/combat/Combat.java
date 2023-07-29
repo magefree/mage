@@ -1258,8 +1258,9 @@ public class Combat implements Serializable, Copyable<Combat> {
 
                                 // Both write a line in the logs, and popup a message to the blocking player, for full clarity.
                                 String message = " can't be blocked this way.";
-                                if (effect.hasCantBeBlockedMessage(attackingCreature, ability, game)) {
-                                    message += " It " + effect.getCantBeBlockedMessage(attackingCreature, ability, game);
+                                String evasionMessage = effect.cantBeBlockedMessage(attackingCreature, ability, game);
+                                if (evasionMessage != null) {
+                                    message += " It " + evasionMessage;
                                 }
                                 game.informPlayer(controller, attackingCreature.getIdName() + message);
                                 game.informPlayers(attackingCreature.getLogName() + message);

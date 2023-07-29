@@ -14,7 +14,7 @@ public abstract class EvasionEffect extends ContinuousEffectImpl {
         this(duration, Outcome.Benefit);
     }
 
-    protected String staticCantBeBlockedMessage;
+    protected String staticCantBeBlockedMessage; // Can be null!
 
     public EvasionEffect(Duration duration, Outcome outcome) {
         super(duration, outcome);
@@ -42,25 +42,18 @@ public abstract class EvasionEffect extends ContinuousEffectImpl {
         return false;
     }
 
-
-    /**
-     * Is there an hint to continuously display on the evasive permanent?
-     * Note: all EvasionEffect do not want to display hint (keyworded ones for instance)
-     */
-    public boolean hasCantBeBlockedMessage(Permanent attacker, Ability source, Game game) {
-        return null != this.staticCantBeBlockedMessage;
-    }
-
     /**
      * If the effect prevents blocking, and there is a message to display in an hint on the evasive permanent,
      * returns the message.
      * <p>
-     * Call hasCantBeBlockedMessage before-end to check if there is a message.
+     * As the message is displayed even without a blocker being defined, this is returning null (and expecting
+     * to return null) in the following situations:
+     * -> The effect is not a cantBeBlocked effect. (for now this is the only kind of EvasionEffect, but that could change)
+     * -> The effect is a cantBeBlocked effect that does not want to display a message (keyworded abilities like Flying for instance)
+     * -> A conditional effect when the condition is not met.
      */
-    public String getCantBeBlockedMessage(Permanent attacker, Ability source, Game game) {
-        if (this.staticCantBeBlockedMessage == null) {
-            throw new UnsupportedOperationException("Message was requested while not defined.");
-        }
+    public String cantBeBlockedMessage(Permanent attacker, Ability source, Game game) {
+        // Can be null!
         return this.staticCantBeBlockedMessage;
     }
 
