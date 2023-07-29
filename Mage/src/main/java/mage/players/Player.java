@@ -38,9 +38,11 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
+import mage.util.MultiAmountMessage;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -746,7 +748,27 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game     Game
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
-    List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game);
+    default List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type,
+            Game game) {
+        List<MultiAmountMessage> constraints = messages.stream().map(s -> new MultiAmountMessage(s, 0, max))
+                .collect(Collectors.toList());
+
+        return getMultiAmountWithIndividualConstraints(outcome, constraints, min, max, type, game);
+    }
+
+    /**
+     * Player distributes amount among multiple options
+     *
+     * @param outcome  AI hint
+     * @param messages List of options to distribute amount among. Each option has a constraint on the min, max chosen for it
+     * @param totalMin Total minimum amount to be distributed
+     * @param totalMax Total amount to be distributed
+     * @param type     MultiAmountType enum to set dialog options such as title and header
+     * @param game     Game
+     * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
+     */
+    List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages, int min,
+            int max, MultiAmountType type, Game game);
 
     void sideboard(Match match, Deck deck);
 

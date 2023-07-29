@@ -9,6 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.MultiAmountType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -24,10 +25,12 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.MultiAmountMessage;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author Alex-Vasile
@@ -92,33 +95,39 @@ class ResourcefulDefenseMoveCounterEffect extends OneShotEffect {
             return false;
         }
 
-        // Counter name and how many to move
-        Map<String, Integer> counterMap = new HashMap<>();
-        for (Map.Entry<String, Counter> entry : fromPermanent.getCounters(game).entrySet()) {
-            int num = controller.getAmount(
-                    0,
-                    entry.getValue().getCount(),
-                    "Choose how many " + entry.getKey() +
-                            " counters to remove from " + fromPermanent.getLogName(),
-                    game);
-            int newAmount = num + counterMap.getOrDefault(entry.getKey(), 0);
-            counterMap.put(entry.getKey(), newAmount);
-        }
+        List<Counter> counters = new ArrayList<>(fromPermanent.getCounters(game).values());
+        counters.sort((c1, c2) -> c1.getName().compareTo(c2.getName()));
 
-        // Move the counters
-        for (String counterName : counterMap.keySet()) {
-            toPermanent.addCounters(
-                    CounterType.findByName(counterName).createInstance(counterMap.get(counterName)),
-                    source,
-                    game);
-            fromPermanent.removeCounters(counterName, counterMap.get(counterName), source, game);
-            game.informPlayers(
-                    controller.getLogName() + "moved " +
-                    counterMap.get(counterName) + " " +
-                    counterName + "counter" + (counterMap.get(counterName) > 1 ? "s" : "") +
-                    "from " + fromPermanent.getLogName() +
-                    "to " + toPermanent.getLogName() + "."
-            );
+        List<MultiAmountMessage> messages = counters.stream()
+                .map(c -> new MultiAmountMessage(c.getName() + " (" + c.getCount() + ")", 0, c.getCount()))
+                .collect(Collectors.toList());
+        int max = messages.stream().map(m -> m.max).reduce(0, Integer::sum);
+
+        int total;
+        List<Integer> choices;
+        do {
+            choices = controller.getMultiAmountWithIndividualConstraints(Outcome.Neutral, messages, 0,
+                    max, MultiAmountType.COUNTERS, game);
+
+            total = choices.stream().reduce(0, Integer::sum);
+        } while (total < 0);
+
+        // Move the counters. Make sure some counters were actually moved.
+        for (int i = 0; i < choices.size(); i++) {
+            Integer amount = choices.get(i);
+
+            if (amount > 0) {
+                String counterName = counters.get(i).getName();
+
+                toPermanent.addCounters(CounterType.findByName(counterName).createInstance(amount), source, game);
+                fromPermanent.removeCounters(counterName, amount, source, game);
+                game.informPlayers(
+                        controller.getLogName() + "moved " +
+                                amount + " " +
+                                counterName + " counter" + (amount > 1 ? "s" : "") +
+                                " from " + fromPermanent.getLogName() +
+                                "to " + toPermanent.getLogName() + ".");
+            }
         }
 
         return true;

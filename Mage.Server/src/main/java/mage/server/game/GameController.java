@@ -28,6 +28,7 @@ import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
+import mage.util.MultiAmountMessage;
 import mage.utils.StreamUtils;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
@@ -870,7 +871,9 @@ public class GameController implements GameCallback {
         perform(playerId, playerId1 -> getGameSession(playerId1).getAmount(message, min, max));
     }
 
-    private synchronized void multiAmount(UUID playerId, final List<String> messages, final int min, final int max, final Map<String, Serializable> options) throws MageException {
+    private synchronized void multiAmount(UUID playerId, final List<MultiAmountMessage> messages,
+            final int min, final int max, final Map<String, Serializable> options)
+            throws MageException {
         perform(playerId, playerId1 -> getGameSession(playerId1).getMultiAmount(messages, min, max, options));
     }
 

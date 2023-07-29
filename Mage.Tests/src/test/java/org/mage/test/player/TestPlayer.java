@@ -49,6 +49,7 @@ import mage.players.net.UserData;
 import mage.target.*;
 import mage.target.common.*;
 import mage.util.CardUtil;
+import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -2831,11 +2832,12 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
+            int min, int max, MultiAmountType type, Game game) {
         assertAliasSupportInChoices(false);
 
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
         if (needCount == 0) {
             return defaultList;
         }
@@ -2861,7 +2863,7 @@ public class TestPlayer implements Player {
             }
 
             // extra check
-            if (!MultiAmountType.isGoodValues(answer, needCount, min, max)) {
+            if (!MultiAmountType.isGoodValues(answer, messages, min, max)) {
                 Assert.fail("Wrong choices in multi amount: " + answer
                         .stream()
                         .map(String::valueOf)
@@ -2872,7 +2874,7 @@ public class TestPlayer implements Player {
         }
 
         this.chooseStrictModeFailed("choice", game, "Multi amount: " + type.getHeader());
-        return computerPlayer.getMultiAmount(outcome, messages, min, max, type, game);
+        return computerPlayer.getMultiAmountWithIndividualConstraints(outcome, messages, min, max, type, game);
     }
 
     @Override

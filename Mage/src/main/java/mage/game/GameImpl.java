@@ -66,6 +66,7 @@ import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.MessageToClient;
+import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 import mage.util.functions.CopyApplier;
 import mage.watchers.Watcher;
@@ -2885,7 +2886,8 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void fireGetMultiAmountEvent(UUID playerId, List<String> messages, int min, int max, Map<String, Serializable> options) {
+    public void fireGetMultiAmountEvent(UUID playerId, List<MultiAmountMessage> messages, int min, int max,
+            Map<String, Serializable> options) {
         if (simulation) {
             return;
         }

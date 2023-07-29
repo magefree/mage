@@ -115,8 +115,7 @@ public class ResourcefulDefenseTest extends CardTestPlayerBase {
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{4}{W}: ");
         addTarget(playerA, steelbaneHydra);
         addTarget(playerA, vividCreek);
-        setChoiceAmount(playerA, 2);
-        setChoiceAmount(playerA, 1);
+        setChoiceAmount(playerA, 1, 2); // +1/+1, Charge
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();

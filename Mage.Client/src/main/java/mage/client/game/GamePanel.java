@@ -28,6 +28,7 @@ import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
 import mage.players.PlayableObjectStats;
 import mage.players.PlayableObjectsList;
+import mage.util.MultiAmountMessage;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
@@ -1774,7 +1775,8 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public void getMultiAmount(List<String> messages, GameView gameView, Map<String, Serializable> options, int min, int max) {
+    public void getMultiAmount(List<MultiAmountMessage> messages, GameView gameView, Map<String, Serializable> options,
+            int min, int max) {
         updateGame(gameView, false, options, null);
         hideAll();
         DialogManager.getManager(gameId).fadeOut();

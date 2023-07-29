@@ -125,6 +125,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Glorious Gale", 51, Rarity.COMMON, mage.cards.g.GloriousGale.class));
         cards.add(new SetCardInfo("Goblin Assailant", 295, Rarity.COMMON, mage.cards.g.GoblinAssailant.class));
         cards.add(new SetCardInfo("Goblin Fireleaper", 133, Rarity.UNCOMMON, mage.cards.g.GoblinFireleaper.class));
+        cards.add(new SetCardInfo("Goldberry, River-Daughter", 52, Rarity.RARE, mage.cards.g.GoldberryRiverDaughter.class));
         cards.add(new SetCardInfo("Gollum's Bite", 85, Rarity.UNCOMMON, mage.cards.g.GollumsBite.class));
         cards.add(new SetCardInfo("Gollum, Patient Plotter", 84, Rarity.UNCOMMON, mage.cards.g.GollumPatientPlotter.class));
         cards.add(new SetCardInfo("Gollum, Scheming Guide", 292, Rarity.RARE, mage.cards.g.GollumSchemingGuide.class));

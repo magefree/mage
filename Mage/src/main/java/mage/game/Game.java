@@ -39,6 +39,7 @@ import mage.players.PlayerList;
 import mage.players.Players;
 import mage.util.Copyable;
 import mage.util.MessageToClient;
+import mage.util.MultiAmountMessage;
 import mage.util.functions.CopyApplier;
 
 import java.io.Serializable;
@@ -301,7 +302,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void fireGetAmountEvent(UUID playerId, String message, int min, int max);
 
-    void fireGetMultiAmountEvent(UUID playerId, List<String> messages, int min, int max, Map<String, Serializable> options);
+    void fireGetMultiAmountEvent(UUID playerId, List<MultiAmountMessage> messages, int min, int max, Map<String, Serializable> options);
 
     void fireChoosePileEvent(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2);
 
