@@ -50,7 +50,7 @@ public final class StarscreamSeekerLeader extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
             new DealsCombatDamageToAPlayerTriggeredAbility(new BecomesMonarchTargetEffect(), false, true),
             MonarchIsNotSetCondition.instance,
-            "Whenever Starscream deals combat damage to a player, if there is no monarch, that player becomes the monarch."
+            "Whenever {this} deals combat damage to a player, if there is no monarch, that player becomes the monarch."
         ));
 
         // Whenever you become the monarch, convert Starscream.
