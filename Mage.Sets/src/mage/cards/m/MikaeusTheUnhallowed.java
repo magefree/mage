@@ -51,7 +51,7 @@ public final class MikaeusTheUnhallowed extends CardImpl {
         Ability ability = new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true));
         ability.addEffect(new GainAbilityControlledEffect(new UndyingAbility(), Duration.WhileOnBattlefield, filter, true)
                 .setText("and have undying. <i>(When a creature with undying dies, if it had no +1/+1 counters on it," +
-                        " return it to the battlefield under its owner’s control with a +1/+1 counter on it.)</i>"));
+                        " return it to the battlefield under its owner's control with a +1/+1 counter on it.)</i>"));
         this.addAbility(ability);
     }
 
