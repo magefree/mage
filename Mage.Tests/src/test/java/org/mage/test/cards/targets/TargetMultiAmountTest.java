@@ -1,5 +1,6 @@
 package org.mage.test.cards.targets;
 
+import com.google.common.collect.ImmutableList;
 import mage.constants.MultiAmountType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -113,7 +114,7 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
 
     @Test
     public void test_GoodValues() {
-        List<List<MultiAmountMessage>> constraints = List.of(
+        List<List<MultiAmountMessage>> constraints = ImmutableList.of(
                 getUnconstrainedConstraints(0),
                 getUnconstrainedConstraints(1),
                 getUnconstrainedConstraints(2),
