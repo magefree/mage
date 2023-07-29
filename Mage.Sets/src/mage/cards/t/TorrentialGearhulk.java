@@ -65,7 +65,7 @@ class TorrentialGearhulkEffect extends OneShotEffect {
     TorrentialGearhulkEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast target instant card from your graveyard without paying its mana cost. "
-                + "If that card would be put into your graveyard this turn, exile it instead";
+                + "If that spell would be put into your graveyard, exile it instead";
     }
 
     TorrentialGearhulkEffect(final TorrentialGearhulkEffect effect) {
