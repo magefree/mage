@@ -929,9 +929,18 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // random order
                 List<UUID> ids = new ArrayList<>(cards);
                 Collections.shuffle(ids);
+                int count = 0;
                 for (UUID id : ids) {
-                    moveObjectToLibrary(id, source, game, false);
+                    if (moveObjectToLibrary(id, source, game, false, false)) {
+                        count += 1;
+                    }
                 }
+                // As the cards are in random order and individual log
+                // are not very informative, batch the individual logs in one.
+                game.informPlayers(getLogName() + " puts " + CardUtil.numberToText(count, "a")
+                        + (count > 1 ? " cards" : " card") + " to the bottom of their owner's library"
+                        + (count > 1 ? " in a random order" : "")
+                        + CardUtil.getSourceLogName(game, source, ids.size() == 1 ? ids.get(0) : null));
             } else {
                 // user defined order
                 TargetCard target = new TargetCard(Zone.ALL,
@@ -1022,9 +1031,18 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // random order
                 List<UUID> ids = new ArrayList<>(cards);
                 Collections.shuffle(ids);
+                int count = 0;
                 for (UUID id : ids) {
-                    moveObjectToLibrary(id, source, game, true);
+                    if (moveObjectToLibrary(id, source, game, true, false)) {
+                        count += 1;
+                    }
                 }
+                // As the cards are in random order and individual log
+                // are not very informative, batch the individual logs in one.
+                game.informPlayers(getLogName() + " puts " + CardUtil.numberToText(count, "a")
+                        + (count > 1 ? " cards" : " card") + " on the top of their owner's library"
+                        + (count > 1 ? " in a random order" : "")
+                        + CardUtil.getSourceLogName(game, source, ids.size() == 1 ? ids.get(0) : null));
             } else {
                 // user defined order
                 TargetCard target = new TargetCard(Zone.ALL,
@@ -1057,7 +1075,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         return true;
     }
 
-    private void moveObjectToLibrary(UUID objectId, Ability source, Game game, boolean toTop) {
+    private boolean moveObjectToLibrary(UUID objectId, Ability source, Game game, boolean toTop) {
+        return this.moveObjectToLibrary(objectId, source, game, toTop, true);
+    }
+
+    private boolean moveObjectToLibrary(UUID objectId, Ability source, Game game, boolean toTop, boolean withLog) {
         MageObject mageObject = game.getObject(objectId);
         if (mageObject instanceof Spell && mageObject.isCopy()) {
             // Spell copies are not moved as cards, so here the no copy spell has to be selected to move
@@ -1071,11 +1093,20 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (mageObject != null) {
             Zone fromZone = game.getState().getZone(objectId);
             if ((mageObject instanceof Permanent)) {
-                this.moveCardToLibraryWithInfo((Permanent) mageObject, source, game, fromZone, toTop, false);
+                if (withLog) {
+                    return this.moveCardToLibraryWithInfo((Permanent) mageObject, source, game, fromZone, toTop, false);
+                } else {
+                    return ((Permanent) mageObject).moveToZone(Zone.LIBRARY, source, game, toTop);
+                }
             } else if (mageObject instanceof Card) {
-                this.moveCardToLibraryWithInfo((Card) mageObject, source, game, fromZone, toTop, false);
+                if (withLog) {
+                    return this.moveCardToLibraryWithInfo((Card) mageObject, source, game, fromZone, toTop, false);
+                } else {
+                    return ((Card) mageObject).moveToZone(Zone.LIBRARY, source, game, toTop);
+                }
             }
         }
+        return false;
     }
 
     @Override
