@@ -420,6 +420,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Nadier's Nightblade", 175, Rarity.COMMON, mage.cards.n.NadiersNightblade.class));
         cards.add(new SetCardInfo("Nahiri, the Harbinger", 929, Rarity.MYTHIC, mage.cards.n.NahiriTheHarbinger.class));
         cards.add(new SetCardInfo("Nahiri, the Lithomancer", 45, Rarity.RARE, mage.cards.n.NahiriTheLithomancer.class));
+        cards.add(new SetCardInfo("Narci, Fable Singer", 710, Rarity.MYTHIC, mage.cards.n.NarciFableSinger.class));
         cards.add(new SetCardInfo("Narset of the Ancient Way", 930, Rarity.MYTHIC, mage.cards.n.NarsetOfTheAncientWay.class));
         cards.add(new SetCardInfo("Narset, Enlightened Master", 931, Rarity.MYTHIC, mage.cards.n.NarsetEnlightenedMaster.class));
         cards.add(new SetCardInfo("Narset, Parter of Veils", 853, Rarity.UNCOMMON, mage.cards.n.NarsetParterOfVeils.class));
