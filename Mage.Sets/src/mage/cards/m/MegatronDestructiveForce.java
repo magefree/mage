@@ -137,16 +137,7 @@ class MegatronDestructiveForceReflexiveEffect extends OneShotEffect {
 
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent == null) {
-            // target should be a creature, thus a permanent.
-            // In case it is not, is it a player?
-            Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-            return player != null && player.damage(value, source, game) > 0;
-        }
-
-        if (!permanent.isCreature(game)) {
-            // target should be a creature.
-            // In case it is not, just damage it.
-            return permanent.damage(value, source, game) > 0;
+            return false;
         }
 
         int lethal = permanent.getLethalDamage(source.getSourceId(), game);
