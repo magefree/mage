@@ -446,6 +446,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Odric, Master Tactician", 46, Rarity.RARE, mage.cards.o.OdricMasterTactician.class));
         cards.add(new SetCardInfo("Ogre Slumlord", 177, Rarity.RARE, mage.cards.o.OgreSlumlord.class));
         cards.add(new SetCardInfo("Ohran Frostfang", 309, Rarity.RARE, mage.cards.o.OhranFrostfang.class));
+        cards.add(new SetCardInfo("Omarthis, Ghostfire Initiate", 708, Rarity.MYTHIC, mage.cards.o.OmarthisGhostfireInitiate.class));
         cards.add(new SetCardInfo("Omen of the Hunt", 906, Rarity.COMMON, mage.cards.o.OmenOfTheHunt.class));
         cards.add(new SetCardInfo("Omen of the Sun", 831, Rarity.COMMON, mage.cards.o.OmenOfTheSun.class));
         cards.add(new SetCardInfo("Omnath, Locus of Mana", 310, Rarity.MYTHIC, mage.cards.o.OmnathLocusOfMana.class));
