@@ -18,6 +18,7 @@ import mage.client.SessionHandler;
 import mage.client.table.TournamentPlayerPanel;
 import mage.client.util.IgnoreList;
 import mage.client.util.gui.FastSearchUtil;
+import mage.constants.MatchBufferTime;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
@@ -85,6 +86,7 @@ public class NewTournamentDialog extends MageDialog {
             cbDeckType.setModel(new DefaultComboBoxModel(SessionHandler.getDeckTypes()));
 
             cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
+            cbBufferTime.setModel(new DefaultComboBoxModel(MatchBufferTime.values()));
             cbSkillLevel.setModel(new DefaultComboBoxModel(SkillLevel.values()));
             cbDraftCube.setModel(new DefaultComboBoxModel(SessionHandler.getDraftCubes()));
             cbDraftTiming.setModel(new DefaultComboBoxModel(Arrays.stream(TimingOption.values())
@@ -131,6 +133,8 @@ public class NewTournamentDialog extends MageDialog {
         txtName = new javax.swing.JTextField();
         lbTimeLimit = new javax.swing.JLabel();
         cbTimeLimit = new javax.swing.JComboBox();
+        lbBufferTime = new javax.swing.JLabel();
+        cbBufferTime = new javax.swing.JComboBox();
         lbSkillLevel = new javax.swing.JLabel();
         cbSkillLevel = new javax.swing.JComboBox();
         lblPassword = new javax.swing.JLabel();
@@ -245,6 +249,16 @@ public class NewTournamentDialog extends MageDialog {
         bindingGroup.addBinding(binding);
 
         cbTimeLimit.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, they lose the complete match. ");
+
+        lbBufferTime.setText("Buffer Time:");
+        lbBufferTime.setToolTipText(
+                "The time a player gets whenever their timer starts before their match time starts going down. ");
+
+        org.jdesktop.beansbinding.Binding binding2 = org.jdesktop.beansbinding.Bindings.createAutoBinding( org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, cbBufferTime, org.jdesktop.beansbinding.ObjectProperty.create(), lbBufferTime, org.jdesktop.beansbinding.BeanProperty.create("labelFor"));
+        bindingGroup.addBinding(binding2);
+
+        cbBufferTime.setToolTipText(
+                "The time a player gets whenever their timer starts before their match time starts going down. ");
 
         lbSkillLevel.setText("Skill Level:");
         lbSkillLevel.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, they lose the complete match. ");
@@ -552,7 +566,11 @@ public class NewTournamentDialog extends MageDialog {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(lbTimeLimit)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lbBufferTime)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(cbBufferTime, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(lblPassword)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -573,6 +591,8 @@ public class NewTournamentDialog extends MageDialog {
                                         .addComponent(lblName)
                                         .addComponent(lbTimeLimit)
                                         .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lbBufferTime)
+                                        .addComponent(cbBufferTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblPassword)
                                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(cbAllowSpectators, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1339,6 +1359,7 @@ public class NewTournamentDialog extends MageDialog {
         tOptions.getMatchOptions().setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
 
         tOptions.getMatchOptions().setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());
+        tOptions.getMatchOptions().setMatchBufferTime((MatchBufferTime) this.cbBufferTime.getSelectedItem());
         tOptions.getMatchOptions().setSkillLevel((SkillLevel) this.cbSkillLevel.getSelectedItem());
         tOptions.getMatchOptions().setWinsNeeded((Integer) this.spnNumWins.getValue());
         tOptions.getMatchOptions().setFreeMulligans((Integer) this.spnFreeMulligans.getValue());
@@ -1360,6 +1381,14 @@ public class NewTournamentDialog extends MageDialog {
         for (MatchTimeLimit mtl : MatchTimeLimit.values()) {
             if (mtl.getTimeLimit() == timeLimit) {
                 this.cbTimeLimit.setSelectedItem(mtl);
+                break;
+            }
+        }
+        // TODO: Rethink default match time with buffer time.
+        int bufferTime = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_BUFFER_TIME + versionStr, "0"));
+        for (MatchBufferTime mtl : MatchBufferTime.values()) {
+            if (mtl.getBufferTime() == bufferTime) {
+                this.cbBufferTime.setSelectedItem(mtl);
                 break;
             }
         }
@@ -1485,6 +1514,7 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JCheckBox cbPlaneChase;
     private javax.swing.JComboBox cbSkillLevel;
     private javax.swing.JComboBox cbTimeLimit;
+    private javax.swing.JComboBox cbBufferTime;
     private javax.swing.JComboBox cbTournamentType;
     private javax.swing.JCheckBox chkRated;
     private javax.swing.JCheckBox chkRollbackTurnsAllowed;
@@ -1492,6 +1522,7 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JLabel lbDeckType;
     private javax.swing.JLabel lbSkillLevel;
     private javax.swing.JLabel lbTimeLimit;
+    private javax.swing.JLabel lbBufferTime;
     private javax.swing.JLabel lblConstructionTime;
     private javax.swing.JLabel lblDraftCube;
     private javax.swing.JLabel lblFreeMulligans;

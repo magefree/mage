@@ -119,6 +119,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected int turns;
     protected int storedBookmark = -1;
     protected int priorityTimeLeft = Integer.MAX_VALUE;
+    protected int bufferTimeLeft = 0;
 
     // conceded or connection lost game
     protected boolean left;
@@ -275,6 +276,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.justActivatedType = player.justActivatedType;
 
         this.priorityTimeLeft = player.getPriorityTimeLeft();
+        this.bufferTimeLeft = player.getBufferTimeLeft();
         this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
 
         this.castSourceIdWithAlternateMana.addAll(player.getCastSourceIdWithAlternateMana());
@@ -4452,6 +4454,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public int getPriorityTimeLeft() {
         return priorityTimeLeft;
+    }
+
+    @Override
+    public void setBufferTimeLeft(int timeLeft) {
+        bufferTimeLeft = timeLeft;
+    }
+
+    @Override
+    public int getBufferTimeLeft() {
+        return bufferTimeLeft;
     }
 
     @Override

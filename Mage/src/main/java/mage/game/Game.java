@@ -529,6 +529,10 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void setPriorityTime(int priorityTime);
 
+    int getBufferTime();
+
+    void setBufferTime(int bufferTime);
+
     UUID getStartingPlayerId();
 
     void setStartingPlayerId(UUID startingPlayerId);

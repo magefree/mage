@@ -1150,6 +1150,16 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void setBufferTimeLeft(int timeLeft) {
+
+    }
+
+    @Override
+    public int getBufferTimeLeft() {
+        return 0;
+    }
+
+    @Override
     public void setReachedNextTurnAfterLeaving(boolean reachedNextTurnAfterLeaving) {
 
     }

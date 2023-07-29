@@ -854,6 +854,20 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     int getPriorityTimeLeft();
 
+    /**
+     * Set seconds left before priority time starts ticking down.
+     *
+     * @param timeLeft
+     */
+    void setBufferTimeLeft(int timeLeft);
+
+    /**
+     * Returns seconds left before priority time starts ticking down.
+     *
+     * @return
+     */
+    int getBufferTimeLeft();
+
     void setReachedNextTurnAfterLeaving(boolean reachedNextTurnAfterLeaving);
 
     boolean hasReachedNextTurnAfterLeaving();

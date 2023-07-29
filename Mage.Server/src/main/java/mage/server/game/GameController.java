@@ -150,15 +150,18 @@ public class GameController implements GameCallback {
                                 if (playerId == null) {
                                     throw new MageException("RESUME_TIMER: playerId can't be null");
                                 }
+                                Player player = game.getState().getPlayer(playerId);
+                                if (player == null) {
+                                    throw new MageException("RESUME_TIMER: player can't be null");
+                                }
+
                                 timer = timers.get(playerId);
                                 if (timer == null) {
-                                    Player player = game.getState().getPlayer(playerId);
-                                    if (player != null) {
-                                        timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
-                                    } else {
-                                        throw new MageException("RESUME_TIMER: player can't be null");
-                                    }
+                                    timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
                                 }
+
+                                player.setBufferTimeLeft(game.getBufferTime());
+                                timer.setBufferCount(game.getBufferTime());
                                 timer.resume();
                                 break;
                             case PAUSE_TIMER:

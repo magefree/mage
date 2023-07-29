@@ -143,7 +143,8 @@ public abstract class GameImpl implements Game {
 
     private boolean scopeRelevant = false; // replacement effects: used to indicate that currently applied replacement effects have to check for scope relevance (614.12 13/01/18)
     private boolean saveGame = false; // replay code, not done
-    private int priorityTime; // match time limit
+    private int priorityTime; // Match time limit (per player). Set at the start of the match and only goes down.
+    private int bufferTime; // Buffer time before priority time starts going down. Buffer time is refreshed every time the timer starts.
     private final int startingLife;
     private final int startingHandSize;
     private final int minimumDeckSize;
@@ -253,6 +254,7 @@ public abstract class GameImpl implements Game {
         this.scopeRelevant = game.scopeRelevant;
         this.saveGame = game.saveGame;
         this.priorityTime = game.priorityTime;
+        this.bufferTime = game.bufferTime;
         this.startingLife = game.startingLife;
         this.startingHandSize = game.startingHandSize;
         this.minimumDeckSize = game.minimumDeckSize;
@@ -3643,6 +3645,16 @@ public abstract class GameImpl implements Game {
     @Override
     public void setPriorityTime(int priorityTime) {
         this.priorityTime = priorityTime;
+    }
+
+    @Override
+    public int getBufferTime() {
+        return bufferTime;
+    }
+
+    @Override
+    public void setBufferTime(int bufferTime) {
+        this.bufferTime = bufferTime;
     }
 
     @Override
