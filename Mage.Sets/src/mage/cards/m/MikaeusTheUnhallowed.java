@@ -52,6 +52,7 @@ public final class MikaeusTheUnhallowed extends CardImpl {
         ability.addEffect(new GainAbilityControlledEffect(new UndyingAbility(), Duration.WhileOnBattlefield, filter, true)
                 .setText("and have undying. <i>(When a creature with undying dies, if it had no +1/+1 counters on it," +
                         " return it to the battlefield under its owner’s control with a +1/+1 counter on it.)</i>"));
+        this.addAbility(ability);
     }
 
     private MikaeusTheUnhallowed(final MikaeusTheUnhallowed card) {
