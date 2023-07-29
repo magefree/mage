@@ -51,7 +51,7 @@ public final class SphereOfSafety extends CardImpl {
 class SphereOfSafetyPayManaToAttackAllEffect extends CantAttackYouUnlessPayAllEffect {
 
     SphereOfSafetyPayManaToAttackAllEffect() {
-        super(null, Scope.YOU_AND_CONTROLLED_PLANESWALKERS);
+        super(new ManaCostsImpl<>("{X}"), Scope.YOU_AND_CONTROLLED_PLANESWALKERS);
         staticText = "Creatures can't attack you or planeswalkers you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.";
     }
 
