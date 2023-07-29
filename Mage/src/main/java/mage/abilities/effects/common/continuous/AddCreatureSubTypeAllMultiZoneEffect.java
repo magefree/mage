@@ -17,6 +17,9 @@ import mage.players.Player;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * @author TheElk801, Susucr
+ */
 public class AddCreatureSubTypeAllMultiZoneEffect extends ContinuousEffectImpl {
     private final FilterControlledCreaturePermanent filterPermanent;
     private final FilterControlledCreatureSpell filterSpell;
