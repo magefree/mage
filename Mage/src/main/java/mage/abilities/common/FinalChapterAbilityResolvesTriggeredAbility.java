@@ -94,7 +94,7 @@ public class FinalChapterAbilityResolvesTriggeredAbility extends TriggeredAbilit
 
         if (rememberSaga) {
             getEffects().setTargetPointer(new FixedTarget(permanent.getId(), game));
-            getEffects().setValue("SAGA_MANACOST", permanent.getManaValue());
+            getEffects().setValue("SAGA_MANACOST", new Integer(permanent.getManaValue()));
         }
         return true;
     }

@@ -77,7 +77,7 @@ class NarciFableSingerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int value = (int) getValue("SAGA_MANACOST");
+        Integer value = (Integer) getValue("SAGA_MANACOST");
         if (value > 0) {
             new LoseLifeOpponentsEffect(value).apply(game, source);
             new GainLifeEffect(value).apply(game, source);
