@@ -75,7 +75,7 @@ public class Spell extends StackObjectImpl implements Card {
         Card affectedCard = card;
 
         // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
-        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.TRANSFORMED && affectedCard.getSecondCardFace() != null) {
+        if (ability.getSpellAbilityCastMode().isTransformed() && affectedCard.getSecondCardFace() != null) {
             // simulate another side as new card (another code part in continues effect from disturb ability)
             affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
         }

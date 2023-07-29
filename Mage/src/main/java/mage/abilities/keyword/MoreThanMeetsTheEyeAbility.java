@@ -23,10 +23,9 @@ public class MoreThanMeetsTheEyeAbility extends SpellAbility {
 
         // getSecondFaceSpellAbility() already verified that second face exists
         this.setCardName(card.getSecondCardFace().getName());
-        this.name = "Cast " + cardName + " using";
 
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
-        this.spellAbilityCastMode = SpellAbilityCastMode.TRANSFORMED;
+        this.setSpellAbilityCastMode(SpellAbilityCastMode.MORE_THAN_MEETS_THE_EYE);
 
         this.manaCost = manaCost;
         this.getManaCosts().clear();
