@@ -163,6 +163,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Demonlord Belzenlok", 151, Rarity.RARE, mage.cards.d.DemonlordBelzenlok.class));
         cards.add(new SetCardInfo("Deploy the Gatewatch", 819, Rarity.MYTHIC, mage.cards.d.DeployTheGatewatch.class));
         cards.add(new SetCardInfo("Deranged Assistant", 87, Rarity.COMMON, mage.cards.d.DerangedAssistant.class));
+        cards.add(new SetCardInfo("Descendants' Fury", 736, Rarity.RARE, mage.cards.d.DescendantsFury.class));
         cards.add(new SetCardInfo("Desecrate Reality", 714, Rarity.RARE, mage.cards.d.DesecrateReality.class));
         cards.add(new SetCardInfo("Destiny Spinner", 890, Rarity.UNCOMMON, mage.cards.d.DestinySpinner.class));
         cards.add(new SetCardInfo("Diffusion Sliver", 845, Rarity.UNCOMMON, mage.cards.d.DiffusionSliver.class));
