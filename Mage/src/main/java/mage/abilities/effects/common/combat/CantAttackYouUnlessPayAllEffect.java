@@ -55,12 +55,14 @@ public class CantAttackYouUnlessPayAllEffect extends PayCostToAttackBlockEffectI
         super(duration, Outcome.Detriment, RestrictType.ATTACK, cost);
         this.scope = scope;
         this.filterCreaturePermanent = filter;
-        staticText = duration.toString()
-            + filterCreaturePermanent.getMessage()
-            + " can't attack " + scope.firstText
-            + " unless their controller pays "
-            + (cost == null ? "" : cost.getText())
-            + " for each " + scope.secondText;
+
+        String durationText = duration.toString();
+        staticText = (durationText.isEmpty() ? "" : durationText + ", ")
+                + filterCreaturePermanent.getMessage()
+                + " can't attack " + scope.firstText
+                + " unless their controller pays "
+                + cost.getText()
+                + " for each " + scope.secondText;
     }
 
     protected CantAttackYouUnlessPayAllEffect(final CantAttackYouUnlessPayAllEffect effect) {
