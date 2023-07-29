@@ -31,7 +31,7 @@ public final class AncientOoze extends CardImpl {
             Zone.ALL,
             new SetBasePowerToughnessSourceEffect(
                 new TotalPermanentsManaValue(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES)
-            )
+            ).setText("{this}'s power and toughness are each equal to the total mana value of other creatures you control")
         ));
     }
 

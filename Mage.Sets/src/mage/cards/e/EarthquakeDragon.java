@@ -27,8 +27,7 @@ import java.util.UUID;
  */
 public final class EarthquakeDragon extends CardImpl {
 
-
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DRAGON);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DRAGON, "Dragons you control");
 
     private static final TotalPermanentsManaValue xValue = new TotalPermanentsManaValue(filter);
 
