@@ -22,4 +22,12 @@ public class FilterCreatureSpell extends FilterSpell {
         this.add(CardType.CREATURE.getPredicate());
     }
 
+    public FilterCreatureSpell(final FilterCreatureSpell filter) {
+        super(filter);
+    }
+
+    @Override
+    public FilterCreatureSpell copy() {
+        return new FilterCreatureSpell(this);
+    }
 }
