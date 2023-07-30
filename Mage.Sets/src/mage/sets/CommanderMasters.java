@@ -526,6 +526,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Ruby Medallion", 405, Rarity.RARE, mage.cards.r.RubyMedallion.class));
         cards.add(new SetCardInfo("Rugged Prairie", 1022, Rarity.RARE, mage.cards.r.RuggedPrairie.class));
         cards.add(new SetCardInfo("Ruins of Oran-Rief", 1023, Rarity.RARE, mage.cards.r.RuinsOfOranRief.class));
+        cards.add(new SetCardInfo("Rukarumel, Biologist", 711, Rarity.MYTHIC, mage.cards.r.RukarumelBiologist.class));
         cards.add(new SetCardInfo("Rune-Scarred Demon", 184, Rarity.RARE, mage.cards.r.RuneScarredDemon.class));
         cards.add(new SetCardInfo("Saheeli, Sublime Artificer", 935, Rarity.UNCOMMON, mage.cards.s.SaheeliSublimeArtificer.class));
         cards.add(new SetCardInfo("Sai, Master Thopterist", 118, Rarity.RARE, mage.cards.s.SaiMasterThopterist.class));
