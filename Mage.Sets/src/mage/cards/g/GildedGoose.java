@@ -16,7 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.FoodToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -27,13 +27,7 @@ import java.util.UUID;
  */
 
 public final class GildedGoose extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Food");
-
-    static {
-        filter.add(SubType.FOOD.getPredicate());
-    }
-
+    
     public GildedGoose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add(SubType.BIRD);
@@ -54,7 +48,7 @@ public final class GildedGoose extends CardImpl {
 
         // {T}, Sacrifice a Food: Add one mana of any color.
         ActivatedManaAbilityImpl ability1 = new AnyColorManaAbility(new TapSourceCost());
-        ability1.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability1.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD)));
         this.addAbility(ability1);
     }
 

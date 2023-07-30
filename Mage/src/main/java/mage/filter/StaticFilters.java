@@ -1202,4 +1202,10 @@ public final class StaticFilters {
         FILTER_PLAYER_CONTROLLER.add(TargetController.YOU.getPlayerPredicate());
         FILTER_PLAYER_CONTROLLER.setLockedFilter(true);
     }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_FOOD = new FilterControlledPermanent(SubType.FOOD, "Food");
+
+    static {
+        FILTER_CONTROLLED_FOOD.setLockedFilter(true);
+    }
 }

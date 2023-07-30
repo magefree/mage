@@ -7,8 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -19,8 +18,6 @@ import java.util.UUID;
  */
 public final class InsatiableAppetite extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.FOOD, "a Food");
-
     public InsatiableAppetite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
@@ -28,7 +25,7 @@ public final class InsatiableAppetite extends CardImpl {
         this.getSpellAbility().addEffect(new DoIfCostPaid(
                 new BoostTargetEffect(5, 5, Duration.EndOfTurn),
                 new BoostTargetEffect(3, 3, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD))
         ).setText("You may sacrifice a Food. If you do, target creature gets +5/+5 until end of turn. " +
                 "Otherwise, that creature gets +3/+3 until end of turn."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
