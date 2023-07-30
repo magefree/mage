@@ -9,6 +9,7 @@ import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +23,31 @@ import java.util.UUID;
 public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
 
     protected final Counter counter;
+    private final int multiplier;
 
     public EntersBattlefieldWithXCountersEffect(Counter counter) {
+        this(counter, 1);
+    }
+
+    public EntersBattlefieldWithXCountersEffect(Counter counter, int multiplier) {
         super(Outcome.BoostCreature);
         this.counter = counter;
-        staticText = "with X " + counter.getName() + " counters on it";
+        this.multiplier = multiplier;
+
+        String countText = "X";
+        if (multiplier == 2) {
+            countText = "twice " + countText;
+        }
+        if (multiplier > 2) {
+            countText = CardUtil.numberToText(multiplier) + " times " + countText;
+        }
+        staticText = "with " + countText + " " + counter.getName() + " counters on it";
     }
 
     public EntersBattlefieldWithXCountersEffect(final EntersBattlefieldWithXCountersEffect effect) {
         super(effect);
         this.counter = effect.counter.copy();
+        this.multiplier = effect.multiplier;
     }
 
     @Override
@@ -48,7 +64,7 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
                     && spellAbility.getSourceId().equals(source.getSourceId())
                     && permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {
                 if (spellAbility.getSourceId().equals(source.getSourceId())) { // put into play by normal cast
-                    int amount = spellAbility.getManaCostsToPay().getX();
+                    int amount = spellAbility.getManaCostsToPay().getX() * this.multiplier;
                     if (amount > 0) {
                         Counter counterToAdd = counter.copy();
                         counterToAdd.add(amount - counter.getCount());
