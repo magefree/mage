@@ -9,6 +9,7 @@ import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,9 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
         String countText = "X";
         if (multiplier == 2) {
             countText = "twice " + countText;
+        }
+        if (multiplier > 2) {
+            countText = CardUtil.numberToText(multiplier) + " times " + countText;
         }
         staticText = "with " + countText + " " + counter.getName() + " counters on it";
     }
