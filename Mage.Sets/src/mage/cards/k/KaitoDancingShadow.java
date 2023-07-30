@@ -1,13 +1,5 @@
 package mage.cards.k;
 
-import mage.MageObjectReference;
-import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
@@ -17,18 +9,21 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantAttackTargetEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.DroneToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.watchers.Watcher;
+import mage.watchers.common.DamagedPlayerThisCombatWatcher;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +40,7 @@ public final class KaitoDancingShadow extends CardImpl {
 
         // Whenever one or more creatures you control deal combat damage to a player, you may return one of them to its owner's hand. If you do, you may activate loyalty abilities of Kaito twice this turn rather than only once.
         Ability ability = new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, new KaitoDancingShadowEffect(), true);
-        ability.addWatcher(new KaitoDancingShadowWatcher());
+        ability.addWatcher(new DamagedPlayerThisCombatWatcher());
         this.addAbility(ability);
 
         // +1: Up to one target creature can't attack or block until your next turn.
@@ -89,7 +84,7 @@ class KaitoDancingShadowEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        KaitoDancingShadowWatcher watcher = game.getState().getWatcher(KaitoDancingShadowWatcher.class);
+        DamagedPlayerThisCombatWatcher watcher = game.getState().getWatcher(DamagedPlayerThisCombatWatcher.class);
         if (watcher == null) {
             return false;
         }
@@ -114,49 +109,6 @@ class KaitoDancingShadowEffect extends OneShotEffect {
         }
 
         return true;
-    }
-}
-
-class KaitoDancingShadowWatcher extends Watcher {
-    //A creature you control that dealt damage to a player - does not apply across multiple combat steps
-
-    //Player ID -> List of permanents they controlled that dealt damage
-    private final Map<UUID, List<MageObjectReference>> permanents = new HashMap<>();
-    //MOR -> Player they dealt damage to
-    private final Map<MageObjectReference, UUID> damageTarget = new HashMap<>();
-
-    KaitoDancingShadowWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
-            permanents.clear();
-            damageTarget.clear();
-            return;
-        }
-        if (event.getType() != GameEvent.EventType.DAMAGED_PLAYER
-                || !((DamagedPlayerEvent) event).isCombatDamage()) {
-            return;
-        }
-        Permanent creature = game.getPermanent(event.getSourceId());
-        if (creature == null) {
-            return;
-        }
-        MageObjectReference mor = new MageObjectReference(creature, game);
-        damageTarget.put(mor, event.getPlayerId());
-
-        List<MageObjectReference> list = permanents.computeIfAbsent(creature.getControllerId(), (key) -> new ArrayList<>());
-        list.add(mor);
-    }
-
-    //Return the set of permanents that the controller controlled which dealt combat damage to the player
-    //Returns empty set if there were none
-    public Set<MageObjectReference> getPermanents(UUID controllerID, UUID damagedPlayerID) {
-        return permanents.getOrDefault(controllerID, Collections.emptyList()).stream()
-                .filter((mor) -> damagedPlayerID.equals(damageTarget.get(mor)))
-                .collect(Collectors.toSet());
     }
 }
 
