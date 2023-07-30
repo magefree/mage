@@ -16,12 +16,11 @@ import java.util.stream.Collectors;
  */
 public class DamagedPlayerThisCombatWatcher extends Watcher {
     // Watch over creatures that dealt combat damage to a player the last damage phase of current combat.
+    // Gets cleared post combat damage step.
 
-    //A creature you control that dealt damage to a player - does not apply across multiple combat steps
-
-    //Player ID -> List of permanents they controlled that dealt damage
+    // Player ID -> List of permanents they controlled that dealt damage
     private final Map<UUID, List<MageObjectReference>> permanents = new HashMap<>();
-    //MOR -> Player they dealt damage to
+    // MOR -> Player they dealt damage to
     private final Map<MageObjectReference, UUID> damageTarget = new HashMap<>();
 
     public DamagedPlayerThisCombatWatcher() {
@@ -30,7 +29,8 @@ public class DamagedPlayerThisCombatWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST
+                || event.getType() == GameEvent.EventType.CLEANUP_STEP_POST) {
             permanents.clear();
             damageTarget.clear();
             return;
@@ -50,8 +50,9 @@ public class DamagedPlayerThisCombatWatcher extends Watcher {
         list.add(mor);
     }
 
-    //Return the set of permanents that the controller controlled which dealt combat damage to the player
-    //Returns empty set if there were none
+    // Return the set of permanents that the controller controlled which dealt combat damage to the player,
+    // during the very last combat step. (so no first striker on normal combat damage)
+    // Returns empty set if there were none
     public Set<MageObjectReference> getPermanents(UUID controllerID, UUID damagedPlayerID) {
         return permanents.getOrDefault(controllerID, Collections.emptyList()).stream()
                          .filter((mor) -> damagedPlayerID.equals(damageTarget.get(mor)))
