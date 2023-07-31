@@ -76,7 +76,7 @@ class RiteOfConsumptionEffect extends OneShotEffect {
             if (sacrificedCreature != null) {
                 int damage = sacrificedCreature.getPower().getValue();
                 if (damage > 0) {
-                    int damageDealt = game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
+                    int damageDealt = game.damagePlayerOrPermanent(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
                     if (damageDealt > 0) {
                         controller.gainLife(damage, game, source);
                     }

@@ -62,7 +62,7 @@ class MageSlayerEffect extends OneShotEffect {
         if (attacker == null) {
             return false;
         }
-        game.damagePlayerOrPlaneswalker(
+        game.damagePlayerOrPermanent(
                 game.getCombat().getDefenderId(attacker.getId()),
                 attacker.getPower().getValue(),
                 attacker.getId(),

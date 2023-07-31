@@ -3833,17 +3833,17 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable) {
-        return damagePlayerOrPlaneswalker(playerOrWalker, damage, attackerId, source, game, combatDamage, preventable, null);
+    public int damagePlayerOrPermanent(UUID playerOrPermanent, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable) {
+        return damagePlayerOrPermanent(playerOrPermanent, damage, attackerId, source, game, combatDamage, preventable, null);
     }
 
     @Override
-    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
-        Player player = getPlayer(playerOrWalker);
+    public int damagePlayerOrPermanent(UUID playerOrPermanent, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
+        Player player = getPlayer(playerOrPermanent);
         if (player != null) {
             return player.damage(damage, attackerId, source, game, combatDamage, preventable, appliedEffects);
         }
-        Permanent permanent = getPermanent(playerOrWalker);
+        Permanent permanent = getPermanent(playerOrPermanent);
         if (permanent != null) {
             return permanent.damage(damage, attackerId, source, game, combatDamage, preventable, appliedEffects);
         }

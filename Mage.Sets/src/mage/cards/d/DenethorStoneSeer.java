@@ -81,7 +81,7 @@ class DenethorStoneSeerEffect extends OneShotEffect {
         if (player != null) {
             game.setMonarchId(source, player.getId());
         }
-        game.damagePlayerOrPlaneswalker(
+        game.damagePlayerOrPermanent(
                 source.getTargets().get(1).getFirstTarget(), 3,
                 source.getSourceId(), source, game, false, true
         );

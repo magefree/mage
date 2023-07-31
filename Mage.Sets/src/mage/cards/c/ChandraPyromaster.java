@@ -87,7 +87,7 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.damagePlayerOrPlaneswalker(source.getTargets().get(0).getFirstTarget(),
+        game.damagePlayerOrPermanent(source.getTargets().get(0).getFirstTarget(),
                 1, source.getSourceId(), source, game, false, true);
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
