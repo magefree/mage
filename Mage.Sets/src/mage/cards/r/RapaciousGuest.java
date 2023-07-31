@@ -40,7 +40,7 @@ public final class RapaciousGuest extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever one or more creatures you control deal combat damage to a player, create a Food token.
         this.addAbility(new DealCombatDamageControlledTriggeredAbility(
