@@ -31,7 +31,7 @@ public final class FeasterOfFools extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Devour 2
-        this.addAbility(new DevourAbility(DevourEffect.DevourFactor.Devour2));
+        this.addAbility(new DevourAbility(new DevourEffect(2)));
     }
 
     private FeasterOfFools(final FeasterOfFools card) {

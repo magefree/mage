@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -17,6 +16,8 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author fireshoes
@@ -30,7 +31,7 @@ public final class BloodsporeThrinax extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Devour 1
-        this.addAbility(new DevourAbility(DevourEffect.DevourFactor.Devour1));
+        this.addAbility(new DevourAbility(new DevourEffect()));
         
         // Each other creature you control enters the battlefield with an additional X +1/+1 counters on it, where X is the number of +1/+1 counters on Bloodspire Thrinax.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodsporeThrinaxEntersBattlefieldEffect()));

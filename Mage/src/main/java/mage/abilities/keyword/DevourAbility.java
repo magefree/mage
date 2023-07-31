@@ -3,7 +3,6 @@ package mage.abilities.keyword;
 
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DevourEffect;
-import mage.abilities.effects.common.DevourEffect.DevourFactor;
 import mage.constants.Zone;
 
 /**
@@ -44,8 +43,8 @@ import mage.constants.Zone;
  */
 public class DevourAbility extends SimpleStaticAbility {
 
-    public DevourAbility(DevourFactor devourFactor) {
-        super(Zone.ALL, new DevourEffect(devourFactor));
+    public DevourAbility(DevourEffect devourEffect) {
+        super(Zone.ALL, devourEffect);
     }
 
     public DevourAbility(final DevourAbility ability) {

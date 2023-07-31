@@ -1,15 +1,16 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.effects.common.DevourEffect.DevourFactor;
+import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+
+import java.util.UUID;
 
 /**
  *
@@ -18,7 +19,7 @@ import mage.constants.SuperType;
 public final class ThromokTheInsatiable extends CardImpl {
 
     public ThromokTheInsatiable(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HELLION);
 
@@ -26,7 +27,11 @@ public final class ThromokTheInsatiable extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Devour X, where X is the number of creatures devoured this way (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with X +1/+1 counters on it for each of those creatures.)
-        this.addAbility(new DevourAbility(DevourFactor.DevourX));
+        this.addAbility(new DevourAbility(
+                new DevourEffect(
+                        Integer.MAX_VALUE // Special value for Thromok.
+                )
+        ));
     }
 
     private ThromokTheInsatiable(final ThromokTheInsatiable card) {
