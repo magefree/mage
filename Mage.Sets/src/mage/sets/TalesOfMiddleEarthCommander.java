@@ -67,6 +67,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dearly Departed", 165, Rarity.RARE, mage.cards.d.DearlyDeparted.class));
         cards.add(new SetCardInfo("Decree of Pain", 199, Rarity.RARE, mage.cards.d.DecreeOfPain.class));
         cards.add(new SetCardInfo("Deep Analysis", 188, Rarity.COMMON, mage.cards.d.DeepAnalysis.class));
+        cards.add(new SetCardInfo("Denethor, Stone Seer", 20, Rarity.RARE, mage.cards.d.DenethorStoneSeer.class));
         cards.add(new SetCardInfo("Deserted Temple", 363, Rarity.MYTHIC, mage.cards.d.DesertedTemple.class));
         cards.add(new SetCardInfo("Desolate Lighthouse", 303, Rarity.RARE, mage.cards.d.DesolateLighthouse.class));
         cards.add(new SetCardInfo("Devastation Tide", 189, Rarity.RARE, mage.cards.d.DevastationTide.class));

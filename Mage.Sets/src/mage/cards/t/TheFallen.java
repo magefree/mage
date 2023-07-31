@@ -62,7 +62,7 @@ class TheFallenEffect extends OneShotEffect {
         if (watcher != null && watcher.getPlayersAndWalkersDealtDamageThisGame(source.getSourceId()) != null) {
             for (UUID playerId : watcher.getPlayersAndWalkersDealtDamageThisGame(source.getSourceId())) {
                 if (!source.isControlledBy(playerId)) {
-                    game.damagePlayerOrPlaneswalker(playerId, 1, source.getSourceId(), source, game, false, true);
+                    game.damagePlayerOrPermanent(playerId, 1, source.getSourceId(), source, game, false, true);
                 }
             }
             return true;

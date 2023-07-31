@@ -65,7 +65,7 @@ class ScepterOfEmpiresEffect extends OneShotEffect {
             }
         }
         int amount = throne && crown ? 3 : 1;
-        return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), amount, source.getSourceId(), source, game, false, true) > 0;
+        return game.damagePlayerOrPermanent(source.getFirstTarget(), amount, source.getSourceId(), source, game, false, true) > 0;
     }
 
     @Override
