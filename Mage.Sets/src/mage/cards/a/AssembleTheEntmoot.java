@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -46,7 +46,7 @@ public final class AssembleTheEntmoot extends CardImpl {
                 new AssembleTheEntmootEffect(),
                 new SacrificeSourceCost()
         );
-        ability.addHint(ControllerGotLifeCount.getHint());
+        ability.addHint(ControllerGainedLifeCount.getHint());
         ability.addWatcher(new PlayerGainedLifeWatcher());
         this.addAbility(ability);
     }

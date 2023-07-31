@@ -8,7 +8,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -39,8 +39,8 @@ public final class SproutbackTrudge extends CardImpl {
 
         // This spell costs {X} less to cast, where X is the amount of life you gained this turn.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(ControllerGotLifeCount.instance)
-        ).addHint(ControllerGotLifeCount.getHint()).setRuleAtTheTop(true), new PlayerGainedLifeWatcher());
+                Zone.ALL, new SpellCostReductionSourceEffect(ControllerGainedLifeCount.instance)
+        ).addHint(ControllerGainedLifeCount.getHint()).setRuleAtTheTop(true), new PlayerGainedLifeWatcher());
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
