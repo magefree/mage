@@ -2,7 +2,6 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +25,7 @@ public final class GorgerWurm extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Devour 1 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)
-        this.addAbility(new DevourAbility(new DevourEffect(1)));
+        this.addAbility(new DevourAbility(1));
     }
 
     private GorgerWurm(final GorgerWurm card) {

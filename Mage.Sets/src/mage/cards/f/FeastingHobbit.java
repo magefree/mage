@@ -2,7 +2,6 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesWithLessPowerEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
@@ -29,7 +28,7 @@ public final class FeastingHobbit extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Devour Food 3
-        this.addAbility(new DevourAbility(new DevourEffect(3, StaticFilters.FILTER_CONTROLLED_FOOD)));
+        this.addAbility(new DevourAbility(3, StaticFilters.FILTER_CONTROLLED_FOOD));
 
         // Creatures with power less than Feasting Hobbit's power can't block it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));

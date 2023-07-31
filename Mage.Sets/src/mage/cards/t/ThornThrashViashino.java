@@ -4,7 +4,6 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -32,7 +31,7 @@ public final class ThornThrashViashino extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Devour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)
-        this.addAbility(new DevourAbility(new DevourEffect(2)));
+        this.addAbility(new DevourAbility(2));
 
         // {G}: Thorn-Thrash Viashino gains trample until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),new ManaCostsImpl<>("{G}")));

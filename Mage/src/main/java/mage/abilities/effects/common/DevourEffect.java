@@ -6,7 +6,6 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -38,8 +37,6 @@ import java.util.UUID;
  */
 public class DevourEffect extends ReplacementEffectImpl {
 
-    private static final FilterControlledPermanent filterCreature = new FilterControlledCreaturePermanent("creature");
-
     // how many counters per devoured permanent.
     // Integer.MAX_VALUE is a special value that means "X, where X is the number of devoured permanent"
     private final int devourFactor;
@@ -50,21 +47,13 @@ public class DevourEffect extends ReplacementEffectImpl {
     // 's' will be added to pluralize, so far so good with the current text generation.
     private final FilterControlledPermanent filterDevoured;
 
-    public DevourEffect() {
-        this(1);
-    }
-
-    public DevourEffect(int devourFactor) {
-        this(devourFactor, filterCreature);
-    }
-
     public DevourEffect(int devourFactor, FilterControlledPermanent filterDevoured) {
         super(Duration.EndOfGame, Outcome.Detriment);
         this.devourFactor = devourFactor;
         this.filterDevoured = filterDevoured;
     }
 
-    public DevourEffect(final DevourEffect effect) {
+    private DevourEffect(final DevourEffect effect) {
         super(effect);
         this.devourFactor = effect.devourFactor;
         this.filterDevoured = effect.filterDevoured;

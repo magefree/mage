@@ -1,7 +1,6 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -35,7 +34,7 @@ public final class Caprichrome extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Devour artifact 1
-        this.addAbility(new DevourAbility(new DevourEffect(1, filter)));
+        this.addAbility(new DevourAbility(1, filter));
     }
 
     private Caprichrome(final Caprichrome card) {

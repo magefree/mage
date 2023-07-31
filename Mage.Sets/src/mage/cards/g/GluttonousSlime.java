@@ -2,7 +2,6 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
@@ -29,7 +28,7 @@ public final class GluttonousSlime extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Devour 1 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with that many +1/+1 counters on it.)
-        this.addAbility(new DevourAbility(new DevourEffect()));
+        this.addAbility(new DevourAbility(1));
     }
 
     private GluttonousSlime(final GluttonousSlime card) {

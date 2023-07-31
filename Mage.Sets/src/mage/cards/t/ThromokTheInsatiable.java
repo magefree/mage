@@ -2,7 +2,6 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,11 +26,7 @@ public final class ThromokTheInsatiable extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Devour X, where X is the number of creatures devoured this way (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with X +1/+1 counters on it for each of those creatures.)
-        this.addAbility(new DevourAbility(
-                new DevourEffect(
-                        Integer.MAX_VALUE // Special value for Thromok.
-                )
-        ));
+        this.addAbility(DevourAbility.DevourX());
     }
 
     private ThromokTheInsatiable(final ThromokTheInsatiable card) {
