@@ -28,6 +28,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Arwen, Weaver of Hope", 35, Rarity.RARE, mage.cards.a.ArwenWeaverOfHope.class));
         cards.add(new SetCardInfo("Asceticism", 233, Rarity.RARE, mage.cards.a.Asceticism.class));
         cards.add(new SetCardInfo("Ash Barrens", 295, Rarity.UNCOMMON, mage.cards.a.AshBarrens.class));
+        cards.add(new SetCardInfo("Assemble the Entmoot", 36, Rarity.RARE, mage.cards.a.AssembleTheEntmoot.class));
         cards.add(new SetCardInfo("Banishing Light", 161, Rarity.UNCOMMON, mage.cards.b.BanishingLight.class));
         cards.add(new SetCardInfo("Banquet Guests", 47, Rarity.RARE, mage.cards.b.BanquetGuests.class));
         cards.add(new SetCardInfo("Basalt Monolith", 274, Rarity.UNCOMMON, mage.cards.b.BasaltMonolith.class));

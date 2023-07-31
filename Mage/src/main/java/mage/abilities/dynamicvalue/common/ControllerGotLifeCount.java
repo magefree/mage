@@ -9,7 +9,7 @@ import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
- * Amount of life the controller got this turn.
+ * Amount of life the controller gained this turn.
  *
  * @author LevelX2
  */
