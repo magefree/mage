@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -43,7 +43,7 @@ public final class GwaihirGreatestOfTheEagles extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new CreateTokenEffect(new GwaihirBirdToken()), TargetController.ANY,
                 new YouGainedLifeCondition(ComparisonType.MORE_THAN, 2), false
-        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private GwaihirGreatestOfTheEagles(final GwaihirGreatestOfTheEagles card) {

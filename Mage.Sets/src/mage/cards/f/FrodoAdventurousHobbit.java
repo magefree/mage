@@ -8,7 +8,7 @@ import mage.abilities.condition.common.SourceIsRingBearerCondition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.keyword.TheRingTemptsYouEffect;
 import mage.abilities.keyword.PartnerWithAbility;
@@ -58,7 +58,7 @@ public final class FrodoAdventurousHobbit extends CardImpl {
                 new DrawCardSourceControllerEffect(1),
                 FrodoAdventurousHobbitCondition.instance
         ));
-        this.addAbility(ability.addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        this.addAbility(ability.addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private FrodoAdventurousHobbit(final FrodoAdventurousHobbit card) {

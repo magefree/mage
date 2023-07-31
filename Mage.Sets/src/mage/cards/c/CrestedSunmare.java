@@ -5,7 +5,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -49,7 +49,7 @@ public final class CrestedSunmare extends CardImpl {
                 ), new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0),
                 "At the beginning of each end step, if you gained life this turn, " +
                         "create a 5/5 white Horse creature token."
-        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private CrestedSunmare(final CrestedSunmare card) {

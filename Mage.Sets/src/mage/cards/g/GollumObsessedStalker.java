@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.keyword.SkulkAbility;
@@ -46,7 +46,7 @@ public final class GollumObsessedStalker extends CardImpl {
         );
         ability.addWatcher(new PlayerGainedLifeWatcher());
         ability.addWatcher(new GollumObsessedStalkerWatcher());
-        ability.addHint(ControllerGotLifeCount.getHint());
+        ability.addHint(ControllerGainedLifeCount.getHint());
         ability.addHint(GollumObsessedStalkerHint.instance);
 
         this.addAbility(ability);
