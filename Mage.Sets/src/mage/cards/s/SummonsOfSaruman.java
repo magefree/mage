@@ -88,7 +88,7 @@ class SummonsOfSarumanEffect extends OneShotEffect {
         staticText = "Mill X cards. You may cast an instant or sorcery spell with mana value X "
                 + "or less from among them without paying its mana cost."
                 + " <i>(To amass Orcs X, put X +1/+1 counters on an Army you control. It's also an Orc. "
-                + "If you don’t control an Army, create a 0/0 black Orc Army creature token first.)</i>";
+                + "If you don't control an Army, create a 0/0 black Orc Army creature token first.)</i>";
     }
 
     private SummonsOfSarumanEffect(final SummonsOfSarumanEffect effect) {
