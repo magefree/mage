@@ -39,7 +39,11 @@ public class AmassEffect extends OneShotEffect {
     private final SubType subType;
 
     public AmassEffect(int amount, SubType subType) {
-        this(StaticValue.get(amount), subType, true);
+        this(StaticValue.get(amount), subType);
+    }
+
+    public AmassEffect(DynamicValue amount, SubType subType) {
+        this(amount, subType, true);
     }
 
     public AmassEffect(DynamicValue amount, SubType subType, boolean withReminder) {
