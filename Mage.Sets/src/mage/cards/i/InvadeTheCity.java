@@ -49,7 +49,7 @@ class InvadeTheCityEffect extends OneShotEffect {
     InvadeTheCityEffect() {
         super(Outcome.Benefit);
         staticText = "amass Zombies X, where X is the number of instant and sorcery cards in your graveyard. " +
-                "<i>(Put X +1/+1 counterson an Army you control. It's also a Zombie. If you don't control an Army, " +
+                "<i>(Put X +1/+1 counters on an Army you control. It's also a Zombie. If you don't control an Army, " +
                 "create a 0/0 black Zombie Army creature token first.)</i>";
     }
 
