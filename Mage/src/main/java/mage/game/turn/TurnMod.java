@@ -1,114 +1,55 @@
-
-
 package mage.game.turn;
+
+import mage.constants.PhaseStep;
+import mage.constants.TurnPhase;
+import mage.util.Copyable;
 
 import java.io.Serializable;
 import java.util.UUID;
-import mage.constants.PhaseStep;
-import mage.constants.TurnPhase;
-
 
 /**
- * stores extra turns, phases or steps
+ * Creates a signle turn modification for turn, phase or step
+ * <p>
+ * For one time usage only
+ * <p>
+ * If you need it in continuous effect then use ContinuousRuleModifyingEffectImpl
+ * with game events like UNTAP_STEP (example: Sands of Time)
+ * <p>
+ * Supports:
+ * - new controller
+ * - turn: extra and skip
+ * - phase: extra and skip
+ * - step: extra and skip
  *
- * @author BetaSteward_at_googlemail.com
+ * @author JayDi85
  */
-public class TurnMod implements Serializable {
+public class TurnMod implements Serializable, Copyable<TurnMod> {
 
     private final UUID id;
     private final UUID playerId;
+
     private UUID newControllerId;
+
     private boolean extraTurn;
     private boolean skipTurn;
+
     private TurnPhase extraPhase;
     private TurnPhase skipPhase;
+
     private Step extraStep;
     private PhaseStep skipStep;
+
     private TurnPhase afterPhase;
     private PhaseStep afterStep;
+
+    private boolean locked = false; // locked for modification, used for wrong code usage protection
     private String note;
 
-    // Turn mod that should be applied after current turn mod.
-    // Implemented only for control player turn mod!
-    // Added for Emrakul, the Promised End.
+    // Turn mod that should be applied after current turn mod
+    // Implemented only for new controller turn mod
     private TurnMod subsequentTurnMod;
 
-    /**
-     * Used to define if a player skips the next turn or gets an extra turn.
-     *
-     * @param playerId
-     * @param skip - true = skips next turn, false = player gets extra turn
-     */
-    public TurnMod(UUID playerId, boolean skip) {
-        this.id = UUID.randomUUID();
-        this.playerId = playerId;
-        if (skip) {
-            this.skipTurn = true;
-        }
-        else {
-            this.extraTurn = true;
-        }
-    }
-
-    /**
-     * Used to define that a player controlls the next turn of another player.
-     *
-     * @param playerId - id of the player whose next turn is controlled by newControllerId
-     * @param newControllerId - id of the player that controlls playerId's next turn
-     */
-    public TurnMod(UUID playerId, UUID newControllerId) {
-        this.id = UUID.randomUUID();
-        this.playerId = playerId;
-        this.newControllerId = newControllerId;
-    }
-
-    /**
-     * Used to define if and when a player gets an extra phase.
-     *
-     * @param playerId
-     * @param phase
-     * @param afterPhase - set to null if extraPhase is after the next phase
-     * @param skip
-     */
-    public TurnMod(UUID playerId, TurnPhase phase, TurnPhase afterPhase, boolean skip) {
-        this.id = UUID.randomUUID();
-        this.playerId = playerId;
-        if (skip) {
-            this.skipPhase = phase;
-        }
-        else {
-            this.extraPhase = phase;
-        }
-        this.afterPhase = afterPhase;
-    }
-
-    /**
-     * Used to define if and when a player gets an extra step.
-     *
-     * @param playerId
-     * @param step - extra step the player gets
-     * @param afterStep - set to null if extraStep is after the next step
-     */
-    public TurnMod(UUID playerId, Step step, PhaseStep afterStep) {
-        this.id = UUID.randomUUID();
-        this.playerId = playerId;
-        this.extraStep = step;
-        this.afterStep = afterStep;
-    }
-
-    /**
-     * Used to define that a player skips the next time the specified step
-     *
-     * @param playerId
-     * @param step - step to skip the next time
-     */
-    public TurnMod(UUID playerId, PhaseStep step) {
-        this.id = UUID.randomUUID();
-        this.playerId = playerId;
-        this.skipStep = step;
-    }
-
-    public TurnMod(final TurnMod mod) {
+    private TurnMod(final TurnMod mod) {
         this.id = mod.id;
         this.playerId = mod.playerId;
         this.newControllerId = mod.newControllerId;
@@ -126,6 +67,86 @@ public class TurnMod implements Serializable {
             this.subsequentTurnMod = mod.subsequentTurnMod.copy();
         }
         this.note = mod.note;
+        this.locked = mod.locked;
+    }
+
+    public TurnMod copy() {
+        return new TurnMod(this);
+    }
+
+    public TurnMod(UUID playerId) {
+        // TODO: delete
+        this.id = UUID.randomUUID();
+        this.playerId = playerId;
+    }
+
+    private void lock() {
+        if (this.locked) {
+            throw new IllegalStateException("Wrong code usage: you must use only one type of turn modification");
+        }
+        this.locked = true;
+    }
+
+    public TurnMod withSkipTurn() {
+        this.skipTurn = true;
+        lock();
+        return this;
+    }
+
+    public TurnMod withExtraTurn() {
+        this.extraTurn = true;
+        lock();
+        return this;
+    }
+
+    public TurnMod withNewController(UUID newControllerId) {
+        return withNewController(newControllerId, null);
+    }
+
+    public TurnMod withNewController(UUID newControllerId, TurnMod nextSubsequentTurnMod) {
+        this.newControllerId = newControllerId;
+        this.subsequentTurnMod = nextSubsequentTurnMod;
+        lock();
+        return this;
+    }
+
+    public TurnMod withSkipPhase(TurnPhase skipPhase) {
+        this.skipPhase = skipPhase;
+        lock();
+        return this;
+    }
+
+    public TurnMod withExtraPhase(TurnPhase extraPhase) {
+        return withExtraPhase(extraPhase, null);
+    }
+
+    public TurnMod withExtraPhase(TurnPhase extraPhase, TurnPhase addAfterPhase) {
+        this.extraPhase = extraPhase;
+        this.afterPhase = addAfterPhase;
+        lock();
+        return this;
+    }
+
+    public TurnMod withSkipStep(PhaseStep skipStep) {
+        this.skipStep = skipStep;
+        lock();
+        return this;
+    }
+
+    public TurnMod withExtraStep(Step extraStep) {
+        return withExtraStep(extraStep, null);
+    }
+
+    public TurnMod withExtraStep(Step extraStep, PhaseStep addAfterStep) {
+        this.extraStep = extraStep;
+        this.afterStep = addAfterStep;
+        lock();
+        return this;
+    }
+
+    public TurnMod withNote(String note) {
+        this.note = note;
+        return this;
     }
 
     public UUID getPlayerId() {
@@ -168,10 +189,6 @@ public class TurnMod implements Serializable {
         return newControllerId;
     }
 
-    public TurnMod copy() {
-        return new TurnMod(this);
-    }
-
     public UUID getId() {
         return id;
     }
@@ -180,15 +197,11 @@ public class TurnMod implements Serializable {
         return subsequentTurnMod;
     }
 
-    public void setSubsequentTurnMod(TurnMod subsequentTurnMod) {
-        this.subsequentTurnMod = subsequentTurnMod;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
     public String getNote() {
         return note;
+    }
+
+    public boolean isLocked() {
+        return locked;
     }
 }

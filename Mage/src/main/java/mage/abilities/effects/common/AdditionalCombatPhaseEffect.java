@@ -30,8 +30,7 @@ public class AdditionalCombatPhaseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(game.getState().getActivePlayerId(),
-                TurnPhase.COMBAT, null, false));
+        game.getState().getTurnMods().add(new TurnMod(game.getState().getActivePlayerId()).withExtraPhase(TurnPhase.COMBAT));
         return true;
     }
 }

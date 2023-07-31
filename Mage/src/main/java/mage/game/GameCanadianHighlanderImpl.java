@@ -22,7 +22,9 @@ public abstract class GameCanadianHighlanderImpl extends GameImpl {
     @Override
     protected void init(UUID choosingPlayerId) {
         super.init(choosingPlayerId);
-        state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+        // 103.7a  In a two-player game, the player who plays first skips the draw step (see rule 504, "Draw Step")
+        // of his or her first turn.
+        state.getTurnMods().add(new TurnMod(startingPlayerId).withSkipStep(PhaseStep.DRAW));
     }
 
 }

@@ -70,7 +70,7 @@ class BrineElementalEffect extends OneShotEffect {
         if (controller != null) {
             for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (controller.hasOpponent(playerId, game)) {
-                    game.getState().getTurnMods().add(new TurnMod(playerId, PhaseStep.UNTAP));
+                    game.getState().getTurnMods().add(new TurnMod(playerId).withSkipStep(PhaseStep.UNTAP));
                 }
             }
             return true;

@@ -60,7 +60,7 @@ public class CustomPillarOfTheParunsDuel extends GameImpl {
             addDelayedTriggeredAbility(new AtTheBeginOfPlayerFirstMainPhase(playerId, "Pillar of the Paruns"), null);
         });
 
-        state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+        state.getTurnMods().add(new TurnMod(startingPlayerId).withSkipStep(PhaseStep.DRAW));
     }
 
     public CustomPillarOfTheParunsDuel(final CustomPillarOfTheParunsDuel game) {

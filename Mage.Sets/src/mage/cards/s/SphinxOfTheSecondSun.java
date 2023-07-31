@@ -70,12 +70,13 @@ class SphinxOfTheSecondSunEffect extends OneShotEffect {
                     && turnMod.getPlayerId().equals(source.getControllerId())
                     && turnMod.getAfterPhase() == turnPhase) {
                 turnPhase = TurnPhase.BEGINNING;
-                turnMod.setNote("sphinxSecondSunIgnore");
+                turnMod.withNote("sphinxSecondSunIgnore");
                 break;
             }
         }
-        TurnMod newPhase = new TurnMod(source.getControllerId(), TurnPhase.BEGINNING, turnPhase, false);
-        newPhase.setNote("sphinxSecondSun");
+        TurnMod newPhase = new TurnMod(source.getControllerId())
+                .withExtraPhase(TurnPhase.BEGINNING, turnPhase)
+                .withNote("sphinxSecondSun");
         game.getState().getTurnMods().add(newPhase);
         return true;
     }
@@ -94,7 +95,7 @@ class SphinxOfTheSecondSunWatcher extends Watcher {
         }
         for (TurnMod turnMod : game.getState().getTurnMods()) {
             if ("sphinxSecondSun".equals(turnMod.getNote())) {
-                turnMod.setNote("sphinxSecondSunIgnore");
+                turnMod.withNote("sphinxSecondSunIgnore");
             }
         }
     }
