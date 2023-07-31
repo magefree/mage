@@ -111,11 +111,11 @@ class GuffRewritesHistoryEffect extends OneShotEffect {
                 Player owner = game.getPlayer(permanent.getOwnerId());
                 Player controller = game.getPlayer(permanent.getControllerId());
 
-                if(controller != null) {
+                if (controller != null) {
                     controllers.add(controller.getId());
                 }
 
-                if(owner != null) {
+                if (owner != null) {
                     toShuffle.computeIfAbsent(owner.getId(), k -> new CardsImpl());
                     toShuffle.get(owner.getId())
                              .add(permanent);
@@ -124,8 +124,8 @@ class GuffRewritesHistoryEffect extends OneShotEffect {
         }
 
         // Only one shuffle per owner!
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)){
-            if(toShuffle.containsKey(playerId)){
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            if (toShuffle.containsKey(playerId)) {
                 Player owner = game.getPlayer(playerId);
                 // Those permanents' owners shuffle them into their libraries.
                 owner.shuffleCardsToLibrary(toShuffle.get(playerId), game, source);
@@ -136,7 +136,7 @@ class GuffRewritesHistoryEffect extends OneShotEffect {
         Map<UUID, Card> nonlands = new HashMap();
 
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            if(!controllers.contains(playerId)){
+            if (!controllers.contains(playerId)) {
                 continue;
             }
 
@@ -160,7 +160,7 @@ class GuffRewritesHistoryEffect extends OneShotEffect {
             controller.moveCards(cards, Zone.EXILED, source, game);
             // reveal all the exiled cards, as they are reshuffled instantly and do not stay in exile.
             controller.revealCards(source, " — " + controller.getName(), cards, game);
-            if(nonland != null){
+            if (nonland != null) {
                 nonlands.put(playerId, nonland);
                 cards.remove(nonland);
             }
@@ -168,13 +168,13 @@ class GuffRewritesHistoryEffect extends OneShotEffect {
         }
 
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            if(!nonlands.containsKey(playerId)){
+            if (!nonlands.containsKey(playerId)) {
                 continue;
             }
 
             Player player = game.getPlayer(playerId);
             Card card = nonlands.get(playerId);
-            if(player == null || card == null){
+            if (player == null || card == null) {
                 continue;
             }
 
