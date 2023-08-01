@@ -34,7 +34,7 @@ public class DraftSession {
     
     protected int timeoutCardNum; // the pick number for which the current timeout has been set up
     protected int timeoutCounter = 0; // increments every second that the player has run out of picking time
-    protected final int AUTOPICK_TIMER = 5; // seconds - when the player has run out of picking time, the autopick happens after this many seconds (to account for client timer possibly lagging behind server)
+    protected final int AUTOPICK_BUFFER = 5; // seconds - when the player has run out of picking time, the autopick happens after this many seconds (to account for client timer possibly lagging behind server)
 
     private ScheduledFuture<?> futureTimeout;
     protected final ScheduledExecutorService timeoutExecutor;
@@ -102,7 +102,7 @@ public class DraftSession {
                     () -> {
                         try {
                             if (timeoutCardNum == draft.getCardNum()) {
-                                if (timeoutCounter++ >= AUTOPICK_TIMER) { // the autopick happens after n seconds (to account for client timer possibly lagging behind server)
+                                if (timeoutCounter++ >= AUTOPICK_BUFFER) { // the autopick happens after n seconds (to account for client timer possibly lagging behind server)
                                     managerFactory.draftManager().timeout(draft.getId(), userId);
                                 }
                                 setupTimeout(1); // The timeout keeps happening at a 1 second interval to make sure that the draft moves onto the next pick
