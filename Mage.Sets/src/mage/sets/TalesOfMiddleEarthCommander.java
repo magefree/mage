@@ -212,6 +212,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Raise the Palisade", 106, Rarity.RARE, mage.cards.r.RaiseThePalisade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rampaging War Mammoth", 34, Rarity.RARE, mage.cards.r.RampagingWarMammoth.class));
         cards.add(new SetCardInfo("Rampant Growth", 257, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
+        cards.add(new SetCardInfo("Rapacious Guest", 28, Rarity.RARE, mage.cards.r.RapaciousGuest.class));
         cards.add(new SetCardInfo("Realm Seekers", 258, Rarity.RARE, mage.cards.r.RealmSeekers.class));
         cards.add(new SetCardInfo("Reanimate", 206, Rarity.RARE, mage.cards.r.Reanimate.class));
         cards.add(new SetCardInfo("Reclamation Sage", 259, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class));
