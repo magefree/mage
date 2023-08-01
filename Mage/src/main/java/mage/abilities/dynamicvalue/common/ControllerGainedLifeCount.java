@@ -9,11 +9,11 @@ import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
- * Amount of life the controller got this turn.
+ * Amount of life the controller gained this turn.
  *
  * @author LevelX2
  */
-public enum ControllerGotLifeCount implements DynamicValue {
+public enum ControllerGainedLifeCount implements DynamicValue {
     instance;
 
     private static final Hint hint = new ValueHint("Life gained this turn", instance);
@@ -28,7 +28,7 @@ public enum ControllerGotLifeCount implements DynamicValue {
     }
 
     @Override
-    public ControllerGotLifeCount copy() {
+    public ControllerGainedLifeCount copy() {
         return instance;
     }
 

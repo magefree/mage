@@ -22,7 +22,7 @@ public final class SylvanOfferingTreefolkToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    public SylvanOfferingTreefolkToken(final SylvanOfferingTreefolkToken token) {
+    private SylvanOfferingTreefolkToken(final SylvanOfferingTreefolkToken token) {
         super(token);
     }
 
