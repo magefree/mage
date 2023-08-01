@@ -16,7 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -31,8 +31,8 @@ import java.util.UUID;
  */
 public final class EomerKingOfRohan extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter =
-            new FilterControlledCreaturePermanent(SubType.HUMAN, "other Human you control");
+    private static final FilterControlledPermanent filter =
+            new FilterControlledPermanent(SubType.HUMAN, "other Human you control");
 
     static {
         filter.add(AnotherPredicate.instance);
