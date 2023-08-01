@@ -31,7 +31,7 @@ public final class SummonsOfSaruman extends CardImpl {
     public SummonsOfSaruman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{R}");
 
-        // Amass Orcs X.
+        // Amass Orcs X. Mill X cards. You may cast an instant or sorcery spell with mana value X or less from among them without paying its mana cost. (To amass Orcs X, put X +1/+1 counters on an Army you control. It’s also an Orc. If you don’t control an Army, create a 0/0 black Orc Army creature token first.)
         this.getSpellAbility().addEffect(new AmassEffect(SummonsOfSarumanVariableValue.instance, SubType.ORC, false));
         this.getSpellAbility().addEffect(new SummonsOfSarumanEffect());
 
