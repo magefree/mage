@@ -23,7 +23,7 @@ public final class TauntFromTheRampart extends CardImpl {
 
         // Goad all creatures your opponents control. Until your next turn, those creatures can't block.
         this.getSpellAbility().addEffect(new GoadAllEffect(filter)
-                .setText("Goad all creatures your opponent control.")
+                .setText("Goad all creatures your opponents control.")
         );
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.UntilYourNextTurn)
                 .setText("Until your next turn, those creatures can't block. "
