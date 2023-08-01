@@ -104,6 +104,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Feed the Swarm", 200, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Fell the Mighty", 167, Rarity.RARE, mage.cards.f.FellTheMighty.class));
         cards.add(new SetCardInfo("Field of Ruin", 308, Rarity.UNCOMMON, mage.cards.f.FieldOfRuin.class));
+        cards.add(new SetCardInfo("Field-Tested Frying Pan", 11, Rarity.RARE, mage.cards.f.FieldTestedFryingPan.class));
         cards.add(new SetCardInfo("Fiend Hunter", 168, Rarity.UNCOMMON, mage.cards.f.FiendHunter.class));
         cards.add(new SetCardInfo("Flamerush Rider", 216, Rarity.RARE, mage.cards.f.FlamerushRider.class));
         cards.add(new SetCardInfo("Flooded Grove", 309, Rarity.RARE, mage.cards.f.FloodedGrove.class));
