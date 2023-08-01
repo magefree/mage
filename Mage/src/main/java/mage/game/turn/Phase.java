@@ -1,19 +1,19 @@
-
 package mage.game.turn;
+
+import mage.constants.PhaseStep;
+import mage.constants.TurnPhase;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.players.Player;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-import mage.constants.PhaseStep;
-import mage.constants.TurnPhase;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class Phase implements Serializable {
@@ -81,14 +81,24 @@ public abstract class Phase implements Serializable {
                 if (game.isPaused() || game.checkIfGameIsOver()) {
                     return false;
                 }
-                if (game.getTurn().isEndTurnRequested() && step.getType()!=PhaseStep.CLEANUP) {
+                if (game.getTurn().isEndTurnRequested() && step.getType() != PhaseStep.CLEANUP) {
                     continue;
                 }
                 currentStep = step;
-                if (!game.getState().getTurnMods().skipStep(activePlayerId, getStep().getType())) {
+                TurnMod skipStepMod = game.getState().getTurnMods().useNextSkipStep(activePlayerId, getStep().getType());
+                if (skipStepMod == null) {
                     playStep(game);
                     if (game.executingRollback()) {
                         return true;
+                    }
+                } else {
+                    Player player = game.getPlayer(skipStepMod.getPlayerId());
+                    if (player != null) {
+                        game.informPlayers(String.format("%s skips %s step%s",
+                                player.getLogName(),
+                                skipStepMod.getSkipStep().toString(),
+                                skipStepMod.getInfo()
+                        ));
                     }
                 }
                 if (!game.isSimulation() && checkStopOnStepOption(game)) {
@@ -135,10 +145,20 @@ public abstract class Phase implements Serializable {
                 return false;
             }
             currentStep = step;
-            if (!game.getState().getTurnMods().skipStep(activePlayerId, currentStep.getType())) {
+            TurnMod skipStepMod = game.getState().getTurnMods().useNextSkipStep(activePlayerId, currentStep.getType());
+            if (skipStepMod == null) {
                 playStep(game);
                 if (game.executingRollback()) {
                     return true;
+                }
+            } else {
+                Player player = game.getPlayer(skipStepMod.getPlayerId());
+                if (player != null) {
+                    game.informPlayers(String.format("%s skips %s step%s",
+                            player.getLogName(),
+                            skipStepMod.getSkipStep().toString(),
+                            skipStepMod.getInfo()
+                    ));
                 }
             }
         }
@@ -219,12 +239,22 @@ public abstract class Phase implements Serializable {
 
     private void playExtraSteps(Game game, PhaseStep afterStep) {
         while (true) {
-            Step extraStep = game.getState().getTurnMods().extraStep(activePlayerId, afterStep);
-            if (extraStep == null) {
+            TurnMod extraStepMod = game.getState().getTurnMods().useNextExtraStep(activePlayerId, afterStep);
+            if (extraStepMod == null) {
                 return;
             }
-            currentStep = extraStep;
-            playStep(game);
+            currentStep = extraStepMod.getExtraStep();
+            Player player = game.getPlayer(extraStepMod.getPlayerId());
+            if (player != null && player.canRespond()) {
+                game.informPlayers(String.format("%s takes an extra %s step%s",
+                        player.getLogName(),
+                        extraStepMod.getExtraStep().toString(),
+                        extraStepMod.getInfo()
+                ));
+                playStep(game);
+            } else {
+                return;
+            }
         }
     }
 

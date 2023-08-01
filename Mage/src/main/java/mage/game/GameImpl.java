@@ -1049,7 +1049,10 @@ public abstract class GameImpl implements Game {
                     Player extraPlayer = this.getPlayer(extraTurn.getPlayerId());
                     if (extraPlayer != null && extraPlayer.canRespond()) {
                         state.setExtraTurnId(extraTurn.getId());
-                        informPlayers(extraPlayer.getLogName() + " takes an extra turn");
+                        informPlayers(String.format("%s takes an extra turn%s",
+                                extraPlayer.getLogName(),
+                                extraTurn.getInfo()
+                        ));
                         if (!playTurn(extraPlayer)) {
                             return false;
                         }
@@ -1066,7 +1069,8 @@ public abstract class GameImpl implements Game {
     private TurnMod useNextExtraTurn() {
         boolean checkForExtraTurn = true;
         while (checkForExtraTurn) {
-            TurnMod extraTurn = getState().getTurnMods().getNextExtraTurn();
+            // user's logs generated in parent method
+            TurnMod extraTurn = getState().getTurnMods().useNextExtraTurn();
             if (extraTurn != null) {
                 GameEvent event = new GameEvent(GameEvent.EventType.EXTRA_TURN, extraTurn.getId(), null, extraTurn.getPlayerId());
                 if (!replaceEvent(event)) {
@@ -1715,8 +1719,8 @@ public abstract class GameImpl implements Game {
         // for Word of Command
         Spell spell = getSpellOrLKIStack(topId);
         if (spell != null) {
-            if (spell.getCommandedBy() != null) {
-                UUID commandedBy = spell.getCommandedBy();
+            if (spell.getCommandedByPlayerId() != null) {
+                UUID commandedBy = spell.getCommandedByPlayerId();
                 UUID spellControllerId;
                 if (commandedBy.equals(spell.getControllerId())) {
                     spellControllerId = spell.getSpellAbility().getFirstTarget(); // i.e. resolved spell is Word of Command
@@ -1736,7 +1740,7 @@ public abstract class GameImpl implements Game {
                         }
                     }
                 }
-                spell.setCommandedBy(null);
+                spell.setCommandedBy(null, null);
             }
         }
     }
