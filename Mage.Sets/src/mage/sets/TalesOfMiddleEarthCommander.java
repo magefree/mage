@@ -144,6 +144,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Hornet Queen", 250, Rarity.RARE, mage.cards.h.HornetQueen.class));
         cards.add(new SetCardInfo("Hostage Taker", 268, Rarity.RARE, mage.cards.h.HostageTaker.class));
         cards.add(new SetCardInfo("Humble Defector", 222, Rarity.UNCOMMON, mage.cards.h.HumbleDefector.class));
+        cards.add(new SetCardInfo("In the Darkness Bind Them", 58, Rarity.RARE, mage.cards.i.InTheDarknessBindThem.class));
         cards.add(new SetCardInfo("Increasing Devotion", 171, Rarity.RARE, mage.cards.i.IncreasingDevotion.class));
         cards.add(new SetCardInfo("Inferno Titan", 223, Rarity.MYTHIC, mage.cards.i.InfernoTitan.class));
         cards.add(new SetCardInfo("Inscription of Abundance", 251, Rarity.RARE, mage.cards.i.InscriptionOfAbundance.class));
