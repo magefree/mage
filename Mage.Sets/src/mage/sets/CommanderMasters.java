@@ -280,6 +280,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Grave Pact", 165, Rarity.MYTHIC, mage.cards.g.GravePact.class));
         cards.add(new SetCardInfo("Greater Tanuki", 897, Rarity.COMMON, mage.cards.g.GreaterTanuki.class));
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 228, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
+        cards.add(new SetCardInfo("Guff Rewrites History", 737, Rarity.RARE, mage.cards.g.GuffRewritesHistory.class));
         cards.add(new SetCardInfo("Guildless Commons", 1003, Rarity.UNCOMMON, mage.cards.g.GuildlessCommons.class));
         cards.add(new SetCardInfo("Guttersnipe", 229, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Hammer of Nazahn", 388, Rarity.RARE, mage.cards.h.HammerOfNazahn.class));
