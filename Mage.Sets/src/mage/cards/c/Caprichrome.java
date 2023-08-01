@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class Caprichrome extends CardImpl {
 
-    public static final FilterControlledPermanent filter = new FilterControlledArtifactPermanent("artifact");
+    private static final FilterControlledPermanent filter = new FilterControlledArtifactPermanent("artifact");
 
     public Caprichrome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}");
