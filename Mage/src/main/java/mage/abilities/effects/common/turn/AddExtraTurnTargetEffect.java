@@ -29,7 +29,7 @@ public class AddExtraTurnTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         if (this.getTargetPointer().getFirst(game, source) != null) {
-            game.getState().getTurnMods().add(new TurnMod(this.getTargetPointer().getFirst(game, source), false));
+            game.getState().getTurnMods().add(new TurnMod(this.getTargetPointer().getFirst(game, source)).withExtraTurn());
         }
         return true;
     }

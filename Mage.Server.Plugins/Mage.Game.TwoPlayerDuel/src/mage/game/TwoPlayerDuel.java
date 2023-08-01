@@ -40,7 +40,7 @@ public class TwoPlayerDuel extends GameImpl {
     @Override
     protected void init(UUID choosingPlayerId) {
         super.init(choosingPlayerId);
-        state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+        state.getTurnMods().add(new TurnMod(startingPlayerId).withSkipStep(PhaseStep.DRAW));
     }
 
     @Override

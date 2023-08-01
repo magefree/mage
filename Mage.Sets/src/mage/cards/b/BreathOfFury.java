@@ -150,8 +150,7 @@ class BreathOfFuryEffect extends OneShotEffect {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterControlledCreaturePermanent(), controller.getId(), game)) {
                     permanent.untap(game);
                 }
-
-                game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
+                game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraPhase(TurnPhase.COMBAT));
             }
             return true;
         }

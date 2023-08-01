@@ -34,7 +34,7 @@ public class SimpleActivatedAbility extends ActivatedAbilityImpl {
         super(zone, effect, cost);
     }
 
-    public SimpleActivatedAbility(SimpleActivatedAbility ability) {
+    protected SimpleActivatedAbility(SimpleActivatedAbility ability) {
         super(ability);
     }
 

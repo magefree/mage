@@ -119,12 +119,13 @@ class MoraugFuryOfAkoumCombatEffect extends OneShotEffect {
                     && turnMod.getPlayerId().equals(source.getControllerId())
                     && turnMod.getAfterPhase() == turnPhase) {
                 turnPhase = TurnPhase.COMBAT;
-                turnMod.setNote("moraugIgnore");
+                turnMod.withNote("moraugIgnore");
                 break;
             }
         }
-        TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, turnPhase, false);
-        combat.setNote("moraug");
+        TurnMod combat = new TurnMod(source.getControllerId())
+                .withExtraPhase(TurnPhase.COMBAT, turnPhase)
+                .withNote("moraug");
         game.getState().getTurnMods().add(combat);
         game.addDelayedTriggeredAbility(new MoraugFuryOfAkoumDelayedTriggeredAbility(combat.getId()), source);
         return true;
@@ -193,7 +194,7 @@ class MoraugFuryOfAkoumWatcher extends Watcher {
         }
         for (TurnMod turnMod : game.getState().getTurnMods()) {
             if ("moraug".equals(turnMod.getNote())) {
-                turnMod.setNote("moraugIgnore");
+                turnMod.withNote("moraugIgnore");
             }
         }
     }

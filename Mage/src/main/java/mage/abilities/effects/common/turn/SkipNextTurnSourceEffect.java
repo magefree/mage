@@ -47,7 +47,7 @@ public class SkipNextTurnSourceEffect extends OneShotEffect {
             playerId = source.getControllerId();
         }
         for (int i = 0; i < numberOfTurns; i++) {
-            game.getState().getTurnMods().add(new TurnMod(playerId, true));
+            game.getState().getTurnMods().add(new TurnMod(playerId).withSkipTurn());
         }
         return true;
     }

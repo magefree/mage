@@ -55,7 +55,7 @@ class SpipTurnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), true));
+        game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withSkipTurn());
         return true;
     }
 

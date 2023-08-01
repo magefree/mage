@@ -1,37 +1,39 @@
-
 package mage.game.turn;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.UUID;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
+import mage.util.Copyable;
 
 /**
+ * Turn, phase and step modification for extra/skip (use it for one time mod only)
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TurnMods extends ArrayList<TurnMod> {
+public class TurnMods extends ArrayList<TurnMod> implements Serializable, Copyable<TurnMods> {
 
     public TurnMods() {
     }
 
-    public TurnMods(final TurnMods mods) {
+    private TurnMods(final TurnMods mods) {
         for (TurnMod mod : mods) {
             this.add(mod.copy());
         }
     }
 
-    public UUID getExtraTurn(UUID playerId) {
-        ListIterator<TurnMod> it = this.listIterator(this.size());
-        while (it.hasPrevious()) {
-            TurnMod turnMod = it.previous();
-            if (turnMod.isExtraTurn() && turnMod.getPlayerId().equals(playerId)) {
-                it.remove();
-                return turnMod.getId();
-            }
+    public TurnMods copy() {
+        return new TurnMods(this);
+    }
+
+    @Override
+    public boolean add(TurnMod turnMod) {
+        if (!turnMod.isLocked()) {
+            throw new IllegalStateException("Wrong code usage: you must prepare turn mode with modification");
         }
-        return null;
+        return super.add(turnMod);
     }
 
     public TurnMod getNextExtraTurn() {
@@ -105,7 +107,6 @@ public class TurnMods extends ArrayList<TurnMod> {
                         if (turnMod.getSkipStep() == step) {
                             it.remove();
                             return true;
-
                         }
                     }
                 }
@@ -137,9 +138,4 @@ public class TurnMods extends ArrayList<TurnMod> {
         }
         return false;
     }
-
-    public TurnMods copy() {
-        return new TurnMods(this);
-    }
-
 }

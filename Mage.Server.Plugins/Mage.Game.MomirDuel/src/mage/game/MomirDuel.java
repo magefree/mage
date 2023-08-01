@@ -54,7 +54,7 @@ public class MomirDuel extends GameImpl {
         }
         getState().addAbility(ability, null);
         super.init(choosingPlayerId);
-        state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+        state.getTurnMods().add(new TurnMod(startingPlayerId).withSkipStep(PhaseStep.DRAW));
     }
 
     @Override
