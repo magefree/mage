@@ -126,6 +126,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Go for the Throat", 201, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
         cards.add(new SetCardInfo("Goblin Cratermaker", 218, Rarity.UNCOMMON, mage.cards.g.GoblinCratermaker.class));
         cards.add(new SetCardInfo("Goblin Dark-Dwellers", 219, Rarity.RARE, mage.cards.g.GoblinDarkDwellers.class));
+        cards.add(new SetCardInfo("Gollum, Obsessed Stalker", 26, Rarity.RARE, mage.cards.g.GollumObsessedStalker.class));
         cards.add(new SetCardInfo("Graypelt Refuge", 316, Rarity.UNCOMMON, mage.cards.g.GraypeltRefuge.class));
         cards.add(new SetCardInfo("Great Oak Guardian", 247, Rarity.UNCOMMON, mage.cards.g.GreatOakGuardian.class));
         cards.add(new SetCardInfo("Grey Host Reinforcements", 14, Rarity.RARE, mage.cards.g.GreyHostReinforcements.class, NON_FULL_USE_VARIOUS));
