@@ -158,9 +158,10 @@ class GuffRewritesHistoryEffect extends OneShotEffect {
             // Each player who controlled one of those permanents exiles cards from the top of their library
             // until they exile a nonland card, then puts the rest on the bottom of their library in a random order.
             controller.moveCards(cards, Zone.EXILED, source, game);
+            cards.retainZone(Zone.EXILED, game);
             // reveal all the exiled cards, as they are reshuffled instantly and do not stay in exile.
             controller.revealCards(source, " — " + controller.getName(), cards, game);
-            if (nonland != null) {
+            if (nonland != null && cards.contains(nonland)) {
                 nonlands.put(playerId, nonland);
                 cards.remove(nonland);
             }
