@@ -34,7 +34,7 @@ public class DraftSession {
     
     protected int timeoutCardNum; // the pick number for which the current timeout has been set up
     protected int timeoutCounter = 0; // increments every second that the player has run out of picking time
-    protected final int AUTOPICK_TIMER = 5;	// seconds - when the player has run out of picking time, the autopick happens after this many seconds (to account for client timer possibly lagging behind server)
+    protected final int AUTOPICK_TIMER = 5; // seconds - when the player has run out of picking time, the autopick happens after this many seconds (to account for client timer possibly lagging behind server)
 
     private ScheduledFuture<?> futureTimeout;
     protected final ScheduledExecutorService timeoutExecutor;
