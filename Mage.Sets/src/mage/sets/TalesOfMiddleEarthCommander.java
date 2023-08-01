@@ -50,6 +50,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Castle Ardenvale", 361, Rarity.MYTHIC, mage.cards.c.CastleArdenvale.class));
         cards.add(new SetCardInfo("Cavern of Souls", 362, Rarity.MYTHIC, mage.cards.c.CavernOfSouls.class));
         cards.add(new SetCardInfo("Cavern-Hoard Dragon", 31, Rarity.RARE, mage.cards.c.CavernHoardDragon.class));
+        cards.add(new SetCardInfo("Champions of Minas Tirith", 10, Rarity.RARE, mage.cards.c.ChampionsOfMinasTirith.class));
         cards.add(new SetCardInfo("Choked Estuary", 299, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 275, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Cirdan the Shipwright", 50, Rarity.RARE, mage.cards.c.CirdanTheShipwright.class));
