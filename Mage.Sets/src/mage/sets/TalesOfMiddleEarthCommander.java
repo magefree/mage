@@ -183,6 +183,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Oboro, Palace in the Clouds", 371, Rarity.MYTHIC, mage.cards.o.OboroPalaceInTheClouds.class));
         cards.add(new SetCardInfo("Opt", 194, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Orchard Strider", 253, Rarity.COMMON, mage.cards.o.OrchardStrider.class));
+        cards.add(new SetCardInfo("Orcish Siegemaster", 33, Rarity.RARE, mage.cards.o.OrcishSiegemaster.class));
         cards.add(new SetCardInfo("Overwhelming Stampede", 254, Rarity.RARE, mage.cards.o.OverwhelmingStampede.class));
         cards.add(new SetCardInfo("Palace Jailer", 174, Rarity.UNCOMMON, mage.cards.p.PalaceJailer.class));
         cards.add(new SetCardInfo("Paradise Druid", 255, Rarity.UNCOMMON, mage.cards.p.ParadiseDruid.class));
