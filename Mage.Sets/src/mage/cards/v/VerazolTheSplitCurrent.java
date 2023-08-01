@@ -11,6 +11,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
@@ -42,7 +43,7 @@ public final class VerazolTheSplitCurrent extends CardImpl {
                         new CopyTargetSpellEffect(false, true)
                                 .setText("copy that spell. You may choose new targets for the copy"),
                         new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))
-                ), StaticFilters.FILTER_SPELL_KICKED_A, false, true
+                ), StaticFilters.FILTER_SPELL_KICKED_A, false, SetTargetPointer.SPELL
         ));
     }
 

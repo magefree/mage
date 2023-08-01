@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -13,21 +12,17 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.ActivateOncePerTurnManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class RamosDragonEngine extends CardImpl {
@@ -43,7 +38,11 @@ public final class RamosDragonEngine extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a spell, put a +1/+1 counter on Ramos, Dragon Engine for each of that spell's colors.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new RamosDragonEngineAddCountersEffect(), StaticFilters.FILTER_SPELL_A, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new RamosDragonEngineAddCountersEffect(),
+                StaticFilters.FILTER_SPELL_A,
+                false, SetTargetPointer.SPELL
+        ));
 
         // Remove five +1/+1 counters from Ramos: Add {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}. Activate this ability only once each turn.        
         Ability ability = new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(2, 2, 2, 2, 2, 0, 0, 0)), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(5)));

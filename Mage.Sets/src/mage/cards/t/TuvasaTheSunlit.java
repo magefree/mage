@@ -1,8 +1,5 @@
 package mage.cards.t;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,13 +10,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -28,8 +19,11 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class TuvasaTheSunlit extends CardImpl {
@@ -76,9 +70,15 @@ public final class TuvasaTheSunlit extends CardImpl {
 
 class TuvasaTheSunlitTriggeredAbility extends SpellCastControllerTriggeredAbility {
 
+    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
+
+    static {
+        filter.add(CardType.ENCHANTMENT.getPredicate());
+    }
+
     public TuvasaTheSunlitTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                (FilterSpell) new FilterSpell("an enchantment spell").add(CardType.ENCHANTMENT.getPredicate()), false, true);
+                filter, false, SetTargetPointer.SPELL);
     }
 
     public TuvasaTheSunlitTriggeredAbility(final TuvasaTheSunlitTriggeredAbility ability) {
@@ -117,7 +117,7 @@ class TuvasaTheSunlitWatcher extends Watcher {
     private final Map<UUID, UUID> firstEnchantmentThisTurn = new HashMap<>();
 
     public TuvasaTheSunlitWatcher() {
-        super( WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     @Override
