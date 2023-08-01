@@ -9,6 +9,7 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -80,6 +81,7 @@ class LidlessGazeEffect extends OneShotEffect {
             }
         }
 
+        cards.retainZone(Zone.EXILED, game);
         for (Card card : cards.getCards(game)) {
             CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn,
                     true, controller.getId(), null);
