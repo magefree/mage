@@ -36,7 +36,7 @@ public final class FieldTestedFryingPan extends CardImpl {
 
         // When Field-Tested Frying Pan enters the battlefield, create a Food token, then create a 1/1 white Halfling creature token and attach Field-Tested Frying Pan to it.
         TriggeredAbility trigger = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new FoodToken()));
-        trigger.addEffect(new CreateTokenAttachSourceEffect(new HalflingToken(), "and").concatBy(", then"));
+        trigger.addEffect(new CreateTokenAttachSourceEffect(new HalflingToken(), " and").concatBy(", then"));
         this.addAbility(trigger);
 
         // Equipped creature has "Whenever you gain life, this creature gets +X/+X until end of turn, where X is the amount of life you gained."
@@ -45,7 +45,7 @@ public final class FieldTestedFryingPan extends CardImpl {
                         FieldTestedFryingPanValue.instance,
                         FieldTestedFryingPanValue.instance,
                         Duration.EndOfTurn
-                ).setText("{this} gets +X/+X until end of turn, where X is the amount of life you gained.")
+                ).setText("this creature gets +X/+X until end of turn, where X is the amount of life you gained.")
         );
         this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(equippedTrigger, AttachmentType.EQUIPMENT)
