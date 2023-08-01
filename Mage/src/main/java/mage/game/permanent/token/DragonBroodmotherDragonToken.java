@@ -1,7 +1,6 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
@@ -21,7 +20,7 @@ public final class DragonBroodmotherDragonToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
-        addAbility(new DevourAbility(DevourEffect.DevourFactor.Devour2));
+        addAbility(new DevourAbility(2));
     }
 
     public DragonBroodmotherDragonToken(final DragonBroodmotherDragonToken token) {

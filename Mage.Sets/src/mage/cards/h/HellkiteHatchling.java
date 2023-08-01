@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.DevouredCreaturesCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.DevourEffect.DevourFactor;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -34,7 +33,7 @@ public final class HellkiteHatchling extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Devour 1 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with that many +1/+1 counters on it.)
-        this.addAbility(new DevourAbility(DevourFactor.Devour1));
+        this.addAbility(new DevourAbility(1));
 
         // Hellkite Hatchling has flying and trample if it devoured a creature.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
