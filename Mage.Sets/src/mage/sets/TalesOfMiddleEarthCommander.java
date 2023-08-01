@@ -250,6 +250,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Subjugate the Hobbits", 24, Rarity.RARE, mage.cards.s.SubjugateTheHobbits.class));
         cards.add(new SetCardInfo("Sulfur Falls", 333, Rarity.RARE, mage.cards.s.SulfurFalls.class));
         cards.add(new SetCardInfo("Sulfurous Springs", 334, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
+        cards.add(new SetCardInfo("Summons of Saruman", 70, Rarity.RARE, mage.cards.s.SummonsOfSaruman.class));
         cards.add(new SetCardInfo("Sunken Hollow", 335, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Sunpetal Grove", 336, Rarity.RARE, mage.cards.s.SunpetalGrove.class));
         cards.add(new SetCardInfo("Sunset Revelry", 177, Rarity.UNCOMMON, mage.cards.s.SunsetRevelry.class));
