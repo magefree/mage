@@ -45,7 +45,7 @@ public class EntersBattlefieldControlledTriggeredAbility extends EntersBattlefie
         super(zone, effect, filter, optional, setTargetPointer, rule, true);
     }
 
-    public EntersBattlefieldControlledTriggeredAbility(final EntersBattlefieldControlledTriggeredAbility ability) {
+    protected EntersBattlefieldControlledTriggeredAbility(final EntersBattlefieldControlledTriggeredAbility ability) {
         super(ability);
     }
 

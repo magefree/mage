@@ -438,7 +438,7 @@ class SuspendBeginningOfUpkeepInterveningIfTriggeredAbility extends ConditionalI
 
     }
 
-    public SuspendBeginningOfUpkeepInterveningIfTriggeredAbility(final SuspendBeginningOfUpkeepInterveningIfTriggeredAbility effect) {
+    private SuspendBeginningOfUpkeepInterveningIfTriggeredAbility(final SuspendBeginningOfUpkeepInterveningIfTriggeredAbility effect) {
         super(effect);
     }
 
