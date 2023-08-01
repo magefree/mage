@@ -76,7 +76,7 @@ public class BackupTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Conclave Sledge-Captain", 4, 4);
     }
     @Test
-    public void MirrorShieldHopliteTestStrict() {
+    public void MirrorShieldHopliteStrictTest() {
         addCard(Zone.BATTLEFIELD, playerA, "Mirror-Shield Hoplite");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
         addCard(Zone.HAND, playerA, "Consuming Aetherborn");
@@ -93,7 +93,7 @@ public class BackupTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Consuming Aetherborn", 3, 3);
     }
     @Test
-    public void MirrorShieldHopliteTestTriggered() {
+    public void MirrorShieldHopliteTriggeredTest() {
         addCard(Zone.BATTLEFIELD, playerA, "Mirror-Shield Hoplite");
         addCard(Zone.BATTLEFIELD, playerA, "Plains");
         addCard(Zone.HAND, playerA, "Enduring Bondwarden");
@@ -112,5 +112,29 @@ public class BackupTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertPowerToughness(playerA, "Enduring Bondwarden", 4, 5);
+    }
+    @Test
+    public void MirrorShieldHopliteSourceTest() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mirror-Shield Hoplite");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Enduring Bondwarden");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, "Murder");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enduring Bondwarden");
+        addTarget(playerA, "Mirror-Shield Hoplite");
+        setChoice(playerA,true);
+        addTarget(playerA, "Enduring Bondwarden");
+        //The source of the copy is the same as the source of the original backup ability.
+        //So the Bondwarden shouldn't gain the ability again
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder", "Enduring Bondwarden");
+        //Auto-targets Hoplite 1x
+
+        setStrictChooseMode(false); //auto-stack triggers
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertPowerToughness(playerA, "Mirror-Shield Hoplite", 4, 4);
     }
 }
