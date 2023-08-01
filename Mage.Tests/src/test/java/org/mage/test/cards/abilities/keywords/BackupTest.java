@@ -130,9 +130,9 @@ public class BackupTest extends CardTestPlayerBase {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder", "Enduring Bondwarden");
-        //Auto-targets Hoplite 1x
+        addTarget(playerA, "Mirror-Shield Hoplite");
 
-        setStrictChooseMode(false); //auto-stack triggers
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertPowerToughness(playerA, "Mirror-Shield Hoplite", 4, 4);
