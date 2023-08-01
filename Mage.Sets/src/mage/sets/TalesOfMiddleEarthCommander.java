@@ -252,6 +252,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sylvan Offering", 261, Rarity.RARE, mage.cards.s.SylvanOffering.class));
         cards.add(new SetCardInfo("Talisman of Conviction", 285, Rarity.UNCOMMON, mage.cards.t.TalismanOfConviction.class));
         cards.add(new SetCardInfo("Talisman of Progress", 286, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
+        cards.add(new SetCardInfo("Taunt from the Rampart", 71, Rarity.RARE, mage.cards.t.TauntFromTheRampart.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 337, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("The Balrog of Moria", 46, Rarity.RARE, mage.cards.t.TheBalrogOfMoria.class));
         cards.add(new SetCardInfo("The Gaffer", 12, Rarity.RARE, mage.cards.t.TheGaffer.class));
