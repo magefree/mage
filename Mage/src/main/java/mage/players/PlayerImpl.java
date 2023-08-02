@@ -1212,7 +1212,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.fireEvent(castEvent);
                 if (spell.activate(game, noMana)) {
                     GameEvent castedEvent = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
-                            spell.getSpellAbility().getId(), spell.getSpellAbility(), playerId, approvingObject);
+                            ability.getId(), ability, playerId, approvingObject);
                     castedEvent.setZone(fromZone);
                     game.fireEvent(castedEvent);
                     if (!game.isSimulation()) {
@@ -4721,7 +4721,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 boolean chooseOrder = false;
                 if (userData.askMoveToGraveOrder() && (cards.size() > 1)) {
                     chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral,
-                                "Choose the order in which the cards go to the graveyard?", source, game);
+                            "Choose the order in which the cards go to the graveyard?", source, game);
                 }
                 if (chooseOrder) {
                     TargetCard target = new TargetCard(fromZone,
@@ -5145,13 +5145,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public Permanent getRingBearer(Game game) {
         return game.getBattlefield()
-            .getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_RINGBEARER,
-                getId(),null, game)
-            .stream()
-            .filter(Objects::nonNull)
-            .findFirst()
-            .orElse(null);
+                .getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_RINGBEARER,
+                        getId(), null, game)
+                .stream()
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
     }
 
     // 701.52a Certain spells and abilities have the text “the Ring tempts you.” Each time the Ring tempts
@@ -5163,11 +5163,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         UUID currentBearerId = currentBearer == null ? null : currentBearer.getId();
 
         List<UUID> ids = game.getBattlefield()
-            .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game)
-            .stream()
-            .filter(Objects::nonNull)
-            .map(p -> p.getId())
-            .collect(Collectors.toList());
+                .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game)
+                .stream()
+                .filter(Objects::nonNull)
+                .map(p -> p.getId())
+                .collect(Collectors.toList());
 
         if (ids.isEmpty()) {
             game.informPlayers(getLogName() + " has no creature to be Ring-bearer.");
@@ -5196,8 +5196,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 choose(Outcome.Neutral, target, null, game);
 
                 newBearerId = target.getFirstTarget();
-            }
-            else {
+            } else {
                 newBearerId = currentBearerId;
             }
         }
@@ -5211,11 +5210,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             // or abilities that care about which creature was chosen as your Ring-bearer.
             // (2023-06-16)
             game.informPlayers(getLogName() + " did not choose a new Ring-bearer. " +
-                "It is still " + (currentBearer == null ? "" : currentBearer.getLogName()) + ".");
+                    "It is still " + (currentBearer == null ? "" : currentBearer.getLogName()) + ".");
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.RING_BEARER_CHOSEN, currentBearerId, null, getId()));
         } else {
             Permanent ringBearer = game.getPermanent(newBearerId);
-            if(ringBearer != null){
+            if (ringBearer != null) {
                 // The setRingBearer method is taking care of removing
                 // the status from the current ring bearer, if existing.
                 ringBearer.setRingBearer(game, true);

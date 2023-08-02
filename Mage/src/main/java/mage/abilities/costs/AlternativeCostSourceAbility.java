@@ -163,7 +163,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                     }
 
                     // save activated status
-                    game.getState().setValue(getActivatedKey(ability), Boolean.TRUE);
+                    doActivate(game, ability);
                 } else {
                     return false;
                 }
@@ -172,6 +172,10 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
             }
         }
         return isActivated(ability, game);
+    }
+
+    protected void doActivate(Game game, Ability ability) {
+        game.getState().setValue(getActivatedKey(ability), Boolean.TRUE);
     }
 
     private String getActivatedKey(Ability source) {

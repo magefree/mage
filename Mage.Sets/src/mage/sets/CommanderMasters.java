@@ -158,6 +158,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Deep Analysis", 86, Rarity.COMMON, mage.cards.d.DeepAnalysis.class));
         cards.add(new SetCardInfo("Deepglow Skate", 844, Rarity.RARE, mage.cards.d.DeepglowSkate.class));
         cards.add(new SetCardInfo("Deflecting Swat", 214, Rarity.RARE, mage.cards.d.DeflectingSwat.class));
+        cards.add(new SetCardInfo("Demon of Fate's Design", 731, Rarity.RARE, mage.cards.d.DemonOfFatesDesign.class));
         cards.add(new SetCardInfo("Demon's Disciple", 149, Rarity.COMMON, mage.cards.d.DemonsDisciple.class));
         cards.add(new SetCardInfo("Demonic Tutor", 150, Rarity.MYTHIC, mage.cards.d.DemonicTutor.class));
         cards.add(new SetCardInfo("Demonlord Belzenlok", 151, Rarity.RARE, mage.cards.d.DemonlordBelzenlok.class));
