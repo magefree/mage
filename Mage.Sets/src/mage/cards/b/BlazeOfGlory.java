@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TurnPhase;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;

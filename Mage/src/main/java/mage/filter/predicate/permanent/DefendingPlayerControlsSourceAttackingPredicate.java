@@ -6,9 +6,12 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * @author TheElk801
+ * This predicate only works when source is an attacking creature.
+ * Use it sparingly, mostly in triggers e.g. 'when [...] attacks, target creature defending player [...]'
+ *
+ * @author Susucr
  */
-public enum DefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+public enum DefendingPlayerControlsSourceAttackingPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
 
     @Override

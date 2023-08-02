@@ -19,7 +19,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -33,7 +33,7 @@ public final class GrimgrinCorpseBorn extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public GrimgrinCorpseBorn(UUID ownerId, CardSetInfo setInfo) {

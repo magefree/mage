@@ -37,7 +37,7 @@ public final class FalseOrders extends CardImpl {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(FalseOrdersDefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsPredicate.instance);
     }
 
     public FalseOrders(UUID ownerId, CardSetInfo setInfo) {
@@ -61,15 +61,6 @@ public final class FalseOrders extends CardImpl {
         return new FalseOrders(this);
     }
 
-}
-
-enum FalseOrdersDefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<Controllable> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
-        return game.getCombat().getPlayerDefenders(game).contains(input.getObject().getControllerId());
-    }
 }
 
 class FalseOrdersUnblockEffect extends OneShotEffect {
