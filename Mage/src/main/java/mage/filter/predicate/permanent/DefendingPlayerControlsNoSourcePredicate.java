@@ -14,8 +14,6 @@ import mage.game.permanent.Permanent;
  * If not, let's go for a ride on rule interpretation of very old cards hiding in
  * a corner of a gray area of the rules.
  * <p>
- * Use it sparingly, mostly in triggers e.g. 'when [...] attacks, target creature defending player [...]'
- * <p>
  * 506.2. During the combat phase, the active player is the attacking player; creatures that player controls
  * may attack. During the combat phase of a two-player game, the nonactive player is the defending
  * player; that player, planeswalkers they control, and battles they protect may be attacked.
