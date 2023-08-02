@@ -6,8 +6,10 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * This predicate only works when source is an attacking creature.
- * Use it sparingly, mostly in triggers e.g. 'when [...] attacks, target creature defending player [...]'
+ * This predicate can only apply when source is an attacking creature.
+ * <p>
+ * It should be used when the source is an attacking creature during an effect
+ * 'when {this} attacks, target creature defending player [...]'
  *
  * @author Susucr
  */

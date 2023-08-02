@@ -13,10 +13,8 @@ import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsNoSourcePredicate;
 import mage.filter.predicate.permanent.PermanentInListPredicate;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.BlockerDeclaredEvent;
@@ -37,7 +35,7 @@ public final class FalseOrders extends CardImpl {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsNoSourcePredicate.instance);
     }
 
     public FalseOrders(UUID ownerId, CardSetInfo setInfo) {
