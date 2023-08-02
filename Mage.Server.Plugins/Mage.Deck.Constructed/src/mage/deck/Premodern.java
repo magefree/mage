@@ -68,5 +68,6 @@ public class Premodern extends Constructed {
         banned.add("Worldgorger Dragon");
         banned.add("Yawgmoth's Bargain");
         banned.add("Yawgmoth's Will");
+        banned.add("Land Tax");
     }
 }
