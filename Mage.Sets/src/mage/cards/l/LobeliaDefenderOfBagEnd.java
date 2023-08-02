@@ -224,7 +224,7 @@ class LobeliaDefenderOfBagEndWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST || event.getType() == GameEvent.EventType.PLAY_LAND) {
             if (event.getAdditionalReference() == null) {
                 return;
             }
