@@ -1,10 +1,7 @@
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
@@ -16,6 +13,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,48 +69,14 @@ class SoulPartitionEffect extends OneShotEffect {
         controller.moveCards(permanent, Zone.EXILED, source, game);
         Card card = game.getCard(targetId);
         if (card != null && game.getState().getZone(targetId) == Zone.EXILED) {
-            game.addEffect(new SoulPartitionCastEffect(card, game), source);
+            CardUtil.makeCardPlayable(
+                game, source, card, Duration.Custom,
+                null, card.getOwnerId(), null);
             if (controller.hasOpponent(card.getOwnerId(), game)) {
                 game.addEffect(new SoulPartitionCostEffect(card, game), source);
             }
         }
         return true;
-    }
-}
-
-class SoulPartitionCastEffect extends AsThoughEffectImpl {
-
-    private final MageObjectReference mor;
-
-    public SoulPartitionCastEffect(Card card, Game game) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.mor = new MageObjectReference(card, game);
-    }
-
-    private SoulPartitionCastEffect(final SoulPartitionCastEffect effect) {
-        super(effect);
-        this.mor = effect.mor;
-    }
-
-    @Override
-    public SoulPartitionCastEffect copy() {
-        return new SoulPartitionCastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = mor.getCard(game);
-        if (card == null) {
-            discard();
-            return false;
-        }
-        return mor.refersTo(CardUtil.getMainCardId(game, sourceId), game)
-                && card.isOwnedBy(affectedControllerId);
     }
 }
 

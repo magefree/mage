@@ -11,16 +11,17 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.AsThoughEffect;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -28,7 +29,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -103,46 +103,12 @@ class IceCauldronExileEffect extends OneShotEffect {
             }
             if (chosenCard != null) {
                 controller.moveCardToExileWithInfo(chosenCard, source.getSourceId(), sourcePermanent.getIdName(), source, game, Zone.HAND, true);
-                AsThoughEffect effect = new IceCauldronCastFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(chosenCard.getId(), game));
-                game.addEffect(effect, source);
-                game.getState().setValue("IceCauldronCard" + source.getSourceId().toString(), new MageObjectReference(chosenCard.getId(), game)); //store the exiled card
+                CardUtil.makeCardCastable(game, source, chosenCard, Duration.Custom);
+                game.getState().setValue(
+                    "IceCauldronCard" + source.getSourceId().toString(),
+                    new MageObjectReference(chosenCard.getId(), game)); //store the exiled card
                 return true;
             }
-        }
-        return false;
-    }
-}
-
-class IceCauldronCastFromExileEffect extends AsThoughEffectImpl {
-
-    IceCauldronCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        staticText = "You may cast that card for as long as it remains exiled";
-    }
-
-    IceCauldronCastFromExileEffect(final IceCauldronCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public IceCauldronCastFromExileEffect copy() {
-        return new IceCauldronCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (targetPointer.getTargets(game, source).contains(objectId)
-                && game.getState().getZone(objectId) == Zone.EXILED) {
-            Player player = game.getPlayer(source.getControllerId());
-            Card card = game.getCard(objectId);
-            return player != null
-                    && card != null;
         }
         return false;
     }

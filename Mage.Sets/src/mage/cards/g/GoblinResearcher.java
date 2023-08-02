@@ -72,10 +72,11 @@ class GoblinResearcherEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.moveCards(card, Zone.EXILED, source, game);
-        CardUtil.makeCardPlayable(
-                game, source, card, Duration.Custom, false,
-                source.getControllerId(), GoblinResearcherCondition.instance
+        CardUtil.exileAndMakePlayable(
+            game, source, card, Duration.Custom,
+            CardUtil.CastManaAdjustment.NONE,
+            source.getControllerId(),
+            GoblinResearcherCondition.instance
         );
         return true;
     }

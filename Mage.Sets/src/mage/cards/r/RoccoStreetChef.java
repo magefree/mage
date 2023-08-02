@@ -15,7 +15,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.FoodToken;
-import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
@@ -83,10 +82,9 @@ class RoccoStreetChefEffect extends OneShotEffect {
             if (card == null) {
                 continue;
             }
-            player.moveCards(card, Zone.EXILED, source, game);
-            CardUtil.makeCardPlayable(
+            CardUtil.exileAndMakePlayable(
                     game, source, card, Duration.UntilYourNextEndStep,
-                    false, playerId, null
+                    null, playerId, null
             );
         }
         return true;

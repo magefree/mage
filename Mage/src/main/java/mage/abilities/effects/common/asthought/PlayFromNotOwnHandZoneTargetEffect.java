@@ -1,23 +1,14 @@
 package mage.abilities.effects.common.asthought;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
-import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -138,75 +129,6 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
         // OK, allow to play
         if (withoutMana) {
             allowCardToPlayWithoutMana(objectId, source, playerId, game);
-        }
-        return true;
-    }
-
-    public static boolean exileAndPlayFromExile(Game game, Ability source, Card card, TargetController allowedCaster,
-                                                Duration duration, boolean withoutMana, boolean anyColor, boolean onlyCastAllowed) {
-        if (card == null) {
-            return true;
-        }
-        Set<Card> cards = new HashSet<>();
-        cards.add(card);
-        return exileAndPlayFromExile(game, source, cards, allowedCaster, duration, withoutMana, anyColor, onlyCastAllowed);
-    }
-
-    /**
-     * Exiles the cards and let the allowed player play them from exile for the given duration
-     * Supports:
-     *  - cards (use any side)
-     *  - permanents (use permanent, not permanent's card)
-     *
-     * @param game
-     * @param source
-     * @param cards
-     * @param allowedCaster
-     * @param duration
-     * @param withoutMana
-     * @param anyColor
-     * @param onlyCastAllowed true for rule "cast that card" and false for rule "play that card"
-     * @return
-     */
-    public static boolean exileAndPlayFromExile(Game game, Ability source, Set<Card> cards, TargetController allowedCaster,
-                                                Duration duration, boolean withoutMana, boolean anyColor, boolean onlyCastAllowed) {
-        if (cards == null || cards.isEmpty()) {
-            return true;
-        }
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null || sourceObject == null) {
-            return false;
-        }
-        UUID exileId = CardUtil.getExileZoneId(
-                controller.getId().toString()
-                        + "-" + game.getState().getTurnNum()
-                        + "-" + sourceObject.getIdName(), game
-        );
-        String exileName = sourceObject.getIdName() + " free play"
-                + (Duration.EndOfTurn.equals(duration) ? " on turn " + game.getState().getTurnNum() : "")
-                + " for " + controller.getName();
-        if (Duration.EndOfTurn.equals(duration)) {
-            game.getExile().createZone(exileId, exileName).setCleanupOnEndTurn(true);
-        }
-        if (!controller.moveCardsToExile(cards, source, game, true, exileId, exileName)) {
-            return false;
-        }
-
-        // get real cards (if it was called on permanent instead card, example: Release to the Wind)
-        Set<Card> cardsToPlay = cards
-                .stream()
-                .map(Card::getMainCard)
-                .filter(card -> Zone.EXILED.equals(game.getState().getZone(card.getId())))
-                .collect(Collectors.toSet());
-
-        ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, allowedCaster, duration, withoutMana, onlyCastAllowed);
-        effect.setTargetPointer(new FixedTargets(cardsToPlay, game));
-        game.addEffect(effect, source);
-        if (anyColor) {
-            for (Card card : cardsToPlay) {
-                game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration).setTargetPointer(new FixedTarget(card, game)), source);
-            }
         }
         return true;
     }

@@ -103,13 +103,12 @@ class ElderBrainEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getHand());
         controller.moveCards(cards, Zone.EXILED, source, game);
+        CardUtil.exileCardsAndMakePlayable(
+            game, source, cards.getCards(game), Duration.Custom,
+            CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR,
+            null, null
+        );
         player.drawCards(cards.size(), source, game);
-        for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(
-                    game, source, card, Duration.Custom,
-                    true, controller.getId(), null
-            );
-        }
         return true;
     }
 }

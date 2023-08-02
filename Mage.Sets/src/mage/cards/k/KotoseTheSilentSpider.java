@@ -129,7 +129,8 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
         KotoseTheSilentSpiderWatcher.addCards(source, cardSet, game);
         for (Card exiledCard : cardSet) {
             CardUtil.makeCardPlayable(
-                    game, source, exiledCard, Duration.WhileControlled, true,
+                    game, source, exiledCard, Duration.WhileControlled,
+                    CardUtil.CastManaAdjustment.AS_THOUGH_ANY_MANA_COLOR,
                     null, new KotoseTheSilentSpiderCondition(exiledCard, game)
             );
         }

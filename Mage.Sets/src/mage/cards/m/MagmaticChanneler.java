@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,7 +11,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.hint.Hint;
@@ -24,6 +22,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -107,38 +106,8 @@ class MagmaticChannelerExileEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        game.addEffect(new MagmaticChannelerCastFromExileEffect(new MageObjectReference(card, game)), source);
+
+        CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn);
         return true;
-    }
-}
-
-class MagmaticChannelerCastFromExileEffect extends AsThoughEffectImpl {
-
-    private final MageObjectReference mor;
-
-    MagmaticChannelerCastFromExileEffect(MageObjectReference mor) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        this.mor = mor;
-    }
-
-    private MagmaticChannelerCastFromExileEffect(final MagmaticChannelerCastFromExileEffect effect) {
-        super(effect);
-        this.mor = effect.mor;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public MagmaticChannelerCastFromExileEffect copy() {
-        return new MagmaticChannelerCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return source.isControlledBy(affectedControllerId)
-                && mor.refersTo(objectId, game);
     }
 }

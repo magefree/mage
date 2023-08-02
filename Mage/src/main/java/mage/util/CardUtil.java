@@ -43,6 +43,8 @@ import mage.target.TargetCard;
 import mage.target.targetpointer.FixedTarget;
 import org.apache.log4j.Logger;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -1189,8 +1191,59 @@ public final class CardUtil {
         }
     }
 
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor) {
-        makeCardPlayable(game, source, card, duration, anyColor, null, null);
+    /**
+     * Groups together the most usual ways a card's payment is adjusted
+     * by card effects that allow play or cast.
+     */
+    public enum CastManaAdjustment {
+        NONE,
+        AS_THOUGH_ANY_MANA_TYPE,
+        AS_THOUGH_ANY_MANA_COLOR,
+        WITHOUT_PAYING_MANA_COST,
+    }
+
+    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration) {
+        makeCardPlayable(game, source, card, duration, CastManaAdjustment.NONE);
+    }
+
+    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration,
+                                        @Nonnull CastManaAdjustment manaAdjustment) {
+        makeCardPlayable(game, source, card, duration, manaAdjustment, null, null);
+    }
+
+    public static void makeCardPlayable(
+        Game game,
+        Ability source,
+        Card card,
+        Duration duration,
+        @Nonnull CastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId,
+        @Nullable Condition condition
+    ) {
+        makeCardPlayableOrCastable(game, source, card, duration,
+            false, manaAdjustment, playerId, condition);
+    }
+
+    public static void makeCardCastable(Game game, Ability source, Card card, Duration duration) {
+        makeCardCastable(game, source, card, duration, CastManaAdjustment.NONE);
+    }
+
+    public static void makeCardCastable(Game game, Ability source, Card card, Duration duration,
+                                        @Nonnull CastManaAdjustment manaAdjustment) {
+        makeCardCastable(game, source, card, duration, manaAdjustment, null, null);
+    }
+
+    public static void makeCardCastable(
+        Game game,
+        Ability source,
+        Card card,
+        Duration duration,
+        @Nonnull CastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId,
+        @Nullable Condition condition
+    ) {
+        makeCardPlayableOrCastable(game, source, card, duration,
+            true, manaAdjustment, playerId, condition);
     }
 
     /**
@@ -1202,20 +1255,229 @@ public final class CardUtil {
      * @param game
      * @param card
      * @param duration
-     * @param anyColor
-     * @param condition can be null
+     * @param isCastNotPlay true for effects that allow to cast but not play
+     * @param manaAdjustment a mana adjustment applied to the payment of the affected card.
+     * @param playerId
+     *              the player allowed to cast/play.
+     *              null for that player to be the source's controller.
+     * @param condition
+     *              optional additional condition checked when the spell is allowed to be played/cast.
      */
-    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, UUID playerId, Condition condition) {
+    private static void makeCardPlayableOrCastable(
+        Game game,
+        Ability source,
+        Card card,
+        Duration duration,
+        boolean isCastNotPlay,
+        @Nonnull CastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId,
+        @Nullable Condition condition
+    ) {
         // Effect can be used for cards in zones and permanents on battlefield
         // PermanentCard's ZCC is static, but we need updated ZCC from the card (after moved to another zone)
         // So there is a workaround to get actual card's ZCC
         // Example: Hostage Taker
         UUID objectId = card.getMainCard().getId();
         int zcc = game.getState().getZoneChangeCounter(objectId);
-        game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, playerId, condition), source);
-        if (anyColor) {
-            game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
+
+        game.addEffect(new CanPlayCardControllerEffect(
+            game, objectId, zcc, duration,
+            playerId == null ? source.getControllerId() : playerId,
+            condition,
+            manaAdjustment == CastManaAdjustment.WITHOUT_PAYING_MANA_COST,
+            isCastNotPlay
+        ), source);
+
+        // TODO: should those be subability of the main effect?
+        switch(manaAdjustment){
+            case AS_THOUGH_ANY_MANA_TYPE:
+                // TODO: make a distinct effect for "as though it were mana of any type"
+            case AS_THOUGH_ANY_MANA_COLOR:
+                game.addEffect(
+                    new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, playerId, condition)
+                        .setTargetPointer(new FixedTarget(objectId, zcc)),
+                    source);
+                break;
+            case WITHOUT_PAYING_MANA_COST:
+                // Handled by the effect.
+                break;
+            case NONE:
+                break;
         }
+    }
+
+    public static boolean exileAndMakePlayable(
+        Game game,
+        Ability source,
+        Card card,
+        Duration duration
+    ) {
+        return exileAndMakePlayable(
+            game, source, card, duration,
+            CastManaAdjustment.NONE, null, null);
+    }
+
+    public static boolean exileAndMakePlayable(
+        Game game,
+        Ability source,
+        Card card,
+        Duration duration,
+        @Nonnull CastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId,
+        @Nullable Condition condition) {
+
+        if (card == null) {
+            return true;
+        }
+        Set<Card> cards = new HashSet<>();
+        cards.add(card);
+        return exileCardsAndMakePlayable(
+            game, source, cards, duration,
+            manaAdjustment, playerId, condition);
+    }
+
+    public static boolean exileCardsAndMakePlayable(
+        Game game,
+        Ability source,
+        Set<Card> cards,
+        Duration duration
+    ) {
+        return exileCardsAndMakePlayable(
+            game, source, cards, duration,
+            CastManaAdjustment.NONE, null, null);
+    }
+
+    public static boolean exileCardsAndMakePlayable(
+        Game game,
+        Ability source,
+        Set<Card> cards,
+        Duration duration,
+        @Nonnull CastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId,
+        @Nullable Condition condition
+    ) {
+        return exileCardsAndMakePlayableOrCastable(
+            game, source, cards, duration,
+            false, manaAdjustment, playerId, condition);
+    }
+
+    public static boolean exileAndMakeCastable(
+        Game game,
+        Ability source,
+        Card card,
+        Duration duration) {
+
+        return exileAndMakeCastable(
+            game, source, card, duration,
+            CastManaAdjustment.NONE, null, null);
+    }
+
+    public static boolean exileAndMakeCastable(
+        Game game,
+        Ability source,
+        Card card,
+        Duration duration,
+        @Nonnull CastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId,
+        @Nullable Condition condition) {
+
+        if (card == null) {
+            return true;
+        }
+        Set<Card> cards = new HashSet<>();
+        cards.add(card);
+        return exileCardsAndMakeCastable(game, source, cards, duration, manaAdjustment, playerId, condition);
+    }
+
+    public static boolean exileCardsAndMakeCastable(
+        Game game,
+        Ability source,
+        Set<Card> cards,
+        Duration duration
+    ) {
+        return exileCardsAndMakeCastable(
+            game, source, cards, duration,
+            CastManaAdjustment.NONE, null, null);
+    }
+
+    public static boolean exileCardsAndMakeCastable(
+        Game game,
+        Ability source,
+        Set<Card> cards,
+        Duration duration,
+        @Nonnull CastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId,
+        @Nullable Condition condition
+    ) {
+        return exileCardsAndMakePlayableOrCastable(
+            game, source, cards, duration,
+            true, manaAdjustment, playerId, condition);
+    }
+
+    /**
+     * Exiles the cards and let the allowed player play them from exile for the given duration
+     * Supports:
+     *  - cards (use any side)
+     *  - permanents (use permanent, not permanent's card)
+     *
+     * @param game
+     * @param source
+     * @param cards
+     * @param duration
+     * @param isCastNotPlay  true for effects that allow to cast but not play
+     * @param manaAdjustment
+     *              a mana adjustment applied to the payment of the affected card.
+     *              null if no adjustment needs to be applied.
+     * @param playerId
+     *              the player allowed to cast/play.
+     *              null for that player to be the source's controller.
+     * @param condition
+     *              optional additional condition checked when the spell is allowed to be played/cast.
+     */
+    private static boolean exileCardsAndMakePlayableOrCastable(
+        Game game,
+        Ability source,
+        Set<Card> cards,
+        Duration duration,
+        boolean isCastNotPlay,
+        @Nonnull CastManaAdjustment manaAdjustment,
+        @Nullable UUID playerId,
+        @Nullable Condition condition
+    ) {
+        if (cards == null || cards.isEmpty()) {
+            return true;
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
+            return false;
+        }
+        UUID exileId = CardUtil.getExileZoneId(
+            controller.getId().toString()
+                + "-" + game.getState().getTurnNum()
+                + "-" + sourceObject.getIdName(), game
+        );
+        String exileName = sourceObject.getIdName() + " free play"
+            + (Duration.EndOfTurn.equals(duration) ? " on turn " + game.getState().getTurnNum() : "")
+            + " for " + controller.getName();
+        if (Duration.EndOfTurn.equals(duration)) {
+            game.getExile().createZone(exileId, exileName).setCleanupOnEndTurn(true);
+        }
+        if (!controller.moveCardsToExile(cards, source, game, true, exileId, exileName)) {
+            return false;
+        }
+
+        // get real cards (if it was called on permanent instead card, example: Release to the Wind)
+        Set<Card> cardsToPlay = cards
+            .stream()
+            .map(Card::getMainCard)
+            .filter(card -> Zone.EXILED.equals(game.getState().getZone(card.getId())))
+            .collect(Collectors.toSet());
+
+        for (Card card : cardsToPlay) {
+            makeCardPlayableOrCastable(game, source, card, duration, isCastNotPlay, manaAdjustment, playerId, condition);
+        }
+        return true;
     }
 
     public interface SpellCastTracker {

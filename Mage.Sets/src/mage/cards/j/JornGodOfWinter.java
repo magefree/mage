@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -21,7 +20,7 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -95,40 +94,12 @@ class KaldringTheRimestaffEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (card != null) {
-            ContinuousEffect effect = new KaldringTheRimestaffGraveyardEffect();
-            effect.setTargetPointer(new FixedTarget(card, game));
-            game.addEffect(effect, source);
-            effect = new KaldringTheRimestaffTapEffect(card.getId());
+            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn);
+            ContinuousEffect effect = new KaldringTheRimestaffTapEffect(card.getId());
             game.addEffect(effect, source);
             return true;
         }
         return false;
-    }
-}
-
-class KaldringTheRimestaffGraveyardEffect extends AsThoughEffectImpl {
-
-    public KaldringTheRimestaffGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-    }
-
-    private KaldringTheRimestaffGraveyardEffect(final KaldringTheRimestaffGraveyardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KaldringTheRimestaffGraveyardEffect copy() {
-        return new KaldringTheRimestaffGraveyardEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return objectId.equals(this.getTargetPointer().getFirst(game, source)) && affectedControllerId.equals(source.getControllerId());
     }
 }
 

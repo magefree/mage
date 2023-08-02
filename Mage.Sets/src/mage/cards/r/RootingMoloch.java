@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.Card;
@@ -17,7 +15,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -83,54 +81,8 @@ class RootingMolochEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(card, Zone.EXILED, source, game);
-        ContinuousEffect effect = new RootingMolochMayPlayEffect();
-        effect.setTargetPointer(new FixedTarget(card, game));
-        game.addEffect(effect, source);
+        CardUtil.makeCardPlayable(game, source, card, Duration.UntilEndOfYourNextTurn);
         return true;
     }
 }
 
-class RootingMolochMayPlayEffect extends AsThoughEffectImpl {
-
-    private int castOnTurn = 0;
-
-    RootingMolochMayPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.staticText = "Until the end of your next turn, you may play that card.";
-    }
-
-    private RootingMolochMayPlayEffect(final RootingMolochMayPlayEffect effect) {
-        super(effect);
-        castOnTurn = effect.castOnTurn;
-    }
-
-    @Override
-    public RootingMolochMayPlayEffect copy() {
-        return new RootingMolochMayPlayEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        castOnTurn = game.getTurnNum();
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (castOnTurn != game.getTurnNum() && game.getPhase().getStep().getType() == PhaseStep.END_TURN) {
-            return game.isActivePlayer(source.getControllerId());
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return source.isControlledBy(affectedControllerId)
-                && getTargetPointer().getTargets(game, source).contains(sourceId);
-    }
-}
