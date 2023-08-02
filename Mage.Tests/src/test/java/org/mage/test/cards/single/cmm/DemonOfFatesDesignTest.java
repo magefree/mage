@@ -218,12 +218,12 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem");
         setChoice(playerA, true); // yes to alt cast of first demon
-        setChoice(playerA, true); // yes to alt cast of second demon ???
+        // second demon has no choice to make.
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Glorious Anthem", 1);
-        assertLife(playerA, 20 - 3 - 3);
+        assertLife(playerA, 20 - 3);
     }
 }
