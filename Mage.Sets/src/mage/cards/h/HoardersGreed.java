@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ClashEffect;
@@ -12,14 +11,15 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class HoardersGreed extends CardImpl {
 
     public HoardersGreed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
 
         // You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process.
@@ -59,7 +59,7 @@ class HoardersGreedEffect extends OneShotEffect {
             do {
                 controller.loseLife(2, game, source, false);
                 controller.drawCards(2, source, game);
-            } while (controller.canRespond() && new ClashEffect().apply(game, source));
+            } while (new ClashEffect().apply(game, source));
             return true;
         }
         return false;
