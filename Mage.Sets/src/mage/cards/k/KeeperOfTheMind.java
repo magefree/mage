@@ -51,7 +51,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * @author jeffwadsworth
+ * @author jeffwadsworth, Susucr
  */
 public class KeeperOfTheMind extends CardImpl {
 
