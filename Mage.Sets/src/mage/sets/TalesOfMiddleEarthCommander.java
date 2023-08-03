@@ -133,6 +133,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Great Oak Guardian", 247, Rarity.UNCOMMON, mage.cards.g.GreatOakGuardian.class));
         cards.add(new SetCardInfo("Grey Host Reinforcements", 14, Rarity.RARE, mage.cards.g.GreyHostReinforcements.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grey Host Reinforcements", 98, Rarity.RARE, mage.cards.g.GreyHostReinforcements.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Grima, Saruman's Footman", 57, Rarity.RARE, mage.cards.g.GrimaSarumansFootman.class));
         cards.add(new SetCardInfo("Growth Spiral", 267, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
         cards.add(new SetCardInfo("Guttersnipe", 220, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Gwaihir, Greatest of the Eagles", 15, Rarity.RARE, mage.cards.g.GwaihirGreatestOfTheEagles.class, NON_FULL_USE_VARIOUS));
