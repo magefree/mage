@@ -79,6 +79,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Drowned Catacomb", 305, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
         cards.add(new SetCardInfo("Dusk // Dawn", 166, Rarity.RARE, mage.cards.d.DuskDawn.class));
         cards.add(new SetCardInfo("Earthquake", 214, Rarity.RARE, mage.cards.e.Earthquake.class));
+        cards.add(new SetCardInfo("Elrond of the White Council", 51, Rarity.RARE, mage.cards.e.ElrondOfTheWhiteCouncil.class));
         cards.add(new SetCardInfo("Elvish Archdruid", 237, Rarity.RARE, mage.cards.e.ElvishArchdruid.class));
         cards.add(new SetCardInfo("Elvish Mystic", 238, Rarity.COMMON, mage.cards.e.ElvishMystic.class));
         cards.add(new SetCardInfo("Elvish Piper", 239, Rarity.RARE, mage.cards.e.ElvishPiper.class));
