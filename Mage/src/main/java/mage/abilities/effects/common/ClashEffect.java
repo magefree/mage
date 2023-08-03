@@ -78,6 +78,9 @@ public class ClashEffect extends OneShotEffect {
         ))) {
             return false;
         }
+        if (!controller.canRespond()) {
+            return false;
+        }
         // choose opponent
         Target target = new TargetOpponent(true);
         target.setTargetName("an opponent to clash with");
@@ -85,7 +88,7 @@ public class ClashEffect extends OneShotEffect {
             return false;
         }
         Player opponent = game.getPlayer(target.getFirstTarget());
-        if (opponent == null) {
+        if (opponent == null || !opponent.canRespond()) {
             return false;
         }
         int cmcController = Integer.MIN_VALUE;
