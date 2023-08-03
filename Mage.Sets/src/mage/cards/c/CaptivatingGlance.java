@@ -89,7 +89,7 @@ class CaptivatingGlanceEffect extends OneShotEffect {
                 } else {
                     Player opponent = game.getPlayer((UUID) getValue("clashOpponent"));
                     if (opponent != null) {
-                        ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, ((Player) opponent).getId());
+                        ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, opponent.getId());
                         effect.setTargetPointer(new FixedTarget(enchantedCreature, game));
                         game.addEffect(effect, source);
                     }
