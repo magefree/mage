@@ -6,6 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.CompoundCondition;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.Cost;
@@ -17,6 +18,7 @@ import mage.abilities.dynamicvalue.common.SacrificeCostManaValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -53,7 +55,15 @@ public final class DemonOfFatesDesign extends CardImpl {
 
         // Once during each of your turns, you may cast an enchantment spell by paying life equal to its mana value rather than paying its mana cost.
         this.addAbility(
-                new SimpleStaticAbility(new DemonOfFatesDesignCastEffect()),
+                new SimpleStaticAbility(new DemonOfFatesDesignCastEffect())
+                        .addHint(new ConditionHint(
+                                DemonOfFatesDesignCondition.instance,
+                                "Can cast with alternative cost this turn.",
+                                null,
+                                "Cannot cast with alternative cost this turn.",
+                                null,
+                                true
+                        )),
                 new DemonOfFatesDesignWatcher()
         );
 
@@ -177,19 +187,15 @@ class DemonOfFatesDesignCastEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public void init(Ability source, Game game, UUID activePlayerId) {
-        super.init(source, game, activePlayerId);
-        alternativeCastingCostAbility.setSourceId(source.getSourceId());
-    }
-
-    @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         DemonOfFatesDesignWatcher watcher = game.getState().getWatcher(DemonOfFatesDesignWatcher.class);
         if (controller == null || watcher == null) {
             return false;
         }
-        if (watcher.isAbilityUsed(alternativeCastingCostAbility.getMor(game))) {
+
+        alternativeCastingCostAbility.setSourceId(source.getSourceId());
+        if (!watcher.canAbilityBeUsed(game, source, alternativeCastingCostAbility.getMor(game))) {
             return false;
         }
 
@@ -237,7 +243,19 @@ class DemonOfFatesDesignWatcher extends Watcher {
         usedFrom.clear();
     }
 
-    public boolean isAbilityUsed(MageObjectReference mor) {
-        return usedFrom.contains(mor);
+    public boolean canAbilityBeUsed(Game game, Ability source, MageObjectReference mor) {
+        return game.isActivePlayer(source.getControllerId()) && !usedFrom.contains(mor);
+    }
+}
+
+
+enum DemonOfFatesDesignCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        DemonOfFatesDesignWatcher watcher = game.getState().getWatcher(DemonOfFatesDesignWatcher.class);
+        return watcher != null
+                && watcher.canAbilityBeUsed(game, source, new MageObjectReference(source.getSourceId(), game));
     }
 }

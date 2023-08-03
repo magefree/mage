@@ -226,4 +226,26 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Glorious Anthem", 1);
         assertLife(playerA, 20 - 3);
     }
+
+    @Test
+    public void DoubleDemonDoubleCast2() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, demon, 2);
+
+        addCard(Zone.HAND, playerA, "Glorious Anthem"); // Enchantment {1}{W}{W}
+        addCard(Zone.HAND, playerA, "Absolute Law"); // Enchantment {1}{W}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem", true);
+        setChoice(playerA, true); // yes to the first one
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Absolute Law");
+        setChoice(playerA, true); // yes to second one
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Glorious Anthem", 1);
+        assertPermanentCount(playerA, "Absolute Law", 1);
+        assertLife(playerA, 20 - 3 - 2);
+    }
 }
