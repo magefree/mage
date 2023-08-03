@@ -72,24 +72,46 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Glorious Anthem");
         setChoice(playerA, true); // yes to alt cast
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        checkPlayableAbility("playable", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Absolute Law", false);
+
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Glorious Anthem", 1);
         assertLife(playerA, 20 - 3);
+    }
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Absolute Law");
+    @Test
+    public void CantCastDuringOpponentTurn() {
+        setStrictChooseMode(true);
 
-        boolean hadError = false;
-        try {
-            setStopAt(1, PhaseStep.END_TURN);
-            execute();
-        } catch (AssertionError e) {
-            hadError = true;
-            assert e.getMessage().equals("Can't find ability to activate command: Cast Absolute Law");
-        } finally {
-            assert hadError;
-        }
+        addCard(Zone.BATTLEFIELD, playerA, demon);
+
+        addCard(Zone.HAND, playerA, "Dictate of Kruphix"); // Enchantment {1}{U}{U} Flash
+
+        checkPlayableAbility("playable", 2, PhaseStep.UPKEEP, playerA, "Cast Dictate of Kruphix", false);
+
+        setStopAt(2, PhaseStep.DRAW);
+        execute();
+
+        assertLife(playerA, 20);
+    }
+
+    @Test
+    public void CantCastIfOpponentHasDemon() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerB, demon);
+
+        addCard(Zone.HAND, playerA, "Glorious Anthem"); // Enchantment {1}{W}{W}
+
+        checkPlayableAbility("playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Glorious Anthem", false);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Glorious Anthem", 1);
+        assertLife(playerA, 20);
     }
 
     @Test
@@ -163,25 +185,14 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
         setChoice(playerA, true); // yes to alt cast
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unsubstantiate", "Glorious Anthem");
 
+        // Did not keep the alt cost from the first cast
+        checkPlayableAbility("playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Glorious Anthem", false);
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertHandCount(playerA, "Glorious Anthem", 1);
         assertLife(playerA, 20 - 3);
-
-        // Did not keep the alt cost from the first cast
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Glorious Anthem");
-
-        boolean hadError = false;
-        try {
-            setStopAt(1, PhaseStep.END_TURN);
-            execute();
-        } catch (AssertionError e) {
-            hadError = true;
-            assert e.getMessage().equals("Can't find ability to activate command: Cast Glorious Anthem");
-        } finally {
-            assert hadError;
-        }
     }
 
     @Test
