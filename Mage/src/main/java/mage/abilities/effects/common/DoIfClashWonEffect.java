@@ -57,9 +57,9 @@ public class DoIfClashWonEffect extends OneShotEffect {
             if (chooseUseText == null || player.chooseUse(executingEffect.getOutcome(), message, source, game)) {
                 if (new ClashEffect().apply(game, source)) {
                     if (setTargetPointerToClashedOpponent) {
-                        Object opponent = game.getPlayer((UUID) getValue("clashOpponent"));
+                        Player opponent = game.getPlayer((UUID) getValue("clashOpponent"));
                         if (opponent != null) {
-                            executingEffect.setTargetPointer(new FixedTarget(((Player) opponent).getId()));
+                            executingEffect.setTargetPointer(new FixedTarget(opponent.getId()));
                         }
                     } else {
                         executingEffect.setTargetPointer(this.targetPointer);
