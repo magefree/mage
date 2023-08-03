@@ -26,7 +26,7 @@ public class FilterPlayer extends FilterImpl<Player> {
         super(name);
     }
 
-    public FilterPlayer(final FilterPlayer filter) {
+    protected FilterPlayer(final FilterPlayer filter) {
         super(filter);
         this.extraPredicates.addAll(filter.extraPredicates);
     }

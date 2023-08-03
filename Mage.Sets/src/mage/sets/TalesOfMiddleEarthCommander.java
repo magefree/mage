@@ -266,6 +266,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Taunt from the Rampart", 71, Rarity.RARE, mage.cards.t.TauntFromTheRampart.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 337, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("The Balrog of Moria", 46, Rarity.RARE, mage.cards.t.TheBalrogOfMoria.class));
+        cards.add(new SetCardInfo("The Black Gate", 80, Rarity.RARE, mage.cards.t.TheBlackGate.class));
         cards.add(new SetCardInfo("The Gaffer", 12, Rarity.RARE, mage.cards.t.TheGaffer.class));
         cards.add(new SetCardInfo("The Great Henge", 348, Rarity.MYTHIC, mage.cards.t.TheGreatHenge.class));
         cards.add(new SetCardInfo("The Ozolith", 351, Rarity.MYTHIC, mage.cards.t.TheOzolith.class));
