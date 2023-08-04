@@ -2,8 +2,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DefendingPlayerControlsSourceAttackingCondition;
@@ -16,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
+
+import java.util.UUID;
 
 /**
  * @author ayratn
@@ -37,7 +37,7 @@ public final class ScrapdiverSerpent extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public ScrapdiverSerpent(final ScrapdiverSerpent card) {
+    private ScrapdiverSerpent(final ScrapdiverSerpent card) {
         super(card);
     }
 
