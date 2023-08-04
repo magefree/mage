@@ -17,7 +17,6 @@ public final class DuelDecksGarrukVsLiliana extends ExpansionSet {
 
     private DuelDecksGarrukVsLiliana() {
         super("Duel Decks: Garruk vs. Liliana", "DDD", ExpansionSet.buildDate(2009, 10, 30), SetType.SUPPLEMENTAL);
-        this.blockName = "Duel Decks";
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Albino Troll", 3, Rarity.UNCOMMON, mage.cards.a.AlbinoTroll.class));

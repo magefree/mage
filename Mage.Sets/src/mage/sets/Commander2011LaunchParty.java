@@ -17,6 +17,7 @@ public class Commander2011LaunchParty extends ExpansionSet {
 
     private Commander2011LaunchParty() {
         super("Commander 2011 Launch Party", "PCMD", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
+        this.blockName = "Commander";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

@@ -18,7 +18,6 @@ public final class ExplorersOfIxalan extends ExpansionSet {
 
     private ExplorersOfIxalan() {
         super("Explorers of Ixalan", "E02", ExpansionSet.buildDate(2017, 11, 24), SetType.SUPPLEMENTAL);
-        this.blockName = "Explorers of Ixalan";
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Adaptive Automaton", 42, Rarity.RARE, mage.cards.a.AdaptiveAutomaton.class));

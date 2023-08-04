@@ -18,7 +18,6 @@ public final class GuildsOfRavnicaGuildKits extends ExpansionSet {
 
     private GuildsOfRavnicaGuildKits() {
         super("Guilds of Ravnica Guild Kits", "GK1", ExpansionSet.buildDate(2018, 11, 2), SetType.SUPPLEMENTAL);
-        this.blockName = "Guild Kits";
         this.hasBasicLands = true;
         
         cards.add(new SetCardInfo("Abrupt Decay", 57, Rarity.RARE, mage.cards.a.AbruptDecay.class));

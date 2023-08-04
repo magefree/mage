@@ -17,7 +17,6 @@ public final class DuelDecksElvesVsGoblins extends ExpansionSet {
 
     private DuelDecksElvesVsGoblins() {
         super("Duel Decks: Elves vs. Goblins", "DD1", ExpansionSet.buildDate(2007, 11, 16), SetType.SUPPLEMENTAL);
-        this.blockName = "Duel Decks";
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Akki Coalflinger", 33, Rarity.UNCOMMON, mage.cards.a.AkkiCoalflinger.class));

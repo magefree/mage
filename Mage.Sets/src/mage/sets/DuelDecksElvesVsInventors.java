@@ -18,7 +18,6 @@ public final class DuelDecksElvesVsInventors extends ExpansionSet {
 
     private DuelDecksElvesVsInventors() {
         super("Duel Decks: Elves vs. Inventors", "DDU", ExpansionSet.buildDate(2018, 4, 6), SetType.SUPPLEMENTAL);
-        this.blockName = "Duel Decks";
 
         cards.add(new SetCardInfo("Artificer's Epiphany", 36, Rarity.COMMON, mage.cards.a.ArtificersEpiphany.class));
         cards.add(new SetCardInfo("Barrage Ogre", 44, Rarity.UNCOMMON, mage.cards.b.BarrageOgre.class));

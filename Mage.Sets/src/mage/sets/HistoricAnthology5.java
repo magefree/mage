@@ -17,7 +17,6 @@ public final class HistoricAnthology5 extends ExpansionSet {
 
     private HistoricAnthology5() {
         super("Historic Anthology 5", "HA5", ExpansionSet.buildDate(2021, 5, 27), SetType.MAGIC_ARENA);
-        this.blockName = "Reprint";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

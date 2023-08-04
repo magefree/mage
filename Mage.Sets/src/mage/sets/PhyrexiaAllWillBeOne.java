@@ -17,7 +17,6 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
 
     private PhyrexiaAllWillBeOne() {
         super("Phyrexia: All Will Be One", "ONE", ExpansionSet.buildDate(2023, 1, 10), SetType.EXPANSION);
-        this.blockName = "Phyrexia: All Will Be One";
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.numBoosterLands = 1;

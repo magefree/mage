@@ -17,7 +17,7 @@ public final class Commander2019Edition extends ExpansionSet {
 
     private Commander2019Edition() {
         super("Commander 2019 Edition", "C19", ExpansionSet.buildDate(2019, 8, 23), SetType.SUPPLEMENTAL);
-        this.blockName = "Command Zone";
+        this.blockName = "Commander";
 
         cards.add(new SetCardInfo("Ainok Survivalist", 156, Rarity.COMMON, mage.cards.a.AinokSurvivalist.class));
         cards.add(new SetCardInfo("Aeon Engine", 52, Rarity.RARE, mage.cards.a.AeonEngine.class));

@@ -17,6 +17,7 @@ public class RiseOfTheEldraziPromos extends ExpansionSet {
 
     private RiseOfTheEldraziPromos() {
         super("Rise of the Eldrazi Promos", "PROE", ExpansionSet.buildDate(2010, 7, 30), SetType.PROMOTIONAL);
+        this.blockName = "Zendikar";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

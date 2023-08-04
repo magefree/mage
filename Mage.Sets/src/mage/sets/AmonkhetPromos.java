@@ -17,6 +17,7 @@ public class AmonkhetPromos extends ExpansionSet {
 
     private AmonkhetPromos() {
         super("Amonkhet Promos", "PAKH", ExpansionSet.buildDate(2017, 4, 28), SetType.PROMOTIONAL);
+        this.blockName = "Amonkhet";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

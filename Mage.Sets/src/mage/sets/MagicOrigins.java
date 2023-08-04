@@ -25,6 +25,7 @@ public final class MagicOrigins extends ExpansionSet {
 
     private MagicOrigins() {
         super("Magic Origins", "ORI", ExpansionSet.buildDate(2015, 7, 17), SetType.CORE);
+        this.blockName = "Core Set";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
@@ -33,6 +34,7 @@ public final class MagicOrigins extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = -1;
         this.maxCardNumberInBooster = 272;
+
         cards.add(new SetCardInfo("Abbot of Keral Keep", 127, Rarity.RARE, mage.cards.a.AbbotOfKeralKeep.class));
         cards.add(new SetCardInfo("Acolyte of the Inferno", 128, Rarity.UNCOMMON, mage.cards.a.AcolyteOfTheInferno.class));
         cards.add(new SetCardInfo("Act of Treason", 129, Rarity.COMMON, mage.cards.a.ActOfTreason.class));

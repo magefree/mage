@@ -24,7 +24,6 @@ public final class ModernMasters2015 extends ExpansionSet {
 
     private ModernMasters2015() {
         super("Modern Masters 2015", "MM2", ExpansionSet.buildDate(2015, 5, 22), SetType.SUPPLEMENTAL_MODERN_LEGAL);
-        this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -32,6 +31,7 @@ public final class ModernMasters2015 extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Aethersnipe", 39, Rarity.COMMON, mage.cards.a.Aethersnipe.class));
         cards.add(new SetCardInfo("Agony Warp", 170, Rarity.UNCOMMON, mage.cards.a.AgonyWarp.class));
         cards.add(new SetCardInfo("Air Servant", 40, Rarity.UNCOMMON, mage.cards.a.AirServant.class));

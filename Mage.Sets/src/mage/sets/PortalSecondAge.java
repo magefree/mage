@@ -19,7 +19,6 @@ public final class PortalSecondAge extends ExpansionSet {
 
     private PortalSecondAge() {
         super("Portal Second Age", "P02", ExpansionSet.buildDate(1998, 6, 24), SetType.SUPPLEMENTAL);
-        this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -27,6 +26,7 @@ public final class PortalSecondAge extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Abyssal Nightstalker", 61, Rarity.UNCOMMON, mage.cards.a.AbyssalNightstalker.class));
         cards.add(new SetCardInfo("Air Elemental", 31, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Alaborn Cavalier", 1, Rarity.UNCOMMON, mage.cards.a.AlabornCavalier.class));

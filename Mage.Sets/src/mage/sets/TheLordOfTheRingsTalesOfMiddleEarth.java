@@ -14,7 +14,6 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
 
     private TheLordOfTheRingsTalesOfMiddleEarth() {
         super("The Lord of the Rings: Tales of Middle-earth", "LTR", ExpansionSet.buildDate(2023, 6, 23), SetType.SUPPLEMENTAL_MODERN_LEGAL);
-        this.blockName = "The Lord of the Rings: Tales of Middle-earth";
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 

@@ -24,7 +24,6 @@ public final class AdventuresInTheForgottenRealms extends ExpansionSet {
 
     private AdventuresInTheForgottenRealms() {
         super("Adventures in the Forgotten Realms", "AFR", ExpansionSet.buildDate(2021, 7, 23), SetType.EXPANSION);
-        this.blockName = "Adventures in the Forgotten Realms";
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.numBoosterLands = 1;

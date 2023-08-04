@@ -19,7 +19,7 @@ public final class Archenemy extends ExpansionSet {
 
     private Archenemy() {
         super("Archenemy", "ARC", ExpansionSet.buildDate(2010, 6, 18), SetType.SUPPLEMENTAL);
-        this.blockName = "Command Zone";
+
         cards.add(new SetCardInfo("Aether Spellbomb", 102, Rarity.COMMON, mage.cards.a.AetherSpellbomb.class));
         cards.add(new SetCardInfo("Agony Warp", 76, Rarity.COMMON, mage.cards.a.AgonyWarp.class));
         cards.add(new SetCardInfo("Architects of Will", 77, Rarity.COMMON, mage.cards.a.ArchitectsOfWill.class));

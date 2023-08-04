@@ -17,6 +17,7 @@ public final class DominariaUnitedCommander extends ExpansionSet {
 
     private DominariaUnitedCommander() {
         super("Dominaria United Commander", "DMC", ExpansionSet.buildDate(2022, 9, 9), SetType.SUPPLEMENTAL);
+        this.blockName = "Commander";
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Abundant Growth", 128, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));

@@ -17,6 +17,7 @@ public class ReturnToRavnicaPromos extends ExpansionSet {
 
     private ReturnToRavnicaPromos() {
         super("Return to Ravnica Promos", "PRTR", ExpansionSet.buildDate(2012, 10, 5), SetType.PROMOTIONAL);
+        this.blockName = "Return to Ravnica";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

@@ -17,6 +17,7 @@ public class TarkirDragonfury extends ExpansionSet {
 
     private TarkirDragonfury() {
         super("Tarkir Dragonfury", "PTKDF", ExpansionSet.buildDate(2015, 4, 3), SetType.PROMOTIONAL);
+        this.blockName = "Khans of Tarkir";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

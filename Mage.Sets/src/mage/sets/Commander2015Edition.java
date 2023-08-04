@@ -19,7 +19,8 @@ public final class Commander2015Edition extends ExpansionSet {
 
     private Commander2015Edition() {
         super("Commander 2015 Edition", "C15", ExpansionSet.buildDate(2015, 11, 13), SetType.SUPPLEMENTAL);
-        this.blockName = "Command Zone";
+        this.blockName = "Commander";
+
         cards.add(new SetCardInfo("Acidic Slime", 173, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Act of Aggression", 141, Rarity.UNCOMMON, mage.cards.a.ActOfAggression.class));
         cards.add(new SetCardInfo("Aetherize", 85, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));

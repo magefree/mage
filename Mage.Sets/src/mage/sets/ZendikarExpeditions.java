@@ -18,7 +18,7 @@ public final class ZendikarExpeditions extends ExpansionSet {
 
     private ZendikarExpeditions() {
         super("Zendikar Expeditions", "EXP", ExpansionSet.buildDate(2015, 10, 2), SetType.PROMOTIONAL);
-        this.blockName = "Masterpiece Series";
+        this.blockName = "Battle for Zendikar";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

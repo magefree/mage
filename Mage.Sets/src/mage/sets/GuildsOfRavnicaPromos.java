@@ -17,6 +17,7 @@ public class GuildsOfRavnicaPromos extends ExpansionSet {
 
     private GuildsOfRavnicaPromos() {
         super("Guilds of Ravnica Promos", "PGRN", ExpansionSet.buildDate(2018, 10, 5), SetType.PROMOTIONAL);
+        this.blockName = "Guilds of Ravnica";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

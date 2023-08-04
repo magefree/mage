@@ -24,7 +24,6 @@ public final class ThroneOfEldraine extends ExpansionSet {
 
     private ThroneOfEldraine() {
         super("Throne of Eldraine", "ELD", ExpansionSet.buildDate(2019, 10, 4), SetType.EXPANSION);
-        this.blockName = "Throne of Eldraine";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

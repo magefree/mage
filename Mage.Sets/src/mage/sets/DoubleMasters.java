@@ -24,7 +24,6 @@ public final class DoubleMasters extends ExpansionSet {
 
     private DoubleMasters() {
         super("Double Masters", "2XM", ExpansionSet.buildDate(2020, 8, 7), SetType.SUPPLEMENTAL);
-        this.blockName = "Reprint";
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

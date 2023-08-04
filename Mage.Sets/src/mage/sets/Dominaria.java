@@ -31,7 +31,6 @@ public final class Dominaria extends ExpansionSet {
 
     private Dominaria() {
         super("Dominaria", "DOM", ExpansionSet.buildDate(2018, 4, 27), SetType.EXPANSION);
-        this.blockName = "Dominaria";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

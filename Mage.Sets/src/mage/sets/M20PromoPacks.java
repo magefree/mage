@@ -17,6 +17,7 @@ public final class M20PromoPacks extends ExpansionSet {
 
     private M20PromoPacks() {
         super("M20 Promo Packs", "PPP1", ExpansionSet.buildDate(2019, 7, 12), SetType.PROMOTIONAL);
+        this.blockName = "Core Set";
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

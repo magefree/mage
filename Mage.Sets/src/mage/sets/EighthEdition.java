@@ -17,6 +17,7 @@ public final class EighthEdition extends ExpansionSet {
 
     private EighthEdition() {
         super("Eighth Edition", "8ED", ExpansionSet.buildDate(2003, 7, 28), SetType.CORE);
+        this.blockName = "Core Set";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

@@ -24,7 +24,6 @@ public final class StreetsOfNewCapenna extends ExpansionSet {
 
     private StreetsOfNewCapenna() {
         super("Streets of New Capenna", "SNC", ExpansionSet.buildDate(2022, 4, 29), SetType.EXPANSION);
-        this.blockName = "Streets of New Capenna";
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.numBoosterLands = 1;

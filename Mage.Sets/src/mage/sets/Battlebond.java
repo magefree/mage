@@ -25,7 +25,6 @@ public final class Battlebond extends ExpansionSet {
 
     private Battlebond() {
         super("Battlebond", "BBD", ExpansionSet.buildDate(2018, 6, 8), SetType.SUPPLEMENTAL);
-        this.blockName = "Battlebond";
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

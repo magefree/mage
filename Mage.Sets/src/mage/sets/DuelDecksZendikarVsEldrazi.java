@@ -17,7 +17,6 @@ public final class DuelDecksZendikarVsEldrazi extends ExpansionSet {
 
     private DuelDecksZendikarVsEldrazi() {
         super("Duel Decks: Zendikar vs. Eldrazi", "DDP", ExpansionSet.buildDate(2015, 8, 28), SetType.SUPPLEMENTAL);
-        this.blockName = "Duel Decks";
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Affa Guard Hound", 2, Rarity.UNCOMMON, mage.cards.a.AffaGuardHound.class));

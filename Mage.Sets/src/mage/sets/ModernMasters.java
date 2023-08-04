@@ -24,7 +24,6 @@ public final class ModernMasters extends ExpansionSet {
 
     private ModernMasters() {
         super("Modern Masters", "MMA", ExpansionSet.buildDate(2013, 6, 7), SetType.SUPPLEMENTAL_MODERN_LEGAL);
-        this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

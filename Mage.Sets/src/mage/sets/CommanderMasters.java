@@ -14,7 +14,6 @@ public final class CommanderMasters extends ExpansionSet {
 
     private CommanderMasters() {
         super("Commander Masters", "CMM", ExpansionSet.buildDate(2023, 8, 4), SetType.SUPPLEMENTAL);
-        this.blockName = "Commander Masters";
         this.hasBasicLands = true;
         this.hasBoosters = false; //temporary
 

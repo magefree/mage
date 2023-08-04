@@ -24,7 +24,6 @@ public final class UltimateMasters extends ExpansionSet {
 
     private UltimateMasters() {
         super("Ultimate Masters", "UMA", ExpansionSet.buildDate(2018, 12, 7), SetType.SUPPLEMENTAL);
-        this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

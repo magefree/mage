@@ -29,7 +29,6 @@ public final class ModernHorizons2 extends ExpansionSet {
 
     private ModernHorizons2() {
         super("Modern Horizons 2", "MH2", ExpansionSet.buildDate(2021, 6, 11), SetType.SUPPLEMENTAL_MODERN_LEGAL);
-        this.blockName = "Modern Horizons 2";
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

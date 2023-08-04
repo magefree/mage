@@ -17,6 +17,7 @@ public class JudgeGiftCards2017 extends ExpansionSet {
 
     private JudgeGiftCards2017() {
         super("Judge Gift Cards 2017", "J17", ExpansionSet.buildDate(2017, 1, 1), SetType.PROMOTIONAL);
+        this.blockName = "Judge Gift Cards";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

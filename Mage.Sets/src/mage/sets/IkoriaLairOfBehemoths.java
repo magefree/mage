@@ -54,7 +54,6 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
 
     private IkoriaLairOfBehemoths() {
         super("Ikoria: Lair of Behemoths", "IKO", ExpansionSet.buildDate(2020, 4, 24), SetType.EXPANSION);
-        this.blockName = "Ikoria: Lair of Behemoths";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

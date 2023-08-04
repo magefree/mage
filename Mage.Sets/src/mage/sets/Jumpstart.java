@@ -17,7 +17,6 @@ public final class Jumpstart extends ExpansionSet {
 
     private Jumpstart() {
         super("Jumpstart", "JMP", ExpansionSet.buildDate(2020, 7, 17), SetType.SUPPLEMENTAL);
-        this.blockName = "Jumpstart";
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Act of Treason", 289, Rarity.COMMON, mage.cards.a.ActOfTreason.class));

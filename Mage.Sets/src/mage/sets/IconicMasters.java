@@ -24,7 +24,6 @@ public final class IconicMasters extends ExpansionSet {
 
     private IconicMasters() {
         super("Iconic Masters", "IMA", ExpansionSet.buildDate(2017, 11, 17), SetType.SUPPLEMENTAL);
-        this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

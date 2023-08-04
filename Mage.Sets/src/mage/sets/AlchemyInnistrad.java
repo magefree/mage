@@ -17,7 +17,7 @@ public final class AlchemyInnistrad extends ExpansionSet {
 
     private AlchemyInnistrad() {
         super("Alchemy: Innistrad", "YMID", ExpansionSet.buildDate(2021, 12, 9), SetType.MAGIC_ARENA);
-        this.blockName = "Alchemy";
+        this.blockName = "Alchemy 2022";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

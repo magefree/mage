@@ -24,7 +24,6 @@ public final class TherosBeyondDeath extends ExpansionSet {
 
     private TherosBeyondDeath() {
         super("Theros Beyond Death", "THB", ExpansionSet.buildDate(2020, 1, 24), SetType.EXPANSION);
-        this.blockName = "Theros Beyond Death";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

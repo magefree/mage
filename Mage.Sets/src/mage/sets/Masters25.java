@@ -24,7 +24,6 @@ public final class Masters25 extends ExpansionSet {
 
     private Masters25() {
         super("Masters 25", "A25", ExpansionSet.buildDate(2018, 3, 16), SetType.SUPPLEMENTAL);
-        this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

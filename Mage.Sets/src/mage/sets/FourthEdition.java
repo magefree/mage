@@ -17,6 +17,7 @@ public final class FourthEdition extends ExpansionSet {
 
     private FourthEdition() {
         super("Fourth Edition", "4ED", ExpansionSet.buildDate(1995, 3, 1), SetType.CORE);
+        this.blockName = "Core Set";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

@@ -17,6 +17,7 @@ public class AetherRevoltPromos extends ExpansionSet {
 
     private AetherRevoltPromos() {
         super("Aether Revolt Promos", "PAER", ExpansionSet.buildDate(2017, 1, 21), SetType.PROMOTIONAL);
+        this.blockName = "Kaladesh";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

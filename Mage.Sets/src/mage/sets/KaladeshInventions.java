@@ -21,7 +21,7 @@ public final class KaladeshInventions extends ExpansionSet {
 
     private KaladeshInventions() {
         super("Kaladesh Inventions", "MPS", ExpansionSet.buildDate(2016, 9, 30), SetType.PROMOTIONAL);
-        this.blockName = "Masterpiece Series";
+        this.blockName = "Kaladesh";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

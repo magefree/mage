@@ -25,12 +25,14 @@ public final class Magic2014 extends ExpansionSet {
 
     private Magic2014() {
         super("Magic 2014", "M14", ExpansionSet.buildDate(2013, 7, 19), SetType.CORE);
+        this.blockName = "Core Set";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Academy Raider", 124, Rarity.COMMON, mage.cards.a.AcademyRaider.class));
         cards.add(new SetCardInfo("Accorder's Shield", 204, Rarity.UNCOMMON, mage.cards.a.AccordersShield.class));
         cards.add(new SetCardInfo("Accursed Spirit", 83, Rarity.COMMON, mage.cards.a.AccursedSpirit.class));

@@ -17,7 +17,7 @@ public final class CommanderAnthology extends ExpansionSet {
 
     private CommanderAnthology() {
         super("Commander Anthology", "CMA", ExpansionSet.buildDate(2017, 6, 9), SetType.SUPPLEMENTAL);
-        this.blockName = "Command Zone";
+        this.blockName = "Commander";
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Acidic Slime", 90, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));

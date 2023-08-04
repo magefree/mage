@@ -17,6 +17,7 @@ public class DarkAscensionPromos extends ExpansionSet {
 
     private DarkAscensionPromos() {
         super("Dark Ascension Promos", "PDKA", ExpansionSet.buildDate(2012, 1, 28), SetType.PROMOTIONAL);
+        this.blockName = "Innistrad";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

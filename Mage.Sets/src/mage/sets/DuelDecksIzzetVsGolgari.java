@@ -18,7 +18,6 @@ public final class DuelDecksIzzetVsGolgari extends ExpansionSet {
 
     private DuelDecksIzzetVsGolgari() {
         super("Duel Decks: Izzet vs. Golgari", "DDJ", ExpansionSet.buildDate(2012, 9, 7), SetType.SUPPLEMENTAL);
-        this.blockName = "Duel Decks";
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Barren Moor", 78, Rarity.COMMON, mage.cards.b.BarrenMoor.class));

@@ -17,6 +17,7 @@ public class ArenaLeague2001 extends ExpansionSet {
 
     private ArenaLeague2001() {
         super("Arena League 2001", "PAL01", ExpansionSet.buildDate(2001, 1, 1), SetType.PROMOTIONAL);
+        this.blockName = "Arena League";
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

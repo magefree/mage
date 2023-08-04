@@ -25,6 +25,7 @@ public final class Magic2015 extends ExpansionSet {
 
     private Magic2015() {
         super("Magic 2015", "M15", ExpansionSet.buildDate(2014, 7, 18), SetType.CORE);
+        this.blockName = "Core Set";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
@@ -32,6 +33,7 @@ public final class Magic2015 extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.maxCardNumberInBooster = 269;
+
         cards.add(new SetCardInfo("Accursed Spirit", 85, Rarity.COMMON, mage.cards.a.AccursedSpirit.class));
         cards.add(new SetCardInfo("Act on Impulse", 126, Rarity.UNCOMMON, mage.cards.a.ActOnImpulse.class));
         cards.add(new SetCardInfo("Aegis Angel", 270, Rarity.RARE, mage.cards.a.AegisAngel.class));

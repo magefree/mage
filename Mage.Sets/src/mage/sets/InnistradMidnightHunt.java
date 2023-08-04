@@ -25,7 +25,7 @@ public final class InnistradMidnightHunt extends ExpansionSet {
 
     private InnistradMidnightHunt() {
         super("Innistrad: Midnight Hunt", "MID", ExpansionSet.buildDate(2021, 9, 24), SetType.EXPANSION);
-        this.blockName = "Innistrad: Midnight Hunt";
+        this.blockName = "Innistrad: Double Feature";
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.numBoosterLands = 1;

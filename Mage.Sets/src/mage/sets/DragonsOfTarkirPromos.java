@@ -17,6 +17,7 @@ public class DragonsOfTarkirPromos extends ExpansionSet {
 
     private DragonsOfTarkirPromos() {
         super("Dragons of Tarkir Promos", "PDTK", ExpansionSet.buildDate(2015, 3, 28), SetType.PROMOTIONAL);
+        this.blockName = "Khans of Tarkir";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

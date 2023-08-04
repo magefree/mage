@@ -17,6 +17,7 @@ public class DragonsMazePromos extends ExpansionSet {
 
     private DragonsMazePromos() {
         super("Dragon's Maze Promos", "PDGM", ExpansionSet.buildDate(2013, 4, 27), SetType.PROMOTIONAL);
+        this.blockName = "Return to Ravnica";
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

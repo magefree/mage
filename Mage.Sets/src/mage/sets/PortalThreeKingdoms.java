@@ -17,7 +17,6 @@ public final class PortalThreeKingdoms extends ExpansionSet {
 
     private PortalThreeKingdoms() {
         super("Portal Three Kingdoms", "PTK", ExpansionSet.buildDate(1999, 5, 1), SetType.SUPPLEMENTAL);
-        this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 2;
@@ -25,6 +24,7 @@ public final class PortalThreeKingdoms extends ExpansionSet {
         this.numBoosterUncommon = 2;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Alert Shu Infantry", 1, Rarity.UNCOMMON, mage.cards.a.AlertShuInfantry.class));
         cards.add(new SetCardInfo("Ambition's Cost", 67, Rarity.RARE, mage.cards.a.AmbitionsCost.class));
         cards.add(new SetCardInfo("Balance of Power", 34, Rarity.RARE, mage.cards.b.BalanceOfPower.class));

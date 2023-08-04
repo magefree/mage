@@ -17,6 +17,7 @@ public class BattleForZendikarPromos extends ExpansionSet {
 
     private BattleForZendikarPromos() {
         super("Battle for Zendikar Promos", "PBFZ", ExpansionSet.buildDate(2015, 10, 3), SetType.PROMOTIONAL);
+        this.blockName = "Battle for Zendikar";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

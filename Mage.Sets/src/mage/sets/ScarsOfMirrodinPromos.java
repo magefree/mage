@@ -17,6 +17,7 @@ public class ScarsOfMirrodinPromos extends ExpansionSet {
 
     private ScarsOfMirrodinPromos() {
         super("Scars of Mirrodin Promos", "PSOM", ExpansionSet.buildDate(2010, 9, 30), SetType.PROMOTIONAL);
+        this.blockName = "Scars of Mirrodin";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

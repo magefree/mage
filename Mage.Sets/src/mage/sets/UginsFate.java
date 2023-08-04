@@ -18,6 +18,7 @@ public final class UginsFate extends ExpansionSet {
 
     private UginsFate() {
         super("Ugin's Fate", "UGIN", ExpansionSet.buildDate(2015, 1, 16), SetType.PROMOTIONAL);
+        this.blockName = "Khans of Tarkir";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

@@ -17,6 +17,7 @@ public class HourOfDevastationPromos extends ExpansionSet {
 
     private HourOfDevastationPromos() {
         super("Hour of Devastation Promos", "PHOU", ExpansionSet.buildDate(2017, 7, 14), SetType.PROMOTIONAL);
+        this.blockName = "Amonkhet";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

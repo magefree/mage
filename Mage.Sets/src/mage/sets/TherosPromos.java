@@ -17,6 +17,7 @@ public class TherosPromos extends ExpansionSet {
 
     private TherosPromos() {
         super("Theros Promos", "PTHS", ExpansionSet.buildDate(2013, 9, 21), SetType.PROMOTIONAL);
+        this.blockName = "Theros";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

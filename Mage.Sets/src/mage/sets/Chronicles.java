@@ -17,7 +17,6 @@ public final class Chronicles extends ExpansionSet {
 
     private Chronicles() {
         super("Chronicles", "CHR", ExpansionSet.buildDate(1995, 6, 1), SetType.SUPPLEMENTAL);
-        this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

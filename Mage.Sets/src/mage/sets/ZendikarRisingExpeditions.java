@@ -17,7 +17,6 @@ public final class ZendikarRisingExpeditions extends ExpansionSet {
 
     private ZendikarRisingExpeditions() {
         super("Zendikar Rising Expeditions", "ZNE", ExpansionSet.buildDate(2020, 9, 25), SetType.PROMOTIONAL);
-        this.blockName = "Masterpiece Series";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

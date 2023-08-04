@@ -30,7 +30,6 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
 
     private StrixhavenSchoolOfMages() {
         super("Strixhaven: School of Mages", "STX", ExpansionSet.buildDate(2021, 4, 23), SetType.EXPANSION);
-        this.blockName = "Strixhaven: School of Mages";
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.numBoosterCommon = 9;

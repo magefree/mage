@@ -17,6 +17,7 @@ public class MagicPlayerRewards2001 extends ExpansionSet {
 
     private MagicPlayerRewards2001() {
         super("Magic Player Rewards 2001", "MPR", ExpansionSet.buildDate(2001, 1, 1), SetType.PROMOTIONAL);
+        this.blockName = "Magic Player Rewards";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

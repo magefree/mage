@@ -19,7 +19,7 @@ public final class Conflux extends ExpansionSet {
 
     private Conflux() {
         super("Conflux", "CON", ExpansionSet.buildDate(2009, 0, 31), SetType.EXPANSION);
-        this.blockName = "Shards of Alara";
+        this.blockName = "Alara";
         this.parentSet = ShardsOfAlara.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;

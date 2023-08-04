@@ -24,7 +24,6 @@ public final class EternalMasters extends ExpansionSet {
 
     private EternalMasters() {
         super("Eternal Masters", "EMA", ExpansionSet.buildDate(2016, 6, 10), SetType.SUPPLEMENTAL);
-        this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

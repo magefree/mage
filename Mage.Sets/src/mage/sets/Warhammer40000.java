@@ -20,6 +20,7 @@ public final class Warhammer40000 extends ExpansionSet {
 
     private Warhammer40000() {
         super("Warhammer 40,000", "40K", ExpansionSet.buildDate(2022, 4, 29), SetType.SUPPLEMENTAL);
+        this.blockName = "Commander";
         this.hasBasicLands = true;
         this.hasBoosters = false;
 

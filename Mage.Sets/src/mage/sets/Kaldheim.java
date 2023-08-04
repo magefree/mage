@@ -25,7 +25,6 @@ public final class Kaldheim extends ExpansionSet {
 
     private Kaldheim() {
         super("Kaldheim", "KHM", ExpansionSet.buildDate(2021, 2, 5), SetType.EXPANSION);
-        this.blockName = "Kaldheim";
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

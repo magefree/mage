@@ -17,6 +17,7 @@ public class EldritchMoonPromos extends ExpansionSet {
 
     private EldritchMoonPromos() {
         super("Eldritch Moon Promos", "PEMN", ExpansionSet.buildDate(2016, 7, 22), SetType.PROMOTIONAL);
+        this.blockName = "Shadows over Innistrad";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

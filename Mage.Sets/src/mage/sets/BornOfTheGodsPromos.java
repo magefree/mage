@@ -17,6 +17,7 @@ public class BornOfTheGodsPromos extends ExpansionSet {
 
     private BornOfTheGodsPromos() {
         super("Born of the Gods Promos", "PBNG", ExpansionSet.buildDate(2014, 2, 1), SetType.PROMOTIONAL);
+        this.blockName = "Theros";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

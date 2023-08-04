@@ -17,6 +17,7 @@ public final class NinthEdition extends ExpansionSet {
 
     private NinthEdition() {
         super("Ninth Edition", "9ED", ExpansionSet.buildDate(2005, 7, 29), SetType.CORE);
+        this.blockName = "Core Set";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

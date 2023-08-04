@@ -20,6 +20,7 @@ public final class UnlimitedEdition extends ExpansionSet {
 
     private UnlimitedEdition() {
         super("Unlimited Edition", "2ED", ExpansionSet.buildDate(1993, 11, 1), SetType.CORE);
+        this.blockName = "Core Set";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

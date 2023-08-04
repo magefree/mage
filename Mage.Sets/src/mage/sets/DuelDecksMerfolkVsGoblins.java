@@ -18,7 +18,6 @@ public final class DuelDecksMerfolkVsGoblins extends ExpansionSet {
 
     private DuelDecksMerfolkVsGoblins() {
         super("Duel Decks: Merfolk vs. Goblins", "DDT", ExpansionSet.buildDate(2017, 11, 10), SetType.SUPPLEMENTAL);
-        this.blockName = "Duel Decks";
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Aquitect's Will", 2, Rarity.COMMON, mage.cards.a.AquitectsWill.class));

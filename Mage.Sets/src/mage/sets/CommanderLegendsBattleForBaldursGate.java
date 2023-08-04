@@ -17,7 +17,6 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
 
     private CommanderLegendsBattleForBaldursGate() {
         super("Commander Legends: Battle for Baldur's Gate", "CLB", ExpansionSet.buildDate(2022, 6, 10), SetType.SUPPLEMENTAL);
-        this.blockName = "Commander Legends";
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 

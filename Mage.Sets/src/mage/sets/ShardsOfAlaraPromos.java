@@ -19,7 +19,7 @@ public final class ShardsOfAlaraPromos extends ExpansionSet {
 
     private ShardsOfAlaraPromos() {
         super("Shards of Alara Promos", "PALA", ExpansionSet.buildDate(2008, 10, 3), SetType.PROMOTIONAL);
-        this.blockName = "Shards of Alara";
+        this.blockName = "Alara";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

@@ -17,6 +17,7 @@ public class WorldwakePromos extends ExpansionSet {
 
     private WorldwakePromos() {
         super("Worldwake Promos", "PWWK", ExpansionSet.buildDate(2010, 7, 30), SetType.PROMOTIONAL);
+        this.blockName = "Zendikar";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

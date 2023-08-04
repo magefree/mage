@@ -21,7 +21,6 @@ public final class MarchOfTheMachine extends ExpansionSet {
 
     private MarchOfTheMachine() {
         super("March of the Machine", "MOM", ExpansionSet.buildDate(2023, 4, 21), SetType.EXPANSION);
-        this.blockName = "March of the Machine";
         this.hasBoosters = true;
         this.numBoosterLands = 0; // TODO: 50% chance basic, 50% chance dual land (currently just adding extra commons)
         this.numBoosterCommon = 10; // TODO: Should be 8 commons, 1 battle, 1 DFC, 3 uncommon+

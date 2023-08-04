@@ -17,6 +17,7 @@ public class FridayNightMagic2012 extends ExpansionSet {
 
     private FridayNightMagic2012() {
         super("Friday Night Magic 2012", "F12", ExpansionSet.buildDate(2012, 1, 1), SetType.PROMOTIONAL);
+        this.blockName = "Friday Night Magic";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

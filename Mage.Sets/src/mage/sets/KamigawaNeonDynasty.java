@@ -27,7 +27,6 @@ public final class KamigawaNeonDynasty extends ExpansionSet {
 
     private KamigawaNeonDynasty() {
         super("Kamigawa: Neon Dynasty", "NEO", ExpansionSet.buildDate(2022, 2, 18), SetType.EXPANSION);
-        this.blockName = "Kamigawa: Neon Dynasty";
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.numBoosterLands = 1;

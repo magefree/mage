@@ -17,7 +17,6 @@ public final class Portal extends ExpansionSet {
 
     private Portal() {
         super("Portal", "POR", ExpansionSet.buildDate(1997, 5, 1), SetType.SUPPLEMENTAL);
-        this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

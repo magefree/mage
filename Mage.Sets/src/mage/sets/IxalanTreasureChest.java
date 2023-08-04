@@ -17,6 +17,7 @@ public class IxalanTreasureChest extends ExpansionSet {
 
     private IxalanTreasureChest() {
         super("Ixalan Treasure Chest", "PXTC", ExpansionSet.buildDate(2017, 11, 24), SetType.PROMOTIONAL);
+        this.blockName = "Ixalan";
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

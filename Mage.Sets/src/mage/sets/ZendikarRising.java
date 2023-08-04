@@ -27,7 +27,6 @@ public final class ZendikarRising extends ExpansionSet {
 
     private ZendikarRising() {
         super("Zendikar Rising", "ZNR", ExpansionSet.buildDate(2020, 9, 25), SetType.EXPANSION);
-        this.blockName = "Zendikar Rising";
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

@@ -17,7 +17,6 @@ public final class Jumpstart2022 extends ExpansionSet {
 
     private Jumpstart2022() {
         super("Jumpstart 2022", "J22", ExpansionSet.buildDate(2020, 12, 2), SetType.SUPPLEMENTAL);
-        this.blockName = "Jumpstart";
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Academy Journeymage", 267, Rarity.COMMON, mage.cards.a.AcademyJourneymage.class));
