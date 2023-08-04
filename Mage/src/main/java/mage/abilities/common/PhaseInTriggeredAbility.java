@@ -27,6 +27,7 @@ public class PhaseInTriggeredAbility extends TriggeredAbilityImpl {
 
     protected PhaseInTriggeredAbility(final PhaseInTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter;
     }
 
     @Override

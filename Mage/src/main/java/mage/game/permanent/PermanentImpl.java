@@ -669,7 +669,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     attachedPerm.phaseIn(game, false);
                 }
             }
-            fireEvent(EventType.PHASED_IN, game);
+            game.addSimultaneousEvent(GameEvent.getEvent(EventType.PHASED_IN, this.objectId, null, this.controllerId));
             return true;
         }
         return false;
@@ -1636,11 +1636,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void setRingBearer(Game game, boolean value) {
-        if(value == this.ringBearerFlag){
+        if (value == this.ringBearerFlag) {
             return;
         }
 
-        if(value) {
+        if (value) {
             // The player may have another Ringbearer. We need to clear it if so.
             //
             // 701.52a Certain spells and abilities have the text “the Ring tempts you.”
@@ -1649,17 +1649,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             // becomes your Ring-bearer or another player gains control of it.
             Player player = game.getPlayer(getControllerId());
             String playername = "";
-            if(player != null){
+            if (player != null) {
                 playername = player.getLogName();
                 Permanent existingRingbearer = player.getRingBearer(game);
-                if(existingRingbearer != null && existingRingbearer.getId() != this.getId()){
+                if (existingRingbearer != null && existingRingbearer.getId() != this.getId()) {
                     existingRingbearer.setRingBearer(game, false);
                 }
             }
 
             addInfo(ringbearerInfoKey, CardUtil.addToolTipMarkTags("Is " + playername + "'s Ring-bearer"), game);
-        }
-        else {
+        } else {
             addInfo(ringbearerInfoKey, null, game);
         }
 
@@ -1821,7 +1820,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean isRingBearer() { return ringBearerFlag; }
+    public boolean isRingBearer() {
+        return ringBearerFlag;
+    }
 
     @Override
     public boolean fight(Permanent fightTarget, Ability source, Game game) {

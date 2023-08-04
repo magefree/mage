@@ -30,6 +30,7 @@ public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
     protected VanishingUpkeepAbility(final VanishingUpkeepAbility ability) {
         super(ability);
         this.vanishingAmount = ability.vanishingAmount;
+        this.permanentType = ability.permanentType;
     }
 
     @Override
