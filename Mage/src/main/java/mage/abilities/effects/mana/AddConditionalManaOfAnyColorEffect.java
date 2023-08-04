@@ -1,9 +1,5 @@
 package mage.abilities.effects.mana;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -15,6 +11,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author noxx
@@ -97,7 +96,7 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
                         if (choice.getChoice() == null) {
                             return null;
                         }
-                        return new ConditionalMana(manaBuilder.setMana(choice.getMana(value), source, game).build());
+                        return manaBuilder.setMana(choice.getMana(value), source, game).build();
                     }
                     List<String> manaStrings = new ArrayList<>(5);
                     manaStrings.add("W");
@@ -107,7 +106,7 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
                     manaStrings.add("G");
                     List<Integer> choices = controller.getMultiAmount(this.outcome, manaStrings, 0, value, MultiAmountType.MANA, game);
                     Mana mana = new Mana(choices.get(0), choices.get(1), choices.get(2), choices.get(3), choices.get(4), 0, 0, 0);
-                    return new ConditionalMana(manaBuilder.setMana(mana, source, game).build());
+                    return manaBuilder.setMana(mana, source, game).build();
                 }
             }
         }
