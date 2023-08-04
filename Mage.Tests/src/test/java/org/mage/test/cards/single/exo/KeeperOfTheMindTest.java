@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author TheElk801
+ * @author Susucr
  */
 public class KeeperOfTheMindTest extends CardTestPlayerBase {
     // Keeper of the Mind {U}{U}
