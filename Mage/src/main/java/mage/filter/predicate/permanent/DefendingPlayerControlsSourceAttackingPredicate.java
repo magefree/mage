@@ -6,9 +6,14 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * @author TheElk801
+ * This predicate can only apply when source is an attacking creature.
+ * <p>
+ * It should be used when the source is an attacking creature during an effect
+ * e.g. 'when {this} attacks, target creature defending player controls can't block this turn.'
+ *
+ * @author Susucr
  */
-public enum DefendingPlayerControlsPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+public enum DefendingPlayerControlsSourceAttackingPredicate implements ObjectSourcePlayerPredicate<Permanent> {
     instance;
 
     @Override
