@@ -1639,8 +1639,8 @@ public class VerifyCardDataTest {
     private void checkCardCanBeCopied(Card card) {
         try {
             Card card2 = card.copy();
-        } catch (StackOverflowError err) {
-            fail(card, "copy", "throws a StackOverflow on copy.");
+        } catch (Error err) {
+            fail(card, "copy", "throws on copy : " + err.getClass() + " : " + err.getMessage() + " : ");
         }
     }
 
