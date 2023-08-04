@@ -57,7 +57,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "LTR;LTC"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = "LTR;LTC;CMM"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
@@ -1606,6 +1606,7 @@ public class VerifyCardDataTest {
             checkBasicLands(card, ref);
             checkMissingAbilities(card, ref);
             checkWrongSymbolsInRules(card);
+            checkCardCanBeCopied(card);
         }
         checkWrongAbilitiesText(card, ref, cardIndex);
     }
@@ -1632,6 +1633,14 @@ public class VerifyCardDataTest {
                 || (color.isRed() && !expected.contains("R"))
                 || (color.isWhite() && !expected.contains("W"))) {
             fail(card, "colors", color + " != " + expected);
+        }
+    }
+
+    private void checkCardCanBeCopied(Card card) {
+        try {
+            Card card2 = card.copy();
+        } catch (Error err) {
+            fail(card, "copy", "throws on copy : " + err.getClass() + " : " + err.getMessage() + " : ");
         }
     }
 
