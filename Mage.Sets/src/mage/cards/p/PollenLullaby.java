@@ -32,7 +32,7 @@ public final class PollenLullaby extends CardImpl {
 
         // Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
-        this.getSpellAbility().addEffect(new DoIfClashWonEffect(new PollenLullabyEffect(), true, null));
+        this.getSpellAbility().addEffect(new DoIfClashWonEffect(new PollenLullabyEffect(), true));
     }
 
     private PollenLullaby(final PollenLullaby card) {
