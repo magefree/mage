@@ -9,7 +9,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.game.events.TappedForManaEvent;
 import mage.players.Player;
-import mage.util.TreeNode;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -171,7 +170,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                                 checkManaReplacementAndTriggeredMana(ability, game, netMana);
                                 for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
                                     for (Mana mana : copy) {
-                                        Mana newMana = new Mana(mana);
+                                        Mana newMana = mana.copy();
                                         newMana.add(triggeredManaVariation);
                                         this.add(newMana);
                                         wasUsable = true;
@@ -213,7 +212,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                             checkManaReplacementAndTriggeredMana(ability, game, netMana);
                             for (Mana triggeredManaVariation : getTriggeredManaVariations(game, ability, netMana)) {
                                 for (Mana mana : copy) {
-                                    Mana newMana = new Mana(mana);
+                                    Mana newMana = mana.copy();
                                     newMana.add(triggeredManaVariation);
                                     this.add(newMana);
                                     wasUsable = true;
@@ -314,7 +313,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 this.clear();
                 for (Mana triggeredMana : triggeredNetMana) {
                     for (Mana mana : copy) {
-                        Mana newMana = new Mana(mana);
+                        Mana newMana = mana.copy();
                         newMana.add(triggeredMana);
                         this.add(newMana);
                     }
@@ -363,7 +362,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                 this.clear();
                 for (Mana addMana : options) {
                     for (Mana mana : copy) {
-                        Mana newMana = new Mana(mana);
+                        Mana newMana = mana.copy();
                         newMana.add(addMana);
                         this.add(newMana);
                     }

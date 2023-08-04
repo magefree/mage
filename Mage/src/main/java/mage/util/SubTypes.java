@@ -20,6 +20,10 @@ public class SubTypes extends ArrayList<SubType> {
         this.isAllCreatureTypes = list.isAllCreatureTypes;
     }
 
+    public SubTypes copy() {
+        return new SubTypes(this);
+    }
+
     public boolean add(SubType... subTypes) {
         return Collections.addAll(this, subTypes);
     }

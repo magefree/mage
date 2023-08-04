@@ -70,9 +70,9 @@ public final class SkullbriarTheWalkingGrave extends CardImpl {
         Counters copyFrom = null;
         if (skullBriarEffectApplied) {
             if (event.getTarget() != null && event.getFromZone() == Zone.BATTLEFIELD) {
-                copyFrom = new Counters(event.getTarget().getCounters(game));
+                copyFrom = event.getTarget().getCounters(game).copy();
             } else {
-                copyFrom = new Counters(this.getCounters(game));
+                copyFrom = this.getCounters(game).copy();
             }
         }
         super.updateZoneChangeCounter(game, event);
