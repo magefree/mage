@@ -21,7 +21,7 @@ public final class MelokuTheCloudedMirrorToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public MelokuTheCloudedMirrorToken(final MelokuTheCloudedMirrorToken token) {
+    protected MelokuTheCloudedMirrorToken(final MelokuTheCloudedMirrorToken token) {
         super(token);
     }
 

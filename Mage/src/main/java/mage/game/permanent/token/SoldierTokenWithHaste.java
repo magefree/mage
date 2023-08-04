@@ -21,7 +21,7 @@ public final class SoldierTokenWithHaste extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    public SoldierTokenWithHaste(final SoldierTokenWithHaste token) {
+    protected SoldierTokenWithHaste(final SoldierTokenWithHaste token) {
         super(token);
     }
 

@@ -23,7 +23,7 @@ public final class PhyrexianHorrorGreenToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    public PhyrexianHorrorGreenToken(final PhyrexianHorrorGreenToken token) {
+    protected PhyrexianHorrorGreenToken(final PhyrexianHorrorGreenToken token) {
         super(token);
     }
 

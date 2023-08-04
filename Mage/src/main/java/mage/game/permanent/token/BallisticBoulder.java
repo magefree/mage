@@ -8,7 +8,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author Susucr
  */
 public final class BallisticBoulder extends TokenImpl {
@@ -24,7 +23,7 @@ public final class BallisticBoulder extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public BallisticBoulder(final BallisticBoulder token) {
+    protected BallisticBoulder(final BallisticBoulder token) {
         super(token);
     }
 

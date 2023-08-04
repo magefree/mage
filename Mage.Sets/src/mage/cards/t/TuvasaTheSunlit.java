@@ -11,7 +11,6 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
@@ -42,7 +41,7 @@ public final class TuvasaTheSunlit extends CardImpl {
                 = new FilterEnchantmentPermanent("enchantment you control");
         filter.add(TargetController.YOU.getControllerPredicate());
         DynamicValue value
-                = new PermanentsOnBattlefieldCount(new FilterPermanent(filter));
+                = new PermanentsOnBattlefieldCount(filter);
         Ability ability = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(

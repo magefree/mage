@@ -547,17 +547,17 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerId) {
-        Player player = game.getPlayer(playerId);
-        player.setTurnControlledBy(this.getId());
-        game.informPlayers(getLogName() + " controls the turn of " + player.getLogName());
-        if (!playerId.equals(this.getId())) {
-            this.playersUnderYourControl.add(playerId);
-            if (!player.hasLeft() && !player.hasLost()) {
-                player.setGameUnderYourControl(false);
+    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
+        Player playerUnderControl = game.getPlayer(playerUnderControlId);
+        playerUnderControl.setTurnControlledBy(this.getId());
+        game.informPlayers(getLogName() + " taken turn control of " + playerUnderControl.getLogName() + info);
+        if (!playerUnderControlId.equals(this.getId())) {
+            this.playersUnderYourControl.add(playerUnderControlId);
+            if (!playerUnderControl.hasLeft() && !playerUnderControl.hasLost()) {
+                playerUnderControl.setGameUnderYourControl(false);
             }
             DelayedTriggeredAbility ability = new AtTheEndOfTurnStepPostDelayedTriggeredAbility(
-                    new LoseControlOnOtherPlayersControllerEffect(this.getLogName(), player.getLogName()));
+                    new LoseControlOnOtherPlayersControllerEffect(this.getLogName(), playerUnderControl.getLogName()));
             ability.setSourceId(getId());
             ability.setControllerId(getId());
             game.addDelayedTriggeredAbility(ability, null);
@@ -2666,7 +2666,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         // P.S. no needs in searchingController, but it helps with unit tests, see TakeControlWhileSearchingLibraryTest
         boolean takeControl = false;
         if (!searchingPlayer.getId().equals(searchingController.getId())) {
-            CardUtil.takeControlUnderPlayerStart(game, searchingController, searchingPlayer, true);
+            // game logs added in child's call
+            CardUtil.takeControlUnderPlayerStart(game, source, searchingController, searchingPlayer, true);
             takeControl = true;
         }
 
@@ -2711,8 +2712,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             // END SEARCH
             if (takeControl) {
-                CardUtil.takeControlUnderPlayerEnd(game, searchingController, searchingPlayer);
-                game.informPlayers("Control of " + searchingPlayer.getLogName() + " is back" + CardUtil.getSourceLogName(game, source));
+                // game logs added in child's call
+                CardUtil.takeControlUnderPlayerEnd(game, source, searchingController, searchingPlayer);
             }
 
             LibrarySearchedEvent searchedEvent = new LibrarySearchedEvent(targetPlayer.getId(), source, searchingPlayer.getId(), target);

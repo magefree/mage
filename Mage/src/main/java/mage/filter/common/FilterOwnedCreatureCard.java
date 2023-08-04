@@ -19,7 +19,7 @@ public class FilterOwnedCreatureCard extends FilterOwnedCard {
         this.add(CardType.CREATURE.getPredicate());
     }
 
-    public FilterOwnedCreatureCard(final FilterOwnedCreatureCard filter) {
+    protected FilterOwnedCreatureCard(final FilterOwnedCreatureCard filter) {
         super(filter);
     }
 

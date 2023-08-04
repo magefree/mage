@@ -37,7 +37,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         this.copyToObjectId = copyToObjectId;
     }
 
-    public CopyEffect(final CopyEffect effect) {
+    protected CopyEffect(final CopyEffect effect) {
         super(effect);
         this.copyFromObject = effect.copyFromObject.copy();
         this.copyToObjectId = effect.copyToObjectId;

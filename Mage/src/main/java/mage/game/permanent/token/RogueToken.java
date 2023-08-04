@@ -18,7 +18,7 @@ public final class RogueToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public RogueToken(final RogueToken token) {
+    protected RogueToken(final RogueToken token) {
         super(token);
     }
 

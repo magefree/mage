@@ -60,7 +60,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
         this.staticText = text;
     }
 
-    public AddManaInAnyCombinationEffect(final AddManaInAnyCombinationEffect effect) {
+    protected AddManaInAnyCombinationEffect(final AddManaInAnyCombinationEffect effect) {
         super(effect);
         this.manaSymbols = effect.manaSymbols;
         this.amount = effect.amount;

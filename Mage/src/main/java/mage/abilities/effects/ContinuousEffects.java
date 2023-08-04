@@ -65,7 +65,7 @@ public class ContinuousEffects implements Serializable {
         collectAllEffects();
     }
 
-    public ContinuousEffects(final ContinuousEffects effect) {
+    protected ContinuousEffects(final ContinuousEffects effect) {
         applyCounters = effect.applyCounters.copy();
         auraReplacementEffect = effect.auraReplacementEffect.copy();
         layeredEffects = effect.layeredEffects.copy();

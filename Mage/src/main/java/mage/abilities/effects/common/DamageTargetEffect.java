@@ -86,7 +86,7 @@ public class DamageTargetEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    public DamageTargetEffect(final DamageTargetEffect effect) {
+    protected DamageTargetEffect(final DamageTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.preventable = effect.preventable;

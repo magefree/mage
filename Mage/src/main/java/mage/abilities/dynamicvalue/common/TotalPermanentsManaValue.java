@@ -14,19 +14,16 @@ import java.util.List;
 public class TotalPermanentsManaValue implements DynamicValue {
 
     private final String message;
-    private final ValueHint hint;
     private final FilterPermanent filter;
 
     public TotalPermanentsManaValue(FilterPermanent filter) {
         this.filter = filter.copy();
         this.message = "the total mana value of " + filter.getMessage();
-        this.hint = new ValueHint("Total mana value of " + filter.getMessage(), this);
     }
 
     private TotalPermanentsManaValue(final TotalPermanentsManaValue value) {
         this.filter = value.filter.copy();
         this.message = value.message;
-        this.hint = value.hint.copy();
     }
 
     @Override
@@ -38,10 +35,10 @@ public class TotalPermanentsManaValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int totalCMC = 0;
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(
-            filter,
-            sourceAbility.getControllerId(),
-            sourceAbility,
-            game);
+                filter,
+                sourceAbility.getControllerId(),
+                sourceAbility,
+                game);
         for (Permanent permanent : permanents) {
             totalCMC += permanent.getManaValue();
         }
@@ -59,6 +56,6 @@ public class TotalPermanentsManaValue implements DynamicValue {
     }
 
     public Hint getHint() {
-        return hint;
+        return new ValueHint("Total mana value of " + filter.getMessage(), this);
     }
 }

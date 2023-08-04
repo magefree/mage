@@ -18,7 +18,7 @@ public class SacrificeAttachmentCost extends UseAttachedCost implements Sacrific
         super();
     }
 
-    public SacrificeAttachmentCost(final SacrificeAttachmentCost cost) {
+    protected SacrificeAttachmentCost(final SacrificeAttachmentCost cost) {
         super(cost);
     }
 

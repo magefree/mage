@@ -25,7 +25,7 @@ public class CantBeBlockedByCreaturesAllEffect extends RestrictionEffect {
                 + filterBlockedBy.getMessage();
     }
 
-    public CantBeBlockedByCreaturesAllEffect(final CantBeBlockedByCreaturesAllEffect effect) {
+    protected CantBeBlockedByCreaturesAllEffect(final CantBeBlockedByCreaturesAllEffect effect) {
         super(effect);
         this.filterCreatures = effect.filterCreatures;
         this.filterBlockedBy = effect.filterBlockedBy;

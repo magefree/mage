@@ -31,7 +31,7 @@ public class InvestigateEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    public InvestigateEffect(final InvestigateEffect effect) {
+    protected InvestigateEffect(final InvestigateEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

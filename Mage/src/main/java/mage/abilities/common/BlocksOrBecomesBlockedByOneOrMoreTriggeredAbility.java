@@ -37,7 +37,7 @@ public class BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility extends Triggered
         setTriggerPhrase("Whenever {this} blocks or becomes blocked by one or more " + (filter != null ? filter.getMessage() : "creatures") + ", ");
     }
 
-    public BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility(final BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility ability) {
+    protected BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility(final BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.rule = ability.rule;

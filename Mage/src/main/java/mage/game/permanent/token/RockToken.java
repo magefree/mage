@@ -25,7 +25,7 @@ public final class RockToken extends TokenImpl {
         this.addAbility(new EquipAbility(1));
     }
 
-    public RockToken(final RockToken token) {
+    protected RockToken(final RockToken token) {
         super(token);
     }
 

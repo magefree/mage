@@ -24,7 +24,7 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} deals combat damage, ");
     }
 
-    public DealsCombatDamageTriggeredAbility(final DealsCombatDamageTriggeredAbility ability) {
+    protected DealsCombatDamageTriggeredAbility(final DealsCombatDamageTriggeredAbility ability) {
         super(ability);
         this.usedInPhase = ability.usedInPhase;
     }

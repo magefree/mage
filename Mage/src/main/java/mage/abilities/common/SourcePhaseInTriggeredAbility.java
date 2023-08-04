@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author TheElk801
  */
 public class SourcePhaseInTriggeredAbility extends TriggeredAbilityImpl {
@@ -17,7 +16,7 @@ public class SourcePhaseInTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this} phases in, ");
     }
 
-    public SourcePhaseInTriggeredAbility(final SourcePhaseInTriggeredAbility ability) {
+    protected SourcePhaseInTriggeredAbility(final SourcePhaseInTriggeredAbility ability) {
         super(ability);
     }
 

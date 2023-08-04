@@ -61,7 +61,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
+    protected EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.rule = ability.rule;

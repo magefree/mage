@@ -59,7 +59,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
-    public BecomesCreatureTargetEffect(final BecomesCreatureTargetEffect effect) {
+    protected BecomesCreatureTargetEffect(final BecomesCreatureTargetEffect effect) {
         super(effect);
         this.token = effect.token.copy();
         this.loseAllAbilities = effect.loseAllAbilities;

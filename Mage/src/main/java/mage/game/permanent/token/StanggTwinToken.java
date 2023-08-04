@@ -23,7 +23,7 @@ public final class StanggTwinToken extends TokenImpl {
         this.toughness = new MageInt(4);
     }
 
-    public StanggTwinToken(final StanggTwinToken token) {
+    protected StanggTwinToken(final StanggTwinToken token) {
         super(token);
     }
 

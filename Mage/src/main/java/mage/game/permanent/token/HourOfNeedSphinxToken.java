@@ -20,7 +20,7 @@ public final class HourOfNeedSphinxToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public HourOfNeedSphinxToken(final HourOfNeedSphinxToken token) {
+    protected HourOfNeedSphinxToken(final HourOfNeedSphinxToken token) {
         super(token);
     }
 

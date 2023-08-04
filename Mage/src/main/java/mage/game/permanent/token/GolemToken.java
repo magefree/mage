@@ -18,7 +18,7 @@ public final class GolemToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public GolemToken(final GolemToken token) {
+    protected GolemToken(final GolemToken token) {
         super(token);
     }
 

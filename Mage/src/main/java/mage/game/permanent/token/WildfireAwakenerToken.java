@@ -28,7 +28,7 @@ public final class WildfireAwakenerToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public WildfireAwakenerToken(final WildfireAwakenerToken token) {
+    protected WildfireAwakenerToken(final WildfireAwakenerToken token) {
         super(token);
     }
 

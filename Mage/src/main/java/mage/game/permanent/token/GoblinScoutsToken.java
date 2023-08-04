@@ -1,13 +1,13 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.MountainwalkAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class GoblinScoutsToken extends TokenImpl {
@@ -24,7 +24,7 @@ public final class GoblinScoutsToken extends TokenImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    public GoblinScoutsToken(final GoblinScoutsToken token) {
+    protected GoblinScoutsToken(final GoblinScoutsToken token) {
         super(token);
     }
 

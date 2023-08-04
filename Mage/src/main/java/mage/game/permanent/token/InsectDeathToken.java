@@ -22,7 +22,7 @@ public final class InsectDeathToken extends TokenImpl {
         addAbility(DeathtouchAbility.getInstance());
     }
 
-    public InsectDeathToken(final InsectDeathToken token) {
+    protected InsectDeathToken(final InsectDeathToken token) {
         super(token);
     }
 

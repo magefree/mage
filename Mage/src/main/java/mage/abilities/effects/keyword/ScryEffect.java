@@ -26,7 +26,7 @@ public class ScryEffect extends OneShotEffect {
         this.setText();
     }
 
-    public ScryEffect(final ScryEffect effect) {
+    protected ScryEffect(final ScryEffect effect) {
         super(effect);
         this.scryNumber = effect.scryNumber;
         this.showEffectHint = effect.showEffectHint;

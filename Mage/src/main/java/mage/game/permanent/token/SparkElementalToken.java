@@ -27,7 +27,7 @@ public final class SparkElementalToken extends TokenImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false));
     }
 
-    public SparkElementalToken(final SparkElementalToken token) {
+    protected SparkElementalToken(final SparkElementalToken token) {
         super(token);
     }
 

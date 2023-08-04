@@ -37,7 +37,7 @@ public abstract class GameCommanderImpl extends GameImpl {
         super(attackOption, range, mulligan, startingLife, minimumDeckSize, 7);
     }
 
-    public GameCommanderImpl(final GameCommanderImpl game) {
+    protected GameCommanderImpl(final GameCommanderImpl game) {
         super(game);
         this.alsoHand = game.alsoHand;
         this.alsoLibrary = game.alsoLibrary;

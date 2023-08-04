@@ -28,7 +28,7 @@ public class Deck implements Serializable, Copyable<Deck> {
         super();
     }
 
-    public Deck(final Deck deck) {
+    protected Deck(final Deck deck) {
         this.name = deck.name;
         this.cards.addAll(deck.cards.stream().map(Card::copy).collect(Collectors.toList()));
         this.sideboard.addAll(deck.sideboard.stream().map(Card::copy).collect(Collectors.toList()));

@@ -21,7 +21,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -37,7 +37,7 @@ public final class KoglaTheTitanApe extends CardImpl {
             = new FilterControlledPermanent(SubType.HUMAN);
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public KoglaTheTitanApe(UUID ownerId, CardSetInfo setInfo) {

@@ -14,7 +14,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
- *
  * @author TheElk801
  */
 public final class SoundTheCallToken extends TokenImpl {
@@ -41,7 +40,7 @@ public final class SoundTheCallToken extends TokenImpl {
         ));
     }
 
-    public SoundTheCallToken(final SoundTheCallToken token) {
+    protected SoundTheCallToken(final SoundTheCallToken token) {
         super(token);
     }
 

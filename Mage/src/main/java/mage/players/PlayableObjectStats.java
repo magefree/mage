@@ -64,7 +64,7 @@ public class PlayableObjectStats implements Serializable, Copyable<PlayableObjec
         }
     }
 
-    public PlayableObjectStats(final PlayableObjectStats source) {
+    protected PlayableObjectStats(final PlayableObjectStats source) {
         for (PlayableObjectRecord rec : source.basicManaAbilities) {
             this.basicManaAbilities.add(rec.copy());
         }

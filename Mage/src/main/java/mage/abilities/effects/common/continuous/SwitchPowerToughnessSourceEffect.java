@@ -20,7 +20,7 @@ public class SwitchPowerToughnessSourceEffect extends ContinuousEffectImpl {
         staticText = "switch {this}'s power and toughness " + duration.toString();
     }
 
-    public SwitchPowerToughnessSourceEffect(final SwitchPowerToughnessSourceEffect effect) {
+    protected SwitchPowerToughnessSourceEffect(final SwitchPowerToughnessSourceEffect effect) {
         super(effect);
     }
 

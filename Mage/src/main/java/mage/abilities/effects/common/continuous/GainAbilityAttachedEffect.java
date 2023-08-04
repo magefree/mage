@@ -58,7 +58,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         this.generateGainAbilityDependencies(ability, null);
     }
 
-    public GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
+    protected GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents

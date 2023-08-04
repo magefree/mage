@@ -43,7 +43,7 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
         this.actionText = actionText;
     }
 
-    public VariableCostImpl(final VariableCostImpl cost) {
+    protected VariableCostImpl(final VariableCostImpl cost) {
         this.id = cost.id;
         this.costType = cost.costType;
         this.text = cost.text;

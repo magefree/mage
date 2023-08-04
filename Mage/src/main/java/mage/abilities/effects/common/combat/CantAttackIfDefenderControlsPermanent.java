@@ -24,7 +24,7 @@ public class CantAttackIfDefenderControlsPermanent extends RestrictionEffect {
         staticText = new StringBuilder("{this} can't attack if defending player controls ").append(filter.getMessage()).toString();
     }
 
-    public CantAttackIfDefenderControlsPermanent(final CantAttackIfDefenderControlsPermanent effect) {
+    protected CantAttackIfDefenderControlsPermanent(final CantAttackIfDefenderControlsPermanent effect) {
         super(effect);
         this.filter = effect.filter;
     }

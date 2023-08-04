@@ -18,7 +18,7 @@ public final class MetallicSliverToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public MetallicSliverToken(final MetallicSliverToken token) {
+    protected MetallicSliverToken(final MetallicSliverToken token) {
         super(token);
     }
 

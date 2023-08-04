@@ -1157,14 +1157,15 @@ public final class CardUtil {
      *
      * @param game
      * @param controller
-     * @param targetPlayer
+     * @param playerUnderControl
      * @param givePauseForResponse if you want to give controller time to watch opponent's hand (if you remove control effect in the end of code)
      */
-    public static void takeControlUnderPlayerStart(Game game, Player controller, Player targetPlayer, boolean givePauseForResponse) {
-        controller.controlPlayersTurn(game, targetPlayer.getId());
+    public static void takeControlUnderPlayerStart(Game game, Ability source, Player controller, Player playerUnderControl, boolean givePauseForResponse) {
+        // game logs added in child's call
+        controller.controlPlayersTurn(game, playerUnderControl.getId(), CardUtil.getSourceLogName(game, source));
         if (givePauseForResponse) {
             while (controller.canRespond()) {
-                if (controller.chooseUse(Outcome.Benefit, "You got control of " + targetPlayer.getLogName()
+                if (controller.chooseUse(Outcome.Benefit, "You got control of " + playerUnderControl.getLogName()
                                 + ". Use switch hands button to view opponent's hand.", null,
                         "Continue", "Wait", null, game)) {
                     break;
@@ -1178,12 +1179,13 @@ public final class CardUtil {
      *
      * @param game
      * @param controller
-     * @param targetPlayer
+     * @param playerUnderControl
      */
-    public static void takeControlUnderPlayerEnd(Game game, Player controller, Player targetPlayer) {
-        targetPlayer.setGameUnderYourControl(true, false);
-        if (!targetPlayer.getTurnControlledBy().equals(controller.getId())) {
-            controller.getPlayersUnderYourControl().remove(targetPlayer.getId());
+    public static void takeControlUnderPlayerEnd(Game game, Ability source, Player controller, Player playerUnderControl) {
+        playerUnderControl.setGameUnderYourControl(true, false);
+        if (!playerUnderControl.getTurnControlledBy().equals(controller.getId())) {
+            game.informPlayers(controller + " return control of the turn to " + playerUnderControl.getLogName() + CardUtil.getSourceLogName(game, source));
+            controller.getPlayersUnderYourControl().remove(playerUnderControl.getId());
         }
     }
 

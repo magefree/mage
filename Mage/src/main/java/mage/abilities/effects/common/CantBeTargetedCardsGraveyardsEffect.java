@@ -12,7 +12,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author LevelX2
  */
 public class CantBeTargetedCardsGraveyardsEffect extends ContinuousRuleModifyingEffectImpl {
@@ -22,7 +21,7 @@ public class CantBeTargetedCardsGraveyardsEffect extends ContinuousRuleModifying
         staticText = "Cards in graveyards can't be the targets of spells or abilities";
     }
 
-    public CantBeTargetedCardsGraveyardsEffect(final CantBeTargetedCardsGraveyardsEffect effect) {
+    protected CantBeTargetedCardsGraveyardsEffect(final CantBeTargetedCardsGraveyardsEffect effect) {
         super(effect);
     }
 

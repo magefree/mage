@@ -28,7 +28,7 @@ public final class KarnConstructToken extends TokenImpl {
         ));
     }
 
-    public KarnConstructToken(final KarnConstructToken token) {
+    protected KarnConstructToken(final KarnConstructToken token) {
         super(token);
     }
 

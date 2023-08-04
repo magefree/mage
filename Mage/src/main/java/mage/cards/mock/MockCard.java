@@ -90,7 +90,7 @@ public class MockCard extends CardImpl {
         }
     }
 
-    public MockCard(final MockCard card) {
+    protected MockCard(final MockCard card) {
         super(card);
 
         this.startingLoyalty = card.startingLoyalty;

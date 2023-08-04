@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SacrificeSourceEffect extends OneShotEffect {
@@ -19,7 +18,7 @@ public class SacrificeSourceEffect extends OneShotEffect {
         staticText = "sacrifice {this}";
     }
 
-    public SacrificeSourceEffect(final SacrificeSourceEffect effect) {
+    protected SacrificeSourceEffect(final SacrificeSourceEffect effect) {
         super(effect);
     }
 

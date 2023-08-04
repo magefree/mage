@@ -2962,8 +2962,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerId) {
-        computerPlayer.controlPlayersTurn(game, playerId);
+    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
+        computerPlayer.controlPlayersTurn(game, playerUnderControlId, info);
     }
 
     @Override

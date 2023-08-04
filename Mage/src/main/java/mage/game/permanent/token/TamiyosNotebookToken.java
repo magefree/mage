@@ -24,7 +24,7 @@ public final class TamiyosNotebookToken extends TokenImpl {
         this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost()));
     }
 
-    public TamiyosNotebookToken(final TamiyosNotebookToken token) {
+    protected TamiyosNotebookToken(final TamiyosNotebookToken token) {
         super(token);
     }
 

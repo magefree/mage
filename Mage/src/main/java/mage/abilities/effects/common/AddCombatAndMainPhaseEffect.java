@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -13,7 +14,6 @@ import mage.game.events.GameEvent;
 import mage.game.turn.TurnMod;
 
 /**
- *
  * @author LevelX2
  */
 public class AddCombatAndMainPhaseEffect extends OneShotEffect {
@@ -23,7 +23,7 @@ public class AddCombatAndMainPhaseEffect extends OneShotEffect {
         staticText = "After this main phase, there is an additional combat phase followed by an additional main phase";
     }
 
-    public AddCombatAndMainPhaseEffect(final AddCombatAndMainPhaseEffect effect) {
+    protected AddCombatAndMainPhaseEffect(final AddCombatAndMainPhaseEffect effect) {
         super(effect);
     }
 

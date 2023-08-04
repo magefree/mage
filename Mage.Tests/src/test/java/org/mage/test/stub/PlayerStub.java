@@ -465,7 +465,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerId) {
+    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
 
     }
 

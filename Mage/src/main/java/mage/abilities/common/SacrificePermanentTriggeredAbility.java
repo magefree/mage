@@ -39,7 +39,7 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you sacrifice " + CardUtil.addArticle(filter.getMessage()) + ", ");
     }
 
-    public SacrificePermanentTriggeredAbility(final SacrificePermanentTriggeredAbility ability) {
+    protected SacrificePermanentTriggeredAbility(final SacrificePermanentTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;

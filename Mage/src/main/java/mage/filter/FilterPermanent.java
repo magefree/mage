@@ -39,7 +39,7 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         }
     }
 
-    public FilterPermanent(final FilterPermanent filter) {
+    protected FilterPermanent(final FilterPermanent filter) {
         super(filter);
         this.extraPredicates.addAll(filter.extraPredicates);
     }

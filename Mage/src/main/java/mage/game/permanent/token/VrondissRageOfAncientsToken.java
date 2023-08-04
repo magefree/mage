@@ -24,7 +24,7 @@ public final class VrondissRageOfAncientsToken extends TokenImpl {
         this.addAbility(new VrondissRageOfAncientsTokenTriggeredAbility());
     }
 
-    public VrondissRageOfAncientsToken(final VrondissRageOfAncientsToken token) {
+    protected VrondissRageOfAncientsToken(final VrondissRageOfAncientsToken token) {
         super(token);
     }
 
@@ -39,7 +39,7 @@ class VrondissRageOfAncientsTokenTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
     }
 
-    public VrondissRageOfAncientsTokenTriggeredAbility(final VrondissRageOfAncientsTokenTriggeredAbility ability) {
+    protected VrondissRageOfAncientsTokenTriggeredAbility(final VrondissRageOfAncientsTokenTriggeredAbility ability) {
         super(ability);
     }
 

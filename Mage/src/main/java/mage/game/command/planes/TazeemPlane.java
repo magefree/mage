@@ -76,7 +76,7 @@ class TazeemCantBlockAllEffect extends RestrictionEffect {
         super(Duration.Custom);
     }
 
-    public TazeemCantBlockAllEffect(final TazeemCantBlockAllEffect effect) {
+    protected TazeemCantBlockAllEffect(final TazeemCantBlockAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

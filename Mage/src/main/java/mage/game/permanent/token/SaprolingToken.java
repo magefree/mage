@@ -18,7 +18,7 @@ public final class SaprolingToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public SaprolingToken(final SaprolingToken token) {
+    protected SaprolingToken(final SaprolingToken token) {
         super(token);
     }
 

@@ -19,7 +19,7 @@ public class AdditionalCombatPhaseEffect extends OneShotEffect {
         this.staticText = staticText;
     }
 
-    public AdditionalCombatPhaseEffect(final AdditionalCombatPhaseEffect effect) {
+    protected AdditionalCombatPhaseEffect(final AdditionalCombatPhaseEffect effect) {
         super(effect);
     }
 

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -50,7 +51,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
         this.rule = rule;
     }
 
-    public ExchangeControlTargetEffect(final ExchangeControlTargetEffect effect) {
+    protected ExchangeControlTargetEffect(final ExchangeControlTargetEffect effect) {
         super(effect);
         this.rule = effect.rule;
         this.withSource = effect.withSource;
@@ -89,8 +90,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
             if (withSecondTarget) {
                 UUID uuid = source.getTargets().get(1).getFirstTarget();
                 permanent2 = game.getPermanent(uuid);
-            }
-            else if (permanent2 == null) {
+            } else if (permanent2 == null) {
                 UUID uuid = source.getTargets().get(0).getFirstTarget();
                 permanent2 = game.getPermanent(uuid);
             }

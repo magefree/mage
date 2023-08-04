@@ -26,7 +26,7 @@ public class OrCost implements Cost {
         this.description = description;
     }
 
-    public OrCost(final OrCost cost) {
+    protected OrCost(final OrCost cost) {
         cost.costs.stream().map(Cost::copy).forEach(this.costs::add);
         this.description = cost.description;
         this.selectedCost = cost.selectedCost;

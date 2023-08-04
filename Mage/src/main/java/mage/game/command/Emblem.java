@@ -43,7 +43,7 @@ public abstract class Emblem extends CommandObjectImpl {
         super(name);
     }
 
-    public Emblem(final Emblem emblem) {
+    protected Emblem(final Emblem emblem) {
         super(emblem);
         this.frameStyle = emblem.frameStyle;
         this.controllerId = emblem.controllerId;

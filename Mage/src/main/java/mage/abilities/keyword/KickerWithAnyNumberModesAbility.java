@@ -20,7 +20,7 @@ public class KickerWithAnyNumberModesAbility extends KickerAbility implements Op
         super(cost);
     }
 
-    public KickerWithAnyNumberModesAbility(final KickerWithAnyNumberModesAbility ability) {
+    protected KickerWithAnyNumberModesAbility(final KickerWithAnyNumberModesAbility ability) {
         super(ability);
     }
 

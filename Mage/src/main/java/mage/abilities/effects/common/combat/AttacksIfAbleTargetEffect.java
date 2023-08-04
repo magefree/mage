@@ -35,7 +35,7 @@ public class AttacksIfAbleTargetEffect extends RequirementEffect {
         }
     }
 
-    public AttacksIfAbleTargetEffect(final AttacksIfAbleTargetEffect effect) {
+    protected AttacksIfAbleTargetEffect(final AttacksIfAbleTargetEffect effect) {
         super(effect);
         this.mustAttacks = effect.mustAttacks;
     }

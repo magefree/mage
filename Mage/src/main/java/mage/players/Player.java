@@ -321,9 +321,10 @@ public interface Player extends MageItem, Copyable<Player> {
      * Defines player whose turn this player controls at the moment.
      *
      * @param game
-     * @param playerId
+     * @param playerUnderControlId
+     * @param info additional info to show in game logs like source
      */
-    void controlPlayersTurn(Game game, UUID playerId);
+    void controlPlayersTurn(Game game, UUID playerUnderControlId, String info);
 
     /**
      * Sets player {@link UUID} who controls this player's turn.

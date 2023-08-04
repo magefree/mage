@@ -20,7 +20,7 @@ public final class WaspToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WaspToken(final WaspToken token) {
+    protected WaspToken(final WaspToken token) {
         super(token);
     }
 

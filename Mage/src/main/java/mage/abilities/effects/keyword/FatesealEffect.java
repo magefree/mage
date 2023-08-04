@@ -18,7 +18,6 @@ import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -34,7 +33,7 @@ public class FatesealEffect extends OneShotEffect {
         this.setText();
     }
 
-    public FatesealEffect(final FatesealEffect effect) {
+    protected FatesealEffect(final FatesealEffect effect) {
         super(effect);
         this.fatesealNumber = effect.fatesealNumber;
     }

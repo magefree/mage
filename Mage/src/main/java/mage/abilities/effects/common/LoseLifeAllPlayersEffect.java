@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class LoseLifeAllPlayersEffect extends OneShotEffect {
@@ -22,27 +21,27 @@ public class LoseLifeAllPlayersEffect extends OneShotEffect {
     public LoseLifeAllPlayersEffect(int amount) {
         this(StaticValue.get(amount));
     }
-    
+
     public LoseLifeAllPlayersEffect(DynamicValue amount) {
         super(Outcome.Damage);
         this.amount = amount;
         staticText = setText();
     }
-    
+
     public LoseLifeAllPlayersEffect(DynamicValue amount, String text) {
         super(Outcome.Damage);
         this.amount = amount;
         staticText = text;
     }
 
-    public LoseLifeAllPlayersEffect(final LoseLifeAllPlayersEffect effect) {
+    protected LoseLifeAllPlayersEffect(final LoseLifeAllPlayersEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.loseLife(amount.calculate(game, source, this), game, source, false);
@@ -55,7 +54,7 @@ public class LoseLifeAllPlayersEffect extends OneShotEffect {
     public LoseLifeAllPlayersEffect copy() {
         return new LoseLifeAllPlayersEffect(this);
     }
-    
+
     private String setText() {
         StringBuilder sb = new StringBuilder("each player loses ");
         sb.append(amount);

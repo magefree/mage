@@ -15,7 +15,7 @@ public final class BiogenicOozeToken extends TokenImpl {
         this.toughness = new MageInt(2);
     }
 
-    public BiogenicOozeToken(final BiogenicOozeToken token) {
+    protected BiogenicOozeToken(final BiogenicOozeToken token) {
         super(token);
     }
 

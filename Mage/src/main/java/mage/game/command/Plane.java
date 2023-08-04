@@ -49,7 +49,7 @@ public abstract class Plane extends CommandObjectImpl {
         this.frameStyle = FrameStyle.M15_NORMAL;
     }
 
-    public Plane(final Plane plane) {
+    protected Plane(final Plane plane) {
         super(plane);
         this.planeType = plane.planeType;
         this.frameStyle = plane.frameStyle;

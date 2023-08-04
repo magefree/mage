@@ -8,7 +8,6 @@ import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author North
  */
 public class BecomesBlockedSourceTriggeredAbility extends TriggeredAbilityImpl {
@@ -25,7 +24,7 @@ public class BecomesBlockedSourceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} becomes blocked, ");
     }
 
-    public BecomesBlockedSourceTriggeredAbility(final BecomesBlockedSourceTriggeredAbility ability) {
+    protected BecomesBlockedSourceTriggeredAbility(final BecomesBlockedSourceTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }

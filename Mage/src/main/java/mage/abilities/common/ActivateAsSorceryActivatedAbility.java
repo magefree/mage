@@ -18,7 +18,7 @@ public class ActivateAsSorceryActivatedAbility extends ActivatedAbilityImpl {
         timing = TimingRule.SORCERY;
     }
 
-    public ActivateAsSorceryActivatedAbility(final ActivateAsSorceryActivatedAbility ability) {
+    protected ActivateAsSorceryActivatedAbility(final ActivateAsSorceryActivatedAbility ability) {
         super(ability);
     }
 

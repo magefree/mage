@@ -63,7 +63,7 @@ public class MoreThanMeetsTheEyeAbility extends SpellAbility {
 
     @Override
     public String getRule() {
-        return "More Than Meets The Eye " + this.manaCost
+        return "More Than Meets the Eye " + this.manaCost
             + " <i>(You may cast this card converted for " + this.manaCost + ".)</i>";
     }
 }

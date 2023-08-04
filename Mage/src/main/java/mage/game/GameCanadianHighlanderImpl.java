@@ -15,7 +15,7 @@ public abstract class GameCanadianHighlanderImpl extends GameImpl {
         super(attackOption, range, mulligan, startLife, 100, 7);
     }
 
-    public GameCanadianHighlanderImpl(final GameCanadianHighlanderImpl game) {
+    protected GameCanadianHighlanderImpl(final GameCanadianHighlanderImpl game) {
         super(game);
     }
 

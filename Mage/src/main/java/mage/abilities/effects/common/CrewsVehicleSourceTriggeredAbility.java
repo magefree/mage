@@ -16,7 +16,7 @@ public class CrewsVehicleSourceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} crews a Vehicle, ");
     }
 
-    public CrewsVehicleSourceTriggeredAbility(final CrewsVehicleSourceTriggeredAbility ability) {
+    protected CrewsVehicleSourceTriggeredAbility(final CrewsVehicleSourceTriggeredAbility ability) {
         super(ability);
     }
 

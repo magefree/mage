@@ -20,7 +20,7 @@ public final class WurmWithTrampleToken extends TokenImpl {
         addAbility(TrampleAbility.getInstance());
     }
 
-    public WurmWithTrampleToken(final WurmWithTrampleToken token) {
+    protected WurmWithTrampleToken(final WurmWithTrampleToken token) {
         super(token);
     }
 

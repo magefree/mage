@@ -22,7 +22,7 @@ public final class ReefWormFishToken extends TokenImpl {
         addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new ReefWormWhaleToken())));
     }
 
-    public ReefWormFishToken(final ReefWormFishToken token) {
+    protected ReefWormFishToken(final ReefWormFishToken token) {
         super(token);
     }
 

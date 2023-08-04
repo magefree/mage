@@ -18,7 +18,7 @@ public final class TitaniaProtectorOfArgothElementalToken extends TokenImpl {
         this.toughness = new MageInt(3);
     }
 
-    public TitaniaProtectorOfArgothElementalToken(final TitaniaProtectorOfArgothElementalToken token) {
+    protected TitaniaProtectorOfArgothElementalToken(final TitaniaProtectorOfArgothElementalToken token) {
         super(token);
     }
 

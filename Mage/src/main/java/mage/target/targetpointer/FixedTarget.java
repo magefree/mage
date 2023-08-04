@@ -93,7 +93,7 @@ public class FixedTarget extends TargetPointerImpl {
         this.zoneChangeCounter = game.getState().getZoneChangeCounter(targetId);
     }
 
-    public FixedTarget(final FixedTarget targetPointer) {
+    protected FixedTarget(final FixedTarget targetPointer) {
         super(targetPointer);
 
         this.targetId = targetPointer.targetId;

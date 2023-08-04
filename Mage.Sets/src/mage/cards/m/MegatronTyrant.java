@@ -51,7 +51,7 @@ public final class MegatronTyrant extends CardImpl {
                 Mana.ColorlessMana(1),
                 OpponentsLostLifeCount.instance,
                 "add {C} for each 1 life your opponents have lost this turn"
-            ).concatBy("If you do, ")
+            ).concatBy("If you do,")
         );
 
         this.addAbility(trigger);

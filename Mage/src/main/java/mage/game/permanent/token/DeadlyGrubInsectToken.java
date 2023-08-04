@@ -22,7 +22,7 @@ public final class DeadlyGrubInsectToken extends TokenImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public DeadlyGrubInsectToken(final DeadlyGrubInsectToken token) {
+    protected DeadlyGrubInsectToken(final DeadlyGrubInsectToken token) {
         super(token);
     }
 

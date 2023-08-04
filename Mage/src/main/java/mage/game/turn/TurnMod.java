@@ -1,7 +1,10 @@
 package mage.game.turn;
 
+import mage.abilities.Ability;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
+import mage.game.Game;
+import mage.util.CardUtil;
 import mage.util.Copyable;
 
 import java.io.Serializable;
@@ -11,12 +14,13 @@ import java.util.UUID;
  * Creates a signle turn modification for turn, phase or step
  * <p>
  * For one time usage only
+ * For current turn only
  * <p>
  * If you need it in continuous effect then use ContinuousRuleModifyingEffectImpl
  * with game events like UNTAP_STEP (example: Sands of Time)
  * <p>
  * Supports:
- * - new controller
+ * - new turn controller
  * - turn: extra and skip
  * - phase: extra and skip
  * - step: extra and skip
@@ -43,7 +47,8 @@ public class TurnMod implements Serializable, Copyable<TurnMod> {
     private PhaseStep afterStep;
 
     private boolean locked = false; // locked for modification, used for wrong code usage protection
-    private String note;
+    private String tag; // for inner usage like enable/disable mod in effects
+    private String info; // for GUI usage like additional info in logs
 
     // Turn mod that should be applied after current turn mod
     // Implemented only for new controller turn mod
@@ -66,7 +71,8 @@ public class TurnMod implements Serializable, Copyable<TurnMod> {
         if (mod.subsequentTurnMod != null) {
             this.subsequentTurnMod = mod.subsequentTurnMod.copy();
         }
-        this.note = mod.note;
+        this.tag = mod.tag;
+        this.info = mod.info;
         this.locked = mod.locked;
     }
 
@@ -144,9 +150,22 @@ public class TurnMod implements Serializable, Copyable<TurnMod> {
         return this;
     }
 
-    public TurnMod withNote(String note) {
-        this.note = note;
+    public TurnMod withTag(String tag) {
+        this.tag = tag;
         return this;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public TurnMod withInfo(String info) {
+        this.info = info;
+        return this;
+    }
+
+    public String getInfo() {
+        return info == null ? "" : info;
     }
 
     public UUID getPlayerId() {
@@ -197,11 +216,11 @@ public class TurnMod implements Serializable, Copyable<TurnMod> {
         return subsequentTurnMod;
     }
 
-    public String getNote() {
-        return note;
-    }
-
     public boolean isLocked() {
         return locked;
+    }
+
+    private void addSourceAsInfo(Game game, Ability source) {
+        this.info = CardUtil.getSourceLogName(game, source);
     }
 }

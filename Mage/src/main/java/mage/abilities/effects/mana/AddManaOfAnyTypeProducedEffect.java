@@ -21,7 +21,7 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
         staticText = "that player adds one mana of any type that land produced";
     }
 
-    public AddManaOfAnyTypeProducedEffect(final AddManaOfAnyTypeProducedEffect effect) {
+    protected AddManaOfAnyTypeProducedEffect(final AddManaOfAnyTypeProducedEffect effect) {
         super(effect);
     }
 
