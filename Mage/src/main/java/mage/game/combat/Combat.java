@@ -78,7 +78,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         this.useToughnessForDamage = false;
     }
 
-    public Combat(final Combat combat) {
+    protected Combat(final Combat combat) {
         this.attackingPlayerId = combat.attackingPlayerId;
         for (CombatGroup group : combat.groups) {
             groups.add(group.copy());

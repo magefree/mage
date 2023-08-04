@@ -27,7 +27,7 @@ public final class AvacynToken extends TokenImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public AvacynToken(final AvacynToken token) {
+    protected AvacynToken(final AvacynToken token) {
         super(token);
     }
 

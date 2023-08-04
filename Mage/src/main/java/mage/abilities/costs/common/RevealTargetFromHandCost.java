@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class RevealTargetFromHandCost extends CostImpl {
@@ -35,7 +34,7 @@ public class RevealTargetFromHandCost extends CostImpl {
         this.revealedCards = new ArrayList<>();
     }
 
-    public RevealTargetFromHandCost(final RevealTargetFromHandCost cost) {
+    protected RevealTargetFromHandCost(final RevealTargetFromHandCost cost) {
         super(cost);
         this.manaValues = cost.manaValues;
         this.numberCardsRevealed = cost.numberCardsRevealed;
@@ -67,7 +66,7 @@ public class RevealTargetFromHandCost extends CostImpl {
                 paid = true; // e.g. for optional additional costs.  example: Dragonlord's Prerogative also true if 0 cards shown
                 return paid;
             }
-        } else if(allowNoReveal) {
+        } else if (allowNoReveal) {
             paid = true; // optional reveal with nothing to reveal.
             return paid;
         }

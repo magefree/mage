@@ -22,7 +22,7 @@ public final class InsectToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public InsectToken(final InsectToken token) {
+    protected InsectToken(final InsectToken token) {
         super(token);
     }
 

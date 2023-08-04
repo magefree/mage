@@ -7,7 +7,6 @@ import mage.filter.FilterPermanent;
 
 
 /**
- *
  * @author ayratn
  */
 public class FilterArtifactPermanent extends FilterPermanent {
@@ -21,7 +20,7 @@ public class FilterArtifactPermanent extends FilterPermanent {
         this.add(CardType.ARTIFACT.getPredicate());
     }
 
-    public FilterArtifactPermanent(final FilterArtifactPermanent filter) {
+    protected FilterArtifactPermanent(final FilterArtifactPermanent filter) {
         super(filter);
     }
 

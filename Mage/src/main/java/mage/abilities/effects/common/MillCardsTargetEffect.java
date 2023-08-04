@@ -26,7 +26,7 @@ public class MillCardsTargetEffect extends OneShotEffect {
         this.numberCards = numberCards;
     }
 
-    public MillCardsTargetEffect(final MillCardsTargetEffect effect) {
+    protected MillCardsTargetEffect(final MillCardsTargetEffect effect) {
         super(effect);
         this.numberCards = effect.numberCards;
     }

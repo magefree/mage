@@ -45,11 +45,11 @@ public class FadingAbility extends EntersBattlefieldAbility {
         }
         ruleText = "Fading " + fadeCounter
                 + (shortRuleText ? ""
-                        : " <i>(This " + cardTypeName + " enters the battlefield with " + CardUtil.numberToText(fadeCounter) + " fade counters on it."
-                        + " At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)</i>");
+                : " <i>(This " + cardTypeName + " enters the battlefield with " + CardUtil.numberToText(fadeCounter) + " fade counters on it."
+                + " At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)</i>");
     }
 
-    public FadingAbility(final FadingAbility ability) {
+    protected FadingAbility(final FadingAbility ability) {
         super(ability);
         this.ruleText = ability.ruleText;
     }

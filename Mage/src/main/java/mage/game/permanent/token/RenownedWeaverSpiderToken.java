@@ -23,7 +23,7 @@ public final class RenownedWeaverSpiderToken extends TokenImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public RenownedWeaverSpiderToken(final RenownedWeaverSpiderToken token) {
+    protected RenownedWeaverSpiderToken(final RenownedWeaverSpiderToken token) {
         super(token);
     }
 

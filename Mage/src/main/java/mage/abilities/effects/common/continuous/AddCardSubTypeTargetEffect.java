@@ -21,7 +21,7 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
         this.addedSubType = addedSubType;
     }
 
-    public AddCardSubTypeTargetEffect(final AddCardSubTypeTargetEffect effect) {
+    protected AddCardSubTypeTargetEffect(final AddCardSubTypeTargetEffect effect) {
         super(effect);
         this.addedSubType = effect.addedSubType;
     }

@@ -70,7 +70,7 @@ class RippleEffect extends OneShotEffect {
         this.rippleNumber = rippleNumber;
     }
 
-    public RippleEffect(final RippleEffect effect) {
+    protected RippleEffect(final RippleEffect effect) {
         super(effect);
         this.rippleNumber = effect.rippleNumber;
     }

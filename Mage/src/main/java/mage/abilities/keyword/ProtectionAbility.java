@@ -39,7 +39,7 @@ public class ProtectionAbility extends StaticAbility {
         this.auraIdNotToBeRemoved = null;
     }
 
-    public ProtectionAbility(final ProtectionAbility ability) {
+    protected ProtectionAbility(final ProtectionAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
         this.removeAuras = ability.removeAuras;

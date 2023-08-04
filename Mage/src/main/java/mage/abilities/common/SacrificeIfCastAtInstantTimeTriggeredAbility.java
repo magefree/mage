@@ -13,7 +13,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 
 /**
- *
  * @author Lonefox
  */
 public class SacrificeIfCastAtInstantTimeTriggeredAbility extends TriggeredAbilityImpl {
@@ -22,7 +21,7 @@ public class SacrificeIfCastAtInstantTimeTriggeredAbility extends TriggeredAbili
         super(Zone.STACK, new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new SacrificeSourceEffect())));
     }
 
-    public SacrificeIfCastAtInstantTimeTriggeredAbility(final SacrificeIfCastAtInstantTimeTriggeredAbility ability) {
+    protected SacrificeIfCastAtInstantTimeTriggeredAbility(final SacrificeIfCastAtInstantTimeTriggeredAbility ability) {
         super(ability);
     }
 

@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author jeffwadsworth
  */
 
@@ -19,7 +18,7 @@ public class SkipCombatStepEffect extends ReplacementEffectImpl {
         staticText = "that player skips their next combat phase";
     }
 
-    public SkipCombatStepEffect(final SkipCombatStepEffect effect) {
+    protected SkipCombatStepEffect(final SkipCombatStepEffect effect) {
         super(effect);
     }
 

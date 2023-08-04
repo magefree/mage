@@ -25,7 +25,7 @@ public class EntersBattlefieldFromGraveyardTriggeredAbility extends TriggeredAbi
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public EntersBattlefieldFromGraveyardTriggeredAbility(final EntersBattlefieldFromGraveyardTriggeredAbility ability) {
+    protected EntersBattlefieldFromGraveyardTriggeredAbility(final EntersBattlefieldFromGraveyardTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
     }

@@ -45,7 +45,7 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player casts " + CardUtil.addArticle(filter.getMessage()) + ", ");
     }
 
-    public SpellCastAllTriggeredAbility(final SpellCastAllTriggeredAbility ability) {
+    protected SpellCastAllTriggeredAbility(final SpellCastAllTriggeredAbility ability) {
         super(ability);
         filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;

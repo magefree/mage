@@ -31,7 +31,7 @@ public class DoIfClashWonEffect extends OneShotEffect {
         this.setTargetPointerToClashedOpponent = setTargetPointerToClashedOpponent;
     }
 
-    public DoIfClashWonEffect(final DoIfClashWonEffect effect) {
+    protected DoIfClashWonEffect(final DoIfClashWonEffect effect) {
         super(effect);
         this.executingEffect = effect.executingEffect.copy();
         this.setTargetPointerToClashedOpponent = effect.setTargetPointerToClashedOpponent;

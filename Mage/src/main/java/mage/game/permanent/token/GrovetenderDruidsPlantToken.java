@@ -18,7 +18,7 @@ public final class GrovetenderDruidsPlantToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public GrovetenderDruidsPlantToken(final GrovetenderDruidsPlantToken token) {
+    protected GrovetenderDruidsPlantToken(final GrovetenderDruidsPlantToken token) {
         super(token);
     }
 

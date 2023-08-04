@@ -26,7 +26,7 @@ public class AddPoisonCounterTargetEffect extends OneShotEffect {
         return amount;
     }
 
-    public AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
+    protected AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

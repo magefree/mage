@@ -1,5 +1,5 @@
 /*
- *  
+ *
  * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
@@ -25,7 +25,7 @@
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
- * 
+ *
  */
 
 package mage.abilities.effects.common;
@@ -38,7 +38,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -49,7 +48,7 @@ public class SkipDrawStepEffect extends ReplacementEffectImpl {
         staticText = "Skip your draw step";
     }
 
-    public SkipDrawStepEffect(final SkipDrawStepEffect effect) {
+    protected SkipDrawStepEffect(final SkipDrawStepEffect effect) {
         super(effect);
     }
 

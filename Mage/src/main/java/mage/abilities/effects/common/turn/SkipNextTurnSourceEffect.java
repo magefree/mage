@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.turn;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -10,7 +11,6 @@ import mage.game.turn.TurnMod;
 import mage.util.CardUtil;
 
 /**
- *
  * @author Mael
  */
 public class SkipNextTurnSourceEffect extends OneShotEffect {
@@ -27,7 +27,7 @@ public class SkipNextTurnSourceEffect extends OneShotEffect {
         staticText = "you skip your next " + (numberOfTurns == 1 ? "turn" : CardUtil.numberToText(numberOfTurns) + " turns");
     }
 
-    public SkipNextTurnSourceEffect(final SkipNextTurnSourceEffect effect) {
+    protected SkipNextTurnSourceEffect(final SkipNextTurnSourceEffect effect) {
         super(effect);
         this.numberOfTurns = effect.numberOfTurns;
     }

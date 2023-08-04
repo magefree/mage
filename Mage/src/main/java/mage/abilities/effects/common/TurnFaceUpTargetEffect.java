@@ -16,7 +16,7 @@ public class TurnFaceUpTargetEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public TurnFaceUpTargetEffect(final TurnFaceUpTargetEffect effect) {
+    protected TurnFaceUpTargetEffect(final TurnFaceUpTargetEffect effect) {
         super(effect);
     }
 

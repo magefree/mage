@@ -20,7 +20,7 @@ public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
         this.vanishingAmount = vanishingEffect;
         this.permanentType = "creature";
     }
-    
+
     public VanishingUpkeepAbility(int vanishingEffect, String permanentType) {
         super(new VanishingEffect(), TargetController.YOU, false);
         this.vanishingAmount = vanishingEffect;
@@ -40,12 +40,11 @@ public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
 
     @Override
     public String getRule() {
-        if(vanishingAmount > 0) {
+        if (vanishingAmount > 0) {
             return "Vanishing " + vanishingAmount
-                + " <i>(This " + permanentType + " enters the battlefield with " + CardUtil.numberToText(vanishingAmount)
-                + " time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)</i>";
-        }
-        else {
+                    + " <i>(This " + permanentType + " enters the battlefield with " + CardUtil.numberToText(vanishingAmount)
+                    + " time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)</i>";
+        } else {
             return "Vanishing <i>(At the beginning of your upkeep, remove a time counter from this " + permanentType + ". When the last is removed, sacrifice it.)</i>";
         }
     }

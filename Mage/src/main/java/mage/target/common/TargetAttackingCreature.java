@@ -24,7 +24,7 @@ public class TargetAttackingCreature extends TargetPermanent {
         super(minNumTargets, maxNumTargets, StaticFilters.FILTER_ATTACKING_CREATURE, notTarget);
     }
 
-    public TargetAttackingCreature(final TargetAttackingCreature target) {
+    protected TargetAttackingCreature(final TargetAttackingCreature target) {
         super(target);
     }
 

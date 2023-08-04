@@ -34,10 +34,10 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
         this.filterTarget = filterTarget;
         this.filterStack = filterStack;
         setTriggerPhrase("Whenever " + filterTarget.getMessage() + " becomes the target of "
-                                     + filterStack.getMessage() + ", ");
+                + filterStack.getMessage() + ", ");
     }
 
-    public BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
+    protected BecomesTargetTriggeredAbility(final BecomesTargetTriggeredAbility ability) {
         super(ability);
         this.filterTarget = ability.filterTarget;
         this.filterStack = ability.filterStack;
@@ -57,12 +57,12 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
         if (sourceObject == null
-            || !filterStack.match(sourceObject, getControllerId(), this, game)) {
+                || !filterStack.match(sourceObject, getControllerId(), this, game)) {
             return false;
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
         if (permanent == null
-            || !filterTarget.match(permanent, getControllerId(), this, game)) {
+                || !filterTarget.match(permanent, getControllerId(), this, game)) {
             return false;
         }
 

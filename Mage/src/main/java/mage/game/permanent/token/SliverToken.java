@@ -17,7 +17,7 @@ public final class SliverToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public SliverToken(final SliverToken token) {
+    protected SliverToken(final SliverToken token) {
         super(token);
     }
 

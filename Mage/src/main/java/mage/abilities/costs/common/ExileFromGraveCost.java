@@ -68,7 +68,7 @@ public class ExileFromGraveCost extends CostImpl {
         this.setTargetPointer = setTargetPointer;
     }
 
-    public ExileFromGraveCost(final ExileFromGraveCost cost) {
+    protected ExileFromGraveCost(final ExileFromGraveCost cost) {
         super(cost);
         this.exiledCards.addAll(cost.getExiledCards());
         this.setTargetPointer = cost.setTargetPointer;

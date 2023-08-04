@@ -109,7 +109,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.countered = false;
     }
 
-    public Spell(final Spell spell) {
+    protected Spell(final Spell spell) {
         this.id = spell.id;
         this.zoneChangeCounter = spell.zoneChangeCounter;
         for (SpellAbility spellAbility : spell.spellAbilities) {
@@ -1131,8 +1131,9 @@ public class Spell extends StackObjectImpl implements Card {
     /**
      * Add temporary turn controller while resolving (e.g. all choices will be made by another player)
      * Example: Word of Command
+     *
      * @param newTurnControllerId
-     * @param info additional info for game logs
+     * @param info                additional info for game logs
      */
     public void setCommandedBy(UUID newTurnControllerId, String info) {
         this.commandedByPlayerId = newTurnControllerId;

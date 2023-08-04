@@ -106,7 +106,7 @@ class EvolveEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
     }
 
-    public EvolveEffect(final EvolveEffect effect) {
+    protected EvolveEffect(final EvolveEffect effect) {
         super(effect);
     }
 

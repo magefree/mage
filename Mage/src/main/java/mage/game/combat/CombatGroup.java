@@ -46,7 +46,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         this.defendingPlayerId = defendingPlayerId;
     }
 
-    public CombatGroup(final CombatGroup group) {
+    protected CombatGroup(final CombatGroup group) {
         this.attackers.addAll(group.attackers);
         this.blockers.addAll(group.blockers);
         this.blockerOrder.addAll(group.blockerOrder);
@@ -67,7 +67,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     /**
-     *
      * @return can be null
      */
     public UUID getDefenderId() {
@@ -694,7 +693,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 logDamageAssignmentOrder("Creatures blocked by ", blockers, attackerOrder, game);
             }
         } else {
-            game.informPlayers(player.getLogName() +  " try to skip choose attacker order");
+            game.informPlayers(player.getLogName() + " try to skip choose attacker order");
         }
     }
 

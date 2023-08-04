@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author LevelX2
  */
 public class MockSplitCardHalf extends MockCard implements SplitCardHalf {
@@ -28,7 +27,7 @@ public class MockSplitCardHalf extends MockCard implements SplitCardHalf {
         this.manaCosts = new ManaCostsImpl<>(String.join("", this.manaCostsSymbols));
     }
 
-    public MockSplitCardHalf(final MockSplitCardHalf card) {
+    protected MockSplitCardHalf(final MockSplitCardHalf card) {
         super(card);
         this.splitCardParent = card.splitCardParent;
         this.manaCosts = card.manaCosts.copy();

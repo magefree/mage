@@ -24,7 +24,7 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public BeginningOfCombatTriggeredAbility(final BeginningOfCombatTriggeredAbility ability) {
+    protected BeginningOfCombatTriggeredAbility(final BeginningOfCombatTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.setTargetPointer = ability.setTargetPointer;

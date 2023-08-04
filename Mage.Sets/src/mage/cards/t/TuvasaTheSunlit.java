@@ -1,8 +1,5 @@
 package mage.cards.t;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,14 +10,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
@@ -28,8 +18,11 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class TuvasaTheSunlit extends CardImpl {
@@ -48,7 +41,7 @@ public final class TuvasaTheSunlit extends CardImpl {
                 = new FilterEnchantmentPermanent("enchantment you control");
         filter.add(TargetController.YOU.getControllerPredicate());
         DynamicValue value
-                = new PermanentsOnBattlefieldCount(new FilterPermanent(filter));
+                = new PermanentsOnBattlefieldCount(filter);
         Ability ability = new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(
@@ -117,7 +110,7 @@ class TuvasaTheSunlitWatcher extends Watcher {
     private final Map<UUID, UUID> firstEnchantmentThisTurn = new HashMap<>();
 
     public TuvasaTheSunlitWatcher() {
-        super( WatcherScope.GAME);
+        super(WatcherScope.GAME);
     }
 
     @Override

@@ -15,7 +15,6 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class BecomesColorOrColorsTargetEffect extends OneShotEffect {
@@ -34,7 +33,7 @@ public class BecomesColorOrColorsTargetEffect extends OneShotEffect {
         this.duration = duration;
     }
 
-    public BecomesColorOrColorsTargetEffect(final BecomesColorOrColorsTargetEffect effect) {
+    protected BecomesColorOrColorsTargetEffect(final BecomesColorOrColorsTargetEffect effect) {
         super(effect);
         this.duration = effect.duration;
     }

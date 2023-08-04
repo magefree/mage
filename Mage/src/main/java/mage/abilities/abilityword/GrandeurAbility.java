@@ -31,7 +31,7 @@ public class GrandeurAbility extends ActivatedAbilityImpl {
         setAbilityWord(AbilityWord.GRANDEUR);
     }
 
-    public GrandeurAbility(final GrandeurAbility ability) {
+    protected GrandeurAbility(final GrandeurAbility ability) {
         super(ability);
         this.cardName = ability.cardName;
     }

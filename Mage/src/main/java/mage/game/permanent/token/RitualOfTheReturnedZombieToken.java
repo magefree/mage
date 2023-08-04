@@ -22,7 +22,7 @@ public final class RitualOfTheReturnedZombieToken extends TokenImpl {
         this.toughness = new MageInt(toughness);
     }
 
-    public RitualOfTheReturnedZombieToken(final RitualOfTheReturnedZombieToken token) {
+    protected RitualOfTheReturnedZombieToken(final RitualOfTheReturnedZombieToken token) {
         super(token);
     }
 

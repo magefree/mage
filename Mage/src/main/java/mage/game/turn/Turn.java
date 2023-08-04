@@ -40,7 +40,7 @@ public class Turn implements Serializable {
         phases.add(new EndPhase());
     }
 
-    public Turn(final Turn turn) {
+    protected Turn(final Turn turn) {
         if (turn.currentPhase != null) {
             this.currentPhase = turn.currentPhase.copy();
         }

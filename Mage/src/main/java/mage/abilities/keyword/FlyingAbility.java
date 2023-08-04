@@ -55,7 +55,7 @@ class FlyingEffect extends RestrictionEffect implements MageSingleton {
         super(Duration.EndOfGame);
     }
 
-    public FlyingEffect(final FlyingEffect effect) {
+    protected FlyingEffect(final FlyingEffect effect) {
         super(effect);
     }
 

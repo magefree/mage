@@ -125,7 +125,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.additionalAbilities = new ArrayList<>();
     }
 
-    public CreateTokenCopyTargetEffect(final CreateTokenCopyTargetEffect effect) {
+    protected CreateTokenCopyTargetEffect(final CreateTokenCopyTargetEffect effect) {
         super(effect);
 
         this.abilityClazzesToRemove = new HashSet<>(effect.abilityClazzesToRemove);

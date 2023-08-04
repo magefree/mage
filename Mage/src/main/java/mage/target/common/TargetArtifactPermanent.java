@@ -30,7 +30,7 @@ public class TargetArtifactPermanent extends TargetPermanent {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetArtifactPermanent(final TargetArtifactPermanent target) {
+    protected TargetArtifactPermanent(final TargetArtifactPermanent target) {
         super(target);
     }
 

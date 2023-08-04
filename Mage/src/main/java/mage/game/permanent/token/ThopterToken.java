@@ -21,7 +21,7 @@ public final class ThopterToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public ThopterToken(final ThopterToken token) {
+    protected ThopterToken(final ThopterToken token) {
         super(token);
     }
 

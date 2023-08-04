@@ -93,7 +93,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         staticText = this.setText();
     }
 
-    public DiscardCardYouChooseTargetEffect(final DiscardCardYouChooseTargetEffect effect) {
+    protected DiscardCardYouChooseTargetEffect(final DiscardCardYouChooseTargetEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.targetController = effect.targetController;

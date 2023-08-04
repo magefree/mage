@@ -60,7 +60,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
         makeTriggerPhrase();
     }
 
-    public SpellCastControllerTriggeredAbility(final SpellCastControllerTriggeredAbility ability) {
+    protected SpellCastControllerTriggeredAbility(final SpellCastControllerTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.rule = ability.rule;

@@ -13,7 +13,7 @@ import mage.watchers.common.PermanentWasCastWatcher;
 /**
  * An extension of triggered abilities that trigger when permanents enter the
  * battlefield, but this time they either must be cast or must not be cast.
- * 
+ *
  * @author alexander-novo
  */
 public class EntersBattlefieldCastTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
@@ -34,31 +34,31 @@ public class EntersBattlefieldCastTriggeredAbility extends EntersBattlefieldAllT
     }
 
     public EntersBattlefieldCastTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean mustCast,
-            boolean optional) {
+                                                 boolean optional) {
         this(zone, effect, filter, mustCast, optional, SetTargetPointer.NONE, null, false);
     }
 
     public EntersBattlefieldCastTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean mustCast,
-            boolean optional,
-            String rule) {
+                                                 boolean optional,
+                                                 String rule) {
         this(zone, effect, filter, mustCast, optional, rule, false);
     }
 
     public EntersBattlefieldCastTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean mustCast,
-            boolean optional,
-            String rule, boolean controlledText) {
+                                                 boolean optional,
+                                                 String rule, boolean controlledText) {
         this(zone, effect, filter, mustCast, optional, SetTargetPointer.NONE, rule, controlledText);
     }
 
     public EntersBattlefieldCastTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean mustCast,
-            boolean optional,
-            SetTargetPointer setTargetPointer, String rule) {
+                                                 boolean optional,
+                                                 SetTargetPointer setTargetPointer, String rule) {
         this(zone, effect, filter, mustCast, optional, setTargetPointer, rule, false);
     }
 
     public EntersBattlefieldCastTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean mustCast,
-            boolean optional,
-            SetTargetPointer setTargetPointer, String rule, boolean controlledText) {
+                                                 boolean optional,
+                                                 SetTargetPointer setTargetPointer, String rule, boolean controlledText) {
         super(zone, effect, filter, optional, setTargetPointer, rule, controlledText);
 
         this.mustCast = mustCast;
@@ -73,7 +73,7 @@ public class EntersBattlefieldCastTriggeredAbility extends EntersBattlefieldAllT
         this.setTriggerPhrase(triggerPhrase.toString());
     }
 
-    public EntersBattlefieldCastTriggeredAbility(final EntersBattlefieldCastTriggeredAbility ability) {
+    protected EntersBattlefieldCastTriggeredAbility(final EntersBattlefieldCastTriggeredAbility ability) {
         super(ability);
 
         this.mustCast = ability.mustCast;

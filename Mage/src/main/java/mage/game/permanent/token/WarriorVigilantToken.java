@@ -20,7 +20,7 @@ public final class WarriorVigilantToken extends TokenImpl {
         addAbility(VigilanceAbility.getInstance());
     }
 
-    public WarriorVigilantToken(final WarriorVigilantToken token) {
+    protected WarriorVigilantToken(final WarriorVigilantToken token) {
         super(token);
     }
 

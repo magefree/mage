@@ -18,7 +18,7 @@ public final class SpiritGreenToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    public SpiritGreenToken(final SpiritGreenToken token) {
+    protected SpiritGreenToken(final SpiritGreenToken token) {
         super(token);
     }
 

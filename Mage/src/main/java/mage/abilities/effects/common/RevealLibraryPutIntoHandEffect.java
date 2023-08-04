@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.Set;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -17,7 +18,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX
  */
 public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
@@ -44,7 +44,7 @@ public class RevealLibraryPutIntoHandEffect extends OneShotEffect {
         this.staticText = setText();
     }
 
-    public RevealLibraryPutIntoHandEffect(final RevealLibraryPutIntoHandEffect effect) {
+    protected RevealLibraryPutIntoHandEffect(final RevealLibraryPutIntoHandEffect effect) {
         super(effect);
         this.amountCards = effect.amountCards;
         this.filter = effect.filter;

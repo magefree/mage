@@ -11,7 +11,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
@@ -26,7 +25,7 @@ public class SacrificeAllTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public SacrificeAllTriggeredAbility(final SacrificeAllTriggeredAbility ability) {
+    protected SacrificeAllTriggeredAbility(final SacrificeAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.sacrificingPlayer = ability.sacrificingPlayer;

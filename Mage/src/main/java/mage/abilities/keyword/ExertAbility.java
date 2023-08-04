@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -23,7 +24,6 @@ import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author LevelX2
  */
 public class ExertAbility extends SimpleStaticAbility {
@@ -54,7 +54,7 @@ public class ExertAbility extends SimpleStaticAbility {
         }
     }
 
-    public ExertAbility(final ExertAbility ability) {
+    protected ExertAbility(final ExertAbility ability) {
         super(ability);
         this.ruleText = ability.ruleText;
 

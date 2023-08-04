@@ -21,7 +21,7 @@ public class TargetCreaturePermanentSameController extends TargetCreaturePermane
         super(numTargets, numTargets, filter, false);
     }
 
-    public TargetCreaturePermanentSameController(final TargetCreaturePermanentSameController target) {
+    protected TargetCreaturePermanentSameController(final TargetCreaturePermanentSameController target) {
         super(target);
     }
 

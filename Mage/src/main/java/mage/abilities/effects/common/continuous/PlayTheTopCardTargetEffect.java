@@ -11,7 +11,7 @@ public class PlayTheTopCardTargetEffect extends PlayTheTopCardEffect {
         super(TargetController.SOURCE_TARGETS);
     }
 
-    public PlayTheTopCardTargetEffect(final PlayTheTopCardTargetEffect effect) {
+    protected PlayTheTopCardTargetEffect(final PlayTheTopCardTargetEffect effect) {
         super(effect);
     }
 

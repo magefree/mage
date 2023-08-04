@@ -32,7 +32,7 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         this.rulePrefix = rulePrefix;
     }
 
-    public CreateDelayedTriggeredAbilityEffect(final CreateDelayedTriggeredAbilityEffect effect) {
+    protected CreateDelayedTriggeredAbilityEffect(final CreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         this.copyTargets = effect.copyTargets;

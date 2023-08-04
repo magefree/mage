@@ -33,7 +33,7 @@ public class TargetNonlandPermanent extends TargetPermanent {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetNonlandPermanent(final TargetNonlandPermanent target) {
+    protected TargetNonlandPermanent(final TargetNonlandPermanent target) {
         super(target);
     }
 

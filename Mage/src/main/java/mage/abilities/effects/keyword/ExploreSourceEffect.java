@@ -68,7 +68,7 @@ public class ExploreSourceEffect extends OneShotEffect {
         setText();
     }
 
-    public ExploreSourceEffect(final ExploreSourceEffect effect) {
+    protected ExploreSourceEffect(final ExploreSourceEffect effect) {
         super(effect);
         this.showAbilityHint = effect.showAbilityHint;
         this.sourceName = effect.sourceName;

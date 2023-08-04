@@ -25,7 +25,7 @@ public final class TreasureToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public TreasureToken(final TreasureToken token) {
+    protected TreasureToken(final TreasureToken token) {
         super(token);
     }
 

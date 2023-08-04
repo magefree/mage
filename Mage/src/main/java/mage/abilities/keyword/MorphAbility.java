@@ -92,7 +92,7 @@ public class MorphAbility extends AlternativeSourceCostsImpl {
         addSubAbility(ability);
     }
 
-    public MorphAbility(final MorphAbility ability) {
+    protected MorphAbility(final MorphAbility ability) {
         super(ability);
         this.morphCosts = ability.morphCosts; // can't be changed
         this.megamorph = ability.megamorph;

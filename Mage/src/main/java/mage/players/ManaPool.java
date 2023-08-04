@@ -59,7 +59,7 @@ public class ManaPool implements Serializable {
         forcedToPay = false;
     }
 
-    public ManaPool(final ManaPool pool) {
+    protected ManaPool(final ManaPool pool) {
         this.playerId = pool.playerId;
         for (ManaPoolItem item : pool.manaItems) {
             manaItems.add(item.copy());

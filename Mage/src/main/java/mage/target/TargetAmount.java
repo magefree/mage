@@ -29,7 +29,7 @@ public abstract class TargetAmount extends TargetImpl {
         amountWasSet = false;
     }
 
-    public TargetAmount(final TargetAmount target) {
+    protected TargetAmount(final TargetAmount target) {
         super(target);
         this.amount = target.amount;
         this.remainingAmount = target.remainingAmount;

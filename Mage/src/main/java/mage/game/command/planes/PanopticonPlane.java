@@ -77,7 +77,7 @@ class PanopticonTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.COMMAND, effect);
     }
 
-    public PanopticonTriggeredAbility(final PanopticonTriggeredAbility ability) {
+    protected PanopticonTriggeredAbility(final PanopticonTriggeredAbility ability) {
         super(ability);
     }
 

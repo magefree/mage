@@ -44,9 +44,9 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
     protected boolean durationRuleAtStart; // put duration rule at the start of the rules text rather than the end
 
     /**
-     * @param token       Token as blueprint for creature to become
-     * @param retainType  If null, permanent loses its previous types, otherwise retains types with appropriate text
-     * @param duration    Duration for the effect
+     * @param token      Token as blueprint for creature to become
+     * @param retainType If null, permanent loses its previous types, otherwise retains types with appropriate text
+     * @param duration   Duration for the effect
      */
     public BecomesCreatureSourceEffect(Token token, CardType retainType, Duration duration) {
         super(duration, Outcome.BecomeCreature);
@@ -57,7 +57,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
         this.addDependencyType(DependencyType.BecomeCreature);
     }
 
-    public BecomesCreatureSourceEffect(final BecomesCreatureSourceEffect effect) {
+    protected BecomesCreatureSourceEffect(final BecomesCreatureSourceEffect effect) {
         super(effect);
         this.token = effect.token.copy();
         this.retainType = effect.retainType;

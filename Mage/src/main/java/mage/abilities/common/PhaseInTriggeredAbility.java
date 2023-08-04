@@ -25,7 +25,7 @@ public class PhaseInTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever " + filter.getMessage() + " phases in, ");
     }
 
-    private PhaseInTriggeredAbility(final PhaseInTriggeredAbility ability) {
+    protected PhaseInTriggeredAbility(final PhaseInTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }

@@ -18,7 +18,7 @@ public final class SheepToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public SheepToken(final SheepToken token) {
+    protected SheepToken(final SheepToken token) {
         super(token);
     }
 

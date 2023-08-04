@@ -8,7 +8,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ReplacementEffectImpl extends ContinuousEffectImpl implements ReplacementEffect {
@@ -30,11 +29,10 @@ public abstract class ReplacementEffectImpl extends ContinuousEffectImpl impleme
     }
 
     /**
-     *
      * @param duration
      * @param outcome
      * @param selfScope - is only relevant while permanents entering the
-     * battlefield events
+     *                  battlefield events
      */
     public ReplacementEffectImpl(Duration duration, Outcome outcome, boolean selfScope) {
         super(duration, outcome);
@@ -42,7 +40,7 @@ public abstract class ReplacementEffectImpl extends ContinuousEffectImpl impleme
         this.selfScope = selfScope;
     }
 
-    public ReplacementEffectImpl(final ReplacementEffectImpl effect) {
+    protected ReplacementEffectImpl(final ReplacementEffectImpl effect) {
         super(effect);
         this.selfScope = effect.selfScope;
     }

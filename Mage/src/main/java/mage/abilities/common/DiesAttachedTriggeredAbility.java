@@ -50,7 +50,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public DiesAttachedTriggeredAbility(final DiesAttachedTriggeredAbility ability) {
+    protected DiesAttachedTriggeredAbility(final DiesAttachedTriggeredAbility ability) {
         super(ability);
         this.attachedDescription = ability.attachedDescription;
         this.diesRuleText = ability.diesRuleText;
@@ -130,9 +130,9 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
             } else {
                 // set targetpointer to the creature that died
                 if (attachment != null
-                    && attachment.getAttachedTo() != null) {
+                        && attachment.getAttachedTo() != null) {
                     Permanent attachedTo = (Permanent) game.getLastKnownInformation(attachment.getAttachedTo(),
-                        Zone.BATTLEFIELD, attachment.getAttachedToZoneChangeCounter());
+                            Zone.BATTLEFIELD, attachment.getAttachedToZoneChangeCounter());
                     if (attachedTo != null) {
                         getEffects().setTargetPointer(new FixedTarget(attachedTo.getId()));
                     }

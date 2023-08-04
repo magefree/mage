@@ -18,7 +18,7 @@ public final class SquirrelToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public SquirrelToken(final SquirrelToken token) {
+    protected SquirrelToken(final SquirrelToken token) {
         super(token);
     }
 

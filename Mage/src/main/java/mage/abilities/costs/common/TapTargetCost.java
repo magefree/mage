@@ -29,7 +29,7 @@ public class TapTargetCost extends CostImpl {
                 : CardUtil.addArticle(target.getTargetName()));
     }
 
-    public TapTargetCost(final TapTargetCost cost) {
+    protected TapTargetCost(final TapTargetCost cost) {
         super(cost);
         this.target = cost.target.copy();
     }

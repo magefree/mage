@@ -14,12 +14,13 @@ public class BlocksOrBlockedSourceTriggeredAbility extends TriggeredAbilityImpl 
     public BlocksOrBlockedSourceTriggeredAbility(Effect effect) {
         this(effect, false);
     }
+
     public BlocksOrBlockedSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         setTriggerPhrase("Whenever {this} blocks or becomes blocked, ");
     }
 
-    public BlocksOrBlockedSourceTriggeredAbility(final BlocksOrBlockedSourceTriggeredAbility ability) {
+    protected BlocksOrBlockedSourceTriggeredAbility(final BlocksOrBlockedSourceTriggeredAbility ability) {
         super(ability);
     }
 

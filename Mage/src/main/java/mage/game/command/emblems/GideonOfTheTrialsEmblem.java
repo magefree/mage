@@ -46,7 +46,7 @@ class GideonOfTheTrialsCantLoseEffect extends ContinuousRuleModifyingEffectImpl 
         staticText = "As long as you control a Gideon planeswalker, you can't lose the game and your opponents can't win the game";
     }
 
-    public GideonOfTheTrialsCantLoseEffect(final GideonOfTheTrialsCantLoseEffect effect) {
+    protected GideonOfTheTrialsCantLoseEffect(final GideonOfTheTrialsCantLoseEffect effect) {
         super(effect);
     }
 

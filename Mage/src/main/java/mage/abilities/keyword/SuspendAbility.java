@@ -246,7 +246,7 @@ class SuspendExileEffect extends OneShotEffect {
         this.suspend = suspend;
     }
 
-    public SuspendExileEffect(final SuspendExileEffect effect) {
+    protected SuspendExileEffect(final SuspendExileEffect effect) {
         super(effect);
         this.suspend = effect.suspend;
     }
@@ -326,7 +326,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
                 + "If you can't, it remains removed from the game";
     }
 
-    public SuspendPlayCardEffect(final SuspendPlayCardEffect effect) {
+    protected SuspendPlayCardEffect(final SuspendPlayCardEffect effect) {
         super(effect);
     }
 
@@ -394,7 +394,7 @@ class GainHasteEffect extends ContinuousEffectImpl {
         staticText = "If you play it this way and it's a creature, it gains haste until you lose control of it";
     }
 
-    public GainHasteEffect(final GainHasteEffect effect) {
+    protected GainHasteEffect(final GainHasteEffect effect) {
         super(effect);
         this.suspendController = effect.suspendController;
     }

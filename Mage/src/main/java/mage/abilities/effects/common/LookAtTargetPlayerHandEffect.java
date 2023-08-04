@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author Quercitron
  */
 public class LookAtTargetPlayerHandEffect extends OneShotEffect {
@@ -19,7 +18,7 @@ public class LookAtTargetPlayerHandEffect extends OneShotEffect {
         this.staticText = "look at target player's hand";
     }
 
-    public LookAtTargetPlayerHandEffect(final LookAtTargetPlayerHandEffect effect) {
+    protected LookAtTargetPlayerHandEffect(final LookAtTargetPlayerHandEffect effect) {
         super(effect);
     }
 

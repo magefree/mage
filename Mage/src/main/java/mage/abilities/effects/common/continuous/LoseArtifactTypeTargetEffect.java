@@ -19,7 +19,7 @@ public class LoseArtifactTypeTargetEffect extends ContinuousEffectImpl {
         setText("isn't an artifact");
     }
 
-    public LoseArtifactTypeTargetEffect(final LoseArtifactTypeTargetEffect effect) {
+    protected LoseArtifactTypeTargetEffect(final LoseArtifactTypeTargetEffect effect) {
         super(effect);
     }
 

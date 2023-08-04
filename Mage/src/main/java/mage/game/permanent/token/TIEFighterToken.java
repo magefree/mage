@@ -21,7 +21,7 @@ public final class TIEFighterToken extends TokenImpl {
         subtype.add(SubType.STARSHIP);
     }
 
-    public TIEFighterToken(final TIEFighterToken token) {
+    protected TIEFighterToken(final TIEFighterToken token) {
         super(token);
     }
 

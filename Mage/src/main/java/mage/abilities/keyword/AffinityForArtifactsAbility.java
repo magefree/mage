@@ -18,7 +18,7 @@ public class AffinityForArtifactsAbility extends SimpleStaticAbility {
         this.addHint(ArtifactYouControlHint.instance);
     }
 
-    public AffinityForArtifactsAbility(final AffinityForArtifactsAbility ability) {
+    protected AffinityForArtifactsAbility(final AffinityForArtifactsAbility ability) {
         super(ability);
     }
 

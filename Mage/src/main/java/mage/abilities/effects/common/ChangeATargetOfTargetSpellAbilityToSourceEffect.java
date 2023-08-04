@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -15,7 +16,6 @@ import mage.target.Target;
 import mage.target.Targets;
 
 /**
- *
  * @author LevelX2
  */
 public class ChangeATargetOfTargetSpellAbilityToSourceEffect extends OneShotEffect {
@@ -25,7 +25,7 @@ public class ChangeATargetOfTargetSpellAbilityToSourceEffect extends OneShotEffe
         staticText = "change a target of target spell or ability to {this}";
     }
 
-    public ChangeATargetOfTargetSpellAbilityToSourceEffect(final ChangeATargetOfTargetSpellAbilityToSourceEffect effect) {
+    protected ChangeATargetOfTargetSpellAbilityToSourceEffect(final ChangeATargetOfTargetSpellAbilityToSourceEffect effect) {
         super(effect);
     }
 

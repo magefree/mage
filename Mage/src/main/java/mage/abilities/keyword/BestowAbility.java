@@ -93,7 +93,7 @@ public class BestowAbility extends SpellAbility {
         addSubAbility(ability);
     }
 
-    public BestowAbility(final BestowAbility ability) {
+    protected BestowAbility(final BestowAbility ability) {
         super(ability);
     }
 
@@ -142,7 +142,7 @@ class BestowEntersBattlefieldEffect extends ReplacementEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
     }
 
-    public BestowEntersBattlefieldEffect(final BestowEntersBattlefieldEffect effect) {
+    protected BestowEntersBattlefieldEffect(final BestowEntersBattlefieldEffect effect) {
         super(effect);
     }
 
