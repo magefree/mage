@@ -57,7 +57,7 @@ public class AllCardsCanBeCopiedTest {
             } catch (StackOverflowError err) {
                 bad += 1;
                 //System.out.println();
-                System.err.println(name + " cause an infinite loop on copy.");
+                System.err.println(name + " throws a StackOverflow on copy.");
 
                 // Stopping there, there are enough bad cards detected.
                 if (bad >= 50) {
@@ -67,7 +67,7 @@ public class AllCardsCanBeCopiedTest {
                     System.out.println("             Bad: " + bad);
                     System.out.println("         Unknown: " + unknown);
                     System.out.println("      Not Tested: " + (allCards.size() - good - bad - unknown));
-                    Assert.fail(bad + " cards at least are causing StackOverflow on copy");
+                    Assert.fail(bad + " cards at least are throwing StackOverflow on copy");
                 }
             }
 
@@ -80,7 +80,7 @@ public class AllCardsCanBeCopiedTest {
         System.out.println("         Unknown: " + unknown);
 
         if (bad > 0) {
-            Assert.fail(bad + " cards cause infinite loop on copy");
+            Assert.fail(bad + " cards are throwing StackOverflow on copy");
         }
         if (unknown > 0) {
             Assert.fail(unknown + " cards in repository were not actually Card");
