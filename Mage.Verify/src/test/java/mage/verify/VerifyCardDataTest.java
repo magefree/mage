@@ -4,8 +4,10 @@ import com.google.common.base.CharMatcher;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.AbilityImpl;
 import mage.abilities.Mode;
 import mage.abilities.common.*;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
@@ -19,6 +21,7 @@ import mage.cards.repository.*;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
+import mage.filter.Filter;
 import mage.game.command.Dungeon;
 import mage.game.command.Plane;
 import mage.game.draft.DraftCube;
@@ -41,10 +44,7 @@ import org.mage.plugins.card.dl.sources.ScryfallImageSupportCards;
 import org.reflections.Reflections;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
@@ -1646,19 +1646,87 @@ public class VerifyCardDataTest {
             fail(card1, "copy", "throws on copy : " + err.getClass() + " : " + err.getMessage() + " : ");
             return;
         }
+        
+        compareClassRecursive(card1, card2, card1, "[Card", 10);
+    }
 
-        // Checks that ability and effect are of the same class when copied.
-        for (int i = 0; i < card1.getAbilities().size(); i++) {
-            Ability ability1 = card1.getAbilities().get(i);
-            Ability ability2 = card2.getAbilities().get(i);
-            if (!ability1.getClass().equals(ability2.getClass())) {
-                fail(card1, "copy", " miss copy in ability " + ability1.getClass().getName());
+    private void compareClassRecursive(Object obj1, Object obj2, Card originalCard, String msg, int maxDepth) {
+        if (obj1 == null && obj2 == null) {
+            return;
+        } else if (obj1 == null || obj2 == null) {
+            fail(originalCard, "copy", "not same class for " + msg + "]");
+        } else if (obj1.getClass() != obj2.getClass()) {
+            fail(originalCard, "copy", "not same class for " + msg + "<" + obj1.getClass() + ">" + "]");
+        } else if (obj1 == obj2) { // for instances mostly
+            return;
+        } else {
+            // Only recurse so much.
+            if (maxDepth == 0) {
+                return;
             }
-            for (int j = 0; j < ability1.getEffects().size(); j++) {
-                Effect effect1 = ability1.getEffects().get(j);
-                Effect effect2 = ability2.getEffects().get(j);
-                if (!effect1.getClass().equals(effect2.getClass())) {
-                    fail(card1, "copy", "miss copy in effect " + effect1.getClass().getName());
+            // Only recurse on those objects
+            if (obj1 instanceof MageObject || obj1 instanceof Filter || obj1 instanceof Condition || obj1 instanceof Effect
+                    || obj1 instanceof Ability) {
+                System.out.println(msg);
+                Class class1 = obj1.getClass();
+                Class class2 = obj2.getClass();
+                do {
+                    if (class1 == null && class2 == null) {
+                        return;
+                    }
+                    if (class1 == null || class2 == null) {
+                        fail(originalCard, "copy", "not same class for " + msg + "<" + obj1.getClass() + ">" + "]");
+                        return;
+                    }
+                    List<Field> ability2Fields = Arrays.stream(class2.getDeclaredFields()).collect(Collectors.toList());
+                    int fieldIndex = 0;
+                    for (Field field1 : class1.getDeclaredFields()) {
+                        Field field2 = ability2Fields.get(fieldIndex);
+                        field1.setAccessible(true);
+                        field2.setAccessible(true);
+                        try {
+                            Object value1 = field1.get(obj1);
+                            Object value2 = field2.get(obj2);
+
+                            boolean doFieldRecurse = true;
+                            if (class1 == CardImpl.class) {
+                                if (field1.getName() == "spellAbility") {
+                                    compareClassRecursive(((CardImpl) obj1).getSpellAbility(), ((CardImpl) obj2).getSpellAbility(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1);
+                                    doFieldRecurse = false;
+                                } else if (field1.getName() == "meldsToCard") {
+                                    //compareClassRecursive(((CardImpl) obj1).getMeldsToCard(), ((CardImpl) obj2).getMeldsToCard(), originalCard, msg + "::" + field1.getName(), maxDepth - 1);
+                                    doFieldRecurse = false;
+                                } else if (field1.getName() == "secondSideCard") {
+                                    //compareClassRecursive(((CardImpl) obj1).getSecondCardFace(), ((CardImpl) obj2).getSecondCardFace(), originalCard, msg + "::" + field1.getName(), maxDepth - 1);
+                                    doFieldRecurse = false;
+                                }
+                            }
+                            if (class1 == AbilityImpl.class) {
+                                if (field1.getName() == "watchers") {
+                                    doFieldRecurse = false;
+                                }
+                            }
+                            if (doFieldRecurse) {
+                                compareClassRecursive(value1, value2, originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1);
+                            }
+                        } catch (IllegalArgumentException | IllegalAccessException e) {
+                        }
+                        fieldIndex++;
+                    }
+                    class1 = class1.getSuperclass();
+                    class2 = class2.getSuperclass();
+                } while (class1 != Object.class && class1 != null);
+            } else if (obj1 instanceof Collection) {
+                Collection col1 = (Collection) obj1;
+                Collection col2 = (Collection) obj2;
+                Iterator it1 = col1.iterator();
+                Iterator it2 = col2.iterator();
+                int i = 0;
+                while (it1.hasNext() && it2.hasNext()) {
+                    compareClassRecursive(it1.next(), it2.next(), originalCard, msg + "<" + obj1.getClass() + ">" + "[" + i++ + "]", maxDepth - 1);
+                }
+                if (it1.hasNext() || it2.hasNext()) {
+                    fail(originalCard, "copy", "not same size for " + msg + "]");
                 }
             }
         }
