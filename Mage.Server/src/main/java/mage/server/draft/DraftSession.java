@@ -102,7 +102,7 @@ public class DraftSession {
                     () -> {
                         try {
                             if (timeoutCardNum == draft.getCardNum()) {
-                                if (timeoutCounter++ >= AUTOPICK_BUFFER) { // the autopick happens after n seconds (to account for client timer possibly lagging behind server)
+                                if (timeoutCounter++ > AUTOPICK_BUFFER) { // the autopick happens after n seconds (to account for client timer possibly lagging behind server)
                                     managerFactory.draftManager().timeout(draft.getId(), userId);
                                 }
                                 setupTimeout(1); // The timeout keeps happening at a 1 second interval to make sure that the draft moves onto the next pick

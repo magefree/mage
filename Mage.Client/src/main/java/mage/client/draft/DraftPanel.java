@@ -68,6 +68,9 @@
      // Number of the current card pick (for draft log writing).
      // starts with 1
      private int pickNo;
+     
+     // Number of the latest card pick for which the timeout has been set.
+     private int setTimeoutPickNo;
 
      // Cached booster data to be written into the log (see logLastPick).
      private String[] currentBooster;
@@ -299,6 +302,7 @@
          }
 
          countdown.stop();
+         
          this.timeout = draftPickView.getTimeout();
          setTimeout(timeout);
          if (timeout != 0) {
