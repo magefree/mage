@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -13,9 +12,9 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -23,8 +22,9 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class CaptivatingGlance extends CardImpl {
@@ -87,9 +87,9 @@ class CaptivatingGlanceEffect extends OneShotEffect {
                     effect.setTargetPointer(new FixedTarget(enchantedCreature, game));
                     game.addEffect(effect, source);
                 } else {
-                    Object opponent = getValue("clashOpponent");
-                    if (opponent instanceof Player) {
-                        ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, ((Player)opponent).getId());
+                    Player opponent = game.getPlayer((UUID) getValue("clashOpponent"));
+                    if (opponent != null) {
+                        ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, opponent.getId());
                         effect.setTargetPointer(new FixedTarget(enchantedCreature, game));
                         game.addEffect(effect, source);
                     }

@@ -14,8 +14,9 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 
@@ -31,7 +32,7 @@ public class DoIfClashWonEffect extends OneShotEffect {
     public DoIfClashWonEffect(Effect effect, boolean setTargetPointerToClashedOpponent, String chooseUseText) {
         super(Outcome.Benefit);
         this.executingEffect = effect;
-        this.chooseUseText = chooseUseText;        
+        this.chooseUseText = chooseUseText;
         this.setTargetPointerToClashedOpponent = setTargetPointerToClashedOpponent;
     }
 
@@ -52,21 +53,20 @@ public class DoIfClashWonEffect extends OneShotEffect {
                 message = chooseUseText;
                 message = CardUtil.replaceSourceName(message, mageObject.getLogName());
             }
-            
+
             if (chooseUseText == null || player.chooseUse(executingEffect.getOutcome(), message, source, game)) {
                 if (new ClashEffect().apply(game, source)) {
                     if (setTargetPointerToClashedOpponent) {
-                        Object opponent = getValue("clashOpponent");
-                        if (opponent instanceof Player) {
-                            executingEffect.setTargetPointer(new FixedTarget(((Player)opponent).getId()));
-                        }                        
+                        Player opponent = game.getPlayer((UUID) getValue("clashOpponent"));
+                        if (opponent != null) {
+                            executingEffect.setTargetPointer(new FixedTarget(opponent.getId()));
+                        }
                     } else {
                         executingEffect.setTargetPointer(this.targetPointer);
                     }
                     if (executingEffect instanceof OneShotEffect) {
                         return executingEffect.apply(game, source);
-                    }
-                    else {
+                    } else {
                         game.addEffect((ContinuousEffect) executingEffect, source);
                     }
                 }
