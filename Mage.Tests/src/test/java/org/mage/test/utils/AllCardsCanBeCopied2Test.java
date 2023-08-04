@@ -4,6 +4,7 @@ import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.GameStates;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,6 +43,7 @@ public class AllCardsCanBeCopied2Test extends CardTestPlayerBase {
      */
     @Test
     public void test_AllCardsCanBeCopied() {
+        GameStates states = currentGame.getGameStates();
 
         addCard(Zone.HAND, playerA, name);
         addCard(Zone.LIBRARY, playerA, name);
@@ -50,10 +52,13 @@ public class AllCardsCanBeCopied2Test extends CardTestPlayerBase {
 
         try {
             execute();
-            currentGame.getBattlefield().reset(currentGame);
+            currentGame.loadGameStates(states);
         } catch (StackOverflowError err) {
-            System.err.println(name + " throws a StackOverflow on copy.");
-            Assert.fail(name + " throws StackOverflow on copy");
+            System.err.println(name + " throws a StackOverflow on loadstate.");
+            Assert.fail(name + " throws StackOverflow on loadstate");
+        } catch (Exception err) {
+            System.err.println(name + " throws an error " + err.getMessage() + " on loadstate.");
+            Assert.fail(name + " throws an error " + err.getMessage() + " on loadstate");
         }
 
     }
