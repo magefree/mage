@@ -1,6 +1,7 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
@@ -8,7 +9,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.SuperType;
 
 /**
- *
  * @author spjspj
  */
 public final class UramiToken extends TokenImpl {
@@ -27,7 +27,7 @@ public final class UramiToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public UramiToken(final UramiToken token) {
+    protected UramiToken(final UramiToken token) {
         super(token);
     }
 

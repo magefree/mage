@@ -18,7 +18,7 @@ public final class OctopusToken extends TokenImpl {
         toughness = new MageInt(8);
     }
 
-    public OctopusToken(final OctopusToken token) {
+    protected OctopusToken(final OctopusToken token) {
         super(token);
     }
 

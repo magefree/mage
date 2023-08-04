@@ -84,7 +84,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
         this.addHint(new ValueHint("Untapped creatures you control", new PermanentsOnBattlefieldCount(filterUntapped)));
     }
 
-    public ConvokeAbility(final ConvokeAbility ability) {
+    protected ConvokeAbility(final ConvokeAbility ability) {
         super(ability);
     }
 
@@ -180,7 +180,7 @@ class ConvokeSpecialAction extends SpecialAction {
         this.addEffect(new ConvokeEffect(unpaid));
     }
 
-    public ConvokeSpecialAction(final ConvokeSpecialAction ability) {
+    protected ConvokeSpecialAction(final ConvokeSpecialAction ability) {
         super(ability);
     }
 
@@ -200,7 +200,7 @@ class ConvokeEffect extends OneShotEffect {
         this.staticText = "Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)";
     }
 
-    public ConvokeEffect(final ConvokeEffect effect) {
+    protected ConvokeEffect(final ConvokeEffect effect) {
         super(effect);
         this.unpaid = effect.unpaid;
     }

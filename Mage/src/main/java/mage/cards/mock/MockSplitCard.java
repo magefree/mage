@@ -64,7 +64,7 @@ public class MockSplitCard extends SplitCard {
         }
     }
 
-    public MockSplitCard(final MockSplitCard card) {
+    protected MockSplitCard(final MockSplitCard card) {
         super(card);
     }
 

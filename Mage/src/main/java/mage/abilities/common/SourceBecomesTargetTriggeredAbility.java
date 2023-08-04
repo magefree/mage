@@ -38,7 +38,7 @@ public class SourceBecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this} becomes the target of " + filter.getMessage() + ", ");
     }
 
-    public SourceBecomesTargetTriggeredAbility(final SourceBecomesTargetTriggeredAbility ability) {
+    protected SourceBecomesTargetTriggeredAbility(final SourceBecomesTargetTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;

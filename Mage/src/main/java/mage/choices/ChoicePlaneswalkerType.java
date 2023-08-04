@@ -32,7 +32,7 @@ public class ChoicePlaneswalkerType extends ChoiceImpl {
         this.setSearchEnabled(true);
     }
 
-    public ChoicePlaneswalkerType(final ChoicePlaneswalkerType choice) {
+    protected ChoicePlaneswalkerType(final ChoicePlaneswalkerType choice) {
         super(choice);
     }
 

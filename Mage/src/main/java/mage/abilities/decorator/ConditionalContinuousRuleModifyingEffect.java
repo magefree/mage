@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
@@ -34,7 +33,7 @@ public class ConditionalContinuousRuleModifyingEffect extends ContinuousRuleModi
         this.otherwiseEffect = otherwiseEffect;
     }
 
-    public ConditionalContinuousRuleModifyingEffect(final ConditionalContinuousRuleModifyingEffect effect) {
+    protected ConditionalContinuousRuleModifyingEffect(final ConditionalContinuousRuleModifyingEffect effect) {
         super(effect);
         this.effect = (ContinuousRuleModifyingEffect) effect.effect.copy();
         if (effect.otherwiseEffect != null) {

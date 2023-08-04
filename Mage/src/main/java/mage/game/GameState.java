@@ -135,7 +135,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         applyEffectsCounter = 0;
     }
 
-    public GameState(final GameState state) {
+    protected GameState(final GameState state) {
         this.players = state.players.copy();
         this.playerList = state.playerList.copy();
         this.choosingPlayerId = state.choosingPlayerId;

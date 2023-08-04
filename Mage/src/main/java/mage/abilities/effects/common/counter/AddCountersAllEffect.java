@@ -25,7 +25,7 @@ public class AddCountersAllEffect extends OneShotEffect {
         staticText = "put " + counter.getDescription() + " on each " + filter.getMessage();
     }
 
-    public AddCountersAllEffect(final AddCountersAllEffect effect) {
+    protected AddCountersAllEffect(final AddCountersAllEffect effect) {
         super(effect);
         this.counter = effect.counter.copy();
         this.filter = effect.filter.copy();

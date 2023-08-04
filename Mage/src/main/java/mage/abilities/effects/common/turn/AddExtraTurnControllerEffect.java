@@ -42,7 +42,7 @@ public class AddExtraTurnControllerEffect extends OneShotEffect {
         this.turnModApplier = turnModApplier;
     }
 
-    public AddExtraTurnControllerEffect(final AddExtraTurnControllerEffect effect) {
+    protected AddExtraTurnControllerEffect(final AddExtraTurnControllerEffect effect) {
         super(effect);
         this.loseGameAtEnd = effect.loseGameAtEnd;
         this.turnModApplier = effect.turnModApplier;
@@ -89,7 +89,7 @@ class LoseGameDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.turnId = turnId;
     }
 
-    public LoseGameDelayedTriggeredAbility(final LoseGameDelayedTriggeredAbility ability) {
+    protected LoseGameDelayedTriggeredAbility(final LoseGameDelayedTriggeredAbility ability) {
         super(ability);
         this.turnId = ability.turnId;
     }

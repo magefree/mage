@@ -50,7 +50,7 @@ public class DoIfCostPaid extends OneShotEffect {
         this.optional = optional;
     }
 
-    public DoIfCostPaid(final DoIfCostPaid effect) {
+    protected DoIfCostPaid(final DoIfCostPaid effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
         this.otherwiseEffects = effect.otherwiseEffects.copy();

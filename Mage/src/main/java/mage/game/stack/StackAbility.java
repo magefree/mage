@@ -64,7 +64,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
         this.name = "stack ability (" + ability.getRule() + ')';
     }
 
-    public StackAbility(final StackAbility stackAbility) {
+    protected StackAbility(final StackAbility stackAbility) {
         super();
         this.ability = stackAbility.ability.copy();
         this.controllerId = stackAbility.controllerId;

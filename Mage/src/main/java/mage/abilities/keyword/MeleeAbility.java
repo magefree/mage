@@ -23,7 +23,7 @@ public class MeleeAbility extends AttacksTriggeredAbility {
         this.addWatcher(new MeleeWatcher());
     }
 
-    public MeleeAbility(final MeleeAbility ability) {
+    protected MeleeAbility(final MeleeAbility ability) {
         super(ability);
     }
 

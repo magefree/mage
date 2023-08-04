@@ -31,7 +31,7 @@ public class SunburstAbility extends EntersBattlefieldAbility {
         isCreature = card.isCreature();
     }
 
-    public SunburstAbility(final SunburstAbility ability) {
+    protected SunburstAbility(final SunburstAbility ability) {
         super(ability);
         this.isCreature = ability.isCreature;
     }
@@ -62,7 +62,7 @@ class SunburstEffect extends OneShotEffect {
         staticText = "Sunburst";
     }
 
-    public SunburstEffect(final SunburstEffect effect) {
+    protected SunburstEffect(final SunburstEffect effect) {
         super(effect);
     }
 

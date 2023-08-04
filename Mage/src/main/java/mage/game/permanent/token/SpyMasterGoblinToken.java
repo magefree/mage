@@ -23,7 +23,7 @@ public final class SpyMasterGoblinToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(new AttacksIfAbleAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURES)));
     }
 
-    public SpyMasterGoblinToken(final SpyMasterGoblinToken token) {
+    protected SpyMasterGoblinToken(final SpyMasterGoblinToken token) {
         super(token);
     }
 

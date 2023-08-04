@@ -40,7 +40,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
         this.staticText = "search " + searchWhatText + " graveyard, hand, and library for " + searchForText + " and exile them. Then that player shuffles";
     }
 
-    public SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(final SearchTargetGraveyardHandLibraryForCardNameAndExileEffect effect) {
+    protected SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(final SearchTargetGraveyardHandLibraryForCardNameAndExileEffect effect) {
         super(effect);
         this.searchWhatText = effect.searchWhatText;
         this.searchForText = effect.searchForText;

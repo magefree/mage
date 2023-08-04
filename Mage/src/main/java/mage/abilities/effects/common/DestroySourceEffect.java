@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DestroySourceEffect extends OneShotEffect {
@@ -25,7 +24,7 @@ public class DestroySourceEffect extends OneShotEffect {
         staticText = "destroy {this}";
     }
 
-    public DestroySourceEffect(final DestroySourceEffect effect) {
+    protected DestroySourceEffect(final DestroySourceEffect effect) {
         super(effect);
         this.noRegen = effect.noRegen;
     }

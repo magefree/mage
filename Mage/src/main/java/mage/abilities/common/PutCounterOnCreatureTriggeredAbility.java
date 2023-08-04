@@ -52,7 +52,7 @@ public class PutCounterOnCreatureTriggeredAbility extends TriggeredAbilityImpl {
         setFilterMessage();
     }
 
-    public PutCounterOnCreatureTriggeredAbility(final PutCounterOnCreatureTriggeredAbility ability) {
+    protected PutCounterOnCreatureTriggeredAbility(final PutCounterOnCreatureTriggeredAbility ability) {
         super(ability);
         this.counterType = ability.counterType;
         this.filter = ability.filter;

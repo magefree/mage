@@ -173,7 +173,7 @@ public abstract class GameImpl implements Game {
         initGameDefaultWatchers();
     }
 
-    public GameImpl(final GameImpl game) {
+    protected GameImpl(final GameImpl game) {
         //this.customData = game.customData; // temporary data, no need on game copy
         //this.losingPlayer = game.losingPlayer; // temporary data, no need on game copy
         this.simulation = game.simulation;
@@ -2891,7 +2891,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void fireGetMultiAmountEvent(UUID playerId, List<MultiAmountMessage> messages, int min, int max,
-            Map<String, Serializable> options) {
+                                        Map<String, Serializable> options) {
         if (simulation) {
             return;
         }

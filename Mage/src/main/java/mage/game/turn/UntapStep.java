@@ -22,7 +22,7 @@ public class UntapStep extends Step {
         this.postStepEvent = EventType.UNTAP_STEP_POST;
     }
 
-    public UntapStep(final UntapStep step) {
+    protected UntapStep(final UntapStep step) {
         super(step);
     }
 

@@ -79,7 +79,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         setRuleAtTheTop(true);
     }
 
-    public KickerAbility(final KickerAbility ability) {
+    protected KickerAbility(final KickerAbility ability) {
         super(ability);
         for (OptionalAdditionalCost cost : ability.kickerCosts) {
             this.kickerCosts.add(cost.copy());

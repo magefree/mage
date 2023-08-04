@@ -18,7 +18,7 @@ public abstract class WhileConditionContinuousEffect extends ContinuousEffectImp
         this.sublayer = sublayer;
     }
 
-    public WhileConditionContinuousEffect(final WhileConditionContinuousEffect effect) {
+    protected WhileConditionContinuousEffect(final WhileConditionContinuousEffect effect) {
         super(effect);
         this.condition = effect.condition;
     }

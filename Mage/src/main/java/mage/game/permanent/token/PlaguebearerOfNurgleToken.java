@@ -18,7 +18,7 @@ public final class PlaguebearerOfNurgleToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public PlaguebearerOfNurgleToken(final PlaguebearerOfNurgleToken token) {
+    protected PlaguebearerOfNurgleToken(final PlaguebearerOfNurgleToken token) {
         super(token);
     }
 

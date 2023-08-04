@@ -11,7 +11,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
- *
  * @author LevelX2
  */
 public class OutlastAbility extends ActivatedAbilityImpl {
@@ -22,7 +21,7 @@ public class OutlastAbility extends ActivatedAbilityImpl {
         this.timing = TimingRule.SORCERY;
     }
 
-    public OutlastAbility(final OutlastAbility ability) {
+    protected OutlastAbility(final OutlastAbility ability) {
         super(ability);
     }
 

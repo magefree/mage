@@ -44,7 +44,7 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
         staticText = "with " + countText + " " + counter.getName() + " counters on it";
     }
 
-    public EntersBattlefieldWithXCountersEffect(final EntersBattlefieldWithXCountersEffect effect) {
+    protected EntersBattlefieldWithXCountersEffect(final EntersBattlefieldWithXCountersEffect effect) {
         super(effect);
         this.counter = effect.counter.copy();
         this.multiplier = effect.multiplier;

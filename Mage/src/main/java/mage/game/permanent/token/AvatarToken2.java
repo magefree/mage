@@ -17,7 +17,7 @@ public final class AvatarToken2 extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public AvatarToken2(final AvatarToken2 token) {
+    protected AvatarToken2(final AvatarToken2 token) {
         super(token);
     }
 

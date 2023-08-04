@@ -94,7 +94,7 @@ public abstract class AbilityImpl implements Ability {
         this.modes = new Modes();
     }
 
-    public AbilityImpl(final AbilityImpl ability) {
+    protected AbilityImpl(final AbilityImpl ability) {
         this.id = ability.id;
         this.originalId = ability.originalId;
         this.abilityType = ability.abilityType;

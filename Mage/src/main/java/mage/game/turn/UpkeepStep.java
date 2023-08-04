@@ -6,7 +6,6 @@ import mage.constants.PhaseStep;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class UpkeepStep extends Step {
@@ -18,7 +17,7 @@ public class UpkeepStep extends Step {
         this.postStepEvent = EventType.UPKEEP_STEP_POST;
     }
 
-    public UpkeepStep(final UpkeepStep step) {
+    protected UpkeepStep(final UpkeepStep step) {
         super(step);
     }
 

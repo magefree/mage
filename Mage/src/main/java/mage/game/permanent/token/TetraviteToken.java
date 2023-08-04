@@ -26,7 +26,7 @@ public final class TetraviteToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TetraviteTokenEffect()));
     }
 
-    public TetraviteToken(final TetraviteToken token) {
+    protected TetraviteToken(final TetraviteToken token) {
         super(token);
     }
 
@@ -42,7 +42,7 @@ class TetraviteTokenEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "this creature can't be enchanted";
     }
 
-    public TetraviteTokenEffect(final TetraviteTokenEffect effect) {
+    protected TetraviteTokenEffect(final TetraviteTokenEffect effect) {
         super(effect);
     }
 

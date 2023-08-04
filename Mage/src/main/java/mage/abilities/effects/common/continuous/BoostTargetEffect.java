@@ -41,7 +41,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         this.toughness = toughness;
     }
 
-    public BoostTargetEffect(final BoostTargetEffect effect) {
+    protected BoostTargetEffect(final BoostTargetEffect effect) {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();

@@ -20,7 +20,7 @@ public final class WraithToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public WraithToken(final WraithToken token) {
+    protected WraithToken(final WraithToken token) {
         super(token);
     }
 

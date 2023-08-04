@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.asthought;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
@@ -13,7 +14,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 public class PlayFromNotOwnHandZoneAllEffect extends AsThoughEffectImpl {
@@ -31,7 +31,7 @@ public class PlayFromNotOwnHandZoneAllEffect extends AsThoughEffectImpl {
         this.allowedCaster = allowedCaster;
     }
 
-    public PlayFromNotOwnHandZoneAllEffect(final PlayFromNotOwnHandZoneAllEffect effect) {
+    protected PlayFromNotOwnHandZoneAllEffect(final PlayFromNotOwnHandZoneAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.fromZone = effect.fromZone;

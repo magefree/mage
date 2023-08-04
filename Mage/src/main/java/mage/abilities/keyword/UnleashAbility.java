@@ -28,7 +28,7 @@ public class UnleashAbility extends SimpleStaticAbility {
         this.addEffect(new UnleashRestrictionEffect());
     }
 
-    public UnleashAbility(final UnleashAbility ability) {
+    protected UnleashAbility(final UnleashAbility ability) {
         super(ability);
     }
 
@@ -101,7 +101,7 @@ class UnleashRestrictionEffect extends RestrictionEffect {
         super(Duration.WhileOnBattlefield);
     }
 
-    public UnleashRestrictionEffect(final UnleashRestrictionEffect effect) {
+    protected UnleashRestrictionEffect(final UnleashRestrictionEffect effect) {
         super(effect);
     }
 

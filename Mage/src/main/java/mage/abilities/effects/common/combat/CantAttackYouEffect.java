@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
@@ -16,7 +17,7 @@ public class CantAttackYouEffect extends RestrictionEffect {
         super(duration);
     }
 
-    public CantAttackYouEffect(final CantAttackYouEffect effect) {
+    protected CantAttackYouEffect(final CantAttackYouEffect effect) {
         super(effect);
     }
 

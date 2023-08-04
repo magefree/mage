@@ -34,7 +34,7 @@ public class BackupAbility extends EntersBattlefieldTriggeredAbility {
         this.addTarget(new TargetCreaturePermanent());
     }
 
-    public BackupAbility(final BackupAbility ability) {
+    protected BackupAbility(final BackupAbility ability) {
         super(ability);
         this.amount = ability.amount;
         this.card = ability.card;
@@ -93,7 +93,7 @@ class BackupEffect extends OneShotEffect {
         this.abilitiesToAdd.addAll(abilitiesToAdd);
     }
 
-    public BackupEffect(final BackupEffect effect) {
+    protected BackupEffect(final BackupEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.abilitiesToAdd.addAll(effect.abilitiesToAdd);

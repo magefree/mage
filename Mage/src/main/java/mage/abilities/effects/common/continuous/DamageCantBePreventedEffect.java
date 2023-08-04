@@ -14,7 +14,7 @@ public class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectIm
         this.staticText = staticText;
     }
 
-    public DamageCantBePreventedEffect(final DamageCantBePreventedEffect effect) {
+    protected DamageCantBePreventedEffect(final DamageCantBePreventedEffect effect) {
         super(effect);
     }
 

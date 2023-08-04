@@ -59,7 +59,7 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
         this.setColor = setColor;
     }
 
-    public BecomesColorSourceEffect(final BecomesColorSourceEffect effect) {
+    protected BecomesColorSourceEffect(final BecomesColorSourceEffect effect) {
         super(effect);
         this.setColor = effect.setColor;
     }

@@ -17,7 +17,7 @@ public class AddExtraTurnTargetEffect extends OneShotEffect {
         staticText = "Target player takes an extra turn after this one";
     }
 
-    public AddExtraTurnTargetEffect(final AddExtraTurnTargetEffect effect) {
+    protected AddExtraTurnTargetEffect(final AddExtraTurnTargetEffect effect) {
         super(effect);
     }
 

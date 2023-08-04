@@ -27,7 +27,7 @@ public final class HasSubtypesSourceEffect extends ContinuousEffectImpl {
         subtypes.addAll(Arrays.asList(subTypes));
     }
 
-    public HasSubtypesSourceEffect(final HasSubtypesSourceEffect effect) {
+    protected HasSubtypesSourceEffect(final HasSubtypesSourceEffect effect) {
         super(effect);
         this.subtypes.addAll(effect.subtypes);
     }

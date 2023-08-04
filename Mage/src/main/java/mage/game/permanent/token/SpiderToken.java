@@ -21,7 +21,7 @@ public final class SpiderToken extends TokenImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public SpiderToken(final SpiderToken token) {
+    protected SpiderToken(final SpiderToken token) {
         super(token);
     }
 

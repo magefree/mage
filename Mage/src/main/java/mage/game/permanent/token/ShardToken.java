@@ -29,7 +29,7 @@ public final class ShardToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public ShardToken(final ShardToken token) {
+    protected ShardToken(final ShardToken token) {
         super(token);
     }
 

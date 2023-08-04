@@ -21,7 +21,7 @@ public final class ThopterColorlessToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public ThopterColorlessToken(final ThopterColorlessToken token) {
+    protected ThopterColorlessToken(final ThopterColorlessToken token) {
         super(token);
     }
 

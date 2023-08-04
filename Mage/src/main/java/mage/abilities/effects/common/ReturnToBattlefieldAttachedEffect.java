@@ -22,7 +22,7 @@ public class ReturnToBattlefieldAttachedEffect extends OneShotEffect {
         staticText = "Return {this} to the battlefield attached to that creature at the beginning of the next end step";
     }
 
-    public ReturnToBattlefieldAttachedEffect(final ReturnToBattlefieldAttachedEffect effect) {
+    protected ReturnToBattlefieldAttachedEffect(final ReturnToBattlefieldAttachedEffect effect) {
         super(effect);
     }
 

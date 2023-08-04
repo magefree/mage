@@ -4,7 +4,6 @@ package mage.filter.common;
 import mage.filter.predicate.permanent.BlockingPredicate;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterBlockingCreature extends FilterCreaturePermanent {
@@ -18,7 +17,7 @@ public class FilterBlockingCreature extends FilterCreaturePermanent {
         this.add(BlockingPredicate.instance);
     }
 
-    public FilterBlockingCreature(final FilterBlockingCreature filter) {
+    protected FilterBlockingCreature(final FilterBlockingCreature filter) {
         super(filter);
     }
 

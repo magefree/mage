@@ -16,7 +16,6 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
@@ -35,7 +34,7 @@ public class CantBeTargetedAllEffect extends ContinuousRuleModifyingEffectImpl {
         setText();
     }
 
-    public CantBeTargetedAllEffect(final CantBeTargetedAllEffect effect) {
+    protected CantBeTargetedAllEffect(final CantBeTargetedAllEffect effect) {
         super(effect);
         if (effect.filterTarget != null) {
             this.filterTarget = effect.filterTarget.copy();

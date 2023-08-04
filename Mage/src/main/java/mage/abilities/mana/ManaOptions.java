@@ -26,7 +26,6 @@ import java.util.*;
  * <p>
  * A LinkedHashSet is used to get the performance benefits of automatic de-duplication of the Mana
  * to avoid performance issues related with manual de-duplication (see https://github.com/magefree/mage/issues/7710).
- *
  */
 public class ManaOptions extends LinkedHashSet<Mana> {
 
@@ -35,7 +34,7 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     public ManaOptions() {
     }
 
-    public ManaOptions(final ManaOptions options) {
+    protected ManaOptions(final ManaOptions options) {
         for (Mana mana : options) {
             this.add(mana.copy());
         }
@@ -604,33 +603,33 @@ public class ManaOptions extends LinkedHashSet<Mana> {
     /**
      * Utility function to get a Mana from ManaOptions at the specified position.
      * Since the implementation uses a LinkedHashSet the ordering of the items is preserved.
-     *
+     * <p>
      * NOTE: Do not use in tight loops as performance of the lookup is much worse than
-     *       for ArrayList (the previous superclass of ManaOptions).
+     * for ArrayList (the previous superclass of ManaOptions).
      */
     public Mana getAtIndex(int i) {
-       if (i < 0 || i >= this.size()) {
-           throw new IndexOutOfBoundsException();
-       }
-       Iterator<Mana> itr = this.iterator();
-       while(itr.hasNext()) {
-           if (i == 0) {
-               return itr.next();
-           } else {
-               itr.next(); // Ignore the value
-               i--;
-           }
-       }
-       return null; // Not sure how we'd ever get here, but leave just in case since IDE complains.
+        if (i < 0 || i >= this.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        Iterator<Mana> itr = this.iterator();
+        while (itr.hasNext()) {
+            if (i == 0) {
+                return itr.next();
+            } else {
+                itr.next(); // Ignore the value
+                i--;
+            }
+        }
+        return null; // Not sure how we'd ever get here, but leave just in case since IDE complains.
     }
 }
 
 /**
  * from: https://stackoverflow.com/a/35000727/7983747
+ *
  * @author Gili Tzabari
  */
-final class Comparators
-{
+final class Comparators {
     /**
      * Verify that a comparator is transitive.
      *
@@ -640,8 +639,8 @@ final class Comparators
      * @throws AssertionError if the comparator is not transitive
      */
     public static <T> void verifyTransitivity(Comparator<T> comparator, Collection<T> elements) {
-        for (T first: elements) {
-            for (T second: elements) {
+        for (T first : elements) {
+            for (T second : elements) {
                 int result1 = comparator.compare(first, second);
                 int result2 = comparator.compare(second, first);
                 if (result1 != -result2 && !(result1 == 0 && result1 == result2)) {
@@ -653,12 +652,12 @@ final class Comparators
                 }
             }
         }
-        for (T first: elements) {
-            for (T second: elements) {
+        for (T first : elements) {
+            for (T second : elements) {
                 int firstGreaterThanSecond = comparator.compare(first, second);
                 if (firstGreaterThanSecond <= 0)
                     continue;
-                for (T third: elements) {
+                for (T third : elements) {
                     int secondGreaterThanThird = comparator.compare(second, third);
                     if (secondGreaterThanThird <= 0)
                         continue;
@@ -676,5 +675,7 @@ final class Comparators
             }
         }
     }
-    private Comparators() {}
+
+    private Comparators() {
+    }
 }

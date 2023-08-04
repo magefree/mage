@@ -15,7 +15,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
- *
  * @author spjspj
  */
 public final class NighteyesTheDesecratorToken extends TokenImpl {
@@ -35,7 +34,7 @@ public final class NighteyesTheDesecratorToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {
+    protected NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {
         super(token);
     }
 

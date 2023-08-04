@@ -19,7 +19,7 @@ public final class AngelVigilanceToken extends TokenImpl {
         addAbility(VigilanceAbility.getInstance());
     }
 
-    public AngelVigilanceToken(final AngelVigilanceToken token) {
+    protected AngelVigilanceToken(final AngelVigilanceToken token) {
         super(token);
     }
 

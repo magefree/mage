@@ -20,7 +20,7 @@ public final class HuntedDragonKnightToken extends TokenImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public HuntedDragonKnightToken(final HuntedDragonKnightToken token) {
+    protected HuntedDragonKnightToken(final HuntedDragonKnightToken token) {
         super(token);
     }
 

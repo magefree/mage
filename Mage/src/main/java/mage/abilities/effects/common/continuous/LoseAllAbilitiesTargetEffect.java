@@ -15,7 +15,6 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- *
  * @author nantuko
  */
 public class LoseAllAbilitiesTargetEffect extends ContinuousEffectImpl {
@@ -24,7 +23,7 @@ public class LoseAllAbilitiesTargetEffect extends ContinuousEffectImpl {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
     }
 
-    public LoseAllAbilitiesTargetEffect(final LoseAllAbilitiesTargetEffect effect) {
+    protected LoseAllAbilitiesTargetEffect(final LoseAllAbilitiesTargetEffect effect) {
         super(effect);
     }
 

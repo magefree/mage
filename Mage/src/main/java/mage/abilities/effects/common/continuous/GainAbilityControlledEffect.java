@@ -55,7 +55,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         this.generateGainAbilityDependencies(ability, filter);
     }
 
-    public GainAbilityControlledEffect(final GainAbilityControlledEffect effect) {
+    protected GainAbilityControlledEffect(final GainAbilityControlledEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         this.filter = effect.filter.copy();

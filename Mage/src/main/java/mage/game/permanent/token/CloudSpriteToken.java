@@ -26,7 +26,7 @@ public final class CloudSpriteToken extends TokenImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public CloudSpriteToken(final CloudSpriteToken token) {
+    protected CloudSpriteToken(final CloudSpriteToken token) {
         super(token);
     }
 

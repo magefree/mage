@@ -22,7 +22,7 @@ public final class ATATToken extends TokenImpl {
         subtype.add(SubType.ATAT);
     }
 
-    public ATATToken(final ATATToken token) {
+    protected ATATToken(final ATATToken token) {
         super(token);
     }
 

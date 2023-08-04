@@ -15,7 +15,7 @@ public class SubTypes extends ArrayList<SubType> {
         Collections.addAll(this, subTypes);
     }
 
-    public SubTypes(final SubTypes list) {
+    protected SubTypes(final SubTypes list) {
         this.addAll(list);
         this.isAllCreatureTypes = list.isAllCreatureTypes;
     }

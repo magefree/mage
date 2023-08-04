@@ -39,7 +39,7 @@ public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
                 + "graveyards";
     }
 
-    public ExileGraveyardAllPlayersEffect(final ExileGraveyardAllPlayersEffect effect) {
+    protected ExileGraveyardAllPlayersEffect(final ExileGraveyardAllPlayersEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.targetController = effect.targetController;

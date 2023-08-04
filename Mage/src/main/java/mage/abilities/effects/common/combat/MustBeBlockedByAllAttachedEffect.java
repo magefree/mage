@@ -3,6 +3,7 @@ package mage.abilities.effects.common.combat;
 
 import java.util.Locale;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.constants.AttachmentType;
@@ -27,7 +28,7 @@ public class MustBeBlockedByAllAttachedEffect extends RequirementEffect {
         staticText = "All creatures able to block " + attachmentType.verb().toLowerCase(Locale.ENGLISH) + " creature do so";
     }
 
-    public MustBeBlockedByAllAttachedEffect(final MustBeBlockedByAllAttachedEffect effect) {
+    protected MustBeBlockedByAllAttachedEffect(final MustBeBlockedByAllAttachedEffect effect) {
         super(effect);
     }
 

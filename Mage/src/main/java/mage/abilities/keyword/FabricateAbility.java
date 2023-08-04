@@ -25,7 +25,7 @@ public class FabricateAbility extends EntersBattlefieldTriggeredAbility {
         this.value = value;
     }
 
-    public FabricateAbility(final FabricateAbility ability) {
+    protected FabricateAbility(final FabricateAbility ability) {
         super(ability);
         this.value = ability.value;
     }

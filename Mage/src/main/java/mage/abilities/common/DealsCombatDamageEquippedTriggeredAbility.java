@@ -23,7 +23,7 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
         setTriggerPhrase("Whenever equipped creature deals combat damage, ");
     }
 
-    public DealsCombatDamageEquippedTriggeredAbility(final DealsCombatDamageEquippedTriggeredAbility ability) {
+    protected DealsCombatDamageEquippedTriggeredAbility(final DealsCombatDamageEquippedTriggeredAbility ability) {
         super(ability);
     }
 

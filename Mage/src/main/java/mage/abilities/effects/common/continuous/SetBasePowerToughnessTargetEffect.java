@@ -34,7 +34,7 @@ public class SetBasePowerToughnessTargetEffect extends ContinuousEffectImpl {
         this(StaticValue.get(power), StaticValue.get(toughness), duration);
     }
 
-    public SetBasePowerToughnessTargetEffect(final SetBasePowerToughnessTargetEffect effect) {
+    protected SetBasePowerToughnessTargetEffect(final SetBasePowerToughnessTargetEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

@@ -20,7 +20,7 @@ public final class DinosaurToken extends TokenImpl {
         addAbility(TrampleAbility.getInstance());
     }
 
-    public DinosaurToken(final DinosaurToken token) {
+    protected DinosaurToken(final DinosaurToken token) {
         super(token);
     }
 

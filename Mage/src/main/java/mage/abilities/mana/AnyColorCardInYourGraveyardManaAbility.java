@@ -28,7 +28,7 @@ public class AnyColorCardInYourGraveyardManaAbility extends ActivatedManaAbility
         super(Zone.BATTLEFIELD, new AnyColorCardInYourGraveyardManaEffect(cardFilter), new TapSourceCost());
     }
 
-    public AnyColorCardInYourGraveyardManaAbility(final AnyColorCardInYourGraveyardManaAbility ability) {
+    protected AnyColorCardInYourGraveyardManaAbility(final AnyColorCardInYourGraveyardManaAbility ability) {
         super(ability);
     }
 
@@ -59,10 +59,10 @@ class AnyColorCardInYourGraveyardManaEffect extends ManaEffect {
         super();
         filter = cardFilter;
         staticText = "Add one mana of any color" +
-            " among " + cardFilter.getMessage() + " in your graveyard.";
+                " among " + cardFilter.getMessage() + " in your graveyard.";
     }
 
-    public AnyColorCardInYourGraveyardManaEffect(final AnyColorCardInYourGraveyardManaEffect effect) {
+    protected AnyColorCardInYourGraveyardManaEffect(final AnyColorCardInYourGraveyardManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }
@@ -105,9 +105,9 @@ class AnyColorCardInYourGraveyardManaEffect extends ManaEffect {
         inManaTypeCalculation = true;
 
         Set<Card> cards =
-            game.getPlayer(source.getControllerId())
-                .getGraveyard()
-                .getCards(filter, game);
+                game.getPlayer(source.getControllerId())
+                        .getGraveyard()
+                        .getCards(filter, game);
         for (Card card : cards) {
             ObjectColor cardColor = card.getColor(game);
 

@@ -18,7 +18,7 @@ public class CantAttackBlockAttachedEffect extends RestrictionEffect {
         this.staticText = attachmentType.verb() + " creature can't attack or block";
     }
 
-    public CantAttackBlockAttachedEffect(final CantAttackBlockAttachedEffect effect) {
+    protected CantAttackBlockAttachedEffect(final CantAttackBlockAttachedEffect effect) {
         super(effect);
     }
 

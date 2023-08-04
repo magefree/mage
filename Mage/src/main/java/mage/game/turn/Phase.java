@@ -33,7 +33,7 @@ public abstract class Phase implements Serializable {
     public Phase() {
     }
 
-    public Phase(final Phase phase) {
+    protected Phase(final Phase phase) {
         this.type = phase.type;
         this.event = phase.event;
         this.preEvent = phase.preEvent;

@@ -9,7 +9,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -20,7 +19,7 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
     public TurnedFaceUpSourceTriggeredAbility(Effect effect) {
         this(effect, false);
     }
-    
+
     public TurnedFaceUpSourceTriggeredAbility(Effect effect, boolean setTargetPointer) {
         this(effect, setTargetPointer, false);
     }
@@ -33,7 +32,7 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this} is turned face up, ");
     }
 
-    public TurnedFaceUpSourceTriggeredAbility(final TurnedFaceUpSourceTriggeredAbility ability) {
+    protected TurnedFaceUpSourceTriggeredAbility(final TurnedFaceUpSourceTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }
@@ -52,7 +51,7 @@ public class TurnedFaceUpSourceTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getSourceId())) {
             if (setTargetPointer) {
-                for (Effect effect: getEffects()) {
+                for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                 }
             }

@@ -14,7 +14,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class DoUnlessAttachedControllerPaysEffect extends OneShotEffect {
@@ -34,7 +33,7 @@ public class DoUnlessAttachedControllerPaysEffect extends OneShotEffect {
         this.chooseUseText = chooseUseText;
     }
 
-    public DoUnlessAttachedControllerPaysEffect(final DoUnlessAttachedControllerPaysEffect effect) {
+    protected DoUnlessAttachedControllerPaysEffect(final DoUnlessAttachedControllerPaysEffect effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
         this.cost = effect.cost.copy();

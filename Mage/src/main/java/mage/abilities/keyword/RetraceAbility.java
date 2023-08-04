@@ -28,7 +28,7 @@ public class RetraceAbility extends SpellAbility {
         this.setRuleAtTheTop(true);
     }
 
-    public RetraceAbility(final RetraceAbility ability) {
+    protected RetraceAbility(final RetraceAbility ability) {
         super(ability);
     }
 

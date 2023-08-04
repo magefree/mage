@@ -9,7 +9,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author TheElk801
  */
 public class PhaseInTriggeredAbility extends TriggeredAbilityImpl {
@@ -26,7 +25,7 @@ public class PhaseInTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever " + filter.getMessage() + " phases in, ");
     }
 
-    public PhaseInTriggeredAbility(final PhaseInTriggeredAbility ability) {
+    protected PhaseInTriggeredAbility(final PhaseInTriggeredAbility ability) {
         super(ability);
     }
 

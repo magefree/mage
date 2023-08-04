@@ -23,7 +23,7 @@ public final class WasitoraCatDragonToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WasitoraCatDragonToken(final WasitoraCatDragonToken token) {
+    protected WasitoraCatDragonToken(final WasitoraCatDragonToken token) {
         super(token);
     }
 

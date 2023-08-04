@@ -38,7 +38,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
         super(attackOption, range, mulligan, startLife, 50, 7);
     }
 
-    public GameTinyLeadersImpl(final GameTinyLeadersImpl game) {
+    protected GameTinyLeadersImpl(final GameTinyLeadersImpl game) {
         super(game);
         this.alsoHand = game.alsoHand;
         this.startingPlayerSkipsDraw = game.startingPlayerSkipsDraw;
@@ -164,7 +164,7 @@ class DefaultCommander extends CardImpl {
 
     }
 
-    public DefaultCommander(final DefaultCommander card) {
+    protected DefaultCommander(final DefaultCommander card) {
         super(card);
     }
 

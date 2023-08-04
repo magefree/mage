@@ -21,7 +21,7 @@ public final class PegasusToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public PegasusToken(final PegasusToken token) {
+    protected PegasusToken(final PegasusToken token) {
         super(token);
     }
 

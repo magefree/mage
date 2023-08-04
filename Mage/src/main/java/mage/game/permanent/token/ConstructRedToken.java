@@ -21,7 +21,7 @@ public final class ConstructRedToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    public ConstructRedToken(final ConstructRedToken token) {
+    protected ConstructRedToken(final ConstructRedToken token) {
         super(token);
     }
 

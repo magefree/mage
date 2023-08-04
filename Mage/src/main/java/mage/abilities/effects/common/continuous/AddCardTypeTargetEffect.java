@@ -32,7 +32,7 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
 
     }
 
-    public AddCardTypeTargetEffect(final AddCardTypeTargetEffect effect) {
+    protected AddCardTypeTargetEffect(final AddCardTypeTargetEffect effect) {
         super(effect);
         this.addedCardTypes.addAll(effect.addedCardTypes);
     }

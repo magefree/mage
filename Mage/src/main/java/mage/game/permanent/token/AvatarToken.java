@@ -21,7 +21,7 @@ public final class AvatarToken extends TokenImpl {
         ).setText("this creature's power and toughness are each equal to your life total")));
     }
 
-    public AvatarToken(final AvatarToken token) {
+    protected AvatarToken(final AvatarToken token) {
         super(token);
     }
 

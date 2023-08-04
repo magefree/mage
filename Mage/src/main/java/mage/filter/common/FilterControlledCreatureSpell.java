@@ -20,7 +20,7 @@ public class FilterControlledCreatureSpell extends FilterCreatureSpell {
         this.add(TargetController.YOU.getControllerPredicate());
     }
 
-    public FilterControlledCreatureSpell(final FilterControlledCreatureSpell filter) {
+    protected FilterControlledCreatureSpell(final FilterControlledCreatureSpell filter) {
         super(filter);
     }
 

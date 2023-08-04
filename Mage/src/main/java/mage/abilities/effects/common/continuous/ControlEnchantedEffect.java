@@ -23,7 +23,7 @@ public class ControlEnchantedEffect extends ContinuousEffectImpl {
         staticText = "You control enchanted " + targetDescription;
     }
 
-    public ControlEnchantedEffect(final ControlEnchantedEffect effect) {
+    protected ControlEnchantedEffect(final ControlEnchantedEffect effect) {
         super(effect);
     }
 

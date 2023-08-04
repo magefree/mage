@@ -42,7 +42,7 @@ public class MatchPlayer implements Serializable {
      * @param newPlayer
      * @return
      */
-    public MatchPlayer(final MatchPlayer source, Player newPlayer) {
+    protected MatchPlayer(final MatchPlayer source, Player newPlayer) {
         this.wins = source.wins;
         this.winsNeeded = source.winsNeeded;
         this.matchWinner = source.matchWinner;

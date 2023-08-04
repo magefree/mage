@@ -23,7 +23,7 @@ public final class MinionToken extends TokenImpl {
         toughness = new MageInt(0);
     }
 
-    public MinionToken(final MinionToken token) {
+    protected MinionToken(final MinionToken token) {
         super(token);
     }
 

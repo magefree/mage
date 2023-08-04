@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author spjspj
  */
 public final class GoldmeadowHarrierToken extends TokenImpl {
@@ -34,7 +33,7 @@ public final class GoldmeadowHarrierToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public GoldmeadowHarrierToken(final GoldmeadowHarrierToken token) {
+    protected GoldmeadowHarrierToken(final GoldmeadowHarrierToken token) {
         super(token);
     }
 

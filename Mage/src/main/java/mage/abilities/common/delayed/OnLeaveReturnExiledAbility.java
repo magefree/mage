@@ -2,6 +2,7 @@ package mage.abilities.common.delayed;
 
 import java.util.LinkedHashSet;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -17,11 +18,10 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * Returns the exiled cards/permanents as source leaves battlefield
- *
+ * <p>
  * Uses no stack
- *
+ * <p>
  * 11/4/2015: In a multiplayer game, if Grasp of Fate's owner leaves the game,
  * the exiled cards will return to the battlefield. Because the one-shot effect
  * that returns the cards isn't an ability that goes on the stack, it won't
@@ -42,7 +42,7 @@ public class OnLeaveReturnExiledAbility extends DelayedTriggeredAbility {
         this.setRuleVisible(false);
     }
 
-    public OnLeaveReturnExiledAbility(final OnLeaveReturnExiledAbility ability) {
+    protected OnLeaveReturnExiledAbility(final OnLeaveReturnExiledAbility ability) {
         super(ability);
     }
 
@@ -78,7 +78,7 @@ class ReturnExiledPermanentsEffect extends OneShotEffect {
         this.staticText = "Return exiled permanents";
     }
 
-    public ReturnExiledPermanentsEffect(final ReturnExiledPermanentsEffect effect) {
+    protected ReturnExiledPermanentsEffect(final ReturnExiledPermanentsEffect effect) {
         super(effect);
         this.zone = effect.zone;
     }

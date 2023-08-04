@@ -2,6 +2,7 @@ package mage.abilities.effects.mana;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -51,7 +52,7 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
                 + ". " + manaBuilder.getRule();
     }
 
-    public AddConditionalManaOfAnyColorEffect(final AddConditionalManaOfAnyColorEffect effect) {
+    protected AddConditionalManaOfAnyColorEffect(final AddConditionalManaOfAnyColorEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.netAmount = effect.netAmount;

@@ -21,7 +21,7 @@ public final class TheHollowSentinelToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public TheHollowSentinelToken(final TheHollowSentinelToken token) {
+    protected TheHollowSentinelToken(final TheHollowSentinelToken token) {
         super(token);
     }
 

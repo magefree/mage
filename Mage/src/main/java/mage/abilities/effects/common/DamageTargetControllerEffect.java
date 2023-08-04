@@ -36,7 +36,7 @@ public class DamageTargetControllerEffect extends OneShotEffect {
         this.preventable = preventable;
     }
 
-    public DamageTargetControllerEffect(final DamageTargetControllerEffect effect) {
+    protected DamageTargetControllerEffect(final DamageTargetControllerEffect effect) {
         super(effect);
         amount = effect.amount.copy();
         preventable = effect.preventable;

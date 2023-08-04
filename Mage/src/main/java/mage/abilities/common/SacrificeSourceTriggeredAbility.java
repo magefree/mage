@@ -25,7 +25,7 @@ public class SacrificeSourceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When you sacrifice {this}, ");
     }
 
-    public SacrificeSourceTriggeredAbility(final SacrificeSourceTriggeredAbility ability) {
+    protected SacrificeSourceTriggeredAbility(final SacrificeSourceTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }

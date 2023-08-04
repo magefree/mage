@@ -20,7 +20,7 @@ public final class XiraBlackInsectToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public XiraBlackInsectToken(final XiraBlackInsectToken token) {
+    protected XiraBlackInsectToken(final XiraBlackInsectToken token) {
         super(token);
     }
 
