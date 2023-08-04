@@ -20,8 +20,6 @@ import mage.filter.StaticFilters;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public final class EpicStruggle extends CardImpl {
-    
-    //private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("if you control twenty or more creatures");
 
     public EpicStruggle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
