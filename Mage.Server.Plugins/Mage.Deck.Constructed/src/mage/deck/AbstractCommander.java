@@ -27,7 +27,8 @@ public abstract class AbstractCommander extends Constructed {
             PartnerValidator.instance,
             FriendsForeverValidator.instance,
             PartnerWithValidator.instance,
-            ChooseABackgroundValidator.instance
+            ChooseABackgroundValidator.instance,
+            DoctorsCompanionValidator.instance
     );
     protected final List<String> bannedCommander = new ArrayList<>();
     protected final List<String> bannedPartner = new ArrayList<>();
