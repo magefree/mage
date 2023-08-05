@@ -75,23 +75,19 @@ class VhalCandlekeepResearcherManaEffect extends ManaEffect {
         return new VhalCandlekeepResearcherManaEffect(this);
     }
 
-    private int calculateToughness(Game game, Ability sourceAbility) {
-        Permanent sourcePermanent = game.getPermanent(sourceAbility.getSourceId());
-        if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD);
-        }
-        if (sourcePermanent != null) {
-            return sourcePermanent.getToughness().getValue();
-        }
-        return 0;
-    }
-
     @Override
     public Mana produceMana(Game game, Ability source) {
         if (game == null) {
             return new Mana();
         }
-        return manaBuilder.setMana(Mana.ColorlessMana(this.calculateToughness(game, source)), source, game).build();
+        Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
+        int calculatedToughness;
+        if (sourcePermanent == null) {
+            calculatedToughness = 0;
+        } else {
+            calculatedToughness = sourcePermanent.getToughness().getValue();
+        }
+        return manaBuilder.setMana(Mana.ColorlessMana(calculatedToughness), source, game).build();
     }
 }
 
