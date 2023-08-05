@@ -26,5 +26,6 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 197, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sarah Jane Smith", 6, Rarity.RARE, mage.cards.s.SarahJaneSmith.class));
         cards.add(new SetCardInfo("Swamp", 201, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yasmin Khan", 7, Rarity.RARE, mage.cards.y.YasminKhan.class));
     }
 }
