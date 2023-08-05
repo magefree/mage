@@ -29,7 +29,7 @@ public final class ZamWesell extends CardImpl {
 
     public ZamWesell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHAPESHIFTER, SubType.HUNTER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

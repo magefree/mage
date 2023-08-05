@@ -14,8 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -29,13 +28,6 @@ import java.util.UUID;
  * @author JayDi85
  */
 public final class SilumgarScavenger extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     public SilumgarScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
@@ -52,7 +44,7 @@ public final class SilumgarScavenger extends CardImpl {
         this.addAbility(new ExploitAbility());
 
         // Whenever another creature you control dies, put a +1/+1 counter on Silumgar Scavenger. It gains haste until end of turn if it exploited that creature.
-        Ability ability = new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter, true);
+        Ability ability = new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, true);
         ability.addEffect(new SilumgarScavengerBoostEffect());
         //ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability, new SilumgarScavengerExploitedWatcher());

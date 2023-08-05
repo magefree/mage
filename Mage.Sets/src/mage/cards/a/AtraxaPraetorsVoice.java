@@ -25,7 +25,7 @@ public final class AtraxaPraetorsVoice extends CardImpl {
     public AtraxaPraetorsVoice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ANGEL);
         this.subtype.add(SubType.HORROR);

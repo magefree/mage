@@ -37,7 +37,7 @@ public final class OrimsCure extends CardImpl {
 
         // If you control a Plains, you may tap an untapped creature you control rather than pay Orim's Cure's mana cost.
         Cost cost = new TapTargetCost(new TargetControlledPermanent(1,1,filterCreature,false));
-        cost.setText(" tap an untapped creature you control");
+        cost.setText("tap an untapped creature you control");
         this.addAbility(new AlternativeCostSourceAbility(cost, new PermanentsOnTheBattlefieldCondition(filter)));
 
         // Prevent the next 4 damage that would be dealt to any target this turn.

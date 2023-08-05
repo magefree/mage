@@ -24,7 +24,7 @@ public final class SeizanPerverterOfTruth extends CardImpl {
 
     public SeizanPerverterOfTruth (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.SPIRIT);
 

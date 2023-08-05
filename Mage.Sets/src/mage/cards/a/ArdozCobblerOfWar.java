@@ -26,7 +26,7 @@ public final class ArdozCobblerOfWar extends CardImpl {
     public ArdozCobblerOfWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);

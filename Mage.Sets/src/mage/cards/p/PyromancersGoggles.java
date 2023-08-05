@@ -28,7 +28,7 @@ public final class PyromancersGoggles extends CardImpl {
 
     public PyromancersGoggles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add {R}.
         Ability ability = new RedManaAbility();

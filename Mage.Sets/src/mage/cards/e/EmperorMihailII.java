@@ -36,7 +36,7 @@ public final class EmperorMihailII extends CardImpl {
     public EmperorMihailII(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(3);

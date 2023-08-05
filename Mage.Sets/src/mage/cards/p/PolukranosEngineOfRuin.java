@@ -34,7 +34,7 @@ public final class PolukranosEngineOfRuin extends CardImpl {
     public PolukranosEngineOfRuin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(6);

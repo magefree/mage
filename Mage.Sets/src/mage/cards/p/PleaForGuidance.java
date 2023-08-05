@@ -25,7 +25,7 @@ public final class PleaForGuidance extends CardImpl {
 
 
         // Search your library for up to two enchantment cards, reveal them, and put them into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0,2, filter), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0,2, filter), true));
     }
 
     private PleaForGuidance(final PleaForGuidance card) {

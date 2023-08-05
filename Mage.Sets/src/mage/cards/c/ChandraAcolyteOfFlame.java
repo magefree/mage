@@ -32,8 +32,6 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -52,7 +50,7 @@ public final class ChandraAcolyteOfFlame extends CardImpl {
     public ChandraAcolyteOfFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.setStartingLoyalty(4);
 
@@ -81,7 +79,7 @@ public final class ChandraAcolyteOfFlame extends CardImpl {
 class ChandraAcolyteOfFlameEffect extends OneShotEffect {
 
     ChandraAcolyteOfFlameEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "Create two 1/1 red Elemental creature tokens. They gain haste. " +
                 "Sacrifice them at the beginning of the next end step.";
     }
@@ -125,7 +123,7 @@ class ChandraAcolyteOfFlameEffect extends OneShotEffect {
 class ChandraAcolyteOfFlameGraveyardEffect extends OneShotEffect {
 
     ChandraAcolyteOfFlameGraveyardEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         this.staticText = "You may cast target instant or sorcery card " +
                 "with mana value 3 or less from your graveyard this turn. " +
                 "If that card would be put into your graveyard this turn, exile it instead";
@@ -158,7 +156,7 @@ class ChandraAcolyteOfFlameGraveyardEffect extends OneShotEffect {
 class ChandraAcolyteOfFlameCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     ChandraAcolyteOfFlameCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
     }
 
     private ChandraAcolyteOfFlameCastFromGraveyardEffect(final ChandraAcolyteOfFlameCastFromGraveyardEffect effect) {

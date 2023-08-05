@@ -38,7 +38,7 @@ public final class OliviaVoldaren extends CardImpl {
 
     public OliviaVoldaren(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(3);

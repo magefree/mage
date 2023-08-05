@@ -55,7 +55,7 @@ public class MonstrosityAbility extends ActivatedAbilityImpl {
         this.addHint(MonstrousHint.instance);
     }
 
-    public MonstrosityAbility(final MonstrosityAbility ability) {
+    protected MonstrosityAbility(final MonstrosityAbility ability) {
         super(ability);
         this.monstrosityValue = ability.monstrosityValue;
     }
@@ -78,7 +78,7 @@ class BecomeMonstrousSourceEffect extends OneShotEffect {
         this.staticText = setText(monstrosityValue);
     }
 
-    public BecomeMonstrousSourceEffect(final BecomeMonstrousSourceEffect effect) {
+    protected BecomeMonstrousSourceEffect(final BecomeMonstrousSourceEffect effect) {
         super(effect);
     }
 

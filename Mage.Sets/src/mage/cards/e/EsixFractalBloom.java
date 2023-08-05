@@ -38,7 +38,7 @@ public final class EsixFractalBloom extends CardImpl {
     public EsixFractalBloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FRACTAL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

@@ -4,10 +4,9 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SpellCastOpponentNoManaSpentTriggeredAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -20,8 +19,6 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,7 +33,7 @@ public final class LaviniaAzoriusRenegade extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -45,7 +42,7 @@ public final class LaviniaAzoriusRenegade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LaviniaAzoriusRenegadeReplacementEffect()));
 
         // Whenever an opponent casts a spell, if no mana was spent to cast it, counter that spell.
-        this.addAbility(new LaviniaAzoriusRenegadeTriggeredAbility());
+        this.addAbility(new SpellCastOpponentNoManaSpentTriggeredAbility(new CounterTargetEffect().setText("counter that spell")));
     }
 
     private LaviniaAzoriusRenegade(final LaviniaAzoriusRenegade card) {
@@ -113,46 +110,5 @@ class LaviniaAzoriusRenegadeReplacementEffect extends ContinuousRuleModifyingEff
     @Override
     public LaviniaAzoriusRenegadeReplacementEffect copy() {
         return new LaviniaAzoriusRenegadeReplacementEffect(this);
-    }
-}
-
-
-class LaviniaAzoriusRenegadeTriggeredAbility extends TriggeredAbilityImpl {
-
-    public LaviniaAzoriusRenegadeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CounterTargetEffect(), false);
-    }
-
-    public LaviniaAzoriusRenegadeTriggeredAbility(final LaviniaAzoriusRenegadeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LaviniaAzoriusRenegadeTriggeredAbility copy() {
-        return new LaviniaAzoriusRenegadeTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getStackAbility().getManaCostsToPay().getUsedManaToPay().count() == 0) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent casts a spell, if no mana was spent to cast it, counter that spell.";
     }
 }

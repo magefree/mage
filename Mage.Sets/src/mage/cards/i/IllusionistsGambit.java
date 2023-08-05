@@ -72,7 +72,7 @@ class IllusionistsGambitRemoveFromCombatEffect extends OneShotEffect {
         }
         if (!attackers.isEmpty()) {
             Phase phase = game.getTurn().getPhase();
-            game.getState().getTurnMods().add(new TurnMod(game.getActivePlayerId(), TurnPhase.COMBAT, null, false));
+            game.getState().getTurnMods().add(new TurnMod(game.getActivePlayerId()).withExtraPhase(TurnPhase.COMBAT));
             ContinuousEffect effect = new IllusionistsGambitRequirementEffect(attackers, phase);
             game.addEffect(effect, source);
             effect = new IllusionistsGambitRestrictionEffect(attackers, phase);

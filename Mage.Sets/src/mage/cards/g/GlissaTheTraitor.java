@@ -30,7 +30,7 @@ public final class GlissaTheTraitor extends CardImpl {
 
     public GlissaTheTraitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.ELF);

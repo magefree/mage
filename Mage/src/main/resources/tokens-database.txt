@@ -2,7 +2,8 @@
 
 # Contains all possible emblems, planes, dungeons and tokens
 # All objects must have an image (private tokens don't have image,
-# so can be ignored)
+# so can be ignored, use TokenCreature instead)
+# One class for same images (if you have 2/2 and */* then must use different classes)
 
 # Use verify test to check it: test_checkMissingTokenData
 
@@ -113,6 +114,7 @@
 |Generate|EMBLEM:MOM|Emblem Wrenn|||WrennAndRealmbreakerEmblem|
 |Generate|EMBLEM:MOC|Emblem Elspeth|||ElspethSunsChampionEmblem|
 |Generate|EMBLEM:MOC|Emblem Teferi|||TeferisTalentEmblem|
+|Generate|EMBLEM:DIS|Emblem Momir|||MomirEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -266,7 +268,7 @@
 |Generate|TOK:BNG|Wolf|||WolfToken|
 |Generate|TOK:BNG|Zombie|||ForlornPseudammaZombieToken|
 |Generate|TOK:C14|Angel|||AngelToken|
-|Generate|TOK:C14|Ape|||PongifyApeToken|
+|Generate|TOK:C14|Ape|||ApeToken|
 |Generate|TOK:C14|Beast|1||BeastToken|
 |Generate|TOK:C14|Beast|2||BeastToken2|
 |Generate|TOK:C14|Cat|||CatToken|
@@ -797,14 +799,6 @@
 |Generate|TOK:MMA|Treefolk Shaman|||TreefolkShamanToken|
 |Generate|TOK:MMA|Worm|||BlackGreenWormToken|
 |Generate|TOK:MMA|Zombie|||ZombieToken|
-|Generate|TOK:MMQ|Ape|||ApeToken|
-|Generate|TOK:MMQ|Butterfly|||ButterflyToken|
-|Generate|TOK:MMQ|Insect|||InsectToken|
-|Generate|TOK:MMQ|Saproling|||SaprolingToken|
-|Generate|TOK:MMQ|Snake|||SnakeToken|
-|Generate|TOK:MMQ|Soldier|||SoldierToken|
-|Generate|TOK:MMQ|Spirit|||SpiritWhiteToken|
-|Generate|TOK:MMQ|Zombie|||ZombieToken|
 |Generate|TOK:MOR|Faerie Rogue|||FaerieRogueToken|
 |Generate|TOK:MOR|Giant Warrior|||GiantWarriorToken|
 |Generate|TOK:MOR|Treefolk Shaman|||TreefolkShamanToken|
@@ -853,37 +847,6 @@
 |Generate|TOK:ORI|Thopter|1||ThopterColorlessToken|
 |Generate|TOK:ORI|Thopter|2||ThopterColorlessToken|
 |Generate|TOK:ORI|Zombie|||ZombieToken|
-|Generate|TOK:PC2|Angel|||AngelToken|
-|Generate|TOK:PC2|Beast|||BeastToken|
-|Generate|TOK:PC2|Boar|||BoarToken|
-|Generate|TOK:PC2|Eldrazi Spawn|||EldraziSpawnToken|
-|Generate|TOK:PC2|Phyrexian Germ|||PhyrexianGermToken|
-|Generate|TOK:PC2|Goblin|||GoblinToken|
-|Generate|TOK:PC2|Hellion|||HellionToken|
-|Generate|TOK:PC2|Insect|||InsectToken|
-|Generate|TOK:PC2|Ooze|||Ooze2Token|
-|Generate|TOK:PC2|Plant|||PlantToken|
-|Generate|TOK:PC2|Saproling|||SaprolingToken|
-|Generate|TOK:PC2|Spider|||PenumbraSpiderToken|
-|Generate|TOK:PCY|Minion|||MinionToken|
-|Generate|TOK:PCY|Squirrel|||SquirrelToken|
-|Generate|TOK:PLC|Ape|||PongifyApeToken|
-|Generate|TOK:PLC|Cat Warrior|||CatWarriorToken|
-|Generate|TOK:PLC|Insect|||DeadlyGrubInsectToken|
-|Generate|TOK:PLC|Knight|||RiftmarkedKnightToken|
-|Generate|TOK:PLC|Saproling|||SaprolingToken|
-|Generate|TOK:PLC|Soldier|||SoldierToken|
-|Generate|TOK:PLS|Hippo|||HippoToken|
-|Generate|TOK:PLS|Saproling|||SaprolingToken|
-|Generate|TOK:PLS|Spirit|||SpiritWhiteToken|
-|Generate|TOK:RAV|Centaur|||HuntedCentaurToken|
-|Generate|TOK:RAV|Goblin|||GoblinToken|
-|Generate|TOK:RAV|Horror|||HorrorToken|
-|Generate|TOK:RAV|Knight|||HuntedDragonKnightToken|
-|Generate|TOK:RAV|Saproling|||SaprolingToken|
-|Generate|TOK:RAV|Spirit|||SpiritWhiteToken|
-|Generate|TOK:RAV|Voja|||VojaToken|
-|Generate|TOK:RAV|Faerie|||FaerieToken|
 |Generate|TOK:RIX|Elemental|1||RekindlingPhoenixToken|
 |Generate|TOK:RIX|Elemental|2||RedElementalToken|
 |Generate|TOK:RIX|Golem|||GoldForgeGarrisonGolemToken|
@@ -907,11 +870,6 @@
 |Generate|TOK:RTR|Saproling|||SaprolingToken|
 |Generate|TOK:RTR|Soldier|||SoldierToken|
 |Generate|TOK:RTR|Wurm|||WurmWithTrampleToken|
-|Generate|TOK:SCG|Angel|||AngelToken|
-|Generate|TOK:SCG|Beast|||BeastToken2|
-|Generate|TOK:SCG|Dragon|||DragonToken2|
-|Generate|TOK:SCG|Goblin|||GoblinToken|
-|Generate|TOK:SCG|Soldier|||SoldierToken|
 |Generate|TOK:SHM|Elemental|1||DinOfTheFireherdToken|
 |Generate|TOK:SHM|Elemental|2||Elemental11HasteToken|
 |Generate|TOK:SHM|Elf Warrior|1||ElfWarriorToken|
@@ -940,10 +898,6 @@
 |Generate|TOK:SOI|Vampire Knight|||VampireKnightToken|
 |Generate|TOK:SOI|Wolf|||WolfToken|
 |Generate|TOK:SOI|Zombie|||ZombieToken|
-|Generate|TOK:SOK|Elemental|||ElementalTokenWithHaste|
-|Generate|TOK:SOK|Snake|||SnakeToken|
-|Generate|TOK:SOK|Urami|||UramiToken|
-|Generate|TOK:SOK|Warrior|||RallyTheHordeWarriorToken|
 |Generate|TOK:SOM|Cat|||CatToken|
 |Generate|TOK:SOM|Goblin|||GoblinToken|
 |Generate|TOK:SOM|Golem|||GolemToken|
@@ -975,12 +929,6 @@
 |Generate|TOK:THS|Soldier|3||AkroanSoldierToken|
 |Generate|TOK:TOR|Squirrel|||SquirrelToken|
 |Generate|TOK:UDS|Goblin|||GoblinToken|
-|Generate|TOK:ULG|Ape|||PongifyApeToken|
-|Generate|TOK:ULG|Skeleton|||SkeletonRegenerateToken|
-|Generate|TOK:ULG|Squirrel|||SquirrelToken|
-|Generate|TOK:UNH|Ape|||PongifyApeToken|
-|Generate|TOK:UNH|Goblin|||GoblinToken|
-|Generate|TOK:UNH|Squirrel|||SquirrelToken|
 |Generate|TOK:USG|Beast|||BeastToken|
 |Generate|TOK:USG|Gnome|||GnomeToken|
 |Generate|TOK:USG|Goblin|||GoblinToken|
@@ -1299,7 +1247,7 @@
 |Generate|TOK:KHC|Thopter|||ThopterColorlessToken|
 
 # TSR
-|Generate|TOK:TSR|Ape|||PongifyApeToken|
+|Generate|TOK:TSR|Ape|||ApeToken|
 |Generate|TOK:TSR|Assembly-Worker|||AssemblyWorkerToken|
 |Generate|TOK:TSR|Bat|||SengirNosferatuBatToken|
 |Generate|TOK:TSR|Cloud Sprite|||CloudSpriteToken|
@@ -2072,3 +2020,37 @@
 |Generate|TOK:MOC|Vampire Knight|||VampireKnightToken|
 |Generate|TOK:MOC|Warrior|||WarriorToken|
 |Generate|TOK:MOC|Zombie Knight|||ZombieKnightToken|
+
+# MUL
+|Generate|TOK:MUL|Elemental|||Elemental31TrampleHasteToken|
+|Generate|TOK:MUL|Phyrexian Myr|||BrudicladTelchorMyrToken|
+
+# LTR
+|Generate|TOK:LTR|Ballistic Boulder|||BallisticBoulder|
+|Generate|TOK:LTR|Food|1||FoodToken|
+|Generate|TOK:LTR|Food|2||FoodToken|
+|Generate|TOK:LTR|Food|3||FoodToken|
+|Generate|TOK:LTR|Human Soldier|1||HumanSoldierToken|
+|Generate|TOK:LTR|Human Soldier|2||HumanSoldierToken|
+|Generate|TOK:LTR|Orc Army|1||OrcArmyToken|
+|Generate|TOK:LTR|Orc Army|2||OrcArmyToken|
+|Generate|TOK:LTR|Smaug|||SmaugToken|
+|Generate|TOK:LTR|Spirit|||SpiritWhiteToken|
+|Generate|TOK:LTR|Tentacle|||TentacleToken|
+|Generate|TOK:LTR|Treasure|||TreasureToken|
+
+# LTC
+|Generate|TOK:LTC|Beast|||BeastToken|
+|Generate|TOK:LTC|Bird|1||SwanSongBirdToken|
+|Generate|TOK:LTC|Bird|2||GwaihirBirdToken|
+|Generate|TOK:LTC|Dragon|||DragonMenaceAndStealArtifactToken|
+|Generate|TOK:LTC|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:LTC|Goat|||GoatToken|
+|Generate|TOK:LTC|Goblin|||GoblinToken|
+|Generate|TOK:LTC|Halfling|||HalflingToken|
+|Generate|TOK:LTC|Human|||HumanToken|
+|Generate|TOK:LTC|Human Knight|||HumanKnightToken|
+|Generate|TOK:LTC|Insect|||InsectDeathToken|
+|Generate|TOK:LTC|Soldier|||SoldierLifelinkToken|
+|Generate|TOK:LTC|Treefolk|||SylvanOfferingTreefolkToken|
+|Generate|TOK:LTC|Wraith|||WraithToken|

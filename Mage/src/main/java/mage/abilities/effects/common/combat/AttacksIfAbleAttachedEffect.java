@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -19,7 +18,7 @@ public class AttacksIfAbleAttachedEffect extends RequirementEffect {
         this.staticText = attachmentType.verb() + " creature attacks each combat if able";
     }
 
-    public AttacksIfAbleAttachedEffect(final AttacksIfAbleAttachedEffect effect) {
+    protected AttacksIfAbleAttachedEffect(final AttacksIfAbleAttachedEffect effect) {
         super(effect);
     }
 

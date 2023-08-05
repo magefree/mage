@@ -20,7 +20,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class SachiDaughterOfSeshiro extends CardImpl {
 
-    private static final FilterCreaturePermanent snakeFilter = new FilterCreaturePermanent("Snakes");
+    private static final FilterCreaturePermanent snakeFilter = new FilterCreaturePermanent("Snake creatures");
     private static final FilterPermanent shamanFilter = new FilterPermanent("Shamans");
 
     static {
@@ -30,7 +30,7 @@ public final class SachiDaughterOfSeshiro extends CardImpl {
 
     public SachiDaughterOfSeshiro(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.SHAMAN);
 

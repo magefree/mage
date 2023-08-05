@@ -15,7 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.permanent.token.ThopterColorlessToken;
 import mage.target.common.TargetControlledPermanent;
@@ -26,24 +26,19 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class SaiMasterThopterist extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("an artifact spell");
     private static final FilterControlledArtifactPermanent filter2 = new FilterControlledArtifactPermanent("artifacts");
-
-    static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-    }
 
     public SaiMasterThopterist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
         // Whenever you cast an artifact spell, create a 1/1 colorless Thopter artifact creature token with flying.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken()), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken()), StaticFilters.FILTER_SPELL_AN_ARTIFACT, false));
 
         // {1}{U}, Sacrifice two artifacts: Draw a card.
         Ability ability = new SimpleActivatedAbility(

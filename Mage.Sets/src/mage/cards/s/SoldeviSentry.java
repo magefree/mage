@@ -52,6 +52,15 @@ class SoldeviSentryEffect extends RegenerateSourceEffect {
         this.staticText = "Choose target opponent. Regenerate {this}. When it regenerates this way, that player may draw a card";
     }
 
+    protected SoldeviSentryEffect(final SoldeviSentryEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SoldeviSentryEffect copy() {
+        return new SoldeviSentryEffect(this);
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
         //20110204 - 701.11

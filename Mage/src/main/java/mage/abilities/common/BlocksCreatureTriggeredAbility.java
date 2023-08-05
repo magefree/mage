@@ -31,7 +31,7 @@ public class BlocksCreatureTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} blocks " + CardUtil.addArticle(filter.getMessage()) + ", ");
     }
 
-    public BlocksCreatureTriggeredAbility(final BlocksCreatureTriggeredAbility ability) {
+    protected BlocksCreatureTriggeredAbility(final BlocksCreatureTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }

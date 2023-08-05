@@ -18,8 +18,4 @@ public interface CommandObject extends MageObject, Controllable {
 
     @Override
     CommandObject copy();
-
-    String getExpansionSetCodeForImage();
-
-    void setExpansionSetCodeForImage(String expansionSetCodeForImage);
 }

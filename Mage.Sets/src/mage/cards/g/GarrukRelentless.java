@@ -27,7 +27,7 @@ public final class GarrukRelentless extends CardImpl {
 
     public GarrukRelentless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
         this.secondSideCardClazz = mage.cards.g.GarrukTheVeilCursed.class;

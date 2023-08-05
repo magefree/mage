@@ -45,7 +45,7 @@ public final class ToxrillTheCorrosive extends CardImpl {
     public ToxrillTheCorrosive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SLUG);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(7);

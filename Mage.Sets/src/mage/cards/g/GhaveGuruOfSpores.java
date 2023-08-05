@@ -19,7 +19,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.SaprolingToken;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -34,7 +34,7 @@ public final class GhaveGuruOfSpores extends CardImpl {
 
     public GhaveGuruOfSpores(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FUNGUS);
         this.subtype.add(SubType.SHAMAN);
 
@@ -51,7 +51,7 @@ public final class GhaveGuruOfSpores extends CardImpl {
 
         // {1}, Sacrifice a creature: Put a +1/+1 counter on target creature.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1));
-        ability2.addCost(new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability2.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
     }

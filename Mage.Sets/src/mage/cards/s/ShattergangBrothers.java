@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -33,7 +33,7 @@ public final class ShattergangBrothers extends CardImpl {
 
     public ShattergangBrothers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.ARTIFICER);
 
@@ -41,8 +41,8 @@ public final class ShattergangBrothers extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{B}, Sacrifice a creature: Each other player sacrifices a creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(FILTER_CONTROLLED_CREATURE_SHORT_TEXT), new ManaCostsImpl<>("{2}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), new ManaCostsImpl<>("{2}{B}"));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
         // {2}{R}, Sacrifice an artifact: Each other player sacrifices an artifact.
         FilterControlledPermanent filter = new FilterControlledArtifactPermanent("an artifact");

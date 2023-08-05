@@ -28,7 +28,7 @@ public final class ElbrusTheBindingBlade extends CardImpl {
 
     public ElbrusTheBindingBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{7}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         this.secondSideCardClazz = mage.cards.w.WithengarUnbound.class;

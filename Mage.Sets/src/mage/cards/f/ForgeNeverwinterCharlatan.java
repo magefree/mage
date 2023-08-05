@@ -5,6 +5,7 @@ import mage.abilities.common.SacrificeAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -28,12 +29,13 @@ import java.util.UUID;
 public final class ForgeNeverwinterCharlatan extends CardImpl {
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.TREASURE));
+    private static final DynamicValue twiceXValue = new MultipliedValue(xValue, 2);
     private static final Hint hint = new ValueHint("Treasures you control", xValue);
 
     public ForgeNeverwinterCharlatan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
@@ -47,14 +49,14 @@ public final class ForgeNeverwinterCharlatan extends CardImpl {
 
         // Forge, Neverwinter Charlatan gets +2/+0 for each Treasure you control.
         this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(
-                xValue, StaticValue.get(0), Duration.WhileOnBattlefield
+                twiceXValue, StaticValue.get(0), Duration.WhileOnBattlefield
         ).setText("{this} gets +2/+0 for each Treasure you control")).addHint(hint));
 
         // Whenever one or more players sacrifice one or more creatures, you create a tapped Treasure token. This ability triggers only once each turn.
         this.addAbility(new SacrificeAllTriggeredAbility(
                 new CreateTokenEffect(new TreasureToken(), 1, true),
                 StaticFilters.FILTER_PERMANENT_CREATURE, TargetController.ANY, false
-        ).setTriggersOnce(true).setTriggerPhrase("Whenever one or more players sacrifice one or more creatures, "));
+        ).setTriggersOnceEachTurn(true).setTriggerPhrase("Whenever one or more players sacrifice one or more creatures, "));
     }
 
     private ForgeNeverwinterCharlatan(final ForgeNeverwinterCharlatan card) {

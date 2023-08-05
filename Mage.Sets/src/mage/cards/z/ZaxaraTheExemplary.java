@@ -33,7 +33,7 @@ public final class ZaxaraTheExemplary extends CardImpl {
     public ZaxaraTheExemplary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.HYDRA);
         this.power = new MageInt(2);

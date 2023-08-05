@@ -21,7 +21,7 @@ public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEff
         staticText = setStaticText();
     }
 
-    public UntapAllDuringEachOtherPlayersUntapStepEffect(final UntapAllDuringEachOtherPlayersUntapStepEffect effect) {
+    protected UntapAllDuringEachOtherPlayersUntapStepEffect(final UntapAllDuringEachOtherPlayersUntapStepEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

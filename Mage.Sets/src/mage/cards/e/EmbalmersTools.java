@@ -5,7 +5,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -41,7 +41,7 @@ public final class EmbalmersTools extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmbalmersToolsEffect()));
 
         // Tap an untapped Zombie you control: Target player puts the top card of their library into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

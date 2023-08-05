@@ -10,8 +10,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -27,30 +25,13 @@ public final class DragonEggDragonToken extends TokenImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
-
-        availableImageSetCodes = Arrays.asList("C18", "EMA", "M14", "M15", "M19", "CMR", "IMA", "GN2", "GN3");
     }
 
-    public DragonEggDragonToken(final DragonEggDragonToken token) {
+    protected DragonEggDragonToken(final DragonEggDragonToken token) {
         super(token);
     }
 
     public DragonEggDragonToken copy() {
         return new DragonEggDragonToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("IMA")) {
-            this.setTokenType(1);
-        }
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("M19")) {
-            this.setTokenType(1);
-        }
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("GN2")) {
-            this.setTokenType(1);
-        }
     }
 }

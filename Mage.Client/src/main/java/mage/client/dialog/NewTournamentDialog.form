@@ -373,6 +373,20 @@
         <Property name="toolTipText" type="java.lang.String" value="The time a player has for the whole match. If a player runs out of time during a game, they lose the complete match. "/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JLabel" name="lbBufferTime">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Buffer Time:"/>
+        <Property name="toolTipText" type="java.lang.String" value="The time a player gets whenever their timer starts before their match time starts going down. "/>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="labelFor" source="cbBufferTime" target="lbBufferTime" targetPath="labelFor" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbBufferTime">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="The time a player gets whenever their timer starts before their match time starts going down. "/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JLabel" name="lbSkillLevel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Skill Level:"/>

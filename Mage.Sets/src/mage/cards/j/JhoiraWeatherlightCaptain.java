@@ -19,7 +19,7 @@ public final class JhoiraWeatherlightCaptain extends CardImpl {
 
     public JhoiraWeatherlightCaptain(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         subtype.add(SubType.HUMAN, SubType.ARTIFICER);
         power = new MageInt(3);
         toughness = new MageInt(3);

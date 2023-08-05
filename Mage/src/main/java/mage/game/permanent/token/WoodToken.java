@@ -1,20 +1,17 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class WoodToken extends TokenImpl {
 
     public WoodToken() {
         super("Wood", "0/1 green Wall creature token with defender named Wood");
-        this.setOriginalExpansionSetCode("MIR");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.WALL);
@@ -24,7 +21,7 @@ public final class WoodToken extends TokenImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public WoodToken(final WoodToken token) {
+    protected WoodToken(final WoodToken token) {
         super(token);
     }
 

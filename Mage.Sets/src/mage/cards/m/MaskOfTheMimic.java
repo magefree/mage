@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -37,7 +37,7 @@ public final class MaskOfTheMimic extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // As an additional cost to cast Mask of the Mimic, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         // Search your library for a card with the same name as target nontoken creature and put that card onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new MaskOfTheMimicEffect());
@@ -58,8 +58,8 @@ class MaskOfTheMimicEffect extends OneShotEffect {
 
     MaskOfTheMimicEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for a card with the same name as target nontoken creature "
-                + "and put that card onto the battlefield. Then shuffle.";
+        this.staticText = "Search your library for a card with the same name as target nontoken creature,"
+                + " put that card onto the battlefield, then shuffle.";
     }
 
     MaskOfTheMimicEffect(final MaskOfTheMimicEffect effect) {

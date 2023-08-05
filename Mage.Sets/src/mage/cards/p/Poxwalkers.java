@@ -40,7 +40,7 @@ public final class Poxwalkers extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true),
                 filter, false, false
-        ));
+        ).withFlavorWord("Curse of the Walking Pox"));
     }
 
     private Poxwalkers(final Poxwalkers card) {

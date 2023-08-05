@@ -5,9 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateOncePerGameActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
@@ -37,7 +35,6 @@ public final class InTheTrenches extends CardImpl {
         // {5}{W}: Exile target nonland permanent you don't control until In the Trenches leaves the battlefield. Activate only as a sorcery and only once.
         Ability ability = new ActivateOncePerGameActivatedAbility(Zone.BATTLEFIELD, new ExileUntilSourceLeavesEffect(), new ManaCostsImpl<>("{5}{W}"), TimingRule.SORCERY);
         ability.addTarget(new TargetPermanent(filter));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
     }
 

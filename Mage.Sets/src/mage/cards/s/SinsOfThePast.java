@@ -46,7 +46,7 @@ class SinsOfThePastEffect extends OneShotEffect {
 
     SinsOfThePastEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Until end of turn, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that card would be put into your graveyard this turn, exile it instead";
+        this.staticText = "Until end of turn, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead";
     }
 
     SinsOfThePastEffect(final SinsOfThePastEffect effect) {
@@ -72,4 +72,3 @@ class SinsOfThePastEffect extends OneShotEffect {
         return false;
     }
 }
-

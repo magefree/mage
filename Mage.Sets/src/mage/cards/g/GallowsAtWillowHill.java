@@ -30,7 +30,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class GallowsAtWillowHill extends CardImpl {
 
-    private static final FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
+    private static final FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Humans you control");
 
     static {
         humanFilter.add(TappedPredicate.UNTAPPED);

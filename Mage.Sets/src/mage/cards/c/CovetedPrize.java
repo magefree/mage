@@ -39,7 +39,7 @@ public final class CovetedPrize extends CardImpl {
         ).addHint(PartyCountHint.instance).setRuleAtTheTop(true));
 
         // Search your library for a card, put it into your hand, then shuffle your library. If you have a full party, you may cast a spell with converted mana cost 4 or less from your hand without paying its mana cost.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CastFromHandForFreeEffect(filter),
                 FullPartyCondition.instance, "If you have a full party, " +

@@ -82,12 +82,17 @@ class CombatCalligrapherTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Player attacker = game.getPlayer(event.getPlayerId());
         Player defender = game.getPlayer(event.getTargetId());
+        if (attacker == null || defender == null) {
+            return false;
+        }
+
         // Do not trigger if opponent is out of range (not visible as opponent to controller, and not the controller)
         // or if the person being attacked is not an opponent of the controller.
         if ((!game.getOpponents(getControllerId()).contains(attacker.getId()) && attacker.getId() != getControllerId())
                 || !game.getOpponents(getControllerId()).contains(defender.getId())) {
             return false;
         }
+
         getEffects().setValue("playerToAttack", defender.getId());
         getEffects().setTargetPointer(new FixedTarget(attacker.getId()));
         return true;

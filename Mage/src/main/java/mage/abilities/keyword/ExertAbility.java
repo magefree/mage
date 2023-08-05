@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -17,14 +18,12 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
 /**
- *
  * @author LevelX2
  */
 public class ExertAbility extends SimpleStaticAbility {
@@ -55,7 +54,7 @@ public class ExertAbility extends SimpleStaticAbility {
         }
     }
 
-    public ExertAbility(final ExertAbility ability) {
+    protected ExertAbility(final ExertAbility ability) {
         super(ability);
         this.ruleText = ability.ruleText;
 
@@ -74,7 +73,7 @@ public class ExertAbility extends SimpleStaticAbility {
 
 class ExertReplacementEffect extends ReplacementEffectImpl {
 
-    final private boolean exertOnlyOncePerTurn;
+    private final boolean exertOnlyOncePerTurn;
 
     public ExertReplacementEffect(boolean exertOnlyOncePerTurn) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

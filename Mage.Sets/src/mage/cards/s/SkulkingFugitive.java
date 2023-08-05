@@ -4,7 +4,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -26,7 +26,7 @@ public final class SkulkingFugitive extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Skulking Fugitive becomes the target of a spell or ability, sacrifice it.
-        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
     private SkulkingFugitive(final SkulkingFugitive card) {

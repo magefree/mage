@@ -17,8 +17,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
 
 /**
@@ -27,19 +26,12 @@ import mage.game.permanent.token.TokenImpl;
  */
 public final class Riddleform extends CardImpl {
 
-    private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
-
-    static {
-        filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
-
     public Riddleform(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // Whenever you cast a noncreature spell, you may have Riddleform become a 3/3 Sphinx creature with flying in addition to its other types until end of turn.
-        Effect effect = new BecomesCreatureSourceEffect(new RiddleformToken(), "", Duration.EndOfTurn);
-        effect.setText("have {this} become a 3/3 Sphinx creature with flying in addition to its other types until end of turn.");
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, effect, filterNonCreature, true, true));
+        Effect effect = new BecomesCreatureSourceEffect(new RiddleformToken(), CardType.ENCHANTMENT, Duration.EndOfTurn);
+        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_SPELL_A_NON_CREATURE, true, true));
 
         // {2}{U}: Scry 1.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new ManaCostsImpl<>("{2}{U}"));

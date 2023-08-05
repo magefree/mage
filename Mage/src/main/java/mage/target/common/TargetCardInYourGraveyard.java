@@ -3,6 +3,7 @@ package mage.target.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -15,7 +16,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetCardInYourGraveyard extends TargetCard {
@@ -49,7 +49,7 @@ public class TargetCardInYourGraveyard extends TargetCard {
         this.setNotTarget(notTarget);
     }
 
-    public TargetCardInYourGraveyard(final TargetCardInYourGraveyard target) {
+    protected TargetCardInYourGraveyard(final TargetCardInYourGraveyard target) {
         super(target);
     }
 

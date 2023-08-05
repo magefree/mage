@@ -7,7 +7,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
@@ -18,7 +18,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class KabiraTakedown extends ModalDoubleFacesCard {
+public final class KabiraTakedown extends ModalDoubleFacedCard {
 
     private static final DynamicValue xValue
             = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURES);

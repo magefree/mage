@@ -7,7 +7,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.LicidAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.AddCardTypeAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.cards.CardImpl;
@@ -15,8 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
 
 /**
  *
@@ -34,10 +31,8 @@ public final class TransmogrifyingLicid extends CardImpl {
         this.addAbility(new LicidAbility(new GenericManaCost(1), new GenericManaCost(1)));
         
         // Enchanted creature gets +1/+1 and is an artifact in addition to its other types.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1));
-        Effect effect = new AddCardTypeAttachedEffect(CardType.ARTIFACT, Duration.WhileOnBattlefield, AttachmentType.AURA);
-        effect.setText("and is an artifact in addition to its other types");
-        ability.addEffect(effect);
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));
+        ability.addEffect(new AddCardTypeAttachedEffect(CardType.ARTIFACT, AttachmentType.AURA));
         this.addAbility(ability);
     }
 

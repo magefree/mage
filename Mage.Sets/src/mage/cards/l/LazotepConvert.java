@@ -63,7 +63,7 @@ class LazotepConvertCopyEffect extends OneShotEffect {
             blueprint.getPower().setModifiedBaseValue(4);
             blueprint.getToughness().setModifiedBaseValue(4);
             blueprint.addSubType(SubType.ZOMBIE);
-            blueprint.getColor().setColor(ObjectColor.BLACK);
+            blueprint.getColor().addColor(ObjectColor.BLACK);
             return true;
         }
     };
@@ -93,8 +93,11 @@ class LazotepConvertCopyEffect extends OneShotEffect {
         if (copyFromCard == null) {
             return true;
         }
+        Card modifiedCopy = copyFromCard.copy();
+        //Appliers must be applied before CopyEffect, its applier setting is just for copies of copies
+        applier.apply(game, modifiedCopy, source, source.getSourceId());
         game.addEffect(new CopyEffect(
-                Duration.Custom, copyFromCard, source.getSourceId()
+                Duration.Custom, modifiedCopy, source.getSourceId()
         ).setApplier(applier), source);
         return true;
     }

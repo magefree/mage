@@ -30,7 +30,7 @@ public final class LilianaVess extends CardImpl {
 
     public LilianaVess(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LILIANA);
 
         this.setStartingLoyalty(5);
@@ -40,7 +40,7 @@ public final class LilianaVess extends CardImpl {
         this.addAbility(ability1);
 
         // -2: Search your library for a card, then shuffle your library and put that card on top of it.
-        this.addAbility(new LoyaltyAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary()), -2));
+        this.addAbility(new LoyaltyAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(), false), -2));
 
         // -8: Put all creature cards from all graveyards onto the battlefield under your control.
         this.addAbility(new LoyaltyAbility(new LilianaVessEffect(), -8));

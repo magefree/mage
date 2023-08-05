@@ -5,8 +5,6 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -20,24 +18,13 @@ public final class HuntedDragonKnightToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(FirstStrikeAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("ORI", "RTR", "C15", "CM2");
     }
 
-    public HuntedDragonKnightToken(final HuntedDragonKnightToken token) {
+    protected HuntedDragonKnightToken(final HuntedDragonKnightToken token) {
         super(token);
     }
 
     public HuntedDragonKnightToken copy() {
         return new HuntedDragonKnightToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C15")) {
-            setTokenType(1);
-        }
     }
 }

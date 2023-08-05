@@ -7,13 +7,12 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class BaruFistOfKrosaToken extends TokenImpl {
 
     public BaruFistOfKrosaToken() {
-       this(1);
+        this(1);
     }
 
     public BaruFistOfKrosaToken(int xValue) {
@@ -25,7 +24,7 @@ public final class BaruFistOfKrosaToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    public BaruFistOfKrosaToken(final BaruFistOfKrosaToken token) {
+    protected BaruFistOfKrosaToken(final BaruFistOfKrosaToken token) {
         super(token);
     }
 

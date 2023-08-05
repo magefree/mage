@@ -30,7 +30,7 @@ public final class GlissaHeraldOfPredation extends CardImpl {
     public GlissaHeraldOfPredation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.ELF);

@@ -37,7 +37,7 @@ public final class LuluLoyalHollyphant extends CardImpl {
     public LuluLoyalHollyphant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEPHANT);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(3);

@@ -25,7 +25,7 @@ public final class DiaochanArtfulBeauty extends CardImpl {
 
     public DiaochanArtfulBeauty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
 

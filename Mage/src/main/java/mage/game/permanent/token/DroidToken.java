@@ -1,21 +1,16 @@
-
 package mage.game.permanent.token;
-
-import java.util.Collections;
 
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author Styxo
  */
 public final class DroidToken extends TokenImpl {
 
     public DroidToken() {
         super("Droid Token", "1/1 colorless Droid creature token");
-        availableImageSetCodes.addAll(Collections.singletonList("SWS"));
 
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
@@ -25,7 +20,7 @@ public final class DroidToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public DroidToken(final DroidToken token) {
+    protected DroidToken(final DroidToken token) {
         super(token);
     }
 

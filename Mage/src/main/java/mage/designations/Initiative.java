@@ -21,7 +21,7 @@ import java.util.UUID;
 public class Initiative extends Designation {
 
     public Initiative() {
-        super(DesignationType.THE_INITIATIVE, "CLB");
+        super(DesignationType.THE_INITIATIVE);
 
         // Whenever one or more creatures a player controls deals combat damage to you, that player takes the initiative.
         this.addAbility(new InitiativeDamageTriggeredAbility());

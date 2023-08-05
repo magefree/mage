@@ -43,7 +43,7 @@ public final class WormfangDrake extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(new ExileTargetCost(new TargetControlledPermanent(filter))),
                 false
-        ));
+        ).setReplaceRuleText(false));
 
         // When Wormfang Drake leaves the battlefield, return the exiled card to the battlefield under its owner's control.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));

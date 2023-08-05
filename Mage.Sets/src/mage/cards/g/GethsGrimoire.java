@@ -19,7 +19,7 @@ public final class GethsGrimoire extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         Effect drawTrigger = new DrawCardSourceControllerEffect(1);
-        drawTrigger.setText("You may draw a card.");
+        drawTrigger.setText("you may draw a card.");
         // Whenever an opponent discards a card, you may draw a card.
         this.addAbility(new DiscardsACardOpponentTriggeredAbility(drawTrigger, true));
     }

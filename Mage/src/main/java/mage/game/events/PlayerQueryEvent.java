@@ -17,6 +17,7 @@ import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+import mage.util.MultiAmountMessage;
 
 /**
  *
@@ -60,11 +61,11 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
     private List<? extends Card> pile1;
     private List<? extends Card> pile2;
     private Choice choice;
-    private List<String> messages;
+    private List<MultiAmountMessage> messages;
 
     private PlayerQueryEvent(UUID playerId, String message, List<? extends Ability> abilities, Set<String> choices,
-                             Set<UUID> targets, Cards cards, QueryType queryType, int min, int max, boolean required,
-                             Map<String, Serializable> options, List<String> messages) {
+            Set<UUID> targets, Cards cards, QueryType queryType, int min, int max,
+            boolean required, Map<String, Serializable> options, List<MultiAmountMessage> messages) {
         super(playerId);
 
         CardUtil.checkSetParamForSerializationCompatibility(choices);
@@ -216,8 +217,10 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.AMOUNT, min, max, false, null, null);
     }
 
-    public static PlayerQueryEvent multiAmountEvent(UUID playerId, List<String> messages, int min, int max, Map<String, Serializable> options) {
-        return new PlayerQueryEvent(playerId, null, null, null, null, null, QueryType.MULTI_AMOUNT, min, max, false, options, messages);
+    public static PlayerQueryEvent multiAmountEvent(UUID playerId, List<MultiAmountMessage> messages, int min,
+            int max, Map<String, Serializable> options) {
+        return new PlayerQueryEvent(playerId, null, null, null, null, null, QueryType.MULTI_AMOUNT, min, max, false,
+                options, messages);
     }
 
     public static PlayerQueryEvent pickCard(UUID playerId, String message, List<Card> booster, int time) {
@@ -300,7 +303,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         return choice;
     }
 
-    public List<String> getMessages() {
+    public List<MultiAmountMessage> getMessages() {
         return messages;
     }
 }

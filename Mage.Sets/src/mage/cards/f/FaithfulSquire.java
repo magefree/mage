@@ -95,7 +95,7 @@ class KaisoMemoryOfLoyaltyToken extends TokenImpl {
 
     KaisoMemoryOfLoyaltyToken() {
         super("Kaiso, Memory of Loyalty", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.SPIRIT);

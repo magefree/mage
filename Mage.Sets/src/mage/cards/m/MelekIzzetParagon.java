@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class MelekIzzetParagon extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("cast instant or sorcery spells");
+    private static final FilterCard filter = new FilterCard("cast instant and sorcery spells");
 
     static {
         filter.add(Predicates.or(
@@ -35,7 +35,7 @@ public final class MelekIzzetParagon extends CardImpl {
 
     public MelekIzzetParagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WEIRD);
         this.subtype.add(SubType.WIZARD);
 

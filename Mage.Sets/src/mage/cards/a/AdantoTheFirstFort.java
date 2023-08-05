@@ -24,7 +24,7 @@ public final class AdantoTheFirstFort extends CardImpl {
     public AdantoTheFirstFort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.nightCard = true;
 

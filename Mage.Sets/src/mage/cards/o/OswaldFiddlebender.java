@@ -32,7 +32,7 @@ public final class OswaldFiddlebender extends CardImpl {
     public OswaldFiddlebender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GNOME);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);

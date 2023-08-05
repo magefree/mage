@@ -12,11 +12,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
 /**
  * @author TheElk801
@@ -32,9 +31,7 @@ public final class DarkTriumph extends CardImpl {
 
         // If you control a Swamp, you may sacrifice a creature rather than pay Dark Triumph's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(
-                new SacrificeTargetCost(
-                        new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-                ), condition
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), condition
         ));
 
         // Creatures you control get +2/+0 until end of turn.

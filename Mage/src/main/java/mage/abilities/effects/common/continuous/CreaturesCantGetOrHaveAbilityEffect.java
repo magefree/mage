@@ -14,7 +14,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class CreaturesCantGetOrHaveAbilityEffect extends ContinuousEffectImpl {
@@ -34,7 +33,7 @@ public class CreaturesCantGetOrHaveAbilityEffect extends ContinuousEffectImpl {
         addDependedToType(DependencyType.AddingAbility);
     }
 
-    public CreaturesCantGetOrHaveAbilityEffect(final CreaturesCantGetOrHaveAbilityEffect effect) {
+    protected CreaturesCantGetOrHaveAbilityEffect(final CreaturesCantGetOrHaveAbilityEffect effect) {
         super(effect);
         this.ability = effect.ability;
         this.filter = effect.filter;

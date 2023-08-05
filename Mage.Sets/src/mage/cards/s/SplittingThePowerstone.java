@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -58,6 +57,6 @@ enum SplittingThePowerstoneCondition implements Condition {
                 .map(SacrificeTargetCost::getPermanents)
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull)
-                .anyMatch(MageObject::isLegendary);
+                .anyMatch(permanent -> permanent.isLegendary(game));
     }
 }

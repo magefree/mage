@@ -6,9 +6,8 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -47,9 +46,8 @@ public final class DistinguishedConjurer extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
 
         // {4}{W}, {T}: Exile another target creature you control, then return it to the battlefield under its owner’s control.
-        Ability ability = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new ManaCostsImpl<>("{4}{W}"));
+        Ability ability = new SimpleActivatedAbility(new ExileThenReturnTargetEffect(false, false), new ManaCostsImpl<>("{4}{W}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).concatBy(", then"));
         ability.addTarget(new TargetControlledCreaturePermanent(filter2));
         this.addAbility(ability);
     }

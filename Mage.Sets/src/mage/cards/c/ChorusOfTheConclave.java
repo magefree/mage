@@ -28,7 +28,7 @@ public final class ChorusOfTheConclave extends CardImpl {
 
     public ChorusOfTheConclave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRYAD);
 
         this.power = new MageInt(3);

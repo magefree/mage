@@ -30,7 +30,7 @@ public abstract class Watcher implements Serializable {
         this.scope = scope;
     }
 
-    public Watcher(final Watcher watcher) {
+    protected Watcher(final Watcher watcher) {
         this.condition = watcher.condition;
         this.controllerId = watcher.controllerId;
         this.sourceId = watcher.sourceId;
@@ -161,7 +161,7 @@ public abstract class Watcher implements Serializable {
                                 Cards list = e.getValue().copy();
                                 target.put(e.getKey(), list);
                             }
-                        } else if (valueType instanceof Class &&  Arrays.stream(((Class) valueType).getInterfaces()).anyMatch(c -> c.equals(Copyable.class))) {
+                        } else if (valueType instanceof Class && Arrays.stream(((Class) valueType).getInterfaces()).anyMatch(c -> c.equals(Copyable.class))) {
                             // Map<UUID, Copyable>
                             Map<Object, Copyable> source = (Map<Object, Copyable>) field.get(this);
                             Map<Object, Copyable> target = (Map<Object, Copyable>) field.get(watcher);

@@ -17,7 +17,6 @@ import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.ManaPaidSourceWatcher;
 
 /**
- *
  * @author weirddan455
  */
 public class ChandraDressedToKillEmblem extends Emblem {
@@ -30,12 +29,19 @@ public class ChandraDressedToKillEmblem extends Emblem {
 
     // Whenever you cast a red spell, this emblem deals X damage to any target, where X is the amount of mana spent to cast that spell.
     public ChandraDressedToKillEmblem() {
-        this.setName("Emblem Chandra");
+        super("Emblem Chandra");
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, new ChandraDressedToKillEmblemEffect(), filter, false, true);
         ability.addTarget(new TargetAnyTarget());
         this.getAbilities().add(ability);
+    }
 
-        this.setExpansionSetCodeForImage("VOW");
+    private ChandraDressedToKillEmblem(final ChandraDressedToKillEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public ChandraDressedToKillEmblem copy() {
+        return new ChandraDressedToKillEmblem(this);
     }
 }
 

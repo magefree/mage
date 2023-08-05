@@ -24,7 +24,7 @@ public final class VegaTheWatcher extends CardImpl {
     public VegaTheWatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(2);

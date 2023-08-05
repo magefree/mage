@@ -1,9 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -20,6 +17,10 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
  *
  * @author Styxo & L_J
@@ -28,7 +29,7 @@ public final class GabrielAngelfire extends CardImpl {
 
     public GabrielAngelfire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -50,7 +51,6 @@ public final class GabrielAngelfire extends CardImpl {
 class GabrielAngelfireGainAbilityEffect extends GainAbilitySourceEffect {
 
     private static final Set<String> choices = new LinkedHashSet<>();
-    private boolean sameStep = true;
 
     static {
         choices.add("Flying");
@@ -60,7 +60,7 @@ class GabrielAngelfireGainAbilityEffect extends GainAbilitySourceEffect {
     }
 
     public GabrielAngelfireGainAbilityEffect() {
-        super(FlyingAbility.getInstance(), Duration.Custom);
+        super(FlyingAbility.getInstance(), Duration.UntilYourNextUpkeepStep);
         staticText = "choose flying, first strike, trample, or rampage 3. {this} gains that ability until your next upkeep";
     }
 
@@ -72,18 +72,6 @@ class GabrielAngelfireGainAbilityEffect extends GainAbilitySourceEffect {
     @Override
     public GabrielAngelfireGainAbilityEffect copy() {
         return new GabrielAngelfireGainAbilityEffect(this);
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            if (!sameStep && game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
-                return true;
-            }
-        } else {
-            sameStep = false;
-        }
-        return false;
     }
 
     @Override

@@ -85,7 +85,7 @@ class CallidusAssassinApplier extends CopyApplier {
 
     @Override
     public String getText() {
-        return "except it has \"When this creature enters the battlefield, " +
+        return ", except it has \"When this creature enters the battlefield, " +
                 "destroy up to one other target creature with the same name as this creature.\"";
     }
 }

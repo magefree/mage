@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -19,17 +17,6 @@ public final class Spirit32Token extends TokenImpl {
         subtype.add(SubType.SPIRIT);
         power = new MageInt(3);
         toughness = new MageInt(2);
-
-        availableImageSetCodes = Arrays.asList("STX", "MOM");
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode().equals("MOM")) {
-            this.setTokenType(2);
-        }
     }
 
     private Spirit32Token(final Spirit32Token token) {

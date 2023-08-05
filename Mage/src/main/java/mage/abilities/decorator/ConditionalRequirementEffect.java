@@ -44,7 +44,7 @@ public class ConditionalRequirementEffect extends RequirementEffect {
         this.otherwiseEffect = otherwiseEffect;
     }
 
-    public ConditionalRequirementEffect(final ConditionalRequirementEffect effect) {
+    protected ConditionalRequirementEffect(final ConditionalRequirementEffect effect) {
         super(effect);
         this.effect = (RequirementEffect) effect.effect.copy();
         if (effect.otherwiseEffect != null) {

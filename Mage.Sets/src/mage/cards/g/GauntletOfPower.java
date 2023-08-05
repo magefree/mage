@@ -84,7 +84,7 @@ class GauntletOfPowerTapForManaAllTriggeredAbility extends TriggeredManaAbility 
     public boolean checkTrigger(GameEvent event, Game game) {
         TappedForManaEvent mEvent = (TappedForManaEvent) event;
         Permanent permanent = mEvent.getPermanent();
-        if (permanent == null || !permanent.isLand() || !permanent.isBasic()) {
+        if (permanent == null || !permanent.isLand() || !permanent.isBasic(game)) {
             return false;
         }
         ObjectColor color = (ObjectColor) game.getState().getValue(getSourceId() + "_color");

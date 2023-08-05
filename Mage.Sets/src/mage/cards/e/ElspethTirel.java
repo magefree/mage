@@ -27,7 +27,7 @@ public final class ElspethTirel extends CardImpl {
 
     public ElspethTirel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELSPETH);
 
         this.setStartingLoyalty(4);

@@ -27,7 +27,7 @@ public final class EmpressGalina extends CardImpl {
 
     public EmpressGalina(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK, SubType.NOBLE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

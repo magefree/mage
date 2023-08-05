@@ -27,8 +27,9 @@ public final class Feint extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Tap all creatures blocking target attacking creature. Prevent all combat damage that would be dealt this turn by that creature and each creature blocking it.
-        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true).setText(""));
         this.getSpellAbility().addEffect(new FeintEffect());
+        this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true)
+                .setText("Prevent all combat damage that would be dealt this turn by that creature and each creature blocking it"));
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
@@ -47,7 +48,7 @@ class FeintEffect extends OneShotEffect {
 
     public FeintEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Tap all creatures blocking target attacking creature. Prevent all combat damage that would be dealt this turn by that creature and each creature blocking it";
+        this.staticText = "tap all creatures blocking target attacking creature";
     }
 
     public FeintEffect(final FeintEffect effect) {

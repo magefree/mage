@@ -1049,8 +1049,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target.getOriginalTarget() instanceof TargetActivatedOrTriggeredAbility
-                || target.getOriginalTarget() instanceof TargetActivatedOrTriggeredAbilityOrLegendarySpell) {
+        if (target.getOriginalTarget() instanceof TargetActivatedOrTriggeredAbility) {
             Iterator<UUID> iterator = target.possibleTargets(source.getControllerId(), source, game).iterator();
             while (!target.isChosen() && iterator.hasNext()) {
                 target.addTarget(iterator.next(), source, game);
@@ -2170,11 +2169,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
+            int min, int max, MultiAmountType type, Game game) {
         log.debug("getMultiAmount");
 
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
         if (needCount == 0) {
             return defaultList;
         }
@@ -2189,7 +2189,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // GOOD effect
         // values must be stable, so AI must able to simulate it and choose correct actions
         // fill max values as much as possible
-        return MultiAmountType.prepareMaxValues(needCount, min, max);
+        return MultiAmountType.prepareMaxValues(messages, min, max);
     }
 
     @Override
@@ -2222,7 +2222,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (!landSets.isEmpty()) {
             criteria.setCodes(landSets.toArray(new String[landSets.size()]));
         }
-        criteria.rarities(Rarity.LAND).nameExact(landName);
+        criteria.rarities(Rarity.LAND).name(landName);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
 
         if (cards.isEmpty()) {

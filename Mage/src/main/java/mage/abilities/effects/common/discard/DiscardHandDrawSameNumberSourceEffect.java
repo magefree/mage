@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class DiscardHandDrawSameNumberSourceEffect extends OneShotEffect {
@@ -18,7 +17,7 @@ public class DiscardHandDrawSameNumberSourceEffect extends OneShotEffect {
         staticText = "Discard all the cards in your hand, then draw that many cards";
     }
 
-    public DiscardHandDrawSameNumberSourceEffect(final DiscardHandDrawSameNumberSourceEffect effect) {
+    protected DiscardHandDrawSameNumberSourceEffect(final DiscardHandDrawSameNumberSourceEffect effect) {
         super(effect);
     }
 

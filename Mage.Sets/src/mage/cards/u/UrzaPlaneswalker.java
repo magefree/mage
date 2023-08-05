@@ -46,7 +46,7 @@ public final class UrzaPlaneswalker extends MeldCard {
     public UrzaPlaneswalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.URZA);
 
         this.setStartingLoyalty(7);

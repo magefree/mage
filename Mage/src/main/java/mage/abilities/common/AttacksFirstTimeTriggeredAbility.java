@@ -11,7 +11,6 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
- *
  * @author TheElk801
  */
 public class AttacksFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
@@ -22,7 +21,7 @@ public class AttacksFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} attacks for the first time each turn, ");
     }
 
-    public AttacksFirstTimeTriggeredAbility(final AttacksFirstTimeTriggeredAbility ability) {
+    protected AttacksFirstTimeTriggeredAbility(final AttacksFirstTimeTriggeredAbility ability) {
         super(ability);
     }
 

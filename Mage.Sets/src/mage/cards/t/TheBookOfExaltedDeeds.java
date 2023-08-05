@@ -41,7 +41,7 @@ public final class TheBookOfExaltedDeeds extends CardImpl {
     public TheBookOfExaltedDeeds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{W}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your end step, if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

@@ -23,8 +23,7 @@ public final class TeferiAkosaOfZhalfirEmblem extends Emblem {
 
     // -2: You get an emblem with "Knights you control get +1/+0 and have ward {1}."
     public TeferiAkosaOfZhalfirEmblem() {
-        this.setName("Emblem Teferi");
-        this.setExpansionSetCodeForImage("MOM");
+        super("Emblem Teferi");
         Ability ability = new SimpleStaticAbility(
                 Zone.COMMAND, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter)
         );
@@ -33,5 +32,14 @@ public final class TeferiAkosaOfZhalfirEmblem extends Emblem {
                 Duration.WhileOnBattlefield, filter2
         ).setText("and have ward {1}"));
         this.getAbilities().add(ability);
+    }
+
+    private TeferiAkosaOfZhalfirEmblem(final TeferiAkosaOfZhalfirEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public TeferiAkosaOfZhalfirEmblem copy() {
+        return new TeferiAkosaOfZhalfirEmblem(this);
     }
 }

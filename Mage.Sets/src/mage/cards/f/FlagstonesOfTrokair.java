@@ -26,13 +26,13 @@ public final class FlagstonesOfTrokair extends CardImpl {
 
     public FlagstonesOfTrokair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
 
         // When Flagstones of Trokair is put into a graveyard from the battlefield, you may search your library for a Plains card and put it onto the battlefield tapped. If you do, shuffle your library.
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(FILTER), true, true), true, false));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(FILTER), true), true, false));
     }
 
     private FlagstonesOfTrokair(final FlagstonesOfTrokair card) {

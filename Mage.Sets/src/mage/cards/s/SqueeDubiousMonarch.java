@@ -32,7 +32,7 @@ public final class SqueeDubiousMonarch extends CardImpl {
     public SqueeDubiousMonarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(2);

@@ -33,7 +33,7 @@ public final class TrostaniSelesnyasVoice extends CardImpl {
 
     public TrostaniSelesnyasVoice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRYAD);
 
         this.power = new MageInt(2);

@@ -5,7 +5,6 @@ package mage.filter.common;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
@@ -20,7 +19,7 @@ public class FilterCreatureForCombat extends FilterCreatureForCombatBase {
         this.add(TappedPredicate.UNTAPPED);
     }
 
-    public FilterCreatureForCombat(final FilterCreatureForCombat filter) {
+    protected FilterCreatureForCombat(final FilterCreatureForCombat filter) {
         super(filter);
     }
 

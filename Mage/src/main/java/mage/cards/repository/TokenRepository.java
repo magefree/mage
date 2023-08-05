@@ -1,5 +1,6 @@
 package mage.cards.repository;
 
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
@@ -274,5 +275,42 @@ public enum TokenRepository {
         res.add(createXmageToken("The Monarch", 2, "https://api.scryfall.com/cards/tcn2/1/en?format=image"));
 
         return res;
+    }
+
+    /**
+     * Try to find random image info by related set code
+     *
+     * @param possibleList     all possible tokens e.g. by clas name
+     * @param preferredSetCode primary set code for possible image (if not found then will use any set)
+     * @return
+     */
+    private TokenInfo findPreferredTokenInfo(List<TokenInfo> possibleList, String preferredSetCode) {
+        // search by set code
+        List<TokenInfo> needList = possibleList.stream()
+                .filter(info -> info.getSetCode().equals(preferredSetCode))
+                .collect(Collectors.toList());
+
+        // search by all sets
+        if (needList.isEmpty()) {
+            needList = possibleList;
+        }
+
+        // also will return diff image number for tokens
+        if (needList.size() > 0) {
+            return RandomUtil.randomFromCollection(needList);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Try to find random image info by related set code
+     *
+     * @param className        full class name of the token or other object
+     * @param preferredSetCode primary set code for possible image (if not found then will use any set)
+     * @return
+     */
+    public TokenInfo findPreferredTokenInfoForClass(String className, String preferredSetCode) {
+        return findPreferredTokenInfo(TokenRepository.instance.getByClassName(className), preferredSetCode);
     }
 }

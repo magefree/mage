@@ -116,10 +116,18 @@ class LethalSchemeEffect extends OneShotEffect {
                 player.choose(Outcome.Neutral, choiceForThisLoop, game);
 
                 String choice = choiceForThisLoop.getChoice();
-                Permanent choicePermanent = permanents.stream().filter(permanent -> permanent.getIdName().equals(choice)).findFirst().get();
-
-                ConniveSourceEffect.connive(choicePermanent, 1, source, game);
-                permanents.remove(choicePermanent);
+                Permanent choicePermanent = permanents
+                        .stream()
+                        .filter(permanent -> permanent.getIdName().equals(choice))
+                        .findFirst()
+                        .orElse(null);
+                if (choicePermanent != null) {
+                    ConniveSourceEffect.connive(choicePermanent, 1, source, game);
+                    permanents.remove(choicePermanent);
+                } else {
+                    // no choices, e.g. disconnection
+                    break;
+                }
             }
         }
         return true;

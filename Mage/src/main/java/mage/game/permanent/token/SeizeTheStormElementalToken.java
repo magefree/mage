@@ -11,8 +11,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -37,8 +35,6 @@ public final class SeizeTheStormElementalToken extends TokenImpl {
         ).setText("this creature's power and toughness are each equal to the number of " +
                 "instant and sorcery cards in your graveyard, plus the number of cards with flashback you own in exile")
         ).addHint(hint));
-
-        availableImageSetCodes = Arrays.asList("MID");
     }
 
     private SeizeTheStormElementalToken(final SeizeTheStormElementalToken token) {

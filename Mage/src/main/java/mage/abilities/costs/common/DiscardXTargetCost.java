@@ -27,7 +27,7 @@ public class DiscardXTargetCost extends VariableCostImpl {
         this.filter = filter;
     }
 
-    public DiscardXTargetCost(final DiscardXTargetCost cost) {
+    protected DiscardXTargetCost(final DiscardXTargetCost cost) {
         super(cost);
         this.filter = cost.filter;
     }

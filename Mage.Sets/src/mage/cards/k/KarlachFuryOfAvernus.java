@@ -26,7 +26,7 @@ public final class KarlachFuryOfAvernus extends CardImpl {
     public KarlachFuryOfAvernus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TIEFLING);
         this.subtype.add(SubType.BARBARIAN);
         this.power = new MageInt(5);

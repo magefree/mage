@@ -15,7 +15,6 @@ import mage.target.TargetCard;
 import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DrawDiscardOneOfThemEffect extends OneShotEffect {
@@ -31,7 +30,7 @@ public class DrawDiscardOneOfThemEffect extends OneShotEffect {
                 + ", then discard one of them";
     }
 
-    public DrawDiscardOneOfThemEffect(final DrawDiscardOneOfThemEffect effect) {
+    protected DrawDiscardOneOfThemEffect(final DrawDiscardOneOfThemEffect effect) {
         super(effect);
         this.cardsToDraw = effect.cardsToDraw;
     }

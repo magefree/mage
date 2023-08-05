@@ -82,7 +82,7 @@ class GoblinTutorEffect extends OneShotEffect {
             if (amount == 2) {
                 effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, filter), true);
             } else if (amount == 3) {
-                effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_ENTCHANTMENT), true);
+                effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_ENCHANTMENT), true);
             } else if (amount == 4) {
                 effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_CARD_ARTIFACT), true);
             } else if (amount == 5) {

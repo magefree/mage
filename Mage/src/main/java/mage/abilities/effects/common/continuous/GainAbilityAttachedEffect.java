@@ -58,7 +58,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         this.generateGainAbilityDependencies(ability, null);
     }
 
-    public GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
+    protected GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
@@ -147,7 +147,12 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         if (quotes) {
             sb.append('"');
         }
-        sb.append(ability.getRule("This " + targetObjectName));
+        String abilityRuleText = ability.getRule("This " + targetObjectName);
+        if (abilityRuleText.endsWith(")</i>")) {
+            // remove reminder text for this rule generation
+            abilityRuleText = abilityRuleText.substring(0, abilityRuleText.indexOf(" <i>("));
+        }
+        sb.append(abilityRuleText);
         if (quotes) {
             sb.append('"');
         }
@@ -155,7 +160,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
             sb.append(' ').append(duration);
         }
         if (doesntRemoveItself) {
-            sb.append(" This effect doesn't remove {this}.");
+            sb.append(". This effect doesn't remove {this}.");
         }
         return sb.toString();
     }

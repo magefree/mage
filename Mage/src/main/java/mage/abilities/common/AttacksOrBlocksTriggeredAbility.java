@@ -18,7 +18,7 @@ public class AttacksOrBlocksTriggeredAbility extends TriggeredAbilityImpl {
         }
     }
 
-    public AttacksOrBlocksTriggeredAbility(final AttacksOrBlocksTriggeredAbility ability) {
+    protected AttacksOrBlocksTriggeredAbility(final AttacksOrBlocksTriggeredAbility ability) {
         super(ability);
     }
 

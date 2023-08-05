@@ -47,7 +47,7 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
                 + (targetController == TargetController.OPPONENT ? "an opponent" : "a player") + ", ");
     }
 
-    public DealsDamageToAPlayerAllTriggeredAbility(final DealsDamageToAPlayerAllTriggeredAbility ability) {
+    protected DealsDamageToAPlayerAllTriggeredAbility(final DealsDamageToAPlayerAllTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.filter = ability.filter;

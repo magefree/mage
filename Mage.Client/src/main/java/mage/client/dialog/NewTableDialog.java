@@ -8,6 +8,7 @@ import mage.client.table.TablePlayerPanel;
 import mage.client.util.Event;
 import mage.client.util.IgnoreList;
 import mage.client.util.Listener;
+import mage.constants.MatchBufferTime;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
@@ -85,6 +86,8 @@ public class NewTableDialog extends MageDialog {
         cbDeckType = new javax.swing.JComboBox();
         lbTimeLimit = new javax.swing.JLabel();
         cbTimeLimit = new javax.swing.JComboBox();
+        lbBufferTime = new javax.swing.JLabel();
+        cbBufferTime = new javax.swing.JComboBox();
         lblGameType = new javax.swing.JLabel();
         cbGameType = new javax.swing.JComboBox();
         chkRollbackTurnsAllowed = new javax.swing.JCheckBox();
@@ -189,6 +192,9 @@ public class NewTableDialog extends MageDialog {
 
         lbTimeLimit.setText("Time Limit:");
         lbTimeLimit.setToolTipText("The active time a player may use to finish the match. If their time runs out, the player looses the current game.");
+
+        lbBufferTime.setText("Buffer Time:");
+        lbBufferTime.setToolTipText("The extra time a player gets whenever the timer starts before their normal time limit starts going down.");
 
         lblGameType.setText("Game Type:");
 
@@ -332,7 +338,11 @@ public class NewTableDialog extends MageDialog {
                                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                                 .addComponent(lbTimeLimit)
                                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addComponent(lbBufferTime)
+                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addComponent(cbBufferTime, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                                 .addComponent(lblPassword)
                                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -412,6 +422,8 @@ public class NewTableDialog extends MageDialog {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(cbTimeLimit)
                                                 .addComponent(lbTimeLimit)
+                                                .addComponent(cbBufferTime)
+                                                .addComponent(lbBufferTime)
                                                 .addComponent(lblPassword)
                                                 .addComponent(txtPassword)
                                                 .addComponent(chkSpectatorsAllowed)))
@@ -603,8 +615,8 @@ public class NewTableDialog extends MageDialog {
             options.getPlayerTypes().add(player.getPlayerType());
         }
         options.setDeckType((String) this.cbDeckType.getSelectedItem());
-        options.setLimited(options.getDeckType().startsWith("Limited"));
         options.setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());
+        options.setMatchBufferTime((MatchBufferTime) this.cbBufferTime.getSelectedItem());
         options.setAttackOption((MultiplayerAttackOption) this.cbAttackOption.getSelectedItem());
         options.setSkillLevel((SkillLevel) this.cbSkillLevel.getSelectedItem());
         options.setRange((RangeOfInfluence) this.cbRange.getSelectedItem());
@@ -621,6 +633,10 @@ public class NewTableDialog extends MageDialog {
         options.setMullgianType((MulliganType) this.cbMulligan.getSelectedItem());
         String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
         options.setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
+        options.setLimited(options.getDeckType().startsWith("Limited"));
+        if (options.getDeckType().startsWith("Variant Magic - Freeform Unlimited Commander")) {
+            options.setLimited(true); // limited-style sideboarding with unlimited basics enabled for Freeform Unlimited Commander
+        }
 
         return options;
     }
@@ -798,6 +814,7 @@ public class NewTableDialog extends MageDialog {
             cbDeckType.setModel(new DefaultComboBoxModel(SessionHandler.getDeckTypes()));
             selectLimitedByDefault();
             cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
+            cbBufferTime.setModel(new DefaultComboBoxModel(MatchBufferTime.values()));
             cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
             cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));
             cbSkillLevel.setModel(new DefaultComboBoxModel(SkillLevel.values()));
@@ -875,6 +892,14 @@ public class NewTableDialog extends MageDialog {
         for (MatchTimeLimit mtl : MatchTimeLimit.values()) {
             if (mtl.getTimeLimit() == timeLimit) {
                 this.cbTimeLimit.setSelectedItem(mtl);
+                break;
+            }
+        }
+        // TODO: Rethink defaults with buffer time?
+        int bufferTime = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_BUFFER_TIME + versionStr, "0"));
+        for (MatchBufferTime mtl : MatchBufferTime.values()) {
+            if (mtl.getBufferTime() == bufferTime) {
+                this.cbBufferTime.setSelectedItem(mtl);
                 break;
             }
         }
@@ -982,6 +1007,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JComboBox cbRange;
     private javax.swing.JComboBox cbSkillLevel;
     private javax.swing.JComboBox cbTimeLimit;
+    private javax.swing.JComboBox cbBufferTime;
     private javax.swing.JCheckBox chkPlaneChase;
     private javax.swing.JCheckBox chkRated;
     private javax.swing.JCheckBox chkRollbackTurnsAllowed;
@@ -993,6 +1019,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lbDeckType;
     private javax.swing.JLabel lbTimeLimit;
+    private javax.swing.JLabel lbBufferTime;
     private javax.swing.JLabel lblAttack;
     private javax.swing.JLabel lblEdhPowerLevel;
     private javax.swing.JLabel lblFreeMulligans;

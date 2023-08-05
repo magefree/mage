@@ -30,7 +30,7 @@ public final class MalcolmKeenEyedNavigator extends CardImpl {
     public MalcolmKeenEyedNavigator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SIREN);
         this.subtype.add(SubType.PIRATE);
         this.power = new MageInt(2);

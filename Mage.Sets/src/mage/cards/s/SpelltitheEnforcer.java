@@ -35,7 +35,7 @@ public final class SpelltitheEnforcer extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new SpelltitheEnforcerEffect(),
-                StaticFilters.FILTER_SPELL,
+                StaticFilters.FILTER_SPELL_A,
                 false,
                 SetTargetPointer.PLAYER
         ));

@@ -31,7 +31,7 @@ public final class IsperiaTheInscrutable extends CardImpl {
 
     public IsperiaTheInscrutable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
@@ -83,7 +83,7 @@ class IsperiaTheInscrutableEffect extends OneShotEffect {
             player.revealCards(player.getLogName() + " hand", player.getHand(), game, true);
             for (Card card : player.getHand().getCards(game)) {
                 if (CardUtil.haveSameNames(card, cardName, game)) {
-                    return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true).apply(game, source);
+                    return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true).apply(game, source);
                 }
             }
             return true;

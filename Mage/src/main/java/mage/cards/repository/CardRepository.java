@@ -96,7 +96,7 @@ public enum CardRepository {
     }
 
     private void addNewNames(CardInfo card, Set<String> namesList) {
-        // require before call: qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName"...);
+        // require before call: qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName"...);
 
         // normal names
         int result = card.getName().indexOf(" // ");
@@ -111,8 +111,8 @@ public enum CardRepository {
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
             namesList.add(card.getSecondSideName());
         }
-        if (card.getModalDoubleFacesSecondSideName() != null && !card.getModalDoubleFacesSecondSideName().isEmpty()) {
-            namesList.add(card.getModalDoubleFacesSecondSideName());
+        if (card.getModalDoubleFacedSecondSideName() != null && !card.getModalDoubleFacedSecondSideName().isEmpty()) {
+            namesList.add(card.getModalDoubleFacedSecondSideName());
         }
         if (card.getFlipCardName() != null && !card.getFlipCardName().isEmpty()) {
             namesList.add(card.getFlipCardName());
@@ -130,7 +130,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 addNewNames(card, names);
@@ -145,7 +145,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             qb.where().not().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
@@ -162,7 +162,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("supertypes", '%' + SuperType.BASIC.name() + '%'),
@@ -183,7 +183,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             qb.where().not().like("supertypes", new SelectArg('%' + SuperType.BASIC.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
@@ -200,7 +200,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             qb.where().like("types", new SelectArg('%' + CardType.CREATURE.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
@@ -217,7 +217,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             qb.where().like("types", new SelectArg('%' + CardType.ARTIFACT.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
@@ -234,7 +234,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("types", '%' + CardType.CREATURE.name() + '%'),
@@ -254,7 +254,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacesSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
             Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("types", '%' + CardType.ARTIFACT.name() + '%'),
@@ -349,18 +349,13 @@ public enum CardRepository {
     }
 
     public CardInfo findPreferredCoreExpansionCard(String name) {
-        return findPreferredCoreExpansionCard(name, null);
+        return findPreferredCoreExpansionCard(name, "");
     }
 
     public CardInfo findPreferredCoreExpansionCard(String name, String preferredSetCode) {
         List<CardInfo> cards;
         cards = findCards(name);
 
-        return findPreferredOrLatestCard(cards, preferredSetCode);
-    }
-
-    public CardInfo findPreferredCoreExpansionCardByClassName(String canonicalClassName, String preferredSetCode) {
-        List<CardInfo> cards = findCardsByClass(canonicalClassName);
         return findPreferredOrLatestCard(cards, preferredSetCode);
     }
 
@@ -373,7 +368,7 @@ public enum CardRepository {
                 ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
                 if (set != null) {
 
-                    if ((preferredSetCode != null) && (preferredSetCode.equals(set.getCode()))) {
+                    if (preferredSetCode.equals(set.getCode())) {
                         return cardinfo;
                     }
 
@@ -483,7 +478,7 @@ public enum CardRepository {
                             .eq("flipCardName",                     new SelectArg(name)).or()
                             .eq("secondSideName",                   new SelectArg(name)).or()
                             .eq("adventureSpellName",               new SelectArg(name)).or()
-                            .eq("modalDoubleFacesSecondSideName",   new SelectArg(name));
+                            .eq("modalDoubleFacedSecondSideName",   new SelectArg(name));
                     results = cardDao.query(queryBuilder.prepare());
                 } else {
                     // Check that a full card was found and not a SplitCardHalf

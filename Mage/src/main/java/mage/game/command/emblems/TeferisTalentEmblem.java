@@ -13,7 +13,7 @@ public final class TeferisTalentEmblem extends Emblem {
     // -12: "You may activate loyalty abilities of planeswalkers you control on any player's turn any time you could cast an instant."
 
     public TeferisTalentEmblem() {
-        this.setName("Emblem Teferi");
+        super("Emblem Teferi");
         this.getAbilities().add(new SimpleStaticAbility(
                 Zone.COMMAND,
                 new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(
@@ -21,7 +21,14 @@ public final class TeferisTalentEmblem extends Emblem {
                         "loyalty abilities of planeswalkers you control on any player's turn"
                 )
         ));
+    }
 
-        this.setExpansionSetCodeForImage("MOC");
+    private TeferisTalentEmblem(final TeferisTalentEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public TeferisTalentEmblem copy() {
+        return new TeferisTalentEmblem(this);
     }
 }

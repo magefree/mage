@@ -28,7 +28,7 @@ public final class KethekCrucibleGoliath extends CardImpl {
     public KethekCrucibleGoliath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(4);
@@ -96,7 +96,7 @@ class KethekCrucibleGoliathEffect extends OneShotEffect {
         // Lesser Mana Value
         filterCreatureCard.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue));
         //put it onto the battlefield, then put the rest on the bottom of your library in a random order.
-        RevealCardsFromLibraryUntilEffect effect = new RevealCardsFromLibraryUntilEffect(filterCreatureCard, Zone.BATTLEFIELD, Zone.LIBRARY);
+        RevealCardsFromLibraryUntilEffect effect = new RevealCardsFromLibraryUntilEffect(filterCreatureCard, PutCards.BATTLEFIELD,PutCards.BOTTOM_RANDOM);
         effect.apply(game, source);
         return true;
     }

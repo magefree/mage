@@ -30,8 +30,8 @@ public final class DarkDepths extends CardImpl {
 
     public DarkDepths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.SNOW);
 
         // Dark Depths enters the battlefield with ten ice counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.ICE.createInstance(10)), "with ten ice counters on it"));

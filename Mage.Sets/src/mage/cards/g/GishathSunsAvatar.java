@@ -32,7 +32,7 @@ public final class GishathSunsAvatar extends CardImpl {
     public GishathSunsAvatar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{G}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DINOSAUR);
         this.subtype.add(SubType.AVATAR);
         this.power = new MageInt(7);

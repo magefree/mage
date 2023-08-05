@@ -22,7 +22,7 @@ public final class CavernsOfDespair extends CardImpl {
     public CavernsOfDespair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // No more than two creatures can attack each combat.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CavernsOfDespairAttackRestrictionEffect()));

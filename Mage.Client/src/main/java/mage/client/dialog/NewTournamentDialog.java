@@ -18,6 +18,7 @@ import mage.client.SessionHandler;
 import mage.client.table.TournamentPlayerPanel;
 import mage.client.util.IgnoreList;
 import mage.client.util.gui.FastSearchUtil;
+import mage.constants.MatchBufferTime;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
@@ -55,6 +56,7 @@ public class NewTournamentDialog extends MageDialog {
     private static final int CONSTRUCTION_TIME_MAX = 30;
     private boolean isRandom = false;
     private boolean isRichMan = false;
+    private boolean isRemixed = false;
     private String cubeFromDeckFilename = "";
     private String jumpstartPacksFilename = "";
     private boolean automaticChange = false;
@@ -84,6 +86,7 @@ public class NewTournamentDialog extends MageDialog {
             cbDeckType.setModel(new DefaultComboBoxModel(SessionHandler.getDeckTypes()));
 
             cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
+            cbBufferTime.setModel(new DefaultComboBoxModel(MatchBufferTime.values()));
             cbSkillLevel.setModel(new DefaultComboBoxModel(SkillLevel.values()));
             cbDraftCube.setModel(new DefaultComboBoxModel(SessionHandler.getDraftCubes()));
             cbDraftTiming.setModel(new DefaultComboBoxModel(Arrays.stream(TimingOption.values())
@@ -130,6 +133,8 @@ public class NewTournamentDialog extends MageDialog {
         txtName = new javax.swing.JTextField();
         lbTimeLimit = new javax.swing.JLabel();
         cbTimeLimit = new javax.swing.JComboBox();
+        lbBufferTime = new javax.swing.JLabel();
+        cbBufferTime = new javax.swing.JComboBox();
         lbSkillLevel = new javax.swing.JLabel();
         cbSkillLevel = new javax.swing.JComboBox();
         lblPassword = new javax.swing.JLabel();
@@ -244,6 +249,16 @@ public class NewTournamentDialog extends MageDialog {
         bindingGroup.addBinding(binding);
 
         cbTimeLimit.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, they lose the complete match. ");
+
+        lbBufferTime.setText("Buffer Time:");
+        lbBufferTime.setToolTipText(
+                "The time a player gets whenever their timer starts before their match time starts going down. ");
+
+        org.jdesktop.beansbinding.Binding binding2 = org.jdesktop.beansbinding.Bindings.createAutoBinding( org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, cbBufferTime, org.jdesktop.beansbinding.ObjectProperty.create(), lbBufferTime, org.jdesktop.beansbinding.BeanProperty.create("labelFor"));
+        bindingGroup.addBinding(binding2);
+
+        cbBufferTime.setToolTipText(
+                "The time a player gets whenever their timer starts before their match time starts going down. ");
 
         lbSkillLevel.setText("Skill Level:");
         lbSkillLevel.setToolTipText("The time a player has for the whole match. If a player runs out of time during a game, they lose the complete match. ");
@@ -551,7 +566,11 @@ public class NewTournamentDialog extends MageDialog {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(lbTimeLimit)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lbBufferTime)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(cbBufferTime, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(lblPassword)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -572,6 +591,8 @@ public class NewTournamentDialog extends MageDialog {
                                         .addComponent(lblName)
                                         .addComponent(lbTimeLimit)
                                         .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lbBufferTime)
+                                        .addComponent(cbBufferTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblPassword)
                                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(cbAllowSpectators, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -679,11 +700,11 @@ public class NewTournamentDialog extends MageDialog {
 
         // CHECKS
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
-        if (tournamentType.isRandom() || tournamentType.isRichMan()) {
-            if (tOptions.getLimitedOptions().getSetCodes().size() < tournamentType.getNumBoosters()) {
+        if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isRemixed()) {
+            if (tOptions.getLimitedOptions().getSetCodes().size() < 1) {
                 JOptionPane.showMessageDialog(
                         MageFrame.getDesktop(),
-                        String.format("Warning, you must select %d packs for the pool", tournamentType.getNumBoosters()),
+                        "Warning, you must select at least one set for the pool",
                         "Warning",
                         JOptionPane.WARNING_MESSAGE
                 );
@@ -916,7 +937,8 @@ public class NewTournamentDialog extends MageDialog {
         if (tournamentType.isLimited()) {
             this.isRandom = tournamentType.isRandom();
             this.isRichMan = tournamentType.isRichMan();
-            if (this.isRandom || this.isRichMan) {
+            this.isRemixed = tournamentType.isRemixed();
+            if (this.isRandom || this.isRichMan || this.isRemixed) {
                 createRandomPacks();
             } else {
                 createPacks(tournamentType.getNumBoosters());
@@ -925,8 +947,9 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void setNumberOfSwissRoundsMin(int numPlayers) {
-        // set the number of minimum swiss rounds related to the number of players
-        int minRounds = (int) Math.ceil(Math.log(numPlayers + 1) / Math.log(2));
+        // set 3 rounds default if more than 4 players
+        // don't set 4 rounds by default, as 3 rounds generally preferred
+        int minRounds = (numPlayers + 1 > 4) ? 3 : 2;
         int newValue = Math.max((Integer) spnNumRounds.getValue(), minRounds);
         this.spnNumRounds.setModel(new SpinnerNumberModel(newValue, 2, 10, 1));
         this.pack();
@@ -960,7 +983,7 @@ public class NewTournamentDialog extends MageDialog {
                 this.lblPacks.setVisible(false);
                 this.pnlPacks.setVisible(false);
                 this.pnlRandomPacks.setVisible(false);
-            } else if (tournamentType.isRandom() || tournamentType.isRichMan()) {
+            } else if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isRemixed()) {
                 this.lblDraftCube.setVisible(false);
                 this.cbDraftCube.setVisible(false);
                 this.lblPacks.setVisible(true);
@@ -1031,7 +1054,7 @@ public class NewTournamentDialog extends MageDialog {
             pnlRandomPacks.add(txtRandomPacks);
             JButton btnSelectRandomPacks = new JButton();
             btnSelectRandomPacks.setAlignmentX(Component.LEFT_ALIGNMENT);
-            btnSelectRandomPacks.setText("Select packs to be included in the pool");
+            btnSelectRandomPacks.setText("Select sets to be included in the pool");
             btnSelectRandomPacks.setToolTipText(RandomPacksSelectorDialog.randomDraftDescription);
             btnSelectRandomPacks.addActionListener(evt -> showRandomPackSelectorDialog());
             pnlRandomPacks.add(btnSelectRandomPacks);
@@ -1044,8 +1067,7 @@ public class NewTournamentDialog extends MageDialog {
     }
 
     private void showRandomPackSelectorDialog() {
-        TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
-        randomPackSelector.showDialog(isRandom, isRichMan, tournamentType.getNumBoosters());
+        randomPackSelector.showDialog(isRandom, isRichMan, isRemixed);
         this.txtRandomPacks.setText(String.join(";", randomPackSelector.getSelectedPacks()));
         this.pack();
         this.revalidate();
@@ -1248,6 +1270,7 @@ public class NewTournamentDialog extends MageDialog {
         if (tournamentType.isLimited()) {
             tOptions.getLimitedOptions().setConstructionTime((Integer) this.spnConstructTime.getValue() * 60);
             tOptions.getLimitedOptions().setIsRandom(tournamentType.isRandom());
+            tOptions.getLimitedOptions().setIsRemixed(tournamentType.isRemixed());
             tOptions.getLimitedOptions().setIsRichMan(tournamentType.isRichMan());
             tOptions.getLimitedOptions().setIsJumpstart(tournamentType.isJumpstart());
 
@@ -1283,6 +1306,7 @@ public class NewTournamentDialog extends MageDialog {
             } else if (tournamentType.isRandom() || tournamentType.isRichMan()) {
                 this.isRandom = tournamentType.isRandom();
                 this.isRichMan = tournamentType.isRichMan();
+                this.isRemixed = tournamentType.isRemixed();
                 tOptions.getLimitedOptions().getSetCodes().clear();
                 java.util.List<String> selected = randomPackSelector.getSelectedPacks();
                 Collections.shuffle(selected);
@@ -1299,6 +1323,12 @@ public class NewTournamentDialog extends MageDialog {
                 } else {
                     tOptions.getLimitedOptions().getSetCodes().addAll(selected);
                 }
+            } else if (tournamentType.isRemixed()) {
+                this.isRandom = tournamentType.isRandom();
+                this.isRichMan = tournamentType.isRichMan();
+                this.isRemixed = tournamentType.isRemixed();
+                tOptions.getLimitedOptions().getSetCodes().clear();
+                tOptions.getLimitedOptions().getSetCodes().addAll(randomPackSelector.getSelectedPacks());
             } else {
                 for (JPanel panel : packPanels) {
                     JComboBox combo = findComboInComponent(panel);
@@ -1320,12 +1350,16 @@ public class NewTournamentDialog extends MageDialog {
             tOptions.getMatchOptions().setDeckType((String) this.cbDeckType.getSelectedItem());
             tOptions.getMatchOptions().setGameType(((GameTypeView) this.cbGameType.getSelectedItem()).getName());
             tOptions.getMatchOptions().setLimited(tOptions.getMatchOptions().getDeckType().startsWith("Limited"));
+            if (tOptions.getMatchOptions().getDeckType().startsWith("Variant Magic - Freeform Unlimited Commander")) {
+                tOptions.getMatchOptions().setLimited(true); // limited-style sideboarding with unlimited basics enabled for Freeform Unlimited Commander
+            }
         }
 
         String serverAddress = SessionHandler.getSession().getServerHostname().orElse("");
         tOptions.getMatchOptions().setBannedUsers(IgnoreList.getIgnoredUsers(serverAddress));
 
         tOptions.getMatchOptions().setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());
+        tOptions.getMatchOptions().setMatchBufferTime((MatchBufferTime) this.cbBufferTime.getSelectedItem());
         tOptions.getMatchOptions().setSkillLevel((SkillLevel) this.cbSkillLevel.getSelectedItem());
         tOptions.getMatchOptions().setWinsNeeded((Integer) this.spnNumWins.getValue());
         tOptions.getMatchOptions().setFreeMulligans((Integer) this.spnFreeMulligans.getValue());
@@ -1347,6 +1381,14 @@ public class NewTournamentDialog extends MageDialog {
         for (MatchTimeLimit mtl : MatchTimeLimit.values()) {
             if (mtl.getTimeLimit() == timeLimit) {
                 this.cbTimeLimit.setSelectedItem(mtl);
+                break;
+            }
+        }
+        // TODO: Rethink default match time with buffer time.
+        int bufferTime = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_BUFFER_TIME + versionStr, "0"));
+        for (MatchBufferTime mtl : MatchBufferTime.values()) {
+            if (mtl.getBufferTime() == bufferTime) {
+                this.cbBufferTime.setSelectedItem(mtl);
                 break;
             }
         }
@@ -1383,7 +1425,7 @@ public class NewTournamentDialog extends MageDialog {
                 numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT + versionStr, "4"));
                 prepareTourneyView(numPlayers);
 
-                if (tournamentType.isRandom() || tournamentType.isRichMan()) {
+                if (tournamentType.isRandom() || tournamentType.isRichMan() || tournamentType.isRemixed()) {
                     loadRandomPacks(version);
                 } else {
                     loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT + versionStr, ""));
@@ -1444,7 +1486,7 @@ public class NewTournamentDialog extends MageDialog {
             if (deckFile != null && !deckFile.isEmpty()) {
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE + versionStr, deckFile);
             }
-            if (tOptions.getLimitedOptions().getIsRandom() || tOptions.getLimitedOptions().getIsRichMan()) {
+            if (tOptions.getLimitedOptions().getIsRandom() || tOptions.getLimitedOptions().getIsRichMan() || tOptions.getLimitedOptions().getIsRemixed()) {
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT + versionStr, String.join(";", this.randomPackSelector.getSelectedPacks()));
             }
         }
@@ -1472,6 +1514,7 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JCheckBox cbPlaneChase;
     private javax.swing.JComboBox cbSkillLevel;
     private javax.swing.JComboBox cbTimeLimit;
+    private javax.swing.JComboBox cbBufferTime;
     private javax.swing.JComboBox cbTournamentType;
     private javax.swing.JCheckBox chkRated;
     private javax.swing.JCheckBox chkRollbackTurnsAllowed;
@@ -1479,6 +1522,7 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JLabel lbDeckType;
     private javax.swing.JLabel lbSkillLevel;
     private javax.swing.JLabel lbTimeLimit;
+    private javax.swing.JLabel lbBufferTime;
     private javax.swing.JLabel lblConstructionTime;
     private javax.swing.JLabel lblDraftCube;
     private javax.swing.JLabel lblFreeMulligans;

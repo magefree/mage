@@ -23,7 +23,7 @@ public final class EyeOfVecna extends CardImpl {
     public EyeOfVecna(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // When Eye of Vecna enters the battlefield, you draw a card and you lose 2 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(

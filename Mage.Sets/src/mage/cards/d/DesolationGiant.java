@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -12,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
@@ -23,12 +22,9 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 public final class DesolationGiant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("other creatures you control");
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter2.add(AnotherPredicate.instance);
-        filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
     public DesolationGiant(UUID ownerId, CardSetInfo setInfo) {
@@ -41,7 +37,7 @@ public final class DesolationGiant extends CardImpl {
         this.addAbility(new KickerAbility("{W}{W}"));
         // When Desolation Giant enters the battlefield, destroy all other creatures you control. If it was kicked, destroy all other creatures instead.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(new DestroyAllEffect(filter),
-            new DestroyAllEffect(filter2), KickedCondition.ONCE, "destroy all other creatures you control. If it was kicked, destroy all other creatures instead.")));
+            new DestroyAllEffect(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES), KickedCondition.ONCE, "destroy all other creatures you control. If it was kicked, destroy all other creatures instead.")));
 }
 
     private DesolationGiant(final DesolationGiant card) {

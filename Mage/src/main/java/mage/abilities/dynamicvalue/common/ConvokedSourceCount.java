@@ -21,7 +21,7 @@ public enum ConvokedSourceCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return ConvokeWatcher.getConvokingCreatures(new MageObjectReference(sourceAbility, offset), game).size();
+        return ConvokeWatcher.getConvokingCreatures(new MageObjectReference(game.getObject(sourceAbility), game, offset), game).size();
     }
 
     @Override

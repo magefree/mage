@@ -53,11 +53,11 @@ public final class DenOfTheBugbear extends CardImpl {
                 "Whenever this creature attacks, create a 1/1 red Goblin creature token that's tapped and attacking."
         );
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
-                new CreatureToken(3, 2, "3/2 red Goblin creature with \"Whenever this creature attacks, create a 1/1 red Goblin creature token that's tapped and attacking\"")
+                new CreatureToken(3, 2, "3/2 red Goblin creature with \"Whenever this creature attacks, create a 1/1 red Goblin creature token that's tapped and attacking.\"")
                         .withColor("R")
                         .withSubType(SubType.GOBLIN)
                         .withAbility(ability),
-                "land", Duration.EndOfTurn), new ManaCostsImpl<>("{3}{R}")));
+                CardType.LAND, Duration.EndOfTurn).withDurationRuleAtStart(true), new ManaCostsImpl<>("{3}{R}")));
     }
 
     private DenOfTheBugbear(final DenOfTheBugbear card) {

@@ -25,7 +25,7 @@ public final class NissaNaturesArtisan extends CardImpl {
 
     public NissaNaturesArtisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
 
         this.setStartingLoyalty(5);

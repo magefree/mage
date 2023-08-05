@@ -41,7 +41,7 @@ public final class SistersOfStoneDeath extends CardImpl {
 
     public SistersOfStoneDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GORGON);
 
         this.power = new MageInt(7);

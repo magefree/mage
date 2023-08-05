@@ -26,7 +26,7 @@ public final class MinscBelovedRanger extends CardImpl {
     public MinscBelovedRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.RANGER);
         this.power = new MageInt(3);

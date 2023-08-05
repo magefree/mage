@@ -11,6 +11,7 @@ import mage.constants.EmptyNames;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -19,6 +20,8 @@ import java.util.UUID;
  */
 public class PermanentToken extends PermanentImpl {
 
+    // non-modifyable container with token characteristics
+    // this PermanentToken resets to it on each game cycle
     protected Token token;
 
     public PermanentToken(Token token, UUID controllerId, Game game) {
@@ -40,7 +43,7 @@ public class PermanentToken extends PermanentImpl {
         }
     }
 
-    public PermanentToken(final PermanentToken permanent) {
+    protected PermanentToken(final PermanentToken permanent) {
         super(permanent);
         this.token = permanent.token.copy();
     }
@@ -71,6 +74,11 @@ public class PermanentToken extends PermanentImpl {
         }
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s - %s", getExpansionSetCode(), getName());
+    }
+
     private void copyFromToken(Token token, Game game, boolean reset) {
         // modify all attributes permanently (without game usage)
         this.name = token.getName();
@@ -95,7 +103,7 @@ public class PermanentToken extends PermanentImpl {
         this.frameColor = token.getFrameColor(game);
         this.frameStyle = token.getFrameStyle();
         this.supertype.clear();
-        this.supertype.addAll(token.getSuperType());
+        this.supertype.addAll(token.getSuperType(game));
         this.subtype.copyFrom(token.getSubtype(game));
         this.startingLoyalty = token.getStartingLoyalty();
         this.startingDefense = token.getStartingDefense();
@@ -103,6 +111,8 @@ public class PermanentToken extends PermanentImpl {
         if (this.abilities.containsClass(ChangelingAbility.class)) {
             this.subtype.setIsAllCreatureTypes(true);
         }
+
+        CardUtil.copySetAndCardNumber(this, token);
     }
 
     @Override
@@ -139,27 +149,7 @@ public class PermanentToken extends PermanentImpl {
     }
 
     @Override
-    protected MageObject getOtherFace() {
+    public MageObject getOtherFace() {
         return this.transformed ? token : this.token.getBackFace();
-    }
-
-    @Override
-    public String getCardNumber() {
-        return token.getOriginalCardNumber();
-    }
-
-    @Override
-    public void setCardNumber(String cardNumber) {
-        throw new IllegalArgumentException("Wrong code usage: you can't change a token's card number");
-    }
-
-    @Override
-    public String getExpansionSetCode() {
-        return token.getOriginalExpansionSetCode();
-    }
-
-    @Override
-    public void setExpansionSetCode(String expansionSetCode) {
-        throw new IllegalArgumentException("Wrong code usage: you can't change a token's set code, use CardUtils.copySetAndCardNumber instead");
     }
 }

@@ -5,16 +5,16 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.GainAbilitySpellsEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterObject;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -33,7 +33,7 @@ import java.util.UUID;
  */
 public final class RadiantScrollwielder extends CardImpl {
 
-    private static final FilterObject filter = new FilterObject("instant and sorcery spells you control");
+    private static final FilterCard filter = new FilterCard("instant and sorcery spells you control");
 
     static {
         filter.add(Predicates.or(
@@ -51,7 +51,7 @@ public final class RadiantScrollwielder extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Instant and sorcery spells you control have lifelink.
-        this.addAbility(new SimpleStaticAbility(new GainAbilitySpellsEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(
                 LifelinkAbility.getInstance(), filter
         ).setText("instant and sorcery spells you control have lifelink")));
 

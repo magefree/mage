@@ -33,7 +33,7 @@ public final class HallOfTheBanditLord extends CardImpl {
 
     public HallOfTheBanditLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Hall of the Bandit Lord enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

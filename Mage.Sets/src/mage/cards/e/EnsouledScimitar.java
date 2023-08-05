@@ -30,7 +30,7 @@ public final class EnsouledScimitar extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // {3}: Ensouled Scimitar becomes a 1/5 Spirit artifact creature with flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new EnsouledScimitarToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{3}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new EnsouledScimitarToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{3}")));
         // Equipped creature gets +1/+5.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 5)));
         // Equip {2}
@@ -51,13 +51,11 @@ class EnsouledScimitarToken extends TokenImpl {
 
     public EnsouledScimitarToken() {
         super("Pincher", "1/5 Spirit artifact creature with flying");
-        setOriginalExpansionSetCode("5ND");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
         power = new MageInt(1);
         toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
-        
     }
 
     public EnsouledScimitarToken(final EnsouledScimitarToken token) {

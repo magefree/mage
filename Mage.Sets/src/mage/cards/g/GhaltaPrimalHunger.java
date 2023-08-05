@@ -33,7 +33,7 @@ public final class GhaltaPrimalHunger extends CardImpl {
     public GhaltaPrimalHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.DINOSAUR);
         this.power = new MageInt(12);

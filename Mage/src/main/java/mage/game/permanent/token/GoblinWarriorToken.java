@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -20,11 +18,9 @@ public final class GoblinWarriorToken extends TokenImpl {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("SHM", "MM3", "C20");
     }
 
-    public GoblinWarriorToken(final GoblinWarriorToken token) {
+    protected GoblinWarriorToken(final GoblinWarriorToken token) {
         super(token);
     }
 

@@ -46,6 +46,7 @@ public enum AbilityWord {
     RAID("Raid"),
     RALLY("Rally"),
     REVOLT("Revolt"),
+    SECRET_COUNCIL("Secret council"),
     SPELL_MASTERY("Spell mastery"),
     STRIVE("Strive"),
     SWEEP("Sweep"),

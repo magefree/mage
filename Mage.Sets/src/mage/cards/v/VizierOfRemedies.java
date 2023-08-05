@@ -10,6 +10,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
@@ -70,11 +71,14 @@ class VizierOfRemediesReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (source != null && source.getControllerId() != null) {
-            return source.isControlledBy(game.getControllerId(event.getTargetId()))
-                    && event.getData() != null && event.getData().equals(CounterType.M1M1.getName())
-                    && event.getAmount() > 0;
+        if (event.getAmount() <= 0 || !event.getData().equals(CounterType.M1M1.getName())) {
+            return false;
         }
-        return false;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+        }
+        return permanent != null && permanent.isControlledBy(source.getControllerId())
+                && permanent.isCreature(game);
     }
 }

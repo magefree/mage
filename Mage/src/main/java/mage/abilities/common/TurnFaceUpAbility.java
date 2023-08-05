@@ -17,7 +17,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class TurnFaceUpAbility extends SpecialAction {
@@ -43,7 +42,7 @@ public class TurnFaceUpAbility extends SpecialAction {
         this.setWorksFaceDown(true);
     }
 
-    public TurnFaceUpAbility(final TurnFaceUpAbility ability) {
+    protected TurnFaceUpAbility(final TurnFaceUpAbility ability) {
         super(ability);
     }
 
@@ -63,7 +62,7 @@ class TurnFaceUpEffect extends OneShotEffect {
         this.megamorph = megamorph;
     }
 
-    public TurnFaceUpEffect(final TurnFaceUpEffect effect) {
+    protected TurnFaceUpEffect(final TurnFaceUpEffect effect) {
         super(effect);
         this.megamorph = effect.megamorph;
     }

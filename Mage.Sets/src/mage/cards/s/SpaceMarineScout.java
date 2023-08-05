@@ -50,9 +50,9 @@ public final class SpaceMarineScout extends CardImpl {
         // Concealed Position -- When Space Marine Scout enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(
-                        new TargetCardInLibrary(filter), true, true
-                )), condition, "When {this} enters the battlefield, if an opponent controls more lands than you, "
-                + "search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle."
+                        new TargetCardInLibrary(filter), true
+                ), true), condition, "When {this} enters the battlefield, if an opponent controls more lands " +
+                "than you, you may search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle."
         ).withFlavorWord("Concealed Position"));
     }
 

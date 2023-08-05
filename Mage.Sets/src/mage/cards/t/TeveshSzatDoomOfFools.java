@@ -28,8 +28,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -38,7 +36,7 @@ public final class TeveshSzatDoomOfFools extends CardImpl {
     public TeveshSzatDoomOfFools(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SZAT);
         this.setStartingLoyalty(4);
 
@@ -79,7 +77,7 @@ class TeveshSzatDoomOfFoolsSacrificeEffect extends OneShotEffect {
     }
 
     TeveshSzatDoomOfFoolsSacrificeEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "you may sacrifice another creature or planeswalker. If you do, draw two cards, " +
                 "then draw another card if the sacrificed permanent was a commander";
     }

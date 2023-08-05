@@ -32,7 +32,7 @@ public final class XanatharGuildKingpin extends CardImpl {
 
     public XanatharGuildKingpin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BEHOLDER);
 
         this.power = new MageInt(5);

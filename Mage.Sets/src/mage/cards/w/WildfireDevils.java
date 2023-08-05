@@ -102,7 +102,6 @@ class WildfireDevilsEffect extends OneShotEffect {
         if (copiedCard == null) {
             return false;
         }
-        randomPlayer.moveCards(copiedCard, Zone.EXILED, source, game);
         if (!controller.chooseUse(outcome, "Cast the copy of the exiled card?", source, game)) {
             return false;
         }

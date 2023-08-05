@@ -1,11 +1,9 @@
-
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class DevastatingSummonsElementalToken extends TokenImpl {
@@ -15,10 +13,9 @@ public final class DevastatingSummonsElementalToken extends TokenImpl {
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);
-        setOriginalExpansionSetCode("ROE");
     }
 
-    public DevastatingSummonsElementalToken(final DevastatingSummonsElementalToken token) {
+    protected DevastatingSummonsElementalToken(final DevastatingSummonsElementalToken token) {
         super(token);
     }
 

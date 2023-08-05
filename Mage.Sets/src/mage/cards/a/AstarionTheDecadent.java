@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -35,7 +35,7 @@ public final class AstarionTheDecadent extends CardImpl {
     public AstarionTheDecadent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ROGUE);
@@ -55,10 +55,10 @@ public final class AstarionTheDecadent extends CardImpl {
         );
         ability.addTarget(new TargetOpponent());
         ability.withFirstModeFlavorWord("Feed");
-        ability.addHint(ControllerGotLifeCount.getHint());
+        ability.addHint(ControllerGainedLifeCount.getHint());
 
         // • Friends — You gain life equal to the amount of life you gained this turn.
-        ability.addMode(new Mode(new GainLifeEffect(ControllerGotLifeCount.instance)).withFlavorWord("Friends"));
+        ability.addMode(new Mode(new GainLifeEffect(ControllerGainedLifeCount.instance)).withFlavorWord("Friends"));
         this.addAbility(ability.addHint(AstarionTheDecadentHint.instance), new PlayerGainedLifeWatcher());
     }
 

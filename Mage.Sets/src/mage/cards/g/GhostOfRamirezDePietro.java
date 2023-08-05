@@ -44,7 +44,7 @@ public final class GhostOfRamirezDePietro extends CardImpl {
     public GhostOfRamirezDePietro(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PIRATE);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(2);

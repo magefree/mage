@@ -128,7 +128,8 @@ public enum SubType {
     CYBORG("Cyborg", SubTypeSet.CreatureType, true), // Star Wars
     CYCLOPS("Cyclops", SubTypeSet.CreatureType),
     // D
-    DATHOMIRIAN("Dathomirian", SubTypeSet.CreatureType, true), // Star Wars
+    DALEK("Dalek", SubTypeSet.CreatureType),
+    DATHOMIRIAN("Dathomirian", SubTypeSet.CreatureType, true), // Star Wars,
     DAUTHI("Dauthi", SubTypeSet.CreatureType),
     DEMIGOD("Demigod", SubTypeSet.CreatureType),
     DEMON("Demon", SubTypeSet.CreatureType),
@@ -153,7 +154,6 @@ public enum SubType {
     ELEMENTAL("Elemental", SubTypeSet.CreatureType),
     ELEPHANT("Elephant", SubTypeSet.CreatureType),
     ELF("Elf", SubTypeSet.CreatureType),
-    ELVES("Elves", SubTypeSet.CreatureType, true), // Un-sets
     ELK("Elk", SubTypeSet.CreatureType),
     EMPLOYEE("Employee", SubTypeSet.CreatureType),
     EYE("Eye", SubTypeSet.CreatureType),
@@ -448,6 +448,7 @@ public enum SubType {
     GARRUK("Garruk", SubTypeSet.PlaneswalkerType),
     GIDEON("Gideon", SubTypeSet.PlaneswalkerType),
     GRIST("Grist", SubTypeSet.PlaneswalkerType),
+    GUFF("Guff", SubTypeSet.PlaneswalkerType),
     HUATLI("Huatli", SubTypeSet.PlaneswalkerType),
     JACE("Jace", SubTypeSet.PlaneswalkerType),
     JARED("Jared", SubTypeSet.PlaneswalkerType),
@@ -493,6 +494,7 @@ public enum SubType {
     VENSER("Venser", SubTypeSet.PlaneswalkerType),
     VIVIEN("Vivien", SubTypeSet.PlaneswalkerType),
     VRASKA("Vraska", SubTypeSet.PlaneswalkerType),
+    VRONOS("Vronos", SubTypeSet.PlaneswalkerType),
     WILL("Will", SubTypeSet.PlaneswalkerType),
     WINDGRACE("Windgrace", SubTypeSet.PlaneswalkerType),
     WRENN("Wrenn", SubTypeSet.PlaneswalkerType),

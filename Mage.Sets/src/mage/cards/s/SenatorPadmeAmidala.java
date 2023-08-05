@@ -19,7 +19,7 @@ public final class SenatorPadmeAmidala extends CardImpl {
 
     public SenatorPadmeAmidala(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(2);

@@ -32,7 +32,7 @@ public final class ThrunBreakerOfSilence extends CardImpl {
     public ThrunBreakerOfSilence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TROLL);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(5);

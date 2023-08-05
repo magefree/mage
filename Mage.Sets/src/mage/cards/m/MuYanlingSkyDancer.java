@@ -27,7 +27,7 @@ public final class MuYanlingSkyDancer extends CardImpl {
     public MuYanlingSkyDancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.YANLING);
         this.setStartingLoyalty(2);
 

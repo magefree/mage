@@ -38,7 +38,7 @@ public final class MondrakGloryDominus extends CardImpl {
     public MondrakGloryDominus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(4);

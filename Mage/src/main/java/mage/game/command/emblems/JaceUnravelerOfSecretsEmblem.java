@@ -25,13 +25,21 @@ public final class JaceUnravelerOfSecretsEmblem extends Emblem {
      * counter that spell."
      */
     public JaceUnravelerOfSecretsEmblem() {
-        this.setName("Emblem Jace");
-        setExpansionSetCodeForImage("SOI");
+        super("Emblem Jace");
         Effect effect = new CounterTargetEffect();
         effect.setText("counter that spell");
         Ability ability = new JaceUnravelerOfSecretsTriggeredAbility(effect, false);
         ability.addWatcher(new SpellsCastWatcher());
         this.getAbilities().add(ability);
+    }
+
+    private JaceUnravelerOfSecretsEmblem(final JaceUnravelerOfSecretsEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public JaceUnravelerOfSecretsEmblem copy() {
+        return new JaceUnravelerOfSecretsEmblem(this);
     }
 }
 

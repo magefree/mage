@@ -12,8 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.ModalDoubleFacesCard;
-import mage.cards.ModalDoubleFacesCardHalf;
+import mage.cards.ModalDoubleFacedCard;
+import mage.cards.ModalDoubleFacedCardHalf;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.AsThoughEffectType;
@@ -95,7 +95,7 @@ class AminatousAuguryEffect extends OneShotEffect {
         }
 
         Cards cardsToCast = new CardsImpl();
-        cardsToCast.addAll(auguryExileZone.getCards(game));
+        cardsToCast.addAllCards(auguryExileZone.getCards(game));
 
         // put a land card from among them onto the battlefield
         TargetCard target = new TargetCard(Zone.EXILED, StaticFilters.FILTER_CARD_LAND_A);
@@ -115,8 +115,8 @@ class AminatousAuguryEffect extends OneShotEffect {
         // TODO staticFilters must be configured to check the main card face (Ex: MDFC card like Sea Gate Restoration does not count as a land if face up)
         for (Card card : cardsToCast.getCards(game)) {
             // ex: Sea Gate Restoration bug #9956
-            if (card instanceof ModalDoubleFacesCard) {
-                ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+            if (card instanceof ModalDoubleFacedCard) {
+                ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
                 if (leftHalfCard != null
                         && !leftHalfCard.isLand(game)) {
                     AminatousAuguryCastFromExileEffect effect = new AminatousAuguryCastFromExileEffect();

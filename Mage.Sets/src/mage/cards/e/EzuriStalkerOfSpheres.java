@@ -23,7 +23,7 @@ public final class EzuriStalkerOfSpheres extends CardImpl {
     public EzuriStalkerOfSpheres(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
@@ -33,7 +33,7 @@ public final class EzuriStalkerOfSpheres extends CardImpl {
         // When Ezuri, Stalker of Spheres enters the battlefield, you may pay {3}. If you do, proliferate twice.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
                 new ProliferateEffect(false), new GenericManaCost(3)
-        ).addEffect(new ProliferateEffect().setText("twice"))));
+        ).addEffect(new ProliferateEffect().setText(" twice"))));
 
         // Whenever you proliferate, draw a card.
         this.addAbility(new ProliferatedControllerTriggeredAbility(new DrawCardSourceControllerEffect(1)));

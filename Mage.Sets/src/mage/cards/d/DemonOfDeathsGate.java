@@ -24,7 +24,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class DemonOfDeathsGate extends CardImpl {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creatures");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
@@ -39,7 +39,7 @@ public final class DemonOfDeathsGate extends CardImpl {
         
         // You may pay 6 life and sacrifice three black creatures rather than pay Demon of Death's Gate's mana cost
         AlternativeCostSourceAbility alternateCosts = new AlternativeCostSourceAbility(new PayLifeCost(6));
-        alternateCosts.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
+        alternateCosts.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, filter)));
         this.addAbility(alternateCosts);
 
         this.addAbility(FlyingAbility.getInstance());

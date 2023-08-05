@@ -29,9 +29,8 @@ import java.util.UUID;
 public final class VhalCandlekeepResearcher extends CardImpl {
 
     public VhalCandlekeepResearcher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{3}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
-
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);

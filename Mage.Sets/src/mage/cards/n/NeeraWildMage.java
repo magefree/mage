@@ -28,7 +28,7 @@ public final class NeeraWildMage extends CardImpl {
     public NeeraWildMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
@@ -41,7 +41,7 @@ public final class NeeraWildMage extends CardImpl {
         // Then put the rest on the bottom of your library in a random order.
         // This ability triggers only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(new NeeraWildMageEffect(), StaticFilters.FILTER_SPELL_A,
-                true, true).setTriggersOnce(true));
+                true, true).setTriggersOnceEachTurn(true));
     }
 
     private NeeraWildMage(final NeeraWildMage card) {

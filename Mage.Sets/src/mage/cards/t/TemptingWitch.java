@@ -13,7 +13,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.FoodToken;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
@@ -24,8 +24,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TemptingWitch extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.FOOD, "a Food");
 
     public TemptingWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -43,7 +41,7 @@ public final class TemptingWitch extends CardImpl {
                 new LoseLifeTargetEffect(3), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

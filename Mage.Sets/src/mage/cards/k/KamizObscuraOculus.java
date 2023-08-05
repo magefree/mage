@@ -32,7 +32,7 @@ public final class KamizObscuraOculus extends CardImpl {
     public KamizObscuraOculus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CEPHALID, SubType.ROGUE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
@@ -73,8 +73,8 @@ class KamizConniveEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        return permanent != null && ConniveSourceEffect.connive(permanent, 1, source, game);
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        return ConniveSourceEffect.connive(permanent, 1, source, game);
     }
 }
 

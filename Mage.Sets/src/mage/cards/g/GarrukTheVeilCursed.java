@@ -33,7 +33,7 @@ public final class GarrukTheVeilCursed extends CardImpl {
 
     public GarrukTheVeilCursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
 
         // this card is the second face of double-faced card
@@ -49,7 +49,7 @@ public final class GarrukTheVeilCursed extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DoIfCostPaid(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                         StaticFilters.FILTER_CARD_CREATURE_A
-                ), true, true),
+                ), true),
                 null,
                 new SacrificeTargetCost(new TargetControlledPermanent(
                         StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT

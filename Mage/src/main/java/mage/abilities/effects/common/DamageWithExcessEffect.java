@@ -2,6 +2,8 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -13,13 +15,18 @@ import mage.players.Player;
  */
 public class DamageWithExcessEffect extends OneShotEffect {
 
-    private final int amount;
+    private final DynamicValue amount;
 
     public DamageWithExcessEffect(int amount) {
+        this(StaticValue.get(amount));
+    }
+
+    public DamageWithExcessEffect(DynamicValue amount) {
         super(Outcome.Damage);
         this.amount = amount;
-        this.staticText = "{this} deals " + amount + " damage to target creature. " +
-                "Excess damage is dealt to that creature's controller instead";
+        this.staticText = "{this} deals " + amount + " damage to target creature" +
+                (amount instanceof StaticValue ? "" : ", where X is " + amount.getMessage()) +
+                ". Excess damage is dealt to that creature's controller instead";
     }
 
     private DamageWithExcessEffect(final DamageWithExcessEffect effect) {
@@ -39,12 +46,13 @@ public class DamageWithExcessEffect extends OneShotEffect {
         if (permanent == null || sourceObject == null) {
             return false;
         }
+        int damage = amount.calculate(game, source, this);
         int lethal = permanent.getLethalDamage(source.getSourceId(), game);
-        lethal = Math.min(lethal, amount);
+        lethal = Math.min(lethal, damage);
         permanent.damage(lethal, source.getSourceId(), source, game);
         Player player = game.getPlayer(permanent.getControllerId());
-        if (player != null && lethal < amount) {
-            player.damage(amount - lethal, source.getSourceId(), source, game);
+        if (player != null && lethal < damage) {
+            player.damage(damage - lethal, source.getSourceId(), source, game);
         }
         return true;
     }

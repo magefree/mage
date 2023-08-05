@@ -1,8 +1,12 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
+
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -18,7 +22,15 @@ public final class MarchOfTheMachine extends ExpansionSet {
     private MarchOfTheMachine() {
         super("March of the Machine", "MOM", ExpansionSet.buildDate(2023, 4, 21), SetType.EXPANSION);
         this.blockName = "March of the Machine";
-        this.hasBoosters = false; // temporary
+        this.hasBoosters = true;
+        this.numBoosterLands = 0; // TODO: 50% chance basic, 50% chance dual land (currently just adding extra commons)
+        this.numBoosterCommon = 10; // TODO: Should be 8 commons, 1 battle, 1 DFC, 3 uncommon+
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.numBoosterSpecial = 1; // Multiverse Legends
+        this.ratioBoosterMythic = 7;
+        this.numBoosterDoubleFaced = -1; // include normally for now, TODO: Collation
+        this.maxCardNumberInBooster = 291;
 
         cards.add(new SetCardInfo("Aerial Boost", 2, Rarity.COMMON, mage.cards.a.AerialBoost.class));
         cards.add(new SetCardInfo("Aetherblade Agent", 88, Rarity.COMMON, mage.cards.a.AetherbladeAgent.class));
@@ -483,6 +495,22 @@ public final class MarchOfTheMachine extends ExpansionSet {
         cards.add(new SetCardInfo("Zimone and Dina", 318, Rarity.MYTHIC, mage.cards.z.ZimoneAndDina.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zurgo and Ojutai", 258, Rarity.MYTHIC, mage.cards.z.ZurgoAndOjutai.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zurgo and Ojutai", 319, Rarity.MYTHIC, mage.cards.z.ZurgoAndOjutai.class, NON_FULL_USE_VARIOUS));
+    }
+
+    @Override
+    protected void addSpecialCards(List<Card> booster, int number) {
+        // number is here always 1
+        // Boosters have one card from MUL, odds are 2/3 for uncommon, 4/15 for rare, 1/15 for mythic
+        Rarity rarity;
+        int rarityKey = RandomUtil.nextInt(15);
+        if (rarityKey == 14) {
+            rarity = Rarity.MYTHIC;
+        } else if (rarityKey >= 10) {
+            rarity = Rarity.RARE;
+        } else {
+            rarity = Rarity.UNCOMMON;
+        }
+        addToBooster(booster, MultiverseLegends.getInstance().getCardsByRarity(rarity));
     }
 
 //    @Override

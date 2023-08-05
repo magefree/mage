@@ -30,7 +30,7 @@ public final class SlimefootTheStowaway extends CardImpl {
     public SlimefootTheStowaway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FUNGUS);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

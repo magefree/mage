@@ -1,10 +1,9 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
+import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
@@ -22,12 +21,9 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.TargetPointer;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -46,7 +42,7 @@ public final class TadeasJuniperAscendant extends CardImpl {
     public TadeasJuniperAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(1);
@@ -55,19 +51,21 @@ public final class TadeasJuniperAscendant extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // Teleport—Dhalsim, Pliable Pacifist has hexproof unless he's attacking.
+        // Tadeas has hexproof unless it's attacking.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance()),
                 condition, "{this} has hexproof unless he's attacking"
-        )).withFlavorWord("Teleport"));
+        )));
 
         // Whenever a creature you control with reach attacks, untap it and it can't be blocked by creatures with greater power this combat.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(
                 new TadeasJuniperAscendantEffect(), false, filter, true
         ));
 
-        // Fierce Punch—Whenever one or more creatures you control deal combat damage to a player, draw a card.
-        this.addAbility(new TadeasJuniperAscendantTriggeredAbility());
+        // Whenever one or more creatures you control deal combat damage to a player, draw a card.
+        this.addAbility(new DealCombatDamageControlledTriggeredAbility(
+                new DrawCardSourceControllerEffect(1)
+        ));
     }
 
     private TadeasJuniperAscendant(final TadeasJuniperAscendant card) {
@@ -103,92 +101,34 @@ class TadeasJuniperAscendantEffect extends OneShotEffect {
             return false;
         }
         permanent.untap(game);
-        game.addEffect(new TadeasJuniperAscendantBlockEffect(permanent, game), source);
+        game.addEffect(new TadeasJuniperAscendantEvasionEffect(getTargetPointer()), source);
         return true;
     }
 }
 
-class TadeasJuniperAscendantBlockEffect extends RestrictionEffect {
+class TadeasJuniperAscendantEvasionEffect extends RestrictionEffect {
 
-    private final MageObjectReference mor;
-
-    TadeasJuniperAscendantBlockEffect(Permanent permanent, Game game) {
-        super(Duration.EndOfTurn);
-        this.mor = new MageObjectReference(permanent, game);
+    TadeasJuniperAscendantEvasionEffect(TargetPointer targetPointer) {
+        super(Duration.EndOfCombat);
+        this.targetPointer = targetPointer;
+        staticText = "and can't be blocked by creatures with greater power";
     }
 
-    private TadeasJuniperAscendantBlockEffect(final TadeasJuniperAscendantBlockEffect effect) {
+    private TadeasJuniperAscendantEvasionEffect(final TadeasJuniperAscendantEvasionEffect effect) {
         super(effect);
-        this.mor = effect.mor;
-    }
-
-    @Override
-    public TadeasJuniperAscendantBlockEffect copy() {
-        return new TadeasJuniperAscendantBlockEffect(this);
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return false;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent attacker = mor.getPermanent(game);
-        if (attacker == null) {
-            discard();
-            return false;
-        }
-        return permanent.getPower().getValue() > attacker.getPower().getValue();
-    }
-}
-
-class TadeasJuniperAscendantTriggeredAbility extends TriggeredAbilityImpl {
-
-    private final Set<UUID> damagedPlayerIds = new HashSet<>();
-
-    TadeasJuniperAscendantTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
-        this.withFlavorWord("Fierce Punch");
-        setTriggerPhrase("Whenever one or more creatures you control deal combat damage to a player, ");
+        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
     }
 
-    private TadeasJuniperAscendantTriggeredAbility(final TadeasJuniperAscendantTriggeredAbility ability) {
-        super(ability);
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return blocker.getPower().getValue() <= attacker.getPower().getValue();
     }
 
     @Override
-    public TadeasJuniperAscendantTriggeredAbility copy() {
-        return new TadeasJuniperAscendantTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRIORITY
-                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRIORITY ||
-                (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(getSourceId()))) {
-            damagedPlayerIds.clear();
-            return false;
-        }
-        if (event.getType() != GameEvent.EventType.DAMAGED_PLAYER) {
-            return false;
-        }
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        Permanent permanent = game.getPermanent(event.getSourceId());
-        if (!damageEvent.isCombatDamage()
-                || permanent == null
-                || !permanent.isControlledBy(this.getControllerId())
-                || !permanent.isCreature(game) ||
-                damagedPlayerIds.contains(event.getPlayerId())) {
-            return false;
-        }
-        damagedPlayerIds.add(event.getPlayerId());
-        return true;
+    public TadeasJuniperAscendantEvasionEffect copy() {
+        return new TadeasJuniperAscendantEvasionEffect(this);
     }
 }

@@ -32,7 +32,7 @@ public final class InkmothNexus extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         
         // {1}: Inkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
-        Effect effect = new BecomesCreatureSourceEffect(new InkmothNexusToken(), "land", Duration.EndOfTurn);
+        Effect effect = new BecomesCreatureSourceEffect(new InkmothNexusToken(), CardType.LAND, Duration.EndOfTurn);
         effect.setText("{this} becomes a 1/1 Phyrexian Blinkmoth artifact creature with flying and infect until end of turn. It's still a land. <i>(It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)</i>");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1)));
     }

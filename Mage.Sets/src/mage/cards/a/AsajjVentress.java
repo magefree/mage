@@ -29,7 +29,7 @@ public final class AsajjVentress extends CardImpl {
 
     public AsajjVentress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DATHOMIRIAN, SubType.SITH);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

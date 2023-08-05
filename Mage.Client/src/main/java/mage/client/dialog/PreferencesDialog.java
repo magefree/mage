@@ -196,6 +196,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TABLE_PASSWORD_JOIN = "newTablePasswordJoin";
     public static final String KEY_NEW_TABLE_DECK_TYPE = "newTableDeckType";
     public static final String KEY_NEW_TABLE_TIME_LIMIT = "newTableTimeLimit";
+    public static final String KEY_NEW_TABLE_BUFFER_TIME = "newTableBufferTime";
     public static final String KEY_NEW_TABLE_GAME_TYPE = "newTableGameType";
     public static final String KEY_NEW_TABLE_NUMBER_OF_WINS = "newTableNumberOfWins";
     public static final String KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED = "newTableRollbackTurnsAllowed";
@@ -218,6 +219,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_NAME = "newTournamentName";
     public static final String KEY_NEW_TOURNAMENT_PASSWORD = "newTournamentPassword";
     public static final String KEY_NEW_TOURNAMENT_TIME_LIMIT = "newTournamentTimeLimit";
+    public static final String KEY_NEW_TOURNAMENT_BUFFER_TIME = "newTournamentBufferTime";
     public static final String KEY_NEW_TOURNAMENT_CONSTR_TIME = "newTournamentConstructionTime";
     public static final String KEY_NEW_TOURNAMENT_TYPE = "newTournamentType";
     public static final String KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS = "newTournamentNumberOfFreeMulligans";
@@ -909,7 +911,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(main_gamelog, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(main_battlefield, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -2447,8 +2449,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabAvatarsLayout.setVerticalGroup(
             tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabAvatarsLayout.createSequentialGroup()
-                .add(avatarPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 504, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 4, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Avatars", tabAvatars);

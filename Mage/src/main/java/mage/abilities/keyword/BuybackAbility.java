@@ -57,7 +57,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
         this.buybackCost.setCostType(VariableCostType.ADDITIONAL);
     }
 
-    public BuybackAbility(final BuybackAbility ability) {
+    protected BuybackAbility(final BuybackAbility ability) {
         super(ability);
         this.buybackCost = ability.buybackCost.copy();
         this.amountToReduceBy = ability.amountToReduceBy;
@@ -172,7 +172,7 @@ class BuybackEffect extends ReplacementEffectImpl {
         staticText = "When {this} resolves and you payed buyback costs, put it back to hand instead";
     }
 
-    public BuybackEffect(final BuybackEffect effect) {
+    protected BuybackEffect(final BuybackEffect effect) {
         super(effect);
     }
 

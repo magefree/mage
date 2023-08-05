@@ -21,6 +21,7 @@ import mage.game.command.CommandObject;
 import mage.game.match.MatchOptions;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentToken;
 import mage.player.ai.ComputerPlayer7;
 import mage.player.ai.ComputerPlayerMCTS;
 import mage.players.ManaPool;
@@ -94,6 +95,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_HAND_COUNT = "HAND_COUNT";
     public static final String CHECK_COMMAND_HAND_CARD_COUNT = "HAND_CARD_COUNT";
     public static final String CHECK_COMMAND_COMMAND_CARD_COUNT = "COMMAND_CARD_COUNT";
+    public static final String CHECK_COMMAND_EMBLEM_COUNT = "EMBLEM_COUNT";
     public static final String CHECK_COMMAND_COLOR = "COLOR";
     public static final String CHECK_COMMAND_TYPE = "TYPE";
     public static final String CHECK_COMMAND_SUBTYPE = "SUBTYPE";
@@ -102,6 +104,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_PLAYER_IN_GAME = "PLAYER_IN_GAME";
     public static final String CHECK_COMMAND_STACK_SIZE = "STACK_SIZE";
     public static final String CHECK_COMMAND_STACK_OBJECT = "STACK_OBJECT";
+    public static final String CHECK_COMMAND_MONARCH = "MONARCH";
 
     // TODO: add target player param to commands
     public static final String SHOW_COMMAND_LIBRARY = "LIBRARY";
@@ -444,6 +447,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         check(checkName, turnNum, step, player, CHECK_COMMAND_COMMAND_CARD_COUNT, cardName, count.toString());
     }
 
+    public void checkEmblemCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String emblemName, Integer count) {
+        //Assert.assertNotEquals("", emblemName);
+        check(checkName, turnNum, step, player, CHECK_COMMAND_EMBLEM_COUNT, emblemName, count.toString());
+    }
+
     public void checkColor(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, String colors, Boolean mustHave) {
         //Assert.assertNotEquals("", permanentName);
         check(checkName, turnNum, step, player, CHECK_COMMAND_COLOR, permanentName, colors, mustHave.toString());
@@ -477,6 +485,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void checkStackObject(String checkName, int turnNum, PhaseStep step, TestPlayer player, String spellAbilityOnStack, Integer needAmount) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_STACK_OBJECT, spellAbilityOnStack, needAmount.toString());
+    }
+
+    public void checkMonarch(String checkName, int turnNum, PhaseStep step, TestPlayer player, TestPlayer monarch) {
+        check(checkName, turnNum, step, player, CHECK_COMMAND_MONARCH, (monarch == null ? "null" : monarch.getId().toString()));
     }
 
     // show commands
@@ -623,7 +635,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         // set code for card
-        String setCode = "";
+        String setCode;
         List<String> cardCommand = SystemUtil.parseSetAndCardNameCommand(cardName);
         setCode = cardCommand.get(0);
         cardName = cardCommand.get(1);
@@ -964,6 +976,22 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
         Assert.assertEquals("(Battlefield) Permanents counts for " + player.getName() + " are not equal (" + cardName + ')', count, actualCount);
+    }
+
+    @Override
+    public void assertTokenCount(Player player, String tokenName, int count) throws AssertionError {
+        //Assert.assertNotEquals("", tokenName);
+        int actualCount = 0;
+        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
+            if (permanent instanceof PermanentToken) {
+                if (permanent.getControllerId().equals(player.getId())) {
+                    if (isObjectHaveTargetNameOrAlias(player, permanent, tokenName)) {
+                        actualCount++;
+                    }
+                }
+            }
+        }
+        Assert.assertEquals("(Battlefield) Tokens counts for " + player.getName() + " are not equal (" + tokenName + ')', count, actualCount);
     }
 
     @Override

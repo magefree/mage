@@ -37,33 +37,7 @@ Mage.Server.Console/target/
 Mage.Server.Console/mageadmin.log
 
 # Mage.Server.Plugins
-Mage.Server.Plugins/Mage.Deck.Constructed/target
-Mage.Server.Plugins/Mage.Deck.Limited/target
-Mage.Server.Plugins/Mage.Game.BrawlDuel/target/
-Mage.Server.Plugins/Mage.Game.BrawlFreeForAll/target/
-Mage.Server.Plugins/Mage.Game.CanadianHighlanderDuel/target
-Mage.Server.Plugins/Mage.Game.CommanderDuel/target
-Mage.Server.Plugins/Mage.Game.CommanderFreeForAll/target/
-Mage.Server.Plugins/Mage.Game.FreeForAll/target
-Mage.Server.Plugins/Mage.Game.MomirDuel/target
-Mage.Server.Plugins/Mage.Game.MomirGame/target/
-Mage.Server.Plugins/Mage.Game.OathbreakerDuel/target/
-Mage.Server.Plugins/Mage.Game.OathbreakerFreeForAll/target/
-Mage.Server.Plugins/Mage.Game.PennyDreadfulCommanderFreeForAll/target
-Mage.Server.Plugins/Mage.Game.FreeformCommanderDuel/target/
-Mage.Server.Plugins/Mage.Game.FreeformCommanderFreeForAll/target/
-Mage.Server.Plugins/Mage.Game.FreeformUnlimitedCommander/target/
-Mage.Server.Plugins/Mage.Game.TinyLeadersDuel/target
-Mage.Server.Plugins/Mage.Game.TwoPlayerDuel/target
-Mage.Server.Plugins/Mage.Player.AI.DraftBot/target
-Mage.Server.Plugins/Mage.Player.AI.MA/target
-Mage.Server.Plugins/Mage.Player.AI/target
-Mage.Server.Plugins/Mage.Player.AIMCTS/target
-Mage.Server.Plugins/Mage.Player.AIMinimax/target
-Mage.Server.Plugins/Mage.Player.Human/target
-Mage.Server.Plugins/Mage.Tournament.BoosterDraft/target
-Mage.Server.Plugins/Mage.Tournament.Constructed/target
-Mage.Server.Plugins/Mage.Tournament.Sealed/target
+Mage.Server.Plugins/*/target
 Mage.Server.Plugins/target
 
 # Mage.Sets

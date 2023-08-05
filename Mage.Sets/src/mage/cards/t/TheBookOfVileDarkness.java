@@ -40,7 +40,7 @@ public final class TheBookOfVileDarkness extends CardImpl {
     public TheBookOfVileDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{B}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your end step, if you lost 2 or more life this turn, create a 2/2 black Zombie creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(

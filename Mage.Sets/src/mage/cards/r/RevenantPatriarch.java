@@ -32,7 +32,7 @@ public final class RevenantPatriarch extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new SkipCombatStepEffect(Duration.OneUse).setText("target player skips their next combat phase."), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ManaWasSpentCondition.WHITE,
-                "if {W} was spent to cast it, target player skips their next combat phase."));
+                "When {this} enters the battlefield, if {W} was spent to cast it, target player skips their next combat phase."));
         // Revenant Patriarch can't block.
         this.addAbility(new CantBlockAbility());
     }

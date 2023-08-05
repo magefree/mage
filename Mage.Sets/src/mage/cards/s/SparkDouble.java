@@ -61,8 +61,7 @@ class SparkDoubleCopyApplier extends CopyApplier {
     @Override
     public String getText() {
         return ", except it enters with an additional +1/+1 counter on it if it's a creature, it enters with "
-                + "an additional loyalty counter on it if it's a planeswalker, and it isn't legendary if "
-                + "that permanent is legendary";
+                + "an additional loyalty counter on it if it's a planeswalker, and it isn't legendary";
     }
 
     @Override
@@ -77,7 +76,7 @@ class SparkDoubleCopyApplier extends CopyApplier {
         // (2019-05-03)
         //
         // So, it's must make changes in blueprint (for farther copyable)
-        blueprint.getSuperType().remove(SuperType.LEGENDARY);
+        blueprint.removeSuperType(SuperType.LEGENDARY);
 
         // TODO: Blood Moon problem, can't apply on type changing effects (same as TeferisTimeTwist)
         // see https://magic.wizards.com/en/articles/archive/feature/war-spark-release-notes-2019-04-19

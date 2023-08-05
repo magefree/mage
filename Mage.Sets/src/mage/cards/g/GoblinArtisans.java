@@ -59,7 +59,7 @@ public final class GoblinArtisans extends CardImpl {
 class GoblinArtisansTarget extends TargetSpell {
 
     private static final FilterSpell filter = new FilterArtifactSpell(
-            "artifact spell you control that isn't the target " +
+            "target artifact spell you control that isn't the target " +
                     "of an ability from another creature named Goblin Artisans"
     );
 

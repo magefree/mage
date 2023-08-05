@@ -1,13 +1,13 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class HauntedAngelToken extends TokenImpl {
@@ -22,7 +22,7 @@ public final class HauntedAngelToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public HauntedAngelToken(final HauntedAngelToken token) {
+    protected HauntedAngelToken(final HauntedAngelToken token) {
         super(token);
     }
 

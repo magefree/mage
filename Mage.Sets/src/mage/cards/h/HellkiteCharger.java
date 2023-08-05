@@ -74,7 +74,7 @@ class HellkiteChargerEffect extends OneShotEffect {
                 cost.clearPaid();
                 if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
                     new UntapAllControllerEffect(new FilterAttackingCreature(),"").apply(game, source);
-                    game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
+                    game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraPhase(TurnPhase.COMBAT));
                     return true;
                 }
             }

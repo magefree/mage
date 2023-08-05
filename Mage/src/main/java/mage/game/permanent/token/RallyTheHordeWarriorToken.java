@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class RallyTheHordeWarriorToken extends TokenImpl {
@@ -20,7 +19,7 @@ public final class RallyTheHordeWarriorToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public RallyTheHordeWarriorToken(final RallyTheHordeWarriorToken token) {
+    protected RallyTheHordeWarriorToken(final RallyTheHordeWarriorToken token) {
         super(token);
     }
 

@@ -68,7 +68,7 @@ public class SkipNextPlayerUntapStepEffect extends OneShotEffect {
             }
         }
         if (player != null) {
-            game.getState().getTurnMods().add(new TurnMod(player.getId(), PhaseStep.UNTAP));
+            game.getState().getTurnMods().add(new TurnMod(player.getId()).withSkipStep(PhaseStep.UNTAP));
             return true;
         }
         return false;

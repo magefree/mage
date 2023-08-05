@@ -6,7 +6,7 @@ import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -16,7 +16,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class KazanduMammoth extends ModalDoubleFacesCard {
+public final class KazanduMammoth extends ModalDoubleFacedCard {
 
     public KazanduMammoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

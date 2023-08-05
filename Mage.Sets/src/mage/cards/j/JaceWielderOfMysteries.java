@@ -6,21 +6,16 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
-
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801
@@ -30,7 +25,7 @@ public final class JaceWielderOfMysteries extends CardImpl {
     public JaceWielderOfMysteries(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
         this.setStartingLoyalty(4);
 
@@ -38,7 +33,7 @@ public final class JaceWielderOfMysteries extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new JaceWielderOfMysteriesContinuousEffect()));
 
         // +1 Target player puts the top two cards of their library into their graveyard. Draw a card.
-        Ability ability = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(2), 1);
+        Ability ability = new LoyaltyAbility(new MillCardsTargetEffect(2), 1);
         ability.addTarget(new TargetPlayer());
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);
@@ -60,7 +55,7 @@ public final class JaceWielderOfMysteries extends CardImpl {
 class JaceWielderOfMysteriesContinuousEffect extends ReplacementEffectImpl {
 
     JaceWielderOfMysteriesContinuousEffect() {
-        super(Duration.WhileOnBattlefield, Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card while your library has no cards in it, you win the game instead";
     }
 
@@ -107,7 +102,7 @@ class JaceWielderOfMysteriesContinuousEffect extends ReplacementEffectImpl {
 class JaceWielderOfMysteriesEffect extends OneShotEffect {
 
     JaceWielderOfMysteriesEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "Draw seven cards. Then if your library has no cards in it, you win the game.";
     }
 

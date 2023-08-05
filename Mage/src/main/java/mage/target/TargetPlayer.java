@@ -41,7 +41,7 @@ public class TargetPlayer extends TargetImpl {
         this.notTarget = notTarget;
     }
 
-    public TargetPlayer(final TargetPlayer target) {
+    protected TargetPlayer(final TargetPlayer target) {
         super(target);
         this.filter = target.filter.copy();
     }

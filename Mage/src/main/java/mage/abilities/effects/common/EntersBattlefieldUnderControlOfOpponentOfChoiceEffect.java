@@ -6,7 +6,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import static mage.constants.Outcome.Benefit;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -22,7 +21,7 @@ import mage.target.targetpointer.FixedTarget;
 public class EntersBattlefieldUnderControlOfOpponentOfChoiceEffect extends OneShotEffect {
 
     public EntersBattlefieldUnderControlOfOpponentOfChoiceEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "under the control of an opponent of your choice";
     }
 

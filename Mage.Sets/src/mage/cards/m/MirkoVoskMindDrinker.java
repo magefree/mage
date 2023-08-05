@@ -25,7 +25,7 @@ public final class MirkoVoskMindDrinker extends CardImpl {
     public MirkoVoskMindDrinker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
         this.subtype.add(SubType.VAMPIRE);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

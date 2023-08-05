@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.DamageCantBePreventedEffect;
 import mage.cards.AdventureCard;
@@ -28,7 +28,7 @@ public final class BonecrusherGiant extends AdventureCard {
         this.toughness = new MageInt(3);
 
         // Whenever Bonecrusher Giant becomes the target of a spell, Bonecrusher Giant deals 2 damage to that spell's controller.
-        this.addAbility(new BecomesTargetTriggeredAbility(
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(
                 new DamageTargetEffect(
                         2, true, "that spell's controller", "{this}"
                 ), StaticFilters.FILTER_SPELL_A, SetTargetPointer.PLAYER
@@ -36,7 +36,7 @@ public final class BonecrusherGiant extends AdventureCard {
 
         // Stomp
         // Damage can’t be prevented this turn. Stomp deals 2 damage to any target.
-        this.getSpellCard().getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn, "Damage can't be prevented this turn", false, false));
+        this.getSpellCard().getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn, "Damage can't be prevented this turn"));
         this.getSpellCard().getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellCard().getSpellAbility().addTarget(new TargetAnyTarget());
     }
