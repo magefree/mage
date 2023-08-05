@@ -42,7 +42,7 @@ public final class TheHowlingAbomination extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance()), TheHowlingAbominationCondition.instance,
                 "{this} has trample as long as you've cast three or more spells this turn"
-        )).withFlavorWord("Rolling Attack"));
+        )));
 
         // Electric Thunder—Whenever Blanka becomes the target of a spell, he gets +2/+2 until end of turn and deals 2 damage to each opponent.
         Ability ability = new SourceBecomesTargetTriggeredAbility(new BoostSourceEffect(
@@ -50,7 +50,7 @@ public final class TheHowlingAbomination extends CardImpl {
         ).setText("he gets +2/+2 until end of turn"), StaticFilters.FILTER_SPELL_A).setTriggerPhrase("Whenever {this} becomes the target of a spell, ");
         ability.addEffect(new DamagePlayersEffect(2, TargetController.OPPONENT)
                 .setText("and deals 2 damage to each opponent"));
-        this.addAbility(ability.withFlavorWord("Electric Thunder"));
+        this.addAbility(ability);
     }
 
     private TheHowlingAbomination(final TheHowlingAbomination card) {

@@ -56,6 +56,7 @@ class GripOfPhyresisEffect extends CreateTokenEffect {
 
     GripOfPhyresisEffect() {
         super(new PhyrexianGermToken());
+        staticText = ", then " + staticText + " and attach that Equipment to it";
     }
 
     GripOfPhyresisEffect(final GripOfPhyresisEffect effect) {

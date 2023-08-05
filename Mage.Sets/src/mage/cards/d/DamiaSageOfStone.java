@@ -82,6 +82,6 @@ class DamiaSageOfStoneTriggeredAbility extends BeginningOfUpkeepTriggeredAbility
 
     @Override
     public String getRule() {
-        return "At the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference";
+        return "At the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.";
     }
 }

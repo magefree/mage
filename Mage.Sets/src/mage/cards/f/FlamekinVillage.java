@@ -37,7 +37,7 @@ public final class FlamekinVillage extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // As Flamekin Village enters the battlefield, you may reveal an Elemental card from your hand. If you don't, Flamekin Village enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Elemental card from your hand. If you don't, {this} enters the battlefield tapped"));
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal an Elemental card from your hand. If you don't, {this} enters the battlefield tapped"));
 
         // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());

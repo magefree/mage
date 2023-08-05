@@ -28,7 +28,7 @@ public final class PendrellMists extends CardImpl {
         // All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay {1}."
         Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(1)), TargetController.YOU, false);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES,
-                "All creatures have \"At the beginning of your upkeep, sacrifice this creature unless you pay {1}")));
+                "All creatures have \"At the beginning of your upkeep, sacrifice this creature unless you pay {1}.\"")));
     }
 
     private PendrellMists(final PendrellMists card) {
