@@ -89,12 +89,16 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
         }
         this.getEffects().setValue("spellCast", spell);
         switch (setTargetPointer) {
+            case NONE:
+                break;
             case SPELL:
                 getEffects().setTargetPointer(new FixedTarget(spell.getId(), game));
                 break;
             case CARD:
                 getEffects().setTargetPointer(new FixedTarget(spell.getCard().getId()));
                 break;
+            default:
+                throw new UnsupportedOperationException("Unexpected setTargetPointer " + setTargetPointer);
         }
         return true;
     }
