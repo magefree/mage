@@ -2,12 +2,15 @@ package mage.verify;
 
 import com.google.common.base.CharMatcher;
 import mage.MageObject;
+import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.AbilityImpl;
 import mage.abilities.Mode;
 import mage.abilities.common.*;
 import mage.abilities.condition.Condition;
+import mage.abilities.costs.Cost;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
@@ -18,6 +21,7 @@ import mage.cards.decks.CardNameUtil;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.*;
+import mage.choices.Choice;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SubType;
@@ -31,6 +35,7 @@ import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.server.util.SystemUtil;
 import mage.sets.TherosBeyondDeath;
+import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
 import mage.verify.mtgjson.MtgJsonCard;
 import mage.verify.mtgjson.MtgJsonService;
@@ -1666,7 +1671,8 @@ public class VerifyCardDataTest {
             }
             // Only recurse on those objects
             if (obj1 instanceof MageObject || obj1 instanceof Filter || obj1 instanceof Condition || obj1 instanceof Effect
-                    || obj1 instanceof Ability) {
+                    || obj1 instanceof Ability || obj1 instanceof Mana || obj1 instanceof Cost || obj1 instanceof DynamicValue
+                    || obj1 instanceof Choice || obj1 instanceof TargetPointer) {
                 //System.out.println(msg);
                 Class class1 = obj1.getClass();
                 Class class2 = obj2.getClass();
