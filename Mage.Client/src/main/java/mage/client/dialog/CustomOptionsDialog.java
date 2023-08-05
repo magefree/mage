@@ -56,6 +56,10 @@ public class CustomOptionsDialog extends MageDialog {
         this.saveLoadKeys = saveLoadKeys;
         initComponents();
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
+        cbMulliganType.setModel(new DefaultComboBoxModel(MulliganType.values()));
+        cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
+        cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));
+        this.setModal(true);
     }
 
     /**
@@ -229,15 +233,7 @@ public class CustomOptionsDialog extends MageDialog {
     }//GEN-LAST:event_btnOKActionPerformed
 
     public void showDialog() {
-        cbMulliganType.setModel(new DefaultComboBoxModel(MulliganType.values()));
-        cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
-        cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));
-        this.setModal(true);
         this.setLocation(150, 100);
-
-        // auto-load last settings
-        onLoadSettings(0);
-
         this.setVisible(true);
     }
 
