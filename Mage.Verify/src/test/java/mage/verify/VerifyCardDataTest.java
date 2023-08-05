@@ -1667,7 +1667,7 @@ public class VerifyCardDataTest {
             // Only recurse on those objects
             if (obj1 instanceof MageObject || obj1 instanceof Filter || obj1 instanceof Condition || obj1 instanceof Effect
                     || obj1 instanceof Ability) {
-                System.out.println(msg);
+                //System.out.println(msg);
                 Class class1 = obj1.getClass();
                 Class class2 = obj2.getClass();
                 do {
