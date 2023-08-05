@@ -18,6 +18,7 @@ public final class DoctorWho extends ExpansionSet {
     private DoctorWho() {
         super("Doctor Who", "WHO", ExpansionSet.buildDate(2023, 10, 13), SetType.SUPPLEMENTAL);
 
+        cards.add(new SetCardInfo("City of Death", 99, Rarity.RARE, mage.cards.c.CityOfDeath.class));
         cards.add(new SetCardInfo("Exterminate!", 68, Rarity.UNCOMMON, mage.cards.e.Exterminate.class));
         cards.add(new SetCardInfo("Farewell", 207, Rarity.RARE, mage.cards.f.Farewell.class));
         cards.add(new SetCardInfo("Forest", 205, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
