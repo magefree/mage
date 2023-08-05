@@ -59,7 +59,7 @@ public final class VhalCandlekeepResearcher extends CardImpl {
 
 class VhalCandlekeepResearcherManaEffect extends ManaEffect {
 
-    ConditionalManaBuilder manaBuilder = new VhalCandlekeepResearcherManaBuilder();
+    private final ConditionalManaBuilder manaBuilder = new VhalCandlekeepResearcherManaBuilder();
 
     VhalCandlekeepResearcherManaEffect() {
         super();
@@ -81,12 +81,7 @@ class VhalCandlekeepResearcherManaEffect extends ManaEffect {
             return new Mana();
         }
         Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
-        int calculatedToughness;
-        if (sourcePermanent == null) {
-            calculatedToughness = 0;
-        } else {
-            calculatedToughness = sourcePermanent.getToughness().getValue();
-        }
+        int calculatedToughness = (sourcePermanent == null ? 0 : sourcePermanent.getToughness().getValue());
         return manaBuilder.setMana(Mana.ColorlessMana(calculatedToughness), source, game).build();
     }
 }
