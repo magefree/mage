@@ -28,8 +28,8 @@ Mage.Server/saved
 Mage.Server/target
 Mage.Server/db
 Mage.Server/cache
-Mage.Server/mageserver.log
-Mage.Server/magediag.log
+Mage.Server/gamelogs
+Mage.Server/*.log
 Mage.Server/extensions
 
 # Mage.Server.Console
