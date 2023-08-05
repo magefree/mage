@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -17,6 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -77,33 +78,12 @@ class HalfdaneUpkeepEffect extends OneShotEffect {
             return false;
         }
 
-        ContinuousEffect effect = new HalfdaneSetBasePowerToughnessEffect(permanent.getPower().getValue(), permanent.getToughness().getValue());
+        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(
+            permanent.getPower().getValue(),
+            permanent.getToughness().getValue(),
+            Duration.UntilYourNextUpkeepStep,
+            SubLayer.SetPT_7b);
         game.addEffect(effect, source);
         return true;
     }
-}
-
-class HalfdaneSetBasePowerToughnessEffect extends SetBasePowerToughnessSourceEffect {
-
-    public HalfdaneSetBasePowerToughnessEffect(int power, int toughness) {
-        super(power, toughness, Duration.UntilYourNextTurn, SubLayer.SetPT_7b);
-    }
-
-    public HalfdaneSetBasePowerToughnessEffect(final HalfdaneSetBasePowerToughnessEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (super.isInactive(source, game) && game.getTurnStepType().isAfter(PhaseStep.UPKEEP)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public HalfdaneSetBasePowerToughnessEffect copy() {
-        return new HalfdaneSetBasePowerToughnessEffect(this);
-    }
-
 }

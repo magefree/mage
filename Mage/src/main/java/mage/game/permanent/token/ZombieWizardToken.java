@@ -7,7 +7,6 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class ZombieWizardToken extends TokenImpl {
@@ -23,7 +22,7 @@ public final class ZombieWizardToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public ZombieWizardToken(final ZombieWizardToken token) {
+    protected ZombieWizardToken(final ZombieWizardToken token) {
         super(token);
     }
 

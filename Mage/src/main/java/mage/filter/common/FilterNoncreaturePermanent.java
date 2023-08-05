@@ -21,7 +21,7 @@ public class FilterNoncreaturePermanent extends FilterPermanent {
         this.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
-    public FilterNoncreaturePermanent(final FilterNoncreaturePermanent filter) {
+    protected FilterNoncreaturePermanent(final FilterNoncreaturePermanent filter) {
         super(filter);
     }
 

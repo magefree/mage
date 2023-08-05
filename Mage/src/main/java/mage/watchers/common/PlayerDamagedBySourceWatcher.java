@@ -1,4 +1,3 @@
-
 package mage.watchers.common;
 
 import java.util.HashSet;
@@ -12,7 +11,7 @@ import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 /**
- * Watcher stores whitch sources did damage to a player
+ * Watcher stores which sources did damage to a player
  * 
  * @author LevelX
  */
@@ -58,5 +57,6 @@ public class PlayerDamagedBySourceWatcher extends Watcher {
     public void reset() {
         super.reset();
         damageSourceIds.clear();
+        combatDamageSourceIds.clear();
     }
 }

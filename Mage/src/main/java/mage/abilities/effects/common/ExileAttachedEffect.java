@@ -9,7 +9,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author Styxo
  */
 public class ExileAttachedEffect extends OneShotEffect {
@@ -19,7 +18,7 @@ public class ExileAttachedEffect extends OneShotEffect {
         staticText = "exile enchanted creature";
     }
 
-    public ExileAttachedEffect(final ExileAttachedEffect effect) {
+    protected ExileAttachedEffect(final ExileAttachedEffect effect) {
         super(effect);
     }
 

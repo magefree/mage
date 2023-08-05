@@ -16,7 +16,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
- *
  * @author TheElk801
  */
 public class SanctuaryInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
@@ -50,5 +49,14 @@ public class SanctuaryInterveningIfTriggeredAbility extends ConditionalInterveni
 
     public SanctuaryInterveningIfTriggeredAbility(OneShotEffect effect1, OneShotEffect effect2, ObjectColor color1, ObjectColor color2, String text) {
         super(makeTrigger(effect1, effect2, color1, color2), makeOrCondition(color1, color2), text);
+    }
+
+    protected SanctuaryInterveningIfTriggeredAbility(final SanctuaryInterveningIfTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public SanctuaryInterveningIfTriggeredAbility copy() {
+        return new SanctuaryInterveningIfTriggeredAbility(this);
     }
 }

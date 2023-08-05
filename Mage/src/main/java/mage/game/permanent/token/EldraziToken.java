@@ -17,7 +17,7 @@ public final class EldraziToken extends TokenImpl {
         toughness = new MageInt(10);
     }
 
-    public EldraziToken(final EldraziToken token) {
+    protected EldraziToken(final EldraziToken token) {
         super(token);
     }
 

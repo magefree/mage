@@ -4,6 +4,7 @@ package mage.target.common;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
 import mage.abilities.Ability;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
@@ -29,7 +30,7 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
         this.filter = filter;
     }
 
-    public TargetActivatedOrTriggeredAbility(final TargetActivatedOrTriggeredAbility target) {
+    protected TargetActivatedOrTriggeredAbility(final TargetActivatedOrTriggeredAbility target) {
         super(target);
         this.filter = target.filter.copy();
     }

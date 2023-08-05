@@ -7,7 +7,6 @@ import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.BlockingPredicate;
 
 /**
- *
  * @author nantuko
  */
 public class FilterAttackingOrBlockingCreature extends FilterCreaturePermanent {
@@ -23,7 +22,7 @@ public class FilterAttackingOrBlockingCreature extends FilterCreaturePermanent {
                 BlockingPredicate.instance));
     }
 
-    public FilterAttackingOrBlockingCreature(final FilterAttackingOrBlockingCreature filter) {
+    protected FilterAttackingOrBlockingCreature(final FilterAttackingOrBlockingCreature filter) {
         super(filter);
     }
 

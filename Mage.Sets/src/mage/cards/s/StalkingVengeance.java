@@ -66,7 +66,7 @@ class StalkingVengeanceDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = (Permanent) game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
         if (creature != null) {
-            game.damagePlayerOrPlaneswalker(source.getFirstTarget(), creature.getPower().getValue(), creature.getId(), source, game, false, true);
+            game.damagePlayerOrPermanent(source.getFirstTarget(), creature.getPower().getValue(), creature.getId(), source, game, false, true);
             return true;
         }
         return false;

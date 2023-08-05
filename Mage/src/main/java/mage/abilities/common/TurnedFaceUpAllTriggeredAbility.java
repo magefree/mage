@@ -37,7 +37,7 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever " + filter.getMessage() + " is turned face up, ");
     }
 
-    public TurnedFaceUpAllTriggeredAbility(final TurnedFaceUpAllTriggeredAbility ability) {
+    protected TurnedFaceUpAllTriggeredAbility(final TurnedFaceUpAllTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.filter = ability.filter;

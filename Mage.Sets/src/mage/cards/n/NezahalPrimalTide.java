@@ -20,10 +20,7 @@ import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -31,12 +28,6 @@ import mage.target.common.TargetCardInHand;
  * @author LevelX2
  */
 public final class NezahalPrimalTide extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public NezahalPrimalTide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
@@ -56,7 +47,7 @@ public final class NezahalPrimalTide extends CardImpl {
 
         // Whenever an opponent casts a noncreature spell, draw a card.
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD,
-                new DrawCardSourceControllerEffect(1), filter, false, SetTargetPointer.NONE));
+                new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, SetTargetPointer.NONE));
 
         // Discard three cards: Exile Nezahal. Return it to the battlefield tapped under its owner's control at the beginning of the next end step.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true),

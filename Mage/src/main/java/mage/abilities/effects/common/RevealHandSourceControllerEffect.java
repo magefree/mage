@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author noahg
  */
 public class RevealHandSourceControllerEffect extends OneShotEffect {
@@ -19,7 +18,7 @@ public class RevealHandSourceControllerEffect extends OneShotEffect {
         this.staticText = "reveal your hand";
     }
 
-    public RevealHandSourceControllerEffect(final RevealHandSourceControllerEffect effect) {
+    protected RevealHandSourceControllerEffect(final RevealHandSourceControllerEffect effect) {
         super(effect);
     }
 

@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrBattleTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateTokenAllEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
@@ -48,9 +48,8 @@ public final class RankleAndTorbran extends CardImpl {
 
         // Whenever Rankle and Torbran deals combat damage to a player or battle, choose any number --
         // * Each player creates a Treasure token.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-                new CreateTokenAllEffect(new TreasureToken(), TargetController.EACH_PLAYER), false
-        ).setOrBattle(true);
+        Ability ability = new DealsCombatDamageToAPlayerOrBattleTriggeredAbility(
+                new CreateTokenAllEffect(new TreasureToken(), TargetController.EACH_PLAYER), false);
         ability.getModes().setMinModes(0);
         ability.getModes().setMaxModes(3);
 

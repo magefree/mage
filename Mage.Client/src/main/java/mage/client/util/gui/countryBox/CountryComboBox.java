@@ -271,7 +271,7 @@ public class CountryComboBox extends JComboBox {
         {"Gay", "gay"},
         {"Genderfluid", "genderfluid"},
         {"Genderqueer", "genderqueer"},
-        {"Innersex", "inner"},
+        {"Intersex", "intersex"},
         {"Lesbian", "lesbian"},
         {"LGBT", "lgbt"},
         {"Nonbinary", "nb"},

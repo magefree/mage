@@ -42,7 +42,7 @@ public final class LaviniaAzoriusRenegade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LaviniaAzoriusRenegadeReplacementEffect()));
 
         // Whenever an opponent casts a spell, if no mana was spent to cast it, counter that spell.
-        this.addAbility(new SpellCastOpponentNoManaSpentTriggeredAbility(new CounterTargetEffect()));
+        this.addAbility(new SpellCastOpponentNoManaSpentTriggeredAbility(new CounterTargetEffect().setText("counter that spell")));
     }
 
     private LaviniaAzoriusRenegade(final LaviniaAzoriusRenegade card) {

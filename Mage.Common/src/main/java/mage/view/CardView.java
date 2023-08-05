@@ -177,7 +177,7 @@ public class CardView extends SimpleCardView {
         this.defense = cardView.defense;
         this.startingDefense = cardView.startingDefense;
         this.cardTypes = new ArrayList<>(cardView.cardTypes);
-        this.subTypes = new SubTypes(cardView.subTypes);
+        this.subTypes = cardView.subTypes.copy();
         this.superTypes = cardView.superTypes;
 
         this.expansionSetCode = cardView.expansionSetCode;
@@ -435,12 +435,16 @@ public class CardView extends SimpleCardView {
             if (permanent.isFaceDown(game)) {
                 this.cardIcons.add(CardIconImpl.FACE_DOWN);
             }
-            // commander
             if (game != null) {
                 Player owner = game.getPlayer(game.getOwnerId(permanent));
+                // commander
                 if (owner != null && game.isCommanderObject(owner, permanent)) {
                     this.cardIcons.add(CardIconImpl.COMMANDER);
                 }
+            }
+            // Ring-bearer
+            if (permanent.isRingBearer()) {
+                this.cardIcons.add(CardIconImpl.RINGBEARER);
             }
         } else {
             if (card.isCopy()) {
@@ -480,7 +484,7 @@ public class CardView extends SimpleCardView {
         this.power = Integer.toString(card.getPower().getValue());
         this.toughness = Integer.toString(card.getToughness().getValue());
         this.cardTypes = new ArrayList<>(card.getCardType(game));
-        this.subTypes = new SubTypes(card.getSubtype(game));
+        this.subTypes = card.getSubtype(game).copy();
         this.superTypes = card.getSuperType(game);
         this.color = card.getColor(game).copy();
         this.flipCard = card.isFlipCard();
@@ -627,7 +631,7 @@ public class CardView extends SimpleCardView {
             this.defense = "";
         }
         this.cardTypes = new ArrayList<>(object.getCardType(game));
-        this.subTypes = new SubTypes(object.getSubtype(game));
+        this.subTypes = object.getSubtype(game).copy();
         this.superTypes = new ArrayList<>(object.getSuperType(game));
         this.color = object.getColor(game).copy();
         this.manaCostLeftStr = String.join("", object.getManaCostSymbols());
@@ -844,7 +848,7 @@ public class CardView extends SimpleCardView {
         this.defense = "";
         this.startingDefense = "";
         this.cardTypes = new ArrayList<>(token.getCardType(game));
-        this.subTypes = new SubTypes(token.getSubtype(game));
+        this.subTypes = token.getSubtype(game).copy();
         this.superTypes = new ArrayList<>(token.getSuperType(game));
         this.color = token.getColor(game).copy();
         this.frameColor = token.getFrameColor(game).copy();

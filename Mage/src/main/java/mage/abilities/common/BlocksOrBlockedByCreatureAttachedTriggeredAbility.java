@@ -31,7 +31,7 @@ public class BlocksOrBlockedByCreatureAttachedTriggeredAbility extends Triggered
         this.selfTarget = selfTarget;
     }
 
-    public BlocksOrBlockedByCreatureAttachedTriggeredAbility(final BlocksOrBlockedByCreatureAttachedTriggeredAbility ability) {
+    protected BlocksOrBlockedByCreatureAttachedTriggeredAbility(final BlocksOrBlockedByCreatureAttachedTriggeredAbility ability) {
         super(ability);
         this.attachmentType = ability.attachmentType;
         this.selfTarget = ability.selfTarget;

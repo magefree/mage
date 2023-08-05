@@ -6,7 +6,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetCreaturePermanent extends TargetPermanent {
@@ -31,7 +30,7 @@ public class TargetCreaturePermanent extends TargetPermanent {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetCreaturePermanent(final TargetCreaturePermanent target) {
+    protected TargetCreaturePermanent(final TargetCreaturePermanent target) {
         super(target);
     }
 

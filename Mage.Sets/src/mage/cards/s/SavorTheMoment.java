@@ -54,7 +54,7 @@ class SkipNextUntapStepSourceControllerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            game.getState().getTurnMods().add(new TurnMod(controller.getId(), PhaseStep.UNTAP));
+            game.getState().getTurnMods().add(new TurnMod(controller.getId()).withSkipStep(PhaseStep.UNTAP));
             return true;
         }
         return false;

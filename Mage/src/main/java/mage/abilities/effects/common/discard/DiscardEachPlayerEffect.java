@@ -49,7 +49,7 @@ public class DiscardEachPlayerEffect extends OneShotEffect {
         this.targetController = targetController;
     }
 
-    public DiscardEachPlayerEffect(final DiscardEachPlayerEffect effect) {
+    protected DiscardEachPlayerEffect(final DiscardEachPlayerEffect effect) {
         super(effect);
         this.randomDiscard = effect.randomDiscard;
         this.amount = effect.amount;

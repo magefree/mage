@@ -31,8 +31,10 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Barad-dur", 253, Rarity.RARE, mage.cards.b.BaradDur.class));
         cards.add(new SetCardInfo("Barrow-Blade", 237, Rarity.UNCOMMON, mage.cards.b.BarrowBlade.class));
         cards.add(new SetCardInfo("Battle-Scarred Goblin", 115, Rarity.COMMON, mage.cards.b.BattleScarredGoblin.class));
+        cards.add(new SetCardInfo("Bewitching Leechcraft", 41, Rarity.COMMON, mage.cards.b.BewitchingLeechcraft.class));
         cards.add(new SetCardInfo("Bilbo's Ring", 298, Rarity.RARE, mage.cards.b.BilbosRing.class));
         cards.add(new SetCardInfo("Bilbo, Retired Burglar", 196, Rarity.UNCOMMON, mage.cards.b.BilboRetiredBurglar.class));
+        cards.add(new SetCardInfo("Bill Ferny, Bree Swindler", 42, Rarity.UNCOMMON, mage.cards.b.BillFernyBreeSwindler.class));
         cards.add(new SetCardInfo("Bill the Pony", 3, Rarity.UNCOMMON, mage.cards.b.BillThePony.class));
         cards.add(new SetCardInfo("Birthday Escape", 43, Rarity.COMMON, mage.cards.b.BirthdayEscape.class));
         cards.add(new SetCardInfo("Bitter Downfall", 77, Rarity.UNCOMMON, mage.cards.b.BitterDownfall.class));
@@ -76,6 +78,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Ent-Draught Basin", 238, Rarity.UNCOMMON, mage.cards.e.EntDraughtBasin.class));
         cards.add(new SetCardInfo("Entish Restoration", 163, Rarity.UNCOMMON, mage.cards.e.EntishRestoration.class));
         cards.add(new SetCardInfo("Eomer of the Riddermark", 121, Rarity.UNCOMMON, mage.cards.e.EomerOfTheRiddermark.class));
+        cards.add(new SetCardInfo("Eomer, Marshal of Rohan", 120, Rarity.RARE, mage.cards.e.EomerMarshalOfRohan.class));
         cards.add(new SetCardInfo("Eowyn, Fearless Knight", 201, Rarity.RARE, mage.cards.e.EowynFearlessKnight.class));
         cards.add(new SetCardInfo("Eowyn, Lady of Rohan", 10, Rarity.UNCOMMON, mage.cards.e.EowynLadyOfRohan.class));
         cards.add(new SetCardInfo("Erebor Flamesmith", 122, Rarity.COMMON, mage.cards.e.EreborFlamesmith.class));
@@ -91,6 +94,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Fear, Fire, Foes!", 125, Rarity.UNCOMMON, mage.cards.f.FearFireFoes.class));
         cards.add(new SetCardInfo("Fiery Inscription", 126, Rarity.UNCOMMON, mage.cards.f.FieryInscription.class));
         cards.add(new SetCardInfo("Fire of Orthanc", 127, Rarity.COMMON, mage.cards.f.FireOfOrthanc.class));
+        cards.add(new SetCardInfo("Fires of Mount Doom", 294, Rarity.RARE, mage.cards.f.FiresOfMountDoom.class));
         cards.add(new SetCardInfo("Flame of Anor", 203, Rarity.RARE, mage.cards.f.FlameOfAnor.class));
         cards.add(new SetCardInfo("Flowering of the White Tree", 15, Rarity.RARE, mage.cards.f.FloweringOfTheWhiteTree.class));
         cards.add(new SetCardInfo("Fog on the Barrow-Downs", 16, Rarity.COMMON, mage.cards.f.FogOnTheBarrowDowns.class));
@@ -115,12 +119,16 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Gimli's Fury", 131, Rarity.COMMON, mage.cards.g.GimlisFury.class));
         cards.add(new SetCardInfo("Gimli, Counter of Kills", 129, Rarity.UNCOMMON, mage.cards.g.GimliCounterOfKills.class));
         cards.add(new SetCardInfo("Gimli, Mournful Avenger", 209, Rarity.RARE, mage.cards.g.GimliMournfulAvenger.class));
+        cards.add(new SetCardInfo("Glamdring", 239, Rarity.MYTHIC, mage.cards.g.Glamdring.class));
         cards.add(new SetCardInfo("Gloin, Dwarf Emissary", 132, Rarity.RARE, mage.cards.g.GloinDwarfEmissary.class));
+        cards.add(new SetCardInfo("Glorfindel, Dauntless Rescuer", 171, Rarity.UNCOMMON, mage.cards.g.GlorfindelDauntlessRescuer.class));
         cards.add(new SetCardInfo("Glorious Gale", 51, Rarity.COMMON, mage.cards.g.GloriousGale.class));
         cards.add(new SetCardInfo("Goblin Assailant", 295, Rarity.COMMON, mage.cards.g.GoblinAssailant.class));
         cards.add(new SetCardInfo("Goblin Fireleaper", 133, Rarity.UNCOMMON, mage.cards.g.GoblinFireleaper.class));
+        cards.add(new SetCardInfo("Goldberry, River-Daughter", 52, Rarity.RARE, mage.cards.g.GoldberryRiverDaughter.class));
         cards.add(new SetCardInfo("Gollum's Bite", 85, Rarity.UNCOMMON, mage.cards.g.GollumsBite.class));
         cards.add(new SetCardInfo("Gollum, Patient Plotter", 84, Rarity.UNCOMMON, mage.cards.g.GollumPatientPlotter.class));
+        cards.add(new SetCardInfo("Gollum, Scheming Guide", 292, Rarity.RARE, mage.cards.g.GollumSchemingGuide.class));
         cards.add(new SetCardInfo("Gorbag of Minas Morgul", 86, Rarity.UNCOMMON, mage.cards.g.GorbagOfMinasMorgul.class));
         cards.add(new SetCardInfo("Gothmog, Morgul Lieutenant", 87, Rarity.UNCOMMON, mage.cards.g.GothmogMorgulLieutenant.class));
         cards.add(new SetCardInfo("Great Hall of the Citadel", 254, Rarity.COMMON, mage.cards.g.GreatHallOfTheCitadel.class));
@@ -144,6 +152,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 264, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Isolation at Orthanc", 57, Rarity.COMMON, mage.cards.i.IsolationAtOrthanc.class));
         cards.add(new SetCardInfo("Ithilien Kingfisher", 58, Rarity.COMMON, mage.cards.i.IthilienKingfisher.class));
+        cards.add(new SetCardInfo("King of the Oathbreakers", 211, Rarity.RARE, mage.cards.k.KingOfTheOathbreakers.class));
         cards.add(new SetCardInfo("Knight of the Keep", 291, Rarity.COMMON, mage.cards.k.KnightOfTheKeep.class));
         cards.add(new SetCardInfo("Knights of Dol Amroth", 59, Rarity.COMMON, mage.cards.k.KnightsOfDolAmroth.class));
         cards.add(new SetCardInfo("Landroval, Horizon Witness", 21, Rarity.UNCOMMON, mage.cards.l.LandrovalHorizonWitness.class));
@@ -203,6 +212,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Protector of Gondor", 25, Rarity.COMMON, mage.cards.p.ProtectorOfGondor.class));
         cards.add(new SetCardInfo("Quarrel's End", 141, Rarity.COMMON, mage.cards.q.QuarrelsEnd.class));
         cards.add(new SetCardInfo("Quickbeam, Upstart Ent", 183, Rarity.UNCOMMON, mage.cards.q.QuickbeamUpstartEnt.class));
+        cards.add(new SetCardInfo("Radagast the Brown", 184, Rarity.MYTHIC, mage.cards.r.RadagastTheBrown.class));
         cards.add(new SetCardInfo("Rally at the Hornburg", 142, Rarity.COMMON, mage.cards.r.RallyAtTheHornburg.class));
         cards.add(new SetCardInfo("Ranger's Firebrand", 143, Rarity.UNCOMMON, mage.cards.r.RangersFirebrand.class));
         cards.add(new SetCardInfo("Rangers of Ithilien", 66, Rarity.RARE, mage.cards.r.RangersOfIthilien.class));
@@ -234,6 +244,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Shadow of the Enemy", 107, Rarity.MYTHIC, mage.cards.s.ShadowOfTheEnemy.class));
         cards.add(new SetCardInfo("Shadowfax, Lord of Horses", 227, Rarity.UNCOMMON, mage.cards.s.ShadowfaxLordOfHorses.class));
         cards.add(new SetCardInfo("Shagrat, Loot Bearer", 228, Rarity.RARE, mage.cards.s.ShagratLootBearer.class));
+        cards.add(new SetCardInfo("Sharkey, Tyrant of the Shire", 229, Rarity.RARE, mage.cards.s.SharkeyTyrantOfTheShire.class));
         cards.add(new SetCardInfo("Shelob's Ambush", 108, Rarity.COMMON, mage.cards.s.ShelobsAmbush.class));
         cards.add(new SetCardInfo("Shelob, Child of Ungoliant", 230, Rarity.RARE, mage.cards.s.ShelobChildOfUngoliant.class));
         cards.add(new SetCardInfo("Shire Scarecrow", 249, Rarity.COMMON, mage.cards.s.ShireScarecrow.class));
@@ -251,6 +262,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("Stalwarts of Osgiliath", 33, Rarity.COMMON, mage.cards.s.StalwartsOfOsgiliath.class));
         cards.add(new SetCardInfo("Stern Scolding", 71, Rarity.UNCOMMON, mage.cards.s.SternScolding.class));
         cards.add(new SetCardInfo("Stew the Coneys", 189, Rarity.UNCOMMON, mage.cards.s.StewTheConeys.class));
+        cards.add(new SetCardInfo("Sting, the Glinting Dagger", 250, Rarity.RARE, mage.cards.s.StingTheGlintingDagger.class));
         cards.add(new SetCardInfo("Stone of Erech", 251, Rarity.UNCOMMON, mage.cards.s.StoneOfErech.class));
         cards.add(new SetCardInfo("Storm of Saruman", 72, Rarity.MYTHIC, mage.cards.s.StormOfSaruman.class));
         cards.add(new SetCardInfo("Strider, Ranger of the North", 232, Rarity.UNCOMMON, mage.cards.s.StriderRangerOfTheNorth.class));

@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
-import mage.abilities.effects.common.UntapEnchantedEffect;
+import mage.abilities.effects.common.UntapAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +35,7 @@ public final class FreedFromTheReal extends CardImpl {
         // {U}: Tap enchanted creature.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapEnchantedEffect(), new ManaCostsImpl<>("{U}")));
         // {U}: Untap enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new ManaCostsImpl<>("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapAttachedEffect(), new ManaCostsImpl<>("{U}")));
 
     }
 

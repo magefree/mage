@@ -49,7 +49,7 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
         this.genericMana = genericMana;
     }
 
-    public DoUnlessTargetPlayerOrTargetsControllerPaysEffect(final DoUnlessTargetPlayerOrTargetsControllerPaysEffect effect) {
+    protected DoUnlessTargetPlayerOrTargetsControllerPaysEffect(final DoUnlessTargetPlayerOrTargetsControllerPaysEffect effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
         this.otherwiseEffect = effect.otherwiseEffect;

@@ -30,7 +30,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     public TriggeredAbilities() {
     }
 
-    public TriggeredAbilities(final TriggeredAbilities abilities) {
+    protected TriggeredAbilities(final TriggeredAbilities abilities) {
         for (Map.Entry<String, TriggeredAbility> entry : abilities.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }

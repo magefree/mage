@@ -22,7 +22,7 @@ public class Targets extends ArrayList<Target> {
         }
     }
 
-    public Targets(final Targets targets) {
+    protected Targets(final Targets targets) {
         for (Target target : targets) {
             this.add(target.copy());
         }

@@ -72,7 +72,7 @@ class WeatheredBodyguardsEffect extends ReplacementEffectImpl {
             permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
             return true;
         }
-        return true;
+        return false;
     }
 
     @Override

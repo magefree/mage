@@ -24,6 +24,7 @@ public class ExileTargetCardCopyAndCastEffect extends OneShotEffect {
 
     /**
      * NOTE: You must supply your own effect text
+     *
      * @param noMana   Whether the copy can be cast without paying its mana cost
      * @param optional Whether the casting of the copy is optional (otherwise it must be cast if possible)
      */
@@ -34,7 +35,7 @@ public class ExileTargetCardCopyAndCastEffect extends OneShotEffect {
         this.noMana = noMana;
     }
 
-    public ExileTargetCardCopyAndCastEffect(final ExileTargetCardCopyAndCastEffect effect) {
+    protected ExileTargetCardCopyAndCastEffect(final ExileTargetCardCopyAndCastEffect effect) {
         super(effect);
 
         this.optional = effect.optional;

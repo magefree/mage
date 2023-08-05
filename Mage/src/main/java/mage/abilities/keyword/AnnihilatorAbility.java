@@ -21,7 +21,7 @@ import java.util.UUID;
  * 702.84. Annihilator 702.84a Annihilator is a triggered ability. "Annihilator
  * N" means "Whenever this creature attacks, defending player sacrifices N
  * permanents."
- *
+ * <p>
  * 702.84b If a creature has multiple instances of annihilator, each triggers
  * separately.
  *
@@ -36,7 +36,7 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
         this.count = count;
     }
 
-    public AnnihilatorAbility(final AnnihilatorAbility ability) {
+    protected AnnihilatorAbility(final AnnihilatorAbility ability) {
         super(ability);
         this.count = ability.count;
     }

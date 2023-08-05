@@ -3,6 +3,7 @@ package mage.abilities.effects.common;
 
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -23,7 +24,7 @@ public class PhaseOutAllEffect extends OneShotEffect {
         this.idList = idList;
     }
 
-    public PhaseOutAllEffect(final PhaseOutAllEffect effect) {
+    protected PhaseOutAllEffect(final PhaseOutAllEffect effect) {
         super(effect);
         this.idList = effect.idList;
     }

@@ -20,7 +20,7 @@ public final class GargoyleToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public GargoyleToken(final GargoyleToken token) {
+    protected GargoyleToken(final GargoyleToken token) {
         super(token);
     }
 

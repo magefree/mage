@@ -66,7 +66,7 @@ class GiltLeafAmbushCreateTokenEffect extends OneShotEffect {
         if (controller != null) {
             CreateTokenEffect effect = new CreateTokenEffect(new ElfWarriorToken(), 2);
             effect.apply(game, source);
-            if (ClashEffect.getInstance().apply(game, source)) {
+            if (new ClashEffect().apply(game, source)) {
                 for (UUID tokenId : effect.getLastAddedTokenIds()) {
                     Permanent token = game.getPermanent(tokenId);
                     if (token != null) {

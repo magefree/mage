@@ -10,6 +10,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.UUID;
+
 import mage.cards.AdventureCard;
 
 /**
@@ -31,7 +32,7 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
         this.consumable = consumable;
     }
 
-    public AsThoughEffectImpl(final AsThoughEffectImpl effect) {
+    protected AsThoughEffectImpl(final AsThoughEffectImpl effect) {
         super(effect);
         this.type = effect.type;
         this.consumable = effect.consumable;
@@ -76,8 +77,8 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
      * card is of the correct type or in the correct zone have to be done
      * before.
      *
-     * @param objectId sourceId of the card to play
-     * @param source source ability that allows this effect
+     * @param objectId             sourceId of the card to play
+     * @param source               source ability that allows this effect
      * @param affectedControllerId player allowed to play the card
      * @param game
      * @return

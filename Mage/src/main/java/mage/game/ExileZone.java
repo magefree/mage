@@ -30,7 +30,7 @@ public class ExileZone extends CardsImpl {
         this.cleanupOnEndTurn = cleanupOnEndTurn;
     }
 
-    public ExileZone(final ExileZone zone) {
+    protected ExileZone(final ExileZone zone) {
         super(zone);
         this.id = zone.id;
         this.name = zone.name;

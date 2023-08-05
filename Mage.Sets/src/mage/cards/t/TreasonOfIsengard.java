@@ -26,7 +26,7 @@ public final class TreasonOfIsengard extends CardImpl {
         ));
 
         // Amass Orcs 2.
-        this.getSpellAbility().addEffect(new AmassEffect(2, SubType.ORC));
+        this.getSpellAbility().addEffect(new AmassEffect(2, SubType.ORC).concatBy("<br>"));
     }
 
     private TreasonOfIsengard(final TreasonOfIsengard card) {

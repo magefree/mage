@@ -1,13 +1,13 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class ElementalCatToken extends TokenImpl {
@@ -23,7 +23,7 @@ public final class ElementalCatToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public ElementalCatToken(final ElementalCatToken token) {
+    protected ElementalCatToken(final ElementalCatToken token) {
         super(token);
     }
 

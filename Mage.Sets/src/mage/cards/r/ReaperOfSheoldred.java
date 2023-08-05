@@ -1,27 +1,19 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.SourceDealsDamageToThisTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
- *
- * @author Loki
+ * @author xenohedron
  */
 public final class ReaperOfSheoldred extends CardImpl {
 
@@ -37,7 +29,10 @@ public final class ReaperOfSheoldred extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
 
         // Whenever a source deals damage to Reaper of Sheoldred, that source's controller gets a poison counter.
-        this.addAbility(new ReaperOfSheoldredTriggeredAbility());
+        this.addAbility(new SourceDealsDamageToThisTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.POISON.createInstance())
+                        .setText("that source's controller gets a poison counter")
+        ));
     }
 
     private ReaperOfSheoldred(final ReaperOfSheoldred card) {
@@ -47,48 +42,5 @@ public final class ReaperOfSheoldred extends CardImpl {
     @Override
     public ReaperOfSheoldred copy() {
         return new ReaperOfSheoldred(this);
-    }
-}
-
-class ReaperOfSheoldredTriggeredAbility extends TriggeredAbilityImpl {
-
-    ReaperOfSheoldredTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.POISON.createInstance()));
-    }
-
-    ReaperOfSheoldredTriggeredAbility(final ReaperOfSheoldredTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ReaperOfSheoldredTriggeredAbility copy() {
-        return new ReaperOfSheoldredTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.getSourceId())) {
-            UUID controller = game.getControllerId(event.getSourceId());
-            if (controller != null) {
-                Player player = game.getPlayer(controller);
-                if (player != null) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(player.getId()));
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a source deals damage to {this}, that source's controller gets a poison counter.";
     }
 }

@@ -18,7 +18,7 @@ public final class RedElementalToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public RedElementalToken(final RedElementalToken token) {
+    protected RedElementalToken(final RedElementalToken token) {
         super(token);
     }
 

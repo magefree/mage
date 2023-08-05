@@ -69,7 +69,7 @@ class KinzuOfTheBleakCovenEffect extends OneShotEffect {
 
     KinzuOfTheBleakCovenEffect() {
         super(Outcome.Benefit);
-        staticText = "you may pay 2 Life and exile it. If you do, " +
+        staticText = "you may pay 2 life and exile it. If you do, " +
                 "create a token that's a copy of that creature" +
                 ", except it's 1/1 and has toxic 1.";
     }

@@ -13,7 +13,6 @@ import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl {
@@ -30,7 +29,7 @@ public class DiscardsACardOpponentTriggeredAbility extends TriggeredAbilityImpl 
         setTriggerPhrase("Whenever an opponent discards a card, ");
     }
 
-    public DiscardsACardOpponentTriggeredAbility(final DiscardsACardOpponentTriggeredAbility ability) {
+    protected DiscardsACardOpponentTriggeredAbility(final DiscardsACardOpponentTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }

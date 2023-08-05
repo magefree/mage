@@ -13,6 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -123,12 +124,9 @@ class LuminousBroodmothEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        Permanent permanent = game.getPermanent(card.getId());
-        if (permanent == null) {
-            return false;
-        }
-        permanent.addCounters(CounterType.FLYING.createInstance(), source.getControllerId(), source, game);
-        return true;
+        Counters countersToAdd = new Counters();
+        countersToAdd.addCounter(CounterType.FLYING.createInstance());
+        game.setEnterWithCounters(card.getId(), countersToAdd);
+        return player.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }

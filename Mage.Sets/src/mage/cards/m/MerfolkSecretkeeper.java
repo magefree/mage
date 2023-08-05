@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,7 +25,7 @@ public final class MerfolkSecretkeeper extends AdventureCard {
 
         // Venture Deeper
         // Target player puts the top four cards of their library into their graveyard.
-        this.getSpellCard().getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));
+        this.getSpellCard().getSpellAbility().addEffect(new MillCardsTargetEffect(4));
         this.getSpellCard().getSpellAbility().addTarget(new TargetPlayer());
     }
 

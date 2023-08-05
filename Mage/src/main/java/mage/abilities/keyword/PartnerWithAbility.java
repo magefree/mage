@@ -44,7 +44,7 @@ public class PartnerWithAbility extends EntersBattlefieldTriggeredAbility {
         }
     }
 
-    public PartnerWithAbility(final PartnerWithAbility ability) {
+    protected PartnerWithAbility(final PartnerWithAbility ability) {
         super(ability);
         this.partnerName = ability.partnerName;
         this.shortName = ability.shortName;
@@ -98,7 +98,7 @@ class PartnersWithSearchEffect extends OneShotEffect {
         this.staticText = "";
     }
 
-    public PartnersWithSearchEffect(final PartnersWithSearchEffect effect) {
+    protected PartnersWithSearchEffect(final PartnersWithSearchEffect effect) {
         super(effect);
         this.partnerName = effect.partnerName;
     }

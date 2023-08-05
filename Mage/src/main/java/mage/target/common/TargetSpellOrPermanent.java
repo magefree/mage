@@ -55,7 +55,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
         this.targetName = filter.getMessage();
     }
 
-    public TargetSpellOrPermanent(final TargetSpellOrPermanent target) {
+    protected TargetSpellOrPermanent(final TargetSpellOrPermanent target) {
         super(target);
         this.filter = target.filter.copy();
     }

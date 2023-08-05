@@ -53,7 +53,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.eachModeMoreThanOnce = false;
     }
 
-    public Modes(final Modes modes) {
+    protected Modes(final Modes modes) {
         for (Map.Entry<UUID, Mode> entry : modes.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }

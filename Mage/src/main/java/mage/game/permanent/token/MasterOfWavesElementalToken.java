@@ -20,7 +20,7 @@ public final class MasterOfWavesElementalToken extends TokenImpl {
         this.toughness = new MageInt(0);
     }
 
-    public MasterOfWavesElementalToken(final MasterOfWavesElementalToken token) {
+    protected MasterOfWavesElementalToken(final MasterOfWavesElementalToken token) {
         super(token);
     }
 

@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -10,11 +11,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author TheElk801
  */
 public final class StarCrownedStag extends CardImpl {
@@ -22,7 +22,7 @@ public final class StarCrownedStag extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public StarCrownedStag(UUID ownerId, CardSetInfo setInfo) {

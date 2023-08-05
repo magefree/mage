@@ -16,31 +16,30 @@ import mage.game.events.GameEvent;
 import mage.target.TargetSource;
 
 /**
- *
  * @author emerald000
  */
 public class PreventNextDamageFromChosenSourceToTargetEffect extends PreventionEffectImpl {
 
     protected final TargetSource targetSource;
-    
+
     public PreventNextDamageFromChosenSourceToTargetEffect(Duration duration) {
         this(duration, new FilterObject<>("source"));
     }
-    
+
     public PreventNextDamageFromChosenSourceToTargetEffect(Duration duration, FilterObject<MageObject> filter) {
         this(duration, filter, false);
     }
-    
+
     public PreventNextDamageFromChosenSourceToTargetEffect(Duration duration, FilterObject<MageObject> filter, boolean onlyCombat) {
         super(duration, Integer.MAX_VALUE, onlyCombat);
         this.targetSource = new TargetSource(filter);
     }
-    
-    public PreventNextDamageFromChosenSourceToTargetEffect(final PreventNextDamageFromChosenSourceToTargetEffect effect) {
+
+    protected PreventNextDamageFromChosenSourceToTargetEffect(final PreventNextDamageFromChosenSourceToTargetEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }
-    
+
     @Override
     public PreventNextDamageFromChosenSourceToTargetEffect copy() {
         return new PreventNextDamageFromChosenSourceToTargetEffect(this);

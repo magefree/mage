@@ -25,7 +25,7 @@ public final class RobotToken extends TokenImpl {
         ));
     }
 
-    public RobotToken(final RobotToken token) {
+    protected RobotToken(final RobotToken token) {
         super(token);
     }
 

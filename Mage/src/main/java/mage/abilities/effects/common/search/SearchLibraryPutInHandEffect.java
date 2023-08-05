@@ -33,7 +33,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
         setText();
     }
 
-    public SearchLibraryPutInHandEffect(final SearchLibraryPutInHandEffect effect) {
+    protected SearchLibraryPutInHandEffect(final SearchLibraryPutInHandEffect effect) {
         super(effect);
         this.reveal = effect.reveal;
         this.textThatCard = effect.textThatCard;

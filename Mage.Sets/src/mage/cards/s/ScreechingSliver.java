@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class ScreechingSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All Slivers have "{T}: Target player puts the top card of their library into their graveyard."
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new TapSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,

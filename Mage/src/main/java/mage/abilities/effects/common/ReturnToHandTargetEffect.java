@@ -24,7 +24,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
         super(Outcome.ReturnToHand);
     }
 
-    public ReturnToHandTargetEffect(final ReturnToHandTargetEffect effect) {
+    protected ReturnToHandTargetEffect(final ReturnToHandTargetEffect effect) {
         super(effect);
     }
 
@@ -41,17 +41,17 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
         }
         List<UUID> copyIds = new ArrayList<>();
         Set<Card> cards = new LinkedHashSet<>();
-            for (UUID targetId : targetPointer.getTargets(game, source)) {
-                MageObject mageObject = game.getObject(targetId);
-                if (mageObject != null) {
-                    if (mageObject instanceof Spell
-                            && mageObject.isCopy()) {
-                        copyIds.add(targetId);
-                    } else if (mageObject instanceof Card) {
-                        cards.add((Card) mageObject);
-                    }
+        for (UUID targetId : targetPointer.getTargets(game, source)) {
+            MageObject mageObject = game.getObject(targetId);
+            if (mageObject != null) {
+                if (mageObject instanceof Spell
+                        && mageObject.isCopy()) {
+                    copyIds.add(targetId);
+                } else if (mageObject instanceof Card) {
+                    cards.add((Card) mageObject);
                 }
             }
+        }
         for (UUID copyId : copyIds) {
             game.getStack().remove(game.getSpell(copyId), game);
         }
@@ -59,8 +59,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
     }
 
     @Override
-    public String getText(Mode mode)
-    {
+    public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }

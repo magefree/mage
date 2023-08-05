@@ -11,6 +11,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.*;
 import mage.filter.predicate.other.AnotherTargetPredicate;
 import mage.filter.predicate.permanent.AttachedOrShareCreatureTypePredicate;
+import mage.filter.predicate.permanent.RingBearerPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -24,6 +25,10 @@ import mage.filter.predicate.permanent.TokenPredicate;
  * @author LevelX2
  */
 public final class StaticFilters {
+
+    // Hide constructor - not to be instantiated
+    private StaticFilters() {
+    }
 
     public static final FilterSpiritOrArcaneCard FILTER_SPIRIT_OR_ARCANE_CARD = new FilterSpiritOrArcaneCard();
 
@@ -260,7 +265,6 @@ public final class StaticFilters {
         FILTER_PERMANENT_ENCHANTMENT.setLockedFilter(true);
     }
 
-
     public static final FilterEnchantmentPermanent FILTER_PERMANENT_ENCHANTMENTS = new FilterEnchantmentPermanent("enchantments");
 
     static {
@@ -479,6 +483,14 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_ENCHANTMENT.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT = new FilterControlledPermanent("another enchantment");
+
+    static {
+        FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT.add(AnotherPredicate.instance);
+        FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT.add(CardType.ENCHANTMENT.getPredicate());
+        FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_LAND = new FilterControlledLandPermanent();
 
     static {
@@ -621,6 +633,14 @@ public final class StaticFilters {
         FILTER_CONTROLLED_CREATURES.setLockedFilter(true);
     }
 
+
+    public static final FilterControlledCreaturePermanent FILTER_OTHER_CONTROLLED_CREATURES = new FilterControlledCreaturePermanent("other creatures you control");
+
+    static {
+        FILTER_OTHER_CONTROLLED_CREATURES.add(AnotherPredicate.instance);
+        FILTER_OTHER_CONTROLLED_CREATURES.setLockedFilter(true);
+    }
+
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_A_CREATURE = new FilterControlledCreaturePermanent("a creature you control");
 
     static {
@@ -662,6 +682,13 @@ public final class StaticFilters {
                 Predicates.not(CardType.LAND.getPredicate())
         );
         FILTER_CONTROLLED_PERMANENT_NON_LAND.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_RINGBEARER = new FilterControlledPermanent("the controlled Ring-bearer");
+
+    static {
+        FILTER_CONTROLLED_RINGBEARER.add(RingBearerPredicate.instance);
+        FILTER_CONTROLLED_RINGBEARER.setLockedFilter(true);
     }
 
     public static final FilterLandPermanent FILTER_LAND = new FilterLandPermanent();
@@ -721,6 +748,17 @@ public final class StaticFilters {
                         CardType.PLANESWALKER.getPredicate()
                 ));
         FILTER_PERMANENT_CREATURE_OR_PLANESWALKER.setLockedFilter(true);
+    }
+
+    public static final FilterPermanent FILTER_PERMANENT_CREATURE_OR_LAND = new FilterPermanent("creature or land");
+
+    static {
+        FILTER_PERMANENT_CREATURE_OR_LAND.add(
+                Predicates.or(
+                        CardType.CREATURE.getPredicate(),
+                        CardType.LAND.getPredicate()
+                ));
+        FILTER_PERMANENT_CREATURE_OR_LAND.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature");
@@ -1163,5 +1201,11 @@ public final class StaticFilters {
     static {
         FILTER_PLAYER_CONTROLLER.add(TargetController.YOU.getPlayerPredicate());
         FILTER_PLAYER_CONTROLLER.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_FOOD = new FilterControlledPermanent(SubType.FOOD, "Food");
+
+    static {
+        FILTER_CONTROLLED_FOOD.setLockedFilter(true);
     }
 }

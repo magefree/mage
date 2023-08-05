@@ -21,7 +21,7 @@ public final class HazezonTamarSandWarriorToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public HazezonTamarSandWarriorToken(final HazezonTamarSandWarriorToken token) {
+    protected HazezonTamarSandWarriorToken(final HazezonTamarSandWarriorToken token) {
         super(token);
     }
 

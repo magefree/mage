@@ -46,7 +46,7 @@ public class FlashbackAbility extends SpellAbility {
         this.timing = card.isSorcery() ? TimingRule.SORCERY : TimingRule.INSTANT;
     }
 
-    public FlashbackAbility(final FlashbackAbility ability) {
+    protected FlashbackAbility(final FlashbackAbility ability) {
         super(ability);
         this.spellAbilityType = ability.spellAbilityType;
         this.abilityName = ability.abilityName;
@@ -191,7 +191,7 @@ class FlashbackReplacementEffect extends ReplacementEffectImpl {
         staticText = "(If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack)";
     }
 
-    public FlashbackReplacementEffect(final FlashbackReplacementEffect effect) {
+    protected FlashbackReplacementEffect(final FlashbackReplacementEffect effect) {
         super(effect);
     }
 

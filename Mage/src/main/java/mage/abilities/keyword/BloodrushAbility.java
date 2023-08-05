@@ -30,7 +30,7 @@ public class BloodrushAbility extends ActivatedAbilityImpl {
         this.setAbilityWord(AbilityWord.BLOODRUSH);
     }
 
-    public BloodrushAbility(final BloodrushAbility ability) {
+    protected BloodrushAbility(final BloodrushAbility ability) {
         super(ability);
     }
 

@@ -28,7 +28,7 @@ public final class GarrukApexPredatorEmblem extends Emblem {
         effect.setText("it gets +5/+5");
         Ability ability = new AttackedByCreatureTriggeredAbility(Zone.COMMAND, effect, false, SetTargetPointer.PERMANENT);
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        ability.addEffect(effect.concatBy("and"));
+        ability.addEffect(effect.setText("and gains trample until end of turn"));
         this.getAbilities().add(ability);
     }
 

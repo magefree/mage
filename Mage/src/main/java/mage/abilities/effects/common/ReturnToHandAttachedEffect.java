@@ -20,7 +20,7 @@ public class ReturnToHandAttachedEffect extends OneShotEffect {
         staticText = "return that card to its owner's hand";
     }
 
-    public ReturnToHandAttachedEffect(final ReturnToHandAttachedEffect effect) {
+    protected ReturnToHandAttachedEffect(final ReturnToHandAttachedEffect effect) {
         super(effect);
     }
 

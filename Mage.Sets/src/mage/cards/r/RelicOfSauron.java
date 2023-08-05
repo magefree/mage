@@ -25,7 +25,7 @@ public final class RelicOfSauron extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         
 
-        // {T}: Add two mana in any combination of {U}, {B} and/or {R}.
+        // {T}: Add two mana in any combination of {U}, {B}, and/or {R}.
         this.addAbility(new SimpleManaAbility(
                 Zone.BATTLEFIELD,
                 new AddManaInAnyCombinationEffect(2, ColoredManaSymbol.U, ColoredManaSymbol.B, ColoredManaSymbol.R),

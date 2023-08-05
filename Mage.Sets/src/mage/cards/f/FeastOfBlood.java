@@ -26,7 +26,7 @@ public final class FeastOfBlood extends CardImpl {
         // Cast Feast of Blood only if you control two or more Vampires.
         this.addAbility(new CastOnlyIfConditionIsTrueAbility(
                 new PermanentsOnTheBattlefieldCondition(
-                        new FilterControlledCreaturePermanent(SubType.VAMPIRE, "if you control two or more Vampires"),
+                        new FilterControlledCreaturePermanent(SubType.VAMPIRE, "you control two or more Vampires"),
                         ComparisonType.MORE_THAN, 1)));
 
         // Destroy target creature. You gain 4 life.

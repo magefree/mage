@@ -45,7 +45,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         }
     }
 
-    public CardsImpl(final CardsImpl cards) {
+    protected CardsImpl(final CardsImpl cards) {
         this.addAll(cards);
         this.ownerId = cards.ownerId;
     }

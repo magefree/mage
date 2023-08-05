@@ -15,7 +15,7 @@ public final class GrismoldPlantToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public GrismoldPlantToken(final GrismoldPlantToken token) {
+    protected GrismoldPlantToken(final GrismoldPlantToken token) {
         super(token);
     }
 

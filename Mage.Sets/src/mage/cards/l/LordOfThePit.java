@@ -53,7 +53,7 @@ class LordOfThePitEffect extends OneShotEffect {
 
     public LordOfThePitEffect() {
         super(Outcome.Damage);
-        this.staticText = "Sacrifice a creature other than {this}. If you can't {this} deals 7 damage to you.";
+        this.staticText = "sacrifice a creature other than {this}. If you can't, {this} deals 7 damage to you.";
     }
 
     public LordOfThePitEffect(final LordOfThePitEffect effect) {

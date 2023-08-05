@@ -48,7 +48,7 @@ public class ReboundAbility extends SimpleStaticAbility {
         super(Zone.STACK, new ReboundCastFromHandReplacementEffect());
     }
 
-    public ReboundAbility(final ReboundAbility ability) {
+    protected ReboundAbility(final ReboundAbility ability) {
         super(ability);
     }
 

@@ -35,7 +35,7 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
         this.adventureCardParent = adventureCardParent;
     }
 
-    public AdventureCardSpellImpl(final AdventureCardSpellImpl card) {
+    protected AdventureCardSpellImpl(final AdventureCardSpellImpl card) {
         super(card);
         this.adventureCardParent = card.adventureCardParent;
     }
@@ -109,7 +109,7 @@ class AdventureCardSpellAbility extends SpellAbility {
         this.setCardName(adventureName);
     }
 
-    public AdventureCardSpellAbility(final AdventureCardSpellAbility ability) {
+    protected AdventureCardSpellAbility(final AdventureCardSpellAbility ability) {
         super(ability);
         this.nameFull = ability.nameFull;
     }

@@ -44,7 +44,7 @@ public class TargetPermanent extends TargetObject {
         this.notTarget = notTarget;
     }
 
-    public TargetPermanent(final TargetPermanent target) {
+    protected TargetPermanent(final TargetPermanent target) {
         super(target);
         this.filter = target.filter.copy();
     }

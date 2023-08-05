@@ -2,6 +2,7 @@ package mage.abilities.effects.common.continuous;
 
 import java.util.Locale;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -44,7 +45,6 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
     private final String commanderTypeName;
 
     /**
-     *
      * @param commanderId
      * @param alsoHand          is the replacement effect also applied if
      *                          commander object goes to hand zone
@@ -71,7 +71,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
         this.commanderTypeName = commanderTypeName;
     }
 
-    public CommanderReplacementEffect(final CommanderReplacementEffect effect) {
+    protected CommanderReplacementEffect(final CommanderReplacementEffect effect) {
         super(effect);
         this.commanderId = effect.commanderId;
         this.alsoHand = effect.alsoHand;

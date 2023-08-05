@@ -19,7 +19,7 @@ public final class PhyrexianBeastToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public PhyrexianBeastToken(final PhyrexianBeastToken token) {
+    protected PhyrexianBeastToken(final PhyrexianBeastToken token) {
         super(token);
     }
 

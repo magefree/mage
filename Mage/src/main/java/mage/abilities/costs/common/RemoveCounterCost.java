@@ -48,7 +48,7 @@ public class RemoveCounterCost extends CostImpl {
         this.text = setText();
     }
 
-    public RemoveCounterCost(final RemoveCounterCost cost) {
+    protected RemoveCounterCost(final RemoveCounterCost cost) {
         super(cost);
         this.target = cost.target.copy();
         this.countersToRemove = cost.countersToRemove;

@@ -4,6 +4,7 @@ package mage.game.stack;
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.PutCards;
@@ -13,7 +14,6 @@ import mage.util.CardUtil;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SpellStack extends ArrayDeque<StackObject> {
@@ -25,7 +25,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
     public SpellStack() {
     }
 
-    public SpellStack(final SpellStack stack) {
+    protected SpellStack(final SpellStack stack) {
 
         for (StackObject spell : stack) {
             this.addLast(spell.copy());

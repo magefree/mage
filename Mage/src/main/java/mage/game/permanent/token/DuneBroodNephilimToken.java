@@ -1,12 +1,12 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class DuneBroodNephilimToken extends TokenImpl {
@@ -18,7 +18,8 @@ public final class DuneBroodNephilimToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
-    public DuneBroodNephilimToken(final DuneBroodNephilimToken token) {
+
+    protected DuneBroodNephilimToken(final DuneBroodNephilimToken token) {
         super(token);
     }
 

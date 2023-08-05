@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class SquidToken extends TokenImpl {
 
     public SquidToken() {
-        super("Squid Token", "1/1 blue Squid creature token with Islandwalk");
+        super("Squid Token", "1/1 blue Squid creature token with islandwalk");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.SQUID);

@@ -94,7 +94,7 @@ public abstract class AbilityImpl implements Ability {
         this.modes = new Modes();
     }
 
-    public AbilityImpl(final AbilityImpl ability) {
+    protected AbilityImpl(final AbilityImpl ability) {
         this.id = ability.id;
         this.originalId = ability.originalId;
         this.abilityType = ability.abilityType;
@@ -434,6 +434,8 @@ public abstract class AbilityImpl implements Ability {
                 case FLASHBACK:
                 case MADNESS:
                 case TRANSFORMED:
+                case DISTURB:
+                case MORE_THAN_MEETS_THE_EYE:
                     // from Snapcaster Mage:
                     // If you cast a spell from a graveyard using its flashback ability, you can't pay other alternative costs
                     // (such as that of Foil). (2018-12-07)

@@ -20,7 +20,7 @@ public final class MonkRedToken extends TokenImpl {
         addAbility(new ProwessAbility());
     }
 
-    public MonkRedToken(final MonkRedToken token) {
+    protected MonkRedToken(final MonkRedToken token) {
         super(token);
     }
 

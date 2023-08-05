@@ -42,7 +42,7 @@ public class ExileFromHandCost extends CostImpl {
         this.setXFromCMC = setXFromCMC;
     }
 
-    public ExileFromHandCost(final ExileFromHandCost cost) {
+    protected ExileFromHandCost(final ExileFromHandCost cost) {
         super(cost);
         for (Card card : cost.cards) {
             this.cards.add(card.copy());

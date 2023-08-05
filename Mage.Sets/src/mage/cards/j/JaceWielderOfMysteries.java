@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -33,7 +33,7 @@ public final class JaceWielderOfMysteries extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new JaceWielderOfMysteriesContinuousEffect()));
 
         // +1 Target player puts the top two cards of their library into their graveyard. Draw a card.
-        Ability ability = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(2), 1);
+        Ability ability = new LoyaltyAbility(new MillCardsTargetEffect(2), 1);
         ability.addTarget(new TargetPlayer());
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);

@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import mage.MageInt;
@@ -15,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 
 import java.util.UUID;
@@ -26,7 +26,7 @@ public final class IncandescentSoulstoke extends CardImpl {
 
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent(SubType.ELEMENTAL, "Elemental creatures");
-    private static final FilterCard filter2 = new FilterCard("Elemental card");
+    private static final FilterCard filter2 = new FilterCreatureCard("Elemental creature card");
 
     static {
         filter2.add(SubType.ELEMENTAL.getPredicate());
@@ -46,7 +46,10 @@ public final class IncandescentSoulstoke extends CardImpl {
 
         // {1}{R}, {T}: You may put an Elemental creature card from your hand onto the battlefield. That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(
-                new PutCardIntoPlayWithHasteAndSacrificeEffect(filter2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}")
+                new PutCardIntoPlayWithHasteAndSacrificeEffect(filter2, Duration.EndOfTurn)
+                        .setText("You may put an Elemental creature card from your hand onto the battlefield. " +
+                                "That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step."),
+                new ManaCostsImpl<>("{1}{R}")
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

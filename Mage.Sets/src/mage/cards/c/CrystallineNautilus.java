@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -36,13 +36,13 @@ public final class CrystallineNautilus extends CardImpl {
         this.addAbility(new BestowAbility(this, "{3}{U}{U}"));
         
         // When Crystalline Nautilus becomes the target of a spell or ability, sacrifice it.
-        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
         
         // Enchanted creature gets +4/+4 and has "When this creature becomes the target of a spell or ability, sacrifice it."        
         Effect effect = new BoostEnchantedEffect(4,4,Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +4/+4");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new GainAbilityAttachedEffect(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), AttachmentType.AURA, Duration.WhileOnBattlefield);
+        effect = new GainAbilityAttachedEffect(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect()), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("and has \"When this creature becomes the target of a spell or ability, sacrifice it.\"");
         ability.addEffect(effect);
         this.addAbility(ability);

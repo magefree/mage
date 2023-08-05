@@ -15,7 +15,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ public final class ElturelSurvivors extends CardImpl {
     private static final FilterPermanent filter = new FilterLandPermanent();
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);

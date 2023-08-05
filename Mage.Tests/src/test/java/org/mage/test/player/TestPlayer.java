@@ -49,18 +49,18 @@ import mage.players.net.UserData;
 import mage.target.*;
 import mage.target.common.*;
 import mage.util.CardUtil;
+import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Ignore;
+import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -993,7 +993,7 @@ public class TestPlayer implements Player {
                         // show battlefield
                         if (params[0].equals(SHOW_COMMAND_BATTLEFIELD) && params.length == 1) {
                             printStart(game, action.getActionName());
-                            printPermanents(game, game.getBattlefield().getAllActivePermanents(computerPlayer.getId()));
+                            printPermanents(game, game.getBattlefield().getAllActivePermanents(computerPlayer.getId()), this);
                             printEnd();
                             actions.remove(action);
                             wasProccessed = true;
@@ -1200,8 +1200,8 @@ public class TestPlayer implements Player {
         }
     }
 
-    private void printPermanents(Game game, List<Permanent> cards) {
-        System.out.println("Total permanents: " + cards.size());
+    private void printPermanents(Game game, List<Permanent> cards, Player controller) {
+        System.out.println(String.format("Total permanents from %s: %d", controller.getName(), cards.size()));
 
         List<String> data = cards.stream()
                 .map(c -> (((c instanceof PermanentToken) ? "[T] " : "[C] ")
@@ -1383,7 +1383,7 @@ public class TestPlayer implements Player {
 
         if (foundCount != count) {
             printStart(game, "Permanents of " + player.getName());
-            printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()));
+            printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()), this);
             printEnd();
             Assert.fail(action.getActionName() + " - permanent " + permanentName + " must exists in " + count + " instances, but found " + foundCount);
         }
@@ -1401,7 +1401,7 @@ public class TestPlayer implements Player {
 
         if (foundCount != count) {
             printStart(game, "Permanents of " + player.getName());
-            printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()));
+            printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()), this);
             printEnd();
             Assert.fail(action.getActionName() + " - must have " + count + (tapped ? " tapped " : " untapped ")
                     + "permanents with name " + permanentName + ", but found " + foundCount);
@@ -2020,6 +2020,10 @@ public class TestPlayer implements Player {
                 if (!choices.isEmpty()) {
                     System.out.println(String.join("\n", choices));
                 }
+                game.getState().getPlayers().values().forEach(player -> {
+                    System.out.println();
+                    printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()), player);
+                });
                 printEnd();
             }
             if (choiceType.equals("target")) {
@@ -2027,6 +2031,10 @@ public class TestPlayer implements Player {
                 if (!targets.isEmpty()) {
                     System.out.println(String.join("\n", targets));
                 }
+                game.getState().getPlayers().values().forEach(player -> {
+                    System.out.println();
+                    printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()), player);
+                });
                 printEnd();
             }
             Assert.fail("Missing " + choiceType.toUpperCase(Locale.ENGLISH) + " def for"
@@ -2824,11 +2832,12 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
+            int min, int max, MultiAmountType type, Game game) {
         assertAliasSupportInChoices(false);
 
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
         if (needCount == 0) {
             return defaultList;
         }
@@ -2854,7 +2863,7 @@ public class TestPlayer implements Player {
             }
 
             // extra check
-            if (!MultiAmountType.isGoodValues(answer, needCount, min, max)) {
+            if (!MultiAmountType.isGoodValues(answer, messages, min, max)) {
                 Assert.fail("Wrong choices in multi amount: " + answer
                         .stream()
                         .map(String::valueOf)
@@ -2865,7 +2874,7 @@ public class TestPlayer implements Player {
         }
 
         this.chooseStrictModeFailed("choice", game, "Multi amount: " + type.getHeader());
-        return computerPlayer.getMultiAmount(outcome, messages, min, max, type, game);
+        return computerPlayer.getMultiAmountWithIndividualConstraints(outcome, messages, min, max, type, game);
     }
 
     @Override
@@ -2953,8 +2962,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerId) {
-        computerPlayer.controlPlayersTurn(game, playerId);
+    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
+        computerPlayer.controlPlayersTurn(game, playerUnderControlId, info);
     }
 
     @Override
@@ -3172,6 +3181,16 @@ public class TestPlayer implements Player {
     @Override
     public LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game) {
         return computerPlayer.getPlayableActivatedAbilities(object, zone, game);
+    }
+
+    @Override
+    public void incrementLandsPlayed() {
+        computerPlayer.incrementLandsPlayed();
+    }
+
+    @Override
+    public void resetLandsPlayed() {
+        computerPlayer.resetLandsPlayed();
     }
 
     @Override
@@ -3838,6 +3857,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void setBufferTimeLeft(int timeLeft) {
+        computerPlayer.setBufferTimeLeft(timeLeft);
+    }
+
+    @Override
+    public int getBufferTimeLeft() {
+        return computerPlayer.getBufferTimeLeft();
+    }
+
+    @Override
     public boolean hasQuit() {
         return computerPlayer.hasQuit();
     }
@@ -4425,11 +4454,6 @@ public class TestPlayer implements Player {
     @Override
     public FilterMana getPhyrexianColors() {
         return computerPlayer.getPhyrexianColors();
-    }
-
-    @Override
-    public UUID getRingBearerId() {
-        return computerPlayer.getRingBearerId();
     }
 
     @Override

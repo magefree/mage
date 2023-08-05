@@ -25,7 +25,7 @@ public abstract class StateTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect);
     }
 
-    public StateTriggeredAbility(final StateTriggeredAbility ability) {
+    protected StateTriggeredAbility(final StateTriggeredAbility ability) {
         super(ability);
     }
 

@@ -8,7 +8,6 @@ import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.MillCardsTargetEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.cost.PlanarDieRollCostIncreasingEffect;
 import mage.constants.Planes;
@@ -31,7 +30,7 @@ public class LetheLakePlane extends Plane {
         this.setPlaneType(Planes.PLANE_LETHE_LAKE);
 
         // At the beginning of your upkeep, put the top ten cards of your libary into your graveyard
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, new PutLibraryIntoGraveTargetEffect(10).setText("that player mills 10 cards"), TargetController.ANY, false, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, new MillCardsTargetEffect(10).setText("that player mills 10 cards"), TargetController.ANY, false, true);
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, target player puts the top ten cards of their library into their graveyard

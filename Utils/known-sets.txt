@@ -46,6 +46,7 @@ Core Set 2021|CoreSet2021|
 Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
+Doctor Who|DoctorWho|
 Dominaria|Dominaria|
 Dominaria United|DominariaUnited|
 Dominaria United Commander|DominariaUnitedCommander|

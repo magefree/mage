@@ -43,7 +43,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    public AddCountersTargetEffect(final AddCountersTargetEffect effect) {
+    protected AddCountersTargetEffect(final AddCountersTargetEffect effect) {
         super(effect);
         if (effect.counter != null) {
             this.counter = effect.counter.copy();

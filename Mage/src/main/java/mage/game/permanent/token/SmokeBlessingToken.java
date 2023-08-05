@@ -37,7 +37,7 @@ public final class SmokeBlessingToken extends TokenImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new SmokeBlessingTokenEffect(), "enchanted creature"));
     }
 
-    public SmokeBlessingToken(final SmokeBlessingToken token) {
+    protected SmokeBlessingToken(final SmokeBlessingToken token) {
         super(token);
     }
 

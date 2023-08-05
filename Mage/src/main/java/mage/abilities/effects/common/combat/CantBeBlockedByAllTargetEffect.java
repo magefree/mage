@@ -20,7 +20,7 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
         this.filterBlockedBy = filterBlockedBy;
     }
 
-    public CantBeBlockedByAllTargetEffect(final CantBeBlockedByAllTargetEffect effect) {
+    protected CantBeBlockedByAllTargetEffect(final CantBeBlockedByAllTargetEffect effect) {
         super(effect);
         this.filterBlockedBy = effect.filterBlockedBy;
     }
@@ -45,8 +45,7 @@ public class CantBeBlockedByAllTargetEffect extends RestrictionEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "target "
-                + mode.getTargets().get(0).getTargetName()
+        return getTargetPointer().describeTargets(mode.getTargets(), "it")
                 + " can't be blocked "
                 + (duration == Duration.EndOfTurn ? "this turn " : "")
                 + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")

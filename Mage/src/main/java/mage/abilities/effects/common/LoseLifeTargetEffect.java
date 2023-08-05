@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -11,7 +12,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class LoseLifeTargetEffect extends OneShotEffect {
@@ -27,7 +27,7 @@ public class LoseLifeTargetEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    public LoseLifeTargetEffect(final LoseLifeTargetEffect effect) {
+    protected LoseLifeTargetEffect(final LoseLifeTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
     }

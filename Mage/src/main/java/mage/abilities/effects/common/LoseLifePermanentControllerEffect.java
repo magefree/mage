@@ -10,10 +10,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 
-
 /**
  * This effect applies to the permanent's controller which originated the ability, but not to the controller of that
  * source ability.
+ *
  * @author jesusjbr
  */
 public class LoseLifePermanentControllerEffect extends OneShotEffect {
@@ -30,7 +30,7 @@ public class LoseLifePermanentControllerEffect extends OneShotEffect {
         setText();
     }
 
-    public LoseLifePermanentControllerEffect(final LoseLifePermanentControllerEffect effect) {
+    protected LoseLifePermanentControllerEffect(final LoseLifePermanentControllerEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
     }

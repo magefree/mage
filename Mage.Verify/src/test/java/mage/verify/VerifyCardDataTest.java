@@ -57,7 +57,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "LTR;LTC"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = "LTR;LTC;CMM"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
@@ -1606,6 +1606,7 @@ public class VerifyCardDataTest {
             checkBasicLands(card, ref);
             checkMissingAbilities(card, ref);
             checkWrongSymbolsInRules(card);
+            checkCardCanBeCopied(card);
         }
         checkWrongAbilitiesText(card, ref, cardIndex);
     }
@@ -1632,6 +1633,32 @@ public class VerifyCardDataTest {
                 || (color.isRed() && !expected.contains("R"))
                 || (color.isWhite() && !expected.contains("W"))) {
             fail(card, "colors", color + " != " + expected);
+        }
+    }
+
+    private void checkCardCanBeCopied(Card card1) {
+        Card card2;
+        try {
+            card2 = card1.copy();
+        } catch (Error err) {
+            fail(card1, "copy", "throws on copy : " + err.getClass() + " : " + err.getMessage() + " : ");
+            return;
+        }
+
+        // Checks that ability and effect are of the same class when copied.
+        for (int i = 0; i < card1.getAbilities().size(); i++) {
+            Ability ability1 = card1.getAbilities().get(i);
+            Ability ability2 = card2.getAbilities().get(i);
+            if (!ability1.getClass().equals(ability2.getClass())) {
+                fail(card1, "copy", " miss copy in ability " + ability1.getClass().getName());
+            }
+            for (int j = 0; j < ability1.getEffects().size(); j++) {
+                Effect effect1 = ability1.getEffects().get(j);
+                Effect effect2 = ability2.getEffects().get(j);
+                if (!effect1.getClass().equals(effect2.getClass())) {
+                    fail(card1, "copy", "miss copy in effect " + effect1.getClass().getName());
+                }
+            }
         }
     }
 
