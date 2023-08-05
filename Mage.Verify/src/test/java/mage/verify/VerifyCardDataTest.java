@@ -1680,6 +1680,12 @@ public class VerifyCardDataTest {
             }
         }
 
+        if (expected.contains("Time") && expected.contains("Lord")) {
+            expected.remove("Time");
+            expected.remove("Lord");
+            expected.add("Time Lord");
+        }
+
         // Remove subtypes that need to be ignored
         Collection<String> actual = card
                 .getSubtype()
