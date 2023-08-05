@@ -40,7 +40,7 @@ public final class GandalfWestwardVoyager extends CardImpl {
 
         // Whenever you cast a spell with mana value 5 or greater, each opponent reveals the top card of their library. If any of those cards shares a card type with that spell, copy that spell, you may choose new targets for the copy, and each opponent draws a card. Otherwise, you draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new GandalWestwardVoyagerEffect(),
+                new GandalfWestwardVoyagerEffect(),
                 filter, false, SetTargetPointer.SPELL
         ));
     }
@@ -55,22 +55,22 @@ public final class GandalfWestwardVoyager extends CardImpl {
     }
 }
 
-class GandalWestwardVoyagerEffect extends OneShotEffect {
+class GandalfWestwardVoyagerEffect extends OneShotEffect {
 
-    GandalWestwardVoyagerEffect() {
+    GandalfWestwardVoyagerEffect() {
         super(Outcome.Benefit);
         staticText = "each opponent reveals the top card of their library. If any of those cards "
                 + "shares a card type with that spell, copy that spell, you may choose new targets for "
                 + "the copy, and each opponent draws a card. Otherwise, you draw a card";
     }
 
-    private GandalWestwardVoyagerEffect(final GandalWestwardVoyagerEffect effect) {
+    private GandalfWestwardVoyagerEffect(final GandalfWestwardVoyagerEffect effect) {
         super(effect);
     }
 
     @Override
-    public GandalWestwardVoyagerEffect copy() {
-        return new GandalWestwardVoyagerEffect(this);
+    public GandalfWestwardVoyagerEffect copy() {
+        return new GandalfWestwardVoyagerEffect(this);
     }
 
     @Override
