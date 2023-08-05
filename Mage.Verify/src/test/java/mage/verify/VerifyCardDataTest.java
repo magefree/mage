@@ -1667,7 +1667,7 @@ public class VerifyCardDataTest {
             // Only recurse on those objects
             if (obj1 instanceof MageObject || obj1 instanceof Filter || obj1 instanceof Condition || obj1 instanceof Effect
                     || obj1 instanceof Ability) {
-                //System.out.println(msg);
+                System.out.println(msg);
                 Class class1 = obj1.getClass();
                 Class class2 = obj2.getClass();
                 do {
@@ -1705,6 +1705,11 @@ public class VerifyCardDataTest {
                                 if (field1.getName() == "watchers") {
                                     doFieldRecurse = false;
                                 }
+                                if (field1.getName() == "modes") {
+                                    //compareClassRecursive(((AbilityImpl) obj1).getModes(), ((AbilityImpl) obj2).getModes(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1);
+                                    compareClassRecursive(((AbilityImpl) obj1).getEffects(), ((AbilityImpl) obj2).getEffects(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1);
+                                    doFieldRecurse = false;
+                                }
                             }
                             if (doFieldRecurse) {
                                 compareClassRecursive(value1, value2, originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1);
@@ -1726,6 +1731,15 @@ public class VerifyCardDataTest {
                     compareClassRecursive(it1.next(), it2.next(), originalCard, msg + "<" + obj1.getClass() + ">" + "[" + i++ + "]", maxDepth - 1);
                 }
                 if (it1.hasNext() || it2.hasNext()) {
+                    fail(originalCard, "copy", "not same size for " + msg + "]");
+                }
+            } else if (obj1 instanceof Map) {
+                Map map1 = (Map) obj1;
+                Map map2 = (Map) obj2;
+                map1.forEach((i, el1) -> {
+                    compareClassRecursive(el1, ((Map<?, ?>) obj2).get(i), originalCard, msg + "<" + obj1.getClass() + ">" + ".(" + i + ")", maxDepth - 1);
+                });
+                if (map1.size() != map2.size()) {
                     fail(originalCard, "copy", "not same size for " + msg + "]");
                 }
             }
