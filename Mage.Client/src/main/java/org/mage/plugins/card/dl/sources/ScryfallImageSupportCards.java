@@ -536,6 +536,7 @@ public class ScryfallImageSupportCards {
             add("LTC"); // Tales of Middle-Earth Commander
             add("CMM"); // Commander Masters
             add("WHO"); // Doctor Who
+            add("WOE"); // Doctor Who
         }
     };
 

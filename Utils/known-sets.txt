@@ -249,6 +249,7 @@ War of the Spark|WarOfTheSpark|
 Weatherlight|Weatherlight|
 Welcome Deck 2016|WelcomeDeck2016|
 Welcome Deck 2017|WelcomeDeck2017|
+Wilds of Eldraine|WildsOfEldraine|
 World Magic Cup Qualifier|WorldMagicCupQualifier|
 Worldwake|Worldwake|
 WPN Gateway|WPNAndGatewayPromos|
