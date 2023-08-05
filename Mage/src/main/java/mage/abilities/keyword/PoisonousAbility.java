@@ -49,6 +49,7 @@ class AddPoisonCountersEffect extends AddCountersTargetEffect {
         super(effect);
     }
 
+    @Override
     public AddPoisonCountersEffect copy() {
         return new AddPoisonCountersEffect(this);
     }

@@ -84,6 +84,7 @@ class TitansNestConditionalMana extends ConditionalMana {
         super(conditionalMana);
     }
 
+    @Override
     public TitansNestConditionalMana copy() {
         return new TitansNestConditionalMana(this);
     }

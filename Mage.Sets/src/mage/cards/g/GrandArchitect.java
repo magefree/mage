@@ -139,6 +139,7 @@ class GrandArchitectConditionalMana extends ConditionalMana {
         super(conditionalMana);
     }
 
+    @Override
     public GrandArchitectConditionalMana copy() {
         return new GrandArchitectConditionalMana(this);
     }

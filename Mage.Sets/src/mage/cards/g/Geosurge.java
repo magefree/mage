@@ -50,6 +50,7 @@ class GeosurgeConditionalMana extends ConditionalMana {
         super(conditionalMana);
     }
 
+    @Override
     public GeosurgeConditionalMana copy() {
         return new GeosurgeConditionalMana(this);
     }

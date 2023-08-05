@@ -72,6 +72,7 @@ class RosheenMeandererConditionalMana extends ConditionalMana {
         super(conditionalMana);
     }
 
+    @Override
     public RosheenMeandererConditionalMana copy() {
         return new RosheenMeandererConditionalMana(this);
     }
