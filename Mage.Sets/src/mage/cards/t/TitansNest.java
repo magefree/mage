@@ -79,6 +79,14 @@ class TitansNestConditionalMana extends ConditionalMana {
         staticText = "Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost.";
         addCondition(new TitansNestManaCondition());
     }
+
+    private TitansNestConditionalMana(final TitansNestConditionalMana conditionalMana) {
+        super(conditionalMana);
+    }
+
+    public TitansNestConditionalMana copy() {
+        return new TitansNestConditionalMana(this);
+    }
 }
 
 class TitansNestManaCondition extends ManaCondition {

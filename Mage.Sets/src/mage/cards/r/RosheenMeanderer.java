@@ -67,4 +67,12 @@ class RosheenMeandererConditionalMana extends ConditionalMana {
         staticText = "Spend this mana only on costs that contain {X}";
         addCondition(new XCostManaCondition());
     }
+
+    private RosheenMeandererConditionalMana(final RosheenMeandererConditionalMana conditionalMana) {
+        super(conditionalMana);
+    }
+
+    public RosheenMeandererConditionalMana copy() {
+        return new RosheenMeandererConditionalMana(this);
+    }
 }

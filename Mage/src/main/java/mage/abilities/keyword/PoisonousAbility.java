@@ -44,4 +44,12 @@ class AddPoisonCountersEffect extends AddCountersTargetEffect {
         setText(n == 1 ? "that player gets a poison counter"
                 : String.format("that player gets %d poison counters", n));
     }
+
+    private AddPoisonCountersEffect(final AddPoisonCountersEffect effect) {
+        super(effect);
+    }
+
+    public AddPoisonCountersEffect copy() {
+        return new AddPoisonCountersEffect(this);
+    }
 }
