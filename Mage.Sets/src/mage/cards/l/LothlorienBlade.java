@@ -3,8 +3,7 @@ package mage.cards.l;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.AttachedPermanentPowerCount;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -13,14 +12,12 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsAttachedAttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -32,7 +29,7 @@ public final class LothlorienBlade extends CardImpl {
     private static final FilterControlledCreaturePermanent filterElf = new FilterControlledCreaturePermanent(SubType.ELF, "Elf");
 
     static {
-        filter.add(LothlorienBladePredicate.instance);
+        filter.add(DefendingPlayerControlsAttachedAttackingPredicate.instance);
     }
 
     public LothlorienBlade(UUID ownerId, CardSetInfo setInfo) {
@@ -41,8 +38,7 @@ public final class LothlorienBlade extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature attacks, it deals damage equal to its power to target creature defending player controls.
-        Ability ability = new AttacksAttachedTriggeredAbility(new DamageTargetEffect(AttachedPermanentPowerCount.instance)
-                .setText("it deals damage equal to its power to target creature defending player controls"));
+        Ability ability = new AttacksAttachedTriggeredAbility(new LothlorienBladeEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
@@ -64,20 +60,34 @@ public final class LothlorienBlade extends CardImpl {
     }
 }
 
-enum LothlorienBladePredicate implements ObjectSourcePlayerPredicate<Permanent> {
-    instance;
+class LothlorienBladeEffect extends OneShotEffect {
 
-    @Override
-    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return Optional.ofNullable(input.getSource().getSourcePermanentOrLKI(game))
-                .map(Permanent::getAttachedTo)
-                .map(uuid -> game.getCombat().getDefendingPlayerId(uuid, game))
-                .map(input.getObject()::isControlledBy)
-                .orElse(false);
+    LothlorienBladeEffect() {
+        super(Outcome.Damage);
+        staticText = "it deals damage equal to its power to target creature defending player controls";
+    }
+
+    private LothlorienBladeEffect(final LothlorienBladeEffect effect) {
+        super(effect);
     }
 
     @Override
-    public String toString() {
-        return "";
+    public LothlorienBladeEffect copy() {
+        return new LothlorienBladeEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Permanent equipment = source.getSourcePermanentOrLKI(game);
+        if (targetCreature == null || equipment == null) {
+            return false;
+        }
+        Permanent attacker = game.getPermanentOrLKIBattlefield(equipment.getAttachedTo());
+        if (attacker == null) {
+            return false;
+        }
+        targetCreature.damage(attacker.getPower().getValue(), attacker.getId(), source, game);
+        return true;
     }
 }
