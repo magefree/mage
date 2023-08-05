@@ -98,8 +98,8 @@ class GaladrielElvenQueenWatcher extends Watcher {
             UUID playerId = event.getPlayerId();
             Set<MageObjectReference> setForThatPlayer = this.elfEnterings.getOrDefault(playerId, new HashSet<>());
 
-            MageObjectReference humanMOR = new MageObjectReference(permanent.getId(), game);
-            setForThatPlayer.add(humanMOR);
+            MageObjectReference elfMOR = new MageObjectReference(permanent.getId(), game);
+            setForThatPlayer.add(elfMOR);
             this.elfEnterings.put(playerId, setForThatPlayer);
         }
     }
@@ -112,7 +112,7 @@ class GaladrielElvenQueenWatcher extends Watcher {
 
     boolean hasPlayerHadAnotherElfEnterThisTurn(Game game, Permanent sourcePermanent, UUID playerId) {
         // The trick there is that we need to exclude the sourcePermanent of the trigger (Galadriel most likely),
-        //     from the humans that entered the battlefield this turn under the player.
+        //     from the elves that entered the battlefield this turn under the player.
 
         // we do use MageObjectReference for when Galadriel is entering the battlefield
         //    multiple time in the same turn (flickered for instance)
