@@ -168,6 +168,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Greaves", 281, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Lignify", 252, Rarity.COMMON, mage.cards.l.Lignify.class));
         cards.add(new SetCardInfo("Living Death", 203, Rarity.RARE, mage.cards.l.LivingDeath.class));
+        cards.add(new SetCardInfo("Lobelia, Defender of Bag End", 27, Rarity.RARE, mage.cards.l.LobeliaDefenderOfBagEnd.class));
         cards.add(new SetCardInfo("Lonely Sandbar", 319, Rarity.UNCOMMON, mage.cards.l.LonelySandbar.class));
         cards.add(new SetCardInfo("Lord of the Nazgul", 60, Rarity.RARE, mage.cards.l.LordOfTheNazgul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord of the Nazgul", 142, Rarity.RARE, mage.cards.l.LordOfTheNazgul.class, NON_FULL_USE_VARIOUS));
