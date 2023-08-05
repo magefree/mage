@@ -37,7 +37,7 @@ public final class SummonsOfSaruman extends CardImpl {
 
         // Flashback--{3}{U}{R}, Exile X cards from your graveyard.
         Ability flashback = new FlashbackAbility(this, new ManaCostsImpl<>("{3}{U}{R}"));
-        flashback.addCost(new ExileXFromYourGraveCost(StaticFilters.FILTER_CARD_CARDS));
+        flashback.addCost(new ExileXFromYourGraveCost(StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD));
         this.addAbility(flashback);
     }
 

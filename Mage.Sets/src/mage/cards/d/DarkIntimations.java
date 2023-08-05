@@ -51,7 +51,7 @@ public final class DarkIntimations extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 Zone.GRAVEYARD, new DarkIntimationsGraveyardEffect(),
                 filter, false, SetTargetPointer.SPELL
-        ));
+        ).setTriggerPhrase("When you cast a Bolas planeswalker spell, "));
     }
 
     private DarkIntimations(final DarkIntimations card) {

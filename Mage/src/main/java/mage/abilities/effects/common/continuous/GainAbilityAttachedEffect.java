@@ -143,7 +143,8 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         }
         boolean quotes = ability instanceof SimpleActivatedAbility
                 || ability instanceof TriggeredAbility
-                || ability instanceof LoyaltyAbility;
+                || ability instanceof LoyaltyAbility
+                || ability.getRule().startsWith("If ");
         if (quotes) {
             sb.append('"');
         }

@@ -29,7 +29,7 @@ public class SearchLibraryGraveyardWithLessMVPutIntoPlay extends OneShotEffect {
     public SearchLibraryGraveyardWithLessMVPutIntoPlay(FilterCard filter) {
         super(Outcome.PutCreatureInPlay);
         this.filter = filter;
-        staticText = "Search your library and/or graveyard for a " + filter.getMessage() + " with mana value X or less, put it onto the battlefield. If you search your library this way, shuffle.";
+        staticText = "Search your library and/or graveyard for a " + filter.getMessage() + " with mana value X or less and put it onto the battlefield. If you search your library this way, shuffle.";
     }
 
     protected SearchLibraryGraveyardWithLessMVPutIntoPlay(final SearchLibraryGraveyardWithLessMVPutIntoPlay effect) {

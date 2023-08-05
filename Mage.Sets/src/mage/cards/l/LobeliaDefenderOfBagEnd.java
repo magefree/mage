@@ -50,16 +50,13 @@ public final class LobeliaDefenderOfBagEnd extends CardImpl {
         // {T}, Sacrifice an artifact: Choose one --
         // * Until end of turn, you may play a card exiled with Lobelia without paying its mana cost.
         // * Each opponent loses 2 life and you gain 2 life.
-        Ability ability = new SimpleActivatedAbility(
-                new LobeliaDefenderOfBagEndPlayFromExileEffect(),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)
-        );
-        ability.addCost(new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LobeliaDefenderOfBagEndPlayFromExileEffect(), new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         ability.addWatcher(new LobeliaDefenderOfBagEndWatcher());
 
         ability.addMode(new Mode(
                 new LoseLifeOpponentsEffect(2)
-        ).addEffect(new GainLifeEffect(2)));
+        ).addEffect(new GainLifeEffect(2).concatBy("and")));
 
         this.addAbility(ability);
     }
