@@ -50,6 +50,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Castle Ardenvale", 361, Rarity.MYTHIC, mage.cards.c.CastleArdenvale.class));
         cards.add(new SetCardInfo("Cavern of Souls", 362, Rarity.MYTHIC, mage.cards.c.CavernOfSouls.class));
         cards.add(new SetCardInfo("Cavern-Hoard Dragon", 31, Rarity.RARE, mage.cards.c.CavernHoardDragon.class));
+        cards.add(new SetCardInfo("Champions of Minas Tirith", 10, Rarity.RARE, mage.cards.c.ChampionsOfMinasTirith.class));
         cards.add(new SetCardInfo("Choked Estuary", 299, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 275, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Cirdan the Shipwright", 50, Rarity.RARE, mage.cards.c.CirdanTheShipwright.class));
@@ -121,6 +122,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Furycalm Snarl", 313, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Galadhrim Ambush", 38, Rarity.RARE, mage.cards.g.GaladhrimAmbush.class));
         cards.add(new SetCardInfo("Gandalf, Westward Voyager", 6, Rarity.MYTHIC, mage.cards.g.GandalfWestwardVoyager.class));
+        cards.add(new SetCardInfo("Galadriel, Elven-Queen", 3, Rarity.MYTHIC, mage.cards.g.GaladrielElvenQueen.class));
         cards.add(new SetCardInfo("Gemstone Caverns", 364, Rarity.MYTHIC, mage.cards.g.GemstoneCaverns.class));
         cards.add(new SetCardInfo("Genesis Wave", 245, Rarity.RARE, mage.cards.g.GenesisWave.class));
         cards.add(new SetCardInfo("Ghost Quarter", 314, Rarity.UNCOMMON, mage.cards.g.GhostQuarter.class));
@@ -167,6 +169,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Greaves", 281, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Lignify", 252, Rarity.COMMON, mage.cards.l.Lignify.class));
         cards.add(new SetCardInfo("Living Death", 203, Rarity.RARE, mage.cards.l.LivingDeath.class));
+        cards.add(new SetCardInfo("Lobelia, Defender of Bag End", 27, Rarity.RARE, mage.cards.l.LobeliaDefenderOfBagEnd.class));
         cards.add(new SetCardInfo("Lonely Sandbar", 319, Rarity.UNCOMMON, mage.cards.l.LonelySandbar.class));
         cards.add(new SetCardInfo("Lord of the Nazgul", 60, Rarity.RARE, mage.cards.l.LordOfTheNazgul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord of the Nazgul", 142, Rarity.RARE, mage.cards.l.LordOfTheNazgul.class, NON_FULL_USE_VARIOUS));

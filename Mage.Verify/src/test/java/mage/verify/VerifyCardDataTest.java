@@ -1636,11 +1636,29 @@ public class VerifyCardDataTest {
         }
     }
 
-    private void checkCardCanBeCopied(Card card) {
+    private void checkCardCanBeCopied(Card card1) {
+        Card card2;
         try {
-            Card card2 = card.copy();
+            card2 = card1.copy();
         } catch (Error err) {
-            fail(card, "copy", "throws on copy : " + err.getClass() + " : " + err.getMessage() + " : ");
+            fail(card1, "copy", "throws on copy : " + err.getClass() + " : " + err.getMessage() + " : ");
+            return;
+        }
+
+        // Checks that ability and effect are of the same class when copied.
+        for (int i = 0; i < card1.getAbilities().size(); i++) {
+            Ability ability1 = card1.getAbilities().get(i);
+            Ability ability2 = card2.getAbilities().get(i);
+            if (!ability1.getClass().equals(ability2.getClass())) {
+                fail(card1, "copy", " miss copy in ability " + ability1.getClass().getName());
+            }
+            for (int j = 0; j < ability1.getEffects().size(); j++) {
+                Effect effect1 = ability1.getEffects().get(j);
+                Effect effect2 = ability2.getEffects().get(j);
+                if (!effect1.getClass().equals(effect2.getClass())) {
+                    fail(card1, "copy", "miss copy in effect " + effect1.getClass().getName());
+                }
+            }
         }
     }
 
