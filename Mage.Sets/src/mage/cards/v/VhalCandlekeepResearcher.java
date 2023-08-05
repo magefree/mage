@@ -63,7 +63,7 @@ class VhalCandlekeepResearcherManaEffect extends ManaEffect {
 
     VhalCandlekeepResearcherManaEffect() {
         super();
-        this.staticText = "Add an amount of {C} equal to Vhal, Candlekeep Researcher's toughness. This mana can't be spent to cast spells from your hand.";
+        this.staticText = "Add an amount of {C} equal to {this}'s toughness. This mana can't be spent to cast spells from your hand.";
     }
 
     VhalCandlekeepResearcherManaEffect(final VhalCandlekeepResearcherManaEffect effect) {
