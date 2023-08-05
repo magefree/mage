@@ -1,9 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -28,8 +25,11 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DarkIntimations extends CardImpl {
@@ -48,7 +48,10 @@ public final class DarkIntimations extends CardImpl {
         this.getSpellAbility().addEffect(new DarkIntimationsEffect());
 
         // When you cast a Bolas planeswalker spell, exile Dark Intimations from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new DarkIntimationsGraveyardEffect(), filter, false, true).setTriggerPhrase("When you cast a Bolas planeswalker spell, "));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                Zone.GRAVEYARD, new DarkIntimationsGraveyardEffect(),
+                filter, false, SetTargetPointer.SPELL
+        ));
     }
 
     private DarkIntimations(final DarkIntimations card) {
@@ -188,7 +191,7 @@ class DarkIntimationsReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        return creature != null 
+        return creature != null
                 && event.getTargetId().equals(getTargetPointer().getFirst(game, source));
     }
 

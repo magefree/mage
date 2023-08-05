@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
@@ -19,7 +20,8 @@ public final class RalIzzetViceroyEmblem extends Emblem {
         super("Emblem Ral");
         Ability ability = new SpellCastControllerTriggeredAbility(
                 Zone.COMMAND, new DamageTargetEffect(4, "this emblem"),
-                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false, false
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
+                false, SetTargetPointer.NONE
         );
         ability.addEffect(
                 new DrawCardSourceControllerEffect(2)

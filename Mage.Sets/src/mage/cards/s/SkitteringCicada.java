@@ -13,10 +13,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
@@ -50,14 +47,14 @@ public final class SkitteringCicada extends CardImpl {
 
         // You may cast colorless spells as though they had flash.
         this.addAbility(new SimpleStaticAbility(
-            new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filterCard)
+                new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filterCard)
         ));
 
         // Whenever you cast a colorless spell, until end of turn, Skittering Cicada gains trample and gets +X/+X, where X is that spell's mana value.
         TriggeredAbility trigger = new SpellCastControllerTriggeredAbility(
-            new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
-                .setText("until end of turn, {this} gains trample"),
-            filterSpell, false, true
+                new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
+                        .setText("until end of turn, {this} gains trample"),
+                filterSpell, false, SetTargetPointer.SPELL
         );
         trigger.addEffect(new SkitteringCicadaBoostEffect());
 

@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,14 +13,15 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj
  */
 public final class Riddleform extends CardImpl {
@@ -31,7 +31,7 @@ public final class Riddleform extends CardImpl {
 
         // Whenever you cast a noncreature spell, you may have Riddleform become a 3/3 Sphinx creature with flying in addition to its other types until end of turn.
         Effect effect = new BecomesCreatureSourceEffect(new RiddleformToken(), CardType.ENCHANTMENT, Duration.EndOfTurn);
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_SPELL_A_NON_CREATURE, true, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(effect, StaticFilters.FILTER_SPELL_A_NON_CREATURE, true));
 
         // {2}{U}: Scry 1.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new ManaCostsImpl<>("{2}{U}"));
@@ -59,6 +59,7 @@ class RiddleformToken extends TokenImpl {
         toughness = new MageInt(3);
         addAbility(FlyingAbility.getInstance());
     }
+
     public RiddleformToken(final RiddleformToken token) {
         super(token);
     }

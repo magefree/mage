@@ -121,6 +121,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fumigate", 170, Rarity.RARE, mage.cards.f.Fumigate.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 313, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
         cards.add(new SetCardInfo("Galadhrim Ambush", 38, Rarity.RARE, mage.cards.g.GaladhrimAmbush.class));
+        cards.add(new SetCardInfo("Gandalf, Westward Voyager", 6, Rarity.MYTHIC, mage.cards.g.GandalfWestwardVoyager.class));
         cards.add(new SetCardInfo("Galadriel, Elven-Queen", 3, Rarity.MYTHIC, mage.cards.g.GaladrielElvenQueen.class));
         cards.add(new SetCardInfo("Gemstone Caverns", 364, Rarity.MYTHIC, mage.cards.g.GemstoneCaverns.class));
         cards.add(new SetCardInfo("Genesis Wave", 245, Rarity.RARE, mage.cards.g.GenesisWave.class));

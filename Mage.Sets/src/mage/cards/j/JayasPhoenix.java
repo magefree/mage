@@ -12,10 +12,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -55,8 +52,11 @@ public final class JayasPhoenix extends CardImpl {
 
 
         // Whenever you cast a planeswalker spell, you may return Jaya's Phoenix from your graveyard to the battlefield.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect()
-                .setText("you may return {this} from your graveyard to the battlefield"), filter, true, false
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToBattlefieldEffect()
+                        .setText("you may return {this} from your graveyard to the battlefield"),
+                filter, true, SetTargetPointer.NONE
         ));
     }
 

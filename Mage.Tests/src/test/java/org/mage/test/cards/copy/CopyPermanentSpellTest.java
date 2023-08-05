@@ -4,6 +4,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.StaticFilters;
@@ -21,7 +22,8 @@ public class CopyPermanentSpellTest extends CardTestPlayerBase {
                 "Forker", playerA,
                 new SpellCastControllerTriggeredAbility(
                         new CopyTargetSpellEffect(true),
-                        StaticFilters.FILTER_SPELL, false, true
+                        StaticFilters.FILTER_SPELL, false,
+                        SetTargetPointer.SPELL
                 )
         );
     }
