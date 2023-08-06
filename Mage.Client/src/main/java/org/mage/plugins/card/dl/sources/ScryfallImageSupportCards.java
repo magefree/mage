@@ -486,6 +486,7 @@ public class ScryfallImageSupportCards {
             add("KLR"); // Kaladesh Remastered
             add("CMR"); // Commander Legends
             add("CC1"); // Commander Collection: Green
+            add("PL21"); // Year of the Ox 2021
             add("KHM"); // Kaldheim
             add("KHC"); // Kaldheim Commander
             add("TSR"); // Time Spiral Remastered
