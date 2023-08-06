@@ -479,9 +479,8 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public Ability setRuleVisible(boolean ruleVisible) {
+    public void setRuleVisible(boolean ruleVisible) {
         this.ability.setRuleVisible(ruleVisible);
-        return this;
     }
 
     @Override
