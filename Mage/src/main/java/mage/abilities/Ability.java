@@ -428,7 +428,7 @@ public interface Ability extends Controllable, Serializable {
      *
      * @param ruleVisible
      */
-    Ability setRuleVisible(boolean ruleVisible);
+    void setRuleVisible(boolean ruleVisible);
 
     /**
      * Returns true if the additional costs of the abilitiy should be visible on

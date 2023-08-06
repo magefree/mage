@@ -127,7 +127,6 @@ Undaunted|new|
 Undying|new|
 Unearth|cost|
 Unleash|new|
-Vanishing|number|
 Vigilance|instance|
 Ward|cost|
 Wither|instance|

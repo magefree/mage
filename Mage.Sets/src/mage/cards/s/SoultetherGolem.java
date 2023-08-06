@@ -1,9 +1,12 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.VanishingAbility;
+import mage.abilities.keyword.VanishingSacrificeAbility;
+import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +38,11 @@ public final class SoultetherGolem extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Vanishing 1
-        this.addAbility(new VanishingAbility(1));
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(1)));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
+        this.addAbility(new VanishingUpkeepAbility(1));
+        this.addAbility(new VanishingSacrificeAbility());
 
         // Whenever another creature enters the battlefield under your control, put a time counter on Soultether Golem.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(

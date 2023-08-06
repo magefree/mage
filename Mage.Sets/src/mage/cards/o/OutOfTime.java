@@ -1,5 +1,7 @@
 package mage.cards.o;
 
+import java.util.*;
+
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -7,7 +9,8 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PhaseOutAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.VanishingAbility;
+import mage.abilities.keyword.VanishingSacrificeAbility;
+import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -21,9 +24,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
-import java.util.*;
-
 /**
+ *
  * @author weirddan455
  */
 public final class OutOfTime extends CardImpl {
@@ -36,7 +38,8 @@ public final class OutOfTime extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new OutOfTimePhaseOutEffect()));
 
         // Vanishing
-        this.addAbility(new VanishingAbility(0));
+        this.addAbility(new VanishingUpkeepAbility(0, "enchantment"));
+        this.addAbility(new VanishingSacrificeAbility());
     }
 
     private OutOfTime(final OutOfTime card) {
