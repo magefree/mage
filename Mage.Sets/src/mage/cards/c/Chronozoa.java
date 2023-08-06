@@ -1,29 +1,23 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.LastTimeCounterRemovedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.CreateTokenCopySourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.VanishingSacrificeAbility;
-import mage.abilities.keyword.VanishingUpkeepAbility;
+import mage.abilities.keyword.VanishingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
- *
  * @author Gal Lerman
- *
  */
 public final class Chronozoa extends CardImpl {
 
@@ -37,11 +31,7 @@ public final class Chronozoa extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Vanishing 3 (This permanent enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)
-        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3)));
-        ability.setRuleVisible(false);
-        this.addAbility(ability);
-        this.addAbility(new VanishingUpkeepAbility(3));
-        this.addAbility(new VanishingSacrificeAbility());
+        this.addAbility(new VanishingAbility(3));
 
         // When Chronozoa is put into a graveyard from play, if it had no time counters on it, create two tokens that are copies of it.
         Effect effect = new CreateTokenCopySourceEffect(2);
