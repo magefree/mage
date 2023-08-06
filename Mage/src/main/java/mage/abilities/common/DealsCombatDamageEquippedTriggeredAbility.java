@@ -13,6 +13,7 @@ import mage.game.permanent.Permanent;
  * @author TheElk801
  */
 public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityImpl {
+    private boolean usedInPhase;
 
     public DealsCombatDamageEquippedTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -20,11 +21,13 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
 
     public DealsCombatDamageEquippedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.usedInPhase = false;
         setTriggerPhrase("Whenever equipped creature deals combat damage, ");
     }
 
     protected DealsCombatDamageEquippedTriggeredAbility(final DealsCombatDamageEquippedTriggeredAbility ability) {
         super(ability);
+        this.usedInPhase = ability.usedInPhase;
     }
 
     @Override
@@ -34,27 +37,23 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH
-                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event instanceof DamagedEvent || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent sourcePermanent = getSourcePermanentOrLKI(game);
-        if (sourcePermanent == null || sourcePermanent.getAttachedTo() == null) {
-            return false;
+        if (!usedInPhase && event instanceof DamagedEvent &&  ((DamagedEvent) event).isCombatDamage()) {
+            Permanent sourcePermanent = getSourcePermanentOrLKI(game);
+            if (sourcePermanent != null && sourcePermanent.getAttachedTo() != null
+                    && event.getSourceId().equals(sourcePermanent.getAttachedTo())) {
+                usedInPhase = true;
+                getEffects().setValue("damage", event.getAmount());
+                return true;
+            }
         }
-        int amount = ((DamagedBatchEvent) event)
-                .getEvents()
-                .stream()
-                .filter(DamagedEvent::isCombatDamage)
-                .filter(e -> e.getAttackerId().equals(sourcePermanent.getAttachedTo()))
-                .mapToInt(GameEvent::getAmount)
-                .sum();
-        if (amount < 1) {
-            return false;
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE) {
+            usedInPhase = false;
         }
-        this.getEffects().setValue("damage", amount);
-        return true;
+        return false;
     }
 }
