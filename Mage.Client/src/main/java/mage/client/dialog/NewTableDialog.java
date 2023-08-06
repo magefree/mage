@@ -970,6 +970,7 @@ public class NewTableDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD + versionStr, options.getPassword());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE + versionStr, options.getDeckType());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT + versionStr, Integer.toString(options.getPriorityTime()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_BUFFER_TIME + versionStr, Integer.toString(options.getBufferTime()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE + versionStr, options.getGameType());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS + versionStr, Integer.toString(options.getWinsNeeded()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED + versionStr, options.isRollbackTurnsAllowed() ? "Yes" : "No");
