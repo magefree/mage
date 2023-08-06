@@ -22,7 +22,7 @@ public final class WaningWurm extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Vanishing 2
-        this.addAbility(new VanishingAbility(2));
+        this.addAbility(new VanishingAbility(this, 2));
     }
 
     private WaningWurm(final WaningWurm card) {

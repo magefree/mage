@@ -19,7 +19,7 @@ public final class FourKnocks extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // Vanishing 4
-        this.addAbility(new VanishingAbility(4));
+        this.addAbility(new VanishingAbility(this, 4));
 
         // At the beginning of your precombat main phase, draw a card.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(

@@ -33,7 +33,7 @@ public final class DeepForestHermit extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Vanishing 3
-        this.addAbility(new VanishingAbility(3));
+        this.addAbility(new VanishingAbility(this, 3));
 
         // When Deep Forest Hermit enters the battlefield, create four 1/1 green Squirrel creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(

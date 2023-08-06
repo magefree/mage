@@ -36,7 +36,7 @@ public final class OutOfTime extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new OutOfTimePhaseOutEffect()));
 
         // Vanishing
-        this.addAbility(new VanishingAbility(0));
+        this.addAbility(new VanishingAbility(this, 0));
     }
 
     private OutOfTime(final OutOfTime card) {

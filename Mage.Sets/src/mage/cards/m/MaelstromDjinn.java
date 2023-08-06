@@ -40,7 +40,7 @@ public final class MaelstromDjinn extends CardImpl {
                 new AddCountersSourceEffect(CounterType.TIME.createInstance(2))
         );
         ability.addEffect(new GainAbilitySourceEffect(
-                new VanishingAbility(0), Duration.WhileOnBattlefield
+                new VanishingAbility(this, 0), Duration.WhileOnBattlefield
         ).setText("and it gains vanishing"));
         this.addAbility(ability);
     }

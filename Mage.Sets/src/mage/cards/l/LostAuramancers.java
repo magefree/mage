@@ -31,7 +31,7 @@ public final class LostAuramancers extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Vanishing 3
-        this.addAbility(new VanishingAbility(3));
+        this.addAbility(new VanishingAbility(this, 3));
 
         // When Lost Auramancers dies, if it had no time counters on it, you may search your library
         // for an enchantment card and put it onto the battlefield. If you do, shuffle your library.
