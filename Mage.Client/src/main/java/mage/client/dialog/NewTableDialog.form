@@ -130,6 +130,10 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="cbTimeLimit" min="-2" pref="102" max="-2" attributes="1"/>
                                       <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lbBufferTime" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbBufferTime" min="-2" pref="101" max="-2" attributes="1"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txtPassword" min="-2" pref="109" max="-2" attributes="0"/>
@@ -235,6 +239,10 @@
                       <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtPassword" alignment="3" max="32767" attributes="0"/>
                       <Component id="chkSpectatorsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                          <Component id="lbBufferTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbBufferTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -305,7 +313,7 @@
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlOtherPlayers" pref="94" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" pref="98" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -371,6 +379,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbBufferTime">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="The extra time a player gets whenever the timer starts before their normal time limit starts going down."/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblGameType">
       <Properties>
