@@ -31,7 +31,7 @@ public final class Chronozoa extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Vanishing 3 (This permanent enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)
-        this.addAbility(new VanishingAbility(this, 3));
+        this.addAbility(new VanishingAbility(3));
 
         // When Chronozoa is put into a graveyard from play, if it had no time counters on it, create two tokens that are copies of it.
         Effect effect = new CreateTokenCopySourceEffect(2);

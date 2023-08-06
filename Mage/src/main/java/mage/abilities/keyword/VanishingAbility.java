@@ -9,7 +9,6 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
-import mage.cards.Card;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -26,17 +25,17 @@ public class VanishingAbility extends EntersBattlefieldAbility {
     private static final Condition condition = new SourceHasCounterCondition(CounterType.TIME);
     private final int amount;
 
-    public VanishingAbility(Card card, int amount) {
+    public VanishingAbility(int amount) {
         super(new AddCountersSourceEffect(CounterType.TIME.createInstance(amount)));
         this.amount = amount;
-        card.addAbility(new ConditionalInterveningIfTriggeredAbility(
+        this.addSubAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new RemoveCounterSourceEffect(CounterType.TIME.createInstance()),
                         TargetController.YOU, false
                 ), condition, "At the beginning of your upkeep, if this permanent " +
                 "has a time counter on it, remove a time counter from it."
         ).setRuleVisible(false));
-        card.addAbility(new VanishingTriggeredAbility());
+        this.addSubAbility(new VanishingTriggeredAbility());
     }
 
     private VanishingAbility(final VanishingAbility ability) {
@@ -84,7 +83,7 @@ class VanishingTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!CounterType.TIME.getName().equals(event.getData()) || !event.getSourceId().equals(getSourceId())) {
+        if (!CounterType.TIME.getName().equals(event.getData())) {
             return false;
         }
         Permanent permanent = getSourcePermanentIfItStillExists(game);

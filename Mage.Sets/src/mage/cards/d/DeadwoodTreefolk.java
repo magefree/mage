@@ -35,7 +35,7 @@ public final class DeadwoodTreefolk extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Vanishing 3
-        this.addAbility(new VanishingAbility(this, 3));
+        this.addAbility(new VanishingAbility(3));
 
         // When Deadwood Treefolk enters the battlefield or leaves the battlefield, return another target creature card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldOrLeavesSourceTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false);

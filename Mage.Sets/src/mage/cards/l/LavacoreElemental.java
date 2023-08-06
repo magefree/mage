@@ -27,7 +27,7 @@ public final class LavacoreElemental extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Vanishing 1
-        this.addAbility(new VanishingAbility(this, 1));
+        this.addAbility(new VanishingAbility(1));
 
         // Whenever a creature you control deals combat damage to a player, put a time counter on Lavacore Elemental.
         Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(1));

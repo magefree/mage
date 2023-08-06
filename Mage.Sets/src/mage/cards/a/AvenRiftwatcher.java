@@ -30,7 +30,7 @@ public final class AvenRiftwatcher extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Vanishing 3
-        this.addAbility(new VanishingAbility(this, 3));
+        this.addAbility(new VanishingAbility(3));
 
         // When Aven Riftwatcher enters the battlefield or leaves the battlefield, you gain 2 life.
         this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new GainLifeEffect(2), false));

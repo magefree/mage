@@ -26,7 +26,7 @@ public final class Calciderm extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
 
         // Vanishing 4
-        this.addAbility(new VanishingAbility(this, 4));
+        this.addAbility(new VanishingAbility(4));
     }
 
     private Calciderm(final Calciderm card) {

@@ -26,7 +26,7 @@ public final class DeadlyGrub extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Vanishing 3
-        this.addAbility(new VanishingAbility(this, 3));
+        this.addAbility(new VanishingAbility(3));
 
         // When Deadly Grub dies, if it had no time counters on it, create a 6/1 green Insect creature token with shroud.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new DeadlyGrubInsectToken(), 1)),
