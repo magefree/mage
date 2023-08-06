@@ -10,7 +10,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- * @author TheElk801
+ * @author notgreat
  */
 public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityImpl {
     private boolean usedInPhase;
