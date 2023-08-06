@@ -66,6 +66,7 @@ public final class TheEleventhHour extends CardImpl {
                                 "except it's a legendary Alien named Prisoner Zero"),
                 new TargetCreaturePermanent()
         );
+        this.addAbility(sagaAbility);
     }
 
     private TheEleventhHour(final TheEleventhHour card) {
