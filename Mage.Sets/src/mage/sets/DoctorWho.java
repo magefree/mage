@@ -22,6 +22,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Exterminate!", 68, Rarity.UNCOMMON, mage.cards.e.Exterminate.class));
         cards.add(new SetCardInfo("Farewell", 207, Rarity.RARE, mage.cards.f.Farewell.class));
         cards.add(new SetCardInfo("Forest", 205, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Four Knocks", 20, Rarity.RARE, mage.cards.f.FourKnocks.class));
         cards.add(new SetCardInfo("Island", 199, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 203, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 197, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
