@@ -60,6 +60,7 @@ public enum SubType {
     // A
     ADVISOR("Advisor", SubTypeSet.CreatureType),
     AETHERBORN("Aetherborn", SubTypeSet.CreatureType),
+    ALIEN("Alien", SubTypeSet.CreatureType),
     ALLY("Ally", SubTypeSet.CreatureType),
     ANGEL("Angel", SubTypeSet.CreatureType),
     ANTELOPE("Antelope", SubTypeSet.CreatureType),
