@@ -16,17 +16,17 @@ import mage.game.events.GameEvent;
  */
 public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean usedInPhase;
+    private boolean usedThisStep;
 
     public DealsCombatDamageTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.usedInPhase = false;
+        this.usedThisStep = false;
         setTriggerPhrase("Whenever {this} deals combat damage, ");
     }
 
     protected DealsCombatDamageTriggeredAbility(final DealsCombatDamageTriggeredAbility ability) {
         super(ability);
-        this.usedInPhase = ability.usedInPhase;
+        this.usedThisStep = ability.usedThisStep;
     }
 
     @Override
@@ -42,15 +42,15 @@ public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event instanceof DamagedEvent
-                && !usedInPhase
+                && !usedThisStep
                 && event.getSourceId().equals(this.sourceId)
                 && ((DamagedEvent) event).isCombatDamage()) {
-            usedInPhase = true;
+            usedThisStep = true;
             getEffects().setValue("damage", event.getAmount());
             return true;
         }
         if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE) {
-            usedInPhase = false;
+            usedThisStep = false;
         }
         return false;
     }
