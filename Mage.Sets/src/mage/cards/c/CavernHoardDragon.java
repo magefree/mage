@@ -118,7 +118,7 @@ enum CavernHoardDragonCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "greatest number of artifacts an opponent controls";
+        return "the greatest number of artifacts an opponent controls";
     }
 
     public static Hint getHint() {

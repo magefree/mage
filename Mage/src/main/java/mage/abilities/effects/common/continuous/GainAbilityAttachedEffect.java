@@ -7,6 +7,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.mana.ManaAbility;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -143,7 +144,9 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         }
         boolean quotes = ability instanceof SimpleActivatedAbility
                 || ability instanceof TriggeredAbility
-                || ability instanceof LoyaltyAbility;
+                || ability instanceof LoyaltyAbility
+                || ability instanceof ManaAbility
+                || ability.getRule().startsWith("If ");
         if (quotes) {
             sb.append('"');
         }

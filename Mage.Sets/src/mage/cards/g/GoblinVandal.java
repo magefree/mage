@@ -21,7 +21,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -101,6 +100,6 @@ class GoblinVandalTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} attacks and isn't blocked, you may pay {R}. If you do, destroy target artifact defending player controls and {this} assigns no combat damage this turn";
+        return "Whenever {this} attacks and isn't blocked, you may pay {R}. If you do, destroy target artifact defending player controls and {this} assigns no combat damage this turn.";
     }
 }

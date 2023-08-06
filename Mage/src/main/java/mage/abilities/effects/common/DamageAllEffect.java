@@ -76,11 +76,4 @@ public class DamageAllEffect extends OneShotEffect {
         staticText = sb.toString();
     }
 
-    public String getSourceName() {
-        return sourceName;
-    }
-
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
-    }
 }
