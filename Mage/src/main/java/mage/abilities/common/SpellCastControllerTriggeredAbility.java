@@ -56,11 +56,11 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public static SpellCastControllerTriggeredAbility createWithFromZone(Effect effect, FilterSpell filter, boolean optional, Zone fromZone) {
-        return new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, effect, filter, optional, null, null, fromZone);
+        return new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, effect, filter, optional, SetTargetPointer.NONE, null, fromZone);
     }
 
     public static SpellCastControllerTriggeredAbility createWithRule(Effect effect, FilterSpell filter, boolean optional, String rule) {
-        return new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, effect, filter, optional, null, rule, null);
+        return new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, effect, filter, optional, SetTargetPointer.NONE, rule, null);
     }
 
     protected SpellCastControllerTriggeredAbility(final SpellCastControllerTriggeredAbility ability) {
