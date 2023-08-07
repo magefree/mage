@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class CrownOfGondor extends CardImpl {
 
-    private final static DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE);
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE);
 
     public CrownOfGondor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
@@ -52,7 +52,7 @@ public final class CrownOfGondor extends CardImpl {
 
         // Equip {4}. This ability costs {3} less to activate if you're the monarch.
         EquipAbility equip = new EquipAbility(4, false);
-        equip.setCostReduceText("This ability costs {3} less to activate if you're the monarch");
+        equip.setCostReduceText("This ability costs {3} less to activate if you're the monarch.");
         equip.setCostAdjuster(CrownOfGondorAdjuster.instance);
         this.addAbility(equip);
     }

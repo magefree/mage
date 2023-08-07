@@ -130,6 +130,10 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="cbTimeLimit" min="-2" pref="102" max="-2" attributes="1"/>
                                       <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lbBufferTime" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbBufferTime" min="-2" pref="101" max="-2" attributes="1"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txtPassword" min="-2" pref="109" max="-2" attributes="0"/>
@@ -180,7 +184,7 @@
                                   <Component id="lblNumWins" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="spnNumWins" min="-2" pref="50" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnCustomOptions" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -208,6 +212,10 @@
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="txtName" alignment="3" max="32767" attributes="0"/>
                       <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="lbBufferTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbBufferTime" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cbTimeLimit" alignment="3" max="32767" attributes="0"/>
@@ -265,7 +273,7 @@
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlOtherPlayers" pref="97" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" pref="102" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -331,6 +339,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbBufferTime">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="The extra time a player gets whenever the timer starts before their normal time limit starts going down."/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblGameType">
       <Properties>

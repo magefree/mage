@@ -49,7 +49,7 @@ public final class TyrantsFamiliar extends CardImpl {
         Ability gainedAbility = new AttacksTriggeredAbility(new DamageTargetEffect(7, "it"), false);
         gainedAbility.addTarget(new TargetPermanent(filter));
         ContinuousEffect effect = new GainAbilitySourceEffect(gainedAbility);
-        effect.setText("and has \"Whenever {this} attacks, it deals 7 damage to target creature defending player controls\"");
+        effect.setText("and has \"Whenever {this} attacks, it deals 7 damage to target creature defending player controls.\"");
         this.addAbility(new LieutenantAbility(effect));
     }
 

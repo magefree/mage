@@ -62,12 +62,13 @@
      private List<String> setCodes;
 
      // Number of the current booster (for draft log writing).
-     // starts with 1
-     private int packNo;
+     private int packNo = 1;
 
      // Number of the current card pick (for draft log writing).
-     // starts with 1
-     private int pickNo;
+     private int pickNo = 1;
+     
+     // Number of the latest card pick for which the timeout has been set.
+     private int timeoutPickNo = 0;
 
      // Cached booster data to be written into the log (see logLastPick).
      private String[] currentBooster;
@@ -297,12 +298,16 @@
              MageTray.instance.displayMessage("Pick the next card.");
              MageTray.instance.blink();
          }
-
-         countdown.stop();
-         this.timeout = draftPickView.getTimeout();
-         setTimeout(timeout);
-         if (timeout != 0) {
-             countdown.start();
+         
+         int newTimeout = draftPickView.getTimeout();
+         if (pickNo != timeoutPickNo || newTimeout < timeout) { // if the timeout would increase the current pick's timer, don't set it (might happen if the client or server is lagging)
+             timeoutPickNo = pickNo;
+             countdown.stop();
+             timeout = newTimeout;
+             setTimeout(timeout);
+             if (timeout != 0) {
+                 countdown.start();
+             }
          }
          
          if (!draftBooster.isEmptyGrid()) {

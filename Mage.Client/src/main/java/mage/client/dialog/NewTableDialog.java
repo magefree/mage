@@ -190,6 +190,8 @@ public class NewTableDialog extends MageDialog {
         lbBufferTime.setText("Buffer Time:");
         lbBufferTime.setToolTipText("The extra time a player gets whenever the timer starts before their normal time limit starts going down.");
 
+        cbBufferTime.setToolTipText("The extra time a player gets whenever the timer starts before their normal time limit starts going down.");
+
         lblGameType.setText("Game Type:");
 
         cbGameType.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +321,7 @@ public class NewTableDialog extends MageDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lbBufferTime)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cbBufferTime, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbBufferTime, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblPassword)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -362,7 +364,7 @@ public class NewTableDialog extends MageDialog {
                                     .addComponent(lblNumWins)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(btnCustomOptions)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -381,10 +383,11 @@ public class NewTableDialog extends MageDialog {
                         .addComponent(txtName)
                         .addComponent(lblName))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbBufferTime)
+                        .addComponent(cbBufferTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cbTimeLimit)
                         .addComponent(lbTimeLimit)
-                        .addComponent(cbBufferTime)
-                        .addComponent(lbBufferTime)
                         .addComponent(lblPassword)
                         .addComponent(txtPassword)
                         .addComponent(chkSpectatorsAllowed)))
@@ -429,7 +432,7 @@ public class NewTableDialog extends MageDialog {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                 .addGap(9, 9, 9)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -891,6 +894,7 @@ public class NewTableDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD + versionStr, options.getPassword());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE + versionStr, options.getDeckType());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT + versionStr, Integer.toString(options.getPriorityTime()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_BUFFER_TIME + versionStr, Integer.toString(options.getBufferTime()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE + versionStr, options.getGameType());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS + versionStr, Integer.toString(options.getWinsNeeded()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED + versionStr, options.isRollbackTurnsAllowed() ? "Yes" : "No");
@@ -922,11 +926,11 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JButton btnOK;
     private javax.swing.JButton btnSettingsLoad;
     private javax.swing.JButton btnSettingsSave;
+    private javax.swing.JComboBox cbBufferTime;
     private javax.swing.JComboBox cbDeckType;
     private javax.swing.JComboBox cbGameType;
     private javax.swing.JComboBox cbSkillLevel;
     private javax.swing.JComboBox cbTimeLimit;
-    private javax.swing.JComboBox cbBufferTime;
     private javax.swing.JCheckBox chkRated;
     private javax.swing.JCheckBox chkRollbackTurnsAllowed;
     private javax.swing.JCheckBox chkSpectatorsAllowed;
@@ -935,9 +939,9 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lbBufferTime;
     private javax.swing.JLabel lbDeckType;
     private javax.swing.JLabel lbTimeLimit;
-    private javax.swing.JLabel lbBufferTime;
     private javax.swing.JLabel lblEdhPowerLevel;
     private javax.swing.JLabel lblGameType;
     private javax.swing.JLabel lblMinimumRating;

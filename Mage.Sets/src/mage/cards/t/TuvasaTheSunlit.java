@@ -69,9 +69,15 @@ public final class TuvasaTheSunlit extends CardImpl {
 
 class TuvasaTheSunlitTriggeredAbility extends SpellCastControllerTriggeredAbility {
 
+    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
+
+    static {
+        filter.add(CardType.ENCHANTMENT.getPredicate());
+    }
+
     public TuvasaTheSunlitTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                (FilterSpell) new FilterSpell("an enchantment spell").add(CardType.ENCHANTMENT.getPredicate()), false, true);
+                filter, false, SetTargetPointer.SPELL);
     }
 
     public TuvasaTheSunlitTriggeredAbility(final TuvasaTheSunlitTriggeredAbility ability) {

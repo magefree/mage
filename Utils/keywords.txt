@@ -30,6 +30,7 @@ Devoid|color|
 Defender|instance|
 Disturb|cost|
 Dredge|number|
+Doctor's companion|instance|
 Double Strike|instance|
 Dredge|number|
 Echo|manaString|

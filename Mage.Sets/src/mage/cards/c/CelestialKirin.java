@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -17,8 +16,9 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CelestialKirin extends CardImpl {
@@ -35,7 +35,10 @@ public final class CelestialKirin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, destroy all permanents with that spell's converted mana cost.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new CelestialKirinEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new CelestialKirinEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD,
+                false, SetTargetPointer.SPELL
+        ));
     }
 
     private CelestialKirin(final CelestialKirin card) {

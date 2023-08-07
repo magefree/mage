@@ -34,12 +34,12 @@ public final class AriaOfFlame extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AriaOfFlameEffect()));
 
         // Whenever you cast an instant or sorcery spell, put a verse counter on Aria of Flame, then it deals damage equal to the number of verse counters on it to target player or planeswalker.
-        Ability ability = new SpellCastControllerTriggeredAbility(
+        Ability ability = SpellCastControllerTriggeredAbility.createWithRule(
                 new AddCountersSourceEffect(CounterType.VERSE.createInstance()),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
-                false, "Whenever you cast an instant or sorcery spell, " +
-                "put a verse counter on {this}, then it deals damage equal to " +
-                "the number of verse counters on it to target player or planeswalker."
+                false, "Whenever you cast an instant or sorcery spell, "
+                        + "put a verse counter on {this}, then it deals damage equal to "
+                        + "the number of verse counters on it to target player or planeswalker."
         );
         ability.addEffect(new DamageTargetEffect(xValue));
         ability.addTarget(new TargetPlayerOrPlaneswalker());

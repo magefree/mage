@@ -24,9 +24,8 @@ public final class SkitteringMonstrosity extends CardImpl {
 
         // When you cast a creature spell, sacrifice Skittering Monstrosity.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A_CREATURE,
-                false, "When you cast a creature spell, sacrifice {this}."
-        ));
+                new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false
+        ).setTriggerPhrase("When you cast a creature spell, "));
     }
 
     private SkitteringMonstrosity(final SkitteringMonstrosity card) {

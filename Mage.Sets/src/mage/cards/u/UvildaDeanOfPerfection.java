@@ -64,7 +64,10 @@ public final class UvildaDeanOfPerfection extends ModalDoubleFacedCard {
         ));
 
         // Whenever you cast a spell from exile, put a +1/+1 counter on Nassari, Dean of Expression.
-        this.getRightHalfCard().addAbility(new NassariDeanOfExpressionTriggeredAbility());
+        this.getRightHalfCard().addAbility(SpellCastControllerTriggeredAbility.createWithFromZone(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                null, false, Zone.EXILED
+        ));
     }
 
     private UvildaDeanOfPerfection(final UvildaDeanOfPerfection card) {
@@ -296,27 +299,5 @@ class NassariDeanOfExpressionEffect extends OneShotEffect {
             CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
         }
         return true;
-    }
-}
-
-class NassariDeanOfExpressionTriggeredAbility extends SpellCastControllerTriggeredAbility {
-
-    NassariDeanOfExpressionTriggeredAbility() {
-        super(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-        this.rule = "Whenever you cast a spell from exile, put a +1/+1 counter on {this}.";
-    }
-
-    private NassariDeanOfExpressionTriggeredAbility(final NassariDeanOfExpressionTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public NassariDeanOfExpressionTriggeredAbility copy() {
-        return new NassariDeanOfExpressionTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getZone() == Zone.EXILED && super.checkTrigger(event, game);
     }
 }
