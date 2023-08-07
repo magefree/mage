@@ -1001,7 +1001,7 @@ public class NewTournamentDialog extends MageDialog {
             // construced
             this.lblDraftCube.setVisible(false);
             this.cbDraftCube.setVisible(false);
-            this.pnlPacks.setVisible(false);
+            this.lblPacks.setVisible(false);
             this.pnlPacks.setVisible(false);
             this.pnlRandomPacks.setVisible(false);
         }
