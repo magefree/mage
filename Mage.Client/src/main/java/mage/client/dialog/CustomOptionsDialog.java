@@ -40,12 +40,14 @@ public class CustomOptionsDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(CustomOptionsDialog.class);
     private final SaveLoadKeys saveLoadKeys;
+    private final JButton openButton;
 
     /**
      * Creates new form NewTableDialog
      */
-    public CustomOptionsDialog(SaveLoadKeys saveLoadKeys) {
+    public CustomOptionsDialog(SaveLoadKeys saveLoadKeys, JButton openButton) {
         this.saveLoadKeys = saveLoadKeys;
+        this.openButton = openButton;
         initComponents();
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
         cbMulliganType.setModel(new DefaultComboBoxModel(MulliganType.values()));
@@ -82,16 +84,32 @@ public class CustomOptionsDialog extends MageDialog {
         lblMulliganType.setToolTipText("What style of mulligan?");
 
         cbMulliganType.setToolTipText("Selections the type of mulligan for games.");
+        cbMulliganType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMulliganTypeActionPerformed(evt);
+            }
+        });
 
         lblFreeMulligans.setLabelFor(cbMulliganType);
         lblFreeMulligans.setText("Free mulligans:");
         lblFreeMulligans.setToolTipText("What style of mulligan?");
+
+        spnFreeMulligans.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnFreeMulligansStateChanged(evt);
+            }
+        });
 
         lblVariantOptions.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblVariantOptions.setText("Variant Options");
 
         chkPlaneChase.setText("PlaneChase");
         chkPlaneChase.setToolTipText("Use the PlaneChase variant for your game.");
+        chkPlaneChase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPlaneChaseActionPerformed(evt);
+            }
+        });
 
         btnOK.setText("OK");
         btnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -175,6 +193,18 @@ public class CustomOptionsDialog extends MageDialog {
         this.hideDialog();
     }//GEN-LAST:event_btnOKActionPerformed
 
+    private void cbMulliganTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMulliganTypeActionPerformed
+        updateActiveCount();
+    }//GEN-LAST:event_cbMulliganTypeActionPerformed
+
+    private void spnFreeMulligansStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnFreeMulligansStateChanged
+        updateActiveCount();
+    }//GEN-LAST:event_spnFreeMulligansStateChanged
+
+    private void chkPlaneChaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPlaneChaseActionPerformed
+        updateActiveCount();
+    }//GEN-LAST:event_chkPlaneChaseActionPerformed
+
     public void showDialog() {
         this.setLocation(150, 100);
         this.setVisible(true);
@@ -201,6 +231,7 @@ public class CustomOptionsDialog extends MageDialog {
         this.chkPlaneChase.setSelected(PreferencesDialog.getCachedValue(saveLoadKeys.PLANECHASE + versionStr, "No").equals("Yes"));
         this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(saveLoadKeys.NUMBER_OF_FREE_MULLIGANS + versionStr, "0")));
         this.cbMulliganType.setSelectedItem(MulliganType.valueByName(PreferencesDialog.getCachedValue(saveLoadKeys.MULLIGAN_TYPE + versionStr, MulliganType.GAME_DEFAULT.toString())));
+        updateActiveCount();
     }
 
     public void onSaveSettings(int version, MatchOptions options) {
@@ -228,6 +259,19 @@ public class CustomOptionsDialog extends MageDialog {
         options.setFreeMulligans((Integer) spnFreeMulligans.getValue());
         options.setMullgianType((MulliganType) cbMulliganType.getSelectedItem());
         options.setPlaneChase(chkPlaneChase.isSelected());
+    }
+
+    public void updateActiveCount() {
+        int activeCount = 0;
+        if ((Integer)spnFreeMulligans.getValue() > 0) activeCount++;
+        if (!cbMulliganType.getSelectedItem().toString().equals(MulliganType.GAME_DEFAULT.toString())) activeCount++;
+        if (chkPlaneChase.isSelected()) activeCount++;
+        if (activeCount == 0) {
+            openButton.setText("Custom Options...");
+        }
+        else {
+            openButton.setText("Custom Options (" + activeCount + ")");
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

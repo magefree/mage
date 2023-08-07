@@ -52,7 +52,7 @@ public class NewTableDialog extends MageDialog {
     public NewTableDialog() {
         lastSessionId = "";
         initComponents();
-        this.customOptions = new CustomOptionsDialog(CustomOptionsDialog.SaveLoadKeys.TABLE);
+        this.customOptions = new CustomOptionsDialog(CustomOptionsDialog.SaveLoadKeys.TABLE, btnCustomOptions);
         MageFrame.getDesktop().add(customOptions, JLayeredPane.MODAL_LAYER);
         player1Panel.showLevel(false);
         this.spnNumWins.setModel(new SpinnerNumberModel(1, 1, 5, 1));
