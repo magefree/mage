@@ -11,12 +11,12 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class UmezawasJitteTest extends CardTestPlayerBase {
 
-    private final String jitte = "Umezawa's Jitte";
+    private static final String jitte = "Umezawa's Jitte";
     // Whenever equipped creature deals combat damage, put two charge counters on Umezawa’s Jitte.
     // Equip 2
-    private final String attacker = "Spiked Baloth"; // 4/2 trample
-    private final String defender1 = "Memnite"; // 1/1 vanilla
-    private final String defender2 = "Darksteel Myr"; // 0/1 indestructible
+    private static final String attacker = "Spiked Baloth"; // 4/2 trample
+    private static final String defender1 = "Memnite"; // 1/1 vanilla
+    private static final String defender2 = "Darksteel Myr"; // 0/1 indestructible
 
     @Test
     public void testTrampleSingleDamageTrigger() {
