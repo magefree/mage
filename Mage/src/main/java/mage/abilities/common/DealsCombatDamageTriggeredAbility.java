@@ -9,11 +9,11 @@ import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 
 /**
- * This triggers only once for each phase the source creature deals damage.
+ * This triggers only once for each combat damage step the source creature deals damage.
  * So a creature blocked by two creatures and dealing damage to both blockers in the same
  * combat damage step triggers only once.
  *
- * @author LevelX
+ * @author LevelX, xenohedron
  */
 public class DealsCombatDamageTriggeredAbility extends TriggeredAbilityImpl {
 
