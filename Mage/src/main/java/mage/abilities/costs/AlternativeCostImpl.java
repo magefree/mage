@@ -2,6 +2,7 @@ package mage.abilities.costs;
 
 import mage.abilities.costs.mana.ManaCost;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  * Alternative costs
@@ -62,7 +63,7 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
     @Override
     public String getReminderText() {
         if (reminderText != null && !reminderText.isEmpty()) {
-            return "<i>(" + reminderText.replace("{cost}", this.getText(true)) + ")</i>";
+            return "<i>(" + reminderText.replace("{cost}", CardUtil.getTextWithFirstCharLowerCase(this.getText(true))) + ")</i>";
         }
         return "";
     }

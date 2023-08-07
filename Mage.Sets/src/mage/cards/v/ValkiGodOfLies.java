@@ -1,59 +1,59 @@
 package mage.cards.v;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
+import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
-import mage.constants.*;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
+import mage.cards.ModalDoubleFacedCard;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.command.emblems.TibaltCosmicImpostorEmblem;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
-public final class ValkiGodOfLies extends ModalDoubleFacesCard {
+public final class ValkiGodOfLies extends ModalDoubleFacedCard {
 
     public ValkiGodOfLies(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{1}{B}",
-                "Tibalt, Cosmic Impostor", new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.TIBALT}, "{5}{B}{R}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{1}{B}",
+                "Tibalt, Cosmic Impostor",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.TIBALT}, "{5}{B}{R}"
         );
 
         // 1.
         // Valki, God of Lies
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(2), new MageInt(1));
 
         // When Valki enters the battlefield, each opponent reveals their hand. For each opponent, exile a creature card they revealed this way until Valki leaves the battlefield.
@@ -65,7 +65,6 @@ public final class ValkiGodOfLies extends ModalDoubleFacesCard {
         // 2.
         // Tibalt, Cosmic Impostor
         // Legendary Planeswalker — Tibalt
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getRightHalfCard().setStartingLoyalty(5);
 
         // As Tibalt enters the battlefield, you get an emblem with “You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells.”
@@ -113,103 +112,34 @@ class ValkiGodOfLiesRevealExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject Valki = game.getObject(source);
+        if (controller == null) {
+            return false;
+        }
         Set<Card> cardsToExile = new LinkedHashSet<>();
-        if (controller != null
-                && Valki != null) {
-            UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + Valki.getZoneChangeCounter(game), game);
-            for (UUID opponentId : game.getOpponents(controller.getId())) {
-                Player opponent = game.getPlayer(opponentId);
-                if (opponent != null) {
-                    opponent.revealCards(source, opponent.getHand(), game);
-                    TargetCard targetToExile = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
-                    targetToExile.withChooseHint("card to exile");
-                    targetToExile.setNotTarget(true);
-                    if (controller.choose(Outcome.Exile, opponent.getHand(), targetToExile, game)) {
-                        Card targetedCardToExile = game.getCard(targetToExile.getFirstTarget());
-                        if (targetedCardToExile != null
-                                && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
-                            cardsToExile.add(targetedCardToExile);
-                        }
+        for (UUID opponentId : game.getOpponents(controller.getId())) {
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent != null && !opponent.getHand().isEmpty()) {
+                opponent.revealCards(source, opponent.getHand(), game);
+                TargetCard targetToExile = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
+                targetToExile.withChooseHint("card to exile");
+                targetToExile.setNotTarget(true);
+                if (opponent.getHand().count(StaticFilters.FILTER_CARD_CREATURE, game) > 0 &&
+                        controller.choose(Outcome.Exile, opponent.getHand(), targetToExile, source, game)) {
+                    Card targetedCardToExile = game.getCard(targetToExile.getFirstTarget());
+                    if (targetedCardToExile != null
+                            && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
+                        cardsToExile.add(targetedCardToExile);
                     }
                 }
             }
-            // exile all cards at one time
-            controller.moveCardsToExile(cardsToExile, source, game, true, exileId, Valki.getName());
-            game.addDelayedTriggeredAbility(new ValkiGodOfLiesReturnExiledCardAbility(), source);
+        }
+        // exile all cards at one time
+        if (cardsToExile.isEmpty()) {
             return true;
         }
-        return false;
-    }
-}
-
-class ValkiGodOfLiesReturnExiledCardAbility extends DelayedTriggeredAbility {
-
-    public ValkiGodOfLiesReturnExiledCardAbility() {
-        super(new ValkiGodOfLiesReturnExiledCardEffect(), Duration.OneUse);
-        this.usesStack = false;
-        this.setRuleVisible(false);
-    }
-
-    public ValkiGodOfLiesReturnExiledCardAbility(final ValkiGodOfLiesReturnExiledCardAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ValkiGodOfLiesReturnExiledCardAbility copy() {
-        return new ValkiGodOfLiesReturnExiledCardAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
-class ValkiGodOfLiesReturnExiledCardEffect extends OneShotEffect {
-
-    public ValkiGodOfLiesReturnExiledCardEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "Return exiled card to its owner's hand";
-    }
-
-    public ValkiGodOfLiesReturnExiledCardEffect(final ValkiGodOfLiesReturnExiledCardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ValkiGodOfLiesReturnExiledCardEffect copy() {
-        return new ValkiGodOfLiesReturnExiledCardEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject ValkiOnBattlefield = game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        if (controller != null
-                && ValkiOnBattlefield != null) {
-            // Valki, God of Lies has changed zone, so make sure to get the exile zone via its last known battlefield state
-            UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + (ValkiOnBattlefield.getZoneChangeCounter(game)), game);
-            ExileZone exile = game.getExile().getExileZone(exileId);
-            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (exile != null
-                    && sourcePermanent != null) {
-                controller.moveCards(exile, Zone.HAND, source, game);
-                return true;
-            }
-        }
-        return false;
+        Effect effect = new ExileUntilSourceLeavesEffect(Zone.HAND);
+        effect.setTargetPointer(new FixedTargets(cardsToExile, game));
+        return effect.apply(game, source);
     }
 }
 
@@ -235,14 +165,14 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null
                 && Valki != null) {
-            UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + (Valki.getZoneChangeCounter(game)), game);
+            UUID exileId = CardUtil.getCardExileZoneId(game, source);
             FilterCard filter = new FilterCard();
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
             TargetCardInExile target = new TargetCardInExile(filter, exileId);
             Cards cards = game.getExile().getExileZone(exileId);
             if (cards != null
                     && !cards.isEmpty()
-                    && controller.choose(Outcome.Benefit, cards, target, game)) {
+                    && controller.choose(Outcome.Benefit, cards, target, source, game)) {
                 Card chosenExiledCard = game.getCard(target.getFirstTarget());
                 if (chosenExiledCard != null) {
                     ContinuousEffect copyEffect = new CopyEffect(Duration.WhileOnBattlefield, chosenExiledCard.getMainCard(), source.getSourceId());

@@ -2,7 +2,7 @@ package mage.abilities.keyword;
 
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-import mage.abilities.icon.abilities.TrampleAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
 import mage.constants.Zone;
 
 import java.io.ObjectStreamException;
@@ -16,7 +16,7 @@ public class TrampleAbility extends StaticAbility implements MageSingleton {
 
     static {
         instance = new TrampleAbility();
-        instance.addIcon(TrampleAbilityIcon.instance);
+        instance.addIcon(CardIconImpl.ABILITY_TRAMPLE);
     }
 
     private Object readResolve() throws ObjectStreamException {

@@ -36,14 +36,14 @@ public final class KiyomaroFirstToStand extends CardImpl {
 
     public KiyomaroFirstToStand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // Kiyomaro, First to Stand's power and toughness are each equal to the number of cards in your hand.
         DynamicValue xValue= CardsInControllerHandCount.instance;
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
         
         // As long as you have four or more cards in hand, Kiyomaro has vigilance.
         Condition condition = new CardsInHandCondition(ComparisonType.MORE_THAN,3);

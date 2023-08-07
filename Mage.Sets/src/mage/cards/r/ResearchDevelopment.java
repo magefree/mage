@@ -47,7 +47,7 @@ class ResearchEffect extends OneShotEffect {
 
     public ResearchEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Choose up to four cards you own from outside the game and shuffle them into your library";
+        this.staticText = "Shuffle up to four cards you own from outside the game into your library";
     }
 
     public ResearchEffect(final ResearchEffect effect) {
@@ -71,7 +71,7 @@ class ResearchEffect extends OneShotEffect {
                 }
                 TargetCard target = new TargetCard(0, 4, Zone.OUTSIDE, new FilterCard("cards you own from outside the game"));
                 target.setNotTarget(true);
-                if (controller.choose(Outcome.Benefit, controller.getSideboard(), target, game)) {
+                if (controller.choose(Outcome.Benefit, controller.getSideboard(), target, source, game)) {
                     controller.shuffleCardsToLibrary(new CardsImpl(target.getTargets()), game, source);
                 }
             }

@@ -30,7 +30,7 @@ public final class AsmodeusTheArchfiend extends CardImpl {
     public AsmodeusTheArchfiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEVIL);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(6);

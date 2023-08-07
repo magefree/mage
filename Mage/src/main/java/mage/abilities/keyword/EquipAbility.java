@@ -45,7 +45,7 @@ public class EquipAbility extends ActivatedAbilityImpl {
         this.showAbilityHint = showAbilityHint;
     }
 
-    public EquipAbility(final EquipAbility ability) {
+    protected EquipAbility(final EquipAbility ability) {
         super(ability);
         this.costReduceText = ability.costReduceText;
         this.showAbilityHint = ability.showAbilityHint;

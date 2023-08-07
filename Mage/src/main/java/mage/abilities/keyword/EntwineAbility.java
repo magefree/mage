@@ -57,7 +57,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
         this.entwineCost.setCostType(VariableCostType.ADDITIONAL);
     }
 
-    public EntwineAbility(final EntwineAbility ability) {
+    protected EntwineAbility(final EntwineAbility ability) {
         super(ability);
         if (ability.entwineCost != null) {
             this.entwineCost = ability.entwineCost.copy();

@@ -16,7 +16,7 @@ public class CantAttackBlockTargetEffect extends RestrictionEffect {
         super(duration);
     }
 
-    public CantAttackBlockTargetEffect(final CantAttackBlockTargetEffect effect) {
+    protected CantAttackBlockTargetEffect(final CantAttackBlockTargetEffect effect) {
         super(effect);
     }
 

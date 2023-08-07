@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -19,11 +17,9 @@ public final class PhyrexianZombieToken extends TokenImpl {
         subtype.add(SubType.ZOMBIE);
         power = new MageInt(2);
         toughness = new MageInt(2);
-
-        availableImageSetCodes = Arrays.asList("MBS");
     }
 
-    public PhyrexianZombieToken(final PhyrexianZombieToken token) {
+    protected PhyrexianZombieToken(final PhyrexianZombieToken token) {
         super(token);
     }
 

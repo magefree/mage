@@ -30,7 +30,7 @@ public final class GolgariKeyrune extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {B}{G}: Golgari Keyrune becomes a 2/2 black and green Insect artifact creature with deathtouch until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GolgariKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{B}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GolgariKeyruneToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{B}{G}")));
     }
 
     private GolgariKeyrune(final GolgariKeyrune card) {

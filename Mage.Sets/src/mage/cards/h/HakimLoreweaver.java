@@ -43,7 +43,7 @@ public final class HakimLoreweaver extends CardImpl {
     public HakimLoreweaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -63,7 +63,7 @@ public final class HakimLoreweaver extends CardImpl {
         this.addAbility(ability);
 
         // {U}{U}, {tap}: Destroy all Auras attached to Hakim.
-        Ability ability2 = new SimpleActivatedAbility(new HakimLoreweaverEffect(), new ManaCostsImpl<>("{U}{U}"));
+        Ability ability2 = new SimpleActivatedAbility(new HakimLoreweaverDestroyEffect(), new ManaCostsImpl<>("{U}{U}"));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
     }
@@ -125,7 +125,7 @@ enum HakimLoreweaverCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (PhaseStep.UPKEEP != game.getStep().getType()
+        if (PhaseStep.UPKEEP != game.getTurnStepType()
                 || !game.isActivePlayer(source.getControllerId())) {
             return false;
         }

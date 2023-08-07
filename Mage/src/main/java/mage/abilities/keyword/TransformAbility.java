@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,7 +10,9 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.MageObjectAttribute;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 
 /**
  * @author nantuko
@@ -37,7 +40,7 @@ public class TransformAbility extends SimpleStaticAbility {
         return "";
     }
 
-    public static void transformPermanent(Permanent permanent, Card sourceCard, Game game, Ability source) {
+    public static void transformPermanent(Permanent permanent, MageObject sourceCard, Game game, Ability source) {
         if (sourceCard == null) {
             return;
         }
@@ -53,11 +56,13 @@ public class TransformAbility extends SimpleStaticAbility {
         }
         permanent.removeAllSubTypes(game);
         permanent.copySubTypesFrom(game, sourceCard);
-        permanent.getSuperType().clear();
-        for (SuperType type : sourceCard.getSuperType()) {
-            permanent.addSuperType(type);
+        permanent.removeAllSuperTypes(game);
+        for (SuperType type : sourceCard.getSuperType(game)) {
+            permanent.addSuperType(game, type);
         }
-        permanent.setExpansionSetCode(sourceCard.getExpansionSetCode());
+
+        CardUtil.copySetAndCardNumber(permanent, sourceCard);
+
         permanent.getAbilities().clear();
         for (Ability ability : sourceCard.getAbilities()) {
             // source == null -- call from init card (e.g. own abilities)
@@ -67,6 +72,7 @@ public class TransformAbility extends SimpleStaticAbility {
         permanent.getPower().setModifiedBaseValue(sourceCard.getPower().getValue());
         permanent.getToughness().setModifiedBaseValue(sourceCard.getToughness().getValue());
         permanent.setStartingLoyalty(sourceCard.getStartingLoyalty());
+        permanent.setStartingDefense(sourceCard.getStartingDefense());
     }
 
     public static Card transformCardSpellStatic(Card mainSide, Card otherSide, Game game) {
@@ -75,15 +81,11 @@ public class TransformAbility extends SimpleStaticAbility {
         // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
         Card newCard = mainSide.copy();
         newCard.setName(otherSide.getName());
-        newCard.getSuperType().clear();
 
         // mana value must be from main side only
         newCard.getManaCost().clear();
         newCard.getManaCost().add(mainSide.getManaCost().copy());
 
-        for (SuperType type : otherSide.getSuperType()) {
-            newCard.addSuperType(type);
-        }
         game.getState().getCardState(newCard.getId()).clearAbilities();
         for (Ability ability : otherSide.getAbilities()) {
             game.getState().addOtherAbility(newCard, ability);
@@ -102,6 +104,8 @@ public class TransformAbility extends SimpleStaticAbility {
         moa.getColor().setColor(otherSide.getColor(game));
         moa.getCardType().clear();
         moa.getCardType().addAll(otherSide.getCardType(game));
+        moa.getSuperType().clear();
+        moa.getSuperType().addAll(otherSide.getSuperType(game));
         moa.getSubtype().clear();
         moa.getSubtype().addAll(otherSide.getSubtype(game));
 
@@ -140,7 +144,12 @@ class TransformEffect extends ContinuousEffectImpl {
             return true;
         }
 
-        Card card = permanent.getSecondCardFace();
+        MageObject card;
+        if (permanent instanceof PermanentToken) {
+            card = ((PermanentToken) permanent).getToken().getBackFace();
+        } else {
+            card = permanent.getSecondCardFace();
+        }
 
         if (card == null) {
             return false;

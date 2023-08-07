@@ -39,7 +39,7 @@ public final class TashaTheWitchQueen extends CardImpl {
     public TashaTheWitchQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TASHA);
         this.setStartingLoyalty(4);
 

@@ -41,7 +41,7 @@ public final class SistersOfStoneDeath extends CardImpl {
 
     public SistersOfStoneDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GORGON);
 
         this.power = new MageInt(7);
@@ -97,7 +97,7 @@ class SistersOfStoneDeathEffect extends OneShotEffect {
                         cardsInExile.add(card);
                     }
                 }
-                if (controller.choose(Outcome.PutCreatureInPlay, cardsInExile, target, game)) {
+                if (controller.choose(Outcome.PutCreatureInPlay, cardsInExile, target, source, game)) {
                     Card chosenCard = game.getCard(target.getFirstTarget());
                     return controller.moveCards(chosenCard, Zone.BATTLEFIELD, source, game);
                 }

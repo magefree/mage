@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -19,10 +18,11 @@ import mage.abilities.effects.common.continuous.GainAbilityWithAttachmentEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterAnyTarget;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
@@ -31,27 +31,29 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.UUID;
 
 /**
  * @author TheElk801
  */
-public final class ToralfGodOfFury extends ModalDoubleFacesCard {
+public final class ToralfGodOfFury extends ModalDoubleFacedCard {
 
     private static final Condition condition
             = new AttachedToMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_LEGENDARY);
 
     public ToralfGodOfFury(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{R}{R}",
-                "Toralf's Hammer", new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.EQUIPMENT}, "{1}{R}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{R}{R}",
+                "Toralf's Hammer",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.EQUIPMENT}, "{1}{R}"
         );
 
         // 1.
         // Toralf, God of Fury
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(5), new MageInt(4));
 
         // Trample
@@ -63,8 +65,6 @@ public final class ToralfGodOfFury extends ModalDoubleFacesCard {
         // 2.
         // Toralf's Hammer
         // Legendary Artifact - Equipment
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-
         // Equipped creature has "{1}{R}, {T}, Unattach Toralf's Hammer: It deals 3 damage to any target. Return Toralf's Hammer to its owner's hand."
         this.getRightHalfCard().addAbility(new SimpleStaticAbility(new GainAbilityWithAttachmentEffect(
                 "equipped creature has \"{1}{R}, {T}, Unattach {this}: It deals 3 damage to any target. Return {this} to its owner's hand.\"",
@@ -118,9 +118,9 @@ class ToralfGodOfFuryTriggeredAbility extends TriggeredAbilityImpl {
         this.getTargets().clear();
         int excessDamage = dEvent.getExcess();
         this.addEffect(new DamageTargetEffect(excessDamage));
-        FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker();
-        filter.getPermanentFilter().add(Predicates.not(new MageObjectReferencePredicate(new MageObjectReference(event.getTargetId(), game))));
-        this.addTarget(new TargetAnyTarget(filter).withChooseHint(Integer.toString(excessDamage) + " damage"));
+        FilterPermanentOrPlayer filter = new FilterAnyTarget();
+        filter.getPermanentFilter().add(Predicates.not(new MageObjectReferencePredicate(event.getTargetId(), game)));
+        this.addTarget(new TargetPermanentOrPlayer(filter).withChooseHint(Integer.toString(excessDamage) + " damage"));
         return true;
     }
 

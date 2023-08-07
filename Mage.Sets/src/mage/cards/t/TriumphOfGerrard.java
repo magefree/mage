@@ -1,14 +1,6 @@
-
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -21,16 +13,24 @@ import mage.constants.Duration;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.Targets;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.GreatestPowerControlledPredicate;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class TriumphOfGerrard extends CardImpl {
+
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("creture you control with the greatest power");
+
+    static {
+        filter.add(GreatestPowerControlledPredicate.instance);
+    }
 
     public TriumphOfGerrard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
@@ -39,28 +39,32 @@ public final class TriumphOfGerrard extends CardImpl {
 
         // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
         SagaAbility sagaAbility = new SagaAbility(this);
+
         // I, II — Put a +1/+1 counter on target creature you control with the greatest power.
         sagaAbility.addChapterEffect(
                 this,
                 SagaChapter.CHAPTER_I,
                 SagaChapter.CHAPTER_II,
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                new TriumphOfGerrardTargetCreature()
+                new TargetPermanent(filter)
         );
         // III — Target creature you control with the greatest power gains flying, first strike, and lifelink until end of turn.
-        Effects effects = new Effects();
-        effects.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn)
-                .setText("Target creature you control with the greatest power gains flying"));
-        effects.add(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
-                .setText(", first strike"));
-        effects.add(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn)
-                .setText(", and lifelink until end of turn"));
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
-                effects, new Targets(new TriumphOfGerrardTargetCreature())
+                ability -> {
+                    ability.addEffect(new GainAbilityTargetEffect(
+                            FlyingAbility.getInstance(), Duration.EndOfTurn
+                    ).setText("Target creature you control with the greatest power gains flying"));
+                    ability.addEffect(new GainAbilityTargetEffect(
+                            FirstStrikeAbility.getInstance(), Duration.EndOfTurn
+                    ).setText(", first strike"));
+                    ability.addEffect(new GainAbilityTargetEffect(
+                            LifelinkAbility.getInstance(), Duration.EndOfTurn
+                    ).setText(", and lifelink until end of turn"));
+                    ability.addTarget(new TargetPermanent(filter));
+                }
         );
         this.addAbility(sagaAbility);
-
     }
 
     private TriumphOfGerrard(final TriumphOfGerrard card) {
@@ -70,68 +74,5 @@ public final class TriumphOfGerrard extends CardImpl {
     @Override
     public TriumphOfGerrard copy() {
         return new TriumphOfGerrard(this);
-    }
-}
-
-class TriumphOfGerrardTargetCreature extends TargetControlledCreaturePermanent {
-
-    public TriumphOfGerrardTargetCreature() {
-        super();
-        setTargetName("creature you control with the greatest power");
-    }
-
-    public TriumphOfGerrardTargetCreature(final TriumphOfGerrardTargetCreature target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (super.canTarget(controllerId, id, source, game)) {
-            int maxPower = 0;
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                if (permanent.getPower().getValue() > maxPower) {
-                    maxPower = permanent.getPower().getValue();
-                }
-            }
-            Permanent targetPermanent = game.getPermanent(id);
-            if (targetPermanent != null) {
-                return targetPermanent.getPower().getValue() == maxPower;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        int maxPower = 0;
-        List<Permanent> activePermanents = game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game);
-        Set<UUID> possibleTargets = new HashSet<>();
-        MageObject targetSource = game.getObject(source);
-        if(targetSource == null){
-            return possibleTargets;
-        }
-        for (Permanent permanent : activePermanents) {
-            if (permanent.getPower().getValue() > maxPower) {
-                maxPower = permanent.getPower().getValue();
-            }
-        }
-        for (Permanent permanent : activePermanents) {
-            if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
-                if (permanent.getPower().getValue() == maxPower) {
-                    possibleTargets.add(permanent.getId());
-                }
-            }
-        }
-        return possibleTargets;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Ability source, Game game) {
-        return !possibleTargets(sourceControllerId, source, game).isEmpty();
-    }
-
-    @Override
-    public TriumphOfGerrardTargetCreature copy() {
-        return new TriumphOfGerrardTargetCreature(this);
     }
 }

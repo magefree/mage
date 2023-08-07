@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -21,11 +20,10 @@ public final class TouchOfDarkness extends CardImpl {
     public TouchOfDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
-        // Any number of target creatures become black until end of turn.
+        // One or more target creatures become black until end of turn.
         Effect effect = new BecomesColorTargetEffect(ObjectColor.BLACK, Duration.EndOfTurn);
-        effect.setText("Any number of target creatures become black until end of turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_CREATURE, false));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, Integer.MAX_VALUE));
 
     }
 

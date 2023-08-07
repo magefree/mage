@@ -56,7 +56,7 @@ class OutOfTimePhaseOutEffect extends OneShotEffect {
 
     public OutOfTimePhaseOutEffect() {
         super(Outcome.AIDontUseIt);
-        this.staticText = "untap all creatures, then phase them out until {this} leaves the battlefield. "
+        this.staticText = "untap all creatures, then those creatures phase out until {this} leaves the battlefield. "
                 + "Put a time counter on {this} for each creature phased out this way";
     }
 
@@ -85,6 +85,7 @@ class OutOfTimePhaseOutEffect extends OneShotEffect {
             Permanent outOfTime = game.getPermanent(source.getSourceId());
             if (outOfTime != null) {
                 new PhaseOutAllEffect(new ArrayList<>(creatureIds)).apply(game, source);
+                game.getState().processAction(game);
                 new AddCountersSourceEffect(CounterType.TIME.createInstance(numCreatures)).apply(game, source);
                 game.getState().setValue("phasedOutCreatures"
                         + source.getId().toString(), creatureIds);

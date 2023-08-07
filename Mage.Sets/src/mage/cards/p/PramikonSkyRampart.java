@@ -30,7 +30,7 @@ public final class PramikonSkyRampart extends CardImpl {
     public PramikonSkyRampart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.WALL);
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);

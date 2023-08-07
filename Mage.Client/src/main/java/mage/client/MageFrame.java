@@ -98,7 +98,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final String PASSWORD_ARG = "-pw";
     private static final String SERVER_ARG = "-server";
     private static final String PORT_ARG = "-port";
-    private static final String DEBUG_ARG = "-debug";
+    private static final String DEBUG_ARG = "-debug"; // enable debug button in main menu
 
     private static final String NOT_CONNECTED_TEXT = "<not connected>";
     private static final String NOT_CONNECTED_BUTTON = "CONNECT TO SERVER";
@@ -1327,6 +1327,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     debugMode = true;
                 }
             }
+
+            // enable debug menu by default for developer build (if you run it from source code)
+            debugMode |= VERSION.isDeveloperBuild();
+
             if (!liteMode) {
                 final SplashScreen splash = SplashScreen.getSplashScreen();
                 if (splash != null) {

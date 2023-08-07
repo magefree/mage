@@ -10,6 +10,10 @@ import mage.constants.SubType;
  */
 public final class RiptideReplicatorToken extends TokenImpl {
 
+    public RiptideReplicatorToken() {
+        this(new ObjectColor(), SubType.BEAR, 0);
+    }
+
     public RiptideReplicatorToken(ObjectColor color, SubType type, int x) {
         super(type.getDescription() + " Token", "X/X creature token of the chosen color and type");
         cardType.add(CardType.CREATURE);
@@ -19,7 +23,7 @@ public final class RiptideReplicatorToken extends TokenImpl {
         toughness = new MageInt(x);
     }
 
-    public RiptideReplicatorToken(final RiptideReplicatorToken token) {
+    protected RiptideReplicatorToken(final RiptideReplicatorToken token) {
         super(token);
     }
 

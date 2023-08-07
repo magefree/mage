@@ -40,7 +40,7 @@ public final class ThatWhichWasTaken extends CardImpl {
 
     public ThatWhichWasTaken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {4}, {T}: Put a divinity counter on target permanent other than That Which Was Taken.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.DIVINITY.createInstance()), new GenericManaCost(4));
@@ -48,9 +48,9 @@ public final class ThatWhichWasTaken extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
-        // Each permanent with a divinity counter on it is indestructible.
+        // Each permanent with a divinity counter on it has indestructible.
         Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filterIndestructible, false);
-        effect.setText("Each permanent with a divinity counter on it is indestructible");
+        effect.setText("Each permanent with a divinity counter on it has indestructible");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 effect));
 
@@ -65,5 +65,3 @@ public final class ThatWhichWasTaken extends CardImpl {
         return new ThatWhichWasTaken(this);
     }
 }
-
-

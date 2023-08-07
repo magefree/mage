@@ -24,7 +24,7 @@ public class PayMoreToCastAsThoughtItHadFlashAbility extends SpellAbility {
         CardUtil.increaseCost(this, costsToAdd);
     }
 
-    public PayMoreToCastAsThoughtItHadFlashAbility(final PayMoreToCastAsThoughtItHadFlashAbility ability) {
+    protected PayMoreToCastAsThoughtItHadFlashAbility(final PayMoreToCastAsThoughtItHadFlashAbility ability) {
         super(ability);
         this.costsToAdd = ability.costsToAdd;
     }

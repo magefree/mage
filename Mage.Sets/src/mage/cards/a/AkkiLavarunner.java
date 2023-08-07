@@ -86,7 +86,7 @@ class AkkiLavarunnerAbility extends TriggeredAbilityImpl {
 class TokTokVolcanoBorn extends TokenImpl {
     TokTokVolcanoBorn() {
         super("Tok-Tok, Volcano Born", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.GOBLIN);

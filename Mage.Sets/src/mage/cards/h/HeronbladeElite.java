@@ -16,9 +16,9 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 
 import java.util.UUID;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 
 /**
  * @author TheElk801
@@ -51,7 +51,7 @@ public final class HeronbladeElite extends CardImpl {
 
         // {T}: Add X mana of any one color, where X is Heronblade Elite's power.
         this.addAbility(new DynamicManaAbility(
-                new Mana(0, 0, 0, 0, 0, 0, 1, 0), xValue, new TapSourceCost(), "Add X mana "
+                Mana.AnyMana(1), xValue, new TapSourceCost(), "Add X mana "
                 + "of any one color, where X is {this}'s power", true
         ));
     }

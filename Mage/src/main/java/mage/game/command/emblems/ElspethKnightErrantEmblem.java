@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,15 +11,13 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.command.Emblem;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
 public final class ElspethKnightErrantEmblem extends Emblem {
 
     public ElspethKnightErrantEmblem() {
-        this.setName("Emblem Elspeth");
+        super("Emblem Elspeth");
         FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts, creatures, enchantments, and lands you control");
         filter.add(Predicates.or(
                 CardType.ARTIFACT.getPredicate(),
@@ -30,6 +27,14 @@ public final class ElspethKnightErrantEmblem extends Emblem {
         Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
         effect.setText("Artifacts, creatures, enchantments, and lands you control have indestructible");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, effect));
-        availableImageSetCodes = Arrays.asList("MMA", "MD1", "MED");
+    }
+
+    private ElspethKnightErrantEmblem(final ElspethKnightErrantEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public ElspethKnightErrantEmblem copy() {
+        return new ElspethKnightErrantEmblem(this);
     }
 }

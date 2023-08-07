@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -7,8 +6,7 @@ import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -16,20 +14,14 @@ import mage.filter.predicate.Predicates;
  */
 public final class Dredge extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature or land");
-
-    static {
-        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.LAND.getPredicate()));
-    }
-
     public Dredge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
         // Sacrifice a creature or land.
-        this.getSpellAbility().addEffect(new SacrificeControllerEffect(filter, 1, ""));
+        this.getSpellAbility().addEffect(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE_OR_LAND, 1, ""));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Dredge(final Dredge card) {

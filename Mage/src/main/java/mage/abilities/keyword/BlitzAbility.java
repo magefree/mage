@@ -38,7 +38,7 @@ public class BlitzAbility extends SpellAbility {
         );
         ability.addEffect(new GainAbilitySourceEffect(new DiesSourceTriggeredAbility(
                 new DrawCardSourceControllerEffect(1)
-        ).setTriggerPhrase("When this creature dies, ")));
+        ).setTriggerPhrase("When this creature dies, "), Duration.Custom, false));
         ability.addEffect(new BlitzAddDelayedTriggeredAbilityEffect());
         ability.setRuleVisible(false);
         addSubAbility(ability);

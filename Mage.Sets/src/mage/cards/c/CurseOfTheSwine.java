@@ -107,6 +107,7 @@ class CurseOfTheSwineEffect extends OneShotEffect {
                             playersWithTargets.getOrDefault(lkiP.getControllerId(), 0) + 1);
                 }
             }
+            game.getState().processAction(game);
             Boar2Token swineToken = new Boar2Token();
             for (Map.Entry<UUID, Integer> exiledByController : playersWithTargets.entrySet()) {
                 swineToken.putOntoBattlefield(exiledByController.getValue(), game, source, exiledByController.getKey());

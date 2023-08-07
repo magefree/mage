@@ -29,7 +29,7 @@ public class BecomesChosenCreatureTypeSourceEffect extends OneShotEffect {
         staticText = "{this} becomes the creature type of your choice" + (duration == Duration.EndOfTurn ? " until end of turn." : "");
     }
 
-    public BecomesChosenCreatureTypeSourceEffect(final BecomesChosenCreatureTypeSourceEffect effect) {
+    protected BecomesChosenCreatureTypeSourceEffect(final BecomesChosenCreatureTypeSourceEffect effect) {
         super(effect);
         this.nonWall = effect.nonWall;
         this.duration = effect.duration;

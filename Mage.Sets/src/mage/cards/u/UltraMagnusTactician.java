@@ -31,7 +31,7 @@ public final class UltraMagnusTactician extends CardImpl {
     public UltraMagnusTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ROBOT);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
@@ -88,7 +88,7 @@ class UltraMagnusTacticianEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInHand(0, 1, filter);
-        player.choose(outcome, player.getHand(), target, game);
+        player.choose(outcome, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

@@ -91,7 +91,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
         this.addSubAbility(new ConspireTriggeredAbility(conspireId));
     }
 
-    public ConspireAbility(final ConspireAbility ability) {
+    protected ConspireAbility(final ConspireAbility ability) {
         super(ability);
         this.conspireId = ability.conspireId;
         this.addedById = ability.addedById;

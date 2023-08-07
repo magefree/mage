@@ -19,7 +19,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -30,7 +30,7 @@ public final class Thermopod extends CardImpl {
 
     public Thermopod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SLUG);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
@@ -40,7 +40,7 @@ public final class Thermopod extends CardImpl {
                 HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{S}")));
         // Sacrifice a creature: Add {R}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(1), CreaturesYouControlCount.instance),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
     }
 
     private Thermopod(final Thermopod card) {

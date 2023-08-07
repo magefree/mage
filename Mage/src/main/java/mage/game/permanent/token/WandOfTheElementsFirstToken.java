@@ -18,11 +18,9 @@ public final class WandOfTheElementsFirstToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
-
-        setTokenType(1);
     }
 
-    public WandOfTheElementsFirstToken(final WandOfTheElementsFirstToken token) {
+    protected WandOfTheElementsFirstToken(final WandOfTheElementsFirstToken token) {
         super(token);
     }
 

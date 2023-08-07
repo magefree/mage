@@ -30,7 +30,7 @@ public class TargetCreatureOrPlaneswalker extends TargetPermanent {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetCreatureOrPlaneswalker(final TargetCreatureOrPlaneswalker target) {
+    protected TargetCreatureOrPlaneswalker(final TargetCreatureOrPlaneswalker target) {
         super(target);
     }
 

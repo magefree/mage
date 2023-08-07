@@ -6,7 +6,6 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 
 /**
- *
  * @author nantuko
  */
 public class FilterArtifactCard extends FilterCard {
@@ -20,7 +19,7 @@ public class FilterArtifactCard extends FilterCard {
         this.add(CardType.ARTIFACT.getPredicate());
     }
 
-    public FilterArtifactCard(final FilterArtifactCard filter) {
+    protected FilterArtifactCard(final FilterArtifactCard filter) {
         super(filter);
     }
 

@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageInt;
 import mage.MageObject;
@@ -15,19 +13,19 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author hanasu
  */
 public final class SoldeviMachinist extends CardImpl {
 
     public SoldeviMachinist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.subtype.add(SubType.ARTIFICER);
@@ -74,13 +72,15 @@ class ArtifactAbilityManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source != null && source.getAbilityType() == AbilityType.ACTIVATED) {
-            MageObject object = game.getObject(source);
-            if (object != null && object.isArtifact(game)) {
-                return true;
-            }
+        switch (source.getAbilityType()) {
+            case ACTIVATED:
+            case MANA:
+                break;
+            default:
+                return false;
         }
-        return false;
+        MageObject object = game.getObject(source);
+        return object != null && object.isArtifact(game);
     }
 
     @Override

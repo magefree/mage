@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -13,8 +12,9 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class HuntToExtinction extends CardImpl {
@@ -26,7 +26,7 @@ public final class HuntToExtinction extends CardImpl {
     }
 
     public HuntToExtinction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{R}{G}");
 
         // Put a bounty counter on up to one target creature an opponent controls.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()));
@@ -36,7 +36,7 @@ public final class HuntToExtinction extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, new FilterCreaturePermanent()));
 
         // Hunt to Exctinction deals an additional X damage to each creature with a bounty counter on it.
-        Effect effect = new DamageAllEffect(ManacostVariableValue.REGULAR, new FilterCreaturePermanent(filter));
+        Effect effect = new DamageAllEffect(ManacostVariableValue.REGULAR, filter);
         effect.setText("Hunt to Exctinction deals an additional X damage to each creature with a bounty counter on it");
         this.getSpellAbility().addEffect(effect);
 

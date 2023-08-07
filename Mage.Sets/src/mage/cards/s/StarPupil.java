@@ -4,16 +4,13 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutSourceCountersOnTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -38,7 +35,7 @@ public final class StarPupil extends CardImpl {
         ));
 
         // When Star Pupil dies, put its counters on target creature you control.
-        Ability ability = new DiesSourceTriggeredAbility(new StarPupilEffect());
+        Ability ability = new DiesSourceTriggeredAbility(new PutSourceCountersOnTargetEffect());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
@@ -50,37 +47,5 @@ public final class StarPupil extends CardImpl {
     @Override
     public StarPupil copy() {
         return new StarPupil(this);
-    }
-}
-
-class StarPupilEffect extends OneShotEffect {
-
-    StarPupilEffect() {
-        super(Outcome.Benefit);
-        staticText = "put its counters on target creature you control";
-    }
-
-    private StarPupilEffect(final StarPupilEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public StarPupilEffect copy() {
-        return new StarPupilEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = (Permanent) getValue("permanentLeftBattlefield");
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (sourcePermanent == null || permanent == null) {
-            return false;
-        }
-        sourcePermanent
-                .getCounters(game)
-                .values()
-                .stream()
-                .forEach(counter -> permanent.addCounters(counter, source.getControllerId(), source, game));
-        return true;
     }
 }

@@ -15,12 +15,11 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
 /**
  * @author Loki
@@ -29,7 +28,7 @@ public final class GhostCouncilOfOrzhova extends CardImpl {
 
     public GhostCouncilOfOrzhova(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(4);
@@ -46,9 +45,7 @@ public final class GhostCouncilOfOrzhova extends CardImpl {
                 Zone.BATTLEFIELD,
                 new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(),
                 new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledCreaturePermanent(
-                        FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

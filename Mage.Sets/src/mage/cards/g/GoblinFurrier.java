@@ -64,7 +64,7 @@ class GoblinFurrierPreventEffectEffect extends PreventionEffectImpl {
         if (super.applies(event, source, game)) {
             if (event.getSourceId().equals(source.getSourceId())) {
                 Permanent damageTo = game.getPermanent(event.getTargetId());
-                return damageTo != null && damageTo.isSnow();
+                return damageTo != null && damageTo.isSnow(game);
             }
         }
         return false;

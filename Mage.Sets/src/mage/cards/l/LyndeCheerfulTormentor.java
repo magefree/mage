@@ -3,6 +3,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -34,7 +35,7 @@ public final class LyndeCheerfulTormentor extends CardImpl {
     public LyndeCheerfulTormentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(2);
@@ -90,7 +91,7 @@ class LyndeCheerfulTormentorCurseDiesTriggeredAbility extends TriggeredAbilityIm
         if (zEvent.isDiesEvent()) {
             Permanent permanent = zEvent.getTarget();
             if (permanent != null && permanent.hasSubtype(SubType.CURSE, game) && permanent.isOwnedBy(controllerId)) {
-                getEffects().setValue("curse", zEvent.getTargetId());
+                getEffects().setValue("curse", new MageObjectReference(game.getCard(zEvent.getTargetId()), game));
                 return true;
             }
         }
@@ -127,7 +128,7 @@ class LyndeCheerfulTormentorReturnCurseEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card curse = game.getCard((UUID)getValue("curse"));
+        Card curse = ((MageObjectReference) getValue("curse")).getCard(game);
         if (controller != null && curse != null) {
             game.getState().setValue("attachTo:" + curse.getId(), controller.getId());
             controller.moveCards(curse, Zone.BATTLEFIELD, source, game);
@@ -175,6 +176,9 @@ class LyndeCheerfulTormentorAttachCurseEffect extends OneShotEffect {
                         if (opponent != null) {
                             controller.removeAttachment(curse, source, game);
                             opponent.addAttachment(curse.getId(), source, game);
+
+                            game.informPlayers(
+                                    curse.getLogName() + " is now attached to " + opponent.getLogName() + ".");
                             controller.drawCards(2, source, game);
                             return true;
                         }

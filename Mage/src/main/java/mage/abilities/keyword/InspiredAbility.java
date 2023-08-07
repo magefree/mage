@@ -30,7 +30,7 @@ public class InspiredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} becomes untapped, ");
     }
 
-    public InspiredAbility(final InspiredAbility ability) {
+    protected InspiredAbility(final InspiredAbility ability) {
         super(ability);
     }
 

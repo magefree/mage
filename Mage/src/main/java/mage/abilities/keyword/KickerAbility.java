@@ -79,7 +79,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         setRuleAtTheTop(true);
     }
 
-    public KickerAbility(final KickerAbility ability) {
+    protected KickerAbility(final KickerAbility ability) {
         super(ability);
         for (OptionalAdditionalCost cost : ability.kickerCosts) {
             this.kickerCosts.add(cost.copy());
@@ -103,7 +103,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
 
     public final OptionalAdditionalCost addKickerCost(Cost cost) {
         OptionalAdditionalCost newCost = new OptionalAdditionalCostImpl(
-                keywordText, "-", reminderText, cost);
+                keywordText, "&mdash;", reminderText, cost);
         addKickerCostAndSetup(newCost);
         return newCost;
     }

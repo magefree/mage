@@ -30,7 +30,7 @@ public final class InduceParanoia extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new InduceParanoiaEffect(), 
                 new CounterTargetEffect(),
-                new ManaWasSpentCondition(ColoredManaSymbol.B), "Counter target spell. If {B} was spent to cast this spell, that spell's controller mills X cards, where X is the spell's mana value."));
+                ManaWasSpentCondition.BLACK, "Counter target spell. If {B} was spent to cast this spell, that spell's controller mills X cards, where X is the spell's mana value."));
                 
         // Counter target spell. 
         this.getSpellAbility().addTarget(new TargetSpell());

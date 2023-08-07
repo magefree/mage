@@ -25,7 +25,7 @@ public final class RenataCalledToTheHunt extends CardImpl {
     public RenataCalledToTheHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMIGOD);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
@@ -33,7 +33,7 @@ public final class RenataCalledToTheHunt extends CardImpl {
         // Renata's power is equal to your devotion to green.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBasePowerSourceEffect(DevotionCount.G, Duration.EndOfGame)
+                new SetBasePowerSourceEffect(DevotionCount.G)
                         .setText("{this}'s power is equal to your devotion to green")
         ).addHint(DevotionCount.G.getHint()));
 

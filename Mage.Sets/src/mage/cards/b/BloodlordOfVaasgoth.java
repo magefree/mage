@@ -43,7 +43,7 @@ public final class BloodlordOfVaasgoth extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast a Vampire creature spell, it gains bloodthirst 3.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BloodlordOfVaasgothEffect(), filter, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BloodlordOfVaasgothEffect(), filter, false, SetTargetPointer.SPELL));
     }
 
     private BloodlordOfVaasgoth(final BloodlordOfVaasgoth card) {

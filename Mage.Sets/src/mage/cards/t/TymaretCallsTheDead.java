@@ -20,8 +20,6 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -70,7 +68,7 @@ class TymaretCallsTheDeadFirstEffect extends OneShotEffect {
     }
 
     TymaretCallsTheDeadFirstEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "mill three cards. Then you may exile a creature or enchantment card from your graveyard. " +
                 "If you do, create a 2/2 black Zombie creature token";
     }
@@ -97,7 +95,7 @@ class TymaretCallsTheDeadFirstEffect extends OneShotEffect {
         }
         TargetCard target = new TargetCardInYourGraveyard(filter);
         target.setNotTarget(true);
-        if (!player.choose(outcome, player.getGraveyard(), target, game)) {
+        if (!player.choose(outcome, player.getGraveyard(), target, source, game)) {
             return true;
         }
         return player.moveCards(game.getCard(target.getFirstTarget()), Zone.EXILED, source, game)
@@ -110,7 +108,7 @@ class TymaretCallsTheDeadLastEffect extends OneShotEffect {
     private static final FilterPermanent filter = new FilterPermanent(SubType.ZOMBIE, "");
 
     TymaretCallsTheDeadLastEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "You gain X life and scry X, where X is the number of Zombies you control.";
     }
 

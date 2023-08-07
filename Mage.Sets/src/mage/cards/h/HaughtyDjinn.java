@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -37,7 +36,7 @@ public final class HaughtyDjinn extends CardImpl {
         // Haughty Djinn's power is equal to the number of instant and sorcery cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBasePowerSourceEffect(new CardsInControllerGraveyardCount(filter), Duration.EndOfGame)
+                new SetBasePowerSourceEffect(new CardsInControllerGraveyardCount(filter))
         ));
 
         // Instant and sorcery spells you cast cost {1} less to cast.

@@ -12,14 +12,13 @@ import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 
 /**
  * @author jeffwadsworth
@@ -35,11 +34,12 @@ public final class CorpseHarvester extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{B}, {tap}, Sacrifice a creature: Search your library for a Zombie card and a Swamp card, reveal them, and put them into your hand. Then shuffle your library.
+        String ruleText = "Search your library for a Zombie card and a Swamp card, reveal them, put them into your hand, then shuffle.";
         Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(
                 new CorpseHarvesterTarget(), true
-        ), new ManaCostsImpl<>("{1}{B}"));
+        ).setText(ruleText), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

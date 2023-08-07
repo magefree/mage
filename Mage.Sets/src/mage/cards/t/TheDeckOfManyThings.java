@@ -35,7 +35,7 @@ public final class TheDeckOfManyThings extends CardImpl {
     public TheDeckOfManyThings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {2}, {T}: Roll a d20 and subtract the number of cards in your hand. If the result is 0 or less, discard your hand.
         // 1-9 | Return a card at random from your graveyard to your hand.

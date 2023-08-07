@@ -3,11 +3,11 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -16,6 +16,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,20 +33,30 @@ import java.util.UUID;
  * to the number of creatures the permanent devoured. "It devoured" means
  * "sacrificed as a result of its devour ability as it entered the battlefield."
  *
- * @author LevelX2
+ * @author LevelX2, Susucr
  */
 public class DevourEffect extends ReplacementEffectImpl {
 
-    private final DevourFactor devourFactor;
+    // how many counters per devoured permanent.
+    // Integer.MAX_VALUE is a special value that means "X, where X is the number of devoured permanent"
+    private final int devourFactor;
+    // For text generation, the filter's message is expected to be the singular
+    // type word in the devour ability. e.g. "Food" "artifact" "creature".
+    // "creature" is a special case as the rule will not mention it.
+    //
+    // 's' will be added to pluralize, so far so good with the current text generation.
+    private final FilterControlledPermanent filterDevoured;
 
-    public DevourEffect(DevourFactor devourFactor) {
+    public DevourEffect(int devourFactor, FilterControlledPermanent filterDevoured) {
         super(Duration.EndOfGame, Outcome.Detriment);
         this.devourFactor = devourFactor;
+        this.filterDevoured = filterDevoured;
     }
 
-    public DevourEffect(final DevourEffect effect) {
+    private DevourEffect(final DevourEffect effect) {
         super(effect);
         this.devourFactor = effect.devourFactor;
+        this.filterDevoured = effect.filterDevoured;
     }
 
     @Override
@@ -75,12 +86,19 @@ public class DevourEffect extends ReplacementEffectImpl {
         if (creature == null || controller == null) {
             return false;
         }
-        Target target = new TargetControlledPermanent(1, Integer.MAX_VALUE, devourFactor.getFilter(), true);
+
+        FilterControlledPermanent filter = new FilterControlledPermanent(filterDevoured.getMessage() + "s to devour");
+        for (Predicate predicate : filterDevoured.getPredicates()) {
+            filter.add(predicate);
+        }
+        filter.add(AnotherPredicate.instance);
+
+        Target target = new TargetControlledPermanent(1, Integer.MAX_VALUE, filter, true);
         target.setRequired(false);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
-        if (!controller.chooseUse(Outcome.Detriment, "Devour " + devourFactor.getCardType().toString().toLowerCase() + "s?", source, game)) {
+        if (!controller.chooseUse(Outcome.Detriment, "Devour " + filterDevoured.getMessage() + "s?", source, game)) {
             return false;
         }
         controller.chooseTarget(Outcome.Detriment, target, source, game);
@@ -96,16 +114,19 @@ public class DevourEffect extends ReplacementEffectImpl {
                 devouredCreatures++;
             }
         }
-        if (!game.isSimulation()) {
-            game.informPlayers(creature.getLogName() + " devours " + devouredCreatures + " " + devourFactor.getCardType().toString().toLowerCase() + "s");
-        }
+
+        game.informPlayers(creature.getLogName()
+                + " devours " + devouredCreatures + " "
+                + filterDevoured.getMessage() + (devouredCreatures > 1 ? "s" : "")
+        );
+        
         game.getState().processAction(game); // need for multistep effects
 
         int amountCounters;
-        if (devourFactor == DevourFactor.DevourX) {
+        if (devourFactor == Integer.MAX_VALUE) {
             amountCounters = devouredCreatures * devouredCreatures;
         } else {
-            amountCounters = devouredCreatures * devourFactor.getFactor();
+            amountCounters = devouredCreatures * devourFactor;
         }
         creature.addCounters(CounterType.P1P1.createInstance(amountCounters), source.getControllerId(), source, game);
         game.getState().setValue(creature.getId().toString() + "devoured", creaturesDevoured);
@@ -114,13 +135,38 @@ public class DevourEffect extends ReplacementEffectImpl {
 
     @Override
     public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder(devourFactor.toString());
-        sb.append(" <i>(As this enters the battlefield, you may sacrifice any number of ");
-        sb.append(devourFactor.getCardType());
-        sb.append("s. This creature enters the battlefield with ");
-        sb.append(devourFactor.getRuleText());
-        sb.append(")</i>");
-        return sb.toString();
+        String text = "Devour ";
+
+        String filterMessage = filterDevoured.getMessage();
+        if (!filterMessage.equals("creature")) {
+            text += filterMessage + " ";
+        }
+
+        if (devourFactor == Integer.MAX_VALUE) {
+            text += "X, where X is the number of " + filterMessage + "s devoured this way";
+        } else {
+            text += devourFactor;
+        }
+
+        text += " <i>(As this enters the battlefield, you may sacrifice any number of "
+                + filterMessage + "s. "
+                + "This creature enters the battlefield with ";
+
+        if (devourFactor == Integer.MAX_VALUE) {
+            text += "X +1/+1 counters on it for each of those creatures";
+        } else {
+            if (devourFactor == 2) {
+                text += "twice ";
+            } else if (devourFactor > 2) {
+                text += CardUtil.numberToText(devourFactor) + " times ";
+            }
+
+            text += "that many +1/+1 counters on it";
+        }
+
+        text += ".)</i>";
+
+        return text;
     }
 
     public List<Permanent> getDevouredCreatures(Game game, UUID permanentId) {
@@ -142,60 +188,5 @@ public class DevourEffect extends ReplacementEffectImpl {
     @Override
     public DevourEffect copy() {
         return new DevourEffect(this);
-    }
-
-    public enum DevourFactor {
-
-        Devour1("Devour 1", "that many +1/+1 counters on it", 1),
-        Devour2("Devour 2", "twice that many +1/+1 counters on it", 2),
-        Devour3("Devour 3", "three times that many +1/+1 counters on it", 3),
-        DevourArtifact1("Devour artifact 1", "that many +1/+1 counters on it", 1, CardType.ARTIFACT),
-        DevourX("Devour X, where X is the number of creatures devoured this way", "X +1/+1 counters on it for each of those creatures", Integer.MAX_VALUE);
-
-        private final String text;
-        private final String ruleText;
-        private final int factor;
-        private final CardType cardType;
-        private final FilterControlledPermanent filter;
-
-        DevourFactor(String text, String ruleText, int factor) {
-            this(text, ruleText, factor, CardType.CREATURE);
-        }
-
-        DevourFactor(String text, String ruleText, int factor, CardType cardType) {
-            this.text = text;
-            this.ruleText = ruleText;
-            this.factor = factor;
-            this.cardType = cardType;
-            this.filter = makeFilter(cardType);
-        }
-
-        @Override
-        public String toString() {
-            return text;
-        }
-
-        public String getRuleText() {
-            return ruleText;
-        }
-
-        public int getFactor() {
-            return factor;
-        }
-
-        public CardType getCardType() {
-            return cardType;
-        }
-
-        public FilterControlledPermanent getFilter() {
-            return filter;
-        }
-
-        private static final FilterControlledPermanent makeFilter(CardType cardType) {
-            FilterControlledPermanent filter = new FilterControlledPermanent(cardType.toString().toLowerCase() + "s to devour");
-            filter.add(cardType.getPredicate());
-            filter.add(AnotherPredicate.instance);
-            return filter;
-        }
     }
 }

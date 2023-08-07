@@ -23,14 +23,14 @@ public final class FacelessHaven extends CardImpl {
     public FacelessHaven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {S}{S}{S}: Faceless Haven becomes a 4/3 creature with vigilance and all creature types until end of turn. It's still a land.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
-                new FacelessHavenToken(), "land", Duration.EndOfTurn
+                new FacelessHavenToken(), CardType.LAND, Duration.EndOfTurn
         ).setText("{this} becomes a 4/3 creature with vigilance and all creature types until end of turn. It's still a land"), new ManaCostsImpl<>("{S}{S}{S}")));
     }
 

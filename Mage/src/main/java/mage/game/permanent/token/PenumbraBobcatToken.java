@@ -1,12 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class PenumbraBobcatToken extends TokenImpl {
@@ -20,7 +18,7 @@ public final class PenumbraBobcatToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public PenumbraBobcatToken(final PenumbraBobcatToken token) {
+    protected PenumbraBobcatToken(final PenumbraBobcatToken token) {
         super(token);
     }
 

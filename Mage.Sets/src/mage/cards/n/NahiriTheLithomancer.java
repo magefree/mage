@@ -32,7 +32,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class NahiriTheLithomancer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("an Equipment");
+    private static final FilterCard filter = new FilterCard("an Equipment card");
 
     static {
         filter.add(SubType.EQUIPMENT.getPredicate());
@@ -40,7 +40,7 @@ public final class NahiriTheLithomancer extends CardImpl {
 
     public NahiriTheLithomancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAHIRI);
 
         this.setStartingLoyalty(3);

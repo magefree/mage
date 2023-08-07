@@ -65,6 +65,7 @@ public final class ScavengedBrawler extends CardImpl {
                 CounterType.LIFELINK.createInstance()
         ).setText(", and a lifelink counter on that creature"));
         ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
     private ScavengedBrawler(final ScavengedBrawler card) {

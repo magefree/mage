@@ -80,6 +80,9 @@ class HeraldsHornEffect extends OneShotEffect {
             // If it's a creature card of the chosen type, you may reveal it and put it into your hand.
             FilterCreatureCard filter = new FilterCreatureCard("creature card of the chosen type");
             SubType subtype = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
+            if (subtype == null) {
+                return true;
+            }
             filter.add(subtype.getPredicate());
             String message = "Reveal the top card of your library and put that card into your hand?";
             if (card != null) {

@@ -36,8 +36,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -54,7 +52,7 @@ public final class UginTheIneffable extends CardImpl {
     public UginTheIneffable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{6}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.UGIN);
         this.setStartingLoyalty(4);
 
@@ -85,7 +83,7 @@ public final class UginTheIneffable extends CardImpl {
 class UginTheIneffableEffect extends OneShotEffect {
 
     UginTheIneffableEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "Exile the top card of your library face down and look at it. "
                 + "Create a 2/2 colorless Spirit creature token. When that token leaves the battlefield, "
                 + "put the exiled card into your hand.";

@@ -53,7 +53,7 @@ class StitchInTimeEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             if (player.flipCoin(source, game, true)) {
-                game.getState().getTurnMods().add(new TurnMod(player.getId(), false));
+                game.getState().getTurnMods().add(new TurnMod(player.getId()).withExtraTurn());
                 return true;
             }
         }

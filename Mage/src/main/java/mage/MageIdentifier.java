@@ -10,6 +10,7 @@ public enum MageIdentifier {
     CastFromGraveyardOnceWatcher,
     CemeteryIlluminatorWatcher,
     GisaAndGeralfWatcher,
+    DanithaNewBenaliasLightWatcher,
     HaukensInsightWatcher,
     KaradorGhostChieftainWatcher,
     KessDissidentMageWatcher,
@@ -17,5 +18,6 @@ public enum MageIdentifier {
     ShareTheSpoilsWatcher,
     WishWatcher,
     GlimpseTheCosmosWatcher,
-    SerraParagonWatcher
+    SerraParagonWatcher,
+    OneWithTheMultiverseWatcher
 }

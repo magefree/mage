@@ -39,7 +39,7 @@ public final class DireMimic extends CardImpl {
                 new CreatureToken(
                         5, 5, "Shapeshifter artifact creature " +
                         "with base power and toughness 5/5", SubType.SHAPESHIFTER
-                ).withType(CardType.ARTIFACT), "", Duration.EndOfTurn
+                ).withType(CardType.ARTIFACT), CardType.ARTIFACT, Duration.EndOfTurn
         ), new GenericManaCost(3)));
     }
 

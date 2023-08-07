@@ -23,7 +23,7 @@ public final class C3POAndR2D2 extends CardImpl {
 
     public C3POAndR2D2(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DROID);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

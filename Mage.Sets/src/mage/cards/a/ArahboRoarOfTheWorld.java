@@ -48,7 +48,7 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
     public ArahboRoarOfTheWorld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT, SubType.AVATAR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

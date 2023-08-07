@@ -30,6 +30,10 @@ public final class BlastFurnaceHellkite extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledArtifactPermanent("artifact");
     private static final FilterPermanent filter2 = new FilterCreaturePermanent("creatures attacking your opponents");
 
+    static {
+        filter2.add(BlastFurnaceHellkitePredicate.instance);
+    }
+
     public BlastFurnaceHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{R}{R}");
 

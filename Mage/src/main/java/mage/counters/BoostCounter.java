@@ -20,7 +20,7 @@ public class BoostCounter extends Counter {
         this.toughness = toughness;
     }
 
-    public BoostCounter(final BoostCounter counter) {
+    protected BoostCounter(final BoostCounter counter) {
         super(counter);
         this.power = counter.power;
         this.toughness = counter.toughness;

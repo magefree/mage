@@ -19,11 +19,10 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class PutIntoGraveFromAnywhereSourceAbility extends SimpleStaticAbility {
-    
+
     public PutIntoGraveFromAnywhereSourceAbility(Effect baseEffect) {
         this(baseEffect, null, "", true, false);
     }
@@ -32,7 +31,7 @@ public class PutIntoGraveFromAnywhereSourceAbility extends SimpleStaticAbility {
         super(Zone.ALL, new PutIntoGraveFromAnywhereEffect(baseEffect, condition, text, selfScope, optional));
     }
 
-    public PutIntoGraveFromAnywhereSourceAbility(final PutIntoGraveFromAnywhereSourceAbility ability) {
+    protected PutIntoGraveFromAnywhereSourceAbility(final PutIntoGraveFromAnywhereSourceAbility ability) {
         super(ability);
     }
 
@@ -45,7 +44,7 @@ public class PutIntoGraveFromAnywhereSourceAbility extends SimpleStaticAbility {
     public String getRule() {
         return "If {this} would be put into a graveyard from anywhere, " + super.getRule();
     }
-    
+
 }
 
 class PutIntoGraveFromAnywhereEffect extends ReplacementEffectImpl {
@@ -100,7 +99,7 @@ class PutIntoGraveFromAnywhereEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD
+        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
                 && event.getTargetId().equals(source.getSourceId())) {
             if (condition == null || condition.apply(game, source)) {
                 return true;
@@ -127,11 +126,10 @@ class PutIntoGraveFromAnywhereEffect extends ReplacementEffectImpl {
             }
         }
         Spell spell = game.getStack().getSpell(event.getSourceId());
-        for (Effect effect: baseEffects) {
+        for (Effect effect : baseEffects) {
             if (effect instanceof ContinuousEffect) {
                 game.addEffect((ContinuousEffect) effect, source);
-            }
-            else {
+            } else {
                 if (spell != null) {
                     effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
                 }

@@ -2,6 +2,7 @@ package mage.abilities.mana;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -11,7 +12,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SimpleManaAbility extends ActivatedManaAbilityImpl {
@@ -23,12 +23,11 @@ public class SimpleManaAbility extends ActivatedManaAbilityImpl {
     }
 
     /**
-     *
      * @param zone
      * @param effect
      * @param cost
      * @param predictable set to false if defining the mana type or amount needs
-     * to reveal information and can't be predicted
+     *                    to reveal information and can't be predicted
      */
     public SimpleManaAbility(Zone zone, ManaEffect effect, Cost cost, boolean predictable) {
         super(zone, effect, cost);
@@ -40,12 +39,11 @@ public class SimpleManaAbility extends ActivatedManaAbilityImpl {
         this.netMana.add(mana.copy());
         this.predictable = true;
     }
-    
+
     /**
-     * 
      * @param zone
-     * @param mana 
-     * @param cost cost for one usage
+     * @param mana
+     * @param cost      cost for one usage
      * @param netAmount DynamicValu to calculate the max available mana if effect is repeatable
      */
     public SimpleManaAbility(Zone zone, Mana mana, Cost cost, DynamicValue netAmount) {
@@ -54,7 +52,7 @@ public class SimpleManaAbility extends ActivatedManaAbilityImpl {
         this.predictable = true;
     }
 
-    public SimpleManaAbility(final SimpleManaAbility ability) {
+    protected SimpleManaAbility(final SimpleManaAbility ability) {
         super(ability);
         this.predictable = ability.predictable;
     }
@@ -71,6 +69,6 @@ public class SimpleManaAbility extends ActivatedManaAbilityImpl {
         }
         return new ArrayList<>(netMana);
     }
-    
+
 
 }

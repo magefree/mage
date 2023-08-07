@@ -35,11 +35,13 @@ public final class TitaniaVoiceOfGaea extends CardImpl {
     public TitaniaVoiceOfGaea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
+
         this.meldsWithClazz = mage.cards.a.ArgothSanctumOfNature.class;
+        this.meldsToClazz = mage.cards.t.TitaniaGaeaIncarnate.class;
 
         // Reach
         this.addAbility(ReachAbility.getInstance());

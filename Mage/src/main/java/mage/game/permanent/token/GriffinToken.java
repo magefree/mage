@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -22,11 +20,9 @@ public final class GriffinToken extends TokenImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("DDH", "DDL", "M21", "TSR", "DMC");
     }
 
-    public GriffinToken(final GriffinToken token) {
+    protected GriffinToken(final GriffinToken token) {
         super(token);
     }
 

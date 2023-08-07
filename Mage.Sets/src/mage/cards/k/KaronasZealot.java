@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import static mage.abilities.effects.RedirectionEffect.UsageType.ACCORDING_DURATION;
+import mage.abilities.effects.RedirectionEffect;
 import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class KaronasZealot extends CardImpl {
         this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{W}{W}")));
 
         // When Karona's Zealot is turned face up, all damage that would be dealt to it this turn is dealt to target creature instead.
-        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, ACCORDING_DURATION)
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, RedirectionEffect.UsageType.ACCORDING_DURATION)
                 .setText("all damage that would be dealt to it this turn is dealt to target creature instead"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

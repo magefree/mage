@@ -19,7 +19,7 @@ public final class TasteOfBlood extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addEffect(new GainLifeEffect(1));
+        this.getSpellAbility().addEffect(new GainLifeEffect(1).concatBy("and"));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 

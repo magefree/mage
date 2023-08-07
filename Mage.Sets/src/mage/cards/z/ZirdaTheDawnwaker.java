@@ -32,7 +32,7 @@ public final class ZirdaTheDawnwaker extends CardImpl {
     public ZirdaTheDawnwaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R/W}{R/W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.FOX);
         this.power = new MageInt(3);
@@ -73,7 +73,7 @@ enum ZirdaTheDawnwakerCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingHandSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         return deck
                 .stream()
                 .filter(MageObject::isPermanent)

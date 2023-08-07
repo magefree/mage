@@ -3,10 +3,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
@@ -29,7 +26,7 @@ public final class HixusPrisonWarden extends CardImpl {
 
     public HixusPrisonWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(4);
@@ -56,7 +53,6 @@ class HixusPrisonWardenTriggeredAbility extends TriggeredAbilityImpl {
 
     public HixusPrisonWardenTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ExileUntilSourceLeavesEffect());
-        addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         setTriggerPhrase("Whenever a creature deals combat damage to you, if {this} entered the battlefield this turn, ");
     }
 

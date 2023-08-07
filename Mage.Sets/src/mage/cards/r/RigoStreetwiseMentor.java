@@ -28,7 +28,7 @@ public final class RigoStreetwiseMentor extends CardImpl {
     public RigoStreetwiseMentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G/W}{W}{W/U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.CITIZEN);
         this.power = new MageInt(2);

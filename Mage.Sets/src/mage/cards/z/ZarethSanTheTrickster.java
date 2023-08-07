@@ -42,7 +42,7 @@ public final class ZarethSanTheTrickster extends CardImpl {
     public ZarethSanTheTrickster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(4);

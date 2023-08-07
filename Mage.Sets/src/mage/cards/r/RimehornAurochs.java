@@ -40,7 +40,7 @@ public final class RimehornAurochs extends CardImpl {
 
     public RimehornAurochs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.AUROCHS);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

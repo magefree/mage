@@ -10,9 +10,11 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- * @author TheElk801
+ * @author TheElk801, xenohedron
  */
 public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityImpl {
+
+    private boolean usedThisStep;
 
     public DealsCombatDamageEquippedTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -20,11 +22,13 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
 
     public DealsCombatDamageEquippedTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.usedThisStep = false;
         setTriggerPhrase("Whenever equipped creature deals combat damage, ");
     }
 
-    public DealsCombatDamageEquippedTriggeredAbility(final DealsCombatDamageEquippedTriggeredAbility ability) {
+    protected DealsCombatDamageEquippedTriggeredAbility(final DealsCombatDamageEquippedTriggeredAbility ability) {
         super(ability);
+        this.usedThisStep = ability.usedThisStep;
     }
 
     @Override
@@ -34,12 +38,18 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH
-                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event instanceof DamagedBatchEvent || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRE) {
+            usedThisStep = false; // clear before damage
+            return false;
+        }
+        if (usedThisStep || !(event instanceof DamagedBatchEvent)) {
+            return false; // trigger only on DamagedEvent and if not yet triggered this step
+        }
         Permanent sourcePermanent = getSourcePermanentOrLKI(game);
         if (sourcePermanent == null || sourcePermanent.getAttachedTo() == null) {
             return false;
@@ -48,13 +58,17 @@ public class DealsCombatDamageEquippedTriggeredAbility extends TriggeredAbilityI
                 .getEvents()
                 .stream()
                 .filter(DamagedEvent::isCombatDamage)
-                .filter(e -> e.getSourceId().equals(sourcePermanent.getAttachedTo()))
+                .filter(e -> e.getAttackerId().equals(sourcePermanent.getAttachedTo()))
                 .mapToInt(GameEvent::getAmount)
                 .sum();
         if (amount < 1) {
             return false;
         }
+        usedThisStep = true;
         this.getEffects().setValue("damage", amount);
+        // TODO: this value saved will not be correct if both permanent and player damaged by a single creature
+        // Need to rework engine logic to fire a single DamagedBatchEvent including both permanents and players
+        // Only Sword of Hours is currently affected.
         return true;
     }
 }

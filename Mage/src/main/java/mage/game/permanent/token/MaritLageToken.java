@@ -7,8 +7,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -18,7 +16,7 @@ public final class MaritLageToken extends TokenImpl {
         super("Marit Lage", "Marit Lage, a legendary 20/20 black Avatar creature token with flying and indestructible");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.AVATAR);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         color.setBlack(true);
         power = new MageInt(20);
@@ -26,11 +24,9 @@ public final class MaritLageToken extends TokenImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(IndestructibleAbility.getInstance());
-
-        availableImageSetCodes.addAll(Arrays.asList("CSP", "MH1", "UMA", "2XM", "V16"));
     }
 
-    public MaritLageToken(final MaritLageToken token) {
+    protected MaritLageToken(final MaritLageToken token) {
         super(token);
     }
 

@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -31,7 +30,7 @@ public final class SplittingThePowerstone extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
 
         // Create two tapped Powerstone tokens. If the sacrificed artifact was legendary, draw a card.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new PowerstoneToken(), 2, false));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new PowerstoneToken(), 2, true));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1), SplittingThePowerstoneCondition.instance,
                 "If the sacrificed artifact was legendary, draw a card"
@@ -58,6 +57,6 @@ enum SplittingThePowerstoneCondition implements Condition {
                 .map(SacrificeTargetCost::getPermanents)
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull)
-                .anyMatch(MageObject::isLegendary);
+                .anyMatch(permanent -> permanent.isLegendary(game));
     }
 }

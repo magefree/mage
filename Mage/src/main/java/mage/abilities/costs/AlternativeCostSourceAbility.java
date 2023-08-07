@@ -77,7 +77,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         this.dynamicCost = dynamicCost;
     }
 
-    public AlternativeCostSourceAbility(final AlternativeCostSourceAbility ability) {
+    protected AlternativeCostSourceAbility(final AlternativeCostSourceAbility ability) {
         super(ability);
         this.alternateCosts = ability.alternateCosts;
         this.condition = ability.condition;

@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterArtifactSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.ManaUtil;
@@ -29,8 +29,7 @@ public final class Lifesmith extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
-        this.addAbility(new SpellCastControllerTriggeredAbility(new LifesmithEffect(), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new LifesmithEffect(), StaticFilters.FILTER_SPELL_AN_ARTIFACT, false));
     }
 
     private Lifesmith(final Lifesmith card) {

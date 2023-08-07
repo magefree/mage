@@ -29,7 +29,7 @@ public final class GideonMartialParagon extends CardImpl {
 
     public GideonMartialParagon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.subtype.add(SubType.GIDEON);
 
@@ -44,7 +44,7 @@ public final class GideonMartialParagon extends CardImpl {
 
         // 0: Until end of turn, Gideon, Martial Paragon, becomes a 5/5 Human Soldier creature with indestructible that's still a planeswalker.
         // Prevent all damage that would be dealt to him this turn.
-        ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonMartialParagonToken(), "planeswalker", Duration.EndOfTurn), 0);
+        ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonMartialParagonToken(), CardType.PLANESWALKER, Duration.EndOfTurn), 0);
         effect = new PreventAllDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all damage that would be dealt to him this turn");
         ability.addEffect(effect);

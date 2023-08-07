@@ -4,8 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class MagePreferencesTest {
     @Before
@@ -20,28 +19,28 @@ public class MagePreferencesTest {
 
     @Test
     public void testIgnoreList() throws Exception {
-        assertThat(MagePreferences.ignoreList("test.com.xx").size(), is(0));
-        assertThat(MagePreferences.removeIgnoredUser("test.com.xx", "test"), is(false));
+        assertEquals(0, MagePreferences.ignoreList("test.com.xx").size());
+        assertFalse(MagePreferences.removeIgnoredUser("test.com.xx", "test"));
 
         MagePreferences.addIgnoredUser("test.com.xx", "test");
-        assertThat(MagePreferences.ignoreList("test.com.xx").size(), is(1));
-        assertThat(MagePreferences.ignoreList("other.com.xx").size(), is(0));
+        assertEquals(1, MagePreferences.ignoreList("test.com.xx").size());
+        assertEquals(0, MagePreferences.ignoreList("other.com.xx").size());
 
         MagePreferences.addIgnoredUser("test.com.xx", "lul");
-        assertThat(MagePreferences.ignoreList("test.com.xx").size(), is(2));
+        assertEquals(2, MagePreferences.ignoreList("test.com.xx").size());
 
-        assertThat(MagePreferences.ignoreList("test.com.xx").contains("test"), is(true));
-        assertThat(MagePreferences.ignoreList("test.com.xx").contains("lul"), is(true));
+        assertTrue(MagePreferences.ignoreList("test.com.xx").contains("test"));
+        assertTrue(MagePreferences.ignoreList("test.com.xx").contains("lul"));
 
-        assertThat(MagePreferences.removeIgnoredUser("test.com.xx", "test"), is(true));
-        assertThat(MagePreferences.removeIgnoredUser("test.com.xx", "test"), is(false));
-        assertThat(MagePreferences.ignoreList("test.com.xx").size(), is(1));
+        assertTrue(MagePreferences.removeIgnoredUser("test.com.xx", "test"));
+        assertFalse(MagePreferences.removeIgnoredUser("test.com.xx", "test"));
+        assertEquals(1, MagePreferences.ignoreList("test.com.xx").size());
 
-        assertThat(MagePreferences.removeIgnoredUser("test.com.xx", "lul"), is(true));
-        assertThat(MagePreferences.removeIgnoredUser("test.com.xx", "lul"), is(false));
-        assertThat(MagePreferences.ignoreList("test.com.xx").size(), is(0));
+        assertTrue(MagePreferences.removeIgnoredUser("test.com.xx", "lul"));
+        assertFalse(MagePreferences.removeIgnoredUser("test.com.xx", "lul"));
+        assertEquals(0, MagePreferences.ignoreList("test.com.xx").size());
 
-        assertThat(MagePreferences.ignoreList("test.com.xx").contains("test"), is(false));
-        assertThat(MagePreferences.ignoreList("test.com.xx").contains("lul"), is(false));
+        assertFalse(MagePreferences.ignoreList("test.com.xx").contains("test"));
+        assertFalse(MagePreferences.ignoreList("test.com.xx").contains("lul"));
     }
 }

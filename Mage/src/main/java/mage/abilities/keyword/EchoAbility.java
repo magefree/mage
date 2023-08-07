@@ -52,7 +52,7 @@ public class EchoAbility extends TriggeredAbilityImpl {
         this.rule = null;
     }
 
-    public EchoAbility(final EchoAbility ability) {
+    protected EchoAbility(final EchoAbility ability) {
         super(ability);
         this.echoPaid = ability.echoPaid;
         this.echoCosts = ability.echoCosts.copy();

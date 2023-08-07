@@ -47,11 +47,13 @@ Clash Pack|CLASH|
 Commander Anthology|CMA|
 Commander Anthology 2018|CM2|
 Commander's Arsenal|CM1|
+Commander Masters|CMM|
 Commander|CMD|
 Conspiracy|CNS|
 Conspiracy: Take the Crown|CN2|
 Conflux|CON|
 Coldsnap|CSP|
+Doctor Who|WHO|
 Duel Decks: Jace vs. Chandra|DD2|
 Duel Decks: Anthology, Divine vs. Demonic|DVD|
 Duel Decks: Anthology, Elves vs. Goblins|EVG|
@@ -139,6 +141,8 @@ Limited Edition Alpha|LEA|
 Limited Edition Beta|LEB|
 Legends|LEG|
 Legions|LGN|
+The Lord of the Rings: Tales of Middle-earth|LTR|
+Tales of Middle-earth Commander|LTC|
 Lorwyn|LRW|
 Magic 2010|M10|
 Magic 2011|M11|
@@ -153,6 +157,9 @@ Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
+March of the Machine|MOM|
+March of the Machine Commander|MOC|
+March of the Machine: The Aftermath|MAT|
 Mirrodin Besieged|MBS|
 Masters Edition II|ME2|
 Masters Edition III|ME3|
@@ -161,7 +168,7 @@ Masters Edition|MED|
 Game Day|MGDC|
 Game Night|GNT|
 Game Night 2019|GN2|
-Game Night 2022|GN3|
+Game Night Free-for-All|GN3|
 Mirage|MIR|
 Launch Party|MLP|
 Modern Horizons|MH1|
@@ -180,6 +187,8 @@ Odyssey|ODY|
 Oath of the Gatewatch|OGW|
 Onslaught|ONS|
 Magic Origins|ORI|
+Phyrexia: All Will Be One|ONE|
+Phyrexia: All Will Be One Commander|ONC|
 Portal Second Age|P02|
 Planechase 2012 Edition|PC2|
 Planechase Anthology|PCA|
@@ -249,6 +258,7 @@ War of the Spark|WAR|
 Welcome Deck 2016|W16|
 Welcome Deck 2017|W17|
 Weatherlight|WTH|
+Wilds of Eldraine|WOE|
 Worldwake|WWK|
 Ixalan|XLN|
 Zendikar|ZEN|

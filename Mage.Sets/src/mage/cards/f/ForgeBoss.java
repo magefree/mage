@@ -36,7 +36,7 @@ public final class ForgeBoss extends CardImpl {
         this.addAbility(new SacrificeAllTriggeredAbility(
                 new DamagePlayersEffect(2, TargetController.OPPONENT),
                 filter, TargetController.YOU, false
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
     }
 
     private ForgeBoss(final ForgeBoss card) {

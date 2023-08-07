@@ -29,7 +29,7 @@ public final class SianiEyeOfTheStorm extends CardImpl {
     public SianiEyeOfTheStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DJINN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(3);

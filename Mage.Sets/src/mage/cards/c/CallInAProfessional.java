@@ -22,7 +22,7 @@ public final class CallInAProfessional extends CardImpl {
         // Players can't gain life this turn. Damage can't be prevented this turn. Call In a Professional deals 3 damage to any target.
         this.getSpellAbility().addEffect(new CantGainLifeAllEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DamageCantBePreventedEffect(
-                Duration.EndOfTurn, "Damage can't be prevented this turn", true, false
+                Duration.EndOfTurn, "Damage can't be prevented this turn"
         ));
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());

@@ -7,7 +7,6 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author nantuko
  */
 public final class FrogToken extends TokenImpl {
@@ -20,7 +19,8 @@ public final class FrogToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
-    public FrogToken(final FrogToken token) {
+
+    protected FrogToken(final FrogToken token) {
         super(token);
     }
 

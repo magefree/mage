@@ -7,8 +7,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 import static mage.constants.PhaseStep.*;
 import static mage.constants.Zone.BATTLEFIELD;
 import static mage.constants.Zone.HAND;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 public class BroodOfCockroachesTest extends CardTestPlayerBase {
 
@@ -27,7 +26,7 @@ public class BroodOfCockroachesTest extends CardTestPlayerBase {
         execute();
 
         Permanent permanent = getPermanent(BROOD_OF_COCKROACHES, playerA);
-        assertThat(permanent.getAbilities().get(1).toString(), is(expectedText));
+        assertEquals(expectedText, permanent.getAbilities().get(1).toString());
     }
 
     @Test

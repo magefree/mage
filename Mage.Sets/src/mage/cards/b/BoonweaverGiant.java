@@ -55,7 +55,7 @@ class BoonweaverGiantEffect extends OneShotEffect {
 
     public BoonweaverGiantEffect() {
         super(Outcome.UnboostCreature);
-        this.staticText = "you may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to {this}." +
+        this.staticText = "you may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to {this}. " +
                 "If you search your library this way, shuffle.";
     }
 
@@ -84,7 +84,7 @@ class BoonweaverGiantEffect extends OneShotEffect {
         // Choose card from graveyard
         if (controller.chooseUse(Outcome.Neutral, "Search your graveyard for an Aura card?", source, game)) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-            if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
             }
         }
@@ -92,7 +92,7 @@ class BoonweaverGiantEffect extends OneShotEffect {
         // Choose card from your hand
         if (card == null && controller.chooseUse(Outcome.Neutral, "Search your Hand for an Aura card?", source, game)) {
             TargetCardInHand target = new TargetCardInHand(filter);
-            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, controller.getHand(), target, source, game)) {
                 card = game.getCard(target.getFirstTarget());
             }
         }

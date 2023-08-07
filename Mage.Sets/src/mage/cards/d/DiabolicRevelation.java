@@ -39,7 +39,7 @@ class DiabolicRevelationEffect extends OneShotEffect {
 
     DiabolicRevelationEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for up to X cards and put those cards into your hand. Then shuffle";
+        this.staticText = "Search your library for up to X cards, put those cards into your hand, then shuffle";
     }
 
     private DiabolicRevelationEffect(final DiabolicRevelationEffect effect) {

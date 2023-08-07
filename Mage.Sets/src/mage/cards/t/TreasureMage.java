@@ -40,7 +40,7 @@ public final class TreasureMage extends CardImpl {
         // When Treasure Mage enters the battlefield, you may search your library for an artifact card with converted mana cost 6 or greater,
         // reveal that card, and put it into your hand. If you do, shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
-        SearchEffect effect = new SearchLibraryPutInHandEffect(target, true, true);
+        SearchEffect effect = new SearchLibraryPutInHandEffect(target, true);
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }
 

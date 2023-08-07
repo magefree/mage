@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -18,11 +16,9 @@ public final class SkeletonToken extends TokenImpl {
         color.setBlack(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("AFR");
     }
 
-    public SkeletonToken(final SkeletonToken token) {
+    protected SkeletonToken(final SkeletonToken token) {
         super(token);
     }
 

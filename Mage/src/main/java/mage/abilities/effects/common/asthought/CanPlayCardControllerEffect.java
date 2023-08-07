@@ -39,7 +39,7 @@ public class CanPlayCardControllerEffect extends AsThoughEffectImpl {
         this.condition = condition;
     }
 
-    public CanPlayCardControllerEffect(final CanPlayCardControllerEffect effect) {
+    protected CanPlayCardControllerEffect(final CanPlayCardControllerEffect effect) {
         super(effect);
         this.mor = effect.mor;
         this.playerId = effect.playerId;

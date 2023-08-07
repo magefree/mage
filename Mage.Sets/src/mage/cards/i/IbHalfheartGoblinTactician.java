@@ -41,7 +41,7 @@ public final class IbHalfheartGoblinTactician extends CardImpl {
 
     public IbHalfheartGoblinTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.ADVISOR);
 

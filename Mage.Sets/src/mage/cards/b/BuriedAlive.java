@@ -1,10 +1,10 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.SearchEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -14,8 +14,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author cbt33, plopman (Entomb)
  */
 public final class BuriedAlive extends CardImpl {
@@ -25,7 +26,6 @@ public final class BuriedAlive extends CardImpl {
 
         // Search your library for up to three creature cards and put them into your graveyard. Then shuffle your library.
         this.getSpellAbility().addEffect(new BuriedAliveEffect());
-
     }
 
     private BuriedAlive(final BuriedAlive card) {
@@ -38,10 +38,10 @@ public final class BuriedAlive extends CardImpl {
     }
 }
 
-class BuriedAliveEffect extends SearchEffect {
+class BuriedAliveEffect extends OneShotEffect {
 
     public BuriedAliveEffect() {
-        super(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_CARD_CREATURE), Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "search your library for up to three creature cards, put them into your graveyard, then shuffle";
     }
 
@@ -57,14 +57,17 @@ class BuriedAliveEffect extends SearchEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.searchLibrary(target, source, game)) {
-                controller.moveCards(new CardsImpl(target.getTargets()), Zone.GRAVEYARD, source, game);
-            }
-            controller.shuffleLibrary(source, game);
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        TargetCardInLibrary target = new TargetCardInLibrary(
+                0, 3, StaticFilters.FILTER_CARD_CREATURE
+        );
+        controller.searchLibrary(target, source, game);
+        Cards cards = new CardsImpl(target.getTargets());
+        cards.retainZone(Zone.LIBRARY, game);
+        controller.moveCards(cards, Zone.GRAVEYARD, source, game);
+        controller.shuffleLibrary(source, game);
+        return true;
     }
-
 }

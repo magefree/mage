@@ -7,7 +7,6 @@ import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class SekKuarDeathkeeperGravebornToken extends TokenImpl {
@@ -23,7 +22,7 @@ public final class SekKuarDeathkeeperGravebornToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public SekKuarDeathkeeperGravebornToken(final SekKuarDeathkeeperGravebornToken token) {
+    protected SekKuarDeathkeeperGravebornToken(final SekKuarDeathkeeperGravebornToken token) {
         super(token);
     }
 

@@ -22,7 +22,7 @@ public final class NymrisOonasTrickster extends CardImpl {
     public NymrisOonasTrickster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(1);

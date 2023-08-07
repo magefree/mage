@@ -21,7 +21,7 @@ public final class IllicitShipment extends CardImpl {
         this.addAbility(new CasualtyAbility(3));
 
         // Search your library for a card, put that card into your hand, then shuffle.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false));
     }
 
     private IllicitShipment(final IllicitShipment card) {

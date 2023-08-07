@@ -1,11 +1,13 @@
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
+import mage.abilities.LoyaltyAbility;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.mana.ManaAbility;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -57,7 +59,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         this.generateGainAbilityDependencies(ability, null);
     }
 
-    public GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
+    protected GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
@@ -140,11 +142,20 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         } else {
             sb.append("gains ");
         }
-        boolean quotes = (ability instanceof SimpleActivatedAbility) || (ability instanceof TriggeredAbility);
+        boolean quotes = ability instanceof SimpleActivatedAbility
+                || ability instanceof TriggeredAbility
+                || ability instanceof LoyaltyAbility
+                || ability instanceof ManaAbility
+                || ability.getRule().startsWith("If ");
         if (quotes) {
             sb.append('"');
         }
-        sb.append(ability.getRule("this " + targetObjectName));
+        String abilityRuleText = ability.getRule("This " + targetObjectName);
+        if (abilityRuleText.endsWith(")</i>")) {
+            // remove reminder text for this rule generation
+            abilityRuleText = abilityRuleText.substring(0, abilityRuleText.indexOf(" <i>("));
+        }
+        sb.append(abilityRuleText);
         if (quotes) {
             sb.append('"');
         }
@@ -152,7 +163,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
             sb.append(' ').append(duration);
         }
         if (doesntRemoveItself) {
-            sb.append(" This effect doesn't remove {this}.");
+            sb.append(". This effect doesn't remove {this}.");
         }
         return sb.toString();
     }

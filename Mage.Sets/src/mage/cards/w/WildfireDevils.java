@@ -87,7 +87,7 @@ class WildfireDevilsEffect extends OneShotEffect {
         }
         TargetCardInGraveyard targetCard = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
         targetCard.setNotTarget(true);
-        if (!randomPlayer.choose(Outcome.Discard, randomPlayer.getGraveyard(), targetCard, game)) {
+        if (!randomPlayer.choose(Outcome.Discard, randomPlayer.getGraveyard(), targetCard, source, game)) {
             return false;
         }
         Card card = game.getCard(targetCard.getFirstTarget());
@@ -102,7 +102,6 @@ class WildfireDevilsEffect extends OneShotEffect {
         if (copiedCard == null) {
             return false;
         }
-        randomPlayer.moveCards(copiedCard, Zone.EXILED, source, game);
         if (!controller.chooseUse(outcome, "Cast the copy of the exiled card?", source, game)) {
             return false;
         }

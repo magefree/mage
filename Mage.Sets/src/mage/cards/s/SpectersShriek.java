@@ -94,7 +94,7 @@ class SpectersShriekEffect extends OneShotEffect {
         }
         target = new TargetCardInHand(filter);
         target.setNotTarget(true);
-        return controller.choose(Outcome.Detriment, controller.getHand(), target, game)
+        return controller.choose(Outcome.Detriment, controller.getHand(), target, source, game)
                 && controller.moveCards(game.getCard(target.getFirstTarget()), Zone.EXILED, source, game);
     }
 }

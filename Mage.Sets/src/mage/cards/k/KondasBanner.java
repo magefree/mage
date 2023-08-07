@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class KondasBanner extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("legendary creatures");
+    private static final FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("legendary creature");
 
     static {
         legendaryFilter.add(SuperType.LEGENDARY.getPredicate());
@@ -60,7 +60,7 @@ public final class KondasBanner extends CardImpl {
 
     public KondasBanner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         Target target = new TargetControlledCreaturePermanent(1, 1, legendaryFilter, false);

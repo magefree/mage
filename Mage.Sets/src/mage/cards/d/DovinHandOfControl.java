@@ -33,7 +33,7 @@ public final class DovinHandOfControl extends CardImpl {
     public DovinHandOfControl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W/U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOVIN);
         this.setStartingLoyalty(5);
 

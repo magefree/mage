@@ -3,7 +3,7 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.DrawSecondCardTriggeredAbility;
+import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
@@ -34,15 +34,15 @@ public final class MinnWilyIllusionist extends CardImpl {
     public MinnWilyIllusionist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GNOME);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
         // Whenever you draw your second card each turn, create a 1/1 blue Illusion creature token with "This creature gets +1/+0 for each other Illusion you control."
-        this.addAbility(new DrawSecondCardTriggeredAbility(
-                new CreateTokenEffect(new MinnWilyIllusionistToken()), false
+        this.addAbility(new DrawNthCardTriggeredAbility(
+                new CreateTokenEffect(new MinnWilyIllusionistToken()), false, 2
         ));
 
         // Whenever an Illusion you control dies, you may put a permanent card with mana value less than or equal to that creature's power from your hand onto the battlefield.
@@ -89,7 +89,7 @@ class MinnWilyIllusionistEffect extends OneShotEffect {
         );
         filterCard.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, permanent.getPower().getValue() + 1));
         TargetCardInHand target = new TargetCardInHand(0, 1, filterCard);
-        player.choose(Outcome.PutCardInPlay, player.getHand(), target, game);
+        player.choose(Outcome.PutCardInPlay, player.getHand(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

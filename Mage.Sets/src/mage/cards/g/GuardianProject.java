@@ -67,7 +67,7 @@ class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (!filter.match(permanent, controllerId, this, game)) {
+        if (permanent == null || !filter.match(permanent, controllerId, this, game)) {
             return false;
         }
 
@@ -133,12 +133,11 @@ class GuardianProjectEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Permanent permanent = mor.getPermanentOrLKIBattlefield(game);
+        if (player == null || permanent == null) {
             return false;
         }
-        if (GuardianProjectTriggeredAbility.checkCondition(
-                mor.getPermanentOrLKIBattlefield(game), source.getControllerId(), game)
-        ) {
+        if (GuardianProjectTriggeredAbility.checkCondition(permanent, source.getControllerId(), game)) {
             player.drawCards(1, source, game);
             return true;
         }

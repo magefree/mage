@@ -50,9 +50,6 @@ public class OfferingAbility extends StaticAbility implements AlternateManaPayme
 
     private final FilterControlledPermanent filter;
 
-    /**
-     * @param subtype name of the subtype that can be offered
-     */
     public OfferingAbility(FilterControlledPermanent filter) {
         super(Zone.ALL, null);
         this.filter = filter;
@@ -127,7 +124,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
         super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfGame, Outcome.Benefit);
     }
 
-    public OfferingAsThoughEffect(final OfferingAsThoughEffect effect) {
+    protected OfferingAsThoughEffect(final OfferingAsThoughEffect effect) {
         super(effect);
     }
 
@@ -226,7 +223,10 @@ class OfferingCostReductionEffect extends CostModificationEffectImpl {
         Permanent toOffer = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (toOffer != null) {
             toOffer.sacrifice(source, game);
-            CardUtil.reduceCost((SpellAbility) abilityToModify, toOffer.getSpellAbility().getManaCosts());
+            if (toOffer.getSpellAbility() != null) {
+                // artifact land don't have spell ability
+                CardUtil.reduceCost((SpellAbility) abilityToModify, toOffer.getSpellAbility().getManaCosts());
+            }
         }
         game.getState().setValue("offering_" + source.getSourceId(), null);
         game.getState().setValue("offering_ok_" + source.getSourceId(), null);

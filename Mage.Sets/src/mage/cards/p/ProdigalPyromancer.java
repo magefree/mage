@@ -29,6 +29,7 @@ public final class ProdigalPyromancer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // {T} : Prodigal Pyromancer deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

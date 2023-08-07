@@ -36,7 +36,7 @@ public final class SautekhImmortal extends CardImpl {
                         CounterType.P1P1.createInstance(0),
                         CreaturesDiedThisTurnCount.instance, true
                 ).setText("with a +1/+1 counter on it for each creature that died this turn.")
-        ).withFlavorWord("Elite Troops").addHint(CreaturesDiedThisTurnHint.instance), new CreaturesDiedWatcher());
+        ).withFlavorWord("Elite Troops").addHint(CreaturesDiedThisTurnHint.instance));
     }
 
     private SautekhImmortal(final SautekhImmortal card) {

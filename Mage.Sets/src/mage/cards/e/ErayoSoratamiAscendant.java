@@ -29,7 +29,7 @@ public final class ErayoSoratamiAscendant extends CardImpl {
 
     public ErayoSoratamiAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MOONFOLK);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(1);
@@ -93,7 +93,7 @@ class ErayosEssenceToken extends TokenImpl {
 
     ErayosEssenceToken() {
         super("Erayo's Essence", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.ENCHANTMENT);
 
         color.setBlue(true);

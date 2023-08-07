@@ -26,14 +26,17 @@ public class PermanentView extends CardView {
     private final boolean summoningSickness;
     private final int damage;
     private List<UUID> attachments;
-    private final CardView original; // original card before transforms and modifications
+    private final CardView original; // original card before transforms and modifications (null for opponents face down cards)
     private final boolean copy;
     private final String nameOwner; // only filled if != controller
+    private final String nameController;
     private final boolean controlled;
     private final UUID attachedTo;
     private final boolean morphed;
     private final boolean manifested;
     private final boolean attachedToPermanent;
+    // If this card is attached to a permanent which is controlled by a player other than the one which controls this permanent
+    private final boolean attachedControllerDiffers;
 
     public PermanentView(Permanent permanent, Card card, UUID createdForPlayerId, Game game) {
         super(permanent, game, permanent.getControllerId() != null && permanent.getControllerId().equals(createdForPlayerId));
@@ -51,14 +54,17 @@ public class PermanentView extends CardView {
             attachments.addAll(permanent.getAttachments());
         }
         this.attachedTo = permanent.getAttachedTo();
+
+        // show face down cards to all players at the game end
+        boolean showFaceDownInfo = controlled || (game != null && game.hasEnded());
+
         if (isToken()) {
             original = new CardView(((PermanentToken) permanent).getToken().copy(), (Game) null);
             original.expansionSetCode = permanent.getExpansionSetCode();
-            tokenSetCode = original.getTokenSetCode();
-            tokenDescriptor = original.getTokenDescriptor();
+            expansionSetCode = permanent.getExpansionSetCode();
         } else {
-            if (card != null) {
-                // original may not be face down
+            if (card != null && showFaceDownInfo) {
+                // face down card must be hidden from opponent, but shown on game end for all
                 original = new CardView(card.copy(), (Game) null);
             } else {
                 original = null;
@@ -72,10 +78,7 @@ public class PermanentView extends CardView {
             if (permanent.isCopy() && permanent.isFlipCard()) {
                 this.alternateName = permanent.getFlipCardName();
             } else {
-                if (controlled // controller may always know
-                        || (!morphed && !manifested)) { // others don't know for morph or transformed cards
-                    this.alternateName = original.getName();
-                }
+                this.alternateName = original.getName();
             }
         }
         if (permanent.getOwnerId() != null && !permanent.getOwnerId().equals(permanent.getControllerId())) {
@@ -89,8 +92,16 @@ public class PermanentView extends CardView {
             this.nameOwner = "";
         }
 
+        Player controller = game.getPlayer(permanent.getControllerId());
+        if (controller != null) {
+            nameController = controller.getName();
+        } else {
+            nameController = "";
+        }
+
+        // add info for face down permanents
         if (permanent.isFaceDown(game) && card != null) {
-            if (controlled) {
+            if (showFaceDownInfo) {
                 // must be a morphed or manifested card
                 for (Ability permanentAbility : permanent.getAbilities(game)) {
                     if (permanentAbility.getWorksFaceDown()) {
@@ -115,10 +126,13 @@ public class PermanentView extends CardView {
             }
         }
         // determines if shown in it's own column
-        if (permanent.getAttachedTo() != null) {
-            attachedToPermanent = game.getPermanent(permanent.getAttachedTo()) != null;
+        Permanent attachment = game.getPermanent(permanent.getAttachedTo());
+        if (attachment != null) {
+            attachedToPermanent = true;
+            attachedControllerDiffers = !attachment.getControllerId().equals(permanent.getControllerId());
         } else {
             attachedToPermanent = false;
+            attachedControllerDiffers = false;
         }
     }
 
@@ -162,6 +176,10 @@ public class PermanentView extends CardView {
         return nameOwner;
     }
 
+    public String getNameController() {
+        return nameController;
+    }
+
     public boolean isControlled() {
         return controlled;
     }
@@ -176,6 +194,10 @@ public class PermanentView extends CardView {
 
     public boolean isAttachedToPermanent() {
         return attachedToPermanent;
+    }
+
+    public boolean isAttachedToDifferentlyControlledPermanent() {
+        return attachedControllerDiffers;
     }
 
     public boolean isMorphed() {

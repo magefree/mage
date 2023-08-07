@@ -51,6 +51,7 @@ public final class LairOfTheHydra extends CardImpl {
         for (Object cost : manaCosts) {
             if (cost instanceof VariableManaCost) {
                 ((VariableManaCost) cost).setMinX(1);
+                break;
             }
         }
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LairOfTheHydraEffect(), manaCosts));
@@ -89,7 +90,7 @@ class LairOfTheHydraEffect extends OneShotEffect {
                 new CreatureToken(xValue, xValue, "X/X green Hydra creature")
                     .withColor("G")
                     .withSubType(SubType.HYDRA),
-                "land", Duration.EndOfTurn), source
+                CardType.LAND, Duration.EndOfTurn), source
         );
         return true;
     }

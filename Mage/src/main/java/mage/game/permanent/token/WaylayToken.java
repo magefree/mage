@@ -1,14 +1,10 @@
-
 package mage.game.permanent.token;
 
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-
-import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class WaylayToken extends TokenImpl {
@@ -20,11 +16,9 @@ public final class WaylayToken extends TokenImpl {
         subtype.add(SubType.KNIGHT);
         power = new MageInt(2);
         toughness = new MageInt(2);
-
-        availableImageSetCodes = Arrays.asList("CLB");
     }
 
-    public WaylayToken(final WaylayToken token) {
+    protected WaylayToken(final WaylayToken token) {
         super(token);
     }
 

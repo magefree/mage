@@ -42,7 +42,7 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
         addSubAbility(new ReplicateTriggeredAbility());
     }
 
-    public ReplicateAbility(final ReplicateAbility ability) {
+    protected ReplicateAbility(final ReplicateAbility ability) {
         super(ability);
         additionalCost = ability.additionalCost;
     }
@@ -189,7 +189,7 @@ class ReplicateCopyEffect extends OneShotEffect {
         super(Outcome.Copy);
     }
 
-    public ReplicateCopyEffect(final ReplicateCopyEffect effect) {
+    protected ReplicateCopyEffect(final ReplicateCopyEffect effect) {
         super(effect);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -73,6 +72,7 @@ class DecreeOfPainEffect extends OneShotEffect {
                 }
             }
             if (destroyedCreature > 0) {
+                game.getState().processAction(game);
                 controller.drawCards(destroyedCreature, source, game);
             }
             return true;

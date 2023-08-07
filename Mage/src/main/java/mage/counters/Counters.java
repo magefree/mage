@@ -15,7 +15,7 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
     public Counters() {
     }
 
-    public Counters(final Counters counters) {
+    protected Counters(final Counters counters) {
         for (Map.Entry<String, Counter> entry : counters.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }

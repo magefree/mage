@@ -42,7 +42,7 @@ class TormentOfHailfireEffect extends OneShotEffect {
     
     public TormentOfHailfireEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "Repeat the following process X times. Each opponent loses 3 life unless they sacrifice a nonland permanent or discards a card";
+        this.staticText = "Repeat the following process X times. Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card";
     }
     
     public TormentOfHailfireEffect(final TormentOfHailfireEffect effect) {

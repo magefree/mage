@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author North
  */
 public class BlocksSourceTriggeredAbility extends TriggeredAbilityImpl {
@@ -21,7 +20,7 @@ public class BlocksSourceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} blocks, ");
     }
 
-    public BlocksSourceTriggeredAbility(final BlocksSourceTriggeredAbility ability) {
+    protected BlocksSourceTriggeredAbility(final BlocksSourceTriggeredAbility ability) {
         super(ability);
     }
 

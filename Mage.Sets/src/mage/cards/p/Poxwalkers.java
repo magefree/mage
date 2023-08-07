@@ -7,6 +7,7 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -39,8 +40,8 @@ public final class Poxwalkers extends CardImpl {
         // Curse of the Walking Pox -- Whenever you cast a spell from anywhere other than your hand, return Poxwalkers from your graveyard to the battlefield tapped.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true),
-                filter, false, false
-        ));
+                filter, false, SetTargetPointer.NONE
+        ).withFlavorWord("Curse of the Walking Pox"));
     }
 
     private Poxwalkers(final Poxwalkers card) {

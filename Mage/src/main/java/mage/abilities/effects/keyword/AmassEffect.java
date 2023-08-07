@@ -4,7 +4,8 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
@@ -12,13 +13,16 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.OrcArmyToken;
+import mage.game.permanent.token.SliverArmyToken;
+import mage.game.permanent.token.Token;
 import mage.game.permanent.token.ZombieArmyToken;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -31,28 +35,35 @@ public class AmassEffect extends OneShotEffect {
         filter.add(SubType.ARMY.getPredicate());
     }
 
-    private final DynamicValue amassNumber;
-    private UUID amassedCreatureId = null;
+    private final DynamicValue amount;
+    private final SubType subType;
 
-    public AmassEffect(int amassNumber) {
-        this(StaticValue.get(amassNumber));
-        staticText = "amass " + amassNumber + ". <i>(Put " + CardUtil.numberToText(amassNumber)
-                + " +1/+1 counter" + (amassNumber > 1 ? "s " : " ")
-                + "on an Army you control. If you don't control one, "
-                + "create a 0/0 black Zombie Army creature token first.)</i>";
+    public AmassEffect(int amount, SubType subType) {
+        this(StaticValue.get(amount), subType);
     }
 
-    public AmassEffect(DynamicValue amassNumber) {
+    public AmassEffect(DynamicValue amount, SubType subType) {
+        this(amount, subType, true);
+    }
+
+    public AmassEffect(DynamicValue amount, SubType subType, boolean withReminder) {
         super(Outcome.BoostCreature);
-        this.amassNumber = amassNumber;
-        staticText = "amass X, where X is the number of " + amassNumber.getMessage() + ". <i>(Put X +1/+1 counters"
-                + "on an Army you control. If you don't control one, "
-                + "create a 0/0 black Zombie Army creature token first.)</i>";
+        this.amount = amount.copy();
+        this.subType = subType;
+
+        staticText = "amass " + subType + "s " + amount + ".";
+        if (withReminder) {
+            staticText += " <i>(Put " + CardUtil.numberToText(amount.toString(), "a")
+                    + " +1/+1 counter" + (amount.toString().equals("1") ? " " : "s ") + "on an Army you control. It's also "
+                    + subType.getIndefiniteArticle() + ' ' + subType + ". If you don't control an Army, "
+                    + "create a 0/0 black " + subType + " Army creature token first.)</i>";
+        }
     }
 
     private AmassEffect(final AmassEffect effect) {
         super(effect);
-        this.amassNumber = effect.amassNumber;
+        this.amount = effect.amount.copy();
+        this.subType = effect.subType;
     }
 
     @Override
@@ -62,29 +73,49 @@ public class AmassEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = amassNumber.calculate(game, source, this);
+        return doAmass(amount.calculate(game, source, this), subType, game, source) != null;
+    }
+
+    private static Token makeToken(SubType subType) {
+        switch (subType) {
+            case ORC:
+                return new OrcArmyToken();
+            case ZOMBIE:
+                return new ZombieArmyToken();
+            case SLIVER:
+                return new SliverArmyToken();
+            default:
+                return new CreatureToken(
+                        0, 0, "", subType, SubType.ARMY
+                ).withColor("B");
+        }
+    }
+
+    public static Permanent doAmass(int xValue, SubType subType, Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
-            return false;
+            return null;
         }
-        if (!game.getBattlefield().containsControlled(filter, source, game, 1)) {
-            new CreateTokenEffect(new ZombieArmyToken()).apply(game, source);
+        if (!game.getBattlefield().contains(filter, source, game, 1)) {
+            makeToken(subType).putOntoBattlefield(1, game, source);
         }
         Target target = new TargetPermanent(filter);
         target.setNotTarget(true);
-        if (!player.choose(outcome, target, source, game)) {
-            return false;
-        }
+        player.choose(Outcome.BoostCreature, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {
-            return false;
+            return null;
         }
-        permanent.addCounters(CounterType.P1P1.createInstance(xValue), source.getControllerId(), source, game);
-        this.amassedCreatureId = permanent.getId();
-        return true;
-    }
-
-    public UUID getAmassedCreatureId() {
-        return amassedCreatureId;
+        if (!permanent.hasSubtype(subType, game)) {
+            game.addEffect(new AddCardSubTypeTargetEffect(subType, Duration.Custom)
+                    .setTargetPointer(new FixedTarget(permanent, game)), source);
+        }
+        if (xValue > 0) {
+            permanent.addCounters(
+                    CounterType.P1P1.createInstance(xValue),
+                    source.getControllerId(), source, game
+            );
+        }
+        return permanent;
     }
 }

@@ -19,9 +19,9 @@ public final class Mindculling extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");
 
 
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, "you"));
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(2).concatBy("and"));
     }
 
     private Mindculling(final Mindculling card) {

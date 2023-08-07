@@ -39,7 +39,7 @@ public final class VerdelothTheAncient extends CardImpl {
 
     public VerdelothTheAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TREEFOLK);
 
         this.power = new MageInt(4);

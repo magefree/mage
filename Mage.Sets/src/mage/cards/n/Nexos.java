@@ -40,7 +40,7 @@ public final class Nexos extends CardImpl {
         // Strategic Coordinator -- Basic lands you control have "{T}: Add {C}{C}. Spend this mana only on costs that contain {X}."
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new NexosManaAbility(), Duration.WhileOnBattlefield, filter
-        )));
+        )).withFlavorWord("Strategic Coordinator"));
     }
 
     private Nexos(final Nexos card) {

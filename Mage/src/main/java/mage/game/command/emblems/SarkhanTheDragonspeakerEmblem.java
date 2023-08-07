@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
@@ -10,16 +9,23 @@ import mage.constants.Zone;
 import mage.game.command.Emblem;
 
 /**
- *
  * @author spjspj
  */
 public final class SarkhanTheDragonspeakerEmblem extends Emblem {
 
     public SarkhanTheDragonspeakerEmblem() {
-        setName("Emblem Sarkhan");
-        this.setExpansionSetCodeForImage("KTK");
+        super("Emblem Sarkhan");
 
         this.getAbilities().add(new BeginningOfDrawTriggeredAbility(Zone.COMMAND, new DrawCardSourceControllerEffect(2), TargetController.YOU, false));
         this.getAbilities().add(new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new DiscardHandControllerEffect(), TargetController.YOU, null, false));
+    }
+
+    private SarkhanTheDragonspeakerEmblem(final SarkhanTheDragonspeakerEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public SarkhanTheDragonspeakerEmblem copy() {
+        return new SarkhanTheDragonspeakerEmblem(this);
     }
 }

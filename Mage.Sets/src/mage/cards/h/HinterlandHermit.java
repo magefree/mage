@@ -20,7 +20,7 @@ public final class HinterlandHermit extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.secondSideCardClazz = HinterlandScourge.class;
+        this.secondSideCardClazz = mage.cards.h.HinterlandScourge.class;
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);

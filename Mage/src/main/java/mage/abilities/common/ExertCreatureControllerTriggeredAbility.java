@@ -17,7 +17,7 @@ public class ExertCreatureControllerTriggeredAbility extends TriggeredAbilityImp
         setTriggerPhrase("Whenever you exert a creature, ");
     }
 
-    public ExertCreatureControllerTriggeredAbility(final ExertCreatureControllerTriggeredAbility ability) {
+    protected ExertCreatureControllerTriggeredAbility(final ExertCreatureControllerTriggeredAbility ability) {
         super(ability);
     }
 

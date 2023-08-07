@@ -41,7 +41,7 @@ public final class LonisCryptozoologist extends CardImpl {
     public LonisCryptozoologist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SCOUT);
@@ -102,7 +102,7 @@ class LonisCryptozoologistEffect extends OneShotEffect {
                 filter.add(Predicates.not(CardType.LAND.getPredicate()));
                 filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
                 TargetCard target = new TargetCard(Zone.LIBRARY, filter);
-                if (controller.choose(outcome, cards, target, game)) {
+                if (controller.choose(outcome, cards, target, source, game)) {
                     Card selectedCard = game.getCard(target.getFirstTarget());
                     if (selectedCard != null) {
                         cards.remove(selectedCard);

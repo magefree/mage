@@ -5,8 +5,6 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -23,11 +21,9 @@ public final class EdgarMarkovsCoffinVampireToken extends TokenImpl {
 
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("VOW");
     }
 
-    public EdgarMarkovsCoffinVampireToken(final EdgarMarkovsCoffinVampireToken token) {
+    protected EdgarMarkovsCoffinVampireToken(final EdgarMarkovsCoffinVampireToken token) {
         super(token);
     }
 

@@ -38,7 +38,7 @@ public class SurgeAbility extends SpellAbility {
                 + " <i>(You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)</i>";
     }
 
-    public SurgeAbility(final SurgeAbility ability) {
+    protected SurgeAbility(final SurgeAbility ability) {
         super(ability);
         this.rule = ability.rule;
     }

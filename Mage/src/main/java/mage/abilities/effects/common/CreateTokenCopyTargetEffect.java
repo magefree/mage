@@ -17,12 +17,11 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
-import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
+import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.EmptyCopyApplier;
 
 import java.util.*;
@@ -34,7 +33,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     @FunctionalInterface
     public interface PermanentModifier {
-        void apply(Token token, Game game);
+        void apply(Token token);
     }
 
     private final Set<Class<? extends Ability>> abilityClazzesToRemove;
@@ -60,7 +59,9 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final int tokenPower;
     private final int tokenToughness;
     private boolean useLKI = false;
-    private PermanentModifier permanentModifier = null;
+    private PermanentModifier permanentModifier = null; // TODO: miss copy constructor? Make serializable?
+
+    // TODO: These constructors are a mess. Copy effects need to be reworked altogether, hopefully clean it up then.
 
     public CreateTokenCopyTargetEffect(boolean useLKI) {
         this();
@@ -124,7 +125,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.additionalAbilities = new ArrayList<>();
     }
 
-    public CreateTokenCopyTargetEffect(final CreateTokenCopyTargetEffect effect) {
+    protected CreateTokenCopyTargetEffect(final CreateTokenCopyTargetEffect effect) {
         super(effect);
 
         this.abilityClazzesToRemove = new HashSet<>(effect.abilityClazzesToRemove);
@@ -200,14 +201,13 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         }
 
         // create token and modify all attributes permanently (without game usage)
-        EmptyToken token = new EmptyToken();
-        CardUtil.copyTo(token).from(copyFrom, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
+        Token token = CopyTokenFunction.createTokenCopy(copyFrom, game); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
         applier.apply(game, token, source, targetId);
         if (becomesArtifact) {
             token.addCardType(CardType.ARTIFACT);
         }
         if (isntLegendary) {
-            token.getSuperType().remove(SuperType.LEGENDARY);
+            token.removeSuperType(SuperType.LEGENDARY);
         }
 
         if (startingLoyalty != -1) {
@@ -238,11 +238,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             token.addSubType(additionalSubType);
         }
         if (color != null) {
-            token.getColor().setColor(color);
+            token.setColor(color);
         }
         additionalAbilities.stream().forEach(token::addAbility);
         if (permanentModifier != null) {
-            permanentModifier.apply(token, game);
+            permanentModifier.apply(token);
         }
 
         if (!this.abilityClazzesToRemove.isEmpty()) {
@@ -304,14 +304,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             }
             sb.append("tokens that are copies of ");
         }
-        if (mode.getTargets().isEmpty()) {
-            throw new UnsupportedOperationException("Using default rule generation of target effect without having a target object");
-        }
-        String targetName = mode.getTargets().get(0).getTargetName();
-        if (!targetName.startsWith("another target")) {
-            sb.append("target ");
-        }
-        sb.append(targetName);
+        sb.append(getTargetPointer().describeTargets(mode.getTargets(), "it"));
 
         if (attacking) {
             sb.append(" that are");

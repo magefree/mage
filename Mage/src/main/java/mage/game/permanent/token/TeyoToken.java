@@ -15,11 +15,9 @@ public final class TeyoToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(3);
         addAbility(DefenderAbility.getInstance());
-
-        setOriginalExpansionSetCode("WAR");
     }
 
-    public TeyoToken(final TeyoToken token) {
+    protected TeyoToken(final TeyoToken token) {
         super(token);
     }
 

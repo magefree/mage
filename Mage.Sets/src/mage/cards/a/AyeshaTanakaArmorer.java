@@ -19,7 +19,7 @@ import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.game.Game;
 
 import java.util.Objects;
@@ -38,7 +38,7 @@ public final class AyeshaTanakaArmorer extends CardImpl {
 
     static {
         filter.add(AyeshaTanakaArmorerPredicate.instance);
-        filter2.add(DefendingPlayerControlsPredicate.instance);
+        filter2.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
@@ -48,14 +48,12 @@ public final class AyeshaTanakaArmorer extends CardImpl {
     public AyeshaTanakaArmorer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.ARTIFICER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Whenever Ayesha Tanaka, Armorer attacks, look at the top four cards of your library.
-        // You may put any number of artifact cards with mana value less than or equal to Ayesha's power
-        // from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order.
+        // Whenever Ayesha Tanaka, Armorer attacks, look at the top four cards of your library. You may put any number of artifact cards with mana value less than or equal to Ayesha's power from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order.
         this.addAbility(new AttacksTriggeredAbility(new LookLibraryAndPickControllerEffect(
                 4, Integer.MAX_VALUE, filter, PutCards.BATTLEFIELD_TAPPED, PutCards.BOTTOM_RANDOM
         )));

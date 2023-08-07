@@ -9,9 +9,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TapSourceUnlessPaysEffect extends OneShotEffect {
@@ -21,10 +21,10 @@ public class TapSourceUnlessPaysEffect extends OneShotEffect {
     public TapSourceUnlessPaysEffect(Cost cost) {
         super(Outcome.Tap);
         this.cost = cost;
-        staticText = "tap {this} unless you " + cost.getText();
+        staticText = "tap {this} unless you " + CardUtil.addCostVerb(cost.getText());
     }
 
-    public TapSourceUnlessPaysEffect(final TapSourceUnlessPaysEffect effect) {
+    protected TapSourceUnlessPaysEffect(final TapSourceUnlessPaysEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

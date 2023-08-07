@@ -15,7 +15,7 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author LevelX2
@@ -62,17 +62,24 @@ class HourOfNeedExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID creatureId : getTargetPointer().getTargets(game, source)) {
-                Permanent creature = game.getPermanent(creatureId);
-                if (creature != null) {
-                    controller.moveCardToExileWithInfo(creature, null, null, source, game, Zone.BATTLEFIELD, true);
-                    Token token = new HourOfNeedSphinxToken();
-                    token.putOntoBattlefield(1, game, source, creature.getControllerId());
-                }
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Map<UUID, Integer> tokenCounts = new HashMap<>(); // For each player, count the number of creatures exiled
+        for (UUID creatureId : getTargetPointer().getTargets(game, source)) {
+            Permanent creature = game.getPermanent(creatureId);
+            if (creature != null && controller.moveCards(creature, Zone.EXILED, source, game)) {
+                tokenCounts.put(creature.getControllerId(), tokenCounts.getOrDefault(creature.getControllerId(), 0) + 1);
+            }
+        }
+        if (tokenCounts.values().stream().noneMatch(i -> (i > 0))) {
+            return false;
+        }
+        game.getState().processAction(game);
+        Token token = new HourOfNeedSphinxToken();
+        for (Map.Entry<UUID, Integer> playerTokenCount : tokenCounts.entrySet()) {
+            token.putOntoBattlefield(playerTokenCount.getValue(), game, source, playerTokenCount.getKey());
+        }
+        return true;
     }
 }

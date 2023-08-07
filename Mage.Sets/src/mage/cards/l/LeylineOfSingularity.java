@@ -61,7 +61,7 @@ class SetSupertypeAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            permanent.addSuperType(SuperType.LEGENDARY);
+            permanent.addSuperType(game, SuperType.LEGENDARY);
         }
         return true;
     }

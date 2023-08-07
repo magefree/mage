@@ -32,7 +32,7 @@ public class FortifyAbility extends ActivatedAbilityImpl {
         this.timing = TimingRule.SORCERY;
     }
 
-    public FortifyAbility(final FortifyAbility ability) {
+    protected FortifyAbility(final FortifyAbility ability) {
         super(ability);
     }
 

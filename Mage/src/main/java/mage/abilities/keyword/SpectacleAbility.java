@@ -39,7 +39,7 @@ public class SpectacleAbility extends SpellAbility {
         this.addHint(OpponentsLostLifeHint.instance);
     }
 
-    public SpectacleAbility(final SpectacleAbility ability) {
+    protected SpectacleAbility(final SpectacleAbility ability) {
         super(ability);
         this.rule = ability.rule;
     }

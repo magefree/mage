@@ -16,7 +16,7 @@ import mage.abilities.hint.Hint;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -38,22 +38,21 @@ import java.util.stream.Collectors;
 /**
  * @author TheElk801
  */
-public final class RowanScholarOfSparks extends ModalDoubleFacesCard {
+public final class RowanScholarOfSparks extends ModalDoubleFacedCard {
 
     private static final FilterCard filter = new FilterInstantOrSorceryCard("instant and sorcery spells");
 
     public RowanScholarOfSparks(UUID ownerId, CardSetInfo setInfo) {
         super(
                 ownerId, setInfo,
-                new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.ROWAN}, "{2}{R}",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.ROWAN}, "{2}{R}",
                 "Will, Scholar of Frost",
-                new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.WILL}, "{4}{U}"
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.WILL}, "{4}{U}"
         );
 
         // 1.
         // Rowan, Scholar of Sparks
         // Legendary Planeswalker - Rowan
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setStartingLoyalty(2);
 
         // Instant and sorcery spells you cast cost {1} less to cast.
@@ -77,7 +76,6 @@ public final class RowanScholarOfSparks extends ModalDoubleFacesCard {
         // 2.
         // Will, Scholar of Frost
         // Legendary Planeswalker - Will
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getRightHalfCard().setStartingLoyalty(4);
 
         // Instant and sorcery spells you cast cost {1} less to cast.

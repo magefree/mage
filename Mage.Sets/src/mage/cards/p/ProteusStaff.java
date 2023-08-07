@@ -99,7 +99,7 @@ class ProteusStaffEffect extends OneShotEffect {
                         }
                     } else {
                         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on bottom of your library (last chosen will be on bottom)"));
-                        controller.choose(Outcome.Neutral, cards, target, game);
+                        controller.choose(Outcome.Neutral, cards, target, source, game);
                         Card card = cards.get(target.getFirstTarget(), game);
                         if (card != null) {
                             controller.moveCardToLibraryWithInfo(card, source, game, Zone.LIBRARY, false, false);

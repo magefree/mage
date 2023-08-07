@@ -47,7 +47,7 @@ public final class PrimarisEliminator extends CardImpl {
         // * Hyperfang Round -- Creatures target player controls gets -2/-2 until end of turn.
         ability.addMode(new Mode(new BoostAllEffect(
                 -2, -2, Duration.EndOfTurn, filter, false
-        )).addTarget(new TargetPlayer()).withFlavorWord("Hyperfang Round"));
+        )).addTarget(new TargetPlayer()).withFlavorWord("Hyperfrag Round"));
         this.addAbility(ability);
     }
 

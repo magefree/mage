@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.PreventDamageAndRemoveCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -13,10 +13,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.PreventDamageEvent;
-import mage.game.events.PreventedDamageEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -35,10 +31,11 @@ public final class UnbreathingHorde extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Unbreathing Horde enters the battlefield with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard.
-        this.addAbility(new EntersBattlefieldAbility(new UnbreathingHordeEffect1(), "with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard"));
+        this.addAbility(new EntersBattlefieldAbility(new UnbreathingHordeEntersEffect(), "with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard"));
 
         // If Unbreathing Horde would be dealt damage, prevent that damage and remove a +1/+1 counter from it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnbreathingHordeEffect2()));
+        this.addAbility(new SimpleStaticAbility(new PreventDamageAndRemoveCountersEffect(false, false, true)
+                .setText("if {this} would be dealt damage, prevent that damage and remove a +1/+1 counter from it")));
     }
 
     private UnbreathingHorde(final UnbreathingHorde card) {
@@ -51,7 +48,7 @@ public final class UnbreathingHorde extends CardImpl {
     }
 }
 
-class UnbreathingHordeEffect1 extends OneShotEffect {
+class UnbreathingHordeEntersEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent();
     private static final FilterCreatureCard filter2 = new FilterCreatureCard();
@@ -61,12 +58,12 @@ class UnbreathingHordeEffect1 extends OneShotEffect {
         filter2.add(SubType.ZOMBIE.getPredicate());
     }
 
-    public UnbreathingHordeEffect1() {
+    public UnbreathingHordeEntersEffect() {
         super(Outcome.BoostCreature);
         staticText = "{this} enters the battlefield with a +1/+1 counter on it for each other Zombie you control and each Zombie card in your graveyard";
     }
 
-    public UnbreathingHordeEffect1(final UnbreathingHordeEffect1 effect) {
+    public UnbreathingHordeEntersEffect(final UnbreathingHordeEntersEffect effect) {
         super(effect);
     }
 
@@ -86,56 +83,8 @@ class UnbreathingHordeEffect1 extends OneShotEffect {
     }
 
     @Override
-    public UnbreathingHordeEffect1 copy() {
-        return new UnbreathingHordeEffect1(this);
-    }
-
-}
-
-class UnbreathingHordeEffect2 extends PreventionEffectImpl {
-
-    public UnbreathingHordeEffect2() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "If damage would be dealt to {this}, prevent that damage and remove a +1/+1 counter from it";
-    }
-
-    public UnbreathingHordeEffect2(final UnbreathingHordeEffect2 effect) {
-        super(effect);
-    }
-
-    @Override
-    public UnbreathingHordeEffect2 copy() {
-        return new UnbreathingHordeEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        boolean retValue = false;
-        GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
-        int damage = event.getAmount();
-        if (!game.replaceEvent(preventEvent)) {
-            event.setAmount(0);
-            game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
-            retValue = true;
-        }
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            permanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
-        }
-        return retValue;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            return event.getTargetId().equals(source.getSourceId());
-        }
-        return false;
+    public UnbreathingHordeEntersEffect copy() {
+        return new UnbreathingHordeEntersEffect(this);
     }
 
 }

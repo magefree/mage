@@ -1,13 +1,13 @@
 
 
 package mage.game.permanent.token;
+
 import mage.MageInt;
 import mage.abilities.keyword.BandingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author L_J
  */
 public final class ErrandOfDutyKnightToken extends TokenImpl {
@@ -22,7 +22,7 @@ public final class ErrandOfDutyKnightToken extends TokenImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public ErrandOfDutyKnightToken(final ErrandOfDutyKnightToken token) {
+    protected ErrandOfDutyKnightToken(final ErrandOfDutyKnightToken token) {
         super(token);
     }
 
