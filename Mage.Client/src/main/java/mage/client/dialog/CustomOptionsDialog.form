@@ -25,18 +25,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jSeparator1" max="32767" attributes="0"/>
                   <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblAttack" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbAttackOption" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="lblRange" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbRange" pref="103" max="32767" attributes="1"/>
-                  </Group>
                   <Component id="jSeparator4" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblMulliganType" min="-2" max="-2" attributes="0"/>
@@ -46,16 +35,15 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="spnFreeMulligans" max="32767" attributes="0"/>
+                      <Component id="spnFreeMulligans" pref="126" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="chkPlaneChase" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblMultiplayerOptions" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblGeneralOptions" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblVariantOptions" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="125" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -89,21 +77,7 @@
               <Component id="chkPlaneChase" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblMultiplayerOptions" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cbRange" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblRange" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cbAttackOption" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblAttack" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jSeparator1" min="-2" pref="2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="btnOK" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -203,70 +177,6 @@
       </AccessibilityProperties>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator4">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblMultiplayerOptions">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="11" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Multiplayer Options"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblRange">
-      <Properties>
-        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="cbRange"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Range of Influence:"/>
-      </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="lblMultiplayerOptions"/>
-        </Property>
-      </AccessibilityProperties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbRange">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;An option for multiplayer games.&#xa;A player&apos;s range of influence is the maximum distance from that player, measured in player seats,&lt;br&gt;&#xa;that the player can affect. Players within that many seats of the player are within that player&apos;s range&lt;br&gt;&#xa;of influence. Objects controlled by players within a player&apos;s range of influence are also within that&lt;br&gt;&#xa;player&apos;s range of influence. Range of influence covers spells, abilities, effects, damage dealing, attacking,&lt;nr&gt;&#xa;making choices, and winning the game."/>
-      </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
-        <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="lblRange"/>
-        </Property>
-      </AccessibilityProperties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblAttack">
-      <Properties>
-        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="cbAttackOption"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Attack Option:"/>
-      </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="lblMultiplayerOptions"/>
-        </Property>
-      </AccessibilityProperties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbAttackOption">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;An option for multiplayer games that defines&lt;br&gt;&#xa;which opponents can be attacked from a player."/>
-      </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
-        <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="lblAttack"/>
-        </Property>
-      </AccessibilityProperties>
-    </Component>
-    <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
     <Component class="javax.swing.JButton" name="btnOK">
       <Properties>

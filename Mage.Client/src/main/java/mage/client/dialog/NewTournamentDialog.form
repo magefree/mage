@@ -98,85 +98,31 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnlPlayers" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnlPacks" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblNbrPlayers" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="spnNumPlayers" min="-2" pref="46" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblNbrSeats" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="spnNumSeats" min="-2" pref="46" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="lblPacks" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblPlayer1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="pnlDraftOptions" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lblNumRounds" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lblConstructionTime" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="spnConstructTime" min="-2" pref="50" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="chkRollbackTurnsAllowed" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="spnNumRounds" min="-2" pref="50" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="lblSettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnSettingsLoad" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnSettingsSave" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnOk" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCancel" min="-2" pref="100" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="player1Panel" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnlRandomPacks" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblName" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTournamentType" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtName" min="-2" pref="224" max="-2" attributes="0"/>
+                              <Component id="cbTournamentType" min="-2" pref="290" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbTimeLimit" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblDraftCube" max="-2" attributes="0"/>
+                                  <Component id="lbDeckType" max="-2" attributes="0"/>
+                                  <Component id="lblGameType" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cbTimeLimit" min="-2" pref="101" max="-2" attributes="1"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbBufferTime" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cbBufferTime" min="-2" pref="101" max="-2" attributes="1"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtPassword" min="-2" pref="56" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cbAllowSpectators" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cbDraftCube" min="-2" pref="290" max="-2" attributes="0"/>
+                                  <Component id="cbDeckType" alignment="0" min="-2" pref="290" max="-2" attributes="1"/>
+                                  <Component id="cbGameType" min="-2" pref="290" max="-2" attributes="1"/>
+                              </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lblTournamentType" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblName" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbTournamentType" min="-2" pref="290" max="-2" attributes="0"/>
+                                      <Component id="txtName" min="-2" pref="224" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="chkRated" min="-2" max="-2" attributes="0"/>
@@ -184,10 +130,6 @@
                                       <Component id="lblMinimumRating" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="spnMinimumRating" min="-2" pref="70" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblNumWins" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="spnNumWins" min="-2" pref="50" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -198,51 +140,114 @@
                                       <Component id="spnQuitRatio" min="-2" pref="70" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="lbSkillLevel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="cbSkillLevel" min="-2" pref="88" max="-2" attributes="1"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtPassword" min="-2" pref="122" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnCustomOptions" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="lblDraftCube" max="-2" attributes="0"/>
-                                          <Component id="lbDeckType" max="-2" attributes="0"/>
-                                          <Component id="lblGameType" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lbTimeLimit" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cbDraftCube" min="-2" pref="290" max="-2" attributes="0"/>
-                                          <Component id="cbDeckType" alignment="0" min="-2" pref="290" max="-2" attributes="1"/>
-                                          <Component id="cbGameType" min="-2" pref="290" max="-2" attributes="1"/>
-                                      </Group>
+                                      <Component id="cbTimeLimit" min="-2" pref="101" max="-2" attributes="1"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lbBufferTime" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbBufferTime" min="-2" pref="101" max="-2" attributes="1"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lblNumWins" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="spnNumWins" min="-2" pref="50" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="chkRollbackTurnsAllowed" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbAllowSpectators" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="pnlPlayers" alignment="0" max="32767" attributes="0"/>
+                          <Component id="pnlPacks" alignment="1" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblNbrPlayers" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="spnNumPlayers" min="-2" pref="46" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblNbrSeats" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="spnNumSeats" min="-2" pref="46" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="lblPacks" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPlayer1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                      <Component id="pnlDraftOptions" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="lblNumRounds" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="lblConstructionTime" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="spnConstructTime" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="spnNumRounds" min="-2" pref="50" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lblSettings" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnSettingsLoad" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnSettingsSave" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnOk" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnCancel" min="-2" pref="100" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="player1Panel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="pnlRandomPacks" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="lbBufferTime" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbBufferTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                          <Component id="lblNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="spnNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="chkRollbackTurnsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbAllowSpectators" alignment="3" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbTimeLimit" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbTimeLimit" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cbAllowSpectators" alignment="3" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -252,11 +257,11 @@
                       <Component id="spnQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbSkillLevel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbSkillLevel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnCustomOptions" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="spnNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                          <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCustomOptions" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="chkRated" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -294,7 +299,7 @@
                   <Group type="102" attributes="0">
                       <Component id="pnlPacks" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlRandomPacks" max="32767" attributes="0"/>
+                      <Component id="pnlRandomPacks" pref="7" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="103" alignment="1" groupAlignment="3" attributes="0">
@@ -316,7 +321,6 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="spnConstructTime" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblConstructionTime" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chkRollbackTurnsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -623,7 +627,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="pnlOtherPlayers" alignment="0" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" alignment="0" pref="6" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

@@ -19,29 +19,21 @@ public class CustomOptionsDialog extends MageDialog {
         TABLE(
                 PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS,
                 PreferencesDialog.KEY_NEW_TABLE_MULLIGAN_TYPE,
-                PreferencesDialog.KEY_NEW_TABLE_RANGE,
-                PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION,
                 PreferencesDialog.KEY_NEW_TABLE_PLANECHASE
         ),
 
         TOURNEY(
                 PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS,
                 PreferencesDialog.KEY_NEW_TOURNAMENT_MULLIGUN_TYPE,
-                PreferencesDialog.KEY_NEW_TOURNAMENT_RANGE,
-                PreferencesDialog.KEY_NEW_TOURNAMENT_ATTACK_OPTION,
                 PreferencesDialog.KEY_NEW_TOURNAMENT_PLANE_CHASE
         );
         public final String NUMBER_OF_FREE_MULLIGANS;
         public final String MULLIGAN_TYPE;
-        public final String RANGE_OF_INFLUENCE;
-        public final String ATTACK_OPTION;
         public final String PLANECHASE;
 
-        SaveLoadKeys(String numberOfFreeMulligans, String mulliganType, String rangeOfInfluence, String attackOption, String planechase) {
+        SaveLoadKeys(String numberOfFreeMulligans, String mulliganType, String planechase) {
             NUMBER_OF_FREE_MULLIGANS = numberOfFreeMulligans;
             MULLIGAN_TYPE = mulliganType;
-            RANGE_OF_INFLUENCE = rangeOfInfluence;
-            ATTACK_OPTION = attackOption;
             PLANECHASE = planechase;
         }
     }
@@ -57,8 +49,6 @@ public class CustomOptionsDialog extends MageDialog {
         initComponents();
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
         cbMulliganType.setModel(new DefaultComboBoxModel(MulliganType.values()));
-        cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
-        cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));
         this.setModal(true);
     }
 
@@ -80,12 +70,6 @@ public class CustomOptionsDialog extends MageDialog {
         lblVariantOptions = new javax.swing.JLabel();
         chkPlaneChase = new javax.swing.JCheckBox();
         jSeparator4 = new javax.swing.JSeparator();
-        lblMultiplayerOptions = new javax.swing.JLabel();
-        lblRange = new javax.swing.JLabel();
-        cbRange = new javax.swing.JComboBox();
-        lblAttack = new javax.swing.JLabel();
-        cbAttackOption = new javax.swing.JComboBox();
-        jSeparator1 = new javax.swing.JSeparator();
         btnOK = new javax.swing.JButton();
 
         setTitle("Custom Options");
@@ -109,19 +93,6 @@ public class CustomOptionsDialog extends MageDialog {
         chkPlaneChase.setText("PlaneChase");
         chkPlaneChase.setToolTipText("Use the PlaneChase variant for your game.");
 
-        lblMultiplayerOptions.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblMultiplayerOptions.setText("Multiplayer Options");
-
-        lblRange.setLabelFor(cbRange);
-        lblRange.setText("Range of Influence:");
-
-        cbRange.setToolTipText("<HTML>An option for multiplayer games.\nA player's range of influence is the maximum distance from that player, measured in player seats,<br>\nthat the player can affect. Players within that many seats of the player are within that player's range<br>\nof influence. Objects controlled by players within a player's range of influence are also within that<br>\nplayer's range of influence. Range of influence covers spells, abilities, effects, damage dealing, attacking,<nr>\nmaking choices, and winning the game.");
-
-        lblAttack.setLabelFor(cbAttackOption);
-        lblAttack.setText("Attack Option:");
-
-        cbAttackOption.setToolTipText("<HTML>An option for multiplayer games that defines<br>\nwhich opponents can be attacked from a player.");
-
         btnOK.setText("OK");
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,16 +107,7 @@ public class CustomOptionsDialog extends MageDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator1)
                     .addComponent(jSeparator2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(lblAttack)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbAttackOption, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblRange)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbRange, 0, 103, Short.MAX_VALUE))
                     .addComponent(jSeparator4)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(lblMulliganType)
@@ -154,14 +116,13 @@ public class CustomOptionsDialog extends MageDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(lblFreeMulligans)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnFreeMulligans))
+                        .addComponent(spnFreeMulligans, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chkPlaneChase)
-                            .addComponent(lblMultiplayerOptions)
                             .addComponent(lblGeneralOptions)
                             .addComponent(lblVariantOptions))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 125, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnOK)))
@@ -188,19 +149,7 @@ public class CustomOptionsDialog extends MageDialog {
                 .addComponent(chkPlaneChase)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMultiplayerOptions)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRange))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAttack))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -215,12 +164,6 @@ public class CustomOptionsDialog extends MageDialog {
         spnFreeMulligans.getAccessibleContext().setAccessibleDescription("Select the number of free mulligans");
         spnFreeMulligans.getAccessibleContext().setAccessibleParent(lblFreeMulligans);
         chkPlaneChase.getAccessibleContext().setAccessibleParent(lblVariantOptions);
-        lblRange.getAccessibleContext().setAccessibleParent(lblMultiplayerOptions);
-        cbRange.getAccessibleContext().setAccessibleName("");
-        cbRange.getAccessibleContext().setAccessibleParent(lblRange);
-        lblAttack.getAccessibleContext().setAccessibleParent(lblMultiplayerOptions);
-        cbAttackOption.getAccessibleContext().setAccessibleName("");
-        cbAttackOption.getAccessibleContext().setAccessibleParent(lblAttack);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -258,21 +201,6 @@ public class CustomOptionsDialog extends MageDialog {
         this.chkPlaneChase.setSelected(PreferencesDialog.getCachedValue(saveLoadKeys.PLANECHASE + versionStr, "No").equals("Yes"));
         this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(saveLoadKeys.NUMBER_OF_FREE_MULLIGANS + versionStr, "0")));
         this.cbMulliganType.setSelectedItem(MulliganType.valueByName(PreferencesDialog.getCachedValue(saveLoadKeys.MULLIGAN_TYPE + versionStr, MulliganType.GAME_DEFAULT.toString())));
-
-        int range = Integer.parseInt(PreferencesDialog.getCachedValue(saveLoadKeys.RANGE_OF_INFLUENCE + versionStr, "0"));
-        for (RangeOfInfluence roi : RangeOfInfluence.values()) {
-            if (roi.getRange() == range) {
-                this.cbRange.setSelectedItem(roi);
-                break;
-            }
-        }
-        String attackOption = PreferencesDialog.getCachedValue(saveLoadKeys.ATTACK_OPTION + versionStr, "Attack Multiple Players");
-        for (MultiplayerAttackOption mao : MultiplayerAttackOption.values()) {
-            if (mao.toString().equals(attackOption)) {
-                this.cbAttackOption.setSelectedItem(mao);
-                break;
-            }
-        }
     }
 
     public void onSaveSettings(int version, MatchOptions options) {
@@ -290,8 +218,6 @@ public class CustomOptionsDialog extends MageDialog {
         }
         PreferencesDialog.saveValue(saveLoadKeys.NUMBER_OF_FREE_MULLIGANS + versionStr, Integer.toString(options.getFreeMulligans()));
         PreferencesDialog.saveValue(saveLoadKeys.MULLIGAN_TYPE + versionStr, options.getMulliganType().toString());
-        PreferencesDialog.saveValue(saveLoadKeys.RANGE_OF_INFLUENCE + versionStr, Integer.toString(options.getRange().getRange()));
-        PreferencesDialog.saveValue(saveLoadKeys.ATTACK_OPTION + versionStr, options.getAttackOption().toString());
         PreferencesDialog.saveValue(saveLoadKeys.PLANECHASE + versionStr, options.isPlaneChase() ? "Yes" : "No");
     }
 
@@ -302,25 +228,17 @@ public class CustomOptionsDialog extends MageDialog {
         options.setFreeMulligans((Integer) spnFreeMulligans.getValue());
         options.setMullgianType((MulliganType) cbMulliganType.getSelectedItem());
         options.setPlaneChase(chkPlaneChase.isSelected());
-        options.setAttackOption((MultiplayerAttackOption) cbAttackOption.getSelectedItem());
-        options.setRange((RangeOfInfluence) cbRange.getSelectedItem());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOK;
-    private javax.swing.JComboBox cbAttackOption;
     private javax.swing.JComboBox<String> cbMulliganType;
-    private javax.swing.JComboBox cbRange;
     private javax.swing.JCheckBox chkPlaneChase;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JLabel lblAttack;
     private javax.swing.JLabel lblFreeMulligans;
     private javax.swing.JLabel lblGeneralOptions;
     private javax.swing.JLabel lblMulliganType;
-    private javax.swing.JLabel lblMultiplayerOptions;
-    private javax.swing.JLabel lblRange;
     private javax.swing.JLabel lblVariantOptions;
     private javax.swing.JSpinner spnFreeMulligans;
     // End of variables declaration//GEN-END:variables
