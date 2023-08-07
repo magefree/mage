@@ -9,7 +9,6 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -70,10 +69,8 @@ enum PrototypePortalAdjuster implements CostAdjuster {
             if (!card.getImprinted().isEmpty()) {
                 Card imprinted = game.getCard(card.getImprinted().get(0));
                 if (imprinted != null) {
-                    ManaCosts manaCostsToPay = ability.getManaCostsToPay();
                     ability.clearManaCostsToPay();
                     ability.addManaCostsToPay(new GenericManaCost(imprinted.getManaValue()));
-                    ability.addManaCostsToPay(manaCostsToPay);
                 }
             }
         }

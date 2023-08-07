@@ -8,7 +8,6 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
@@ -70,7 +69,6 @@ enum SoulFoundryAdjuster implements CostAdjuster {
             if (!sourcePermanent.getImprinted().isEmpty()) {
                 Card imprinted = game.getCard(sourcePermanent.getImprinted().get(0));
                 if (imprinted != null) {
-                    ManaCosts manaCostsToPay = ability.getManaCostsToPay();
                     ability.clearManaCostsToPay();
                     ability.addManaCostsToPay(new GenericManaCost(imprinted.getManaValue()));
                 }
