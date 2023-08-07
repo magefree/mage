@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.Objects;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -12,7 +13,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffectImpl {
@@ -22,7 +22,7 @@ public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffect
         this.staticText = buildStaticText();
     }
 
-    public CantBeRegeneratedSourceEffect(final CantBeRegeneratedSourceEffect effect) {
+    protected CantBeRegeneratedSourceEffect(final CantBeRegeneratedSourceEffect effect) {
         super(effect);
     }
 

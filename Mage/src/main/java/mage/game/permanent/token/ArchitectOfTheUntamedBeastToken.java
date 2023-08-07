@@ -18,7 +18,7 @@ public final class ArchitectOfTheUntamedBeastToken extends TokenImpl {
         toughness = new MageInt(6);
     }
 
-    public ArchitectOfTheUntamedBeastToken(final ArchitectOfTheUntamedBeastToken token) {
+    protected ArchitectOfTheUntamedBeastToken(final ArchitectOfTheUntamedBeastToken token) {
         super(token);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -13,20 +12,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author fireshoes
  */
 public final class PristineSkywise extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public PristineSkywise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{U}");
@@ -38,7 +30,7 @@ public final class PristineSkywise extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever you cast a noncreature spell, untap Pristine Skywise. It gains protection from the color of your choice until the end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false);
         ability.addEffect(new GainProtectionFromColorSourceEffect(Duration.EndOfTurn));
         this.addAbility(ability);
     }

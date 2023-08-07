@@ -21,7 +21,7 @@ public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect {
         super(Outcome.ReturnToHand);
     }
 
-    public ReturnFromGraveyardToHandTargetEffect(final ReturnFromGraveyardToHandTargetEffect effect) {
+    protected ReturnFromGraveyardToHandTargetEffect(final ReturnFromGraveyardToHandTargetEffect effect) {
         super(effect);
     }
 

@@ -74,7 +74,7 @@ public class WishEffect extends OneShotEffect {
         return "a face-up " + s;
     }
 
-    public WishEffect(final WishEffect effect) {
+    protected WishEffect(final WishEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.reveal = effect.reveal;

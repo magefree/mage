@@ -45,7 +45,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
         this.staticText = "equipped creature gets " + CardUtil.getBoostText(power, toughness, duration);
     }
 
-    public BoostEquippedEffect(final BoostEquippedEffect effect) {
+    protected BoostEquippedEffect(final BoostEquippedEffect effect) {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();

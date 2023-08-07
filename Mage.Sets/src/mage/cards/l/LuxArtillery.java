@@ -38,11 +38,11 @@ public final class LuxArtillery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Whenever you cast an artifact creature spell, it gains sunburst.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new LuxArtilleryEffect(this), filter, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new LuxArtilleryEffect(this), filter, false, SetTargetPointer.SPELL));
 
         // At the beginning of your end step, if there are thirty or more counters among artifacts
         // and creatures you control, Lux Artillery deals 10 damage to each opponent.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility (new BeginningOfYourEndStepTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfYourEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new DamagePlayersEffect(10, TargetController.OPPONENT), false), LuxArtilleryCondition.instance,
                 "At the beginning of your end step, if there are thirty or more counters among artifacts " +
                         "and creatures you control, {this} deals 10 damage to each opponent"

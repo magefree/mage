@@ -46,7 +46,7 @@ public final class WestvaleAbbey extends CardImpl {
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(5, 5, new FilterControlledCreaturePermanent("creatures"), true)));
-        ability.addEffect(new UntapSourceEffect());
+        ability.addEffect(new UntapSourceEffect().setText("untap it").concatBy(", then"));
         this.addAbility(ability);
     }
 

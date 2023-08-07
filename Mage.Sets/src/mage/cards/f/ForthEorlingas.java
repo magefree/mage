@@ -34,7 +34,7 @@ public final class ForthEorlingas extends CardImpl {
         ));
 
         // Whenever one or more creatures you control deal combat damage to one or more players this turn, you become the monarch.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ForthEorlingasTriggeredAbility()));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ForthEorlingasTriggeredAbility()).concatBy("<br>"));
     }
 
     private ForthEorlingas(final ForthEorlingas card) {

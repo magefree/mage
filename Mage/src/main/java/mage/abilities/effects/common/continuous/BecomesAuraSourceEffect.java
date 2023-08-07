@@ -28,7 +28,7 @@ public class BecomesAuraSourceEffect extends ContinuousEffectImpl {
 
     }
 
-    public BecomesAuraSourceEffect(final BecomesAuraSourceEffect effect) {
+    protected BecomesAuraSourceEffect(final BecomesAuraSourceEffect effect) {
         super(effect);
         this.target = effect.target;
         this.newAbility = effect.newAbility;

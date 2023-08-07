@@ -3,7 +3,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class TetheredSkirge extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Tethered Skirge becomes the target of a spell or ability, you lose 1 life.
-        this.addAbility(new BecomesTargetTriggeredAbility(new LoseLifeSourceControllerEffect(1)));
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(new LoseLifeSourceControllerEffect(1)));
     }
 
     private TetheredSkirge(final TetheredSkirge card) {

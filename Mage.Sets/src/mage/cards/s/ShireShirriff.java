@@ -2,10 +2,8 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.VigilanceAbility;
@@ -47,10 +45,9 @@ public final class ShireShirriff extends CardImpl {
         // When you do, exile target creature an opponent controls until Shire Shirriff leaves the battlefield.
         ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(
             new ExileUntilSourceLeavesEffect(), false,
-            "exile target creature an opponent controls until {this} leaves the battlefield."
+            "exile target creature an opponent controls until {this} leaves the battlefield"
         );
         reflexive.addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
-        reflexive.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
 
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoWhenCostPaid(
             reflexive,

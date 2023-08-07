@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -26,6 +25,7 @@ public final class BeaconOfTomorrows extends CardImpl {
         // Target player takes an extra turn after this one.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new BeaconOfTomorrowsEffect());
+
         // Shuffle Beacon of Tomorrows into its owner's library.
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
     }
@@ -58,7 +58,11 @@ class BeaconOfTomorrowsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget(), false));
+        if (source.getFirstTarget() == null) {
+            return false;
+        }
+
+        game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget()).withExtraTurn());
         return true;
     }
 }

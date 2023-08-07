@@ -28,7 +28,7 @@ public final class KavuAllColorToken extends TokenImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public KavuAllColorToken(final KavuAllColorToken token) {
+    protected KavuAllColorToken(final KavuAllColorToken token) {
         super(token);
     }
 

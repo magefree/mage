@@ -20,7 +20,7 @@ public final class WingmateRocToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public WingmateRocToken(final WingmateRocToken token) {
+    protected WingmateRocToken(final WingmateRocToken token) {
         super(token);
     }
 

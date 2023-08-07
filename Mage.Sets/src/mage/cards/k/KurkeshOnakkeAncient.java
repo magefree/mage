@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -50,8 +50,8 @@ public final class KurkeshOnakkeAncient extends CardImpl {
 class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
 
     KurkeshOnakkeAncientTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackObjectEffect(), new GenericManaCost(1)));
-        setTriggerPhrase("Whenever you activate an ability of an artifact, if it isn't a mana ability");
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CopyStackObjectEffect(), new ManaCostsImpl<>("{R}")));
+        setTriggerPhrase("Whenever you activate an ability of an artifact, if it isn't a mana ability, ");
     }
 
     KurkeshOnakkeAncientTriggeredAbility(final KurkeshOnakkeAncientTriggeredAbility ability) {

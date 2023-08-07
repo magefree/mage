@@ -58,7 +58,7 @@ public final class JorKadeenFirstGoldwarden extends CardImpl {
         ));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
-                condition, "Then if {this}'s power is 4 or greater"
+                condition, "Then if {this}'s power is 4 or greater, draw a card"
         ));
         this.addAbility(ability.addHint(hint));
     }

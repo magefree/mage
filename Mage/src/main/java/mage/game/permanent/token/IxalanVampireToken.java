@@ -20,7 +20,7 @@ public final class IxalanVampireToken extends TokenImpl {
         addAbility(LifelinkAbility.getInstance());
     }
 
-    public IxalanVampireToken(final IxalanVampireToken token) {
+    protected IxalanVampireToken(final IxalanVampireToken token) {
         super(token);
     }
 

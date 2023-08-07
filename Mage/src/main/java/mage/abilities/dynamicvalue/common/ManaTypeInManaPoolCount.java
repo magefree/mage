@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class ManaTypeInManaPoolCount implements DynamicValue {
@@ -20,7 +19,7 @@ public class ManaTypeInManaPoolCount implements DynamicValue {
         this.manaType = manaType;
     }
 
-    public ManaTypeInManaPoolCount(final ManaTypeInManaPoolCount dynamicValue) {
+    protected ManaTypeInManaPoolCount(final ManaTypeInManaPoolCount dynamicValue) {
         this.manaType = dynamicValue.manaType;
     }
 

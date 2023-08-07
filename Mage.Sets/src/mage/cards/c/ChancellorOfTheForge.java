@@ -4,16 +4,13 @@ import mage.MageInt;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.PhyrexianGoblinHasteToken;
@@ -26,11 +23,6 @@ import java.util.UUID;
 public final class ChancellorOfTheForge extends CardImpl {
 
     private static String abilityText = "at the beginning of the first upkeep, create a 1/1 red Goblin creature token with haste";
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     public ChancellorOfTheForge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
@@ -44,8 +36,7 @@ public final class ChancellorOfTheForge extends CardImpl {
         this.addAbility(new ChancellorAbility(new ChancellorOfTheForgeDelayedTriggeredAbility(), abilityText));
 
         // When Chancellor of the Forge enters the battlefield, create X 1/1 red Goblin creature tokens with haste, where X is the number of creatures you control.
-        DynamicValue value = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PhyrexianGoblinHasteToken(), value), false)
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PhyrexianGoblinHasteToken(), CreaturesYouControlCount.instance), false)
                 .addHint(CreaturesYouControlHint.instance));
     }
 

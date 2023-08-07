@@ -21,7 +21,7 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
         this.splitCardParent = splitCardParent;
     }
 
-    public SplitCardHalfImpl(final SplitCardHalfImpl card) {
+    protected SplitCardHalfImpl(final SplitCardHalfImpl card) {
         super(card);
         this.splitCardParent = card.splitCardParent;
     }

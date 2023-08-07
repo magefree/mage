@@ -14,7 +14,7 @@ public class VanishingSacrificeAbility extends TriggeredAbilityImpl {
         this.setRuleVisible(false);
     }
 
-    public VanishingSacrificeAbility(final VanishingSacrificeAbility ability) {
+    protected VanishingSacrificeAbility(final VanishingSacrificeAbility ability) {
         super(ability);
     }
 
@@ -38,5 +38,5 @@ public class VanishingSacrificeAbility extends TriggeredAbilityImpl {
     public VanishingSacrificeAbility copy() {
         return new VanishingSacrificeAbility(this);
     }
-    
+
 }

@@ -30,8 +30,6 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class BillThePony extends CardImpl {
 
-    private static final FilterControlledPermanent foodFilter = new FilterControlledPermanent(SubType.FOOD, "a Food");;
-
     public BillThePony(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         
@@ -46,7 +44,7 @@ public final class BillThePony extends CardImpl {
         // Sacrifice a Food: Until end of turn, target creature you control assigns combat damage equal to its toughness rather than its power.
         Ability ability = new SimpleActivatedAbility(
             new BillThePonyEffect(),
-            new SacrificeTargetCost(new TargetControlledPermanent(foodFilter))
+            new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD))
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_CREATURE));
 

@@ -45,7 +45,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author emerald000
  */
 public class FilterPermanentOrSuspendedCard extends FilterImpl<MageObject> implements FilterInPlay<MageObject> {
@@ -65,7 +64,7 @@ public class FilterPermanentOrSuspendedCard extends FilterImpl<MageObject> imple
         cardFilter.add(CounterType.TIME.getPredicate());
     }
 
-    public FilterPermanentOrSuspendedCard(final FilterPermanentOrSuspendedCard filter) {
+    protected FilterPermanentOrSuspendedCard(final FilterPermanentOrSuspendedCard filter) {
         super(filter);
         this.permanentFilter = filter.permanentFilter.copy();
         this.cardFilter = filter.cardFilter.copy();

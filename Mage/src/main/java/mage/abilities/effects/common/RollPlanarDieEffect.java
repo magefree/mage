@@ -38,7 +38,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
         addChaosTargets(chaosTargets);
     }
 
-    public RollPlanarDieEffect(final RollPlanarDieEffect effect) {
+    protected RollPlanarDieEffect(final RollPlanarDieEffect effect) {
         super(effect);
         this.chaosEffects = effect.chaosEffects.stream().collect(Collectors.toList());
         this.chaosTargets = effect.chaosTargets.stream().collect(Collectors.toList());

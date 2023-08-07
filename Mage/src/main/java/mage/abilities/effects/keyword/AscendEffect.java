@@ -8,7 +8,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 public class AscendEffect extends OneShotEffect {
@@ -18,7 +17,7 @@ public class AscendEffect extends OneShotEffect {
         staticText = AscendAbility.ASCEND_RULE + "<br>";
     }
 
-    public AscendEffect(final AscendEffect effect) {
+    protected AscendEffect(final AscendEffect effect) {
         super(effect);
     }
 

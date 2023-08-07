@@ -43,7 +43,7 @@ public final class SengirNosferatuBatToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public SengirNosferatuBatToken(final SengirNosferatuBatToken token) {
+    protected SengirNosferatuBatToken(final SengirNosferatuBatToken token) {
         super(token);
     }
 

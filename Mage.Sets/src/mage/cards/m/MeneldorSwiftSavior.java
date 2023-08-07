@@ -4,16 +4,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
 
 /**
@@ -41,9 +38,8 @@ public final class MeneldorSwiftSavior extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Meneldor, Swift Savior deals combat damage to a player, exile up to one target creature you own, then return it to the battlefield under your control.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ExileTargetForSourceEffect().setText("exile up to one target creature you own"), false);
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ExileThenReturnTargetEffect(true, false), false);
         ability.addTarget(new TargetPermanent(0, 1, filter));
-        ability.addEffect(new ReturnFromExileEffect(Zone.BATTLEFIELD, ", then return it to the battlefield under your control."));
         this.addAbility(ability);
     }
 

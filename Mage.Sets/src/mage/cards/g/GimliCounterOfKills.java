@@ -39,7 +39,7 @@ public final class GimliCounterOfKills extends CardImpl {
 
         // Whenever a creature an opponent controls dies, Gimli, Counter of Kills deals 1 damage to that creature's controller.
         this.addAbility(new DiesCreatureTriggeredAbility(
-                new GimliMournfulAvengerEffect(), false,
+                new GimliCounterOfKillsEffect(), false,
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE
         ));
     }

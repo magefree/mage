@@ -25,7 +25,7 @@ public class AddCardTypeAttachedEffect extends ContinuousEffectImpl {
                 " in addition to its other types";
     }
 
-    public AddCardTypeAttachedEffect(final AddCardTypeAttachedEffect effect) {
+    protected AddCardTypeAttachedEffect(final AddCardTypeAttachedEffect effect) {
         super(effect);
         this.addedCardType = effect.addedCardType;
         this.attachmentType = effect.attachmentType;

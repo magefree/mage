@@ -62,7 +62,7 @@ class GoblinClearCutterManaEffect extends ManaEffect {
 
     public GoblinClearCutterManaEffect() {
         super();
-        this.staticText = "Add 3 mana in any combination of {R} and/or {G}";
+        this.staticText = "Add three mana in any combination of {R} and/or {G}";
         netMana.add(new Mana(0, 0, 0, 0, 3, 0, 0, 0));
         netMana.add(new Mana(0, 0, 0, 1, 2, 0, 0, 0));
         netMana.add(new Mana(0, 0, 0, 2, 1, 0, 0, 0));

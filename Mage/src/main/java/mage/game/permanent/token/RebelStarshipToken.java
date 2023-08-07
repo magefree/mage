@@ -22,7 +22,7 @@ public final class RebelStarshipToken extends TokenImpl {
         subtype.add(SubType.STARSHIP);
     }
 
-    public RebelStarshipToken(final RebelStarshipToken token) {
+    protected RebelStarshipToken(final RebelStarshipToken token) {
         super(token);
     }
 

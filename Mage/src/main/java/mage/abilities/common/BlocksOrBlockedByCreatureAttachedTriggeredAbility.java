@@ -26,12 +26,12 @@ public class BlocksOrBlockedByCreatureAttachedTriggeredAbility extends Triggered
 
     public BlocksOrBlockedByCreatureAttachedTriggeredAbility(Effect effect, AttachmentType attachmentType, boolean selfTarget, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("Whenever " + attachmentType.verb().toLowerCase() + " creature blocks or becomes blocked, ");
+        setTriggerPhrase("Whenever " + attachmentType.verb().toLowerCase() + " creature blocks or becomes blocked by a creature, ");
         this.attachmentType = attachmentType;
         this.selfTarget = selfTarget;
     }
 
-    public BlocksOrBlockedByCreatureAttachedTriggeredAbility(final BlocksOrBlockedByCreatureAttachedTriggeredAbility ability) {
+    protected BlocksOrBlockedByCreatureAttachedTriggeredAbility(final BlocksOrBlockedByCreatureAttachedTriggeredAbility ability) {
         super(ability);
         this.attachmentType = ability.attachmentType;
         this.selfTarget = ability.selfTarget;

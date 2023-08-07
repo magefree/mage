@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -13,12 +12,14 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class VerdantEidolon extends CardImpl {
@@ -34,8 +35,10 @@ public final class VerdantEidolon extends CardImpl {
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
         // Whenever you cast a multicolored spell, you may return Verdant Eidolon from your graveyard to your hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, true, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED,
+                true, SetTargetPointer.NONE));
     }
 
     private VerdantEidolon(final VerdantEidolon card) {

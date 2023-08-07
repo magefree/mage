@@ -40,7 +40,7 @@ public class RemoveVariableCountersSourceCost extends VariableCostImpl {
         }
     }
 
-    public RemoveVariableCountersSourceCost(final RemoveVariableCountersSourceCost cost) {
+    protected RemoveVariableCountersSourceCost(final RemoveVariableCountersSourceCost cost) {
         super(cost);
         this.minimalCountersToPay = cost.minimalCountersToPay;
         this.counterType = cost.counterType;

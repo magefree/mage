@@ -23,7 +23,7 @@ public final class PhyrexianRebirthHorrorToken extends TokenImpl {
         this.toughness = new MageInt(toughness);
     }
 
-    public PhyrexianRebirthHorrorToken(final PhyrexianRebirthHorrorToken token) {
+    protected PhyrexianRebirthHorrorToken(final PhyrexianRebirthHorrorToken token) {
         super(token);
     }
 

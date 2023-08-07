@@ -12,7 +12,8 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 
 /**
- *  RENAME
+ * RENAME
+ *
  * @author Backfir3, noxx
  */
 public class SetBaseToughnessSourceEffect extends ContinuousEffectImpl {
@@ -20,7 +21,6 @@ public class SetBaseToughnessSourceEffect extends ContinuousEffectImpl {
     private final DynamicValue amount;
 
     /**
-     *
      * @param amount Toughness to set as a characteristic-defining ability
      */
     public SetBaseToughnessSourceEffect(DynamicValue amount) {
@@ -30,7 +30,7 @@ public class SetBaseToughnessSourceEffect extends ContinuousEffectImpl {
         staticText = "{this}'s toughness is equal to the number of " + amount.getMessage();
     }
 
-    public SetBaseToughnessSourceEffect(final SetBaseToughnessSourceEffect effect) {
+    protected SetBaseToughnessSourceEffect(final SetBaseToughnessSourceEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

@@ -8,7 +8,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class ThatcherHumanToken extends TokenImpl {
@@ -24,7 +23,7 @@ public final class ThatcherHumanToken extends TokenImpl {
         this.toughness = new MageInt(1);
     }
 
-    public ThatcherHumanToken(final ThatcherHumanToken token) {
+    protected ThatcherHumanToken(final ThatcherHumanToken token) {
         super(token);
     }
 

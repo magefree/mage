@@ -1,13 +1,13 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.HasteAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class BalduvianToken extends TokenImpl {
@@ -23,7 +23,7 @@ public final class BalduvianToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    public BalduvianToken(final BalduvianToken token) {
+    protected BalduvianToken(final BalduvianToken token) {
         super(token);
     }
 

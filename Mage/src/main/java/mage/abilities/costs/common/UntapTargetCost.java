@@ -28,7 +28,7 @@ public class UntapTargetCost extends CostImpl {
         this.target.setNotTarget(true);
     }
 
-    public UntapTargetCost(final UntapTargetCost cost) {
+    protected UntapTargetCost(final UntapTargetCost cost) {
         super(cost);
         this.target = cost.target.copy();
     }

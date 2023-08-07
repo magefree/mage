@@ -7,11 +7,10 @@ import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  * @author jmharmon
@@ -30,7 +29,7 @@ public final class Damn extends CardImpl {
         // Overload {2}{W}{W} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of “target” with “each.”)
         this.addAbility(new OverloadAbility(
                 this,
-                new DestroyAllEffect(FILTER_PERMANENT_CREATURES, true),
+                new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, true),
                 new ManaCostsImpl<>("{2}{W}{W}")
         ));
     }

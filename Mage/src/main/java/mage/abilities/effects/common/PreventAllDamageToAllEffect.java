@@ -45,7 +45,7 @@ public class PreventAllDamageToAllEffect extends PreventionEffectImpl {
                 + (duration == Duration.EndOfTurn ? "this turn" : duration.toString());
     }
 
-    public PreventAllDamageToAllEffect(final PreventAllDamageToAllEffect effect) {
+    protected PreventAllDamageToAllEffect(final PreventAllDamageToAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

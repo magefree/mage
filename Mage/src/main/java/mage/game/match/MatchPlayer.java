@@ -95,7 +95,7 @@ public class MatchPlayer implements Serializable {
 
     public Deck generateDeck(DeckValidator deckValidator) {
         // auto complete deck
-        while (deck.getCards().size() < deckValidator.getDeckMinSize() && !deck.getSideboard().isEmpty()) {
+        while (deck.getMaindeckCards().size() < deckValidator.getDeckMinSize() && !deck.getSideboard().isEmpty()) {
             Card card = deck.getSideboard().iterator().next();
             deck.getCards().add(card);
             deck.getSideboard().remove(card);

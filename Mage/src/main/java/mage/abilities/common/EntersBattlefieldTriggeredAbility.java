@@ -28,7 +28,7 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this} enters the battlefield, ");
     }
 
-    public EntersBattlefieldTriggeredAbility(final EntersBattlefieldTriggeredAbility ability) {
+    protected EntersBattlefieldTriggeredAbility(final EntersBattlefieldTriggeredAbility ability) {
         super(ability);
         this.ignoreRulesGeneration = ability.ignoreRulesGeneration;
         this.etbFlavorWord = ability.etbFlavorWord;

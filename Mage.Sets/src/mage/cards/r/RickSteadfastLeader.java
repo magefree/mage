@@ -30,8 +30,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -87,7 +85,7 @@ class RickSteadfastLeaderChooseEffect extends OneShotEffect {
     }
 
     RickSteadfastLeaderChooseEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "choose two abilities from among first strike, vigilance, and lifelink";
     }
 

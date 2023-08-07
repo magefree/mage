@@ -1,13 +1,13 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.constants.SuperType;
 
 /**
- *
  * @author spjspj
  */
 public final class KaldraToken extends TokenImpl {
@@ -21,7 +21,7 @@ public final class KaldraToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public KaldraToken(final KaldraToken token) {
+    protected KaldraToken(final KaldraToken token) {
         super(token);
     }
 

@@ -45,7 +45,7 @@ public final class PollywogSymbiote extends CardImpl {
                 .setText("each creature spell you cast costs {1} less to cast if it has mutate")));
 
         // Whenever you cast a creature spell, if it has mutate, draw a card, then discard a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(
+        this.addAbility(SpellCastControllerTriggeredAbility.createWithRule(
                 new DrawDiscardControllerEffect(1, 1), filter2, false,
                 "Whenever you cast a creature spell, if it has mutate, draw a card, then discard a card."
         ));

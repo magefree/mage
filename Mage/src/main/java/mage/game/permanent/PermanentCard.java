@@ -81,7 +81,7 @@ public class PermanentCard extends PermanentImpl {
         }
     }
 
-    public PermanentCard(final PermanentCard permanent) {
+    protected PermanentCard(final PermanentCard permanent) {
         super(permanent);
         this.card = permanent.card.copy();
         this.maxLevelCounters = permanent.maxLevelCounters;

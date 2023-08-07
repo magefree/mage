@@ -20,7 +20,7 @@ public final class NecronWarriorToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public NecronWarriorToken(final NecronWarriorToken token) {
+    protected NecronWarriorToken(final NecronWarriorToken token) {
         super(token);
     }
 

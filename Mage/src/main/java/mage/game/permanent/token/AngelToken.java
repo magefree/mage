@@ -18,7 +18,7 @@ public final class AngelToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public AngelToken(final AngelToken token) {
+    protected AngelToken(final AngelToken token) {
         super(token);
     }
 

@@ -21,7 +21,7 @@ public final class BlueBirdToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public BlueBirdToken(final BlueBirdToken token) {
+    protected BlueBirdToken(final BlueBirdToken token) {
         super(token);
     }
 

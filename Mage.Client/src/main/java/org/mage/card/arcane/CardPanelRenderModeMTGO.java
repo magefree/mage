@@ -31,7 +31,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
     // https://www.mtg.onl/evolution-of-magic-token-card-frame-design/
 
     // Map of generated images
-    private final static Cache<ImageKey, BufferedImage> IMAGE_CACHE = CacheBuilder
+    private static final Cache<ImageKey, BufferedImage> IMAGE_CACHE = CacheBuilder
             .newBuilder()
             .maximumSize(3000)
             .expireAfterAccess(60, TimeUnit.MINUTES)

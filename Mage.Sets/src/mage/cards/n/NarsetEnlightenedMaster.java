@@ -57,7 +57,7 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
 
     public NarsetEnlightenedMasterExileEffect() {
         super(Outcome.Discard);
-        staticText = "exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with {this} this turn without paying their mana costs";
+        staticText = "exile the top four cards of your library. Until end of turn, you may cast noncreature spells from among those cards without paying their mana costs";
     }
 
     public NarsetEnlightenedMasterExileEffect(final NarsetEnlightenedMasterExileEffect effect) {

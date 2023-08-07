@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class SubterraneanTremorsLizardToken extends TokenImpl {
@@ -20,7 +19,7 @@ public final class SubterraneanTremorsLizardToken extends TokenImpl {
         toughness = new MageInt(8);
     }
 
-    public SubterraneanTremorsLizardToken(final SubterraneanTremorsLizardToken token) {
+    protected SubterraneanTremorsLizardToken(final SubterraneanTremorsLizardToken token) {
         super(token);
     }
 

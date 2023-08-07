@@ -22,7 +22,7 @@ public final class PirateRedToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    public PirateRedToken(final PirateRedToken token) {
+    protected PirateRedToken(final PirateRedToken token) {
         super(token);
     }
 

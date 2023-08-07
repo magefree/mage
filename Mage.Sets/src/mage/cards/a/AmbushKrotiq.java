@@ -10,20 +10,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LevelX2
  */
 public final class AmbushKrotiq extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public AmbushKrotiq(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
@@ -34,7 +27,7 @@ public final class AmbushKrotiq extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // When Ambush Krotiq enters the battlefield, return another creature you control to its owner's hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL)));
 
     }
 

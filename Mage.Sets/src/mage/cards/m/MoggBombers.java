@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -21,7 +22,7 @@ import mage.target.TargetPlayer;
  */
 public final class MoggBombers extends CardImpl {
     
-    private static final String rule = "When another creature enters the battlefield, sacrifice {this} and it deals 3 damage to target player.";
+    private static final String rule = "When another creature enters the battlefield, sacrifice {this} and it deals 3 damage to target player or planeswalker.";
 
     public MoggBombers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -40,7 +41,7 @@ public final class MoggBombers extends CardImpl {
                 false,
                 rule);
         ability.addEffect(damageTargetPlayer);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
 
     }

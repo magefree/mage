@@ -1,13 +1,13 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class TatsumaDragonToken extends TokenImpl {
@@ -23,7 +23,7 @@ public final class TatsumaDragonToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public TatsumaDragonToken(final TatsumaDragonToken token) {
+    protected TatsumaDragonToken(final TatsumaDragonToken token) {
         super(token);
     }
 

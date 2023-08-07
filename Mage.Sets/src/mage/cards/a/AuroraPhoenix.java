@@ -8,6 +8,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
@@ -42,7 +43,7 @@ public final class AuroraPhoenix extends CardImpl {
         // Whenever you cast a spell with cascade, return Aurora Phoenix from your graveyard to your hand.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
-                filter, false, false
+                filter, false, SetTargetPointer.NONE
         ));
     }
 

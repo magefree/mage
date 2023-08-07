@@ -14,7 +14,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
@@ -51,7 +50,7 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
         this(1);
     }
 
-    public LookLibraryTopCardTargetPlayerEffect(final LookLibraryTopCardTargetPlayerEffect effect) {
+    protected LookLibraryTopCardTargetPlayerEffect(final LookLibraryTopCardTargetPlayerEffect effect) {
         super(effect);
         amount = effect.amount;
         putToGraveyard = effect.putToGraveyard;

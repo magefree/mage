@@ -24,8 +24,6 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -67,7 +65,7 @@ public final class TorrentSculptor extends ModalDoubleFacedCard {
 class TorrentSculptorEffect extends OneShotEffect {
 
     TorrentSculptorEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "exile an instant or sorcery card from your graveyard. " +
                 "Put a number of +1/+1 counters on {this} equal to half that card's mana value, rounded up.";
     }

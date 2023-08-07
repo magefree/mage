@@ -2,6 +2,7 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.RequirementEffect;
@@ -22,7 +23,6 @@ import mage.target.common.TargetCreaturePermanent;
  * provoke, each triggers separately.
  *
  * @author LevelX2
- *
  */
 public class ProvokeAbility extends AttacksTriggeredAbility {
 
@@ -35,7 +35,7 @@ public class ProvokeAbility extends AttacksTriggeredAbility {
         this.addEffect(new ProvokeRequirementEffect());
     }
 
-    public ProvokeAbility(final ProvokeAbility ability) {
+    protected ProvokeAbility(final ProvokeAbility ability) {
         super(ability);
     }
 
@@ -71,7 +71,7 @@ class ProvokeRequirementEffect extends RequirementEffect {
         staticText = "and blocks {this} this turn if able";
     }
 
-    public ProvokeRequirementEffect(final ProvokeRequirementEffect effect) {
+    protected ProvokeRequirementEffect(final ProvokeRequirementEffect effect) {
         super(effect);
     }
 

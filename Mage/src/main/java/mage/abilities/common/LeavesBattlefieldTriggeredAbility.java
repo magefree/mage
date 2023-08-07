@@ -16,7 +16,7 @@ public class LeavesBattlefieldTriggeredAbility extends ZoneChangeTriggeredAbilit
         super(Zone.ALL, Zone.BATTLEFIELD, null, effect, "When {this} leaves the battlefield, ", optional);
     }
 
-    public LeavesBattlefieldTriggeredAbility(LeavesBattlefieldTriggeredAbility ability) {
+    protected LeavesBattlefieldTriggeredAbility(LeavesBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 

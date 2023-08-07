@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -17,8 +16,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
 
 /**
@@ -28,17 +26,13 @@ import mage.game.permanent.token.TokenImpl;
 public final class MythRealized extends CardImpl {
 
     private static final DynamicValue loreCounterCount = new CountersSourceCount(CounterType.LORE);
-    private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
-
-    static {
-        filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
     
     public MythRealized(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         // Whenever you cast a noncreature spell, put a lore counter on Myth Realized.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()), filterNonCreature, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()),
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false));
 
         // {2}{W}: Put a lore counter on Myth Realized.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.LORE.createInstance()), new ManaCostsImpl<>("{2}{W}")));

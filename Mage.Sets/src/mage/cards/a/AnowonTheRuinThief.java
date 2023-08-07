@@ -151,7 +151,8 @@ class AnowonTheRuinThiefWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST
+                || event.getType() == GameEvent.EventType.CLEANUP_STEP_POST) {
             damageMap.clear();
             return;
         }

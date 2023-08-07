@@ -37,7 +37,7 @@ public final class LegolasCounterOfKills extends CardImpl {
 
         // Whenever you scry, if Legolas, Counter of Kills is tapped, you may untap it. Do this only once each turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new ScryTriggeredAbility(new UntapSourceEffect()).setDoOnlyOnce(true), SourceTappedCondition.TAPPED,
+                new ScryTriggeredAbility(new UntapSourceEffect()).setDoOnlyOnceEachTurn(true), SourceTappedCondition.TAPPED,
                 "Whenever you scry, if {this} is tapped, you may untap it. Do this only once each turn."
         ));
 

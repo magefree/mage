@@ -17,7 +17,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -45,7 +45,7 @@ public final class JinxedRing extends CardImpl {
 
         // Sacrifice a creature: Target opponent gains control of Jinxed Ring.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedRingEffect(),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

@@ -59,7 +59,7 @@ public class DamageEverythingEffect extends OneShotEffect {
         staticText = this.sourceName + " deals " + this.amount.toString() + " damage to each " + this.filter.getMessage() + " and each player";
     }
 
-    public DamageEverythingEffect(final DamageEverythingEffect effect) {
+    protected DamageEverythingEffect(final DamageEverythingEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.filter = effect.filter;

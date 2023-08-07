@@ -21,7 +21,7 @@ public final class WurmWithLifelinkToken extends TokenImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public WurmWithLifelinkToken(final WurmWithLifelinkToken token) {
+    protected WurmWithLifelinkToken(final WurmWithLifelinkToken token) {
         super(token);
     }
 

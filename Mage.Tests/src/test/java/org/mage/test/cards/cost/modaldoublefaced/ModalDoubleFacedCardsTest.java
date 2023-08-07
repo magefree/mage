@@ -10,9 +10,7 @@ import mage.game.permanent.PermanentCard;
 import mage.util.CardUtil;
 import mage.util.ManaUtil;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -800,7 +798,6 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
         setChoice(playerA, true); // use free cast
         //setChoice(playerA, "Cast Valki, God of Lies"); possible bug: you can see two spell abilities to choose, but only one allows here
-        setChoice(playerA, TestPlayer.CHOICE_SKIP); // no choices for valki's etb exile
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -848,7 +845,6 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sram's Expertise");
         setChoice(playerA, true); // use free cast
-        setChoice(playerA, TestPlayer.CHOICE_SKIP); // no choices for valki's etb exile
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

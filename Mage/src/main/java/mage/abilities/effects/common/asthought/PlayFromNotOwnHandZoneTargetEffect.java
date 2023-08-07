@@ -57,7 +57,7 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
         this.onlyCastAllowed = onlyCastAllowed;
     }
 
-    public PlayFromNotOwnHandZoneTargetEffect(final PlayFromNotOwnHandZoneTargetEffect effect) {
+    protected PlayFromNotOwnHandZoneTargetEffect(final PlayFromNotOwnHandZoneTargetEffect effect) {
         super(effect);
         this.fromZone = effect.fromZone;
         this.allowedCaster = effect.allowedCaster;
@@ -155,8 +155,8 @@ public class PlayFromNotOwnHandZoneTargetEffect extends AsThoughEffectImpl {
     /**
      * Exiles the cards and let the allowed player play them from exile for the given duration
      * Supports:
-     *  - cards (use any side)
-     *  - permanents (use permanent, not permanent's card)
+     * - cards (use any side)
+     * - permanents (use permanent, not permanent's card)
      *
      * @param game
      * @param source

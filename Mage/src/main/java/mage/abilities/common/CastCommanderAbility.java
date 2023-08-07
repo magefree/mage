@@ -20,7 +20,7 @@ public class CastCommanderAbility extends SpellAbility {
         this.ruleText = spellTemplate.getRule(); // need to support custom rule texts like OverloadAbility
     }
 
-    public CastCommanderAbility(final CastCommanderAbility ability) {
+    protected CastCommanderAbility(final CastCommanderAbility ability) {
         super(ability);
         this.ruleText = ability.ruleText;
     }

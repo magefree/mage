@@ -48,7 +48,7 @@ public final class TaleOfTinuviel extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
                 new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn),
-                new TargetControlledCreaturePermanent(0, 2)
+                new TargetControlledCreaturePermanent(0, 2, StaticFilters.FILTER_CONTROLLED_CREATURES, false)
         );
         this.addAbility(sagaAbility);
     }

@@ -18,7 +18,7 @@ public class BecomesEnchantmentSourceEffect extends ContinuousEffectImpl {
         dependencyTypes.add(DependencyType.EnchantmentAddingRemoving);
     }
 
-    public BecomesEnchantmentSourceEffect(final BecomesEnchantmentSourceEffect effect) {
+    protected BecomesEnchantmentSourceEffect(final BecomesEnchantmentSourceEffect effect) {
         super(effect);
     }
 

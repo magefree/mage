@@ -87,7 +87,7 @@ class TrailOfTheMageRingsReboundEffect extends ContinuousEffectImpl {
         staticText = "Instant and sorcery spells have rebound";
     }
 
-    public TrailOfTheMageRingsReboundEffect(final TrailOfTheMageRingsReboundEffect effect) {
+    protected TrailOfTheMageRingsReboundEffect(final TrailOfTheMageRingsReboundEffect effect) {
         super(effect);
     }
 

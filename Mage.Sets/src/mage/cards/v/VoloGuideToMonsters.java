@@ -6,6 +6,7 @@ import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
@@ -45,7 +46,7 @@ public final class VoloGuideToMonsters extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new CopyTargetSpellEffect(true)
                         .setText("copy that spell"),
-                filter, false, true
+                filter, false, SetTargetPointer.SPELL
         ));
     }
 

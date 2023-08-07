@@ -6,7 +6,6 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 
 /**
- *
  * @author duncant
  */
 
@@ -21,7 +20,7 @@ public class FilterInstantOrSorcerySpell extends FilterSpell {
         this.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
     }
 
-    public FilterInstantOrSorcerySpell(final FilterInstantOrSorcerySpell filter) {
+    protected FilterInstantOrSorcerySpell(final FilterInstantOrSorcerySpell filter) {
         super(filter);
     }
 

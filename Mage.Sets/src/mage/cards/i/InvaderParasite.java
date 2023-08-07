@@ -125,6 +125,6 @@ class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a land with the same name as the exiled card enters the battlefield under an opponent's control, {this} deals 2 damage to that player";
+        return "Whenever a land with the same name as the exiled card enters the battlefield under an opponent's control, {this} deals 2 damage to that player.";
     }
 }

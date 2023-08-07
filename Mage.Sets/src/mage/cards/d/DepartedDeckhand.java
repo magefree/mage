@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -43,7 +43,7 @@ public final class DepartedDeckhand extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Departed Deckhand becomes the target of a spell, sacrifice it.
-        this.addAbility(new BecomesTargetTriggeredAbility(
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(
                 new SacrificeSourceEffect(),
                 StaticFilters.FILTER_SPELL_A
         ));

@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author L_J
  */
 public final class UktabiKongApeToken extends TokenImpl {
@@ -20,7 +19,7 @@ public final class UktabiKongApeToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public UktabiKongApeToken(final UktabiKongApeToken token) {
+    protected UktabiKongApeToken(final UktabiKongApeToken token) {
         super(token);
     }
 

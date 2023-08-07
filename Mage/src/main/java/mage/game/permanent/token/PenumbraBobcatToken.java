@@ -18,7 +18,7 @@ public final class PenumbraBobcatToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public PenumbraBobcatToken(final PenumbraBobcatToken token) {
+    protected PenumbraBobcatToken(final PenumbraBobcatToken token) {
         super(token);
     }
 

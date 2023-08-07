@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,14 +17,15 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class GoreVassal extends CardImpl {
 
     public GoreVassal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.DOG);
 
@@ -56,6 +56,15 @@ class GoreVassalEffect extends RegenerateTargetEffect {
     GoreVassalEffect() {
         super();
         staticText = "Then if that creature's toughness is 1 or greater, regenerate it";
+    }
+
+    protected GoreVassalEffect(final GoreVassalEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GoreVassalEffect copy() {
+        return new GoreVassalEffect(this);
     }
 
     @Override

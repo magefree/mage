@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -73,7 +73,7 @@ class GrislySpectacleEffect extends OneShotEffect {
             Player controller = game.getPlayer(creature.getControllerId());
             if (controller != null) {
                 int power = creature.getPower().getValue();
-                Effect effect = new PutLibraryIntoGraveTargetEffect(power);
+                Effect effect = new MillCardsTargetEffect(power);
                 effect.setTargetPointer(new FixedTarget(controller.getId()));
                 return effect.apply(game, source);
             }

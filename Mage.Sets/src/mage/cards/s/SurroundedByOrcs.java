@@ -61,6 +61,7 @@ class SurroundedByOrcsEffect extends OneShotEffect {
         if (permanent == null || player == null) {
             return false;
         }
+        game.getState().processAction(game);
         player.millCards(permanent.getPower().getValue(), source, game);
         return true;
     }

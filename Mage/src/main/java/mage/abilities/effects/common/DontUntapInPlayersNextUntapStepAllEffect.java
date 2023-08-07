@@ -35,7 +35,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
         this.filter = filter;
     }
 
-    public DontUntapInPlayersNextUntapStepAllEffect(final DontUntapInPlayersNextUntapStepAllEffect effect) {
+    protected DontUntapInPlayersNextUntapStepAllEffect(final DontUntapInPlayersNextUntapStepAllEffect effect) {
         super(effect);
         this.validForTurnNum = effect.validForTurnNum;
         this.filter = effect.filter;

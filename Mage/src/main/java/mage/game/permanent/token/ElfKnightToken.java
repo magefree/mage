@@ -22,7 +22,7 @@ public final class ElfKnightToken extends TokenImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public ElfKnightToken(final ElfKnightToken token) {
+    protected ElfKnightToken(final ElfKnightToken token) {
         super(token);
     }
 

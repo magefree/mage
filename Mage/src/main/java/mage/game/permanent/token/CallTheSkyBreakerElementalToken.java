@@ -22,7 +22,7 @@ public final class CallTheSkyBreakerElementalToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public CallTheSkyBreakerElementalToken(final CallTheSkyBreakerElementalToken token) {
+    protected CallTheSkyBreakerElementalToken(final CallTheSkyBreakerElementalToken token) {
         super(token);
     }
 

@@ -63,7 +63,7 @@ class AminatousAuguryEffect extends OneShotEffect {
         staticText = "Exile the top eight cards of your library. "
                 + "You may put a land card from among them onto the battlefield. "
                 + "Until end of turn, for each nonland card type, "
-                + "you may cast a card of that type from among the exiled cards without paying its mana cost.";
+                + "you may cast a spell of that type from among the exiled cards without paying its mana cost.";
     }
 
     public AminatousAuguryEffect(final AminatousAuguryEffect effect) {

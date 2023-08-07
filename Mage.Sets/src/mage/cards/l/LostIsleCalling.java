@@ -75,7 +75,7 @@ class LostIsleCallingEffect extends OneShotEffect {
         int count = permanent.getCounters(game).getCount(CounterType.VERSE);
         player.drawCards(count, source, game);
         if (count >= 7) {
-            game.getState().getTurnMods().add(new TurnMod(player.getId(), false));
+            game.getState().getTurnMods().add(new TurnMod(player.getId()).withExtraTurn());
         }
         return true;
     }

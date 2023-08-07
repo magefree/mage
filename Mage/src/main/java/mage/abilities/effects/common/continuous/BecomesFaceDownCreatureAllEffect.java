@@ -29,7 +29,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
         staticText = "turn all " + filter.getMessage() + " face down. (They're 2/2 creatures.)";
     }
 
-    public BecomesFaceDownCreatureAllEffect(final BecomesFaceDownCreatureAllEffect effect) {
+    protected BecomesFaceDownCreatureAllEffect(final BecomesFaceDownCreatureAllEffect effect) {
         super(effect);
         for (Map.Entry<UUID, Ability> entry : effect.turnFaceUpAbilityMap.entrySet()) {
             this.turnFaceUpAbilityMap.put(entry.getKey(), entry.getValue());

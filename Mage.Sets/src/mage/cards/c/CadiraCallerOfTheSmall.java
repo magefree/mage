@@ -51,7 +51,7 @@ public final class CadiraCallerOfTheSmall extends CardImpl {
                 new CreateTokenEffect(new RabbitToken(), xValue)
                         .setText("for each token you control, create a 1/1 white Rabbit creature token"),
                 false
-        ));
+        ).addHint(hint));
     }
 
     private CadiraCallerOfTheSmall(final CadiraCallerOfTheSmall card) {

@@ -1708,6 +1708,7 @@ public class TablesPanel extends javax.swing.JPanel {
             options.setRange(RangeOfInfluence.ONE);
             options.setWinsNeeded(2);
             options.setMatchTimeLimit(MatchTimeLimit.NONE);
+            options.setMatchBufferTime(MatchBufferTime.NONE);
             options.setFreeMulligans(2);
             options.setSkillLevel(SkillLevel.CASUAL);
             options.setRollbackTurnsAllowed(true);

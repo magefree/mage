@@ -59,7 +59,7 @@ class VoraciousFellBeastEffect extends OneShotEffect {
 
     VoraciousFellBeastEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Each opponent sacrifices a creature. " +
+        this.staticText = "each opponent sacrifices a creature. " +
             "Create a Food token for each creature sacrificed this way";
     }
 
@@ -106,7 +106,8 @@ class VoraciousFellBeastEffect extends OneShotEffect {
                 sacrificeCount += 1;
             }
         }
-        if(sacrificeCount > 0) {
+        if (sacrificeCount > 0) {
+            game.getState().processAction(game);
             new CreateTokenEffect(new FoodToken(), sacrificeCount).apply(game, source);
         }
         return true;

@@ -21,7 +21,7 @@ public final class EnchantmentBirdToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public EnchantmentBirdToken(final EnchantmentBirdToken token) {
+    protected EnchantmentBirdToken(final EnchantmentBirdToken token) {
         super(token);
     }
 

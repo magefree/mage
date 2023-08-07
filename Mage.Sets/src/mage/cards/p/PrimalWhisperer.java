@@ -23,7 +23,7 @@ import mage.filter.predicate.card.FaceDownPredicate;
  */
 public final class PrimalWhisperer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creature on the battlefield");
 
     static {
         filter.add(FaceDownPredicate.instance);

@@ -82,6 +82,6 @@ class BalduvianFallenAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this}'s cumulative upkeep is paid, it gets +1/+0 until end of turn for each {B} or {R} spent this way";
+        return "Whenever {this}'s cumulative upkeep is paid, it gets +1/+0 until end of turn for each {B} or {R} spent this way.";
     }
 }

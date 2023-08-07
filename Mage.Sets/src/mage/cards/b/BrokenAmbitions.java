@@ -66,7 +66,7 @@ class BrokenAmbitionsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        if (ClashEffect.getInstance().apply(game, source)) {
+        if (new ClashEffect().apply(game, source)) {
             player.millCards(4, source, game);
         }
         return true;

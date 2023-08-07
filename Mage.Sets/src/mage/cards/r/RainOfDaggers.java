@@ -66,6 +66,7 @@ class RainOfDaggersEffect extends OneShotEffect {
                 }
             }
             if (destroyedCreature > 0) {
+                game.getState().processAction(game);
                 new LoseLifeSourceControllerEffect(destroyedCreature * 2).apply(game, source);
             }
             return true;

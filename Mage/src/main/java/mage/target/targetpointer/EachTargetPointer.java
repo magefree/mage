@@ -25,7 +25,7 @@ public class EachTargetPointer extends TargetPointerImpl {
         super();
     }
 
-    public EachTargetPointer(final EachTargetPointer targetPointer) {
+    protected EachTargetPointer(final EachTargetPointer targetPointer) {
         super(targetPointer);
 
         this.zoneChangeCounter = new HashMap<>();

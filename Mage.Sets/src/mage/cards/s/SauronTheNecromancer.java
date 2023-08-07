@@ -89,7 +89,7 @@ class SauronTheNecromancerEffect extends OneShotEffect {
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
                 null, null, false, 1, true, true
         );
-        effect.setPermanentModifier(((token, g) -> {
+        effect.setPermanentModifier(((token) -> {
             token.setColor(ObjectColor.BLACK);
             token.addSubType(SubType.WRAITH);
             token.setPower(3);

@@ -17,7 +17,7 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
         staticText = "You may have {this} enter the battlefield as a copy of " + token.getDescription() + " on the battlefield";
     }
 
-    public CopyTokenEffect(final CopyTokenEffect effect) {
+    protected CopyTokenEffect(final CopyTokenEffect effect) {
         super(effect);
         this.token = effect.token.copy();
     }

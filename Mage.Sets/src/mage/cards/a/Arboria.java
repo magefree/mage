@@ -62,6 +62,9 @@ class ArboriaEffect extends RestrictionEffect {
         if (defenderId == null) {
             return true;
         }
+        if (!game.getPlayers().containsKey(defenderId)) {
+            return true;
+        }
 
         CastSpellYourLastTurnWatcher watcher = game.getState().getWatcher(CastSpellYourLastTurnWatcher.class);
         if (watcher != null && watcher.getAmountOfSpellsCastOnPlayersTurn(defenderId) > 0) {

@@ -73,7 +73,7 @@ public final class CreatureToken extends TokenImpl {
         return this;
     }
 
-    public CreatureToken(final CreatureToken token) {
+    protected CreatureToken(final CreatureToken token) {
         super(token);
     }
 

@@ -30,27 +30,31 @@ public class DoIfCostPaid extends OneShotEffect {
     }
 
     public DoIfCostPaid(Effect effectOnPaid, Effect effectOnNotPaid, Cost cost, boolean optional) {
-        this(effectOnPaid, cost, null, optional);
-        if (effectOnNotPaid != null) {
-            this.otherwiseEffects.add(effectOnNotPaid);
-        }
+        this(effectOnPaid, effectOnNotPaid, cost, null, optional);
     }
 
     public DoIfCostPaid(Effect effectOnPaid, Cost cost, String chooseUseText) {
-        this(effectOnPaid, cost, chooseUseText, true);
+        this(effectOnPaid, null, cost, chooseUseText, true);
     }
 
     public DoIfCostPaid(Effect effectOnPaid, Cost cost, String chooseUseText, boolean optional) {
+        this(effectOnPaid, null, cost, chooseUseText, optional);
+    }
+
+    public DoIfCostPaid(Effect effectOnPaid, Effect effectOnNotPaid, Cost cost, String chooseUseText, boolean optional) {
         super(Outcome.Benefit);
         if (effectOnPaid != null) {
             this.executingEffects.add(effectOnPaid);
+        }
+        if (effectOnNotPaid != null) {
+            this.otherwiseEffects.add(effectOnNotPaid);
         }
         this.cost = cost;
         this.chooseUseText = chooseUseText;
         this.optional = optional;
     }
 
-    public DoIfCostPaid(final DoIfCostPaid effect) {
+    protected DoIfCostPaid(final DoIfCostPaid effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
         this.otherwiseEffects = effect.otherwiseEffects.copy();
@@ -149,7 +153,7 @@ public class DoIfCostPaid extends OneShotEffect {
     public Cost getCost() {
         return cost;
     }
-
+    
     @Override
     public String getText(Mode mode) {
         if (!staticText.isEmpty()) {
