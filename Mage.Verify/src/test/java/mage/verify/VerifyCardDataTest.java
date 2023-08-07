@@ -584,6 +584,8 @@ public class VerifyCardDataTest {
             }
 
             if ((deckCards.getCards().size() + deckCards.getSideboard().size()) < 10) {
+                // note: does not check whether cards are extra deck cards (contraptions/attractions);
+                // may succeed for decks with such cards when it should fail
                 errorsList.add("Error: sample deck contains too little cards (" + deckCards.getSideboard().size() + ") " + deckName);
                 totalErrorFiles++;
                 continue;

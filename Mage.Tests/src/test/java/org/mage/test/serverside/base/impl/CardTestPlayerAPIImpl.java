@@ -219,8 +219,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
         Deck deck = Deck.load(list, false, false, loadedCardInfo);
         logger.debug("Done!");
-        if (deck.getCards().size() < 40) {
-            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
+        if (deck.getMaindeckCards().size() < 40) {
+            throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getMaindeckCards().size());
         }
 
         game.loadCards(deck.getCards(), player.getId());

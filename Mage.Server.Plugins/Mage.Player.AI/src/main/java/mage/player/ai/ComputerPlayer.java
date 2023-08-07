@@ -2257,7 +2257,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         List<Card> sortedCards = new ArrayList<>(cardPool);
         if (!sortedCards.isEmpty()) {
-            while (deck.getCards().size() < DECK_SIZE) {
+            while (deck.getMaindeckCards().size() < DECK_SIZE) {
                 deck.getCards().add(sortedCards.get(RandomUtil.nextInt(sortedCards.size())));
             }
             return deck;
@@ -2287,7 +2287,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         // get top cards
         int cardNum = 0;
-        while (deck.getCards().size() < DECK_CARDS_COUNT && sortedCards.size() > cardNum) {
+        while (deck.getMaindeckCards().size() < DECK_CARDS_COUNT && sortedCards.size() > cardNum) {
             Card card = sortedCards.get(cardNum);
             if (!card.isBasic()) {
                 deck.getCards().add(card);
@@ -2349,7 +2349,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         // adds remaining lands (most popular name)
-        addBasicLands(deck, mostLandName, DECK_SIZE - deck.getCards().size());
+        addBasicLands(deck, mostLandName, DECK_SIZE - deck.getMaindeckCards().size());
 
         return deck;
     }
@@ -2359,7 +2359,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         DeckValidator deckValidator = DeckValidatorFactory.instance.createDeckValidator(tournament.getOptions().getMatchOptions().getDeckType());
         int deckMinSize = deckValidator != null ? deckValidator.getDeckMinSize() : 0;
 
-        if (deck != null && deck.getCards().size() < deckMinSize && !deck.getSideboard().isEmpty()) {
+        if (deck != null && deck.getMaindeckCards().size() < deckMinSize && !deck.getSideboard().isEmpty()) {
             if (chosenColors == null) {
                 for (Card card : deck.getSideboard()) {
                     rememberPick(card, RateCard.rateCard(card, null));

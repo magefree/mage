@@ -388,11 +388,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void useDeck(Deck deck, Game game) {
         library.clear();
-        library.addAll(deck.getCards(), game);
+        library.addAll(deck.getMaindeckCards(), game);
         sideboard.clear();
         for (Card card : deck.getSideboard()) {
             sideboard.add(card);
         }
+        //TODO ARTI initialize extra decks here!
     }
 
     /**

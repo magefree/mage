@@ -53,6 +53,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean usesVariousArt = false;
     protected boolean morphCard;
     protected List<UUID> attachments = new ArrayList<>();
+    protected boolean extraDeckCard = false;
 
     protected CardImpl(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
         this(ownerId, setInfo, cardTypes, costs, SpellAbilityType.BASE);
@@ -130,6 +131,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         flipCardName = card.flipCardName;
         usesVariousArt = card.usesVariousArt;
         morphCard = card.morphCard;
+        extraDeckCard = card.extraDeckCard;
 
         this.attachments.addAll(card.attachments);
     }
@@ -951,5 +953,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
         // Only way to get here is if none of the effects on the card care about mana color.
         return false;
+    }
+
+    @Override
+    public boolean isExtraDeckCard() {
+        return extraDeckCard;
     }
 }

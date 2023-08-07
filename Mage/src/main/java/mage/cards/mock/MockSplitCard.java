@@ -19,7 +19,6 @@ import java.util.List;
  * @author North
  */
 public class MockSplitCard extends SplitCard {
-
     public MockSplitCard(CardInfo card) {
         super(null, new CardSetInfo(card.getName(), card.getSetCode(), card.getCardNumber(), card.getRarity()),
                 card.getTypes().toArray(new CardType[0]),
@@ -62,6 +61,8 @@ public class MockSplitCard extends SplitCard {
             this.rightHalfCard = new MockSplitCardHalf(rightHalf);
             ((SplitCardHalf) this.rightHalfCard).setParentCard(this);
         }
+
+        this.extraDeckCard = card.isExtraDeckCard();
     }
 
     protected MockSplitCard(final MockSplitCard card) {

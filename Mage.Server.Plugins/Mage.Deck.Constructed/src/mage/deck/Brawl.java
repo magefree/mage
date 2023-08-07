@@ -89,11 +89,11 @@ public class Brawl extends Constructed {
             }
         }
 
-        if (companion != null && deck.getCards().size() + deck.getSideboard().size() != getDeckMinSize() + 1) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + (getDeckMinSize() + 1) + " cards (companion doesn't count in deck size requirement): has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+        if (companion != null && deck.getMaindeckCards().size() + deck.getSideboard().size() != getDeckMinSize() + 1) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + (getDeckMinSize() + 1) + " cards (companion doesn't count in deck size requirement): has " + (deck.getMaindeckCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
-        } else if (companion == null && deck.getCards().size() + deck.getSideboard().size() != getDeckMinSize()) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + getDeckMinSize() + " cards: has " + (deck.getCards().size() + deck.getSideboard().size()) + " cards");
+        } else if (companion == null && deck.getMaindeckCards().size() + deck.getSideboard().size() != getDeckMinSize()) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + getDeckMinSize() + " cards: has " + (deck.getMaindeckCards().size() + deck.getSideboard().size()) + " cards");
             valid = false;
         }
 
