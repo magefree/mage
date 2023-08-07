@@ -17,6 +17,7 @@ public class MagicOriginsPromos extends ExpansionSet {
 
     private MagicOriginsPromos() {
         super("Magic Origins Promos", "PORI", ExpansionSet.buildDate(2015, 7, 17), SetType.PROMOTIONAL);
+        this.parentSet = MagicOrigins.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

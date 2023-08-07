@@ -19,7 +19,6 @@ public final class Weatherlight extends ExpansionSet {
     private Weatherlight() {
         super("Weatherlight", "WTH", ExpansionSet.buildDate(1997, 5, 31), SetType.EXPANSION);
         this.blockName = "Mirage";
-        this.parentSet = Mirage.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -27,6 +26,7 @@ public final class Weatherlight extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Abduction", 30, Rarity.UNCOMMON, mage.cards.a.Abduction.class));
         cards.add(new SetCardInfo("Abeyance", 1, Rarity.RARE, mage.cards.a.Abeyance.class));
         cards.add(new SetCardInfo("Abjure", 31, Rarity.COMMON, mage.cards.a.Abjure.class));

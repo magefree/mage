@@ -18,6 +18,7 @@ public final class M19GiftPack extends ExpansionSet {
 
     private M19GiftPack() {
         super("M19 Gift Pack", "G18", ExpansionSet.buildDate(2018, 11, 16), SetType.SUPPLEMENTAL_STANDARD_LEGAL);
+        this.parentSet = CoreSet2019.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = false;
 

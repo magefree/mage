@@ -17,6 +17,7 @@ public class ThroneOfEldrainePromos extends ExpansionSet {
 
     private ThroneOfEldrainePromos() {
         super("Throne of Eldraine Promos", "PELD", ExpansionSet.buildDate(2019, 10, 4), SetType.PROMOTIONAL);
+        this.parentSet = ThroneOfEldraine.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

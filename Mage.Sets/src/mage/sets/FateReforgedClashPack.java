@@ -18,6 +18,7 @@ public class FateReforgedClashPack extends ExpansionSet {
     private FateReforgedClashPack() {
         super("Fate Reforged Clash Pack", "CP2", ExpansionSet.buildDate(2015, 1, 23), SetType.PROMOTIONAL);
         this.blockName = "Khans of Tarkir";
+        this.parentSet = FateReforged.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

@@ -26,6 +26,7 @@ public final class Magic2014 extends ExpansionSet {
     private Magic2014() {
         super("Magic 2014", "M14", ExpansionSet.buildDate(2013, 7, 19), SetType.CORE);
         this.blockName = "Core Set";
+        this.parentSet = Magic2014.getInstance();
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

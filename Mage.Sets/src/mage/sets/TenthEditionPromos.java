@@ -17,6 +17,7 @@ public class TenthEditionPromos extends ExpansionSet {
 
     private TenthEditionPromos() {
         super("Tenth Edition Promos", "P10E", ExpansionSet.buildDate(2007, 7, 13), SetType.PROMOTIONAL);
+        this.parentSet = TenthEdition.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

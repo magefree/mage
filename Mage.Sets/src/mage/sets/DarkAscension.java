@@ -38,8 +38,8 @@ public final class DarkAscension extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = 1;
-        this.parentSet = Innistrad.getInstance();
         this.hasBasicLands = false;
+
         cards.add(new SetCardInfo("Afflicted Deserter", 81, Rarity.UNCOMMON, mage.cards.a.AfflictedDeserter.class));
         cards.add(new SetCardInfo("Alpha Brawl", 82, Rarity.RARE, mage.cards.a.AlphaBrawl.class));
         cards.add(new SetCardInfo("Altar of the Lost", 144, Rarity.UNCOMMON, mage.cards.a.AltarOfTheLost.class));

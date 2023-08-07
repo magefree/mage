@@ -17,6 +17,7 @@ public final class Transformers extends ExpansionSet {
 
     private Transformers() {
         super("Transformers", "BOT", ExpansionSet.buildDate(2022, 11, 18), SetType.SUPPLEMENTAL);
+        this.parentSet = TheBrothersWar.getInstance();
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Arcee, Acrobatic Coupe", 7, Rarity.MYTHIC, mage.cards.a.ArceeAcrobaticCoupe.class));

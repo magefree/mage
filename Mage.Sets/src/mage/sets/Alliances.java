@@ -15,7 +15,6 @@ public final class Alliances extends ExpansionSet {
     private Alliances() {
         super("Alliances", "ALL", ExpansionSet.buildDate(1996, 6, 10), SetType.EXPANSION);
         this.blockName = "Ice Age";
-        this.parentSet = IceAge.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

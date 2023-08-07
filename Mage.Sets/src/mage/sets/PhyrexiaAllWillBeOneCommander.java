@@ -18,6 +18,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
     private PhyrexiaAllWillBeOneCommander() {
         super("Phyrexia: All Will Be One Commander", "ONC", ExpansionSet.buildDate(2023, 1, 10), SetType.SUPPLEMENTAL);
         this.blockName = "Commander";
+        this.parentSet = PhyrexiaAllWillBeOne.getInstance();
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Adriana, Captain of the Guard", 114, Rarity.RARE, mage.cards.a.AdrianaCaptainOfTheGuard.class));

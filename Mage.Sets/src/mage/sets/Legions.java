@@ -20,7 +20,6 @@ public final class Legions extends ExpansionSet {
     private Legions() {
         super("Legions", "LGN", ExpansionSet.buildDate(2003, 1, 25), SetType.EXPANSION);
         this.blockName = "Onslaught";
-        this.parentSet = Onslaught.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -28,6 +27,7 @@ public final class Legions extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Akroma, Angel of Wrath", 1, Rarity.RARE, mage.cards.a.AkromaAngelOfWrath.class));
         cards.add(new SetCardInfo("Akroma's Devoted", 2, Rarity.UNCOMMON, mage.cards.a.AkromasDevoted.class));
         cards.add(new SetCardInfo("Aphetto Exterminator", 59, Rarity.UNCOMMON, mage.cards.a.AphettoExterminator.class));

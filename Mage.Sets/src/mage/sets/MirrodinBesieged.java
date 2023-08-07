@@ -20,13 +20,13 @@ public final class MirrodinBesieged extends ExpansionSet {
     private MirrodinBesieged() {
         super("Mirrodin Besieged", "MBS", ExpansionSet.buildDate(2011, 1, 4), SetType.EXPANSION);
         this.blockName = "Scars of Mirrodin";
-        this.parentSet = ScarsOfMirrodin.getInstance();
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Accorder Paladin", 1, Rarity.UNCOMMON, mage.cards.a.AccorderPaladin.class));
         cards.add(new SetCardInfo("Ardent Recruit", 2, Rarity.COMMON, mage.cards.a.ArdentRecruit.class));
         cards.add(new SetCardInfo("Banishment Decree", 3, Rarity.COMMON, mage.cards.b.BanishmentDecree.class));

@@ -18,6 +18,7 @@ public class KhansOfTarkirPromos extends ExpansionSet {
     private KhansOfTarkirPromos() {
         super("Khans of Tarkir Promos", "PKTK", ExpansionSet.buildDate(2014, 9, 27), SetType.PROMOTIONAL);
         this.blockName = "Khans of Tarkir";
+        this.parentSet = KhansOfTarkir.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

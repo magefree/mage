@@ -18,6 +18,7 @@ public class RivalsOfIxalanPromos extends ExpansionSet {
     private RivalsOfIxalanPromos() {
         super("Rivals of Ixalan Promos", "PRIX", ExpansionSet.buildDate(2018, 1, 19), SetType.PROMOTIONAL);
         this.blockName = "Ixalan";
+        this.parentSet = RivalsOfIxalan.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

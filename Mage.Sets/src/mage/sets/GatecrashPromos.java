@@ -18,6 +18,7 @@ public class GatecrashPromos extends ExpansionSet {
     private GatecrashPromos() {
         super("Gatecrash Promos", "PGTC", ExpansionSet.buildDate(2013, 1, 26), SetType.PROMOTIONAL);
         this.blockName = "Return to Ravnica";
+        this.parentSet = Gatecrash.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

@@ -18,6 +18,7 @@ public class KaladeshPromos extends ExpansionSet {
     private KaladeshPromos() {
         super("Kaladesh Promos", "PKLD", ExpansionSet.buildDate(2016, 9, 30), SetType.PROMOTIONAL);
         this.blockName = "Kaladesh";
+        this.parentSet = Kaladesh.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

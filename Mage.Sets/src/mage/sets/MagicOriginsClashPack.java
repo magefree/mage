@@ -17,6 +17,7 @@ public class MagicOriginsClashPack extends ExpansionSet {
 
     private MagicOriginsClashPack() {
         super("Magic Origins Clash Pack", "CP3", ExpansionSet.buildDate(2015, 7, 17), SetType.PROMOTIONAL);
+        this.parentSet = MagicOrigins.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

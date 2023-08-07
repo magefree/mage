@@ -17,6 +17,7 @@ public class MysteryBoosterRetailEditionFoils extends ExpansionSet {
 
     private MysteryBoosterRetailEditionFoils() {
         super("Mystery Booster Retail Edition Foils", "FMB1", ExpansionSet.buildDate(2020, 3, 8), SetType.SUPPLEMENTAL);
+        this.parentSet = MysteryBooster.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

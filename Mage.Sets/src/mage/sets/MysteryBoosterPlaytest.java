@@ -20,6 +20,7 @@ public class MysteryBoosterPlaytest extends ExpansionSet {
 
     private MysteryBoosterPlaytest() {
         super("Mystery Booster Playtest", "CMB1", ExpansionSet.buildDate(2019, 11, 7), SetType.JOKESET);
+        this.parentSet = MysteryBooster.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

@@ -15,6 +15,7 @@ public final class TalesOfMiddleEarthCommander extends ExpansionSet {
     private TalesOfMiddleEarthCommander() {
         super("Tales of Middle-earth Commander", "LTC", ExpansionSet.buildDate(2023, 6, 23), SetType.SUPPLEMENTAL);
         this.blockName = "Commander";
+        this.parentSet = TheLordOfTheRingsTalesOfMiddleEarth.getInstance();
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Access Tunnel", 294, Rarity.UNCOMMON, mage.cards.a.AccessTunnel.class));

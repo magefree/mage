@@ -19,7 +19,6 @@ public final class Dissension extends ExpansionSet {
     private Dissension() {
         super("Dissension", "DIS", ExpansionSet.buildDate(2006, 4, 5), SetType.EXPANSION);
         this.blockName = "Ravnica";
-        this.parentSet = RavnicaCityOfGuilds.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -27,6 +26,7 @@ public final class Dissension extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Aethermage's Touch", 101, Rarity.RARE, mage.cards.a.AethermagesTouch.class));
         cards.add(new SetCardInfo("Anthem of Rakdos", 102, Rarity.RARE, mage.cards.a.AnthemOfRakdos.class));
         cards.add(new SetCardInfo("Aquastrand Spider", 80, Rarity.COMMON, mage.cards.a.AquastrandSpider.class));

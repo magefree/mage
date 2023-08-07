@@ -20,7 +20,6 @@ public final class FutureSight extends ExpansionSet {
     private FutureSight() {
         super("Future Sight", "FUT", ExpansionSet.buildDate(2007, 4, 4), SetType.EXPANSION);
         this.blockName = "Time Spiral";
-        this.parentSet = TimeSpiral.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -28,6 +27,7 @@ public final class FutureSight extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Akroma's Memorial", 159, Rarity.RARE, mage.cards.a.AkromasMemorial.class));
         cards.add(new SetCardInfo("Angel of Salvation", 1, Rarity.RARE, mage.cards.a.AngelOfSalvation.class));
         cards.add(new SetCardInfo("Arcanum Wings", 48, Rarity.UNCOMMON, mage.cards.a.ArcanumWings.class));

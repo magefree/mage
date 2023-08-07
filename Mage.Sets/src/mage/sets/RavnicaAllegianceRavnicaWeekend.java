@@ -18,6 +18,7 @@ public class RavnicaAllegianceRavnicaWeekend extends ExpansionSet {
     private RavnicaAllegianceRavnicaWeekend() {
         super("Ravnica Allegiance Ravnica Weekend", "PRW2", ExpansionSet.buildDate(2019, 2, 16), SetType.PROMOTIONAL);
         this.blockName = "Guilds of Ravnica";
+        this.parentSet = RavnicaAllegiance.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

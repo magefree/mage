@@ -20,7 +20,6 @@ public final class Torment extends ExpansionSet {
     private Torment() {
         super("Torment", "TOR", ExpansionSet.buildDate(2002, 1, 26), SetType.EXPANSION);
         this.blockName = "Odyssey";
-        this.parentSet = Odyssey.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -29,6 +28,7 @@ public final class Torment extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         this.hasUnbalancedColors = true;
+
         cards.add(new SetCardInfo("Accelerate", 90, Rarity.COMMON, mage.cards.a.Accelerate.class));
         cards.add(new SetCardInfo("Acorn Harvest", 118, Rarity.COMMON, mage.cards.a.AcornHarvest.class));
         cards.add(new SetCardInfo("Ambassador Laquatus", 23, Rarity.RARE, mage.cards.a.AmbassadorLaquatus.class));

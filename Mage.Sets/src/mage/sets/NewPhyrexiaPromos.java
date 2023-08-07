@@ -18,6 +18,7 @@ public class NewPhyrexiaPromos extends ExpansionSet {
     private NewPhyrexiaPromos() {
         super("New Phyrexia Promos", "PNPH", ExpansionSet.buildDate(2011, 5, 12), SetType.PROMOTIONAL);
         this.blockName = "Scars of Mirrodin";
+        this.parentSet = NewPhyrexia.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

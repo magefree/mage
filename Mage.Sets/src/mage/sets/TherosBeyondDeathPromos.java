@@ -17,6 +17,7 @@ public class TherosBeyondDeathPromos extends ExpansionSet {
 
     private TherosBeyondDeathPromos() {
         super("Theros Beyond Death Promos", "PTHB", ExpansionSet.buildDate(2020, 1, 24), SetType.PROMOTIONAL);
+        this.parentSet = TherosBeyondDeath.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

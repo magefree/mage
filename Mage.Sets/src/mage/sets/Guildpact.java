@@ -19,7 +19,6 @@ public final class Guildpact extends ExpansionSet {
     private Guildpact() {
         super("Guildpact", "GPT", ExpansionSet.buildDate(2006, 1, 3), SetType.EXPANSION);
         this.blockName = "Ravnica";
-        this.parentSet = RavnicaCityOfGuilds.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -27,6 +26,7 @@ public final class Guildpact extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Absolver Thrull", 1, Rarity.COMMON, mage.cards.a.AbsolverThrull.class));
         cards.add(new SetCardInfo("Abyssal Nocturnus", 43, Rarity.RARE, mage.cards.a.AbyssalNocturnus.class));
         cards.add(new SetCardInfo("Aetherplasm", 22, Rarity.UNCOMMON, mage.cards.a.Aetherplasm.class));

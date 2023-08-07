@@ -28,7 +28,6 @@ public final class AetherRevolt extends ExpansionSet {
     private AetherRevolt() {
         super("Aether Revolt", "AER", ExpansionSet.buildDate(2017, 1, 20), SetType.EXPANSION);
         this.blockName = "Kaladesh";
-        this.parentSet = Kaladesh.getInstance();
         this.hasBoosters = true;
         this.hasBasicLands = false;
         this.numBoosterLands = 1;

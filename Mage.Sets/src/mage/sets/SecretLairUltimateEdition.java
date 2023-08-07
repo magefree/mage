@@ -17,6 +17,7 @@ public class SecretLairUltimateEdition extends ExpansionSet {
 
     private SecretLairUltimateEdition() {
         super("Secret Lair: Ultimate Edition", "SLU", ExpansionSet.buildDate(2020, 5, 29), SetType.PROMOTIONAL);
+        this.parentSet = SecretLairDrop.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

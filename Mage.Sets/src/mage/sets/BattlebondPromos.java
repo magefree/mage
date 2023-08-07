@@ -17,6 +17,7 @@ public class BattlebondPromos extends ExpansionSet {
 
     private BattlebondPromos() {
         super("Battlebond Promos", "PBBD", ExpansionSet.buildDate(2018, 6, 9), SetType.PROMOTIONAL);
+        this.parentSet = Battlebond.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

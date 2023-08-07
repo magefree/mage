@@ -30,7 +30,6 @@ public final class EldritchMoon extends ExpansionSet {
     private EldritchMoon() {
         super("Eldritch Moon", "EMN", ExpansionSet.buildDate(2016, 7, 22), SetType.EXPANSION);
         this.blockName = "Shadows over Innistrad";
-        this.parentSet = ShadowsOverInnistrad.getInstance();
         this.hasBoosters = true;
         this.hasBasicLands = false;
         this.numBoosterLands = 1;

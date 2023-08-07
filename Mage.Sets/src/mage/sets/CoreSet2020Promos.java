@@ -17,6 +17,7 @@ public final class CoreSet2020Promos extends ExpansionSet {
 
     private CoreSet2020Promos() {
         super("Core Set 2020 Promos", "PM20", ExpansionSet.buildDate(2019, 7, 12), SetType.PROMOTIONAL);
+        this.parentSet = CoreSet2020.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

@@ -18,6 +18,7 @@ public final class UltimateBoxTopperPromos extends ExpansionSet {
 
     private UltimateBoxTopperPromos() {
         super("Ultimate Box Topper Promos", "PUMA", ExpansionSet.buildDate(2018, 12, 7), SetType.PROMOTIONAL);
+        this.parentSet = UltimateMasters.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = false;
 

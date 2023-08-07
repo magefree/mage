@@ -19,6 +19,7 @@ public final class Magic2011 extends ExpansionSet {
     private Magic2011() {
         super("Magic 2011", "M11", ExpansionSet.buildDate(2010, 7, 16), SetType.CORE);
         this.blockName = "Core Set";
+        this.parentSet = Magic2011.getInstance();
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

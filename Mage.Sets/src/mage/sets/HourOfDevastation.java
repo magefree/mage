@@ -28,7 +28,6 @@ public final class HourOfDevastation extends ExpansionSet {
     private HourOfDevastation() {
         super("Hour of Devastation", "HOU", ExpansionSet.buildDate(2017, 7, 14), SetType.EXPANSION);
         this.blockName = "Amonkhet";
-        this.parentSet = Amonkhet.getInstance();
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

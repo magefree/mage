@@ -17,6 +17,7 @@ public final class ZendikarRisingExpeditions extends ExpansionSet {
 
     private ZendikarRisingExpeditions() {
         super("Zendikar Rising Expeditions", "ZNE", ExpansionSet.buildDate(2020, 9, 25), SetType.PROMOTIONAL);
+        this.parentSet = ZendikarRising.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

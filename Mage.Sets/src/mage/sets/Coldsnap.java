@@ -29,7 +29,6 @@ public final class Coldsnap extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
-        this.parentSet = IceAge.getInstance();
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Adarkar Valkyrie", 1, Rarity.RARE, mage.cards.a.AdarkarValkyrie.class));

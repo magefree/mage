@@ -20,7 +20,6 @@ public final class Nemesis extends ExpansionSet {
     private Nemesis() {
         super("Nemesis", "NEM", ExpansionSet.buildDate(2000, 1, 5), SetType.EXPANSION);
         this.blockName = "Masques";
-        this.parentSet = MercadianMasques.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -28,6 +27,7 @@ public final class Nemesis extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Accumulated Knowledge", 26, Rarity.COMMON, mage.cards.a.AccumulatedKnowledge.class));
         cards.add(new SetCardInfo("Aether Barrier", 27, Rarity.RARE, mage.cards.a.AetherBarrier.class));
         cards.add(new SetCardInfo("Air Bladder", 28, Rarity.COMMON, mage.cards.a.AirBladder.class));

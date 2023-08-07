@@ -18,6 +18,7 @@ public class IxalanStandardShowdown extends ExpansionSet {
     private IxalanStandardShowdown() {
         super("Ixalan Standard Showdown", "PSS2", ExpansionSet.buildDate(2017, 9, 29), SetType.PROMOTIONAL);
         this.blockName = "Ixalan";
+        this.parentSet = Ixalan.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

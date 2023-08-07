@@ -17,6 +17,7 @@ public final class StrixhavenMysticalArchive extends ExpansionSet {
 
     private StrixhavenMysticalArchive() {
         super("Strixhaven Mystical Archive", "STA", ExpansionSet.buildDate(2021, 4, 23), SetType.SUPPLEMENTAL);
+        this.parentSet = StrixhavenSchoolOfMages.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
         this.maxCardNumberInBooster = 63;

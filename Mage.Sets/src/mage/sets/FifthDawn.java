@@ -20,7 +20,6 @@ public final class FifthDawn extends ExpansionSet {
     private FifthDawn() {
         super("Fifth Dawn", "5DN", ExpansionSet.buildDate(2004, 5, 4), SetType.EXPANSION);
         this.blockName = "Mirrodin";
-        this.parentSet = Mirrodin.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

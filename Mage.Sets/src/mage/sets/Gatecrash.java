@@ -26,7 +26,6 @@ public final class Gatecrash extends ExpansionSet {
     private Gatecrash() {
         super("Gatecrash", "GTC", ExpansionSet.buildDate(2013, 2, 1), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
-        this.parentSet = ReturnToRavnica.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
@@ -34,6 +33,7 @@ public final class Gatecrash extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Act of Treason", 85, Rarity.COMMON, mage.cards.a.ActOfTreason.class));
         cards.add(new SetCardInfo("Adaptive Snapjaw", 113, Rarity.COMMON, mage.cards.a.AdaptiveSnapjaw.class));
         cards.add(new SetCardInfo("Aerial Maneuver", 1, Rarity.COMMON, mage.cards.a.AerialManeuver.class));

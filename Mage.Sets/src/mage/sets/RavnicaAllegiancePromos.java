@@ -18,6 +18,7 @@ public class RavnicaAllegiancePromos extends ExpansionSet {
     private RavnicaAllegiancePromos() {
         super("Ravnica Allegiance Promos", "PRNA", ExpansionSet.buildDate(2019, 1, 25), SetType.PROMOTIONAL);
         this.blockName = "Guilds of Ravnica";
+        this.parentSet = RavnicaAllegiance.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

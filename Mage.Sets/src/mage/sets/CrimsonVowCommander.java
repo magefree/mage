@@ -18,6 +18,7 @@ public final class CrimsonVowCommander extends ExpansionSet {
     private CrimsonVowCommander() {
         super("Crimson Vow Commander", "VOC", ExpansionSet.buildDate(2021, 11, 19), SetType.SUPPLEMENTAL);
         this.blockName = "Commander";
+        this.parentSet = InnistradCrimsonVow.getInstance();
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Ancient Craving", 117, Rarity.UNCOMMON, mage.cards.a.AncientCraving.class));

@@ -38,8 +38,8 @@ public final class DragonsMaze extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.parentSet = ReturnToRavnica.getInstance();
         this.hasBasicLands = false;
+
         cards.add(new SetCardInfo("Advent of the Wurm", 51, Rarity.RARE, mage.cards.a.AdventOfTheWurm.class));
         cards.add(new SetCardInfo("Aetherling", 11, Rarity.RARE, mage.cards.a.Aetherling.class));
         cards.add(new SetCardInfo("Alive // Well", 121, Rarity.UNCOMMON, mage.cards.a.AliveWell.class));

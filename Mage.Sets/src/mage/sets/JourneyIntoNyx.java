@@ -26,7 +26,6 @@ public final class JourneyIntoNyx extends ExpansionSet {
     private JourneyIntoNyx() {
         super("Journey into Nyx", "JOU", ExpansionSet.buildDate(2014, 5, 2), SetType.EXPANSION);
         this.blockName = "Theros";
-        this.parentSet = Theros.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
@@ -34,6 +33,7 @@ public final class JourneyIntoNyx extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Aegis of the Gods", 1, Rarity.RARE, mage.cards.a.AegisOfTheGods.class));
         cards.add(new SetCardInfo("Aerial Formation", 30, Rarity.COMMON, mage.cards.a.AerialFormation.class));
         cards.add(new SetCardInfo("Agent of Erebos", 59, Rarity.UNCOMMON, mage.cards.a.AgentOfErebos.class));

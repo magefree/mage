@@ -18,6 +18,7 @@ public class InnistradPromos extends ExpansionSet {
     private InnistradPromos() {
         super("Innistrad Promos", "PISD", ExpansionSet.buildDate(2011, 9, 24), SetType.PROMOTIONAL);
         this.blockName = "Innistrad";
+        this.parentSet = Innistrad.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

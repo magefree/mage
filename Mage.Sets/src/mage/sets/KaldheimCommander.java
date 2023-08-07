@@ -18,6 +18,7 @@ public final class KaldheimCommander extends ExpansionSet {
     private KaldheimCommander() {
         super("Kaldheim Commander", "KHC", ExpansionSet.buildDate(2021, 2, 5), SetType.SUPPLEMENTAL);
         this.blockName = "Commander";
+        this.parentSet = Kaldheim.getInstance();
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Abomination of Llanowar", 81, Rarity.UNCOMMON, mage.cards.a.AbominationOfLlanowar.class));

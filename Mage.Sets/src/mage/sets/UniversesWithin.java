@@ -18,6 +18,7 @@ public final class UniversesWithin extends ExpansionSet {
     private UniversesWithin() {
         // The set name is a placeholder and will likely change
         super("Universes Within", "SLX", ExpansionSet.buildDate(2022, 3, 3), SetType.SUPPLEMENTAL);
+        this.parentSet = SecretLairDrop.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = false;
 

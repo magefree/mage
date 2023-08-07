@@ -20,7 +20,6 @@ public final class Scourge extends ExpansionSet {
     private Scourge() {
         super("Scourge", "SCG", ExpansionSet.buildDate(2003, 5, 17), SetType.EXPANSION);
         this.blockName = "Onslaught";
-        this.parentSet = Onslaught.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -28,6 +27,7 @@ public final class Scourge extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Accelerated Mutation", 109, Rarity.COMMON, mage.cards.a.AcceleratedMutation.class));
         cards.add(new SetCardInfo("Ageless Sentinels", 1, Rarity.RARE, mage.cards.a.AgelessSentinels.class));
         cards.add(new SetCardInfo("Alpha Status", 110, Rarity.UNCOMMON, mage.cards.a.AlphaStatus.class));

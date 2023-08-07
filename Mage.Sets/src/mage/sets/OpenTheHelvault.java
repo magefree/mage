@@ -17,6 +17,7 @@ public class OpenTheHelvault extends ExpansionSet {
 
     private OpenTheHelvault() {
         super("Open the Helvault", "PHEL", ExpansionSet.buildDate(2012, 4, 28), SetType.PROMOTIONAL);
+        this.parentSet = AvacynRestored.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

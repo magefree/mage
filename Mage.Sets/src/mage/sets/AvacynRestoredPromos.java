@@ -18,6 +18,7 @@ public class AvacynRestoredPromos extends ExpansionSet {
     private AvacynRestoredPromos() {
         super("Avacyn Restored Promos", "PAVR", ExpansionSet.buildDate(2012, 4, 28), SetType.PROMOTIONAL);
         this.blockName = "Innistrad";
+        this.parentSet =  AvacynRestored.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

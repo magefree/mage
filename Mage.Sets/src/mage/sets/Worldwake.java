@@ -26,7 +26,6 @@ public final class Worldwake extends ExpansionSet {
     private Worldwake() {
         super("Worldwake", "WWK", ExpansionSet.buildDate(2010, 1, 30), SetType.EXPANSION);
         this.blockName = "Zendikar";
-        this.parentSet = Zendikar.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
@@ -34,6 +33,7 @@ public final class Worldwake extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Abyssal Persecutor", 47, Rarity.MYTHIC, mage.cards.a.AbyssalPersecutor.class));
         cards.add(new SetCardInfo("Admonition Angel", 1, Rarity.MYTHIC, mage.cards.a.AdmonitionAngel.class));
         cards.add(new SetCardInfo("Aether Tradewinds", 24, Rarity.COMMON, mage.cards.a.AetherTradewinds.class));

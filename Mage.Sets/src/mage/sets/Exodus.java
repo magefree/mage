@@ -20,7 +20,6 @@ public final class Exodus extends ExpansionSet {
     private Exodus() {
         super("Exodus", "EXO", ExpansionSet.buildDate(1998, 6, 15), SetType.EXPANSION);
         this.blockName = "Tempest";
-        this.parentSet = Tempest.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -28,6 +27,7 @@ public final class Exodus extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Aether Tide", 27, Rarity.COMMON, mage.cards.a.AetherTide.class));
         cards.add(new SetCardInfo("Allay", 1, Rarity.COMMON, mage.cards.a.Allay.class));
         cards.add(new SetCardInfo("Anarchist", 79, Rarity.COMMON, mage.cards.a.Anarchist.class));

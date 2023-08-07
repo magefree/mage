@@ -18,6 +18,7 @@ public class ColdsnapThemeDecks extends ExpansionSet {
     private ColdsnapThemeDecks() {
         super("Coldsnap Theme Decks", "CST", ExpansionSet.buildDate(2006, 7, 21), SetType.SUPPLEMENTAL);
         this.blockName = "Ice Age";
+        this.parentSet = Coldsnap.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

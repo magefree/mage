@@ -15,7 +15,6 @@ public final class Darksteel extends ExpansionSet {
     public Darksteel() {
         super("Darksteel", "DST", ExpansionSet.buildDate(2004, 1, 6), SetType.EXPANSION);
         this.blockName = "Mirrodin";
-        this.parentSet = Mirrodin.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -23,6 +22,7 @@ public final class Darksteel extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Aether Snap", 37, Rarity.RARE, mage.cards.a.AetherSnap.class));
         cards.add(new SetCardInfo("Aether Vial", 91, Rarity.UNCOMMON, mage.cards.a.AetherVial.class));
         cards.add(new SetCardInfo("Ageless Entity", 73, Rarity.RARE, mage.cards.a.AgelessEntity.class));

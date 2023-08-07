@@ -18,6 +18,7 @@ public class FateReforgedPromos extends ExpansionSet {
     private FateReforgedPromos() {
         super("Fate Reforged Promos", "PFRF", ExpansionSet.buildDate(2015, 1, 24), SetType.PROMOTIONAL);
         this.blockName = "Khans of Tarkir";
+        this.parentSet = FateReforged.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

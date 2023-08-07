@@ -18,6 +18,7 @@ public class ZendikarPromos extends ExpansionSet {
     private ZendikarPromos() {
         super("Zendikar Promos", "PZEN", ExpansionSet.buildDate(2009, 10, 2), SetType.PROMOTIONAL);
         this.blockName = "Zendikar";
+        this.parentSet = Zendikar.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

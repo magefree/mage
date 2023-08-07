@@ -17,6 +17,7 @@ public class WarOfTheSparkPromos extends ExpansionSet {
 
     private WarOfTheSparkPromos() {
         super("War of the Spark Promos", "PWAR", ExpansionSet.buildDate(2019, 5, 4), SetType.PROMOTIONAL);
+        this.parentSet = WarOfTheSpark.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

@@ -17,6 +17,7 @@ public class UnstablePromos extends ExpansionSet {
 
     private UnstablePromos() {
         super("Unstable Promos", "PUST", ExpansionSet.buildDate(2017, 11, 13), SetType.JOKESET);
+        this.parentSet = Unstable.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

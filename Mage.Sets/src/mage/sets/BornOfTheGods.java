@@ -26,7 +26,6 @@ public final class BornOfTheGods extends ExpansionSet {
     private BornOfTheGods() {
         super("Born of the Gods", "BNG", ExpansionSet.buildDate(2014, 2, 7), SetType.EXPANSION);
         this.blockName = "Theros";
-        this.parentSet = Theros.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

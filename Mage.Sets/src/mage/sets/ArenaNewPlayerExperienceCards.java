@@ -17,6 +17,7 @@ public final class ArenaNewPlayerExperienceCards extends ExpansionSet {
 
     private ArenaNewPlayerExperienceCards() {
         super("Arena New Player Experience Cards", "OANA", ExpansionSet.buildDate(2018, 7, 14), SetType.MAGIC_ONLINE);
+        this.parentSet = ArenaNewPlayerExperience.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

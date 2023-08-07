@@ -18,6 +18,7 @@ public class BFZStandardSeries extends ExpansionSet {
     private BFZStandardSeries() {
         super("BFZ Standard Series", "PSS1", ExpansionSet.buildDate(2015, 10, 2), SetType.PROMOTIONAL);
         this.blockName = "Battle for Zendikar";
+        this.parentSet = BattleForZendikar.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

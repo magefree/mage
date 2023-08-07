@@ -17,6 +17,7 @@ public final class TheBrothersWarRetroArtifacts extends ExpansionSet {
 
     private TheBrothersWarRetroArtifacts() {
         super("The Brothers' War Retro Artifacts", "BRR", ExpansionSet.buildDate(2022, 11, 18), SetType.SUPPLEMENTAL);
+        this.parentSet = TheBrothersWar.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
         this.maxCardNumberInBooster = 63;

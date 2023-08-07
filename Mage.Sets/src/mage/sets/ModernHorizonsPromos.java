@@ -17,6 +17,7 @@ public class ModernHorizonsPromos extends ExpansionSet {
 
     private ModernHorizonsPromos() {
         super("Modern Horizons Promos", "PMH1", ExpansionSet.buildDate(2019, 6, 14), SetType.PROMOTIONAL);
+        this.parentSet = ModernHorizons.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

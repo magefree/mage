@@ -17,6 +17,7 @@ public class Magic2010Promos extends ExpansionSet {
 
     private Magic2010Promos() {
         super("Magic 2010 Promos", "PM10", ExpansionSet.buildDate(2009, 7, 16), SetType.PROMOTIONAL);
+        this.parentSet = Magic2010.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

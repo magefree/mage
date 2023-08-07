@@ -21,6 +21,7 @@ public final class AmonkhetInvocations extends ExpansionSet {
     private AmonkhetInvocations() {
         super("Amonkhet Invocations", "MP2", ExpansionSet.buildDate(2017, 4, 28), SetType.PROMOTIONAL);
         this.blockName = "Amonkhet";
+        this.parentSet = Amonkhet.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

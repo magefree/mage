@@ -18,7 +18,6 @@ public final class Stronghold extends ExpansionSet {
     private Stronghold() {
         super("Stronghold", "STH", ExpansionSet.buildDate(1998, 3, 2), SetType.EXPANSION);
         this.blockName = "Tempest";
-        this.parentSet = Tempest.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

@@ -18,6 +18,7 @@ public final class NewCapennaCommander extends ExpansionSet {
     private NewCapennaCommander() {
         super("New Capenna Commander", "NCC", ExpansionSet.buildDate(2022, 4, 29), SetType.SUPPLEMENTAL);
         this.blockName = "Commander";
+        this.parentSet = StreetsOfNewCapenna.getInstance();
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Aether Snap", 241, Rarity.RARE, mage.cards.a.AetherSnap.class));

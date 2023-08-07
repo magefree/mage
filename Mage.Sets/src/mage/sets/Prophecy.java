@@ -20,7 +20,6 @@ public final class Prophecy extends ExpansionSet {
     private Prophecy() {
         super("Prophecy", "PCY", ExpansionSet.buildDate(2000, 4, 27), SetType.EXPANSION);
         this.blockName = "Masques";
-        this.parentSet = MercadianMasques.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -28,6 +27,7 @@ public final class Prophecy extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Abolish", 1, Rarity.UNCOMMON, mage.cards.a.Abolish.class));
         cards.add(new SetCardInfo("Agent of Shauku", 55, Rarity.COMMON, mage.cards.a.AgentOfShauku.class));
         cards.add(new SetCardInfo("Alexi's Cloak", 29, Rarity.COMMON, mage.cards.a.AlexisCloak.class));

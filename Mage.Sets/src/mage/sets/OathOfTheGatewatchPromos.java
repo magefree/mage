@@ -18,6 +18,7 @@ public class OathOfTheGatewatchPromos extends ExpansionSet {
     private OathOfTheGatewatchPromos() {
         super("Oath of the Gatewatch Promos", "POGW", ExpansionSet.buildDate(2016, 1, 23), SetType.PROMOTIONAL);
         this.blockName = "Battle for Zendikar";
+        this.parentSet = OathOfTheGatewatch.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

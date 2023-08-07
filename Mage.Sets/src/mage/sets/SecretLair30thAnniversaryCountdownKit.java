@@ -17,6 +17,7 @@ public class SecretLair30thAnniversaryCountdownKit extends ExpansionSet {
 
     private SecretLair30thAnniversaryCountdownKit() {
         super("Secret Lair 30th Anniversary Countdown Kit", "SLC", ExpansionSet.buildDate(2022, 11, 1), SetType.PROMOTIONAL);
+        this.parentSet = SecretLairDrop.getInstance();
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Arclight Phoenix", 2018, Rarity.RARE, mage.cards.a.ArclightPhoenix.class));

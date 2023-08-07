@@ -18,6 +18,7 @@ public final class NeonDynastyCommander extends ExpansionSet {
     private NeonDynastyCommander() {
         super("Neon Dynasty Commander", "NEC", ExpansionSet.buildDate(2022, 2, 18), SetType.SUPPLEMENTAL);
         this.blockName = "Commander";
+        this.parentSet = KamigawaNeonDynasty.getInstance();
         this.hasBasicLands = false;
 
         // 122, Nissa, Voice of Zendikar - omitted from set due scryfall support

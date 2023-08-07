@@ -17,6 +17,7 @@ public final class MultiverseLegends extends ExpansionSet {
 
     private MultiverseLegends() {
         super("Multiverse Legends", "MUL", ExpansionSet.buildDate(2023, 4, 21), SetType.SUPPLEMENTAL);
+        this.parentSet = MarchOfTheMachine.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

@@ -18,6 +18,7 @@ public class JourneyIntoNyxPromos extends ExpansionSet {
     private JourneyIntoNyxPromos() {
         super("Journey into Nyx Promos", "PJOU", ExpansionSet.buildDate(2014, 4, 26), SetType.PROMOTIONAL);
         this.blockName = "Theros";
+        this.parentSet = JourneyIntoNyx.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

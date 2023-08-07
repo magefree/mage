@@ -15,7 +15,6 @@ public final class Apocalypse extends ExpansionSet {
     private Apocalypse() {
         super("Apocalypse", "APC", ExpansionSet.buildDate(2001, 5, 1), SetType.EXPANSION);
         this.blockName = "Invasion";
-        this.parentSet = Invasion.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

@@ -20,7 +20,6 @@ public final class UrzasDestiny extends ExpansionSet {
     private UrzasDestiny() {
         super("Urza's Destiny", "UDS", ExpansionSet.buildDate(1999, 6, 7), SetType.EXPANSION);
         this.blockName = "Urza";
-        this.parentSet = UrzasSaga.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -28,6 +27,7 @@ public final class UrzasDestiny extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Academy Rector", 1, Rarity.RARE, mage.cards.a.AcademyRector.class));
         cards.add(new SetCardInfo("Aether Sting", 76, Rarity.UNCOMMON, mage.cards.a.AetherSting.class));
         cards.add(new SetCardInfo("Ancient Silverback", 101, Rarity.RARE, mage.cards.a.AncientSilverback.class));

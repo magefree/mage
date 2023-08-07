@@ -17,6 +17,7 @@ public class DominariaPromos extends ExpansionSet {
 
     private DominariaPromos() {
         super("Dominaria Promos", "PDOM", ExpansionSet.buildDate(2018, 4, 27), SetType.PROMOTIONAL);
+        this.parentSet = Dominaria.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

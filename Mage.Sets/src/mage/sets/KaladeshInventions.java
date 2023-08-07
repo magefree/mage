@@ -22,6 +22,7 @@ public final class KaladeshInventions extends ExpansionSet {
     private KaladeshInventions() {
         super("Kaladesh Inventions", "MPS", ExpansionSet.buildDate(2016, 9, 30), SetType.PROMOTIONAL);
         this.blockName = "Kaladesh";
+        this.parentSet = Kaladesh.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

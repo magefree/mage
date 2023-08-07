@@ -15,7 +15,6 @@ public final class Eventide extends ExpansionSet {
     private Eventide() {
         super("Eventide", "EVE", ExpansionSet.buildDate(2008, 6, 25), SetType.EXPANSION);
         this.blockName = "Shadowmoor";
-        this.parentSet = Shadowmoor.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -23,6 +22,7 @@ public final class Eventide extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Aerie Ouphes", 65, Rarity.COMMON, mage.cards.a.AerieOuphes.class));
         cards.add(new SetCardInfo("Altar Golem", 166, Rarity.RARE, mage.cards.a.AltarGolem.class));
         cards.add(new SetCardInfo("Antler Skulkin", 167, Rarity.COMMON, mage.cards.a.AntlerSkulkin.class));

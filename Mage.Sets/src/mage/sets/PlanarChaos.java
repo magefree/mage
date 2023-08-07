@@ -20,7 +20,6 @@ public final class PlanarChaos extends ExpansionSet {
     private PlanarChaos() {
         super("Planar Chaos", "PLC", ExpansionSet.buildDate(2007, 1, 2), SetType.EXPANSION);
         this.blockName = "Time Spiral";
-        this.parentSet = TimeSpiral.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -28,6 +27,7 @@ public final class PlanarChaos extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Aeon Chronicler", 32, Rarity.RARE, mage.cards.a.AeonChronicler.class));
         cards.add(new SetCardInfo("Aether Membrane", 93, Rarity.UNCOMMON, mage.cards.a.AetherMembrane.class));
         cards.add(new SetCardInfo("Akroma, Angel of Fury", 94, Rarity.RARE, mage.cards.a.AkromaAngelOfFury.class));

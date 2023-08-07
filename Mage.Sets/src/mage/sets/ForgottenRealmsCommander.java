@@ -18,6 +18,7 @@ public final class ForgottenRealmsCommander extends ExpansionSet {
     private ForgottenRealmsCommander() {
         super("Forgotten Realms Commander", "AFC", ExpansionSet.buildDate(2021, 7, 23), SetType.SUPPLEMENTAL);
         this.blockName = "Commander";
+        this.parentSet = AdventuresInTheForgottenRealms.getInstance();
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Abundant Growth", 150, Rarity.COMMON, mage.cards.a.AbundantGrowth.class));

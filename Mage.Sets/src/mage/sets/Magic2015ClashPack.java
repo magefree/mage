@@ -17,6 +17,7 @@ public class Magic2015ClashPack extends ExpansionSet {
 
     private Magic2015ClashPack() {
         super("Magic 2015 Clash Pack", "CP1", ExpansionSet.buildDate(2014, 7, 18), SetType.PROMOTIONAL);
+        this.parentSet = Magic2015.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

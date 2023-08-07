@@ -19,7 +19,6 @@ public final class Planeshift extends ExpansionSet {
     private Planeshift() {
         super("Planeshift", "PLS", ExpansionSet.buildDate(2001, 1, 5), SetType.EXPANSION);
         this.blockName = "Invasion";
-        this.parentSet = Invasion.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

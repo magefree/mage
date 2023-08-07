@@ -18,6 +18,7 @@ public final class ZendikarRisingCommander extends ExpansionSet {
     private ZendikarRisingCommander() {
         super("Zendikar Rising Commander", "ZNC", ExpansionSet.buildDate(2020, 9, 25), SetType.SUPPLEMENTAL);
         this.blockName = "Commander";
+        this.parentSet = ZendikarRising.getInstance();
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Abundance", 58, Rarity.RARE, mage.cards.a.Abundance.class));

@@ -20,7 +20,6 @@ public final class UrzasLegacy extends ExpansionSet {
     private UrzasLegacy() {
         super("Urza's Legacy", "ULG", ExpansionSet.buildDate(1999, 2, 15), SetType.EXPANSION);
         this.blockName = "Urza";
-        this.parentSet = UrzasSaga.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -28,6 +27,7 @@ public final class UrzasLegacy extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("About Face", 73, Rarity.COMMON, mage.cards.a.AboutFace.class));
         cards.add(new SetCardInfo("Angel's Trumpet", 121, Rarity.UNCOMMON, mage.cards.a.AngelsTrumpet.class));
         cards.add(new SetCardInfo("Angelic Curator", 1, Rarity.COMMON, mage.cards.a.AngelicCurator.class));

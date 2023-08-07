@@ -18,6 +18,7 @@ public class IxalanPromos extends ExpansionSet {
     private IxalanPromos() {
         super("Ixalan Promos", "PXLN", ExpansionSet.buildDate(2017, 9, 29), SetType.PROMOTIONAL);
         this.blockName = "Ixalan";
+        this.parentSet = Ixalan.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

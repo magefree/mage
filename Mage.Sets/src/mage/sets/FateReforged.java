@@ -31,7 +31,6 @@ public final class FateReforged extends ExpansionSet {
     private FateReforged() {
         super("Fate Reforged", "FRF", ExpansionSet.buildDate(2015, 1, 23), SetType.EXPANSION);
         this.blockName = "Khans of Tarkir";
-        this.parentSet = KhansOfTarkir.getInstance();
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterSpecial = 1;

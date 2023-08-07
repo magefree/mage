@@ -19,7 +19,6 @@ public final class Visions extends ExpansionSet {
     private Visions() {
         super("Visions", "VIS", ExpansionSet.buildDate(1997, 1, 11), SetType.EXPANSION);
         this.blockName = "Mirage";
-        this.parentSet = Mirage.getInstance();
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -27,6 +26,7 @@ public final class Visions extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
+
         cards.add(new SetCardInfo("Aku Djinn", 51, Rarity.RARE, mage.cards.a.AkuDjinn.class));
         cards.add(new SetCardInfo("Anvil of Bogardan", 141, Rarity.RARE, mage.cards.a.AnvilOfBogardan.class));
         cards.add(new SetCardInfo("Archangel", 1, Rarity.RARE, mage.cards.a.Archangel.class));

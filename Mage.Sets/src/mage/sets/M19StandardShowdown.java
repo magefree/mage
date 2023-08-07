@@ -17,6 +17,7 @@ public class M19StandardShowdown extends ExpansionSet {
 
     private M19StandardShowdown() {
         super("M19 Standard Showdown", "PSS3", ExpansionSet.buildDate(2018, 7, 13), SetType.PROMOTIONAL);
+        this.parentSet = CoreSet2019.getInstance();
         this.hasBoosters = false;
         this.hasBasicLands = true;
 
