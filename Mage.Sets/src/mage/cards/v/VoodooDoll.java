@@ -81,7 +81,7 @@ enum VoodooDollAdjuster implements CostAdjuster {
             int pin = sourcePermanent.getCounters(game).getCount(CounterType.PIN);
             ManaCosts manaCostsToPay = ability.getManaCostsToPay();
             ability.clearManaCostsToPay();
-            ability.addManaCostsToPay(new GenericManaCost(new GenericManaCost(pin * 2)));
+            ability.addManaCostsToPay(new GenericManaCost(pin * 2));
             ability.addManaCostsToPay(manaCostsToPay);
         }
     }
