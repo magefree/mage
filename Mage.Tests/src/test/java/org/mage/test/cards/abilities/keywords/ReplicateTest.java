@@ -104,6 +104,37 @@ public class ReplicateTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void testMultipleInstancesReplicate() {
+
+        String hatchery = "Hatchery Sliver"; // 1G, Replicate 1G, Sliver spells you cast have replicate.
+        String metallic = "Metallic Sliver"; // 1
+
+        addCard(Zone.HAND, playerA, hatchery);
+        addCard(Zone.HAND, playerA, metallic);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4 + 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hatchery);
+        setChoice(playerA, true); // pay 1 time replicate
+        setChoice(playerA, false); // don't pay 2 times replicate
+        // Now there are two Hatchery Slivers on the battlefield, so Sliver spells have two instances of replicate.
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, metallic);
+        setChoice(playerA, true); // pay 1 time replicate (first instance)
+        setChoice(playerA, false); // don't pay 2 times replicate (first instance)
+        setChoice(playerA, true); // pay 1 time replicate (second instance)
+        setChoice(playerA, true); // pay 2 times replicate (second instance)
+        setChoice(playerA, false); // don't pay 3 times replicate (second instance)
+        setChoice(playerA, "Replicate"); // order triggers (currently appear identical)
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTappedCount("Forest", false, 0); // all mana should have been used to pay costs
+        assertPermanentCount(playerA, hatchery, 2);
+        assertPermanentCount(playerA, metallic, 4);
+    }
+
+    @Test
     @Ignore // TODO: enable test after replicate ability will be supported by AI
     public void testReplicate_AI() {
         // Replicate {1}{R} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)
