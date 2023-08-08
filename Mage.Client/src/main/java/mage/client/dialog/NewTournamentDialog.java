@@ -22,7 +22,6 @@ import mage.constants.*;
 import mage.game.GameException;
 import mage.game.draft.DraftOptions;
 import mage.game.draft.DraftOptions.TimingOption;
-import mage.game.mulligan.MulliganType;
 import mage.game.tournament.LimitedOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.players.PlayerType;
@@ -65,10 +64,6 @@ public class NewTournamentDialog extends MageDialog {
         lastSessionId = "";
         txtName.setText("Tournament");
         this.spnNumWins.setModel(new SpinnerNumberModel(2, 1, 5, 1));
-        /*
-        this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
-        this.cbMulligan.setModel(new DefaultComboBoxModel(MulliganType.values()));
-         */
         this.spnConstructTime.setModel(new SpinnerNumberModel(10, CONSTRUCTION_TIME_MIN, CONSTRUCTION_TIME_MAX, 2));
         this.spnNumRounds.setModel(new SpinnerNumberModel(2, 2, 10, 1));
         this.spnQuitRatio.setModel(new SpinnerNumberModel(100, 0, 100, 5));
@@ -100,7 +95,6 @@ public class NewTournamentDialog extends MageDialog {
                 tournamentPlayerPanel.init(i++);
             }
             cbAllowSpectators.setSelected(true);
-            //cbPlaneChase.setSelected(false);
             this.setModal(true);
             this.setLocation(150, 100);
         }
@@ -1224,7 +1218,6 @@ public class NewTournamentDialog extends MageDialog {
         tOptions.setPassword(txtPassword.getText());
         tOptions.getPlayerTypes().add(PlayerType.HUMAN);
         tOptions.setWatchingAllowed(cbAllowSpectators.isSelected());
-        //tOptions.setPlaneChase(cbPlaneChase.isSelected());
         tOptions.setQuitRatio((Integer) spnQuitRatio.getValue());
         tOptions.setMinimumRating((Integer) spnMinimumRating.getValue());
         for (TournamentPlayerPanel player : players) {
@@ -1336,10 +1329,6 @@ public class NewTournamentDialog extends MageDialog {
         tOptions.getMatchOptions().setMatchBufferTime((MatchBufferTime) this.cbBufferTime.getSelectedItem());
         tOptions.getMatchOptions().setSkillLevel((SkillLevel) this.cbSkillLevel.getSelectedItem());
         tOptions.getMatchOptions().setWinsNeeded((Integer) this.spnNumWins.getValue());
-        /*
-        tOptions.getMatchOptions().setFreeMulligans((Integer) this.spnFreeMulligans.getValue());
-        tOptions.getMatchOptions().setMullgianType((MulliganType) this.cbMulligan.getSelectedItem());
-         */
         tOptions.getMatchOptions().setAttackOption(MultiplayerAttackOption.LEFT);
         tOptions.getMatchOptions().setRange(RangeOfInfluence.ALL);
         tOptions.getMatchOptions().setRollbackTurnsAllowed(this.chkRollbackTurnsAllowed.isSelected());
@@ -1388,10 +1377,6 @@ public class NewTournamentDialog extends MageDialog {
                 break;
             }
         }
-        /*
-        this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS + versionStr, "0")));
-        this.cbMulligan.setSelectedItem(MulliganType.valueByName(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_MULLIGUN_TYPE + versionStr, MulliganType.GAME_DEFAULT.toString())));
-         */
         this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS + versionStr, "2")));
         this.spnQuitRatio.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_QUIT_RATIO + versionStr, "100")));
         this.spnMinimumRating.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_MINIMUM_RATING + versionStr, "0")));
@@ -1424,7 +1409,6 @@ public class NewTournamentDialog extends MageDialog {
             }
         }
         this.cbAllowSpectators.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS + versionStr, "Yes").equals("Yes"));
-        //this.cbPlaneChase.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLANE_CHASE + versionStr, "No").equals("Yes"));
         this.chkRollbackTurnsAllowed.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS + versionStr, "Yes").equals("Yes"));
         this.chkRated.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_RATED + versionStr, "No").equals("Yes"));
 
@@ -1446,10 +1430,6 @@ public class NewTournamentDialog extends MageDialog {
             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_CONSTR_TIME + versionStr, Integer.toString(tOptions.getLimitedOptions().getConstructionTime()));
         }
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TYPE + versionStr, tOptions.getTournamentType());
-        /*
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS + versionStr, Integer.toString(tOptions.getMatchOptions().getFreeMulligans()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_MULLIGUN_TYPE + versionStr, tOptions.getMatchOptions().getMulliganType().toString());
-         */
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS + versionStr, Integer.toString(tOptions.getMatchOptions().getWinsNeeded()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_QUIT_RATIO + versionStr, Integer.toString(tOptions.getQuitRatio()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_MINIMUM_RATING + versionStr, Integer.toString(tOptions.getMinimumRating()));
@@ -1475,9 +1455,6 @@ public class NewTournamentDialog extends MageDialog {
             }
         }
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS + versionStr, (tOptions.isWatchingAllowed() ? "Yes" : "No"));
-        /*
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLANE_CHASE + versionStr, (tOptions.isPlaneChase() ? "Yes" : "No"));
-         */
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS + versionStr, (tOptions.getMatchOptions().isRollbackTurnsAllowed() ? "Yes" : "No"));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_RATED + versionStr, (tOptions.getMatchOptions().isRated() ? "Yes" : "No"));
         customOptions.onSaveSettings(version, tOptions.getMatchOptions());
