@@ -10,8 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -27,8 +27,8 @@ public final class ManaVapors extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         // Lands target player controls don't untap during their next untap step.
-        getSpellAbility().addTarget(new TargetPlayer());
         getSpellAbility().addEffect(new ManaVaporsEffect());
+        getSpellAbility().addTarget(new TargetPlayer());
     }
 
     private ManaVapors(final ManaVapors card) {
@@ -43,8 +43,10 @@ public final class ManaVapors extends CardImpl {
 
 class ManaVaporsEffect extends OneShotEffect {
 
+    private static final FilterPermanent filter = new FilterLandPermanent();
+
     ManaVaporsEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Detriment);
         this.staticText = "Lands target player controls don't untap during their next untap step";
     }
 
@@ -59,12 +61,11 @@ class ManaVaporsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (targetPlayer != null) {
-            FilterLandPermanent filter = new FilterLandPermanent();
-            filter.add(new ControllerIdPredicate(targetPlayer.getId()));
+        Player player = game.getPlayer(source.getFirstTarget());
+
+        if (player != null) {
             ContinuousEffect effect = new DontUntapInPlayersNextUntapStepAllEffect(filter);
-            effect.setTargetPointer(new FixedTarget(targetPlayer.getId()));
+            effect.setTargetPointer(new FixedTarget(player.getId()));
             game.addEffect(effect, source);
             return true;
         }
