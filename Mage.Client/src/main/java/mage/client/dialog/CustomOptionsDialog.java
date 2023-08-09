@@ -333,7 +333,7 @@ public class CustomOptionsDialog extends MageDialog {
     }//GEN-LAST:event_chkPlaneChaseActionPerformed
 
     private void chkEmblemCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEmblemCardsActionPerformed
-        // TODO add your handling code here:
+        updateActiveCount();
     }//GEN-LAST:event_chkEmblemCardsActionPerformed
 
     private void btnEmblemCardsPerPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmblemCardsPerPlayerActionPerformed
@@ -446,6 +446,9 @@ public class CustomOptionsDialog extends MageDialog {
                     // copy the cards set so deck can be garbage collected
                     options.setPerPlayerEmblemCards(new HashSet<>(perPlayerEmblemDeck.getCards()));
                 }
+                else {
+                    options.setPerPlayerEmblemCards(Collections.emptySet());
+                }
             }
             if (!txtEmblemCardsStartingPlayer.getText().isEmpty()) {
                 Deck startingPlayerEmblemDeck = null;
@@ -458,6 +461,9 @@ public class CustomOptionsDialog extends MageDialog {
                     startingPlayerEmblemDeck.clearLayouts();
                     // copy the cards set so deck can be garbage collected
                     options.setGlobalEmblemCards(new HashSet<>(startingPlayerEmblemDeck.getCards()));
+                }
+                else {
+                    options.setGlobalEmblemCards(Collections.emptySet());
                 }
             }
         }
