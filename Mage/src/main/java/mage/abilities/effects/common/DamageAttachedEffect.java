@@ -11,7 +11,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LoneFox
  */
 public class DamageAttachedEffect extends OneShotEffect {
@@ -36,7 +35,7 @@ public class DamageAttachedEffect extends OneShotEffect {
         this.staticText = whoDealDamageName + " deals " + amount + " damage to enchanted creature";
     }
 
-    public DamageAttachedEffect(final DamageAttachedEffect effect) {
+    protected DamageAttachedEffect(final DamageAttachedEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -58,7 +57,7 @@ public class DamageAttachedEffect extends OneShotEffect {
             return false;
         }
         Permanent enchanted = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
-        if(enchanted == null) {
+        if (enchanted == null) {
             return false;
         }
         enchanted.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, true);

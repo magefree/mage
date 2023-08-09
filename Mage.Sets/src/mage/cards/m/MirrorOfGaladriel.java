@@ -3,6 +3,7 @@ package mage.cards.m;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.CostAdjuster;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -34,7 +35,8 @@ public final class MirrorOfGaladriel extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new ScryEffect(1, false), new GenericManaCost(5)
         );
-        ability.addEffect(new DrawCardSourceControllerEffect(1));
+        ability.addCost(new TapSourceCost());
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
         ability.addEffect(new InfoEffect(
                 "This ability costs {1} less to activate for each legendary creature you control."
         ));

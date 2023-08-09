@@ -73,7 +73,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         setText();
     }
 
-    public BoostControlledEffect(final BoostControlledEffect effect) {
+    protected BoostControlledEffect(final BoostControlledEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

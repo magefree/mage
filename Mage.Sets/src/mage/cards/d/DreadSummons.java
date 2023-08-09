@@ -74,6 +74,7 @@ class DreadSummonsEffect extends OneShotEffect {
                     .count();
         }
         if (creatureCount > 0) {
+            game.getState().processAction(game);
             token.putOntoBattlefield(creatureCount, game, source, source.getControllerId(), true, false);
         }
         return true;

@@ -78,6 +78,10 @@ class WulfgarOfIcewindDaleEffect extends ReplacementEffectImpl {
             return false;
         }
         GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+        if (sourceEvent == null) {
+            return false;
+        }
+
         switch (sourceEvent.getType()) {
             case ATTACKER_DECLARED:
                 return source.isControlledBy(sourceEvent.getPlayerId());

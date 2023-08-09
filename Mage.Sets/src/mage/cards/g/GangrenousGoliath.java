@@ -20,11 +20,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class GangrenousGoliath extends CardImpl {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Clerics");
-    
-    static {
-        filter.add(SubType.CLERIC.getPredicate());
-    }
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.CLERIC,"untapped Clerics you control");
 
     public GangrenousGoliath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

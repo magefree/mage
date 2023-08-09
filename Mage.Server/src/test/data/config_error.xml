@@ -47,6 +47,7 @@
         <gameType name="Freeform Commander Two Player Duel" jar="mage-game-freeformcommanderduel.jar" className="mage.game.FreeformCommanderDuelMatch" typeName="mage.game.FreeformCommanderDuelType"/>
         <gameType name="Freeform Commander Free For All" jar="mage-game-freeformcommanderfreeforall.jar" className="mage.game.FreeformCommanderFreeForAllMatch" typeName="mage.game.FreeformCommanderFreeForAllType"/>
         <gameType name="Freeform Unlimited Commander" jar="mage-game-freeformunlimitedcommander.jar" className="mage.game.FreeformUnlimitedCommanderMatch" typeName="mage.game.FreeformUnlimitedCommanderType"/>
+        <gameType name="Custom Pillar of the Paruns Two Player Duel" jar="mage-game-custompillaroftheparunsduel.jar" className="mage.game.CustomPillarOfTheParunsDuelMatch" typeName="mage.game.CustomPillarOfTheParunsDuelType"/>
         <gameType name="Oathbreaker Two Player Duel" jar="mage-game-oathbreakerduel.jar" className="mage.game.OathbreakerDuelMatch" typeName="mage.game.OathbreakerDuelType"/>
         <gameType name="Oathbreaker Free For All" jar="mage-game-oathbreakerfreeforall.jar" className="mage.game.OathbreakerFreeForAllMatch" typeName="mage.game.OathbreakerFreeForAllType"/>
         <gameType name="Brawl Two Player Duel" jar="mage-game-brawlduel.jar" className="mage.game.BrawlDuelMatch" typeName="mage.game.BrawlDuelType"/>

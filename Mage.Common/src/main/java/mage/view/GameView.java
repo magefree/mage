@@ -42,6 +42,7 @@ public class GameView implements Serializable {
 
     private static final Logger LOGGER = Logger.getLogger(GameView.class);
     private final int priorityTime;
+    private final int bufferTime;
     private final List<PlayerView> players = new ArrayList<>();
     private CardsView hand;
     private PlayableObjectsList canPlayObjects;
@@ -68,6 +69,7 @@ public class GameView implements Serializable {
         Player createdForPlayer = null;
         this.isPlayer = createdForPlayerId != null;
         this.priorityTime = game.getPriorityTime();
+        this.bufferTime = game.getBufferTime();
         for (Player player : state.getPlayers().values()) {
             players.add(new PlayerView(player, state, game, createdForPlayerId, watcherUserId));
             if (player.getId().equals(createdForPlayerId)) {
@@ -311,6 +313,10 @@ public class GameView implements Serializable {
 
     public int getPriorityTime() {
         return priorityTime;
+    }
+
+    public int getBufferTime() {
+        return bufferTime;
     }
 
     public UUID getActivePlayerId() {

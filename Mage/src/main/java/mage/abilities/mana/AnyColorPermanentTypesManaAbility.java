@@ -28,7 +28,7 @@ public class AnyColorPermanentTypesManaAbility extends ActivatedManaAbilityImpl 
         super(Zone.BATTLEFIELD, new AnyColorPermanentTypesManaEffect(targetController, permanentTypes), new TapSourceCost());
     }
 
-    public AnyColorPermanentTypesManaAbility(final AnyColorPermanentTypesManaAbility ability) {
+    protected AnyColorPermanentTypesManaAbility(final AnyColorPermanentTypesManaAbility ability) {
         super(ability);
     }
 
@@ -64,7 +64,7 @@ class AnyColorPermanentTypesManaEffect extends ManaEffect {
                 (targetController == TargetController.OPPONENT ? "an opponent controls." : "you control.");
     }
 
-    public AnyColorPermanentTypesManaEffect(final AnyColorPermanentTypesManaEffect effect) {
+    protected AnyColorPermanentTypesManaEffect(final AnyColorPermanentTypesManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

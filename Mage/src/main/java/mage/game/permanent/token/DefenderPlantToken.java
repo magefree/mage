@@ -21,7 +21,7 @@ public final class DefenderPlantToken extends TokenImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public DefenderPlantToken(final DefenderPlantToken token) {
+    protected DefenderPlantToken(final DefenderPlantToken token) {
         super(token);
     }
 

@@ -270,6 +270,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Ankheg", 233, Rarity.UNCOMMON, mage.cards.g.GiantAnkheg.class));
         cards.add(new SetCardInfo("Githzerai Monk", 20, Rarity.UNCOMMON, mage.cards.g.GithzeraiMonk.class));
         cards.add(new SetCardInfo("Glorious Protector", 695, Rarity.RARE, mage.cards.g.GloriousProtector.class));
+        cards.add(new SetCardInfo("Gluntch, the Bestower", 275, Rarity.RARE, mage.cards.g.GluntchTheBestower.class));
         cards.add(new SetCardInfo("Gnoll War Band", 178, Rarity.UNCOMMON, mage.cards.g.GnollWarBand.class));
         cards.add(new SetCardInfo("Goblin Spymaster", 795, Rarity.RARE, mage.cards.g.GoblinSpymaster.class));
         cards.add(new SetCardInfo("Goggles of Night", 74, Rarity.COMMON, mage.cards.g.GogglesOfNight.class));
@@ -375,6 +376,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Martial Impetus", 33, Rarity.COMMON, mage.cards.m.MartialImpetus.class));
         cards.add(new SetCardInfo("Marut", 322, Rarity.COMMON, mage.cards.m.Marut.class));
         cards.add(new SetCardInfo("Maskwood Nexus", 865, Rarity.RARE, mage.cards.m.MaskwoodNexus.class));
+        cards.add(new SetCardInfo("Master Chef", 241, Rarity.COMMON, mage.cards.m.MasterChef.class));
         cards.add(new SetCardInfo("Mazzy, Truesword Paladin", 283, Rarity.RARE, mage.cards.m.MazzyTrueswordPaladin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mazzy, Truesword Paladin", 430, Rarity.RARE, mage.cards.m.MazzyTrueswordPaladin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mazzy, Truesword Paladin", 541, Rarity.RARE, mage.cards.m.MazzyTrueswordPaladin.class, NON_FULL_USE_VARIOUS));

@@ -41,7 +41,7 @@ public final class FolkHero extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new SpellCastControllerTriggeredAbility(
                         new DrawCardSourceControllerEffect(1), filter, false
-                ).setTriggersOnce(true), Duration.WhileOnBattlefield,
+                ).setTriggersOnceEachTurn(true), Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
         )));
     }

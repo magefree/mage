@@ -24,7 +24,7 @@ public final class OozeToken extends TokenImpl {
         toughness = new MageInt(0);
     }
 
-    public OozeToken(final OozeToken token) {
+    protected OozeToken(final OozeToken token) {
         super(token);
     }
 

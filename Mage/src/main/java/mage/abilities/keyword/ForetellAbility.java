@@ -103,7 +103,7 @@ public class ForetellAbility extends SpecialAction {
             this.foretellSplitCost = foretellSplitCost;
         }
 
-        public ForetellExileEffect(final ForetellExileEffect effect) {
+        protected ForetellExileEffect(final ForetellExileEffect effect) {
             super(effect);
             this.card = effect.card;
             this.foretellCost = effect.foretellCost;
@@ -156,7 +156,7 @@ public class ForetellAbility extends SpecialAction {
             super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.AIDontUseIt);
         }
 
-        public ForetellLookAtCardEffect(final ForetellLookAtCardEffect effect) {
+        protected ForetellLookAtCardEffect(final ForetellLookAtCardEffect effect) {
             super(effect);
         }
 
@@ -200,7 +200,7 @@ public class ForetellAbility extends SpecialAction {
             staticText = "Foretold card";
         }
 
-        public ForetellAddCostEffect(final ForetellAddCostEffect effect) {
+        protected ForetellAddCostEffect(final ForetellAddCostEffect effect) {
             super(effect);
             this.mor = effect.mor;
         }
@@ -315,7 +315,7 @@ public class ForetellAbility extends SpecialAction {
             this.addCost(new ManaCostsImpl<>(foretellCost));
         }
 
-        public ForetellCostAbility(final ForetellCostAbility ability) {
+        protected ForetellCostAbility(final ForetellCostAbility ability) {
             super(ability);
             this.spellAbilityType = ability.spellAbilityType;
             this.abilityName = ability.abilityName;

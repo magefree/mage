@@ -13,6 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 
 import mage.choices.Choice;
+import mage.util.MultiAmountMessage;
 
 /**
  *
@@ -42,7 +43,7 @@ public class GameClientMessage implements Serializable {
     @Expose
     private Choice choice;
     @Expose
-    private List<String> messages;
+    private List<MultiAmountMessage> messages;
 
     public GameClientMessage(GameView gameView, Map<String, Serializable> options) {
         this.gameView = gameView;
@@ -80,7 +81,8 @@ public class GameClientMessage implements Serializable {
         this.cardsView2 = pile2;
     }
 
-    public GameClientMessage(GameView gameView, Map<String, Serializable> options, List<String> messages, int min, int max) {
+    public GameClientMessage(GameView gameView, Map<String, Serializable> options, List<MultiAmountMessage> messages,
+            int min, int max) {
         this.gameView = gameView;
         this.options = options;
         this.messages = messages;
@@ -134,7 +136,7 @@ public class GameClientMessage implements Serializable {
         return choice;
     }
 
-    public List<String> getMessages() {
+    public List<MultiAmountMessage> getMessages() {
         return messages;
     }
 

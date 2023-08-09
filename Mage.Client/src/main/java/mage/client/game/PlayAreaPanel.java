@@ -57,7 +57,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
      * @param gamePanel
      * @param options
      */
-    public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, int priorityTime, GamePanel gamePanel, PlayAreaPanelOptions options) {
+    public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, int priorityTime, GamePanel gamePanel,
+            PlayAreaPanelOptions options) {
         this.gamePanel = gamePanel;
         this.options = options;
         initComponents();

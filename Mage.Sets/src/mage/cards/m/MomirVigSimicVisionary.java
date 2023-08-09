@@ -94,7 +94,7 @@ class MomirVigSimicVisionaryEffect extends OneShotEffect {
         }
 
         CardsImpl cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, 1));
+        cards.addAllCards(controller.getLibrary().getTopCards(game, 1));
         controller.revealCards(sourceObject.getIdName(), cards, game);
 
         Set<Card> cardsList = cards.getCards(game);

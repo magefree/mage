@@ -11,9 +11,7 @@ import java.util.List;
  * @author TheElk801
  */
 public final class Warhammer40000 extends ExpansionSet {
-
-    private static final List<String> unfinished = Arrays.asList("Arco-Flagellant", "Sicarian Infiltrator", "Space Marine Devastator", "Ultramarines Honour Guard", "Vanguard Suppressor", "Zephyrim");
-
+	
     private static final Warhammer40000 instance = new Warhammer40000();
 
     public static Warhammer40000 getInstance() {
@@ -300,7 +298,5 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Worn Powerstone", 263, Rarity.UNCOMMON, mage.cards.w.WornPowerstone.class));
         cards.add(new SetCardInfo("Zephyrim", 20, Rarity.RARE, mage.cards.z.Zephyrim.class));
         cards.add(new SetCardInfo("Zoanthrope", 149, Rarity.RARE, mage.cards.z.Zoanthrope.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 }

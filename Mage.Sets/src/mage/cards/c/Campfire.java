@@ -82,7 +82,7 @@ class CampfireEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY));
-        cards.addAll(player.getGraveyard().getCards(filter, game));
+        cards.addAllCards(player.getGraveyard().getCards(filter, game));
         player.moveCards(cards, Zone.HAND, source, game);
         player.putCardsOnBottomOfLibrary(player.getGraveyard(), game, source, false);
         player.shuffleLibrary(source, game);

@@ -15,7 +15,7 @@ public class UndauntedAbility extends SimpleStaticAbility {
         setRuleAtTheTop(true);
     }
 
-    public UndauntedAbility(final UndauntedAbility ability) {
+    protected UndauntedAbility(final UndauntedAbility ability) {
         super(ability);
     }
 

@@ -66,7 +66,6 @@ public class DiscardTargetCost extends CostImpl {
     public void clearPaid() {
         super.clearPaid();
         this.cards.clear();
-        this.targets.clearChosen();
     }
 
     @Override

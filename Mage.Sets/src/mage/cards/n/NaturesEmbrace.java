@@ -14,8 +14,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -27,22 +26,13 @@ import java.util.UUID;
  */
 public final class NaturesEmbrace extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature or land");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.LAND.getPredicate()
-        ));
-    }
-
     public NaturesEmbrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         this.subtype.add(SubType.AURA);
 
         // Enchant creature or land
-        TargetPermanent auraTarget = new TargetPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_LAND);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget);

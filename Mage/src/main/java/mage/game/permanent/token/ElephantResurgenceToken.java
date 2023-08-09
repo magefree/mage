@@ -11,7 +11,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 
 /**
- *
  * @author TheElk801
  */
 public final class ElephantResurgenceToken extends TokenImpl {
@@ -32,7 +31,7 @@ public final class ElephantResurgenceToken extends TokenImpl {
         ));
     }
 
-    public ElephantResurgenceToken(final ElephantResurgenceToken token) {
+    protected ElephantResurgenceToken(final ElephantResurgenceToken token) {
         super(token);
     }
 

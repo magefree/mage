@@ -91,7 +91,7 @@ public final class KyrenToy extends CardImpl {
                     numberOfMana = ((RemoveVariableCountersSourceCost) cost).getAmount();
                 }
             }
-            return new Mana(Mana.ColorlessMana(numberOfMana + 1));
+            return Mana.ColorlessMana(numberOfMana + 1);
         }
 
         @Override

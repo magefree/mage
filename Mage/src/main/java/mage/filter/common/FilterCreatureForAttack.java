@@ -13,7 +13,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
@@ -32,7 +31,7 @@ public class FilterCreatureForAttack extends FilterCreaturePermanent {
         this.add(new CanTapPredicate());
     }
 
-    public FilterCreatureForAttack(final FilterCreatureForAttack filter) {
+    protected FilterCreatureForAttack(final FilterCreatureForAttack filter) {
         super(filter);
     }
 

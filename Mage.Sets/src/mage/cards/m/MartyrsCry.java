@@ -87,6 +87,7 @@ class MartyrsCryEffect extends OneShotEffect {
                         Integer::sum
                 ));
         controller.moveCards(new CardsImpl(permanents), Zone.EXILED, source, game);
+        game.getState().processAction(game);
         for (Map.Entry<UUID, Integer> entry : playerMap.entrySet()) {
             Player player = game.getPlayer(entry.getKey());
             if (player == null) {

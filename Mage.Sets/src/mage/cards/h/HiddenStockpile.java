@@ -19,7 +19,7 @@ import mage.watchers.common.RevoltWatcher;
 
 import java.util.UUID;
 
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 
 /**
  * @author LevelX2
@@ -38,7 +38,7 @@ public final class HiddenStockpile extends CardImpl {
 
         // {1}, Sacrifice a creature: Scry 1.
         Ability ability = new SimpleActivatedAbility(new ScryEffect(1, false), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

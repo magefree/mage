@@ -38,7 +38,7 @@ public class DestroyTargetEffect extends OneShotEffect {
         staticText = ruleText;
     }
 
-    public DestroyTargetEffect(final DestroyTargetEffect effect) {
+    protected DestroyTargetEffect(final DestroyTargetEffect effect) {
         super(effect);
         this.noRegen = effect.noRegen;
     }

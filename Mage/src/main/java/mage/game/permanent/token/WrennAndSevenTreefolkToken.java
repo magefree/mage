@@ -27,7 +27,7 @@ public final class WrennAndSevenTreefolkToken extends TokenImpl {
         ).setText("this creature's power and toughness are each equal to the number of lands you control")));
     }
 
-    public WrennAndSevenTreefolkToken(final WrennAndSevenTreefolkToken token) {
+    protected WrennAndSevenTreefolkToken(final WrennAndSevenTreefolkToken token) {
         super(token);
     }
 

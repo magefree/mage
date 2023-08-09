@@ -52,7 +52,7 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         this.ruleText = rule;
     }
 
-    public ConditionalActivatedAbility(final ConditionalActivatedAbility ability) {
+    protected ConditionalActivatedAbility(final ConditionalActivatedAbility ability) {
         super(ability);
         this.ruleText = ability.ruleText;
     }

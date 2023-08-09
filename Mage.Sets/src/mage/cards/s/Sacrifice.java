@@ -9,7 +9,7 @@ import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -22,7 +22,7 @@ public final class Sacrifice extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // As an additional cost to cast Sacrifice, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         // Add an amount of {B} equal to the sacrificed creature's converted mana cost.
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.BlackMana(1), new SacrificeCostConvertedMana("creature"),
                 "add an amount of {B} equal to the sacrificed creature's mana value"));

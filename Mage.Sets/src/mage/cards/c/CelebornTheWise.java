@@ -71,7 +71,7 @@ enum CelebornTheWiseValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "card you looked at while scrying this way";
+        return "card looked at while scrying this way";
     }
 
     @Override

@@ -28,8 +28,6 @@ import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -100,7 +98,7 @@ class GiftOfDoomEffect extends OneShotEffect {
     }
 
     GiftOfDoomEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "attach it to a creature";
     }
 

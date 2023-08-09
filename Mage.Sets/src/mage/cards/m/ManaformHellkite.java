@@ -1,25 +1,26 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.DragonIllusionToken;
 import mage.game.stack.Spell;
 import mage.watchers.common.ManaPaidSourceWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class ManaformHellkite extends CardImpl {
@@ -36,7 +37,11 @@ public final class ManaformHellkite extends CardImpl {
 
         // Whenever you cast a noncreature spell, create an X/X red Dragon Illusion creature token with flying and haste, where X is the amount of mana spent to cast that spell.
         // Exile that token at the beginning of the next end step.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ManaformHellkitEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new ManaformHellkitEffect(),
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE,
+                false, SetTargetPointer.SPELL
+        ));
     }
 
     private ManaformHellkite(final ManaformHellkite card) {

@@ -28,7 +28,7 @@ public final class VoiceOfResurgenceToken extends TokenImpl {
                 CreaturesYouControlCount.instance)));
     }
 
-    public VoiceOfResurgenceToken(final VoiceOfResurgenceToken token) {
+    protected VoiceOfResurgenceToken(final VoiceOfResurgenceToken token) {
         super(token);
     }
 

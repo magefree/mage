@@ -4,7 +4,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -35,7 +35,7 @@ public final class CephalidIllusionist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Cephalid Illusionist becomes the target of a spell or ability, put the top three cards of your library into your graveyard.
-        this.addAbility(new BecomesTargetTriggeredAbility(new MillCardsControllerEffect(3)));
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(new MillCardsControllerEffect(3)));
         
         // {2}{U}, {tap}: Prevent all combat damage that would be dealt to
         Effect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, true);

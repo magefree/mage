@@ -54,7 +54,7 @@ class MindclawShamanEffect extends OneShotEffect {
     public MindclawShamanEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "target opponent reveals their hand. You may cast "
-                + "an instant or sorcery card from it without paying its mana cost";
+                + "an instant or sorcery spell from among those cards without paying its mana cost";
     }
 
     public MindclawShamanEffect(final MindclawShamanEffect effect) {

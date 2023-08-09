@@ -18,7 +18,7 @@ public final class CatToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public CatToken(final CatToken token) {
+    protected CatToken(final CatToken token) {
         super(token);
     }
 

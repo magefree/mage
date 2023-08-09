@@ -20,7 +20,7 @@ public final class WolvesOfTheHuntToken extends TokenImpl {
         this.addAbility(new BandsWithOtherAbility("Wolves of the Hunt"));
     }
 
-    public WolvesOfTheHuntToken(final WolvesOfTheHuntToken token) {
+    protected WolvesOfTheHuntToken(final WolvesOfTheHuntToken token) {
         super(token);
     }
 

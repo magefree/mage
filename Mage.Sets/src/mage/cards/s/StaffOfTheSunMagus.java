@@ -6,6 +6,7 @@ import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,8 +34,10 @@ public final class StaffOfTheSunMagus extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Whenever you cast a white spell or a Plains enters the battlefield under your control, you gain 1 life.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(1), filterSpell,false));
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filterLand, false));
+        this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), false,
+                "Whenever you cast a white spell or a Plains enters the battlefield under your control, ",
+                new SpellCastControllerTriggeredAbility(null, filterSpell,false),
+                new EntersBattlefieldControlledTriggeredAbility(null, filterLand)));
     }
 
     private StaffOfTheSunMagus(final StaffOfTheSunMagus card) {

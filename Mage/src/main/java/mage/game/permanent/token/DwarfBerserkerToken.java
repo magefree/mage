@@ -16,7 +16,7 @@ public final class DwarfBerserkerToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public DwarfBerserkerToken(final DwarfBerserkerToken token) {
+    protected DwarfBerserkerToken(final DwarfBerserkerToken token) {
         super(token);
     }
 

@@ -33,7 +33,8 @@ public final class ElvishEulogist extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new CardsInControllerGraveyardCount(filter, 1)), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new CardsInControllerGraveyardCount(filter, 1))
+                .setText("you gain 1 life for each Elf card in your graveyard"), new SacrificeSourceCost()));
     }
 
     private ElvishEulogist(final ElvishEulogist card) {

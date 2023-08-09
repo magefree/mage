@@ -29,7 +29,7 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
         this.condition = condition;
     }
 
-    public LimitedTimesPerTurnActivatedAbility(final LimitedTimesPerTurnActivatedAbility ability) {
+    protected LimitedTimesPerTurnActivatedAbility(final LimitedTimesPerTurnActivatedAbility ability) {
         super(ability);
         this.maxActivationsPerTurn = ability.maxActivationsPerTurn;
         this.condition = ability.condition;

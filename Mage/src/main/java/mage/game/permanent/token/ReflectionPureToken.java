@@ -22,7 +22,7 @@ public final class ReflectionPureToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    public ReflectionPureToken(final ReflectionPureToken token) {
+    protected ReflectionPureToken(final ReflectionPureToken token) {
         super(token);
     }
 

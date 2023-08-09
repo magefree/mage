@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +38,7 @@ public final class SoratamiMindsweeper extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {2}, Return a land you control to its owner's hand: Target player puts the top two cards of their library into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new PutLibraryIntoGraveTargetEffect(2), new ManaCostsImpl<>("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new MillCardsTargetEffect(2), new ManaCostsImpl<>("{2}"));
         ability.addTarget(new TargetPlayer());
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
@@ -53,5 +53,3 @@ public final class SoratamiMindsweeper extends CardImpl {
         return new SoratamiMindsweeper(this);
     }
 }
-
-

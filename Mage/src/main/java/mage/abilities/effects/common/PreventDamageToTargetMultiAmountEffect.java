@@ -35,7 +35,7 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
         super(duration, amount, onlyCombat, consumable, dynamicValue);
     }
 
-    public PreventDamageToTargetMultiAmountEffect(final PreventDamageToTargetMultiAmountEffect effect) {
+    protected PreventDamageToTargetMultiAmountEffect(final PreventDamageToTargetMultiAmountEffect effect) {
         super(effect);
     }
 

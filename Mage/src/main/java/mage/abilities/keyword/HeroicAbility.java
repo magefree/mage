@@ -34,10 +34,11 @@ public class HeroicAbility extends TriggeredAbilityImpl {
         if (isHeroic) {
             this.setAbilityWord(AbilityWord.HEROIC);
         }
+        this.replaceRuleText = false;
         setTriggerPhrase("Whenever you cast a spell that targets {this}, ");
     }
 
-    public HeroicAbility(final HeroicAbility ability) {
+    protected HeroicAbility(final HeroicAbility ability) {
         super(ability);
     }
 

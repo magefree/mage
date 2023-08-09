@@ -67,7 +67,7 @@ public abstract class MageObjectImpl implements MageObject {
         abilities = new AbilitiesImpl<>();
     }
 
-    public MageObjectImpl(final MageObjectImpl object) {
+    protected MageObjectImpl(final MageObjectImpl object) {
         objectId = object.objectId;
         name = object.name;
         manaCost = object.manaCost.copy();

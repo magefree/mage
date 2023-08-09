@@ -6,8 +6,6 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 /**
  * @author North
@@ -18,7 +16,7 @@ public class CantBlockTargetEffect extends RestrictionEffect {
         super(duration);
     }
 
-    public CantBlockTargetEffect(final CantBlockTargetEffect effect) {
+    protected CantBlockTargetEffect(final CantBlockTargetEffect effect) {
         super(effect);
     }
 
@@ -42,26 +40,8 @@ public class CantBlockTargetEffect extends RestrictionEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (mode.getTargets().isEmpty()) {
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
-        Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
-            sb.append("any number of ");
-        } else if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
-                sb.append("up to ");
-            }
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
-        }
-        sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-
-        sb.append(" can't block");
-        if (this.duration == Duration.EndOfTurn) {
-            sb.append(" this turn");
-        }
-
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+                " can't block" +
+                (duration == Duration.EndOfTurn ? " this turn" : "" );
     }
 }

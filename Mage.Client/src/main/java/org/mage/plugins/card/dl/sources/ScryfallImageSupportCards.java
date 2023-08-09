@@ -486,6 +486,7 @@ public class ScryfallImageSupportCards {
             add("KLR"); // Kaladesh Remastered
             add("CMR"); // Commander Legends
             add("CC1"); // Commander Collection: Green
+            add("PL21"); // Year of the Ox 2021
             add("KHM"); // Kaldheim
             add("KHC"); // Kaldheim Commander
             add("TSR"); // Time Spiral Remastered
@@ -508,6 +509,7 @@ public class ScryfallImageSupportCards {
             add("CC2"); // Commander Collection: Black
             add("NEO"); // Kamigawa: Neon Dynasty
             add("NEC"); // Neon Dynasty Commander
+            add("PL22"); // Year of the Tiger 2022
             add("SNC"); // Streets of New Capenna
             add("NCC"); // New Capenna Commander
             add("SLX"); // Universes Within
@@ -527,6 +529,7 @@ public class ScryfallImageSupportCards {
             add("DMR"); // Dominaria Remastered
             add("ONE"); // Phyrexia: All Will Be One
             add("ONC"); // Phyrexia: All Will Be One Commander
+            add("PL23"); // Year of the Rabbit 2023
             add("MOM"); // March of the Machine
             add("MOC"); // March of the Machine Commander
             add("MAT"); // March of the Machine: The Aftermath
@@ -535,6 +538,8 @@ public class ScryfallImageSupportCards {
             add("LTR"); // The Lord of the Rings: Tales of Middle-Earth
             add("LTC"); // Tales of Middle-Earth Commander
             add("CMM"); // Commander Masters
+            add("WHO"); // Doctor Who
+            add("WOE"); // Doctor Who
         }
     };
 

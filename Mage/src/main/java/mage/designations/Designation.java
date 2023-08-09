@@ -45,7 +45,7 @@ public abstract class Designation extends MageObjectImpl {
         this.frameStyle = FrameStyle.M15_NORMAL;
     }
 
-    public Designation(final Designation designation) {
+    protected Designation(final Designation designation) {
         super(designation);
         this.designationType = designation.designationType;
         this.unique = designation.unique;

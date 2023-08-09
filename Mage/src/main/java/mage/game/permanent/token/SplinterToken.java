@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author L_J
  */
 public final class SplinterToken extends TokenImpl {
@@ -25,7 +24,7 @@ public final class SplinterToken extends TokenImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{G}")));
     }
 
-    public SplinterToken(final SplinterToken token) {
+    protected SplinterToken(final SplinterToken token) {
         super(token);
     }
 

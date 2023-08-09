@@ -14,7 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -32,7 +32,7 @@ public final class MartyredRusalka extends CardImpl {
 
         // {W}, Sacrifice a creature: Target creature can't attack this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{W}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

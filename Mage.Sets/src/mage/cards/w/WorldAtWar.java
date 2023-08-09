@@ -64,7 +64,7 @@ class WorldAtWarEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // we can't add two turn modes at once, will add additional post combat on delayed trigger resolution
-        TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN, false);
+        TurnMod combat = new TurnMod(source.getControllerId()).withExtraPhase(TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN);
         game.getState().getTurnMods().add(combat);
         UntapDelayedTriggeredAbility delayedTriggeredAbility = new UntapDelayedTriggeredAbility();
         delayedTriggeredAbility.setConnectedTurnMod(combat.getId());
@@ -107,7 +107,7 @@ class UntapDelayedTriggeredAbility extends DelayedTriggeredAbility {
         }
         if (event.getType() == GameEvent.EventType.COMBAT_PHASE_PRE && enabled) {
             // add additional post combat phase after that
-            game.getState().getTurnMods().add(new TurnMod(getControllerId(), TurnPhase.POSTCOMBAT_MAIN, TurnPhase.COMBAT, false));
+            game.getState().getTurnMods().add(new TurnMod(getControllerId()).withExtraPhase(TurnPhase.POSTCOMBAT_MAIN, TurnPhase.COMBAT));
             enabled = false;
             return true;
         }

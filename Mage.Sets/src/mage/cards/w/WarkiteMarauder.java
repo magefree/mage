@@ -2,6 +2,7 @@
 package mage.cards.w;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -14,11 +15,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author LevelX2
  */
 public final class WarkiteMarauder extends CardImpl {
@@ -26,7 +26,7 @@ public final class WarkiteMarauder extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public WarkiteMarauder(UUID ownerId, CardSetInfo setInfo) {

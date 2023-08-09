@@ -19,7 +19,7 @@ public class OpponentsCantCastChosenUntilNextTurnEffect extends ContinuousRuleMo
         staticText = "Until your next turn, your opponents can't cast spells with the chosen name";
     }
 
-    public OpponentsCantCastChosenUntilNextTurnEffect(final OpponentsCantCastChosenUntilNextTurnEffect effect) {
+    protected OpponentsCantCastChosenUntilNextTurnEffect(final OpponentsCantCastChosenUntilNextTurnEffect effect) {
         super(effect);
     }
 

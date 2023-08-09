@@ -51,7 +51,7 @@ public class DonalHeraldOfWings extends CardImpl {
         // Do this only once each turn. (The copy becomes a token.)
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new DonalHeraldOfWingsEffect(), filterSpell, true
-        ).setDoOnlyOnce(true));
+        ).setDoOnlyOnceEachTurn(true));
     }
 
     private DonalHeraldOfWings(final DonalHeraldOfWings card) {

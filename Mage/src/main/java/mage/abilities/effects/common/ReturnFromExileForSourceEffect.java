@@ -34,7 +34,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
         updateText();
     }
 
-    public ReturnFromExileForSourceEffect(final ReturnFromExileForSourceEffect effect) {
+    protected ReturnFromExileForSourceEffect(final ReturnFromExileForSourceEffect effect) {
         super(effect);
         this.returnToZone = effect.returnToZone;
         this.pluralCards = effect.pluralCards;

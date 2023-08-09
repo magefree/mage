@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -16,8 +17,6 @@ import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -73,7 +72,7 @@ enum AetherBurstAdjuster implements TargetAdjuster {
 class DynamicTargetCreaturePermanent extends TargetPermanent {
 
     public DynamicTargetCreaturePermanent() {
-        super(FILTER_PERMANENT_CREATURES);
+        super(StaticFilters.FILTER_PERMANENT_CREATURES);
     }
 
     public DynamicTargetCreaturePermanent(final DynamicTargetCreaturePermanent target) {

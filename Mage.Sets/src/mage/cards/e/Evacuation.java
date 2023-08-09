@@ -6,7 +6,7 @@ import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -18,7 +18,7 @@ public final class Evacuation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
 
         // Return all creatures to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     private Evacuation(final Evacuation card) {

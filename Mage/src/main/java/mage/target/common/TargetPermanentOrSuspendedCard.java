@@ -34,7 +34,7 @@ public class TargetPermanentOrSuspendedCard extends TargetImpl {
         this.maxNumberOfTargets = 1;
     }
 
-    public TargetPermanentOrSuspendedCard(final TargetPermanentOrSuspendedCard target) {
+    protected TargetPermanentOrSuspendedCard(final TargetPermanentOrSuspendedCard target) {
         super(target);
         this.filter = target.filter.copy();
     }

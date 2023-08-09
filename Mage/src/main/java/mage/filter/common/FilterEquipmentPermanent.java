@@ -2,11 +2,11 @@
 
 
 package mage.filter.common;
+
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 
 /**
- *
  * @author TheElk801
  */
 public class FilterEquipmentPermanent extends FilterPermanent {
@@ -20,7 +20,7 @@ public class FilterEquipmentPermanent extends FilterPermanent {
         this.add(SubType.EQUIPMENT.getPredicate());
     }
 
-    public FilterEquipmentPermanent(final FilterEquipmentPermanent filter) {
+    protected FilterEquipmentPermanent(final FilterEquipmentPermanent filter) {
         super(filter);
     }
 

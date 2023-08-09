@@ -119,13 +119,26 @@ class EleshNornMotherOfMachinesPreventionEffect extends ContinuousRuleModifyingE
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Ability ability = (Ability) getValue("targetAbility");
-        if (ability != null && ability.getAbilityType() == AbilityType.TRIGGERED && game.getOpponents(source.getControllerId()).contains(ability.getControllerId())) {
-            Permanent enteringPermanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (enteringPermanent != null) {
-                return (((TriggeredAbility) ability).checkTrigger(event, game));
-            }
+        if(ability == null || ability.getAbilityType() != AbilityType.TRIGGERED) {
+            return false;
         }
-        return false;
+
+        // Elesh Norn should not prevent Bloodghast trigger from the graveyard.
+        // This checks that the trigger originated from a permanent.
+        if(ability.getSourcePermanentOrLKI(game) == null) {
+            return false;
+        }
+
+        if (!game.getOpponents(source.getControllerId()).contains(ability.getControllerId())) {
+            return false;
+        }
+
+        Permanent enteringPermanent = ((EntersTheBattlefieldEvent) event).getTarget();
+        if (enteringPermanent == null) {
+            return false;
+        }
+
+        return (((TriggeredAbility) ability).checkTrigger(event, game));
     }
 
     @Override

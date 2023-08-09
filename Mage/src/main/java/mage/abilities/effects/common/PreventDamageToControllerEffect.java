@@ -28,7 +28,7 @@ public class PreventDamageToControllerEffect extends PreventionEffectImpl {
         staticText = setText();
     }
 
-    public PreventDamageToControllerEffect(final PreventDamageToControllerEffect effect) {
+    protected PreventDamageToControllerEffect(final PreventDamageToControllerEffect effect) {
         super(effect);
     }
 

@@ -83,7 +83,7 @@ enum LutriTheSpellchaserCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingHandSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         Map<String, Integer> cardMap = new HashMap<>();
         deck.stream()
                 .filter(card -> !card.hasCardTypeForDeckbuilding(CardType.LAND))

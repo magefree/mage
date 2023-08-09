@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author L_J
  */
 public final class ExpansionSymbolToken extends TokenImpl {
@@ -19,7 +18,7 @@ public final class ExpansionSymbolToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public ExpansionSymbolToken(final ExpansionSymbolToken token) {
+    protected ExpansionSymbolToken(final ExpansionSymbolToken token) {
         super(token);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -11,7 +10,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 
@@ -24,17 +22,13 @@ public class CantBeTargetedTargetEffect extends ContinuousRuleModifyingEffectImp
     private final FilterObject filterSource;
     private final TargetController targetController;
 
-    public CantBeTargetedTargetEffect(FilterObject filterSource, Duration duration) {
-        this(filterSource, duration, TargetController.ANY);
-    }
-
     public CantBeTargetedTargetEffect(FilterObject filterSource, Duration duration, TargetController targetController) {
         super(duration, Outcome.Benefit, false, false);
         this.targetController = targetController;
         this.filterSource = filterSource;
     }
 
-    public CantBeTargetedTargetEffect(final CantBeTargetedTargetEffect effect) {
+    protected CantBeTargetedTargetEffect(final CantBeTargetedTargetEffect effect) {
         super(effect);
         this.filterSource = effect.filterSource.copy();
         this.targetController = effect.targetController;
@@ -81,10 +75,7 @@ public class CantBeTargetedTargetEffect extends ContinuousRuleModifyingEffectImp
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (!mode.getTargets().isEmpty()) {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-        }
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "it"));
         sb.append(" can't be the target of ");
         sb.append(filterSource.getMessage());
         if (!duration.toString().isEmpty()) {

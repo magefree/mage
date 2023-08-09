@@ -1,7 +1,6 @@
 
 package mage.game;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
@@ -17,6 +16,8 @@ import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author nigelzor
@@ -24,7 +25,7 @@ import mage.players.Player;
 public class MomirDuel extends GameImpl {
 
     public MomirDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 60);
+        super(attackOption, range, mulligan, startLife, 60, 7);
     }
 
     public MomirDuel(final MomirDuel game) {
@@ -53,7 +54,7 @@ public class MomirDuel extends GameImpl {
         }
         getState().addAbility(ability, null);
         super.init(choosingPlayerId);
-        state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+        state.getTurnMods().add(new TurnMod(startingPlayerId).withSkipStep(PhaseStep.DRAW));
     }
 
     @Override

@@ -15,7 +15,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
- *
  * @author LoneFox
  */
 public class DiscardOntoBattlefieldEffect extends ReplacementEffectImpl {
@@ -25,7 +24,7 @@ public class DiscardOntoBattlefieldEffect extends ReplacementEffectImpl {
         staticText = "If a spell or ability an opponent controls causes you to discard {this}, put it onto the battlefield instead of putting it into your graveyard";
     }
 
-    public DiscardOntoBattlefieldEffect(final DiscardOntoBattlefieldEffect effect) {
+    protected DiscardOntoBattlefieldEffect(final DiscardOntoBattlefieldEffect effect) {
         super(effect);
     }
 

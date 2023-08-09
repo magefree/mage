@@ -18,11 +18,7 @@ import mage.game.permanent.token.ZombieToken;
  */
 public final class RotlungReanimator extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("{this} or another Cleric");
-    
-    static {
-        filter.add(SubType.CLERIC.getPredicate());
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.CLERIC, "Cleric");
 
     public RotlungReanimator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

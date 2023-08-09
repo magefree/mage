@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEffect {
@@ -42,7 +41,7 @@ public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEff
                 + " under its owner's control";
     }
 
-    public ReturnToBattlefieldUnderOwnerControlSourceEffect(final ReturnToBattlefieldUnderOwnerControlSourceEffect effect) {
+    protected ReturnToBattlefieldUnderOwnerControlSourceEffect(final ReturnToBattlefieldUnderOwnerControlSourceEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
         this.zoneChangeCounter = effect.zoneChangeCounter;

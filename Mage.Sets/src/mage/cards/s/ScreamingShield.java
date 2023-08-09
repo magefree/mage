@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -30,7 +30,7 @@ public final class ScreamingShield extends CardImpl {
 
         // Equipped creature gets +0/+3 and has "{2}, {T}: Target player puts the top three cards of their library into their graveyard."
         Ability toAdd = new SimpleActivatedAbility(
-                new PutLibraryIntoGraveTargetEffect(3), new GenericManaCost(2)
+                new MillCardsTargetEffect(3), new GenericManaCost(2)
         );
         toAdd.addCost(new TapSourceCost());
         toAdd.addTarget(new TargetPlayer());

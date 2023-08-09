@@ -39,7 +39,7 @@ public final class RiveteersAscendancy extends CardImpl {
         Ability ability = new SacrificePermanentTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(true),
                 StaticFilters.FILTER_PERMANENT_A_CREATURE
-        ).setDoOnlyOnce(true);
+        ).setDoOnlyOnceEachTurn(true);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

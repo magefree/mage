@@ -22,7 +22,7 @@ public class RegenerateTargetEffect extends ReplacementEffectImpl {
         super(Duration.EndOfTurn, Outcome.Regenerate);
     }
 
-    public RegenerateTargetEffect(final RegenerateTargetEffect effect) {
+    protected RegenerateTargetEffect(final RegenerateTargetEffect effect) {
         super(effect);
     }
 

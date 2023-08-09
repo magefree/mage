@@ -35,18 +35,15 @@ public class CrypticPursuit extends CardImpl {
     public CrypticPursuit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{R}");
 
-        // Whenever you cast an instant or sorcery spell from your hand, manifest the top card of your library.
-        // (Put that card onto the battlefield face down as a 2/2 creature.
-        // Turn it face up any time for its mana cost if it’s a creature card.)
-        this.addAbility(new SpellCastControllerTriggeredAbility(
+        // Whenever you cast an instant or sorcery spell from your hand, manifest the top card of your library. (Put that card onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it’s a creature card.)
+        this.addAbility(SpellCastControllerTriggeredAbility.createWithFromZone(
                 new ManifestEffect(1),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
                 false,
-                Zone.HAND)
-        );
+                Zone.HAND
+        ));
 
-        // Whenever a face-down creature you control dies, exile it if it’s an instant or sorcery card.
-        // You may cast that card until the end of your next turn.
+        // Whenever a face-down creature you control dies, exile it if it’s an instant or sorcery card. You may cast that card until the end of your next turn.
         this.addAbility(new DiesCreatureTriggeredAbility(
                 new CrypticPursuitExileAndPlayEffect(),
                 false,

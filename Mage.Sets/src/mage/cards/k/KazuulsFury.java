@@ -14,7 +14,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 
 /**
  * @author JayDi85
@@ -32,7 +32,7 @@ public final class KazuulsFury extends ModalDoubleFacedCard {
         // Instant
 
         // As an additional cost to cast this spell, sacrifice a creature.
-        this.getLeftHalfCard().getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getLeftHalfCard().getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         // Kazuul's Fury deals damage equal to the sacrificed creatures power to any target.
         this.getLeftHalfCard().getSpellAbility().addEffect(new DamageTargetEffect(SacrificeCostCreaturesPower.instance)

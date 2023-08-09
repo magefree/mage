@@ -26,11 +26,11 @@ public final class SmaugToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new DiesSourceTriggeredAbility(
-                new CreateTokenEffect(new FoodToken(), 14)
+                new CreateTokenEffect(new TreasureToken(), 14)
         ).setTriggerPhrase("When this creature dies, "));
     }
 
-    public SmaugToken(final SmaugToken token) {
+    protected SmaugToken(final SmaugToken token) {
         super(token);
     }
 

@@ -28,7 +28,7 @@ public final class YuanShaosInfantry extends CardImpl {
         // Whenever Yuan Shao's Infantry attacks alone, Yuan Shao's Infantry can't be blocked this combat.
         Effect effect = new CantBeBlockedSourceEffect(Duration.EndOfCombat);
         effect.setText("{this} can't be blocked this combat");
-        this.addAbility(new AttacksAloneSourceTriggeredAbility(effect));
+        this.addAbility(new AttacksAloneSourceTriggeredAbility(effect).setReplaceRuleText(false));
     }
 
     private YuanShaosInfantry(final YuanShaosInfantry card) {

@@ -21,7 +21,6 @@ import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class BolsterEffect extends OneShotEffect {
@@ -38,7 +37,7 @@ public class BolsterEffect extends OneShotEffect {
         this.staticText = setText();
     }
 
-    public BolsterEffect(final BolsterEffect effect) {
+    protected BolsterEffect(final BolsterEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

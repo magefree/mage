@@ -44,7 +44,7 @@ public class SetBasePowerToughnessAllEffect extends ContinuousEffectImpl {
         this.lockedInPT = lockedInPT;
     }
 
-    public SetBasePowerToughnessAllEffect(final SetBasePowerToughnessAllEffect effect) {
+    protected SetBasePowerToughnessAllEffect(final SetBasePowerToughnessAllEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

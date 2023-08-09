@@ -13,7 +13,7 @@ import mage.constants.Zone;
 import mage.game.command.Emblem;
 import mage.target.common.TargetControlledCreaturePermanent;
 
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 
 /**
  * @author spjspj
@@ -27,7 +27,7 @@ public final class ObNixilisOfTheBlackOathEmblem extends Emblem {
         Effect effect = new GainLifeEffect(xValue);
         effect.setText("You gain X life");
         Ability ability = new SimpleActivatedAbility(Zone.COMMAND, effect, new ManaCostsImpl<>("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         effect = new DrawCardSourceControllerEffect(xValue);
         effect.setText("and draw X cards, where X is the sacrificed creature's power");
         ability.addEffect(effect);

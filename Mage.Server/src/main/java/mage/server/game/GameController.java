@@ -28,6 +28,7 @@ import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
+import mage.util.MultiAmountMessage;
 import mage.utils.StreamUtils;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
@@ -149,15 +150,18 @@ public class GameController implements GameCallback {
                                 if (playerId == null) {
                                     throw new MageException("RESUME_TIMER: playerId can't be null");
                                 }
+                                Player player = game.getState().getPlayer(playerId);
+                                if (player == null) {
+                                    throw new MageException("RESUME_TIMER: player can't be null");
+                                }
+
                                 timer = timers.get(playerId);
                                 if (timer == null) {
-                                    Player player = game.getState().getPlayer(playerId);
-                                    if (player != null) {
-                                        timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
-                                    } else {
-                                        throw new MageException("RESUME_TIMER: player can't be null");
-                                    }
+                                    timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
                                 }
+
+                                player.setBufferTimeLeft(game.getBufferTime());
+                                timer.setBufferCount(game.getBufferTime());
                                 timer.resume();
                                 break;
                             case PAUSE_TIMER:
@@ -870,7 +874,9 @@ public class GameController implements GameCallback {
         perform(playerId, playerId1 -> getGameSession(playerId1).getAmount(message, min, max));
     }
 
-    private synchronized void multiAmount(UUID playerId, final List<String> messages, final int min, final int max, final Map<String, Serializable> options) throws MageException {
+    private synchronized void multiAmount(UUID playerId, final List<MultiAmountMessage> messages,
+            final int min, final int max, final Map<String, Serializable> options)
+            throws MageException {
         perform(playerId, playerId1 -> getGameSession(playerId1).getMultiAmount(messages, min, max, options));
     }
 
@@ -1212,8 +1218,8 @@ public class GameController implements GameCallback {
         sb.append(state.getStepNum());
         sb.append("<br>getTurn: ");
         sb.append(state.getTurn());
-        sb.append("<br>getTurnId: ");
-        sb.append(state.getTurnId());
+        sb.append("<br>getExtraTurnId: ");
+        sb.append(state.getExtraTurnId());
         sb.append("<br>getTurnMods: ");
         sb.append(state.getTurnMods());
         sb.append("<br>getTurnNum: ");

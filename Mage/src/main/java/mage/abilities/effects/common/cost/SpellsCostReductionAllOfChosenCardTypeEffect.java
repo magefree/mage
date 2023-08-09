@@ -19,7 +19,7 @@ public class SpellsCostReductionAllOfChosenCardTypeEffect extends SpellsCostRedu
         super(filter, amount, false, onlyControlled);
     }
 
-    public SpellsCostReductionAllOfChosenCardTypeEffect(final SpellsCostReductionAllOfChosenCardTypeEffect effect) {
+    protected SpellsCostReductionAllOfChosenCardTypeEffect(final SpellsCostReductionAllOfChosenCardTypeEffect effect) {
         super(effect);
     }
 

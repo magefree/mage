@@ -18,7 +18,7 @@ public final class CrushOfTentaclesToken extends TokenImpl {
         this.toughness = new MageInt(8);
     }
 
-    public CrushOfTentaclesToken(final CrushOfTentaclesToken token) {
+    protected CrushOfTentaclesToken(final CrushOfTentaclesToken token) {
         super(token);
     }
 

@@ -42,7 +42,7 @@ public final class ZethiArcaneBlademaster extends CardImpl {
                 .setTargetAdjuster(ZethiArcaneBlademasterAdjuster.instance));
 
         // Lightning Kick—Whenever Chun-Li attacks, copy each exiled card you own with a kick counter on it. You may cast the copies.
-        this.addAbility(new AttacksTriggeredAbility(new ZethiArcaneBlademasterCastEffect()).withFlavorWord("Lightning Kick"));
+        this.addAbility(new AttacksTriggeredAbility(new ZethiArcaneBlademasterCastEffect()));
     }
 
     private ZethiArcaneBlademaster(final ZethiArcaneBlademaster card) {

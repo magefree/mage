@@ -21,7 +21,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 
 /**
  * @author LePwnerer
@@ -39,7 +39,7 @@ public final class HostileHostel extends CardImpl {
         this.addAbility(new TransformAbility());
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new HostileHostelEffect(), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

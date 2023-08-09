@@ -37,7 +37,7 @@ public class AttacksTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} attacks, ");
     }
 
-    public AttacksTriggeredAbility(final AttacksTriggeredAbility ability) {
+    protected AttacksTriggeredAbility(final AttacksTriggeredAbility ability) {
         super(ability);
         this.text = ability.text;
         this.setTargetPointer = ability.setTargetPointer;

@@ -14,7 +14,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author Plopman
  */
 public final class PersonalTutor extends CardImpl {
-    private static final FilterCard filter = new FilterCard("Sorcery card");
+    private static final FilterCard filter = new FilterCard("sorcery card");
     static{
         filter.add(CardType.SORCERY.getPredicate());
     }

@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -29,7 +29,7 @@ public final class FrenziedTrapbreaker extends CardImpl {
             = new FilterArtifactOrEnchantmentPermanent("artifact or enchantment defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public FrenziedTrapbreaker(UUID ownerId, CardSetInfo setInfo) {

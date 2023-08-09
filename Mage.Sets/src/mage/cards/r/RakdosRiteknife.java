@@ -27,7 +27,7 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 import mage.abilities.costs.mana.GenericManaCost;
 
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 
 /**
  * @author TheElk801
@@ -130,7 +130,7 @@ class RakdosRiteknifeEffect extends ContinuousEffectImpl {
                         .setTargetPointer(new FixedTarget(permanent, game)),
                 new TapSourceCost()
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         return ability;
     }
 }

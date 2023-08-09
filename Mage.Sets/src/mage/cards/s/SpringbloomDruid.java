@@ -15,8 +15,6 @@ import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT;
-
 /**
  * @author TheElk801
  */
@@ -37,7 +35,7 @@ public final class SpringbloomDruid extends CardImpl {
                 ), true
                 ).setText("search your library for up to two basic land cards, " +
                         "put them onto the battlefield tapped, then shuffle"
-                ), new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_LAND_SHORT_TEXT))
+                ), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)
         )));
     }
 

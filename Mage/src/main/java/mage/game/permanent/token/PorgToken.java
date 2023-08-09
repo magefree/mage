@@ -23,7 +23,7 @@ public final class PorgToken extends TokenImpl {
         this.addAbility(new MonstrosityAbility("{G}", 1));
     }
 
-    public PorgToken(final PorgToken token) {
+    protected PorgToken(final PorgToken token) {
         super(token);
     }
 

@@ -41,7 +41,7 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = filter;
         this.minAttackers = minAttackers;
         this.setTargetPointer = setTargetPointer;
-        if (minAttackers == 1) {
+        if (minAttackers == 1 && StaticFilters.FILTER_PERMANENT_CREATURES.equals(filter)) {
             setTriggerPhrase("Whenever you attack, ");
         } else {
             StringBuilder sb = new StringBuilder("Whenever you attack with ");
@@ -53,7 +53,7 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         }
     }
 
-    public AttacksWithCreaturesTriggeredAbility(final AttacksWithCreaturesTriggeredAbility ability) {
+    protected AttacksWithCreaturesTriggeredAbility(final AttacksWithCreaturesTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.minAttackers = ability.minAttackers;

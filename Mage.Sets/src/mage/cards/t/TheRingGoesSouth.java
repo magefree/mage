@@ -50,7 +50,7 @@ class TheRingGoesSouthEffect extends OneShotEffect {
     TheRingGoesSouthEffect() {
         super(Outcome.Benefit);
         staticText = "Then reveal cards from the top of your library until you reveal X land cards, " +
-                "where X is the number of legendary creatures you control. Put those lands onto " +
+                "where X is the number of legendary creatures you control. Put those land cards onto " +
                 "the battlefield tapped and the rest on the bottom of your library in a random order.";
     }
 

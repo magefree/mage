@@ -40,7 +40,9 @@ public final class HornOfGondor extends CardImpl {
 
         // {3}, {T}: Create X 1/1 white Human Soldier creature tokens, where X is the number of Humans you control.
         Ability ability = new SimpleActivatedAbility(
-                new CreateTokenEffect(new HumanSoldierToken(), xValue), new GenericManaCost(3)
+                new CreateTokenEffect(new HumanSoldierToken(), xValue)
+                        .setText("create X 1/1 white Human Soldier creature tokens, where X is the number of Humans you control"),
+                new GenericManaCost(3)
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability.addHint(hint));

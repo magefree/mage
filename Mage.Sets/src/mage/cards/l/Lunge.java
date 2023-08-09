@@ -26,7 +26,7 @@ public final class Lunge extends CardImpl {
 
         Effect effect = new DamageTargetEffect(2).setUseOnlyTargetPointer(true);
         effect.setTargetPointer(new SecondTargetPointer());
-        effect.setText("and 2 damage to target player");
+        effect.setText("and 2 damage to target player or planeswalker");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }

@@ -32,7 +32,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -61,7 +61,7 @@ public final class HairStrungKoto extends CardImpl {
          * card of their library into their graveyard.
          */
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutLibraryIntoGraveTargetEffect(1),
+                new MillCardsTargetEffect(1),
                 new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

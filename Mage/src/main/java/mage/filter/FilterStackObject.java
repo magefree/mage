@@ -25,7 +25,7 @@ public class FilterStackObject extends FilterObject<StackObject> {
         super(name);
     }
 
-    public FilterStackObject(final FilterStackObject filter) {
+    protected FilterStackObject(final FilterStackObject filter) {
         super(filter);
         this.extraPredicates.addAll(filter.extraPredicates);
     }

@@ -20,7 +20,6 @@ import mage.util.CardUtil;
 import java.util.Set;
 
 /**
- *
  * @author LevelX2
  */
 public class ManifestTargetPlayerEffect extends OneShotEffect {
@@ -35,7 +34,7 @@ public class ManifestTargetPlayerEffect extends OneShotEffect {
         this.staticText = setText();
     }
 
-    public ManifestTargetPlayerEffect(final ManifestTargetPlayerEffect effect) {
+    protected ManifestTargetPlayerEffect(final ManifestTargetPlayerEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.prefix = effect.prefix;

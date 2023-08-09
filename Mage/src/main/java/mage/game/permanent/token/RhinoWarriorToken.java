@@ -19,7 +19,7 @@ public final class RhinoWarriorToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public RhinoWarriorToken(final RhinoWarriorToken token) {
+    protected RhinoWarriorToken(final RhinoWarriorToken token) {
         super(token);
     }
 

@@ -40,7 +40,7 @@ public class PutCardFromHandOntoBattlefieldEffect extends OneShotEffect {
         this.tapped = tapped;
     }
 
-    public PutCardFromHandOntoBattlefieldEffect(final PutCardFromHandOntoBattlefieldEffect effect) {
+    protected PutCardFromHandOntoBattlefieldEffect(final PutCardFromHandOntoBattlefieldEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
         this.useTargetController = effect.useTargetController;

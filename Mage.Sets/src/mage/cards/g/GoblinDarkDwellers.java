@@ -72,7 +72,7 @@ class GoblinDarkDwellersEffect extends OneShotEffect {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast target instant or sorcery card with "
                 + "mana value 3 or less from your graveyard without paying its mana cost. "
-                + "If that spell would be put into your graveyard this turn, exile it instead";
+                + "If that spell would be put into your graveyard, exile it instead";
     }
 
     GoblinDarkDwellersEffect(final GoblinDarkDwellersEffect effect) {
@@ -92,7 +92,7 @@ class GoblinDarkDwellersEffect extends OneShotEffect {
             if (card != null) {
                 if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + '?', source, game)) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                    Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
+                    boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
                             game, true, new ApprovingObject(source, game));
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
                     if (cardWasCast) {

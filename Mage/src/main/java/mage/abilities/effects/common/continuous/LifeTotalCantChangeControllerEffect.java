@@ -20,7 +20,7 @@ public class LifeTotalCantChangeControllerEffect extends ContinuousEffectImpl {
         staticText = "Your life total can't change. <i>(You can't gain or lose life. You can't pay any amount of life except 0.)</i>";
     }
 
-    public LifeTotalCantChangeControllerEffect(final LifeTotalCantChangeControllerEffect effect) {
+    protected LifeTotalCantChangeControllerEffect(final LifeTotalCantChangeControllerEffect effect) {
         super(effect);
     }
 

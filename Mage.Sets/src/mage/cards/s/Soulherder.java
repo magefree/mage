@@ -4,8 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,9 +47,8 @@ public final class Soulherder extends CardImpl {
 
         // At the beginning of your end step, you may exile another target creature you control, then return that card to the battlefield under its owner's control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new ExileTargetForSourceEffect(), TargetController.YOU, true
+                new ExileThenReturnTargetEffect(false, true), TargetController.YOU, true
         );
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).concatBy(", then"));
         ability.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(ability);
     }

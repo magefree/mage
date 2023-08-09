@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class MelekIzzetParagon extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("cast instant or sorcery spells");
+    private static final FilterCard filter = new FilterCard("cast instant and sorcery spells");
 
     static {
         filter.add(Predicates.or(

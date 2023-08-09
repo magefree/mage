@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class SetBasePowerToughnessEnchantedEffect extends ContinuousEffectImpl {
@@ -29,7 +28,7 @@ public class SetBasePowerToughnessEnchantedEffect extends ContinuousEffectImpl {
         this.toughness = toughness;
     }
 
-    public SetBasePowerToughnessEnchantedEffect(final SetBasePowerToughnessEnchantedEffect effect) {
+    protected SetBasePowerToughnessEnchantedEffect(final SetBasePowerToughnessEnchantedEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;
