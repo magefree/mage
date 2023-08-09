@@ -88,7 +88,7 @@ public class DontUntapTest extends CardTestPlayerBase {
         
         attack(1, playerA, "Silvercoat Lion");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Exhaustion", playerA);
-        activateAbility(2, PhaseStep.END_TURN, playerA, "{1}{B}:"); //Reassembling Skeleton enters after spell is cast, should remain tapped
+        activateAbility(2, PhaseStep.END_TURN, playerA, "{1}{B}:"); // Reassembling Skeleton enters after spell is cast, should remain tapped
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
@@ -124,11 +124,11 @@ public class DontUntapTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Reassembling Skeleton", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
-        addCard(Zone.HAND, playerB, "Exhaustion", 1);
+        addCard(Zone.HAND, playerB, "Misstep", 1);
         
         attack(1, playerA, "Silvercoat Lion");
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Exhaustion", playerA);
-        activateAbility(2, PhaseStep.END_TURN, playerA, "{1}{B}:"); //Reassembling Skeleton enters after spell is cast, should remain tapped
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Misstep", playerA);
+        activateAbility(2, PhaseStep.END_TURN, playerA, "{1}{B}:"); // Reassembling Skeleton enters after spell is cast, should remain tapped
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
@@ -154,12 +154,14 @@ public class DontUntapTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         attack(1, playerA, "Silvercoat Lion");
+        // Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step.
         castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerB, "Pollen Lullaby");
         setChoice(playerB, "PlayerA");
+        // Choose to keep cards on top
         setChoice(playerB, false);
         setChoice(playerA, false);
 
-        activateAbility(2, PhaseStep.END_TURN, playerA, "{1}{B}:"); //Reassembling Skeleton enters after spell is cast, should remain tapped
+        activateAbility(2, PhaseStep.END_TURN, playerA, "{1}{B}:"); // Reassembling Skeleton enters after spell is cast, should remain tapped
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
@@ -183,10 +185,11 @@ public class DontUntapTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}:");
         attack(1, playerA, "Silvercoat Lion");
 
+        // When Icebreaker Kraken enters the battlefield, artifacts and creatures target opponent controls don't untap during that player's next untap step.
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Icebreaker Kraken");
         addTarget(playerB, playerA);
 
-        activateAbility(2, PhaseStep.END_TURN, playerA, "{1}{B}:"); //Reassembling Skeleton enters after Exhaustion is cast, should remain tapped
+        activateAbility(2, PhaseStep.END_TURN, playerA, "{1}{B}:"); // Reassembling Skeleton enters after effect is in play, should remain tapped
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
