@@ -63,7 +63,7 @@ public class DontUntapTest extends CardTestPlayerBase {
         attack(1, playerA, "Sublime Archangel");
                 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "+1: Target permanent doesn't","Sublime Archangel");
-                
+        
         setStopAt(3, PhaseStep.DRAW);
         execute();
 
@@ -89,6 +89,8 @@ public class DontUntapTest extends CardTestPlayerBase {
         attack(1, playerA, "Silvercoat Lion");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Exhaustion", playerA);
         activateAbility(2, PhaseStep.END_TURN, playerA, "{1}{B}:"); //Reassembling Skeleton enters after spell is cast, should remain tapped
+
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -107,6 +109,8 @@ public class DontUntapTest extends CardTestPlayerBase {
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Mana Vapors", playerA);
+
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -125,6 +129,8 @@ public class DontUntapTest extends CardTestPlayerBase {
         attack(1, playerA, "Silvercoat Lion");
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Exhaustion", playerA);
         activateAbility(2, PhaseStep.END_TURN, playerA, "{1}{B}:"); //Reassembling Skeleton enters after spell is cast, should remain tapped
+
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -149,8 +155,13 @@ public class DontUntapTest extends CardTestPlayerBase {
 
         attack(1, playerA, "Silvercoat Lion");
         castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerB, "Pollen Lullaby");
-        
+        setChoice(playerB, "PlayerA");
+        setChoice(playerB, false);
+        setChoice(playerA, false);
+
         activateAbility(2, PhaseStep.END_TURN, playerA, "{1}{B}:"); //Reassembling Skeleton enters after spell is cast, should remain tapped
+
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -173,8 +184,11 @@ public class DontUntapTest extends CardTestPlayerBase {
         attack(1, playerA, "Silvercoat Lion");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Icebreaker Kraken");
+        addTarget(playerB, playerA);
+
         activateAbility(2, PhaseStep.END_TURN, playerA, "{1}{B}:"); //Reassembling Skeleton enters after Exhaustion is cast, should remain tapped
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
