@@ -9,8 +9,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DontUntapInPlayersNextUntapStepAllEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
@@ -19,16 +18,11 @@ import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
-
 import java.util.UUID;
 
 /**
@@ -60,7 +54,9 @@ public final class IcebreakerKraken extends CardImpl {
         ).addHint(hint));
 
         // When Icebreaker Kraken enters the battlefield, artifacts and creatures target opponent controls don't untap during that player's next untap step.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new IcebreakerKrakenEffect());
+        Effect effect = new DontUntapInPlayersNextUntapStepAllEffect(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE);
+        effect.setText("artifacts and creatures target opponent controls don't untap during that player's next untap step");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
@@ -77,41 +73,5 @@ public final class IcebreakerKraken extends CardImpl {
     @Override
     public IcebreakerKraken copy() {
         return new IcebreakerKraken(this);
-    }
-}
-
-class IcebreakerKrakenEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(Predicates.or(CardType.CREATURE.getPredicate(), CardType.ARTIFACT.getPredicate()));
-    }
-
-    IcebreakerKrakenEffect() {
-        super(Outcome.Detriment);
-        staticText = "Artifacts and creatures target opponent controls don't untap during that player's next untap step";
-    }
-
-    private IcebreakerKrakenEffect(final IcebreakerKrakenEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public IcebreakerKrakenEffect copy() {
-        return new IcebreakerKrakenEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-   
-        if (player != null) {
-            ContinuousEffect effect = new DontUntapInPlayersNextUntapStepAllEffect(filter);
-            effect.setTargetPointer(new FixedTarget(player.getId()));
-            game.addEffect(effect, source);                      
-            return true;
-        }
-        return true;
     }
 }

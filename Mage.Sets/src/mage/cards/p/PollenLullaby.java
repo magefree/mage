@@ -2,6 +2,8 @@
 package mage.cards.p;
 
 import java.util.UUID;
+
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfClashWonEffect;
 import mage.abilities.effects.common.DontUntapInPlayersNextUntapStepAllEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
@@ -9,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -22,9 +24,9 @@ public final class PollenLullaby extends CardImpl {
 
         // Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
-        this.getSpellAbility().addEffect(new DoIfClashWonEffect(
-            new DontUntapInPlayersNextUntapStepAllEffect(new FilterCreaturePermanent()), true)
-        );
+        Effect effect = new DontUntapInPlayersNextUntapStepAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE);
+        effect.setText("creatures that player controls don't untap during the player's next untap step");
+        this.getSpellAbility().addEffect(new DoIfClashWonEffect(effect, true));
     }
 
     private PollenLullaby(final PollenLullaby card) {
