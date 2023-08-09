@@ -2,7 +2,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DontUntapInPlayersNextUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,9 +19,7 @@ public final class Misstep extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
         // Creatures target player controls don't untap during that player's next untap step.
-        Effect effect = new DontUntapInPlayersNextUntapStepAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE);
-        effect.setText("creatures target player controls don't untap during their next untap step");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DontUntapInPlayersNextUntapStepAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

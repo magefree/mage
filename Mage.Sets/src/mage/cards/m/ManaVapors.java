@@ -2,7 +2,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DontUntapInPlayersNextUntapStepAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,9 +19,7 @@ public final class ManaVapors extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         // Lands target player controls don't untap during their next untap step.
-        Effect effect = new DontUntapInPlayersNextUntapStepAllEffect(StaticFilters.FILTER_LAND);
-        effect.setText("lands target player controls don't untap during their next untap step");
-        getSpellAbility().addEffect(effect);
+        getSpellAbility().addEffect(new DontUntapInPlayersNextUntapStepAllEffect(StaticFilters.FILTER_LANDS));
         getSpellAbility().addTarget(new TargetPlayer());
     }
 
