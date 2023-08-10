@@ -115,6 +115,14 @@
 |Generate|EMBLEM:MOC|Emblem Elspeth|||ElspethSunsChampionEmblem|
 |Generate|EMBLEM:MOC|Emblem Teferi|||TeferisTalentEmblem|
 |Generate|EMBLEM:DIS|Emblem Momir|||MomirEmblem|
+|Generate|EMBLEM:CMM|Emblem Ajani|||AjaniSteadfastEmblem|
+|Generate|EMBLEM:CMM|Emblem Chandra|1||ChandraAwakenedInfernoEmblem|
+|Generate|EMBLEM:CMM|Emblem Chandra|2||ChandraTorchOfDefianceEmblem|
+|Generate|EMBLEM:CMM|Emblem Daretti|||DarettiScrapSavantEmblem|
+|Generate|EMBLEM:CMM|Emblem Elspeth|||ElspethSunsChampionEmblem|
+|Generate|EMBLEM:CMM|Emblem Narset|||NarsetOfTheAncientWayEmblem|
+|Generate|EMBLEM:CMM|Emblem Nixilis|||ObNixilisOfTheBlackOathEmblem|
+|Generate|EMBLEM:CMM|Emblem Teferi|||TeferiTemporalArchmageEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -226,11 +234,6 @@
 |Generate|TOK:ALA|Soldier|||SoldierToken|
 |Generate|TOK:ALA|Thopter|||ThopterToken|
 |Generate|TOK:ALA|Zombie|||ZombieToken|
-|Generate|TOK:ALL|Graveborn|||SekKuarDeathkeeperGravebornToken|
-|Generate|TOK:ALL|Hippo|||HippoToken|
-|Generate|TOK:ALL|Soldier|||SoldierToken|
-|Generate|TOK:ALL|Starfish|||StarfishToken|
-|Generate|TOK:ALL|Zombie|||ZombieToken|
 |Generate|TOK:ARB|Bird Soldier|||BirdSoldierToken|
 |Generate|TOK:ARB|Dragon|||DragonBroodmotherDragonToken|
 |Generate|TOK:ARB|Lizard|||LizardToken|
@@ -448,10 +451,6 @@
 |Generate|TOK:CNS|Zombie|||ZombieToken|
 |Generate|TOK:CON|Angel|||AngelToken|
 |Generate|TOK:CON|Elemental|||ElementalTokenWithHaste|
-|Generate|TOK:CSP|Bird|||BirdToken|
-|Generate|TOK:CSP|Graveborn|||SekKuarDeathkeeperGravebornToken|
-|Generate|TOK:CSP|Marit Lage|||MaritLageToken|
-|Generate|TOK:CSP|Soldier|||SoldierToken|
 |Generate|TOK:DD2|Elemental Shaman|||ElementalShamanToken|
 |Generate|TOK:DVD|Demon|||DemonFlyingToken|
 |Generate|TOK:DVD|Spirit|||SpiritWhiteToken|
@@ -732,16 +731,6 @@
 |Generate|TOK:MBS|Phyrexian Horror|||PhyrexianRebirthHorrorToken|
 |Generate|TOK:MBS|Thopter|||ThopterColorlessToken|
 |Generate|TOK:MBS|Zombie|||ZombieToken|
-|Generate|TOK:ME2|Caribou|||CaribouToken|
-|Generate|TOK:ME2|Graveborn|||SekKuarDeathkeeperGravebornToken|
-|Generate|TOK:ME2|Plant Wall|||KelpToken|
-|Generate|TOK:ME2|Saproling|||SaprolingToken|
-|Generate|TOK:ME2|Soldier|||SoldierToken|
-|Generate|TOK:ME3|Demon|||MinorDemonToken|
-|Generate|TOK:ME3|Sand Warrior|||HazezonTamarSandWarriorToken|
-|Generate|TOK:ME4|Djinn|||DjinnToken|
-|Generate|TOK:ME4|Goblin|||GoblinToken|
-|Generate|TOK:ME4|Tetravite|||TetraviteToken|
 |Generate|TOK:MED|Beast|||GarrukApexPredatorBeastToken|
 |Generate|TOK:MED|Construct|1||KarnConstructToken|
 |Generate|TOK:MED|Construct|2||DarettiConstructToken|
@@ -2054,3 +2043,73 @@
 |Generate|TOK:LTC|Soldier|||SoldierLifelinkToken|
 |Generate|TOK:LTC|Treefolk|||SylvanOfferingTreefolkToken|
 |Generate|TOK:LTC|Wraith|||WraithToken|
+
+# CMM
+|Generate|TOK:CMM|Angel|||AngelToken|
+|Generate|TOK:CMM|Assassin|||QueenMarchesaAssassinToken|
+|Generate|TOK:CMM|Avacyn|||AvacynToken|
+|Generate|TOK:CMM|Bird|||BirdToken|
+|Generate|TOK:CMM|Bird Illusion|||BirdIllusionToken|
+|Generate|TOK:CMM|Cat|1||GreenCat2Token|
+|Generate|TOK:CMM|Cat|2||CatToken|
+|Generate|TOK:CMM|Cat Beast|||CatBeastToken|
+|Generate|TOK:CMM|Cleric|||HeliodGodOfTheSunToken|
+|Generate|TOK:CMM|Clue|||ClueArtifactToken|
+|Generate|TOK:CMM|Construct|1||OviyaPashiriSageLifecrafterToken|
+|Generate|TOK:CMM|Construct|2||KarnConstructToken|
+|Generate|TOK:CMM|Construct|3||ConstructToken|
+|Generate|TOK:CMM|Construct|4||StoneTrapIdolToken|
+|Generate|TOK:CMM|Demon|||DemonToken|
+|Generate|TOK:CMM|Dragon|1||DragonEggDragonToken|
+|Generate|TOK:CMM|Dragon|2||DragonToken|
+|Generate|TOK:CMM|Dragon|3||DragonToken2|
+|Generate|TOK:CMM|Dragon Egg|||NestingDragonToken|
+|Generate|TOK:CMM|Drake|||DrakeToken|
+|Generate|TOK:CMM|Dwarf Berserker|||DwarfBerserkerToken|
+|Generate|TOK:CMM|Eldrazi|||EldraziToken|
+|Generate|TOK:CMM|Eldrazi Scion|||EldraziScionToken|
+|Generate|TOK:CMM|Eldrazi Spawn|||EldraziSpawnToken|
+|Generate|TOK:CMM|Elemental|1||Elemental11HasteToken|
+|Generate|TOK:CMM|Elemental|2||ElementalTokenWithHaste|
+|Generate|TOK:CMM|Elemental|3||Elemental31TrampleHasteToken|
+|Generate|TOK:CMM|Elemental|4||Elemental44Token|
+|Generate|TOK:CMM|Elephant|||ElephantToken|
+|Generate|TOK:CMM|Elf Druid|||ElfDruidToken|
+|Generate|TOK:CMM|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:CMM|Goblin|||GoblinToken|
+|Generate|TOK:CMM|Graveborn|||GravebornToken|
+|Generate|TOK:CMM|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:CMM|Human Warrior|||HumanWarriorToken|
+|Generate|TOK:CMM|Insect|||InsectToken|
+|Generate|TOK:CMM|Knight|||KnightToken|
+|Generate|TOK:CMM|Kor Ally|||KorAllyToken|
+|Generate|TOK:CMM|Kor Soldier|||KorSoldierToken|
+|Generate|TOK:CMM|Myr|||MyrToken|
+|Generate|TOK:CMM|Ogre|||OgreToken|
+|Generate|TOK:CMM|Ox|||OxToken|
+|Generate|TOK:CMM|Pegasus|||PegasusToken2|
+|Generate|TOK:CMM|Phyrexian Beast|||PhyrexianBeastToken|
+|Generate|TOK:CMM|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:CMM|Phyrexian Golem|||PhyrexianGolemToken|
+|Generate|TOK:CMM|Phyrexian Myr|||PhyrexianMyrToken|
+|Generate|TOK:CMM|Rat|||RatToken|
+|Generate|TOK:CMM|Saproling|||SaprolingToken|
+|Generate|TOK:CMM|Satyr|||SatyrCantBlockToken|
+|Generate|TOK:CMM|Servo|||ServoToken|
+|Generate|TOK:CMM|Sliver|||SliverToken|
+|Generate|TOK:CMM|Sliver Army|||SliverArmyToken|
+|Generate|TOK:CMM|Soldier|||SoldierToken|
+|Generate|TOK:CMM|Spider|||SpiderToken|
+|Generate|TOK:CMM|Spirit|1||UginTheIneffableToken|
+|Generate|TOK:CMM|Spirit|2||SpiritWhiteToken|
+|Generate|TOK:CMM|Spirit|3||WhiteBlackSpiritToken|
+|Generate|TOK:CMM|Stoneforged Blade|||NahiriTheLithomancerEquipmentToken|
+|Generate|TOK:CMM|Thopter|||ThopterColorlessToken|
+|Generate|TOK:CMM|Thrull|||ThrullToken|
+|Generate|TOK:CMM|Treasure|||TreasureToken|
+// TODO: add Teyo, Geometric Tactician wall token when implemented
+|Generate|TOK:CMM|Wizard|||CommodoreGuffToken|
+|Generate|TOK:CMM|Wurm|||Wurm55Token|
+|Generate|TOK:CMM|Zombie|1||ZombieToken|
+|Generate|TOK:CMM|Zombie|2||StitcherGeralfZombieToken|
+|Generate|TOK:CMM|Zombie Army|||ZombieArmyToken|
