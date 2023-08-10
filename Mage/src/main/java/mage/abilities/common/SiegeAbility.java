@@ -4,7 +4,6 @@ import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
@@ -13,9 +12,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author TheElk801
@@ -109,39 +106,9 @@ class SiegeDefeatedEffect extends OneShotEffect {
             return true;
         }
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getSecondCardFace().getId(), Boolean.TRUE);
-        if (player.cast(card.getSecondFaceSpellAbility(), game, true, new ApprovingObject(source, game))) {
-            game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
-            game.addEffect(new SiegeTransformEffect().setTargetPointer(new FixedTarget(card, game)), source);
-        }
+        SpellTransformedAbility transformedSpell = new SpellTransformedAbility(card.getSecondFaceSpellAbility());
+        player.cast(transformedSpell, game, true, new ApprovingObject(source, game));
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getSecondCardFace().getId(), null);
-        return true;
-    }
-}
-
-class SiegeTransformEffect extends ContinuousEffectImpl {
-
-    public SiegeTransformEffect() {
-        super(Duration.WhileOnStack, Layer.CopyEffects_1, SubLayer.CopyEffects_1a, Outcome.BecomeCreature);
-    }
-
-    private SiegeTransformEffect(final SiegeTransformEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SiegeTransformEffect copy() {
-        return new SiegeTransformEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpell(getTargetPointer().getFirst(game, source));
-        if (spell == null || spell.getCard().getSecondCardFace() == null) {
-            return false;
-        }
-
-        // simulate another side as new card (another code part in spell constructor)
-        TransformAbility.transformCardSpellDynamic(spell, spell.getCard().getSecondCardFace(), game);
         return true;
     }
 }

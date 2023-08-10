@@ -154,4 +154,24 @@ public class BattleDuelTest extends BattleBaseTest {
         assertGraveyardCount(playerA, kaladesh, 1);
         assertPermanentCount(playerA, "Thopter Token", 1);
     }
+    @Test
+    public void testSpellCardTypeTrigger() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 3 + 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Oketra's Monument");
+        addCard(Zone.BATTLEFIELD, playerA, "Deeproot Champion");
+        addCard(Zone.HAND, playerA, "Invasion of Dominaria");
+        addCard(Zone.HAND, playerA, impact);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Invasion of Dominaria");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, impact, "Invasion of Dominaria");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Serra Faithkeeper", 1);
+        assertPermanentCount(playerA, "Warrior Token", 1);
+        assertPowerToughness(playerA, "Deeproot Champion",3,3);
+    }
 }
