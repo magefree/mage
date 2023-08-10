@@ -67,7 +67,7 @@ class ForgeAnewCostEffect extends CostModificationEffectImpl {
 
     ForgeAnewCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.SET_COST);
-        this.staticText = "you may pay {0} rather than pay the equip cost of the first equip ability you activate each turn.";
+        this.staticText = "you may pay {0} rather than pay the equip cost of the first equip ability you activate on each of your turns.";
     }
 
     ForgeAnewCostEffect(final ForgeAnewCostEffect effect) {
@@ -78,6 +78,7 @@ class ForgeAnewCostEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return abilityToModify instanceof EquipAbility
                 && source.isControlledBy(abilityToModify.getControllerId())
+                && game.getActivePlayerId() == source.getControllerId()
                 && !ForgeAnewWatcher.checkPlayer(abilityToModify.getControllerId(), game);
     }
 
