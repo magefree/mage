@@ -31,7 +31,8 @@ public class ForgeAnewTest extends CardTestPlayerBase {
         addTarget(playerA, EQUIPMENT, 1);
 
         // Test can equip at instant speed for 0 (all mana tapped)
-        activateAbility(1, PhaseStep.END_COMBAT, playerA, "Equip {0}", CREATURE);
+        activateAbility(1, PhaseStep.END_COMBAT, playerA, "Equip {3}", CREATURE);
+        setChoice(playerA, true); // Choose to equip for free
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

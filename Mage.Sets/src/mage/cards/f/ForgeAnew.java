@@ -11,16 +11,16 @@ import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.continuous.ActivateAbilitiesAnyTimeYouCouldCastInstantEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.watchers.Watcher;
 
@@ -51,11 +51,7 @@ public class ForgeAnew extends CardImpl {
         );
 
         //You may pay {0} rather than pay the equip cost of the first equip ability you activate during each of your turns.
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new EquipAbility(0, false), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_EQUIPMENT
-                ).setText("you may pay {0} rather than pay the equip cost of the first equip ability you activate during each of your turns.")
-            ), new ForgeAnewWatcher()
-        );
+        this.addAbility(new SimpleStaticAbility(new ForgeAnewCostEffect()), new ForgeAnewWatcher());
     }
     private ForgeAnew(final ForgeAnew card) {
         super(card);
@@ -64,6 +60,55 @@ public class ForgeAnew extends CardImpl {
     @Override
     public ForgeAnew copy() {
         return new ForgeAnew(this);
+    }
+}
+
+class ForgeAnewCostEffect extends CostModificationEffectImpl {
+
+    ForgeAnewCostEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.SET_COST);
+        this.staticText = "you may pay {0} rather than pay the equip cost of the first equip ability you activate each turn.";
+    }
+
+    ForgeAnewCostEffect(final ForgeAnewCostEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        return abilityToModify instanceof EquipAbility
+                && source.isControlledBy(abilityToModify.getControllerId())
+                && !ForgeAnewWatcher.checkPlayer(abilityToModify.getControllerId(), game);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        boolean applyReduce = false;
+        if (game.inCheckPlayableState()) {
+            // getPlayable use - apply all the time
+            applyReduce = true;
+        } else {
+            // real use - ask the player
+            Player controller = game.getPlayer(abilityToModify.getControllerId());
+            if (controller != null
+                    && controller.chooseUse(Outcome.PlayForFree,
+                    String.format("Pay {0} to equip instead %s?", abilityToModify.getManaCostsToPay().getText()), source, game)) {
+                applyReduce = true;
+            }
+        }
+
+        if (applyReduce) {
+            abilityToModify.getCosts().clear();
+            abilityToModify.getManaCostsToPay().clear();
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public ForgeAnewCostEffect copy() {
+        return new ForgeAnewCostEffect(this);
     }
 }
 
