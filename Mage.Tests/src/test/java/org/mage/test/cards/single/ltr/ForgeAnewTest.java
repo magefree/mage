@@ -1,4 +1,4 @@
-package org.mage.test.cards.enchantments;
+package org.mage.test.cards.single.ltr;
 
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
