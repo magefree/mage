@@ -14,7 +14,7 @@ public final class ArtifactShapeshifterToken extends TokenImpl {
         super("Shapeshifter Token", "0/1 colorless Artifact Shapeshifter");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
-        subtype.add(SubType.CITIZEN);
+        subtype.add(SubType.SHAPESHIFTER);
         this.addAbility(new ChangelingAbility());
         power = new MageInt(0);
         toughness = new MageInt(1);

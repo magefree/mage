@@ -16,7 +16,7 @@ import java.util.UUID;
 public final class TheMassiveCritter extends CardImpl {
 
     public TheMassiveCritter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT,CardType.CREATURE}, "{7}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHAPESHIFTER);
