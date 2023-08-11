@@ -13,11 +13,11 @@ import mage.game.stack.Spell;
 import java.util.UUID;
 
 /**
- * @author weirddan455, JayDi85, notgreat (based on Disturb)
+ * @author weirddan455, JayDi85, notgreat
  */
 public class SpellTransformedAbility extends SpellAbility {
 
-    protected final String manaCost;
+    protected final String manaCost; //This variable is only used for rules text
 
     public SpellTransformedAbility(Card card, String manaCost) {
         super(card.getSecondFaceSpellAbility());

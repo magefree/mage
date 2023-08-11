@@ -86,7 +86,6 @@ public class DisturbTest extends CardTestPlayerBase {
         checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Waildrifter using Disturb", true);
 
         // cast with disturb
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Waildrifter using Disturb");
         checkStackObject("on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Waildrifter using Disturb", 1);
         runCode("check stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
@@ -122,6 +121,7 @@ public class DisturbTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertTappedCount("Volcanic Island",true,6); //5+1
     }
 
     @Test
