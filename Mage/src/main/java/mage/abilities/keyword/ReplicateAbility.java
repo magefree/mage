@@ -18,6 +18,7 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 import java.util.Iterator;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -39,7 +40,7 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
         this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, cost);
         this.additionalCost.setRepeatable(true);
         setRuleAtTheTop(true);
-        addSubAbility(new ReplicateTriggeredAbility());
+        addSubAbility(new ReplicateTriggeredAbility(this.getId()));
     }
 
     protected ReplicateAbility(final ReplicateAbility ability) {
@@ -131,13 +132,17 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
 
 class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
 
-    public ReplicateTriggeredAbility() {
+    private UUID replicateId; // need to correspond only to own replicate ability, not any other instances of replicate ability
+
+    public ReplicateTriggeredAbility(UUID replicateId) {
         super(Zone.STACK, new ReplicateCopyEffect());
+        this.replicateId = replicateId;
         this.setRuleVisible(false);
     }
 
     private ReplicateTriggeredAbility(final ReplicateTriggeredAbility ability) {
         super(ability);
+        this.replicateId = ability.replicateId;
     }
 
     @Override
@@ -164,7 +169,7 @@ class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         for (Ability ability : card.getAbilities(game)) {
-            if (!(ability instanceof ReplicateAbility) || !ability.isActivated()) {
+            if (!(ability instanceof ReplicateAbility) || !ability.isActivated() || ability.getId() != replicateId) {
                 continue;
             }
             for (Effect effect : this.getEffects()) {

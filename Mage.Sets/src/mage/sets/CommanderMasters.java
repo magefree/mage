@@ -289,6 +289,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Hanna, Ship's Navigator", 340, Rarity.RARE, mage.cards.h.HannaShipsNavigator.class));
         cards.add(new SetCardInfo("Harmonic Sliver", 924, Rarity.UNCOMMON, mage.cards.h.HarmonicSliver.class));
         cards.add(new SetCardInfo("Harsh Mercy", 825, Rarity.RARE, mage.cards.h.HarshMercy.class));
+        cards.add(new SetCardInfo("Hatchery Sliver", 741, Rarity.RARE, mage.cards.h.HatcherySliver.class));
         cards.add(new SetCardInfo("Haunted Cloak", 389, Rarity.COMMON, mage.cards.h.HauntedCloak.class));
         cards.add(new SetCardInfo("Havoc Jester", 230, Rarity.UNCOMMON, mage.cards.h.HavocJester.class));
         cards.add(new SetCardInfo("Heart-Piercer Bow", 390, Rarity.COMMON, mage.cards.h.HeartPiercerBow.class));
