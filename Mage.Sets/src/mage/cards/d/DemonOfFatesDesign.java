@@ -18,7 +18,7 @@ import mage.abilities.dynamicvalue.common.SacrificeCostManaValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.common.ConditionPermanentHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public final class DemonOfFatesDesign extends CardImpl {
         // Once during each of your turns, you may cast an enchantment spell by paying life equal to its mana value rather than paying its mana cost.
         this.addAbility(
                 new SimpleStaticAbility(new DemonOfFatesDesignCastEffect())
-                        .addHint(new ConditionHint(
+                        .addHint(new ConditionPermanentHint(
                                 DemonOfFatesDesignCondition.instance,
                                 "Can cast with alternative cost this turn.",
                                 null,
