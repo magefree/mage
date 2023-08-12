@@ -519,6 +519,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Ob Nixilis's Cruelty", 451, Rarity.COMMON, mage.cards.o.ObNixilissCruelty.class));
         cards.add(new SetCardInfo("Ob Nixilis, the Hate-Twisted", 450, Rarity.UNCOMMON, mage.cards.o.ObNixilisTheHateTwisted.class));
         cards.add(new SetCardInfo("Octoprophet", 329, Rarity.COMMON, mage.cards.o.Octoprophet.class));
+        cards.add(new SetCardInfo("Ogre Battlecaster", 36, Rarity.RARE, mage.cards.o.OgreBattlecaster.class));
         cards.add(new SetCardInfo("Ogre Slumlord", 71, Rarity.RARE, mage.cards.o.OgreSlumlord.class));
         cards.add(new SetCardInfo("Ondu Giant", 698, Rarity.COMMON, mage.cards.o.OnduGiant.class));
         cards.add(new SetCardInfo("One With the Wind", 330, Rarity.COMMON, mage.cards.o.OneWithTheWind.class));
