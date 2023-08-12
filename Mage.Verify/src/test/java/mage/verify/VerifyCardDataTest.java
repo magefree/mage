@@ -74,6 +74,7 @@ public class VerifyCardDataTest {
     private static final String SKIP_LIST_TYPE = "TYPE";
     private static final String SKIP_LIST_SUBTYPE = "SUBTYPE";
     private static final String SKIP_LIST_NUMBER = "NUMBER";
+    private static final String SKIP_LIST_RARITY = "RARITY";
     private static final String SKIP_LIST_MISSING_ABILITIES = "MISSING_ABILITIES";
     private static final String SKIP_LIST_DOUBLE_RARE = "DOUBLE_RARE";
     private static final String SKIP_LIST_UNSUPPORTED_SETS = "UNSUPPORTED_SETS";
@@ -136,6 +137,11 @@ public class VerifyCardDataTest {
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
+
+        // rarity
+        skipListCreate(SKIP_LIST_RARITY);
+        skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
+        skipListAddName(SKIP_LIST_RARITY, "MP2"); // Collation for MP2 (Amonkhet Invocation) is set with Special
 
         // missing abilities
         skipListCreate(SKIP_LIST_MISSING_ABILITIES);
@@ -2292,6 +2298,9 @@ public class VerifyCardDataTest {
     }
 
     private void checkRarityAndBasicLands(Card card, MtgJsonCard ref) {
+        if (skipListHaveName(SKIP_LIST_RARITY, card.getExpansionSetCode(), card.getName())) {
+            return;
+        }
 
         // basic lands must have Rarity.LAND and SuperType.BASIC
         // other cards can't have that stats
