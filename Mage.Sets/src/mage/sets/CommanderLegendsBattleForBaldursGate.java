@@ -327,6 +327,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Izzet Boilerworks", 897, Rarity.UNCOMMON, mage.cards.i.IzzetBoilerworks.class));
         cards.add(new SetCardInfo("Izzet Chemister", 798, Rarity.RARE, mage.cards.i.IzzetChemister.class));
         cards.add(new SetCardInfo("Izzet Signet", 863, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Jade Orb of Dragonkind", 236, Rarity.COMMON, mage.cards.j.JadeOrbOfDragonkind.class));
         cards.add(new SetCardInfo("Jaheira's Respite", 238, Rarity.RARE, mage.cards.j.JaheirasRespite.class));
         cards.add(new SetCardInfo("Jaheira, Friend of the Forest", 237, Rarity.RARE, mage.cards.j.JaheiraFriendOfTheForest.class));
         cards.add(new SetCardInfo("Jan Jansen, Chaos Crafter", 277, Rarity.RARE, mage.cards.j.JanJansenChaosCrafter.class));
