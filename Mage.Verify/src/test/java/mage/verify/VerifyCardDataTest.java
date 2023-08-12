@@ -1651,11 +1651,21 @@ public class VerifyCardDataTest {
             fail(card1, "copy", "throws on copy : " + err.getClass() + " : " + err.getMessage() + " : ");
             return;
         }
-        
-        compareClassRecursive(card1, card2, card1, "[Card", 10);
+
+        compareClassRecursive(card1, card2, card1, "[Card", 10, new HashSet<>(), true);
     }
 
-    private void compareClassRecursive(Object obj1, Object obj2, Card originalCard, String msg, int maxDepth) {
+    /**
+     * @param obj1           first object to compare. Initially the original card.
+     * @param obj2           second object to compare. Initially the copy of the original card.
+     * @param originalCard   the original card, used to print a nice message on fail.
+     * @param msg            the recursively built message to explain what is different.
+     * @param maxDepth       the maximum allowed recursion. A safety mesure for the test to end.
+     * @param alreadyChecked Map of all Cards obj1 already compared.
+     * @param useRecursive   When false, do not recursively compare Cards.
+     */
+    private void compareClassRecursive(Object obj1, Object obj2, Card originalCard, String msg, int maxDepth,
+                                       Set<Card> alreadyChecked, boolean useRecursive) {
         if (obj1 == null && obj2 == null) {
             return;
         } else if (obj1 == null || obj2 == null) {
@@ -1673,6 +1683,20 @@ public class VerifyCardDataTest {
             if (obj1 instanceof MageObject || obj1 instanceof Filter || obj1 instanceof Condition || obj1 instanceof Effect
                     || obj1 instanceof Ability || obj1 instanceof Mana || obj1 instanceof Cost || obj1 instanceof DynamicValue
                     || obj1 instanceof Choice || obj1 instanceof TargetPointer) {
+
+                boolean doRecurse = useRecursive;
+                if (obj1 instanceof Card) {
+                    if (alreadyChecked.contains(obj1)) {
+                        if (!doRecurse) {
+                            return; // we already checked that obj1 and do not want to recurse. stop there.
+                        } else {
+                            doRecurse = false;
+                        }
+                    } else {
+                        alreadyChecked.add((Card) obj1);
+                    }
+                }
+
                 //System.out.println(msg);
                 Class class1 = obj1.getClass();
                 Class class2 = obj2.getClass();
@@ -1697,13 +1721,13 @@ public class VerifyCardDataTest {
                             boolean doFieldRecurse = true;
                             if (class1 == CardImpl.class) {
                                 if (field1.getName() == "spellAbility") {
-                                    compareClassRecursive(((CardImpl) obj1).getSpellAbility(), ((CardImpl) obj2).getSpellAbility(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1);
+                                    compareClassRecursive(((CardImpl) obj1).getSpellAbility(), ((CardImpl) obj2).getSpellAbility(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
                                 } else if (field1.getName() == "meldsToCard") {
-                                    //compareClassRecursive(((CardImpl) obj1).getMeldsToCard(), ((CardImpl) obj2).getMeldsToCard(), originalCard, msg + "::" + field1.getName(), maxDepth - 1);
+                                    compareClassRecursive(((CardImpl) obj1).getMeldsToCard(), ((CardImpl) obj2).getMeldsToCard(), originalCard, msg + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
                                 } else if (field1.getName() == "secondSideCard") {
-                                    //compareClassRecursive(((CardImpl) obj1).getSecondCardFace(), ((CardImpl) obj2).getSecondCardFace(), originalCard, msg + "::" + field1.getName(), maxDepth - 1);
+                                    compareClassRecursive(((CardImpl) obj1).getSecondCardFace(), ((CardImpl) obj2).getSecondCardFace(), originalCard, msg + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
                                 }
                             }
@@ -1713,12 +1737,12 @@ public class VerifyCardDataTest {
                                 }
                                 if (field1.getName() == "modes") {
                                     //compareClassRecursive(((AbilityImpl) obj1).getModes(), ((AbilityImpl) obj2).getModes(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1);
-                                    compareClassRecursive(((AbilityImpl) obj1).getEffects(), ((AbilityImpl) obj2).getEffects(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1);
+                                    compareClassRecursive(((AbilityImpl) obj1).getEffects(), ((AbilityImpl) obj2).getEffects(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
                                 }
                             }
                             if (doFieldRecurse) {
-                                compareClassRecursive(value1, value2, originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1);
+                                compareClassRecursive(value1, value2, originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                             }
                         } catch (IllegalArgumentException | IllegalAccessException e) {
                         }
@@ -1734,7 +1758,7 @@ public class VerifyCardDataTest {
                 Iterator it2 = col2.iterator();
                 int i = 0;
                 while (it1.hasNext() && it2.hasNext()) {
-                    compareClassRecursive(it1.next(), it2.next(), originalCard, msg + "<" + obj1.getClass() + ">" + "[" + i++ + "]", maxDepth - 1);
+                    compareClassRecursive(it1.next(), it2.next(), originalCard, msg + "<" + obj1.getClass() + ">" + "[" + i++ + "]", maxDepth - 1, alreadyChecked, useRecursive);
                 }
                 if (it1.hasNext() || it2.hasNext()) {
                     fail(originalCard, "copy", "not same size for " + msg + "]");
@@ -1743,7 +1767,7 @@ public class VerifyCardDataTest {
                 Map map1 = (Map) obj1;
                 Map map2 = (Map) obj2;
                 map1.forEach((i, el1) -> {
-                    compareClassRecursive(el1, ((Map<?, ?>) obj2).get(i), originalCard, msg + "<" + obj1.getClass() + ">" + ".(" + i + ")", maxDepth - 1);
+                    compareClassRecursive(el1, ((Map<?, ?>) obj2).get(i), originalCard, msg + "<" + obj1.getClass() + ">" + ".(" + i + ")", maxDepth - 1, alreadyChecked, useRecursive);
                 });
                 if (map1.size() != map2.size()) {
                     fail(originalCard, "copy", "not same size for " + msg + "]");
