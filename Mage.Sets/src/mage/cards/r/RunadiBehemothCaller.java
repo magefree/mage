@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -9,24 +8,21 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.mana.GreenManaAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.*;
+import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.counters.CounterType;
-import mage.game.events.EntersTheBattlefieldEvent;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +33,7 @@ public final class RunadiBehemothCaller extends CardImpl {
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creatures with three or more +1/+1 counters on them");
 
     static {
-        filter.add(P1P1CounterAmountPredicate.instance);
+        filter.add(RunadiBehemothCallerPredicate.instance);
     }
 
     public RunadiBehemothCaller(UUID ownerId, CardSetInfo setInfo) {
@@ -74,11 +70,11 @@ public final class RunadiBehemothCaller extends CardImpl {
 
 class RunadiBehemothCallerTriggeredAbility extends TriggeredAbilityImpl {
 
-    public RunadiBehemothCallerTriggeredAbility() {
+    RunadiBehemothCallerTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public RunadiBehemothCallerTriggeredAbility(final RunadiBehemothCallerTriggeredAbility ability) {
+    private RunadiBehemothCallerTriggeredAbility(final RunadiBehemothCallerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -96,7 +92,7 @@ class RunadiBehemothCallerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.isCreature()) {
+            if (spell != null && spell.isCreature(game)) {
                 int manaValue = spell.getManaValue();
                 if (manaValue >= 5) {
                     this.addEffect(new RunadiBehemothCallerCounterEffect(spell.getSourceId()));
@@ -109,7 +105,9 @@ class RunadiBehemothCallerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast a creature spell with mana value 5 or greater, that creature enters the battlefield with X additional +1/+1 counters on it, where X is its mana value minus 4.";
+        return "Whenever you cast a creature spell with mana value 5 or greater," +
+                " that creature enters the battlefield with X additional +1/+1 counters on it," +
+                " where X is its mana value minus 4.";
     }
 }
 
@@ -117,7 +115,7 @@ class RunadiBehemothCallerCounterEffect extends ReplacementEffectImpl {
 
     private final UUID spellCastId;
 
-    public RunadiBehemothCallerCounterEffect(UUID spellCastId) {
+    RunadiBehemothCallerCounterEffect(UUID spellCastId) {
         super(Duration.EndOfTurn, Outcome.BoostCreature);
         this.spellCastId = spellCastId;
     }
@@ -146,14 +144,14 @@ class RunadiBehemothCallerCounterEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (creature != null) {
-            creature.addCounters(CounterType.P1P1.createInstance(creature.getManaValue() - 4), source.getControllerId(), source, game, event.getAppliedEffects());
+            creature.addCounters(CounterType.P1P1.createInstance(creature.getManaValue() - 4),
+                    source.getControllerId(), source, game, event.getAppliedEffects());
         }
         return false;
     }
 }
 
-
-enum P1P1CounterAmountPredicate implements Predicate<Permanent> {
+enum RunadiBehemothCallerPredicate implements Predicate<Permanent> {
     instance;
 
     @Override
