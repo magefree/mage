@@ -2,6 +2,7 @@
 package mage.cards.n;
 
 import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DefendingPlayerControlsSourceAttackingCondition;
 import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.Effect;

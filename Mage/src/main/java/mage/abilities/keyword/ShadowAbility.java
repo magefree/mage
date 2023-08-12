@@ -81,7 +81,6 @@ class ShadowBlockEffect extends RestrictionEffect implements MageSingleton {
     }
 
     private ShadowBlockEffect(final ShadowBlockEffect effect) {
->>>>>>> 1151368355 (refactor all Evasion abilities. add hints to most of them.)
         super(effect);
     }
 
