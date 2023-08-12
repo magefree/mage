@@ -173,7 +173,7 @@ class DemonOfFatesDesignCastEffect extends ContinuousEffectImpl {
             = new DemonOfFatesDesignAlternativeCostSourceAbility();
 
     DemonOfFatesDesignCastEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Neutral);
         this.staticText = "you may cast an enchantment spell by paying life equal to its mana value rather than paying its mana cost.";
     }
 
@@ -187,7 +187,7 @@ class DemonOfFatesDesignCastEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         DemonOfFatesDesignWatcher watcher = game.getState().getWatcher(DemonOfFatesDesignWatcher.class);
         if (controller == null || watcher == null) {
@@ -202,17 +202,6 @@ class DemonOfFatesDesignCastEffect extends ContinuousEffectImpl {
         controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
         return true;
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
-    }
-
 }
 
 class DemonOfFatesDesignWatcher extends Watcher {
