@@ -107,6 +107,7 @@ public class CustomOptionsDialog extends MageDialog {
         jSeparator2 = new javax.swing.JSeparator();
         lblVariantOptions = new javax.swing.JLabel();
         chkPlaneChase = new javax.swing.JCheckBox();
+        planechaseDescriptionLabel = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         btnOK = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
@@ -117,6 +118,7 @@ public class CustomOptionsDialog extends MageDialog {
         btnEmblemCardsStartingPlayer = new javax.swing.JButton();
         txtEmblemCardsStartingPlayer = new javax.swing.JTextField();
         lblEmblemCardsStartingPlayer = new javax.swing.JLabel();
+        emblemCardsDescriptionLabel = new javax.swing.JLabel();
 
         setTitle("Custom Options");
 
@@ -147,13 +149,16 @@ public class CustomOptionsDialog extends MageDialog {
         lblVariantOptions.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblVariantOptions.setText("Variant Options");
 
-        chkPlaneChase.setText("PlaneChase");
+        chkPlaneChase.setText("Planechase");
         chkPlaneChase.setToolTipText("Use the PlaneChase variant for your game.");
         chkPlaneChase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkPlaneChaseActionPerformed(evt);
             }
         });
+
+        planechaseDescriptionLabel.setText("<html>Shared planar deck of all implemented planes.<br>Uses a 9-sided planar die with 2 planeswalk sides and 2 chaos sides.<br>Some ability text may be incorrect.<br>Some rules details (such as who controls plane abilities) may be incorrect.");
+        planechaseDescriptionLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         btnOK.setText("OK");
         btnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +168,7 @@ public class CustomOptionsDialog extends MageDialog {
         });
 
         chkEmblemCards.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        chkEmblemCards.setText("Emblem Cards");
+        chkEmblemCards.setText("Emblem Cards (Experimental)");
         chkEmblemCards.setToolTipText("If enabled, select cards to give players emblem copies of");
         chkEmblemCards.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +208,9 @@ public class CustomOptionsDialog extends MageDialog {
         lblEmblemCardsStartingPlayer.setText("Starting Player File");
         lblEmblemCardsStartingPlayer.setToolTipText("An emblem of every card in this file is given to the starting player (useful for symmetric effects)");
 
+        emblemCardsDescriptionLabel.setText("<html>Give players emblems with the abilities of cards.<br>Note that some abilities may not function correctly from the command zone.<br>If anything breaks, please report it on GitHub.");
+        emblemCardsDescriptionLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -210,8 +218,20 @@ public class CustomOptionsDialog extends MageDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnOK))
+                    .addComponent(jSeparator3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtEmblemCardsPerPlayer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEmblemCardsPerPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtEmblemCardsStartingPlayer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEmblemCardsStartingPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblMulliganType)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -219,33 +239,19 @@ public class CustomOptionsDialog extends MageDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblFreeMulligans)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnFreeMulligans, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnOK))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtEmblemCardsPerPlayer)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEmblemCardsPerPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(spnFreeMulligans))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chkPlaneChase)
-                            .addComponent(lblGeneralOptions)
                             .addComponent(lblVariantOptions)
+                            .addComponent(chkPlaneChase)
                             .addComponent(chkEmblemCards)
                             .addComponent(lblEmblemCardsPerPlayer)
-                            .addComponent(lblEmblemCardsStartingPlayer))
+                            .addComponent(lblEmblemCardsStartingPlayer)
+                            .addComponent(lblGeneralOptions))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtEmblemCardsStartingPlayer)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEmblemCardsStartingPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(planechaseDescriptionLabel)
+                    .addComponent(emblemCardsDescriptionLabel))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jSeparator3)
-                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,8 +272,14 @@ public class CustomOptionsDialog extends MageDialog {
                 .addComponent(lblVariantOptions)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkPlaneChase)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(planechaseDescriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkEmblemCards)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(emblemCardsDescriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblEmblemCardsPerPlayer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -285,11 +297,6 @@ public class CustomOptionsDialog extends MageDialog {
                 .addGap(0, 0, 0)
                 .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(147, 147, 147)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(176, Short.MAX_VALUE)))
         );
 
         lblMulliganType.getAccessibleContext().setAccessibleName("Mulligan Type:");
@@ -302,13 +309,14 @@ public class CustomOptionsDialog extends MageDialog {
         spnFreeMulligans.getAccessibleContext().setAccessibleDescription("Select the number of free mulligans");
         spnFreeMulligans.getAccessibleContext().setAccessibleParent(lblFreeMulligans);
         chkPlaneChase.getAccessibleContext().setAccessibleParent(lblVariantOptions);
-        btnEmblemCardsPerPlayer.getAccessibleContext().setAccessibleParent(txtEmblemCardsPerPlayer);
-        txtEmblemCardsPerPlayer.getAccessibleContext().setAccessibleParent(lblEmblemCardsPerPlayer);
+        planechaseDescriptionLabel.getAccessibleContext().setAccessibleName("Planechase Description");
+        planechaseDescriptionLabel.getAccessibleContext().setAccessibleDescription("Shared planar deck of all implemented planes.\nUses a 9-sided planar die with 2 planeswalk sides and 2 chaos sides.\nSome ability text may be incorrect.\nSome rules details (such as who controls plane abilities) may be incorrect.");
+        planechaseDescriptionLabel.getAccessibleContext().setAccessibleParent(chkPlaneChase);
         lblEmblemCardsPerPlayer.getAccessibleContext().setAccessibleParent(chkEmblemCards);
-        btnEmblemCardsStartingPlayer.getAccessibleContext().setAccessibleParent(txtEmblemCardsStartingPlayer);
         txtEmblemCardsStartingPlayer.getAccessibleContext().setAccessibleDescription("");
-        txtEmblemCardsStartingPlayer.getAccessibleContext().setAccessibleParent(lblEmblemCardsStartingPlayer);
         lblEmblemCardsStartingPlayer.getAccessibleContext().setAccessibleParent(chkEmblemCards);
+        emblemCardsDescriptionLabel.getAccessibleContext().setAccessibleName("Emblem Cards description");
+        emblemCardsDescriptionLabel.getAccessibleContext().setAccessibleDescription("Give players emblems with the abilities of cards.\nNote that some abilities may not function correctly from the command zone.\nIf anything breaks, please report it on GitHub.");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -492,6 +500,7 @@ public class CustomOptionsDialog extends MageDialog {
     private javax.swing.JComboBox<String> cbMulliganType;
     private javax.swing.JCheckBox chkEmblemCards;
     private javax.swing.JCheckBox chkPlaneChase;
+    private javax.swing.JLabel emblemCardsDescriptionLabel;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -501,6 +510,7 @@ public class CustomOptionsDialog extends MageDialog {
     private javax.swing.JLabel lblGeneralOptions;
     private javax.swing.JLabel lblMulliganType;
     private javax.swing.JLabel lblVariantOptions;
+    private javax.swing.JLabel planechaseDescriptionLabel;
     private javax.swing.JSpinner spnFreeMulligans;
     private javax.swing.JTextField txtEmblemCardsPerPlayer;
     private javax.swing.JTextField txtEmblemCardsStartingPlayer;
