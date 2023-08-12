@@ -3,7 +3,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.PlayerCanOnlyAttackInDirectionReplacementEffect;
+import mage.abilities.effects.common.continuous.PlayerCanOnlyAttackInDirectionRestrictionEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -35,11 +35,11 @@ public final class PramikonSkyRampart extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // As Pramikon, Sky Rampart enters the battlefield, choose left or right.
-        this.addAbility(new AsEntersBattlefieldAbility(PlayerCanOnlyAttackInDirectionReplacementEffect.choiceEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(PlayerCanOnlyAttackInDirectionRestrictionEffect.choiceEffect()));
 
         // Each player may attack only the nearest opponent in the chosen direction and planeswalkers controlled by that opponent.
         this.addAbility(new SimpleStaticAbility(
-                new PlayerCanOnlyAttackInDirectionReplacementEffect(
+                new PlayerCanOnlyAttackInDirectionRestrictionEffect(
                         Duration.WhileOnBattlefield,
                         "the chosen direction"
                 )

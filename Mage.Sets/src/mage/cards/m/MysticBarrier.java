@@ -4,7 +4,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseModeEffect;
-import mage.abilities.effects.common.continuous.PlayerCanOnlyAttackInDirectionReplacementEffect;
+import mage.abilities.effects.common.continuous.PlayerCanOnlyAttackInDirectionRestrictionEffect;
 import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +35,7 @@ public final class MysticBarrier extends CardImpl {
 
         // Each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that player.
         this.addAbility(new SimpleStaticAbility(
-                new PlayerCanOnlyAttackInDirectionReplacementEffect(
+                new PlayerCanOnlyAttackInDirectionRestrictionEffect(
                         Duration.WhileOnBattlefield,
                         "the last chosen direction"
                 )

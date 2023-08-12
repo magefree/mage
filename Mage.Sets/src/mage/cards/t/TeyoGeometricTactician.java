@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.abilities.effects.common.continuous.PlayerCanOnlyAttackInDirectionReplacementEffect;
+import mage.abilities.effects.common.continuous.PlayerCanOnlyAttackInDirectionRestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -49,10 +49,10 @@ public final class TeyoGeometricTactician extends CardImpl {
 
         // -2: Choose left or right. Until your next turn, each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that opponent.
         ability = new LoyaltyAbility(
-                PlayerCanOnlyAttackInDirectionReplacementEffect.choiceEffect(),
+                PlayerCanOnlyAttackInDirectionRestrictionEffect.choiceEffect(),
                 -2
         );
-        ability.addEffect(new PlayerCanOnlyAttackInDirectionReplacementEffect(
+        ability.addEffect(new PlayerCanOnlyAttackInDirectionRestrictionEffect(
                 Duration.UntilYourNextTurn,
                 "the last chosen direction"
         ));
