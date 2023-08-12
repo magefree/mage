@@ -30,7 +30,7 @@ public final class EmblemOfCard extends Emblem {
                 .name(cardName)
                 .minCardNumber(cardNumberInt)
                 .maxCardNumber(cardNumberInt)
-                .setCodes(setCode);
+                .setCodes(setCode));
         return found.stream()
                 .filter(ci -> ci.getCardNumber().equals(cardNumber))
                 .findFirst()
@@ -45,14 +45,14 @@ public final class EmblemOfCard extends Emblem {
                 info.getCardNum(),
                 info.getSetCode(),
                 "DeckCardInfo"
-        )
+        );
     }
     public EmblemOfCard(Card card, Zone zone) {
         super(card.getName());
         if (card instanceof MockCard) {
             card = lookupCard(
                     card.getName(),
-                    card.getCardNumber()
+                    card.getCardNumber(),
                     card.getExpansionSetCode(),
                     "MockCard"
             );
@@ -86,12 +86,7 @@ public final class EmblemOfCard extends Emblem {
 
     @Override
     public void setSourceObject(MageObject sourceObject) {
-        try {
-            super.setSourceObject(sourceObject);
-        }
-        catch (IllegalArgumentException e) {
-            // happens because this isn't a real emblem, but the source object gets set before throwing so it's fine
-        }
+        this.sourceObject = sourceObject;
     }
     public boolean getUsesVariousArt() {
         return usesVariousArt;
