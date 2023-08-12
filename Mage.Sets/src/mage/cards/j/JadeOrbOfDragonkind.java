@@ -1,11 +1,5 @@
 package mage.cards.j;
 
-import java.util.UUID;
-
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreatureSpell;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.ManaSpentDelayedTriggeredAbility;
@@ -15,16 +9,24 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.mana.BasicManaAbility;
 import mage.abilities.mana.GreenManaAbility;
-import mage.constants.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.FilterSpell;
+import mage.filter.common.FilterCreatureSpell;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
+import java.util.UUID;
+
 /**
- *
  * @author Zelane
  */
 public final class JadeOrbOfDragonkind extends CardImpl {
@@ -37,15 +39,12 @@ public final class JadeOrbOfDragonkind extends CardImpl {
     public JadeOrbOfDragonkind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[] { CardType.ARTIFACT }, "{2}{G}");
 
-        // {T}: Add {G}.
+        // {T}: Add {G}. When you spend this mana to cast a Dragon creature spell, it enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn.
         BasicManaAbility ability = new GreenManaAbility();
-
-        // When you spend this mana to cast a Dragon creature spell, it enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn.
         ManaSpentDelayedTriggeredAbility manaSpentAbility = new ManaSpentDelayedTriggeredAbility(
-                new HexproofGainAbilityTargetEffect(), filter);
-        manaSpentAbility.addEffect(new AdditionalCounterEffect());
+                new JadeOrbAdditionalCounterEffect(), filter);
+        manaSpentAbility.addEffect(new JadeOrbGainHexproofEffect());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(manaSpentAbility));
-
         ability.setUndoPossible(false);
         this.addAbility(ability);
     }
@@ -60,20 +59,20 @@ public final class JadeOrbOfDragonkind extends CardImpl {
     }
 }
 
-class HexproofGainAbilityTargetEffect extends GainAbilityTargetEffect {
+class JadeOrbGainHexproofEffect extends GainAbilityTargetEffect {
 
-    HexproofGainAbilityTargetEffect() {
+    JadeOrbGainHexproofEffect() {
         super(HexproofAbility.getInstance(), Duration.UntilYourNextTurn, null, true);
-        staticText = "and gains hexproof until your next turn.";
+        staticText = "and gains hexproof until your next turn";
     }
 
-    public HexproofGainAbilityTargetEffect(final HexproofGainAbilityTargetEffect effect) {
+    public JadeOrbGainHexproofEffect(final JadeOrbGainHexproofEffect effect) {
         super(effect);
     }
 
     @Override
-    public HexproofGainAbilityTargetEffect copy() {
-        return new HexproofGainAbilityTargetEffect(this);
+    public JadeOrbGainHexproofEffect copy() {
+        return new JadeOrbGainHexproofEffect(this);
     }
 
     @Override
@@ -88,14 +87,14 @@ class HexproofGainAbilityTargetEffect extends GainAbilityTargetEffect {
     }
 }
 
-class AdditionalCounterEffect extends ReplacementEffectImpl {
+class JadeOrbAdditionalCounterEffect extends ReplacementEffectImpl {
 
-    public AdditionalCounterEffect() {
+    public JadeOrbAdditionalCounterEffect() {
         super(Duration.EndOfTurn, Outcome.BoostCreature);
         this.staticText = "it enters the battlefield with an additional +1/+1 counter on it";
     }
 
-    public AdditionalCounterEffect(AdditionalCounterEffect effect) {
+    public JadeOrbAdditionalCounterEffect(JadeOrbAdditionalCounterEffect effect) {
         super(effect);
     }
 
@@ -106,7 +105,7 @@ class AdditionalCounterEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (source instanceof ManaSpentDelayedTriggeredAbility == false) {
+        if (!(source instanceof ManaSpentDelayedTriggeredAbility)) {
             return false;
         }
         GameEvent manaUsedEvent = ((ManaSpentDelayedTriggeredAbility) source).getTriggerEvent();
@@ -133,7 +132,7 @@ class AdditionalCounterEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public AdditionalCounterEffect copy() {
-        return new AdditionalCounterEffect(this);
+    public JadeOrbAdditionalCounterEffect copy() {
+        return new JadeOrbAdditionalCounterEffect(this);
     }
 }
