@@ -706,7 +706,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Zur the Enchanter", 726, Rarity.RARE, mage.cards.z.ZurTheEnchanter.class));
         cards.add(new SetCardInfo("Fabled Passage", 727, Rarity.RARE, mage.cards.f.FabledPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Themberchaud", 728, Rarity.RARE, mage.cards.t.Themberchaud.class));
-        cards.add(new SetCardInfo("The Scarab God", 900, Rarity.RARE, mage.cards.t.TheScarabGod.class));
+        cards.add(new SetCardInfo("The Scarab God", 900, Rarity.MYTHIC, mage.cards.t.TheScarabGod.class));
         cards.add(new SetCardInfo("Elspeth, Knight-Errant", 1001, Rarity.MYTHIC, mage.cards.e.ElspethKnightErrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Patron Wizard", 1002, Rarity.RARE, mage.cards.p.PatronWizard.class));
         cards.add(new SetCardInfo("Berserk", 1003, Rarity.MYTHIC, mage.cards.b.Berserk.class));
@@ -737,7 +737,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Skysovereign, Consul Flagship", 1029, Rarity.MYTHIC, mage.cards.s.SkysovereignConsulFlagship.class));
         cards.add(new SetCardInfo("Blind Obedience", 1030, Rarity.RARE, mage.cards.b.BlindObedience.class));
         cards.add(new SetCardInfo("Danitha Capashen, Paragon", 1031, Rarity.RARE, mage.cards.d.DanithaCapashenParagon.class));
-        cards.add(new SetCardInfo("Najeela, the Blade-Blossom", 1032, Rarity.RARE, mage.cards.n.NajeelaTheBladeBlossom.class));
+        cards.add(new SetCardInfo("Najeela, the Blade-Blossom", 1032, Rarity.MYTHIC, mage.cards.n.NajeelaTheBladeBlossom.class));
         cards.add(new SetCardInfo("Scourge of the Throne", 1033, Rarity.MYTHIC, mage.cards.s.ScourgeOfTheThrone.class));
         cards.add(new SetCardInfo("Loxodon Warhammer", 1034, Rarity.RARE, mage.cards.l.LoxodonWarhammer.class));
         cards.add(new SetCardInfo("Approach of the Second Sun", 1035, Rarity.RARE, mage.cards.a.ApproachOfTheSecondSun.class));
@@ -906,7 +906,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Crusader", 1214, Rarity.RARE, mage.cards.p.PhyrexianCrusader.class));
         cards.add(new SetCardInfo("Plague Engineer", 1215, Rarity.RARE, mage.cards.p.PlagueEngineer.class));
         cards.add(new SetCardInfo("Ertai, the Corrupted", 1216, Rarity.RARE, mage.cards.e.ErtaiTheCorrupted.class));
-        cards.add(new SetCardInfo("Glissa, the Traitor", 1217, Rarity.RARE, mage.cards.g.GlissaTheTraitor.class));
+        cards.add(new SetCardInfo("Glissa, the Traitor", 1217, Rarity.MYTHIC, mage.cards.g.GlissaTheTraitor.class));
         cards.add(new SetCardInfo("Eldrazi Conscription", 1218, Rarity.RARE, mage.cards.e.EldraziConscription.class));
         cards.add(new SetCardInfo("Deafening Silence", 1219, Rarity.RARE, mage.cards.d.DeafeningSilence.class));
         cards.add(new SetCardInfo("Counterbalance", 1220, Rarity.RARE, mage.cards.c.Counterbalance.class));
@@ -917,7 +917,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Ice-Fang Coatl", 1225, Rarity.RARE, mage.cards.i.IceFangCoatl.class));
         cards.add(new SetCardInfo("Stonecoil Serpent", 1226, Rarity.RARE, mage.cards.s.StonecoilSerpent.class));
         cards.add(new SetCardInfo("Alms Collector", 1227, Rarity.RARE, mage.cards.a.AlmsCollector.class));
-        cards.add(new SetCardInfo("Crested Sunmare", 1228, Rarity.RARE, mage.cards.c.CrestedSunmare.class));
+        cards.add(new SetCardInfo("Crested Sunmare", 1228, Rarity.MYTHIC, mage.cards.c.CrestedSunmare.class));
         cards.add(new SetCardInfo("Goreclaw, Terror of Qal Sisma", 1229, Rarity.RARE, mage.cards.g.GoreclawTerrorOfQalSisma.class));
         cards.add(new SetCardInfo("Rin and Seri, Inseparable", 1230, Rarity.MYTHIC, mage.cards.r.RinAndSeriInseparable.class));
         cards.add(new SetCardInfo("Exotic Orchard", 1231, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
@@ -938,7 +938,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Sarkhan, Dragonsoul", 1245, Rarity.MYTHIC, mage.cards.s.SarkhanDragonsoul.class));
         cards.add(new SetCardInfo("Nicol Bolas, Dragon-God", 1246, Rarity.MYTHIC, mage.cards.n.NicolBolasDragonGod.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Braid of Fire", 1247, Rarity.RARE, mage.cards.b.BraidOfFire.class));
-        cards.add(new SetCardInfo("Koth of the Hammer", 1248, Rarity.RARE, mage.cards.k.KothOfTheHammer.class));
+        cards.add(new SetCardInfo("Koth of the Hammer", 1248, Rarity.MYTHIC, mage.cards.k.KothOfTheHammer.class));
         cards.add(new SetCardInfo("Master of the Wild Hunt", 1249, Rarity.MYTHIC, mage.cards.m.MasterOfTheWildHunt.class));
         cards.add(new SetCardInfo("Karrthus, Tyrant of Jund", 1250, Rarity.MYTHIC, mage.cards.k.KarrthusTyrantOfJund.class));
         cards.add(new SetCardInfo("Cleansing Nova", 1251, Rarity.RARE, mage.cards.c.CleansingNova.class));
