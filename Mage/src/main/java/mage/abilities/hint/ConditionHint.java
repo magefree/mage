@@ -36,7 +36,7 @@ public class ConditionHint implements Hint {
         this.useIcons = useIcons;
     }
 
-    private ConditionHint(final ConditionHint hint) {
+    protected ConditionHint(final ConditionHint hint) {
         this.condition = hint.condition;
         this.trueText = hint.trueText;
         this.trueColor = hint.trueColor;

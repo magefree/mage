@@ -166,7 +166,7 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
                 return true;  // can't pay with life
             }
             if (cost instanceof SacrificeSourceCost
-                    && !permanent.isLand()) {
+                    && !permanent.isLand(game)) {
                 return true;
             }
             if (cost instanceof SacrificeTargetCost) {

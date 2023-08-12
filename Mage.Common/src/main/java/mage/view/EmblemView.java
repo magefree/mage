@@ -15,21 +15,21 @@ public class EmblemView implements CommandObjectView, Serializable {
 
     protected UUID id;
     protected String name;
+    protected String cardNumber = "";
+    protected int imageNum;
+    protected boolean usesVariousArt = false;
     protected String expansionSetCode;
     protected List<String> rules;
     protected PlayableObjectStats playableStats = new PlayableObjectStats();
-    protected String cardNumber = "";
-    protected int imageNumber = 0;
-    protected boolean usesVariousArt = false;
 
     public EmblemView(Emblem emblem) {
         this.id = emblem.getId();
         this.name = emblem.getName();
+        this.imageNum = emblem.getImageNumber();
         this.expansionSetCode = emblem.getExpansionSetCode();
         this.rules = emblem.getAbilities().getRules(emblem.getName());
         if (emblem instanceof EmblemOfCard) {
             cardNumber = emblem.getCardNumber();
-            imageNumber = emblem.getImageNumber();
             usesVariousArt = ((EmblemOfCard) emblem).getUsesVariousArt();
         }
     }
@@ -47,6 +47,18 @@ public class EmblemView implements CommandObjectView, Serializable {
     @Override
     public UUID getId() {
         return id;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    @Override
+    public int getImageNumber() {
+        return imageNum;
+    }
+    public boolean getUsesVariousArt() {
+        return this.usesVariousArt;
     }
 
     @Override
@@ -89,14 +101,5 @@ public class EmblemView implements CommandObjectView, Serializable {
     @Override
     public void setSelected(boolean isSelected) {
         // unsupported
-    }
-    public String getCardNumber() {
-        return cardNumber;
-    }
-    public int getImageNumber() {
-        return imageNumber;
-    }
-    public boolean getUsesVariousArt() {
-        return this.usesVariousArt;
     }
 }

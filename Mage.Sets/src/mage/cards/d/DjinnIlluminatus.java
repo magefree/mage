@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import mage.MageInt;
@@ -29,7 +28,8 @@ public final class DjinnIlluminatus extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Each instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EachSpellYouCastHasReplicateEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new EachSpellYouCastHasReplicateEffect(filter,
+                "When you cast it, copy it for each time you paid its replicate cost. You may choose new targets for the copies.")));
     }
 
     private DjinnIlluminatus(final DjinnIlluminatus card) {
