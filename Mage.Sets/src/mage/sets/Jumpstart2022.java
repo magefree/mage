@@ -621,6 +621,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Rosethorn Halberd", 722, Rarity.COMMON, mage.cards.r.RosethornHalberd.class));
         cards.add(new SetCardInfo("Ruin in Their Wake", 132, Rarity.UNCOMMON, mage.cards.r.RuinInTheirWake.class));
         cards.add(new SetCardInfo("Rummaging Goblin", 591, Rarity.COMMON, mage.cards.r.RummagingGoblin.class));
+        cards.add(new SetCardInfo("Runadi, Behemoth Caller", 44, Rarity.RARE, mage.cards.r.RunadiBehemothCaller.class));
         cards.add(new SetCardInfo("Runed Servitor", 794, Rarity.COMMON, mage.cards.r.RunedServitor.class));
         cards.add(new SetCardInfo("Rush of Adrenaline", 592, Rarity.COMMON, mage.cards.r.RushOfAdrenaline.class));
         cards.add(new SetCardInfo("Ruthless Disposal", 462, Rarity.UNCOMMON, mage.cards.r.RuthlessDisposal.class));
