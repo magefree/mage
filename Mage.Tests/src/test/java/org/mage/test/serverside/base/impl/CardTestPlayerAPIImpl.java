@@ -31,6 +31,7 @@ import mage.server.util.SystemUtil;
 import mage.util.CardUtil;
 import mage.view.GameView;
 import org.junit.Assert;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.mage.test.player.PlayerAction;
 import org.mage.test.player.TestPlayer;
@@ -43,8 +44,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * API for test initialization and asserting the test results.
@@ -85,6 +84,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_LIFE = "LIFE";
     public static final String CHECK_COMMAND_ABILITY = "ABILITY";
     public static final String CHECK_COMMAND_PLAYABLE_ABILITY = "PLAYABLE_ABILITY";
+    public static final String CHECK_COMMAND_MAY_ATTACK_DEFENDER = "MAY_ATTACK_DEFENDER";
     public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
     public static final String CHECK_COMMAND_PERMANENT_TAPPED = "PERMANENT_TAPPED";
     public static final String CHECK_COMMAND_PERMANENT_COUNTERS = "PERMANENT_COUNTERS";
@@ -390,6 +390,20 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void checkPlayableAbility(String checkName, int turnNum, PhaseStep step, TestPlayer player, String abilityStartText, Boolean mustHave) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_PLAYABLE_ABILITY, abilityStartText, mustHave.toString());
+    }
+
+    /**
+     * Checks whether or not a creature can attack on a given turn a defender (player only for now, could be extended to permanents)
+     *
+     * @param checkName       String to show up if the check fails, for display purposes only.
+     * @param turnNum         The turn number to check on.
+     * @param player          The player to be checked for the ability.
+     * @param attackerName    The attacker permanent to check.
+     * @param defendingPlayer The defending player.
+     * @param mayAttack       Whether the attack is possible or not.
+     */
+    public void checkMayAttackDefender(String checkName, int turnNum, TestPlayer player, String attackerName, TestPlayer defendingPlayer, Boolean mayAttack) {
+        check(checkName, turnNum, PhaseStep.BEGIN_COMBAT, player, CHECK_COMMAND_MAY_ATTACK_DEFENDER, attackerName, defendingPlayer.getId().toString(), mayAttack.toString());
     }
 
     public void checkPermanentCount(String checkName, int turnNum, PhaseStep step, TestPlayer player, String permanentName, Integer count) {

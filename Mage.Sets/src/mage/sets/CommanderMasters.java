@@ -655,6 +655,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Terramorphic Expanse", 428, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Teshar, Ancestor's Apostle", 65, Rarity.UNCOMMON, mage.cards.t.TesharAncestorsApostle.class));
         cards.add(new SetCardInfo("Tetsuko Umezawa, Fugitive", 126, Rarity.UNCOMMON, mage.cards.t.TetsukoUmezawaFugitive.class));
+        cards.add(new SetCardInfo("Teyo, Geometric Tactician", 725, Rarity.RARE, mage.cards.t.TeyoGeometricTactician.class));
         cards.add(new SetCardInfo("Teysa Karlov", 359, Rarity.RARE, mage.cards.t.TeysaKarlov.class));
         cards.add(new SetCardInfo("The Binding of the Titans", 886, Rarity.UNCOMMON, mage.cards.t.TheBindingOfTheTitans.class));
         cards.add(new SetCardInfo("The Chain Veil", 943, Rarity.MYTHIC, mage.cards.t.TheChainVeil.class));
