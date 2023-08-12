@@ -1605,7 +1605,7 @@ public class VerifyCardDataTest {
             checkSupertypes(card, ref);
             checkTypes(card, ref);
             checkColors(card, ref);
-            checkBasicLands(card, ref);
+            checkRarityAndBasicLands(card, ref);
             checkMissingAbilities(card, ref);
             checkWrongSymbolsInRules(card);
             checkCardCanBeCopied(card);
@@ -2291,7 +2291,7 @@ public class VerifyCardDataTest {
                 || name.equals("Mountain");
     }
 
-    private void checkBasicLands(Card card, MtgJsonCard ref) {
+    private void checkRarityAndBasicLands(Card card, MtgJsonCard ref) {
 
         // basic lands must have Rarity.LAND and SuperType.BASIC
         // other cards can't have that stats
@@ -2314,6 +2314,8 @@ public class VerifyCardDataTest {
             // non lands
             if (card.getRarity() == Rarity.LAND) {
                 fail(card, "rarity", "only basic land can be Rarity.LAND");
+            } else if (!card.getRarity().equals(ref.getRarity())) {
+                fail(card, "rarity", "mismatched. MtgJson has " + ref.getRarity() + " while set file has " + card.getRarity());
             }
 
             if (card.isBasic()) {
