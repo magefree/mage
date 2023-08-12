@@ -135,7 +135,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Crimson Fleet Commodore", 211, Rarity.COMMON, mage.cards.c.CrimsonFleetCommodore.class));
         cards.add(new SetCardInfo("Crippling Fear", 862, Rarity.RARE, mage.cards.c.CripplingFear.class));
         cards.add(new SetCardInfo("Crypt Sliver", 863, Rarity.COMMON, mage.cards.c.CryptSliver.class));
-        cards.add(new SetCardInfo("Cryptic Serpent", 83, Rarity.UNCOMMON, mage.cards.c.CrypticSerpent.class));
+        cards.add(new SetCardInfo("Cryptic Serpent", 83, Rarity.COMMON, mage.cards.c.CrypticSerpent.class));
         cards.add(new SetCardInfo("Crystalline Sliver", 920, Rarity.UNCOMMON, mage.cards.c.CrystallineSliver.class));
         cards.add(new SetCardInfo("Culling Ritual", 921, Rarity.RARE, mage.cards.c.CullingRitual.class));
         cards.add(new SetCardInfo("Cultivate", 889, Rarity.COMMON, mage.cards.c.Cultivate.class));
@@ -282,7 +282,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 228, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
         cards.add(new SetCardInfo("Guff Rewrites History", 737, Rarity.RARE, mage.cards.g.GuffRewritesHistory.class));
         cards.add(new SetCardInfo("Guildless Commons", 1003, Rarity.UNCOMMON, mage.cards.g.GuildlessCommons.class));
-        cards.add(new SetCardInfo("Guttersnipe", 229, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
+        cards.add(new SetCardInfo("Guttersnipe", 229, Rarity.COMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Hammer of Nazahn", 388, Rarity.RARE, mage.cards.h.HammerOfNazahn.class));
         cards.add(new SetCardInfo("Hamza, Guardian of Arashin", 339, Rarity.UNCOMMON, mage.cards.h.HamzaGuardianOfArashin.class));
         cards.add(new SetCardInfo("Hangarback Walker", 951, Rarity.RARE, mage.cards.h.HangarbackWalker.class));
