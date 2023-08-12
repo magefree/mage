@@ -15,8 +15,14 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
     private TheLordOfTheRingsTalesOfMiddleEarth() {
         super("The Lord of the Rings: Tales of Middle-earth", "LTR", ExpansionSet.buildDate(2023, 6, 23), SetType.SUPPLEMENTAL_MODERN_LEGAL);
         this.blockName = "The Lord of the Rings: Tales of Middle-earth";
+        this.hasBoosters = true;
         this.hasBasicLands = true;
-        this.hasBoosters = false; // temporary
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 7;
+        this.maxCardNumberInBooster = 281;
 
         cards.add(new SetCardInfo("Anduril, Flame of the West", 236, Rarity.MYTHIC, mage.cards.a.AndurilFlameOfTheWest.class));
         cards.add(new SetCardInfo("Aragorn and Arwen, Wed", 287, Rarity.MYTHIC, mage.cards.a.AragornAndArwenWed.class));
