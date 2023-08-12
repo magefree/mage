@@ -10,27 +10,27 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * @author LoneFox
+ * @author LoneFox, Susucr
  */
-public class SacrificeCostConvertedMana implements DynamicValue {
+public enum SacrificeCostManaValue implements DynamicValue {
+    CREATURE("creature"),
+    ENCHANTMENT("enchantment"),
+    ARTIFACT("artifact"),
+    PERMANENT("permanent");
 
     private final String type;
 
-    public SacrificeCostConvertedMana(String type) {
+    private SacrificeCostManaValue(String type) {
         this.type = type;
-    }
-
-    public SacrificeCostConvertedMana(SacrificeCostConvertedMana value) {
-        this.type = value.type;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        for(Cost cost : sourceAbility.getCosts()) {
-            if(cost instanceof SacrificeTargetCost) {
+        for (Cost cost : sourceAbility.getCosts()) {
+            if (cost instanceof SacrificeTargetCost) {
                 SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
                 int totalCMC = 0;
-                for(Permanent permanent : sacrificeCost.getPermanents()) {
+                for (Permanent permanent : sacrificeCost.getPermanents()) {
                     totalCMC += permanent.getManaValue();
                 }
                 return totalCMC;
@@ -40,8 +40,8 @@ public class SacrificeCostConvertedMana implements DynamicValue {
     }
 
     @Override
-    public SacrificeCostConvertedMana copy() {
-        return new SacrificeCostConvertedMana(this);
+    public SacrificeCostManaValue copy() {
+        return this;
     }
 
     @Override
