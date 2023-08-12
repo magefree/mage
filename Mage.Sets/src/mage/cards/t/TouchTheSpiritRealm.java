@@ -5,9 +5,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.keyword.ChannelAbility;
@@ -37,7 +35,6 @@ public final class TouchTheSpiritRealm extends CardImpl {
         // Touch the Spirit Realm leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
         
         // Channel - {1}{W}, Discard Touch the Spirit Realm: Exile target artifact or creature.
@@ -77,7 +74,7 @@ class TouchTheSpiritRealmEffect extends OneShotEffect {
         }
         Card card = permanent.getMainCard();
         player.moveCardsToExile(permanent, source, game, true, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
-        ReturnToBattlefieldUnderOwnerControlTargetEffect returnEffect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, true);
+        ReturnToBattlefieldUnderOwnerControlTargetEffect returnEffect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
         returnEffect.setTargetPointer(new FixedTarget(card,game));
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnEffect), source);
         return true;

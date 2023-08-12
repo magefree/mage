@@ -8,8 +8,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -39,14 +38,13 @@ public final class EmielTheBlessed extends CardImpl {
     public EmielTheBlessed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.UNICORN);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
         // {3}: Exile another target creature you control, then return it to the battlefield under its owner's control.
-        Ability ability = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new GenericManaCost(3));
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
+        Ability ability = new SimpleActivatedAbility(new ExileThenReturnTargetEffect(false, false), new GenericManaCost(3));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 

@@ -35,7 +35,7 @@ public final class ToshiroUmezawa extends CardImpl {
 
     public ToshiroUmezawa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SAMURAI);
 
@@ -68,7 +68,7 @@ class ToshiroUmezawaEffect extends OneShotEffect {
     public ToshiroUmezawaEffect() {
         super(Outcome.Benefit);
         this.staticText = "you may cast target instant card from your graveyard. "
-                + "If that spell would be put into a graveyard this turn, exile it instead";
+                + "If that spell would be put into a graveyard, exile it instead";
     }
 
     public ToshiroUmezawaEffect(final ToshiroUmezawaEffect effect) {

@@ -91,7 +91,7 @@ class BlueDragonEffect extends ContinuousEffectImpl {
         int affectedTargets = 0;
         for (Target target : source.getTargets()) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null && permanent.isCreature()) {
+            if (permanent != null && permanent.isCreature(game)) {
                 permanent.addPower(power);
                 affectedTargets++;
             }

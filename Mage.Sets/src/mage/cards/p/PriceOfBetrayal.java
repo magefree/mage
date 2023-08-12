@@ -32,7 +32,7 @@ public final class PriceOfBetrayal extends CardImpl {
         ));
     }
 
-    private static final FilterPermanentOrPlayer filter2 = new FilterPermanentOrPlayer("artifact, creature, planeswalker or opponent", filter, new FilterOpponent());
+    private static final FilterPermanentOrPlayer filter2 = new FilterPermanentOrPlayer("artifact, creature, planeswalker, or opponent", filter, new FilterOpponent());
 
     public PriceOfBetrayal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");

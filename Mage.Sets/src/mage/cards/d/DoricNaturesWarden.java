@@ -33,7 +33,7 @@ public final class DoricNaturesWarden extends CardImpl {
     public DoricNaturesWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TIEFLING);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(3);
@@ -45,7 +45,7 @@ public final class DoricNaturesWarden extends CardImpl {
 
         // When Doric, Nature's Warden enters the battlefield, search your library for a Forest card, put it into the battlefield tapped, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, true)
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true)
         ));
 
         // Whenever Doric attacks, you may pay {1}{G}. If you do, transform her.

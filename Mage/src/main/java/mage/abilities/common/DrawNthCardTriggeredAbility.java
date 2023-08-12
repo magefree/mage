@@ -11,6 +11,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -82,11 +83,11 @@ public class DrawNthCardTriggeredAbility extends TriggeredAbilityImpl {
     public String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
-                return "Whenever you draw your second card each turn, ";
+                return "Whenever you draw your " + CardUtil.numberToOrdinalText(cardNumber) + " card each turn, ";
             case ACTIVE:
-                return "Whenever a player draws their second card during their turn, ";
+                return "Whenever a player draws their " + CardUtil.numberToOrdinalText(cardNumber) + " card during their turn, ";
             case OPPONENT:
-                return "Whenever an opponent draws their second card each turn, ";
+                return "Whenever an opponent draws their " + CardUtil.numberToOrdinalText(cardNumber) + " card each turn, ";
             default:
                 throw new IllegalArgumentException("TargetController " + targetController + " not supported");
         }
@@ -122,10 +123,10 @@ class DrawCardWatcher extends Watcher {
         super.reset();
         drawMap.clear();
     }
-    
+
     static boolean checkEvent(UUID playerId, GameEvent event, Game game, int cardNumber) {
         Map<UUID, List<UUID>> drawMap = game.getState().getWatcher(DrawCardWatcher.class).drawMap;
         return drawMap.containsKey(playerId) && Objects.equals(drawMap.get(playerId).size(), cardNumber) && event.getId().equals(drawMap.get(playerId).get(cardNumber - 1));
     }
-    
+
 }

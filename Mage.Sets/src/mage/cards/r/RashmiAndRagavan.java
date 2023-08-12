@@ -40,7 +40,7 @@ public final class RashmiAndRagavan extends CardImpl {
 
     public RashmiAndRagavan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.MONKEY);
         this.power = new MageInt(2);

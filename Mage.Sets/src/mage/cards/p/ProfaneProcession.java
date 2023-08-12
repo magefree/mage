@@ -31,7 +31,7 @@ public final class ProfaneProcession extends CardImpl {
     public ProfaneProcession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.secondSideCardClazz = mage.cards.t.TombOfTheDuskRose.class;
 

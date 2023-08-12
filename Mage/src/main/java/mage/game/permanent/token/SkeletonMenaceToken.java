@@ -5,8 +5,6 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -21,11 +19,9 @@ public final class SkeletonMenaceToken extends TokenImpl {
         toughness = new MageInt(1);
 
         addAbility(new MenaceAbility());
-
-        availableImageSetCodes = Arrays.asList("CLB");
     }
 
-    public SkeletonMenaceToken(final SkeletonMenaceToken token) {
+    protected SkeletonMenaceToken(final SkeletonMenaceToken token) {
         super(token);
     }
 

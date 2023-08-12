@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class SegmentedWurm extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        this.addAbility(new BecomesTargetTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance())));
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance())));
     }
 
     private SegmentedWurm(final SegmentedWurm card) {

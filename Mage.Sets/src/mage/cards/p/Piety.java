@@ -17,14 +17,13 @@ import mage.filter.common.FilterBlockingCreature;
  */
 public final class Piety extends CardImpl {
 
-    static final FilterBlockingCreature filter = new FilterBlockingCreature();
+    private static final FilterBlockingCreature filter = new FilterBlockingCreature("blocking creatures");
     
     public Piety(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
         // Blocking creatures get +0/+3 until end of turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(0, 3, Duration.EndOfTurn, filter, false)));
-        //this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_POST, "end Piety", true, new BoostAllEffect(0, 3, Duration.EndOfTurn, filter, false)));
     }
 
     private Piety(final Piety card) {

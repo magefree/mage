@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,7 +22,7 @@ public final class CephalidAristocrat extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Cephalid Aristocrat becomes the target of a spell or ability, put the top two cards of your library into your graveyard.
-        this.addAbility(new BecomesTargetTriggeredAbility(new MillCardsControllerEffect(2)));
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(new MillCardsControllerEffect(2)));
     }
 
     private CephalidAristocrat(final CephalidAristocrat card) {

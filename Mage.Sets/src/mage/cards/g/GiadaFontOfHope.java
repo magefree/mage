@@ -34,7 +34,7 @@ public final class GiadaFontOfHope extends CardImpl {
     public GiadaFontOfHope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

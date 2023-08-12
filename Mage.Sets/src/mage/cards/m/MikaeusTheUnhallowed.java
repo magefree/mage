@@ -2,6 +2,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -35,7 +36,7 @@ public final class MikaeusTheUnhallowed extends CardImpl {
 
     public MikaeusTheUnhallowed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.CLERIC);
 
@@ -47,8 +48,11 @@ public final class MikaeusTheUnhallowed extends CardImpl {
         this.addAbility(new MikaeusTheUnhallowedAbility());
 
         // Other non-Human creatures you control get +1/+1 and have undying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new UndyingAbility(), Duration.WhileOnBattlefield, filter, true)));
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true));
+        ability.addEffect(new GainAbilityControlledEffect(new UndyingAbility(), Duration.WhileOnBattlefield, filter, true)
+                .setText("and have undying. <i>(When a creature with undying dies, if it had no +1/+1 counters on it," +
+                        " return it to the battlefield under its owner's control with a +1/+1 counter on it.)</i>"));
+        this.addAbility(ability);
     }
 
     private MikaeusTheUnhallowed(final MikaeusTheUnhallowed card) {

@@ -1,14 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-
-import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class MetallicSliverToken extends TokenImpl {
@@ -20,11 +16,9 @@ public final class MetallicSliverToken extends TokenImpl {
         subtype.add(SubType.SLIVER);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("TSR");
     }
 
-    public MetallicSliverToken(final MetallicSliverToken token) {
+    protected MetallicSliverToken(final MetallicSliverToken token) {
         super(token);
     }
 

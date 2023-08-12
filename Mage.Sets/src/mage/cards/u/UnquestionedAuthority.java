@@ -17,7 +17,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -42,7 +42,7 @@ public final class UnquestionedAuthority extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         // Enchanted creature has protection from creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityAttachedEffect(new ProtectionAbility(FILTER_PERMANENT_CREATURES), AttachmentType.AURA)));
+                new GainAbilityAttachedEffect(new ProtectionAbility(StaticFilters.FILTER_PERMANENT_CREATURES), AttachmentType.AURA)));
     }
 
     private UnquestionedAuthority(final UnquestionedAuthority card) {

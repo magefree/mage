@@ -2,6 +2,7 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
+
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.constants.Zone;
@@ -30,7 +31,7 @@ public class DethroneAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
     }
 
-    public DethroneAbility(final DethroneAbility ability) {
+    protected DethroneAbility(final DethroneAbility ability) {
         super(ability);
     }
 

@@ -1920,7 +1920,15 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
     }
 
     private void updateCounts() {
-        deckNameAndCountLabel.setText(role.getName() + " - " + allCards.size());
+        int extraDeckCount = allCards.stream()
+                        .filter(c -> c.isExtraDeckCard())
+                        .collect(Collectors.toSet())
+                        .size();
+        int maindeckCount = allCards.size() - extraDeckCount;
+        deckNameAndCountLabel.setText(role.getName() + " - " + maindeckCount + (
+                extraDeckCount > 0 ? " (" + extraDeckCount + ")"
+                : ""
+        ));
         creatureCountLabel.setText(String.valueOf(creatureCounter.get()));
         landCountLabel.setText(String.valueOf(landCounter.get()));
         for (CardType cardType : selectByTypeButtons.keySet()) {

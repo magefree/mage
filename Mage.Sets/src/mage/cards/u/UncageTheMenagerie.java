@@ -61,7 +61,7 @@ class UncageTheMenagerieEffect extends OneShotEffect {
         FilterCard filter = new FilterCreatureCard(xValue + " creature cards with different names that each have mana value " + xValue);
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
         return new SearchLibraryPutInHandEffect(
-                new TargetCardWithDifferentNameInLibrary(0, xValue, filter), true, true
+                new TargetCardWithDifferentNameInLibrary(0, xValue, filter), true
         ).apply(game, source);
     }
 }

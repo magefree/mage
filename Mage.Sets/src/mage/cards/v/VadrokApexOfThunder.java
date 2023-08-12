@@ -36,7 +36,7 @@ public final class VadrokApexOfThunder extends CardImpl {
     public VadrokApexOfThunder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.DINOSAUR);
         this.subtype.add(SubType.CAT);

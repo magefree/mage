@@ -27,7 +27,7 @@ public final class ArniBrokenbrow extends CardImpl {
     public ArniBrokenbrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(3);

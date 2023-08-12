@@ -25,7 +25,7 @@ public class HeliodTheWarpedEclipse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "");
         this.color.setWhite(true);
         this.color.setBlue(true);
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.PHYREXIAN);
         this.addSubType(SubType.GOD);
         this.power = new MageInt(4);

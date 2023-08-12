@@ -19,10 +19,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -33,17 +30,10 @@ import java.util.UUID;
  */
 public final class ErebosBleakHearted extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public ErebosBleakHearted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
@@ -58,7 +48,7 @@ public final class ErebosBleakHearted extends CardImpl {
         // Whenever another creature you control dies, you may pay 2 life. If you do, draw a card.
         this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1), new PayLifeCost(2)
-        ), false, filter, true));
+        ), false, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, true));
 
         // {1}{B}, Sacrifice another creature: Target creature gets -2/-1 until end of turn.
         Ability ability = new SimpleActivatedAbility(

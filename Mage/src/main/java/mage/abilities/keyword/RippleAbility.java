@@ -70,7 +70,7 @@ class RippleEffect extends OneShotEffect {
         this.rippleNumber = rippleNumber;
     }
 
-    public RippleEffect(final RippleEffect effect) {
+    protected RippleEffect(final RippleEffect effect) {
         super(effect);
         this.rippleNumber = effect.rippleNumber;
     }
@@ -90,7 +90,7 @@ class RippleEffect extends OneShotEffect {
             }
             // reveal top cards from library
             Cards cards = new CardsImpl();
-            cards.addAll(player.getLibrary().getTopCards(game, rippleNumber));
+            cards.addAllCards(player.getLibrary().getTopCards(game, rippleNumber));
             player.revealCards(sourceObject.getIdName(), cards, game);
 
             // determine which card should be rippled

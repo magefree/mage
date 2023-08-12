@@ -1,13 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class OphiomancerSnakeToken extends TokenImpl {
@@ -20,10 +18,9 @@ public final class OphiomancerSnakeToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(DeathtouchAbility.getInstance());
-        setOriginalExpansionSetCode("CC2");
     }
 
-    public OphiomancerSnakeToken(final OphiomancerSnakeToken token) {
+    protected OphiomancerSnakeToken(final OphiomancerSnakeToken token) {
         super(token);
     }
 

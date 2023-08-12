@@ -38,7 +38,7 @@ public final class CircuDimirLobotomist extends CardImpl {
     public CircuDimirLobotomist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -103,7 +103,7 @@ class CircuDimirLobotomistRuleModifyingEffect extends ContinuousRuleModifyingEff
 
     public CircuDimirLobotomistRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Your opponents can't cast nonland cards with the same name as a card exiled with {this}";
+        staticText = "Your opponents can't cast spells with the same name as a card exiled with {this}";
     }
 
     public CircuDimirLobotomistRuleModifyingEffect(final CircuDimirLobotomistRuleModifyingEffect effect) {

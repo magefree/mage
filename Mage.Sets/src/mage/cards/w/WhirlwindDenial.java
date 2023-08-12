@@ -8,14 +8,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.ManaUtil;
 
-import java.util.Objects;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author xenohedron
  */
 public final class WhirlwindDenial extends CardImpl {
 
@@ -55,36 +57,46 @@ class WhirlwindDenialEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getStack()
-                .stream()
-                .filter(Objects::nonNull)
-                .forEachOrdered(stackObject -> {
-                    if (!game.getOpponents(source.getControllerId()).contains(stackObject.getControllerId())) {
-                        return;
-                    }
-                    Player player = game.getPlayer(stackObject.getControllerId());
-                    if (player == null) {
-                        return;
-                    }
-                    Cost cost = ManaUtil.createManaCost(4, false);
-                    if (cost.canPay(source, source, stackObject.getControllerId(), game)
-                            && player.chooseUse(outcome, "Pay {4} to prevent "
-                            + stackObject.getIdName() + " from being countered?", source, game)
-                            && cost.pay(source, game, source, stackObject.getControllerId(), false)) {
-                        game.informPlayers("The cost was paid by "
-                                + player.getLogName()
-                                + " to prevent "
-                                + stackObject.getIdName()
-                                + " from being countered.");
-                        return;
-                    }
-                    game.informPlayers("The cost was not paid by "
-                            + player.getLogName()
-                            + " to prevent "
+        List<StackObject> stackObjectsToCounter = new LinkedList<>();
+        Cost cost = ManaUtil.createManaCost(4, false);
+        // As Whirlwind Denial resolves, first the opponent whose turn it is
+        // (or, if it's your turn, the next opponent in turn order) chooses which spells and/or abilities to pay for,
+        // then pays that amount. Then each other opponent in turn order does the same.
+        // Then all spells and abilities that weren't paid for are countered at the same time.
+        // (2020-01-24)
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            if (playerId.equals(source.getControllerId())) {
+                continue; // only opponents have to pay
+            }
+            Player player = game.getPlayer(playerId);
+            for (StackObject stackObject : game.getStack()) {
+                if (!playerId.equals(stackObject.getControllerId())) {
+                    continue; // opponents only choose for their own spells/abilities
+                }
+                if (player == null) { // shouldn't be null, but if somehow so, they can't pay, so counter it
+                    stackObjectsToCounter.add(stackObject);
+                    continue;
+                }
+                if (cost.canPay(source, source, playerId, game)
+                && player.chooseUse(outcome, "Pay {4} to prevent "
+                        + stackObject.getIdName() + " from being countered?", source, game)
+                        && cost.pay(source, game, source, stackObject.getControllerId(), false)) {
+                    game.informPlayers(player.getLogName()
+                            + " pays the cost to prevent "
                             + stackObject.getIdName()
                             + " from being countered.");
-                    game.getStack().counter(stackObject.getId(), source, game);
-                });
+                } else {
+                    game.informPlayers(stackObject.getIdName()
+                            + " will be countered as "
+                            + player.getLogName()
+                            + " does not pay the cost.");
+                    stackObjectsToCounter.add(stackObject); // will be countered all at the end
+                }
+            }
+        }
+        for (StackObject toCounter : stackObjectsToCounter) {
+            game.getStack().counter(toCounter.getId(), source, game);
+        }
         return true;
     }
 }

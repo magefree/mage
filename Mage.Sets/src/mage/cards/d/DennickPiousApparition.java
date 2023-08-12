@@ -24,7 +24,7 @@ public final class DennickPiousApparition extends CardImpl {
     public DennickPiousApparition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(3);
@@ -40,7 +40,7 @@ public final class DennickPiousApparition extends CardImpl {
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new InvestigateEffect(1), false,
                 StaticFilters.FILTER_CARD_CREATURE, TargetController.ANY
-        ).setTriggersOnce(true).setTriggerPhrase("Whenever one or more creature cards are put into graveyards from anywhere, "));
+        ).setTriggersOnceEachTurn(true).setTriggerPhrase("Whenever one or more creature cards are put into graveyards from anywhere, "));
 
         // If Dennick, Pious Apparition would be put into a graveyard from anywhere, exile it instead.
         this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new ExileSourceEffect().setText("exile it instead")));

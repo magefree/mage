@@ -25,7 +25,7 @@ public final class Arboria extends CardImpl {
     public Arboria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // Creatures can't attack a player unless that player cast a spell or put a nontoken permanent onto the battlefield during their last turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArboriaEffect()), new PermanentsEnteredBattlefieldYourLastTurnWatcher());
@@ -60,6 +60,9 @@ class ArboriaEffect extends RestrictionEffect {
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game, boolean canUseChooseDialogs) {
         if (defenderId == null) {
+            return true;
+        }
+        if (!game.getPlayers().containsKey(defenderId)) {
             return true;
         }
 

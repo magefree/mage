@@ -33,7 +33,7 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
         staticText = setText();
     }
 
-    public CastAsThoughItHadFlashAllEffect(final CastAsThoughItHadFlashAllEffect effect) {
+    protected CastAsThoughItHadFlashAllEffect(final CastAsThoughItHadFlashAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.anyPlayer = effect.anyPlayer;

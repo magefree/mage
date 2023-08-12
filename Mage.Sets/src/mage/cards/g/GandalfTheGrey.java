@@ -37,7 +37,7 @@ public final class GandalfTheGrey extends CardImpl {
     public GandalfTheGrey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AVATAR);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);

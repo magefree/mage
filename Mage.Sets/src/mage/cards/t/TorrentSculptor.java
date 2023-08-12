@@ -9,7 +9,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -24,12 +24,10 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
-public final class TorrentSculptor extends ModalDoubleFacesCard {
+public final class TorrentSculptor extends ModalDoubleFacedCard {
 
     public TorrentSculptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
@@ -67,7 +65,7 @@ public final class TorrentSculptor extends ModalDoubleFacesCard {
 class TorrentSculptorEffect extends OneShotEffect {
 
     TorrentSculptorEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "exile an instant or sorcery card from your graveyard. " +
                 "Put a number of +1/+1 counters on {this} equal to half that card's mana value, rounded up.";
     }

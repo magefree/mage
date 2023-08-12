@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.List;
@@ -12,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -22,19 +20,13 @@ import mage.game.permanent.Permanent;
  */
 public final class DeathPitOffering extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
     public DeathPitOffering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
         // When Death Pit Offering enters the battlefield, sacrifice all creatures you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DeathPitOfferingEffect()));
         // Creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES, false)));
     }
 
     private DeathPitOffering(final DeathPitOffering card) {

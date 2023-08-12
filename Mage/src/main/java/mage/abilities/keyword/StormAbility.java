@@ -64,7 +64,7 @@ class StormEffect extends OneShotEffect {
         super(Outcome.Copy);
     }
 
-    public StormEffect(final StormEffect effect) {
+    protected StormEffect(final StormEffect effect) {
         super(effect);
     }
 

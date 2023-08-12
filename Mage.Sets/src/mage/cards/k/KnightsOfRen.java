@@ -24,7 +24,7 @@ import java.util.UUID;
 public class KnightsOfRen extends CardImpl {
     public KnightsOfRen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.HUMAN);
         this.addSubType(SubType.SITH);
         this.power = new MageInt(4);

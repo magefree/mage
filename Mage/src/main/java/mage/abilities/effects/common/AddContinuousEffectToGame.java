@@ -23,7 +23,7 @@ public class AddContinuousEffectToGame extends OneShotEffect {
         }
     }
 
-    public AddContinuousEffectToGame(final AddContinuousEffectToGame effect) {
+    protected AddContinuousEffectToGame(final AddContinuousEffectToGame effect) {
         super(effect);
         this.effects.addAll(effect.effects);
     }

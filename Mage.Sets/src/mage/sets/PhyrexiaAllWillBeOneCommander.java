@@ -23,7 +23,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 125, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Assemble the Legion", 115, Rarity.RARE, mage.cards.a.AssembleTheLegion.class));
         cards.add(new SetCardInfo("Battle Screech", 59, Rarity.UNCOMMON, mage.cards.b.BattleScreech.class));
-        cards.add(new SetCardInfo("Beast Within", 104, Rarity.SPECIAL, mage.cards.b.BeastWithin.class));
+        cards.add(new SetCardInfo("Beast Within", 104, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Blight Mamba", 105, Rarity.COMMON, mage.cards.b.BlightMamba.class));
         cards.add(new SetCardInfo("Bojuka Bog", 145, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Boros Charm", 116, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
@@ -124,6 +124,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Norn's Annex", 83, Rarity.RARE, mage.cards.n.NornsAnnex.class));
         cards.add(new SetCardInfo("Norn's Choirmaster", 8, Rarity.RARE, mage.cards.n.NornsChoirmaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Norn's Choirmaster", 46, Rarity.RARE, mage.cards.n.NornsChoirmaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Norn's Decree", 9, Rarity.RARE, mage.cards.n.NornsDecree.class));
         cards.add(new SetCardInfo("Noxious Revival", 110, Rarity.UNCOMMON, mage.cards.n.NoxiousRevival.class));
         cards.add(new SetCardInfo("Otharri, Suns' Glory", 3, Rarity.MYTHIC, mage.cards.o.OtharriSunsGlory.class));
         cards.add(new SetCardInfo("Painful Truths", 95, Rarity.RARE, mage.cards.p.PainfulTruths.class));
@@ -152,6 +153,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sol Ring", 140, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 141, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Soul-Guide Lantern", 142, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
+        cards.add(new SetCardInfo("Staff of the Storyteller", 10, Rarity.RARE, mage.cards.s.StaffOfTheStoryteller.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 166, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 89, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Synthesis Pod", 23, Rarity.RARE, mage.cards.s.SynthesisPod.class));

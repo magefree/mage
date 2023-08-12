@@ -34,7 +34,7 @@ public final class TianaShipsCaretaker extends CardImpl {
     public TianaShipsCaretaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(3);

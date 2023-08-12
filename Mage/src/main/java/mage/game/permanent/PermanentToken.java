@@ -5,11 +5,13 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.ChangelingAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.constants.EmptyNames;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -18,6 +20,8 @@ import java.util.UUID;
  */
 public class PermanentToken extends PermanentImpl {
 
+    // non-modifyable container with token characteristics
+    // this PermanentToken resets to it on each game cycle
     protected Token token;
 
     public PermanentToken(Token token, UUID controllerId, Game game) {
@@ -28,6 +32,9 @@ public class PermanentToken extends PermanentImpl {
         this.power = new MageInt(token.getPower().getModifiedBaseValue());
         this.toughness = new MageInt(token.getToughness().getModifiedBaseValue());
         this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
+        if (this.token.isEntersTransformed()) {
+            TransformAbility.transformPermanent(this, this.token.getBackFace(), game, null);
+        }
 
         // token's ZCC must be synced with original token to keep abilities settings
         // Example: kicker ability and kicked status
@@ -36,7 +43,7 @@ public class PermanentToken extends PermanentImpl {
         }
     }
 
-    public PermanentToken(final PermanentToken permanent) {
+    protected PermanentToken(final PermanentToken permanent) {
         super(permanent);
         this.token = permanent.token.copy();
     }
@@ -51,12 +58,25 @@ public class PermanentToken extends PermanentImpl {
     }
 
     @Override
+    public int getManaValue() {
+        if (this.isTransformed()) {
+            return token.getManaValue();
+        }
+        return super.getManaValue();
+    }
+
+    @Override
     public String getName() {
         if (name.isEmpty()) {
             return EmptyNames.FACE_DOWN_TOKEN.toString();
         } else {
             return name;
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s - %s", getExpansionSetCode(), getName());
     }
 
     private void copyFromToken(Token token, Game game, boolean reset) {
@@ -83,7 +103,7 @@ public class PermanentToken extends PermanentImpl {
         this.frameColor = token.getFrameColor(game);
         this.frameStyle = token.getFrameStyle();
         this.supertype.clear();
-        this.supertype.addAll(token.getSuperType());
+        this.supertype.addAll(token.getSuperType(game));
         this.subtype.copyFrom(token.getSubtype(game));
         this.startingLoyalty = token.getStartingLoyalty();
         this.startingDefense = token.getStartingDefense();
@@ -91,6 +111,8 @@ public class PermanentToken extends PermanentImpl {
         if (this.abilities.containsClass(ChangelingAbility.class)) {
             this.subtype.setIsAllCreatureTypes(true);
         }
+
+        CardUtil.copySetAndCardNumber(this, token);
     }
 
     @Override
@@ -122,22 +144,12 @@ public class PermanentToken extends PermanentImpl {
     }
 
     @Override
-    public String getCardNumber() {
-        return token.getOriginalCardNumber();
+    public boolean isTransformable() {
+        return token.getBackFace() != null;
     }
 
     @Override
-    public void setCardNumber(String cardNumber) {
-        throw new IllegalArgumentException("Wrong code usage: you can't change a token's card number");
-    }
-
-    @Override
-    public String getExpansionSetCode() {
-        return token.getOriginalExpansionSetCode();
-    }
-
-    @Override
-    public void setExpansionSetCode(String expansionSetCode) {
-        throw new IllegalArgumentException("Wrong code usage: you can't change a token's set code, use CardUtils.copySetAndCardNumber instead");
+    public MageObject getOtherFace() {
+        return this.transformed ? token : this.token.getBackFace();
     }
 }

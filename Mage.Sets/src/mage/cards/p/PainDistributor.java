@@ -35,7 +35,7 @@ public final class PainDistributor extends CardImpl {
 
     static {
         filter.add(PainDistributorPredicate.instance);
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
+        filter2.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
     public PainDistributor(UUID ownerId, CardSetInfo setInfo) {

@@ -19,14 +19,12 @@ import java.util.List;
  * @author North
  */
 public class MockSplitCard extends SplitCard {
-
     public MockSplitCard(CardInfo card) {
         super(null, new CardSetInfo(card.getName(), card.getSetCode(), card.getCardNumber(), card.getRarity()),
                 card.getTypes().toArray(new CardType[0]),
                 join(card.getManaCosts(CardInfo.ManaCostSide.LEFT)),
                 join(card.getManaCosts(CardInfo.ManaCostSide.RIGHT)),
                 getSpellAbilityType(card));
-        this.expansionSetCode = card.getSetCode();
         this.power = mageIntFromString(card.getPower());
         this.toughness = mageIntFromString(card.getToughness());
         this.cardType = card.getTypes();
@@ -63,9 +61,11 @@ public class MockSplitCard extends SplitCard {
             this.rightHalfCard = new MockSplitCardHalf(rightHalf);
             ((SplitCardHalf) this.rightHalfCard).setParentCard(this);
         }
+
+        this.extraDeckCard = card.isExtraDeckCard();
     }
 
-    public MockSplitCard(final MockSplitCard card) {
+    protected MockSplitCard(final MockSplitCard card) {
         super(card);
     }
 

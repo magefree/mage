@@ -43,7 +43,7 @@ public class MeldEffect extends OneShotEffect {
         this.attacking = attacking;
     }
 
-    public MeldEffect(final MeldEffect effect) {
+    protected MeldEffect(final MeldEffect effect) {
         super(effect);
         this.meldWithName = effect.meldWithName;
         this.meldIntoName = effect.meldIntoName;

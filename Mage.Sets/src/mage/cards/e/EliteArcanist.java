@@ -160,8 +160,6 @@ class EliteArcanistCopyEffect extends OneShotEffect {
                 if (controller != null) {
                     Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
                     if (copiedCard != null) {
-                        game.getExile().add(source.getSourceId(), "", copiedCard);
-                        game.getState().setZone(copiedCard.getId(), Zone.EXILED);
                         if (controller.chooseUse(Outcome.PlayForFree, "Cast the copied card without paying mana cost?", source, game)) {
                             game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
                             Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(copiedCard, game, true),

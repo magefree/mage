@@ -26,7 +26,7 @@ public final class WithengarUnbound extends CardImpl {
 
     public WithengarUnbound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.color.setBlack(true);
 

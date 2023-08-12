@@ -35,7 +35,7 @@ public final class ParasiticImplant extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         ability = new BeginningOfUpkeepTriggeredAbility(new ParasiticImplantEffect(), TargetController.YOU, false);
-        ability.addEffect(new CreateTokenEffect(new PhyrexianMyrToken()));
+        ability.addEffect(new CreateTokenEffect(new PhyrexianMyrToken()).concatBy("and you"));
         this.addAbility(ability);
     }
 

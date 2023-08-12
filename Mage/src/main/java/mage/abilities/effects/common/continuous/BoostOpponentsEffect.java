@@ -34,7 +34,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl {
         setText();
     }
 
-    public BoostOpponentsEffect(final BoostOpponentsEffect effect) {
+    protected BoostOpponentsEffect(final BoostOpponentsEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

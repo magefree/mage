@@ -34,7 +34,7 @@ public final class ChainerNightmareAdept extends CardImpl {
     public ChainerNightmareAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MINION);
         this.power = new MageInt(3);
@@ -154,12 +154,12 @@ class ChainerNightmareAdeptWatcher extends Watcher {
 
 class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
 
-    private final static String abilityText = "Whenever a nontoken creature "
+    private static final String abilityText = "Whenever a nontoken creature "
             + "enters the battlefield under your control, "
             + "if you didn't cast it from your hand, it gains haste until your next turn.";
-    private final static ContinuousEffect gainHasteUntilNextTurnEffect
+    private static final ContinuousEffect gainHasteUntilNextTurnEffect
             = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.UntilYourNextTurn);
-    private final static FilterControlledCreaturePermanent filter
+    private static final FilterControlledCreaturePermanent filter
             = new FilterControlledCreaturePermanent("nontoken creature");
 
     static {

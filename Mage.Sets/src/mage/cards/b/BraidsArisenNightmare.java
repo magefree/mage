@@ -29,7 +29,7 @@ public final class BraidsArisenNightmare extends CardImpl {
     public BraidsArisenNightmare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -101,7 +101,7 @@ class BraidsArisenNightmareEffect extends OneShotEffect {
         if (!permanent.sacrifice(source, game)) {
             return false;
         }
-        for (UUID opponentId : game.getOpponents(controller.getId())) {
+        for (UUID opponentId : game.getOpponents(controller.getId(), true)) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent == null) {
                 continue;

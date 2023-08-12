@@ -68,7 +68,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
         }
     }
 
-    public PlayTheTopCardEffect(final PlayTheTopCardEffect effect) {
+    protected PlayTheTopCardEffect(final PlayTheTopCardEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.targetLibrary = effect.targetLibrary;

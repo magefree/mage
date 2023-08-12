@@ -67,12 +67,13 @@ public final class Main {
     public static final PluginClassLoader classLoader = new PluginClassLoader();
     private static TransporterServer server;
 
-    // special test mode:
+    // Special test mode:
     // - fast game buttons;
     // - cheat commands;
     // - no deck validation;
+    // - load any deck in sideboarding;
     // - simplified registration and login (no password check);
-    // - debug main menu for GUI and rendering testing;
+    // - debug main menu for GUI and rendering testing (must use -debug arg for client app);
     private static boolean testMode;
 
     private static boolean fastDbMode;
@@ -86,14 +87,18 @@ public final class Main {
         logger.info("Logging level: " + logger.getEffectiveLevel());
         logger.info("Default charset: " + Charset.defaultCharset());
         String adminPassword = "";
+
+        // enable test mode by default for developer build (if you run it from source code)
+        testMode |= version.isDeveloperBuild();
+
         for (String arg : args) {
             if (arg.startsWith(testModeArg)) {
-                testMode = Boolean.valueOf(arg.replace(testModeArg, ""));
+                testMode = Boolean.parseBoolean(arg.replace(testModeArg, ""));
             } else if (arg.startsWith(adminPasswordArg)) {
                 adminPassword = arg.replace(adminPasswordArg, "");
                 adminPassword = SystemUtil.sanitize(adminPassword);
             } else if (arg.startsWith(fastDBModeArg)) {
-                fastDbMode = Boolean.valueOf(arg.replace(fastDBModeArg, ""));
+                fastDbMode = Boolean.parseBoolean(arg.replace(fastDBModeArg, ""));
             }
         }
 
@@ -409,7 +414,9 @@ public final class Main {
 
         @Override
         public Object invoke(final InvocationRequest invocation) throws Throwable {
-            // Called for every client connecting to the server (after add Listener)
+            // called for every client connecting to the server (after add Listener)
+
+            // save client ip-address
             String sessionId = invocation.getSessionId();
             Map map = invocation.getRequestPayload();
             String host;

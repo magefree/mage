@@ -44,7 +44,7 @@ public final class RealmbreakerTheInvasionTree extends CardImpl {
     public RealmbreakerTheInvasionTree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {2}, {T}: Target opponent mills three cards. Put a land card from their graveyard onto the battlefield tapped under your control. It gains "If this land would leave the battlefield, exile it instead of putting it anywhere else."
         Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(3), new GenericManaCost(2));

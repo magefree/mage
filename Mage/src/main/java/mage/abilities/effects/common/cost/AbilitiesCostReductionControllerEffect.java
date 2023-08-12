@@ -22,7 +22,7 @@ public class AbilitiesCostReductionControllerEffect extends CostModificationEffe
     }
 
     public AbilitiesCostReductionControllerEffect(Class<? extends ActivatedAbility> activatedAbility, String activatedAbilityName, int amount) {
-        this(activatedAbility, activatedAbilityName, 1, false);
+        this(activatedAbility, activatedAbilityName, amount, false);
     }
 
     public AbilitiesCostReductionControllerEffect(Class<? extends ActivatedAbility> activatedAbility, String activatedAbilityName, int amount, boolean excludeSource) {

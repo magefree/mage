@@ -24,7 +24,7 @@ public final class OonaQueenOfTheFae extends CardImpl {
 
     public OonaQueenOfTheFae(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U/B}{U/B}{U/B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.WIZARD);
 
@@ -76,7 +76,7 @@ class OonaQueenOfTheFaeEffect extends OneShotEffect {
         }
         int cardsWithColor = 0;
         Cards cardsToExile = new CardsImpl();
-        cardsToExile.addAll(opponent.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+        cardsToExile.addAllCards(opponent.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
 
         for (Card card : cardsToExile.getCards(game)) {
             if (card != null && card.getColor(game).contains(choice.getColor())) {

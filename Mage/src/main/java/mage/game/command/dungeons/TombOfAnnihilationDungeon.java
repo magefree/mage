@@ -42,7 +42,7 @@ public final class TombOfAnnihilationDungeon extends Dungeon {
     }
 
     public TombOfAnnihilationDungeon() {
-        super("Tomb of Annihilation", "AFR");
+        super("Tomb of Annihilation");
         // (1) Trapped Entry — Each player loses 1 life. (→ 2a or 2b)
         DungeonRoom trappedEntry = new DungeonRoom("Trapped Entry", new LoseLifeAllPlayersEffect(1));
 

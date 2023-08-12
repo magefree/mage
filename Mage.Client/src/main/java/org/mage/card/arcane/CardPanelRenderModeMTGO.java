@@ -23,11 +23,15 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Render mode: MTGO
+ *
  */
 public class CardPanelRenderModeMTGO extends CardPanel {
 
+    //
+    // https://www.mtg.onl/evolution-of-magic-token-card-frame-design/
+
     // Map of generated images
-    private final static Cache<ImageKey, BufferedImage> IMAGE_CACHE = CacheBuilder
+    private static final Cache<ImageKey, BufferedImage> IMAGE_CACHE = CacheBuilder
             .newBuilder()
             .maximumSize(3000)
             .expireAfterAccess(60, TimeUnit.MINUTES)
@@ -131,7 +135,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
             sb.append(this.view.getLoyalty());
             sb.append(this.view.getDefense());
             sb.append(this.view.getColor().toString());
-            sb.append(this.view.getType());
+            sb.append(this.view.getImageNumber());
             sb.append(this.view.getExpansionSetCode());
             for (CardType type : this.view.getCardTypes()) {
                 sb.append((char) type.ordinal());

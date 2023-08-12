@@ -71,10 +71,10 @@ class MaskOfTheSchemerEffect extends OneShotEffect {
         if (equipment == null || damage < 1) {
             return false;
         }
-        Permanent permanent = game.getPermanent(equipment.getAttachedTo());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(equipment.getAttachedTo());
         if (permanent == null) {
             return false;
         }
-        return permanent != null && ConniveSourceEffect.connive(permanent, damage, source, game);
+        return ConniveSourceEffect.connive(permanent, damage, source, game);
     }
 }

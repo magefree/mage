@@ -36,7 +36,7 @@ public final class VialSmasherTheFierce extends CardImpl {
     public VialSmasherTheFierce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(2);

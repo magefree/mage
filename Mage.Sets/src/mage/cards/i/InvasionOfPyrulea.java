@@ -67,7 +67,7 @@ class InvasionOfPyruleaEffect extends OneShotEffect {
         player.scry(3, source, game);
         Card card = player.getLibrary().getFromTop(game);
         player.revealCards(source, new CardsImpl(card), game);
-        if (card != null && (card.isLand(game) || card instanceof ModalDoubleFacesCard || card.getSecondCardFace() != null)) {
+        if (card != null && (card.isLand(game) || card instanceof ModalDoubleFacedCard || card.getSecondCardFace() != null)) {
             player.drawCards(1, source, game);
         }
         return true;

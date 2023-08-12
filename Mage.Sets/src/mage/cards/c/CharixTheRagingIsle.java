@@ -31,7 +31,7 @@ public final class CharixTheRagingIsle extends CardImpl {
     public CharixTheRagingIsle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LEVIATHAN);
         this.subtype.add(SubType.CRAB);
         this.power = new MageInt(0);

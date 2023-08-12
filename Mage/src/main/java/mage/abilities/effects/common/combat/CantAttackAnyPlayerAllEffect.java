@@ -31,7 +31,7 @@ public class CantAttackAnyPlayerAllEffect extends RestrictionEffect {
         staticText = sb.toString();
     }
 
-    public CantAttackAnyPlayerAllEffect(final CantAttackAnyPlayerAllEffect effect) {
+    protected CantAttackAnyPlayerAllEffect(final CantAttackAnyPlayerAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

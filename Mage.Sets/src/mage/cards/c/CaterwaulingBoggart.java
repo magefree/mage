@@ -38,8 +38,8 @@ public final class CaterwaulingBoggart extends CardImpl {
 
         // Goblins you control and Elementals you control have menace.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new MenaceAbility(true), Duration.WhileOnBattlefield, filter
-        )));
+                new MenaceAbility(false), Duration.WhileOnBattlefield, filter
+        ).setText("Goblins you control and Elementals you control have menace. <i>(They can't be blocked except by two or more creatures.)</i>")));
     }
 
     private CaterwaulingBoggart(final CaterwaulingBoggart card) {

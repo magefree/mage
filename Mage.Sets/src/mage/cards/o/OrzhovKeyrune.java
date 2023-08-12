@@ -30,7 +30,7 @@ public final class OrzhovKeyrune extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // {W}{B}: Orzhov Keyrune becomes a 1/4 white and black Thrull artifact creature with lifelink until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new OrzhovKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{W}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new OrzhovKeyruneToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{W}{B}")));
     }
 
     private OrzhovKeyrune(final OrzhovKeyrune card) {

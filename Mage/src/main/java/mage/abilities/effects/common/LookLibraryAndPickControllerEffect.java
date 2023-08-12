@@ -108,7 +108,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         this.upTo = (numberToPick > 1);
     }
 
-    public LookLibraryAndPickControllerEffect(final LookLibraryAndPickControllerEffect effect) {
+    protected LookLibraryAndPickControllerEffect(final LookLibraryAndPickControllerEffect effect) {
         super(effect);
         this.numberToPick = effect.numberToPick;
         this.putPickedCards = effect.putPickedCards;

@@ -25,7 +25,7 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} is dealt damage, ");
     }
 
-    public DealtDamageToSourceTriggeredAbility(final DealtDamageToSourceTriggeredAbility ability) {
+    protected DealtDamageToSourceTriggeredAbility(final DealtDamageToSourceTriggeredAbility ability) {
         super(ability);
     }
 

@@ -48,7 +48,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         super(abilityType, zone);
     }
 
-    public ActivatedAbilityImpl(final ActivatedAbilityImpl ability) {
+    protected ActivatedAbilityImpl(final ActivatedAbilityImpl ability) {
         super(ability);
         timing = ability.timing;
         mayActivate = ability.mayActivate;

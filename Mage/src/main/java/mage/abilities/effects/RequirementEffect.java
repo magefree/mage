@@ -2,6 +2,7 @@
 package mage.abilities.effects;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.EffectType;
@@ -10,7 +11,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class RequirementEffect extends ContinuousEffectImpl {
@@ -22,10 +22,9 @@ public abstract class RequirementEffect extends ContinuousEffectImpl {
     }
 
     /**
-     *
      * @param duration
      * @param playerRelated defines a requirement that is more related to a
-     * player than a single creature
+     *                      player than a single creature
      */
     public RequirementEffect(Duration duration, boolean playerRelated) {
         super(duration, Outcome.Detriment);
@@ -33,7 +32,7 @@ public abstract class RequirementEffect extends ContinuousEffectImpl {
         this.playerRelated = playerRelated;
     }
 
-    public RequirementEffect(final RequirementEffect effect) {
+    protected RequirementEffect(final RequirementEffect effect) {
         super(effect);
         this.playerRelated = effect.playerRelated;
     }
@@ -52,7 +51,7 @@ public abstract class RequirementEffect extends ContinuousEffectImpl {
     public boolean mustBlockAny(Game game) {
         return false;
     }
-    
+
     public boolean mustBlockAllAttackers(Game game) {
         return false;
     }

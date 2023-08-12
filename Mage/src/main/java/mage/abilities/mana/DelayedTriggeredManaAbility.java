@@ -16,10 +16,10 @@ public abstract class DelayedTriggeredManaAbility extends DelayedTriggeredAbilit
         super(effect);
     }
 
-    public DelayedTriggeredManaAbility(final DelayedTriggeredManaAbility ability) {
+    protected DelayedTriggeredManaAbility(final DelayedTriggeredManaAbility ability) {
         super(ability);
     }
-    
+
     public DelayedTriggeredManaAbility(Effect effect, Duration duration, Boolean triggerOnlyOnce) {
         super(effect, duration, triggerOnlyOnce);
     }

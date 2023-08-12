@@ -24,8 +24,9 @@ public final class XanthicStatue extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{8}");
 
         // {5}: Until end of turn, Xanthic Statue becomes an 8/8 Golem artifact creature with trample.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new XanthicStatueCreature(),
-            "", Duration.EndOfTurn), new ManaCostsImpl<>("{5}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new XanthicStatueCreature(), CardType.ARTIFACT, Duration.EndOfTurn)
+                .setText("until end of turn, {this} becomes an 8/8 Golem artifact creature with trample")
+                , new ManaCostsImpl<>("{5}")));
     }
 
     private XanthicStatue(final XanthicStatue card) {

@@ -81,7 +81,7 @@ class GuidedPassageEffect extends OneShotEffect {
             return true;
         }
         CardsImpl cards = new CardsImpl();
-        cards.addAll(controller.getLibrary().getTopCards(game, libSize));
+        cards.addAllCards(controller.getLibrary().getTopCards(game, libSize));
         controller.revealCards(sourceObject.getIdName(), cards, game);
 
         Player opponent;

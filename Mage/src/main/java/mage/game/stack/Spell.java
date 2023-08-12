@@ -25,12 +25,13 @@ import mage.game.events.CopiedStackObjectEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.SubTypes;
+import mage.util.functions.CopyTokenFunction;
 import mage.util.functions.StackObjectCopyApplier;
 import org.apache.log4j.Logger;
 
@@ -60,7 +61,8 @@ public class Spell extends StackObjectImpl implements Card {
     private boolean faceDown;
     private boolean countered;
     private boolean resolving = false;
-    private UUID commandedBy = null; // for Word of Command
+    private UUID commandedByPlayerId = null; // controller of the spell resolve, example: Word of Command
+    private String commandedByInfo; // info about spell commanded, e.g. source
     private int startingLoyalty;
     private int startingDefense;
 
@@ -74,7 +76,7 @@ public class Spell extends StackObjectImpl implements Card {
         Card affectedCard = card;
 
         // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
-        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.TRANSFORMED && affectedCard.getSecondCardFace() != null) {
+        if (ability.getSpellAbilityCastMode().isTransformed() && affectedCard.getSecondCardFace() != null) {
             // simulate another side as new card (another code part in continues effect from disturb ability)
             affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
         }
@@ -107,7 +109,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.countered = false;
     }
 
-    public Spell(final Spell spell) {
+    protected Spell(final Spell spell) {
         this.id = spell.id;
         this.zoneChangeCounter = spell.zoneChangeCounter;
         for (SpellAbility spellAbility : spell.spellAbilities) {
@@ -131,7 +133,8 @@ public class Spell extends StackObjectImpl implements Card {
         this.faceDown = spell.faceDown;
         this.countered = spell.countered;
         this.resolving = spell.resolving;
-        this.commandedBy = spell.commandedBy;
+        this.commandedByPlayerId = spell.commandedByPlayerId;
+        this.commandedByInfo = spell.commandedByInfo;
 
         this.currentActivatingManaAbilitiesStep = spell.currentActivatingManaAbilitiesStep;
         this.targetChanged = spell.targetChanged;
@@ -192,13 +195,43 @@ public class Spell extends StackObjectImpl implements Card {
                     + " as Adventure spell of " + GameLog.getColoredObjectIdName(adventureCard);
         }
 
-        if (card instanceof ModalDoubleFacesCardHalf) {
-            ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) card.getMainCard();
+        if (card instanceof ModalDoubleFacedCardHalf) {
+            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card.getMainCard();
             return GameLog.replaceNameByColoredName(card, getSpellAbility().toString(), mdfCard)
                     + " as mdf side of " + GameLog.getColoredObjectIdName(mdfCard);
         }
 
         return GameLog.replaceNameByColoredName(card, getSpellAbility().toString());
+    }
+
+    @Override
+    public String getExpansionSetCode() {
+        return card.getExpansionSetCode();
+    }
+
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {
+        throw new IllegalStateException("Wrong code usage: you can't change set code for the spell");
+    }
+
+    @Override
+    public String getCardNumber() {
+        return card.getCardNumber();
+    }
+
+    @Override
+    public void setCardNumber(String cardNumber) {
+        throw new IllegalStateException("Wrong code usage: you can't change card number for the spell");
+    }
+
+    @Override
+    public Integer getImageNumber() {
+        return card.getImageNumber();
+    }
+
+    @Override
+    public void setImageNumber(Integer imageNumber) {
+        throw new IllegalStateException("Wrong code usage: you can't change image number for the spell");
     }
 
     @Override
@@ -209,12 +242,16 @@ public class Spell extends StackObjectImpl implements Card {
             return false;
         }
         this.resolving = true;
-        if (commandedBy != null && !commandedBy.equals(getControllerId())) {
-            Player turnController = game.getPlayer(commandedBy);
-            if (turnController != null) {
-                turnController.controlPlayersTurn(game, controller.getId());
+
+        // setup new turn controller for spell's resolve, example: Word of Command
+        // original controller will be reset after spell's resolve
+        if (commandedByPlayerId != null && !commandedByPlayerId.equals(getControllerId())) {
+            Player newTurnController = game.getPlayer(commandedByPlayerId);
+            if (newTurnController != null) {
+                newTurnController.controlPlayersTurn(game, controller.getId(), commandedByInfo);
             }
         }
+
         if (this.isInstantOrSorcery(game)) {
             int index = 0;
             result = false;
@@ -275,8 +312,7 @@ public class Spell extends StackObjectImpl implements Card {
                 UUID permId;
                 boolean flag;
                 if (isCopy()) {
-                    EmptyToken token = new EmptyToken();
-                    CardUtil.copyTo(token).from(card, game, this);
+                    Token token = CopyTokenFunction.createTokenCopy(card, game, this);
                     // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
                     if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false)) {
                         permId = token.getLastAddedTokenIds().stream().findFirst().orElse(null);
@@ -343,8 +379,7 @@ public class Spell extends StackObjectImpl implements Card {
                 return false;
             }
         } else if (isCopy()) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(card, game, this);
+            Token token = CopyTokenFunction.createTokenCopy(card, game, this);
             // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
             token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false);
             return true;
@@ -483,11 +518,6 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public String getImageName() {
-        return card.getImageName();
-    }
-
-    @Override
     public void setName(String name) {
     }
 
@@ -544,8 +574,8 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public Set<SuperType> getSuperType() {
-        return card.getSuperType();
+    public List<SuperType> getSuperType(Game game) {
+        return card.getSuperType(game);
     }
 
     public List<SpellAbility> getSpellAbilities() {
@@ -703,11 +733,6 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public List<String> getRules(Game game) {
         return card.getRules(game);
-    }
-
-    @Override
-    public String getExpansionSetCode() {
-        return card.getExpansionSetCode();
     }
 
     @Override
@@ -874,11 +899,6 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public boolean putOntoBattlefield(Game game, Zone fromZone, Ability source, UUID controllerId, boolean tapped, boolean facedown, List<UUID> appliedEffects) {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String getCardNumber() {
-        return card.getCardNumber();
     }
 
     @Override
@@ -1108,12 +1128,24 @@ public class Spell extends StackObjectImpl implements Card {
         throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setCommandedBy(UUID playerId) {
-        this.commandedBy = playerId;
+    /**
+     * Add temporary turn controller while resolving (e.g. all choices will be made by another player)
+     * Example: Word of Command
+     *
+     * @param newTurnControllerId
+     * @param info                additional info for game logs
+     */
+    public void setCommandedBy(UUID newTurnControllerId, String info) {
+        this.commandedByPlayerId = newTurnControllerId;
+        this.commandedByInfo = info;
     }
 
-    public UUID getCommandedBy() {
-        return commandedBy;
+    public UUID getCommandedByPlayerId() {
+        return commandedByPlayerId;
+    }
+
+    public String getCommandedByInfo() {
+        return commandedByInfo == null ? "" : commandedByInfo;
     }
 
     @Override

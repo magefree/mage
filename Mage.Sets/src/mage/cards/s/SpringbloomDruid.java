@@ -8,15 +8,12 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT;
 
 /**
  * @author TheElk801
@@ -35,10 +32,10 @@ public final class SpringbloomDruid extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(
                         0, 2, StaticFilters.FILTER_CARD_BASIC_LAND
-                ), true, Outcome.PutLandInPlay
+                ), true
                 ).setText("search your library for up to two basic land cards, " +
                         "put them onto the battlefield tapped, then shuffle"
-                ), new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_LAND_SHORT_TEXT))
+                ), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)
         )));
     }
 

@@ -45,7 +45,7 @@ class AnimistsAwakeningEffect extends OneShotEffect {
 
     public AnimistsAwakeningEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the rest on the bottom of your library in any order."
+        staticText = "Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the rest on the bottom of your library in a random order."
                 + "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, untap those lands";
     }
 
@@ -62,7 +62,7 @@ class AnimistsAwakeningEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         int xValue = source.getManaCostsToPay().getX();
-        cards.addAll(controller.getLibrary().getTopCards(game, xValue));
+        cards.addAllCards(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
             Set<Card> toBattlefield = new LinkedHashSet<>();

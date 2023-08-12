@@ -27,7 +27,7 @@ public final class TezzeretAgentOfBolas extends CardImpl {
 
     public TezzeretAgentOfBolas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
 
         this.setStartingLoyalty(3);

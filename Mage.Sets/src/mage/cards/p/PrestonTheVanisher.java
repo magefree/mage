@@ -43,7 +43,7 @@ public final class PrestonTheVanisher extends CardImpl {
 
     public PrestonTheVanisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{3}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RABBIT);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);

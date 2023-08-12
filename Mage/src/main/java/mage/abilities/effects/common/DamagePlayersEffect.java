@@ -50,7 +50,7 @@ public class DamagePlayersEffect extends OneShotEffect {
     }
 
 
-    public DamagePlayersEffect(final DamagePlayersEffect effect) {
+    protected DamagePlayersEffect(final DamagePlayersEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.controller = effect.controller;

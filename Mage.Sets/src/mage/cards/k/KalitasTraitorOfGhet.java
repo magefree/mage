@@ -43,7 +43,7 @@ public final class KalitasTraitorOfGhet extends CardImpl {
 
     public KalitasTraitorOfGhet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);

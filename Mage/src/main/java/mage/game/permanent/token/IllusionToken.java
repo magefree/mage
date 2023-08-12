@@ -1,13 +1,10 @@
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-
-import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class IllusionToken extends TokenImpl {
@@ -20,11 +17,9 @@ public final class IllusionToken extends TokenImpl {
         subtype.add(SubType.ILLUSION);
         power = new MageInt(2);
         toughness = new MageInt(2);
-
-        availableImageSetCodes = Arrays.asList("ZEN");
     }
 
-    public IllusionToken(final IllusionToken token) {
+    protected IllusionToken(final IllusionToken token) {
         super(token);
     }
 

@@ -13,6 +13,7 @@ import mage.players.Player;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.server.managers.UserManager;
+import mage.util.MultiAmountMessage;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
@@ -114,7 +115,8 @@ public class GameSessionPlayer extends GameSessionWatcher {
         }
     }
 
-    public void getMultiAmount(final List<String> messages, final int min, final int max, final Map<String, Serializable> options) {
+    public void getMultiAmount(final List<MultiAmountMessage> messages, final int min, final int max,
+            final Map<String, Serializable> options) {
         if (!killed) {
             userManager.getUser(userId).ifPresent(user
                     -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_GET_MULTI_AMOUNT, game.getId(), new GameClientMessage(getGameView(), options, messages, min, max))));

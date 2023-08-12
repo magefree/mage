@@ -44,7 +44,7 @@ public final class TayamLuminousEnigma extends CardImpl {
     public TayamLuminousEnigma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);

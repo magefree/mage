@@ -20,11 +20,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class BloodstokeHowler extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Beast creatures you control");
-
-    static {
-        filter.add(SubType.BEAST.getPredicate());
-    }
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.BEAST, "Beast creatures");
 
     public BloodstokeHowler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");

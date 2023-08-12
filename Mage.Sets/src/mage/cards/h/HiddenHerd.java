@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -50,7 +49,7 @@ public final class HiddenHerd extends CardImpl {
 class HiddenHerdAbility extends TriggeredAbilityImpl {
 
     public HiddenHerdAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new HiddenHerdBeast(), "", Duration.WhileOnBattlefield, true, false), false);
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new HiddenHerdBeast(), null, Duration.WhileOnBattlefield), false);
     }
 
     public HiddenHerdAbility(final HiddenHerdAbility ability) {
@@ -70,7 +69,7 @@ class HiddenHerdAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return game.getOpponents(controllerId).contains(event.getPlayerId()) && !land.getSuperType().contains(SuperType.BASIC);
+        return game.getOpponents(controllerId).contains(event.getPlayerId()) && !land.isBasic(game);
     }
 
     @Override

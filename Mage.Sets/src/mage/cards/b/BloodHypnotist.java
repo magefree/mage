@@ -40,7 +40,7 @@ public final class BloodHypnotist extends CardImpl {
         // Whenever you sacrifice one or more Blood tokens, target creature can't block this turn. This ability triggers only once each turn.
         Ability ability = new SacrificePermanentTriggeredAbility(
                 new CantBlockTargetEffect(Duration.EndOfTurn), filter
-        ).setTriggersOnce(true);
+        ).setTriggersOnceEachTurn(true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

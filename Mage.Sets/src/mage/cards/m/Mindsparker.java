@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class Mindsparker extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("white or blue instant or sorcery spell");
+    private static final FilterSpell filter = new FilterSpell("a white or blue instant or sorcery spell");
 
     static {
         filter.add(Predicates.or(

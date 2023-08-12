@@ -33,7 +33,7 @@ public final class KelsienThePlague extends CardImpl {
     public KelsienThePlague(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.ASSASSIN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

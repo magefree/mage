@@ -5,7 +5,6 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 
 /**
- *
  * @author LevelX2
  */
 public class AddConditionalColorlessManaEffect extends AddConditionalManaEffect {
@@ -18,7 +17,7 @@ public class AddConditionalColorlessManaEffect extends AddConditionalManaEffect 
         super(Mana.ColorlessMana(amount), manaBuilder, netAmount);
     }
 
-    public AddConditionalColorlessManaEffect(final AddConditionalColorlessManaEffect effect) {
+    protected AddConditionalColorlessManaEffect(final AddConditionalColorlessManaEffect effect) {
         super(effect);
     }
 

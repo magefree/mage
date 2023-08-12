@@ -60,7 +60,7 @@ public class SkipNextDrawStepControllerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player =  game.getPlayer(source.getControllerId());
         if (player != null) {
-            game.getState().getTurnMods().add(new TurnMod(player.getId(), PhaseStep.DRAW));
+            game.getState().getTurnMods().add(new TurnMod(player.getId()).withSkipStep(PhaseStep.DRAW));
             return true;
         }
         return false;

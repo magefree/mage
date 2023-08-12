@@ -99,7 +99,7 @@ class UnmooredEgoEffect extends OneShotEffect {
                 // cards in Library
                 if (numberOfCardsStillToRemove > 0) {
                     Cards cardsInLibrary = new CardsImpl();
-                    cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
+                    cardsInLibrary.addAllCards(targetPlayer.getLibrary().getCards(game));
                     cardsCount = (cardName.isEmpty() ? 0 : cardsInLibrary.count(filter, game));
                     filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
                     TargetCardInLibrary targetLib = new TargetCardInLibrary(0, Math.min(cardsCount, numberOfCardsStillToRemove), filter);

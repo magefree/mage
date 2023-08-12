@@ -3,7 +3,6 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import java.util.Arrays;
 
 /**
  * @author TheElk801
@@ -18,11 +17,9 @@ public final class OgreWarriorToken extends TokenImpl {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(4);
         toughness = new MageInt(3);
-
-        availableImageSetCodes = Arrays.asList("SNC");
     }
 
-    public OgreWarriorToken(final OgreWarriorToken token) {
+    protected OgreWarriorToken(final OgreWarriorToken token) {
         super(token);
     }
 

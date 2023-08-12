@@ -35,7 +35,7 @@ public final class AzorsGateway extends CardImpl {
     public AzorsGateway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.secondSideCardClazz = mage.cards.s.SanctumOfTheSun.class;
 
         // {1}, {T}: Draw a card, then exile a card from your hand.

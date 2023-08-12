@@ -32,7 +32,7 @@ public final class NajalTheStormRunner extends CardImpl {
     public NajalTheStormRunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EFREET);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(5);

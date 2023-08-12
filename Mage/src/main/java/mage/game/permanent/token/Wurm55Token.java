@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author fireshoes
  */
@@ -18,11 +16,9 @@ public final class Wurm55Token extends TokenImpl {
         subtype.add(SubType.WURM);
         power = new MageInt(5);
         toughness = new MageInt(5);
-
-        availableImageSetCodes = Arrays.asList("AKH", "NCC", "CLB");
     }
 
-    public Wurm55Token(final Wurm55Token token) {
+    protected Wurm55Token(final Wurm55Token token) {
         super(token);
     }
 

@@ -27,7 +27,7 @@ public final class KroxaAndKunoros extends CardImpl {
     public KroxaAndKunoros(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDER);
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.DOG);

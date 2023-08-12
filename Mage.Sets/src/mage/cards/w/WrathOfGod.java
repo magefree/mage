@@ -6,7 +6,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -18,7 +18,7 @@ public final class WrathOfGod extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
 
         // Destroy all creatures. They can't be regenerated.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(FILTER_PERMANENT_CREATURES, true));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, true));
     }
 
     private WrathOfGod(final WrathOfGod card) {

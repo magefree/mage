@@ -37,7 +37,7 @@ public final class CaptainPhasma extends CardImpl {
     public CaptainPhasma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.TROOPER);
         this.power = new MageInt(4);
@@ -51,7 +51,7 @@ public final class CaptainPhasma extends CardImpl {
                 new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, filter, false)));
 
         // {W}{U}{B}{R}{G}: Search your library for a Trooper creature card, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true), new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true), new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
     }
 
     private CaptainPhasma(final CaptainPhasma card) {

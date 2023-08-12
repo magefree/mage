@@ -26,7 +26,7 @@ public final class DakkonShadowSlayer extends CardImpl {
     public DakkonShadowSlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DAKKON);
         this.setStartingLoyalty(0);
 

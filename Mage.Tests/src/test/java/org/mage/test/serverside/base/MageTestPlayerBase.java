@@ -35,6 +35,7 @@ import mage.server.managers.ConfigSettings;
 import mage.server.util.ConfigFactory;
 import mage.server.util.ConfigWrapper;
 import mage.server.util.PluginClassLoader;
+import mage.server.util.SystemUtil;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.target.TargetPermanent;
@@ -425,12 +426,19 @@ public abstract class MageTestPlayerBase {
 
     protected void addCustomCardWithAbility(String customName, TestPlayer controllerPlayer, Ability ability, SpellAbility spellAbility,
                                             CardType cardType, String spellCost, Zone putAtZone, SubType... additionalSubTypes) {
-        CustomTestCard.clearCustomAbilities(customName);
-        CustomTestCard.addCustomAbility(customName, spellAbility, ability);
-        CustomTestCard.clearAdditionalSubtypes(customName);
-        CustomTestCard.addAdditionalSubtypes(customName, additionalSubTypes);
+        List<String> cardCommand = SystemUtil.parseSetAndCardNameCommand(customName);
+        String needSetCode = cardCommand.get(0);
+        String needCardName = cardCommand.get(1);
+        if (needSetCode.isEmpty()) {
+            needSetCode = "custom";
+        }
 
-        CardSetInfo testSet = new CardSetInfo(customName, "custom", "123", Rarity.COMMON);
+        CustomTestCard.clearCustomAbilities(needCardName);
+        CustomTestCard.addCustomAbility(needCardName, spellAbility, ability);
+        CustomTestCard.clearAdditionalSubtypes(needCardName);
+        CustomTestCard.addAdditionalSubtypes(needCardName, additionalSubTypes);
+
+        CardSetInfo testSet = new CardSetInfo(needCardName, needSetCode, "123", Rarity.COMMON);
         Card newCard = new CustomTestCard(controllerPlayer.getId(), testSet, cardType, spellCost);
         Card permCard = CardUtil.getDefaultCardSideForBattlefield(currentGame, newCard);
         PermanentCard permanent = new PermanentCard(permCard, controllerPlayer.getId(), currentGame);
@@ -536,7 +544,7 @@ public abstract class MageTestPlayerBase {
         );
 
         // library
-        ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD)).setText("return from library"), new ManaCostsImpl<>(""));
+        ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD), false).setText("return from library"), new ManaCostsImpl<>(""));
         addCustomCardWithAbility(
                 "return from library for " + controller.getName(),
                 controller,

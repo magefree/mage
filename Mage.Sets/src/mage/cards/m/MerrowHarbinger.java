@@ -36,7 +36,7 @@ public final class MerrowHarbinger extends CardImpl {
         // Islandwalk
         this.addAbility(new IslandwalkAbility());
         // When Merrow Harbinger enters the battlefield, you may search your library for a Merfolk card, reveal it, then shuffle your library and put that card on top of it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true), true));
     }
 
     private MerrowHarbinger(final MerrowHarbinger card) {

@@ -1,20 +1,17 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.constants.CardType;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class WireflyToken extends TokenImpl {
 
     public WireflyToken() {
         super("Wirefly", "2/2 colorless Insect artifact creature token with flying named Wirefly");
-        this.setOriginalExpansionSetCode("DST");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.subtype.add(SubType.INSECT);
@@ -23,7 +20,7 @@ public final class WireflyToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WireflyToken(final WireflyToken token) {
+    protected WireflyToken(final WireflyToken token) {
         super(token);
     }
 

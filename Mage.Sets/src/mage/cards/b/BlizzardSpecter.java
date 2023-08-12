@@ -27,7 +27,7 @@ public final class BlizzardSpecter extends CardImpl {
 
     public BlizzardSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SPECTER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

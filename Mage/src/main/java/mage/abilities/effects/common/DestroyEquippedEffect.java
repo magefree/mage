@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -8,7 +9,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class DestroyEquippedEffect extends OneShotEffect {
@@ -18,7 +18,7 @@ public class DestroyEquippedEffect extends OneShotEffect {
         staticText = "destroy that permanent";
     }
 
-    public DestroyEquippedEffect(final DestroyEquippedEffect effect) {
+    protected DestroyEquippedEffect(final DestroyEquippedEffect effect) {
         super(effect);
     }
 

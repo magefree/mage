@@ -1,29 +1,24 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801 & L_J
  */
 public final class ThermalFlux extends CardImpl {
@@ -91,9 +86,9 @@ class ThermalFluxEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
             if (addSnow) {
-                permanent.addSuperType(SuperType.SNOW);
+                permanent.addSuperType(game, SuperType.SNOW);
             } else {
-                permanent.getSuperType().remove(SuperType.SNOW);
+                permanent.removeSuperType(game, SuperType.SNOW);
             }
         }
         return true;

@@ -23,7 +23,7 @@ public final class GarzaZolPlagueQueen extends CardImpl {
 
     public GarzaZolPlagueQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE, SubType.NOBLE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

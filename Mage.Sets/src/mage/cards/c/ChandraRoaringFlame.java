@@ -27,7 +27,7 @@ public final class ChandraRoaringFlame extends CardImpl {
 
     public ChandraRoaringFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
         this.color.setRed(true);
 

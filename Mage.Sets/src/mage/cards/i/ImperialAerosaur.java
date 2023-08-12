@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -13,23 +12,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.StaticFilters;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author TheElk801
  */
 public final class ImperialAerosaur extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(AnotherPredicate.instance);
-    }
 
     public ImperialAerosaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -48,7 +38,7 @@ public final class ImperialAerosaur extends CardImpl {
         effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying until end of turn");
         ability.addEffect(effect);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 

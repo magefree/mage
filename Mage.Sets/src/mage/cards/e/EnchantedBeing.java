@@ -29,8 +29,8 @@ public final class EnchantedBeing extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Prevent all damage that would be dealt to Enchanted Being by enchanted creatures.
-        this.addAbility(new SimpleStaticAbility(new PreventAllDamageToSourceByPermanentsEffect(filter)));
+        // Prevent all combat damage that would be dealt to Enchanted Being by enchanted creatures.
+        this.addAbility(new SimpleStaticAbility(new PreventAllDamageToSourceByPermanentsEffect(filter, true)));
     }
 
     private EnchantedBeing(final EnchantedBeing card) {

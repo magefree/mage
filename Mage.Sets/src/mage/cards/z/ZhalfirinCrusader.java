@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import static mage.abilities.effects.RedirectionEffect.UsageType.ONE_USAGE_ABSOLUTE;
+import mage.abilities.effects.RedirectionEffect;
 import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
 import mage.abilities.keyword.FlankingAbility;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class ZhalfirinCrusader extends CardImpl {
         this.addAbility(new FlankingAbility());
 
         // {1}{W}: The next 1 damage that would be dealt to Zhalfirin Crusader this turn is dealt to any target instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, ONE_USAGE_ABSOLUTE), new ManaCostsImpl<>("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, RedirectionEffect.UsageType.ONE_USAGE_ABSOLUTE), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

@@ -49,7 +49,7 @@ public final class MountDoom extends CardImpl {
     public MountDoom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}, Pay 1 life: Add {B} or {R}.
         Ability ability = new BlackManaAbility();

@@ -46,7 +46,7 @@ public final class BrainInAJar extends CardImpl {
         // {3}, {T}, Remove X charge counters from Brain in a Jar: Scry X.
         ability = new SimpleActivatedAbility(new BrainInAJarScryEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE));
         this.addAbility(ability);
     }
 

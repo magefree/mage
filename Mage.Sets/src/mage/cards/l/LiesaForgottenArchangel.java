@@ -9,21 +9,21 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.constants.*;
+import mage.abilities.effects.common.replacement.CreaturesAreExiledOnDeathReplacementEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -31,7 +31,7 @@ import mage.players.Player;
  */
 public final class LiesaForgottenArchangel extends CardImpl {
 
-    private final static FilterControlledCreaturePermanent filter
+    private static final FilterControlledCreaturePermanent filter
             = new FilterControlledCreaturePermanent("another nontoken creature you control");
 
     static {
@@ -42,7 +42,7 @@ public final class LiesaForgottenArchangel extends CardImpl {
     public LiesaForgottenArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
@@ -57,7 +57,9 @@ public final class LiesaForgottenArchangel extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new LiesaForgottenArchangelReturnToHandEffect(), false, filter, true));
 
         // If a creature an opponent controls would die, exile it instead.
-        this.addAbility(new SimpleStaticAbility(new LiesaForgottenArchangelReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(
+            new CreaturesAreExiledOnDeathReplacementEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE)
+        ));
     }
 
     private LiesaForgottenArchangel(final LiesaForgottenArchangel card) {
@@ -94,46 +96,5 @@ class LiesaForgottenArchangelReturnToHandEffect extends OneShotEffect {
         DelayedTriggeredAbility ability = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
         game.addDelayedTriggeredAbility(ability, source);
         return true;
-    }
-}
-
-class LiesaForgottenArchangelReplacementEffect extends ReplacementEffectImpl {
-
-    public LiesaForgottenArchangelReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "If a creature an opponent controls would die, exile it instead";
-    }
-
-    private LiesaForgottenArchangelReplacementEffect(final LiesaForgottenArchangelReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LiesaForgottenArchangelReplacementEffect copy() {
-        return new LiesaForgottenArchangelReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            Permanent permanent = zEvent.getTarget();
-            if (permanent != null && permanent.isCreature()) {
-                Player player = game.getPlayer(source.getControllerId());
-                return player != null && player.hasOpponent(permanent.getControllerId(), game);
-            }
-        }
-        return false;
     }
 }

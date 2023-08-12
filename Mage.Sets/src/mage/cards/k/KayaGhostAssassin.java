@@ -31,7 +31,7 @@ public final class KayaGhostAssassin extends CardImpl {
 
     public KayaGhostAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAYA);
 
         this.setStartingLoyalty(5);

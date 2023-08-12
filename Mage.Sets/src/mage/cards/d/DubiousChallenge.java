@@ -62,7 +62,7 @@ class DubiousChallengeEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             Cards topCards = new CardsImpl();
-            topCards.addAll(controller.getLibrary().getTopCards(game, 10));
+            topCards.addAllCards(controller.getLibrary().getTopCards(game, 10));
             controller.lookAtCards(sourceObject.getIdName(), topCards, game);
             TargetCard targetCreatures = new TargetCard(0, 2, Zone.LIBRARY, StaticFilters.FILTER_CARD_CREATURE);
             controller.choose(outcome, topCards, targetCreatures, source, game);

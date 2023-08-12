@@ -70,7 +70,7 @@ class MitoticManipulationEffect extends OneShotEffect {
             }
 
             Cards cardsFromTop = new CardsImpl();
-            cardsFromTop.addAll(controller.getLibrary().getTopCards(game, 7));
+            cardsFromTop.addAllCards(controller.getLibrary().getTopCards(game, 7));
             controller.lookAtCards(sourceObject.getIdName(), cardsFromTop, game);
             FilterCard filter = new FilterCard("card to put onto the battlefield");
             List<NamePredicate> namePredicates = new ArrayList<>();

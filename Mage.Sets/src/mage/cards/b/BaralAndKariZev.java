@@ -36,7 +36,7 @@ public final class BaralAndKariZev extends CardImpl {
     public BaralAndKariZev(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
@@ -84,7 +84,7 @@ class BaralAndKariZevTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = game.getSpell(event.getId());
+        Spell spell = game.getSpell(event.getTargetId());
         if (spell == null || !spell.isInstantOrSorcery(game)) {
             return false;
         }

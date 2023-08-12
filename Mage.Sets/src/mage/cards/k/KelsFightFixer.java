@@ -30,7 +30,7 @@ public final class KelsFightFixer extends CardImpl {
     public KelsFightFixer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AZRA);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(4);

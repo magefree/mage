@@ -22,7 +22,7 @@ public class HideawayPlayEffect extends OneShotEffect {
         staticText = "you may play the exiled card without paying its mana cost";
     }
 
-    public HideawayPlayEffect(final HideawayPlayEffect effect) {
+    protected HideawayPlayEffect(final HideawayPlayEffect effect) {
         super(effect);
     }
 

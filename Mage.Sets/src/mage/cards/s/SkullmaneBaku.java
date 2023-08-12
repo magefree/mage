@@ -42,7 +42,7 @@ public final class SkullmaneBaku extends CardImpl {
         // {1}, {T}, Remove X ki counters from Skullmane Baku: Target creature gets -X/-X until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -26,7 +26,7 @@ public final class TheGoldenThrone extends CardImpl {
     public TheGoldenThrone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Arcane Life-support -- If you would lose the game, instead exile The Golden Throne and your life total becomes 1.
         this.addAbility(new SimpleStaticAbility(new TheGoldenThroneEffect()).withFlavorWord("Arcane Life-support"));

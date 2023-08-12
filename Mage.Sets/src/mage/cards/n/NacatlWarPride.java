@@ -19,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -43,8 +42,9 @@ public final class NacatlWarPride extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Nacatl War-Pride must be blocked by exactly one creature if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
+        Ability blockAbility = new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield).setText("{this} must be blocked"));
+        blockAbility.addEffect(new CantBeBlockedByMoreThanOneSourceEffect().setText(" by exactly one creature if able"));
+        this.addAbility(blockAbility);
 
         // Whenever Nacatl War-Pride attacks, create X tokens that are copies of Nacatl War-Pride tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.
         Ability ability = new AttacksTriggeredAbility(new NacatlWarPrideEffect(), false);

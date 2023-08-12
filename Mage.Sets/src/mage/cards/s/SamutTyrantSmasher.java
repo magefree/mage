@@ -26,7 +26,7 @@ public final class SamutTyrantSmasher extends CardImpl {
     public SamutTyrantSmasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R/G}{R/G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SAMUT);
         this.setStartingLoyalty(5);
 

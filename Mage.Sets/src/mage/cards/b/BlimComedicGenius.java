@@ -32,7 +32,7 @@ public final class BlimComedicGenius extends CardImpl {
     public BlimComedicGenius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.IMP);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

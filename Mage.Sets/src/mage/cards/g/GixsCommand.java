@@ -79,7 +79,7 @@ class GixsCommandCounterEffect extends OneShotEffect {
 
     public GixsCommandCounterEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "Put two +1/+1 counter on up to one creature. It gains lifelink until end of turn.";
+        this.staticText = "Put two +1/+1 counters on up to one creature. It gains lifelink until end of turn.";
     }
 
     private GixsCommandCounterEffect(final GixsCommandCounterEffect effect) {

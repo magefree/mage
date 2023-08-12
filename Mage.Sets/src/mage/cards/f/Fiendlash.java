@@ -147,11 +147,9 @@ class FiendlashEffect extends OneShotEffect {
         }
 
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            if (permanent.isPlaneswalker()) {
-                permanent.damage(damage, creature.getId(), source, game);
-                return true;
-            }
+        if (permanent != null && (permanent.isPlaneswalker(game))) {
+            permanent.damage(damage, creature.getId(), source, game);
+            return true;
         }
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {

@@ -36,7 +36,7 @@ public final class BasriDevotedPaladin extends CardImpl {
     public BasriDevotedPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BASRI);
         this.setStartingLoyalty(4);
 

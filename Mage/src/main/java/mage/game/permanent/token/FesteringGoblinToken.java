@@ -1,6 +1,7 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
@@ -11,7 +12,6 @@ import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author spjspj
  */
 public final class FesteringGoblinToken extends TokenImpl {
@@ -30,7 +30,7 @@ public final class FesteringGoblinToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public FesteringGoblinToken(final FesteringGoblinToken token) {
+    protected FesteringGoblinToken(final FesteringGoblinToken token) {
         super(token);
     }
 

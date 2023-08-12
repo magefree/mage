@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterArtifactSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.MyrToken;
 import mage.util.ManaUtil;
@@ -30,8 +30,7 @@ public final class Myrsmith extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast an artifact spell, you may pay {1}. If you do, put a 1/1 colorless Myr artifact creature token onto the battlefield.
-        FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
-        this.addAbility(new SpellCastControllerTriggeredAbility(new MyrsmithEffect(), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new MyrsmithEffect(), StaticFilters.FILTER_SPELL_AN_ARTIFACT, false));
     }
 
     private Myrsmith(final Myrsmith card) {

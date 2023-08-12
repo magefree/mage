@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -97,7 +97,7 @@ class OrimsChantEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && KickedCondition.ONCE.apply(game, source)) {
-            game.addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), source);
+            game.addEffect(new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES), source);
             return true;
         }
         return false;

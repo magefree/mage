@@ -18,7 +18,7 @@ public final class WallOfResurgenceToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public WallOfResurgenceToken(final WallOfResurgenceToken token) {
+    protected WallOfResurgenceToken(final WallOfResurgenceToken token) {
         super(token);
     }
 

@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -22,11 +20,9 @@ public final class CustomIllusionToken extends TokenImpl {
         subtype.add(SubType.ILLUSION);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
-
-        availableImageSetCodes = Arrays.asList("ZNR");
     }
 
-    public CustomIllusionToken(final CustomIllusionToken token) {
+    protected CustomIllusionToken(final CustomIllusionToken token) {
         super(token);
     }
 

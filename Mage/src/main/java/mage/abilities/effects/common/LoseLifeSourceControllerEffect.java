@@ -11,7 +11,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class LoseLifeSourceControllerEffect extends OneShotEffect {
@@ -28,7 +27,7 @@ public class LoseLifeSourceControllerEffect extends OneShotEffect {
         setText();
     }
 
-    public LoseLifeSourceControllerEffect(final LoseLifeSourceControllerEffect effect) {
+    protected LoseLifeSourceControllerEffect(final LoseLifeSourceControllerEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
     }

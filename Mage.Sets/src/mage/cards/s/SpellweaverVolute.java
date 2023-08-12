@@ -64,7 +64,7 @@ class SpellweaverVoluteEffect extends OneShotEffect {
 
     public SpellweaverVoluteEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "copy the enchanted instant card. You may cast the copy without paying its mana cost. \n"
+        this.staticText = "copy the enchanted instant card. You may cast the copy without paying its mana cost. "
                 + "If you do, exile the enchanted card and attach {this} to another instant card in a graveyard";
     }
 
@@ -90,8 +90,6 @@ class SpellweaverVoluteEffect extends OneShotEffect {
                             && controller.chooseUse(Outcome.Copy, "Create a copy of " + enchantedCard.getName() + '?', source, game)) {
                         Card copiedCard = game.copyCard(enchantedCard, source, source.getControllerId());
                         if (copiedCard != null) {
-                            controller.getGraveyard().add(copiedCard);
-                            game.getState().setZone(copiedCard.getId(), Zone.GRAVEYARD);
                             if (controller.chooseUse(Outcome.PlayForFree, "Cast the copied card without paying mana cost?", source, game)) {
                                 if (copiedCard.getSpellAbility() != null) {
                                     game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);

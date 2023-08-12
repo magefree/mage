@@ -38,7 +38,7 @@ public final class YasharnImplacableEarth extends CardImpl {
     public YasharnImplacableEarth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.BOAR);
         this.power = new MageInt(4);
@@ -166,7 +166,7 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
                 return true;  // can't pay with life
             }
             if (cost instanceof SacrificeSourceCost
-                    && !permanent.isLand()) {
+                    && !permanent.isLand(game)) {
                 return true;
             }
             if (cost instanceof SacrificeTargetCost) {

@@ -8,6 +8,7 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
@@ -34,7 +35,10 @@ public final class ClovenCasting extends CardImpl {
         // Whenever you cast a multicolored instant or sorcery spell, you may pay {1}. If you do, copy that spell. You may choose new targets for the copy.
         Effect effect = new CopyTargetSpellEffect(true);
         effect.setText("copy that spell. You may choose new targets for the copy");
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(effect, new GenericManaCost(1)), filter, false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new DoIfCostPaid(effect, new GenericManaCost(1)),
+                filter, false, SetTargetPointer.SPELL
+        ));
     }
 
     private ClovenCasting(final ClovenCasting card) {

@@ -30,7 +30,7 @@ public final class ShaukuEndbringer extends CardImpl {
 
     public ShaukuEndbringer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -45,7 +45,7 @@ public final class ShaukuEndbringer extends CardImpl {
 
         // {T}: Exile target creature and put a +1/+1 counter on Shauku.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
-        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).concatBy("and"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

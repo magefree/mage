@@ -56,7 +56,7 @@ public class ConjureCardEffect extends OneShotEffect {
         }
         CardInfo cardInfo = CardRepository
                 .instance
-                .findCards(new CardCriteria().nameExact(cardName))
+                .findCards(new CardCriteria().name(cardName))
                 .stream()
                 .findFirst()
                 .orElse(null);

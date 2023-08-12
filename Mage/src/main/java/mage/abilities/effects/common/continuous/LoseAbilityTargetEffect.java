@@ -13,7 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class LoseAbilityTargetEffect extends ContinuousEffectImpl {
@@ -29,7 +28,7 @@ public class LoseAbilityTargetEffect extends ContinuousEffectImpl {
         this.ability = ability;
     }
 
-    public LoseAbilityTargetEffect(final LoseAbilityTargetEffect effect) {
+    protected LoseAbilityTargetEffect(final LoseAbilityTargetEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
     }

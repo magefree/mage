@@ -32,7 +32,7 @@ public final class TatsumasaTheDragonsFang extends CardImpl {
 
     public TatsumasaTheDragonsFang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +5/+5.

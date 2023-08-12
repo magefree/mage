@@ -25,7 +25,7 @@ public final class DukeUlderRavengard extends CardImpl {
     public DukeUlderRavengard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.NOBLE);
         this.subtype.add(SubType.SOLDIER);

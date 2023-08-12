@@ -72,7 +72,7 @@ class SwordOfOnceAndFutureCastEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterInstantOrSorceryCard();
 
     static {
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 2));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     SwordOfOnceAndFutureCastEffect() {
@@ -97,7 +97,7 @@ class SwordOfOnceAndFutureCastEffect extends OneShotEffect {
             return false;
         }
         return CardUtil.castSpellWithAttributesForFree(
-                player, source, game, new CardsImpl(player.getHand()),
+                player, source, game, new CardsImpl(player.getGraveyard()),
                 filter, SwordOfOnceAndFutureTracker.instance
         );
     }
