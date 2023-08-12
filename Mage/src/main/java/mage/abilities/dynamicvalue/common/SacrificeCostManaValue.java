@@ -13,10 +13,10 @@ import mage.game.permanent.Permanent;
  * @author LoneFox, Susucr
  */
 public enum SacrificeCostManaValue implements DynamicValue {
-    Creature("creature"),
-    Enchantment("enchantment"),
-    Artifact("artifact"),
-    Permanent("permanent");
+    CREATURE("creature"),
+    ENCHANTMENT("enchantment"),
+    ARTIFACT("artifact"),
+    PERMANENT("permanent");
 
     private final String type;
 

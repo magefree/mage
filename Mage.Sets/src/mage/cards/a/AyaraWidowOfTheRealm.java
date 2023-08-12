@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class AyaraWidowOfTheRealm extends CardImpl {
 
-    private static final DynamicValue xValue = SacrificeCostManaValue.Permanent;
+    private static final DynamicValue xValue = SacrificeCostManaValue.PERMANENT;
     private static final FilterPermanentOrPlayer filter = new FilterPermanentOrPlayer(
             "opponent or battle", StaticFilters.FILTER_PERMANENT_BATTLE, new FilterOpponent()
     );

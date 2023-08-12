@@ -39,7 +39,7 @@ public final class BoshIronGolem extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // {3}{R}, Sacrifice an artifact: Bosh, Iron Golem deals damage equal to the sacrificed artifact's converted mana cost to any target.
-        Effect effect = new DamageTargetEffect(SacrificeCostManaValue.Artifact);
+        Effect effect = new DamageTargetEffect(SacrificeCostManaValue.ARTIFACT);
         effect.setText("{this} deals damage equal to the sacrificed artifact's mana value to any target");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));

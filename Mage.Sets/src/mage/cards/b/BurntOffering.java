@@ -23,7 +23,7 @@ public final class BurntOffering extends CardImpl {
         //As an additional cost to cast Burnt Offering, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         //Add an amount of {B} and/or {R} equal to the sacrificed creature's converted mana cost.
-        SacrificeCostManaValue xValue = SacrificeCostManaValue.Creature;
+        SacrificeCostManaValue xValue = SacrificeCostManaValue.CREATURE;
         this.getSpellAbility().addEffect(new AddManaInAnyCombinationEffect(
                 xValue, xValue, ColoredManaSymbol.B, ColoredManaSymbol.R
         ));

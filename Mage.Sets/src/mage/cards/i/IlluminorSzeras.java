@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class IlluminorSzeras extends CardImpl {
 
-    private static final DynamicValue xValue = SacrificeCostManaValue.Creature;
+    private static final DynamicValue xValue = SacrificeCostManaValue.CREATURE;
     private static final DynamicValue netValue = new HighestCMCOfPermanentValue(
             StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
     );

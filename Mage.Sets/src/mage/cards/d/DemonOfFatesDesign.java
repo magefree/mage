@@ -69,7 +69,7 @@ public final class DemonOfFatesDesign extends CardImpl {
 
         // {2}{B}, Sacrifice another enchantment: Demon of Fate's Design gets +X/+0 until end of turn, where X is the sacrificed enchantment's mana value.
         Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(
-                SacrificeCostManaValue.Enchantment,
+                SacrificeCostManaValue.ENCHANTMENT,
                 StaticValue.get(0), Duration.EndOfTurn
         ), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new SacrificeTargetCost(
