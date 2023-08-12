@@ -60,7 +60,7 @@ class DesertionEffect extends OneShotEffect {
             return false;
         }
         return game.getStack().counter(spell.getId(), source, game,
-                spell.isArtifact() || spell.isCreature() ? PutCards.BATTLEFIELD : PutCards.GRAVEYARD
+                spell.isArtifact(game) || spell.isCreature(game) ? PutCards.BATTLEFIELD : PutCards.GRAVEYARD
         );
     }
 }

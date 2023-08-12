@@ -85,7 +85,7 @@ class CarthTheLionTriggeredAbility extends TriggeredAbilityImpl {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.isDiesEvent()) {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
-                return permanent != null && permanent.isPlaneswalker();
+                return permanent != null && permanent.isPlaneswalker(game);
             }
         }
         return false;

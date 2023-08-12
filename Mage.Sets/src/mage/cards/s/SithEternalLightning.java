@@ -64,12 +64,15 @@ class SithEternalLightningEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         Set<UUID> opponents = game.getOpponents(controller.getId());
-        if (controller != null && opponents != null) {
+        if (opponents != null) {
             for (UUID opponent : opponents) {
                 List<Permanent> permanents = game.getBattlefield().getActivePermanents(opponent, game);
                 for (Permanent permanent : permanents) {
-                    if (permanent.isCreature() && permanent.getControllerId() == opponent) {
+                    if (permanent.isCreature(game) && opponent.equals(permanent.getControllerId())) {
                         permanent.tap(source, game);
                         DontUntapInControllersNextUntapStepTargetEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
                         effect.setTargetPointer(new FixedTarget(permanent.getId(), game));

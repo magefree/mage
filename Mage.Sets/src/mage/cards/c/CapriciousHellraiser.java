@@ -76,13 +76,13 @@ class CapriciousHellraiserEffect extends OneShotEffect {
                 if (card != null) {
                     toExile.add(card);
                     cardsInGraveyard.remove(card);
-                    if (!card.isCreature() && !card.isLand()) {
+                    if (!card.isCreature(game) && !card.isLand(game)) {
                         cardsToChooseFrom.add(card);
                     }
                 }
             }
             controller.moveCards(toExile, Zone.EXILED, source, game);
-            if (cardsToChooseFrom.size() > 0) {
+            if (!cardsToChooseFrom.isEmpty()) {
                 TargetCard targetCard = new TargetCard(1, Zone.EXILED, StaticFilters.FILTER_CARD);
                 controller.choose(Outcome.Copy, cardsToChooseFrom, targetCard, source, game);
                 Card cardToCopy = game.getCard(targetCard.getTargets().get(0));
