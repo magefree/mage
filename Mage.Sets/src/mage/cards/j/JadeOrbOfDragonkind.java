@@ -66,7 +66,7 @@ class JadeOrbGainHexproofEffect extends GainAbilityTargetEffect {
         staticText = "and gains hexproof until your next turn";
     }
 
-    public JadeOrbGainHexproofEffect(final JadeOrbGainHexproofEffect effect) {
+    private JadeOrbGainHexproofEffect(final JadeOrbGainHexproofEffect effect) {
         super(effect);
     }
 
@@ -82,19 +82,21 @@ class JadeOrbGainHexproofEffect extends GainAbilityTargetEffect {
         GameEvent event = ((ManaSpentDelayedTriggeredAbility) source).getTriggerEvent();
         if (event != null) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            affectedObjectList.add(new MageObjectReference(spell.getSourceId(), game));
+            if (spell != null) {
+                affectedObjectList.add(new MageObjectReference(spell.getSourceId(), game));
+            }
         }
     }
 }
 
 class JadeOrbAdditionalCounterEffect extends ReplacementEffectImpl {
 
-    public JadeOrbAdditionalCounterEffect() {
+    JadeOrbAdditionalCounterEffect() {
         super(Duration.EndOfTurn, Outcome.BoostCreature);
         this.staticText = "it enters the battlefield with an additional +1/+1 counter on it";
     }
 
-    public JadeOrbAdditionalCounterEffect(JadeOrbAdditionalCounterEffect effect) {
+    private JadeOrbAdditionalCounterEffect(final JadeOrbAdditionalCounterEffect effect) {
         super(effect);
     }
 
@@ -113,7 +115,7 @@ class JadeOrbAdditionalCounterEffect extends ReplacementEffectImpl {
         if (spell == null) {
             return false;
         }
-        return event.getSourceId() == spell.getSourceId();
+        return event.getSourceId().equals(spell.getSourceId());
     }
 
     @Override
@@ -125,8 +127,7 @@ class JadeOrbAdditionalCounterEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
         if (target != null) {
-            target.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game,
-                    event.getAppliedEffects());
+            target.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
         }
         return false;
     }
