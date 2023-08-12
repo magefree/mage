@@ -142,6 +142,24 @@ public class DisturbTest extends CardTestPlayerBase {
         assertLife(playerB, 19);
     }
 
+    @Test
+    public void test_SpellAttributesIndirectTrigger() {
+        // Disturb {1}{U}
+        // Hook-Haunt Drifter
+        addCard(Zone.GRAVEYARD, playerA, "Baithook Angler", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Lys Alana Huntmaster", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Maskwood Nexus", 1);
+        // Transform's copy effect must not override other spell modifications
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hook-Haunt Drifter using Disturb");
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerA, "Elf Warrior Token", 1);
+    }
+
     /**
      * Relevant ruling:
      *      To determine the total cost of a spell, start with the mana cost or alternative cost
