@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
 import mage.cards.CardImpl;
@@ -30,21 +30,21 @@ public final class Nothic extends CardImpl {
         // 1-9 | You draw a card and you lose 1 life.
         effect.addTableEntry(
                 1, 9,
-                new DrawCardTargetEffect(1).setText("you draw a card"),
+                new DrawCardSourceControllerEffect(1, "you"),
                 new LoseLifeSourceControllerEffect(1).concatBy("and")
         );
 
         // 10-19 | You draw two cards and you lose 2 life.
         effect.addTableEntry(
                 10, 19,
-                new DrawCardTargetEffect(2).setText("you draw two cards"),
+                new DrawCardSourceControllerEffect(2, "you"),
                 new LoseLifeSourceControllerEffect(2).concatBy("and")
         );
 
         // 20 | You draw seven cards and you lose 7 life.
         effect.addTableEntry(
                 20, 20,
-                new DrawCardTargetEffect(7).setText("you draw seven cards"),
+                new DrawCardSourceControllerEffect(7, "you"),
                 new LoseLifeSourceControllerEffect(7).concatBy("and")
         );
 

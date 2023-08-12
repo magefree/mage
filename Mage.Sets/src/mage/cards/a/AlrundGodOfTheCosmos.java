@@ -1,13 +1,6 @@
 package mage.cards.a;
 
-import java.util.Collection;
-import java.util.Set;
 import mage.MageInt;
-import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
-import mage.constants.*;
-import mage.game.Game;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -21,31 +14,36 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ForetellAbility;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.card.OwnerIdPredicate;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.ExileZone;
+import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.Collection;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author jeffwadsworth
  */
-public final class AlrundGodOfTheCosmos extends ModalDoubleFacesCard {
+public final class AlrundGodOfTheCosmos extends ModalDoubleFacedCard {
 
     public AlrundGodOfTheCosmos(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{3}{U}{U}",
-                "Hakka, Whispering Raven", new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BIRD}, "{1}{U}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{3}{U}{U}",
+                "Hakka, Whispering Raven",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BIRD}, "{1}{U}"
         );
 
         // 1.
         // Alrund, God of the Cosmos
         // Legendary Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(new MageInt(1), new MageInt(1));
 
         // Alrund gets +1/+1 for each card in your hand and each foretold card you own in exile.
@@ -62,7 +60,6 @@ public final class AlrundGodOfTheCosmos extends ModalDoubleFacesCard {
         // 2.
         // Hakka, Whispering Raven
         // Legendary Creature — Bird 
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getRightHalfCard().setPT(new MageInt(2), new MageInt(3));
 
         // Flying
@@ -110,7 +107,7 @@ class AlrundGodOfTheCosmosEffect extends OneShotEffect {
         if (controller != null) {
             Set<Card> twoCardsFromTop = controller.getLibrary().getTopCards(game, 2);
             Cards cards = new CardsImpl();
-            cards.addAll(twoCardsFromTop);
+            cards.addAllCards(twoCardsFromTop);
             controller.revealCards(source, cards, game);
             for (Card card : cards.getCards(game)) {
                 if (card.getCardType(game).toString().contains(chosenCardType)) {

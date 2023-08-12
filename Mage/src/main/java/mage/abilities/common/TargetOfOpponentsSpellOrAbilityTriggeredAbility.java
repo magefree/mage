@@ -18,22 +18,13 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class TargetOfOpponentsSpellOrAbilityTriggeredAbility extends TriggeredAbilityImpl {
 
-    private Boolean onlyController = Boolean.FALSE;
+    private boolean onlyController = false;
 
     public TargetOfOpponentsSpellOrAbilityTriggeredAbility(Effect effect) {
-        this(effect, false);
+        this(effect, false, false);
     }
 
-    // NOTE: Using Boolean instead of boolean in order to have a second constructor with (Effect, "boolean") signature
-    public TargetOfOpponentsSpellOrAbilityTriggeredAbility(Effect effect, Boolean onlyController) {
-        this(effect, false, onlyController);
-    }
-
-    public TargetOfOpponentsSpellOrAbilityTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, Boolean.FALSE);
-    }
-
-    public TargetOfOpponentsSpellOrAbilityTriggeredAbility(Effect effect, boolean optional, Boolean onlyController) {
+    public TargetOfOpponentsSpellOrAbilityTriggeredAbility(Effect effect, boolean optional, boolean onlyController) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.onlyController = onlyController;
         if (this.onlyController) {
@@ -64,7 +55,7 @@ public class TargetOfOpponentsSpellOrAbilityTriggeredAbility extends TriggeredAb
         // Check if player was targeted
         if (controller.getId().equals(event.getTargetId())) {
             // Add target for effects which need it (e.g. the counter effect from AmuletOfSafekeeping)
-            this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
+            this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId()));
             return true;
         }
 
@@ -80,7 +71,7 @@ public class TargetOfOpponentsSpellOrAbilityTriggeredAbility extends TriggeredAb
         }
 
         // Add target for effects which need it (e.g. the counter effect from AmuletOfSafekeeping)
-        this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
+        this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId()));
         return true;
     }
 

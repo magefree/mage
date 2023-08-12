@@ -43,7 +43,6 @@ public final class ForerunnerOfTheEmpire extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(
                         new SearchLibraryPutOnLibraryEffect(
                                 new TargetCardInLibrary(new FilterBySubtypeCard(SubType.DINOSAUR)),
-                                true,
                                 true
                         ),
                         true

@@ -6,13 +6,12 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class KalitasVampireToken extends TokenImpl {
 
     public KalitasVampireToken() {
-        this(1,1);
+        this(1, 1);
     }
 
     public KalitasVampireToken(int tokenPower, int tokenToughness) {
@@ -24,7 +23,7 @@ public final class KalitasVampireToken extends TokenImpl {
         toughness = new MageInt(tokenToughness);
     }
 
-    public KalitasVampireToken(final KalitasVampireToken token) {
+    protected KalitasVampireToken(final KalitasVampireToken token) {
         super(token);
     }
 

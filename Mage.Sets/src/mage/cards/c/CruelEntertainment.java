@@ -63,8 +63,8 @@ class CruelEntertainmentEffect extends OneShotEffect {
             player2 = game.getPlayer(getTargetPointer().getTargets(game, source).get(1));
         }
         if (player1 != null && player2 != null) {
-            game.getState().getTurnMods().add(new TurnMod(player1.getId(), player2.getId()));
-            game.getState().getTurnMods().add(new TurnMod(player2.getId(), player1.getId()));
+            game.getState().getTurnMods().add(new TurnMod(player1.getId()).withNewController(player2.getId()));
+            game.getState().getTurnMods().add(new TurnMod(player2.getId()).withNewController(player1.getId()));
             return true;
         }
         return false;

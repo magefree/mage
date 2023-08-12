@@ -71,7 +71,7 @@ class RiptideManglerEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        game.addEffect(new SetBasePowerToughnessSourceEffect(StaticValue.get(permanent.getPower().getValue()), null, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(StaticValue.get(permanent.getPower().getValue()), null, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
         return true;
     }
 }

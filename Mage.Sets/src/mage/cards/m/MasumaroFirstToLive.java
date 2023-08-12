@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 
@@ -25,7 +24,7 @@ public final class MasumaroFirstToLive extends CardImpl {
 
     public MasumaroFirstToLive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(0);
@@ -33,7 +32,7 @@ public final class MasumaroFirstToLive extends CardImpl {
 
         // Masumaro, First to Live's power and toughness are each equal to twice the number of cards in your hand.
         DynamicValue xValue= new MultipliedValue(CardsInControllerHandCount.instance, 2);
-        Effect effect = new SetBasePowerToughnessSourceEffect(xValue, Duration.EndOfGame);
+        Effect effect = new SetBasePowerToughnessSourceEffect(xValue);
         effect.setText("{this}'s power and toughness are each equal to twice the number of cards in your hand");
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
 

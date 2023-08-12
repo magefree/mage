@@ -8,7 +8,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
@@ -32,7 +31,8 @@ public final class CephalopodSentry extends CardImpl {
 
         // Cephalopod Sentry's power is equal to the number of artifacts you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerSourceEffect(ArtifactYouControlCount.instance, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerSourceEffect(ArtifactYouControlCount.instance)
+                .setText("{this}'s power is equal to the number of artifacts you control")
         ));
     }
 

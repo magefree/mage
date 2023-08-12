@@ -6,6 +6,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -13,8 +14,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
 
 /**
  * @author ilcartographer
@@ -78,7 +77,7 @@ class BreakingPointDestroyEffect extends OneShotEffect {
                 }
             }
             if (destroyCreatures) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(FILTER_PERMANENT_CREATURES, source.getControllerId(), source, game)) {
+                for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES, source.getControllerId(), source, game)) {
                     permanent.destroy(source, game, true);
                 }
             }

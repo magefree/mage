@@ -16,11 +16,9 @@ public final class WandOfTheElementsSecondToken extends TokenImpl {
         this.color.setRed(true);
         power = new MageInt(3);
         toughness = new MageInt(3);
-
-        setTokenType(2);
     }
 
-    public WandOfTheElementsSecondToken(final WandOfTheElementsSecondToken token) {
+    protected WandOfTheElementsSecondToken(final WandOfTheElementsSecondToken token) {
         super(token);
     }
 

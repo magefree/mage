@@ -22,7 +22,7 @@ public class AdditionalCostRuleTest extends CardTestPlayerBase {
 
         Card firewildBorderpost = playerA.getGraveyard().getCards(currentGame).iterator().next();
         boolean found = false;
-        for (String rule : firewildBorderpost.getRules()) {
+        for (String rule : firewildBorderpost.getRules(currentGame)) {
             if (rule.startsWith("As an additional cost to cast")) {
                 found = true;
                 break;

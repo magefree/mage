@@ -45,7 +45,7 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
             "W/U/P", "U/B/P", "B/R/P", "R/G/P", "G/W/P", "W/B/P", "U/R/P", "B/G/P", "R/W/P", "G/U/P",
             "2/W", "2/U", "2/B", "2/R", "2/G",
             "WP", "UP", "BP", "RP", "GP",
-            "X", "S", "T", "Q", "C", "E"};
+            "X", "S", "T", "Q", "C", "E", "P"};
 
     @Override
     public Iterator<DownloadJob> iterator() {

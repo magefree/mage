@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author Styxo
  */
 public class LoseHalfLifeTargetEffect extends OneShotEffect {
@@ -18,7 +17,7 @@ public class LoseHalfLifeTargetEffect extends OneShotEffect {
         staticText = "that player loses half their life, rounded up";
     }
 
-    public LoseHalfLifeTargetEffect(final LoseHalfLifeTargetEffect effect) {
+    protected LoseHalfLifeTargetEffect(final LoseHalfLifeTargetEffect effect) {
         super(effect);
     }
 

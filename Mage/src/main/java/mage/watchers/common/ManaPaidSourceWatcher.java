@@ -36,6 +36,7 @@ public class ManaPaidSourceWatcher extends Watcher {
         private int greenSnow = 0;
         private int colorlessSnow = 0;
         private int treasure = 0;
+        private int creature = 0;
 
         private ManaPaidTracker() {
             super();
@@ -50,6 +51,7 @@ public class ManaPaidSourceWatcher extends Watcher {
             this.greenSnow = tracker.greenSnow;
             this.colorlessSnow = tracker.colorlessSnow;
             this.treasure = tracker.treasure;
+            this.creature = tracker.creature;
         }
 
         @Override
@@ -59,10 +61,13 @@ public class ManaPaidSourceWatcher extends Watcher {
 
         private void increment(MageObject sourceObject, ManaType manaType, Game game) {
             total++;
-            if (sourceObject.hasSubtype(SubType.TREASURE, game)) {
+            if (sourceObject != null && sourceObject.hasSubtype(SubType.TREASURE, game)) {
                 treasure++;
             }
-            if (!sourceObject.isSnow()) {
+            if (sourceObject != null && sourceObject.isCreature(game)) {
+                creature++;
+            }
+            if (sourceObject != null && !sourceObject.isSnow(game)) {
                 return;
             }
             switch (manaType) {
@@ -142,6 +147,11 @@ public class ManaPaidSourceWatcher extends Watcher {
     public static int getTreasurePaid(UUID sourceId, Game game) {
         ManaPaidSourceWatcher watcher = game.getState().getWatcher(ManaPaidSourceWatcher.class);
         return watcher == null ? 0 : watcher.manaMap.getOrDefault(sourceId, emptyTracker).treasure;
+    }
+
+    public static int getCreaturePaid(UUID sourceId, Game game) {
+        ManaPaidSourceWatcher watcher = game.getState().getWatcher(ManaPaidSourceWatcher.class);
+        return watcher == null ? 0 : watcher.manaMap.getOrDefault(sourceId, emptyTracker).creature;
     }
 
     public static int getSnowPaid(UUID sourceId, Game game) {

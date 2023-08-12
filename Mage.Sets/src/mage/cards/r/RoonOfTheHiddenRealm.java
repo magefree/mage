@@ -15,8 +15,7 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -30,15 +29,9 @@ import java.util.UUID;
  */
 public final class RoonOfTheHiddenRealm extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     public RoonOfTheHiddenRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RHINO);
         this.subtype.add(SubType.SOLDIER);
 
@@ -51,7 +44,7 @@ public final class RoonOfTheHiddenRealm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // {2}, {tap}: Exile another target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RoonOfTheHiddenRealmEffect(), new GenericManaCost(2));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

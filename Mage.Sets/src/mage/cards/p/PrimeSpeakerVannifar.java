@@ -30,7 +30,7 @@ public final class PrimeSpeakerVannifar extends CardImpl {
     public PrimeSpeakerVannifar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.OOZE);
         this.subtype.add(SubType.WIZARD);

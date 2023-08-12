@@ -29,7 +29,7 @@ public final class MaeveInsidiousSinger extends CardImpl {
     public MaeveInsidiousSinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SIREN);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

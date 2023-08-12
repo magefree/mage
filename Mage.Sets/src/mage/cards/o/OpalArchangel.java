@@ -31,7 +31,7 @@ public final class OpalArchangel extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");
 
         // When an opponent casts a creature spell, if Opal Archangel is an enchantment, Opal Archangel becomes a 5/5 Angel creature with flying and vigilance.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalArchangelToken(), "", Duration.WhileOnBattlefield, true, false),
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalArchangelToken(), null, Duration.WhileOnBattlefield),
                 new FilterCreatureSpell(), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
                 "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 5/5 Angel creature with flying and vigilance."));

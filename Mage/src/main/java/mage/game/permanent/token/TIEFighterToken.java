@@ -6,14 +6,12 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author Styxo
  */
 public final class TIEFighterToken extends TokenImpl {
 
     public TIEFighterToken() {
         super("TIE Fighter", "1/1 black Starship artifact creature tokens with Spaceflight named TIE Fighter");
-        this.setOriginalExpansionSetCode("SWS");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         cardType.add(CardType.CREATURE);
@@ -23,7 +21,7 @@ public final class TIEFighterToken extends TokenImpl {
         subtype.add(SubType.STARSHIP);
     }
 
-    public TIEFighterToken(final TIEFighterToken token) {
+    protected TIEFighterToken(final TIEFighterToken token) {
         super(token);
     }
 

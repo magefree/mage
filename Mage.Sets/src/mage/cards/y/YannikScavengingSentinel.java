@@ -3,7 +3,7 @@ package mage.cards.y;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -14,9 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,7 +33,7 @@ public final class YannikScavengingSentinel extends CardImpl {
     public YannikScavengingSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HYENA);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
@@ -63,13 +61,6 @@ public final class YannikScavengingSentinel extends CardImpl {
 
 class YannikScavengingSentinelEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
-
     YannikScavengingSentinelEffect() {
         super(Outcome.Benefit);
         staticText = "exile another creature you control until {this} leaves the battlefield. " +
@@ -91,10 +82,10 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (player == null || sourcePermanent == null
-                || game.getBattlefield().count(filter, source.getControllerId(), source, game) < 1) {
+                || game.getBattlefield().count(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, source.getControllerId(), source, game) < 1) {
             return false;
         }
-        TargetPermanent target = new TargetPermanent(filter);
+        TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL);
         target.setNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
@@ -105,7 +96,7 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
         new ExileTargetEffect(CardUtil.getExileZoneId(
                 game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
         ), permanent.getIdName()).setTargetPointer(new FixedTarget(permanent, game)).apply(game, source);
-        game.addDelayedTriggeredAbility(new OnLeaveReturnExiledToBattlefieldAbility(), source);
+        game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
         if (game.getState().getZone(permanent.getId()) != Zone.BATTLEFIELD) {
             ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                     new DistributeCountersEffect(

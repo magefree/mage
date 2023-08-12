@@ -25,7 +25,7 @@ public final class UginsNexus extends CardImpl {
 
     public UginsNexus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // If a player would begin an extra turn, that player skips that turn instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UginsNexusSkipExtraTurnsEffect()));

@@ -30,7 +30,7 @@ public final class NissaSageAnimist extends CardImpl {
 
     public NissaSageAnimist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
         this.color.setGreen(true);
 

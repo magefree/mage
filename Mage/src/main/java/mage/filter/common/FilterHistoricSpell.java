@@ -13,7 +13,7 @@ public class FilterHistoricSpell extends FilterSpell {
         this.add(HistoricPredicate.instance);
     }
 
-    public FilterHistoricSpell(final FilterHistoricSpell filter) {
+    protected FilterHistoricSpell(final FilterHistoricSpell filter) {
         super(filter);
     }
 

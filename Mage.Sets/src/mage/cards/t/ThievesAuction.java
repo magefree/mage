@@ -85,7 +85,7 @@ class ThievesAuctionEffect extends OneShotEffect {
 
             // chooses one of the exiled cards
             TargetCard target = new TargetCardInExile(new FilterCard());
-            if (player.choose(Outcome.PutCardInPlay, exiledCards, target, game)) {
+            if (player.choose(Outcome.PutCardInPlay, exiledCards, target, source, game)) {
                 // and puts it onto the battlefield tapped under their control.
                 Card chosenCard = exiledCards.get(target.getFirstTarget(), game);
                 if (chosenCard != null) {

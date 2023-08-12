@@ -11,9 +11,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -76,16 +76,15 @@ class CauldronsGiftEffect extends OneShotEffect {
         }
         TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         target.setNotTarget(true);
-        if (!player.choose(outcome, player.getGraveyard(), target, game)) {
-            return false;
+        if (!player.choose(outcome, player.getGraveyard(), target, source, game)) {
+            return true;
         }
         Card card = game.getCard(target.getFirstTarget());
-        if (card == null || !player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(card.getId());
-        if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
+        if (card != null) {
+            Counters countersToAdd = new Counters();
+            countersToAdd.addCounter(CounterType.P1P1.createInstance());
+            game.setEnterWithCounters(card.getId(), countersToAdd);
+            player.moveCards(card, Zone.BATTLEFIELD, source, game);
         }
         return true;
     }

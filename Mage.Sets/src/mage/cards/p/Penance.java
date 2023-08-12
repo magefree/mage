@@ -47,7 +47,7 @@ class PenanceEffect extends PreventionEffectImpl {
 
     public PenanceEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
-        this.staticText = "The next time a black or red source of your choice would deal damage to you this turn, prevent that damage.";
+        this.staticText = "The next time a black or red source of your choice would deal damage this turn, prevent that damage.";
         this.target = new TargetSource();
     }
 
@@ -76,10 +76,8 @@ class PenanceEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used
-                && super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getControllerId())
-                    && event.getSourceId().equals(target.getFirstTarget())) {
+        if (!this.used && super.applies(event, source, game)) {
+            if (event.getSourceId().equals(target.getFirstTarget())) {
                 return (game.getObject(target.getFirstTarget()).getColor(game).contains(ObjectColor.BLACK)
                         || game.getObject(target.getFirstTarget()).getColor(game).contains(ObjectColor.RED));
             }

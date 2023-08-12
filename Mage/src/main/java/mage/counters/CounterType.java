@@ -23,12 +23,14 @@ public enum CounterType {
     ARROWHEAD("arrowhead"),
     AWAKENING("awakening"),
     BLAZE("blaze"),
+    BLESSING("blessing"),
     BLOOD("blood"),
     BLOODLINE("bloodline"),
     BOOK("book"),
     BOUNTY("bounty"),
     BRIBERY("bribery"),
     BRICK("brick"),
+    BURDEN("burden"),
     CAGE("cage"),
     CARRION("carrion"),
     CHARGE("charge"),
@@ -46,6 +48,7 @@ public enum CounterType {
     CURRENCY("currency"),
     DEATH("death"),
     DEATHTOUCH("deathtouch"),
+    DEFENSE("defense"),
     DELAY("delay"),
     DEPLETION("depletion"),
     DESCENT("descent"),
@@ -91,6 +94,7 @@ public enum CounterType {
     HIT("hit"),
     HOOFPRINT("hoofprint"),
     HONE("hone"),
+    HOPE("hope"),
     HOUR("hour", "an"),
     HOURGLASS("hourglass", "an"),
     HUNGER("hunger"),
@@ -98,6 +102,7 @@ public enum CounterType {
     INCARNATION("incarnation"),
     INDESTRUCTIBLE("indestructible"),
     INFECTION("infection"),
+    INFLUENCE("influence"),
     INGENUITY("ingenuity"),
     INTEL("intel"),
     INTERVENTION("intervention"),
@@ -158,7 +163,10 @@ public enum CounterType {
     PREY("prey"),
     PUPA("pupa"),
     REACH("reach"),
+    REJECTION("rejection"),
     REPAIR("repair"),
+    REPRIEVE("reprieve"),
+    RIBBON("ribbon"),
     RITUAL("ritual"),
     ROPE("rope"),
     RUST("rust"),
@@ -177,6 +185,7 @@ public enum CounterType {
     SPORE("spore"),
     STASH("stash"),
     STORAGE("storage"),
+    STORY("story"),
     STRIFE("strife"),
     STUDY("study"),
     STUN("stun"),
@@ -218,7 +227,7 @@ public enum CounterType {
     }
 
     CounterType(String name) {
-        this(name, "aeiou".contains("" + name.charAt(0)) ? "an" : "a");
+        this(name, "aeiou".contains( String.valueOf( name.charAt( 0 ) ) ) ? "an" : "a");
     }
 
     CounterType(String name, String article) {

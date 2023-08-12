@@ -47,7 +47,7 @@ public final class InniazTheGaleForce extends CardImpl {
     public InniazTheGaleForce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DJINN);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

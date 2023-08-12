@@ -11,7 +11,6 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -36,7 +35,7 @@ public final class KrosanVerge extends CardImpl {
 
         // {2}, {T}, Sacrifice Krosan Verge: Search your library for a Forest card and a Plains card and put them onto the battlefield tapped. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(
-                new KrosanVergeTarget(), true, Outcome.PutLandInPlay
+                new KrosanVergeTarget(), true
         ).setText("search your library for a Forest card and a Plains card, put them onto the battlefield tapped, then shuffle"), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

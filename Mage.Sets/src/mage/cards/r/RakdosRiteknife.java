@@ -27,7 +27,7 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 import mage.abilities.costs.mana.GenericManaCost;
 
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 
 /**
  * @author TheElk801
@@ -48,7 +48,7 @@ public final class RakdosRiteknife extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new SacrificeEffect(StaticFilters.FILTER_PERMANENT, xValue, "Target player")
                         .setText("target player sacrifices a permanent for each blood counter on {this}"),
-                new ManaCostsImpl<>("{R}{B}")
+                new ManaCostsImpl<>("{B}{R}")
         );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -130,7 +130,7 @@ class RakdosRiteknifeEffect extends ContinuousEffectImpl {
                         .setTargetPointer(new FixedTarget(permanent, game)),
                 new TapSourceCost()
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         return ability;
     }
 }

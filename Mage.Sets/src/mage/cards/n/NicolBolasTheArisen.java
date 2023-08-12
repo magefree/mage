@@ -40,7 +40,7 @@ public final class NicolBolasTheArisen extends CardImpl {
     public NicolBolasTheArisen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOLAS);
 
         this.color.setBlue(true);

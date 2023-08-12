@@ -34,7 +34,7 @@ public class SacrificeXTargetCost extends VariableCostImpl implements SacrificeC
         this.minValue = minValue;
     }
 
-    public SacrificeXTargetCost(final SacrificeXTargetCost cost) {
+    protected SacrificeXTargetCost(final SacrificeXTargetCost cost) {
         super(cost);
         this.filter = cost.filter;
         this.minValue = cost.minValue;

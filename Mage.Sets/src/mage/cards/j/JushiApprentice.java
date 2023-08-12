@@ -61,7 +61,7 @@ class TomoyaTheRevealer extends TokenImpl {
 
     TomoyaTheRevealer() {
         super("Tomoya the Revealer", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.HUMAN);

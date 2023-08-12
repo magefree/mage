@@ -13,8 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ElementalTokenWithHaste;
@@ -56,7 +54,7 @@ class LightningCoilsEffect extends OneShotEffect {
 
     LightningCoilsEffect() {
         super(Outcome.Benefit);
-        staticText = "if {this} has five or more charge counters on it, remove all of them from it and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.";
+        staticText = "if {this} has five or more charge counters on it, remove all of them from it and create that many 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.";
     }
 
     LightningCoilsEffect(final LightningCoilsEffect effect) {

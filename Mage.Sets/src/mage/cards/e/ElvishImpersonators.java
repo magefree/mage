@@ -22,7 +22,7 @@ public final class ElvishImpersonators extends CardImpl {
 
     public ElvishImpersonators(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.subtype.add(SubType.ELVES);
+        this.subtype.add(SubType.ELF);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
@@ -65,7 +65,7 @@ class ElvishImpersonatorsEffect extends OneShotEffect {
         List<Integer> results = controller.rollDice(outcome, source, game, 6, 2, 0);
         int firstRoll = results.get(0);
         int secondRoll = results.get(1);
-        game.addEffect(new SetBasePowerToughnessSourceEffect(firstRoll, secondRoll, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(firstRoll, secondRoll, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
         return true;
     }
 }

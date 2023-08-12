@@ -41,7 +41,7 @@ public final class ChandrasRegulator extends CardImpl {
     public ChandrasRegulator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Whenever you activate a loyalty ability of a Chandra planeswalker, you may pay {1}. If you do, copy that ability. You may choose new targets for the copy.
         this.addAbility(new ActivatePlaneswalkerLoyaltyAbilityTriggeredAbility(new ChandrasRegulatorEffect(), SubType.CHANDRA));

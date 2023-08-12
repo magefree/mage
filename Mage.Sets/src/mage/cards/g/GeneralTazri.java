@@ -35,7 +35,7 @@ public final class GeneralTazri extends CardImpl {
 
     public GeneralTazri(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ALLY);
         this.power = new MageInt(3);
@@ -43,7 +43,7 @@ public final class GeneralTazri extends CardImpl {
 
         // When General Tazri enters the battlefield, you may search your library for an Ally creature card, reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true, true), true));
+                new TargetCardInLibrary(filter), true), true));
         // {W}{U}{B}{R}{G}: Ally creatures you control get +X/+X until end of turn, where X is the number of colors among those creatures.
         DynamicValue xValue = new GeneralTazriColorCount();
         BoostControlledEffect effect = new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent(SubType.ALLY, "Ally creatures"), false);

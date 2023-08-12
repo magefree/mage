@@ -59,7 +59,7 @@ public final class CardsViewUtil {
             } else if (commandObject instanceof CommanderView) {
                 cardView = (CommanderView) commandObject;
             } else {
-                continue;
+                throw new IllegalStateException("ERROR, unsupported commander object type: " + commandObject.getClass().getSimpleName());
             }
             cards.put(commandObject.getId(), cardView);
         }

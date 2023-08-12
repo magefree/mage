@@ -24,8 +24,6 @@ import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-
 /**
  * @author jeffwadsworth
  */
@@ -50,7 +48,7 @@ public final class TradingPost extends CardImpl {
         Ability ability3 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(1));
         ability3.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD));
         ability3.addCost(new TapSourceCost());
-        ability3.addCost(new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability3.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability3);
 
         // {1}, {T}, Sacrifice an artifact: Draw a card.

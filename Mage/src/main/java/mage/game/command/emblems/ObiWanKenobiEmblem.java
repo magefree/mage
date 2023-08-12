@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -14,15 +13,13 @@ import mage.constants.Zone;
 import mage.game.command.Emblem;
 
 /**
- *
  * @author spjspj
  */
 public final class ObiWanKenobiEmblem extends Emblem {
 
     // Creatures you control get +1/+1 and have vigilance, first strike, and lifelink
     public ObiWanKenobiEmblem() {
-        this.setName("Emblem Obi-Wan Kenobi");
-        this.setExpansionSetCodeForImage("SWS");
+        super("Emblem Obi-Wan Kenobi");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new BoostControlledEffect(1, 1, Duration.EndOfGame));
         Effect effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfGame);
         effect.setText("and have vigilance");
@@ -34,5 +31,14 @@ public final class ObiWanKenobiEmblem extends Emblem {
         effect.setText("and lifelink.");
         ability.addEffect(effect);
         getAbilities().add(ability);
+    }
+
+    private ObiWanKenobiEmblem(final ObiWanKenobiEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public ObiWanKenobiEmblem copy() {
+        return new ObiWanKenobiEmblem(this);
     }
 }

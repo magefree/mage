@@ -41,7 +41,7 @@ public final class CelestialColonnade extends CardImpl {
                         .withSubType(SubType.ELEMENTAL)
                         .withAbility(FlyingAbility.getInstance())
                         .withAbility(VigilanceAbility.getInstance()),
-                "land", Duration.EndOfTurn), new ManaCostsImpl<>("{3}{W}{U}")));
+                CardType.LAND, Duration.EndOfTurn).withDurationRuleAtStart(true), new ManaCostsImpl<>("{3}{W}{U}")));
     }
 
     private CelestialColonnade(final CelestialColonnade card) {

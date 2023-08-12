@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPlayer;
@@ -78,7 +79,7 @@ public final class AAT1 extends CardImpl {
                     && event.getPlayerId().equals(game.getControllerId(sourceId))
                     && card.isCreature(game)
                     && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
-                    && event.getData().equals("repair")) {
+                    && event.getData().equals(CounterType.REPAIR.getName())) {
                 return true;
             }
             return false;

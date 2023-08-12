@@ -38,7 +38,7 @@ public final class HazduhrTheAbbot extends CardImpl {
 
     public HazduhrTheAbbot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);

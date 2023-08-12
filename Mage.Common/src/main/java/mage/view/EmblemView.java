@@ -15,25 +15,16 @@ public class EmblemView implements CommandObjectView, Serializable {
 
     protected UUID id;
     protected String name;
+    protected int imageNum;
     protected String expansionSetCode;
     protected List<String> rules;
     protected PlayableObjectStats playableStats = new PlayableObjectStats();
 
-    public EmblemView(Emblem emblem, Card sourceCard) {
-        this.id = emblem.getId();
-        this.name = "Emblem " + sourceCard.getName();
-        if (emblem.getExpansionSetCodeForImage() == null) {
-            this.expansionSetCode = sourceCard.getExpansionSetCode();
-        } else {
-            this.expansionSetCode = emblem.getExpansionSetCodeForImage();
-        }
-        this.rules = emblem.getAbilities().getRules(sourceCard.getName());
-    }
-
     public EmblemView(Emblem emblem) {
         this.id = emblem.getId();
         this.name = emblem.getName();
-        this.expansionSetCode = emblem.getExpansionSetCodeForImage();
+        this.imageNum = emblem.getImageNumber();
+        this.expansionSetCode = emblem.getExpansionSetCode();
         this.rules = emblem.getAbilities().getRules(emblem.getName());
     }
 
@@ -50,6 +41,11 @@ public class EmblemView implements CommandObjectView, Serializable {
     @Override
     public UUID getId() {
         return id;
+    }
+
+    @Override
+    public int getImageNumber() {
+        return imageNum;
     }
 
     @Override

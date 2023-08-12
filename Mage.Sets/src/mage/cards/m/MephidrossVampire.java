@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import mage.MageInt;
@@ -12,7 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -50,12 +49,6 @@ public final class MephidrossVampire extends CardImpl {
 
 class MephidrossVampireEffect extends ContinuousEffectImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
-
     MephidrossVampireEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "Each creature you control is a Vampire in addition to its other creature types and has \"Whenever this creature deals damage to a creature, put a +1/+1 counter on this creature.\"";
@@ -80,7 +73,7 @@ class MephidrossVampireEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURES, source.getControllerId(), game)) {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
                     creature.addAbility(new DealsDamageToACreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, false, false), source.getSourceId(), game);

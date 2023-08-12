@@ -41,7 +41,11 @@ public interface TriggeredAbility extends Ability {
 
     boolean checkUsedAlready(Game game);
 
-    TriggeredAbility setTriggersOnce(boolean triggersOnce);
+    TriggeredAbility setTriggersOnceEachTurn(boolean triggersOnce);
+
+    TriggeredAbility setDoOnlyOnceEachTurn(boolean doOnlyOnce);
+
+    TriggeredAbility setReplaceRuleText(boolean replaceRuleText);
 
     boolean checkInterveningIfClause(Game game);
 
@@ -57,13 +61,6 @@ public interface TriggeredAbility extends Ability {
     void setTriggerEvent(GameEvent event);
 
     GameEvent getTriggerEvent();
-
-    /**
-     * Don't override this. Use setTriggerPhrase instead and let the base class handle it.
-     * @return
-     */
-    @Deprecated
-    String getTriggerPhrase();
 
     TriggeredAbility setTriggerPhrase(String triggerPhrase);
 }

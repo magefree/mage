@@ -27,7 +27,7 @@ public final class AxelrodGunnarson extends CardImpl {
     public AxelrodGunnarson(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

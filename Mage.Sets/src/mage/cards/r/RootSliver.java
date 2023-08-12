@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -15,7 +14,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -26,12 +24,6 @@ import mage.game.stack.StackObject;
  * @author cbt33, BetaSteward (Autumn's Veil, Combust)
  */
 public final class RootSliver extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("Sliver spells");
-
-    static {
-        filter.add(SubType.SLIVER.getPredicate());
-    }
 
     public RootSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

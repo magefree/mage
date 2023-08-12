@@ -9,7 +9,6 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class PreventAllDamageToPlayersEffect extends PreventionEffectImpl {
@@ -19,7 +18,7 @@ public class PreventAllDamageToPlayersEffect extends PreventionEffectImpl {
         staticText = setText();
     }
 
-    public PreventAllDamageToPlayersEffect(final PreventAllDamageToPlayersEffect effect) {
+    protected PreventAllDamageToPlayersEffect(final PreventAllDamageToPlayersEffect effect) {
         super(effect);
     }
 

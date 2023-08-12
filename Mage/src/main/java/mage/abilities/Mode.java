@@ -27,7 +27,7 @@ public class Mode implements Serializable {
         }
     }
 
-    public Mode(final Mode mode) {
+    protected Mode(final Mode mode) {
         this.id = mode.id;
         this.targets = mode.targets.copy();
         this.effects = mode.effects.copy();

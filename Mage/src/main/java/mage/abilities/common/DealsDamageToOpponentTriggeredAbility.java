@@ -35,7 +35,7 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
         setTriggerPhrase("Whenever {this} deals " + (onlyCombat ? "combat " : "") + "damage to an opponent, ");
     }
 
-    public DealsDamageToOpponentTriggeredAbility(final DealsDamageToOpponentTriggeredAbility ability) {
+    protected DealsDamageToOpponentTriggeredAbility(final DealsDamageToOpponentTriggeredAbility ability) {
         super(ability);
         this.onlyCombat = ability.onlyCombat;
         this.setTargetPointer = ability.setTargetPointer;
@@ -61,7 +61,7 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
                     return false;
                 }
             }
-            if(setTargetPointer) {
+            if (setTargetPointer) {
                 for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                     effect.setValue("damage", event.getAmount());

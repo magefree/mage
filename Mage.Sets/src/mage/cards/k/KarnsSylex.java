@@ -28,7 +28,7 @@ import java.util.UUID;
 public class KarnsSylex extends CardImpl {
     public KarnsSylex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Karn’s Sylex
         this.addAbility(new EntersBattlefieldTappedAbility());

@@ -29,6 +29,6 @@ public class TherosPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Nighthowler", 98, Rarity.RARE, mage.cards.n.Nighthowler.class));
         cards.add(new SetCardInfo("Phalanx Leader", 26, Rarity.UNCOMMON, mage.cards.p.PhalanxLeader.class));
         cards.add(new SetCardInfo("Shipbreaker Kraken", "63*", Rarity.RARE, mage.cards.s.ShipbreakerKraken.class));
-        cards.add(new SetCardInfo("Sylvan Caryatid", "*180", Rarity.RARE, mage.cards.s.SylvanCaryatid.class));
+        cards.add(new SetCardInfo("Sylvan Caryatid", "180*", Rarity.RARE, mage.cards.s.SylvanCaryatid.class));
     }
 }

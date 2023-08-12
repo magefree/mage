@@ -32,7 +32,7 @@ public final class Bossk extends CardImpl {
 
     public Bossk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TRANDOSHAN, SubType.HUNTER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -44,7 +44,7 @@ public final class Bossk extends CardImpl {
         this.addAbility(new BosskTriggeredAbility());
 
         // <i>Bounty</i> &mdash; Whenever a creature an opponent controls with a bounty counter on it dies, you may search your library for a basic land card, reveal it, and put it in to your hand. If you do, shuffle your library.
-        this.addAbility(new BountyAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true), true));
+        this.addAbility(new BountyAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true), true));
     }
 
     private Bossk(final Bossk card) {

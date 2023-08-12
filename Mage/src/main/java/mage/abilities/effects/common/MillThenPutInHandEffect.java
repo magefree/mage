@@ -58,7 +58,7 @@ public class MillThenPutInHandEffect extends OneShotEffect {
             return applyOtherwiseEffect(game, source);
         }
         TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
-        player.choose(Outcome.DrawCard, cards, target, game);
+        player.choose(Outcome.DrawCard, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return applyOtherwiseEffect(game, source);
@@ -86,7 +86,7 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         sb.append(CardUtil.numberToText(amount));
         sb.append(" cards. You may put ");
         sb.append(filter.getMessage());
-        sb.append(" from among the cards milled this way into your hand");
+        sb.append(" from among the milled cards into your hand");
         if (otherwiseEffect != null) {
             sb.append(". If you don't, ");
             sb.append(otherwiseEffect.getText(mode));

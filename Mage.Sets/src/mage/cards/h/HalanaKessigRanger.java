@@ -28,7 +28,7 @@ public final class HalanaKessigRanger extends CardImpl {
     public HalanaKessigRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARCHER);
         this.subtype.add(SubType.RANGER);

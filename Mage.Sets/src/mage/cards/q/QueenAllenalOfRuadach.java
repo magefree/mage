@@ -30,7 +30,7 @@ public final class QueenAllenalOfRuadach extends CardImpl {
     public QueenAllenalOfRuadach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.NOBLE);
         this.power = new MageInt(0);
@@ -39,7 +39,7 @@ public final class QueenAllenalOfRuadach extends CardImpl {
         // Queen Allenal of Ruadach's power and toughness are each equal to the number of creatures you control.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBasePowerToughnessSourceEffect(count, Duration.EndOfGame)
+                new SetBasePowerToughnessSourceEffect(count)
         ));
 
         // If one or more creature tokens would be created under your control, those tokens plus a 1/1 white Soldier creature token are created instead.

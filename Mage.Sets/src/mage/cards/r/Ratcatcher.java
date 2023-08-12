@@ -39,7 +39,7 @@ public final class Ratcatcher extends CardImpl {
         
         // At the beginning of your upkeep, you may search your library for a Rat card, reveal it, and put it into your hand. If you do, shuffle your library.
         TargetCardInLibrary targetCard = new TargetCardInLibrary(1, 1, filter);
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(targetCard, true, true), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(targetCard, true), TargetController.YOU, true));
         
     }
 

@@ -38,7 +38,7 @@ public final class DjeruWithEyesOpen extends CardImpl {
     public DjeruWithEyesOpen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(4);
@@ -48,7 +48,7 @@ public final class DjeruWithEyesOpen extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When Djeru, With Eyes Open enters the battlefield, you may search your library for a planeswalker card, reveal it, put it into your hand, then shuffle your library.
-        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, filter), true, true);
+        Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, filter), true);
         effect.setText("you may search your library for a planeswalker card, reveal it, put it into your hand, then shuffle");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
 

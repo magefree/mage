@@ -13,10 +13,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.permanent.token.custom.CreatureToken;
 
@@ -32,13 +29,13 @@ public final class ChimericMass extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
 
         // {1}: Until end of turn, Chimeric Mass becomes a Construct artifact creature with "This creature's power and toughness are each equal to the number of charge counters on it."
-        // set to character defining to prevent setting P/T again to 0 becuase already set by CDA of the token 
+        CountersSourceCount count = new CountersSourceCount(CounterType.CHARGE);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
                 new CreatureToken(0, 0, "Construct artifact creature with \"This creature's power and toughness are each equal to the number of charge counters on it.\"")
                         .withType(CardType.ARTIFACT)
                         .withSubType(SubType.CONSTRUCT)
-                        .withAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(new CountersSourceCount(CounterType.CHARGE), Duration.WhileOnBattlefield))),
-                "", Duration.EndOfTurn, false, true), new GenericManaCost(1)));
+                        .withAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(count, count, Duration.WhileOnBattlefield, SubLayer.SetPT_7b))),
+                CardType.ARTIFACT, Duration.EndOfTurn).withDurationRuleAtStart(true), new GenericManaCost(1)));
     }
 
     private ChimericMass(final ChimericMass card) {

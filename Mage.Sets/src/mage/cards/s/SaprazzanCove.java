@@ -38,7 +38,7 @@ public final class SaprazzanCove extends CardImpl {
                 new TapSourceCost(),
                 "Add {U} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance(),
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE,
                 "Remove any number of storage counters from {this}"));
         this.addAbility(ability);
     }

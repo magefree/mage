@@ -42,7 +42,7 @@ public final class TattooWard extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(
                 new ProtectionAbility(StaticFilters.FILTER_PERMANENT_ENCHANTMENTS),
                 AttachmentType.AURA, Duration.WhileOnBattlefield
-        ).setDoesntRemoveItself(true));
+        ).setDoesntRemoveItself(true).setText(" and has protection from enchantments. This effect doesn't remove {this}"));
         this.addAbility(ability);
 
         // Sacrifice Tattoo Ward: Destroy target enchantment.

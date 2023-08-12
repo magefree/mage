@@ -29,7 +29,7 @@ public final class UneshCriosphinxSovereign extends CardImpl {
     public UneshCriosphinxSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

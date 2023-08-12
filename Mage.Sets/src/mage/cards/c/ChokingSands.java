@@ -69,7 +69,7 @@ class ChokingSandsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        if (permanent != null && !permanent.isBasic()) {
+        if (permanent != null && !permanent.isBasic(game)) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 player.damage(2, source.getSourceId(), source, game);

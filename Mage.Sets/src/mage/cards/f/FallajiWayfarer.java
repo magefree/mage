@@ -12,6 +12,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterMana;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 
 import java.util.UUID;
@@ -21,10 +23,12 @@ import java.util.UUID;
  */
 public final class FallajiWayfarer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("multicolored spells");
+    private static final FilterCard filter = new FilterCard("multicolored spells you cast");
 
     static {
         filter.add(MulticoloredPredicate.instance);
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
+        filter.add(Predicates.not(new AbilityPredicate(ConvokeAbility.class))); // So there are not redundant copies being added to each card
     }
 
     public FallajiWayfarer(UUID ownerId, CardSetInfo setInfo) {

@@ -105,8 +105,8 @@ public class TinyLeaders extends Constructed {
         boolean valid = true;
         errorsList.clear();
 
-        if (deck.getCards().size() != getDeckMinSize()) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + getDeckMinSize() + " cards: has " + deck.getCards().size() + " cards");
+        if (deck.getMaindeckCards().size() != getDeckMinSize()) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + getDeckMinSize() + " cards: has " + deck.getMaindeckCards().size() + " cards");
             valid = false;
         }
 
@@ -206,9 +206,9 @@ public class TinyLeaders extends Constructed {
         if (card instanceof SplitCard) {
             costs.add(((SplitCard) card).getLeftHalfCard().getManaValue());
             costs.add(((SplitCard) card).getRightHalfCard().getManaValue());
-        } else if (card instanceof ModalDoubleFacesCard) {
-            costs.add(((ModalDoubleFacesCard) card).getLeftHalfCard().getManaValue());
-            costs.add(((ModalDoubleFacesCard) card).getRightHalfCard().getManaValue());
+        } else if (card instanceof ModalDoubleFacedCard) {
+            costs.add(((ModalDoubleFacedCard) card).getLeftHalfCard().getManaValue());
+            costs.add(((ModalDoubleFacedCard) card).getRightHalfCard().getManaValue());
         } else {
             costs.add(card.getManaValue());
         }

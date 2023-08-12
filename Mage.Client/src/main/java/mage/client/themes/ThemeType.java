@@ -3,6 +3,7 @@ package mage.client.themes;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.icon.CardIconColor;
 import org.mage.card.arcane.SvgUtils;
+import org.mage.plugins.card.images.ImageCache;
 
 import java.awt.*;
 
@@ -347,5 +348,8 @@ public enum ThemeType {
         for (CardIconColor cardIconColor : CardIconColor.values()) {
             SvgUtils.prepareCss(this.getCardIconsCssFile(cardIconColor), this.getCardIconsCssSettings(cardIconColor), true);
         }
+
+        // reload card icons and other rendering things from cache - it can depend on current theme
+        ImageCache.clearCache();
     }
 }

@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -18,20 +16,13 @@ public final class BreedingPitThrullToken extends TokenImpl {
         color.setBlack(true);
         power = new MageInt(0);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("CMR", "DDC", "DVD");
     }
 
-    public BreedingPitThrullToken(final BreedingPitThrullToken token) {
+    protected BreedingPitThrullToken(final BreedingPitThrullToken token) {
         super(token);
     }
 
     public BreedingPitThrullToken copy() {
         return new BreedingPitThrullToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
     }
 }

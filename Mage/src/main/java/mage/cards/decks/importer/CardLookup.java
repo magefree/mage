@@ -1,11 +1,11 @@
 package mage.cards.decks.importer;
 
-import java.util.List;
-import java.util.Optional;
-
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 public class CardLookup {
 

@@ -80,8 +80,8 @@ class WordOfCommandEffect extends OneShotEffect {
             Player controller = null;
             Spell wordOfCommand = game.getSpell(source.getSourceId());
             if (wordOfCommand != null) {
-                if (wordOfCommand.getCommandedBy() != null) {
-                    controller = game.getPlayer(wordOfCommand.getCommandedBy());
+                if (wordOfCommand.getCommandedByPlayerId() != null) {
+                    controller = game.getPlayer(wordOfCommand.getCommandedByPlayerId());
                 } else {
                     controller = game.getPlayer(sourceController.getTurnControlledBy());
                 }
@@ -92,12 +92,12 @@ class WordOfCommandEffect extends OneShotEffect {
 
             // Look at target opponent's hand and choose a card from it
             TargetCard targetCard = new TargetCard(Zone.HAND, new FilterCard());
-            if (controller.choose(Outcome.Discard, targetPlayer.getHand(), targetCard, game)) {
+            if (controller.choose(Outcome.Discard, targetPlayer.getHand(), targetCard, source, game)) {
                 card = game.getCard(targetCard.getFirstTarget());
             }
 
             // You control that player until Word of Command finishes resolving
-            CardUtil.takeControlUnderPlayerStart(game, controller, targetPlayer, true);
+            CardUtil.takeControlUnderPlayerStart(game, source, controller, targetPlayer, true);
 
             // The player plays that card if able
             if (card != null) {
@@ -144,15 +144,15 @@ class WordOfCommandEffect extends OneShotEffect {
                 game.getContinuousEffects().removeInactiveEffects(game);
                 Spell spell = game.getSpell(card.getId());
                 if (spell != null) {
-                    spell.setCommandedBy(controller.getId()); // If the chosen card is cast as a spell, you control the player while that spell is resolving
+                    spell.setCommandedBy(controller.getId(), CardUtil.getSourceLogName(game, source)); // If the chosen card is cast as a spell, you control the player while that spell is resolving
                 }
             }
 
             wordOfCommand = game.getSpell(source.getSourceId());
             if (wordOfCommand != null) {
-                wordOfCommand.setCommandedBy(controller.getId()); // You control the player until Word of Command finishes resolving
+                wordOfCommand.setCommandedBy(controller.getId(), CardUtil.getSourceLogName(game, source)); // You control the player until Word of Command finishes resolving
             } else {
-                CardUtil.takeControlUnderPlayerEnd(game, controller, targetPlayer);
+                CardUtil.takeControlUnderPlayerEnd(game, source, controller, targetPlayer);
             }
             return true;
         }

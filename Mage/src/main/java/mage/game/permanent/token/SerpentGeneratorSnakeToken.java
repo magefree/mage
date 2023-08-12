@@ -9,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class SerpentGeneratorSnakeToken extends TokenImpl {
@@ -27,7 +26,7 @@ public final class SerpentGeneratorSnakeToken extends TokenImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(effect, false, true));
     }
 
-    public SerpentGeneratorSnakeToken(final SerpentGeneratorSnakeToken token) {
+    protected SerpentGeneratorSnakeToken(final SerpentGeneratorSnakeToken token) {
         super(token);
     }
 

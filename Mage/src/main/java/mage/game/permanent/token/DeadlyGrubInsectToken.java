@@ -1,15 +1,11 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.ShroudAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class DeadlyGrubInsectToken extends TokenImpl {
@@ -24,11 +20,9 @@ public final class DeadlyGrubInsectToken extends TokenImpl {
 
         // Shroud
         this.addAbility(ShroudAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("PLC", "TSR");
     }
 
-    public DeadlyGrubInsectToken(final DeadlyGrubInsectToken token) {
+    protected DeadlyGrubInsectToken(final DeadlyGrubInsectToken token) {
         super(token);
     }
 

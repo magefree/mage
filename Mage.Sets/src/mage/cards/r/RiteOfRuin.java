@@ -60,7 +60,7 @@ class RiteOfRuinEffect extends OneShotEffect {
             return false;
         }
 
-        Set<String> choices = new HashSet<>();
+        Set<String> choices = new LinkedHashSet<>();
         choices.add("Artifacts");
         choices.add("Creatures");
         choices.add("Lands");

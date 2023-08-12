@@ -57,7 +57,7 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
         }
     }
 
-    public ConditionalContinuousEffect(final ConditionalContinuousEffect effect) {
+    protected ConditionalContinuousEffect(final ConditionalContinuousEffect effect) {
         super(effect);
         this.effect = effect.effect.copy();
         if (effect.otherwiseEffect != null) {

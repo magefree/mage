@@ -42,7 +42,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
         this.exile = exile;
     }
 
-    public CounterUnlessPaysEffect(final CounterUnlessPaysEffect effect) {
+    protected CounterUnlessPaysEffect(final CounterUnlessPaysEffect effect) {
         super(effect);
         if (effect.cost != null) {
             this.cost = effect.cost.copy();

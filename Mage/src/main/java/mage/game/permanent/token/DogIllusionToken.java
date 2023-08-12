@@ -7,16 +7,12 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Arrays;
-
 /**
- *
  * @author weirddan455
  */
 public final class DogIllusionToken extends TokenImpl {
@@ -32,11 +28,9 @@ public final class DogIllusionToken extends TokenImpl {
 
         // This creature's power and toughness are each equal to twice the number of cards in your hand.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(
-                DogIllusionValue.instance, Duration.EndOfGame)
+                DogIllusionValue.instance)
                 .setText("this creature's power and toughness are each equal to twice the number of cards in your hand")
         ));
-
-        availableImageSetCodes = Arrays.asList("AFR");
     }
 
     private DogIllusionToken(final DogIllusionToken token) {

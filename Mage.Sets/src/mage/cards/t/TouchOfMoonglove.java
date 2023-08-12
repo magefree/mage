@@ -58,7 +58,7 @@ class TouchOfMoongloveAddTriggerEffect extends OneShotEffect {
 
     public TouchOfMoongloveAddTriggerEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "Whenever a creature dealt damage by that creature this turn dies, its controller loses 2 life";
+        this.staticText = "Whenever a creature dealt damage by that creature dies this turn, its controller loses 2 life";
     }
 
     public TouchOfMoongloveAddTriggerEffect(final TouchOfMoongloveAddTriggerEffect effect) {

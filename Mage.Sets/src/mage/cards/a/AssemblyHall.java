@@ -87,6 +87,6 @@ class AssemblyHallEffect extends OneShotEffect {
         String nameToSearch = CardUtil.getCardNameForSameNameSearch(cardToReveal);
         FilterCard filterCard = new FilterCard("card named " + nameToSearch);
         filterCard.add(new NamePredicate(nameToSearch));
-        return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true).apply(game, source);
+        return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true).apply(game, source);
     }
 }

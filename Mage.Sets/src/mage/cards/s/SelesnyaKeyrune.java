@@ -29,7 +29,7 @@ public final class SelesnyaKeyrune extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // {G}{W}: Selesnya Keyrune becomes a 3/3 green and white Wolf artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SelesnyaKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{G}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SelesnyaKeyruneToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{G}{W}")));
     }
 
     private SelesnyaKeyrune(final SelesnyaKeyrune card) {

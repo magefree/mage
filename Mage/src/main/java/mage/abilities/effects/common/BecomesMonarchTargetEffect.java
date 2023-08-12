@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class BecomesMonarchTargetEffect extends OneShotEffect {
@@ -17,7 +16,7 @@ public class BecomesMonarchTargetEffect extends OneShotEffect {
         staticText = "target player becomes the monarch";
     }
 
-    public BecomesMonarchTargetEffect(final BecomesMonarchTargetEffect effect) {
+    protected BecomesMonarchTargetEffect(final BecomesMonarchTargetEffect effect) {
         super(effect);
     }
 

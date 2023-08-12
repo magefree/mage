@@ -46,7 +46,7 @@ public class TargetCardInGraveyardBattlefieldOrStack extends TargetCard {
                 + " on the battlefield";
     }
 
-    public TargetCardInGraveyardBattlefieldOrStack(final TargetCardInGraveyardBattlefieldOrStack target) {
+    protected TargetCardInGraveyardBattlefieldOrStack(final TargetCardInGraveyardBattlefieldOrStack target) {
         super(target);
         this.filterPermanent = target.filterPermanent;
         this.filterSpell = target.filterSpell;

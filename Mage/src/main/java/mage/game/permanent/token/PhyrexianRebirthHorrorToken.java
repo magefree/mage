@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -23,20 +21,13 @@ public final class PhyrexianRebirthHorrorToken extends TokenImpl {
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);
-
-        availableImageSetCodes = Arrays.asList("C16", "C18", "C19", "MBS", "CMR", "BRC");
     }
 
-    public PhyrexianRebirthHorrorToken(final PhyrexianRebirthHorrorToken token) {
+    protected PhyrexianRebirthHorrorToken(final PhyrexianRebirthHorrorToken token) {
         super(token);
     }
 
     public PhyrexianRebirthHorrorToken copy() {
         return new PhyrexianRebirthHorrorToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
     }
 }

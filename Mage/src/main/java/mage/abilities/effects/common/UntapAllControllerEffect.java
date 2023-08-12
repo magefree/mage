@@ -11,7 +11,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author nantuko
  */
 
@@ -39,7 +38,7 @@ public class UntapAllControllerEffect extends OneShotEffect {
         this.includeSource = includeSource;
     }
 
-    public UntapAllControllerEffect(final UntapAllControllerEffect effect) {
+    protected UntapAllControllerEffect(final UntapAllControllerEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.includeSource = effect.includeSource;
@@ -50,7 +49,7 @@ public class UntapAllControllerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null) {
-            for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
                 if (includeSource || sourcePermanent == null || !sourcePermanent.getId().equals(permanent.getId())) {
                     permanent.untap(game);
                 }

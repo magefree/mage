@@ -26,7 +26,7 @@ public final class ShadowRift extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private ShadowRift(final ShadowRift card) {

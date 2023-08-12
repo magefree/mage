@@ -60,11 +60,11 @@ public final class JungleVillage extends CardImpl {
             List<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
             subtypePredicates.add(SubType.PLAINS.getPredicate());
             subtypePredicates.add(SubType.MOUNTAIN.getPredicate());
-            subtypePredicates.add(SubType.FAERIE.getPredicate());
+            subtypePredicates.add(SubType.FOREST.getPredicate());
             filter.add(Predicates.or(subtypePredicates));
             filter.add(SuperType.BASIC.getPredicate());
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            addEffect(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay));
+            addEffect(new SearchLibraryPutInPlayEffect(target, true));
         }
 
         @Override

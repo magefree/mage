@@ -2,7 +2,6 @@ package mage.cards.l;
 
 import mage.abilities.Mode;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.ExileSagaAndReturnTransformedEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -12,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
-import mage.target.Targets;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -35,13 +33,15 @@ public final class LifeOfToshiroUmezawa extends CardImpl {
         // • Target creature gets +2/+2 until end of turn.
         // • Target creature gets -1/-1 until end of turn.
         // • You gain 2 life.
-        Mode mode = new Mode(new BoostTargetEffect(-1, -1));
-        mode.addTarget(new TargetCreaturePermanent());
         sagaAbility.addChapterEffect(
-                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
-                new Effects(new BoostTargetEffect(2, 2)),
-                new Targets(new TargetCreaturePermanent()), false,
-                mode, new Mode(new GainLifeEffect(2))
+                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, false,
+                ability -> {
+                    ability.addEffect(new BoostTargetEffect(2, 2));
+                    ability.addTarget(new TargetCreaturePermanent());
+                    ability.addMode(new Mode(new BoostTargetEffect(-1, -1))
+                            .addTarget(new TargetCreaturePermanent()));
+                    ability.addMode(new Mode(new GainLifeEffect(2)));
+                }
         );
 
         // III — Exile this Saga, then return it to the battlefield transformed under your control.

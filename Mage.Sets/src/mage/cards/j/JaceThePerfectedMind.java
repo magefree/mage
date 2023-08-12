@@ -28,7 +28,7 @@ public final class JaceThePerfectedMind extends CardImpl {
     public JaceThePerfectedMind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U/P}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
         this.setStartingLoyalty(5);
 

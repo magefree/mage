@@ -29,7 +29,7 @@ public final class ConjurersBan extends CardImpl {
         this.getSpellAbility().addEffect(new ConjurersBanEffect());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private ConjurersBan(final ConjurersBan card) {
@@ -46,7 +46,7 @@ class ConjurersBanEffect extends ContinuousRuleModifyingEffectImpl {
 
     ConjurersBanEffect() {
         super(Duration.UntilYourNextTurn, Outcome.Detriment, true, false);
-        this.staticText = "Until your next turn spells with the chosen name can't be cast and lands with the chosen name can't be played";
+        this.staticText = "Until your next turn, spells with the chosen name can't be cast and lands with the chosen name can't be played";
     }
 
     private ConjurersBanEffect(final ConjurersBanEffect effect) {

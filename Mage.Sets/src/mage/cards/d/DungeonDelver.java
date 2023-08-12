@@ -22,7 +22,7 @@ public final class DungeonDelver extends CardImpl {
     public DungeonDelver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have "Room abilities of dungeons you own trigger an additional time."
@@ -66,7 +66,8 @@ class DungeonDelverEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         GameEvent gameEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
-        return gameEvent.getType() == GameEvent.EventType.ROOM_ENTERED
+        return gameEvent != null
+                && gameEvent.getType() == GameEvent.EventType.ROOM_ENTERED
                 && source.isControlledBy(gameEvent.getPlayerId());
     }
 

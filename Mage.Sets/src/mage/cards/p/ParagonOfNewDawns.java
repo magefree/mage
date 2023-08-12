@@ -31,7 +31,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class ParagonOfNewDawns extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Another white creature you control");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("another target white creature you control");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));

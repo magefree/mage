@@ -9,7 +9,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author North, Quercitron
  */
 public class FilterSpell extends FilterStackObject {
@@ -22,7 +21,7 @@ public class FilterSpell extends FilterStackObject {
         super(name);
     }
 
-    public FilterSpell(final FilterSpell filter) {
+    protected FilterSpell(final FilterSpell filter) {
         super(filter);
     }
 

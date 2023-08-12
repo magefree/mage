@@ -6,7 +6,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -60,7 +60,7 @@ class SwordOfBodyAndMindAbility extends TriggeredAbilityImpl {
 
     public SwordOfBodyAndMindAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()));
-        this.addEffect(new PutLibraryIntoGraveTargetEffect(10));
+        this.addEffect(new MillCardsTargetEffect(10));
     }
 
     public SwordOfBodyAndMindAbility(final SwordOfBodyAndMindAbility ability) {

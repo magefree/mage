@@ -31,16 +31,15 @@ public class BecomesChosenCreatureTypeTargetEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
         this.nonWall = nonWall;
         this.duration = duration;
-        if(nonWall) {
+        if (nonWall) {
             staticText = "choose a creature type other than Wall. Target creature becomes that type until end of turn";
-        }
-        else {
+        } else {
             staticText = "target creature becomes the creature type of your choice until end of turn";
         }
 
     }
 
-    public BecomesChosenCreatureTypeTargetEffect(final BecomesChosenCreatureTypeTargetEffect effect) {
+    protected BecomesChosenCreatureTypeTargetEffect(final BecomesChosenCreatureTypeTargetEffect effect) {
         super(effect);
         this.nonWall = effect.nonWall;
         this.duration = effect.duration;
@@ -54,11 +53,11 @@ public class BecomesChosenCreatureTypeTargetEffect extends OneShotEffect {
         if (player != null && card != null) {
             Choice typeChoice = new ChoiceCreatureType();
             String msg = "Choose a creature type";
-            if(nonWall) {
+            if (nonWall) {
                 msg += " other than Wall";
             }
             typeChoice.setMessage(msg);
-            if(nonWall) {
+            if (nonWall) {
                 typeChoice.getChoices().remove(SubType.WALL.getDescription());
             }
             while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {

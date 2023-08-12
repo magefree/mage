@@ -20,7 +20,7 @@ public final class IceTunnel extends CardImpl {
     public IceTunnel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ISLAND);
         this.subtype.add(SubType.SWAMP);
 

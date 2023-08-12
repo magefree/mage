@@ -59,7 +59,7 @@ class SanityGrindingEffect extends OneShotEffect {
             return false;
         }
         Cards revealed = new CardsImpl();
-        revealed.addAll(controller.getLibrary().getTopCards(game, 10));
+        revealed.addAllCards(controller.getLibrary().getTopCards(game, 10));
         controller.revealCards(sourceObject.getIdName(), revealed, game);
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
         if (targetOpponent != null) {

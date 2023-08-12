@@ -96,7 +96,7 @@ class NighteyesTheDesecratorToken extends TokenImpl {
     
     NighteyesTheDesecratorToken() {            
         super("Nighteyes the Desecrator", "");
-       addSuperType(SuperType.LEGENDARY);
+       this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.RAT);

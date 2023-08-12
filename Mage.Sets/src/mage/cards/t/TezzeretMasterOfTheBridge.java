@@ -8,6 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
+import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.cards.*;
 import mage.constants.*;
@@ -25,7 +26,7 @@ import java.util.UUID;
  */
 public final class TezzeretMasterOfTheBridge extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("creature and planeswalker spells");
+    private static final FilterCard filter = new FilterCard("creature and planeswalker spells you cast");
 
     static {
         filter.add(Predicates.or(
@@ -37,7 +38,7 @@ public final class TezzeretMasterOfTheBridge extends CardImpl {
     public TezzeretMasterOfTheBridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TEZZERET);
         this.setStartingLoyalty(5);
 
@@ -47,7 +48,7 @@ public final class TezzeretMasterOfTheBridge extends CardImpl {
         )));
 
         // +2: Tezzeret, Master of the Bridge deals X damage to each opponent, where X is the number of artifacts you control. You gain X life.
-        this.addAbility(new LoyaltyAbility(new TezzeretMasterOfTheBridgeEffect(), 2));
+        this.addAbility(new LoyaltyAbility(new TezzeretMasterOfTheBridgeEffect(), 2).addHint(ArtifactYouControlHint.instance));
 
         // -3: Return target artifact card from your graveyard to your hand.
         Ability ability = new LoyaltyAbility(new ReturnFromGraveyardToHandTargetEffect(), -3);

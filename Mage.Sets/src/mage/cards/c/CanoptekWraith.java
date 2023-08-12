@@ -56,7 +56,7 @@ public final class CanoptekWraith extends CardImpl {
                                 "pay {3} and sacrifice it"
                         )
                 ), false
-        ).withFlavorWord("Transdimensional Scout"));
+        ).setTriggerPhrase("When {this} deals combat damage to a player, ").withFlavorWord("Transdimensional Scout"));
     }
 
     private CanoptekWraith(final CanoptekWraith card) {

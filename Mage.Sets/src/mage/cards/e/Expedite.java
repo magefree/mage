@@ -25,7 +25,7 @@ public final class Expedite extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Expedite(final Expedite card) {

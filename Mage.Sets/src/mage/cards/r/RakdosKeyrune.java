@@ -30,7 +30,7 @@ public final class RakdosKeyrune extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // {B}{R}: Rakdos Keyrune becomes a 3/1 black and red Devil artifact creature with first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new RakdosKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{B}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new RakdosKeyruneToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{B}{R}")));
     }
 
     private RakdosKeyrune(final RakdosKeyrune card) {

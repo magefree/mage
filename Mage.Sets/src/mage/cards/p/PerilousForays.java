@@ -10,10 +10,9 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInLibrary;
@@ -41,9 +40,9 @@ public final class PerilousForays extends CardImpl {
 
         // {1}, Sacrifice a creature: Search your library for a land card with a basic land type and put it onto the battlefield tapped. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, Outcome.PutLandInPlay),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true),
                 new ManaCostsImpl<>("{1}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

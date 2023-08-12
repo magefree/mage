@@ -24,9 +24,9 @@ import java.util.*;
  */
 public final class ZonesHandler {
 
-    public static boolean cast(ZoneChangeInfo info, Game game, Ability source) {
+    public static boolean cast(ZoneChangeInfo info, Ability source, Game game) {
         if (maybeRemoveFromSourceZone(info, game, source)) {
-            placeInDestinationZone(info, game, 0);
+            placeInDestinationZone(info,0, source, game);
             // create a group zone change event if a card is moved to stack for casting (it's always only one card, but some effects check for group events (one or more xxx))
             Set<Card> cards = new HashSet<>();
             Set<PermanentToken> tokens = new HashSet<>();
@@ -54,10 +54,10 @@ public final class ZonesHandler {
     public static boolean moveCard(ZoneChangeInfo info, Game game, Ability source) {
         List<ZoneChangeInfo> list = new ArrayList<>();
         list.add(info);
-        return !moveCards(list, game, source).isEmpty();
+        return !moveCards(list, source, game).isEmpty();
     }
 
-    public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Game game, Ability source) {
+    public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Ability source, Game game) {
         // Handle Unmelded Meld Cards
         for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext(); ) {
             ZoneChangeInfo info = itr.next();
@@ -83,21 +83,21 @@ public final class ZonesHandler {
             ZoneChangeInfo info = itr.next();
             if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
                 Card card = game.getCard(info.event.getTargetId());
-                if (card instanceof ModalDoubleFacesCard || card instanceof ModalDoubleFacesCardHalf) {
+                if (card instanceof ModalDoubleFacedCard || card instanceof ModalDoubleFacedCardHalf) {
                     boolean forceToMainSide = false;
 
                     // if effect put half mdf card to battlefield then it must be the main side only (example: return targeted half card to battle)
-                    if (card instanceof ModalDoubleFacesCardHalf && !source.getAbilityType().isPlayCardAbility()) {
+                    if (card instanceof ModalDoubleFacedCardHalf && !source.getAbilityType().isPlayCardAbility()) {
                         forceToMainSide = true;
                     }
 
                     // if effect put mdf card to battlefield then it must be main side only
-                    if (card instanceof ModalDoubleFacesCard) {
+                    if (card instanceof ModalDoubleFacedCard) {
                         forceToMainSide = true;
                     }
 
                     if (forceToMainSide) {
-                        info.event.setTargetId(((ModalDoubleFacesCard) card.getMainCard()).getLeftHalfCard().getId());
+                        info.event.setTargetId(((ModalDoubleFacedCard) card.getMainCard()).getLeftHalfCard().getId());
                     }
                 }
             }
@@ -110,7 +110,7 @@ public final class ZonesHandler {
                 // All permanents go to battlefield at the same time (=create order)
                 createOrder = game.getState().getNextPermanentOrderNumber();
             }
-            placeInDestinationZone(zoneChangeInfo, game, createOrder);
+            placeInDestinationZone(zoneChangeInfo, createOrder, source, game);
             if (game.getPhase() != null) { // moving cards to zones before game started does not need events
                 game.addSimultaneousEvent(zoneChangeInfo.event);
             }
@@ -118,14 +118,14 @@ public final class ZonesHandler {
         return zoneChangeInfos;
     }
 
-    private static void placeInDestinationZone(ZoneChangeInfo info, Game game, int createOrder) {
+    private static void placeInDestinationZone(ZoneChangeInfo info, int createOrder, Ability source, Game game) {
         // Handle unmelded cards
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             Zone toZone = null;
             for (ZoneChangeInfo subInfo : unmelded.subInfo) {
                 toZone = subInfo.event.getToZone();
-                placeInDestinationZone(subInfo, game, createOrder);
+                placeInDestinationZone(subInfo, createOrder, source, game);
             }
             // We arbitrarily prefer the bottom half card. This should never be relevant.
             if (toZone != null) {
@@ -148,10 +148,10 @@ public final class ZonesHandler {
                 // meld/group cards must be independent (use can choose order)
                 cardsToMove = ((MeldCard) targetCard).getHalves();
                 cardsToUpdate.get(toZone).addAll(cardsToMove);
-            } else if (targetCard instanceof ModalDoubleFacesCard
-                    || targetCard instanceof ModalDoubleFacesCardHalf) {
+            } else if (targetCard instanceof ModalDoubleFacedCard
+                    || targetCard instanceof ModalDoubleFacedCardHalf) {
                 // mdf cards must be moved as single object, but each half must be updated separately
-                ModalDoubleFacesCard mdfCard = (ModalDoubleFacesCard) targetCard.getMainCard();
+                ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) targetCard.getMainCard();
                 cardsToMove = new CardsImpl(mdfCard);
                 cardsToUpdate.get(toZone).add(mdfCard);
                 // example: cast left side
@@ -199,7 +199,8 @@ public final class ZonesHandler {
                     break;
                 case GRAVEYARD:
                     for (Card card : chooseOrder(
-                            "order to put in graveyard (last chosen will be on top)", cardsToMove, owner, game)) {
+                            "order to put in graveyard (last chosen will be on top)",
+                            cardsToMove, owner, source, game)) {
                         game.getPlayer(card.getOwnerId()).getGraveyard().add(card);
                     }
                     break;
@@ -207,13 +208,15 @@ public final class ZonesHandler {
                     if (info instanceof ZoneChangeInfo.Library && ((ZoneChangeInfo.Library) info).top) {
                         // on top
                         for (Card card : chooseOrder(
-                                "order to put on top of library (last chosen will be topmost)", cardsToMove, owner, game)) {
+                                "order to put on top of library (last chosen will be topmost)",
+                                cardsToMove, owner, source, game)) {
                             game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
                         }
                     } else {
                         // on bottom
                         for (Card card : chooseOrder(
-                                "order to put on bottom of library (last chosen will be bottommost)", cardsToMove, owner, game)) {
+                                "order to put on bottom of library (last chosen will be bottommost)",
+                                cardsToMove, owner, source, game)) {
                             game.getPlayer(card.getOwnerId()).getLibrary().putOnBottom(card, game);
                         }
                     }
@@ -346,7 +349,7 @@ public final class ZonesHandler {
                 Permanent permanent;
                 if (card instanceof MeldCard) {
                     permanent = new PermanentMeld(card, event.getPlayerId(), game);
-                } else if (card instanceof ModalDoubleFacesCard) {
+                } else if (card instanceof ModalDoubleFacedCard) {
                     // main mdf card must be processed before that call (e.g. only halfes can be moved to battlefield)
                     throw new IllegalStateException("Unexpected trying of move mdf card to battlefield instead half");
                 } else if (card instanceof Permanent) {
@@ -404,7 +407,7 @@ public final class ZonesHandler {
         return success;
     }
 
-    public static List<Card> chooseOrder(String message, Cards cards, Player player, Game game) {
+    public static List<Card> chooseOrder(String message, Cards cards, Player player, Ability source, Game game) {
         List<Card> order = new ArrayList<>();
         if (cards.isEmpty()) {
             return order;
@@ -412,7 +415,7 @@ public final class ZonesHandler {
         TargetCard target = new TargetCard(Zone.ALL, new FilterCard(message));
         target.setRequired(true);
         while (player.canRespond() && cards.size() > 1) {
-            player.choose(Outcome.Neutral, cards, target, game);
+            player.choose(Outcome.Neutral, cards, target, source, game);
             UUID targetObjectId = target.getFirstTarget();
             order.add(cards.get(targetObjectId, game));
             cards.remove(targetObjectId);

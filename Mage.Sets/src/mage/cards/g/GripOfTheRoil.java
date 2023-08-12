@@ -26,7 +26,7 @@ public final class GripOfTheRoil extends CardImpl {
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
 
         // Surge {1}{U}
         addAbility(new SurgeAbility(this, "{1}{U}"));

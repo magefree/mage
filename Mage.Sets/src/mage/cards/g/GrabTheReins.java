@@ -69,7 +69,7 @@ class GrabTheReinsEffect extends OneShotEffect {
 
     public GrabTheReinsEffect() {
         super(Outcome.Damage);
-        staticText = "sacrifice a creature. {this} deals damage equal to the sacrificed creature's power to any target";
+        staticText = "sacrifice a creature. {this} deals damage equal to that creature's power to any target";
     }
 
     public GrabTheReinsEffect(final GrabTheReinsEffect effect) {

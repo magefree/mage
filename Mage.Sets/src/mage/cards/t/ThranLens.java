@@ -37,8 +37,6 @@ public final class ThranLens extends CardImpl {
 }
  class ThranLensEffect extends ContinuousEffectImpl {
 
-    private static ObjectColor colorless = new ObjectColor();
-    
     public ThranLensEffect()
     {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
@@ -47,7 +45,7 @@ public final class ThranLens extends CardImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent perm: game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            perm.getColor(game).setColor(colorless);
+            perm.getColor(game).setColor(ObjectColor.COLORLESS);
         }
         return true;
     }

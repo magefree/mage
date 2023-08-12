@@ -22,7 +22,7 @@ public final class Mindslaver extends CardImpl {
 
     public Mindslaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {4}, {T}, Sacrifice Mindslaver: You control target player during that player's next turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ControlTargetPlayerNextTurnEffect(), new GenericManaCost(4));

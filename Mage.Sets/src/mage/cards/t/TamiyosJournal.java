@@ -30,7 +30,7 @@ public final class TamiyosJournal extends CardImpl {
 
     public TamiyosJournal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your upkeep, investigate (Create a colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\").
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new InvestigateEffect(), TargetController.YOU, false));

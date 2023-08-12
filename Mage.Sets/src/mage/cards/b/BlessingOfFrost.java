@@ -30,7 +30,7 @@ public final class BlessingOfFrost extends CardImpl {
     public BlessingOfFrost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Distribute X +1/+1 counters among any number of creatures you control, where X is the amount of {S} spent to cast this spell. Then draw a card for each creature you control with power 4 or greater.
         this.getSpellAbility().addEffect(new BlessingOfFrostEffect());

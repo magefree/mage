@@ -478,7 +478,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
     }
 
     @Test
-    public void test_ModalDoubleFacesCard_1() {
+    public void test_ModalDoubleFacedCard_1() {
         // Player order: A -> D -> C -> B
 
         // use case:
@@ -533,7 +533,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
     }
 
     @Test
-    public void test_ModalDoubleFacesCard_CanReturnAfterKillAndCommanderControlCondition() {
+    public void test_ModalDoubleFacedCard_CanReturnAfterKillAndCommanderControlCondition() {
         // Player order: A -> D -> C -> B
 
         // Cosima, God of the Voyage, {2}{U}, creature, 2/4

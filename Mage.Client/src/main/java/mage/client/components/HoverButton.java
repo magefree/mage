@@ -57,6 +57,7 @@ public class HoverButton extends JPanel implements MouseListener {
     private Command observer = null;
     private Command onHover = null;
     private Color textColor = Color.white;
+    private Color topTextColor = null;
     private final Rectangle centerTextArea = new Rectangle(5, 18, 75, 40);
     private Color centerTextColor = new Color(200, 210, 0, 200);
     private Color origCenterTextColor = new Color(200, 210, 0, 200);
@@ -152,7 +153,7 @@ public class HoverButton extends JPanel implements MouseListener {
             topTextOffsetX = calculateOffsetForTop(g2d, topText);
             g2d.setColor(textBGColor);
             g2d.drawString(topText, topTextOffsetX + 1, 14);
-            g2d.setColor(textColor);
+            g2d.setColor(topTextColor != null ? topTextColor : textColor);
             g2d.drawString(topText, topTextOffsetX, 13);
         }
         if (topTextImage != null) {
@@ -233,6 +234,15 @@ public class HoverButton extends JPanel implements MouseListener {
 
     public void setTextColor(Color textColor) {
         this.textColor = textColor;
+    }
+
+    /**
+     * Overrides textColor for the upper text if non-null.
+     * If null, return back to textColor.
+     * @param textColor
+     */
+    public void setTopTextColor(Color textColor) {
+        this.topTextColor = textColor;
     }
 
     public void setOverlayImage(Image image) {

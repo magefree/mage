@@ -35,7 +35,7 @@ public final class KathrilAspectWarper extends CardImpl {
     public KathrilAspectWarper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.INSECT);
         this.power = new MageInt(3);

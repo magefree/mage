@@ -28,7 +28,7 @@ public final class KorlessaScaleSinger extends CardImpl {
     public KorlessaScaleSinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.BARD);
         this.power = new MageInt(1);

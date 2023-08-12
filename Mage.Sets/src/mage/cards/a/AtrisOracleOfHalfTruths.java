@@ -27,7 +27,7 @@ public final class AtrisOracleOfHalfTruths extends CardImpl {
     public AtrisOracleOfHalfTruths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(3);
@@ -83,7 +83,7 @@ class AtrisOracleOfHalfTruthsEffect extends OneShotEffect {
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 3));
 
         TargetCard target = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
-        targetOpponent.choose(outcome, cards, target, game);
+        targetOpponent.choose(outcome, cards, target, source, game);
         Cards faceDownPile = new CardsImpl(target.getTargets());
         cards.removeAll(target.getTargets());
         controller.revealCards(sourceObject.getIdName() + " - cards in face-up pile", cards, game);

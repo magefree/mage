@@ -34,7 +34,7 @@ public final class AngrathMinotaurPirate extends CardImpl {
     public AngrathMinotaurPirate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGRATH);
         this.setStartingLoyalty(5);
 

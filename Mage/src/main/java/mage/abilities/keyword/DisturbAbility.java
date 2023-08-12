@@ -34,10 +34,11 @@ public class DisturbAbility extends SpellAbility {
         this.newId();
 
         // getSecondFaceSpellAbility() already verified that second face exists
-        this.setCardName(card.getSecondCardFace().getName() + " with Disturb");
+        this.setCardName(card.getSecondCardFace().getName());
+
         this.zone = Zone.GRAVEYARD;
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
-        this.spellAbilityCastMode = SpellAbilityCastMode.DISTURB;
+        this.setSpellAbilityCastMode(SpellAbilityCastMode.DISTURB);
 
         this.manaCost = manaCost;
         this.getManaCosts().clear();

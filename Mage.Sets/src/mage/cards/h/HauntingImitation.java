@@ -12,6 +12,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -87,7 +88,7 @@ class HauntingImitationEffect extends OneShotEffect {
         );
         effect.setAdditionalSubType(SubType.SPIRIT);
         for (Card card : cards.getCards(game)) {
-            effect.setSavedPermanent(new PermanentCard(card, source.getControllerId(), game));
+            effect.setSavedPermanent(new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game));
             effect.apply(game, source);
         }
         return true;

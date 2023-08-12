@@ -7,8 +7,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -25,6 +23,8 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
     protected boolean removeSubtypes = false;
     protected boolean loseOtherCardTypes;
 
+    protected boolean durationRuleAtStart = false; // put duration rule to the start of the rules instead end
+
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration) {
         this(token, loseAllAbilities, stillALand, duration, false);
     }
@@ -39,16 +39,16 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
 
     /**
      * @param token
-     * @param loseAllAbilities loses all creature subtypes, colors and abilities
-     * @param stillALand add rule text, "it's still a land"
-     * @param loseName permanent loses name and gets it from token
-     * @param keepAbilities lose subtypes/colors, but keep abilities (example:
-     * Scale Up)
+     * @param loseAllAbilities   loses all creature subtypes, colors and abilities
+     * @param stillALand         add rule text, "it's still a land"
+     * @param loseName           permanent loses name and gets it from token
+     * @param keepAbilities      lose subtypes/colors, but keep abilities (example:
+     *                           Scale Up)
      * @param duration
      * @param loseOtherCardTypes permanent loses other (original) card types, exclusively obtains card types of token
      */
     public BecomesCreatureTargetEffect(Token token, boolean loseAllAbilities, boolean stillALand, Duration duration, boolean loseName,
-            boolean keepAbilities, boolean loseOtherCardTypes) {
+                                       boolean keepAbilities, boolean loseOtherCardTypes) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.loseAllAbilities = loseAllAbilities;
@@ -59,7 +59,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
-    public BecomesCreatureTargetEffect(final BecomesCreatureTargetEffect effect) {
+    protected BecomesCreatureTargetEffect(final BecomesCreatureTargetEffect effect) {
         super(effect);
         this.token = effect.token.copy();
         this.loseAllAbilities = effect.loseAllAbilities;
@@ -68,6 +68,8 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
         this.keepAbilities = effect.keepAbilities;
         this.loseOtherCardTypes = effect.loseOtherCardTypes;
         this.dependencyTypes.add(DependencyType.BecomeCreature);
+        this.durationRuleAtStart = effect.durationRuleAtStart;
+        this.removeSubtypes = effect.removeSubtypes;
     }
 
     @Override
@@ -105,10 +107,8 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     }
                     permanent.copySubTypesFrom(game, token);
 
-                    for (SuperType t : token.getSuperType()) {
-                        if (!permanent.getSuperType().contains(t)) {
-                            permanent.addSuperType(t);
-                        }
+                    for (SuperType t : token.getSuperType(game)) {
+                        permanent.addSuperType(game, t);
                     }
 
                     break;
@@ -172,40 +172,35 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                 || layer == Layer.TextChangingEffects_3;
     }
 
+    public BecomesCreatureTargetEffect withDurationRuleAtStart(boolean durationRuleAtStart) {
+        this.durationRuleAtStart = durationRuleAtStart;
+        return this;
+    }
+
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("up to ");
-            }
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName());
-            if (loseAllAbilities) {
-                sb.append(" lose all their abilities and ");
-            }
-            sb.append(" each become ");
-        } else {
-            sb.append("target ").append(target.getTargetName());
-            if (loseAllAbilities && !keepAbilities) {
-                sb.append(" loses all abilities and ");
-            }
-            sb.append(" becomes a ");
+        if (durationRuleAtStart && !duration.toString().isEmpty()) {
+            sb.append(duration.toString());
+            sb.append(", ");
         }
+        sb.append(getTargetPointer().describeTargets(mode.getTargets(), "that creature"));
+        sb.append(getTargetPointer().isPlural(mode.getTargets()) ? " each" : "");
+        if (loseAllAbilities && !keepAbilities) {
+            sb.append(getTargetPointer().isPlural(mode.getTargets()) ?
+                    " lose all their abilities and" :
+                    " loses all abilities and");
+        }
+        sb.append(getTargetPointer().isPlural(mode.getTargets()) ? " become " : " becomes a ");
         sb.append(token.getDescription());
-        sb.append(' ').append(duration.toString());
+        if (!durationRuleAtStart && !duration.toString().isEmpty()) {
+            sb.append(' ').append(duration.toString());
+        }
         if (addStillALandText) {
-            if (!sb.toString().endsWith("\" ")) {
-                sb.append(". ");
-            }
-            if (target.getMaxNumberOfTargets() > 1) {
-                sb.append("They're still lands");
-            } else {
-                sb.append("It's still a land");
-            }
+            sb.append(getTargetPointer().isPlural(mode.getTargets()) ? ". They're still lands" : ". It's still a land");
         }
         return sb.toString().replace(" .", ".");
     }

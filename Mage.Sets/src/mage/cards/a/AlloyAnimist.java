@@ -43,7 +43,7 @@ public final class AlloyAnimist extends CardImpl {
                 new CreatureToken(4, 4, "4/4 artifact creature")
                         .withType(CardType.ARTIFACT),
                 false, false, Duration.EndOfTurn
-        ), new ManaCostsImpl<>("{2}{G}"));
+        ).withDurationRuleAtStart(true), new ManaCostsImpl<>("{2}{G}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

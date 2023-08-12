@@ -37,7 +37,7 @@ public class ReleaseToTheWindTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_Exile_ModalDoubleFacesCard() {
+    public void test_Exile_ModalDoubleFacedCard() {
         // Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost.
         addCard(Zone.HAND, playerA, "Release to the Wind"); // {2}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);

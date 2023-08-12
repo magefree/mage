@@ -1,7 +1,6 @@
 package mage.cards.e;
 
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,8 +19,7 @@ public final class Ephemerate extends CardImpl {
 
         // Exile target creature you control, then return it to the battlefield under its owner's control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
+        this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, false));
 
         // Rebound
         this.addAbility(new ReboundAbility());

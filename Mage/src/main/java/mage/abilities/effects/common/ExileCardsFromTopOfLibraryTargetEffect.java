@@ -11,7 +11,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
@@ -31,7 +30,7 @@ public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
                 + (amount == 1 ? "card" : " cards") + " of their library";
     }
 
-    public ExileCardsFromTopOfLibraryTargetEffect(final ExileCardsFromTopOfLibraryTargetEffect effect) {
+    protected ExileCardsFromTopOfLibraryTargetEffect(final ExileCardsFromTopOfLibraryTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
 
@@ -47,7 +46,7 @@ public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             Cards cards = new CardsImpl();
-            cards.addAll(targetPlayer.getLibrary().getTopCards(game, amount));
+            cards.addAllCards(targetPlayer.getLibrary().getTopCards(game, amount));
             return targetPlayer.moveCards(cards, Zone.EXILED, source, game);
         }
         return false;

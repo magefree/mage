@@ -32,7 +32,7 @@ public final class SeshiroTheAnointed extends CardImpl {
 
     public SeshiroTheAnointed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.MONK);
 

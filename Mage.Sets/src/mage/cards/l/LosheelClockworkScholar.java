@@ -33,7 +33,7 @@ public final class LosheelClockworkScholar extends CardImpl {
     public LosheelClockworkScholar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEPHANT);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
@@ -47,7 +47,7 @@ public final class LosheelClockworkScholar extends CardImpl {
         // Whenever one or more artifact creatures enter the battlefield under your control, draw a card. This ability triggers only once each turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), filter2
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
     }
 
     private LosheelClockworkScholar(final LosheelClockworkScholar card) {

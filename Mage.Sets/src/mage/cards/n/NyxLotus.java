@@ -28,7 +28,7 @@ public final class NyxLotus extends CardImpl {
     public NyxLotus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Nyx Lotus enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

@@ -30,7 +30,7 @@ public final class PrimeSpeakerZegana extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{U}{U}");
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

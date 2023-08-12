@@ -4,7 +4,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -35,7 +35,7 @@ public final class BoneshardSlasher extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7),
             "As long as seven or more cards are in your graveyard, {this} gets +2/+2"));
-        Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect())),
+        Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect())),
             new CardsInControllerGraveyardCondition(7), "and has \"When {this} becomes the target of a spell or ability, sacrifice it.\"");
         ability.addEffect(effect);
         ability.setAbilityWord(AbilityWord.THRESHOLD);

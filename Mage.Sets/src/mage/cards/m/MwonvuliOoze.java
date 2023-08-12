@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -34,7 +33,7 @@ public final class MwonvuliOoze extends CardImpl {
         // Cumulative upkeep {2}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")));
         // Mwonvuli Ooze's power and toughness are each equal to 1 plus twice the number of age counters on it.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new MwonvuliOozePTValue(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new MwonvuliOozePTValue())));
     }
 
     private MwonvuliOoze(final MwonvuliOoze card) {

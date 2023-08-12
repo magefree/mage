@@ -98,6 +98,7 @@ public class TableView implements Serializable {
             if (table.getMatch().getGames().isEmpty()) {
                 addInfo.append("Wins:").append(table.getMatch().getWinsNeeded());
                 addInfo.append(" Time: ").append(table.getMatch().getOptions().getMatchTimeLimit().toString());
+                addInfo.append(" Buffer: ").append(table.getMatch().getOptions().getMatchBufferTime().toString());
                 if (table.getMatch().getFreeMulligans() > 0) {
                     addInfo.append(" FM: ").append(table.getMatch().getFreeMulligans());
                 }
@@ -150,6 +151,7 @@ public class TableView implements Serializable {
                         stateText.append(" (").append(table.getTournament().getPlayers().size()).append('/').append(table.getNumberOfSeats()).append(')');
                     }
                     infoText.append(" Time: ").append(table.getTournament().getOptions().getMatchOptions().getMatchTimeLimit().toString());
+                    infoText.append(" Buffer: ").append(table.getTournament().getOptions().getMatchOptions().getMatchBufferTime().toString());
                     if (table.getTournament().getOptions().getMatchOptions().getFreeMulligans() > 0) {
                         infoText.append(" FM: ").append(table.getTournament().getOptions().getMatchOptions().getFreeMulligans());
                     }

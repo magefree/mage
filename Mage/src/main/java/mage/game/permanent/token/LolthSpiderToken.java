@@ -6,8 +6,6 @@ import mage.abilities.keyword.ReachAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -26,11 +24,9 @@ public final class LolthSpiderToken extends TokenImpl {
 
         // Reach
         this.addAbility(ReachAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("AFR");
     }
 
-    public LolthSpiderToken(final LolthSpiderToken token) {
+    protected LolthSpiderToken(final LolthSpiderToken token) {
         super(token);
     }
 

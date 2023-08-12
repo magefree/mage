@@ -15,8 +15,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -27,12 +26,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Styxo
  */
 public final class ScroungingBandar extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public ScroungingBandar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -47,7 +40,7 @@ public final class ScroungingBandar extends CardImpl {
 
         // At the beginning of you upkeep, you may move any number of +1/+1 counters from Scrounging Bandar onto another target creature.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ScroungingBandarEffect(), TargetController.YOU, true);
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }
 

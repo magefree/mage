@@ -87,7 +87,7 @@ class ShadowKinEffect extends OneShotEffect {
                 0, 1, StaticFilters.FILTER_CARD_CREATURE
         );
         target.setNotTarget(true);
-        controller.choose(outcome, cards, target, game);
+        controller.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (card == null || sourcePermanent == null) {

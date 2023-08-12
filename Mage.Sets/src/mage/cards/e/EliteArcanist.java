@@ -104,7 +104,7 @@ class EliteArcanistImprintEffect extends OneShotEffect {
         if (player != null && !player.getHand().isEmpty()) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
             if (target.canChoose(source.getControllerId(), source, game)
-                    && player.choose(Outcome.Benefit, player.getHand(), target, game)) {
+                    && player.choose(Outcome.Benefit, player.getHand(), target, source, game)) {
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     card.moveToExile(source.getSourceId(), "Elite Arcanist", source, game);
@@ -160,8 +160,6 @@ class EliteArcanistCopyEffect extends OneShotEffect {
                 if (controller != null) {
                     Card copiedCard = game.copyCard(imprintedInstant, source, source.getControllerId());
                     if (copiedCard != null) {
-                        game.getExile().add(source.getSourceId(), "", copiedCard);
-                        game.getState().setZone(copiedCard.getId(), Zone.EXILED);
                         if (controller.chooseUse(Outcome.PlayForFree, "Cast the copied card without paying mana cost?", source, game)) {
                             game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
                             Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(copiedCard, game, true),

@@ -18,7 +18,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -42,7 +42,7 @@ public final class ThoughtpickerWitch extends CardImpl {
 
         // {1}, Sacrifice a creature: Look at the top two cards of target opponent's library, then exile one of them.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThoughtpickerWitchEffect(), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -81,7 +81,7 @@ class ThoughtpickerWitchEffect extends OneShotEffect {
             Cards cards = new CardsImpl(opponent.getLibrary().getTopCards(game, 2));
             if (!cards.isEmpty()) {
                 TargetCard target = new TargetCardInLibrary(new FilterCard("card to exile"));
-                if (controller.choose(Outcome.Exile, cards, target, game)) {
+                if (controller.choose(Outcome.Exile, cards, target, source, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);

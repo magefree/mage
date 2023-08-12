@@ -28,7 +28,7 @@ import mage.filter.predicate.permanent.EquippedPredicate;
  */
 public final class JorKadeenFirstGoldwarden extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("equipped creatures you control");
     private static final FilterPermanent filter2 = new FilterPermanent();
 
     static {
@@ -43,7 +43,7 @@ public final class JorKadeenFirstGoldwarden extends CardImpl {
     public JorKadeenFirstGoldwarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.REBEL);
         this.power = new MageInt(2);
@@ -58,7 +58,7 @@ public final class JorKadeenFirstGoldwarden extends CardImpl {
         ));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
-                condition, "Then if {this}'s power is 4 or greater"
+                condition, "Then if {this}'s power is 4 or greater, draw a card"
         ));
         this.addAbility(ability.addHint(hint));
     }

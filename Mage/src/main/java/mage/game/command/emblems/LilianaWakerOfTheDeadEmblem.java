@@ -15,14 +15,21 @@ public final class LilianaWakerOfTheDeadEmblem extends Emblem {
      */
 
     public LilianaWakerOfTheDeadEmblem() {
-        setName("Emblem Liliana");
+        super("Emblem Liliana");
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 Zone.COMMAND,
                 new ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect(),
                 TargetController.YOU, false, false);
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.getAbilities().add(ability);
+    }
 
-        this.setExpansionSetCodeForImage("M21");
+    private LilianaWakerOfTheDeadEmblem(final LilianaWakerOfTheDeadEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public LilianaWakerOfTheDeadEmblem copy() {
+        return new LilianaWakerOfTheDeadEmblem(this);
     }
 }

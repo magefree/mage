@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -79,6 +78,6 @@ class EbonyOwlNetsukeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of each opponent's upkeep, if that player has seven or more cards in hand, {this} deals 4 damage to that player";
+        return "At the beginning of each opponent's upkeep, if that player has seven or more cards in hand, {this} deals 4 damage to that player.";
     }
 }

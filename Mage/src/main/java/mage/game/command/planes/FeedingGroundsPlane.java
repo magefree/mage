@@ -1,7 +1,5 @@
 package mage.game.command.planes;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -31,6 +29,9 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 import mage.watchers.common.PlanarRollWatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author spjspj
  */
@@ -40,7 +41,6 @@ public class FeedingGroundsPlane extends Plane {
 
     public FeedingGroundsPlane() {
         this.setPlaneType(Planes.PLANE_FEEDING_GROUNDS);
-        this.setExpansionSetCodeForImage("PCA");
 
         // Red spells cost {1} less to cast.  Green spells cost {1} less to cast
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new FeedingGroundsEffect());
@@ -60,6 +60,15 @@ public class FeedingGroundsPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
+    }
+
+    private FeedingGroundsPlane(final FeedingGroundsPlane plane) {
+        super(plane);
+    }
+
+    @Override
+    public FeedingGroundsPlane copy() {
+        return new FeedingGroundsPlane(this);
     }
 }
 

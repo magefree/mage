@@ -28,7 +28,7 @@ public final class XenagosTheReveler extends CardImpl {
 
     public XenagosTheReveler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.XENAGOS);
 
         this.setStartingLoyalty(3);
@@ -115,7 +115,7 @@ class XenagosExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cards exiledCards = new CardsImpl();
-            exiledCards.addAll(controller.getLibrary().getTopCards(game, 7));
+            exiledCards.addAllCards(controller.getLibrary().getTopCards(game, 7));
             controller.moveCards(exiledCards, Zone.EXILED, source, game);
             FilterCard filter = new FilterCard("creature and/or land cards to put onto the battlefield");
             filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
@@ -124,7 +124,7 @@ class XenagosExileEffect extends OneShotEffect {
             target1.setNotTarget(true);
             if (!exiledCards.isEmpty()
                     && target1.canChoose(source.getControllerId(), source, game)
-                    && controller.choose(Outcome.PutCardInPlay, exiledCards, target1, game)) {
+                    && controller.choose(Outcome.PutCardInPlay, exiledCards, target1, source, game)) {
                 controller.moveCards(new CardsImpl(target1.getTargets()), Zone.BATTLEFIELD, source, game);
             }
             return true;

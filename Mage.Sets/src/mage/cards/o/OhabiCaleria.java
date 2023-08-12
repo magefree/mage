@@ -25,7 +25,7 @@ public final class OhabiCaleria extends CardImpl {
 
     public OhabiCaleria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.ARCHER);
         this.power = new MageInt(1);

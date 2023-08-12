@@ -4,7 +4,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.*;
@@ -27,7 +29,7 @@ public final class NineFingersKeene extends CardImpl {
     public NineFingersKeene(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(4);
@@ -40,7 +42,8 @@ public final class NineFingersKeene extends CardImpl {
         this.addAbility(new WardAbility(new PayLifeCost(9), false));
 
         // Whenever Nine-Fingers Keene deals combat damage to a player, look at the top nine cards of your library. You may put a Gate card from among them onto the battlefield. Then if you control nine or more Gates, put the rest into your hand. Otherwise, put the rest on the bottom of your library in a random order.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new NineFingersKeeneEffect(), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new NineFingersKeeneEffect(), false)
+                .addHint(new ValueHint("Gates you control", new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.GATE)))));
     }
 
     private NineFingersKeene(final NineFingersKeene card) {
@@ -89,7 +92,7 @@ class NineFingersKeeneEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInLibrary(0, 1, filter);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game);

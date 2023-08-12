@@ -1,21 +1,13 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.constants.*;
-import mage.filter.StaticFilters;
-import mage.game.Game;
-
-import java.util.Arrays;
 
 /**
  * @author ciaccona007
@@ -37,11 +29,9 @@ public final class ConsumingBlobOozeToken extends TokenImpl {
         // This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
-                new SetBasePowerToughnessSourceEffect(powerValue, toughnessValue, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a, false)
+                new SetBasePowerToughnessSourceEffect(powerValue, toughnessValue, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a)
                         .setText("{this}'s power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1")
         ));
-
-        availableImageSetCodes.addAll(Arrays.asList("MID"));
     }
 
     private ConsumingBlobOozeToken(final ConsumingBlobOozeToken token) {

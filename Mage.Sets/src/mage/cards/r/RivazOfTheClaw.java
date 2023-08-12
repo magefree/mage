@@ -1,24 +1,24 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CastFromGraveyardOnceStaticAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
-import mage.constants.*;
-import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreatureSpell;
 import mage.filter.predicate.card.CastFromZonePredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class RivazOfTheClaw extends CardImpl {
@@ -37,7 +37,7 @@ public final class RivazOfTheClaw extends CardImpl {
     public RivazOfTheClaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIASHINO);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(3);
@@ -61,7 +61,7 @@ public final class RivazOfTheClaw extends CardImpl {
                         "it gains \"When this creature dies, exile it.\"",
                         true
                 ),
-                spellCastFilter, false, true, true
+                spellCastFilter, false, SetTargetPointer.CARD
         ));
     }
 

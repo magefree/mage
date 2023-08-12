@@ -16,7 +16,7 @@ public class CantBlockActivateAttachedEffect extends RestrictionEffect {
         staticText = "Enchanted creature can't block, and its activated abilities can't be activated";
     }
 
-    public CantBlockActivateAttachedEffect(final CantBlockActivateAttachedEffect effect) {
+    protected CantBlockActivateAttachedEffect(final CantBlockActivateAttachedEffect effect) {
         super(effect);
     }
 

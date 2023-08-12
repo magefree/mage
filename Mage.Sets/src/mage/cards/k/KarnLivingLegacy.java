@@ -26,7 +26,7 @@ public final class KarnLivingLegacy extends CardImpl {
     public KarnLivingLegacy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KARN);
         this.setStartingLoyalty(4);
 
@@ -86,7 +86,7 @@ class KarnLivingLegacyEffect extends OneShotEffect {
             return true;
         }
         TargetCard target = new TargetCardInLibrary(StaticFilters.FILTER_CARD);
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         Card card = cards.get(target.getFirstTarget(), game);
         if (card != null) {
             player.moveCards(card, Zone.HAND, source, game);

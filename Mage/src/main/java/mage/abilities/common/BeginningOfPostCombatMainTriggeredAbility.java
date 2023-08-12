@@ -27,7 +27,7 @@ public class BeginningOfPostCombatMainTriggeredAbility extends TriggeredAbilityI
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public BeginningOfPostCombatMainTriggeredAbility(final BeginningOfPostCombatMainTriggeredAbility ability) {
+    protected BeginningOfPostCombatMainTriggeredAbility(final BeginningOfPostCombatMainTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.setTargetPointer = ability.setTargetPointer;

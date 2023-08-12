@@ -32,7 +32,7 @@ public final class EyeOfSingularity extends CardImpl {
     public EyeOfSingularity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-        this.addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // When Eye of Singularity enters the battlefield, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EyeOfSingularityETBEffect()));
@@ -126,7 +126,7 @@ class EyeOfSingularityTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
 
-        if (permanent != null && !permanent.isBasic()) {
+        if (permanent != null && !permanent.isBasic(game)) {
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
             return true;
         }

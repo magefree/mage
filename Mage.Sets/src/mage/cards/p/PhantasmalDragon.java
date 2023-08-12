@@ -3,7 +3,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ public final class PhantasmalDragon extends CardImpl {
         this.toughness = new MageInt(5);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
     private PhantasmalDragon(final PhantasmalDragon card) {

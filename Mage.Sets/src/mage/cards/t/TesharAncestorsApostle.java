@@ -34,7 +34,7 @@ public final class TesharAncestorsApostle extends CardImpl {
 
     public TesharAncestorsApostle(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);

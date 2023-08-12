@@ -3,7 +3,9 @@ package mage.cards.b;
 import java.util.UUID;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
@@ -24,12 +26,14 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class BlackSunsTwilight extends CardImpl {
 
+    private static final DynamicValue xValue = new SignInversionDynamicValue(ManacostVariableValue.REGULAR);
+
     public BlackSunsTwilight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{B}");
 
         // Up to one target creature gets -X/-X until end of turn. If X is 5 or more, return a creature card with mana value X or less from your graveyard to the battlefield tapped.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                ManacostVariableValue.REGULAR, ManacostVariableValue.REGULAR, Duration.EndOfTurn
+                xValue, xValue, Duration.EndOfTurn
         ));
         this.getSpellAbility().addEffect(new BlackSunsTwilightEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));

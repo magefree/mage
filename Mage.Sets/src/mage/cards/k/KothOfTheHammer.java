@@ -39,7 +39,7 @@ public final class KothOfTheHammer extends CardImpl {
 
     public KothOfTheHammer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KOTH);
 
         this.setStartingLoyalty(3);

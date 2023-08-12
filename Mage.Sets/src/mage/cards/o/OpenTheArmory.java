@@ -28,7 +28,7 @@ public final class OpenTheArmory extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}");
 
         // Search your library for an Aura or Equipment card, reveal it, and put it into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, auraOrEquipmentTarget), true, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, auraOrEquipmentTarget), true));
     }
 
     private OpenTheArmory(final OpenTheArmory card) {

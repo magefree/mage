@@ -43,7 +43,7 @@ public final class HelmOfKaldra extends CardImpl {
 
     public HelmOfKaldra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has first strike, trample, and haste.
@@ -52,7 +52,7 @@ public final class HelmOfKaldra extends CardImpl {
         effect.setText(", trample");
         ability.addEffect(effect);
         effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT);
-        effect.setText("and haste");
+        effect.setText(", and haste");
         ability.addEffect(effect);
         this.addAbility(ability);
         // {1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create a legendary 4/4 colorless Avatar creature token named Kaldra and attach those Equipment to it.
@@ -61,7 +61,7 @@ public final class HelmOfKaldra extends CardImpl {
                 new HelmOfKaldraEffect(),
                 new GenericManaCost(1),
                 new HelmOfKaldraCondition(),
-                "{1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create a legendary 4/4 colorless Avatar creature token named Kaldra and attach those Equipment to it."));
+                "{1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, create Kaldra, a legendary 4/4 colorless Avatar creature token. Attach those Equipment to it."));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.Benefit, new ManaCostsImpl<>("{2}"), false));
     }

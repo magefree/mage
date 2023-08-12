@@ -42,7 +42,7 @@ public final class KozilekTheGreatDistortion extends CardImpl {
 
     public KozilekTheGreatDistortion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{C}{C}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);
@@ -134,12 +134,6 @@ class KozilekDiscardCost extends CostImpl {
             }
         }
         return paid;
-    }
-
-    @Override
-    public void clearPaid() {
-        super.clearPaid();
-        this.targets.clearChosen();
     }
 
     @Override

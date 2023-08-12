@@ -36,7 +36,7 @@ public final class GarrukSavageHerald extends CardImpl {
     public GarrukSavageHerald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{G}{G}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GARRUK);
         this.setStartingLoyalty(5);
 

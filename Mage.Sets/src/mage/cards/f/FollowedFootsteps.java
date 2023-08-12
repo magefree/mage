@@ -57,7 +57,7 @@ class FollowedFootstepsEffect extends OneShotEffect {
 
     public FollowedFootstepsEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "You create a token that's a copy of enchanted creature";
+        this.staticText = "create a token that's a copy of enchanted creature";
     }
 
     public FollowedFootstepsEffect(final FollowedFootstepsEffect effect) {

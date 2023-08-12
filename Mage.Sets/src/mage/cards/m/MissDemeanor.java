@@ -71,7 +71,7 @@ class MissDemeanorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         String activePlayerName = game.getPlayer(game.getActivePlayerId()).getName();
         if (sourceObject != null) {
             if (controller.chooseUse(outcome, "Compliment " + activePlayerName + " on their game play?", source, game)) {

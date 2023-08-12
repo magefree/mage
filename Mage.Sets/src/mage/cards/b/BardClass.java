@@ -100,7 +100,7 @@ class BardClassReplacementEffect extends ReplacementEffectImpl {
         return creature != null
                 && creature.isControlledBy(source.getControllerId())
                 && creature.isCreature(game)
-                && creature.isLegendary();
+                && creature.isLegendary(game);
     }
 
     @Override
