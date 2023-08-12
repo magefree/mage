@@ -96,7 +96,7 @@ class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredA
         }
 
         FilterCard filterCard;
-        if (spell.isSorcery()) {
+        if (spell.isSorcery(game)) {
             filterCard = INSTANT_FILTER;
         } else {
             filterCard = SORCERY_FILTER;
