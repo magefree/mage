@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import java.util.stream.Collectors;
 
 public final class EmblemOfCard extends Emblem {
+    private boolean usesVariousArt;
     private static final Logger logger = Logger.getLogger(EmblemOfCard.class);
     public static Card cardFromDeckInfo(DeckCardInfo info) {
         return CardLookup.instance.lookupCardInfo(info.getCardName(), info.getSetCode(), info.getCardNum())
@@ -39,6 +40,7 @@ public final class EmblemOfCard extends Emblem {
         this.setExpansionSetCode(card.getExpansionSetCode());
         this.setCardNumber(card.getCardNumber());
         this.setImageNumber(card.getImageNumber());
+        this.usesVariousArt = card.getUsesVariousArt();
     }
     public EmblemOfCard(Card card) {
         this(card, Zone.BATTLEFIELD);
@@ -46,6 +48,7 @@ public final class EmblemOfCard extends Emblem {
 
     private EmblemOfCard(EmblemOfCard eoc) {
         super(eoc);
+        this.usesVariousArt = eoc.usesVariousArt;
     }
     @Override
     public Emblem copy() {
@@ -60,6 +63,9 @@ public final class EmblemOfCard extends Emblem {
         catch (IllegalArgumentException e) {
             // happens because this isn't a real emblem, but the source object gets set before throwing so it's fine
         }
+    }
+    public boolean getUsesVariousArt() {
+        return usesVariousArt;
     }
 }
 

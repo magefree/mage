@@ -1,7 +1,7 @@
 package mage.view;
 
-import mage.cards.Card;
 import mage.game.command.Emblem;
+import mage.game.command.emblems.EmblemOfCard;
 import mage.players.PlayableObjectStats;
 
 import java.io.Serializable;
@@ -18,12 +18,20 @@ public class EmblemView implements CommandObjectView, Serializable {
     protected String expansionSetCode;
     protected List<String> rules;
     protected PlayableObjectStats playableStats = new PlayableObjectStats();
+    protected String cardNumber = "";
+    protected int imageNumber = 0;
+    protected boolean usesVariousArt = false;
 
     public EmblemView(Emblem emblem) {
         this.id = emblem.getId();
         this.name = emblem.getName();
         this.expansionSetCode = emblem.getExpansionSetCode();
         this.rules = emblem.getAbilities().getRules(emblem.getName());
+        if (emblem instanceof EmblemOfCard) {
+            cardNumber = emblem.getCardNumber();
+            imageNumber = emblem.getImageNumber();
+            usesVariousArt = ((EmblemOfCard) emblem).getUsesVariousArt();
+        }
     }
 
     @Override
@@ -81,5 +89,14 @@ public class EmblemView implements CommandObjectView, Serializable {
     @Override
     public void setSelected(boolean isSelected) {
         // unsupported
+    }
+    public String getCardNumber() {
+        return cardNumber;
+    }
+    public int getImageNumber() {
+        return imageNumber;
+    }
+    public boolean getUsesVariousArt() {
+        return this.usesVariousArt;
     }
 }
