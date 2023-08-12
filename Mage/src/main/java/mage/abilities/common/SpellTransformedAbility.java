@@ -63,8 +63,9 @@ public class SpellTransformedAbility extends SpellAbility {
         if (super.activate(game, noMana)) {
             game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getSourceId(), Boolean.TRUE);
             // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
-            game.addEffect(new TransformedEffect(), this);
-            game.applyEffects();
+            TransformedEffect effect = new TransformedEffect();
+            game.addEffect(effect, this);
+            effect.apply(game, this); //Apply the effect immediately
             return true;
         }
         return false;
