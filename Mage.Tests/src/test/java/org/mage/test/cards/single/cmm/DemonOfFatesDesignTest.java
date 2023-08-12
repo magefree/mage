@@ -115,7 +115,7 @@ public class DemonOfFatesDesignTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void CantCastBothInDifferentTurn() {
+    public void CanCastBothInDifferentTurn() {
         setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, demon, 1);

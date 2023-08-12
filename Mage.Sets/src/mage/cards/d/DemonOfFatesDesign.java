@@ -174,7 +174,7 @@ class DemonOfFatesDesignCastEffect extends ContinuousEffectImpl {
 
     DemonOfFatesDesignCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        this.staticText = "You may cast an enchantment spell by paying life equal to its mana value rather than paying its mana cost.";
+        this.staticText = "you may cast an enchantment spell by paying life equal to its mana value rather than paying its mana cost.";
     }
 
     private DemonOfFatesDesignCastEffect(final DemonOfFatesDesignCastEffect effect) {
