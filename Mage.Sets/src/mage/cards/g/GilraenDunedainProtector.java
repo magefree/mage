@@ -15,14 +15,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.counters.Counter;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
-import java.util.HashSet;
 import java.util.UUID;
 
 /**
@@ -62,11 +61,11 @@ public final class GilraenDunedainProtector extends CardImpl {
 
 class GilraenDunedainProtectorEffect extends OneShotEffect {
 
-    private static final HashSet<Counter> counters = new HashSet<>();
+    private static final Counters counters = new Counters();
 
     static {
-        counters.add(CounterType.VIGILANCE.createInstance());
-        counters.add(CounterType.LIFELINK.createInstance());
+        counters.addCounter(CounterType.VIGILANCE.createInstance())
+                .addCounter(CounterType.LIFELINK.createInstance());
     }
 
     GilraenDunedainProtectorEffect() {

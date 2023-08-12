@@ -12,14 +12,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.HashSet;
 import java.util.UUID;
 
 /**
@@ -51,12 +49,6 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
 
     private static final String effectText = "Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it";
 
-    private static final HashSet<Counter> counters = new HashSet<>();
-
-    static {
-        counters.add(CounterType.P1P1.createInstance());
-    }
-
     OtherworldlyJourneyEffect() {
         super(Outcome.Benefit);
         staticText = effectText;
@@ -80,7 +72,7 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
                         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                                 new ReturnMORToBattlefieldUnderOwnerControlWithCounterEffect(
                                         new MageObjectReference(card, game),
-                                        counters,
+                                        CounterType.P1P1.createInstance(),
                                         "a +1/+1 counter"
                                 )
                         ), source);
