@@ -26,13 +26,13 @@ public class WorldChampionshipDecks2001 extends ExpansionSet {
         cards.add(new SetCardInfo("Blastoderm", "jt102", Rarity.COMMON, mage.cards.b.Blastoderm.class));
         cards.add(new SetCardInfo("Blazing Specter", "tvdl236", Rarity.RARE, mage.cards.b.BlazingSpecter.class));
         cards.add(new SetCardInfo("Blood Oath", "jt177sb", Rarity.RARE, mage.cards.b.BloodOath.class));
-        cards.add(new SetCardInfo("Boil", "jt177sba", Rarity.COMMON, mage.cards.b.Boil.class));
+        cards.add(new SetCardInfo("Boil", "jt177sba", Rarity.UNCOMMON, mage.cards.b.Boil.class));
         cards.add(new SetCardInfo("City of Brass", "jt327", Rarity.RARE, mage.cards.c.CityOfBrass.class));
         cards.add(new SetCardInfo("Counterspell", "ar69", Rarity.COMMON, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Counterspell", "ab69", Rarity.COMMON, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Counterspell", "ar67", Rarity.COMMON, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Counterspell", "ab67", Rarity.COMMON, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Crosis's Charm", "ar99", Rarity.COMMON, mage.cards.c.CrosissCharm.class));
+        cards.add(new SetCardInfo("Crosis's Charm", "ar99", Rarity.UNCOMMON, mage.cards.c.CrosissCharm.class));
         cards.add(new SetCardInfo("Crypt Angel", "tvdl97sb", Rarity.RARE, mage.cards.c.CryptAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crypt Angel", "tvdl97", Rarity.RARE, mage.cards.c.CryptAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dark Ritual", "tvdl129", Rarity.COMMON, mage.cards.d.DarkRitual.class));
@@ -86,7 +86,7 @@ public class WorldChampionshipDecks2001 extends ExpansionSet {
         cards.add(new SetCardInfo("Lobotomy", "ar255sb", Rarity.UNCOMMON, mage.cards.l.Lobotomy.class));
         cards.add(new SetCardInfo("Lord of Atlantis", "ab83", Rarity.RARE, mage.cards.l.LordOfAtlantis.class));
         cards.add(new SetCardInfo("Mana Maze", "ab59sb", Rarity.RARE, mage.cards.m.ManaMaze.class));
-        cards.add(new SetCardInfo("Meekstone", "ar307sb", Rarity.COMMON, mage.cards.m.Meekstone.class));
+        cards.add(new SetCardInfo("Meekstone", "ar307sb", Rarity.RARE, mage.cards.m.Meekstone.class));
         cards.add(new SetCardInfo("Merfolk Looter", "ab89", Rarity.UNCOMMON, mage.cards.m.MerfolkLooter.class));
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", "ab90", Rarity.COMMON, mage.cards.m.MerfolkOfThePearlTrident.class));
         cards.add(new SetCardInfo("Misdirection", "ab87sb", Rarity.RARE, mage.cards.m.Misdirection.class));
@@ -129,7 +129,7 @@ public class WorldChampionshipDecks2001 extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", "tvdl339", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tangle", "jt213sb", Rarity.UNCOMMON, mage.cards.t.Tangle.class));
         cards.add(new SetCardInfo("Teferi's Response", "ar78sb", Rarity.RARE, mage.cards.t.TeferisResponse.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Teferi's Response", "ab78sb", Rarity.COMMON, mage.cards.t.TeferisResponse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Teferi's Response", "ab78sb", Rarity.RARE, mage.cards.t.TeferisResponse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terminate", "tvdl128", Rarity.COMMON, mage.cards.t.Terminate.class));
         cards.add(new SetCardInfo("Thornscape Battlemage", "jt94", Rarity.UNCOMMON, mage.cards.t.ThornscapeBattlemage.class));
         cards.add(new SetCardInfo("Thunderscape Battlemage", "jt75sb", Rarity.UNCOMMON, mage.cards.t.ThunderscapeBattlemage.class));
@@ -139,7 +139,7 @@ public class WorldChampionshipDecks2001 extends ExpansionSet {
         cards.add(new SetCardInfo("Tsabo's Web", "ar317", Rarity.RARE, mage.cards.t.TsabosWeb.class));
         cards.add(new SetCardInfo("Underground River", "ar350", Rarity.RARE, mage.cards.u.UndergroundRiver.class));
         cards.add(new SetCardInfo("Undermine", "ar282", Rarity.RARE, mage.cards.u.Undermine.class));
-        cards.add(new SetCardInfo("Urborg Volcano", "tvdl330", Rarity.COMMON, mage.cards.u.UrborgVolcano.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Urborg Volcano", "tvdl330", Rarity.UNCOMMON, mage.cards.u.UrborgVolcano.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urborg Volcano", "ar330", Rarity.UNCOMMON, mage.cards.u.UrborgVolcano.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Rage", "tvdl178", Rarity.RARE, mage.cards.u.UrzasRage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Rage", "jt178", Rarity.RARE, mage.cards.u.UrzasRage.class, NON_FULL_USE_VARIOUS));

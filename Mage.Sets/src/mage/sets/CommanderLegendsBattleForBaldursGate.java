@@ -307,7 +307,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Highland Forest", 896, Rarity.COMMON, mage.cards.h.HighlandForest.class));
         cards.add(new SetCardInfo("Hoarding Ogre", 181, Rarity.COMMON, mage.cards.h.HoardingOgre.class));
         cards.add(new SetCardInfo("Horn of Valhalla", 26, Rarity.RARE, mage.cards.h.HornOfValhalla.class));
-        cards.add(new SetCardInfo("Hornet Queen", 825, Rarity.MYTHIC, mage.cards.h.HornetQueen.class));
+        cards.add(new SetCardInfo("Hornet Queen", 825, Rarity.RARE, mage.cards.h.HornetQueen.class));
         cards.add(new SetCardInfo("Hullbreaker Horror", 724, Rarity.RARE, mage.cards.h.HullbreakerHorror.class));
         cards.add(new SetCardInfo("Hunted Horror", 758, Rarity.RARE, mage.cards.h.HuntedHorror.class));
         cards.add(new SetCardInfo("Icewind Stalwart", 27, Rarity.COMMON, mage.cards.i.IcewindStalwart.class));
@@ -441,7 +441,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Oji, the Exquisite Blade", 290, Rarity.UNCOMMON, mage.cards.o.OjiTheExquisiteBlade.class));
         cards.add(new SetCardInfo("Order of Whiteclay", 703, Rarity.RARE, mage.cards.o.OrderOfWhiteclay.class));
         cards.add(new SetCardInfo("Orzhov Basilica", 906, Rarity.UNCOMMON, mage.cards.o.OrzhovBasilica.class));
-        cards.add(new SetCardInfo("Orzhov Signet", 867, Rarity.UNCOMMON, mage.cards.o.OrzhovSignet.class));
+        cards.add(new SetCardInfo("Orzhov Signet", 867, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Outpost Siege", 804, Rarity.RARE, mage.cards.o.OutpostSiege.class));
         cards.add(new SetCardInfo("Overcharged Amalgam", 729, Rarity.RARE, mage.cards.o.OverchargedAmalgam.class));
         cards.add(new SetCardInfo("Overwhelming Encounter", 245, Rarity.UNCOMMON, mage.cards.o.OverwhelmingEncounter.class));

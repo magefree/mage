@@ -31,7 +31,7 @@ public class WorldChampionshipDecks2004 extends ExpansionSet {
         cards.add(new SetCardInfo("Blinkmoth Nexus", "ap163", Rarity.RARE, mage.cards.b.BlinkmothNexus.class));
         cards.add(new SetCardInfo("Chrome Mox", "ap152", Rarity.RARE, mage.cards.c.ChromeMox.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chrome Mox", "mb152", Rarity.RARE, mage.cards.c.ChromeMox.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Circle of Protection: Red", "jn13sb", Rarity.COMMON, mage.cards.c.CircleOfProtectionRed.class));
+        cards.add(new SetCardInfo("Circle of Protection: Red", "jn13sb", Rarity.UNCOMMON, mage.cards.c.CircleOfProtectionRed.class));
         cards.add(new SetCardInfo("Cloudpost", "gn280", Rarity.COMMON, mage.cards.c.Cloudpost.class));
         cards.add(new SetCardInfo("Condescend", "gn27", Rarity.COMMON, mage.cards.c.Condescend.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Condescend", "mb27", Rarity.COMMON, mage.cards.c.Condescend.class, NON_FULL_USE_VARIOUS));
@@ -65,7 +65,7 @@ public class WorldChampionshipDecks2004 extends ExpansionSet {
         cards.add(new SetCardInfo("Mana Leak", "mb89sb", Rarity.COMMON, mage.cards.m.ManaLeak.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Myr Incubator", "mb212", Rarity.RARE, mage.cards.m.MyrIncubator.class));
         cards.add(new SetCardInfo("Ornithopter", "ap224", Rarity.UNCOMMON, mage.cards.o.Ornithopter.class));
-        cards.add(new SetCardInfo("Oxidize", "jn79sb", Rarity.COMMON, mage.cards.o.Oxidize.class));
+        cards.add(new SetCardInfo("Oxidize", "jn79sb", Rarity.UNCOMMON, mage.cards.o.Oxidize.class));
         cards.add(new SetCardInfo("Pacifism", "gn33sb", Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Pentad Prism", "mb143", Rarity.COMMON, mage.cards.p.PentadPrism.class));
         cards.add(new SetCardInfo("Plains", "gn331", Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
