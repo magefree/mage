@@ -1,20 +1,19 @@
 package mage.cards.o;
 
-import java.util.UUID;
+import mage.ApprovingObject;
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
@@ -24,17 +23,15 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
-import mage.ApprovingObject;
+
+import java.util.UUID;
 
 /**
- *
- * @author @stwalsh4118
+ * @author @stwalsh4118, xenohedron
  */
 public final class OgreBattlecaster extends CardImpl {
 
-    private static final FilterCard filter = new FilterInstantOrSorceryCard(
-        "instant or sorcery card"
-);
+    private static final FilterCard filter = new FilterInstantOrSorceryCard();
 
     public OgreBattlecaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -63,7 +60,6 @@ public final class OgreBattlecaster extends CardImpl {
     }
 }
 
-
 class OgreBattlecasterEffect extends OneShotEffect {
 
     OgreBattlecasterEffect() {
@@ -85,23 +81,23 @@ class OgreBattlecasterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
+        if (controller == null || card == null) {
             return false;
         }
-        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
-        if (card != null
-                && controller.chooseUse(Outcome.Benefit, "Cast " + card.getLogName() + '?', source, game)) {
+        if (controller.chooseUse(Outcome.Benefit, "Cast " + card.getLogName() + '?', source, game)) {
             int originalManaValue = card.getManaValue();
             card.getSpellAbility().addCost(new ManaCostsImpl<>("{R}{R}"));
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-            controller.cast(controller.chooseAbilityForCast(card, game, false), game, false, new ApprovingObject(source, game));
+            boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, false),
+                    game, false, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-
-            ContinuousEffect effect = new BoostTargetEffect(
-                    originalManaValue, 0, Duration.EndOfTurn
-            );
-            effect.setTargetPointer(new FixedTarget(source.getSourceId()));
-            game.addEffect(effect, source);
+            if (cardWasCast) {
+                ContinuousEffect effect = new BoostTargetEffect(originalManaValue, 0, Duration.EndOfTurn);
+                effect.setTargetPointer(new FixedTarget(source.getSourceId()));
+                game.fireReflexiveTriggeredAbility(new ReflexiveTriggeredAbility(effect, false,
+                        "When you cast that spell, {this} gets +X/+0 until end of turn, where X is that spell's mana value"), source);
+            }
         }
         ContinuousEffect effect = new OgreBattlecasterReplacementEffect(card.getId());
         effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
@@ -117,7 +113,7 @@ class OgreBattlecasterReplacementEffect extends ReplacementEffectImpl {
     OgreBattlecasterReplacementEffect(UUID cardId) {
         super(Duration.EndOfTurn, Outcome.Exile);
         this.cardId = cardId;
-        staticText = "If that card would be put into your graveyard this turn, exile it instead";
+        staticText = "if that spell would be put into a graveyard, exile it instead";
     }
 
     private OgreBattlecasterReplacementEffect(final OgreBattlecasterReplacementEffect effect) {
