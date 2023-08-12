@@ -15,14 +15,13 @@ import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
- *
  * @author spjspj
  */
 public final class NighteyesTheDesecratorToken extends TokenImpl {
 
     public NighteyesTheDesecratorToken() {
         super("Nighteyes the Desecrator Token", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.RAT);
@@ -35,7 +34,7 @@ public final class NighteyesTheDesecratorToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {
+    protected NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {
         super(token);
     }
 

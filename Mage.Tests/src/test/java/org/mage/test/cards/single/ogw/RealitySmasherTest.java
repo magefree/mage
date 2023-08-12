@@ -2,7 +2,6 @@ package org.mage.test.cards.single.ogw;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,9 +11,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class RealitySmasherTest extends CardTestPlayerBase {
-    
-    // Cannot figure out how to setup any of these tests to work with Reality Smashers triggered ability
-    @Ignore
+
     @Test
     public void testSimpleKillSpellChooseToDiscard() {
         
@@ -30,6 +27,7 @@ public class RealitySmasherTest extends CardTestPlayerBase {
         setChoice(playerB, true); // discard to prevent counter
         setChoice(playerB, "Sigiled Starfish");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
         
         assertGraveyardCount(playerB, "Doom Blade", 1);        
@@ -37,9 +35,7 @@ public class RealitySmasherTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Sigiled Starfish", 1);
         assertGraveyardCount(playerA, "Reality Smasher", 1);
     }
-    
-    // Cannot figure out how to setup any of these tests to work with Reality Smashers triggered ability
-    @Ignore
+
     @Test
     public void testSimpleKillSpellChooseNotToDiscard() {
         
@@ -53,14 +49,13 @@ public class RealitySmasherTest extends CardTestPlayerBase {
         addTarget(playerB, "Reality Smasher");
         setChoice(playerB, false); // no discard
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
         
         assertGraveyardCount(playerB, "Doom Blade", 1);
         assertPermanentCount(playerA, "Reality Smasher", 1);
     }
-    
-    // Cannot figure out how to setup any of these tests to work with Reality Smashers triggered ability
-    @Ignore
+
     @Test
     public void testTargettedByPyromancerGoggleCopy() {
         
@@ -83,6 +78,7 @@ public class RealitySmasherTest extends CardTestPlayerBase {
         setChoice(playerA, "Swamp");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
         execute();
         
         assertGraveyardCount(playerA, "Lightning Bolt", 1);

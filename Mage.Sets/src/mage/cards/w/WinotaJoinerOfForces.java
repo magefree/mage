@@ -35,7 +35,7 @@ public final class WinotaJoinerOfForces extends CardImpl {
     public WinotaJoinerOfForces(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(4);
@@ -90,7 +90,7 @@ class WinotaJoinerOfForcesEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 6));
         TargetCardInLibrary targetCardInLibrary = new TargetCardInLibrary(0, 1, filter);
-        player.choose(outcome, cards, targetCardInLibrary, game);
+        player.choose(outcome, cards, targetCardInLibrary, source, game);
         Card card = game.getCard(targetCardInLibrary.getFirstTarget());
         if (card == null || !player.moveCards(
                 card, Zone.BATTLEFIELD, source, game, true,

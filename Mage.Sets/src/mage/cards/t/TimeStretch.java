@@ -56,8 +56,12 @@ class TimeStretchEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget(), false));
-        game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget(), false));
+        if (source.getFirstTarget() == null) {
+            return false;
+        }
+
+        game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget()).withExtraTurn());
+        game.getState().getTurnMods().add(new TurnMod(source.getFirstTarget()).withExtraTurn());
         return true;
     }
 }

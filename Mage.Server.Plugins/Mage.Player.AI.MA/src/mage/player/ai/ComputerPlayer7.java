@@ -45,10 +45,10 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             logger.info("======================= Turn: " + game.getTurnNum() + " [" + game.getPlayer(game.getActivePlayerId()).getName() + "] =========================================");
         }
         logState(game);
-        logger.debug("Priority -- Step: " + (game.getTurn().getStepType() + "                       ").substring(0, 25) + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
+        logger.debug("Priority -- Step: " + (game.getTurnStepType() + "                       ").substring(0, 25) + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
         game.getState().setPriorityPlayerId(playerId);
         game.firePriorityEvent(playerId);
-        switch (game.getTurn().getStepType()) {
+        switch (game.getTurnStepType()) {
             case UPKEEP:
             case DRAW:
                 pass(game);

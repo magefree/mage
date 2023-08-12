@@ -27,7 +27,7 @@ public final class OathOfKaya extends CardImpl {
     public OathOfKaya(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // When Oath of Kaya enters the battlefield, it deals 3 damage to any target and you gain 3 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3, "it"));

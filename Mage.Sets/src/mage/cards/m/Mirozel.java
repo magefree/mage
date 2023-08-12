@@ -3,7 +3,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
@@ -28,7 +28,7 @@ public final class Mirozel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Mirozel becomes the target of a spell or ability, return Mirozel to its owner's hand.
-        this.addAbility(new BecomesTargetTriggeredAbility(new ReturnToHandSourceEffect(true)));
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(new ReturnToHandSourceEffect(true)));
     }
 
     private Mirozel(final Mirozel card) {

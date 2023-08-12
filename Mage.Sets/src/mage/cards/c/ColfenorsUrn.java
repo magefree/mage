@@ -76,7 +76,7 @@ class ColfenorsUrnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && permanent != null) {
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             ExileZone exile = game.getExile().getExileZone(exileId);

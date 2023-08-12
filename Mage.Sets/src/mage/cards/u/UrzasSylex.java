@@ -40,7 +40,7 @@ public final class UrzasSylex extends CardImpl {
     public UrzasSylex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {2}{W}{W}, {T}, Exile Urza's Sylex: Each player chooses six lands they control. Destroy all other permanents. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
@@ -55,7 +55,7 @@ public final class UrzasSylex extends CardImpl {
                 Zone.BATTLEFIELD, Zone.EXILED,
                 new DoIfCostPaid(
                         new SearchLibraryPutInHandEffect(
-                                new TargetCardInLibrary(filter), true, true
+                                new TargetCardInLibrary(filter), true
                         ), new GenericManaCost(2)
                 ), "When {this} is put into exile from the battlefield, ", false
         ));

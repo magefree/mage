@@ -25,12 +25,11 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author AhmadYProjects
  */
 public final class TheSeedcore extends CardImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("1/1 creature");
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("1/1 creature");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, 1));
@@ -51,8 +50,8 @@ public final class TheSeedcore extends CardImpl {
                 Zone.BATTLEFIELD,
                 new BoostTargetEffect(2, 1, Duration.EndOfTurn),
                 new TapSourceCost(),
-                CorruptedCondition.instance,
-                "{T}: Target 1/1 creature gets +2/+1 until end of turn. Activate only if an opponent has three or more poison counters.").setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint());
+                CorruptedCondition.instance
+        ).setAbilityWord(AbilityWord.CORRUPTED).addHint(CorruptedCondition.getHint());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -66,6 +65,7 @@ public final class TheSeedcore extends CardImpl {
         return new TheSeedcore(this);
     }
 }
+
 class TheSeedcoreManaBuilder extends ConditionalManaBuilder {
 
     @Override
@@ -76,7 +76,7 @@ class TheSeedcoreManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public String getRule() {
-        return "Spend this mana only to cast a Phyrexian creature spell.";
+        return "Spend this mana only to cast Phyrexian creature spells.";
     }
 }
 
@@ -84,7 +84,7 @@ class TheSeedcoreConditionalMana extends ConditionalMana {
 
     TheSeedcoreConditionalMana(Mana mana) {
         super(mana);
-        staticText = "Spend this mana only to cast a Phyrexian creature spell.";
+        staticText = "Spend this mana only to cast Phyrexian creature spells.";
         addCondition(new mage.cards.t.TheSeedcoreManaCondition());
     }
 }

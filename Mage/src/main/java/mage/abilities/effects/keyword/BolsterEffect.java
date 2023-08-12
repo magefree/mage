@@ -21,7 +21,6 @@ import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 public class BolsterEffect extends OneShotEffect {
@@ -38,7 +37,7 @@ public class BolsterEffect extends OneShotEffect {
         this.staticText = setText();
     }
 
-    public BolsterEffect(final BolsterEffect effect) {
+    protected BolsterEffect(final BolsterEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -95,7 +94,7 @@ public class BolsterEffect extends OneShotEffect {
         } else {
             sb.append("X, where X is the number of ");
             sb.append(amount.getMessage());
-            sb.append(" (Choose a creature with the least toughness among creatures you control and put X +1/+1 counters on it.)");
+            sb.append(". (Choose a creature with the least toughness among creatures you control and put X +1/+1 counters on it.)");
         }
         return sb.toString();
     }

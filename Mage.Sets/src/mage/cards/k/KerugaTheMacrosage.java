@@ -35,7 +35,7 @@ public final class KerugaTheMacrosage extends CardImpl {
     public KerugaTheMacrosage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G/U}{G/U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DINOSAUR);
         this.subtype.add(SubType.HIPPO);
         this.power = new MageInt(5);
@@ -66,7 +66,7 @@ enum KerugaCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingHandSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         return deck.stream().allMatch(card -> card.hasCardTypeForDeckbuilding(CardType.LAND) || card.getManaValue() >= 3);
     }
 }

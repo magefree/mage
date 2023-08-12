@@ -19,6 +19,8 @@ public final class NeonDynastyCommander extends ExpansionSet {
         super("Neon Dynasty Commander", "NEC", ExpansionSet.buildDate(2022, 2, 18), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
+        // 122, Nissa, Voice of Zendikar - omitted from set due scryfall support
+
         cards.add(new SetCardInfo("Access Denied", 11, Rarity.RARE, mage.cards.a.AccessDenied.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Access Denied", 47, Rarity.RARE, mage.cards.a.AccessDenied.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Acidic Slime", 112, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
@@ -120,7 +122,6 @@ public final class NeonDynastyCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Myojin of Towering Might", 38, Rarity.RARE, mage.cards.m.MyojinOfToweringMight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Myojin of Towering Might", 68, Rarity.RARE, mage.cards.m.MyojinOfToweringMight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Myrsmith", 86, Rarity.UNCOMMON, mage.cards.m.Myrsmith.class));
-        cards.add(new SetCardInfo("Nissa, Voice of Zendikar", 122, Rarity.MYTHIC, mage.cards.n.NissaVoiceOfZendikar.class));
         cards.add(new SetCardInfo("One with the Kami", 27, Rarity.RARE, mage.cards.o.OneWithTheKami.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("One with the Kami", 69, Rarity.RARE, mage.cards.o.OneWithTheKami.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Opal Palace", 172, Rarity.COMMON, mage.cards.o.OpalPalace.class));

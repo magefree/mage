@@ -33,7 +33,7 @@ public final class BenefactorsDraught extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BenefactorsDraughtTriggeredAbility()));
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private BenefactorsDraught(final BenefactorsDraught card) {

@@ -1,12 +1,12 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class PatagiaViperSnakeToken extends TokenImpl {
@@ -21,7 +21,7 @@ public final class PatagiaViperSnakeToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public PatagiaViperSnakeToken(final PatagiaViperSnakeToken token) {
+    protected PatagiaViperSnakeToken(final PatagiaViperSnakeToken token) {
         super(token);
     }
 

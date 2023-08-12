@@ -29,7 +29,7 @@ public final class BloodForTheBloodGod extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(CreaturesDiedThisTurnCount.instance)
                 .setText("this spell costs {1} less to cast for each creature that died this turn")
-        ).addHint(CreaturesDiedThisTurnHint.instance).setRuleAtTheTop(true), new CreaturesDiedWatcher());
+        ).addHint(CreaturesDiedThisTurnHint.instance).setRuleAtTheTop(true));
 
         // Discard your hand, then draw eight cards. Blood for the Blood God! deals 8 damage to each opponent. Exile Blood for the Blood God!.
         this.getSpellAbility().addEffect(new DiscardHandControllerEffect());

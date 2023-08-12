@@ -73,9 +73,7 @@ class BoneyardParleyEffect extends OneShotEffect {
         if (player != null) {
             Cards cards = new CardsImpl();
             for (Target target : source.getTargets()) {
-                for (UUID cardId : target.getTargets()) {
-                    cards.add(cardId);
-                }
+                cards.addAll(target.getTargets());
             }
             if (!cards.isEmpty() && player.moveCards(cards, Zone.EXILED, source, game)) {
                 TargetOpponent targetOpponent = new TargetOpponent(true);
@@ -84,7 +82,7 @@ class BoneyardParleyEffect extends OneShotEffect {
                     if (opponent != null) {
                         TargetCard targetCards = new TargetCard(0, cards.size(), Zone.EXILED, new FilterCard("cards to put in the first pile"));
                         List<Card> pile1 = new ArrayList<>();
-                        if (opponent.choose(Outcome.Neutral, cards, targetCards, game)) {
+                        if (opponent.choose(Outcome.Neutral, cards, targetCards, source, game)) {
                             List<UUID> targets = targetCards.getTargets();
                             for (UUID targetId : targets) {
                                 Card card = cards.get(targetId, game);
@@ -109,23 +107,9 @@ class BoneyardParleyEffect extends OneShotEffect {
                         pile1Set.addAll(pile1);
                         pile2Set.addAll(pile2);
 
-//                        Cards toBattlefield = new CardsImpl();
-//                        Cards toGraveyard = new CardsImpl();
-//
-//                        if (pile1Zone == Zone.BATTLEFIELD) {
-//                            toBattlefield.addAll(pile1);
-//                            toGraveyard.addAll(pile2);
-//                        } else {
-//                            toBattlefield.addAll(pile2);
-//                            toGraveyard.addAll(pile1);
-//                        }
                         player.moveCards(pile1Set, pile1Zone, source, game, false, false, false, null);
                         player.moveCards(pile2Set, pile2Zone, source, game, false, false, false, null);
 
-//                        StringBuilder sb = new StringBuilder("Pile 1, going to ").append(pile1Zone == Zone.BATTLEFIELD ? "Battlefield" : "Graveyard").append(": ");
-//                        game.informPlayers(sb.toString());
-//                        sb = new StringBuilder("Pile 2, going to ").append(pile2Zone == Zone.BATTLEFIELD ? "Battlefield" : "Graveyard").append(':');
-//                        game.informPlayers(sb.toString());
                     }
                     return true;
                 }

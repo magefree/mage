@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -16,8 +15,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class GrimCaptainsCall extends CardImpl {
@@ -71,7 +71,7 @@ class GrimCaptainsCallEffect extends OneShotEffect {
     private void returnToHand(Game game, SubType subType, Player controller, Ability source) {
         FilterCreatureCard filter = new FilterCreatureCard(subType.getDescription() + " card");
         filter.add(subType.getPredicate());
-        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(new FilterCreatureCard(filter));
+        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
         if (target.canChoose(source.getControllerId(), source, game)) {
             if (controller.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());

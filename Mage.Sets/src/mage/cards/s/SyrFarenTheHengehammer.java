@@ -35,7 +35,7 @@ public final class SyrFarenTheHengehammer extends CardImpl {
     public SyrFarenTheHengehammer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.KNIGHT);
 
         this.power = new MageInt(2);

@@ -158,16 +158,16 @@ class JestersScepterCost extends CostImpl {
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, ability));
             if (cards != null
                     && !cards.isEmpty()
-                    && controller.choose(Outcome.Benefit, cards, target, game)) {
+                    && controller.choose(Outcome.Benefit, cards, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     if (controller.moveCardToGraveyardWithInfo(card, source, game, Zone.EXILED)) {
                         if (card instanceof SplitCard) {
                             game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", ((SplitCard) card).getLeftHalfCard().getName());
                             game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment2", ((SplitCard) card).getRightHalfCard().getName());
-                        } else if (card instanceof ModalDoubleFacesCard) {
-                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", ((ModalDoubleFacesCard) card).getLeftHalfCard().getName());
-                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment2", ((ModalDoubleFacesCard) card).getRightHalfCard().getName());
+                        } else if (card instanceof ModalDoubleFacedCard) {
+                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", ((ModalDoubleFacedCard) card).getLeftHalfCard().getName());
+                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment2", ((ModalDoubleFacedCard) card).getRightHalfCard().getName());
                         } else {
                             game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", card.getName());
                         }

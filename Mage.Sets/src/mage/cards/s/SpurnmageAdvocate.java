@@ -26,7 +26,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public final class SpurnmageAdvocate extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("two target cards from an opponent's graveyard");
+    private static final FilterCard filter = new FilterCard("target cards from an opponent's graveyard");
 
     static {
         filter.add(TargetController.OPPONENT.getOwnerPredicate());

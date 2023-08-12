@@ -23,7 +23,7 @@ public class ReturnToLibrarySpellEffect extends OneShotEffect {
         this.toTop = top;
     }
 
-    public ReturnToLibrarySpellEffect(final ReturnToLibrarySpellEffect effect) {
+    protected ReturnToLibrarySpellEffect(final ReturnToLibrarySpellEffect effect) {
         super(effect);
         this.toTop = effect.toTop;
     }

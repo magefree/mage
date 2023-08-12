@@ -31,7 +31,7 @@ public final class GruulKeyrune extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {R}{G}: Gruul Keyrune becomes a 3/2 red and green Beast artifact creature with trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GruulKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GruulKeyruneToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{R}{G}")));
     }
 
     private GruulKeyrune(final GruulKeyrune card) {

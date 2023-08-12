@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 public final class AngelToken extends TokenImpl {
 
     public AngelToken() {
@@ -18,12 +16,9 @@ public final class AngelToken extends TokenImpl {
         toughness = new MageInt(4);
 
         addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("APC", "AVR", "C14", "C15", "C18", "CON", "DDQ", "GTC",
-                "ISD", "M14", "MM3", "NEM", "OGW", "ORI", "PC2", "SCG", "SOI", "ZEN", "C20", "M21", "CMR", "AFC", "VOC", "2XM", "IMA", "PCA", "A25", "GN3");
     }
 
-    public AngelToken(final AngelToken token) {
+    protected AngelToken(final AngelToken token) {
         super(token);
     }
 

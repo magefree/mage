@@ -13,7 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DamageAllControlledTargetEffect extends OneShotEffect {
@@ -50,7 +49,7 @@ public class DamageAllControlledTargetEffect extends OneShotEffect {
         this.filter = filter;
     }
 
-    public DamageAllControlledTargetEffect(final DamageAllControlledTargetEffect effect) {
+    protected DamageAllControlledTargetEffect(final DamageAllControlledTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.filter = effect.filter.copy();

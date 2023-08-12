@@ -27,7 +27,7 @@ import mage.target.common.TargetControlledPermanent;
 public final class FungalPlots extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card from your graveyard");
-    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("two Saprolings");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Saprolings");
 
     static {
         filter2.add(SubType.SAPROLING.getPredicate());

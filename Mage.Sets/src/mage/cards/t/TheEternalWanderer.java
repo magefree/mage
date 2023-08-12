@@ -53,7 +53,7 @@ public final class TheEternalWanderer extends CardImpl {
     public TheEternalWanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
         
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.setStartingLoyalty(5);
 
         // No more than one creature can attack The Eternal Wanderer each combat.
@@ -212,7 +212,7 @@ class TheEternalWandererAttackRestrictionEffect extends RestrictionEffect {
 
             //If there is already a creature attacking The Eternal Wanderer, dont let another creature attack it
             for(CombatGroup group : game.getCombat().getGroups()){
-                if(group.getDefenderId().equals(source.getSourceId())){
+                if(group.getDefenderId() != null && group.getDefenderId().equals(source.getSourceId())){
                     return false;
                 }
             }

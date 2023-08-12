@@ -16,7 +16,7 @@ import mage.constants.TargetController;
  */
 public final class StarCompass extends CardImpl {
     
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("basic land");
 
     static {
         filter.add(SuperType.BASIC.getPredicate());
@@ -27,6 +27,7 @@ public final class StarCompass extends CardImpl {
 
         // Star Compass enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
+        
         // {T}: Add one mana of any color that a basic land you control could produce.
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.YOU, true, filter));
     }

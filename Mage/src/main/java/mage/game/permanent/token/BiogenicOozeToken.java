@@ -13,10 +13,9 @@ public final class BiogenicOozeToken extends TokenImpl {
         color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        setOriginalExpansionSetCode("RNA");
     }
 
-    public BiogenicOozeToken(final BiogenicOozeToken token) {
+    protected BiogenicOozeToken(final BiogenicOozeToken token) {
         super(token);
     }
 

@@ -8,10 +8,7 @@ import mage.abilities.effects.common.continuous.EachSpellYouCastHasReplicateEffe
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCardHalf;
-import mage.cards.SplitCardHalf;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -38,7 +35,10 @@ public class ThreefoldSignal extends CardImpl {
         //  (When you cast it, copy it for each time you paid its replicate cost.
         //   You may choose new targets for the copies.
         //   A copy of a permanent spell becomes a token.)
-        this.addAbility(new SimpleStaticAbility(new EachSpellYouCastHasReplicateEffect(filter, new GenericManaCost(3))));
+        this.addAbility(new SimpleStaticAbility(new EachSpellYouCastHasReplicateEffect(filter,
+                "When you cast it, copy it for each time you paid its replicate cost. " +
+                        "You may choose new targets for the copies. A copy of a permanent spell becomes a token.",
+                new GenericManaCost(3))));
     }
 
     private ThreefoldSignal(final ThreefoldSignal card) {

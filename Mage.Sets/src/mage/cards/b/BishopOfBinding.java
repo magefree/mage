@@ -5,11 +5,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
@@ -44,7 +43,6 @@ public final class BishopOfBinding extends CardImpl {
         // When Bishop of Binding enters the battlefield, exile target creature an opponent controls until Bishop of Binding leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BishopOfBindingExileEffect());
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
 
         // Whenever Bishop of Binding attacks, target Vampire gets +X/+X until end of turn, where X is the power of the exiled card.
@@ -81,11 +79,15 @@ class BishopOfBindingExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         // If this leaves the battlefield before its triggered ability resolves,
         // the target creature won't be exiled.
         if (permanent != null) {
-            return new ExileTargetEffect(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), permanent.getIdName()).apply(game, source);
+            new ExileTargetEffect(
+                    CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), permanent.getIdName()
+            ).apply(game, source);
+            game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
+            return true;
         }
         return false;
     }

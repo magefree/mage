@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -21,11 +19,9 @@ public final class BlueBirdToken extends TokenImpl {
         toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("EVE", "INV", "KHM");
     }
 
-    public BlueBirdToken(final BlueBirdToken token) {
+    protected BlueBirdToken(final BlueBirdToken token) {
         super(token);
     }
 

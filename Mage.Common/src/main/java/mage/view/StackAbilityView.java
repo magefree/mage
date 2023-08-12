@@ -7,7 +7,7 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
-import mage.abilities.icon.other.VariableCostCardIcon;
+import mage.abilities.icon.CardIconImpl;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -43,16 +43,17 @@ public class StackAbilityView extends CardView {
         this.sourceCard.setMageObjectType(mageObjectType);
         this.name = "Ability";
         this.loyalty = "";
+        this.defense = "";
 
         this.cardTypes = ability.getCardType(game);
         this.subTypes = ability.getSubtype(game);
-        this.superTypes = ability.getSuperType();
+        this.superTypes = ability.getSuperType(game);
         this.color = ability.getColor(game);
         this.manaCostLeftStr = String.join("", ability.getManaCostSymbols());
         this.manaCostRightStr = "";
         this.cardTypes = ability.getCardType(game);
         this.subTypes = ability.getSubtype(game);
-        this.superTypes = ability.getSuperType();
+        this.superTypes = ability.getSuperType(game);
         this.color = ability.getColor(game);
         this.power = ability.getPower().toString();
         this.toughness = ability.getToughness().toString();
@@ -82,7 +83,7 @@ public class StackAbilityView extends CardView {
         // cost x
         if (ability.getManaCostsToPay().containsX()) {
             int costX = ManacostVariableValue.END_GAME.calculate(game, ability, null);
-            this.cardIcons.add(new VariableCostCardIcon(costX));
+            this.cardIcons.add(CardIconImpl.variableCost(costX));
         }
     }
 

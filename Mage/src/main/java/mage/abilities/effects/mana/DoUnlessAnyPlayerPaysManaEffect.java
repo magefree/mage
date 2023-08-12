@@ -28,7 +28,7 @@ public class DoUnlessAnyPlayerPaysManaEffect extends ManaEffect {
         this.chooseUseText = chooseUseText;
     }
 
-    public DoUnlessAnyPlayerPaysManaEffect(final DoUnlessAnyPlayerPaysManaEffect effect) {
+    protected DoUnlessAnyPlayerPaysManaEffect(final DoUnlessAnyPlayerPaysManaEffect effect) {
         super(effect);
         this.manaEffect = (ManaEffect) effect.manaEffect.copy();
         this.cost = effect.cost.copy();

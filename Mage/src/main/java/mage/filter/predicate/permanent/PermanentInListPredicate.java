@@ -20,6 +20,6 @@ public class PermanentInListPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return permanents.contains(input);
+        return (permanents.contains(input));
     }
 }

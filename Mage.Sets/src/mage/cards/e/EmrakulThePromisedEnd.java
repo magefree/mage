@@ -35,7 +35,7 @@ public final class EmrakulThePromisedEnd extends CardImpl {
 
     public EmrakulThePromisedEnd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{13}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(13);
         this.toughness = new MageInt(13);
@@ -94,10 +94,9 @@ class EmrakulThePromisedEndGainControlEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (controller != null && targetPlayer != null) {
-            TurnMod controlPlayerTurnMod = new TurnMod(targetPlayer.getId(), controller.getId());
-            TurnMod extraTurnMod = new TurnMod(targetPlayer.getId(), false);
-            controlPlayerTurnMod.setSubsequentTurnMod(extraTurnMod);
-            game.getState().getTurnMods().add(controlPlayerTurnMod);
+            TurnMod extraTurnMod = new TurnMod(targetPlayer.getId()).withExtraTurn();
+            TurnMod newControllerTurnMod = new TurnMod(targetPlayer.getId()).withNewController(controller.getId(), extraTurnMod);
+            game.getState().getTurnMods().add(newControllerTurnMod);
             return true;
         }
         return false;

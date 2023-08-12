@@ -8,8 +8,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -26,11 +24,9 @@ public final class PhyrexianMiteToken extends TokenImpl {
 
         this.addAbility(new ToxicAbility(1));
         this.addAbility(new SimpleStaticAbility(new CantBlockSourceEffect(Duration.WhileOnBattlefield).setText("this creature can't block")));
-
-        availableImageSetCodes = Arrays.asList("ONE");
     }
 
-    public PhyrexianMiteToken(final PhyrexianMiteToken token) {
+    protected PhyrexianMiteToken(final PhyrexianMiteToken token) {
         super(token);
     }
 

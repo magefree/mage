@@ -51,7 +51,7 @@ public final class AlpineHoundmaster extends CardImpl {
 
         // When Alpine Houndmaster enters the battlefield, you may search your library for a card named Alpine Watchdog and/or a card named Igneous Cur, reveal them, put them into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardWithDifferentNameInLibrary(0, 2, filter2), true, true
+                new TargetCardWithDifferentNameInLibrary(0, 2, filter2), true
         ).setText("search your library for a card named Alpine Watchdog and/or a card named Igneous Cur, reveal them, put them into your hand, then shuffle"), true));
 
         // Whenever Alpine Houndmaster attacks, it gets +X/+0 until end of turn, where X is the number of other attacking creatures.

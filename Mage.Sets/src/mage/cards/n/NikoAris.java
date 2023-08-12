@@ -48,7 +48,7 @@ public final class NikoAris extends CardImpl {
     public NikoAris(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{X}{W}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIKO);
         this.setStartingLoyalty(3);
 

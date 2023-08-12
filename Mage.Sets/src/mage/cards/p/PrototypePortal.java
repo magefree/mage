@@ -21,10 +21,10 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.util.CardUtil;
+import mage.util.functions.CopyTokenFunction;
 
 import java.util.UUID;
 
@@ -101,7 +101,7 @@ class PrototypePortalEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             if (!controller.getHand().isEmpty()) {
                 TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_ARTIFACT);
-                controller.choose(Outcome.Benefit, controller.getHand(), target, game);
+                controller.choose(Outcome.Benefit, controller.getHand(), target, source, game);
                 Card card = controller.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName() + " (Imprint)");
@@ -149,8 +149,7 @@ class PrototypePortalCreateTokenEffect extends OneShotEffect {
         if (!permanent.getImprinted().isEmpty()) {
             Card card = game.getCard(permanent.getImprinted().get(0));
             if (card != null) {
-                EmptyToken token = new EmptyToken();
-                CardUtil.copyTo(token).from(card, game);
+                Token token = CopyTokenFunction.createTokenCopy(card, game);
                 token.putOntoBattlefield(1, game, source, source.getControllerId());
                 return true;
             }

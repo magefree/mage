@@ -60,7 +60,7 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
         this.condition = condition;
     }
 
-    public GainControlTargetEffect(final GainControlTargetEffect effect) {
+    protected GainControlTargetEffect(final GainControlTargetEffect effect) {
         super(effect);
         this.controllingPlayerId = effect.controllingPlayerId;
         this.fixedControl = effect.fixedControl;
@@ -139,15 +139,18 @@ public class GainControlTargetEffect extends ContinuousEffectImpl {
         Target target = mode.getTargets().get(0);
         StringBuilder sb = new StringBuilder("gain control of ");
         if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
+            if (target.getMinNumberOfTargets() == 0) {
                 sb.append("up to ");
             }
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ");
         } else if (!target.getTargetName().startsWith("another")) {
+            if (target.getMinNumberOfTargets() == 0) {
+                sb.append("up to one ");
+            }
             sb.append("target ");
         }
         sb.append(mode.getTargets().get(0).getTargetName());
-        if (!duration.toString().isEmpty()) {
+        if (!duration.toString().isEmpty() && duration != Duration.EndOfGame) {
             sb.append(' ').append(duration.toString());
         }
         return sb.toString();

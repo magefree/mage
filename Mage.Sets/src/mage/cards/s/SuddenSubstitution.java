@@ -9,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -18,8 +19,6 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801
@@ -51,7 +50,7 @@ public final class SuddenSubstitution extends CardImpl {
 class SuddenSubstitutionEffect extends OneShotEffect {
 
     SuddenSubstitutionEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "Exchange control of target noncreature spell and target creature. " +
                 "Then the spell's controller may choose new targets for it.";
     }

@@ -27,7 +27,7 @@ public class TapTargetEffect extends OneShotEffect {
         }
     }
 
-    public TapTargetEffect(final TapTargetEffect effect) {
+    protected TapTargetEffect(final TapTargetEffect effect) {
         super(effect);
     }
 

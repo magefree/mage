@@ -6,21 +6,22 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.util.Copyable;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Revealed extends HashMap<String, Cards> implements Serializable, Copyable<Revealed> {
 
-    public Revealed() {    }
+    public Revealed() {
+    }
 
-    public Revealed(final Revealed revealed) {
-        for (Map.Entry<String, Cards> entry: revealed.entrySet()) {
+    protected Revealed(final Revealed revealed) {
+        for (Map.Entry<String, Cards> entry : revealed.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
     }
@@ -32,11 +33,11 @@ public class Revealed extends HashMap<String, Cards> implements Serializable, Co
     public void update(String name, Cards cards) {
         this.put(name, cards.copy());
     }
-    
+
     public void add(String name, Cards cards) {
         if (this.containsKey(name)) {
             this.get(name).addAll(cards);
-        } else  {
+        } else {
             this.put(name, cards.copy());
         }
     }
@@ -55,7 +56,7 @@ public class Revealed extends HashMap<String, Cards> implements Serializable, Co
     }
 
     public Card getCard(UUID cardId, Game game) {
-        for (Cards cards: this.values()) {
+        for (Cards cards : this.values()) {
             if (cards.contains(cardId)) {
                 return game.getCard(cardId);
             }

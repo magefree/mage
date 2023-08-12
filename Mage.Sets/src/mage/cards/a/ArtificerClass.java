@@ -61,7 +61,7 @@ public final class ArtificerClass extends CardImpl {
         this.addAbility(new BecomesClassLevelTriggeredAbility(
                 new RevealCardsFromLibraryUntilEffect(
                         StaticFilters.FILTER_CARD_ARTIFACT_AN,
-                        Zone.HAND, Zone.LIBRARY, false, false
+                        PutCards.HAND, PutCards.BOTTOM_RANDOM
                 ), 2
         ));
 

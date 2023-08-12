@@ -22,7 +22,7 @@ public final class IsshinTwoHeavensAsOne extends CardImpl {
     public IsshinTwoHeavensAsOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SAMURAI);
         this.power = new MageInt(3);
@@ -71,7 +71,12 @@ class IsshinTwoHeavensAsOneEffect extends ReplacementEffectImpl {
         if (sourcePermanent == null || !sourcePermanent.isControlledBy(source.getControllerId())) {
             return false;
         }
+
         GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+        if (sourceEvent == null) {
+            return false;
+        }
+
         switch (sourceEvent.getType()) {
             case ATTACKER_DECLARED:
             case DECLARED_ATTACKERS:

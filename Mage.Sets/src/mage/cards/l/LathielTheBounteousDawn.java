@@ -34,7 +34,7 @@ public final class LathielTheBounteousDawn extends CardImpl {
     public LathielTheBounteousDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.UNICORN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

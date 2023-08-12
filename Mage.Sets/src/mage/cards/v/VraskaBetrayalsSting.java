@@ -28,7 +28,7 @@ public final class VraskaBetrayalsSting extends CardImpl {
     public VraskaBetrayalsSting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{B}{B/P}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VRASKA);
         this.setStartingLoyalty(6);
 

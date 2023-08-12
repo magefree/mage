@@ -25,7 +25,7 @@ public final class MarisiBreakerOfTheCoil extends CardImpl {
     public MarisiBreakerOfTheCoil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(5);
@@ -79,7 +79,7 @@ class MarisiBreakerOfTheCoilSpellEffect extends ContinuousRuleModifyingEffectImp
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return game.getPhase().getType() == TurnPhase.COMBAT
+        return game.getTurnPhaseType() == TurnPhase.COMBAT
                 && game.getOpponents(source.getControllerId()).contains(event.getPlayerId());
     }
 }

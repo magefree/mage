@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -14,7 +15,6 @@ import mage.target.targetpointer.SecondTargetPointer;
 import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DrawCardTargetEffect extends OneShotEffect {
@@ -46,7 +46,7 @@ public class DrawCardTargetEffect extends OneShotEffect {
         this.upTo = upto;
     }
 
-    public DrawCardTargetEffect(final DrawCardTargetEffect effect) {
+    protected DrawCardTargetEffect(final DrawCardTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.optional = effect.optional;

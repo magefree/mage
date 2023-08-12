@@ -1,12 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class HumanClericToken extends TokenImpl {
@@ -21,7 +19,8 @@ public final class HumanClericToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
-    public HumanClericToken(final HumanClericToken token) {
+
+    protected HumanClericToken(final HumanClericToken token) {
         super(token);
     }
 

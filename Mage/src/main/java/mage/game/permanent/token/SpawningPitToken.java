@@ -1,12 +1,12 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class SpawningPitToken extends TokenImpl {
@@ -20,7 +20,7 @@ public final class SpawningPitToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public SpawningPitToken(final SpawningPitToken token) {
+    protected SpawningPitToken(final SpawningPitToken token) {
         super(token);
     }
 

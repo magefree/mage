@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -40,7 +39,7 @@ public final class SewerNemesis extends CardImpl {
         // As Sewer Nemesis enters the battlefield, choose a player.
         this.addAbility(new AsEntersBattlefieldAbility(new ChoosePlayerEffect(Outcome.Detriment)));
         // Sewer Nemesis's power and toughness are each equal to the number of cards in the chosen player's graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CardsInTargetOpponentsGraveyardCount(), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CardsInTargetOpponentsGraveyardCount())));
         // Whenever the chosen player casts a spell, that player puts the top card of their library into their graveyard.
         this.addAbility(new SewerNemesisTriggeredAbility());
 

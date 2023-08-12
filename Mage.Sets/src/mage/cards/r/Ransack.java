@@ -72,9 +72,9 @@ class RansackEffect extends OneShotEffect {
             int number = min(player.getLibrary().size(), 5);
             Set<Card> cards = player.getLibrary().getTopCards(game, number);
             Cards cardsRemaining = new CardsImpl();
-            cardsRemaining.addAll(cards);
+            cardsRemaining.addAllCards(cards);
             TargetCard target = new TargetCard(0, number, Zone.LIBRARY, filter);
-            if (player.choose(Outcome.DrawCard, cardsRemaining, target, game)) {
+            if (player.choose(Outcome.DrawCard, cardsRemaining, target, source, game)) {
                 Cards pickedCards = new CardsImpl(target.getTargets());
                 cardsRemaining.removeAll(pickedCards);
                 player.putCardsOnBottomOfLibrary(pickedCards, game, source, true);

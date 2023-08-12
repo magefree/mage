@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -19,20 +17,13 @@ public final class PhyrexianGolemToken extends TokenImpl {
         subtype.add(SubType.GOLEM);
         power = new MageInt(3);
         toughness = new MageInt(3);
-
-        availableImageSetCodes = Arrays.asList("MM2", "NPH", "SOM", "MH1", "M20", "CMR", "MM3", "2X2");
     }
 
-    public PhyrexianGolemToken(final PhyrexianGolemToken token) {
+    protected PhyrexianGolemToken(final PhyrexianGolemToken token) {
         super(token);
     }
 
     public PhyrexianGolemToken copy() {
         return new PhyrexianGolemToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
     }
 }

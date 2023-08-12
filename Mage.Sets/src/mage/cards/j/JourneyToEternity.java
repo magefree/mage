@@ -31,7 +31,7 @@ public final class JourneyToEternity extends CardImpl {
     public JourneyToEternity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AURA);
 
         this.secondSideCardClazz = mage.cards.a.AtzalCaveOfEternity.class;

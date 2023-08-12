@@ -30,7 +30,7 @@ public final class Shadowspear extends CardImpl {
     public Shadowspear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 and has trample and lifelink.

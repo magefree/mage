@@ -12,8 +12,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.ModalDoubleFacesCard;
-import mage.cards.ModalDoubleFacesCardHalf;
+import mage.cards.ModalDoubleFacedCard;
+import mage.cards.ModalDoubleFacedCardHalf;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.AsThoughEffectType;
@@ -63,7 +63,7 @@ class AminatousAuguryEffect extends OneShotEffect {
         staticText = "Exile the top eight cards of your library. "
                 + "You may put a land card from among them onto the battlefield. "
                 + "Until end of turn, for each nonland card type, "
-                + "you may cast a card of that type from among the exiled cards without paying its mana cost.";
+                + "you may cast a spell of that type from among the exiled cards without paying its mana cost.";
     }
 
     public AminatousAuguryEffect(final AminatousAuguryEffect effect) {
@@ -95,14 +95,14 @@ class AminatousAuguryEffect extends OneShotEffect {
         }
 
         Cards cardsToCast = new CardsImpl();
-        cardsToCast.addAll(auguryExileZone.getCards(game));
+        cardsToCast.addAllCards(auguryExileZone.getCards(game));
 
         // put a land card from among them onto the battlefield
         TargetCard target = new TargetCard(Zone.EXILED, StaticFilters.FILTER_CARD_LAND_A);
 
         if (cardsToCast.count(StaticFilters.FILTER_CARD_LAND, game) > 0) {
             if (controller.chooseUse(Outcome.PutLandInPlay, "Put a land from among the exiled cards into play?", source, game)) {
-                if (controller.choose(Outcome.PutLandInPlay, cardsToCast, target, game)) {
+                if (controller.choose(Outcome.PutLandInPlay, cardsToCast, target, source, game)) {
                     Card card = cardsToCast.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cardsToCast.remove(card);
@@ -115,8 +115,8 @@ class AminatousAuguryEffect extends OneShotEffect {
         // TODO staticFilters must be configured to check the main card face (Ex: MDFC card like Sea Gate Restoration does not count as a land if face up)
         for (Card card : cardsToCast.getCards(game)) {
             // ex: Sea Gate Restoration bug #9956
-            if (card instanceof ModalDoubleFacesCard) {
-                ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+            if (card instanceof ModalDoubleFacedCard) {
+                ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
                 if (leftHalfCard != null
                         && !leftHalfCard.isLand(game)) {
                     AminatousAuguryCastFromExileEffect effect = new AminatousAuguryCastFromExileEffect();

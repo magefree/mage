@@ -44,7 +44,7 @@ public final class ShefetMonitor extends CardImpl {
 
         // When you cycle Shefet Monitor, you may search your library for a basic land card or a Desert card, put it onto the battlefield, then shuffle your library.
         this.addAbility(new CycleTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false),
                 true));
     }
 

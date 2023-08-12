@@ -86,7 +86,7 @@ class TrenchGorgerEffect extends OneShotEffect {
             }
         }
         controller.shuffleLibrary(source, game);
-        game.addEffect(new SetBasePowerToughnessSourceEffect(count, count, Duration.WhileOnBattlefield, SubLayer.SetPT_7b, true), source);
+        game.addEffect(new SetBasePowerToughnessSourceEffect(count, count, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
         return true;
     }
 }

@@ -31,7 +31,7 @@ public final class BlackbladeReforged extends CardImpl {
 
     public BlackbladeReforged(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 for each land you control.

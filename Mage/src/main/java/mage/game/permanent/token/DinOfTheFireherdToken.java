@@ -1,12 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class DinOfTheFireherdToken extends TokenImpl {
@@ -21,16 +19,7 @@ public final class DinOfTheFireherdToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode().equals("SHM")) {
-            this.setTokenType(1);
-        }
-    }
-
-    public DinOfTheFireherdToken(final DinOfTheFireherdToken token) {
+    protected DinOfTheFireherdToken(final DinOfTheFireherdToken token) {
         super(token);
     }
 

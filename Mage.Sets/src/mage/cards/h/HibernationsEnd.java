@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
@@ -78,7 +79,7 @@ class HibernationsEndEffect extends OneShotEffect {
 
     public HibernationsEndEffect() {
         super(Outcome.Benefit);
-        this.staticText = "search your library for a creature card with mana value equal to the number of age counters on {this} and put it onto the battlefield. If you do, shuffle.";
+        this.staticText = "search your library for a creature card with mana value equal to the number of age counters on {this}, put it onto the battlefield, then shuffle.";
     }
 
     public HibernationsEndEffect(final HibernationsEndEffect effect) {
@@ -95,7 +96,7 @@ class HibernationsEndEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null && player != null) {
-            int newConvertedCost = sourcePermanent.getCounters(game).getCount("age");
+            int newConvertedCost = sourcePermanent.getCounters(game).getCount(CounterType.AGE);
             FilterCard filter = new FilterCard("creature card with mana value " + newConvertedCost);
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, newConvertedCost));
             filter.add(CardType.CREATURE.getPredicate());

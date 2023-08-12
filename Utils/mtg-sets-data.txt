@@ -47,11 +47,13 @@ Clash Pack|CLASH|
 Commander Anthology|CMA|
 Commander Anthology 2018|CM2|
 Commander's Arsenal|CM1|
+Commander Masters|CMM|
 Commander|CMD|
 Conspiracy|CNS|
 Conspiracy: Take the Crown|CN2|
 Conflux|CON|
 Coldsnap|CSP|
+Doctor Who|WHO|
 Duel Decks: Jace vs. Chandra|DD2|
 Duel Decks: Anthology, Divine vs. Demonic|DVD|
 Duel Decks: Anthology, Elves vs. Goblins|EVG|
@@ -139,6 +141,8 @@ Limited Edition Alpha|LEA|
 Limited Edition Beta|LEB|
 Legends|LEG|
 Legions|LGN|
+The Lord of the Rings: Tales of Middle-earth|LTR|
+Tales of Middle-earth Commander|LTC|
 Lorwyn|LRW|
 Magic 2010|M10|
 Magic 2011|M11|
@@ -254,6 +258,7 @@ War of the Spark|WAR|
 Welcome Deck 2016|W16|
 Welcome Deck 2017|W17|
 Weatherlight|WTH|
+Wilds of Eldraine|WOE|
 Worldwake|WWK|
 Ixalan|XLN|
 Zendikar|ZEN|

@@ -40,7 +40,7 @@ public class VaziKeenNegotiator extends CardImpl {
     public VaziKeenNegotiator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.HUMAN, SubType.ADVISOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

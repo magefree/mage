@@ -136,11 +136,11 @@ class LegionsInitiativeReturnFromExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, -1));
-        if (player == null || exile == null || exile.isEmpty()) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, -1));
+        if (player == null || exileZone == null || exileZone.isEmpty()) {
             return false;
         }
-        Cards cards = new CardsImpl(exile);
+        Cards cards = new CardsImpl(exileZone);
         player.moveCards(cards, Zone.BATTLEFIELD, source, game);
         List<Permanent> permanents = cards.stream().map(game::getPermanent).filter(Objects::nonNull).collect(Collectors.toList());
         if (permanents.isEmpty()) {

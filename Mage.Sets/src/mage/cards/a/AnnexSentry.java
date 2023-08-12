@@ -3,8 +3,6 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.ToxicAbility;
 import mage.cards.CardImpl;
@@ -21,18 +19,17 @@ import mage.target.TargetPermanent;
 import java.util.UUID;
 
 /**
- *
  * @author AhmadYProjects
  */
 public final class AnnexSentry extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature an opponent controls with cmc 3 or less");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or creature an opponent controls with mana value 3 or less");
 
     static {
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN,4));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 4));
         filter.add(Predicates.or
                 (CardType.ARTIFACT.getPredicate(),
-                CardType.CREATURE.getPredicate()));
+                        CardType.CREATURE.getPredicate()));
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
@@ -50,7 +47,6 @@ public final class AnnexSentry extends CardImpl {
         // When Annex Sentry enters the battlefield, exile target artifact or creature an opponent controls with mana value 3 or less until Annex Sentry leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(filter));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
     }
 

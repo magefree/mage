@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -26,7 +26,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class RuthlessKnave extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Treasures");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Treasures");
 
     static {
         filter.add(SubType.TREASURE.getPredicate());
@@ -42,7 +42,7 @@ public final class RuthlessKnave extends CardImpl {
 
         // {2}{B}, Sacrifice a creature: Create two colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken(), 2), new ManaCostsImpl<>("{2}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
 
         // Sacrifice three Treasures: Draw a card.

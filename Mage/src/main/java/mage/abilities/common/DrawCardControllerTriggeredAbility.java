@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author North
  */
 public class DrawCardControllerTriggeredAbility extends TriggeredAbilityImpl {
@@ -22,7 +21,7 @@ public class DrawCardControllerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you draw a card, ");
     }
 
-    public DrawCardControllerTriggeredAbility(final DrawCardControllerTriggeredAbility ability) {
+    protected DrawCardControllerTriggeredAbility(final DrawCardControllerTriggeredAbility ability) {
         super(ability);
     }
 

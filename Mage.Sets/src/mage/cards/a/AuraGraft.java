@@ -1,9 +1,7 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
@@ -17,6 +15,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,19 +28,19 @@ import mage.util.TargetAddress;
  */
 public final class AuraGraft extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("Aura that's attached to a permanent");
+    static {
+        filter.add(SubType.AURA.getPredicate());
+        filter.add(AuraGraftAttachedToPermanentPredicate.instance);
+    }
+
     public AuraGraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Gain control of target Aura that's attached to a permanent. Attach it to another permanent it can enchant.
-        FilterPermanent filter = new FilterPermanent("Aura that's attached to a permanent");
-        filter.add(SubType.AURA.getPredicate());
-        filter.add(new AttachedToPermanentPredicate());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-
-        Effect gainControlEffect = new GainControlTargetEffect(Duration.EndOfGame);
-        this.getSpellAbility().addEffect(gainControlEffect);
-
-        this.getSpellAbility().addEffect(new MoveTargetAuraEffect());
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfGame));
+        this.getSpellAbility().addEffect(new AuraGraftMoveAuraEffect());
     }
 
     private AuraGraft(final AuraGraft card) {
@@ -54,11 +53,8 @@ public final class AuraGraft extends CardImpl {
     }
 }
 
-class AttachedToPermanentPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-
-    public AttachedToPermanentPredicate() {
-        super();
-    }
+enum AuraGraftAttachedToPermanentPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
 
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         Permanent attached = input.getObject();
@@ -66,11 +62,11 @@ class AttachedToPermanentPredicate implements ObjectSourcePlayerPredicate<Perman
     }
 }
 
-class PermanentCanBeAttachedToPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+class AuraGraftAuraCanEnchantPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 
     protected Permanent aura;
 
-    public PermanentCanBeAttachedToPredicate(Permanent aura) {
+    AuraGraftAuraCanEnchantPredicate(Permanent aura) {
         super();
         this.aura = aura;
     }
@@ -87,49 +83,47 @@ class PermanentCanBeAttachedToPredicate implements ObjectSourcePlayerPredicate<P
     }
 }
 
-class MoveTargetAuraEffect extends OneShotEffect {
+class AuraGraftMoveAuraEffect extends OneShotEffect {
 
-    public MoveTargetAuraEffect() {
+    AuraGraftMoveAuraEffect() {
         super(Outcome.Benefit);
         staticText = "Attach it to another permanent it can enchant";
     }
 
-    public MoveTargetAuraEffect(final MoveTargetAuraEffect effect) {
+    private AuraGraftMoveAuraEffect(final AuraGraftMoveAuraEffect effect) {
         super(effect);
     }
 
     @Override
-    public MoveTargetAuraEffect copy() {
-        return new MoveTargetAuraEffect(this);
+    public AuraGraftMoveAuraEffect copy() {
+        return new AuraGraftMoveAuraEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(targetPointer.getFirst(game, source));
-        if (enchantment == null) {
-            return false;
-        }
-        Permanent oldAttachment = game.getPermanent(enchantment.getAttachedTo());
-        if (oldAttachment == null) {
-            return false;
-        }
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        if (enchantment == null || controller == null) {
+            return false;
+        }
+        Permanent previouslyEnchanted = game.getPermanent(enchantment.getAttachedTo());
+        if (previouslyEnchanted == null) {
             return false;
         }
 
         FilterPermanent filter = new FilterPermanent("another permanent " + enchantment.getLogName() + " can enchant");
         filter.add(AnotherPredicate.instance);
-        filter.add(new PermanentCanBeAttachedToPredicate(enchantment));
+        filter.add(new AuraGraftAuraCanEnchantPredicate(enchantment)); // extracts Targets from Aura spell ability
+        filter.add(new CanBeEnchantedByPredicate(enchantment)); // checks for protection
         Target target = new TargetPermanent(filter);
         target.setNotTarget(true);
         if (target.canChoose(controller.getId(), source, game)
                 && controller.choose(outcome, target, source, game)) {
             Permanent newAttachment = game.getPermanent(target.getFirstTarget());
             if (newAttachment != null
-                    && oldAttachment.removeAttachment(enchantment.getId(), source, game)) {
+                    && previouslyEnchanted.removeAttachment(enchantment.getId(), source, game)) {
                 newAttachment.addAttachment(enchantment.getId(), source, game);
-                game.informPlayers(enchantment.getLogName() + " was unattached from " + oldAttachment.getLogName() + " and attached to " + newAttachment.getLogName());
+                game.informPlayers(enchantment.getLogName() + " was unattached from " + previouslyEnchanted.getLogName() + " and attached to " + newAttachment.getLogName());
                 return true;
             }
         }

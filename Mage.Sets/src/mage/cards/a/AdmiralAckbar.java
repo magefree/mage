@@ -33,7 +33,7 @@ public final class AdmiralAckbar extends CardImpl {
 
     public AdmiralAckbar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CALAMARI);
         this.subtype.add(SubType.REBEL);
         this.power = new MageInt(2);

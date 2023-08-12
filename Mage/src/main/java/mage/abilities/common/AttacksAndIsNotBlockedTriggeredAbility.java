@@ -26,7 +26,7 @@ public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl
         setTriggerPhrase("Whenever {this} attacks and isn't blocked, ");
     }
 
-    public AttacksAndIsNotBlockedTriggeredAbility(final AttacksAndIsNotBlockedTriggeredAbility ability) {
+    protected AttacksAndIsNotBlockedTriggeredAbility(final AttacksAndIsNotBlockedTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }

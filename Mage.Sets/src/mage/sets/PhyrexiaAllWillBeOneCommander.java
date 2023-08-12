@@ -72,6 +72,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Glissa's Retriever", 56, Rarity.RARE, mage.cards.g.GlissasRetriever.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glistening Sphere", 20, Rarity.RARE, mage.cards.g.GlisteningSphere.class));
         cards.add(new SetCardInfo("Goldnight Commander", 72, Rarity.UNCOMMON, mage.cards.g.GoldnightCommander.class));
+        cards.add(new SetCardInfo("Goldwardens' Gambit", 13, Rarity.RARE, mage.cards.g.GoldwardensGambit.class));
         cards.add(new SetCardInfo("Golgari Signet", 131, Rarity.UNCOMMON, mage.cards.g.GolgariSignet.class));
         cards.add(new SetCardInfo("Grafted Exoskeleton", 132, Rarity.UNCOMMON, mage.cards.g.GraftedExoskeleton.class));
         cards.add(new SetCardInfo("Grateful Apparition", 73, Rarity.UNCOMMON, mage.cards.g.GratefulApparition.class));
@@ -118,10 +119,12 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Myr Battlesphere", 138, Rarity.RARE, mage.cards.m.MyrBattlesphere.class));
         cards.add(new SetCardInfo("Myriad Landscape", 159, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Necroblossom Snarl", 160, Rarity.RARE, mage.cards.n.NecroblossomSnarl.class));
+        cards.add(new SetCardInfo("Neyali, Suns' Vanguard", 2, Rarity.MYTHIC, mage.cards.n.NeyaliSunsVanguard.class));
         cards.add(new SetCardInfo("Night's Whisper", 94, Rarity.COMMON, mage.cards.n.NightsWhisper.class));
         cards.add(new SetCardInfo("Norn's Annex", 83, Rarity.RARE, mage.cards.n.NornsAnnex.class));
         cards.add(new SetCardInfo("Norn's Choirmaster", 8, Rarity.RARE, mage.cards.n.NornsChoirmaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Norn's Choirmaster", 46, Rarity.RARE, mage.cards.n.NornsChoirmaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Norn's Decree", 9, Rarity.RARE, mage.cards.n.NornsDecree.class));
         cards.add(new SetCardInfo("Noxious Revival", 110, Rarity.UNCOMMON, mage.cards.n.NoxiousRevival.class));
         cards.add(new SetCardInfo("Otharri, Suns' Glory", 3, Rarity.MYTHIC, mage.cards.o.OtharriSunsGlory.class));
         cards.add(new SetCardInfo("Painful Truths", 95, Rarity.RARE, mage.cards.p.PainfulTruths.class));
@@ -150,8 +153,10 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sol Ring", 140, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 141, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Soul-Guide Lantern", 142, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
+        cards.add(new SetCardInfo("Staff of the Storyteller", 10, Rarity.RARE, mage.cards.s.StaffOfTheStoryteller.class));
         cards.add(new SetCardInfo("Sungrass Prairie", 166, Rarity.RARE, mage.cards.s.SungrassPrairie.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 89, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
+        cards.add(new SetCardInfo("Synthesis Pod", 23, Rarity.RARE, mage.cards.s.SynthesisPod.class));
         cards.add(new SetCardInfo("Tainted Field", 167, Rarity.UNCOMMON, mage.cards.t.TaintedField.class));
         cards.add(new SetCardInfo("Tainted Wood", 168, Rarity.UNCOMMON, mage.cards.t.TaintedWood.class));
         cards.add(new SetCardInfo("Talisman of Conviction", 143, Rarity.UNCOMMON, mage.cards.t.TalismanOfConviction.class));
@@ -167,8 +172,10 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Viridian Corrupter", 113, Rarity.UNCOMMON, mage.cards.v.ViridianCorrupter.class));
         cards.add(new SetCardInfo("Vishgraz, the Doomhive", 4, Rarity.MYTHIC, mage.cards.v.VishgrazTheDoomhive.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vishgraz, the Doomhive", 40, Rarity.MYTHIC, mage.cards.v.VishgrazTheDoomhive.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vulshok Factory", 16, Rarity.RARE, mage.cards.v.VulshokFactory.class));
         cards.add(new SetCardInfo("White Sun's Zenith", 90, Rarity.RARE, mage.cards.w.WhiteSunsZenith.class));
         cards.add(new SetCardInfo("Windborn Muse", 91, Rarity.RARE, mage.cards.w.WindbornMuse.class));
         cards.add(new SetCardInfo("Windbrisk Heights", 174, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
+        cards.add(new SetCardInfo("Wurmquake", 19, Rarity.RARE, mage.cards.w.Wurmquake.class));
     }
 }

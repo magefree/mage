@@ -1,9 +1,5 @@
 package mage.cards.a;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -16,17 +12,22 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseGameSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
-import mage.constants.Outcome;
-import mage.constants.SubType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -64,7 +65,10 @@ public final class ArchfiendOfTheDross extends CardImpl {
         this.addAbility(ability);
 
         // Whenever a creature an opponent controls dies, its controller loses 2 life.
-        this.addAbility(new DiesCreatureTriggeredAbility(new ArchfiendOfTheDrossEffect(), false));
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new ArchfiendOfTheDrossEffect(), false,
+                StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE
+        ));
     }
 
     private ArchfiendOfTheDross(final ArchfiendOfTheDross card) {

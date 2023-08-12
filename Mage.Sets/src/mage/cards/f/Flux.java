@@ -25,7 +25,7 @@ public final class Flux extends CardImpl {
         this.getSpellAbility().addEffect(new FluxEffect());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private Flux(final Flux card) {

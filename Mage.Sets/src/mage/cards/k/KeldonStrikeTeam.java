@@ -1,11 +1,10 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.condition.common.SourceEnteredThisTurnCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -18,12 +17,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
 
-import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -54,7 +49,7 @@ public final class KeldonStrikeTeam extends CardImpl {
                 new GainAbilityControlledEffect(
                         HasteAbility.getInstance(), Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_CONTROLLED_CREATURE
-                ), KeldonStrikeTeamCondition.instance, "as long as {this} " +
+                ), SourceEnteredThisTurnCondition.instance, "as long as {this} " +
                 "entered the battlefield this turn, creatures you control have haste"
         )));
     }
@@ -66,17 +61,5 @@ public final class KeldonStrikeTeam extends CardImpl {
     @Override
     public KeldonStrikeTeam copy() {
         return new KeldonStrikeTeam(this);
-    }
-}
-
-enum KeldonStrikeTeamCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return Optional.ofNullable(source.getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
-                .map(Permanent::getTurnsOnBattlefield)
-                .orElse(-1) == 0;
     }
 }

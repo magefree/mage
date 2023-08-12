@@ -22,7 +22,7 @@ public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl {
         setText();
     }
 
-    public AddCardSubtypeAttachedEffect(final AddCardSubtypeAttachedEffect effect) {
+    protected AddCardSubtypeAttachedEffect(final AddCardSubtypeAttachedEffect effect) {
         super(effect);
         this.addedSubtype = effect.addedSubtype;
         this.attachmentType = effect.attachmentType;

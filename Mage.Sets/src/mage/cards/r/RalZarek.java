@@ -38,7 +38,7 @@ public final class RalZarek extends CardImpl {
 
     public RalZarek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{R}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RAL);
 
         this.setStartingLoyalty(4);
@@ -99,7 +99,7 @@ class RalZarekExtraTurnsEffect extends OneShotEffect {
         if (controller != null) {
             for (int i = 0; i < 5; i++) {
                 if (controller.flipCoin(source, game, false)) {
-                    game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
+                    game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
                 }
             }
             return true;

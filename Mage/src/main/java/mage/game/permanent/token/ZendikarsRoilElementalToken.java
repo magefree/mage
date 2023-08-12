@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -18,24 +16,13 @@ public final class ZendikarsRoilElementalToken extends TokenImpl {
         color.setGreen(true);
         power = new MageInt(2);
         toughness = new MageInt(2);
-
-        availableImageSetCodes.addAll(Arrays.asList("ORI", "ZNC"));
     }
 
-    public ZendikarsRoilElementalToken(final ZendikarsRoilElementalToken token) {
+    protected ZendikarsRoilElementalToken(final ZendikarsRoilElementalToken token) {
         super(token);
     }
 
     public ZendikarsRoilElementalToken copy() {
         return new ZendikarsRoilElementalToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ZNC")) {
-            setTokenType(2);
-        }
     }
 }

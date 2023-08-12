@@ -16,7 +16,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class EntersBattlefieldEffect extends ReplacementEffectImpl {
@@ -54,7 +53,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl {
         this.optional = optional;
     }
 
-    public EntersBattlefieldEffect(final EntersBattlefieldEffect effect) {
+    protected EntersBattlefieldEffect(final EntersBattlefieldEffect effect) {
         super(effect);
         this.baseEffects = effect.baseEffects.copy();
         this.text = effect.text;

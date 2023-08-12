@@ -1,16 +1,24 @@
-
 package mage.game.permanent.token;
 
 /**
+ * Token container for copyable characteristics, don't put it to battlefield
+ *
  * @author nantuko
  */
 public final class EmptyToken extends TokenImpl {
 
     public EmptyToken() {
-        super(" Token", "");
+        this(false);
     }
 
-    public EmptyToken(final EmptyToken token) {
+    public EmptyToken(boolean withBackFace) {
+        super(" Token", "");
+        if (withBackFace) {
+            this.backFace = new EmptyToken();
+        }
+    }
+
+    protected EmptyToken(final EmptyToken token) {
         super(token);
     }
 

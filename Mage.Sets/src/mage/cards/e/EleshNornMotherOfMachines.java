@@ -27,7 +27,7 @@ public final class EleshNornMotherOfMachines extends CardImpl {
     public EleshNornMotherOfMachines(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN, SubType.PRAETOR);
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);
@@ -73,14 +73,13 @@ class EleshNornMotherOfMachinesDoublingEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event instanceof NumberOfTriggersEvent) {
             NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
-            // Only triggers of the controller of Elesh Norn
+            // Only triggers for the controller of Elesh Norn
             if (source.isControlledBy(event.getPlayerId())) {
                 GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
                 // Only EtB triggers
                 if (sourceEvent != null
                         && sourceEvent.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
                         && sourceEvent instanceof EntersTheBattlefieldEvent) {
-                    EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
                     // Only for triggers of permanents
                     if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
                         return true;
@@ -120,13 +119,26 @@ class EleshNornMotherOfMachinesPreventionEffect extends ContinuousRuleModifyingE
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Ability ability = (Ability) getValue("targetAbility");
-        if (ability != null && ability.getAbilityType() == AbilityType.TRIGGERED && game.getOpponents(source.getControllerId()).contains(ability.getControllerId())) {
-            Permanent enteringPermanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (enteringPermanent != null) {
-                return (((TriggeredAbility) ability).checkTrigger(event, game));
-            }
+        if(ability == null || ability.getAbilityType() != AbilityType.TRIGGERED) {
+            return false;
         }
-        return false;
+
+        // Elesh Norn should not prevent Bloodghast trigger from the graveyard.
+        // This checks that the trigger originated from a permanent.
+        if(ability.getSourcePermanentOrLKI(game) == null) {
+            return false;
+        }
+
+        if (!game.getOpponents(source.getControllerId()).contains(ability.getControllerId())) {
+            return false;
+        }
+
+        Permanent enteringPermanent = ((EntersTheBattlefieldEvent) event).getTarget();
+        if (enteringPermanent == null) {
+            return false;
+        }
+
+        return (((TriggeredAbility) ability).checkTrigger(event, game));
     }
 
     @Override

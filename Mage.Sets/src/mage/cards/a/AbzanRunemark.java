@@ -48,7 +48,7 @@ public final class AbzanRunemark extends CardImpl {
         // Enchanted creature has vigilance as long as you control a black or green permanent.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA),
-                new PermanentsOnTheBattlefieldCondition(filter), "{this} has vigilance as long as you control a black or green permanent")));
+                new PermanentsOnTheBattlefieldCondition(filter), "Enchanted creature has vigilance as long as you control a black or green permanent")));
     }
 
     private AbzanRunemark(final AbzanRunemark card) {

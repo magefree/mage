@@ -25,7 +25,7 @@ public class StriveAbility extends SimpleStaticAbility {
         setAbilityWord(AbilityWord.STRIVE);
     }
 
-    public StriveAbility(final StriveAbility ability) {
+    protected StriveAbility(final StriveAbility ability) {
         super(ability);
         this.striveCost = ability.striveCost;
     }

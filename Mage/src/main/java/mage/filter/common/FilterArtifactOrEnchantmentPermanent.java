@@ -6,7 +6,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 
 /**
- *
  * @author LevelX2
  */
 public class FilterArtifactOrEnchantmentPermanent extends FilterPermanent {
@@ -20,7 +19,7 @@ public class FilterArtifactOrEnchantmentPermanent extends FilterPermanent {
         this.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
     }
 
-    public FilterArtifactOrEnchantmentPermanent(final FilterArtifactOrEnchantmentPermanent filter) {
+    protected FilterArtifactOrEnchantmentPermanent(final FilterArtifactOrEnchantmentPermanent filter) {
         super(filter);
     }
 

@@ -29,8 +29,7 @@ public final class EverlastingTorment extends CardImpl {
 
         // Damage can't be prevented.
         this.addAbility(new SimpleStaticAbility(new DamageCantBePreventedEffect(
-                Duration.WhileOnBattlefield, "Damage can't be prevented",
-                true, false
+                Duration.WhileOnBattlefield, "Damage can't be prevented"
         )));
 
         // All damage is dealt as though its source had wither.

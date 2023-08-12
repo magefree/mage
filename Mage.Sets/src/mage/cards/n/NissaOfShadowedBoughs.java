@@ -26,8 +26,6 @@ import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -41,7 +39,7 @@ public final class NissaOfShadowedBoughs extends CardImpl {
     public NissaOfShadowedBoughs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
         this.setStartingLoyalty(4);
 
@@ -76,7 +74,7 @@ public final class NissaOfShadowedBoughs extends CardImpl {
 class NissaOfShadowedBoughsLandEffect extends OneShotEffect {
 
     NissaOfShadowedBoughsLandEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "You may have it become a 3/3 Elemental creature with haste and menace until end of turn. It's still a land.";
     }
 

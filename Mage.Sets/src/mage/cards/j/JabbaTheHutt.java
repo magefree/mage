@@ -44,7 +44,7 @@ public final class JabbaTheHutt extends CardImpl {
 
     public JabbaTheHutt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUTT);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(6);

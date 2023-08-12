@@ -18,6 +18,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.watchers.common.RevoltWatcher;
 
 import java.util.UUID;
 
@@ -36,7 +37,7 @@ public final class LuluLoyalHollyphant extends CardImpl {
     public LuluLoyalHollyphant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEPHANT);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(3);
@@ -51,7 +52,7 @@ public final class LuluLoyalHollyphant extends CardImpl {
                 TargetController.YOU, RevoltCondition.instance, false
         );
         ability.addEffect(new UntapAllEffect(filter).setText(", then untap them"));
-        this.addAbility(ability);
+        this.addAbility(ability, new RevoltWatcher());
 
         // Choose a Background
         this.addAbility(ChooseABackgroundAbility.getInstance());

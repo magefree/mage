@@ -38,10 +38,10 @@ public class EmergeAbility extends SpellAbility {
         this.getManaCostsToPay().clear();
         this.addManaCost(emergeCost.copy());
 
-        this.setRuleAtTheTop(true);        
+        this.setRuleAtTheTop(true);
     }
 
-    public EmergeAbility(final EmergeAbility ability) {
+    protected EmergeAbility(final EmergeAbility ability) {
         super(ability);
         this.emergeCost = ability.emergeCost.copy();
     }

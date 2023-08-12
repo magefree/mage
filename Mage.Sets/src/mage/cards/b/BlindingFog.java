@@ -11,8 +11,6 @@ import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE;
-
 /**
  * @author LevelX2
  */
@@ -25,7 +23,7 @@ public final class BlindingFog extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
 
         // Creatures you control gain hexproof until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURE, false));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
     private BlindingFog(final BlindingFog card) {

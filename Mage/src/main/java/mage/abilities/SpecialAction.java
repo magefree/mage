@@ -33,7 +33,7 @@ public abstract class SpecialAction extends ActivatedAbilityImpl {
         this.manaAbility = manaAbility;
     }
 
-    public SpecialAction(final SpecialAction action) {
+    protected SpecialAction(final SpecialAction action) {
         super(action);
         this.unpaidMana = action.unpaidMana;
         this.manaAbility = action.manaAbility;

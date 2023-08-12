@@ -25,7 +25,7 @@ public final class ChaliceOfLife extends CardImpl {
     public ChaliceOfLife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        this.secondSideCardClazz = ChaliceOfDeath.class;
+        this.secondSideCardClazz = mage.cards.c.ChaliceOfDeath.class;
         this.addAbility(new TransformAbility());
 
 

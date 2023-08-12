@@ -28,7 +28,7 @@ public final class RamsesAssassinLord extends CardImpl {
     public RamsesAssassinLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ASSASSIN);
         this.power = new MageInt(4);

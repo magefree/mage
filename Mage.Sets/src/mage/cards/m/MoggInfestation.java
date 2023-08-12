@@ -74,10 +74,10 @@ class MoggInfestationEffect extends OneShotEffect {
                     }
                 }
             }
-            game.getState().processAction(game);  // Bug #8548
             if (creaturesDied.isEmpty()) {
                 return true;
             }
+            game.getState().processAction(game);  // Bug #8548
             for (Card c : creaturesDied.getCards(game)) {
                 if (game.getState().getZone(c.getId()) == Zone.GRAVEYARD) {
                     Effect effect = new CreateTokenTargetEffect(new GoblinToken(), 2);

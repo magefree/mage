@@ -15,7 +15,6 @@ import mage.target.TargetCard;
 import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DrawDiscardOneOfThemEffect extends OneShotEffect {
@@ -31,7 +30,7 @@ public class DrawDiscardOneOfThemEffect extends OneShotEffect {
                 + ", then discard one of them";
     }
 
-    public DrawDiscardOneOfThemEffect(final DrawDiscardOneOfThemEffect effect) {
+    protected DrawDiscardOneOfThemEffect(final DrawDiscardOneOfThemEffect effect) {
         super(effect);
         this.cardsToDraw = effect.cardsToDraw;
     }
@@ -52,7 +51,7 @@ public class DrawDiscardOneOfThemEffect extends OneShotEffect {
             if (!drawnCards.isEmpty()) {
                 TargetCard cardToDiscard = new TargetCard(Zone.HAND, new FilterCard("card to discard"));
                 cardToDiscard.setNotTarget(true);
-                if (controller.choose(Outcome.Discard, drawnCards, cardToDiscard, game)) {
+                if (controller.choose(Outcome.Discard, drawnCards, cardToDiscard, source, game)) {
                     Card card = controller.getHand().get(cardToDiscard.getFirstTarget(), game);
                     if (card != null) {
                         return controller.discard(card, false, source, game);

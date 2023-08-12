@@ -21,7 +21,7 @@ public class DiesSourceTriggeredAbility extends ZoneChangeTriggeredAbility {
         this(effect, false);
     }
 
-    public DiesSourceTriggeredAbility(final DiesSourceTriggeredAbility ability) {
+    protected DiesSourceTriggeredAbility(final DiesSourceTriggeredAbility ability) {
         super(ability);
     }
 

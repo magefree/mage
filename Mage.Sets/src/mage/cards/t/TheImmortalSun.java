@@ -28,7 +28,7 @@ public final class TheImmortalSun extends CardImpl {
     public TheImmortalSun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Players can't activate planeswalkers' loyalty abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TheImmortalSunCantActivateEffect()));

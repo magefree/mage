@@ -1,8 +1,5 @@
 package mage.cards.a;
 
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -15,30 +12,26 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class AnchorToReality extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or creature");
-
-    static {
-        filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
-    }
 
     public AnchorToReality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
 
         // As an additional cost to cast this spell, sacrifice an artifact or creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
 
         // Search your library for an Equipment or Vehicle card, put that card onto the battlefield, then shuffle. If it has mana value less than the sacrificed permanent's mana value, scry 2.
         this.getSpellAbility().addEffect(new AnchorToRealityEffect());

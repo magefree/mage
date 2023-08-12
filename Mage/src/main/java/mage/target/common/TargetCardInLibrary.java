@@ -49,7 +49,7 @@ public class TargetCardInLibrary extends TargetCard {
         this.librarySearchLimit = Integer.MAX_VALUE;
     }
 
-    public TargetCardInLibrary(final TargetCardInLibrary target) {
+    protected TargetCardInLibrary(final TargetCardInLibrary target) {
         super(target);
         this.librarySearchLimit = target.librarySearchLimit;
     }

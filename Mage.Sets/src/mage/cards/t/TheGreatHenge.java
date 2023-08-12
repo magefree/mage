@@ -34,7 +34,7 @@ public final class TheGreatHenge extends CardImpl {
     public TheGreatHenge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{7}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // This spell costs {X} less to cast, where X is the greatest power among creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new TheGreatHengeCostReductionEffect()));

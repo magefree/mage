@@ -1,15 +1,15 @@
-    
+
 
 package mage.game.turn;
 
 import java.util.UUID;
+
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CleanupStep extends Step {
@@ -21,7 +21,7 @@ public class CleanupStep extends Step {
         this.postStepEvent = EventType.CLEANUP_STEP_POST;
     }
 
-    public CleanupStep(final CleanupStep step) {
+    protected CleanupStep(final CleanupStep step) {
         super(step);
     }
 
@@ -32,7 +32,7 @@ public class CleanupStep extends Step {
         game.getState().setPriorityPlayerId(activePlayer.getId());
         //20091005 - 514.1
         if (activePlayer.isInGame()) {
-            activePlayer.discardToMax(game);            
+            activePlayer.discardToMax(game);
         }
         //20100423 - 514.2
         game.getBattlefield().endOfTurn(activePlayerId, game);
@@ -43,7 +43,7 @@ public class CleanupStep extends Step {
     public void endStep(Game game, UUID activePlayerId) {
         Player activePlayer = game.getPlayer(activePlayerId);
         activePlayer.setGameUnderYourControl(true);
-        super.endStep(game, activePlayerId);         
+        super.endStep(game, activePlayerId);
     }
 
     @Override

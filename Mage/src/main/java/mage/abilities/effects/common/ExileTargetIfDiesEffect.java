@@ -23,7 +23,7 @@ public class ExileTargetIfDiesEffect extends OneShotEffect {
         this.staticText = "If that " + targetName + " would die this turn, exile it instead";
     }
 
-    public ExileTargetIfDiesEffect(final ExileTargetIfDiesEffect effect) {
+    protected ExileTargetIfDiesEffect(final ExileTargetIfDiesEffect effect) {
         super(effect);
     }
 

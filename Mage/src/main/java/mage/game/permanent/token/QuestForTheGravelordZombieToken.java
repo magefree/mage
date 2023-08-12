@@ -1,15 +1,10 @@
-
 package mage.game.permanent.token;
-
 
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
- *
  * spjspj
  */
 public final class QuestForTheGravelordZombieToken extends TokenImpl {
@@ -23,11 +18,9 @@ public final class QuestForTheGravelordZombieToken extends TokenImpl {
         color.setBlack(true);
         power = new MageInt(5);
         toughness = new MageInt(5);
-
-        availableImageSetCodes.addAll(Arrays.asList("ZEN", "DDR", "BBD"));
     }
 
-    public QuestForTheGravelordZombieToken(final QuestForTheGravelordZombieToken token) {
+    protected QuestForTheGravelordZombieToken(final QuestForTheGravelordZombieToken token) {
         super(token);
     }
 

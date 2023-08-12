@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -18,6 +17,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author L_J
@@ -32,7 +33,7 @@ public final class Halfdane extends CardImpl {
 
     public Halfdane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -77,33 +78,12 @@ class HalfdaneUpkeepEffect extends OneShotEffect {
             return false;
         }
 
-        ContinuousEffect effect = new HalfdaneSetBasePowerToughnessEffect(permanent.getPower().getValue(), permanent.getToughness().getValue());
+        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(
+            permanent.getPower().getValue(),
+            permanent.getToughness().getValue(),
+            Duration.UntilYourNextUpkeepStep,
+            SubLayer.SetPT_7b);
         game.addEffect(effect, source);
         return true;
     }
-}
-
-class HalfdaneSetBasePowerToughnessEffect extends SetBasePowerToughnessSourceEffect {
-
-    public HalfdaneSetBasePowerToughnessEffect(int power, int toughness) {
-        super(power, toughness, Duration.UntilYourNextTurn, SubLayer.SetPT_7b, true);
-    }
-
-    public HalfdaneSetBasePowerToughnessEffect(final HalfdaneSetBasePowerToughnessEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (super.isInactive(source, game) && game.getStep().getType().isAfter(PhaseStep.UPKEEP)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public HalfdaneSetBasePowerToughnessEffect copy() {
-        return new HalfdaneSetBasePowerToughnessEffect(this);
-    }
-
 }

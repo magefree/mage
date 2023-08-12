@@ -1,6 +1,5 @@
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -12,9 +11,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
-import mage.constants.*;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacedCard;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.game.Game;
@@ -24,11 +23,12 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
-public final class JornGodOfWinter extends ModalDoubleFacesCard {
+public final class JornGodOfWinter extends ModalDoubleFacedCard {
 
     private static final FilterPermanent filter = new FilterPermanent();
     private static final FilterPermanentCard filter2 = new FilterPermanentCard("snow permanent card from your graveyard");
@@ -39,16 +39,16 @@ public final class JornGodOfWinter extends ModalDoubleFacesCard {
     }
 
     public JornGodOfWinter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{G}",
-                "Kaldring, the Rimestaff", new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{1}{U}{B}"
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY, SuperType.SNOW}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{2}{G}",
+                "Kaldring, the Rimestaff",
+                new SuperType[]{SuperType.LEGENDARY, SuperType.SNOW}, new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{1}{U}{B}"
         );
 
         // 1.
         // Jorn, God of Winter
         // Legendary Snow Creature - God
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
-        this.getLeftHalfCard().addSuperType(SuperType.SNOW);
         this.getLeftHalfCard().setPT(new MageInt(3), new MageInt(3));
 
         // Whenever Jorn attacks, untap each snow permanent you control.
@@ -59,9 +59,6 @@ public final class JornGodOfWinter extends ModalDoubleFacesCard {
         // 2.
         // Kaldring, the Rimestaff
         // Legendary Snow Artifact
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
-        this.getRightHalfCard().addSuperType(SuperType.SNOW);
-
         // {T}: You may play target snow permanent card from your graveyard this turn. If you do, it enters the battlefield tapped.
         Ability ability = new SimpleActivatedAbility(new KaldringTheRimestaffEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
@@ -95,7 +92,7 @@ class KaldringTheRimestaffEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source){
+    public boolean apply(Game game, Ability source) {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (card != null) {
             ContinuousEffect effect = new KaldringTheRimestaffGraveyardEffect();

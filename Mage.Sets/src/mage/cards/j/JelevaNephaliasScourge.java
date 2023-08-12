@@ -13,6 +13,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -33,7 +34,7 @@ public final class JelevaNephaliasScourge extends CardImpl {
 
     public JelevaNephaliasScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.WIZARD);
 
@@ -125,10 +126,11 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+        if (controller == null || exileZone == null) {
             return false;
         }
-        Cards cards = new CardsImpl(game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)));
+        Cards cards = new CardsImpl(exileZone);
         return CardUtil.castSpellWithAttributesForFree(
                 controller, source, game, cards,
                 StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY

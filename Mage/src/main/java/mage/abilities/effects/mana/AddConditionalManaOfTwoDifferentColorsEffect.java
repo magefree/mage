@@ -1,6 +1,5 @@
 package mage.abilities.effects.mana;
 
-import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
@@ -40,9 +39,9 @@ public class AddConditionalManaOfTwoDifferentColorsEffect extends ManaEffect {
     public Mana produceMana(Game game, Ability source) {
         if (game != null) {
             Player player = getPlayer(game, source);
-            Mana mana = new ConditionalMana(manaBuilder.setMana(
+            Mana mana = manaBuilder.setMana(
                     ManaChoice.chooseTwoDifferentColors(
-                            player, game), source, game).build());
+                            player, game), source, game).build();
             return mana;
         }
         return new Mana();

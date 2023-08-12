@@ -20,7 +20,7 @@ public final class GatstafShepherd extends CardImpl {
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WEREWOLF);
 
-        this.secondSideCardClazz = GatstafHowler.class;
+        this.secondSideCardClazz = mage.cards.g.GatstafHowler.class;
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

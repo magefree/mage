@@ -2,6 +2,7 @@
 package mage.game.turn;
 
 import java.util.UUID;
+
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -9,7 +10,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FirstCombatDamageStep extends Step {
@@ -21,7 +21,7 @@ public class FirstCombatDamageStep extends Step {
         this.postStepEvent = EventType.COMBAT_DAMAGE_STEP_POST;
     }
 
-    public FirstCombatDamageStep(final FirstCombatDamageStep step) {
+    protected FirstCombatDamageStep(final FirstCombatDamageStep step) {
         super(step);
     }
 

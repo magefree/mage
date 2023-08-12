@@ -21,7 +21,7 @@ public final class GravenLore extends CardImpl {
     public GravenLore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
 
         // Scry X, where is the amount of {S} spent to cast this spell, then draw three cards.
         this.getSpellAbility().addEffect(new GravenLoreEffect());

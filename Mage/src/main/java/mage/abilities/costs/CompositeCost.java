@@ -18,7 +18,7 @@ public class CompositeCost implements Cost {
         this.description = description;
     }
 
-    public CompositeCost(final CompositeCost cost) {
+    protected CompositeCost(final CompositeCost cost) {
         this.firstCost = cost.firstCost.copy();
         this.secondCost = cost.secondCost.copy();
         this.description = cost.description;

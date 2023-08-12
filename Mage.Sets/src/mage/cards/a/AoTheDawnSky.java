@@ -43,7 +43,7 @@ public final class AoTheDawnSky extends CardImpl {
     public AoTheDawnSky(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(5);
@@ -100,7 +100,7 @@ class AoTheDawnSkyEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 7));
         TargetCard target = new AoTheDawnSkyTarget();
-        player.choose(outcome, cards, target, game);
+        player.choose(outcome, cards, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);

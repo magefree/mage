@@ -59,6 +59,11 @@ public class PlayersAttackedThisTurnWatcher extends Watcher {
         }
     }
 
+    public boolean hasPlayerAttackedPlayer(UUID attacker, UUID defender){
+        PlayerList defendersList = playersAttackedThisTurn.getOrDefault(attacker, null);
+        return defendersList != null && defendersList.contains(defender);
+    }
+
     public int getAttackedPlayersCount(UUID playerID) {
         PlayerList defendersList = playersAttackedThisTurn.getOrDefault(playerID, null);
         if (defendersList != null) {

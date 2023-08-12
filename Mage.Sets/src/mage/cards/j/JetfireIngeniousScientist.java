@@ -35,7 +35,7 @@ public final class JetfireIngeniousScientist extends CardImpl {
     public JetfireIngeniousScientist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ROBOT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

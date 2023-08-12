@@ -9,7 +9,7 @@ import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.AdventureCardSpell;
 import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCardHalf;
+import mage.cards.ModalDoubleFacedCardHalf;
 import mage.cards.SplitCardHalf;
 import mage.constants.*;
 import mage.filter.FilterCard;
@@ -89,7 +89,7 @@ enum IsBeingCastFromHandCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
-        if (object instanceof SplitCardHalf || object instanceof AdventureCardSpell || object instanceof ModalDoubleFacesCardHalf) {
+        if (object instanceof SplitCardHalf || object instanceof AdventureCardSpell || object instanceof ModalDoubleFacedCardHalf) {
             UUID mainCardId = ((Card) object).getMainCard().getId();
             object = game.getObject(mainCardId);
         }

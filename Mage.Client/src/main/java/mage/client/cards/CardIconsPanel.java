@@ -175,7 +175,32 @@ public class CardIconsPanel extends JPanel {
         this.removeAll();
         if (newIcons != null) {
             this.icons.clear();
-            this.icons.addAll(newIcons);
+            TreeMap<CardIconType, List<CardIcon>> cardIconMap = new TreeMap<>();
+            newIcons.forEach(icon -> cardIconMap.computeIfAbsent(icon.getIconType(), k -> new ArrayList<>()).add(icon));
+
+            for (Map.Entry<CardIconType, List<CardIcon>> entry : cardIconMap.entrySet()) {
+                List<CardIcon> combined = entry.getValue()
+                        .stream()
+                        .filter(icon -> icon != null && icon.canBeCombined())
+                        .sorted(CardIconComparator.instance)
+                        .collect(Collectors.toList());
+
+                if (combined.size() > 1) {
+                    entry.getValue().removeAll(combined);
+
+                    String combinedHint = combined.stream()
+                            .map(CardIcon::getCombinedInfo)
+                            .collect(Collectors.joining("<br>"));
+
+                    CardIcon combinedIcon = new CardIconImpl(entry.getKey(), combinedHint);
+
+                    this.icons.add(combinedIcon);
+                    this.icons.addAll(entry.getValue());
+                } else {
+                    this.icons.addAll(entry.getValue());
+                }
+
+            }
         }
 
         // auto-hide panel on empty icons
@@ -293,7 +318,11 @@ public class CardIconsPanel extends JPanel {
         //BufferedImage iconImage = ImageManagerImpl.instance.getCardIcon(icon.getIconType().getResourceName(), this.halfSize * 2);
 
         // cached call
-        BufferedImage iconImageCached = ImageCache.getCardIconImage(icon.getIconType().getResourceName(), this.halfSize * 2, color.toString());
+        BufferedImage iconImageCached = ImageCache.getCardIconImage(
+                icon.getIconType().getResourceName(),
+                this.halfSize * 2,
+                color.toString()
+        ).getImage();
 
         if (iconImageCached != null && this.font != null) {
             BufferedImage iconImageWithText = ImageManagerImpl.deepCopy(iconImageCached); // must copy cached value before modify

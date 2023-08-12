@@ -17,11 +17,19 @@ public final class ChandraAwakenedInfernoEmblem extends Emblem {
      */
 
     public ChandraAwakenedInfernoEmblem() {
-        setName("Emblem Chandra");
-        setExpansionSetCodeForImage("M20");
+        super("Emblem Chandra");
         this.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
                 Zone.COMMAND, new DamageControllerEffect(1, "this emblem"),
                 TargetController.YOU, false, true
         ));
+    }
+
+    private ChandraAwakenedInfernoEmblem(final ChandraAwakenedInfernoEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public ChandraAwakenedInfernoEmblem copy() {
+        return new ChandraAwakenedInfernoEmblem(this);
     }
 }

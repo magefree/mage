@@ -5,8 +5,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -42,7 +41,7 @@ public class AminatouTheFateshifter extends CardImpl {
 
     public AminatouTheFateshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{W}{U}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.AMINATOU);
 
         this.setStartingLoyalty(3);
@@ -52,8 +51,7 @@ public class AminatouTheFateshifter extends CardImpl {
         this.addAbility(ability);
 
         // −1: Exile another target permanent you own, then return it to the battlefield under your control.
-        ability = new LoyaltyAbility(new ExileTargetForSourceEffect(), -1);
-        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect().concatBy(", then"));
+        ability = new LoyaltyAbility(new ExileThenReturnTargetEffect(true, false), -1);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 

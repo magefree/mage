@@ -27,7 +27,7 @@ public class CantBeBlockedByOneEffect extends ContinuousEffectImpl {
         staticText = "{this} can't be blocked except by " + CardUtil.numberToText(amount) + " or more creatures";
     }
 
-    public CantBeBlockedByOneEffect(final CantBeBlockedByOneEffect effect) {
+    protected CantBeBlockedByOneEffect(final CantBeBlockedByOneEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

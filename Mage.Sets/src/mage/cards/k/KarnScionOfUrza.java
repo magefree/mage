@@ -31,7 +31,7 @@ public final class KarnScionOfUrza extends CardImpl {
     public KarnScionOfUrza(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KARN);
         this.setStartingLoyalty(5);
 

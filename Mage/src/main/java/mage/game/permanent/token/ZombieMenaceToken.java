@@ -5,8 +5,6 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 public class ZombieMenaceToken extends TokenImpl {
 
     public ZombieMenaceToken() {
@@ -23,17 +21,6 @@ public class ZombieMenaceToken extends TokenImpl {
         toughness = new MageInt(xValue);
 
         this.addAbility(new MenaceAbility());
-
-        availableImageSetCodes.addAll(Arrays.asList("MID"));
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("MID")) {
-            this.setTokenType(2);
-        }
     }
 
     private ZombieMenaceToken(final ZombieMenaceToken token) {

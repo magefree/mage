@@ -59,7 +59,7 @@ class TyranidHarridanTriggeredAbility extends DealsDamageToAPlayerAllTriggeredAb
 
     TyranidHarridanTriggeredAbility() {
         super(new CreateTokenEffect(new TyranidGargoyleToken()), filter, false, SetTargetPointer.NONE, true);
-        this.setTriggerPhrase("Shrieking Gargoyles");
+        this.withFlavorWord("Shrieking Gargoyles");
     }
 
     private TyranidHarridanTriggeredAbility(final TyranidHarridanTriggeredAbility ability) {

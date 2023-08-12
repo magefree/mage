@@ -1,6 +1,7 @@
 package mage.cards.mock;
 
 import mage.MageInt;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
@@ -9,6 +10,8 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
+import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.List;
 
@@ -16,14 +19,12 @@ import java.util.List;
  * @author North
  */
 public class MockSplitCard extends SplitCard {
-
     public MockSplitCard(CardInfo card) {
         super(null, new CardSetInfo(card.getName(), card.getSetCode(), card.getCardNumber(), card.getRarity()),
                 card.getTypes().toArray(new CardType[0]),
                 join(card.getManaCosts(CardInfo.ManaCostSide.LEFT)),
                 join(card.getManaCosts(CardInfo.ManaCostSide.RIGHT)),
                 getSpellAbilityType(card));
-        this.expansionSetCode = card.getSetCode();
         this.power = mageIntFromString(card.getPower());
         this.toughness = mageIntFromString(card.getToughness());
         this.cardType = card.getTypes();
@@ -40,7 +41,7 @@ public class MockSplitCard extends SplitCard {
         this.nightCard = card.isNightCard();
 
         if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
-            this.secondSideCard = new MockCard(CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode()));
+            this.secondSideCard = new MockCard(CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber()));
         }
 
         this.flipCardName = card.getFlipCardName();
@@ -49,20 +50,22 @@ public class MockSplitCard extends SplitCard {
             this.addAbility(textAbilityFromString(ruleText));
         }
 
-        CardInfo leftHalf = CardRepository.instance.findCardWPreferredSet(getLeftHalfName(card), card.getSetCode(), true);
+        CardInfo leftHalf = CardRepository.instance.findCardWithPreferredSetAndNumber(getLeftHalfName(card), card.getSetCode(), card.getCardNumber(), true);
         if (leftHalf != null) {
             this.leftHalfCard = new MockSplitCardHalf(leftHalf);
             ((SplitCardHalf) this.leftHalfCard).setParentCard(this);
         }
 
-        CardInfo rightHalf = CardRepository.instance.findCardWPreferredSet(getRightHalfName(card), card.getSetCode(), true);
+        CardInfo rightHalf = CardRepository.instance.findCardWithPreferredSetAndNumber(getRightHalfName(card), card.getSetCode(), card.getCardNumber(), true);
         if (rightHalf != null) {
             this.rightHalfCard = new MockSplitCardHalf(rightHalf);
             ((SplitCardHalf) this.rightHalfCard).setParentCard(this);
         }
+
+        this.extraDeckCard = card.isExtraDeckCard();
     }
 
-    public MockSplitCard(final MockSplitCard card) {
+    protected MockSplitCard(final MockSplitCard card) {
         super(card);
     }
 
@@ -108,5 +111,23 @@ public class MockSplitCard extends SplitCard {
 
     private static String getRightHalfName(CardInfo card) {
         return card.getName().split(" // ")[1];
+    }
+
+    @Override
+    public List<String> getRules() {
+        // SplitCard adds additional fuse text to the card and to the database,
+        // so a MockSplitCard must ignore it (duplicate fix)
+        Abilities<Ability> sourceAbilities = this.getAbilities();
+        return CardUtil.getCardRulesWithAdditionalInfo(
+                this.getId(),
+                this.getName(),
+                sourceAbilities,
+                sourceAbilities
+        );
+    }
+
+    @Override
+    public List<String> getRules(Game game) {
+        return this.getRules();
     }
 }

@@ -1,10 +1,7 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
@@ -13,8 +10,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.permanent.token.EldraziScionToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Blisterpod extends CardImpl {
@@ -27,10 +25,10 @@ public final class Blisterpod extends CardImpl {
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
+
         // When Blisterpod dies, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
-        Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("Create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\"");
-        this.addAbility(new DiesSourceTriggeredAbility(effect, false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new EldraziScionToken())
+                .setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\""), false));
     }
 
     private Blisterpod(final Blisterpod card) {

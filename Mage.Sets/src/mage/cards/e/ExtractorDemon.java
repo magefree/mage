@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
@@ -40,7 +40,7 @@ public final class ExtractorDemon extends CardImpl {
 
         // Whenever another creature leaves the battlefield, you may have target player put the top two cards of their library into their graveyard.
         Ability ability = new LeavesBattlefieldAllTriggeredAbility(
-                new PutLibraryIntoGraveTargetEffect(2)
+                new MillCardsTargetEffect(2)
                         .setText("you may have target player mill two cards"),
                 filter, true
         );

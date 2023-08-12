@@ -2,7 +2,6 @@
 package mage.abilities.effects.common.search;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -41,7 +40,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
         this.staticText = "search " + searchWhatText + " graveyard, hand, and library for " + searchForText + " and exile them. Then that player shuffles";
     }
 
-    public SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(final SearchTargetGraveyardHandLibraryForCardNameAndExileEffect effect) {
+    protected SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(final SearchTargetGraveyardHandLibraryForCardNameAndExileEffect effect) {
         super(effect);
         this.searchWhatText = effect.searchWhatText;
         this.searchForText = effect.searchForText;
@@ -69,7 +68,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 if (cardsCount > 0) {
                     filter.setMessage("card named " + cardName + " in the graveyard of " + targetPlayer.getName());
                     TargetCard target = new TargetCard((graveyardExileOptional ? 0 : cardsCount), cardsCount, Zone.GRAVEYARD, filter);
-                    if (controller.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, game)) {
+                    if (controller.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, source, game)) {
                         controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
                     }
                 }
@@ -78,17 +77,17 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 cardsCount = (cardName.isEmpty() ? 0 : targetPlayer.getHand().count(filter, game));
                 filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getName());
                 TargetCard target = new TargetCard(0, cardsCount, Zone.HAND, filter);
-                if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
+                if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, source, game)) {
                     controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
                 }
 
                 // cards in Library
                 Cards cardsInLibrary = new CardsImpl();
-                cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
+                cardsInLibrary.addAllCards(targetPlayer.getLibrary().getCards(game));
                 cardsCount = (cardName.isEmpty() ? 0 : cardsInLibrary.count(filter, game));
                 filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
                 TargetCardInLibrary targetLib = new TargetCardInLibrary(0, cardsCount, filter);
-                if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, game)) {
+                if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, source, game)) {
                     controller.moveCards(new CardsImpl(targetLib.getTargets()), Zone.EXILED, source, game);
                 }
                 targetPlayer.shuffleLibrary(source, game);

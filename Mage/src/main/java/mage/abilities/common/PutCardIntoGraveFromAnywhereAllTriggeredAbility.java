@@ -56,7 +56,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
         setTriggerPhrase(sb.toString());
     }
 
-    public PutCardIntoGraveFromAnywhereAllTriggeredAbility(final PutCardIntoGraveFromAnywhereAllTriggeredAbility ability) {
+    protected PutCardIntoGraveFromAnywhereAllTriggeredAbility(final PutCardIntoGraveFromAnywhereAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;

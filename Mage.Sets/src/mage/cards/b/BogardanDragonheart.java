@@ -32,8 +32,7 @@ public final class BogardanDragonheart extends CardImpl {
 
         // Sacrifice another creature: Until end of turn, Bogardan Dragonheart becomes a Dragon with base power and toughness 4/4, flying, and haste.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
-                new BogardanDragonheartToken(), null, Duration.EndOfTurn, false,
-                false, null, null, false
+                new BogardanDragonheartToken(), CardType.CREATURE, Duration.EndOfTurn
         ), new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))));
     }
 

@@ -3,7 +3,6 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import java.util.Arrays;
 
 /**
  * @author TheElk801
@@ -17,11 +16,9 @@ public final class RogueToken extends TokenImpl {
         color.setBlack(true);
         power = new MageInt(2);
         toughness = new MageInt(2);
-
-        availableImageSetCodes = Arrays.asList("SNC");
     }
 
-    public RogueToken(final RogueToken token) {
+    protected RogueToken(final RogueToken token) {
         super(token);
     }
 

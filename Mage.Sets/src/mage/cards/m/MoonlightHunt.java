@@ -50,7 +50,7 @@ class MoonlightHuntEffect extends OneShotEffect {
 
     MoonlightHuntEffect() {
         super(Outcome.Damage);
-        this.staticText = "Choose target creature you don't control. Each creature you control that's a Wolf or Werewolf deals damage equal to its power to that creature";
+        this.staticText = "Choose target creature you don't control. Each creature you control that's a Wolf or a Werewolf deals damage equal to its power to that creature";
     }
 
     private MoonlightHuntEffect(final MoonlightHuntEffect effect) {

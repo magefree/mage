@@ -7,7 +7,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.UntapEnchantedEffect;
+import mage.abilities.effects.common.UntapAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TotemArmorAbility;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class CrabUmbra extends CardImpl {
         this.addAbility(ability);
 
         // {2}{U}: Untap enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapAttachedEffect(), new ManaCostsImpl<>("{2}{U}")));
 
         // Totem armor
         this.addAbility(new TotemArmorAbility());

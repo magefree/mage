@@ -6,7 +6,6 @@ import mage.constants.PhaseStep;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class EndStep extends Step {
@@ -18,7 +17,7 @@ public class EndStep extends Step {
         this.postStepEvent = EventType.END_TURN_STEP_POST;
     }
 
-    public EndStep(final EndStep step) {
+    protected EndStep(final EndStep step) {
         super(step);
     }
 

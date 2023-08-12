@@ -61,7 +61,7 @@ class FirestormEffect extends OneShotEffect {
 
     public FirestormEffect() {
         super(Outcome.Benefit);
-        staticText = "{this} deals X damage to each of X target creatures and/or players";
+        staticText = "{this} deals X damage to each of X targets";
     }
 
     public FirestormEffect(final FirestormEffect effect) {

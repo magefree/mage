@@ -13,10 +13,10 @@ import java.util.Objects;
  */
 public abstract class ConditionalManaBuilder implements Builder<ConditionalMana> {
 
-    protected Mana mana;
+    protected ConditionalMana mana;
 
     public ConditionalManaBuilder setMana(Mana mana, Ability source, Game game) {
-        this.mana = mana;
+        this.mana = new ConditionalMana(mana);
         return this;
     }
 

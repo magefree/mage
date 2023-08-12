@@ -17,7 +17,7 @@ public class FilterPermanentCard extends FilterCard {
         this.add(PermanentPredicate.instance);
     }
 
-    public FilterPermanentCard(final FilterPermanentCard filter) {
+    protected FilterPermanentCard(final FilterPermanentCard filter) {
         super(filter);
     }
 

@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author LoneFox
  */
@@ -19,11 +17,9 @@ public final class GoblinRogueToken extends TokenImpl {
         subtype.add(SubType.ROGUE);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes.addAll(Arrays.asList("LRW", "MMA", "ZNC"));
     }
 
-    public GoblinRogueToken(final GoblinRogueToken token) {
+    protected GoblinRogueToken(final GoblinRogueToken token) {
         super(token);
     }
 

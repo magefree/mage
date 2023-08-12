@@ -4,7 +4,7 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.continuous.BoostOpponentsEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class BeyeenVeil extends ModalDoubleFacesCard {
+public final class BeyeenVeil extends ModalDoubleFacedCard {
 
     public BeyeenVeil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

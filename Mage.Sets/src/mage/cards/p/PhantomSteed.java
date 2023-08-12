@@ -5,9 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -23,10 +21,11 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
+import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTargets;
 import mage.util.CardUtil;
+import mage.util.functions.CopyTokenFunction;
 
 import java.util.List;
 import java.util.Objects;
@@ -58,7 +57,6 @@ public final class PhantomSteed extends CardImpl {
         // When Phantom Steed enters the battlefield, exile another target creature you control until Phantom Steed leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(filter));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
 
         // Whenever Phantom Steed attacks, create a tapped and attacking token that's a copy of the exiled creature, except it's an Illusion in addition to its other types. Sacrifice that token at end of combat.
@@ -99,8 +97,7 @@ class PhantomSteedEffect extends OneShotEffect {
             return false;
         }
         for (Card card : exileZone.getCards(game)) {
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(card, game);
+            Token token = CopyTokenFunction.createTokenCopy(card, game);
             token.addSubType(SubType.ILLUSION);
             token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true);
             List<Permanent> permanents = token

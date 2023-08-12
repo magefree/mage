@@ -20,7 +20,6 @@ import mage.players.Player;
 public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModifyingEffectImpl {
 
     private int validForTurnNum;
-    //private String targetName;
     FilterPermanent filter;
 
     /**
@@ -35,7 +34,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
         this.filter = filter;
     }
 
-    public DontUntapInPlayersNextUntapStepAllEffect(final DontUntapInPlayersNextUntapStepAllEffect effect) {
+    protected DontUntapInPlayersNextUntapStepAllEffect(final DontUntapInPlayersNextUntapStepAllEffect effect) {
         super(effect);
         this.validForTurnNum = effect.validForTurnNum;
         this.filter = effect.filter;
@@ -89,7 +88,7 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
             }
         }
 
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
+        if (game.getTurnStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
                 Player controller = game.getPlayer(source.getControllerId());
@@ -114,6 +113,9 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return filter.getMessage() + " target opponent controls don't untap during their next untap step.";
+        return filter.getMessage()
+                + ' '
+                + getTargetPointer().describeTargets(mode.getTargets(), "target opponent")
+                + " controls don't untap during their next untap step";
     }
 }

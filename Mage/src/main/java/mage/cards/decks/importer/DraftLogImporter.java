@@ -2,10 +2,8 @@ package mage.cards.decks.importer;
 
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,14 +26,7 @@ public class DraftLogImporter extends PlainTextDeckImporter {
         Matcher pickMatcher = PICK_PATTERN.matcher(line);
         if (pickMatcher.matches()) {
             String name = pickMatcher.group(1);
-            List<CardInfo> cards = getCardLookup().lookupCardInfo(new CardCriteria().setCodes(currentSet).name(name));
-            CardInfo card = null;
-            if (!cards.isEmpty()) {
-                card = cards.get(0);
-            } else {
-                card = getCardLookup().lookupCardInfo(name).orElse(null);
-            }
-
+            CardInfo card = getCardLookup().lookupCardInfo(name, currentSet).orElse(null);
             if (card != null) {
                 deckList.getCards().add(new DeckCardInfo(card.getName(), card.getCardNumber(), card.getSetCode()));
             } else {

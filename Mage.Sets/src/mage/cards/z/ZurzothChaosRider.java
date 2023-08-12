@@ -27,7 +27,7 @@ public final class ZurzothChaosRider extends CardImpl {
     public ZurzothChaosRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEVIL);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

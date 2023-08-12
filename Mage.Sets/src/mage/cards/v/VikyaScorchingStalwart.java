@@ -29,7 +29,7 @@ public final class VikyaScorchingStalwart extends CardImpl {
     public VikyaScorchingStalwart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
@@ -43,7 +43,7 @@ public final class VikyaScorchingStalwart extends CardImpl {
         ability.addCost(new UntapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetAnyTarget());
-        this.addAbility(ability.withFlavorWord("Hadoken"));
+        this.addAbility(ability);
     }
 
     private VikyaScorchingStalwart(final VikyaScorchingStalwart card) {

@@ -22,7 +22,7 @@ public class RegenerateTargetEffect extends ReplacementEffectImpl {
         super(Duration.EndOfTurn, Outcome.Regenerate);
     }
 
-    public RegenerateTargetEffect(final RegenerateTargetEffect effect) {
+    protected RegenerateTargetEffect(final RegenerateTargetEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ public class RegenerateTargetEffect extends ReplacementEffectImpl {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append("Regenerate ");
+        sb.append("regenerate ");
         Target target = mode.getTargets().get(0);
         if (target != null) {
             if (!target.getTargetName().toLowerCase(Locale.ENGLISH).startsWith("another")) {

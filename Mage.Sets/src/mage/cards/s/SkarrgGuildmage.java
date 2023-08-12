@@ -17,7 +17,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.permanent.token.custom.ElementalCreatureToken;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 /**
@@ -40,7 +40,7 @@ public final class SkarrgGuildmage extends CardImpl {
                 new ManaCostsImpl<>("{R}{G}")));
         // {1}{R}{G}: Target land you control becomes a 4/4 Elemental creature until end of turn. It's still a land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(
-                new ElementalCreatureToken(4, 4, "4/4 Elemental creature"),
+                new CreatureToken(4, 4, "4/4 Elemental creature", SubType.ELEMENTAL),
                 false, true, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}{G}") );
         ability.addTarget(new TargetPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);

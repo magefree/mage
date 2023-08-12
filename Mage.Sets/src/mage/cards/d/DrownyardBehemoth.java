@@ -3,8 +3,10 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.SourceEnteredThisTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.EmergeAbility;
 import mage.abilities.keyword.FlashAbility;
@@ -34,7 +36,10 @@ public final class DrownyardBehemoth extends CardImpl {
         this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{7}{U}")));
         
         // Drownyard Behemoth has hexproof as long as it entered the battlefield this turn.
-        this.addAbility(new AsEntersBattlefieldAbility(new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn)));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
+                SourceEnteredThisTurnCondition.instance, "{this} has hexproof as long as it entered the battlefield this turn"
+        )));
     }
 
     private DrownyardBehemoth(final DrownyardBehemoth card) {

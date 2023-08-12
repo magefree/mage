@@ -11,7 +11,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class SacrificeSourceUnlessConditionEffect extends OneShotEffect {
@@ -23,7 +22,7 @@ public class SacrificeSourceUnlessConditionEffect extends OneShotEffect {
         this.condition = condition;
     }
 
-    public SacrificeSourceUnlessConditionEffect(final SacrificeSourceUnlessConditionEffect effect) {
+    protected SacrificeSourceUnlessConditionEffect(final SacrificeSourceUnlessConditionEffect effect) {
         super(effect);
         this.condition = effect.condition;
     }

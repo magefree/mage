@@ -12,7 +12,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class ChooseBasicLandTypeEffect extends OneShotEffect {
@@ -24,7 +23,7 @@ public class ChooseBasicLandTypeEffect extends OneShotEffect {
         this.staticText = "choose a basic land type";
     }
 
-    public ChooseBasicLandTypeEffect(final ChooseBasicLandTypeEffect effect) {
+    protected ChooseBasicLandTypeEffect(final ChooseBasicLandTypeEffect effect) {
         super(effect);
     }
 

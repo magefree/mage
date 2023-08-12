@@ -21,7 +21,7 @@ public final class ZhugeJinWuStrategist extends CardImpl {
 
     public ZhugeJinWuStrategist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.ADVISOR);
 
         this.power = new MageInt(1);

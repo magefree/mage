@@ -45,15 +45,15 @@ public abstract class TargetImpl implements Target {
     @Override
     public abstract TargetImpl copy();
 
-    public TargetImpl() {
+    protected TargetImpl() {
         this(false);
     }
 
-    public TargetImpl(boolean notTarget) {
+    protected TargetImpl(boolean notTarget) {
         this.notTarget = notTarget;
     }
 
-    public TargetImpl(final TargetImpl target) {
+    protected TargetImpl(final TargetImpl target) {
         this.targetName = target.targetName;
         this.zone = target.zone;
         this.maxNumberOfTargets = target.maxNumberOfTargets;
@@ -103,7 +103,10 @@ public abstract class TargetImpl implements Target {
         StringBuilder sb = new StringBuilder();
         int min = getMinNumberOfTargets();
         int max = getMaxNumberOfTargets();
-        if (min != 1 || max != 1) {
+        if (min > 0 && max == Integer.MAX_VALUE) {
+            sb.append(CardUtil.numberToText(min));
+            sb.append(" or more ");
+        } else if (!getTargetName().startsWith("X") && (min != 1 || max != 1)) {
             if (min < max && max != Integer.MAX_VALUE) {
                 if (min == 1 && max == 2) {
                     sb.append("one or ");
@@ -116,7 +119,7 @@ public abstract class TargetImpl implements Target {
             sb.append(CardUtil.numberToText(max));
             sb.append(' ');
         }
-        if (!isNotTarget() && !getTargetName().contains("target")) {
+        if (!isNotTarget() && !getTargetName().contains("target ") && !getTargetName().endsWith("any target")) {
             sb.append("target ");
         }
         if (isNotTarget() && min == 1 && max == 1) {
@@ -350,7 +353,7 @@ public abstract class TargetImpl implements Target {
                 }
             } else {
                 // Try to autochoosen
-                UUID autoChosenId = tryToAutoChoose(playerId, source, game);
+                UUID autoChosenId = required ? tryToAutoChoose(playerId, source, game) : null;
                 if (autoChosenId != null) {
                     addTarget(autoChosenId, source, game);
                 } else if (!targetController.chooseTarget(outcome, this, source, game)) { // If couldn't autochoose ask player

@@ -18,7 +18,6 @@ import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -34,7 +33,7 @@ public class FatesealEffect extends OneShotEffect {
         this.setText();
     }
 
-    public FatesealEffect(final FatesealEffect effect) {
+    protected FatesealEffect(final FatesealEffect effect) {
         super(effect);
         this.fatesealNumber = effect.fatesealNumber;
     }
@@ -63,7 +62,7 @@ public class FatesealEffect extends OneShotEffect {
                 TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
                 target1.setRequired(false);
                 // move cards to the bottom of the library
-                while (!cards.isEmpty() && controller.choose(Outcome.Detriment, cards, target1, game)) {
+                while (!cards.isEmpty() && controller.choose(Outcome.Detriment, cards, target1, source, game)) {
                     if (!controller.canRespond() || !opponent.canRespond()) {
                         return false;
                     }

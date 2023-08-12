@@ -42,7 +42,7 @@ public final class VexingPuzzlebox extends CardImpl {
 
         // {T}, Remove 100 charge counters from Vexing Puzzlebox: Search your library for an artifact card, put that card onto the battlefield, then shuffle.
         Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_ARTIFACT_AN)
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_ARTIFACT_AN), false, true
         ), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(100)));
         this.addAbility(ability);

@@ -29,7 +29,7 @@ public final class UntaidakeTheCloudKeeper extends CardImpl {
 
     public UntaidakeTheCloudKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Untaidake, the Cloud Keeper enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
@@ -78,7 +78,7 @@ class LegendaryCastManaCondition extends ManaCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             MageObject object = game.getObject(source);
-            if (object != null && object.isLegendary()) {
+            if (object != null && object.isLegendary(game)) {
                 return true;
             }
         }

@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetEnchantmentPermanent;
 
@@ -36,7 +36,7 @@ public final class QuagmireDruid extends CardImpl {
         // {G}, {T}, Sacrifice a creature: Destroy target enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(false), new ColoredManaCost(ColoredManaSymbol.G));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(ability);
     }

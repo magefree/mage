@@ -24,7 +24,6 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801
@@ -34,7 +33,7 @@ public final class TyvarJubilantBrawler extends CardImpl {
     public TyvarJubilantBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TYVAR);
         this.setStartingLoyalty(3);
 

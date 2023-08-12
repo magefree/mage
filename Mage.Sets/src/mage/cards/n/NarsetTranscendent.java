@@ -38,7 +38,7 @@ public final class NarsetTranscendent extends CardImpl {
 
     public NarsetTranscendent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NARSET);
 
         this.setStartingLoyalty(6);

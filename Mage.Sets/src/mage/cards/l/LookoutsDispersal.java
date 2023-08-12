@@ -8,6 +8,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,20 +24,23 @@ import java.util.UUID;
  */
 public final class LookoutsDispersal extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Pirate");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Pirate");
 
     static {
         filter.add(SubType.PIRATE.getPredicate());
     }
 
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
+    private static final Hint hint = new ConditionHint(condition, "You control a Pirate");
+
     public LookoutsDispersal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Lookout's Dispersal costs {1} less to cast if you control a Pirate.
-        Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
+
         Ability ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(1, condition));
         ability.setRuleAtTheTop(true);
-        ability.addHint(new ConditionHint(condition, "You control a Pirate"));
+        ability.addHint(hint);
         this.addAbility(ability);
 
         // Counter target spell unless its controller pays {4}.

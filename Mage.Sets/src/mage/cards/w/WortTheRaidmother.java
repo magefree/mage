@@ -28,7 +28,7 @@ public final class WortTheRaidmother extends CardImpl {
 
     public WortTheRaidmother(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R/G}{R/G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(3);

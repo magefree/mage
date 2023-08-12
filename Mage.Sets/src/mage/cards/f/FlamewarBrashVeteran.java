@@ -41,7 +41,7 @@ public final class FlamewarBrashVeteran extends CardImpl {
     public FlamewarBrashVeteran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ROBOT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

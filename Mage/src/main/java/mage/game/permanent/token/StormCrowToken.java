@@ -7,7 +7,6 @@ import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 
 /**
- *
  * @author spjspj
  */
 public final class StormCrowToken extends TokenImpl {
@@ -22,7 +21,7 @@ public final class StormCrowToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public StormCrowToken(final StormCrowToken token) {
+    protected StormCrowToken(final StormCrowToken token) {
         super(token);
     }
 

@@ -4,7 +4,8 @@ import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -16,7 +17,7 @@ import mage.util.CardUtil;
  */
 public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected final FilterControlledCreaturePermanent filter;
+    protected final FilterPermanent filter;
     protected final boolean setTargetPointer;
     protected boolean once = false;
 
@@ -25,25 +26,29 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
     }
 
     public AttacksCreatureYouControlTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, new FilterControlledCreaturePermanent());
+        this(effect, optional, StaticFilters.FILTER_CONTROLLED_CREATURE);
     }
 
     public AttacksCreatureYouControlTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
-        this(effect, optional, new FilterControlledCreaturePermanent(), setTargetPointer);
+        this(effect, optional, StaticFilters.FILTER_CONTROLLED_CREATURE, setTargetPointer);
     }
 
-    public AttacksCreatureYouControlTriggeredAbility(Effect effect, boolean optional, FilterControlledCreaturePermanent filter) {
+    public AttacksCreatureYouControlTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter) {
         this(effect, optional, filter, false);
     }
 
-    public AttacksCreatureYouControlTriggeredAbility(Effect effect, boolean optional, FilterControlledCreaturePermanent filter, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, optional);
+    public AttacksCreatureYouControlTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
+        this(Zone.BATTLEFIELD, effect, optional, filter, setTargetPointer);
+    }
+
+    public AttacksCreatureYouControlTriggeredAbility(Zone zone, Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
+        super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " attacks, ");
     }
 
-    public AttacksCreatureYouControlTriggeredAbility(AttacksCreatureYouControlTriggeredAbility ability) {
+    private AttacksCreatureYouControlTriggeredAbility(final AttacksCreatureYouControlTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;

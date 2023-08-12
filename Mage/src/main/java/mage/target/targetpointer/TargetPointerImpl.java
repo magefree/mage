@@ -15,7 +15,7 @@ public abstract class TargetPointerImpl implements TargetPointer {
         super();
     }
 
-    public TargetPointerImpl(final TargetPointerImpl targetPointer) {
+    protected TargetPointerImpl(final TargetPointerImpl targetPointer) {
         super();
         this.data.putAll(targetPointer.data);
     }

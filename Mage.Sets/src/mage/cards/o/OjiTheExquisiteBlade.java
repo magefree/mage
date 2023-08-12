@@ -4,9 +4,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CastSecondSpellTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +24,7 @@ public final class OjiTheExquisiteBlade extends CardImpl {
     public OjiTheExquisiteBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(2);
@@ -37,8 +36,7 @@ public final class OjiTheExquisiteBlade extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you cast your second spell each turn, exile up to one target creature you control, then return it to the battlefield under its owner's control.
-        ability = new CastSecondSpellTriggeredAbility(new ExileTargetForSourceEffect());
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
+        ability = new CastSecondSpellTriggeredAbility(new ExileThenReturnTargetEffect(false, false));
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));
         this.addAbility(ability);
     }

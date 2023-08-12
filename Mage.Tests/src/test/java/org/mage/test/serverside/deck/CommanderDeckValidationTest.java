@@ -23,6 +23,17 @@ public class CommanderDeckValidationTest extends MageTestBase {
         deckTester.validate("Grist should be legal as a commander");
     }
 
+    @Test(expected = AssertionError.class)
+    public void testTwoInvalidCommanders() {
+        DeckTester deckTester = new DeckTester(new Commander());
+        deckTester.addMaindeck("Wastes", 99);
+
+        deckTester.addSideboard("Tiana, Ship's Caretaker", 1);
+        deckTester.addSideboard("Mazzy, Truesword Paladin", 1);
+
+        deckTester.validate("These commanders don't have partner");
+    }
+
     @Test
     public void testPrismaticPiperOneCopy() {
         DeckTester deckTester = new DeckTester(new Commander());

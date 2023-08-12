@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.common.FilterArtifactSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -31,8 +31,7 @@ public final class Embersmith extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
-        SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new EmbersmithEffect(), filter, false);
+        SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new EmbersmithEffect(), StaticFilters.FILTER_SPELL_AN_ARTIFACT, false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

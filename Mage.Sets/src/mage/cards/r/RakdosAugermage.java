@@ -38,7 +38,7 @@ public final class RakdosAugermage extends CardImpl {
 
         // {tap}: Reveal your hand and discard a card of target opponent’s choice. Then that player reveals their hand and discards a card of your choice. Activate this ability only any time you could cast a sorcery.
         ActivateAsSorceryActivatedAbility ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new RakdosAugermageEffect(), new TapSourceCost());
-        ability.addEffect(new DiscardCardYouChooseTargetEffect());
+        ability.addEffect(new DiscardCardYouChooseTargetEffect().setText(". Then that player reveals their hand and discards a card of your choice"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -74,7 +74,7 @@ class RakdosAugermageEffect extends OneShotEffect {
             Card sourceCard = game.getCard(source.getSourceId());
             player.revealCards((sourceCard != null ? sourceCard.getIdName() + " (" + sourceCard.getZoneChangeCounter(game) + ") (" : "Discard (") + controller.getName() + ")", revealedCards, game);
             TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
-            if (player.choose(Outcome.Benefit, revealedCards, target, game)) {
+            if (player.choose(Outcome.Benefit, revealedCards, target, source, game)) {
                 Card card = revealedCards.get(target.getFirstTarget(), game);
                 return player.discard(card, false, source, game);
 

@@ -31,7 +31,7 @@ public final class AnowonTheRuinThief extends CardImpl {
     public AnowonTheRuinThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);
@@ -151,7 +151,8 @@ class AnowonTheRuinThiefWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST
+                || event.getType() == GameEvent.EventType.CLEANUP_STEP_POST) {
             damageMap.clear();
             return;
         }

@@ -27,11 +27,11 @@ public final class CunningStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         Effect effect = new DamageTargetEffect(StaticValue.get(2), true, "", true);
         effect.setTargetPointer(new SecondTargetPointer());
-        effect.setText("and 2 damage to target player");
+        effect.setText("and 2 damage to target player or planeswalker");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private CunningStrike(final CunningStrike card) {

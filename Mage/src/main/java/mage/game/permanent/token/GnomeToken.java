@@ -1,12 +1,12 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class GnomeToken extends TokenImpl {
@@ -20,7 +20,7 @@ public final class GnomeToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public GnomeToken(final GnomeToken token) {
+    protected GnomeToken(final GnomeToken token) {
         super(token);
     }
 

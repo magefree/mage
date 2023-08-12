@@ -35,7 +35,7 @@ public final class RaziaBorosArchangel extends CardImpl {
 
     public RaziaBorosArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(6);

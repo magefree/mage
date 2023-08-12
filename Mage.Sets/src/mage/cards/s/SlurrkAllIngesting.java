@@ -32,7 +32,7 @@ public final class SlurrkAllIngesting extends CardImpl {
     public SlurrkAllIngesting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.OOZE);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

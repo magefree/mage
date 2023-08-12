@@ -215,6 +215,10 @@
                     </descriptors>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.ruleoftech</groupId>
+                <artifactId>markdown-page-generator-plugin</artifactId>
+            </plugin>
         </plugins>
 
         <finalName>mage-client</finalName>

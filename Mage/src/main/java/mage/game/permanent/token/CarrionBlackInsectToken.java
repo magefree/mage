@@ -1,12 +1,12 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author TheElk801
  */
 public final class CarrionBlackInsectToken extends TokenImpl {
@@ -19,12 +19,13 @@ public final class CarrionBlackInsectToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(1);
     }
-    public CarrionBlackInsectToken(final CarrionBlackInsectToken token) {
+
+    protected CarrionBlackInsectToken(final CarrionBlackInsectToken token) {
         super(token);
     }
 
     public CarrionBlackInsectToken copy() {
         return new CarrionBlackInsectToken(this);
     }
-    
+
 }

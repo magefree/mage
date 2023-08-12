@@ -5,6 +5,7 @@ import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.TokenRepository;
 import mage.client.MageFrame;
 import mage.client.dialog.DownloadImagesDialog;
 import mage.client.dialog.PreferencesDialog;
@@ -260,7 +261,16 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     @Override
     public void updateProgressMessage(String text) {
+        updateProgressMessage(text, 0, 0);
+    }
+
+    @Override
+    public void updateProgressMessage(String text, int progressCurrent, int progressNeed) {
         this.uiDialog.getProgressBar().setString(text);
+
+        // set values to 0 to disable progress bar
+        this.uiDialog.getProgressBar().setMaximum(progressNeed);
+        this.uiDialog.getProgressBar().setValue(progressCurrent);
     }
 
     @Override
@@ -409,7 +419,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         ? "%d of %d (%d cards/%d tokens) image downloads finished! Please close!"
                         : "%d of %d (%d cards/%d tokens) image downloads finished! Please wait! [%.1f Mb]",
                 0, imageSum, cardCount, tokenCount, mb
-        ));
+        ), 0, imageSum);
     }
 
     private static String createDownloadName(CardInfo card) {
@@ -435,7 +445,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()) {
                     String cardName = card.getName();
                     boolean isType2 = type2SetsFilter.contains(card.getSetCode());
-                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), card.isNightCard());
+                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), card.isNightCard());
 
                     // variations must have diff file names with additional postfix
                     if (url.getUsesVariousArt()) {
@@ -449,18 +459,24 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     // main side
                     allCardsUrls.add(url);
 
-                    // second side (xmage's set doesn't have info about it, so generate it here)
+                    // second side
+                    // xmage doesn't search night cards by default, so add it and other types manually
                     if (card.isDoubleFaced()) {
                         if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
                             throw new IllegalStateException("Second side card can't have empty name.");
                         }
 
-                        CardInfo secondSideCard = CardRepository.instance.findCardWPreferredSet(card.getSecondSideName(), card.getSetCode());
+                        CardInfo secondSideCard = CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber());
                         if (secondSideCard == null) {
                             throw new IllegalStateException("Can''t find second side card in database: " + card.getSecondSideName());
                         }
 
-                        url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), secondSideCard.getCardNumber(), card.usesVariousArt(), 0, "", "", false, card.isDoubleFaced(), true);
+                        url = new CardDownloadData(
+                                card.getSecondSideName(),
+                                card.getSetCode(),
+                                secondSideCard.getCardNumber(),
+                                card.usesVariousArt(),
+                                0, false, card.isDoubleFaced(), true);
                         url.setType2(isType2);
                         allCardsUrls.add(url);
                     }
@@ -473,22 +489,42 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 card.getSetCode(),
                                 card.getCardNumber(),
                                 card.usesVariousArt(),
-                                0, "", "", false, card.isDoubleFaced(), card.isNightCard());
+                                0, false, card.isDoubleFaced(), card.isNightCard());
                         cardDownloadData.setFlipCard(true);
                         cardDownloadData.setFlippedSide(true);
                         cardDownloadData.setType2(isType2);
                         allCardsUrls.add(cardDownloadData);
                     }
-                    if (card.isModalDoubleFacesCard()) {
-                        if (card.getModalDoubleFacesSecondSideName() == null || card.getModalDoubleFacesSecondSideName().trim().isEmpty()) {
+                    if (card.getMeldsToCardName() != null) {
+                        if (card.getMeldsToCardName().trim().isEmpty()) {
+                            throw new IllegalStateException("MeldsToCardName can't be empty in " + card.getName());
+                        }
+
+                        CardInfo meldsToCard = CardRepository.instance.findCardWithPreferredSetAndNumber(card.getMeldsToCardName(), card.getSetCode(), card.getCardNumber());
+                        if (meldsToCard == null) {
+                            throw new IllegalStateException("Can''t find meldsToCard in database: " + card.getMeldsToCardName());
+                        }
+
+                        // meld cards are normal cards from the set, so no needs to set two faces/sides here
+                        url = new CardDownloadData(
+                                card.getMeldsToCardName(),
+                                card.getSetCode(),
+                                meldsToCard.getCardNumber(),
+                                card.usesVariousArt(),
+                                0, false, false, false);
+                        url.setType2(isType2);
+                        allCardsUrls.add(url);
+                    }
+                    if (card.isModalDoubleFacedCard()) {
+                        if (card.getModalDoubleFacedSecondSideName() == null || card.getModalDoubleFacedSecondSideName().trim().isEmpty()) {
                             throw new IllegalStateException("MDF card can't have empty name.");
                         }
                         CardDownloadData cardDownloadData = new CardDownloadData(
-                                card.getModalDoubleFacesSecondSideName(),
+                                card.getModalDoubleFacedSecondSideName(),
                                 card.getSetCode(),
                                 card.getCardNumber(),
                                 card.usesVariousArt(),
-                                0, "", "", false, true, true);
+                                0, false, true, true);
                         cardDownloadData.setType2(isType2);
                         allCardsUrls.add(cardDownloadData);
                     }
@@ -501,7 +537,19 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 }
             });
 
-            allCardsUrls.addAll(getTokenCardUrls());
+            // tokens
+            TokenRepository.instance.getAll().forEach(token -> {
+                CardDownloadData card = new CardDownloadData(
+                        token.getName(),
+                        token.getSetCode(),
+                        "0",
+                        false,
+                        token.getImageNumber(),
+                        true,
+                        token.getImageFileName()
+                );
+                allCardsUrls.add(card);
+            });
         } catch (Exception e) {
             logger.error(e);
         }
@@ -514,7 +562,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 cardsToDownload.add(card);
             } else {
                 // need missing cards
-                File file = new TFile(CardImageUtils.buildImagePathToCard(card));
+                File file = new TFile(CardImageUtils.buildImagePathToCardOrToken(card));
                 if (!file.exists()) {
                     cardsToDownload.add(card);
                 }
@@ -522,94 +570,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         });
 
         return Collections.synchronizedList(new ArrayList<>(cardsToDownload));
-    }
-
-    public static List<CardDownloadData> getTokenCardUrls() throws RuntimeException {
-        List<CardDownloadData> list = new ArrayList<>();
-        InputStream in = DownloadPicturesService.class.getClassLoader().getResourceAsStream("card-pictures-tok.txt");
-
-        if (in == null) {
-            logger.error("resources input stream is null");
-            return list;
-        }
-
-        try (InputStreamReader input = new InputStreamReader(in);
-             BufferedReader reader = new BufferedReader(input)) {
-
-            String line = reader.readLine();
-            while (line != null) {
-                line = line.trim();
-                if (line.startsWith("|")) { // new format
-                    String[] params = line.split("\\|", -1);
-                    if (params.length >= 5) {
-                        int type = 0;
-                        if (params[4] != null && !params[4].isEmpty()) {
-                            type = Integer.parseInt(params[4].trim()); // token number for same names
-                        }
-                        String fileName = "";
-                        if (params.length > 5 && params[5] != null && !params[5].isEmpty()) {
-                            fileName = params[5].trim();
-                        }
-                        String tokenClassName = "";
-                        if (params.length > 7 && params[6] != null && !params[6].isEmpty()) {
-                            tokenClassName = params[6].trim();
-                        }
-
-                        if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("TOK:")) {
-                            String set = params[2].substring(4);
-                            CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", "", true);
-                            card.setTokenClassName(tokenClassName);
-                            list.add(card);
-                        } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("EMBLEM:")) {
-                            String set = params[2].substring(7);
-                            CardDownloadData card = new CardDownloadData("Emblem " + params[3], set, "0", false, type, "", "", true, fileName);
-                            card.setTokenClassName(tokenClassName);
-                            list.add(card);
-                        } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("EMBLEM-:")) {
-                            String set = params[2].substring(8);
-                            CardDownloadData card = new CardDownloadData(params[3] + " Emblem", set, "0", false, type, "", "", true, fileName);
-                            card.setTokenClassName(tokenClassName);
-                            list.add(card);
-                        } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("EMBLEM!:")) {
-                            String set = params[2].substring(8);
-                            CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", "", true, fileName);
-                            card.setTokenClassName(tokenClassName);
-                            list.add(card);
-                        } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("PLANE:")) {
-                            String set = params[2].substring(6);
-                            CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", "", true, fileName);
-                            card.setTokenClassName(tokenClassName);
-                            list.add(card);
-                        } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("DUNGEON:")) {
-                            String set = params[2].substring(8);
-                            CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", "", true, fileName);
-                            card.setTokenClassName(tokenClassName);
-                            list.add(card);
-                        } else {
-                            logger.error("wrong line format in tokens file: " + line);
-                        }
-                    } else {
-                        logger.error("wrong line data in tokens file: " + line);
-                    }
-                }
-                line = reader.readLine();
-            }
-
-        } catch (Exception ex) {
-            logger.error(ex);
-            throw new RuntimeException("DownloadPicturesService : readFile() error");
-        }
-
-        // TODO: delete and move to copy-pate images download mode
-        /*
-        for (CardDownloadData card : list) {
-            if (card.isToken()) {
-                System.out.println(card.getSet() + "/" + card.getName() + (!card.getType().equals(0) ? "/" + card.getType() : ""));
-            }
-        }
-        */
-
-        return list;
     }
 
     @Override
@@ -798,7 +758,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         destFile = new TFile(CardImageUtils.buildImagePathToTokens() + actualFilename + ".jpg");
                     }
                 } else {
-                    destFile = new TFile(CardImageUtils.buildImagePathToCard(card));
+                    destFile = new TFile(CardImageUtils.buildImagePathToCardOrToken(card));
                 }
 
                 // FILE already exists (in zip or in dir)
@@ -869,9 +829,13 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         // check result
                         if (responseCode != 200) {
                             // show errors only on full fail (all urls were not work)
-                            errorsList.add("Image download for " + card.getName()
-                                    + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
-                                    + " (" + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
+                            String info = String.format("Image download failed for %s - %s, http code: %d, url: %s",
+                                    card.getSet(),
+                                    card.getName(),
+                                    responseCode,
+                                    url
+                            );
+                            errorsList.add(info);
 
                             if (logger.isDebugEnabled()) {
                                 // Shows the returned html from the request to the web server
@@ -963,12 +927,12 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             // downloading
             float mb = ((needDownloadCount - lastCardIndex) * selectedSource.getAverageSize()) / 1024;
             updateProgressMessage(String.format("%d of %d image downloads finished! Please wait! [%.1f Mb]",
-                    lastCardIndex, needDownloadCount, mb));
+                    lastCardIndex, needDownloadCount, mb), lastCardIndex, needDownloadCount);
         } else {
             // finished
             List<CardDownloadData> downloadedCards = Collections.synchronizedList(new ArrayList<>());
             DownloadPicturesService.this.cardsMissing.parallelStream().forEach(cardDownloadData -> {
-                TFile file = new TFile(CardImageUtils.buildImagePathToCard(cardDownloadData));
+                TFile file = new TFile(CardImageUtils.buildImagePathToCardOrToken(cardDownloadData));
                 if (file.exists()) {
                     downloadedCards.add(cardDownloadData);
                 }

@@ -39,7 +39,7 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         }
     }
 
-    public FilterPermanent(final FilterPermanent filter) {
+    protected FilterPermanent(final FilterPermanent filter) {
         super(filter);
         this.extraPredicates.addAll(filter.extraPredicates);
     }
@@ -54,7 +54,7 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         if (!this.match(permanent, game) || !permanent.isPhasedIn()) {
             return false;
         }
-        ObjectSourcePlayer<Permanent> osp = new ObjectSourcePlayer<Permanent>(permanent, playerId, source);
+        ObjectSourcePlayer<Permanent> osp = new ObjectSourcePlayer<>(permanent, playerId, source);
         return extraPredicates.stream().allMatch(p -> p.apply(osp, game));
     }
 

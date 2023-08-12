@@ -1,13 +1,11 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DevourEffect.DevourFactor;
 import mage.abilities.keyword.DevourAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -16,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetAnyTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +34,7 @@ public final class PreyseizerDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Devour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)
-        this.addAbility(new DevourAbility(DevourFactor.Devour2));
+        this.addAbility(new DevourAbility(2));
 
         // Whenever Preyseizer Dragon attacks, it deals damage to any target equal to the number of +1/+1 counters on Preyseizer Dragon.
         Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1)), false);

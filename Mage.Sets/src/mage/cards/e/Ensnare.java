@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -34,7 +34,7 @@ public final class Ensnare extends CardImpl {
         this.addAbility(ability);
 
         // Tap all creatures.
-        this.getSpellAbility().addEffect(new TapAllEffect(FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().addEffect(new TapAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     private Ensnare(final Ensnare card) {

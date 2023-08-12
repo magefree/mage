@@ -66,7 +66,7 @@ class EerieUltimatumEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new EerieUltimatumTarget();
-        if (!player.choose(outcome, player.getGraveyard(), target, game)) {
+        if (!player.choose(outcome, player.getGraveyard(), target, source, game)) {
             return false;
         }
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);

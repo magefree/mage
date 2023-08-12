@@ -25,7 +25,7 @@ public final class BlazingCrescendo extends CardImpl {
         // Exile the top card of your library. Until the end of your next turn, you may play that card.
         this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(
                 1, false, Duration.UntilEndOfYourNextTurn
-        ));
+        ).concatBy("<br>"));
     }
 
     private BlazingCrescendo(final BlazingCrescendo card) {

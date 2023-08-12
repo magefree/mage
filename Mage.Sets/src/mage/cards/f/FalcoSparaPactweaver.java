@@ -33,7 +33,7 @@ public final class FalcoSparaPactweaver extends CardImpl {
     public FalcoSparaPactweaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(3);

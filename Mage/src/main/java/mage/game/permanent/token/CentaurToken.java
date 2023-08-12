@@ -3,9 +3,6 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.util.RandomUtil;
-
-import java.util.Arrays;
 
 /**
  * @author LevelX2
@@ -19,11 +16,9 @@ public final class CentaurToken extends TokenImpl {
         subtype.add(SubType.CENTAUR);
         power = new MageInt(3);
         toughness = new MageInt(3);
-
-        availableImageSetCodes = Arrays.asList("C19", "RTR", "RNA", "MIC", "MM3", "GK1");
     }
 
-    public CentaurToken(final CentaurToken token) {
+    protected CentaurToken(final CentaurToken token) {
         super(token);
     }
 

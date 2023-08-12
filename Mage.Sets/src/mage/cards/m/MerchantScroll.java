@@ -29,7 +29,7 @@ public final class MerchantScroll extends CardImpl {
 
 
         // Search your library for a blue instant card, reveal that card, and put it into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, filter), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, filter), true, true));
     }
 
     private MerchantScroll(final MerchantScroll card) {

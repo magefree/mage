@@ -23,7 +23,7 @@ public final class KrarksOtherThumb extends CardImpl {
     public KrarksOtherThumb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // If you would roll a die, instead roll two of those dice and ignore one of those results.
         this.addAbility(new SimpleStaticAbility(new KrarksOtherThumbEffect()));

@@ -39,6 +39,7 @@ import mage.players.PlayerList;
 import mage.players.Players;
 import mage.util.Copyable;
 import mage.util.MessageToClient;
+import mage.util.MultiAmountMessage;
 import mage.util.functions.CopyApplier;
 
 import java.io.Serializable;
@@ -180,6 +181,19 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Turn getTurn();
 
+    /**
+     * @return can return null in non started games
+     */
+    PhaseStep getTurnStepType();
+
+    /**
+     * @return can return null in non started games
+     */
+    TurnPhase getTurnPhaseType();
+
+    /**
+     * @return can return null in non started games
+     */
     Phase getPhase();
 
     Step getStep();
@@ -192,6 +206,8 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     /**
      * Id of the player the current turn it is.
+     *
+     * Player can be under control of another player, so search a real GUI's controller by Player->getTurnControlledBy
      *
      * @return
      */
@@ -286,7 +302,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void fireGetAmountEvent(UUID playerId, String message, int min, int max);
 
-    void fireGetMultiAmountEvent(UUID playerId, List<String> messages, int min, int max, Map<String, Serializable> options);
+    void fireGetMultiAmountEvent(UUID playerId, List<MultiAmountMessage> messages, int min, int max, Map<String, Serializable> options);
 
     void fireChoosePileEvent(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2);
 
@@ -385,13 +401,15 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId);
 
-    boolean addPlane(Plane plane, MageObject sourceObject, UUID toPlayerId);
+    boolean addPlane(Plane plane, UUID toPlayerId);
 
     void addCommander(Commander commander);
 
     Dungeon addDungeon(Dungeon dungeon, UUID playerId);
 
     void ventureIntoDungeon(UUID playerId, boolean undercity);
+
+    void temptWithTheRing(UUID playerId);
 
     /**
      * Tells whether the current game has day or night, defaults to false
@@ -448,6 +466,13 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     UUID fireReflexiveTriggeredAbility(ReflexiveTriggeredAbility reflexiveAbility, Ability source);
 
+    /**
+     * Inner game engine call to reset game objects to actual versions
+     * (reset all objects and apply all effects due layer system)
+     * <p>
+     * Warning, if you need to process object moves in the middle of the effect/ability
+     * then call game.getState().processAction(game) instead
+     */
     void applyEffects();
 
     boolean checkStateAndTriggered();
@@ -504,6 +529,10 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     void setPriorityTime(int priorityTime);
 
+    int getBufferTime();
+
+    void setBufferTime(int bufferTime);
+
     UUID getStartingPlayerId();
 
     void setStartingPlayerId(UUID startingPlayerId);
@@ -539,14 +568,14 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     /**
      * Function to call for a player to take the initiative.
      *
-     * @param source        The ability granting initiative.
-     * @param initiativeId  UUID of the player taking the initiative
+     * @param source       The ability granting initiative.
+     * @param initiativeId UUID of the player taking the initiative
      */
     void takeInitiative(Ability source, UUID initiativeId);
 
-    int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable);
+    int damagePlayerOrPermanent(UUID playerOrPermanent, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable);
 
-    int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
+    int damagePlayerOrPermanent(UUID playerOrPermanent, int damage, UUID attackerId, Ability source, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
 
     Mulligan getMulligan();
 
@@ -668,6 +697,6 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     void setGameStopped(boolean gameStopped);
 
     boolean isGameStopped();
-    
+
     boolean isTurnOrderReversed();
 }

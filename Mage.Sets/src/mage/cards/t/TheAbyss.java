@@ -26,7 +26,7 @@ public final class TheAbyss extends CardImpl {
 
     public TheAbyss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of their choice. It can't be regenerated.
         this.addAbility(new TheAbyssTriggeredAbility());
