@@ -112,4 +112,215 @@ public class PramikonSkyRampartTest extends CardTestMultiPlayerBase {
         setStopAt(4, PhaseStep.END_TURN);
         execute();
     }
+
+    @Test
+    public void chooseRight() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, pramikon);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, ancients);
+        addCard(Zone.BATTLEFIELD, playerB, bogstomper);
+        addCard(Zone.BATTLEFIELD, playerC, crocodile);
+        addCard(Zone.BATTLEFIELD, playerD, devil);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, pramikon);
+        setChoice(playerA, PlayerCanOnlyAttackInDirectionRestrictionEffect.ALLOW_ATTACKING_RIGHT);
+
+        // A has pramikon, and chose right.
+        //
+        //  D <----- C
+        //  |        ^
+        //  |        |
+        //  v        v
+        //  A -----> B
+
+        checkMayAttackDefender("Attack left impossible",
+                1, playerA, ancients, playerD, false);
+        checkMayAttackDefender("Attack out of range impossible",
+                1, playerA, ancients, playerC, false);
+        checkMayAttackDefender("Attack right possible",
+                1, playerA, ancients, playerB, true);
+        checkMayAttackDefender("Attack self impossible",
+                1, playerA, ancients, playerA, false);
+
+        checkMayAttackDefender("Attack left impossible",
+                2, playerD, devil, playerC, false);
+        checkMayAttackDefender("Attack out of range impossible",
+                2, playerD, devil, playerB, false);
+        checkMayAttackDefender("Attack right possible",
+                2, playerD, devil, playerA, true);
+        checkMayAttackDefender("Attack self impossible",
+                2, playerD, devil, playerD, false);
+
+        checkMayAttackDefender("Attack left possible -- not in range of Pramikon",
+                3, playerC, crocodile, playerB, true);
+        checkMayAttackDefender("Attack out of range impossible",
+                3, playerC, crocodile, playerA, false);
+        checkMayAttackDefender("Attack right possible -- not in range of Pramikon",
+                3, playerC, crocodile, playerD, true);
+        checkMayAttackDefender("Attack self impossible",
+                3, playerC, crocodile, playerC, false);
+
+        checkMayAttackDefender("Attack left impossible",
+                4, playerB, bogstomper, playerA, false);
+        checkMayAttackDefender("Attack out of range impossible",
+                4, playerB, bogstomper, playerD, false);
+        checkMayAttackDefender("Attack right possible",
+                4, playerB, bogstomper, playerC, true);
+        checkMayAttackDefender("Attack self impossible",
+                4, playerB, bogstomper, playerB, false);
+
+        setStopAt(4, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void doublePramikon() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, pramikon);
+        addCard(Zone.HAND, playerD, pramikon);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerD, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerD, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerD, "Plains", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, ancients);
+        addCard(Zone.BATTLEFIELD, playerB, bogstomper);
+        addCard(Zone.BATTLEFIELD, playerC, crocodile);
+        addCard(Zone.BATTLEFIELD, playerD, devil);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, pramikon);
+        setChoice(playerA, PlayerCanOnlyAttackInDirectionRestrictionEffect.ALLOW_ATTACKING_RIGHT);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, pramikon);
+        setChoice(playerD, PlayerCanOnlyAttackInDirectionRestrictionEffect.ALLOW_ATTACKING_LEFT);
+
+        // A has pramikon, and chose right.
+        // D has pramikon, and chose left.
+        //
+        //  D x----x C
+        //  x        ^
+        //  |        |
+        //  x        v
+        //  A x----x B
+
+        checkMayAttackDefender("Attack left impossible",
+                2, playerD, devil, playerC, false);
+        checkMayAttackDefender("Attack out of range impossible",
+                2, playerD, devil, playerB, false);
+        checkMayAttackDefender("Attack right impossible",
+                2, playerD, devil, playerA, false);
+        checkMayAttackDefender("Attack self impossible",
+                2, playerD, devil, playerD, false);
+
+        checkMayAttackDefender("Attack left possible -- not in range of A's Pramikon",
+                3, playerC, crocodile, playerB, true);
+        checkMayAttackDefender("Attack out of range impossible",
+                3, playerC, crocodile, playerA, false);
+        checkMayAttackDefender("Attack right impossible",
+                3, playerC, crocodile, playerD, false);
+        checkMayAttackDefender("Attack self impossible",
+                3, playerC, crocodile, playerC, false);
+
+        checkMayAttackDefender("Attack left impossible",
+                4, playerB, bogstomper, playerA, false);
+        checkMayAttackDefender("Attack out of range impossible",
+                4, playerB, bogstomper, playerD, false);
+        checkMayAttackDefender("Attack right possible -- not in range of D's Pramikon",
+                4, playerB, bogstomper, playerC, true);
+        checkMayAttackDefender("Attack self impossible",
+                4, playerB, bogstomper, playerB, false);
+
+        checkMayAttackDefender("Attack left impossible",
+                5, playerA, ancients, playerD, false);
+        checkMayAttackDefender("Attack out of range impossible",
+                5, playerA, ancients, playerC, false);
+        checkMayAttackDefender("Attack right impossible",
+                5, playerA, ancients, playerB, false);
+        checkMayAttackDefender("Attack self impossible",
+                5, playerA, ancients, playerA, false);
+
+        setStopAt(5, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void doublePramikonOther() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, pramikon);
+        addCard(Zone.HAND, playerD, pramikon);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerD, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerD, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerD, "Plains", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, ancients);
+        addCard(Zone.BATTLEFIELD, playerB, bogstomper);
+        addCard(Zone.BATTLEFIELD, playerC, crocodile);
+        addCard(Zone.BATTLEFIELD, playerD, devil);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, pramikon);
+        setChoice(playerA, PlayerCanOnlyAttackInDirectionRestrictionEffect.ALLOW_ATTACKING_LEFT);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerD, pramikon);
+        setChoice(playerD, PlayerCanOnlyAttackInDirectionRestrictionEffect.ALLOW_ATTACKING_RIGHT);
+
+        // A has pramikon, and chose left.
+        // D has pramikon, and chose right.
+        //
+        //  D <----x C
+        //  x        x
+        //  |        |
+        //  x        x
+        //  A <----x B
+
+        checkMayAttackDefender("Attack left impossible",
+                2, playerD, devil, playerC, false);
+        checkMayAttackDefender("Attack out of range impossible",
+                2, playerD, devil, playerB, false);
+        checkMayAttackDefender("Attack right impossible",
+                2, playerD, devil, playerA, false);
+        checkMayAttackDefender("Attack self impossible",
+                2, playerD, devil, playerD, false);
+
+        checkMayAttackDefender("Attack left impossible",
+                3, playerC, crocodile, playerB, false);
+        checkMayAttackDefender("Attack out of range impossible",
+                3, playerC, crocodile, playerA, false);
+        checkMayAttackDefender("Attack right possible -- not in range of A's Pramikon",
+                3, playerC, crocodile, playerD, true);
+        checkMayAttackDefender("Attack self impossible",
+                3, playerC, crocodile, playerC, false);
+
+        checkMayAttackDefender("Attack left possible -- not in range of D's Pramikon",
+                4, playerB, bogstomper, playerA, true);
+        checkMayAttackDefender("Attack out of range impossible",
+                4, playerB, bogstomper, playerD, false);
+        checkMayAttackDefender("Attack right impossible",
+                4, playerB, bogstomper, playerC, false);
+        checkMayAttackDefender("Attack self impossible",
+                4, playerB, bogstomper, playerB, false);
+
+        checkMayAttackDefender("Attack left impossible",
+                5, playerA, ancients, playerD, false);
+        checkMayAttackDefender("Attack out of range impossible",
+                5, playerA, ancients, playerC, false);
+        checkMayAttackDefender("Attack right impossible",
+                5, playerA, ancients, playerB, false);
+        checkMayAttackDefender("Attack self impossible",
+                5, playerA, ancients, playerA, false);
+
+        setStopAt(5, PhaseStep.END_TURN);
+        execute();
+    }
 }

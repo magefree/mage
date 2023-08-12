@@ -1393,13 +1393,13 @@ public class TestPlayer implements Player {
         if (expectedMayAttack && !mayAttack) {
             printStart(game, action.getActionName());
             printEnd();
-            Assert.fail("Was expected to be able to attack " + defender.getName() + " but is not able to.");
+            Assert.fail(permanentName + " was expected to be able to attack " + defender.getName() + " but is not able to.");
         }
 
         if (!expectedMayAttack && mayAttack) {
             printStart(game, action.getActionName());
             printEnd();
-            Assert.fail("Was not expected to be able to attack " + defender.getName() + " but is able to.");
+            Assert.fail(permanentName + " was not expected to be able to attack " + defender.getName() + " but is able to.");
         }
     }
 
