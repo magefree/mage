@@ -1709,6 +1709,15 @@ public class VerifyCardDataTest {
                         return;
                     }
                     List<Field> ability2Fields = Arrays.stream(class2.getDeclaredFields()).collect(Collectors.toList());
+
+                    // Special fields for CardImpl.class
+                    boolean hasSpellAbilityField = false;
+                    boolean hasMeldField = false;
+                    boolean hasSecondSideCardField = false;
+                    // Special fields for AbilityImpl.class
+                    boolean hasWatchersField = false;
+                    boolean hasModesField = false;
+
                     int fieldIndex = 0;
                     for (Field field1 : class1.getDeclaredFields()) {
                         Field field2 = ability2Fields.get(fieldIndex);
@@ -1723,22 +1732,28 @@ public class VerifyCardDataTest {
                                 if (field1.getName() == "spellAbility") {
                                     compareClassRecursive(((CardImpl) obj1).getSpellAbility(), ((CardImpl) obj2).getSpellAbility(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
+                                    hasSpellAbilityField = true;
                                 } else if (field1.getName() == "meldsToCard") {
                                     compareClassRecursive(((CardImpl) obj1).getMeldsToCard(), ((CardImpl) obj2).getMeldsToCard(), originalCard, msg + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
+                                    hasMeldField = true;
                                 } else if (field1.getName() == "secondSideCard") {
                                     compareClassRecursive(((CardImpl) obj1).getSecondCardFace(), ((CardImpl) obj2).getSecondCardFace(), originalCard, msg + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
+                                    hasSecondSideCardField = true;
                                 }
                             }
                             if (class1 == AbilityImpl.class) {
                                 if (field1.getName() == "watchers") {
+                                    // Watchers are only used on initialization, they are not copied.
                                     doFieldRecurse = false;
+                                    hasWatchersField = true;
                                 }
                                 if (field1.getName() == "modes") {
                                     //compareClassRecursive(((AbilityImpl) obj1).getModes(), ((AbilityImpl) obj2).getModes(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1);
                                     compareClassRecursive(((AbilityImpl) obj1).getEffects(), ((AbilityImpl) obj2).getEffects(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
+                                    hasModesField = true;
                                 }
                             }
                             if (doFieldRecurse) {
@@ -1748,6 +1763,28 @@ public class VerifyCardDataTest {
                         }
                         fieldIndex++;
                     }
+
+                    // Do check that the expected special fields were encountered.
+                    // If those field are no relevant, or were renamed, please modify the relevant code block above.
+                    if (class1 == CardImpl.class) {
+                        if (!hasSpellAbilityField) {
+                            fail(originalCard, "copy", "was expecting a spellAbility field, but found none " + msg + "]");
+                        }
+                        if (!hasMeldField) {
+                            fail(originalCard, "copy", "was expecting a meldsToCard field, but found none " + msg + "]");
+                        }
+                        if (!hasSecondSideCardField) {
+                            fail(originalCard, "copy", "was expecting a secondSideCard field, but found none " + msg + "]");
+                        }
+                    } else if (class1 == AbilityImpl.class) {
+                        if (!hasWatchersField) {
+                            fail(originalCard, "copy", "was expecting a watchers field, but found none " + msg + "]");
+                        }
+                        if (!hasModesField) {
+                            fail(originalCard, "copy", "was expecting a modes field, but found none " + msg + "]");
+                        }
+                    }
+
                     class1 = class1.getSuperclass();
                     class2 = class2.getSuperclass();
                 } while (class1 != Object.class && class1 != null);
