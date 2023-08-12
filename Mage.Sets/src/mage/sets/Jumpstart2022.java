@@ -475,6 +475,7 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Michiko Konda, Truth Seeker", 215, Rarity.RARE, mage.cards.m.MichikoKondaTruthSeeker.class));
         cards.add(new SetCardInfo("Midnight Guard", 216, Rarity.COMMON, mage.cards.m.MidnightGuard.class));
         cards.add(new SetCardInfo("Might of the Masses", 690, Rarity.COMMON, mage.cards.m.MightOfTheMasses.class));
+        cards.add(new SetCardInfo("Mild-Mannered Librarian", 41, Rarity.UNCOMMON, mage.cards.m.MildManneredLibrarian.class));
         cards.add(new SetCardInfo("Military Intelligence", 322, Rarity.UNCOMMON, mage.cards.m.MilitaryIntelligence.class));
         cards.add(new SetCardInfo("Miraculous Recovery", 217, Rarity.UNCOMMON, mage.cards.m.MiraculousRecovery.class));
         cards.add(new SetCardInfo("Mire Blight", 442, Rarity.COMMON, mage.cards.m.MireBlight.class));
