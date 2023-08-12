@@ -1,7 +1,7 @@
 
 package mage.game.match;
 
-import mage.cards.Card;
+import mage.cards.decks.DeckCardInfo;
 import mage.constants.MatchBufferTime;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
@@ -50,8 +50,8 @@ public class MatchOptions implements Serializable {
     protected MatchBufferTime matchBufferTime; // Amount of time each player gets before their normal time limit counts down. Refreshes each time the normal timer is invoked.
     protected MulliganType mulliganType;
 
-    protected Collection<Card> perPlayerEmblemCards;
-    protected Collection<Card> globalEmblemCards;
+    protected Collection<DeckCardInfo> perPlayerEmblemCards;
+    protected Collection<DeckCardInfo> globalEmblemCards;
 
     /*public MatchOptions(String name, String gameType) {
         this.name = name;
@@ -291,19 +291,19 @@ public class MatchOptions implements Serializable {
         return mulliganType;
     }
 
-    public Collection<Card> getPerPlayerEmblemCards() {
+    public Collection<DeckCardInfo> getPerPlayerEmblemCards() {
         return perPlayerEmblemCards;
     }
 
-    public void setPerPlayerEmblemCards(Collection<Card> perPlayerEmblemCards) {
+    public void setPerPlayerEmblemCards(Collection<DeckCardInfo> perPlayerEmblemCards) {
         this.perPlayerEmblemCards = perPlayerEmblemCards;
     }
 
-    public Collection<Card> getGlobalEmblemCards() {
+    public Collection<DeckCardInfo> getGlobalEmblemCards() {
         return globalEmblemCards;
     }
 
-    public void setGlobalEmblemCards(Collection<Card> globalEmblemCards) {
+    public void setGlobalEmblemCards(Collection<DeckCardInfo> globalEmblemCards) {
         this.globalEmblemCards = globalEmblemCards;
     }
 }

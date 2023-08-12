@@ -3,6 +3,7 @@ package mage.game.command.emblems;
 import mage.MageObject;
 import mage.abilities.AbilityImpl;
 import mage.cards.Card;
+import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.importer.CardLookup;
 import mage.cards.mock.MockCard;
 import mage.constants.Zone;
@@ -13,6 +14,11 @@ import java.util.stream.Collectors;
 
 public final class EmblemOfCard extends Emblem {
     private static final Logger logger = Logger.getLogger(EmblemOfCard.class);
+    public static Card cardFromDeckInfo(DeckCardInfo info) {
+        return CardLookup.instance.lookupCardInfo(info.getCardName(), info.getSetCode(), info.getCardNum())
+                .orElseThrow(() -> new IllegalArgumentException("No real card for DeckCardInfo" + info.getCardName()))
+                .getCard();
+    }
     public EmblemOfCard(Card card, Zone zone) {
         super(card.getName());
         if (card instanceof MockCard) {

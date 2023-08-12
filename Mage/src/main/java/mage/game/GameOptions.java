@@ -1,8 +1,8 @@
 package mage.game;
 
+import mage.cards.decks.DeckCardInfo;
 import mage.constants.PhaseStep;
 import mage.util.Copyable;
-import mage.cards.Card;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -58,11 +58,11 @@ public class GameOptions implements Serializable, Copyable<GameOptions> {
     /**
      * Cards to be given to each player as emblems
      */
-    public Collection<Card> perPlayerEmblemCards = Collections.emptySet();
+    public Collection<DeckCardInfo> perPlayerEmblemCards = Collections.emptySet();
     /**
      * Cards to be given to the starting player as emblems
      */
-    public Collection<Card> globalEmblemCards = Collections.emptySet();
+    public Collection<DeckCardInfo> globalEmblemCards = Collections.emptySet();
 
 
     // PLANECHASE game mode

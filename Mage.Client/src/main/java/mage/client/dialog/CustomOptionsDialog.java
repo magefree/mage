@@ -443,8 +443,7 @@ public class CustomOptionsDialog extends MageDialog {
                 }
                 if (perPlayerEmblemDeck != null) {
                     perPlayerEmblemDeck.clearLayouts();
-                    // copy the cards set so deck can be garbage collected
-                    options.setPerPlayerEmblemCards(new HashSet<>(perPlayerEmblemDeck.getCards()));
+                    options.setPerPlayerEmblemCards(perPlayerEmblemDeck.getDeckCardLists().getCards());
                 }
                 else {
                     options.setPerPlayerEmblemCards(Collections.emptySet());
@@ -459,8 +458,7 @@ public class CustomOptionsDialog extends MageDialog {
                 }
                 if (startingPlayerEmblemDeck != null) {
                     startingPlayerEmblemDeck.clearLayouts();
-                    // copy the cards set so deck can be garbage collected
-                    options.setGlobalEmblemCards(new HashSet<>(startingPlayerEmblemDeck.getCards()));
+                    options.setGlobalEmblemCards(startingPlayerEmblemDeck.getDeckCardLists().getCards());
                 }
                 else {
                     options.setGlobalEmblemCards(Collections.emptySet());

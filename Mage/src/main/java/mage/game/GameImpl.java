@@ -22,6 +22,7 @@ import mage.abilities.mana.TriggeredManaAbility;
 import mage.actions.impl.MageAction;
 import mage.cards.*;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardInfo;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.CounterType;
@@ -1325,14 +1326,16 @@ public abstract class GameImpl implements Game {
 
         if (!gameOptions.perPlayerEmblemCards.isEmpty()) {
             for (UUID playerId : state.getPlayerList(startingPlayerId)) {
-                for (Card card : gameOptions.perPlayerEmblemCards) {
+                for (DeckCardInfo info : gameOptions.perPlayerEmblemCards) {
+                    Card card = EmblemOfCard.cardFromDeckInfo(info);
                     addEmblem(new EmblemOfCard(card), card, playerId);
                 }
             }
         }
 
         if (!gameOptions.globalEmblemCards.isEmpty()) {
-            for (Card card : gameOptions.globalEmblemCards) {
+            for (DeckCardInfo info : gameOptions.globalEmblemCards) {
+                Card card = EmblemOfCard.cardFromDeckInfo(info);
                 addEmblem(new EmblemOfCard(card), card, startingPlayerId);
             }
         }
