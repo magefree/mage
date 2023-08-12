@@ -19,8 +19,8 @@ import java.util.UUID;
  */
 public class PlayerCanOnlyAttackInDirectionRestrictionEffect extends RestrictionEffect {
 
-    static final String ALLOW_ATTACKING_LEFT = "Allow attacking left";
-    static final String ALLOW_ATTACKING_RIGHT = "Allow attacking right";
+    public static final String ALLOW_ATTACKING_LEFT = "Allow attacking left";
+    public static final String ALLOW_ATTACKING_RIGHT = "Allow attacking right";
 
     public PlayerCanOnlyAttackInDirectionRestrictionEffect(Duration duration, String directionText) {
         super(duration, Outcome.Neutral);
@@ -63,6 +63,11 @@ public class PlayerCanOnlyAttackInDirectionRestrictionEffect extends Restriction
 
         Player playerAttacking = game.getPlayer(attacker.getControllerId());
         if (playerAttacking == null) {
+            return true;
+        }
+
+        // The attacking player should be in range of the source's controller
+        if (!game.getState().getPlayersInRange(source.getControllerId(), game).contains(playerAttacking.getId())) {
             return true;
         }
 
