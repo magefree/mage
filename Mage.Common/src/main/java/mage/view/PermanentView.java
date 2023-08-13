@@ -92,12 +92,14 @@ public class PermanentView extends CardView {
             this.nameOwner = "";
         }
 
-        Player controller = game.getPlayer(permanent.getControllerId());
-        if (controller != null) {
-            nameController = controller.getName();
-        } else {
-            nameController = "";
+        String nameController = "";
+        if (game != null) {
+            Player controller = game.getPlayer(permanent.getControllerId());
+            if (controller != null) {
+                nameController = controller.getName();
+            }
         }
+        this.nameController = nameController;
 
         // add info for face down permanents
         if (permanent.isFaceDown(game) && card != null) {
@@ -125,15 +127,19 @@ public class PermanentView extends CardView {
                 }
             }
         }
+
         // determines if shown in it's own column
-        Permanent attachment = game.getPermanent(permanent.getAttachedTo());
-        if (attachment != null) {
-            attachedToPermanent = true;
-            attachedControllerDiffers = !attachment.getControllerId().equals(permanent.getControllerId());
-        } else {
-            attachedToPermanent = false;
-            attachedControllerDiffers = false;
+        boolean attachedToPermanent = false;
+        boolean attachedControllerDiffers = false;
+        if (game != null) {
+            Permanent attachment = game.getPermanent(permanent.getAttachedTo());
+            if (attachment != null) {
+                attachedToPermanent = true;
+                attachedControllerDiffers = !attachment.getControllerId().equals(permanent.getControllerId());
+            }
         }
+        this.attachedToPermanent = attachedToPermanent;
+        this.attachedControllerDiffers = attachedControllerDiffers;
     }
 
     public boolean isTapped() {
