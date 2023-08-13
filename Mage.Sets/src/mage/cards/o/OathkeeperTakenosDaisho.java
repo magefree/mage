@@ -80,7 +80,7 @@ class OathkeeperExileEquippedEffect extends OneShotEffect {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(equipment.getAttachedTo());
             if (creature != null) {
-                return creature.moveToExile(null, "", source, game);
+                return !creature.moveToExile(null, "", source, game).isEmpty();
             }
         }
         return false;

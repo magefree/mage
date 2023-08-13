@@ -1,5 +1,6 @@
 package mage.game;
 
+import static java.util.Collections.emptyList;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -43,8 +44,6 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -100,6 +99,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Combat combat;
     private Map<String, Object> values = new HashMap<>();
     private Map<UUID, Zone> zones = new HashMap<>();
+    private Map<UUID, List<UUID>> zonesNewId = new HashMap<>();
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, CardState> cardState = new HashMap<>();
     private Map<UUID, MageObjectAttribute> mageObjectAttribute = new HashMap<>();
@@ -186,6 +186,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             }
         }
         this.zones.putAll(state.zones);
+        this.zonesNewId.putAll(state.zonesNewId);
         this.simultaneousEvents.addAll(state.simultaneousEvents);
         for (Map.Entry<UUID, CardState> entry : state.cardState.entrySet()) {
             cardState.put(entry.getKey(), entry.getValue().copy());
@@ -237,6 +238,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         watchers.clear();
         values.clear();
         zones.clear();
+        zonesNewId.clear();
         simultaneousEvents.clear();
         copiedCards.clear();
         usePowerInsteadOfToughnessForDamageLethalityFilters.clear();
@@ -279,6 +281,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             origPlayer.restore(copyPlayer);
         }
         this.zones = state.zones;
+        this.zonesNewId = state.zonesNewId;
         this.simultaneousEvents = state.simultaneousEvents;
         this.cardState = state.cardState;
         this.mageObjectAttribute = state.mageObjectAttribute;
@@ -779,6 +782,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         return null;
     }
 
+    public List<UUID> getPermanentIdFromCard(UUID cardId) {
+        if (!getZone(cardId).equals(Zone.BATTLEFIELD)) {
+            return new ArrayList<>();
+        }
+        if (zonesNewId.containsKey(cardId)) {
+            return zonesNewId.get(cardId);
+        }
+        return new ArrayList<>();
+    }
+
     public Zone getZone(UUID id) {
         if (id != null && zones.containsKey(id)) {
             return zones.get(id);
@@ -786,11 +799,26 @@ public class GameState implements Serializable, Copyable<GameState> {
         return null;
     }
 
-    public void setZone(UUID id, Zone zone) {
+    public void setZone(UUID id, Zone zone, List<ZoneChangeInfo> zcis) {
         if (zone == null) {
             zones.remove(id);
+            zonesNewId.remove(id);
         } else {
             zones.put(id, zone);
+            if (zcis == null) {
+                zonesNewId.remove(id);
+            } else {
+                List<UUID> targets = zcis.stream()
+                        .map(zci -> zci.event.getTargetId())
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList());
+
+                if (targets.isEmpty()) {
+                    zonesNewId.remove(id);
+                } else {
+                    zonesNewId.put(id, targets);
+                }
+            }
         }
     }
 
@@ -948,7 +976,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     private void addCard(Card card, Zone zone) {
-        setZone(card.getId(), zone);
+        setZone(card.getId(), zone, null);
 
         // add card specific abilities to game
         for (Ability ability : card.getInitAbilities()) {
@@ -1048,7 +1076,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addCommandObject(CommandObject commandObject) {
         getCommand().add(commandObject);
-        setZone(commandObject.getId(), Zone.COMMAND);
+        setZone(commandObject.getId(), Zone.COMMAND, null);
 
         // must add only command object specific abilities, all other abilities adds from card parts (on loadCards)
         for (Ability ability : commandObject.getInitAbilities()) {

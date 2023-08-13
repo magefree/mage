@@ -780,7 +780,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void setZone(UUID objectId, Zone zone) {
-        state.setZone(objectId, zone);
+        state.setZone(objectId, zone, null);
     }
 
     @Override
@@ -2750,7 +2750,7 @@ public abstract class GameImpl implements Game {
 
     private boolean movePermanentToGraveyardWithInfo(Permanent permanent) {
         boolean result = false;
-        if (permanent.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+        if (!permanent.moveToZone(Zone.GRAVEYARD, null, this, false).isEmpty()) {
             if (!this.isSimulation()) {
                 this.informPlayers(permanent.getLogName() + " is put into graveyard from battlefield");
             }

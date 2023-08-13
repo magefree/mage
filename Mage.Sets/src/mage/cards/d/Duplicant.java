@@ -3,7 +3,6 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -79,7 +78,7 @@ class DuplicantExileTargetEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
         if (permanent != null && sourceObject instanceof Permanent) {
-            if (permanent.moveToExile(null, null, source, game)
+            if (!permanent.moveToExile(null, null, source, game).isEmpty()
                     && ((Permanent) sourceObject).imprint(permanent.getId(), game)) {
                 ((Permanent) sourceObject).addInfo("imprint", "[Imprinted card - " + permanent.getName() + ']', game);
             }

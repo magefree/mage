@@ -8,8 +8,10 @@ import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.ZoneChangeInfo;
 import mage.game.events.ZoneChangeEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,12 +51,14 @@ public abstract class AdventureCard extends CardImpl {
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
-        if (super.moveToZone(toZone, source, game, flag, appliedEffects)) {
-            game.getState().setZone(getSpellCard().getId(), toZone);
-            return true;
+    public List<ZoneChangeInfo> moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
+        List<ZoneChangeInfo> moved = super.moveToZone(toZone, source, game, flag, appliedEffects);
+        if (moved.isEmpty()) {
+            return new ArrayList<>();
         }
-        return false;
+
+        game.getState().setZone(getSpellCard().getId(), toZone, moved);
+        return moved;
     }
 
     @Override
@@ -64,13 +68,14 @@ public abstract class AdventureCard extends CardImpl {
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
-        if (super.moveToExile(exileId, name, source, game, appliedEffects)) {
-            Zone currentZone = game.getState().getZone(getId());
-            game.getState().setZone(getSpellCard().getId(), currentZone);
-            return true;
+    public List<ZoneChangeInfo> moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
+        List<ZoneChangeInfo> moved = super.moveToExile(exileId, name, source, game, appliedEffects);
+        if (moved.isEmpty()) {
+            return new ArrayList<>();
         }
-        return false;
+        Zone currentZone = game.getState().getZone(getId());
+        game.getState().setZone(getSpellCard().getId(), currentZone, moved);
+        return moved;
     }
 
     @Override

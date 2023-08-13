@@ -1,7 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -13,6 +11,8 @@ import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,7 +60,7 @@ class SinsOfTheFatherEffect extends OneShotEffect {
             int exiledCards = 0;
             for(Card card : targetPlayer.getGraveyard().getCards(game)) {
                 if(filter.match(card, game)) {
-                    if(card.moveToExile(null, "", source, game)) {
+                    if (!card.moveToExile(null, "", source, game).isEmpty()) {
                         exiledCards++;
                     }
                 }

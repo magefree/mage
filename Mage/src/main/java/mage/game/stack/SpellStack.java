@@ -1,10 +1,6 @@
 
 package mage.game.stack;
 
-import java.util.ArrayDeque;
-import java.util.Date;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.PutCards;
@@ -12,6 +8,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayDeque;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -52,7 +52,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
     public boolean remove(StackObject object, Game game) {
         for (StackObject spell : this) {
             if (spell.getId().equals(object.getId())) {
-                game.getState().setZone(spell.getId(), null);
+                game.getState().setZone(spell.getId(), null, null);
                 return super.remove(spell);
             }
         }

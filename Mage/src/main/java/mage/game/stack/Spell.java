@@ -21,6 +21,7 @@ import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.MageObjectAttribute;
+import mage.game.ZoneChangeInfo;
 import mage.game.events.CopiedStackObjectEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
@@ -851,32 +852,32 @@ public class Spell extends StackObjectImpl implements Card {
     }
 
     @Override
-    public boolean moveToZone(Zone zone, Ability source, Game game, boolean flag) {
+    public List<ZoneChangeInfo> moveToZone(Zone zone, Ability source, Game game, boolean flag) {
         return moveToZone(zone, source, game, flag, null);
     }
 
     @Override
-    public boolean moveToZone(Zone zone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
+    public List<ZoneChangeInfo> moveToZone(Zone zone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         // 706.10a If a copy of a spell is in a zone other than the stack, it ceases to exist.
         // If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
         // These are state-based actions. See rule 704.
         if (this.isCopy() && zone != Zone.STACK) {
-            return true;
+            return new ArrayList<>();
         }
         return card.moveToZone(zone, source, game, flag, appliedEffects);
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, Ability source, Game game) {
+    public List<ZoneChangeInfo> moveToExile(UUID exileId, String name, Ability source, Game game) {
         return moveToExile(exileId, name, source, game, null);
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
+    public List<ZoneChangeInfo> moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
         if (this.isCopy()) {
             // copied spell, only remove from stack
             game.getStack().remove(this, game);
-            return true;
+            return new ArrayList<>();
         }
         return this.card.moveToExile(exileId, name, source, game, appliedEffects);
     }
@@ -1060,7 +1061,7 @@ public class Spell extends StackObjectImpl implements Card {
     @Override
     public void setZone(Zone zone, Game game) {
         card.setZone(zone, game);
-        game.getState().setZone(this.getId(), zone);
+        game.getState().setZone(this.getId(), zone, null);
     }
 
     @Override

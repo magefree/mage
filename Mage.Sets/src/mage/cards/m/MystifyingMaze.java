@@ -74,7 +74,7 @@ class MystifyingMazeEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         MageObject sourceObject = source.getSourceObject(game);
         if (permanent != null && sourceObject != null) {
-            if (permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source, game)) {
+            if (!permanent.moveToExile(source.getSourceId(), sourceObject.getIdName(), source, game).isEmpty()) {
                 //create delayed triggered ability
                 Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true, false);
                 effect.setTargetPointer(new FixedTarget(source.getFirstTarget(), game));

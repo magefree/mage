@@ -207,7 +207,7 @@ class BuybackEffect extends ReplacementEffectImpl {
         Card card = game.getCard(source.getSourceId());
         if (card != null && source instanceof BuybackAbility) {
             if (((BuybackAbility) source).isBuybackActivated(game)) {
-                return card.moveToZone(Zone.HAND, source, game, true, event.getAppliedEffects());
+                return !card.moveToZone(Zone.HAND, source, game, true, event.getAppliedEffects()).isEmpty();
             }
         }
         return false;

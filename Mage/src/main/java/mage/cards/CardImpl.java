@@ -373,12 +373,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag) {
+    public List<ZoneChangeInfo> moveToZone(Zone toZone, Ability source, Game game, boolean flag) {
         return this.moveToZone(toZone, source, game, flag, null);
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
+    public List<ZoneChangeInfo> moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, source, ownerId, fromZone, toZone, appliedEffects);
         ZoneChangeInfo zoneChangeInfo;
@@ -396,7 +396,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
             return ZonesHandler.moveCard(zoneChangeInfo, game, source);
         }
-        return false;
+        return new ArrayList<>();
     }
 
     @Override
@@ -409,12 +409,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, Ability source, Game game) {
+    public List<ZoneChangeInfo> moveToExile(UUID exileId, String name, Ability source, Game game) {
         return moveToExile(exileId, name, source, game, null);
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
+    public List<ZoneChangeInfo> moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, source, ownerId, fromZone, Zone.EXILED, appliedEffects);
         ZoneChangeInfo.Exile info = new ZoneChangeInfo.Exile(event, exileId, name);
@@ -440,7 +440,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public boolean putOntoBattlefield(Game game, Zone fromZone, Ability source, UUID controllerId, boolean tapped, boolean faceDown, List<UUID> appliedEffects) {
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, source, controllerId, fromZone, Zone.BATTLEFIELD, appliedEffects);
         ZoneChangeInfo.Battlefield info = new ZoneChangeInfo.Battlefield(event, faceDown, tapped, source);
-        return ZonesHandler.moveCard(info, game, source);
+        return !ZonesHandler.moveCard(info, game, source).isEmpty();
     }
 
     @Override

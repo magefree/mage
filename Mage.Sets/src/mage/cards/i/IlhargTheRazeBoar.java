@@ -89,15 +89,17 @@ class IlhargTheRazeBoarEffect extends OneShotEffect {
             return false;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
-        Permanent permanent = game.getPermanent(card.getId());
-        if (permanent == null) {
-            return false;
+        for (UUID permanentId : game.getState().getPermanentIdFromCard(card.getId())) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent == null) {
+                continue;
+            }
+            game.getCombat().addAttackingCreature(permanent.getId(), game);
+            Effect effect = new ReturnToHandTargetEffect();
+            effect.setText("return " + permanent.getName() + " to its owner's hand");
+            effect.setTargetPointer(new FixedTarget(permanent, game));
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
         }
-        game.getCombat().addAttackingCreature(permanent.getId(), game);
-        Effect effect = new ReturnToHandTargetEffect();
-        effect.setText("return " + permanent.getName() + " to its owner's hand");
-        effect.setTargetPointer(new FixedTarget(permanent, game));
-        game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), source);
         return true;
     }
 }

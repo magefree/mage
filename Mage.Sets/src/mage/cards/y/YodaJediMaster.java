@@ -1,6 +1,5 @@
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -19,6 +18,8 @@ import mage.game.command.emblems.YodaEmblem;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -79,7 +80,7 @@ class YodaJediMasterEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (permanent != null && sourcePermanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), sourcePermanent.getName(), source, game)) {
+            if (!permanent.moveToExile(source.getSourceId(), sourcePermanent.getName(), source, game).isEmpty()) {
                 //create delayed triggered ability
                 Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
                 effect.setText("Return that card to the battlefield under your control at the beginning of your next end step");

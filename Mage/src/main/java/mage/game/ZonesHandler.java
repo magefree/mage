@@ -51,10 +51,10 @@ public final class ZonesHandler {
         return false;
     }
 
-    public static boolean moveCard(ZoneChangeInfo info, Game game, Ability source) {
+    public static List<ZoneChangeInfo> moveCard(ZoneChangeInfo info, Game game, Ability source) {
         List<ZoneChangeInfo> list = new ArrayList<>();
         list.add(info);
-        return !moveCards(list, source, game).isEmpty();
+        return moveCards(list, source, game);
     }
 
     public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Ability source, Game game) {
@@ -248,8 +248,12 @@ public final class ZonesHandler {
                         }
                         spell.syncZoneChangeCounterOnStack(card, game);
                         game.getStack().push(spell);
-                        game.getState().setZone(spell.getId(), Zone.STACK);
-                        game.getState().setZone(card.getId(), Zone.STACK);
+
+                        List<ZoneChangeInfo> zcis = new ArrayList<>();
+                        zcis.add(info);
+
+                        game.getState().setZone(spell.getId(), Zone.STACK, zcis);
+                        game.getState().setZone(card.getId(), Zone.STACK, zcis);
                     }
                     break;
                 case BATTLEFIELD:

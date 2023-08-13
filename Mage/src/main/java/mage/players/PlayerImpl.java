@@ -983,7 +983,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (library.size() + 1 < xFromTheTop) {
                 putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, true);
             } else {
-                if (card.moveToZone(Zone.LIBRARY, source, game, true)
+                if (!card.moveToZone(Zone.LIBRARY, source, game, true).isEmpty()
                         && !(card instanceof PermanentToken) && !card.isCopy()) {
                     Card cardInLib = getLibrary().getFromTop(game);
                     if (cardInLib != null && cardInLib.getId().equals(card.getMainCard().getId())) { // check needed because e.g. commander can go to command zone
@@ -4558,6 +4558,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 infoList = ZonesHandler.moveCards(infoList, source, game);
                 for (ZoneChangeInfo info : infoList) {
+                    game.getState().setZone(info.event.getInitialTargetId(), toZone, infoList);
                     Permanent permanent = game.getPermanent(info.event.getTargetId());
                     if (permanent != null) {
                         successfulMovedCards.add(permanent);
@@ -4675,7 +4676,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (fromZone == Zone.BATTLEFIELD && !(card instanceof Permanent)) {
             card = game.getPermanent(card.getId());
         }
-        if (card.moveToZone(Zone.HAND, source, game, false)) {
+        if (!card.moveToZone(Zone.HAND, source, game, false).isEmpty()) {
             if (card instanceof PermanentCard && game.getCard(card.getId()) != null) {
                 card = game.getCard(card.getId());
             }
@@ -4764,7 +4765,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         boolean result = false;
-        if (card.moveToZone(Zone.GRAVEYARD, source, game, false)) {
+        if (!card.moveToZone(Zone.GRAVEYARD, source, game, false).isEmpty()) {
             if (!game.isSimulation()) {
                 if (card instanceof PermanentCard && game.getCard(card.getId()) != null) {
                     card = game.getCard(card.getId());
@@ -4791,7 +4792,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         boolean result = false;
-        if (card.moveToZone(Zone.LIBRARY, source, game, toTop)) {
+        if (!card.moveToZone(Zone.LIBRARY, source, game, toTop).isEmpty()) {
             if (!game.isSimulation()) {
                 if (card instanceof PermanentCard && game.getCard(card.getId()) != null) {
                     card = game.getCard(card.getId());
@@ -4824,7 +4825,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         boolean result = false;
-        if (card.moveToZone(Zone.COMMAND, source, game, true)) {
+        if (!card.moveToZone(Zone.COMMAND, source, game, true).isEmpty()) {
             if (!game.isSimulation()) {
                 if (card instanceof PermanentCard && game.getCard(card.getId()) != null) {
                     card = game.getCard(card.getId());
@@ -4856,7 +4857,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
         boolean result = false;
-        if (card.moveToExile(exileId, exileName, source, game)) {
+        if (!card.moveToExile(exileId, exileName, source, game).isEmpty()) {
             if (!game.isSimulation()) {
                 if (card instanceof PermanentCard) {
                     // in case it's face down or name was changed by copying from other permanent

@@ -1306,7 +1306,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DESTROY_PERMANENT, objectId, source, controllerId, noRegen ? 1 : 0))) {
             // this means destroy was successful, if object movement to graveyard will be replaced (e.g. commander to command zone) it's still
             // handled as successful destroying (but not as successful "dies this way" for destroying).
-            if (moveToZone(Zone.GRAVEYARD, source, game, false)) {
+            if (!moveToZone(Zone.GRAVEYARD, source, game, false).isEmpty()) {
                 String logName;
                 Card card = game.getCard(this.getId());
                 if (card != null) {
@@ -1888,7 +1888,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
+    public List<ZoneChangeInfo> moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
@@ -1899,21 +1899,21 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             } else {
                 zoneChangeInfo = new ZoneChangeInfo(event);
             }
-            boolean successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game, source);
+            List<ZoneChangeInfo> successfullyMoved = ZonesHandler.moveCard(zoneChangeInfo, game, source);
             //20180810 - 701.3d
             detachAllAttachments(game);
             return successfullyMoved;
         }
-        return false;
+        return new ArrayList<>();
     }
 
     @Override
-    public boolean moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
+    public List<ZoneChangeInfo> moveToExile(UUID exileId, String name, Ability source, Game game, List<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         ZoneChangeEvent event = new ZoneChangeEvent(this, source, ownerId, fromZone, Zone.EXILED, appliedEffects);
         ZoneChangeInfo.Exile zcInfo = new ZoneChangeInfo.Exile(event, exileId, name);
 
-        boolean successfullyMoved = ZonesHandler.moveCard(zcInfo, game, source);
+        List<ZoneChangeInfo> successfullyMoved = ZonesHandler.moveCard(zcInfo, game, source);
         //20180810 - 701.3d
         detachAllAttachments(game);
         return successfullyMoved;

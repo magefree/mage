@@ -65,7 +65,7 @@ class SkybindEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (permanent != null && sourcePermanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), sourcePermanent.getName(), source, game)) {
+            if (!permanent.moveToExile(source.getSourceId(), sourcePermanent.getName(), source, game).isEmpty()) {
                 //create delayed triggered ability
                 Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
                 effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source), game));
