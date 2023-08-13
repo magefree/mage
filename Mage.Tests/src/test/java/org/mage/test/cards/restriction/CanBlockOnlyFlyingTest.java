@@ -39,18 +39,13 @@ public class CanBlockOnlyFlyingTest extends CardTestPlayerBase {
         block(3, playerB, "Vaporkin", "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
-        try {
-            execute();
-            fail("Expected exception not thrown");
-        } catch (UnsupportedOperationException e) {
-            assertEquals("Vaporkin is blocked incorrectly.", e.getMessage());
-        }
+        execute();
 
-        //assertPermanentCount(playerA, "Silvercoat Lion", 1);
-        //assertPermanentCount(playerB, "Vaporkin", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPermanentCount(playerB, "Vaporkin", 1);
 
-        //assertLife(playerA, 20);
-        //assertLife(playerB, 18);
+        assertLife(playerA, 20);
+        assertLife(playerB, 18);
     }
 
     /**
