@@ -2,7 +2,6 @@ package org.mage.test.combat;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
@@ -19,6 +18,8 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
     @Test
     public void testFlyingVsNonFlying() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Captain of the Mists");
         addCard(Zone.BATTLEFIELD, playerB, "Mist Raven");
 
@@ -26,13 +27,19 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         block(2, playerA, "Captain of the Mists", "Mist Raven");
 
         setStopAt(2, PhaseStep.END_TURN);
-        execute();
 
-        assertLife(playerA, 18);
-        assertLife(playerB, 20);
+        try {
+            execute();
+            fail("Expected exception not thrown");
+        } catch (UnsupportedOperationException e) {
+            assertEquals("Mist Raven is blocked incorrectly.", e.getMessage());
+        }
 
-        Permanent mistRaven = getPermanent("Mist Raven", playerB.getId());
-        Assert.assertTrue("Should be tapped because of attacking", mistRaven.isTapped());
+        //assertLife(playerA, 18);
+        //assertLife(playerB, 20);
+
+        //Permanent mistRaven = getPermanent("Mist Raven", playerB.getId());
+        //Assert.assertTrue("Should be tapped because of attacking", mistRaven.isTapped());
     }
 
     /**
@@ -230,6 +237,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testCantBeBlocked() {
+        setStrictChooseMode(true);
 
         addCard(Zone.BATTLEFIELD, playerA, "Blighted Agent");
         addCard(Zone.BATTLEFIELD, playerB, "Blighted Agent");
@@ -242,13 +250,20 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         block(2, playerA, "Birds of Paradise:0", "Blighted Agent:0");
 
         setStopAt(2, PhaseStep.END_TURN);
-        execute();
+        try {
+            execute();
+            fail("Expected exception not thrown");
+        } catch (UnsupportedOperationException e) {
+            assertEquals("Blighted Agent is blocked incorrectly. It can't be blocked.", e.getMessage());
+        }
 
-        assertCounterCount(playerA, CounterType.POISON, 1);
+        //assertCounterCount(playerA, CounterType.POISON, 1);
     }
 
     @Test
     public void testCantBeBlockedTormentedSoul() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerB, "Tormented Soul");
 
         addCard(Zone.BATTLEFIELD, playerA, "Flinthoof Boar");
@@ -257,12 +272,17 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         block(4, playerA, "Flinthoof Boar", "Tormented Soul");
 
         setStopAt(4, PhaseStep.END_TURN);
-        execute();
+        try {
+            execute();
+            fail("Expected exception not thrown");
+        } catch (UnsupportedOperationException e) {
+            assertEquals("Tormented Soul is blocked incorrectly. It can't be blocked.", e.getMessage());
+        }
 
-        assertPermanentCount(playerA, "Flinthoof Boar", 1);
-        assertPermanentCount(playerB, "Tormented Soul", 1);
+        //assertPermanentCount(playerA, "Flinthoof Boar", 1);
+        //assertPermanentCount(playerB, "Tormented Soul", 1);
 
-        assertLife(playerA, 19);
+        //assertLife(playerA, 19);
     }
 
     /**
@@ -270,6 +290,8 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testFlyingVsNonFlying2() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Savannah Lions");
         addCard(Zone.BATTLEFIELD, playerA, "Azure Drake");
@@ -291,14 +313,20 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         block(3, playerB, "Walking Corpse", "Aven Squire"); // able to block because of Turn to Frog
 
         setStopAt(3, PhaseStep.END_TURN);
-        execute();
 
-        assertLife(playerB, 15);
-        assertLife(playerA, 20);
+        try {
+            execute();
+            fail("Expected exception not thrown");
+        } catch (UnsupportedOperationException e) {
+            assertEquals("Azure Drake is blocked incorrectly.", e.getMessage());
+        }
 
-        assertPermanentCount(playerB, "Aven Squire", 0);
-        assertPermanentCount(playerB, "Walking Corpse", 1);
-        assertPermanentCount(playerB, "Llanowar Elves", 1);
+        //assertLife(playerB, 15);
+        //assertLife(playerA, 20);
+
+        //assertPermanentCount(playerB, "Aven Squire", 0);
+        //assertPermanentCount(playerB, "Walking Corpse", 1);
+        //assertPermanentCount(playerB, "Llanowar Elves", 1);
     }
 
     /**
@@ -401,6 +429,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     */
     @Test
     public void tromokratisNotBlockedByAll() {
+        setStrictChooseMode(true);
         /*
         Tromokratis {5}{U}{U}
         Legendary Creature — Kraken 8/8
@@ -423,17 +452,23 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         block(3, playerB, memnite, tromokratis);
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
+        try {
+            execute();
+            fail("Expected exception not thrown");
+        } catch (UnsupportedOperationException e) {
+            assertEquals("Tromokratis is blocked incorrectly. It can't be blocked unless all creatures defending player controls block it.", e.getMessage());
+        }
 
-        assertLife(playerB, 12); // Hill Giant could not block it, so no other creature could block Tromokratis either
-        assertPermanentCount(playerB, gBears, 1);
-        assertPermanentCount(playerB, memnite, 1);
-        assertTapped(tromokratis, true);
-        assertTapped(hGiant, true);
+        //assertLife(playerB, 12); // Hill Giant could not block it, so no other creature could block Tromokratis either
+        //assertPermanentCount(playerB, gBears, 1);
+        //assertPermanentCount(playerB, memnite, 1);
+        //assertTapped(tromokratis, true);
+        //assertTapped(hGiant, true);
     }
 
     @Test
     public void underworldCerberusBlockedByOneTest() {
+        setStrictChooseMode(true);
     	/* Underworld Cerberus {3}{B}{3} 6/6
     	*  Underworld Cerberus can't be blocked except by three or more creatures.
     	*  Cards in graveyards can't be the targets of spells or abilities.
@@ -457,6 +492,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
     @Test
     public void underworldCerberusBlockedByTwoTest() {
+        setStrictChooseMode(true);
     	/* Underworld Cerberus {3}{B}{3} 6/6
     	*  Underworld Cerberus can't be blocked except by three or more creatures.
     	*  Cards in graveyards can't be the targets of spells or abilities.

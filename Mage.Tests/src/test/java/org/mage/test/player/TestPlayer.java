@@ -1972,7 +1972,9 @@ public class TestPlayer implements Player {
     }
 
     private void checkCantBeBlockedAfter(Game game, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
-        for (List<MageObjectReference> attackers : blockedCreaturesByCreature.values()) {
+        for (Map.Entry<MageObjectReference, List<MageObjectReference>> entryBlock : blockedCreaturesByCreature.entrySet()) {
+            List<MageObjectReference> attackers = entryBlock.getValue();
+            MageObjectReference blockerMOR = entryBlock.getKey();
             for (MageObjectReference morAttacker : attackers) {
                 Permanent attackingCreature = morAttacker.getPermanent(game);
                 if (attackingCreature == null) {
@@ -1982,9 +1984,15 @@ public class TestPlayer implements Player {
                 for (Map.Entry<EvasionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableEvasionEffects(attackingCreature, game).entrySet()) {
                     EvasionEffect effect = entry.getKey();
                     for (Ability ability : entry.getValue()) {
+                        if (effect.cantBeBlocked(attackingCreature, blockerMOR.getPermanent(game), ability, game, true)) {
+                            String additionalMessage = effect.cantBeBlockedMessage(attackingCreature, ability, game);
+                            throw new UnsupportedOperationException(attackingCreature.getName() + " is blocked incorrectly."
+                                    + (additionalMessage == null || additionalMessage.isEmpty() ? "" : " It " + additionalMessage + "."));
+                        }
                         if (effect.cantBeBlockedCheckAfter(attackingCreature, ability, game, true)) {
-                            throw new UnsupportedOperationException(attackingCreature.getName() + " is blocked incorrectly. "
-                                    + "It " + effect.cantBeBlockedMessage(attackingCreature, ability, game) + ".");
+                            String additionalMessage = effect.cantBeBlockedMessage(attackingCreature, ability, game);
+                            throw new UnsupportedOperationException(attackingCreature.getName() + " is blocked incorrectly."
+                                    + (additionalMessage == null || additionalMessage.isEmpty() ? "" : " It " + additionalMessage + "."));
                         }
                     }
                 }

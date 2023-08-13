@@ -4,6 +4,8 @@ package org.mage.test.cards.restriction;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -27,6 +29,8 @@ public class CanBlockOnlyFlyingTest extends CardTestPlayerBase {
 
     @Test
     public void testCannotBlockCreatureWithoutFlying() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
         addCard(Zone.BATTLEFIELD, playerB, "Vaporkin");
@@ -35,14 +39,18 @@ public class CanBlockOnlyFlyingTest extends CardTestPlayerBase {
         block(3, playerB, "Vaporkin", "Silvercoat Lion");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
+        try {
+            execute();
+            fail("Expected exception not thrown");
+        } catch (UnsupportedOperationException e) {
+            assertEquals("Vaporkin is blocked incorrectly.", e.getMessage());
+        }
 
-        assertPermanentCount(playerA, "Silvercoat Lion", 1);
-        assertPermanentCount(playerB, "Vaporkin", 1);
+        //assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        //assertPermanentCount(playerB, "Vaporkin", 1);
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 18);
-
+        //assertLife(playerA, 20);
+        //assertLife(playerB, 18);
     }
 
     /**
@@ -51,6 +59,8 @@ public class CanBlockOnlyFlyingTest extends CardTestPlayerBase {
 
     @Test
     public void testCanBlockCreatureWithFlying() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Wingsteed Rider");
 
         addCard(Zone.BATTLEFIELD, playerB, "Vaporkin");
@@ -66,7 +76,6 @@ public class CanBlockOnlyFlyingTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-
     }
 
     /**
@@ -75,6 +84,8 @@ public class CanBlockOnlyFlyingTest extends CardTestPlayerBase {
 
     @Test
     public void testCantBlockFlyerAfterLosingFlying() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Archetype of Imagination");
 
         addCard(Zone.BATTLEFIELD, playerB, "Vaporkin");
@@ -83,22 +94,28 @@ public class CanBlockOnlyFlyingTest extends CardTestPlayerBase {
         block(3, playerB, "Vaporkin", "Archetype of Imagination");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
+        try {
+            execute();
+            fail("Expected exception not thrown");
+        } catch (UnsupportedOperationException e) {
+            assertEquals("Archetype of Imagination is blocked incorrectly.", e.getMessage());
+        }
 
-        assertPermanentCount(playerA, "Archetype of Imagination", 1);
-        assertPermanentCount(playerB, "Vaporkin", 1);
+        //assertPermanentCount(playerA, "Archetype of Imagination", 1);
+        //assertPermanentCount(playerB, "Vaporkin", 1);
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 17);
-
+        //assertLife(playerA, 20);
+        //assertLife(playerB, 17);
     }
 
-/**
+    /**
      * Tests if Vaporkin can block a creature whicj gained flying
      */
 
     @Test
     public void testCanBlockCreatureWhichGainedFlying() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
         addCard(Zone.HAND, playerB, "Jump");
@@ -117,10 +134,5 @@ public class CanBlockOnlyFlyingTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
         assertPermanentCount(playerB, "Vaporkin", 0);
-
-
     }
-
-
-
 }

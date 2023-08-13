@@ -1,8 +1,9 @@
 package org.mage.test.cards.continuous;
 
-import mage.abilities.keyword.IslandwalkAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -13,6 +14,8 @@ public class MasterOfThePearlTridentTest extends CardTestPlayerBase {
 
     @Test
     public void testLordAbility() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Master of the Pearl Trident");
         addCard(Zone.BATTLEFIELD, playerA, "Merfolk of the Pearl Trident");
@@ -26,12 +29,18 @@ public class MasterOfThePearlTridentTest extends CardTestPlayerBase {
         block(3, playerB, "Llanowar Elves", "Merfolk of the Pearl Trident");
 
         setStopAt(3, PhaseStep.END_TURN);
-        execute();
 
-        assertPermanentCount(playerA, "Master of the Pearl Trident", 1);
-        assertLife(playerB, 18);
-        assertPowerToughness(playerA, "Merfolk of the Pearl Trident", 2, 2);
-        assertAbility(playerA, "Merfolk of the Pearl Trident", new IslandwalkAbility(), true);
+        try {
+            execute();
+            fail("Expected exception not thrown");
+        } catch (UnsupportedOperationException e) {
+            assertEquals("Merfolk of the Pearl Trident is blocked incorrectly.", e.getMessage());
+        }
+
+        //assertPermanentCount(playerA, "Master of the Pearl Trident", 1);
+        //assertLife(playerB, 18);
+        //assertPowerToughness(playerA, "Merfolk of the Pearl Trident", 2, 2);
+        //assertAbility(playerA, "Merfolk of the Pearl Trident", new IslandwalkAbility(), true);
     }
 
     @Test

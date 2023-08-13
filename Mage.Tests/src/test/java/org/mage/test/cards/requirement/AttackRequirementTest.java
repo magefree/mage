@@ -3,6 +3,8 @@ package org.mage.test.cards.requirement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,6 +16,8 @@ public class AttackRequirementTest extends CardTestPlayerBase {
 
     @Test
     public void testSimpleAttackRequirement() {
+        setStrictChooseMode(true);
+
         // Defender
         // {G}: Wall of Tanglecord gains reach until end of turn. (It can block creatures with flying.)
         addCard(Zone.BATTLEFIELD, playerA, "Wall of Tanglecord"); // 0/6
@@ -22,15 +26,22 @@ public class AttackRequirementTest extends CardTestPlayerBase {
         // Juggernaut can't be blocked by Walls
         addCard(Zone.BATTLEFIELD, playerB, "Juggernaut"); // 5/3
 
+        setStopAt(2, PhaseStep.DECLARE_ATTACKERS);
+        execute();
+
         // Juggernaut should be forced to attack
         block(2, playerA, "Wall of Tanglecord", "Juggernaut"); // this block should'nt work because of Juggernauts restriction
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
+        try {
+            execute();
+            fail("Expected exception not thrown");
+        } catch (UnsupportedOperationException e) {
+            assertEquals("Juggernaut is blocked incorrectly. It can't be blocked by Walls.", e.getMessage());
+        }
 
-        assertLife(playerA, 15);
-        assertLife(playerB, 20);
-
+        //assertLife(playerA, 15);
+        //assertLife(playerB, 20);
     }
 
     @Test
