@@ -30,7 +30,8 @@ public class NextSpellCastHasAbilityEffect extends ContinuousEffectImpl {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.filter = filter;
-        staticText = "the next spell you cast this turn has " + CardUtil.getTextWithFirstCharLowerCase(CardUtil.stripReminderText(ability.getRule()));
+        staticText = "the next " + filter.getMessage().replace("card", "spell")
+                + " you cast this turn has " + CardUtil.getTextWithFirstCharLowerCase(CardUtil.stripReminderText(ability.getRule()));
     }
 
     private NextSpellCastHasAbilityEffect(final NextSpellCastHasAbilityEffect effect) {
