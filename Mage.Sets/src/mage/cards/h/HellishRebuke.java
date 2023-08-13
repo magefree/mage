@@ -62,7 +62,6 @@ class HellishRebukeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = source.getSourceObject(game);
         game.addEffect(new GainAbilityAllEffect(
                 new HellishRebukeTriggeredAbility(source, game),
                 Duration.EndOfTurn, StaticFilters.FILTER_OPPONENTS_PERMANENT

@@ -79,8 +79,7 @@ enum PainDistributorPredicate implements Predicate<StackObject> {
     public boolean apply(StackObject input, Game game) {
         return game.getState()
                 .getWatcher(SpellsCastWatcher.class)
-                .getSpellsCastThisTurn(input.getControllerId())
-                .size() == 1;
+                .getCount(input.getControllerId()) == 1;
     }
 }
 

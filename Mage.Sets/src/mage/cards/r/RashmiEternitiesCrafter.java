@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.List;
 import java.util.UUID;
 import mage.ApprovingObject;
 import mage.MageInt;
@@ -72,16 +71,13 @@ class RashmiEternitiesCrafterTriggeredAbility extends SpellCastControllerTrigger
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-            if (watcher != null) {
-                List<Spell> spells = watcher.getSpellsCastThisTurn(event.getPlayerId());
-                if (spells != null && spells.size() == 1) {
-                    Spell spell = game.getStack().getSpell(event.getTargetId());
-                    if (spell != null) {
-                        for (Effect effect : getEffects()) {
-                            effect.setValue("RashmiEternitiesCrafterCMC", spell.getManaValue());
-                        }
-                        return true;
+            if (watcher != null && watcher.getCount(event.getPlayerId()) == 1) {
+                Spell spell = game.getStack().getSpell(event.getTargetId());
+                if (spell != null) {
+                    for (Effect effect : getEffects()) {
+                        effect.setValue("RashmiEternitiesCrafterCMC", spell.getManaValue());
                     }
+                    return true;
                 }
             }
         }

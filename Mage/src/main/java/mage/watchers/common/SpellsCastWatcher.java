@@ -89,4 +89,9 @@ public class SpellsCastWatcher extends Watcher {
         }
         return null;
     }
+
+    public int getCount(UUID playerId) {
+        return spellsCast.getOrDefault(playerId, new ArrayList<>()).size();
+    }
+
 }

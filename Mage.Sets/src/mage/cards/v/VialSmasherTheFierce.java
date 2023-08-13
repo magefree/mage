@@ -78,16 +78,13 @@ class VialSmasherTheFierceTriggeredAbility extends SpellCastControllerTriggeredA
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-            if (watcher != null) {
-                List<Spell> spells = watcher.getSpellsCastThisTurn(event.getPlayerId());
-                if (spells != null && spells.size() == 1) {
-                    Spell spell = game.getStack().getSpell(event.getTargetId());
-                    if (spell != null) {
-                        for (Effect effect : getEffects()) {
-                            effect.setValue("VialSmasherTheFierceCMC", spell.getManaValue());
-                        }
-                        return true;
+            if (watcher != null && watcher.getCount(event.getPlayerId()) == 1) {
+                Spell spell = game.getStack().getSpell(event.getTargetId());
+                if (spell != null) {
+                    for (Effect effect : getEffects()) {
+                        effect.setValue("VialSmasherTheFierceCMC", spell.getManaValue());
                     }
+                    return true;
                 }
             }
         }
