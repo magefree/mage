@@ -54,7 +54,7 @@ public final class PainDistributor extends CardImpl {
                 new CreateTokenTargetEffect(new TreasureToken())
                         .setText("they create a Treasure token"),
                 filter, false, SetTargetPointer.PLAYER
-        ), new SpellsCastWatcher());
+        ));
 
         // Whenever an artifact an opponent controls is put into a graveyard from the battlefield, Pain Distributor deals 1 damage to that player.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(

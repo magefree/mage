@@ -1343,6 +1343,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
         newWatchers.add(new CreaturesDiedWatcher());
         newWatchers.add(new TemptedByTheRingWatcher());
+        newWatchers.add(new SpellsCastWatcher());
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
@@ -3864,7 +3865,7 @@ public abstract class GameImpl implements Game {
         return filterCommandersBySearchZone(mainCards, returnAllCardParts);
     }
 
-    final protected Set<UUID> filterCommandersBySearchZone(Set<UUID> commanderMainCards, boolean returnAllCardParts) {
+    protected final Set<UUID> filterCommandersBySearchZone(Set<UUID> commanderMainCards, boolean returnAllCardParts) {
         // filter by zone search (example: if you search commanders on battlefield then must see all sides of mdf cards)
         Set<UUID> filteredCards = new HashSet<>();
         if (returnAllCardParts) {
