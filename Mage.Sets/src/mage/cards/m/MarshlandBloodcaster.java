@@ -70,6 +70,7 @@ class MarshlandBloodcasterEffect extends ContinuousEffectImpl {
 
     public MarshlandBloodcasterEffect(final MarshlandBloodcasterEffect effect) {
         super(effect);
+        this.spellsCast = effect.spellsCast;
     }
 
     @Override
@@ -99,7 +100,7 @@ class MarshlandBloodcasterEffect extends ContinuousEffectImpl {
 
     private static int getSpellsCast(UUID playerId, Game game) {
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        return watcher != null ? watcher.getSpellsCastThisTurn(playerId).size() : 0;
+        return watcher != null ? watcher.getCount(playerId) : 0;
     }
 }
 

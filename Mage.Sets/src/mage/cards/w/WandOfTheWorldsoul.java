@@ -11,15 +11,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.util.CardUtil;
-import mage.watchers.Watcher;
+import mage.watchers.common.SpellsCastWatcher;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -37,8 +33,7 @@ public final class WandOfTheWorldsoul extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // {T}: The next spell you cast this turn has convoke.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WandOfTheWorldsoulEffect(), new TapSourceCost()),
-                new WandOfTheWorldsoulWatcher());
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WandOfTheWorldsoulEffect(), new TapSourceCost()));
     }
 
     private WandOfTheWorldsoul(final WandOfTheWorldsoul card) {
@@ -53,7 +48,6 @@ public final class WandOfTheWorldsoul extends CardImpl {
 class WandOfTheWorldsoulEffect extends ContinuousEffectImpl {
 
     private int spellsCast;
-    private final Ability convokeAbility = new ConvokeAbility();
 
     WandOfTheWorldsoulEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
@@ -68,7 +62,7 @@ class WandOfTheWorldsoulEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        WandOfTheWorldsoulWatcher watcher = game.getState().getWatcher(WandOfTheWorldsoulWatcher.class);
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher != null) {
             spellsCast = watcher.getCount(source.getControllerId());
         }
@@ -76,7 +70,7 @@ class WandOfTheWorldsoulEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        WandOfTheWorldsoulWatcher watcher = game.getState().getWatcher(WandOfTheWorldsoulWatcher.class);
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher == null) {
             return false;
         }
@@ -93,7 +87,7 @@ class WandOfTheWorldsoulEffect extends ContinuousEffectImpl {
             for (StackObject stackObject : game.getStack()) {
                 if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.isControlledBy(source.getControllerId())) {
                     Spell spell = (Spell) stackObject;
-                    game.getState().addOtherAbility(spell.getCard(), convokeAbility);
+                    game.getState().addOtherAbility(spell.getCard(), new ConvokeAbility());
                     return true;
                 }
             }
@@ -105,35 +99,5 @@ class WandOfTheWorldsoulEffect extends ContinuousEffectImpl {
     @Override
     public WandOfTheWorldsoulEffect copy() {
         return new WandOfTheWorldsoulEffect(this);
-    }
-}
-
-class WandOfTheWorldsoulWatcher extends Watcher {
-
-    private final Map<UUID, Integer> playerMap = new HashMap<>();
-
-    WandOfTheWorldsoulWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST) {
-            return;
-        }
-        Spell spell = game.getSpell(event.getSourceId());
-        if (spell != null) {
-            playerMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        playerMap.clear();
-    }
-
-    int getCount(UUID playerId) {
-        return playerMap.getOrDefault(playerId, 0);
     }
 }

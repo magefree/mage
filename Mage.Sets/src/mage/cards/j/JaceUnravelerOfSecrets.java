@@ -1,4 +1,3 @@
-
 package mage.cards.j;
 
 import java.util.UUID;
@@ -18,7 +17,6 @@ import mage.game.command.emblems.JaceUnravelerOfSecretsEmblem;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- * import mage.game.command.emblems.JaceUnravelerOfSecretsEmblem;
  *
  * @author LevelX2
  */

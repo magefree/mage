@@ -142,7 +142,7 @@ class MonkClassCastEffect extends AsThoughEffectImpl {
         Card card = game.getCard(sourceId);
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         return card != null && watcher != null && !card.isLand(game)
-                && !watcher.getSpellsCastThisTurn(affectedControllerId).isEmpty();
+                && watcher.getCount(affectedControllerId) > 0;
     }
 
     @Override

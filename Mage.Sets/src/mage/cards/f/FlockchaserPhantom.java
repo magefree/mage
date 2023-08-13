@@ -11,15 +11,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.util.CardUtil;
-import mage.watchers.Watcher;
+import mage.watchers.common.SpellsCastWatcher;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -43,7 +39,7 @@ public final class FlockchaserPhantom extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever Flockchaser Phantom attacks, the next spell you cast this turn has convoke.
-        this.addAbility(new AttacksTriggeredAbility(new FlockchaserPhantomEffect()), new FlockchaserPhantomWatcher());
+        this.addAbility(new AttacksTriggeredAbility(new FlockchaserPhantomEffect()));
     }
 
     private FlockchaserPhantom(final FlockchaserPhantom card) {
@@ -59,7 +55,6 @@ public final class FlockchaserPhantom extends CardImpl {
 class FlockchaserPhantomEffect extends ContinuousEffectImpl {
 
     private int spellsCast;
-    private final Ability convokeAbility = new ConvokeAbility();
 
     FlockchaserPhantomEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
@@ -74,7 +69,7 @@ class FlockchaserPhantomEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        FlockchaserPhantomWatcher watcher = game.getState().getWatcher(FlockchaserPhantomWatcher.class);
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher != null) {
             spellsCast = watcher.getCount(source.getControllerId());
         }
@@ -82,7 +77,7 @@ class FlockchaserPhantomEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FlockchaserPhantomWatcher watcher = game.getState().getWatcher(FlockchaserPhantomWatcher.class);
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (watcher == null) {
             return false;
         }
@@ -99,7 +94,7 @@ class FlockchaserPhantomEffect extends ContinuousEffectImpl {
             for (StackObject stackObject : game.getStack()) {
                 if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.isControlledBy(source.getControllerId())) {
                     Spell spell = (Spell) stackObject;
-                    game.getState().addOtherAbility(spell.getCard(), convokeAbility);
+                    game.getState().addOtherAbility(spell.getCard(), new ConvokeAbility());
                     return true;
                 }
             }
@@ -111,35 +106,5 @@ class FlockchaserPhantomEffect extends ContinuousEffectImpl {
     @Override
     public FlockchaserPhantomEffect copy() {
         return new FlockchaserPhantomEffect(this);
-    }
-}
-
-class FlockchaserPhantomWatcher extends Watcher {
-
-    private final Map<UUID, Integer> playerMap = new HashMap<>();
-
-    FlockchaserPhantomWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST) {
-            return;
-        }
-        Spell spell = game.getSpell(event.getSourceId());
-        if (spell != null) {
-            playerMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        playerMap.clear();
-    }
-
-    int getCount(UUID playerId) {
-        return playerMap.getOrDefault(playerId, 0);
     }
 }
