@@ -9,6 +9,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
@@ -1908,7 +1909,7 @@ public class TestPlayer implements Player {
                 }
             }
         }
-        checkMultipleBlockers(game, blockedCreaturesList);
+        checkCantBeBlockedAfter(game, blockedCreaturesList);
 
         // AI FULL play if no actions available
         if (!mustBlockByAction && this.AIPlayer) {
@@ -1970,10 +1971,25 @@ public class TestPlayer implements Player {
         return true;
     }
 
-    private void checkMultipleBlockers(Game game, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
-        // Check for Menace type abilities - if creatures can be blocked by >X or <Y only
+    private void checkCantBeBlockedAfter(Game game, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
+        for (List<MageObjectReference> attackers : blockedCreaturesByCreature.values()) {
+            for (MageObjectReference morAttacker : attackers) {
+                Permanent attackingCreature = morAttacker.getPermanent(game);
+                if (attackingCreature == null) {
+                    continue;
+                }
 
-        // TODO: call cantBeBlockedCheckAfter on each attacker's evasion effect.
+                for (Map.Entry<EvasionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableEvasionEffects(attackingCreature, game).entrySet()) {
+                    EvasionEffect effect = entry.getKey();
+                    for (Ability ability : entry.getValue()) {
+                        if (effect.cantBeBlockedCheckAfter(attackingCreature, ability, game, true)) {
+                            throw new UnsupportedOperationException(attackingCreature.getName() + " is blocked incorrectly. "
+                                    + "It " + effect.cantBeBlockedMessage(attackingCreature, ability, game) + ".");
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private String getInfo(MageObject o) {
