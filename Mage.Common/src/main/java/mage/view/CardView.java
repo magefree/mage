@@ -131,12 +131,13 @@ public class CardView extends SimpleCardView {
     protected boolean inViewerOnly; // GUI render: show object as a card instead permanent (without PT, etc)
     protected List<CardIcon> cardIcons = new ArrayList<>(); // additional icons to render
 
+    // GUI related: additional info about current object (example: real PT)
     protected MageInt originalPower = null;
     protected MageInt originalToughness = null;
     protected FilterMana originalColorIdentity = null;
+    protected UUID originalId = null;
     protected boolean originalIsCopy = false;
     protected boolean originalIsCard = false;
-    protected MageObject originalObject = null; // GUI related: additional info about current object (example: real PT)
 
     /**
      * Non game usage like deck editor
@@ -243,8 +244,12 @@ public class CardView extends SimpleCardView {
         this.canAttack = cardView.canAttack;
         this.canBlock = cardView.canBlock;
         this.inViewerOnly = cardView.inViewerOnly;
-        this.setOriginalValues(cardView.originalObject);
-        this.originalObject = cardView.originalObject == null ? null : cardView.originalObject.copy();
+        this.originalPower = cardView.originalPower;
+        this.originalToughness = cardView.originalToughness;
+        this.originalColorIdentity = cardView.originalColorIdentity;
+        this.originalId = cardView.originalId;
+        this.originalIsCard = cardView.originalIsCard;
+        this.originalIsCopy = cardView.originalIsCopy;
         if (cardView.cardIcons != null) {
             cardView.cardIcons.forEach(icon -> this.cardIcons.add(icon.copy()));
         }
@@ -295,7 +300,6 @@ public class CardView extends SimpleCardView {
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), game != null);
         this.setOriginalValues(card);
-        this.originalObject = card;
         this.imageNumber = card.getImageNumber();
 
         // no information available for face down cards as long it's not a controlled face down morph card
@@ -625,7 +629,6 @@ public class CardView extends SimpleCardView {
     public CardView(MageObject object, Game game) {
         super(object.getId(), object.getExpansionSetCode(), object.getCardNumber(), false, true);
         this.setOriginalValues(object);
-        this.originalObject = object;
 
         this.imageNumber = object.getImageNumber();
         this.name = object.getName();
@@ -907,6 +910,7 @@ public class CardView extends SimpleCardView {
             this.originalPower = object.getPower();
             this.originalToughness = object.getToughness();
             this.originalIsCopy = object.isCopy();
+            this.originalId = object.getId();
 
             if (object instanceof Card) {
                 this.originalColorIdentity = ((Card) object).getColorIdentity();
@@ -1325,20 +1329,16 @@ public class CardView extends SimpleCardView {
         return this.originalToughness;
     }
 
+    public UUID getOriginalId() {
+        return this.originalId;
+    }
+
     public boolean isOriginalACopy() {
         return this.originalIsCopy;
     }
 
     public boolean isOriginalACard() {
         return this.originalIsCard;
-    }
-
-    public Card getOriginalCard() {
-        if (this.originalObject instanceof Card) {
-            return (Card) this.originalObject;
-        } else {
-            return null;
-        }
     }
 
     public List<CardIcon> getCardIcons() {
