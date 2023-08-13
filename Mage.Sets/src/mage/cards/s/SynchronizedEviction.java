@@ -4,16 +4,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.common.GreatestSharedCreatureTypeCount;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutIntoLibraryNFromTopTargetEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
 
 import java.util.UUID;
@@ -33,7 +30,7 @@ public final class SynchronizedEviction extends CardImpl {
         );
 
         // Put target nonland permanent into its owner's library second from the top.
-        this.getSpellAbility().addEffect(new SynchronizedEvictionEffect());
+        this.getSpellAbility().addEffect(new PutIntoLibraryNFromTopTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
@@ -57,32 +54,6 @@ enum SynchronizedEvictionCondition implements Condition {
 
     @Override
     public String toString() {
-        return "you control two or more creatures that share a creature type";
-    }
-}
-
-class SynchronizedEvictionEffect extends OneShotEffect {
-
-    SynchronizedEvictionEffect() {
-        super(Outcome.Benefit);
-        staticText = "put target nonland permanent into its owner's library second from the top";
-    }
-
-    private SynchronizedEvictionEffect(final SynchronizedEvictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SynchronizedEvictionEffect copy() {
-        return new SynchronizedEvictionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        return controller != null
-                && permanent != null
-                && controller.putCardOnTopXOfLibrary(permanent, game, source, 2, true);
+        return "you control at least two creatures that share a creature type";
     }
 }

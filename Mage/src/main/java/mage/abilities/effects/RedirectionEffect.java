@@ -13,7 +13,6 @@ import mage.players.Player;
 import mage.target.Target;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class RedirectionEffect extends ReplacementEffectImpl {
@@ -41,7 +40,7 @@ public abstract class RedirectionEffect extends ReplacementEffectImpl {
         this.usageType = usageType;
     }
 
-    public RedirectionEffect(final RedirectionEffect effect) {
+    protected RedirectionEffect(final RedirectionEffect effect) {
         super(effect);
         this.redirectTarget = effect.redirectTarget;
         this.amountToRedirect = effect.amountToRedirect;

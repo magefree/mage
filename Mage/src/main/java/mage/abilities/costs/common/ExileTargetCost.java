@@ -28,7 +28,7 @@ public class ExileTargetCost extends CostImpl {
     public ExileTargetCost(TargetControlledPermanent target) {
         target.setNotTarget(true);
         this.addTarget(target);
-        this.text = "exile " + target.getTargetName();
+        this.text = "exile " + target.getDescription();
     }
 
     public ExileTargetCost(TargetControlledPermanent target, boolean noText) {

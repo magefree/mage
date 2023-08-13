@@ -33,7 +33,7 @@ public final class KotoriPilotProdigy extends CardImpl {
     public KotoriPilotProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MOONFOLK);
         this.subtype.add(SubType.PILOT);
         this.power = new MageInt(2);

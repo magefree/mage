@@ -29,7 +29,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class ConsecratedByBlood extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("two other creatures");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creatures");
 
     static {
         filter.add(AnotherPredicate.instance);

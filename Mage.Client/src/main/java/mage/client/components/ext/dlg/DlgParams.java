@@ -3,13 +3,11 @@ package mage.client.components.ext.dlg;
 import mage.client.cards.BigCard;
 import mage.client.components.ext.MessageDialogType;
 import mage.client.game.FeedbackPanel;
+import mage.util.CardUtil;
 import mage.view.CardsView;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * GUI: parameters for dialogs, uses to store useful data
@@ -39,7 +37,7 @@ public class DlgParams {
 
     private boolean isAI = false;
 
-    private Set<String> manaChoices = new HashSet<>();
+    private Set<String> manaChoices = new LinkedHashSet<>();
 
     public int getPlayerID() {
         return playerID;
@@ -80,6 +78,7 @@ public class DlgParams {
     }
 
     public void setManaChoices(Set<String> manaChoices) {
+        CardUtil.checkSetParamForSerializationCompatibility(manaChoices);
         this.manaChoices = manaChoices;
     }
 

@@ -23,6 +23,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -90,7 +91,7 @@ class AgentToolkitMoveCounterEffect extends OneShotEffect {
         Permanent enteringCreature = (Permanent) enteringObject;
 
         Choice moveCounterChoice = new ChoiceImpl(false);
-        Set<String> possibleCounterNames = agentsToolkitPermanent.getCounters(game).keySet();
+        Set<String> possibleCounterNames = new LinkedHashSet<>(agentsToolkitPermanent.getCounters(game).keySet());
         moveCounterChoice.setMessage("Choose counter to move");
         moveCounterChoice.setChoices(possibleCounterNames);
 

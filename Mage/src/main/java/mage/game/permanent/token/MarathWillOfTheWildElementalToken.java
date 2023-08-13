@@ -1,12 +1,12 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class MarathWillOfTheWildElementalToken extends TokenImpl {
@@ -20,7 +20,7 @@ public final class MarathWillOfTheWildElementalToken extends TokenImpl {
         toughness = new MageInt(0);
     }
 
-    public MarathWillOfTheWildElementalToken(final MarathWillOfTheWildElementalToken token) {
+    protected MarathWillOfTheWildElementalToken(final MarathWillOfTheWildElementalToken token) {
         super(token);
     }
 

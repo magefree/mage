@@ -15,7 +15,7 @@ import java.util.jar.Manifest;
 public class JarVersion {
 
     private static final Logger logger = Logger.getLogger(JarVersion.class);
-    private static final String JAR_BUILD_TIME_FROM_CLASSES = "runtime";
+    public static final String JAR_BUILD_TIME_FROM_CLASSES = "runtime";
     private static final String JAR_BUILD_TIME_ERROR = "n/a";
 
     public static String getBuildTime(Class clazz) {

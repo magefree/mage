@@ -108,9 +108,9 @@ class PortalMageEffect extends OneShotEffect {
                     }
                 }
                 // Select the new defender
-                TargetDefender target = new TargetDefender(defenders, null);
+                TargetDefender target = new TargetDefender(defenders);
                 if (controller.chooseTarget(Outcome.Damage, target, source, game)) {
-                    if (!combatGroupTarget.getDefenderId().equals(target.getFirstTarget())) {
+                    if (combatGroupTarget.getDefenderId() != null && !combatGroupTarget.getDefenderId().equals(target.getFirstTarget())) {
                         if (combatGroupTarget.changeDefenderPostDeclaration(target.getFirstTarget(), game)) {
                             String attacked = "";
                             Player player = game.getPlayer(target.getFirstTarget());

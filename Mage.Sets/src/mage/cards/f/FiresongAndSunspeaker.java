@@ -9,13 +9,13 @@ import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.GainAbilitySpellsEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterObject;
+import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -28,7 +28,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public final class FiresongAndSunspeaker extends CardImpl {
 
-    private static final FilterObject filter = new FilterObject("Red instant and sorcery spells you control");
+    private static final FilterCard filter = new FilterCard("red instant and sorcery spells you control");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
@@ -38,14 +38,14 @@ public final class FiresongAndSunspeaker extends CardImpl {
     public FiresongAndSunspeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 
         // Red instant and sorcery spells you control have lifelink.
-        Effect effect = new GainAbilitySpellsEffect(LifelinkAbility.getInstance(), filter);
+        Effect effect = new GainAbilityControlledSpellsEffect(LifelinkAbility.getInstance(), filter);
         effect.setText("Red instant and sorcery spells you control have lifelink");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Whenever a white instant or sorcery spell causes you to gain life, Firesong and Sunspeaker deals 3 damage to target creature or player.

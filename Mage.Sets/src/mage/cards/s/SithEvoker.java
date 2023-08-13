@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -21,7 +22,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -43,7 +44,7 @@ public final class SithEvoker extends CardImpl {
         // {T}, {B}, Sacrifice a creature: You gain life equal to that creature's power or toughness.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SithEvokerEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
 
         this.addAbility(ability);
     }
@@ -60,7 +61,7 @@ public final class SithEvoker extends CardImpl {
 
 class SithEvokerEffect extends OneShotEffect {
 
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add("Gain life equal to creature's power");

@@ -17,7 +17,7 @@ public class MayTapOrUntapTargetEffect extends OneShotEffect {
         super(Outcome.AIDontUseIt);
     }
 
-    public MayTapOrUntapTargetEffect(final MayTapOrUntapTargetEffect effect) {
+    protected MayTapOrUntapTargetEffect(final MayTapOrUntapTargetEffect effect) {
         super(effect);
     }
 

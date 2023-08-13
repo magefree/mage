@@ -93,7 +93,7 @@ class DeliverUntoEvilEffect extends OneShotEffect {
             return false;
         }
         TargetCard targetCard = new TargetCardInGraveyard(Math.min(2, cards.size()), filter2);
-        if (!opponent.choose(outcome, cards, targetCard, game)) {
+        if (!opponent.choose(outcome, cards, targetCard, source, game)) {
             return false;
         }
         cards.removeAll(targetCard.getTargets());

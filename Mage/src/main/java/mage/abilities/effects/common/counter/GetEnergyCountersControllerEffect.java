@@ -28,7 +28,7 @@ public class GetEnergyCountersControllerEffect extends OneShotEffect {
         setText();
     }
 
-    public GetEnergyCountersControllerEffect(final GetEnergyCountersControllerEffect effect) {
+    protected GetEnergyCountersControllerEffect(final GetEnergyCountersControllerEffect effect) {
         super(effect);
         this.value = effect.value;
     }

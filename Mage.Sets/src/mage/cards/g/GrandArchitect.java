@@ -14,6 +14,7 @@ import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -24,7 +25,6 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
-import mage.filter.FilterPermanent;
 
 /**
  * @author BetaSteward_at_googlemail.com, nantuko
@@ -133,6 +133,15 @@ class GrandArchitectConditionalMana extends ConditionalMana {
         super(Mana.ColorlessMana(2));
         staticText = "Spend this mana only to cast artifact spells or activate abilities of artifacts";
         addCondition(new GrandArchitectManaCondition());
+    }
+
+    private GrandArchitectConditionalMana(final GrandArchitectConditionalMana conditionalMana) {
+        super(conditionalMana);
+    }
+
+    @Override
+    public GrandArchitectConditionalMana copy() {
+        return new GrandArchitectConditionalMana(this);
     }
 }
 

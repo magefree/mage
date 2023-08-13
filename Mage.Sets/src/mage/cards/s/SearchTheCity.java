@@ -1,14 +1,15 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.PlayCardTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -82,10 +83,10 @@ class SearchTheCityExileEffect extends OneShotEffect {
     }
 }
 
-class SearchTheCityTriggeredAbility extends TriggeredAbilityImpl {
+class SearchTheCityTriggeredAbility extends PlayCardTriggeredAbility {
 
     public SearchTheCityTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SearchTheCityExiledCardToHandEffect(), true);
+        super(TargetController.YOU, Zone.BATTLEFIELD, new SearchTheCityExiledCardToHandEffect(), true);
         setTriggerPhrase("Whenever you play a card with the same name as one of the exiled cards, " );
     }
 
@@ -94,13 +95,8 @@ class SearchTheCityTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST || event.getType() == GameEvent.EventType.LAND_PLAYED;
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getPlayerId().equals(this.getControllerId())) {
+        if (!super.checkTrigger(event, game)) {
             return false;
         }
         String cardName = "";
@@ -168,7 +164,7 @@ class SearchTheCityExiledCardToHandEffect extends OneShotEffect {
                         if (permanent != null) {
                             permanent.sacrifice(source, game);
                             // extra turn
-                            game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
+                            game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
                         }
                     }
                     return true;

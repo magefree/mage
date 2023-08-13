@@ -52,7 +52,7 @@ public final class Haruspex extends CardImpl {
                 Mana.AnyMana(1), RemovedCountersForCostValue.instance, new TapSourceCost(),
                 "Add X mana of any one color", true, xValue
         );
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1));
         this.addAbility(ability.withFlavorWord("Devouring Monster"));
     }
 

@@ -20,8 +20,6 @@ public final class AssassinToken2 extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(DeathtouchAbility.getInstance());
         addAbility(new DestroyPlaneswalkerWhenDamagedTriggeredAbility());
-
-        setOriginalExpansionSetCode("WAR");
     }
 
     private AssassinToken2(final AssassinToken2 token) {

@@ -13,10 +13,7 @@ import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffec
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.TokenImpl;
 
@@ -32,8 +29,7 @@ public final class SvogthosTheRestlessTomb extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {3}{B}{G}: Until end of turn, Svogthos, the Restless Tomb becomes a black and green Plant Zombie creature with "This creature's power and toughness are each equal to the number of creature cards in your graveyard." It's still a land.
-        // set to character defining to prevent setting P/T again to 0 becuase already set by CDA of the token
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SvogthosToken(), "land", Duration.EndOfTurn, false, true), new ManaCostsImpl<>("{3}{B}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SvogthosToken(), CardType.LAND, Duration.EndOfTurn).withDurationRuleAtStart(true), new ManaCostsImpl<>("{3}{B}{G}"));
         this.addAbility(ability);
     }
 
@@ -59,7 +55,7 @@ class SvogthosToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
         CardsInControllerGraveyardCount count = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards"));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(count, Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(count, count, Duration.WhileOnBattlefield, SubLayer.SetPT_7b)));
     }
     public SvogthosToken(final SvogthosToken token) {
         super(token);

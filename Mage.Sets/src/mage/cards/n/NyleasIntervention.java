@@ -79,6 +79,6 @@ class NyleasInterventionEffect extends OneShotEffect {
         int xValue = source.getManaCostsToPay().getX();
         return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                 0, xValue, StaticFilters.FILTER_CARD_LAND
-        ), true, true).apply(game, source);
+        ), true).apply(game, source);
     }
 }

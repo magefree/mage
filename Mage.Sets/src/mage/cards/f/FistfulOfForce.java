@@ -69,7 +69,7 @@ class FistfulOfForceEffect extends OneShotEffect {
             ContinuousEffect effect = new BoostTargetEffect(2,2,Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(creature.getId(), game));
             game.addEffect(effect, source);
-            if (ClashEffect.getInstance().apply(game, source)) {
+            if (new ClashEffect().apply(game, source)) {
                 game.addEffect(effect.copy(), source);
                 effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(creature.getId(), game));

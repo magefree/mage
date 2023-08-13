@@ -26,6 +26,7 @@ import mage.game.Game;
 import mage.game.permanent.PermanentCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -88,7 +89,7 @@ class DollhouseOfHorrorsEffect extends OneShotEffect {
                 source.getControllerId(), CardType.ARTIFACT, false, 1, false,
                 false, null, 0, 0, false
         );
-        effect.setSavedPermanent(new PermanentCard(card, source.getControllerId(), game));
+        effect.setSavedPermanent(new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game));
         effect.setAdditionalSubType(SubType.CONSTRUCT);
         effect.addAdditionalAbilities(new SimpleStaticAbility(new BoostSourceEffect(
                 xValue,

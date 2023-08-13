@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 public final class PlantToken extends TokenImpl {
 
     public PlantToken() {
@@ -15,20 +13,13 @@ public final class PlantToken extends TokenImpl {
         subtype.add(SubType.PLANT);
         power = new MageInt(0);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("C18", "DDP", "OGW", "PC2", "WWK", "XLN", "ZNR", "CMR", "NEC", "2XM", "NCC", "PCA", "DDR");
     }
 
-    public PlantToken(final PlantToken token) {
+    protected PlantToken(final PlantToken token) {
         super(token);
     }
 
     public PlantToken copy() {
         return new PlantToken(this);
-    }
-
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
     }
 }

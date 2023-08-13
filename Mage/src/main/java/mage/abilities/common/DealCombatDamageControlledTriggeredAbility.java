@@ -47,7 +47,7 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
                 + (onlyOpponents ? "an opponent" : "a player") + ", ");
     }
 
-    public DealCombatDamageControlledTriggeredAbility(final DealCombatDamageControlledTriggeredAbility ability) {
+    protected DealCombatDamageControlledTriggeredAbility(final DealCombatDamageControlledTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.onlyOpponents = ability.onlyOpponents;

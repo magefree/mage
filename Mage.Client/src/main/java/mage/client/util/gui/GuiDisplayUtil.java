@@ -313,11 +313,15 @@ public final class GuiDisplayUtil {
         }
         buffer.append("</td></tr></table>");
 
-        String pt = "";
+        String pt;
         if (card.isCreature()) {
             pt = card.getPower() + '/' + card.getToughness();
-        } else if (card.isPlanesWalker()) {
+        } else if (card.isPlaneswalker()) {
             pt = card.getLoyalty();
+        } else if (card.isBattle()) {
+            pt = card.getDefense();
+        } else {
+            pt = "";
         }
 
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%' valign='bottom'><tr><td><b>");
@@ -329,6 +333,9 @@ public final class GuiDisplayUtil {
             } else {
                 buffer.append("[only controlled] ");
             }
+        }
+        if (card instanceof PermanentView && ((PermanentView) card).isAttachedToDifferentlyControlledPermanent()) {
+            buffer.append('(').append(((PermanentView) card).getNameController()).append(") ");
         }
         if (card.getMageObjectType() != MageObjectType.NULL) {
             buffer.append(card.getMageObjectType().toString());

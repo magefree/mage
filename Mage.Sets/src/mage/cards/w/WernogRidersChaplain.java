@@ -27,7 +27,7 @@ public final class WernogRidersChaplain extends CardImpl {
     public WernogRidersChaplain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);

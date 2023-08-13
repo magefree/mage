@@ -21,7 +21,7 @@ public class RevealSecretOpponentCost extends CostImpl {
         this.text = "Reveal the player you chose";
     }
 
-    public RevealSecretOpponentCost(final RevealSecretOpponentCost cost) {
+    protected RevealSecretOpponentCost(final RevealSecretOpponentCost cost) {
         super(cost);
     }
 

@@ -1,11 +1,8 @@
 
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -30,7 +27,7 @@ public final class TeferisRealm extends CardImpl {
 
     public TeferisRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TeferisRealmEffect(), TargetController.ANY, false));
@@ -52,7 +49,7 @@ class TeferisRealmEffect extends OneShotEffect {
     private static final String CREATURE = "Creature";
     private static final String LAND = "Land";
     private static final String NON_AURA_ENCHANTMENT = "Non-Aura enchantment";
-    private static final Set<String> choices = new HashSet<>();
+    private static final Set<String> choices = new LinkedHashSet<>();
 
     static {
         choices.add(ARTIFACT);

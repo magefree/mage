@@ -3,8 +3,9 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.common.ClashWinReturnToHandSpellEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DoIfClashWonEffect;
+import mage.abilities.effects.common.ReturnToHandSpellEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,7 +24,7 @@ public final class TitansRevenge extends CardImpl {
         // Titan's Revenge deals X damage to any target. Clash with an opponent. If you win, return Titan's Revenge to its owner's hand.
         this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
-        this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
+        this.getSpellAbility().addEffect(new DoIfClashWonEffect(ReturnToHandSpellEffect.getInstance()));
     }
 
     private TitansRevenge(final TitansRevenge card) {

@@ -26,7 +26,6 @@ public class DroneToken extends TokenImpl {
         Ability ability = new LeavesBattlefieldTriggeredAbility(new LoseLifeOpponentsEffect(2), false).setTriggerPhrase("When this creature leaves the battlefield, ");
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         addAbility(ability);
-
     }
 
     private DroneToken(final DroneToken token) {

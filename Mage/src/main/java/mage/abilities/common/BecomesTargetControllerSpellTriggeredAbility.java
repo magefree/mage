@@ -19,7 +19,7 @@ public class BecomesTargetControllerSpellTriggeredAbility extends TriggeredAbili
         setTriggerPhrase("When you become the target of a spell, ");
     }
 
-    public BecomesTargetControllerSpellTriggeredAbility(final BecomesTargetControllerSpellTriggeredAbility ability) {
+    protected BecomesTargetControllerSpellTriggeredAbility(final BecomesTargetControllerSpellTriggeredAbility ability) {
         super(ability);
     }
 

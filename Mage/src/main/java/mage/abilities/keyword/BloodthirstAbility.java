@@ -3,6 +3,7 @@ package mage.abilities.keyword;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -15,7 +16,6 @@ import mage.util.CardUtil;
 import mage.watchers.common.BloodthirstWatcher;
 
 /**
- *
  * @author Loki
  */
 public class BloodthirstAbility extends EntersBattlefieldAbility {
@@ -27,7 +27,7 @@ public class BloodthirstAbility extends EntersBattlefieldAbility {
         this.amount = amount;
     }
 
-    public BloodthirstAbility(final BloodthirstAbility ability) {
+    protected BloodthirstAbility(final BloodthirstAbility ability) {
         super(ability);
         this.amount = ability.amount;
     }

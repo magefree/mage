@@ -25,7 +25,7 @@ public final class Nebuchadnezzar extends CardImpl {
 
     public Nebuchadnezzar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);

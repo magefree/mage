@@ -1,21 +1,16 @@
-
 package mage.game.permanent.token;
-
-import java.util.Collections;
 
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author Styxo
  */
 public final class TrooperToken extends TokenImpl {
 
     public TrooperToken() {
         super("Trooper Token", "1/1 white Trooper creature token");
-        availableImageSetCodes.addAll(Collections.singletonList("SWS"));
 
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.TROOPER);
@@ -25,7 +20,7 @@ public final class TrooperToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public TrooperToken(final TrooperToken token) {
+    protected TrooperToken(final TrooperToken token) {
         super(token);
     }
 

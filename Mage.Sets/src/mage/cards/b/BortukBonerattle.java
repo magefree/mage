@@ -32,7 +32,7 @@ public final class BortukBonerattle extends CardImpl {
     public BortukBonerattle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TROLL);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(4);

@@ -45,7 +45,7 @@ public final class LivingLore extends CardImpl {
 
         // Living Lore's power and toughness are each equal to the exiled card's converted mana cost.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SetBasePowerToughnessSourceEffect(LivingLoreValue.instance, Duration.EndOfGame)
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(LivingLoreValue.instance)
                 .setText("{this}'s power and toughness are each equal to the exiled card's mana value")
         ));
 
@@ -156,11 +156,11 @@ class LivingLoreCastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, -2));
-        return controller != null
-                && exileZone != null
-                && !exileZone.isEmpty()
-                && CardUtil.castSpellWithAttributesForFree(
-                controller, source, game, new CardsImpl(exileZone), StaticFilters.FILTER_CARD
-        );
+        if (controller == null || exileZone == null || exileZone.isEmpty()) {
+            return false;
+        }
+
+        return CardUtil.castSpellWithAttributesForFree(controller, source, game,
+                new CardsImpl(exileZone), StaticFilters.FILTER_CARD);
     }
 }

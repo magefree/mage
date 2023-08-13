@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -20,6 +19,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Quercitron
@@ -34,7 +35,7 @@ public final class AggressiveMining extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AggressiveMiningEffect()));
         
         // Sacrifice a land: Draw two cards.  Activate this ability only once each turn.
-        Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")));
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), cost));
     }
 

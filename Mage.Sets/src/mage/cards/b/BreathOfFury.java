@@ -97,7 +97,7 @@ class BreathOfFuryEffect extends OneShotEffect {
 
     public BreathOfFuryEffect() {
         super(Outcome.Benefit);
-        staticText = "sacrifice enchanted creature and attach {this} to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase";
+        staticText = "sacrifice it and attach {this} to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase";
     }
 
     public BreathOfFuryEffect(final BreathOfFuryEffect effect) {
@@ -150,8 +150,7 @@ class BreathOfFuryEffect extends OneShotEffect {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterControlledCreaturePermanent(), controller.getId(), game)) {
                     permanent.untap(game);
                 }
-
-                game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
+                game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraPhase(TurnPhase.COMBAT));
             }
             return true;
         }

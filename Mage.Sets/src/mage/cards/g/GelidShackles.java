@@ -25,7 +25,7 @@ public final class GelidShackles extends CardImpl {
 
     public GelidShackles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.AURA);
 
         // Enchant creature

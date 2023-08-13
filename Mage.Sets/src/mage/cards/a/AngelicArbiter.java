@@ -86,7 +86,7 @@ class AngelicArbiterEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     public AngelicArbiterEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Each opponent who attacked this turn can't cast spells";
+        staticText = "Each opponent who attacked with a creature this turn can't cast spells";
     }
 
     public AngelicArbiterEffect2(final AngelicArbiterEffect2 effect) {

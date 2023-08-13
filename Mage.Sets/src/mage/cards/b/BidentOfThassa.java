@@ -29,7 +29,7 @@ public final class BidentOfThassa extends CardImpl {
 
     public BidentOfThassa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.ARTIFACT},"{2}{U}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
 
         // Whenever a creature you control deals combat damage to a player, you may draw a card.

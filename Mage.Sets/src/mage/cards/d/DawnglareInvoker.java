@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 
 /**
@@ -31,7 +31,7 @@ public final class DawnglareInvoker extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new TapAllTargetPlayerControlsEffect(FILTER_PERMANENT_CREATURES),
+                new TapAllTargetPlayerControlsEffect(StaticFilters.FILTER_PERMANENT_CREATURES),
                 new ManaCostsImpl<>("{8}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

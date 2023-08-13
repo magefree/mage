@@ -34,7 +34,7 @@ public final class AltacBloodseeker extends CardImpl {
         // Whenever a creature an opponent controls dies, Altac Bloodseeker gets +2/+0 and gains first strike and haste until end of turn.
         Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
         effect.setText("{this} gets +2/+0");
-        Ability ability = new DiesCreatureTriggeredAbility(effect, false, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
+        Ability ability = new DiesCreatureTriggeredAbility(effect, false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE);
         
         effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains first strike");

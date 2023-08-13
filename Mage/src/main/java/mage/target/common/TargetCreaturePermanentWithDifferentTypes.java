@@ -9,7 +9,6 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public class TargetCreaturePermanentWithDifferentTypes extends TargetCreaturePermanent {
@@ -18,7 +17,7 @@ public class TargetCreaturePermanentWithDifferentTypes extends TargetCreaturePer
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetCreaturePermanentWithDifferentTypes(final TargetCreaturePermanentWithDifferentTypes target) {
+    protected TargetCreaturePermanentWithDifferentTypes(final TargetCreaturePermanentWithDifferentTypes target) {
         super(target);
     }
 
@@ -35,7 +34,7 @@ public class TargetCreaturePermanentWithDifferentTypes extends TargetCreaturePer
                 for (Object object : getTargets()) {
                     UUID targetId = (UUID) object;
                     Permanent selectedCreature = game.getPermanent(targetId);
-                    if (selectedCreature != null 
+                    if (selectedCreature != null
                             && !creature.getId().equals(selectedCreature.getId())) {
                         if (creature.shareCreatureTypes(game, selectedCreature)) {
                             return false;

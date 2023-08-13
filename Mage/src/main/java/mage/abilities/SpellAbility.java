@@ -48,7 +48,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
         setSpellName();
     }
 
-    public SpellAbility(final SpellAbility ability) {
+    protected SpellAbility(final SpellAbility ability) {
         super(ability);
         this.spellAbilityType = ability.spellAbilityType;
         this.spellAbilityCastMode = ability.spellAbilityCastMode;

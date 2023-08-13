@@ -26,7 +26,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public final class Blizzard extends CardImpl {
 
-    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("if you control a snow land");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("you control a snow land");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures with flying");
 
     static {

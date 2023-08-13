@@ -37,7 +37,7 @@ public final class VarchildBetrayerOfKjeldor extends CardImpl {
     public VarchildBetrayerOfKjeldor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.KNIGHT);
         this.power = new MageInt(3);

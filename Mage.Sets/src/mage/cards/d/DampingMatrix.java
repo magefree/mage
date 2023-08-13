@@ -1,8 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,8 +16,10 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  *
@@ -80,7 +80,7 @@ class DampingMatrixEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
-        if (object instanceof Permanent && filter.match((Permanent)object, game)) {
+        if (object instanceof Permanent && filter.match((Permanent)object, source.getControllerId(), source, game)) {
             Optional<Ability> ability = object.getAbilities().get(event.getTargetId());
             if (ability.isPresent() && !(ability.get() instanceof ActivatedManaAbilityImpl)) {
                 return true;

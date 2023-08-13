@@ -17,6 +17,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -123,10 +124,12 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
         permanent.setName(copied.getName());
         permanent.getManaCost().clear();
         permanent.getManaCost().addAll(copied.getManaCost());
-        permanent.setExpansionSetCode(copied.getExpansionSetCode());
-        permanent.getSuperType().clear();
-        for (SuperType t : copied.getSuperType()) {
-            permanent.addSuperType(t);
+
+        CardUtil.copySetAndCardNumber(permanent, copied);
+
+        permanent.removeAllCardTypes(game);
+        for (SuperType t : copied.getSuperType(game)) {
+            permanent.addSuperType(game, t);
         }
         permanent.removeAllCardTypes(game);
         for (CardType cardType : copied.getCardType(game)) {

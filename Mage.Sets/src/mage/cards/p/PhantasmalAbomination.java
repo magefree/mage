@@ -3,7 +3,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
@@ -25,7 +25,7 @@ public final class PhantasmalAbomination extends CardImpl {
         this.toughness = new MageInt(5);
 
         this.addAbility(DefenderAbility.getInstance());
-        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect().setText("sacrifice it")));
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect().setText("sacrifice it")));
     }
 
     private PhantasmalAbomination(final PhantasmalAbomination card) {

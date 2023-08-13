@@ -9,8 +9,6 @@ import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -18,10 +16,17 @@ public final class RowanKenrithEmblem extends Emblem {
     // Target player gets an emblem with "Whenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy."
 
     public RowanKenrithEmblem() {
-        this.setName("Emblem Rowan Kenrith");
+        super("Emblem Rowan Kenrith");
         this.getAbilities().add(new RowanKenrithEmblemTriggeredAbility());
+    }
 
-        availableImageSetCodes = Arrays.asList("BBD", "CLB");
+    private RowanKenrithEmblem(final RowanKenrithEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public RowanKenrithEmblem copy() {
+        return new RowanKenrithEmblem(this);
     }
 }
 

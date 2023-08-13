@@ -46,7 +46,7 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl {
         this.minValue = minValue;
     }
 
-    public RemoveVariableCountersTargetCost(final RemoveVariableCountersTargetCost cost) {
+    protected RemoveVariableCountersTargetCost(final RemoveVariableCountersTargetCost cost) {
         super(cost);
         this.filter = cost.filter;
         this.counterTypeToRemove = cost.counterTypeToRemove;

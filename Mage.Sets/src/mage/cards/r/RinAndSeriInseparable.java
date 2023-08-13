@@ -49,7 +49,7 @@ public final class RinAndSeriInseparable extends CardImpl {
     public RinAndSeriInseparable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOG);
         this.subtype.add(SubType.CAT);
         this.power = new MageInt(4);

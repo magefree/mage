@@ -68,7 +68,7 @@ class TemurWarShamanTriggeredAbility extends TurnedFaceUpAllTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Whenever a permanent you control is turned face up, if it is a creature, you may have it fight target creature you don't control.";
+        return "Whenever a permanent you control is turned face up, if it's a creature, you may have it fight target creature you don't control.";
     }
 }
 

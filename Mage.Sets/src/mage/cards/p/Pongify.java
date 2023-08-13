@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.PongifyApeToken;
+import mage.game.permanent.token.ApeToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -63,7 +63,7 @@ class PongifyEffect extends OneShotEffect {
             if (permanent != null) {
                 UUID controllerId = permanent.getControllerId();
                 if (controllerId != null) {
-                    new PongifyApeToken().putOntoBattlefield(1, game, source, controllerId);
+                    new ApeToken().putOntoBattlefield(1, game, source, controllerId);
                     return true;
                 }
             }

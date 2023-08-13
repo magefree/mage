@@ -40,7 +40,7 @@ public class Turn implements Serializable {
         phases.add(new EndPhase());
     }
 
-    public Turn(final Turn turn) {
+    protected Turn(final Turn turn) {
         if (turn.currentPhase != null) {
             this.currentPhase = turn.currentPhase.copy();
         }
@@ -84,13 +84,6 @@ public class Turn implements Serializable {
         return null;
     }
 
-    public PhaseStep getStepType() {
-        if (currentPhase != null && currentPhase.getStep() != null) {
-            return currentPhase.getStep().getType();
-        }
-        return null;
-    }
-
     /**
      * @param game
      * @param activePlayer
@@ -106,9 +99,12 @@ public class Turn implements Serializable {
             return false;
         }
 
-
-        if (game.getState().getTurnMods().skipTurn(activePlayer.getId())) {
-            game.informPlayers(activePlayer.getLogName() + " skips their turn.");
+        TurnMod skipTurnMod = game.getState().getTurnMods().useNextSkipTurn(activePlayer.getId());
+        if (skipTurnMod != null) {
+            game.informPlayers(String.format("%s skips their turn%s",
+                    activePlayer.getLogName(),
+                    skipTurnMod.getInfo()
+            ));
             return true;
         }
         logStartOfTurn(game, activePlayer);
@@ -126,15 +122,25 @@ public class Turn implements Serializable {
                 continue;
             }
             currentPhase = phase;
+
+            TurnMod skipPhaseMod = game.getState().getTurnMods().useNextSkipPhase(activePlayer.getId(), currentPhase.getType());
+            if (skipPhaseMod != null) {
+                game.informPlayers(String.format("%s skips %s phase%s",
+                        activePlayer.getLogName(),
+                        currentPhase.getType(),
+                        skipPhaseMod.getInfo()
+                ));
+                continue;
+            }
+
             game.fireEvent(new PhaseChangedEvent(activePlayer.getId(), null));
-            if (game.getState().getTurnMods().skipPhase(
-                    activePlayer.getId(), currentPhase.getType()
-            ) || !phase.play(game, activePlayer.getId())) {
+            if (!phase.play(game, activePlayer.getId())) {
                 continue;
             }
             if (game.executingRollback()) {
                 return false;
             }
+
             //20091005 - 500.4/703.4n
             game.emptyManaPools(null);
             game.saveState(false);
@@ -147,39 +153,66 @@ public class Turn implements Serializable {
 
     public void resumePlay(Game game, boolean wasPaused) {
         activePlayerId = game.getActivePlayerId();
+        Player activePlayer = game.getPlayer(activePlayerId);
         UUID priorityPlayerId = game.getPriorityPlayerId();
-        TurnPhase phaseType = game.getPhase().getType();
-        PhaseStep stepType = game.getStep().getType();
+        TurnPhase needPhaseType = game.getTurnPhaseType();
+        PhaseStep needStepType = game.getTurnStepType();
 
         Iterator<Phase> it = phases.iterator();
-        Phase phase;
+        Phase nextPhase;
         do {
-            phase = it.next();
-            currentPhase = phase;
-        } while (phase.type != phaseType);
-        if (phase.resumePlay(game, stepType, wasPaused)) {
-            //20091005 - 500.4/703.4n
-            game.emptyManaPools(null);
-            //game.saveState();
-            //20091005 - 500.8
-            playExtraPhases(game, phase.getType());
-        }
-        while (it.hasNext()) {
-            phase = it.next();
+            nextPhase = it.next();
+        } while (nextPhase.type != needPhaseType);
+
+        // play first phase
+        TurnMod skipPhaseMod = game.getState().getTurnMods().useNextSkipPhase(activePlayerId, nextPhase.getType());
+        if (skipPhaseMod != null && activePlayer != null) {
+            game.informPlayers(String.format("%s skips %s phase%s",
+                    activePlayer.getLogName(),
+                    nextPhase.getType(),
+                    skipPhaseMod.getInfo()
+            ));
+        } else {
             if (game.isPaused() || game.checkIfGameIsOver()) {
                 return;
             }
-            currentPhase = phase;
-            if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
-                if (phase.play(game, activePlayerId)) {
+            currentPhase = nextPhase;
+            game.fireEvent(new PhaseChangedEvent(activePlayerId, null));
+            if (nextPhase.resumePlay(game, needStepType, wasPaused)) {
+                //20091005 - 500.4/703.4n
+                game.emptyManaPools(null);
+                //20091005 - 500.8
+                playExtraPhases(game, nextPhase.getType());
+            }
+        }
+
+        // play all other phases
+        while (it.hasNext()) {
+            nextPhase = it.next();
+            if (game.isPaused() || game.checkIfGameIsOver()) {
+                return;
+            }
+            skipPhaseMod = game.getState().getTurnMods().useNextSkipPhase(activePlayerId, nextPhase.getType());
+            if (skipPhaseMod != null && activePlayer != null) {
+                game.informPlayers(String.format("%s skips %s phase%s",
+                        activePlayer.getLogName(),
+                        nextPhase.getType(),
+                        skipPhaseMod.getInfo()
+                ));
+            } else {
+                currentPhase = nextPhase;
+                game.fireEvent(new PhaseChangedEvent(activePlayerId, null));
+                if (nextPhase.play(game, activePlayerId)) {
                     //20091005 - 500.4/703.4n
                     game.emptyManaPools(null);
-                    //game.saveState();
                     //20091005 - 500.8
-                    playExtraPhases(game, phase.getType());
+                    playExtraPhases(game, nextPhase.getType());
                 }
             }
-            if (!currentPhase.equals(phase)) { // phase was changed from the card
+
+            // TODO: old code, can't find any usage of turn's phase change by events/cards
+            //  so it must be research and removed as outdated (maybe rollback or playExtraPhases related?)
+            if (!currentPhase.equals(nextPhase)) { // phase was changed from the card
                 game.fireEvent(new PhaseChangedEvent(activePlayerId, null));
                 break;
             }
@@ -187,9 +220,10 @@ public class Turn implements Serializable {
     }
 
     private void checkTurnIsControlledByOtherPlayer(Game game, UUID activePlayerId) {
-        UUID newControllerId = game.getState().getTurnMods().controlsTurn(activePlayerId);
-        if (newControllerId != null && !newControllerId.equals(activePlayerId)) {
-            game.getPlayer(newControllerId).controlPlayersTurn(game, activePlayerId);
+        TurnMod newControllerMod = game.getState().getTurnMods().useNextNewController(activePlayerId);
+        if (newControllerMod != null && !newControllerMod.getNewControllerId().equals(activePlayerId)) {
+            // game logs added in child's call (controlPlayersTurn)
+            game.getPlayer(newControllerMod.getNewControllerId()).controlPlayersTurn(game, activePlayerId, newControllerMod.getInfo());
         }
     }
 
@@ -201,13 +235,13 @@ public class Turn implements Serializable {
 
     private boolean playExtraPhases(Game game, TurnPhase afterPhase) {
         while (true) {
-            TurnMod extraPhaseTurnMod = game.getState().getTurnMods().extraPhase(activePlayerId, afterPhase);
-            if (extraPhaseTurnMod == null) {
+            TurnMod extraPhaseMod = game.getState().getTurnMods().useNextExtraPhase(activePlayerId, afterPhase);
+            if (extraPhaseMod == null) {
                 return false;
             }
-            TurnPhase extraPhase = extraPhaseTurnMod.getExtraPhase();
+            TurnPhase extraPhase = extraPhaseMod.getExtraPhase();
             if (extraPhase == null) {
-                return false;
+                throw new IllegalStateException("Wrong code usage: miss data in turn mod's extra phase - " + extraPhaseMod.getInfo());
             }
             Phase phase;
             switch (extraPhase) {
@@ -223,25 +257,32 @@ public class Turn implements Serializable {
                 case POSTCOMBAT_MAIN:
                     phase = new PostCombatMainPhase();
                     break;
-                default:
+                case END:
                     phase = new EndPhase();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown phase type: " + extraPhase);
             }
             currentPhase = phase;
-            game.fireEvent(new PhaseChangedEvent(activePlayerId, extraPhaseTurnMod));
+            game.fireEvent(new PhaseChangedEvent(activePlayerId, extraPhaseMod));
             Player activePlayer = game.getPlayer(activePlayerId);
-            if (activePlayer != null && !game.isSimulation()) {
-                game.informPlayers(activePlayer.getLogName() + " starts an additional " + phase.getType().toString() + " phase");
+            if (activePlayer != null) {
+                game.informPlayers(String.format("%s starts an additional %s phase%s",
+                        activePlayer.getLogName(),
+                        phase.getType().toString(),
+                        extraPhaseMod.getInfo()
+                ));
             }
             phase.play(game, activePlayerId);
+
+            // TODO: is it lost extra phase on multiple phases here?
+            //  example:
+            //  - mods contains 2 mods for same main phases
+            //  - one played and afterPhase take main phase value
+            //  - so it can't find a second mod
             afterPhase = extraPhase;
         }
     }
-
-    /*protected void playExtraTurns(Game game) {
-     while (game.getState().getTurnMods().extraTurn(activePlayerId)) {
-     this.play(game, activePlayerId);
-     }
-     }*/
 
     /**
      * Used for some spells with end turn effect (e.g. Time Stop).

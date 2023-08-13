@@ -30,7 +30,7 @@ public final class OpalGargoyle extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // When an opponent casts a creature spell, if Opal Gargoyle is an enchantment, Opal Gargoyle becomes a 2/2 Gargoyle creature with flying.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalGargoyleToken(), "", Duration.WhileOnBattlefield, true, false),
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalGargoyleToken(), null, Duration.WhileOnBattlefield),
                 new FilterCreatureSpell(), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
                 "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 2/2 Gargoyle creature with flying."));

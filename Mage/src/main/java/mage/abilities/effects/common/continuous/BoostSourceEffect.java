@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEffect {
+public class BoostSourceEffect extends ContinuousEffectImpl {
     private DynamicValue power;
     private DynamicValue toughness;
     private final boolean lockedIn;
@@ -42,7 +42,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEff
      * @param power
      * @param toughness
      * @param duration
-     * @param lockedIn  if true, power and toughness will be calculated only once, when the ability resolves
+     * @param lockedIn    if true, power and toughness will be calculated only once, when the ability resolves
      * @param description
      */
     public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, boolean lockedIn, String description) {
@@ -53,7 +53,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEff
         this.staticText = description + " gets " + CardUtil.getBoostText(power, toughness, duration);
     }
 
-    public BoostSourceEffect(final BoostSourceEffect effect) {
+    protected BoostSourceEffect(final BoostSourceEffect effect) {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();

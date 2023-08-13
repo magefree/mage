@@ -28,7 +28,7 @@ public final class KamahlsDruidicVow extends CardImpl {
 
     public KamahlsDruidicVow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // (You may cast a legendary sorcery only if you control a legendary creature or planeswalker.)
         this.addAbility(new LegendarySpellAbility());
@@ -80,7 +80,7 @@ class KamahlsDruidicVowEffect extends OneShotEffect {
                     ));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
             target1.setNotTarget(true);
-            controller.choose(Outcome.PutCardInPlay, cards, target1, game);
+            controller.choose(Outcome.PutCardInPlay, cards, target1, source, game);
             Cards toBattlefield = new CardsImpl(target1.getTargets());
             cards.removeAll(toBattlefield);
             controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, false, null);

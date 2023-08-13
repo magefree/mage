@@ -8,7 +8,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SacrificeCostCreaturesPower;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -19,7 +18,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.Token;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -31,7 +29,7 @@ public final class GhoulcallerGisa extends CardImpl {
 
     public GhoulcallerGisa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -39,10 +37,7 @@ public final class GhoulcallerGisa extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {B}, {tap}, Sacrifice another creature: create X 2/2 black Zombie creature tokens, where X is the sacrificed creature's power.
-        DynamicValue xValue = SacrificeCostCreaturesPower.instance;
-        Token zombie = new ZombieToken();
-        zombie.setTokenType(2);
-        Effect effect = new CreateTokenEffect(zombie, xValue);
+        Effect effect = new CreateTokenEffect(new ZombieToken(), SacrificeCostCreaturesPower.instance);
         effect.setText("create X 2/2 black Zombie creature tokens, where X is the sacrificed creature's power");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());

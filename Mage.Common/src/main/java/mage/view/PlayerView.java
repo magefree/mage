@@ -47,6 +47,7 @@ public class PlayerView implements Serializable {
     private final List<UUID> attachments = new ArrayList<>();
     private final int statesSavedSize;
     private final int priorityTimeLeft;
+    private final int bufferTimeLeft;
     private final boolean passedTurn; // F4
     private final boolean passedUntilEndOfTurn; // F5
     private final boolean passedUntilNextMain; // F6
@@ -74,6 +75,7 @@ public class PlayerView implements Serializable {
         this.isActive = (player.getId().equals(state.getActivePlayerId()));
         this.hasPriority = player.getId().equals(state.getPriorityPlayerId());
         this.priorityTimeLeft = player.getPriorityTimeLeft();
+        this.bufferTimeLeft = player.getBufferTimeLeft();
         this.timerActive = (this.hasPriority && player.isGameUnderControl())
                 || (player.getPlayersUnderYourControl().contains(state.getPriorityPlayerId()))
                 || player.getId().equals(game.getState().getChoosingPlayerId());
@@ -273,6 +275,10 @@ public class PlayerView implements Serializable {
 
     public int getPriorityTimeLeft() {
         return priorityTimeLeft;
+    }
+
+    public int getBufferTimeLeft() {
+        return bufferTimeLeft;
     }
 
     public boolean hasPriority() {

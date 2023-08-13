@@ -17,7 +17,7 @@ public class CantAttackAnyPlayerSourceEffect extends RestrictionEffect {
         super(duration);
     }
 
-    public CantAttackAnyPlayerSourceEffect(final CantAttackAnyPlayerSourceEffect effect) {
+    protected CantAttackAnyPlayerSourceEffect(final CantAttackAnyPlayerSourceEffect effect) {
         super(effect);
     }
 

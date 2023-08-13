@@ -1,12 +1,10 @@
-
 package mage.game.permanent.token;
 
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class CrestedSunmareToken extends TokenImpl {
@@ -18,10 +16,9 @@ public final class CrestedSunmareToken extends TokenImpl {
         color.setWhite(true);
         subtype.add(SubType.HORSE);
         cardType.add(CardType.CREATURE);
-        setOriginalExpansionSetCode("HOU");
     }
 
-    public CrestedSunmareToken(final CrestedSunmareToken token) {
+    protected CrestedSunmareToken(final CrestedSunmareToken token) {
         super(token);
     }
 

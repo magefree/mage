@@ -29,7 +29,7 @@ public class CommanderCostModification extends CostModificationEffectImpl {
         this.commander = commander;
     }
 
-    public CommanderCostModification(final CommanderCostModification effect) {
+    protected CommanderCostModification(final CommanderCostModification effect) {
         super(effect);
         this.commander = effect.commander;
     }

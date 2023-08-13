@@ -31,7 +31,7 @@ public final class StalkingYeti extends CardImpl {
     public StalkingYeti(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.YETI);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

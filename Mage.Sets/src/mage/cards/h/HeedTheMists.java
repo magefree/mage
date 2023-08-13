@@ -40,7 +40,7 @@ public final class HeedTheMists extends CardImpl {
 
         public HeedTheMistsEffect() {
             super(Outcome.DrawCard);
-            staticText = "Mill a card, then draw cards equal to that card's mana value";
+            staticText = "Mill a card, then draw cards equal to the milled card's mana value";
         }
 
         public HeedTheMistsEffect(HeedTheMistsEffect effect) {
@@ -49,7 +49,6 @@ public final class HeedTheMists extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            boolean result = false;
             Player controller = game.getPlayer(source.getControllerId());
             int totalCMC = controller
                     .millCards(1, source, game)

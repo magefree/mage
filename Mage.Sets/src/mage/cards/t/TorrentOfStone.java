@@ -17,7 +17,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class TorrentOfStone extends CardImpl {
-    private static final FilterControlledLandPermanent filterSacrifice = new FilterControlledLandPermanent("two Mountains");
+    private static final FilterControlledLandPermanent filterSacrifice = new FilterControlledLandPermanent("Mountains");
 
     static {
         filterSacrifice.add(SubType.MOUNTAIN.getPredicate());

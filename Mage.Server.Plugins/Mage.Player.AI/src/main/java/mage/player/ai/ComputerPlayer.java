@@ -282,9 +282,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             List<Permanent> targets;
             TargetAnyTarget origTarget = (TargetAnyTarget) target.getOriginalTarget();
             if (outcome.isGood()) {
-                targets = threats(abilityControllerId, source, ((FilterCreaturePlayerOrPlaneswalker) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
+                targets = threats(abilityControllerId, source, ((FilterAnyTarget) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
             } else {
-                targets = threats(randomOpponentId, source, ((FilterCreaturePlayerOrPlaneswalker) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
+                targets = threats(randomOpponentId, source, ((FilterAnyTarget) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
             }
             for (Permanent permanent : targets) {
                 List<UUID> alreadyTargetted = target.getTargets();
@@ -749,9 +749,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             List<Permanent> targets;
             TargetAnyTarget origTarget = ((TargetAnyTarget) target.getOriginalTarget());
             if (outcome.isGood()) {
-                targets = threats(abilityControllerId, source, ((FilterCreaturePlayerOrPlaneswalker) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
+                targets = threats(abilityControllerId, source, ((FilterAnyTarget) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
             } else {
-                targets = threats(randomOpponentId, source, ((FilterCreaturePlayerOrPlaneswalker) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
+                targets = threats(randomOpponentId, source, ((FilterAnyTarget) origTarget.getFilter()).getPermanentFilter(), game, target.getTargets());
             }
 
             if (targets.isEmpty()) {
@@ -765,7 +765,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
 
             if (targets.isEmpty() && required) {
-                targets = game.getBattlefield().getActivePermanents(((FilterCreaturePlayerOrPlaneswalker) origTarget.getFilter()).getPermanentFilter(), playerId, game);
+                targets = game.getBattlefield().getActivePermanents(((FilterAnyTarget) origTarget.getFilter()).getPermanentFilter(), playerId, game);
             }
             for (Permanent permanent : targets) {
                 List<UUID> alreadyTargeted = target.getTargets();
@@ -1049,8 +1049,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return target.isChosen();
         }
 
-        if (target.getOriginalTarget() instanceof TargetActivatedOrTriggeredAbility
-                || target.getOriginalTarget() instanceof TargetActivatedOrTriggeredAbilityOrLegendarySpell) {
+        if (target.getOriginalTarget() instanceof TargetActivatedOrTriggeredAbility) {
             Iterator<UUID> iterator = target.possibleTargets(source.getControllerId(), source, game).iterator();
             while (!target.isChosen() && iterator.hasNext()) {
                 target.addTarget(iterator.next(), source, game);
@@ -1266,7 +1265,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (game.isMainPhase() && game.getStack().isEmpty()) {
                 playLand(game);
             }
-            switch (game.getTurn().getStepType()) {
+            switch (game.getTurnStepType()) {
                 case UPKEEP:
                     findPlayables(game);
                     break;
@@ -1331,7 +1330,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
         } else {
             //respond to opponent events
-            switch (game.getTurn().getStepType()) {
+            switch (game.getTurnStepType()) {
                 case UPKEEP:
                     findPlayables(game);
                     break;
@@ -2030,7 +2029,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game) {
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
         log.debug("choose 2");
         if (cards == null || cards.isEmpty()) {
             return true;
@@ -2043,9 +2042,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             abilityControllerId = target.getAbilityController();
         }
 
-        List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), game));
+        List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), abilityControllerId, source, game));
         while (!target.doneChoosing()) {
-            Card card = pickTarget(abilityControllerId, cardChoices, outcome, target, null, game);
+            Card card = pickTarget(abilityControllerId, cardChoices, outcome, target, source, game);
             if (card != null) {
                 target.add(card.getId(), game);
                 cardChoices.remove(card);
@@ -2170,11 +2169,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
+            int min, int max, MultiAmountType type, Game game) {
         log.debug("getMultiAmount");
 
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
         if (needCount == 0) {
             return defaultList;
         }
@@ -2189,7 +2189,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // GOOD effect
         // values must be stable, so AI must able to simulate it and choose correct actions
         // fill max values as much as possible
-        return MultiAmountType.prepareMaxValues(needCount, min, max);
+        return MultiAmountType.prepareMaxValues(messages, min, max);
     }
 
     @Override
@@ -2222,7 +2222,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (!landSets.isEmpty()) {
             criteria.setCodes(landSets.toArray(new String[landSets.size()]));
         }
-        criteria.rarities(Rarity.LAND).nameExact(landName);
+        criteria.rarities(Rarity.LAND).name(landName);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
 
         if (cards.isEmpty()) {
@@ -2257,7 +2257,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         List<Card> sortedCards = new ArrayList<>(cardPool);
         if (!sortedCards.isEmpty()) {
-            while (deck.getCards().size() < DECK_SIZE) {
+            while (deck.getMaindeckCards().size() < DECK_SIZE) {
                 deck.getCards().add(sortedCards.get(RandomUtil.nextInt(sortedCards.size())));
             }
             return deck;
@@ -2287,7 +2287,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         // get top cards
         int cardNum = 0;
-        while (deck.getCards().size() < DECK_CARDS_COUNT && sortedCards.size() > cardNum) {
+        while (deck.getMaindeckCards().size() < DECK_CARDS_COUNT && sortedCards.size() > cardNum) {
             Card card = sortedCards.get(cardNum);
             if (!card.isBasic()) {
                 deck.getCards().add(card);
@@ -2349,7 +2349,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         // adds remaining lands (most popular name)
-        addBasicLands(deck, mostLandName, DECK_SIZE - deck.getCards().size());
+        addBasicLands(deck, mostLandName, DECK_SIZE - deck.getMaindeckCards().size());
 
         return deck;
     }
@@ -2359,7 +2359,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         DeckValidator deckValidator = DeckValidatorFactory.instance.createDeckValidator(tournament.getOptions().getMatchOptions().getDeckType());
         int deckMinSize = deckValidator != null ? deckValidator.getDeckMinSize() : 0;
 
-        if (deck != null && deck.getCards().size() < deckMinSize && !deck.getSideboard().isEmpty()) {
+        if (deck != null && deck.getMaindeckCards().size() < deckMinSize && !deck.getSideboard().isEmpty()) {
             if (chosenColors == null) {
                 for (Card card : deck.getSideboard()) {
                     rememberPick(card, RateCard.rateCard(card, null));

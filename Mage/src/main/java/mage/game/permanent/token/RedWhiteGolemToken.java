@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author weirddan455
  */
@@ -20,8 +18,6 @@ public class RedWhiteGolemToken extends TokenImpl {
         color.setWhite(true);
         power = new MageInt(4);
         toughness = new MageInt(4);
-
-        availableImageSetCodes = Arrays.asList("MH2");
     }
 
     private RedWhiteGolemToken(final RedWhiteGolemToken token) {

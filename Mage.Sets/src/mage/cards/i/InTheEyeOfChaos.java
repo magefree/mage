@@ -28,7 +28,7 @@ public final class InTheEyeOfChaos extends CardImpl {
 
     public InTheEyeOfChaos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
 
         // Whenever a player casts an instant spell, counter it unless that player pays {X}, where X is its converted mana cost.

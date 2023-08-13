@@ -13,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -30,7 +31,7 @@ public final class SolphimMayhemDominus extends CardImpl {
     public SolphimMayhemDominus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(5);
@@ -41,7 +42,7 @@ public final class SolphimMayhemDominus extends CardImpl {
 
         // {1}{R/P}{R/P}, Discard two cards: Put an indestructible counter on Solphim, Mayhem Dominus.
         Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.INDESTRUCTIBLE.createInstance()), new ManaCostsImpl<>("{1}{R/P}{R/P}"));
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         this.addAbility(ability);
     }
 

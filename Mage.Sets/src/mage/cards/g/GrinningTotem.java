@@ -6,19 +6,20 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -82,54 +83,11 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
         if (card != null) {
             UUID exileZoneId = CardUtil.getCardExileZoneId(game, source);
             you.moveCardsToExile(card, source, game, true, exileZoneId, CardUtil.getSourceName(game, source));
-            game.addEffect(new GrinningTotemMayPlayEffect().setTargetPointer(new FixedTarget(card.getId())), source);
+            CardUtil.makeCardPlayable(game, source, card, Duration.UntilYourNextUpkeepStep, false);
             game.addDelayedTriggeredAbility(new GrinningTotemDelayedTriggeredAbility(exileZoneId), source);
         }
         targetOpponent.shuffleLibrary(source, game);
         return true;
-    }
-
-}
-
-class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
-
-    private boolean sameStep = true;
-
-    public GrinningTotemMayPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.staticText = "Until the beginning of your next upkeep, you may play that card.";
-    }
-
-    public GrinningTotemMayPlayEffect(final GrinningTotemMayPlayEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GrinningTotemMayPlayEffect copy() {
-        return new GrinningTotemMayPlayEffect(this);
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            if (!sameStep && game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
-                return true;
-            }
-        } else {
-            sameStep = false;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return source.isControlledBy(affectedControllerId)
-                && sourceId.equals(getTargetPointer().getFirst(game, source));
     }
 
 }

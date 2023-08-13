@@ -26,7 +26,7 @@ public final class IngaRuneEyes extends CardImpl {
     public IngaRuneEyes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
@@ -38,7 +38,7 @@ public final class IngaRuneEyes extends CardImpl {
         // When Inga Rune-Eyes dies, draw three cards if three or more creatures died this turn.
         this.addAbility(new DiesSourceTriggeredAbility(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(3), IngaRuneEyesCondition.instance
-        ).setText("draw three cards if three or more creatures died this turn")), new CreaturesDiedWatcher());
+        ).setText("draw three cards if three or more creatures died this turn")));
     }
 
     private IngaRuneEyes(final IngaRuneEyes card) {

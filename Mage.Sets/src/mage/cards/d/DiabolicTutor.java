@@ -19,7 +19,7 @@ public final class DiabolicTutor extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
         TargetCardInLibrary target = new TargetCardInLibrary();
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target, false, true));
     }
 
     private DiabolicTutor(final DiabolicTutor card) {

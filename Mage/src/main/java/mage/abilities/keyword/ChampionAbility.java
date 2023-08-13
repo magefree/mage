@@ -69,7 +69,7 @@ public class ChampionAbility extends StaticAbility {
             case 1:
                 SubType subType = subTypes.get(0);
                 this.objectDescription = subType.getDescription();
-                filter = new FilterControlledPermanent(subType, "another " + subType + " you control");
+                filter = new FilterControlledPermanent(subType, "another " + subType);
                 filter.add(AnotherPredicate.instance);
                 break;
             case 2:
@@ -102,7 +102,7 @@ public class ChampionAbility extends StaticAbility {
         addSubAbility(ability2);
     }
 
-    public ChampionAbility(final ChampionAbility ability) {
+    protected ChampionAbility(final ChampionAbility ability) {
         super(ability);
         this.objectDescription = ability.objectDescription;
     }

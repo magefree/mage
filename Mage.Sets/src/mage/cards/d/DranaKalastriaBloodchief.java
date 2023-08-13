@@ -29,7 +29,7 @@ public final class DranaKalastriaBloodchief extends CardImpl {
 
     public DranaKalastriaBloodchief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
-       addSuperType(SuperType.LEGENDARY);
+       this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.SHAMAN);
 

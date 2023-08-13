@@ -29,8 +29,8 @@ public final class RayOfCommand extends CardImpl {
 
         // Untap target creature an opponent controls and gain control of it until end of turn. That creature gains haste until end of turn. When you lose control of the creature, tap it.
         this.getSpellAbility().addEffect(new UntapTargetEffect());
-        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn).setText("and gain control of it until end of turn"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("that creature gains haste until end of turn"));
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new RayOfCommandDelayedTriggeredAbility(), true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
     }

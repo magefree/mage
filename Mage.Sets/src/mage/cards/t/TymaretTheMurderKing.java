@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -28,7 +28,7 @@ public final class TymaretTheMurderKing extends CardImpl {
 
     public TymaretTheMurderKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WARRIOR);
 
@@ -42,7 +42,7 @@ public final class TymaretTheMurderKing extends CardImpl {
         this.addAbility(ability);
         // {1}{B}, Sacrifice a creature: Return Tymaret from your graveyard to your hand.
         ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
 
     }

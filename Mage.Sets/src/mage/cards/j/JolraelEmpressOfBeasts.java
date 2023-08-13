@@ -15,6 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -31,7 +32,7 @@ public final class JolraelEmpressOfBeasts extends CardImpl {
 
     public JolraelEmpressOfBeasts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SPELLSHAPER);
         this.power = new MageInt(3);
@@ -40,7 +41,7 @@ public final class JolraelEmpressOfBeasts extends CardImpl {
         // {2}{G}, {tap}, Discard two cards: All lands target player controls become 3/3 creatures until end of turn. They're still lands.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JolraelEmpressOfBeastsEffect(), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

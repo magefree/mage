@@ -34,7 +34,7 @@ public final class GatheringThrong extends CardImpl {
 
         // When Gathering Throng enters the battlefield, you may search your library for any number of cards named Gathering Throng, reveal them, put them into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), true, true
+                new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), true
         ), true));
     }
 

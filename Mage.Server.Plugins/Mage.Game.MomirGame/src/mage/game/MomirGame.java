@@ -1,7 +1,6 @@
 
 package mage.game;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
@@ -17,6 +16,8 @@ import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
  *
  * @author nigelzor
@@ -26,7 +27,7 @@ public class MomirGame extends GameImpl {
     private int numPlayers;
 
     public MomirGame(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 60);
+        super(attackOption, range, mulligan, startLife, 60, 7);
     }
 
     public MomirGame(final MomirGame game) {
@@ -49,13 +50,17 @@ public class MomirGame extends GameImpl {
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null) {
-                CardInfo cardInfo = CardRepository.instance.findCard("Momir Vig, Simic Visionary");
+                CardInfo cardInfo = CardRepository.instance.findCardWithPreferredSetAndNumber("Momir Vig, Simic Visionary", "DIS", "118");
+                if (cardInfo == null) {
+                    // how-to fix: make sure that a Momir Emblem and a source card uses same set (DIS - Dissension)
+                    throw new IllegalStateException("Wrong code usage: momir card and emblem must exists in the same set (DIS)");
+                }
                 addEmblem(new MomirEmblem(), cardInfo.getCard(), playerId);
             }
         }
         getState().addAbility(ability, null);
         super.init(choosingPlayerId);
-        state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+        state.getTurnMods().add(new TurnMod(startingPlayerId).withSkipStep(PhaseStep.DRAW));
     }
 
     @Override

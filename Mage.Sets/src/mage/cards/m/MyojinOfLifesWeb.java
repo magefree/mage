@@ -34,7 +34,7 @@ public final class MyojinOfLifesWeb extends CardImpl {
 
     public MyojinOfLifesWeb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(8);
@@ -43,11 +43,11 @@ public final class MyojinOfLifesWeb extends CardImpl {
         this.getSpellAbility().addWatcher(new CastFromHandWatcher());
 
         // Myojin of Life's Web enters the battlefield with a divinity counter on it if you cast it from your hand.
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), CastFromHandSourcePermanentCondition.instance, ""), "{this} enters the battlefield with a divinity counter on it if you cast it from your hand"));
-        // Myojin of Life's Web is indestructible as long as it has a divinity counter on it.
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), CastFromHandSourcePermanentCondition.instance, ""), "with a divinity counter on it if you cast it from your hand"));
+        // Myojin of Life's Web has indestructible as long as it has a divinity counter on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
-                        new SourceHasCounterCondition(CounterType.DIVINITY), "{this} is indestructible as long as it has a divinity counter on it")));
+                        new SourceHasCounterCondition(CounterType.DIVINITY), "{this} has indestructible as long as it has a divinity counter on it")));
         // Remove a divinity counter from Myojin of Life's Web: Put any number of creature cards from your hand onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyojinOfLifesWebPutCreatureOnBattlefieldEffect(), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance()));
 

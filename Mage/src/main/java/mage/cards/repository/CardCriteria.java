@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class CardCriteria {
 
+    private String nameContains;
     private String name;
-    private String nameExact;
     private String rules;
     private final List<String> setCodes;
     private final List<String> ignoreSetCodes; // sets to ignore, use with little amount of sets (example: ignore sets with snow lands)
@@ -29,6 +29,7 @@ public class CardCriteria {
     private final List<SuperType> notSupertypes;
     private final List<SubType> subtypes;
     private final List<Rarity> rarities;
+    private Boolean variousArt;
     private Boolean doubleFaced;
     private Boolean modalDoubleFaced;
     private boolean nightCard;
@@ -98,6 +99,11 @@ public class CardCriteria {
         return this;
     }
 
+    public CardCriteria variousArt(boolean variousArt) {
+        this.variousArt = variousArt;
+        return this;
+    }
+
     public CardCriteria doubleFaced(boolean doubleFaced) {
         this.doubleFaced = doubleFaced;
         return this;
@@ -113,13 +119,13 @@ public class CardCriteria {
         return this;
     }
 
-    public CardCriteria name(String name) {
-        this.name = name;
+    public CardCriteria nameContains(String str) {
+        this.nameContains = str;
         return this;
     }
 
-    public CardCriteria nameExact(String nameExact) {
-        this.nameExact = nameExact;
+    public CardCriteria name(String name) {
+        this.name = name;
         return this;
     }
 
@@ -144,7 +150,11 @@ public class CardCriteria {
     }
 
     public CardCriteria setCodes(String... setCodes) {
-        this.setCodes.addAll(Arrays.asList(setCodes));
+        return setCodes(Arrays.asList(setCodes));
+    }
+
+    public CardCriteria setCodes(List<String> setCodes) {
+        this.setCodes.addAll(setCodes);
         return this;
     }
 
@@ -210,16 +220,21 @@ public class CardCriteria {
         where.eq("nightCard", nightCard);
         where.eq("splitCardHalf", false);
         int clausesCount = 2;
-        if (name != null) {
-            where.like("name", new SelectArg('%' + name + '%'));
+        if (nameContains != null) {
+            where.like("name", new SelectArg('%' + nameContains + '%'));
             clausesCount++;
         }
-        if (nameExact != null) {
-            where.like("name", new SelectArg(nameExact));
+        if (name != null) {
+            where.eq("name", new SelectArg(name));
             clausesCount++;
         }
         if (rules != null) {
             where.like("rules", new SelectArg('%' + rules + '%'));
+            clausesCount++;
+        }
+
+        if (variousArt != null) {
+            where.eq("variousArt", variousArt);
             clausesCount++;
         }
 
@@ -229,7 +244,7 @@ public class CardCriteria {
         }
 
         if (modalDoubleFaced != null) {
-            where.eq("modalDoubleFacesCard", modalDoubleFaced);
+            where.eq("modalDoubleFacedCard", modalDoubleFaced);
             clausesCount++;
         }
 
@@ -382,12 +397,12 @@ public class CardCriteria {
         return this;
     }
 
-    public String getName() {
-        return name;
+    public String getNameContains() {
+        return nameContains;
     }
 
-    public String getNameExact() {
-        return nameExact;
+    public String getName() {
+        return name;
     }
 
     public String getRules() {
@@ -424,6 +439,10 @@ public class CardCriteria {
 
     public List<Rarity> getRarities() {
         return rarities;
+    }
+
+    public Boolean getVariousArt() {
+        return variousArt;
     }
 
     public Boolean getDoubleFaced() {

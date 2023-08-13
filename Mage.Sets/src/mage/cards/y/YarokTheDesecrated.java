@@ -24,7 +24,7 @@ public final class YarokTheDesecrated extends CardImpl {
     public YarokTheDesecrated(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(3);

@@ -26,7 +26,7 @@ public final class LyraDawnbringer extends CardImpl {
     public LyraDawnbringer(UUID ownerID, CardSetInfo cardSetInfo) {
         super(ownerID, cardSetInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         subtype.add(SubType.ANGEL);
         power = new MageInt(5);
         toughness = new MageInt(5);

@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -26,7 +26,7 @@ public final class SkulkingGhost extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Skulking Ghost becomes the target of a spell or ability, sacrifice it.
-        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
     private SkulkingGhost(final SkulkingGhost card) {

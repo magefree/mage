@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
 public class PhaseOutAttachedEffect extends OneShotEffect {
@@ -18,7 +17,7 @@ public class PhaseOutAttachedEffect extends OneShotEffect {
         this.staticText = "Enchanted creature phases out";
     }
 
-    public PhaseOutAttachedEffect(final PhaseOutAttachedEffect effect) {
+    protected PhaseOutAttachedEffect(final PhaseOutAttachedEffect effect) {
         super(effect);
     }
 

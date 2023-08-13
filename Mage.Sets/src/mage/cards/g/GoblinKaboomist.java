@@ -54,6 +54,7 @@ class GoblinKaboomistFlipCoinEffect extends OneShotEffect {
 
     public GoblinKaboomistFlipCoinEffect() {
         super(Outcome.Damage);
+        staticText = "Then flip a coin. If you lose the flip, {this} deals 2 damage to itself";
     }
 
     public GoblinKaboomistFlipCoinEffect(final GoblinKaboomistFlipCoinEffect effect) {

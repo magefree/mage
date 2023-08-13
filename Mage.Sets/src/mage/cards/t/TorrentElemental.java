@@ -18,7 +18,7 @@ import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -37,7 +37,7 @@ public final class TorrentElemental extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Torrent Elemental attacks, tap all creatures defending player controls.
-        Effect effect = new TapAllTargetPlayerControlsEffect(FILTER_PERMANENT_CREATURES);
+        Effect effect = new TapAllTargetPlayerControlsEffect(StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("tap all creatures defending player controls.");
         this.addAbility(new AttacksTriggeredAbility(effect, false, null, SetTargetPointer.PLAYER));
         // {3}{B/G}{B/G}: Put Torrent Elemental from exile onto the battlefield tapped. Activate this ability only any time you could cast a sorcery.

@@ -30,15 +30,17 @@ import java.util.UUID;
 public final class NemataPrimevalWarden extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Saproling");
+    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Saprolings");
 
     static {
         filter.add(SubType.SAPROLING.getPredicate());
+        filter2.add(SubType.SAPROLING.getPredicate());
     }
 
     public NemataPrimevalWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TREEFOLK);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
@@ -60,7 +62,7 @@ public final class NemataPrimevalWarden extends CardImpl {
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 new ManaCostsImpl<>("{1}{B}"));
-        ability2.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));
+        ability2.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, filter2, false)));
         this.addAbility(ability2);
     }
 

@@ -10,7 +10,6 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
@@ -30,7 +29,7 @@ public final class KhalniHeartExpedition extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(
                         0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS
-                ), true, Outcome.PutLandInPlay),
+                ), true),
                 new CompositeCost(
                         new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)),
                         new SacrificeSourceCost(),

@@ -27,7 +27,7 @@ public final class AshnodTheUncaring extends CardImpl {
     public AshnodTheUncaring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(1);
@@ -85,7 +85,7 @@ class AshnodTheUncaringTriggeredAbility extends TriggeredAbilityImpl {
                 .noneMatch(SacrificeCost.class::isInstance)) {
             return false;
         }
-        Permanent permanent = game.getPermanent(stackAbility.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(stackAbility.getSourceId());
         if (permanent == null || (!permanent.isArtifact(game) && !permanent.isCreature(game))) {
             return false;
         }

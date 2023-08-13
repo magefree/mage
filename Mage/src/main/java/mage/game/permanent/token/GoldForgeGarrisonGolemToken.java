@@ -5,7 +5,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author LevelX2
  */
 public final class GoldForgeGarrisonGolemToken extends TokenImpl {
@@ -21,7 +20,7 @@ public final class GoldForgeGarrisonGolemToken extends TokenImpl {
 
     }
 
-    public GoldForgeGarrisonGolemToken(final GoldForgeGarrisonGolemToken token) {
+    protected GoldForgeGarrisonGolemToken(final GoldForgeGarrisonGolemToken token) {
         super(token);
     }
 

@@ -31,7 +31,7 @@ public final class KillZoneAcrobat extends CardImpl {
         // Whenever Kill-Zone Acrobat attacks, you may sacrifice another creature or artifact. If you do, Kill-Zone Acrobat gains flying until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE)
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT)
         )));
     }
 

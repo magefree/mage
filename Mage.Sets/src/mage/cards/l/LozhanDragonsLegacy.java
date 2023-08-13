@@ -13,12 +13,13 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterAnyTarget;
+import mage.filter.common.FilterPermanentOrPlayer;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CommanderPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetPermanentOrPlayer;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -29,8 +30,8 @@ import java.util.UUID;
 public final class LozhanDragonsLegacy extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an Adventure spell or Dragon spell");
-    private static final FilterCreaturePlayerOrPlaneswalker filter2
-            = new FilterCreaturePlayerOrPlaneswalker("any target that isn't a commander");
+    private static final FilterPermanentOrPlayer filter2
+            = new FilterAnyTarget("any target that isn't a commander");
 
     static {
         filter.add(Predicates.or(
@@ -43,7 +44,7 @@ public final class LozhanDragonsLegacy extends CardImpl {
     public LozhanDragonsLegacy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(4);
@@ -57,7 +58,7 @@ public final class LozhanDragonsLegacy extends CardImpl {
                 new DamageTargetEffect(LozhanDragonsLegacyValue.instance)
                         .setText("{this} deals damage equal to that spell's mana value to any target that isn't a commander"), filter, false
         );
-        ability.addTarget(new TargetAnyTarget(filter2));
+        ability.addTarget(new TargetPermanentOrPlayer(filter2));
         this.addAbility(ability);
     }
 

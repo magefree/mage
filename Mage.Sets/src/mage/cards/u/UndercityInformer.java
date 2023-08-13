@@ -16,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -39,7 +39,7 @@ public final class UndercityInformer extends CardImpl {
 
         //{1}, Sacrifice a creature: Target player reveals the top card of their library until they reveal a land card, then puts those cards into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UndercityInformerEffect(), new ManaCostsImpl<>("{1}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

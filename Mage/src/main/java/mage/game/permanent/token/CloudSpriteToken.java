@@ -1,16 +1,12 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.common.CanBlockOnlyFlyingAbility;
 import mage.abilities.keyword.FlyingAbility;
-
-import java.util.Arrays;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class CloudSpriteToken extends TokenImpl {
@@ -28,11 +24,9 @@ public final class CloudSpriteToken extends TokenImpl {
 
         // Cloud Sprite can block only creatures with flying.
         this.addAbility(new CanBlockOnlyFlyingAbility());
-
-        availableImageSetCodes = Arrays.asList("TSR");
     }
 
-    public CloudSpriteToken(final CloudSpriteToken token) {
+    protected CloudSpriteToken(final CloudSpriteToken token) {
         super(token);
     }
 

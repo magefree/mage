@@ -58,7 +58,7 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
         this.addHint(new ValueHint("Untapped artifacts you control", untappedCount));
     }
 
-    public ImproviseAbility(final ImproviseAbility ability) {
+    protected ImproviseAbility(final ImproviseAbility ability) {
         super(ability);
     }
 
@@ -70,7 +70,7 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
 
     @Override
     public String getRule() {
-        return "Improvise <i>(Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)</i>";
+        return "improvise <i>(Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)</i>";
     }
 
     @Override
@@ -119,7 +119,7 @@ class ImproviseSpecialAction extends SpecialAction {
         this.addEffect(new ImproviseEffect(unpaid));
     }
 
-    public ImproviseSpecialAction(final ImproviseSpecialAction ability) {
+    protected ImproviseSpecialAction(final ImproviseSpecialAction ability) {
         super(ability);
     }
 
@@ -139,7 +139,7 @@ class ImproviseEffect extends OneShotEffect {
         this.staticText = "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)";
     }
 
-    public ImproviseEffect(final ImproviseEffect effect) {
+    protected ImproviseEffect(final ImproviseEffect effect) {
         super(effect);
         this.unpaid = effect.unpaid;
     }

@@ -52,7 +52,7 @@ public final class TheCrueltyOfGix extends CardImpl {
         // II -- Search your library for a card, put that card into your hand, then shuffle. You lose 3 life.
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II,
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary()),
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true),
                 new LoseLifeSourceControllerEffect(3)
         );
 

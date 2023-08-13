@@ -35,7 +35,7 @@ public final class GrenzoHavocRaiser extends CardImpl {
     public GrenzoHavocRaiser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(2);

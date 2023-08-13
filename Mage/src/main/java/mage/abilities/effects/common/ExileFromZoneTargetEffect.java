@@ -43,7 +43,7 @@ public class ExileFromZoneTargetEffect extends OneShotEffect {
         this.withSource = withSource;
     }
 
-    public ExileFromZoneTargetEffect(final ExileFromZoneTargetEffect effect) {
+    protected ExileFromZoneTargetEffect(final ExileFromZoneTargetEffect effect) {
         super(effect);
         this.zone = effect.zone;
         this.filter = effect.filter.copy();

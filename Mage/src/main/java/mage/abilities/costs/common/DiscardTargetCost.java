@@ -30,7 +30,7 @@ public class DiscardTargetCost extends CostImpl {
     public DiscardTargetCost(TargetCardInHand target, boolean randomDiscard) {
         this.addTarget(target);
         this.randomDiscard = randomDiscard;
-        this.text = "discard " + target.getTargetName();
+        this.text = "discard " + target.getDescription();
     }
 
     public DiscardTargetCost(DiscardTargetCost cost) {
@@ -66,7 +66,6 @@ public class DiscardTargetCost extends CostImpl {
     public void clearPaid() {
         super.clearPaid();
         this.cards.clear();
-        this.targets.clearChosen();
     }
 
     @Override

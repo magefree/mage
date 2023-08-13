@@ -59,7 +59,7 @@ class PullingTeethEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int cardsToDiscard;
-            if (ClashEffect.getInstance().apply(game, source)) {
+            if (new ClashEffect().apply(game, source)) {
                 cardsToDiscard = 2;
             } else {
                 cardsToDiscard = 1;

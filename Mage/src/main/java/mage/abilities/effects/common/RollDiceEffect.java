@@ -28,7 +28,7 @@ public class RollDiceEffect extends OneShotEffect {
         this.numSides = numSides;
     }
 
-    public RollDiceEffect(final RollDiceEffect effect) {
+    protected RollDiceEffect(final RollDiceEffect effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
         this.numSides = effect.numSides;

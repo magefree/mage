@@ -38,7 +38,7 @@ public final class SkanosDragonheart extends CardImpl {
     public SkanosDragonheart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.RANGER);
         this.power = new MageInt(4);

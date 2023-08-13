@@ -18,7 +18,7 @@ public class FightTargetSourceEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    public FightTargetSourceEffect(final FightTargetSourceEffect effect) {
+    protected FightTargetSourceEffect(final FightTargetSourceEffect effect) {
         super(effect);
     }
 

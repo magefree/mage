@@ -26,7 +26,7 @@ public final class PillarTombsOfAku extends CardImpl {
     public PillarTombsOfAku(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
-        this.addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, that player may sacrifice a creature. If that player doesn't, they lose 5 life and you sacrifice Pillar Tombs of Aku.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

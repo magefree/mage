@@ -7,7 +7,7 @@ import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.hint.common.MyTurnHint;
@@ -32,7 +32,7 @@ public final class LiciaSanguineTribune extends CardImpl {
     public LiciaSanguineTribune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{W}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(4);
@@ -41,7 +41,7 @@ public final class LiciaSanguineTribune extends CardImpl {
         // Licia, Sanguine Tribune costs 1 less to cast for each 1 life you gained this turn.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new LiciaSanguineTribuneCostReductionEffect()
-        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
@@ -82,7 +82,7 @@ class LiciaSanguineTribuneCostReductionEffect extends CostModificationEffectImpl
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            CardUtil.reduceCost(abilityToModify, ControllerGotLifeCount.instance.calculate(game, source, this));
+            CardUtil.reduceCost(abilityToModify, ControllerGainedLifeCount.instance.calculate(game, source, this));
             return true;
         }
         return false;

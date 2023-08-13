@@ -20,7 +20,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 
 /**
  * @author North
@@ -40,7 +40,7 @@ public final class FalkenrathAristocrat extends CardImpl {
         // If the sacrificed creature was a Human, put a +1/+1 counter on Falkenrath Aristocrat.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         ability.addEffect(new FalkenrathAristocratEffect());
         this.addAbility(ability);
     }

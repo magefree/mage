@@ -29,7 +29,7 @@ public class CantAttackBlockAllEffect extends RestrictionEffect {
         staticText = sb.toString();
     }
 
-    public CantAttackBlockAllEffect(final CantAttackBlockAllEffect effect) {
+    protected CantAttackBlockAllEffect(final CantAttackBlockAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

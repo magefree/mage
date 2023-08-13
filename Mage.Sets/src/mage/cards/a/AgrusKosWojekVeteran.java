@@ -31,7 +31,7 @@ public final class AgrusKosWojekVeteran extends CardImpl {
 
     public AgrusKosWojekVeteran(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 

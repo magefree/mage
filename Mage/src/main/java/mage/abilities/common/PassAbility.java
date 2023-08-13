@@ -19,7 +19,7 @@ public class PassAbility extends ActivatedAbilityImpl {
         this.usesStack = false;
     }
 
-    public PassAbility(final PassAbility ability) {
+    protected PassAbility(final PassAbility ability) {
         super(ability);
     }
 

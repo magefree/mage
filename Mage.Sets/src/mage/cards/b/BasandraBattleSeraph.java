@@ -25,7 +25,7 @@ public final class BasandraBattleSeraph extends CardImpl {
     
     public BasandraBattleSeraph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         
         this.power = new MageInt(4);
@@ -84,7 +84,7 @@ class BasandraBattleSeraphEffect extends ContinuousRuleModifyingEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getPhase().getType() == TurnPhase.COMBAT) {
+        if (game.getTurnPhaseType() == TurnPhase.COMBAT) {
             return true;
         }
         return false;

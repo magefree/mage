@@ -10,7 +10,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -53,7 +52,7 @@ public final class Excavator extends CardImpl {
     }
 }
 
-class ExcavatorEffect extends ContinuousEffectImpl implements SourceEffect {
+class ExcavatorEffect extends ContinuousEffectImpl {
 
     private Abilities<Ability> abilities = new AbilitiesImpl();
 

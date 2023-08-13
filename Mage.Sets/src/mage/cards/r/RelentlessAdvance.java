@@ -4,6 +4,7 @@ import mage.abilities.effects.keyword.AmassEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ public final class RelentlessAdvance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Amass 3. (Put three +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.
-        this.getSpellAbility().addEffect(new AmassEffect(3));
+        this.getSpellAbility().addEffect(new AmassEffect(3, SubType.ZOMBIE));
     }
 
     private RelentlessAdvance(final RelentlessAdvance card) {

@@ -43,7 +43,7 @@ public final class NoyanDarRoilShaper extends CardImpl {
 
     public NoyanDarRoilShaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.ALLY);
         this.power = new MageInt(4);

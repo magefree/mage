@@ -80,7 +80,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
             }
             // play land check
             if (card.isLand(game)
-                    && !card.isBasic()) {
+                    && !card.isBasic(game)) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
                     if (permanent != null) {
                         if (CardUtil.haveSameNames(card, permanent.getName(), game)) {

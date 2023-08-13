@@ -23,7 +23,7 @@ public final class IshaiOjutaiDragonspeaker extends CardImpl {
     public IshaiOjutaiDragonspeaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(1);

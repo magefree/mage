@@ -46,7 +46,7 @@ public final class DuelDecksAnthologyDivineVsDemonic extends ExpansionSet {
         cards.add(new SetCardInfo("Duress", 46, Rarity.COMMON, mage.cards.d.Duress.class));
         cards.add(new SetCardInfo("Dusk Imp", 34, Rarity.COMMON, mage.cards.d.DuskImp.class));
         cards.add(new SetCardInfo("Faith's Fetters", 20, Rarity.COMMON, mage.cards.f.FaithsFetters.class));
-        cards.add(new SetCardInfo("Fallen Angel", 42, Rarity.RARE, mage.cards.f.FallenAngel.class));
+        cards.add(new SetCardInfo("Fallen Angel", 42, Rarity.UNCOMMON, mage.cards.f.FallenAngel.class));
         cards.add(new SetCardInfo("Foul Imp", 32, Rarity.COMMON, mage.cards.f.FoulImp.class));
         cards.add(new SetCardInfo("Healing Salve", 14, Rarity.COMMON, mage.cards.h.HealingSalve.class));
         cards.add(new SetCardInfo("Icatian Priest", 2, Rarity.UNCOMMON, mage.cards.i.IcatianPriest.class));
@@ -68,7 +68,7 @@ public final class DuelDecksAnthologyDivineVsDemonic extends ExpansionSet {
         cards.add(new SetCardInfo("Righteous Cause", 22, Rarity.UNCOMMON, mage.cards.r.RighteousCause.class));
         cards.add(new SetCardInfo("Secluded Steppe", 25, Rarity.COMMON, mage.cards.s.SecludedSteppe.class));
         cards.add(new SetCardInfo("Serra Advocate", 7, Rarity.UNCOMMON, mage.cards.s.SerraAdvocate.class));
-        cards.add(new SetCardInfo("Serra Angel", 10, Rarity.RARE, mage.cards.s.SerraAngel.class));
+        cards.add(new SetCardInfo("Serra Angel", 10, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Serra's Boon", 18, Rarity.UNCOMMON, mage.cards.s.SerrasBoon.class));
         cards.add(new SetCardInfo("Serra's Embrace", 21, Rarity.UNCOMMON, mage.cards.s.SerrasEmbrace.class));
         cards.add(new SetCardInfo("Soot Imp", 37, Rarity.UNCOMMON, mage.cards.s.SootImp.class));

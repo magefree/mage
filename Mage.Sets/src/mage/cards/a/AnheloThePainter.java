@@ -29,7 +29,7 @@ public class AnheloThePainter extends CardImpl {
     public AnheloThePainter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.VAMPIRE, SubType.ASSASSIN);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);

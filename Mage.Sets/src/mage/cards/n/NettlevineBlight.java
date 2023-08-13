@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -29,20 +30,13 @@ import mage.target.TargetPermanent;
  */
 public final class NettlevineBlight extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature or land permanent");
-
-    static {
-        filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
-                CardType.LAND.getPredicate()));
-    }
-
     public NettlevineBlight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
 
         this.subtype.add(SubType.AURA);
 
         // Enchant creature or land
-        TargetPermanent auraTarget = new TargetPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_LAND);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget);

@@ -73,7 +73,7 @@ class HelldozerEffect extends OneShotEffect {
         Permanent helldozer = game.getPermanent(source.getSourceId());
         Permanent landTarget = game.getPermanent(source.getFirstTarget());
         if (landTarget != null) {
-            boolean wasNonBasic = !landTarget.isBasic();
+            boolean wasNonBasic = !landTarget.isBasic(game);
             landTarget.destroy(source, game, false);
             if (wasNonBasic
                     && helldozer != null) {

@@ -11,6 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.RollDieType;
 import mage.constants.Zone;
 import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DieRolledEvent;
 import mage.game.events.GameEvent;
@@ -105,9 +106,9 @@ class AsLuckWouldHaveItEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             if (getValue("rolled") != null) {
                 int amount = (Integer) getValue("rolled");
-                permanent.addCounters(new Counter("luck", amount), source.getControllerId(), source, game);
+                permanent.addCounters(new Counter(CounterType.LUCK.getName(), amount), source.getControllerId(), source, game);
 
-                if (permanent.getCounters(game).getCount("luck") >= 100) {
+                if (permanent.getCounters(game).getCount(CounterType.LUCK) >= 100) {
                     Player player = game.getPlayer(permanent.getControllerId());
                     if (player != null) {
                         player.won(game);

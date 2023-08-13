@@ -48,7 +48,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         super(abilityType, zone);
     }
 
-    public ActivatedAbilityImpl(final ActivatedAbilityImpl ability) {
+    protected ActivatedAbilityImpl(final ActivatedAbilityImpl ability) {
         super(ability);
         timing = ability.timing;
         mayActivate = ability.mayActivate;
@@ -241,8 +241,9 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     @Override
-    public void setTiming(TimingRule timing) {
+    public ActivatedAbilityImpl setTiming(TimingRule timing) {
         this.timing = timing;
+        return this;
     }
 
     protected boolean hasMoreActivationsThisTurn(Game game) {

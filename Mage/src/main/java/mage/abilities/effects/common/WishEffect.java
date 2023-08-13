@@ -74,7 +74,7 @@ public class WishEffect extends OneShotEffect {
         return "a face-up " + s;
     }
 
-    public WishEffect(final WishEffect effect) {
+    protected WishEffect(final WishEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.reveal = effect.reveal;
@@ -125,7 +125,7 @@ public class WishEffect extends OneShotEffect {
 
         TargetCard target = new TargetCard(Zone.ALL, filter);
         target.setNotTarget(true);
-        if (controller.choose(Outcome.Benefit, filteredCards, target, game)) {
+        if (controller.choose(Outcome.Benefit, filteredCards, target, source, game)) {
             Card card = controller.getSideboard().get(target.getFirstTarget(), game);
             if (card == null && alsoFromExile) {
                 card = game.getCard(target.getFirstTarget());

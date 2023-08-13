@@ -19,19 +19,9 @@ public final class ConstructRedToken extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());
-        setOriginalExpansionSetCode("NEO");
     }
 
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("NEO")) {
-            setTokenType(2);
-        }
-    }
-
-    public ConstructRedToken(final ConstructRedToken token) {
+    protected ConstructRedToken(final ConstructRedToken token) {
         super(token);
     }
 

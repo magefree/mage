@@ -29,7 +29,7 @@ public final class LazavDimirMastermind extends CardImpl {
 
     public LazavDimirMastermind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(3);

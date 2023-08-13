@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class DeserterToken extends TokenImpl {
@@ -20,7 +19,7 @@ public final class DeserterToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public DeserterToken(final DeserterToken token) {
+    protected DeserterToken(final DeserterToken token) {
         super(token);
     }
 

@@ -1,14 +1,10 @@
-
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-
-import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class KherKeepKoboldToken extends TokenImpl {
@@ -20,10 +16,9 @@ public final class KherKeepKoboldToken extends TokenImpl {
         subtype.add(SubType.KOBOLD);
         power = new MageInt(0);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("A25", "TSR", "CLB", "DMC");
     }
-    public KherKeepKoboldToken(final KherKeepKoboldToken token) {
+
+    protected KherKeepKoboldToken(final KherKeepKoboldToken token) {
         super(token);
     }
 

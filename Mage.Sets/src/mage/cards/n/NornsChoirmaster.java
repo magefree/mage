@@ -38,7 +38,7 @@ public final class NornsChoirmaster extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Whenever a commander you control enters the battlefield or attacks, proliferate.
-        this.addAbility(new EntersBattlefieldOrAttacksAllTriggeredAbility(new ProliferateEffect(false), filter));
+        this.addAbility(new EntersBattlefieldOrAttacksAllTriggeredAbility(new ProliferateEffect(true), filter));
     }
 
     private NornsChoirmaster(final NornsChoirmaster card) {

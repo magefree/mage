@@ -44,7 +44,7 @@ public final class KayaTheInexorable extends CardImpl {
     public KayaTheInexorable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.KAYA);
         this.setStartingLoyalty(5);
 

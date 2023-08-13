@@ -43,7 +43,7 @@ class ScepterOfEmpiresEffect extends OneShotEffect {
 
     public ScepterOfEmpiresEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Scepter of Empires deals 1 damage to target player or planeswalker. It deals 3 damage to that player or planeswalker instead if you control artifacts named Crown of Empires and Throne of Empires";
+        staticText = "Scepter of Empires deals 1 damage to target player or planeswalker. It deals 3 damage instead if you control artifacts named Crown of Empires and Throne of Empires";
     }
 
     public ScepterOfEmpiresEffect(ScepterOfEmpiresEffect effect) {
@@ -65,7 +65,7 @@ class ScepterOfEmpiresEffect extends OneShotEffect {
             }
         }
         int amount = throne && crown ? 3 : 1;
-        return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), amount, source.getSourceId(), source, game, false, true) > 0;
+        return game.damagePlayerOrPermanent(source.getFirstTarget(), amount, source.getSourceId(), source, game, false, true) > 0;
     }
 
     @Override

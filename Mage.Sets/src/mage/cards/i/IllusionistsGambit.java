@@ -72,7 +72,7 @@ class IllusionistsGambitRemoveFromCombatEffect extends OneShotEffect {
         }
         if (!attackers.isEmpty()) {
             Phase phase = game.getTurn().getPhase();
-            game.getState().getTurnMods().add(new TurnMod(game.getActivePlayerId(), TurnPhase.COMBAT, null, false));
+            game.getState().getTurnMods().add(new TurnMod(game.getActivePlayerId()).withExtraPhase(TurnPhase.COMBAT));
             ContinuousEffect effect = new IllusionistsGambitRequirementEffect(attackers, phase);
             game.addEffect(effect, source);
             effect = new IllusionistsGambitRestrictionEffect(attackers, phase);
@@ -116,7 +116,7 @@ class IllusionistsGambitRequirementEffect extends RequirementEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.END_COMBAT) {
+        if (game.getTurnStepType() == PhaseStep.END_COMBAT) {
             return !Objects.equals(game.getTurn().getPhase(), phase);
         }
         return false;
@@ -158,7 +158,7 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.END_COMBAT) {
+        if (game.getTurnStepType() == PhaseStep.END_COMBAT) {
             return !Objects.equals(game.getTurn().getPhase(), phase);
         }
         return false;

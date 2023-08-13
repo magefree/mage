@@ -32,7 +32,7 @@ public final class VraskaSwarmsEminence extends CardImpl {
     public VraskaSwarmsEminence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{B/G}{B/G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VRASKA);
         this.setStartingLoyalty(5);
 

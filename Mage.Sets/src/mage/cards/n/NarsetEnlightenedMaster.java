@@ -27,7 +27,7 @@ public final class NarsetEnlightenedMaster extends CardImpl {
 
     public NarsetEnlightenedMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
 
@@ -57,7 +57,7 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
 
     public NarsetEnlightenedMasterExileEffect() {
         super(Outcome.Discard);
-        staticText = "exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with {this} this turn without paying their mana costs";
+        staticText = "exile the top four cards of your library. Until end of turn, you may cast noncreature spells from among those cards without paying their mana costs";
     }
 
     public NarsetEnlightenedMasterExileEffect(final NarsetEnlightenedMasterExileEffect effect) {

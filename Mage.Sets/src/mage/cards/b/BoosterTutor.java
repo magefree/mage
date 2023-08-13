@@ -90,8 +90,8 @@ class BoosterTutorEffect extends OneShotEffect {
                     Set<Card> cardsToLoad = new HashSet<Card>(boosterPack);
                     game.loadCards(cardsToLoad, controller.getId());
                     CardsImpl cards = new CardsImpl();
-                    cards.addAll(boosterPack);
-                    if (controller.choose(Outcome.Benefit, cards, targetCard, game)) {
+                    cards.addAllCards(boosterPack);
+                    if (controller.choose(Outcome.Benefit, cards, targetCard, source, game)) {
                         Card card = game.getCard(targetCard.getFirstTarget());
                         if (card != null) {
                             controller.moveCards(card, Zone.HAND, source, game);

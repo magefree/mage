@@ -22,7 +22,7 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public final class Unforge extends CardImpl {
     
-    private static FilterArtifactPermanent filter = new FilterArtifactPermanent("equipment");
+    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("Equipment");
     
     static{
         filter.add(SubType.EQUIPMENT.getPredicate());

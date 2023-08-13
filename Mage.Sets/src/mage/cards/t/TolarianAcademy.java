@@ -27,7 +27,7 @@ public final class TolarianAcademy extends CardImpl {
 
     public TolarianAcademy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         DynamicManaAbility ability = new DynamicManaAbility(Mana.BlueMana(1), new PermanentsOnBattlefieldCount(filter));
         this.addAbility(ability);

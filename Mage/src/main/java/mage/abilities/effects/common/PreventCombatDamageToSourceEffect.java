@@ -9,23 +9,22 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class PreventCombatDamageToSourceEffect extends PreventionEffectImpl {
 
     public PreventCombatDamageToSourceEffect(Duration duration) {
-            super(duration, Integer.MAX_VALUE, true);
-            staticText = "Prevent all combat damage that would be dealt to {this}" + duration.toString();
+        super(duration, Integer.MAX_VALUE, true);
+        staticText = "Prevent all combat damage that would be dealt to {this}" + duration.toString();
     }
 
-    public PreventCombatDamageToSourceEffect(final PreventCombatDamageToSourceEffect effect) {
-            super(effect);
+    protected PreventCombatDamageToSourceEffect(final PreventCombatDamageToSourceEffect effect) {
+        super(effect);
     }
 
     @Override
     public PreventCombatDamageToSourceEffect copy() {
-            return new PreventCombatDamageToSourceEffect(this);
+        return new PreventCombatDamageToSourceEffect(this);
     }
 
     @Override

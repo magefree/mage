@@ -38,9 +38,11 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
+import mage.util.MultiAmountMessage;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -209,6 +211,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     Cards getHand();
 
+    void incrementLandsPlayed();
+    void resetLandsPlayed();
+
     int getLandsPlayed();
 
     int getLandsPerTurn();
@@ -316,9 +321,10 @@ public interface Player extends MageItem, Copyable<Player> {
      * Defines player whose turn this player controls at the moment.
      *
      * @param game
-     * @param playerId
+     * @param playerUnderControlId
+     * @param info additional info to show in game logs like source
      */
-    void controlPlayersTurn(Game game, UUID playerId);
+    void controlPlayersTurn(Game game, UUID playerUnderControlId, String info);
 
     /**
      * Sets player {@link UUID} who controls this player's turn.
@@ -424,6 +430,8 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana);
+
+    ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana);
 
     boolean removeFromHand(Card card, Game game);
 
@@ -565,11 +573,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void revealCards(Ability source, Cards cards, Game game);
 
-    void revealCards(String titelSuffix, Cards cards, Game game);
+    void revealCards(String titleSuffix, Cards cards, Game game);
 
-    void revealCards(Ability source, String titelSuffix, Cards cards, Game game);
+    void revealCards(Ability source, String titleSuffix, Cards cards, Game game);
 
-    void revealCards(String titelSuffix, Cards cards, Game game, boolean postToLog);
+    void revealCards(String titleSuffix, Cards cards, Game game, boolean postToLog);
 
     /**
      * Adds the cards to the reveal window and adds the source object's id name
@@ -625,7 +633,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options);
 
-    boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game); // TODO: remove to use choose with "Ability source"
+    boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game);
 
     boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game);
 
@@ -741,7 +749,27 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game     Game
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
-    List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game);
+    default List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type,
+            Game game) {
+        List<MultiAmountMessage> constraints = messages.stream().map(s -> new MultiAmountMessage(s, 0, max))
+                .collect(Collectors.toList());
+
+        return getMultiAmountWithIndividualConstraints(outcome, constraints, min, max, type, game);
+    }
+
+    /**
+     * Player distributes amount among multiple options
+     *
+     * @param outcome  AI hint
+     * @param messages List of options to distribute amount among. Each option has a constraint on the min, max chosen for it
+     * @param totalMin Total minimum amount to be distributed
+     * @param totalMax Total amount to be distributed
+     * @param type     MultiAmountType enum to set dialog options such as title and header
+     * @param game     Game
+     * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
+     */
+    List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages, int min,
+            int max, MultiAmountType type, Game game);
 
     void sideboard(Match match, Deck deck);
 
@@ -827,6 +855,20 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     int getPriorityTimeLeft();
 
+    /**
+     * Set seconds left before priority time starts ticking down.
+     *
+     * @param timeLeft
+     */
+    void setBufferTimeLeft(int timeLeft);
+
+    /**
+     * Returns seconds left before priority time starts ticking down.
+     *
+     * @return
+     */
+    int getBufferTimeLeft();
+
     void setReachedNextTurnAfterLeaving(boolean reachedNextTurnAfterLeaving);
 
     boolean hasReachedNextTurnAfterLeaving();
@@ -907,6 +949,17 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean moveCardToHandWithInfo(Card card, Ability source, Game game, boolean withName);
+
+    /**
+     * Iterates through a set of cards and runs moveCardToHandWithInfo on each item
+     *
+     * @param cards
+     * @param source
+     * @param game
+     * @param withName show the card names in the log
+     * @return
+     */
+    boolean moveCardsToHandWithInfo(Cards cards, Ability source, Game game, boolean withName);
 
     /**
      * Uses card.moveToExile and posts a inform message about moving the card to
@@ -1066,6 +1119,10 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     FilterMana getPhyrexianColors();
+
+    Permanent getRingBearer(Game game);
+
+    void chooseRingBearer(Game game);
 
     /**
      * Function to query if the player has strictChooseMode enabled. Only the test player can have it.

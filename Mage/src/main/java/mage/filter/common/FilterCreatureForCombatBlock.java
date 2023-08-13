@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class FilterCreatureForCombatBlock extends FilterCreatureForCombatBase {
@@ -21,7 +20,7 @@ public class FilterCreatureForCombatBlock extends FilterCreatureForCombatBase {
         this.add(new BlockTappedPredicate());
     }
 
-    public FilterCreatureForCombatBlock(final FilterCreatureForCombatBlock filter) {
+    protected FilterCreatureForCombatBlock(final FilterCreatureForCombatBlock filter) {
         super(filter);
     }
 

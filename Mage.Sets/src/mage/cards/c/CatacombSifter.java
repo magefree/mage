@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -12,9 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.EldraziScionToken;
 
 /**
@@ -22,12 +19,6 @@ import mage.game.permanent.token.EldraziScionToken;
  * @author fireshoes
  */
 public final class CatacombSifter extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
-    static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }        
 
     public CatacombSifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}");
@@ -43,7 +34,7 @@ public final class CatacombSifter extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziScionToken())));
         
         // Whenever another creature you control dies, scry 1
-        this.addAbility(new DiesCreatureTriggeredAbility(new ScryEffect(1), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new ScryEffect(1), false, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
     }
 
     private CatacombSifter(final CatacombSifter card) {

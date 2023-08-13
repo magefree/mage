@@ -16,6 +16,7 @@ import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -30,7 +31,7 @@ public final class KahoMinamoHistorian extends CardImpl {
 
     public KahoMinamoHistorian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -68,8 +69,7 @@ class KahoMinamoHistorianEffect extends SearchEffect {
 
     public KahoMinamoHistorianEffect() {
         super(new TargetCardInLibrary(0, 3, filter), Outcome.Benefit);
-        this.staticText = "search your library for up to three instant cards "
-                + "and exile them. Then shuffle";
+        this.staticText = "search your library for up to three instant cards, exile them, then shuffle";
     }
 
     public KahoMinamoHistorianEffect(final KahoMinamoHistorianEffect effect) {
@@ -121,10 +121,16 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Cards cards = new CardsImpl(game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)));
-        if (controller == null || cards.isEmpty()) {
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+        if (controller == null || exileZone == null) {
             return false;
         }
+
+        Cards cards = new CardsImpl(exileZone);
+        if (cards.isEmpty()) {
+            return false;
+        }
+
         FilterCard filter = new FilterCard();
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
         return CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, filter);

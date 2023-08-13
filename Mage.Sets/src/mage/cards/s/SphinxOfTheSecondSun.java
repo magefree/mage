@@ -64,18 +64,19 @@ class SphinxOfTheSecondSunEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TurnPhase turnPhase = game.getPhase().getType();
+        TurnPhase turnPhase = game.getTurnPhaseType();
         for (TurnMod turnMod : game.getState().getTurnMods()) {
-            if ("sphinxSecondSun".equals(turnMod.getNote())
+            if ("sphinxSecondSun".equals(turnMod.getTag())
                     && turnMod.getPlayerId().equals(source.getControllerId())
                     && turnMod.getAfterPhase() == turnPhase) {
                 turnPhase = TurnPhase.BEGINNING;
-                turnMod.setNote("sphinxSecondSunIgnore");
+                turnMod.withTag("sphinxSecondSunIgnore");
                 break;
             }
         }
-        TurnMod newPhase = new TurnMod(source.getControllerId(), TurnPhase.BEGINNING, turnPhase, false);
-        newPhase.setNote("sphinxSecondSun");
+        TurnMod newPhase = new TurnMod(source.getControllerId())
+                .withExtraPhase(TurnPhase.BEGINNING, turnPhase)
+                .withTag("sphinxSecondSun");
         game.getState().getTurnMods().add(newPhase);
         return true;
     }
@@ -93,8 +94,8 @@ class SphinxOfTheSecondSunWatcher extends Watcher {
             return;
         }
         for (TurnMod turnMod : game.getState().getTurnMods()) {
-            if ("sphinxSecondSun".equals(turnMod.getNote())) {
-                turnMod.setNote("sphinxSecondSunIgnore");
+            if ("sphinxSecondSun".equals(turnMod.getTag())) {
+                turnMod.withTag("sphinxSecondSunIgnore");
             }
         }
     }

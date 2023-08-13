@@ -30,7 +30,7 @@ public final class BoseijuWhoSheltersAll extends CardImpl {
 
     public BoseijuWhoSheltersAll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // Boseiju, Who Shelters All enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());

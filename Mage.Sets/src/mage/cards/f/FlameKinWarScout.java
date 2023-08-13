@@ -10,13 +10,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -25,12 +20,6 @@ import mage.game.permanent.Permanent;
  * @author TheElk801
  */
 public final class FlameKinWarScout extends CardImpl {
-
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public FlameKinWarScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -41,7 +30,11 @@ public final class FlameKinWarScout extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When another creature enters the battlefield, sacrifice Flame-Kin War Scout. If you do, Flame-Kin War Scout deals 4 damage to that creature.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new FlameKinWarScourEffect(), filter, false, SetTargetPointer.PERMANENT, null));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+            Zone.BATTLEFIELD, new FlameKinWarScourEffect(),
+            StaticFilters.FILTER_ANOTHER_CREATURE, false,
+            SetTargetPointer.PERMANENT, null
+        ));
 
     }
 
@@ -73,7 +66,7 @@ class FlameKinWarScourEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             if (permanent.sacrifice(source, game)) {
                 Effect effect = new DamageTargetEffect(4).setText("{this} deals 4 damage to it");

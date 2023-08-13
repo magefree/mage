@@ -1,6 +1,7 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.abilities.Ability;
@@ -17,7 +18,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 
 /**
- *
  * @author spjspj
  */
 public final class NahiriTheLithomancerEquipmentToken extends TokenImpl {
@@ -36,7 +36,7 @@ public final class NahiriTheLithomancerEquipmentToken extends TokenImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(0)));
     }
 
-    public NahiriTheLithomancerEquipmentToken(final NahiriTheLithomancerEquipmentToken token) {
+    protected NahiriTheLithomancerEquipmentToken(final NahiriTheLithomancerEquipmentToken token) {
         super(token);
     }
 

@@ -87,7 +87,7 @@ class KenzoTheHardhearted extends TokenImpl {
 
     KenzoTheHardhearted() {
         super("Kenzo the Hardhearted", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.HUMAN, SubType.SAMURAI);

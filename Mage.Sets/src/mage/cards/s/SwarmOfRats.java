@@ -9,7 +9,6 @@ import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -34,7 +33,7 @@ public final class SwarmOfRats extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Swarm of Rats's power is equal to the number of Rats you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(new PermanentsOnBattlefieldCount(filter))));
     }
 
     private SwarmOfRats(final SwarmOfRats card) {

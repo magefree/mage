@@ -99,6 +99,11 @@ public class GameEvent implements Serializable {
         DISCARDED_CARD,
         DISCARDED_CARDS,
         CYCLE_CARD, CYCLED_CARD, CYCLE_DRAW,
+        /* CLASHED (one event fired for each player involved)
+         playerId    the id of the clashing player
+         flag        true = playerId won the clash
+         targetId    the id of the other player in the clash
+         */
         CLASH, CLASHED,
         DAMAGE_PLAYER,
         MILL_CARDS,
@@ -107,16 +112,21 @@ public class GameEvent implements Serializable {
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage
-         playerId    the id of the damged player
+         playerId    the id of the damaged player
          amount      amount of damage
-         flag        true = comabat damage - other damage = false
+         flag        true = combat damage - other damage = false
          */
         DAMAGED_PLAYER,
+
+        /* DAMAGED_PLAYER_BATCH
+         combines all player damaged events in one single event
+         */
         DAMAGED_PLAYER_BATCH,
+
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage, can be null for default events like combat
-         playerId    the id of the damged player
+         playerId    the id of the damaged player
          amount      amount of damage
          flag        is it combat damage
          */
@@ -129,7 +139,7 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the ability which caused the lose
          playerId    the id of the player loosing life
          amount      amount of life loss
-         flag        true = from comabat damage - other from non combat damage
+         flag        true = from combat damage - other from non combat damage
          */
         PLAY_LAND, LAND_PLAYED,
         CREATURE_CHAMPIONED,
@@ -328,7 +338,7 @@ public class GameEvent implements Serializable {
         TAP,
         /* TAPPED,
          targetId    tapped permanent
-         sourceId    id of the abilitity's source (can be null for standard tap actions like combat)
+         sourceId    id of the ability's source (can be null for standard tap actions like combat)
          playerId    controller of the tapped permanent
          amount      not used for this event
          flag        is it tapped for combat
@@ -387,9 +397,15 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         OPTION_USED,
+
         DAMAGE_PERMANENT,
         DAMAGED_PERMANENT,
+
+        /*  DAMAGED_PERMANENT_BATCH
+         combine all permanent damage events to single event
+         */
         DAMAGED_PERMANENT_BATCH,
+
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
          targetId    id of the permanent to destroy
@@ -430,7 +446,7 @@ public class GameEvent implements Serializable {
         /* LOST_CONTROL
          targetId    id of the creature that lost control
          sourceId    null
-         playerId    player that controlles the creature before
+         playerId    player that controls the creature before
          amount      not used for this event
          flag        not used for this event
          */
@@ -451,7 +467,7 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         GAINED_CONTROL,
-        CREATE_TOKEN, CREATED_TOKEN,
+        CREATE_TOKEN, CREATED_TOKEN, CREATED_TOKENS,
         /* REGENERATE
          targetId    id of the creature to regenerate
          sourceId    sourceId of the effect doing the regeneration
@@ -482,6 +498,7 @@ public class GameEvent implements Serializable {
         ROOM_ENTERED,
         VENTURE, VENTURED,
         DUNGEON_COMPLETED,
+        TEMPTED_BY_RING, RING_BEARER_CHOSEN,
         REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
         FORETOLD, // targetId   id of card foretold
         FORETELL, // targetId   id of card foretell  playerId   id of the controller

@@ -45,7 +45,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
         this.targetName = filter.getMessage();
     }
 
-    public TargetCreatureOrPlayer(final TargetCreatureOrPlayer target) {
+    protected TargetCreatureOrPlayer(final TargetCreatureOrPlayer target) {
         super(target);
         this.filter = target.filter.copy();
     }

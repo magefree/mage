@@ -38,7 +38,7 @@ import mage.util.RandomUtil;
 public class UndercityDungeon extends Dungeon {
 
     public UndercityDungeon() {
-        super("Undercity", "CLB");
+        super("Undercity");
 
         // Secret Entrance — Search your library for a basic land card,
         //                   reveal it,
@@ -153,15 +153,17 @@ class ThroneOfTheDeadThreeEffect extends OneShotEffect {
                 break;
             default:
                 TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE);
-                player.choose(outcome, cards, target, game);
+                player.choose(outcome, cards, target, source, game);
                 card = cards.get(target.getFirstTarget(), game);
         }
         if (card != null) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game);
             Permanent permanent = game.getPermanent(card.getId());
-            permanent.addCounters(CounterType.P1P1.createInstance(3), source, game);
-            game.addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.UntilYourNextTurn)
-                    .setTargetPointer(new FixedTarget(permanent, game)), source);
+            if (permanent != null) {
+                permanent.addCounters(CounterType.P1P1.createInstance(3), source, game);
+                game.addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.UntilYourNextTurn)
+                        .setTargetPointer(new FixedTarget(permanent, game)), source);
+            }
         }
         player.shuffleLibrary(source, game);
         return true;

@@ -5,8 +5,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author JayDi85
  */
@@ -21,20 +19,9 @@ public final class DorotheasRetributionSpiritToken extends TokenImpl {
         toughness = new MageInt(4);
 
         this.addAbility(FlyingAbility.getInstance());
-
-        availableImageSetCodes = Arrays.asList("VOW");
     }
 
-    @Override
-    public void setExpansionSetCodeForImage(String code) {
-        super.setExpansionSetCodeForImage(code);
-
-        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("VOW")) {
-            setTokenType(2);
-        }
-    }
-
-    public DorotheasRetributionSpiritToken(final DorotheasRetributionSpiritToken token) {
+    protected DorotheasRetributionSpiritToken(final DorotheasRetributionSpiritToken token) {
         super(token);
     }
 

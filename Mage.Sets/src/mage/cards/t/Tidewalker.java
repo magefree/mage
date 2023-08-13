@@ -14,7 +14,6 @@ import mage.abilities.keyword.VanishingUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -44,7 +43,7 @@ public final class Tidewalker extends CardImpl {
         this.addAbility(new VanishingUpkeepAbility(0));
         this.addAbility(new VanishingSacrificeAbility());
         // Tidewalker's power and toughness are each equal to the number of time counters on it.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CountersSourceCount(CounterType.TIME), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CountersSourceCount(CounterType.TIME))));
     }
 
     private Tidewalker(final Tidewalker card) {

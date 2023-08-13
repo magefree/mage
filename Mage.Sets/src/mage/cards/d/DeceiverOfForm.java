@@ -77,9 +77,9 @@ class DeceiverOfFormEffect extends OneShotEffect {
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
                             if (!permanent.getId().equals(sourceObject.getId())) {
                                 // handle MDFC
-                                if (cardFromTop instanceof ModalDoubleFacesCard
-                                        && ((ModalDoubleFacesCard) cardFromTop).getLeftHalfCard().isCreature(game)) {
-                                    copyFromCard = ((ModalDoubleFacesCard) cardFromTop).getLeftHalfCard();
+                                if (cardFromTop instanceof ModalDoubleFacedCard
+                                        && ((ModalDoubleFacedCard) cardFromTop).getLeftHalfCard().isCreature(game)) {
+                                    copyFromCard = ((ModalDoubleFacedCard) cardFromTop).getLeftHalfCard();
                                 }
                                 Permanent newBluePrint = null;
                                 newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);

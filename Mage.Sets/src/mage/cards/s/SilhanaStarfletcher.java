@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.mana.AddManaChosenColorEffect;
@@ -34,7 +34,7 @@ public final class SilhanaStarfletcher extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // As Silhana Starfletcher enters the battlefield, choose a color.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
 
         // {tap}: Add one mana of the chosen color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaChosenColorEffect(), new TapSourceCost()));

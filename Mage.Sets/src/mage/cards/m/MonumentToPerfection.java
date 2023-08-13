@@ -2,6 +2,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,13 +22,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -64,9 +63,8 @@ public final class MonumentToPerfection extends CardImpl {
                 ).withType(CardType.ARTIFACT)
                         .withAbility(IndestructibleAbility.getInstance())
                         .withAbility(new ToxicAbility(9)),
-                        null, Duration.Custom, true,
-                        false, null, null, true
-                ), new GenericManaCost(3), MonumentToPerfectionCondition.instance
+                        CardType.ARTIFACT, Duration.Custom
+                ).andLoseAbilities(true), new GenericManaCost(3), MonumentToPerfectionCondition.instance
         ).addHint(MonumentToPerfectionValue.getHint()));
     }
 
@@ -102,7 +100,7 @@ enum MonumentToPerfectionValue implements DynamicValue {
                 .getBattlefield()
                 .getActivePermanents(filter, sourceAbility.getControllerId(), game)
                 .stream()
-                .map(permanent -> permanent.getName())
+                .map(MageObject::getName)
                 .filter(s -> s.length() > 0)
                 .distinct()
                 .mapToInt(x -> 1)

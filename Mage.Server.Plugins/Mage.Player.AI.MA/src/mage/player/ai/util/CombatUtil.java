@@ -23,7 +23,7 @@ import java.util.*;
  */
 public final class CombatUtil {
 
-    private static final List<Permanent> emptyList = new ArrayList<>();
+    private static final List<Permanent> emptyList = Collections.unmodifiableList(new ArrayList<>());
 
     private static final Logger log = Logger.getLogger(CombatUtil.class);
 

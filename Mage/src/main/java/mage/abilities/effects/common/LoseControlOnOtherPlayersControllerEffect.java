@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author nantuko
  */
 public class LoseControlOnOtherPlayersControllerEffect extends OneShotEffect {
@@ -19,7 +18,7 @@ public class LoseControlOnOtherPlayersControllerEffect extends OneShotEffect {
         staticText = controllingPlayerName + " lost control over " + controlledPlayerName;
     }
 
-    public LoseControlOnOtherPlayersControllerEffect(final LoseControlOnOtherPlayersControllerEffect effect) {
+    protected LoseControlOnOtherPlayersControllerEffect(final LoseControlOnOtherPlayersControllerEffect effect) {
         super(effect);
     }
 

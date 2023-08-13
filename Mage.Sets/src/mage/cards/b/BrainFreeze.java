@@ -2,7 +2,7 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,7 +21,7 @@ public final class BrainFreeze extends CardImpl {
 
         // Target player puts the top three cards of their library into their graveyard.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(3));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(3));
         // Storm
         this.addAbility(new StormAbility());
     }

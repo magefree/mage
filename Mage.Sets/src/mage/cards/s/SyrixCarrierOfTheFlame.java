@@ -46,7 +46,7 @@ public class SyrixCarrierOfTheFlame extends CardImpl {
     public SyrixCarrierOfTheFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.PHOENIX);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

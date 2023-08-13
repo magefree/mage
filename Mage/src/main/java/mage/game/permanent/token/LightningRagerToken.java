@@ -9,8 +9,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -28,11 +26,9 @@ public final class LightningRagerToken extends TokenImpl {
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
-
-        availableImageSetCodes = Arrays.asList("C15", "CM2", "NCC");
     }
 
-    public LightningRagerToken(final LightningRagerToken token) {
+    protected LightningRagerToken(final LightningRagerToken token) {
         super(token);
     }
 

@@ -47,7 +47,7 @@ public final class PathOfMettle extends CardImpl {
     public PathOfMettle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         this.secondSideCardClazz = mage.cards.m.MetzaliTowerOfTriumph.class;
 

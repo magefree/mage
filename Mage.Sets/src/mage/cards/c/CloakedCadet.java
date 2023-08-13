@@ -50,7 +50,7 @@ class CloakedCadetTriggeredAbility extends TriggeredAbilityImpl {
 
     CloakedCadetTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
-        this.setTriggersOnce(true);
+        this.setTriggersOnceEachTurn(true);
         setTriggerPhrase("Whenever one or more +1/+1 counters are put on one or more Humans you control, ");
     }
 
@@ -70,7 +70,10 @@ class CloakedCadetTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+        }
         return permanent != null
                 && isControlledBy(permanent.getControllerId())
                 && permanent.hasSubtype(SubType.HUMAN, game)

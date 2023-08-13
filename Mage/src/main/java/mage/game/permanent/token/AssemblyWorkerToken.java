@@ -1,14 +1,10 @@
-
 package mage.game.permanent.token;
 
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-
-import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class AssemblyWorkerToken extends TokenImpl {
@@ -21,11 +17,9 @@ public final class AssemblyWorkerToken extends TokenImpl {
 
         power = new MageInt(2);
         toughness = new MageInt(2);
-
-        availableImageSetCodes = Arrays.asList("ATQ", "TSR");
     }
 
-    public AssemblyWorkerToken(final AssemblyWorkerToken token) {
+    protected AssemblyWorkerToken(final AssemblyWorkerToken token) {
         super(token);
     }
 
