@@ -983,6 +983,10 @@ public final class CardUtil {
         return "<i>" + text + "</i> &mdash; ";
     }
 
+    public static String stripReminderText(String text) {
+        return text.endsWith(")</i>") ? text.substring(0, text.indexOf(" <i>(")) : text;
+    }
+
     public static Set<UUID> getAllSelectedTargets(Ability ability, Game game) {
         return ability.getModes().getSelectedModes()
                 .stream()
