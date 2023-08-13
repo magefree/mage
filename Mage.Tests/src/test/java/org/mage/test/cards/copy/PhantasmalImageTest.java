@@ -259,6 +259,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // yes to "you may copy"
         setChoice(playerA, "Azure Drake"); // copy Azure Drake
         attack(1, playerA, "Azure Drake");
         block(1, playerB, "Llanowar Elves", "Azure Drake");
