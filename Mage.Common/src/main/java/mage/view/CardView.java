@@ -1,6 +1,7 @@
 package mage.view;
 
 import com.google.gson.annotations.Expose;
+import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -130,6 +131,10 @@ public class CardView extends SimpleCardView {
     protected boolean inViewerOnly; // GUI render: show object as a card instead permanent (without PT, etc)
     protected List<CardIcon> cardIcons = new ArrayList<>(); // additional icons to render
 
+    protected MageInt originalPower = null;
+    protected MageInt originalToughness = null;
+    protected FilterMana originalColorIdentity = null;
+    protected boolean originalIsCopy = false;
     protected MageObject originalObject = null; // GUI related: additional info about current object (example: real PT)
 
     /**
@@ -237,6 +242,7 @@ public class CardView extends SimpleCardView {
         this.canAttack = cardView.canAttack;
         this.canBlock = cardView.canBlock;
         this.inViewerOnly = cardView.inViewerOnly;
+        this.setOriginalValues(cardView.originalObject);
         this.originalObject = cardView.originalObject == null ? null : cardView.originalObject.copy();
         if (cardView.cardIcons != null) {
             cardView.cardIcons.forEach(icon -> this.cardIcons.add(icon.copy()));
@@ -287,6 +293,7 @@ public class CardView extends SimpleCardView {
      */
     public CardView(Card card, Game game, boolean controlled, boolean showFaceDownCard, boolean storeZone) {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), game != null);
+        this.setOriginalValues(card);
         this.originalObject = card;
         this.imageNumber = card.getImageNumber();
 
@@ -616,6 +623,7 @@ public class CardView extends SimpleCardView {
 
     public CardView(MageObject object, Game game) {
         super(object.getId(), object.getExpansionSetCode(), object.getCardNumber(), false, true);
+        this.setOriginalValues(object);
         this.originalObject = object;
 
         this.imageNumber = object.getImageNumber();
@@ -694,7 +702,6 @@ public class CardView extends SimpleCardView {
 
     public CardView(EmblemView emblem) {
         this(true);
-        this.originalObject = null;
         this.gameObject = true;
         this.id = emblem.getId();
         this.mageObjectType = MageObjectType.EMBLEM;
@@ -716,7 +723,6 @@ public class CardView extends SimpleCardView {
 
     public CardView(DungeonView dungeon) {
         this(true);
-        this.originalObject = null;
         this.gameObject = true;
         this.id = dungeon.getId();
         this.mageObjectType = MageObjectType.DUNGEON;
@@ -738,7 +744,6 @@ public class CardView extends SimpleCardView {
 
     public CardView(PlaneView plane) {
         this(true);
-        this.originalObject = null;
         this.gameObject = true;
         this.id = plane.getId();
         this.mageObjectType = MageObjectType.PLANE;
@@ -761,7 +766,6 @@ public class CardView extends SimpleCardView {
 
     public CardView(Designation designation, StackAbility stackAbility) {
         this(true);
-        this.originalObject = null;
         this.gameObject = true;
         this.id = designation.getId();
         this.mageObjectType = MageObjectType.NULL;
@@ -788,7 +792,6 @@ public class CardView extends SimpleCardView {
     }
 
     private void fillEmpty(Card card, boolean controlled) {
-        this.originalObject = null;
         this.name = "Face Down";
         this.displayName = name;
         this.displayFullName = name;
@@ -894,6 +897,24 @@ public class CardView extends SimpleCardView {
         this.targets.addAll(newTargets);
     }
 
+    private void setOriginalValues(MageObject object) {
+        if (object == null) {
+            return;
+        }
+        // Only valid objects to transfer original values are Card and Token
+        if (object instanceof Card || object instanceof Token) {
+            this.originalPower = object.getPower();
+            this.originalToughness = object.getToughness();
+            this.originalIsCopy = object.isCopy();
+
+            if (object instanceof Card) {
+                this.originalColorIdentity = ((Card) object).getColorIdentity();
+            } else if (object instanceof Token) {
+                this.originalColorIdentity = ManaUtil.getColorIdentity((Token) object);
+            }
+        }
+    }
+
     public String getName() {
         return name;
     }
@@ -991,14 +1012,8 @@ public class CardView extends SimpleCardView {
     }
 
     public String getColorIdentityStr() {
-        FilterMana colorInfo;
-        if (getOriginalCard() != null) {
-            // card
-            colorInfo = getOriginalCard().getColorIdentity();
-        } else if (getOriginalToken() != null) {
-            // token
-            colorInfo = ManaUtil.getColorIdentity(getOriginalToken());
-        } else {
+        FilterMana colorInfo = this.originalColorIdentity;
+        if (colorInfo != null) {
             colorInfo = new FilterMana();
         }
 
@@ -1285,17 +1300,21 @@ public class CardView extends SimpleCardView {
         return inViewerOnly;
     }
 
+    public MageInt getOriginalPower() {
+        return this.originalPower;
+    }
+
+    public MageInt getOriginalToughness() {
+        return this.originalToughness;
+    }
+
+    public boolean isOriginalACopy() {
+        return this.originalIsCopy;
+    }
+
     public Card getOriginalCard() {
         if (this.originalObject instanceof Card) {
             return (Card) this.originalObject;
-        } else {
-            return null;
-        }
-    }
-
-    public Token getOriginalToken() {
-        if (this.originalObject instanceof Token) {
-            return (Token) this.originalObject;
         } else {
             return null;
         }
