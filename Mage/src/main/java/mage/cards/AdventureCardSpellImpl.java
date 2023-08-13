@@ -131,7 +131,7 @@ class AdventureCardSpellAbility extends SpellAbility {
         if (!ability.finalized) {
             throw new IllegalStateException("Adventures need to call finalizeAdventure()");
         }
-        ability.finalized = true;
+        this.finalized = true;
     }
 
     @Override

@@ -58,6 +58,8 @@ public final class KellanTheFaeBlooded extends AdventureCard {
         // Birthright Boon
         // Search your library for an Aura or Equipment card, reveal it, put it into your hand, then shuffle.
         this.getSpellCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(auraOrEquipmentCard), true));
+
+        this.finalizeAdventure();
     }
 
     private KellanTheFaeBlooded(final KellanTheFaeBlooded card) {

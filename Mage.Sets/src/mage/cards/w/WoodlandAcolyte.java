@@ -36,6 +36,8 @@ public final class WoodlandAcolyte extends AdventureCard {
         // Put target permanent card from your graveyard on top of your library.
         this.getSpellCard().getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+
+        this.finalizeAdventure();
     }
 
     private WoodlandAcolyte(final WoodlandAcolyte card) {

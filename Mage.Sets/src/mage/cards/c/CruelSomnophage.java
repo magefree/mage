@@ -37,6 +37,8 @@ public final class CruelSomnophage extends AdventureCard {
         // Target player mills four cards.
         this.getSpellCard().getSpellAbility().addEffect(new MillCardsTargetEffect(4));
         this.getSpellCard().getSpellAbility().addTarget(new TargetPlayer());
+
+        this.finalizeAdventure();
     }
 
     private CruelSomnophage(final CruelSomnophage card) {

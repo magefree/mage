@@ -42,6 +42,8 @@ public final class PegasusGuardian extends AdventureCard {
         // Exile target creature you control, then return that card to the battlefield under its owner's control.
         this.getSpellCard().getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, true));
         this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+
+        this.finalizeAdventure();
     }
 
     private PegasusGuardian(final PegasusGuardian card) {
