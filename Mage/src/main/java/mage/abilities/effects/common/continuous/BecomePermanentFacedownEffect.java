@@ -25,11 +25,11 @@ public class BecomePermanentFacedownEffect extends ContinuousEffectImpl {
         void apply(Permanent permanent, Game game, Ability source);
     }
 
-    private final PermanentApplier modifier;
+    private final PermanentApplier applier;
 
-    public BecomePermanentFacedownEffect(PermanentApplier modifier, Cards cards, Game game) {
+    public BecomePermanentFacedownEffect(PermanentApplier applier, Cards cards, Game game) {
         super(Duration.Custom, Layer.CopyEffects_1, SubLayer.FaceDownEffects_1b, Outcome.Neutral);
-        this.modifier = modifier;
+        this.applier = applier;
         this.setTargetPointer(new FixedTargets(
                 cards.getCards(game)
                         .stream()
@@ -40,7 +40,7 @@ public class BecomePermanentFacedownEffect extends ContinuousEffectImpl {
 
     private BecomePermanentFacedownEffect(final BecomePermanentFacedownEffect effect) {
         super(effect);
-        this.modifier = effect.modifier;
+        this.applier = effect.applier;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class BecomePermanentFacedownEffect extends ContinuousEffectImpl {
             permanent.removeAllSuperTypes(game);
             permanent.removeAllCardTypes(game);
             permanent.removeAllSubTypes(game);
-            modifier.apply(permanent, game, source);
+            applier.apply(permanent, game, source);
         }
         return true;
     }
