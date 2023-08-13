@@ -322,6 +322,11 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return null;
     }
 
+    //Used to create a Commander copy of SpellAbilities
+    public void modifyZone(Zone zone){
+        this.zone = zone;
+    }
+
     public void setId(UUID idToUse) {
         this.id = idToUse;
     }
