@@ -12,6 +12,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -150,12 +151,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         if (quotes) {
             sb.append('"');
         }
-        String abilityRuleText = ability.getRule("This " + targetObjectName);
-        if (abilityRuleText.endsWith(")</i>")) {
-            // remove reminder text for this rule generation
-            abilityRuleText = abilityRuleText.substring(0, abilityRuleText.indexOf(" <i>("));
-        }
-        sb.append(abilityRuleText);
+        sb.append(CardUtil.stripReminderText(ability.getRule("This " + targetObjectName)));
         if (quotes) {
             sb.append('"');
         }

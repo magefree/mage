@@ -5,47 +5,67 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.watchers.common.SpellsCastWatcher;
 
 /**
- * @author Styxo
+ * @author xenohedron
  */
-public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
+public class NextSpellCastHasAbilityEffect extends ContinuousEffectImpl {
 
+    private int spellsCast;
     private final Ability ability;
     private final FilterCard filter;
 
-    public GainAbilityControlledSpellsEffect(Ability ability, FilterCard filter) {
-        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.ability = ability;
-        this.filter = filter;
-        staticText = filter.getMessage() + " have " + CardUtil.getTextWithFirstCharLowerCase(CardUtil.stripReminderText(ability.getRule()));
+    public NextSpellCastHasAbilityEffect(Ability ability) {
+        this(ability, StaticFilters.FILTER_CARD);
     }
 
-    private GainAbilityControlledSpellsEffect(final GainAbilityControlledSpellsEffect effect) {
+    public NextSpellCastHasAbilityEffect(Ability ability, FilterCard filter) {
+        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.ability = ability;
+        this.filter = filter;
+        staticText = "the next spell you cast this turn has " + CardUtil.getTextWithFirstCharLowerCase(CardUtil.stripReminderText(ability.getRule()));
+    }
+
+    private NextSpellCastHasAbilityEffect(final NextSpellCastHasAbilityEffect effect) {
         super(effect);
+        this.spellsCast = effect.spellsCast;
         this.ability = effect.ability;
         this.filter = effect.filter;
     }
 
     @Override
-    public GainAbilityControlledSpellsEffect copy() {
-        return new GainAbilityControlledSpellsEffect(this);
+    public NextSpellCastHasAbilityEffect copy() {
+        return new NextSpellCastHasAbilityEffect(this);
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
+        if (watcher != null) {
+            spellsCast = watcher.getCount(source.getControllerId());
+        }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player == null || permanent == null) {
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
+        if (player == null || watcher == null) {
             return false;
         }
-
+        //check if a spell was cast before
+        if (watcher.getCount(source.getControllerId()) > spellsCast) {
+            discard(); // only one use
+            return false;
+        }
         for (Card card : game.getExile().getAllCardsByRange(game, source.getControllerId())) {
             if (filter.match(card, game)) {
                 game.getState().addOtherAbility(card, ability);
@@ -66,7 +86,6 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
                 game.getState().addOtherAbility(card, ability);
             }
         }
-
         // workaround to gain cost reduction abilities to commanders before cast (make it playable)
         game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY)
                 .stream()
