@@ -36,7 +36,7 @@ public final class ArcboundTracker extends CardImpl {
         this.addAbility(new ModularAbility(this, 2));
 
         // Whenever you cast a spell other than your first spell each turn, put a +1/+1 counter on Arcbound Tracker.
-        this.addAbility(new ArcboundTrackerTriggeredAbility(), new SpellsCastWatcher());
+        this.addAbility(new ArcboundTrackerTriggeredAbility());
     }
 
     private ArcboundTracker(final ArcboundTracker card) {

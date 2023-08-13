@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -20,7 +19,7 @@ import mage.watchers.common.SpellsCastWatcher;
 import java.util.*;
 
 /**
- * @author: Merlingilb
+ * @author Merlingilb
  */
 public final class AJedisFervor extends CardImpl {
     public AJedisFervor(UUID ownerId, CardSetInfo setInfo) {
@@ -34,7 +33,6 @@ public final class AJedisFervor extends CardImpl {
 
         // If an opponent cast a black spell this turn, that player sacrifices a creature or planeswalker.
         this.getSpellAbility().addEffect(new AJedisFervorEffect());
-        this.getSpellAbility().addWatcher(new SpellsCastWatcher());
     }
 
     private AJedisFervor(final AJedisFervor card) {

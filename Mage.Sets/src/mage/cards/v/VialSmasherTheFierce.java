@@ -43,7 +43,7 @@ public final class VialSmasherTheFierce extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast your first spell each turn, Vial Smasher the Fierce deals damage equal to that spell's converted mana cost to an opponent chosen at random.
-        this.addAbility(new VialSmasherTheFierceTriggeredAbility(), new SpellsCastWatcher());
+        this.addAbility(new VialSmasherTheFierceTriggeredAbility());
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());
@@ -136,7 +136,7 @@ class VialSmasherTheFierceEffect extends OneShotEffect {
                 Collections.shuffle(opponents);
                 Player opponent = opponents.get(0);
                 game.informPlayers(opponent.getLogName() + " was chosen at random.");
-                if (game.getBattlefield().getAllActivePermanents(new FilterPlaneswalkerPermanent(), opponent.getId(), game).size() > 0) {
+                if (!game.getBattlefield().getAllActivePermanents(new FilterPlaneswalkerPermanent(), opponent.getId(), game).isEmpty()) {
                     if (controller.chooseUse(Outcome.Damage, "Redirect to a planeswalker controlled by " + opponent.getLogName() + "?", source, game)) {
                         FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("a planeswalker controlled by " + opponent.getLogName());
                         filter.add(new ControllerIdPredicate(opponent.getId()));
