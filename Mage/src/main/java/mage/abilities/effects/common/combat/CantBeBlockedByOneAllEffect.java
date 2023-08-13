@@ -9,8 +9,11 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -54,12 +57,21 @@ public class CantBeBlockedByOneAllEffect extends EvasionEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        boolean doneSomething = false;
-        for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            perm.setMinBlockedBy(amount);
-            doneSomething = true;
+    public boolean cantBeBlockedCheckAfter(Permanent attacker, Ability source, Game game, boolean canUseChooseDialogs) {
+        for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+            if (combatGroup.getAttackers().contains(attacker.getId())) {
+                int count = 0;
+                for (UUID blockerId : combatGroup.getBlockers()) {
+                    Permanent blockingCreature = game.getPermanent(blockerId);
+                    if (blockingCreature != null) {
+                        count++;
+                    }
+                }
+                if (count < amount) {
+                    return true;
+                }
+            }
         }
-        return doneSomething;
+        return false;
     }
 }

@@ -5,6 +5,8 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import javax.annotation.Nullable;
+
 /**
  * @author Susucr
  */
@@ -52,8 +54,8 @@ public abstract class EvasionEffect extends ContinuousEffectImpl {
      * -> The effect is a cantBeBlocked effect that does not want to display a message (keyworded abilities like Flying for instance)
      * -> A conditional effect when the condition is not met.
      */
+    @Nullable
     public String cantBeBlockedMessage(Permanent attacker, Ability source, Game game) {
-        // Can be null!
         return this.staticCantBeBlockedMessage;
     }
 

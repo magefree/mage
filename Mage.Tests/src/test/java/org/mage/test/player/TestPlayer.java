@@ -1973,29 +1973,7 @@ public class TestPlayer implements Player {
     private void checkMultipleBlockers(Game game, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
         // Check for Menace type abilities - if creatures can be blocked by >X or <Y only
 
-        // Stores the total number of blockers for each attacker
-        Map<MageObjectReference, Integer> blockersForAttacker = new HashMap<>();
-
-        // Calculate the number of blockers each attacker has
-        for (List<MageObjectReference> attackers : blockedCreaturesByCreature.values()) {
-            for (MageObjectReference mr : attackers) {
-                Integer blockers = blockersForAttacker.getOrDefault(mr, 0);
-                blockersForAttacker.put(mr, blockers + 1);
-            }
-        }
-
-        // Check each attacker is blocked by an allowed amount of creatures
-        for (Map.Entry<MageObjectReference, Integer> entry : blockersForAttacker.entrySet()) {
-            Permanent attacker = entry.getKey().getPermanent(game);
-            Integer blockers = entry.getValue();
-            // If getMaxBlockedBy() == 0 it means any number of creatures can block this creature
-            if (attacker.getMaxBlockedBy() != 0 && blockers > attacker.getMaxBlockedBy()) {
-                throw new UnsupportedOperationException(attacker.getName() + " is blocked by " + blockers + " creature(s). It can only be blocked by " + attacker.getMaxBlockedBy() + " or less.");
-            } else if (blockers < attacker.getMinBlockedBy()) {
-                throw new UnsupportedOperationException(attacker.getName() + " is blocked by " + blockers + " creature(s). It has to be blocked by " + attacker.getMinBlockedBy() + " or more.");
-            }
-        }
-        // No errors raised - all the blockers pass the test!
+        // TODO: call cantBeBlockedCheckAfter on each attacker's evasion effect.
     }
 
     private String getInfo(MageObject o) {

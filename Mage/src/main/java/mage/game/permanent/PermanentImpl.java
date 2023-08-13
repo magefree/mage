@@ -85,10 +85,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected int blocking;
     // number of creatures the permanent can block
     protected int maxBlocks = 1;
-    // minimal number of creatures the creature can be blocked by
-    protected int minBlockedBy = 1;
-    // maximal number of creatures the creature can be blocked by  0 = no restriction
-    protected int maxBlockedBy = 0;
     protected boolean deathtouched;
 
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
@@ -157,8 +153,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.counters = permanent.counters.copy();
         this.attachedTo = permanent.attachedTo;
         this.attachedToZoneChangeCounter = permanent.attachedToZoneChangeCounter;
-        this.minBlockedBy = permanent.minBlockedBy;
-        this.maxBlockedBy = permanent.maxBlockedBy;
         this.transformed = permanent.transformed;
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
@@ -209,8 +203,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public void reset(Game game) {
         this.resetControl();
         this.maxBlocks = 1;
-        this.minBlockedBy = 1;
-        this.maxBlockedBy = 0;
         this.copy = false;
         this.goadingPlayers.clear();
         this.loyaltyActivationsAvailable = 1;
@@ -753,16 +745,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public int getMaxBlocks() {
         return maxBlocks;
-    }
-
-    @Override
-    public int getMinBlockedBy() {
-        return minBlockedBy;
-    }
-
-    @Override
-    public int getMaxBlockedBy() {
-        return maxBlockedBy;
     }
 
     @Override
@@ -1555,16 +1537,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setMaxBlocks(int maxBlocks) {
         this.maxBlocks = maxBlocks;
-    }
-
-    @Override
-    public void setMinBlockedBy(int minBlockedBy) {
-        this.minBlockedBy = minBlockedBy;
-    }
-
-    @Override
-    public void setMaxBlockedBy(int maxBlockedBy) {
-        this.maxBlockedBy = maxBlockedBy;
     }
 
     @Override
