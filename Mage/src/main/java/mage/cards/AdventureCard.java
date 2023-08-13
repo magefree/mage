@@ -26,6 +26,10 @@ public abstract class AdventureCard extends CardImpl {
         this.spellCard = new AdventureCardSpellImpl(ownerId, setInfo, adventureName, typesSpell, costsSpell, this);
     }
 
+    public void finalizeAdventure() {
+        spellCard.finalizeAdventure();
+    }
+
     public AdventureCard(AdventureCard card) {
         super(card);
         this.spellCard = card.getSpellCard().copy();
