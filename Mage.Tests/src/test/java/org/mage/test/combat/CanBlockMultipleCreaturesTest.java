@@ -192,7 +192,7 @@ public class CanBlockMultipleCreaturesTest extends CardTestPlayerBase {
             execute();
             fail("Expected exception not thrown");
         } catch(UnsupportedOperationException e) {
-            assertEquals("Embraal Bruiser is blocked by 1 creature(s). It has to be blocked by 2 or more.", e.getMessage());
+            assertEquals("Embraal Bruiser is blocked incorrectly. It can't be blocked except by two or more creatures.", e.getMessage());
         }
 
     }
