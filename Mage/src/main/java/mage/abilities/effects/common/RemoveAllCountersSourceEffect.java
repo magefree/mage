@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LoneFox
  */
 public class RemoveAllCountersSourceEffect extends OneShotEffect {
@@ -22,7 +21,7 @@ public class RemoveAllCountersSourceEffect extends OneShotEffect {
         staticText = "remove all " + counterType.getName() + " counters from it.";
     }
 
-    public RemoveAllCountersSourceEffect(final RemoveAllCountersSourceEffect effect) {
+    protected RemoveAllCountersSourceEffect(final RemoveAllCountersSourceEffect effect) {
         super(effect);
         this.counterType = effect.counterType;
     }

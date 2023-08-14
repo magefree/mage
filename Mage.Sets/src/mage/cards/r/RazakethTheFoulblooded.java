@@ -29,7 +29,7 @@ public final class RazakethTheFoulblooded extends CardImpl {
     public RazakethTheFoulblooded(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);

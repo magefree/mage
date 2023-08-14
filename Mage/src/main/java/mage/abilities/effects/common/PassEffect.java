@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PassEffect extends OneShotEffect {
@@ -18,7 +17,7 @@ public class PassEffect extends OneShotEffect {
         super(Outcome.Neutral);
     }
 
-    public PassEffect(final PassEffect effect) {
+    protected PassEffect(final PassEffect effect) {
         super(effect);
     }
 

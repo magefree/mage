@@ -17,7 +17,7 @@ import java.util.UUID;
 
 /**
  * @author JRHerlehy
- *         Created on 4/4/18.
+ * Created on 4/4/18.
  */
 public class WUBRGInsteadEffect extends ContinuousEffectImpl {
 
@@ -28,7 +28,7 @@ public class WUBRGInsteadEffect extends ContinuousEffectImpl {
         staticText = "You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast";
     }
 
-    public WUBRGInsteadEffect(final WUBRGInsteadEffect effect) {
+    protected WUBRGInsteadEffect(final WUBRGInsteadEffect effect) {
         super(effect);
     }
 

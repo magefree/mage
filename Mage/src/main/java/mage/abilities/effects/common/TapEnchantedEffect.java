@@ -20,7 +20,7 @@ public class TapEnchantedEffect extends OneShotEffect {
         staticText = "tap enchanted " + name;
     }
 
-    public TapEnchantedEffect(final TapEnchantedEffect effect) {
+    protected TapEnchantedEffect(final TapEnchantedEffect effect) {
         super(effect);
     }
 

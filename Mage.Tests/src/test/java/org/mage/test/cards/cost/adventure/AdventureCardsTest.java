@@ -513,7 +513,6 @@ public class AdventureCardsTest extends CardTestPlayerBase {
     }
 
     @Test
-    //@Ignore("Not yet working correctly.")
     public void testCastTreatsToShareWithWrennAndSixEmblem() {
         /*
          * Wrenn and Six {R}{G}

@@ -270,6 +270,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Ankheg", 233, Rarity.UNCOMMON, mage.cards.g.GiantAnkheg.class));
         cards.add(new SetCardInfo("Githzerai Monk", 20, Rarity.UNCOMMON, mage.cards.g.GithzeraiMonk.class));
         cards.add(new SetCardInfo("Glorious Protector", 695, Rarity.RARE, mage.cards.g.GloriousProtector.class));
+        cards.add(new SetCardInfo("Gluntch, the Bestower", 275, Rarity.RARE, mage.cards.g.GluntchTheBestower.class));
         cards.add(new SetCardInfo("Gnoll War Band", 178, Rarity.UNCOMMON, mage.cards.g.GnollWarBand.class));
         cards.add(new SetCardInfo("Goblin Spymaster", 795, Rarity.RARE, mage.cards.g.GoblinSpymaster.class));
         cards.add(new SetCardInfo("Goggles of Night", 74, Rarity.COMMON, mage.cards.g.GogglesOfNight.class));
@@ -306,7 +307,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Highland Forest", 896, Rarity.COMMON, mage.cards.h.HighlandForest.class));
         cards.add(new SetCardInfo("Hoarding Ogre", 181, Rarity.COMMON, mage.cards.h.HoardingOgre.class));
         cards.add(new SetCardInfo("Horn of Valhalla", 26, Rarity.RARE, mage.cards.h.HornOfValhalla.class));
-        cards.add(new SetCardInfo("Hornet Queen", 825, Rarity.MYTHIC, mage.cards.h.HornetQueen.class));
+        cards.add(new SetCardInfo("Hornet Queen", 825, Rarity.RARE, mage.cards.h.HornetQueen.class));
         cards.add(new SetCardInfo("Hullbreaker Horror", 724, Rarity.RARE, mage.cards.h.HullbreakerHorror.class));
         cards.add(new SetCardInfo("Hunted Horror", 758, Rarity.RARE, mage.cards.h.HuntedHorror.class));
         cards.add(new SetCardInfo("Icewind Stalwart", 27, Rarity.COMMON, mage.cards.i.IcewindStalwart.class));
@@ -326,6 +327,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Izzet Boilerworks", 897, Rarity.UNCOMMON, mage.cards.i.IzzetBoilerworks.class));
         cards.add(new SetCardInfo("Izzet Chemister", 798, Rarity.RARE, mage.cards.i.IzzetChemister.class));
         cards.add(new SetCardInfo("Izzet Signet", 863, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Jade Orb of Dragonkind", 236, Rarity.COMMON, mage.cards.j.JadeOrbOfDragonkind.class));
         cards.add(new SetCardInfo("Jaheira's Respite", 238, Rarity.RARE, mage.cards.j.JaheirasRespite.class));
         cards.add(new SetCardInfo("Jaheira, Friend of the Forest", 237, Rarity.RARE, mage.cards.j.JaheiraFriendOfTheForest.class));
         cards.add(new SetCardInfo("Jan Jansen, Chaos Crafter", 277, Rarity.RARE, mage.cards.j.JanJansenChaosCrafter.class));
@@ -375,6 +377,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Martial Impetus", 33, Rarity.COMMON, mage.cards.m.MartialImpetus.class));
         cards.add(new SetCardInfo("Marut", 322, Rarity.COMMON, mage.cards.m.Marut.class));
         cards.add(new SetCardInfo("Maskwood Nexus", 865, Rarity.RARE, mage.cards.m.MaskwoodNexus.class));
+        cards.add(new SetCardInfo("Master Chef", 241, Rarity.COMMON, mage.cards.m.MasterChef.class));
         cards.add(new SetCardInfo("Mazzy, Truesword Paladin", 283, Rarity.RARE, mage.cards.m.MazzyTrueswordPaladin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mazzy, Truesword Paladin", 430, Rarity.RARE, mage.cards.m.MazzyTrueswordPaladin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mazzy, Truesword Paladin", 541, Rarity.RARE, mage.cards.m.MazzyTrueswordPaladin.class, NON_FULL_USE_VARIOUS));
@@ -439,7 +442,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Oji, the Exquisite Blade", 290, Rarity.UNCOMMON, mage.cards.o.OjiTheExquisiteBlade.class));
         cards.add(new SetCardInfo("Order of Whiteclay", 703, Rarity.RARE, mage.cards.o.OrderOfWhiteclay.class));
         cards.add(new SetCardInfo("Orzhov Basilica", 906, Rarity.UNCOMMON, mage.cards.o.OrzhovBasilica.class));
-        cards.add(new SetCardInfo("Orzhov Signet", 867, Rarity.UNCOMMON, mage.cards.o.OrzhovSignet.class));
+        cards.add(new SetCardInfo("Orzhov Signet", 867, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Outpost Siege", 804, Rarity.RARE, mage.cards.o.OutpostSiege.class));
         cards.add(new SetCardInfo("Overcharged Amalgam", 729, Rarity.RARE, mage.cards.o.OverchargedAmalgam.class));
         cards.add(new SetCardInfo("Overwhelming Encounter", 245, Rarity.UNCOMMON, mage.cards.o.OverwhelmingEncounter.class));

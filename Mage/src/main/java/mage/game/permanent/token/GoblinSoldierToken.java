@@ -1,12 +1,10 @@
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
-
-import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class GoblinSoldierToken extends TokenImpl {
@@ -20,11 +18,9 @@ public final class GoblinSoldierToken extends TokenImpl {
         subtype.add(SubType.SOLDIER);
         power = new MageInt(1);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("EVE", "EMA");
     }
 
-    public GoblinSoldierToken(final GoblinSoldierToken token) {
+    protected GoblinSoldierToken(final GoblinSoldierToken token) {
         super(token);
     }
 

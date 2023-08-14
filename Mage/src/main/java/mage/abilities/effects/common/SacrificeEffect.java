@@ -37,7 +37,7 @@ public class SacrificeEffect extends OneShotEffect {
         setText();
     }
 
-    public SacrificeEffect(final SacrificeEffect effect) {
+    protected SacrificeEffect(final SacrificeEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.count = effect.count;
@@ -89,7 +89,7 @@ public class SacrificeEffect extends OneShotEffect {
         if (preText != null) {
             sb.append(preText);
         }
-        if (preText != null && (preText.endsWith("player") || preText.endsWith("opponent"))) {
+        if (preText != null && (preText.endsWith("player") || preText.endsWith("opponent") || preText.endsWith("controller"))) {
             sb.append(" sacrifices ");
         } else {
             if (preText == null || preText.isEmpty()) {
@@ -102,6 +102,7 @@ public class SacrificeEffect extends OneShotEffect {
             sb.append(CardUtil.addArticle(filter.getMessage()));
         } else {
             sb.append(CardUtil.numberToText(count.toString(), "a"));
+            sb.append(" ");
             sb.append(filter.getMessage());
         }
         staticText = sb.toString();

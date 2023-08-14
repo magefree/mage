@@ -26,7 +26,7 @@ public final class SkitteringSurveyor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Skittering Surveyor enters the battlefield, you may search your library for a basic land, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true), true));
     }
 
     private SkitteringSurveyor(final SkitteringSurveyor card) {

@@ -12,16 +12,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 public final class Magmaroth extends CardImpl{
-
-    private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
-
-    static {
-        filterNonCreature.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public Magmaroth(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -33,7 +26,8 @@ public final class Magmaroth extends CardImpl{
         addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance()), TargetController.YOU, false));
 
         // Whenever you cast a noncreature spell, remove a -1/-1 counter from Magmaroth
-        addAbility(new SpellCastControllerTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance()), filterNonCreature, false));
+        addAbility(new SpellCastControllerTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance()),
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false));
 
     }
 

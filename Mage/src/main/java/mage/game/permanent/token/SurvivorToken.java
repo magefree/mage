@@ -6,7 +6,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author North
  */
 public final class SurvivorToken extends TokenImpl {
@@ -20,7 +19,7 @@ public final class SurvivorToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public SurvivorToken(final SurvivorToken token) {
+    protected SurvivorToken(final SurvivorToken token) {
         super(token);
     }
 

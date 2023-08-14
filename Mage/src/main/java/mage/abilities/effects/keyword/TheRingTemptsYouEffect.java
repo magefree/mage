@@ -26,7 +26,7 @@ public class TheRingTemptsYouEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // TODO: Implement when we know what the mechanic does
-        return false;
+        game.temptWithTheRing(source.getControllerId());
+        return true;
     }
 }

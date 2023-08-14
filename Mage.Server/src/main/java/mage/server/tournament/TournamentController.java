@@ -2,6 +2,8 @@ package mage.server.tournament;
 
 import mage.MageException;
 import mage.cards.decks.Deck;
+import mage.cards.decks.DeckValidator;
+import mage.cards.decks.DeckValidatorFactory;
 import mage.constants.TableState;
 import mage.constants.TournamentPlayerState;
 import mage.game.GameException;
@@ -333,7 +335,9 @@ public class TournamentController {
         if (userPlayerMap.containsKey(userId)) {
             TournamentPlayer tournamentPlayer = tournament.getPlayer(userPlayerMap.get(userId));
             if (tournamentPlayer.getDeck() != null) {
-                tournament.autoSubmit(userPlayerMap.get(userId), tournamentPlayer.generateDeck());
+                DeckValidator deckValidator = DeckValidatorFactory.instance.createDeckValidator(tournament.getOptions().getMatchOptions().getDeckType());
+                int deckMinSize = deckValidator != null ? deckValidator.getDeckMinSize() : 40;
+                tournament.autoSubmit(userPlayerMap.get(userId), tournamentPlayer.generateDeck(deckMinSize));
             } else {
                 StringBuilder sb = new StringBuilder();
                 managerFactory.userManager().getUser(userId).ifPresent(user

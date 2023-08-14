@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LoneFox
  */
 public class DestroyTargetAtBeginningOfNextEndStepEffect extends OneShotEffect {
@@ -19,7 +18,7 @@ public class DestroyTargetAtBeginningOfNextEndStepEffect extends OneShotEffect {
         this.staticText = "Destroy that creature at the beginning of the next end step";
     }
 
-    public DestroyTargetAtBeginningOfNextEndStepEffect(final DestroyTargetAtBeginningOfNextEndStepEffect effect) {
+    protected DestroyTargetAtBeginningOfNextEndStepEffect(final DestroyTargetAtBeginningOfNextEndStepEffect effect) {
         super(effect);
     }
 

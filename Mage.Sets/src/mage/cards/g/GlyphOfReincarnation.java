@@ -98,6 +98,7 @@ class GlyphOfReincarnationEffect extends OneShotEffect {
                         }
                     }
                 }
+                game.getState().processAction(game);
                 // For each creature that died this way, put a creature card from the graveyard of the player who controlled that creature the last time it became blocked by that Wall 
                 // onto the battlefield under its owner’s control
                 for (Map.Entry<UUID, Player> entry : destroyed.entrySet()) {

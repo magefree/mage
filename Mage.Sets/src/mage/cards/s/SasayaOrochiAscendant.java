@@ -38,7 +38,7 @@ public final class SasayaOrochiAscendant extends CardImpl {
 
     public SasayaOrochiAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.MONK);
 
@@ -97,7 +97,7 @@ class SasayasEssence extends TokenImpl {
 
     SasayasEssence() {
         super("Sasaya's Essence", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.ENCHANTMENT);
 
         color.setGreen(true);

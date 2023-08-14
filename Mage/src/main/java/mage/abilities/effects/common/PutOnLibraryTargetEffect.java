@@ -38,7 +38,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
         this.staticText = rule;
     }
 
-    public PutOnLibraryTargetEffect(final PutOnLibraryTargetEffect effect) {
+    protected PutOnLibraryTargetEffect(final PutOnLibraryTargetEffect effect) {
         super(effect);
         this.onTop = effect.onTop;
     }

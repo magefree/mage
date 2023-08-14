@@ -27,7 +27,7 @@ public class UntapTargetEffect extends OneShotEffect {
         }
     }
 
-    public UntapTargetEffect(final UntapTargetEffect effect) {
+    protected UntapTargetEffect(final UntapTargetEffect effect) {
         super(effect);
     }
 

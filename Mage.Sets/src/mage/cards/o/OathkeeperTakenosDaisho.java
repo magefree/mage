@@ -6,7 +6,7 @@ import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlAttachedEffect;
@@ -26,28 +26,23 @@ import java.util.UUID;
  */
 public final class OathkeeperTakenosDaisho extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("it's a Samurai card");
-
-    static {
-        filter.add(SubType.SAMURAI.getPredicate());
-    }
-
     public OathkeeperTakenosDaisho(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1, Duration.WhileOnBattlefield)));
 
         // Whenever equipped creature dies, return that card to the battlefield under your control if it's a Samurai card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderYourControlAttachedEffect(), "equipped creature", false),
-                new OathkeeperEquippedMatchesFilterCondition(filter),
-                ""));
+        this.addAbility(new DiesAttachedTriggeredAbility(new ConditionalOneShotEffect(
+                new ReturnToBattlefieldUnderYourControlAttachedEffect(),
+                OathkeeperEquippedSamuraiCondition.instance,
+                "return that card to the battlefield under your control if it's a Samurai card"
+        ), "equipped creature"));
 
         // When Oathkeeper, Takeno's Daisho is put into a graveyard from the battlefield, exile equipped creature.
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ExileEquippedEffect()));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new OathkeeperExileEquippedEffect()));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}"), false));
@@ -63,20 +58,20 @@ public final class OathkeeperTakenosDaisho extends CardImpl {
     }
 }
 
-class ExileEquippedEffect extends OneShotEffect {
+class OathkeeperExileEquippedEffect extends OneShotEffect {
 
-    public ExileEquippedEffect() {
+    public OathkeeperExileEquippedEffect() {
         super(Outcome.Exile);
         staticText = "exile equipped creature";
     }
 
-    public ExileEquippedEffect(final ExileEquippedEffect effect) {
+    public OathkeeperExileEquippedEffect(final OathkeeperExileEquippedEffect effect) {
         super(effect);
     }
 
     @Override
-    public ExileEquippedEffect copy() {
-        return new ExileEquippedEffect(this);
+    public OathkeeperExileEquippedEffect copy() {
+        return new OathkeeperExileEquippedEffect(this);
     }
 
     @Override
@@ -90,15 +85,15 @@ class ExileEquippedEffect extends OneShotEffect {
         }
         return false;
     }
-
 }
 
-class OathkeeperEquippedMatchesFilterCondition implements Condition {
+enum OathkeeperEquippedSamuraiCondition implements Condition {
+    instance;
 
-    private FilterCreaturePermanent filter;
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("it's a Samurai card");
 
-    public OathkeeperEquippedMatchesFilterCondition(FilterCreaturePermanent filter) {
-        this.filter = filter;
+    static {
+        filter.add(SubType.SAMURAI.getPredicate());
     }
 
     @Override
@@ -122,7 +117,6 @@ class OathkeeperEquippedMatchesFilterCondition implements Condition {
             }
             if (attachedTo != null) {
                 return filter.match(attachedTo, attachedTo.getControllerId(), source, game);
-
             }
         }
         return false;

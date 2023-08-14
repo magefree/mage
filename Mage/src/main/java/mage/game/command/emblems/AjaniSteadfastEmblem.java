@@ -1,4 +1,3 @@
-
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
@@ -12,15 +11,22 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author spjspj
  */
 public final class AjaniSteadfastEmblem extends Emblem {
 
     public AjaniSteadfastEmblem() {
-        setName("Emblem Ajani");
+        super("Emblem Ajani");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new AjaniSteadfastPreventEffect()));
-        this.setExpansionSetCodeForImage("M15");
+    }
+
+    private AjaniSteadfastEmblem(final AjaniSteadfastEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public AjaniSteadfastEmblem copy() {
+        return new AjaniSteadfastEmblem(this);
     }
 }
 

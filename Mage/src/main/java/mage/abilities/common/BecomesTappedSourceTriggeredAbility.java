@@ -21,7 +21,7 @@ public class BecomesTappedSourceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} becomes tapped, ");
     }
 
-    public BecomesTappedSourceTriggeredAbility(final BecomesTappedSourceTriggeredAbility ability) {
+    protected BecomesTappedSourceTriggeredAbility(final BecomesTappedSourceTriggeredAbility ability) {
         super(ability);
     }
 

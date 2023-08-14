@@ -27,7 +27,7 @@ public final class HallOfGemstone extends CardImpl {
     public HallOfGemstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
 
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, that player chooses a color. Until end of turn, lands tapped for mana produce mana of the chosen color instead of any other color.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HallOfGemstoneEffect(), TargetController.ACTIVE, false));

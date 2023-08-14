@@ -33,7 +33,7 @@ public class SearchLibraryPutInPlayTargetControllerEffect extends SearchEffect {
                 + ", then shuffle";
     }
 
-    public SearchLibraryPutInPlayTargetControllerEffect(final SearchLibraryPutInPlayTargetControllerEffect effect) {
+    protected SearchLibraryPutInPlayTargetControllerEffect(final SearchLibraryPutInPlayTargetControllerEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
     }

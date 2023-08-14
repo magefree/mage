@@ -27,7 +27,7 @@ public final class AscendantSpirit extends CardImpl {
     public AscendantSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

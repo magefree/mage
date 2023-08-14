@@ -40,7 +40,7 @@ public final class NightDealings extends CardImpl {
 
         // {2}{B}{B}, Remove X theft counters from Night Dealings: Search your library for a nonland card with converted mana cost X, reveal it, and put it into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(new NightDealingsSearchEffect(), new ManaCostsImpl<>("{2}{B}{B}"));
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.THEFT.createInstance(1)));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.THEFT));
         this.addAbility(ability);
     }
 

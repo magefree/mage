@@ -7,8 +7,6 @@ import mage.abilities.keyword.TransformAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -24,10 +22,9 @@ public final class IncubatorToken extends TokenImpl {
         this.addAbility(new SimpleActivatedAbility(
                 new TransformSourceEffect().setText("transform this artifact"), new GenericManaCost(2)
         ));
-        availableImageSetCodes = Arrays.asList("MOM");
     }
 
-    public IncubatorToken(final IncubatorToken token) {
+    protected IncubatorToken(final IncubatorToken token) {
         super(token);
     }
 

@@ -45,7 +45,7 @@ public final class RimefeatherOwl extends CardImpl {
     public RimefeatherOwl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
 
-        this.addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -103,7 +103,7 @@ class RimefeatherOwlEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            permanent.addSuperType(SuperType.SNOW);
+            permanent.addSuperType(game, SuperType.SNOW);
 
         }
         return true;

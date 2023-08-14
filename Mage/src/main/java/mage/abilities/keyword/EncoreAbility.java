@@ -40,7 +40,7 @@ public class EncoreAbility extends ActivatedAbilityImpl {
         this.rule = setRule(cost);
     }
 
-    public EncoreAbility(final EncoreAbility ability) {
+    protected EncoreAbility(final EncoreAbility ability) {
         super(ability);
         this.rule = ability.rule;
     }

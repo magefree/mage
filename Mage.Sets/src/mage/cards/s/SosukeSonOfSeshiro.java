@@ -34,7 +34,7 @@ public final class SosukeSonOfSeshiro extends CardImpl {
 
     public SosukeSonOfSeshiro(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WARRIOR);
 

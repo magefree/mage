@@ -26,7 +26,7 @@ public class FilterBasicLandCard extends FilterCard {
         this.add(SuperType.BASIC.getPredicate());
     }
 
-    public FilterBasicLandCard(final FilterBasicLandCard filter) {
+    protected FilterBasicLandCard(final FilterBasicLandCard filter) {
         super(filter);
     }
 

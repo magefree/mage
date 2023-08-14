@@ -20,7 +20,7 @@ public class EntersBattlefieldOrLeavesSourceTriggeredAbility extends TriggeredAb
         setTriggerPhrase("When {this} enters or leaves the battlefield, ");
     }
 
-    public EntersBattlefieldOrLeavesSourceTriggeredAbility(final EntersBattlefieldOrLeavesSourceTriggeredAbility ability) {
+    protected EntersBattlefieldOrLeavesSourceTriggeredAbility(final EntersBattlefieldOrLeavesSourceTriggeredAbility ability) {
         super(ability);
     }
 

@@ -18,7 +18,7 @@ public final class BorealDruid extends CardImpl {
 
     public BorealDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
-        addSuperType(SuperType.SNOW);
+        this.supertype.add(SuperType.SNOW);
         this.subtype.add(SubType.ELF, SubType.DRUID);
 
         this.power = new MageInt(1);

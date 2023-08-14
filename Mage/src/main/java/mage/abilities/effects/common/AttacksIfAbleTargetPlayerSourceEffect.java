@@ -15,7 +15,7 @@ public class AttacksIfAbleTargetPlayerSourceEffect extends RequirementEffect {
         staticText = "{this} attacks that player this combat if able";
     }
 
-    public AttacksIfAbleTargetPlayerSourceEffect(final AttacksIfAbleTargetPlayerSourceEffect effect) {
+    protected AttacksIfAbleTargetPlayerSourceEffect(final AttacksIfAbleTargetPlayerSourceEffect effect) {
         super(effect);
     }
 

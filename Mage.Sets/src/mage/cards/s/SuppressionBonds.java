@@ -1,10 +1,8 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -13,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -35,9 +32,7 @@ public final class SuppressionBonds extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted permanent can't attack or block, and its activated abilities can't be actiated.
-        Effect effect = new CantBlockAttackActivateAttachedEffect();
-        effect.setText("Enchanted permanent can't attack or block, and its activated abilities can't be actiated");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect("permanent")));
     }
 
     private SuppressionBonds(final SuppressionBonds card) {

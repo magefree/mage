@@ -28,7 +28,7 @@ public final class KikuNightsFlower extends CardImpl {
 
     public KikuNightsFlower (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ASSASSIN);
 

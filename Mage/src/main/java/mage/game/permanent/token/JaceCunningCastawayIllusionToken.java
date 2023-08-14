@@ -13,7 +13,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 
 /**
- *
  * @author TheElk801
  */
 public final class JaceCunningCastawayIllusionToken extends TokenImpl {
@@ -30,7 +29,7 @@ public final class JaceCunningCastawayIllusionToken extends TokenImpl {
         this.addAbility(new IllusionTokenTriggeredAbility());
     }
 
-    public JaceCunningCastawayIllusionToken(final JaceCunningCastawayIllusionToken token) {
+    protected JaceCunningCastawayIllusionToken(final JaceCunningCastawayIllusionToken token) {
         super(token);
     }
 
@@ -46,7 +45,7 @@ class IllusionTokenTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
     }
 
-    public IllusionTokenTriggeredAbility(final IllusionTokenTriggeredAbility ability) {
+    protected IllusionTokenTriggeredAbility(final IllusionTokenTriggeredAbility ability) {
         super(ability);
     }
 

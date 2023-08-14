@@ -12,7 +12,6 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 public class SetBasePowerSourceEffect extends ContinuousEffectImpl {
@@ -20,7 +19,6 @@ public class SetBasePowerSourceEffect extends ContinuousEffectImpl {
     private final DynamicValue amount;
 
     /**
-     *
      * @param amount Power to set as a characteristic-defining ability
      */
     public SetBasePowerSourceEffect(DynamicValue amount) {
@@ -30,7 +28,7 @@ public class SetBasePowerSourceEffect extends ContinuousEffectImpl {
         staticText = "{this}'s power is equal to the number of " + amount.getMessage();
     }
 
-    public SetBasePowerSourceEffect(final SetBasePowerSourceEffect effect) {
+    protected SetBasePowerSourceEffect(final SetBasePowerSourceEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

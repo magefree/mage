@@ -201,9 +201,11 @@ public abstract class MatchImpl implements Match {
                 // set the priority time left for the match
                 if (games.isEmpty()) { // first game full time
                     matchPlayer.getPlayer().setPriorityTimeLeft(options.getPriorityTime());
+                    matchPlayer.getPlayer().setBufferTimeLeft(options.getBufferTime());
                 } else {
                     if (matchPlayer.getPriorityTimeLeft() > 0) {
                         matchPlayer.getPlayer().setPriorityTimeLeft(matchPlayer.getPriorityTimeLeft());
+                        matchPlayer.getPlayer().setBufferTimeLeft(options.getBufferTime());
                     }
                 }
             } else {
@@ -213,6 +215,7 @@ public abstract class MatchImpl implements Match {
             }
         }
         game.setPriorityTime(options.getPriorityTime());
+        game.setBufferTime(options.getBufferTime());
     }
 
     protected void shufflePlayers() {

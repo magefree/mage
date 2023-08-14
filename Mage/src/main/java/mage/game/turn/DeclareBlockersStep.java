@@ -2,12 +2,12 @@
 package mage.game.turn;
 
 import java.util.UUID;
+
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DeclareBlockersStep extends Step {
@@ -19,7 +19,7 @@ public class DeclareBlockersStep extends Step {
         this.postStepEvent = EventType.DECLARE_BLOCKERS_STEP_POST;
     }
 
-    public DeclareBlockersStep(final DeclareBlockersStep step) {
+    protected DeclareBlockersStep(final DeclareBlockersStep step) {
         super(step);
     }
 

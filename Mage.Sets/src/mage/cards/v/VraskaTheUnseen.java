@@ -33,7 +33,7 @@ public final class VraskaTheUnseen extends CardImpl {
 
     public VraskaTheUnseen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VRASKA);
 
         this.setStartingLoyalty(5);

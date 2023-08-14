@@ -28,7 +28,7 @@ public final class SorinMarkov extends CardImpl {
 
     public SorinMarkov(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SORIN);
 
         this.setStartingLoyalty(4);

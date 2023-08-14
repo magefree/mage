@@ -64,7 +64,7 @@ public class CopyPermanentEffect extends OneShotEffect {
         this.staticText = text;
     }
 
-    public CopyPermanentEffect(final CopyPermanentEffect effect) {
+    protected CopyPermanentEffect(final CopyPermanentEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
         this.applier = effect.applier;

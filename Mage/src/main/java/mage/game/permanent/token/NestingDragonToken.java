@@ -8,20 +8,19 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class NestingDragonToken extends TokenImpl {
 
     public NestingDragonToken() {
         super(
-                "Dragon Egg",
+                "Dragon Egg Token",
                 "0/2 red Dragon Egg creature token with defender and "
-                + "\""
-                + "When this creature dies, "
-                + "create a 2/2 red Dragon creature token with flying and "
-                + "'{R}: This creature gets +1/+0 until end of turn.'"
-                + "\""
+                        + "\""
+                        + "When this creature dies, "
+                        + "create a 2/2 red Dragon creature token with flying and "
+                        + "'{R}: This creature gets +1/+0 until end of turn.'"
+                        + "\""
         );
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -35,7 +34,7 @@ public final class NestingDragonToken extends TokenImpl {
         ));
     }
 
-    public NestingDragonToken(final NestingDragonToken token) {
+    protected NestingDragonToken(final NestingDragonToken token) {
         super(token);
     }
 

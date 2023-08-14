@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
@@ -27,7 +27,7 @@ public final class CabalPatriarch extends CardImpl {
 
     public CabalPatriarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WIZARD);
 
         this.power = new MageInt(5);
@@ -35,7 +35,7 @@ public final class CabalPatriarch extends CardImpl {
 
         // {2}{B}, Sacrifice a creature: Target creature gets -2/-2 until end of turn.
         Ability ability1 = new SimpleActivatedAbility(new BoostTargetEffect(-2, -2), new ManaCostsImpl<>("{2}{B}"));
-        ability1.addCost(new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability1.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         ability1.addTarget(new TargetCreaturePermanent().withChooseHint("gets -2/-2"));
         this.addAbility(ability1);
 

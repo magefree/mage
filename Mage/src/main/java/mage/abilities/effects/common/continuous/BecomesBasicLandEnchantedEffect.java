@@ -27,7 +27,7 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
         ));
     }
 
-    public BecomesBasicLandEnchantedEffect(final BecomesBasicLandEnchantedEffect effect) {
+    protected BecomesBasicLandEnchantedEffect(final BecomesBasicLandEnchantedEffect effect) {
         super(effect);
         this.landTypes.addAll(effect.landTypes);
     }

@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class ChiefEngineer extends CardImpl {
 
-    private static final FilterCard filter = new FilterArtifactCard("artifact spells");
+    private static final FilterCard filter = new FilterArtifactCard("artifact spells you cast");
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));

@@ -35,7 +35,7 @@ public final class HenrikaInfernalSeer extends CardImpl {
     public HenrikaInfernalSeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

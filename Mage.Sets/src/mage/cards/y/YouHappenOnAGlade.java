@@ -28,7 +28,7 @@ public final class YouHappenOnAGlade extends CardImpl {
         // • Journey On — Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.
         this.getSpellAbility().addEffect(
                 new SearchLibraryPutInHandEffect(
-                        new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS), true, true)
+                        new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS), true)
         );
         this.getSpellAbility().withFirstModeFlavorWord("Journey On");
 

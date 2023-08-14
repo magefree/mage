@@ -6,6 +6,7 @@ import mage.abilities.effects.keyword.AmassEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -23,7 +24,7 @@ public final class CrushDissent extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
 
         // Amass 2.
-        this.getSpellAbility().addEffect(new AmassEffect(2));
+        this.getSpellAbility().addEffect(new AmassEffect(2, SubType.ZOMBIE));
     }
 
     private CrushDissent(final CrushDissent card) {

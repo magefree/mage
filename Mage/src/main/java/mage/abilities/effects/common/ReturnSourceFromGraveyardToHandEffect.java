@@ -19,7 +19,7 @@ public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
         staticText = "return {this} from your graveyard to your hand";
     }
 
-    public ReturnSourceFromGraveyardToHandEffect(final ReturnSourceFromGraveyardToHandEffect effect) {
+    protected ReturnSourceFromGraveyardToHandEffect(final ReturnSourceFromGraveyardToHandEffect effect) {
         super(effect);
     }
 

@@ -1,12 +1,10 @@
 package mage.abilities.keyword;
 
-import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-import mage.abilities.icon.abilities.InfectAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
+import mage.abilities.icon.CardIconType;
 import mage.constants.Zone;
 import mage.util.CardUtil;
-
-import java.io.ObjectStreamException;
 
 /**
  * @author TheElk801
@@ -18,6 +16,8 @@ public class ToxicAbility extends StaticAbility {
     public ToxicAbility(int amount) {
         super(Zone.BATTLEFIELD, null);
         this.amount = amount;
+
+        this.addIcon(new CardIconImpl(CardIconType.ABILITY_INFECT, "Toxic " + amount));
     }
 
     private ToxicAbility(final ToxicAbility ability) {

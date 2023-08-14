@@ -32,7 +32,7 @@ public class ChoiceCreatureType extends ChoiceImpl {
         this.setSearchEnabled(true);
     }
 
-    public ChoiceCreatureType(final ChoiceCreatureType choice) {
+    protected ChoiceCreatureType(final ChoiceCreatureType choice) {
         super(choice);
     }
 

@@ -41,7 +41,7 @@ public final class RelicRunner extends CardImpl {
                         new CastHistoricSpellThisTurnCondition(),
                         "{this} can't be blocked if you've cast an historic spell this turn. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"
                 )
-        ), new SpellsCastWatcher());
+        ));
     }
 
     private RelicRunner(final RelicRunner card) {

@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.LearnEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -32,7 +32,7 @@ public final class DreamStrix extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Dream Strix becomes the target of a spell, sacrifice it.
-        this.addAbility(new BecomesTargetTriggeredAbility(
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(
                 new SacrificeSourceEffect().setText("sacrifice it"), StaticFilters.FILTER_SPELL_A
         ));
 

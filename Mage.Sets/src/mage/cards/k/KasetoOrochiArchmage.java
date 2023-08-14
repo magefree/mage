@@ -24,7 +24,7 @@ public final class KasetoOrochiArchmage extends CardImpl {
 
     public KasetoOrochiArchmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);

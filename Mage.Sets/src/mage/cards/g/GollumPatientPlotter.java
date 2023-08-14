@@ -26,7 +26,7 @@ public final class GollumPatientPlotter extends CardImpl {
     public GollumPatientPlotter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HALFLING);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(3);

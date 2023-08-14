@@ -4,7 +4,7 @@ package mage.cards.j;
 
 import java.util.UUID;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,7 +20,7 @@ public final class JacesErasure extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
 
-        DrawCardControllerTriggeredAbility ability = new DrawCardControllerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(1), true);
+        DrawCardControllerTriggeredAbility ability = new DrawCardControllerTriggeredAbility(new MillCardsTargetEffect(1), true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

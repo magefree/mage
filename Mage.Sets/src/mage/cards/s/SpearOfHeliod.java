@@ -35,7 +35,7 @@ public final class SpearOfHeliod extends CardImpl {
 
     public SpearOfHeliod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{1}{W}{W}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
 
         // Creatures you control get +1/+1.

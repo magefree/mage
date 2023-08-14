@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author spjspj
  */
@@ -18,11 +16,9 @@ public final class CarnivoreToken extends TokenImpl {
         subtype.add(SubType.BEAST);
         power = new MageInt(3);
         toughness = new MageInt(1);
-
-        availableImageSetCodes = Arrays.asList("EMA");
     }
 
-    public CarnivoreToken(final CarnivoreToken token) {
+    protected CarnivoreToken(final CarnivoreToken token) {
         super(token);
     }
 

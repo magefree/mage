@@ -5,7 +5,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.TargetSpell;
@@ -15,7 +15,7 @@ import java.util.UUID;
 /**
  * @author JayDi85
  */
-public final class JwariDisruption extends ModalDoubleFacesCard {
+public final class JwariDisruption extends ModalDoubleFacedCard {
 
     public JwariDisruption(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

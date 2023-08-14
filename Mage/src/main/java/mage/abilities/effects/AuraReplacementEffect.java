@@ -2,6 +2,7 @@ package mage.abilities.effects;
 
 import java.util.Locale;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -38,7 +39,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfGame, Outcome.Neutral);
     }
 
-    public AuraReplacementEffect(final AuraReplacementEffect effect) {
+    protected AuraReplacementEffect(final AuraReplacementEffect effect) {
         super(effect);
     }
 

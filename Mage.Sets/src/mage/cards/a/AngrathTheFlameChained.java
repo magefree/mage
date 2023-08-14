@@ -38,7 +38,7 @@ public final class AngrathTheFlameChained extends CardImpl {
     public AngrathTheFlameChained(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGRATH);
         this.setStartingLoyalty(4);
 

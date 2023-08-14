@@ -2,6 +2,7 @@
 package mage.cards.t;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.LieutenantAbility;
@@ -16,11 +17,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
 
 /**
- *
  * @author emerald000
  */
 public final class TyrantsFamiliar extends CardImpl {
@@ -29,7 +29,7 @@ public final class TyrantsFamiliar extends CardImpl {
 
     static {
         filter.add(CardType.CREATURE.getPredicate());
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public TyrantsFamiliar(UUID ownerId, CardSetInfo setInfo) {
@@ -49,7 +49,7 @@ public final class TyrantsFamiliar extends CardImpl {
         Ability gainedAbility = new AttacksTriggeredAbility(new DamageTargetEffect(7, "it"), false);
         gainedAbility.addTarget(new TargetPermanent(filter));
         ContinuousEffect effect = new GainAbilitySourceEffect(gainedAbility);
-        effect.setText("and has \"Whenever {this} attacks, it deals 7 damage to target creature defending player controls\"");
+        effect.setText("and has \"Whenever {this} attacks, it deals 7 damage to target creature defending player controls.\"");
         this.addAbility(new LieutenantAbility(effect));
     }
 

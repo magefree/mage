@@ -24,7 +24,7 @@ public class AddCardColorAttachedEffect extends ContinuousEffectImpl {
         setText();
     }
 
-    public AddCardColorAttachedEffect(final AddCardColorAttachedEffect effect) {
+    protected AddCardColorAttachedEffect(final AddCardColorAttachedEffect effect) {
         super(effect);
         this.addedColor = effect.addedColor;
         this.attachmentType = effect.attachmentType;

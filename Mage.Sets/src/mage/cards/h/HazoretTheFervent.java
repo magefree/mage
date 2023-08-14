@@ -31,7 +31,7 @@ public final class HazoretTheFervent extends CardImpl {
     public HazoretTheFervent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

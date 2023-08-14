@@ -12,10 +12,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Arrays;
-
 /**
- *
  * @author weirddan455
  */
 public final class DogIllusionToken extends TokenImpl {
@@ -34,8 +31,6 @@ public final class DogIllusionToken extends TokenImpl {
                 DogIllusionValue.instance)
                 .setText("this creature's power and toughness are each equal to twice the number of cards in your hand")
         ));
-
-        availableImageSetCodes = Arrays.asList("AFR");
     }
 
     private DogIllusionToken(final DogIllusionToken token) {

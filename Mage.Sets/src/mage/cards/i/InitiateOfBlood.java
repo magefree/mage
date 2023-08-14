@@ -98,7 +98,7 @@ class GokaTheUnjust extends TokenImpl {
 
     GokaTheUnjust() {
         super("Goka the Unjust", "");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.OGRE, SubType.SHAMAN);

@@ -38,7 +38,7 @@ public final class KurbisHarvestCelebrant extends CardImpl {
     public KurbisHarvestCelebrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{G}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.TREEFOLK);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

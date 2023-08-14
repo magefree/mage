@@ -26,7 +26,7 @@ public final class JaceArcaneStrategist extends CardImpl {
     public JaceArcaneStrategist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
         this.setStartingLoyalty(4);
 
@@ -42,7 +42,7 @@ public final class JaceArcaneStrategist extends CardImpl {
 
         // -7: Creatures you control can't be blocked this turn.
         this.addAbility(new LoyaltyAbility(new CantBeBlockedAllEffect(
-                StaticFilters.FILTER_CONTROLLED_CREATURE, Duration.EndOfTurn
+                StaticFilters.FILTER_CONTROLLED_CREATURES, Duration.EndOfTurn
         ), -7));
     }
 

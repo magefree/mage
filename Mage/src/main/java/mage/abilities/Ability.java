@@ -61,7 +61,7 @@ public interface Ability extends Controllable, Serializable {
      * @see Game#addTriggeredAbility(TriggeredAbility, GameEvent)
      * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
-    void newOriginalId();
+    void newOriginalId(); // TODO: delete newOriginalId???
 
     /**
      * Gets the {@link AbilityType} of this ability.

@@ -36,7 +36,7 @@ public final class TombstoneStairwell extends CardImpl {
 
     public TombstoneStairwell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
-        addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // Cumulative upkeep-Pay {1}{B}.
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}{B}")));

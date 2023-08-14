@@ -22,7 +22,7 @@ public class Exile implements Serializable, Copyable<Exile> {
         createZone(PERMANENT, "Permanent");
     }
 
-    public Exile(final Exile exile) {
+    protected Exile(final Exile exile) {
         for (Entry<UUID, ExileZone> entry : exile.exileZones.entrySet()) {
             exileZones.put(entry.getKey(), entry.getValue().copy());
         }
@@ -70,7 +70,7 @@ public class Exile implements Serializable, Copyable<Exile> {
         return allCards.stream().filter(card -> filter.match(card, game)).collect(Collectors.toList());
     }
 
-    @Deprecated // TODO: must use related request due game range
+    @Deprecated // TODO: must use related request due game range like getAllCardsByRange
     public List<Card> getAllCards(Game game) {
         return getAllCards(game, null);
     }

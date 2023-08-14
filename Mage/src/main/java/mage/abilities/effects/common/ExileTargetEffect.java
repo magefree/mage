@@ -56,7 +56,7 @@ public class ExileTargetEffect extends OneShotEffect {
         this.onlyFromZone = onlyFromZone;
     }
 
-    public ExileTargetEffect(final ExileTargetEffect effect) {
+    protected ExileTargetEffect(final ExileTargetEffect effect) {
         super(effect);
         this.exileZone = effect.exileZone;
         this.exileId = effect.exileId;

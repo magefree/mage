@@ -29,7 +29,7 @@ public final class KamahlFistOfKrosa extends CardImpl {
     public KamahlFistOfKrosa(UUID ownerId, CardSetInfo setInfo) {
         
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
 
@@ -45,9 +45,9 @@ public final class KamahlFistOfKrosa extends CardImpl {
 		
         // {2}{G}{G}{G}: Creatures you control get +3/+3 and gain trample until end of turn.
         SimpleActivatedAbility boostAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostControlledEffect(3, 3, Duration.EndOfTurn),
+                new BoostControlledEffect(3, 3, Duration.EndOfTurn).setText("Creatures you control get +3/+3"),
                 new ManaCostsImpl<>("{2}{G}{G}{G}"));
-		boostAbility.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
+		boostAbility.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES).setText("and gain trample until end of turn"));
 		this.addAbility(boostAbility);
     }
 

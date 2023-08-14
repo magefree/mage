@@ -26,7 +26,7 @@ public class LoseAbilitySourceEffect extends ContinuousEffectImpl {
         staticText = ("{this} loses " + ability.getRule() + ' ' + duration.toString()).trim();
     }
 
-    public LoseAbilitySourceEffect(final LoseAbilitySourceEffect effect) {
+    protected LoseAbilitySourceEffect(final LoseAbilitySourceEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
     }

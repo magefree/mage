@@ -36,7 +36,7 @@ public final class LegionConquistador extends CardImpl {
 
         // When Legion Conquistador enters the battlefield, you may search your library for any number of cards named Legion Conquistador, reveal them, put them into your hand, then shuffle your library
         TargetCardInLibrary target = new TargetCardInLibrary(0, Integer.MAX_VALUE, filter);
-        Effect effect = new SearchLibraryPutInHandEffect(target, true, true);
+        Effect effect = new SearchLibraryPutInHandEffect(target, true);
         effect.setText("you may search your library for any number of cards named Legion Conquistador, reveal them, put them into your hand, then shuffle");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }

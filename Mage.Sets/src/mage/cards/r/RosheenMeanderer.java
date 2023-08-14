@@ -23,7 +23,7 @@ public final class RosheenMeanderer extends CardImpl {
 
     public RosheenMeanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R/G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(4);
@@ -66,5 +66,14 @@ class RosheenMeandererConditionalMana extends ConditionalMana {
         super(Mana.ColorlessMana(4));
         staticText = "Spend this mana only on costs that contain {X}";
         addCondition(new XCostManaCondition());
+    }
+
+    private RosheenMeandererConditionalMana(final RosheenMeandererConditionalMana conditionalMana) {
+        super(conditionalMana);
+    }
+
+    @Override
+    public RosheenMeandererConditionalMana copy() {
+        return new RosheenMeandererConditionalMana(this);
     }
 }

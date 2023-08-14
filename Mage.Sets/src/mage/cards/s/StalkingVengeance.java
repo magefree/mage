@@ -8,8 +8,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
@@ -20,13 +19,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class StalkingVengeance extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(AnotherPredicate.instance);
-    }
 
     public StalkingVengeance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
@@ -39,7 +31,7 @@ public final class StalkingVengeance extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever another creature you control dies, it deals damage equal to its power to target player or planeswalker.
-        Ability ability = new DiesCreatureTriggeredAbility(new StalkingVengeanceDamageEffect(), false, filter, true);
+        Ability ability = new DiesCreatureTriggeredAbility(new StalkingVengeanceDamageEffect(), false, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, true);
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
@@ -74,7 +66,7 @@ class StalkingVengeanceDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent creature = (Permanent) game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
         if (creature != null) {
-            game.damagePlayerOrPlaneswalker(source.getFirstTarget(), creature.getPower().getValue(), creature.getId(), source, game, false, true);
+            game.damagePlayerOrPermanent(source.getFirstTarget(), creature.getPower().getValue(), creature.getId(), source, game, false, true);
             return true;
         }
         return false;

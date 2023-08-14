@@ -32,7 +32,7 @@ public final class TivitSellerOfSecrets extends CardImpl {
     public TivitSellerOfSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.subtype.add(SubType.ROGUE);
         this.power = new MageInt(6);

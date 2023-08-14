@@ -82,7 +82,7 @@ class IllusionaryTerrainEffect extends ContinuousEffectImpl {
                 && firstChoice != null
                 && secondChoice != null) {
             for (Permanent land : lands) {
-                if (land.isBasic()) {
+                if (land.isBasic(game)) {
                     switch (layer) {
                         case TypeChangingEffects_4:
                             // the land mana ability is intrinsic, so add it here, not layer 6

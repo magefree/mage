@@ -25,7 +25,7 @@ import java.util.UUID;
 public class GethThaneOfContracts extends CardImpl {
     public GethThaneOfContracts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.PHYREXIAN);
         this.addSubType(SubType.ZOMBIE);
         this.power = new MageInt(3);

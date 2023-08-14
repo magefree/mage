@@ -34,7 +34,7 @@ public class LukkaBoundToRuin extends CardImpl {
     public LukkaBoundToRuin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R/G/P}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.LUKKA);
         this.setStartingLoyalty(5);
 

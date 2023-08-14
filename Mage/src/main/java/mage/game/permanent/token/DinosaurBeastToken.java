@@ -1,9 +1,9 @@
 package mage.game.permanent.token;
 
-        import mage.MageInt;
-        import mage.abilities.keyword.TrampleAbility;
-        import mage.constants.CardType;
-        import mage.constants.SubType;
+import mage.MageInt;
+import mage.abilities.keyword.TrampleAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author TheElk801
@@ -13,6 +13,7 @@ public final class DinosaurBeastToken extends TokenImpl {
     public DinosaurBeastToken() {
         this(0);
     }
+
     public DinosaurBeastToken(int xValue) {
         super("Dinosaur Beast Token", "X/X green Dinosaur Beast creature token with trample");
         cardType.add(CardType.CREATURE);
@@ -22,7 +23,6 @@ public final class DinosaurBeastToken extends TokenImpl {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
         addAbility(TrampleAbility.getInstance());
-        setOriginalExpansionSetCode("IKO");
     }
 
     private DinosaurBeastToken(final DinosaurBeastToken token) {

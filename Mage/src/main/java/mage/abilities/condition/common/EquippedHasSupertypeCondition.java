@@ -38,12 +38,12 @@ public class EquippedHasSupertypeCondition implements Condition {
             }
             if (attachedTo != null) {
                 if (superType != null) {
-                    if (attachedTo.getSuperType().contains(this.superType)) {
+                    if (attachedTo.getSuperType(game).contains(this.superType)) {
                         return true;
                     }
                 } else {
                     for (SuperType s : superTypes) {
-                        if (attachedTo.getSuperType().contains(s)) {
+                        if (attachedTo.getSuperType(game).contains(s)) {
                             return true;
                         }
                     }

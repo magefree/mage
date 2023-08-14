@@ -31,7 +31,7 @@ public final class ElspethSunsChampion extends CardImpl {
 
     public ElspethSunsChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELSPETH);
 
         this.setStartingLoyalty(4);

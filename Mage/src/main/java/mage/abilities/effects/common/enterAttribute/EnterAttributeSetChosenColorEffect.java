@@ -21,7 +21,7 @@ public class EnterAttributeSetChosenColorEffect extends OneShotEffect {
         super(Outcome.Neutral);
     }
 
-    public EnterAttributeSetChosenColorEffect(final EnterAttributeSetChosenColorEffect effect) {
+    protected EnterAttributeSetChosenColorEffect(final EnterAttributeSetChosenColorEffect effect) {
         super(effect);
     }
 
@@ -33,7 +33,7 @@ public class EnterAttributeSetChosenColorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color") ;
+        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         if (permanent != null && color != null) {
             permanent.getColor().setColor(color);
             return true;

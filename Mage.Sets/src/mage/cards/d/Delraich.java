@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class Delraich extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent("black creature");
+            = new FilterControlledCreaturePermanent("black creatures");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

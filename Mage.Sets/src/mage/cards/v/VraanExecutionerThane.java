@@ -22,7 +22,7 @@ public final class VraanExecutionerThane extends CardImpl {
     public VraanExecutionerThane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(2);
@@ -32,7 +32,7 @@ public final class VraanExecutionerThane extends CardImpl {
         Ability ability = new DiesCreatureTriggeredAbility(
                 new LoseLifeOpponentsEffect(2), false,
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        ).setTriggerPhrase("Whenever one or more other creatures you control die, ").setTriggersOnce(true);
+        ).setTriggerPhrase("Whenever one or more other creatures you control die, ").setTriggersOnceEachTurn(true);
         ability.addEffect(new GainLifeEffect(2).concatBy("and"));
         this.addAbility(ability);
     }

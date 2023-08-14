@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import mage.constants.ManaType;
 
 /**
@@ -37,7 +38,7 @@ public class AnyColorLandsProduceManaAbility extends ActivatedManaAbilityImpl {
         super(Zone.BATTLEFIELD, new AnyColorLandsProduceManaEffect(targetController, onlyColors, filter), new TapSourceCost());
     }
 
-    public AnyColorLandsProduceManaAbility(final AnyColorLandsProduceManaAbility ability) {
+    protected AnyColorLandsProduceManaAbility(final AnyColorLandsProduceManaAbility ability) {
         super(ability);
     }
 

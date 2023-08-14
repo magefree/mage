@@ -23,7 +23,7 @@ public final class ExplodingBorders extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{G}");
 
         // Domain - Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library. Exploding Borders deals X damage to target player, where X is the number of basic land types among lands you control.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true));
         this.getSpellAbility().addEffect(new DamageTargetEffect(DomainValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().addHint(DomainHint.instance);

@@ -40,7 +40,7 @@ public final class UmbrisFearManifest extends CardImpl {
     public UmbrisFearManifest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(1);

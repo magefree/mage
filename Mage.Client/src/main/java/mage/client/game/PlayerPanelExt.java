@@ -103,10 +103,14 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             });
             final PriorityTimer pt = timer;
             timer.setTaskOnTick(() -> {
-                int priorityTimeValue = pt.getCount();
+                int priorityTimeValue = pt.getCount() + pt.getBufferCount();
                 String text = getPriorityTimeLeftString(priorityTimeValue);
+
                 PlayerPanelExt.this.avatar.setTopText(text);
+                PlayerPanelExt.this.avatar.setTopTextColor(pt.getBufferCount() > 0 ? Color.GREEN : null);
                 PlayerPanelExt.this.timerLabel.setText(text);
+                PlayerPanelExt.this.timerLabel
+                        .setForeground(pt.getBufferCount() > 0 ? Color.GREEN.darker().darker() : Color.BLACK);
                 PlayerPanelExt.this.avatar.repaint();
             });
             timer.init(gameId);
@@ -304,8 +308,13 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             if (player.getPriorityTimeLeft() != Integer.MAX_VALUE) {
                 String priorityTimeValue = getPriorityTimeLeftString(player);
                 this.timer.setCount(player.getPriorityTimeLeft());
+                this.timer.setBufferCount(player.getBufferTimeLeft());
                 this.avatar.setTopText(priorityTimeValue);
                 this.timerLabel.setText(priorityTimeValue);
+
+                this.avatar.setTopTextColor(player.getBufferTimeLeft() > 0 ? Color.GREEN : null);
+                this.timerLabel
+                        .setForeground(player.getBufferTimeLeft() > 0 ? Color.GREEN.darker().darker() : Color.BLACK);
             }
             if (player.isTimerActive()) {
                 this.timer.resume();
@@ -361,7 +370,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 countryname = "Unknown";
             }
             basicTooltipText = "<HTML>Name: " + player.getName()
-                    + "<br/>Country: " + countryname
+                    + "<br/>Flag: " + countryname
                     + "<br/>Constructed rating: " + player.getUserData().getConstructedRating()
                     + "<br/>Limited rating: " + player.getUserData().getLimitedRating()
                     + "<br/>Deck hash code: " + player.getDeckHashCode()
@@ -396,7 +405,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private String getPriorityTimeLeftString(PlayerView player) {
-        int priorityTimeLeft = player.getPriorityTimeLeft();
+        int priorityTimeLeft = player.getPriorityTimeLeft() + player.getBufferTimeLeft();
         return getPriorityTimeLeftString(priorityTimeLeft);
     }
 

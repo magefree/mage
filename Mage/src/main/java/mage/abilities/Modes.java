@@ -53,7 +53,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.eachModeMoreThanOnce = false;
     }
 
-    public Modes(final Modes modes) {
+    protected Modes(final Modes modes) {
         for (Map.Entry<UUID, Mode> entry : modes.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
@@ -208,9 +208,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             return realMaxModes;
         }
 
-        // use case: make all modes chooseable
+        // use case: make two modes chooseable (all cards that use this currently go from one to two)
         if (moreCondition != null && moreCondition.apply(game, source)) {
-            realMaxModes = this.size();
+            realMaxModes = 2;
         }
 
         // use case: limit max modes by opponents (wtf?!)

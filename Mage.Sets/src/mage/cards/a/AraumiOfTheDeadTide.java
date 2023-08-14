@@ -26,7 +26,7 @@ public final class AraumiOfTheDeadTide extends CardImpl {
     public AraumiOfTheDeadTide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);

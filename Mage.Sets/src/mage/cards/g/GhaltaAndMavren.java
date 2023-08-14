@@ -41,7 +41,7 @@ public final class GhaltaAndMavren extends CardImpl {
     public GhaltaAndMavren(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{W}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.DINOSAUR);
         this.subtype.add(SubType.VAMPIRE);
         this.power = new MageInt(12);

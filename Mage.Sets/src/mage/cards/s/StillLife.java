@@ -25,7 +25,7 @@ public final class StillLife extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");
 
         // {G}{G}: Still Life becomes a 4/3 Centaur creature until end of turn. It's still an enchantment.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new StillLifeCentaur(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{G}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new StillLifeCentaur(), CardType.ENCHANTMENT, Duration.EndOfTurn), new ManaCostsImpl<>("{G}{G}")));
     }
 
     private StillLife(final StillLife card) {
@@ -41,7 +41,7 @@ public final class StillLife extends CardImpl {
 class StillLifeCentaur extends TokenImpl {
 
     public StillLifeCentaur() {
-        super("Centaur", "4/3 Centaur creature token");
+        super("Centaur", "4/3 Centaur creature");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.CENTAUR);
         power = new MageInt(4);

@@ -44,7 +44,7 @@ public final class NahiriTheUnforgiving extends CardImpl {
 
     public NahiriTheUnforgiving(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{R/W/P}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAHIRI);
 
         this.setStartingLoyalty(5);

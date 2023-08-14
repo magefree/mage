@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrBattleTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class DeeprootWayfinder extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Deeproot Wayfinder deals combat damage to a player or battle, surveil 1, then you may return a land card from your graveyard to the battlefield tapped.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DeeprootWayfinderEffect(), false).setOrBattle(true));
+        this.addAbility(new DealsCombatDamageToAPlayerOrBattleTriggeredAbility(new DeeprootWayfinderEffect(), false));
     }
 
     private DeeprootWayfinder(final DeeprootWayfinder card) {

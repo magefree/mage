@@ -30,7 +30,7 @@ public final class BazaarOfWonders extends CardImpl {
     public BazaarOfWonders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
-        this.addSuperType(SuperType.WORLD);
+        this.supertype.add(SuperType.WORLD);
 
         // When Bazaar of Wonders enters the battlefield, exile all cards from all graveyards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileGraveyardAllPlayersEffect()));

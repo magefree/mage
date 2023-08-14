@@ -53,7 +53,7 @@ public final class TemurRunemark extends CardImpl {
         // Enchanted creature has trample as long as you control a blue or red permanent.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA),
-                new PermanentsOnTheBattlefieldCondition(filter), "{this} has trample as long as you control a blue or red permanent")));
+                new PermanentsOnTheBattlefieldCondition(filter), "Enchanted creature has trample as long as you control a blue or red permanent")));
     }
 
     private TemurRunemark(final TemurRunemark card) {

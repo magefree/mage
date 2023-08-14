@@ -15,7 +15,6 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com, North
  */
 public class BoostEnchantedEffect extends ContinuousEffectImpl {
@@ -43,7 +42,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
         this.staticText = "enchanted creature gets " + CardUtil.getBoostText(power, toughness, duration);
     }
 
-    public BoostEnchantedEffect(final BoostEnchantedEffect effect) {
+    protected BoostEnchantedEffect(final BoostEnchantedEffect effect) {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();

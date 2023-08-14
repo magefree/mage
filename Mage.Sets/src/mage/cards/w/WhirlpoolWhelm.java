@@ -61,8 +61,8 @@ class WhirlpoolWhelmEffect extends OneShotEffect {
         Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null) {
             boolean topOfLibrary = false;
-            if (ClashEffect.getInstance().apply(game, source)) {
-                topOfLibrary = controller.chooseUse(outcome, "Put " + creature.getLogName() + " to top of libraray instead?", source, game);
+            if (new ClashEffect().apply(game, source)) {
+                topOfLibrary = controller.chooseUse(outcome, "Put " + creature.getLogName() + " to top of its owner's library instead?", source, game);
             }
             if (topOfLibrary) {
                 controller.moveCardToLibraryWithInfo(creature, source, game, Zone.BATTLEFIELD, true, true);

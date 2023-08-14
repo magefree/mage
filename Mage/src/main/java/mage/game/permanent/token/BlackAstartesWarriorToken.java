@@ -1,11 +1,9 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
+import mage.abilities.keyword.MenaceAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
-
-import java.util.Arrays;
-import mage.abilities.keyword.MenaceAbility;
 
 /**
  * @author TheElk801
@@ -21,12 +19,9 @@ public final class BlackAstartesWarriorToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(new MenaceAbility());
-
-        availableImageSetCodes.addAll(Arrays.asList("40K"));
-        this.setTokenType(1);
     }
 
-    public BlackAstartesWarriorToken(final BlackAstartesWarriorToken token) {
+    protected BlackAstartesWarriorToken(final BlackAstartesWarriorToken token) {
         super(token);
     }
 

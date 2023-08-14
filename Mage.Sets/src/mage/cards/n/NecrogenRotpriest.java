@@ -27,7 +27,7 @@ import java.util.UUID;
 public final class NecrogenRotpriest extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("creature you control with toxic");
+            = new FilterControlledCreaturePermanent("a creature you control with toxic");
 
     static {
         filter.add(new AbilityPredicate(ToxicAbility.class));

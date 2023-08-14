@@ -19,7 +19,7 @@ public class SearchLibraryPutInGraveyardEffect extends SearchEffect {
         staticText = "search your library for a card, put that card into your graveyard, then shuffle";
     }
 
-    public SearchLibraryPutInGraveyardEffect(final SearchLibraryPutInGraveyardEffect effect) {
+    protected SearchLibraryPutInGraveyardEffect(final SearchLibraryPutInGraveyardEffect effect) {
         super(effect);
     }
 

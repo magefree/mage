@@ -43,7 +43,7 @@ public final class KadenaSlinkingSorcerer extends CardImpl {
     public KadenaSlinkingSorcerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NAGA);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);

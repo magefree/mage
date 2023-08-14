@@ -19,10 +19,17 @@ public final class SerraTheBenevolentEmblem extends Emblem {
 
     // -6: You get an emblem with "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead."
     public SerraTheBenevolentEmblem() {
-        this.setName("Emblem Serra");
+        super("Emblem Serra");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new SerraTheBenevolentEmblemEffect()));
+    }
 
-        this.setExpansionSetCodeForImage("MH1");
+    private SerraTheBenevolentEmblem(final SerraTheBenevolentEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public SerraTheBenevolentEmblem copy() {
+        return new SerraTheBenevolentEmblem(this);
     }
 }
 

@@ -28,7 +28,7 @@ public final class TakenumaAbandonedMire extends CardImpl {
     public TakenumaAbandonedMire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
 
         // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());

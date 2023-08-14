@@ -81,7 +81,7 @@ class ExpropriateEffect extends OneShotEffect {
         // extra turn
         int timeCount = vote.getVoteCount(true);
         for (int i = 0; i < timeCount; i++) {
-            game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
+            game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
         }
 
         // gain control

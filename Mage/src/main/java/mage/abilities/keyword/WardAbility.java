@@ -5,6 +5,8 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
+import mage.abilities.icon.CardIconImpl;
+import mage.abilities.icon.CardIconType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -34,6 +36,9 @@ public class WardAbility extends TriggeredAbilityImpl {
         this.genericMana = null;
         this.showAbilityHint = showAbilityHint;
         this.whereXIs = null;
+
+        this.addIcon(new CardIconImpl(CardIconType.ABILITY_HEXPROOF,
+                CardUtil.getTextWithFirstCharUpperCase(getRuleWithoutHint())));
     }
 
     public WardAbility(DynamicValue genericMana) {
@@ -46,6 +51,9 @@ public class WardAbility extends TriggeredAbilityImpl {
         this.whereXIs = whereXIs;
         this.cost = null;
         this.showAbilityHint = false;
+
+        this.addIcon(new CardIconImpl(CardIconType.ABILITY_HEXPROOF,
+                CardUtil.getTextWithFirstCharUpperCase(getRuleWithoutHint())));
     }
 
     private WardAbility(final WardAbility ability) {
@@ -97,8 +105,7 @@ public class WardAbility extends TriggeredAbilityImpl {
         return new WardAbility(this);
     }
 
-    @Override
-    public String getRule() {
+    public String getRuleWithoutHint() {
         StringBuilder sb = new StringBuilder("ward");
         if (cost != null) {
             if (cost instanceof ManaCost) {
@@ -113,23 +120,33 @@ public class WardAbility extends TriggeredAbilityImpl {
             }
         }
 
-        if (showAbilityHint) {
-            sb.append(" <i>(Whenever this creature becomes the target of a spell or ability an opponent controls, " +
-                    "counter it unless that player ");
-            if (cost != null) {
-                if (cost instanceof ManaCost) {
-                    sb.append("pays ").append(cost.getText());
-                } else {
-                    sb.append(cost.getText().replace("pay ", "pays "));
-                }
-                sb.append(".)</i>");
+        return sb.toString();
+    }
+
+    @Override
+    public String getRule() {
+        String rule = getRuleWithoutHint();
+
+        if (!showAbilityHint) {
+            return rule;
+        }
+
+        StringBuilder sb = new StringBuilder(rule);
+        sb.append(" <i>(Whenever this creature becomes the target of a spell or ability an opponent controls, " +
+                "counter it unless that player ");
+        if (cost != null) {
+            if (cost instanceof ManaCost) {
+                sb.append("pays ").append(cost.getText());
             } else {
-                sb.append("pays {X}");
-                if (whereXIs != null) {
-                    sb.append(whereXIs);
-                }
-                sb.append(".)</i>");
+                sb.append(cost.getText().replace("pay ", "pays "));
             }
+            sb.append(".)</i>");
+        } else {
+            sb.append("pays {X}");
+            if (whereXIs != null) {
+                sb.append(whereXIs);
+            }
+            sb.append(".)</i>");
         }
 
         return sb.toString();

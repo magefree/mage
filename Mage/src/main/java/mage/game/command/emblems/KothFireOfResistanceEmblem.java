@@ -22,13 +22,21 @@ public final class KothFireOfResistanceEmblem extends Emblem {
 
     // −7: You get an emblem with "Whenever a Mountain enters the battlefield under your control, this emblem deals 4 damage to any target."
     public KothFireOfResistanceEmblem() {
-        this.setName("Emblem Koth");
-        this.setExpansionSetCodeForImage("ONE");
+        super("Emblem Koth");
 
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.COMMAND, new DamageTargetEffect(4).setText("this emblem deals 4 damage to any target"),
                 filterMountain, false);
         ability.addTarget(new TargetAnyTarget());
         getAbilities().add(ability);
+    }
+
+    private KothFireOfResistanceEmblem(final KothFireOfResistanceEmblem card) {
+        super(card);
+    }
+
+    @Override
+    public KothFireOfResistanceEmblem copy() {
+        return new KothFireOfResistanceEmblem(this);
     }
 }

@@ -119,7 +119,7 @@ public interface Permanent extends Card, Controllable {
 
     int getAttachedToZoneChangeCounter();
 
-    void attachTo(UUID permanentId, Ability source, Game game);
+    void attachTo(UUID attachToObjectId, Ability source, Game game);
 
     void unattach(Game game);
 
@@ -215,6 +215,7 @@ public interface Permanent extends Card, Controllable {
      * @param ability
      * @param sourceId
      * @param game
+     * @return can be null for exists abilities
      */
     Ability addAbility(Ability ability, UUID sourceId, Game game);
 
@@ -422,6 +423,10 @@ public interface Permanent extends Card, Controllable {
     void setManifested(boolean value);
 
     boolean isManifested();
+
+    boolean isRingBearer();
+
+    void setRingBearer(Game game, boolean value);
 
     @Override
     Permanent copy();

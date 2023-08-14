@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -70,7 +70,7 @@ class LaezelsAcrobaticsEffect extends RollDieWithResultTableEffect {
     return new LaezelsAcrobaticsEffect(this);
   }
 
-  private static final FilterCreaturePermanent creatureFilter = new FilterCreaturePermanent();
+  private static final FilterControlledCreaturePermanent creatureFilter = new FilterControlledCreaturePermanent();
 
   static {
     creatureFilter.add(TokenPredicate.FALSE);

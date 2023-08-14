@@ -29,7 +29,7 @@ public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever " + filter.getMessage() + " becomes blocked, ");
     }
 
-    public BecomesBlockedAllTriggeredAbility(final BecomesBlockedAllTriggeredAbility ability) {
+    protected BecomesBlockedAllTriggeredAbility(final BecomesBlockedAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;

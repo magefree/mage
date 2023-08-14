@@ -25,7 +25,7 @@ public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When you cast this spell, ");
     }
 
-    public CastSourceTriggeredAbility(final CastSourceTriggeredAbility ability) {
+    protected CastSourceTriggeredAbility(final CastSourceTriggeredAbility ability) {
         super(ability);
     }
 

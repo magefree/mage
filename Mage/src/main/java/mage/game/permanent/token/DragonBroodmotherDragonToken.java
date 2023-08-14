@@ -1,15 +1,12 @@
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author spjspj
  */
 public final class DragonBroodmotherDragonToken extends TokenImpl {
@@ -23,11 +20,10 @@ public final class DragonBroodmotherDragonToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
-        addAbility(new DevourAbility(DevourEffect.DevourFactor.Devour2));
-        setOriginalExpansionSetCode("ARB");
+        addAbility(new DevourAbility(2));
     }
 
-    public DragonBroodmotherDragonToken(final DragonBroodmotherDragonToken token) {
+    protected DragonBroodmotherDragonToken(final DragonBroodmotherDragonToken token) {
         super(token);
     }
 

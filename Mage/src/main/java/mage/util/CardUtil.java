@@ -29,7 +29,6 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.GameState;
-import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -973,7 +972,8 @@ public final class CardUtil {
         if (text.startsWith("a ")
                 || text.startsWith("an ")
                 || text.startsWith("another ")
-                || text.startsWith("any ")) {
+                || text.startsWith("any ")
+                || text.startsWith("one ")) {
             return text;
         }
         return (!text.isEmpty() && vowels.contains(text.substring(0, 1))) ? "an " + text : "a " + text;
@@ -981,6 +981,10 @@ public final class CardUtil {
 
     public static String italicizeWithEmDash(String text) {
         return "<i>" + text + "</i> &mdash; ";
+    }
+
+    public static String stripReminderText(String text) {
+        return text.endsWith(")</i>") ? text.substring(0, text.indexOf(" <i>(")) : text;
     }
 
     public static Set<UUID> getAllSelectedTargets(Ability ability, Game game) {
@@ -1070,8 +1074,8 @@ public final class CardUtil {
             permCard = card;
         } else if (card instanceof AdventureCard) {
             permCard = card;
-        } else if (card instanceof ModalDoubleFacesCard) {
-            permCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+        } else if (card instanceof ModalDoubleFacedCard) {
+            permCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
         } else {
             permCard = card;
         }
@@ -1094,8 +1098,8 @@ public final class CardUtil {
         // it's ok to return one name only cause NamePredicate can find same card by first name
         if (card instanceof SplitCard) {
             return ((SplitCard) card).getLeftHalfCard().getName();
-        } else if (card instanceof ModalDoubleFacesCard) {
-            return ((ModalDoubleFacesCard) card).getLeftHalfCard().getName();
+        } else if (card instanceof ModalDoubleFacedCard) {
+            return ((ModalDoubleFacedCard) card).getLeftHalfCard().getName();
         } else {
             return card.getName();
         }
@@ -1117,31 +1121,34 @@ public final class CardUtil {
         try {
             List<String> rules = rulesSource.getRules(cardName);
 
-            if (game != null) {
+            if (game == null || game.getPhase() == null) {
+                // dynamic hints for started game only
+                return rules;
+            }
 
-                // debug state
-                rules.addAll(game.getState().getCardState(cardId).getInfo().values());
+            // additional effect's info from card.addInfo methods
+            rules.addAll(game.getState().getCardState(cardId).getInfo().values());
 
-                // ability hints
-                List<String> abilityHints = new ArrayList<>();
-                if (HintUtils.ABILITY_HINTS_ENABLE) {
-                    for (Ability ability : hintsSource) {
-                        for (Hint hint : ability.getHints()) {
-                            String s = hint.getText(game, ability);
-                            if (s != null && !s.isEmpty()) {
-                                abilityHints.add(s);
-                            }
+            // ability hints
+            List<String> abilityHints = new ArrayList<>();
+            if (HintUtils.ABILITY_HINTS_ENABLE) {
+                for (Ability ability : hintsSource) {
+                    for (Hint hint : ability.getHints()) {
+                        String s = hint.getText(game, ability);
+                        if (s != null && !s.isEmpty()) {
+                            abilityHints.add(s);
                         }
                     }
                 }
-
-                // restrict hints only for permanents, not cards
-                // total hints
-                if (!abilityHints.isEmpty()) {
-                    rules.add(HintUtils.HINT_START_MARK);
-                    HintUtils.appendHints(rules, abilityHints);
-                }
             }
+
+            // restrict hints only for permanents, not cards
+            // total hints
+            if (!abilityHints.isEmpty()) {
+                rules.add(HintUtils.HINT_START_MARK);
+                HintUtils.appendHints(rules, abilityHints);
+            }
+
             return rules;
         } catch (Exception e) {
             logger.error("Exception in rules generation for card: " + cardName, e);
@@ -1154,14 +1161,15 @@ public final class CardUtil {
      *
      * @param game
      * @param controller
-     * @param targetPlayer
+     * @param playerUnderControl
      * @param givePauseForResponse if you want to give controller time to watch opponent's hand (if you remove control effect in the end of code)
      */
-    public static void takeControlUnderPlayerStart(Game game, Player controller, Player targetPlayer, boolean givePauseForResponse) {
-        controller.controlPlayersTurn(game, targetPlayer.getId());
+    public static void takeControlUnderPlayerStart(Game game, Ability source, Player controller, Player playerUnderControl, boolean givePauseForResponse) {
+        // game logs added in child's call
+        controller.controlPlayersTurn(game, playerUnderControl.getId(), CardUtil.getSourceLogName(game, source));
         if (givePauseForResponse) {
             while (controller.canRespond()) {
-                if (controller.chooseUse(Outcome.Benefit, "You got control of " + targetPlayer.getLogName()
+                if (controller.chooseUse(Outcome.Benefit, "You got control of " + playerUnderControl.getLogName()
                                 + ". Use switch hands button to view opponent's hand.", null,
                         "Continue", "Wait", null, game)) {
                     break;
@@ -1175,12 +1183,13 @@ public final class CardUtil {
      *
      * @param game
      * @param controller
-     * @param targetPlayer
+     * @param playerUnderControl
      */
-    public static void takeControlUnderPlayerEnd(Game game, Player controller, Player targetPlayer) {
-        targetPlayer.setGameUnderYourControl(true, false);
-        if (!targetPlayer.getTurnControlledBy().equals(controller.getId())) {
-            controller.getPlayersUnderYourControl().remove(targetPlayer.getId());
+    public static void takeControlUnderPlayerEnd(Game game, Ability source, Player controller, Player playerUnderControl) {
+        playerUnderControl.setGameUnderYourControl(true, false);
+        if (!playerUnderControl.getTurnControlledBy().equals(controller.getId())) {
+            game.informPlayers(controller + " return control of the turn to " + playerUnderControl.getLogName() + CardUtil.getSourceLogName(game, source));
+            controller.getPlayersUnderYourControl().remove(playerUnderControl.getId());
         }
     }
 
@@ -1384,9 +1393,9 @@ public final class CardUtil {
         }
 
         // handle MDFC
-        if (card instanceof ModalDoubleFacesCard) {
-            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+        if (card instanceof ModalDoubleFacedCard) {
+            ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+            ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
             if (manaCost != null) {
                 // some MDFC cards are lands.  IE: sea gate restoration
                 if (!leftHalfCard.isLand(game)) {
@@ -1442,9 +1451,9 @@ public final class CardUtil {
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
-        if (card instanceof ModalDoubleFacesCard) {
-            ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-            ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+        if (card instanceof ModalDoubleFacedCard) {
+            ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+            ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
@@ -1582,8 +1591,8 @@ public final class CardUtil {
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof ModalDoubleFacesCard || object instanceof ModalDoubleFacesCardHalf) {
-            ModalDoubleFacesCard mainCard = (ModalDoubleFacesCard) ((Card) object).getMainCard();
+        } else if (object instanceof ModalDoubleFacedCard || object instanceof ModalDoubleFacedCardHalf) {
+            ModalDoubleFacedCard mainCard = (ModalDoubleFacedCard) ((Card) object).getMainCard();
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
@@ -1786,47 +1795,40 @@ public final class CardUtil {
 
 
     /**
-     * Copy image related data from one object to another (card number, set code, token type)
+     * Copy image related data from one object to another (set code, card number, image number)
      * Use it in copy/transform effects
      */
-    public static void copySetAndCardNumber(Permanent permanent, MageObject copyFromObject) {
+    public static void copySetAndCardNumber(MageObject targetObject, MageObject copyFromObject) {
         String needSetCode;
         String needCardNumber;
-        int needTokenType;
-        if (copyFromObject instanceof CommandObject) {
-            needSetCode = ((CommandObject) copyFromObject).getExpansionSetCodeForImage();
-            needCardNumber = "0";
-            needTokenType = 0;
-        } else if (copyFromObject instanceof PermanentCard) {
-            needSetCode = ((PermanentCard) copyFromObject).getExpansionSetCode();
-            needCardNumber = ((PermanentCard) copyFromObject).getCardNumber();
-            needTokenType = 0;
-        } else if (copyFromObject instanceof PermanentToken) {
-            needSetCode = ((PermanentToken) copyFromObject).getToken().getOriginalExpansionSetCode();
-            needCardNumber = ((PermanentToken) copyFromObject).getToken().getOriginalCardNumber();
-            needTokenType = ((PermanentToken) copyFromObject).getToken().getTokenType();
-        } else if (copyFromObject instanceof Card) {
-            needSetCode = ((Card) copyFromObject).getExpansionSetCode();
-            needCardNumber = ((Card) copyFromObject).getCardNumber();
-            needTokenType = 0;
-        } else if (copyFromObject instanceof Token) {
-            // TODO: make this work
-            return;
-        } else {
-            throw new IllegalStateException("Unsupported copyFromObject class: " + copyFromObject.getClass().getSimpleName());
-        }
+        int needImageNumber;
+        needSetCode = copyFromObject.getExpansionSetCode();
+        needCardNumber = copyFromObject.getCardNumber();
+        needImageNumber = copyFromObject.getImageNumber();
 
-        copySetAndCardNumber(permanent, needSetCode, needCardNumber, needTokenType);
+        if (targetObject instanceof Permanent) {
+            copySetAndCardNumber((Permanent) targetObject, needSetCode, needCardNumber, needImageNumber);
+        } else if (targetObject instanceof Token) {
+            copySetAndCardNumber((Token) targetObject, needSetCode, needCardNumber, needImageNumber);
+        } else {
+            throw new IllegalStateException("Unsupported target object class: " + targetObject.getClass().getSimpleName());
+        }
     }
 
-    public static void copySetAndCardNumber(Permanent permanent, String newSetCode, String newCardNumber, Integer newTokenType) {
-        if (permanent instanceof PermanentToken) {
-            ((PermanentToken) permanent).getToken().setOriginalExpansionSetCode(newSetCode);
-            ((PermanentToken) permanent).getToken().setExpansionSetCodeForImage(newCardNumber);
-            ((PermanentToken) permanent).getToken().setTokenType(newTokenType);
+    private static void copySetAndCardNumber(Permanent targetPermanent, String newSetCode, String newCardNumber, Integer newImageNumber) {
+        if (targetPermanent instanceof PermanentCard
+                || targetPermanent instanceof PermanentToken) {
+            targetPermanent.setExpansionSetCode(newSetCode);
+            targetPermanent.setCardNumber(newCardNumber);
+            targetPermanent.setImageNumber(newImageNumber);
         } else {
-            permanent.setExpansionSetCode(newSetCode);
-            permanent.setCardNumber(newCardNumber);
+            throw new IllegalArgumentException("Wrong code usage: un-supported target permanent type: " + targetPermanent.getClass().getSimpleName());
         }
+    }
+
+    private static void copySetAndCardNumber(Token targetToken, String newSetCode, String newCardNumber, Integer newImageNumber) {
+        targetToken.setExpansionSetCode(newSetCode);
+        targetToken.setCardNumber(newCardNumber);
+        targetToken.setImageNumber(newImageNumber);
     }
 }

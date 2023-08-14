@@ -12,7 +12,7 @@ import java.util.UUID;
 public class YargleAndMultani extends CardImpl {
     public YargleAndMultani(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{G}");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.addSubType(SubType.FROG);
         this.addSubType(SubType.SPIRIT);
         this.addSubType(SubType.ELEMENTAL);

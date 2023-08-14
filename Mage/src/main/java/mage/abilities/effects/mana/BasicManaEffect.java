@@ -3,6 +3,7 @@ package mage.abilities.effects.mana;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -37,7 +38,7 @@ public class BasicManaEffect extends ManaEffect {
         this.netAmount = netAmount;
     }
 
-    public BasicManaEffect(final BasicManaEffect effect) {
+    protected BasicManaEffect(final BasicManaEffect effect) {
         super(effect);
         this.manaTemplate = effect.manaTemplate.copy();
         this.netAmount = effect.netAmount;

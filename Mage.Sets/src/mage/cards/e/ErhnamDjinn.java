@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -13,6 +12,8 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -35,9 +36,8 @@ public final class ErhnamDjinn extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, target non-Wall creature an opponent controls gains forestwalk until your next upkeep.
-        GainAbilityTargetEffect effect = new GainAbilityTargetEffect(new ForestwalkAbility(false), Duration.Custom,
+        GainAbilityTargetEffect effect = new GainAbilityTargetEffect(new ForestwalkAbility(false), Duration.UntilYourNextUpkeepStep,
         "target non-Wall creature an opponent controls gains forestwalk until your next upkeep");
-        effect.setDurationToPhase(PhaseStep.UPKEEP);
         Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

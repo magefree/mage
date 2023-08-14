@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class BecomesRenownedSourceTriggeredAbility extends TriggeredAbilityImpl {
@@ -19,7 +18,7 @@ public class BecomesRenownedSourceTriggeredAbility extends TriggeredAbilityImpl 
         setTriggerPhrase("When {this} becomes renowned, ");
     }
 
-    public BecomesRenownedSourceTriggeredAbility(final BecomesRenownedSourceTriggeredAbility ability) {
+    protected BecomesRenownedSourceTriggeredAbility(final BecomesRenownedSourceTriggeredAbility ability) {
         super(ability);
         this.renownValue = ability.renownValue;
     }

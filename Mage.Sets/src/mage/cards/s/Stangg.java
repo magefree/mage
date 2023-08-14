@@ -28,7 +28,7 @@ public final class Stangg extends CardImpl {
 
     public Stangg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");
-        addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

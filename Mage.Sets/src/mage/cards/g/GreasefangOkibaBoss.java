@@ -37,7 +37,7 @@ public final class GreasefangOkibaBoss extends CardImpl {
     public GreasefangOkibaBoss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.RAT);
         this.subtype.add(SubType.PILOT);
         this.power = new MageInt(4);

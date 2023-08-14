@@ -31,7 +31,7 @@ public final class VoharVodalianDesecrator extends CardImpl {
     public VoharVodalianDesecrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);

@@ -42,9 +42,12 @@ public class Premodern extends Constructed {
         setCodes.add(mage.sets.Legions.getInstance().getCode());
         setCodes.add(mage.sets.Scourge.getInstance().getCode());
 
-        // Ban List
+        // Ban List see: https://scryfall.com/search?q=banned%3Apremodern&as=checklist
+        // Updated last time 02-08-2023 (https://premodernmagic.com/blog/ban-list-update-2023/)
+        banned.add("Amulet of Quoz");
         banned.add("Balance");
         banned.add("Brainstorm");
+        banned.add("Bronze Tablet");
         banned.add("Channel");
         banned.add("Demonic Consultation");
         banned.add("Earthcraft");
@@ -53,15 +56,20 @@ public class Premodern extends Constructed {
         banned.add("Force of Will");
         banned.add("Goblin Recruiter");
         banned.add("Grim Monolith");
+        banned.add("Jeweled Bird");
+        banned.add("Land Tax");
         banned.add("Mana Vault");
         banned.add("Memory Jar");
         banned.add("Mind's Desire");
         banned.add("Mind Twist");
         banned.add("Mystical Tutor");
         banned.add("Necropotence");
+        banned.add("Rebirth");
         banned.add("Strip Mine");
+        banned.add("Tempest Efreet");
         banned.add("Tendrils of Agony");
         banned.add("Time Spiral");
+        banned.add("Timmerian Fiends");
         banned.add("Tolarian Academy");
         banned.add("Vampiric Tutor");
         banned.add("Windfall");

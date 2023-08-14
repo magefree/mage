@@ -14,10 +14,9 @@ public final class DinosaurCatToken extends TokenImpl {
         subtype.add(SubType.CAT);
         power = new MageInt(2);
         toughness = new MageInt(2);
-        setOriginalExpansionSetCode("C20");
     }
 
-    public DinosaurCatToken(final DinosaurCatToken token) {
+    protected DinosaurCatToken(final DinosaurCatToken token) {
         super(token);
     }
 

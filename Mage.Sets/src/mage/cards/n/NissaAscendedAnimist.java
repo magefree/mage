@@ -39,7 +39,7 @@ public final class NissaAscendedAnimist extends CardImpl {
     public NissaAscendedAnimist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{G}{G}{G/P}{G/P}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.NISSA);
         this.setStartingLoyalty(7);
 

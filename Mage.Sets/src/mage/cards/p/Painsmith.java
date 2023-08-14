@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.common.FilterArtifactSpell;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -29,8 +29,7 @@ public final class Painsmith extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
-        SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), filter, true);
+        SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), StaticFilters.FILTER_SPELL_AN_ARTIFACT, true);
         ability.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

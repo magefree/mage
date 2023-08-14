@@ -4,16 +4,11 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class Warhammer40000 extends ExpansionSet {
-
-    private static final List<String> unfinished = Arrays.asList("Arco-Flagellant", "Sicarian Infiltrator", "Space Marine Devastator", "Ultramarines Honour Guard", "Vanguard Suppressor", "Zephyrim");
-
+	
     private static final Warhammer40000 instance = new Warhammer40000();
 
     public static Warhammer40000 getInstance() {
@@ -43,6 +38,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Bastion Protector", 182, Rarity.RARE, mage.cards.b.BastionProtector.class));
         cards.add(new SetCardInfo("Be'lakor, the Dark Master", 6, Rarity.MYTHIC, mage.cards.b.BelakorTheDarkMaster.class));
         cards.add(new SetCardInfo("Beacon of Unrest", 194, Rarity.RARE, mage.cards.b.BeaconOfUnrest.class));
+        cards.add(new SetCardInfo("Belisarius Cawl", 106, Rarity.RARE, mage.cards.b.BelisariusCawl.class));
         cards.add(new SetCardInfo("Bile Blight", 195, Rarity.UNCOMMON, mage.cards.b.BileBlight.class));
         cards.add(new SetCardInfo("Biophagus", 87, Rarity.RARE, mage.cards.b.Biophagus.class));
         cards.add(new SetCardInfo("Biotransference", 30, Rarity.RARE, mage.cards.b.Biotransference.class));
@@ -86,6 +82,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Cryptothrall", 155, Rarity.RARE, mage.cards.c.Cryptothrall.class));
         cards.add(new SetCardInfo("Cultivate", 211, Rarity.COMMON, mage.cards.c.Cultivate.class));
         cards.add(new SetCardInfo("Cybernetica Datasmith", 114, Rarity.RARE, mage.cards.c.CyberneticaDatasmith.class));
+        cards.add(new SetCardInfo("Dark Apostle", 75, Rarity.RARE, mage.cards.d.DarkApostle.class));
         cards.add(new SetCardInfo("Dark Ritual", 196, Rarity.COMMON, mage.cards.d.DarkRitual.class));
         cards.add(new SetCardInfo("Darkness", 197, Rarity.COMMON, mage.cards.d.Darkness.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 274, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
@@ -183,6 +180,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Mystic Forge", 246, Rarity.RARE, mage.cards.m.MysticForge.class));
         cards.add(new SetCardInfo("Necron Deathmark", 42, Rarity.RARE, mage.cards.n.NecronDeathmark.class));
         cards.add(new SetCardInfo("Necron Monolith", 161, Rarity.RARE, mage.cards.n.NecronMonolith.class));
+        cards.add(new SetCardInfo("Necron Overlord", 43, Rarity.RARE, mage.cards.n.NecronOverlord.class));
         cards.add(new SetCardInfo("New Horizons", 218, Rarity.COMMON, mage.cards.n.NewHorizons.class));
         cards.add(new SetCardInfo("Nexos", 95, Rarity.RARE, mage.cards.n.Nexos.class));
         cards.add(new SetCardInfo("Night Scythe", 162, Rarity.UNCOMMON, mage.cards.n.NightScythe.class));
@@ -233,6 +231,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Skorpekh Lord", 58, Rarity.RARE, mage.cards.s.SkorpekhLord.class));
         cards.add(new SetCardInfo("Skullclamp", 248, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Skycloud Expanse", 294, Rarity.RARE, mage.cards.s.SkycloudExpanse.class));
+        cards.add(new SetCardInfo("Sloppity Bilepiper", 59, Rarity.RARE, mage.cards.s.SloppityBilepiper.class));
         cards.add(new SetCardInfo("Sol Ring", 249, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Space Marine Devastator", 14, Rarity.RARE, mage.cards.s.SpaceMarineDevastator.class));
         cards.add(new SetCardInfo("Space Marine Scout", 15, Rarity.UNCOMMON, mage.cards.s.SpaceMarineScout.class));
@@ -260,6 +259,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("The First Tyrannic War", 121, Rarity.RARE, mage.cards.t.TheFirstTyrannicWar.class));
         cards.add(new SetCardInfo("The Flesh Is Weak", 122, Rarity.RARE, mage.cards.t.TheFleshIsWeak.class));
         cards.add(new SetCardInfo("The Golden Throne", 157, Rarity.RARE, mage.cards.t.TheGoldenThrone.class));
+        cards.add(new SetCardInfo("The Horus Heresy", 126, Rarity.RARE, mage.cards.t.TheHorusHeresy.class));
         cards.add(new SetCardInfo("The Lost and the Damned", 129, Rarity.UNCOMMON, mage.cards.t.TheLostAndTheDamned.class));
         cards.add(new SetCardInfo("The Swarmlord", 4, Rarity.MYTHIC, mage.cards.t.TheSwarmlord.class));
         cards.add(new SetCardInfo("The War in Heaven", 69, Rarity.RARE, mage.cards.t.TheWarInHeaven.class));
@@ -276,6 +276,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Trazyn the Infinite", 65, Rarity.RARE, mage.cards.t.TrazynTheInfinite.class));
         cards.add(new SetCardInfo("Triarch Praetorian", 66, Rarity.UNCOMMON, mage.cards.t.TriarchPraetorian.class));
         cards.add(new SetCardInfo("Triarch Stalker", 67, Rarity.RARE, mage.cards.t.TriarchStalker.class));
+        cards.add(new SetCardInfo("Triumph of Saint Katherine", 17, Rarity.RARE, mage.cards.t.TriumphOfSaintKatherine.class));
         cards.add(new SetCardInfo("Trygon Prime", 143, Rarity.UNCOMMON, mage.cards.t.TrygonPrime.class));
         cards.add(new SetCardInfo("Tyranid Harridan", 144, Rarity.RARE, mage.cards.t.TyranidHarridan.class));
         cards.add(new SetCardInfo("Tyranid Invasion", 102, Rarity.UNCOMMON, mage.cards.t.TyranidInvasion.class));
@@ -297,7 +298,5 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Worn Powerstone", 263, Rarity.UNCOMMON, mage.cards.w.WornPowerstone.class));
         cards.add(new SetCardInfo("Zephyrim", 20, Rarity.RARE, mage.cards.z.Zephyrim.class));
         cards.add(new SetCardInfo("Zoanthrope", 149, Rarity.RARE, mage.cards.z.Zoanthrope.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName())); // remove when mechanic is implemented
     }
 }

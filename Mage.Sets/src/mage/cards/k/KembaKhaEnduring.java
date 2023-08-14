@@ -39,7 +39,7 @@ public final class KembaKhaEnduring extends CardImpl {
     public KembaKhaEnduring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);

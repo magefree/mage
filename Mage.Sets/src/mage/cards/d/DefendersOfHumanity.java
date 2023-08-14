@@ -1,11 +1,13 @@
 package mage.cards.d;
 
+import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
@@ -18,9 +20,9 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.game.permanent.token.WhiteAstartesWarriorToken;
 
 import java.util.UUID;
-import mage.game.permanent.token.WhiteAstartesWarriorToken;
 
 /**
  * @author TheElk801
@@ -44,12 +46,14 @@ public final class DefendersOfHumanity extends CardImpl {
         ));
 
         // {X}{2}{W}, Exile Defenders of Humanity: Create X 2/2 white Astartes Warrior creature tokens with vigilance. Activate only if you control no creatures and only during your turn.
-        this.addAbility(new ActivateIfConditionActivatedAbility(
+        Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(
                         new WhiteAstartesWarriorToken(), GetXValue.instance
                 ), new ManaCostsImpl<>("{X}{2}{W}"), condition
-        ).addHint(CreaturesYouControlHint.instance).addHint(MyTurnHint.instance));
+        ).addHint(CreaturesYouControlHint.instance).addHint(MyTurnHint.instance);
+        ability.addCost(new ExileSourceCost());
+        this.addAbility(ability);
     }
 
     private DefendersOfHumanity(final DefendersOfHumanity card) {

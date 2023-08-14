@@ -78,7 +78,7 @@ class SageOfHoursEffect extends OneShotEffect {
             }
             int turns = countersRemoved / 5;
             for (int i = 0; i < turns; i++) {
-                game.getState().getTurnMods().add(new TurnMod(player.getId(), false));
+                game.getState().getTurnMods().add(new TurnMod(player.getId()).withExtraTurn());
             }
             game.informPlayers("Removed " + countersRemoved +
                     " +1/+1 counters: " + player.getLogName() + " takes " +

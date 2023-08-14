@@ -9,7 +9,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class SetPlayerLifeSourceEffect extends OneShotEffect {
@@ -26,7 +25,7 @@ public class SetPlayerLifeSourceEffect extends OneShotEffect {
         this.staticText = setText();
     }
 
-    public SetPlayerLifeSourceEffect(final SetPlayerLifeSourceEffect effect) {
+    protected SetPlayerLifeSourceEffect(final SetPlayerLifeSourceEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

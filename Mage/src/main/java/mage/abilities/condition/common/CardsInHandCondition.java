@@ -107,6 +107,7 @@ public class CardsInHandCondition implements Condition {
                 if (count > 0) {
                     sb.append("exactly ");
                     sb.append(CardUtil.numberToText(count));
+                    sb.append(" ");
                 } else {
                     sb.append("no ");
                 }

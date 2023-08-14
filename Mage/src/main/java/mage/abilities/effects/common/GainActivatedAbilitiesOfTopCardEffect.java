@@ -23,7 +23,7 @@ public class GainActivatedAbilitiesOfTopCardEffect extends ContinuousEffectImpl 
         this.filter = filter;
     }
 
-    public GainActivatedAbilitiesOfTopCardEffect(final GainActivatedAbilitiesOfTopCardEffect effect) {
+    protected GainActivatedAbilitiesOfTopCardEffect(final GainActivatedAbilitiesOfTopCardEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

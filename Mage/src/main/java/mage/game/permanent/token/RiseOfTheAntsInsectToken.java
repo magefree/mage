@@ -4,8 +4,6 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.Arrays;
-
 /**
  * @author TheElk801
  */
@@ -18,11 +16,9 @@ public final class RiseOfTheAntsInsectToken extends TokenImpl {
         subtype.add(SubType.INSECT);
         power = new MageInt(3);
         toughness = new MageInt(3);
-
-        availableImageSetCodes.addAll(Arrays.asList("MID"));
     }
 
-    public RiseOfTheAntsInsectToken(final RiseOfTheAntsInsectToken token) {
+    protected RiseOfTheAntsInsectToken(final RiseOfTheAntsInsectToken token) {
         super(token);
     }
 

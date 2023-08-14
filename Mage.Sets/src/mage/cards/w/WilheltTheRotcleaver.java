@@ -18,6 +18,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.ZombieDecayedToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -35,12 +36,13 @@ public final class WilheltTheRotcleaver extends CardImpl {
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(DecayedAbility.class)));
+        filter.add(AnotherPredicate.instance);
     }
 
     public WilheltTheRotcleaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);

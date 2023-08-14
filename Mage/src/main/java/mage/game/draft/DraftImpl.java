@@ -34,7 +34,7 @@ public abstract class DraftImpl implements Draft {
     protected int cardNum = 1; // starts with card number 1, increases by +1 after each picking
     protected TimingOption timing;
     protected int boosterLoadingCounter; // number of times the boosters have been sent to players until all are confirmed to have received them
-    protected final int BOOSTER_LOADING_INTERVAL = 3; // interval in seconds
+    protected final int BOOSTER_LOADING_INTERVAL = 2; // interval in seconds
 
     protected boolean abort = false;
     protected boolean started = false;
@@ -158,9 +158,11 @@ public abstract class DraftImpl implements Draft {
 
     @Override
     public void autoPick(UUID playerId) {
-        List<Card> booster = players.get(playerId).getBooster();
-        if (booster.size() > 0) {
-            this.addPick(playerId, booster.get(booster.size() - 1).getId(), null);
+        if (players.containsKey(playerId)) {
+            List<Card> booster = players.get(playerId).getBooster();
+            if (booster.size() > 0) {
+                this.addPick(playerId, booster.get(booster.size() - 1).getId(), null);
+            }
         }
     }
 

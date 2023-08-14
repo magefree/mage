@@ -25,7 +25,7 @@ public final class JaceTelepathUnbound extends CardImpl {
 
     public JaceTelepathUnbound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
         this.color.setBlue(true);
@@ -42,7 +42,7 @@ public final class JaceTelepathUnbound extends CardImpl {
 
         // -3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
         CastCardFromGraveyardThenExileItEffect minusEffect = new CastCardFromGraveyardThenExileItEffect();
-        minusEffect.setText("You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead");
+        minusEffect.setText("You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead");
         ability = new LoyaltyAbility(minusEffect, -3);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard()));
         this.addAbility(ability);

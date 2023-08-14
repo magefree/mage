@@ -80,7 +80,7 @@ class ShadesBreathSetSubtypeEffect extends ContinuousEffectImpl {
 
     ShadesBreathSetSubtypeEffect() {
         super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-        staticText = "Shade";
+        staticText = " Shade";
     }
 
     private ShadesBreathSetSubtypeEffect(final ShadesBreathSetSubtypeEffect effect) {

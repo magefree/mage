@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class ConductorOfCacophony extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("each other creature");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("other creature");
 
     static {
         filter.add(AnotherPredicate.instance);

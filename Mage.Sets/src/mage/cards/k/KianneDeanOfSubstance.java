@@ -29,17 +29,19 @@ import java.util.stream.Collectors;
 /**
  * @author TheElk801
  */
-public final class KianneDeanOfSubstance extends ModalDoubleFacesCard {
+public final class KianneDeanOfSubstance extends ModalDoubleFacedCard {
 
     public KianneDeanOfSubstance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo,
-                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELF, SubType.DRUID}, "{2}{G}",
-                "Imbraham, Dean of Theory", new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BIRD, SubType.WIZARD}, "{2}{U}{U}");
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.ELF, SubType.DRUID}, "{2}{G}",
+                "Imbraham, Dean of Theory",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BIRD, SubType.WIZARD}, "{2}{U}{U}"
+        );
 
         // 1.
         // Kianne, Dean of Substance
         // Legendary Creature - Elf Druid
-        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getLeftHalfCard().setPT(2, 2);
 
         // {T}: Exile the top card of your library. If it's a land card, put it into your hand. Otherwise, put a study counter on it.
@@ -56,7 +58,6 @@ public final class KianneDeanOfSubstance extends ModalDoubleFacesCard {
         // 2.
         // Imbraham, Dean of Theory
         // Legendary Creature - Bird Wizard
-        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
         this.getRightHalfCard().setPT(3, 3);
 
         // Flying

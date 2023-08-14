@@ -23,7 +23,7 @@ public final class BeholdTheBeyond extends CardImpl {
         // Discard your hand. Search your library for three cards and put those cards into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new DiscardHandControllerEffect());
         TargetCardInLibrary target = new TargetCardInLibrary(0, 3, new FilterCard("cards"));
-        Effect effect = new SearchLibraryPutInHandEffect(target);
+        Effect effect = new SearchLibraryPutInHandEffect(target, false);
         effect.setText("Search your library for three cards, put those cards into your hand, then shuffle");
         this.getSpellAbility().addEffect(effect);
     }

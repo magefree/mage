@@ -14,7 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -28,7 +28,7 @@ public final class Metamorphosis extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
         // As an additional cost to cast Metamorphosis, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.getSpellAbility().addEffect(new MetamorphosisEffect());
         // Add X mana of any one color, where X is one plus the sacrificed creature's converted mana cost. Spend this mana only to cast creature spells.
     }

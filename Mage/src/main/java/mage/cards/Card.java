@@ -25,8 +25,6 @@ public interface Card extends MageObject {
 
     UUID getOwnerId();
 
-    String getCardNumber();
-
     Rarity getRarity(); // null for tokens
 
     void setOwnerId(UUID ownerId);
@@ -48,7 +46,6 @@ public interface Card extends MageObject {
 
     List<String> getRules(Game game);  // gets card rules + in game modifications
 
-    String getExpansionSetCode();
     void checkForCountersToAdd(Permanent permanent, Ability source, Game game);
 
     void setFaceDown(boolean value, Game game);
@@ -83,6 +80,13 @@ public interface Card extends MageObject {
         return null;
     }
 
+    /**
+     * Is this an extra deck card? (such as contraptions and attractions)
+     * @return true if this is an extra deck card, false otherwise
+     */
+    default boolean isExtraDeckCard() {
+        return false;
+    }
     void assignNewId();
 
     void addInfo(String key, String value, Game game);

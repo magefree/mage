@@ -24,7 +24,7 @@ public final class NaelAvizoaAeronaut extends CardImpl {
     public NaelAvizoaAeronaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
 
-        this.addSuperType(SuperType.LEGENDARY);
+        this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF, SubType.SCOUT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);

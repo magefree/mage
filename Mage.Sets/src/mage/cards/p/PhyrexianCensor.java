@@ -30,7 +30,7 @@ public final class PhyrexianCensor extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("non-Phyrexian creatures");
 
     static {
-        filter.add(Predicates.or(SubType.PHYREXIAN.getPredicate()));
+        filter.add(Predicates.not(SubType.PHYREXIAN.getPredicate()));
     }
 
     public PhyrexianCensor(UUID ownerId, CardSetInfo setInfo) {

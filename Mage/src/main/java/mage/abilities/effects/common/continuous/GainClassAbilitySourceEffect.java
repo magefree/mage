@@ -14,7 +14,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author TheElk801
  */
-public class GainClassAbilitySourceEffect extends ContinuousEffectImpl implements SourceEffect {
+public class GainClassAbilitySourceEffect extends ContinuousEffectImpl {
 
     private final Ability ability;
     private final int level;

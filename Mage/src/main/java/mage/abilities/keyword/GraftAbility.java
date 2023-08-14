@@ -2,6 +2,7 @@
 package mage.abilities.keyword;
 
 import java.util.Locale;
+
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -27,7 +28,7 @@ import mage.util.CardUtil;
  * counters on it" and, "Whenever another creature enters the battlefield, if
  * this permanent has a +1/+1 counter on it, you may move a +1/+1 counter from
  * this permanent onto that creature."
- *
+ * <p>
  * 702.56b. If a creature has multiple instances of graft, each one works
  * separately.
  *
@@ -51,7 +52,7 @@ public class GraftAbility extends TriggeredAbilityImpl {
         addSubAbility(new GraftStaticAbility(amount));
     }
 
-    public GraftAbility(final GraftAbility ability) {
+    protected GraftAbility(final GraftAbility ability) {
         super(ability);
         this.amount = ability.amount;
         this.cardtype = ability.cardtype;
@@ -106,7 +107,7 @@ class GraftStaticAbility extends StaticAbility {
         this.setRuleVisible(false);
     }
 
-    public GraftStaticAbility(final GraftStaticAbility ability) {
+    protected GraftStaticAbility(final GraftStaticAbility ability) {
         super(ability);
         this.ruleText = ability.ruleText;
     }
@@ -129,7 +130,7 @@ class GraftDistributeCounterEffect extends OneShotEffect {
         this.staticText = "you may move a +1/+1 counter from this permanent onto it";
     }
 
-    public GraftDistributeCounterEffect(final GraftDistributeCounterEffect effect) {
+    protected GraftDistributeCounterEffect(final GraftDistributeCounterEffect effect) {
         super(effect);
     }
 

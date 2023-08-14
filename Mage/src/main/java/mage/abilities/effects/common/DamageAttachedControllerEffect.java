@@ -28,7 +28,7 @@ public class DamageAttachedControllerEffect extends OneShotEffect {
         this.staticText = "{this} deals " + amount + " damage to that creature's controller";
     }
 
-    public DamageAttachedControllerEffect(final DamageAttachedControllerEffect effect) {
+    protected DamageAttachedControllerEffect(final DamageAttachedControllerEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

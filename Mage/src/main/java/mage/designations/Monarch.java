@@ -19,7 +19,7 @@ import mage.target.targetpointer.FixedTarget;
 public class Monarch extends Designation {
 
     public Monarch() {
-        super(DesignationType.THE_MONARCH, "CN2");
+        super(DesignationType.THE_MONARCH);
         addAbility(new MonarchDrawTriggeredAbility());
         addAbility(new MonarchDealsCombatDamageToAPlayerTriggeredAbility());
     }
@@ -41,7 +41,7 @@ class MonarchDrawTriggeredAbility extends BeginningOfEndStepTriggeredAbility {
         super(Zone.ALL, new DrawCardTargetEffect(1), TargetController.ANY, null, false);
     }
 
-    public MonarchDrawTriggeredAbility(final MonarchDrawTriggeredAbility ability) {
+    protected MonarchDrawTriggeredAbility(final MonarchDrawTriggeredAbility ability) {
         super(ability);
     }
 
@@ -78,7 +78,7 @@ class MonarchDealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
         super(Zone.ALL, new BecomesMonarchTargetEffect(), false);
     }
 
-    public MonarchDealsCombatDamageToAPlayerTriggeredAbility(final MonarchDealsCombatDamageToAPlayerTriggeredAbility ability) {
+    protected MonarchDealsCombatDamageToAPlayerTriggeredAbility(final MonarchDealsCombatDamageToAPlayerTriggeredAbility ability) {
         super(ability);
     }
 

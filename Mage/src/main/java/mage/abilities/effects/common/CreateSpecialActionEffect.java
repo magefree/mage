@@ -18,7 +18,7 @@ public class CreateSpecialActionEffect extends OneShotEffect {
         this.action = action;
     }
 
-    public CreateSpecialActionEffect(final CreateSpecialActionEffect effect) {
+    protected CreateSpecialActionEffect(final CreateSpecialActionEffect effect) {
         super(effect);
         this.action = (SpecialAction) effect.action.copy();
     }

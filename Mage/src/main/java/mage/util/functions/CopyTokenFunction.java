@@ -13,6 +13,7 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.EmptyToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
+import mage.util.CardUtil;
 
 /**
  * @author nantuko
@@ -44,59 +45,68 @@ public class CopyTokenFunction {
         // else gained abililies would be copied too.
         target.setEntersTransformed(source instanceof Permanent && ((Permanent) source).isTransformed());
         MageObject sourceObj;
+
+        // from another token
         if (source instanceof PermanentToken) {
             // create token from another token
             Token sourceToken = ((PermanentToken) source).getToken();
             sourceObj = sourceToken;
-            copyToToken(target, sourceObj, game);
-            if (sourceToken.getBackFace() != null) {
-                target.getBackFace().setOriginalExpansionSetCode(sourceToken.getOriginalExpansionSetCode());
-                target.getBackFace().setOriginalCardNumber(sourceToken.getOriginalCardNumber());
-                target.getBackFace().setCopySourceCard(sourceToken.getBackFace().getCopySourceCard());
-                copyToToken(target.getBackFace(), sourceToken.getBackFace(), game);
-            }
-            // to show the source image, the original values have to be used
-            target.setOriginalExpansionSetCode(sourceToken.getOriginalExpansionSetCode());
-            target.setOriginalCardNumber(sourceToken.getOriginalCardNumber());
             target.setCopySourceCard(((PermanentToken) source).getToken().getCopySourceCard());
+
+            copyToToken(target, sourceObj, game);
+            CardUtil.copySetAndCardNumber(target, source);
+            if (sourceToken.getBackFace() != null) {
+                copyToToken(target.getBackFace(), sourceToken.getBackFace(), game);
+                CardUtil.copySetAndCardNumber(target.getBackFace(), sourceToken.getBackFace());
+            }
             return;
         }
+
+        // from a permanent
         if (source instanceof PermanentCard) {
             // create token from non-token permanent
-            if (((PermanentCard) source).isMorphed() || ((PermanentCard) source).isManifested()) {
-                MorphAbility.setPermanentToFaceDownCreature(target, game);
+
+            // morph/manifest must hide all info
+            if (((PermanentCard) source).isMorphed()
+                    || ((PermanentCard) source).isManifested()
+                    || source.isFaceDown(game)) {
+                MorphAbility.setPermanentToFaceDownCreature(target, (PermanentCard) source, game);
                 return;
             }
-            sourceObj = ((PermanentCard) source).getMainCard();
-            copyToToken(target, sourceObj, game);
-            if (((Card) sourceObj).isTransformable()) {
-                target.getBackFace().setOriginalExpansionSetCode(source.getExpansionSetCode());
-                target.getBackFace().setOriginalCardNumber(source.getCardNumber());
-                target.getBackFace().setCopySourceCard(((Card) sourceObj).getSecondCardFace());
-                copyToToken(target.getBackFace(), ((Card) sourceObj).getSecondCardFace(), game);
-            }
 
-            target.setOriginalExpansionSetCode(source.getExpansionSetCode());
-            target.setOriginalCardNumber(source.getCardNumber());
+            sourceObj = source.getMainCard();
             target.setCopySourceCard((Card) sourceObj);
+
+            copyToToken(target, sourceObj, game);
+            CardUtil.copySetAndCardNumber(target, sourceObj);
+            if (((Card) sourceObj).isTransformable()) {
+                copyToToken(target.getBackFace(), ((Card) sourceObj).getSecondCardFace(), game);
+                CardUtil.copySetAndCardNumber(target.getBackFace(), ((Card) sourceObj).getSecondCardFace());
+            }
             return;
         }
+
+        // from another object like card (example: Embalm ability)
         sourceObj = source;
-        copyToToken(target, sourceObj, game);
-        if (source.isTransformable()) {
-            target.getBackFace().setOriginalExpansionSetCode(source.getExpansionSetCode());
-            target.getBackFace().setOriginalCardNumber(source.getCardNumber());
-            target.getBackFace().setCopySourceCard(source.getSecondCardFace());
-            copyToToken(target.getBackFace(), source.getSecondCardFace(), game);
-        }
-        // create token from non-permanent object like card (example: Embalm ability)
-        target.setOriginalExpansionSetCode(source.getExpansionSetCode());
-        target.setOriginalCardNumber(source.getCardNumber());
         target.setCopySourceCard(source);
+
+        copyToToken(target, sourceObj, game);
+        CardUtil.copySetAndCardNumber(target, sourceObj);
+        if (source.isTransformable()) {
+            if (target.getBackFace() == null) {
+                // if you catch this then a weird use case here: card with single face copy another token with double face??
+                // must create back face??
+                throw new IllegalStateException("Wrong code usage: back face must be non null: " + target.getName() + " - " + target.getClass().getSimpleName());
+            }
+            copyToToken(target.getBackFace(), source.getSecondCardFace(), game);
+            CardUtil.copySetAndCardNumber(target.getBackFace(), source.getSecondCardFace());
+        }
     }
 
-    private static Token copyToToken(Token target, MageObject sourceObj, Game game) {
+    private static void copyToToken(Token target, MageObject sourceObj, Game game) {
         // modify all attributes permanently (without game usage)
+        // ignore images settings here, it will be setup later due needs in face down
+        // (after copy or after put to battlefield)
         target.setName(sourceObj.getName());
         target.getColor().setColor(sourceObj.getColor());
         target.getManaCost().clear();
@@ -128,8 +138,6 @@ public class CopyTokenFunction {
         target.setToughness(sourceObj.getToughness().getBaseValue());
         target.setStartingLoyalty(sourceObj.getStartingLoyalty());
         target.setStartingDefense(sourceObj.getStartingDefense());
-
-        return target;
     }
 
     private Token from(Card source, Game game, Spell spell) {
