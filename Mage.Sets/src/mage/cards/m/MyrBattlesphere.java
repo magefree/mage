@@ -1,6 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -80,8 +81,11 @@ class MyrBattlesphereTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent source = game.getPermanent(event.getSourceId());
         if (source != null && source.getId().equals(this.getSourceId())) {
-            UUID defenderId = game.getCombat().getDefenderId(event.getSourceId());
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(defenderId, game));
+            MageObjectReference defenderMOR = game.getCombat().getDefenderMOR(event.getSourceId());
+            if (defenderMOR == null) {
+                return false;
+            }
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(defenderMOR));
             return true;
         }
         return false;

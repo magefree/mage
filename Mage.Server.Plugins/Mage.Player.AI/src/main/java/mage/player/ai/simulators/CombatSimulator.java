@@ -1,5 +1,6 @@
 package mage.player.ai.simulators;
 
+import mage.MageObjectReference;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -9,6 +10,7 @@ import mage.players.Player;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -25,16 +27,15 @@ public class CombatSimulator implements Serializable {
 
     public static CombatSimulator load(Game game) {
         CombatSimulator simCombat = new CombatSimulator();
-        for (CombatGroup group: game.getCombat().getGroups()) {
-            simCombat.groups.add(new CombatGroupSimulator(group.getDefenderId(), group.getAttackers(), group.getBlockers(), game));
+        for (CombatGroup group : game.getCombat().getGroups()) {
+            simCombat.groups.add(new CombatGroupSimulator(group.getDefenderMOR(), group.getAttackers(), group.getBlockers(), game));
         }
-        for (UUID defenderId: game.getCombat().getDefenders()) {
+        for (UUID defenderId : game.getCombat().getDefenders().stream().map(MageObjectReference::getSourceId).collect(Collectors.toList())) {
             simCombat.defenders.add(defenderId);
             Player player = game.getPlayer(defenderId);
             if (player != null) {
                 simCombat.playersLife.put(defenderId, player.getLife());
-            }
-            else {
+            } else {
                 Permanent permanent = game.getPermanent(defenderId);
                 simCombat.planeswalkerLoyalty.put(defenderId, permanent.getCounters(game).getCount(CounterType.LOYALTY));
             }
@@ -57,14 +58,13 @@ public class CombatSimulator implements Serializable {
     }
 
     public int evaluate() {
-        Map<UUID, Integer> damage = new HashMap<>();
+        Map<MageObjectReference, Integer> damage = new HashMap<>();
         int result = 0;
         for (CombatGroupSimulator group: groups) {
-            if (!damage.containsKey(group.defenderId)) {
-                damage.put(group.defenderId, group.unblockedDamage);
-            }
-            else {
-                damage.put(group.defenderId, damage.get(group.defenderId) + group.unblockedDamage);
+            if (!damage.containsKey(group.defenderMOR)) {
+                damage.put(group.defenderMOR, group.unblockedDamage);
+            } else {
+                damage.put(group.defenderMOR, damage.get(group.defenderMOR) + group.unblockedDamage);
             }
         }
         //check for lethal damage to player

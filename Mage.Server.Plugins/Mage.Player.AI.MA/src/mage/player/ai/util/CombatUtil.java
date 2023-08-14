@@ -159,7 +159,7 @@ public final class CombatUtil {
     public static CombatInfo blockWithGoodTrade(Game game, List<Permanent> attackers, List<Permanent> blockers) {
 
         UUID attackerId = game.getCombat().getAttackingPlayerId();
-        UUID defenderId = game.getCombat().getDefenders().iterator().next();
+        UUID defenderId = game.getCombat().getDefenders().iterator().next().getSourceId();
         if (attackerId == null || defenderId == null) {
             log.warn("Couldn't find attacker or defender: " + attackerId + ' ' + defenderId);
             return new CombatInfo();
@@ -240,7 +240,7 @@ public final class CombatUtil {
         combat.setAttacker(attackingPlayerId);
         combat.setDefenders(sim);
 
-        UUID defenderId = sim.getCombat().getDefenders().iterator().next();
+        UUID defenderId = sim.getCombat().getDefenders().iterator().next().getSourceId();
         boolean triggered = false;
 
         sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defendingPlayerId, defendingPlayerId));
@@ -296,7 +296,7 @@ public final class CombatUtil {
     public static CombatInfo blockWithGoodTrade2(Game game, List<Permanent> attackers, List<Permanent> blockers) {
 
         UUID attackerId = game.getCombat().getAttackingPlayerId();
-        UUID defenderId = game.getCombat().getDefenders().iterator().next();
+        UUID defenderId = game.getCombat().getDefenders().iterator().next().getSourceId();
         if (attackerId == null || defenderId == null) {
             log.warn("Couldn't find attacker or defender: " + attackerId + ' ' + defenderId);
             return new CombatInfo();

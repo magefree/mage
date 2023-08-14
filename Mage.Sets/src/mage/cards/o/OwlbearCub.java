@@ -1,6 +1,7 @@
 package mage.cards.o;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -74,7 +75,7 @@ class OwlbearCubTriggeredAbility extends TriggeredAbilityImpl {
         if (!game.getCombat().getAttackers().contains(this.getSourceId())) {
             return false;
         }
-        Player player = game.getPlayer(game.getCombat().getDefenderId(this.getSourceId()));
+        Player player = game.getPlayer(game.getCombat().getDefenderPlayerId(this.getSourceId()));
         if (player == null || game.getBattlefield().count(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
                 player.getId(), this, game
@@ -118,7 +119,7 @@ class OwlbearCubEffect extends OneShotEffect {
             player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
             Permanent permanent = game.getPermanent(card.getId());
             if (permanent != null) {
-                game.getCombat().addAttackerToCombat(permanent.getId(), getTargetPointer().getFirst(game, source), game);
+                game.getCombat().addAttackerToCombat(permanent.getId(), new MageObjectReference(getTargetPointer().getFirst(game, source), game), game);
             }
         }
         cards.retainZone(Zone.LIBRARY, game);

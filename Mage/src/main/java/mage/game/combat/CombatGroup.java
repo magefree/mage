@@ -1,5 +1,6 @@
 package mage.game.combat;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.ControllerDivideCombatDamageAbility;
@@ -31,17 +32,17 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     protected List<UUID> attackerOrder = new ArrayList<>();
     protected Map<UUID, UUID> players = new HashMap<>();
     protected boolean blocked;
-    protected UUID defenderId; // planeswalker or player, can be null after remove from combat (e.g. due damage)
+    protected MageObjectReference defenderMOR; // planeswalker or player, can be null after remove from combat (e.g. due damage)
     protected UUID defendingPlayerId;
     protected boolean defenderIsPermanent;
 
     /**
-     * @param defenderId          the player that controls the defending permanents
-     * @param defenderIsPermanent is the defender a permanent
+     * @param defenderMOR         the player or permanent that is the defender
+     * @param defenderIsPermanent is the defender a permanent?
      * @param defendingPlayerId   regular controller of the defending permanents
      */
-    public CombatGroup(UUID defenderId, boolean defenderIsPermanent, UUID defendingPlayerId) {
-        this.defenderId = defenderId;
+    public CombatGroup(MageObjectReference defenderMOR, boolean defenderIsPermanent, UUID defendingPlayerId) {
+        this.defenderMOR = defenderMOR;
         this.defenderIsPermanent = defenderIsPermanent;
         this.defendingPlayerId = defendingPlayerId;
     }
@@ -53,7 +54,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         this.attackerOrder.addAll(group.attackerOrder);
         this.players.putAll(group.players);
         this.blocked = group.blocked;
-        this.defenderId = group.defenderId;
+        this.defenderMOR = group.defenderMOR;
         this.defendingPlayerId = group.defendingPlayerId;
         this.defenderIsPermanent = group.defenderIsPermanent;
     }
@@ -69,8 +70,15 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     /**
      * @return can be null
      */
-    public UUID getDefenderId() {
-        return defenderId;
+    public MageObjectReference getDefenderMOR() {
+        return defenderMOR;
+    }
+
+    /**
+     * @return can be null, notably when the defender is not a player
+     */
+    public UUID getDefenderPlayerID() {
+        return isDefenderIsPermanent() ? null : defenderMOR.getSourceId();
     }
 
     public UUID getDefendingPlayerId() {
@@ -221,7 +229,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
         }
         if (defenderIsPermanent) {
-            Permanent permanent = game.getPermanent(defenderId);
+            Permanent permanent = defenderMOR.getPermanent(game);
             if (permanent != null) {
                 permanent.applyDamage(game);
             }
@@ -558,34 +566,50 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * @param damageToDefenderController excess damage to defender's controller (example: trample over planeswalker)
      */
     private void defenderDamage(Permanent attacker, int amount, Game game, boolean damageToDefenderController) {
-        UUID affectedDefenderId = damageToDefenderController ? game.getControllerId(this.defenderId) : this.defenderId;
+        MageObjectReference affectedDefenderMOR;
 
-        // on planeswalker
-        Permanent permanent = game.getPermanent(affectedDefenderId);
-        if (permanent == null) {// on player
-            Player defender = game.getPlayer(affectedDefenderId);
-            if (defender != null) {
-                defender.damage(amount, attacker.getId(), null, game, true, true);
-            }
+        if (damageToDefenderController) {
+            affectedDefenderMOR = new MageObjectReference(getDefendingPlayerId(), game);
+        } else {
+            affectedDefenderMOR = defenderMOR;
+        }
+
+        if (affectedDefenderMOR == null) {
             return;
         }
-        // apply excess damage from "trample over planeswaslkers" ability (example: Thrasta, Tempest's Roar)
-        if (permanent.isPlaneswalker(game) && hasTrampleOverPlaneswalkers(attacker)) {
-            int lethalDamage = permanent.getLethalDamage(attacker.getId(), game);
-            if (lethalDamage >= amount) {
+
+        // Is the defender a player?
+        Player player = game.getPlayer(affectedDefenderMOR.getSourceId());
+        if (player != null) {
+            player.damage(amount, attacker.getId(), null, game, true, true);
+            return;
+        }
+
+        // Is the defender a permanent, and if so a planeswalker or battle?
+        Permanent permanent = this.defenderMOR.getPermanent(game);
+        if (permanent != null) {
+            if (!permanent.isPlaneswalker(game) && !permanent.isBattle(game)) {
+                return;
+            }
+
+            // apply excess damage from "trample over planeswaslkers" ability (example: Thrasta, Tempest's Roar)
+            if (permanent.isPlaneswalker(game) && hasTrampleOverPlaneswalkers(attacker)) {
+                int lethalDamage = permanent.getLethalDamage(attacker.getId(), game);
+                if (lethalDamage >= amount) {
+                    // normal damage
+                    permanent.markDamage(amount, attacker.getId(), null, game, true, true);
+                } else {
+                    // damage with excess (additional damage to permanent's controller)
+                    permanent.markDamage(lethalDamage, attacker.getId(), null, game, true, true);
+                    amount -= lethalDamage;
+                    if (amount > 0) {
+                        defenderDamage(attacker, amount, game, true);
+                    }
+                }
+            } else {
                 // normal damage
                 permanent.markDamage(amount, attacker.getId(), null, game, true, true);
-            } else {
-                // damage with excess (additional damage to permanent's controller)
-                permanent.markDamage(lethalDamage, attacker.getId(), null, game, true, true);
-                amount -= lethalDamage;
-                if (amount > 0) {
-                    defenderDamage(attacker, amount, game, true);
-                }
             }
-        } else {
-            // normal damage
-            permanent.markDamage(amount, attacker.getId(), null, game, true, true);
         }
     }
 
@@ -730,8 +754,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public boolean removeAttackedPermanent(UUID permanentId) {
-        if (defenderIsPermanent && defenderId.equals(permanentId)) {
-            defenderId = null;
+        if (defenderIsPermanent && defenderMOR.equals(permanentId)) {
+            defenderMOR = null;
             return true;
         }
         return false;
@@ -874,7 +898,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public boolean changeDefenderPostDeclaration(UUID newDefenderId, Game game) {
-        if (defenderId.equals(newDefenderId)) {
+        if (defenderMOR.equals(newDefenderId)) {
             return false;
         }
         for (UUID attackerId : attackers) { // changing defender will remove a banded attacker from its current band
@@ -891,7 +915,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
         Permanent permanent = game.getPermanent(newDefenderId);
         if (permanent != null) {
-            defenderId = newDefenderId;
+            defenderMOR = new MageObjectReference(newDefenderId, game);
             defendingPlayerId = permanent.isBattle(game) ? permanent.getProtectorId() : permanent.getControllerId();
             defenderIsPermanent = true;
             return true;
@@ -900,7 +924,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (defender == null) {
             return false;
         }
-        defenderId = newDefenderId;
+        defenderMOR = new MageObjectReference(newDefenderId, game);
         defendingPlayerId = newDefenderId;
         defenderIsPermanent = false;
         return true;

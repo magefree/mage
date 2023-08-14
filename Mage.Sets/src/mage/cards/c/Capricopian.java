@@ -84,7 +84,7 @@ class CapricopianActivatedAbility extends ActivatedAbilityImpl {
     protected boolean checkTargetController(UUID playerId, Game game) {
         return super.checkTargetController(playerId, game)
                 && playerId != null
-                && playerId.equals(game.getCombat().getDefenderId(this.getSourceId()));
+                && playerId.equals(game.getCombat().getDefenderPlayerId(this.getSourceId()));
     }
 }
 
@@ -115,7 +115,7 @@ class CapricopianEffect extends OneShotEffect {
         }
         FilterPlayer filterPlayer = new FilterPlayer();
         filterPlayer.add(Predicates.not(new PlayerIdPredicate(permanent.getControllerId())));
-        filterPlayer.add(Predicates.not(new PlayerIdPredicate(game.getCombat().getDefenderId(permanent.getId()))));
+        filterPlayer.add(Predicates.not(new PlayerIdPredicate(game.getCombat().getDefenderPlayerId(permanent.getId()))));
         TargetPlayer targetPlayer = new TargetPlayer(0, 1, true, filterPlayer);
         player.choose(outcome, targetPlayer, source, game);
         Player newPlayer = game.getPlayer(targetPlayer.getFirstTarget());

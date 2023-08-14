@@ -5,7 +5,8 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.watchers.common.PlayerAttackedStepWatcher;
+
+import java.util.Objects;
 
 /**
  * A condition which checks whether any players being attacked are poisoned
@@ -19,7 +20,12 @@ public enum AttackedPlayersPoisonedCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getCombat().getDefenders().stream().map(defender -> game.getPlayer(defender))
+        return game
+                .getCombat()
+                .getDefenders()
+                .stream()
+                .filter(Objects::nonNull)
+                .map(defender -> game.getPlayer(defender.getSourceId()))
                 .anyMatch(player -> player != null && player.getCounters().containsKey(CounterType.POISON));
     }
 

@@ -48,7 +48,7 @@ public class GoadTest extends CardTestMultiPlayerBase {
         Permanent permanent = getPermanent(attacker);
         Assert.assertTrue("Creature should be tapped", permanent.isTapped());
         Assert.assertTrue("Creature should be attacking", permanent.isAttacking());
-        UUID defenderId = currentGame.getCombat().getDefenderId(permanent.getId());
+        UUID defenderId = currentGame.getCombat().getDefenderPlayerId(permanent.getId());
         Assert.assertTrue(
                 "Creature should be attacking one the following players: "
                         + Arrays

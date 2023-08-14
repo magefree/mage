@@ -1,20 +1,21 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,7 +69,7 @@ class SwathcutterGiantEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new ControllerIdPredicate(
-                game.getCombat().getDefenderId(source.getSourceId())
+                game.getCombat().getDefendingPlayerId(source.getSourceId(), game)
         ));
         return new DamageAllEffect(1, filter).apply(game, source);
     }

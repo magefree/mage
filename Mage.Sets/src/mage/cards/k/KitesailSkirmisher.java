@@ -75,8 +75,8 @@ enum KitesailSkirmisherPredicate implements ObjectSourcePlayerPredicate<MageObje
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
         return Objects.equals(
-                game.getCombat().getDefenderId(input.getSourceId()),
-                game.getCombat().getDefenderId(input.getObject().getId())
+                game.getCombat().getDefenderPlayerId(input.getSourceId()),
+                game.getCombat().getDefenderPlayerId(input.getObject().getId())
         );
     }
 }

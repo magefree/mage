@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GoldToken;
@@ -22,7 +23,6 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.Zone;
 
 /**
  * @author Saga
@@ -87,7 +87,7 @@ class CurseOfOpulenceEffect extends OneShotEffect {
         }
         Set<UUID> players = new HashSet<>();
         for (UUID attacker : game.getCombat().getAttackers()) {
-            UUID defender = game.getCombat().getDefenderId(attacker);
+            UUID defender = game.getCombat().getDefenderPlayerId(attacker);
             if (defender.equals(enchantedPlayer.getId())
                     && game.getPlayer(source.getControllerId()).hasOpponent(game.getPermanent(attacker).getControllerId(), game)) {
                 players.add(game.getPermanent(attacker).getControllerId());

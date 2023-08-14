@@ -1,11 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -17,11 +12,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -29,6 +20,8 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.RandomUtil;
 import mage.watchers.Watcher;
+
+import java.util.*;
 
 /**
  *
@@ -84,7 +77,7 @@ class AttackedLastCombatWatcher extends Watcher {
             for (UUID attackerId : game.getCombat().getAttackers()) {
                 Permanent attacker = game.getPermanent(attackerId);
                 if (attacker != null) {
-                    attackedPlayers.put(new MageObjectReference(attacker, game), game.getCombat().getDefenderId(attackerId));
+                    attackedPlayers.put(new MageObjectReference(attacker, game), game.getCombat().getDefenderPlayerId(attackerId));
                 }
             }
             attackedLastCombatPlayers.put(game.getCombat().getAttackingPlayerId(), attackedPlayers);

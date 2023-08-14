@@ -1,5 +1,6 @@
 package mage.game;
 
+import static java.util.Collections.emptyList;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -43,8 +44,6 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -336,7 +335,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         sb.append("combat");
         for (CombatGroup group : combat.getGroups()) {
-            sb.append(group.getDefenderId()).append(group.getAttackers()).append(group.getBlockers());
+            sb.append(group.getDefenderMOR()).append(group.getAttackers()).append(group.getBlockers());
         }
 
         return sb.toString();
@@ -389,7 +388,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         sb.append("combat");
         for (CombatGroup group : combat.getGroups()) {
-            sb.append(group.getDefenderId()).append(group.getAttackers()).append(group.getBlockers());
+            sb.append(group.getDefenderMOR()).append(group.getAttackers()).append(group.getBlockers());
         }
 
         return sb.toString();
@@ -442,7 +441,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         sb.append("combat");
         for (CombatGroup group : combat.getGroups()) {
-            sb.append(group.getDefenderId()).append(group.getAttackers()).append(group.getBlockers());
+            sb.append(group.getDefenderMOR()).append(group.getAttackers()).append(group.getBlockers());
         }
 
         return sb.toString();

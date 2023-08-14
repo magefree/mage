@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -9,6 +10,8 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -63,9 +66,29 @@ class CavalcadeOfCalamityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.damagePlayerOrPermanent(
-                game.getCombat().getDefenderId(targetPointer.getFirst(game, source)), 1,
-                source.getSourceId(), source, game, false, true
-        ) > 0;
+        MageObjectReference defenderMOR = game.getCombat().getDefenderMOR(targetPointer.getFirst(game, source));
+        if (defenderMOR == null) {
+            return false;
+        }
+
+        Permanent permanent = defenderMOR.getPermanent(game);
+        if (permanent != null) {
+            game.damagePlayerOrPermanent(
+                    permanent.getId(), 1,
+                    source.getSourceId(), source, game, false, true
+            );
+            return true;
+        }
+
+        Player player = game.getPlayer(defenderMOR.getSourceId());
+        if (player != null) {
+            game.damagePlayerOrPermanent(
+                    player.getId(), 1,
+                    source.getSourceId(), source, game, false, true
+            );
+            return true;
+        }
+
+        return false;
     }
 }

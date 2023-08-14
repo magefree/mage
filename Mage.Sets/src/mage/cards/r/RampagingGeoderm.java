@@ -1,6 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -78,7 +79,8 @@ class RampagingGeodermEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        Permanent defender = game.getPermanent(game.getCombat().getDefenderId(permanent.getId()));
+        MageObjectReference defenderMOR = game.getCombat().getDefenderMOR(permanent.getId());
+        Permanent defender = defenderMOR == null ? null : defenderMOR.getPermanent(game);
         if (defender != null && defender.isBattle(game)) {
             return permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
         }

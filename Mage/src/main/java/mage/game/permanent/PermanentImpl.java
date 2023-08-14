@@ -1427,6 +1427,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             if (game.getCombat()
                     .getDefenders()
                     .stream()
+                    .map(MageObjectReference::getSourceId)
                     .noneMatch(defenderToCheckId -> canAttackCheckRestrictionEffects(defenderToCheckId, game))) {
                 return false;
             }

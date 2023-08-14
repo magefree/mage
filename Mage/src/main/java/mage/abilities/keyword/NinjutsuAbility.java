@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -110,14 +111,14 @@ class NinjutsuEffect extends OneShotEffect {
             controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
-                UUID defendingPlayerId = null;
+                MageObjectReference defenderMOR = null;
                 for (Cost cost : source.getCosts()) {
                     if (cost instanceof ReturnAttackerToHandTargetCost) {
-                        defendingPlayerId = ((ReturnAttackerToHandTargetCost) cost).getDefendingPlayerId();
+                        defenderMOR = ((ReturnAttackerToHandTargetCost) cost).getDefenderMOR();
                     }
                 }
-                if (defendingPlayerId != null) {
-                    game.getCombat().addAttackerToCombat(permanent.getId(), defendingPlayerId, game);
+                if (defenderMOR != null) {
+                    game.getCombat().addAttackerToCombat(permanent.getId(), defenderMOR, game);
                     return true;
                 }
             }
@@ -135,7 +136,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
         filter.add(UnblockedPredicate.instance);
     }
 
-    private UUID defendingPlayerId = null;
+    private MageObjectReference defenderMOR = null;
 
     public ReturnAttackerToHandTargetCost() {
         this.addTarget(new TargetControlledPermanent(1, 1, filter, true));
@@ -156,7 +157,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
                         || controller == null) {
                     return false;
                 }
-                defendingPlayerId = game.getCombat().getDefenderId(permanent.getId());
+                defenderMOR = game.getCombat().getDefenderMOR(permanent.getId());
                 paid |= controller.moveCardToHandWithInfo(permanent, source, game, true);
             }
         }
@@ -173,8 +174,8 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
         return new ReturnAttackerToHandTargetCost(this);
     }
 
-    public UUID getDefendingPlayerId() {
-        return defendingPlayerId;
+    public MageObjectReference getDefenderMOR() {
+        return defenderMOR;
     }
 }
 

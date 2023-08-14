@@ -2,6 +2,7 @@ package org.mage.test.stub;
 
 import mage.ApprovingObject;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
@@ -1005,7 +1006,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void declareAttacker(UUID attackerId, UUID defenderId, Game game, boolean allowUndo) {
+    public void declareAttacker(UUID attackerId, MageObjectReference defenderMOR, Game game, boolean allowUndo) {
 
     }
 

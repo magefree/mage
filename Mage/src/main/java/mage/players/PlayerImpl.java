@@ -2591,15 +2591,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void declareAttacker(UUID attackerId, UUID defenderId, Game game, boolean allowUndo) {
+    public void declareAttacker(UUID attackerId, MageObjectReference defenderMOR, Game game, boolean allowUndo) {
         if (allowUndo) {
             setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
         }
         Permanent attacker = game.getPermanent(attackerId);
         if (attacker != null
-                && attacker.canAttack(defenderId, game)
+                && attacker.canAttack(defenderMOR.getSourceId(), game)
                 && attacker.isControlledBy(playerId)
-                && !game.getCombat().declareAttacker(attackerId, defenderId, playerId, game)) {
+                && !game.getCombat().declareAttacker(attackerId, defenderMOR, playerId, game)) {
             game.undo(playerId);
         }
     }

@@ -61,7 +61,7 @@ class HolgaRelentlessRagerEffect extends OneShotEffect {
 
         @Override
         public boolean apply(Permanent input, Game game) {
-            return game.getPlayer(game.getCombat().getDefenderId(input.getId())) != null;
+            return game.getPlayer(game.getCombat().getDefenderPlayerId(input.getId())) != null;
         }
     }
 
@@ -91,7 +91,7 @@ class HolgaRelentlessRagerEffect extends OneShotEffect {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             int count = game
                     .getBattlefield()
-                    .count(StaticFilters.FILTER_CONTROLLED_CREATURE, game.getCombat().getDefenderId(permanent.getId()), source, game);
+                    .count(StaticFilters.FILTER_CONTROLLED_CREATURE, game.getCombat().getDefenderPlayerId(permanent.getId()), source, game);
             if (count > 0) {
                 game.addEffect(new BoostTargetEffect(
                         count, 0, Duration.EndOfTurn

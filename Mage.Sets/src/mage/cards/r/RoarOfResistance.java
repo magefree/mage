@@ -1,5 +1,6 @@
 package mage.cards.r;
 
+import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -65,14 +66,14 @@ enum RoarOfResistancePredicate implements ObjectSourcePlayerPredicate<Permanent>
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        UUID defenderId = game.getCombat().getDefenderId(input.getObject().getId());
+        MageObjectReference defenderMOR = game.getCombat().getDefenderMOR(input.getObject().getId());
         Set<UUID> opponents = game.getOpponents(input.getSource().getControllerId());
-        Permanent attackedPlaneswalker = game.getPermanent(defenderId);
+        Permanent attackedPlaneswalker = defenderMOR.getPermanent(game);
         if (attackedPlaneswalker != null
                 && attackedPlaneswalker.isPlaneswalker(game)
                 && opponents.contains(attackedPlaneswalker.getControllerId())) {
             return true;
-        } else return opponents.contains(defenderId);
+        } else return opponents.contains(defenderMOR.getSourceId());
     }
 }
 

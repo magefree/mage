@@ -60,16 +60,16 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     protected List<CombatGroup> groups = new ArrayList<>();
     protected Map<UUID, CombatGroup> blockingGroups = new HashMap<>();
-    // player and planeswalker ids
-    protected Set<UUID> defenders = new HashSet<>();
-    // how many creatures attack defending player
-    protected Map<UUID, Set<UUID>> numberCreaturesDefenderAttackedBy = new HashMap<>();
+    // player and permanents MOR that could be attacked.
+    protected Set<MageObjectReference> defenders = new HashSet<>();
+    // which creatures attack each player. Permanents being attacked do not store anything there.
+    protected Map<UUID, Set<UUID>> creaturesPlayerIsAttackedBy = new HashMap<>();
     protected UUID attackingPlayerId; //the player that is attacking
     // <creature that can block, <all attackers that force the creature to block it>>
     protected Map<UUID, Set<UUID>> creatureMustBlockAttackers = new HashMap<>();
 
     // which creature is forced to attack which defender(s). If set is empty, the creature can attack every possible defender
-    private final Map<UUID, Set<UUID>> creaturesForcedToAttack = new HashMap<>();
+    private final Map<UUID, Set<MageObjectReference>> creaturesForcedToAttack = new HashMap<>();
     private int maxAttackers = Integer.MIN_VALUE;
 
     private final HashSet<UUID> attackersTappedByAttack = new HashSet<>();
@@ -88,14 +88,14 @@ public class Combat implements Serializable, Copyable<Combat> {
             blockingGroups.put(group.getKey(), group.getValue());
         }
         this.useToughnessForDamage = combat.useToughnessForDamage;
-        for (Map.Entry<UUID, Set<UUID>> group : combat.numberCreaturesDefenderAttackedBy.entrySet()) {
-            this.numberCreaturesDefenderAttackedBy.put(group.getKey(), group.getValue());
+        for (Map.Entry<UUID, Set<UUID>> group : combat.creaturesPlayerIsAttackedBy.entrySet()) {
+            this.creaturesPlayerIsAttackedBy.put(group.getKey(), group.getValue());
         }
 
         for (Map.Entry<UUID, Set<UUID>> group : combat.creatureMustBlockAttackers.entrySet()) {
             this.creatureMustBlockAttackers.put(group.getKey(), group.getValue());
         }
-        for (Map.Entry<UUID, Set<UUID>> group : combat.creaturesForcedToAttack.entrySet()) {
+        for (Map.Entry<UUID, Set<MageObjectReference>> group : combat.creaturesForcedToAttack.entrySet()) {
             this.creaturesForcedToAttack.put(group.getKey(), group.getValue());
         }
         this.maxAttackers = combat.maxAttackers;
@@ -115,12 +115,12 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     /**
-     * Get all possible defender (players and planeswalkers) That does not mean
+     * Get all possible defender (players and permanents) That does not mean
      * necessarily mean that they are really attacked
      *
      * @return
      */
-    public Set<UUID> getDefenders() {
+    public Set<MageObjectReference> getDefenders() {
         return defenders;
     }
 
@@ -185,7 +185,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         defenders.clear();
         attackingPlayerId = null;
         creatureMustBlockAttackers.clear();
-        numberCreaturesDefenderAttackedBy.clear();
+        creaturesPlayerIsAttackedBy.clear();
         creaturesForcedToAttack.clear();
         maxAttackers = Integer.MIN_VALUE;
         attackersTappedByAttack.clear();
@@ -195,7 +195,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         StringBuilder sb = new StringBuilder();
         sb.append(attackingPlayerId).append(defenders);
         for (CombatGroup group : groups) {
-            sb.append(group.defenderId).append(group.attackers).append(group.attackerOrder).append(group.blockers).append(group.blockerOrder);
+            sb.append(group.defenderMOR).append(group.attackers).append(group.attackerOrder).append(group.blockers).append(group.blockerOrder);
         }
         return sb.toString();
     }
@@ -217,17 +217,17 @@ public class Combat implements Serializable, Copyable<Combat> {
         return this.addAttackingCreature(creatureId, game, null);
     }
 
-    public boolean addAttackingCreature(UUID creatureId, Game game, UUID playerToAttack) {
-        Set<UUID> possibleDefenders;
-        if (playerToAttack != null) {
+    public boolean addAttackingCreature(UUID creatureId, Game game, UUID attackingPlayer) {
+        Set<MageObjectReference> possibleDefenders;
+        if (attackingPlayer != null) {
             possibleDefenders = new HashSet<>();
-            for (UUID objectId : defenders) {
-                if (playerToAttack.equals(objectId)) {
+            for (MageObjectReference objectId : defenders) {
+                if (attackingPlayer.equals(objectId.getSourceId())) {
                     possibleDefenders.add(objectId);
                     continue;
                 }
-                Permanent permanent = game.getPermanent(objectId);
-                if (permanent != null && permanent.canBeAttacked(creatureId, playerToAttack, game)) {
+                Permanent permanent = objectId.getPermanent(game);
+                if (permanent != null && permanent.canBeAttacked(creatureId, attackingPlayer, game)) {
                     possibleDefenders.add(objectId);
                 }
             }
@@ -246,7 +246,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             target.setRequired(true);
             player.chooseTarget(Outcome.Damage, target, null, game);
             if (target.getFirstTarget() != null) {
-                addAttackerToCombat(creatureId, target.getFirstTarget(), game);
+                addAttackerToCombat(creatureId, new MageObjectReference(target.getFirstTarget(), game), game);
                 return true;
             }
         }
@@ -293,9 +293,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
                 handleBanding(attacker, game);
                 // This can only be used to modify the event, the attack can't be replaced here
-                game.replaceEvent(new AttackerDeclaredEvent(group.defenderId, attacker, attackingPlayerId));
-                game.addSimultaneousEvent(new AttackerDeclaredEvent(group.defenderId, attacker, attackingPlayerId));
-                morSetMap.computeIfAbsent(group.defenderId, x -> new HashSet<>()).add(new MageObjectReference(attacker, game));
+                game.replaceEvent(new AttackerDeclaredEvent(group.defenderMOR.getSourceId(), attacker, attackingPlayerId));
+                game.addSimultaneousEvent(new AttackerDeclaredEvent(group.defenderMOR.getSourceId(), attacker, attackingPlayerId));
+                morSetMap.computeIfAbsent(group.defenderMOR.getSourceId(), x -> new HashSet<>()).add(new MageObjectReference(attacker, game));
             }
         }
         attackersTappedByAttack.clear();
@@ -341,7 +341,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         boolean isBanded = false;
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking creature to band with " + attacker.getLogName());
         filter.add(Predicates.not(new PermanentIdPredicate(creatureId)));
-        filter.add(new AttackingSameNotBandedPredicate(combatGroup.getDefenderId())); // creature that isn't already banded, and is attacking the same player or planeswalker
+        filter.add(new AttackingSameNotBandedPredicate(combatGroup.getDefenderMOR())); // creature that isn't already banded, and is attacking the same player or planeswalker
         List<Predicate<MageObject>> predicates = new ArrayList<>();
         if (!canBand
                 && canBandWithOther) {
@@ -446,11 +446,23 @@ public class Combat implements Serializable, Copyable<Combat> {
         game.informPlayers(sb.toString());
     }
 
+    private boolean isDefenderMORStillValid(Game game, MageObjectReference defenderMOR) {
+        if (defenderMOR == null) {
+            return false;
+        }
+        Permanent permanent = defenderMOR.getPermanent(game);
+        if (permanent != null) {
+            return true;
+        }
+        Player player = game.getPlayer(defenderMOR.getSourceId());
+        return player != null && !player.hasLost();
+    }
+
     protected void checkAttackRequirements(Player player, Game game) {
         //20101001 - 508.1d
         for (Permanent creature : player.getAvailableAttackers(game)) {
             boolean mustAttack = false;
-            Set<UUID> defendersForcedToAttack = new HashSet<>();
+            Set<MageObjectReference> defendersForcedToAttack = new HashSet<>();
             if (creature.getGoadingPlayers().isEmpty()) {
                 // check if a creature has to attack
                 for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, false, game).entrySet()) {
@@ -463,11 +475,14 @@ public class Combat implements Serializable, Copyable<Combat> {
                         UUID defenderId = effect.mustAttackDefender(ability, game);
 
                         if (defenderId != null) {
+                            MageObjectReference forcedToAttackMOR = defenders
+                                    .stream()
+                                    .filter(mor -> mor.getSourceId().equals(defenderId))
+                                    .findFirst()
+                                    .orElse(null);
                             // creature is not forced to attack players that are no longer in the game
-                            if (game.getPermanentOrLKIBattlefield(defenderId) == null && game.getPlayer(defenderId).hasLost()) {
-                                return;
-                            } else if (defenders.contains(defenderId)) {
-                                defendersForcedToAttack.add(defenderId);
+                            if (isDefenderMORStillValid(game, forcedToAttackMOR)) {
+                                defendersForcedToAttack.add(forcedToAttackMOR);
                             }
                         }
                         break;
@@ -476,42 +491,50 @@ public class Combat implements Serializable, Copyable<Combat> {
             } else {
                 // if creature is goaded then we start with assumption that it needs to attack any player
                 mustAttack = true;
-                // Filter out the planeswalkers
+                // Filter out the permanents
                 defendersForcedToAttack.addAll(defenders.stream()
+                        .map(MageObjectReference::getSourceId)
                         .map(game::getPlayer)
                         .filter(Objects::nonNull)
                         .map(Player::getId)
+                        .map(id -> new MageObjectReference(id, game))
                         .collect(Collectors.toSet()));
             }
             if (!mustAttack) {
                 continue;
             }
             // check which defenders the forced to attack creature can attack without paying a cost
-            Set<UUID> defendersCostlessAttackable = new HashSet<>(defenders);
-            for (UUID defenderId : defenders) {
+            Set<MageObjectReference> defendersCostlessAttackable = new HashSet<>(defenders);
+            for (MageObjectReference defenderMOR : defenders) {
                 if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
-                        new DeclareAttackerEvent(defenderId, creature.getId(), creature.getControllerId()), game
+                        new DeclareAttackerEvent(defenderMOR.getSourceId(), creature.getId(), creature.getControllerId()), game
                 )) {
-                    defendersCostlessAttackable.remove(defenderId);
-                    defendersForcedToAttack.remove(defenderId);
+                    defendersCostlessAttackable.remove(defenderMOR);
+                    defendersForcedToAttack.remove(defenderMOR);
                     continue;
                 }
                 for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(creature, game).entrySet()) {
-                    if (entry
+                    // creature is not forced to attack players that are no longer in the game
+                    if (isDefenderMORStillValid(game, defenderMOR) && entry
                             .getValue()
                             .stream()
                             .anyMatch(ability -> entry.getKey().canAttack(
-                                    creature, defenderId, ability, game, false
+                                    creature, defenderMOR.getSourceId(), ability, game, false
                             ))) {
                         continue;
                     }
-                    defendersCostlessAttackable.remove(defenderId);
-                    defendersForcedToAttack.remove(defenderId);
+                    defendersCostlessAttackable.remove(defenderMOR);
+                    defendersForcedToAttack.remove(defenderMOR);
                     break;
                 }
             }
             // Remove all the players which have goaded the attacker
-            defendersForcedToAttack.removeAll(creature.getGoadingPlayers());
+            defendersForcedToAttack.removeAll(creature.getGoadingPlayers()
+                    .stream()
+                    .map(mor -> new MageObjectReference(mor, game))
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet())
+            );
 
             // force attack only if a defender can be attacked without paying a cost
             if (defendersCostlessAttackable.isEmpty()) {
@@ -519,16 +542,23 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
             creaturesForcedToAttack.put(creature.getId(), defendersForcedToAttack);
             // No need to attack a special defender
-            Set<UUID> defendersToChooseFrom = defendersForcedToAttack.isEmpty() ? defendersCostlessAttackable : defendersForcedToAttack;
+            Set<MageObjectReference> defendersToChooseFrom = defendersForcedToAttack.isEmpty() ? defendersCostlessAttackable : defendersForcedToAttack;
             if (defendersToChooseFrom.size() == 1) {
-                player.declareAttacker(creature.getId(), defendersToChooseFrom.iterator().next(), game, false);
-                continue;
+                MageObjectReference onlyDefender = defendersToChooseFrom
+                        .stream()
+                        .filter(mor -> isDefenderMORStillValid(game, mor))
+                        .findFirst()
+                        .orElse(null);
+                if (onlyDefender != null) {
+                    player.declareAttacker(creature.getId(), onlyDefender, game, false);
+                    continue;
+                }
             }
             TargetDefender target = new TargetDefender(defendersToChooseFrom);
             target.setRequired(true);
             target.setTargetName("permanent or player for " + creature.getLogName() + " to attack (must attack effect)");
             if (player.chooseTarget(Outcome.Damage, target, null, game)) {
-                player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
+                player.declareAttacker(creature.getId(), new MageObjectReference(target.getFirstTarget(), game), game, false);
             }
         }
     }
@@ -1274,7 +1304,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             addDefender(playerId, game);
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filterBattles, attackingPlayerId, game)) {
-            defenders.add(permanent.getId());
+            defenders.add(new MageObjectReference(permanent.getId(), game));
         }
     }
 
@@ -1329,19 +1359,20 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                 }
             }
-            defenders.add(defenderId);
+            defenders.add(new MageObjectReference(defenderId, game));
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_PLANESWALKER, defenderId, game)) {
-                defenders.add(permanent.getId());
+                defenders.add(new MageObjectReference(permanent.getId(), game));
             }
         }
     }
 
     @SuppressWarnings("deprecation")
-    public boolean declareAttacker(UUID creatureId, UUID defenderId, UUID playerId, Game game) {
+    public boolean declareAttacker(UUID creatureId, MageObjectReference defenderMOR, UUID playerId, Game game) {
         Permanent attacker = game.getPermanent(creatureId);
         if (attacker == null
-                || game.replaceEvent(new DeclareAttackerEvent(defenderId, creatureId, playerId))
-                || !addAttackerToCombat(creatureId, defenderId, game)) {
+                || !isDefenderMORStillValid(game, defenderMOR)
+                || game.replaceEvent(new DeclareAttackerEvent(defenderMOR.getSourceId(), creatureId, playerId))
+                || !addAttackerToCombat(creatureId, defenderMOR, game)) {
             return false;
         }
         if (attacker.hasAbility(VigilanceAbility.getInstance(), game)
@@ -1355,11 +1386,11 @@ public class Combat implements Serializable, Copyable<Combat> {
         return true;
     }
 
-    public boolean addAttackerToCombat(UUID attackerId, UUID defenderId, Game game) {
+    public boolean addAttackerToCombat(UUID attackerId, MageObjectReference defenderId, Game game) {
         if (!defenders.contains(defenderId)) {
             return false;
         }
-        Permanent defender = game.getPermanent(defenderId);
+        Permanent defender = defenderId.getPermanent(game);
         // Check if defending player can be attacked with another creature
         if (!canDefenderBeAttacked(attackerId, defenderId, game)) {
             return false;
@@ -1370,7 +1401,8 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         UUID defendingPlayerId;
         if (defender == null) {
-            defendingPlayerId = defenderId;
+            // Means the defenderId is a player
+            defendingPlayerId = defenderId.getSourceId();
         } else if (defender.isPlaneswalker(game)) {
             defendingPlayerId = defender.getControllerId();
         } else if (defender.isBattle(game)) {
@@ -1385,23 +1417,23 @@ public class Combat implements Serializable, Copyable<Combat> {
         return true;
     }
 
-    public boolean canDefenderBeAttacked(UUID attackerId, UUID defenderId, Game game) {
-        Permanent defender = game.getPermanent(defenderId);
+    public boolean canDefenderBeAttacked(UUID attackerId, MageObjectReference defenderMOR, Game game) {
+        Permanent defender = defenderMOR.getPermanent(game);
         // Check if defending player can be attacked with another creature
         if (defender != null) {
-            // a planeswalker is attacked, there exits no restriction yet for attacking planeswalker
+            // a permanent is attacked, there exists no restriction yet for attacking permanent
             return true;
         }
-        Player defendingPlayer = game.getPlayer(defenderId);
+        Player defendingPlayer = game.getPlayer(defenderMOR.getSourceId());
         if (defendingPlayer == null) {
             return false;
         }
         Set<UUID> defenderAttackedBy;
-        if (numberCreaturesDefenderAttackedBy.containsKey(defendingPlayer.getId())) {
-            defenderAttackedBy = numberCreaturesDefenderAttackedBy.get(defendingPlayer.getId());
+        if (creaturesPlayerIsAttackedBy.containsKey(defendingPlayer.getId())) {
+            defenderAttackedBy = creaturesPlayerIsAttackedBy.get(defendingPlayer.getId());
         } else {
             defenderAttackedBy = new HashSet<>();
-            numberCreaturesDefenderAttackedBy.put(defendingPlayer.getId(), defenderAttackedBy);
+            creaturesPlayerIsAttackedBy.put(defendingPlayer.getId(), defenderAttackedBy);
         }
         if (defenderAttackedBy.size() >= defendingPlayer.getMaxAttackedBy()) {
             Player attackingPlayer = game.getPlayer(game.getControllerId(attackerId));
@@ -1446,7 +1478,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         Permanent blocker = game.getPermanent(blockerId);
         if (blockerId != null && blocker != null && blocker.getBlocking() > 1) {
             if (!blockingGroupsContains(blockerId)) {
-                CombatGroup newGroup = new CombatGroup(playerId, false, playerId);
+                CombatGroup newGroup = new CombatGroup(new MageObjectReference(playerId, game), false, playerId);
                 newGroup.blockers.add(blockerId);
                 // add all blocked attackers
                 for (CombatGroup group : groups) {
@@ -1483,7 +1515,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     public boolean removeDefendingPermanentFromCombat(UUID permanentId, Game game) {
         boolean result = false;
         for (CombatGroup group : groups) {
-            if (group.getDefenderId() != null && group.getDefenderId().equals(permanentId)) {
+            if (group.getDefenderMOR() != null && group.getDefenderMOR().equals(permanentId)) {
                 group.removeAttackedPermanent(permanentId);
                 result = true;
             }
@@ -1576,10 +1608,10 @@ public class Combat implements Serializable, Copyable<Combat> {
         return groups.isEmpty() || getAttackers().isEmpty();
     }
 
-    public boolean isPlaneswalkerAttacked(UUID defenderId, Game game) {
+    public boolean isControlledPermanentAttacked(UUID defenderId, Game game) {
         for (CombatGroup group : groups) {
             if (group.isDefenderIsPermanent()) {
-                Permanent permanent = game.getPermanent(group.getDefenderId());
+                Permanent permanent = group.getDefenderMOR().getPermanent(game);
                 if (permanent.isControlledBy(defenderId)) {
                     return true;
                 }
@@ -1590,14 +1622,29 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     /**
      * @param attackerId
-     * @return uuid of defending player or planeswalker
+     * @return MOR of defending player or planeswalker
      */
-    public UUID getDefenderId(UUID attackerId) {
+    public MageObjectReference getDefenderMOR(UUID attackerId) {
         return groups
                 .stream()
                 .filter(group -> group.getAttackers().contains(attackerId))
-                .map(CombatGroup::getDefenderId)
+                .map(CombatGroup::getDefenderMOR)
                 .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * @param attackerId
+     * @return UUID of defender if it is a player
+     */
+    public UUID getDefenderPlayerId(UUID attackerId) {
+        return groups
+                .stream()
+                .filter(group -> group.getAttackers().contains(attackerId) && !group.isDefenderIsPermanent())
+                .map(CombatGroup::getDefenderMOR)
+                .filter(Objects::nonNull)
+                .map(MageObjectReference::getSourceId)
                 .findFirst()
                 .orElse(null);
     }
@@ -1630,7 +1677,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 continue;
             }
             if (group.isDefenderIsPermanent()) {
-                Permanent permanent = game.getPermanent(group.getDefenderId());
+                Permanent permanent = group.getDefenderMOR().getPermanent(game);
                 if (permanent == null) {
                     playerDefenders.add(group.getDefendingPlayerId());
                 } else if (permanent.isPlaneswalker(game)) {
@@ -1639,7 +1686,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     playerDefenders.add(permanent.getProtectorId());
                 }
             } else {
-                playerDefenders.add(group.getDefenderId());
+                playerDefenders.add(group.getDefenderMOR().getSourceId());
             }
         }
         return playerDefenders;
@@ -1663,7 +1710,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (group.attackers.contains(attackerId)) {
                 group.attackers.remove(attackerId);
                 group.attackerOrder.remove(attackerId);
-                for (Set<UUID> attackingCreatures : numberCreaturesDefenderAttackedBy.values()) {
+                for (Set<UUID> attackingCreatures : creaturesPlayerIsAttackedBy.values()) {
                     attackingCreatures.remove(attackerId);
                 }
                 Permanent creature = game.getPermanent(attackerId);
@@ -1788,7 +1835,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         return attackingPlayerId;
     }
 
-    public Map<UUID, Set<UUID>> getCreaturesForcedToAttack() {
+    public Map<UUID, Set<MageObjectReference>> getCreaturesForcedToAttack() {
         return creaturesForcedToAttack;
     }
 

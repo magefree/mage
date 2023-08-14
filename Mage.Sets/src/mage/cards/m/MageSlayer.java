@@ -1,6 +1,6 @@
 package mage.cards.m;
 
-import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -10,6 +10,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,15 +65,40 @@ class MageSlayerEffect extends OneShotEffect {
         if (attacker == null) {
             return false;
         }
-        game.damagePlayerOrPermanent(
-                game.getCombat().getDefenderId(attacker.getId()),
-                attacker.getPower().getValue(),
-                attacker.getId(),
-                source,
-                game,
-                false,
-                true
-        );
-        return true;
+
+        MageObjectReference defenderMOR = game.getCombat().getDefenderMOR(attacker.getId());
+        if (defenderMOR == null) {
+            return false;
+        }
+
+        Permanent permanent = defenderMOR.getPermanent(game);
+        if (permanent != null) {
+            game.damagePlayerOrPermanent(
+                    permanent.getId(),
+                    attacker.getPower().getValue(),
+                    attacker.getId(),
+                    source,
+                    game,
+                    false,
+                    true
+            );
+            return true;
+        }
+
+        Player player = game.getPlayer(defenderMOR.getSourceId());
+        if (player != null) {
+            game.damagePlayerOrPermanent(
+                    player.getId(),
+                    attacker.getPower().getValue(),
+                    attacker.getId(),
+                    source,
+                    game,
+                    false,
+                    true
+            );
+            return true;
+        }
+
+        return false;
     }
 }

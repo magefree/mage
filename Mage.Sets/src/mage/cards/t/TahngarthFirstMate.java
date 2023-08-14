@@ -1,6 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -134,7 +135,7 @@ class TahngarthFirstMateEffect extends OneShotEffect {
         effect.setTargetPointer(new FixedTarget(permanent, game));
         game.addEffect(effect, source);
         game.getState().processAction(game);
-        return game.getCombat().addAttackerToCombat(permanent.getId(), target.getFirstTarget(), game);
+        return game.getCombat().addAttackerToCombat(permanent.getId(), new MageObjectReference(target.getFirstTarget(), game), game);
     }
 }
 

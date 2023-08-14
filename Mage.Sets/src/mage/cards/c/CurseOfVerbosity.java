@@ -1,8 +1,5 @@
 package mage.cards.c;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EnchantedPlayerAttackedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -21,6 +18,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -81,7 +82,7 @@ class CurseOfVerbosityEffect extends OneShotEffect {
             if (enchantedPlayer != null) {
                 Set<UUID> players = new HashSet<>();
                 for (UUID attacker : game.getCombat().getAttackers()) {
-                    UUID defender = game.getCombat().getDefenderId(attacker);
+                    UUID defender = game.getCombat().getDefenderPlayerId(attacker);
                     if (defender.equals(enchantedPlayer.getId())
                             && game.getPlayer(source.getControllerId()).hasOpponent(game.getPermanent(attacker).getControllerId(), game)) {
                         players.add(game.getPermanent(attacker).getControllerId());

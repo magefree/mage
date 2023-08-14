@@ -72,8 +72,9 @@ class ThrashingFrontlinerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         return Optional
                 .ofNullable(this.getSourceId())
-                .map(game.getCombat()::getDefenderId)
-                .map(game::getPermanent)
+                .map(game.getCombat()::getDefenderMOR)
+                .filter(Objects::nonNull)
+                .map(mor -> mor.getPermanent(game))
                 .filter(Objects::nonNull)
                 .map(permanent -> permanent.isBattle(game))
                 .orElse(false);

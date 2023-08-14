@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,18 +12,15 @@ import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,7 +84,7 @@ class GraspOfTheHieromancerTriggeredAbility extends TriggeredAbilityImpl {
             if (defendingPlayerId != null) {                
                 this.getTargets().clear();
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-                UUID defenderId = game.getCombat().getDefenderId(getSourceId());
+                UUID defenderId = game.getCombat().getDefenderPlayerId(getSourceId());
                 filter.add(new ControllerIdPredicate(defenderId));
                 TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
                 this.addTarget(target);

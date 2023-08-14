@@ -132,6 +132,28 @@ public class BattleDuelTest extends BattleBaseTest {
         assertPowerToughness(playerA, "Knight Token", 2 + 1, 2 + 1);
     }
 
+
+    // Bug: double strike against battle can cause damage to the other side.
+    @Test
+    public void testDefeatedByDoubleStrike() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 2);
+        addCard(Zone.HAND, playerA, azgol);
+        addCard(Zone.BATTLEFIELD, playerA, "Zetalpa, Primal Dawn"); // 4/8 Double Strike
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, azgol);
+        addTarget(playerA, playerB);
+
+        attack(1, playerA, "Zetalpa, Primal Dawn", azgol);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, azgol, 0);
+        assertPermanentCount(playerA, ashenReaper, 1);
+    }
+
     @Test
     public void testDefeatedStifle() {
         addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 2 + 6 + 1);

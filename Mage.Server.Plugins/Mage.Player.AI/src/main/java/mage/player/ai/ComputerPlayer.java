@@ -1,9 +1,6 @@
 package mage.player.ai;
 
-import mage.ApprovingObject;
-import mage.ConditionalMana;
-import mage.MageObject;
-import mage.Mana;
+import mage.*;
 import mage.abilities.*;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
@@ -2068,24 +2065,29 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         log.debug("selectAttackers");
-        UUID opponentId = game.getCombat().getDefenders().iterator().next();
+        MageObjectReference defenderMOR = game.getCombat().getDefenders().stream().findFirst().orElse(null);
+        if (defenderMOR == null) {
+            return;
+        }
+
         Attackers attackers = getPotentialAttackers(game);
-        List<Permanent> blockers = getOpponentBlockers(opponentId, game);
+        List<Permanent> blockers = getOpponentBlockers(defenderMOR.getSourceId(), game);
         List<Permanent> actualAttackers = new ArrayList<>();
+        Player player = game.getPlayer(defenderMOR.getSourceId());
         if (blockers.isEmpty()) {
             actualAttackers = attackers.getAttackers();
-        } else if (attackers.size() - blockers.size() >= game.getPlayer(opponentId).getLife()) {
+        } else if (player != null && attackers.size() - blockers.size() >= player.getLife()) {
             actualAttackers = attackers.getAttackers();
         } else {
-            CombatSimulator combat = simulateAttack(attackers, blockers, opponentId, game);
+            CombatSimulator combat = simulateAttack(attackers, blockers, defenderMOR, game);
             if (combat.rating > 2) {
                 for (CombatGroupSimulator group : combat.groups) {
-                    this.declareAttacker(group.attackers.get(0).id, group.defenderId, game, false);
+                    this.declareAttacker(group.attackers.get(0).id, group.defenderMOR, game, false);
                 }
             }
         }
         for (Permanent attacker : actualAttackers) {
-            this.declareAttacker(attacker.getId(), opponentId, game, false);
+            this.declareAttacker(attacker.getId(), defenderMOR, game, false);
         }
     }
 
@@ -2617,7 +2619,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         return game.getBattlefield().getAllActivePermanents(blockFilter, opponentId, game);
     }
 
-    protected CombatSimulator simulateAttack(Attackers attackers, List<Permanent> blockers, UUID opponentId, Game game) {
+    protected CombatSimulator simulateAttack(Attackers attackers, List<Permanent> blockers, MageObjectReference defenderMOR, Game game) {
         log.debug("simulateAttack");
         List<Permanent> attackersList = attackers.getAttackers();
         CombatSimulator best = new CombatSimulator();
@@ -2637,7 +2639,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             CombatSimulator combat = new CombatSimulator();
             for (Permanent permanent : trialAttackers) {
-                combat.groups.add(new CombatGroupSimulator(opponentId, Arrays.asList(permanent.getId()), new ArrayList<UUID>(), game));
+                combat.groups.add(new CombatGroupSimulator(defenderMOR, Arrays.asList(permanent.getId()), new ArrayList<UUID>(), game));
             }
             CombatSimulator test = simulateBlock(combat, blockers, game);
             if (test.evaluate() > bestResult) {

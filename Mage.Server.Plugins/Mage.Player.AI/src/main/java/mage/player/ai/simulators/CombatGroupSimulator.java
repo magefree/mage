@@ -1,5 +1,6 @@
 package mage.player.ai.simulators;
 
+import mage.MageObjectReference;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -9,24 +10,23 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CombatGroupSimulator implements Serializable {
     public List<CreatureSimulator> attackers = new ArrayList<>();
     public List<CreatureSimulator> blockers = new ArrayList<>();
-    public UUID defenderId;
-    public boolean defenderIsPlaneswalker;
+    public MageObjectReference defenderMOR;
+    public boolean defenderIsPermanent;
     public int unblockedDamage;
     private CreatureSimulator attacker;
 
-    public CombatGroupSimulator(UUID defenderId, List<UUID> attackers, List<UUID> blockers, Game game) {
-        this.defenderId = defenderId;
-        for (UUID attackerId: attackers) {
+    public CombatGroupSimulator(MageObjectReference defenderMOR, List<UUID> attackers, List<UUID> blockers, Game game) {
+        this.defenderMOR = defenderMOR;
+        for (UUID attackerId : attackers) {
             Permanent permanent = game.getPermanent(attackerId);
             this.attackers.add(new CreatureSimulator(permanent));
         }
-        for (UUID blockerId: blockers) {
+        for (UUID blockerId : blockers) {
             Permanent permanent = game.getPermanent(blockerId);
             this.blockers.add(new CreatureSimulator(permanent));
         }

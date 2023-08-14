@@ -1777,7 +1777,7 @@ public class TestPlayer implements Player {
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         // Loop through players and validate can attack/block this turn
-        UUID defenderId = null;
+        MageObjectReference defenderMOR = null;
         boolean mustAttackByAction = false;
         boolean madeAttackByAction = false;
         for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext(); ) {
@@ -1811,7 +1811,7 @@ public class TestPlayer implements Player {
                         String permanentName = group.substring(group.indexOf("permanent=") + 10);
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT, game)) {
                             if (hasObjectTargetNameOrAlias(permanent, permanentName)) {
-                                defenderId = permanent.getId();
+                                defenderMOR = new MageObjectReference(permanent.getId(), game);
                                 break;
                             }
                         }
@@ -1819,17 +1819,17 @@ public class TestPlayer implements Player {
                         String defendingPlayerName = group.substring(group.indexOf("defendingPlayer=") + 16);
                         for (Player defendingPlayer : game.getPlayers().values()) {
                             if (defendingPlayer.getName().equals(defendingPlayerName)) {
-                                defenderId = defendingPlayer.getId();
+                                defenderMOR = new MageObjectReference(defendingPlayer.getId(), game);
                                 break;
                             }
                         }
                     }
                 }
-                if (defenderId == null) {
-                    for (UUID uuid : game.getCombat().getDefenders()) {
-                        Player defender = game.getPlayer(uuid);
+                if (defenderMOR == null) {
+                    for (MageObjectReference mor : game.getCombat().getDefenders()) {
+                        Player defender = game.getPlayer(mor.getSourceId());
                         if (defender != null) {
-                            defenderId = uuid;
+                            defenderMOR = mor;
                         }
                     }
                 }
@@ -1842,8 +1842,8 @@ public class TestPlayer implements Player {
                 secondFilter.add(Predicates.not(SummoningSicknessPredicate.instance));
                 // TODO: Cannot enforce legal attackers multiple times per combat. See issue #3038
                 Permanent attacker = findPermanent(secondFilter, groups[0], computerPlayer.getId(), game, false);
-                if (attacker != null && attacker.canAttack(defenderId, game)) {
-                    computerPlayer.declareAttacker(attacker.getId(), defenderId, game, false);
+                if (attacker != null && attacker.canAttack(defenderMOR.getSourceId(), game)) {
+                    computerPlayer.declareAttacker(attacker.getId(), defenderMOR, game, false);
                     it.remove();
                     madeAttackByAction = true;
                 }
@@ -3611,8 +3611,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void declareAttacker(UUID attackerId, UUID defenderId, Game game, boolean allowUndo) {
-        computerPlayer.declareAttacker(attackerId, defenderId, game, allowUndo);
+    public void declareAttacker(UUID attackerId, MageObjectReference defenderMOR, Game game, boolean allowUndo) {
+        computerPlayer.declareAttacker(attackerId, defenderMOR, game, allowUndo);
     }
 
     @Override

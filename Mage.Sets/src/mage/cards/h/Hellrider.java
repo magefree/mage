@@ -1,8 +1,8 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -13,12 +13,12 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class Hellrider extends CardImpl {
@@ -69,8 +69,11 @@ class HellriderTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent source = game.getPermanent(event.getSourceId());
         if (source != null && source.isControlledBy(controllerId)) {
-            UUID defendingPlayerId = game.getCombat().getDefenderId(event.getSourceId());
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(defendingPlayerId));
+            MageObjectReference defenderMOR = game.getCombat().getDefenderMOR(event.getSourceId());
+            if (defenderMOR == null) {
+                return false;
+            }
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(defenderMOR));
             return true;
         }
         return false;

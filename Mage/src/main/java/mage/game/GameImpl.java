@@ -2568,7 +2568,7 @@ public abstract class GameImpl implements Game {
                         .getCombat()
                         .getGroups()
                         .stream()
-                        .map(CombatGroup::getDefenderId)
+                        .map(CombatGroup::getDefenderMOR)
                         .filter(Objects::nonNull)
                         .noneMatch(perm.getId()::equals)
                         && this.getPlayer(perm.getProtectorId()) == null

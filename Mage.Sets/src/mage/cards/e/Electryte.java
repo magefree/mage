@@ -1,8 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -16,6 +14,9 @@ import mage.filter.common.FilterBlockingCreature;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +63,7 @@ class ElectryteTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredAbili
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            return game.getCombat().getDefenderId(getSourceId()).equals(event.getPlayerId());
+            return game.getCombat().getDefenderPlayerId(getSourceId()).equals(event.getPlayerId());
         }
         return false;
     }

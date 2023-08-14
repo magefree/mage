@@ -66,7 +66,7 @@ enum AstralConfrontationValue implements DynamicValue {
                         .map(game::getControllerId)
                         .anyMatch(sourceAbility::isControlledBy)
                 )
-                .map(CombatGroup::getDefenderId)
+                .map(CombatGroup::getDefenderMOR)
                 .filter(Objects::nonNull)
                 .distinct()
                 .filter(opponents::contains)

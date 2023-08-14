@@ -1,6 +1,7 @@
 package mage.player.human;
 
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.*;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -16,6 +17,8 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.*;
+import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
+import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
@@ -41,12 +44,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetDefender;
-import mage.util.CardUtil;
-import mage.util.GameLog;
-import mage.util.ManaUtil;
-import mage.util.MessageToClient;
-import mage.util.MultiAmountMessage;
-
+import mage.util.*;
 import org.apache.log4j.Logger;
 
 import java.awt.*;
@@ -55,9 +53,6 @@ import java.util.List;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
-
-import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
-import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -1637,20 +1632,25 @@ public class HumanPlayer extends PlayerImpl {
             if (response.getString() != null
                     && response.getString().equals("special")) { // All attack
                 setStoredBookmark(game.bookmarkState());
-                UUID attackedDefender = null;
-                if (game.getCombat().getDefenders().size() > 1) {
-                    attackedDefender = selectDefenderForAllAttack(game.getCombat().getDefenders(), game);
-                } else if (game.getCombat().getDefenders().size() == 1) {
-                    attackedDefender = game.getCombat().getDefenders().iterator().next();
+                MageObjectReference attackedDefender = null;
+                Set<MageObjectReference> defenderIds = game.getCombat().getDefenders()
+                        .stream().filter(Objects::nonNull)
+                        .collect(Collectors.toSet());
+                if (defenderIds.size() > 1) {
+                    attackedDefender = selectDefenderForAllAttack(defenderIds, game);
+                } else if (defenderIds.size() == 1) {
+                    attackedDefender = defenderIds.iterator().next();
                 }
                 for (Permanent attacker : game.getBattlefield().getAllActivePermanents(filterCreatureForCombat, getId(), game)) {
                     if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
-                            new DeclareAttackerEvent(attackedDefender, attacker.getId(), attacker.getControllerId()), game)) {
+                            new DeclareAttackerEvent(attackedDefender.getSourceId(), attacker.getId(), attacker.getControllerId()), game)) {
                         continue;
                     }
                     // if attacker needs a specific defender to attack so select that one instead
                     if (game.getCombat().getCreaturesForcedToAttack().containsKey(attacker.getId())) {
-                        Set<UUID> possibleDefenders = game.getCombat().getCreaturesForcedToAttack().get(attacker.getId());
+                        Set<MageObjectReference> possibleDefenders = game.getCombat().getCreaturesForcedToAttack().get(attacker.getId())
+                                .stream().filter(Objects::nonNull)
+                                .collect(Collectors.toSet());
                         if (!possibleDefenders.isEmpty() && !possibleDefenders.contains(attackedDefender)) {
                             declareAttacker(attacker.getId(), possibleDefenders.iterator().next(), game, false);
                             continue;
@@ -1671,7 +1671,10 @@ public class HumanPlayer extends PlayerImpl {
                 Permanent attacker = game.getPermanent(responseId);
                 if (attacker != null) {
                     if (filterCreatureForCombat.match(attacker, playerId, null, game)) {
-                        selectDefender(game.getCombat().getDefenders(), attacker.getId(), game);
+                        Set<MageObjectReference> defenderIds = game.getCombat().getDefenders()
+                                .stream().filter(Objects::nonNull)
+                                .collect(Collectors.toSet());
+                        selectDefender(defenderIds, attacker.getId(), game);
                     } else if (filterAttack.match(attacker, playerId, null, game) && game.getStack().isEmpty()) {
                         removeAttackerIfPossible(game, attacker);
                     }
@@ -1688,9 +1691,12 @@ public class HumanPlayer extends PlayerImpl {
                 for (UUID creatureId : game.getCombat().getCreaturesForcedToAttack().keySet()) {
                     boolean validForcedAttacker = false;
                     if (game.getCombat().getAttackers().contains(creatureId)) {
-                        Set<UUID> possibleDefender = game.getCombat().getCreaturesForcedToAttack().get(creatureId);
+                        Set<UUID> possibleDefender = game.getCombat().getCreaturesForcedToAttack().get(creatureId)
+                                .stream().filter(Objects::nonNull)
+                                .map(MageObjectReference::getSourceId)
+                                .collect(Collectors.toSet());
                         if (possibleDefender.isEmpty()
-                                || possibleDefender.contains(game.getCombat().getDefenderId(creatureId))) {
+                                || possibleDefender.contains(game.getCombat().getDefenderMOR(creatureId).getSourceId())) {
                             validForcedAttacker = true;
                         }
                     }
@@ -1745,7 +1751,10 @@ public class HumanPlayer extends PlayerImpl {
                     }
                     // if attacker needs a specific defender to attack so select that one instead
                     if (game.getCombat().getCreaturesForcedToAttack().containsKey(attacker.getId())) {
-                        Set<UUID> possibleDefenders = game.getCombat().getCreaturesForcedToAttack().get(attacker.getId());
+                        Set<UUID> possibleDefenders = game.getCombat().getCreaturesForcedToAttack().get(attacker.getId())
+                                .stream().filter(Objects::nonNull)
+                                .map(MageObjectReference::getSourceId)
+                                .collect(Collectors.toSet());
                         if (!possibleDefenders.isEmpty() && !possibleDefenders.contains(forcedToAttackId)) {
                             continue;
                         }
@@ -1787,14 +1796,17 @@ public class HumanPlayer extends PlayerImpl {
      * @param game
      * @return
      */
-    protected boolean selectDefender(Set<UUID> defenders, UUID attackerId, Game game) {
+    protected boolean selectDefender(Set<MageObjectReference> defenders, UUID attackerId, Game game) {
         boolean forcedToAttack = false;
-        Set<UUID> possibleDefender = game.getCombat().getCreaturesForcedToAttack().get(attackerId);
-        if (possibleDefender != null) {
+        Set<MageObjectReference> possibleDefender = game.getCombat().getCreaturesForcedToAttack()
+                .getOrDefault(attackerId, new HashSet<>())
+                .stream().filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+
+        if (possibleDefender.size() > 0) {
             forcedToAttack = true;
         }
-        if (possibleDefender == null
-                || possibleDefender.isEmpty()) {
+        if (possibleDefender.isEmpty()) {
             possibleDefender = defenders;
         }
         if (possibleDefender.size() == 1) {
@@ -1812,17 +1824,17 @@ public class HumanPlayer extends PlayerImpl {
             }
             if (chooseTarget(Outcome.Damage, target, null, game)) {
                 UUID defenderId = getFixedResponseUUID(game);
-                declareAttacker(attackerId, defenderId, game, true);
+                declareAttacker(attackerId, new MageObjectReference(defenderId, game), game, true);
                 return true;
             }
         }
         return false;
     }
 
-    protected UUID selectDefenderForAllAttack(Set<UUID> defenders, Game game) {
+    protected MageObjectReference selectDefenderForAllAttack(Set<MageObjectReference> defenders, Game game) {
         TargetDefender target = new TargetDefender(defenders);
         if (chooseTarget(Outcome.Damage, target, null, game)) {
-            return getFixedResponseUUID(game);
+            return new MageObjectReference(getFixedResponseUUID(game), game);
         }
         return null;
     }

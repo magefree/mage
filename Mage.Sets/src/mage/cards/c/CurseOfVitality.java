@@ -1,26 +1,27 @@
 package mage.cards.c;
 
-import java.util.HashSet;
-import java.util.Set;
+import mage.abilities.Ability;
+import mage.abilities.common.EnchantedPlayerAttackedTriggeredAbility;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EnchantedPlayerAttackedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.GainLifeTargetEffect;
-import mage.constants.Zone;
-import mage.players.Player;
 
 /**
  *
@@ -81,7 +82,7 @@ class CurseOfVitalityEffect extends OneShotEffect {
             if (enchantedPlayer != null) {
                 Set<UUID> players = new HashSet<>();
                 for (UUID attacker : game.getCombat().getAttackers()) {
-                    UUID defender = game.getCombat().getDefenderId(attacker);
+                    UUID defender = game.getCombat().getDefenderPlayerId(attacker);
                     if (defender.equals(enchantedPlayer.getId())
                             && game.getPlayer(source.getControllerId()).hasOpponent(game.getPermanent(attacker).getControllerId(), game)) {
                         players.add(game.getPermanent(attacker).getControllerId());

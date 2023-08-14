@@ -67,7 +67,7 @@ class ScorchSpitterTriggeredAbility extends TriggeredAbilityImpl {
         if (this.getSourceId().equals(event.getSourceId())) {
             this.getEffects().clear();
             Effect effect = new DamageTargetEffect(1);
-            effect.setTargetPointer(new FixedTarget(game.getCombat().getDefenderId(event.getSourceId()), game));
+            effect.setTargetPointer(new FixedTarget(game.getCombat().getDefenderMOR(event.getSourceId())));
             this.addEffect(effect);
             return true;
         }

@@ -1,20 +1,14 @@
 
 package mage.player.ai;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.common.PassAbility;
 import mage.cards.Card;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -22,8 +16,10 @@ import mage.game.turn.Step.StepPart;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class MCTSNode {
@@ -90,7 +86,7 @@ public class MCTSNode {
             playerId = game.getPriorityPlayerId();
         } else {
             if (game.getTurnStepType() == PhaseStep.DECLARE_BLOCKERS) {
-                playerId = game.getCombat().getDefenders().iterator().next();
+                playerId = game.getCombat().getDefenders().iterator().next().getSourceId();
             } else {
                 playerId = game.getActivePlayerId();
             }
@@ -156,7 +152,7 @@ public class MCTSNode {
                     Game sim = game.copy();
                     MCTSPlayer simPlayer = (MCTSPlayer) sim.getPlayer(player.getId());
                     for (UUID attackerId: attack) {
-                        simPlayer.declareAttacker(attackerId, defenderId, sim, false);
+                        simPlayer.declareAttacker(attackerId, new MageObjectReference(defenderId, game), sim, false);
                     }
                     sim.resume();
                     children.add(new MCTSNode(this, sim, sim.getCombat()));

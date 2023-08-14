@@ -1,8 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -12,13 +10,16 @@ import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
@@ -81,12 +82,12 @@ class CanalCourierTriggeredAbility extends TriggeredAbilityImpl {
         // Both Canal Courier and the other creature must attack different players for the last ability to trigger.
         Permanent permanent = game.getPermanent(getSourceId());
         if (permanent != null && permanent.isAttacking()) {
-            UUID sourceDefenderId = game.getCombat().getDefenderId(permanent.getId());
+            UUID sourceDefenderId = game.getCombat().getDefenderPlayerId(permanent.getId());
             Player attackedPlayer = game.getPlayer(sourceDefenderId);
             if (attackedPlayer != null) {
                 for (UUID attacker : game.getCombat().getAttackers()) {
                     if (!Objects.equals(attacker, permanent.getId())) {
-                        UUID defenderId = game.getCombat().getDefenderId(attacker);
+                        UUID defenderId = game.getCombat().getDefenderPlayerId(attacker);
                         Player attackedPlayer2 = game.getPlayer(defenderId);
                         if (attackedPlayer2 != null && attackedPlayer.getId().equals(attackedPlayer2.getId())) {
                             return true;

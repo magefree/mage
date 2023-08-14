@@ -78,7 +78,7 @@ class OathOfKayaTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
 
-        if (game.getCombat().isPlaneswalkerAttacked(you.getId(), game)) {
+        if (game.getCombat().isControlledPermanentAttacked(you.getId(), game)) {
             for (UUID attacker : game.getCombat().getAttackers()) {
                 Permanent attackingPermanent = game.getPermanent(attacker);
                 if (attackingPermanent != null && attackingPermanent.isCreature(game)) {
