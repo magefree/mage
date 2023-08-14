@@ -3,13 +3,12 @@ package mage.abilities.effects.common.continuous;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.common.LinkedSimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 import java.util.*;
 
@@ -44,6 +43,8 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
     public GainAbilityTargetEffect(Ability ability, Duration duration, String rule, boolean useOnCard) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, ability.getEffects().getOutcome(ability, Outcome.AddAbility));
         this.ability = ability;
+        this.ability = copyAbility();
+        
         this.staticText = rule;
         this.useOnCard = useOnCard;
 
@@ -52,8 +53,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
 
     protected GainAbilityTargetEffect(final GainAbilityTargetEffect effect) {
         super(effect);
-        this.ability = effect.ability.copy();
-        this.ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
+        this.ability = effect.copyAbility();
         this.useOnCard = effect.useOnCard;
         this.waitingCardPermanent = effect.waitingCardPermanent;
         this.durationPhaseStep = effect.durationPhaseStep;
@@ -200,6 +200,15 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             }
         }
         return affectedTargets > 0;
+    }
+
+    public Ability copyAbility() {
+        Ability ability = this.ability.copy();
+        ability.newId();
+        if (ability instanceof LinkedSimpleStaticAbility) {
+            ((LinkedSimpleStaticAbility) ability).setEffectIdManually();
+        }
+        return ability;
     }
 
     @Override
