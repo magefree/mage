@@ -347,7 +347,16 @@ public final class ZonesHandler {
                 card = takeAttributesFromSpell(card, event, game);
                 // controlling player can be replaced so use event player now
                 Permanent permanent;
-                if (card instanceof MeldCard) {
+                if (card.isFaceDown(game)) {
+                    // TODO: this should be allowed. Main reason it is not is that caller does not have
+                    //       the permanent UUID to set as Morph/Manifest/Other
+                    if (card instanceof ModalDoubleFacedCardHalf) {
+                        // main mdf card must be processed before that call (e.g. only halfes can be moved to battlefield)
+                        throw new IllegalStateException("Unexpected trying of move mdf card to battlefield facedown instead half");
+                    }
+                    // If facedown, we do not really care for any kind of mdfc or meld.
+                    permanent = new PermanentCard(card, event.getPlayerId(), game, true);
+                } else if (card instanceof MeldCard) {
                     permanent = new PermanentMeld(card, event.getPlayerId(), game);
                 } else if (card instanceof ModalDoubleFacedCard) {
                     // main mdf card must be processed before that call (e.g. only halfes can be moved to battlefield)
@@ -355,7 +364,7 @@ public final class ZonesHandler {
                 } else if (card instanceof Permanent) {
                     throw new IllegalStateException("Unexpected trying of move permanent to battlefield instead card");
                 } else {
-                    permanent = new PermanentCard(card, event.getPlayerId(), game);
+                    permanent = new PermanentCard(card, event.getPlayerId(), game, false);
                 }
 
                 // put onto battlefield with possible counters

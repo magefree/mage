@@ -35,22 +35,28 @@ public class PermanentCard extends PermanentImpl {
     protected int zoneChangeCounter;
 
     public PermanentCard(Card card, UUID controllerId, Game game) {
+        this(card, controllerId, game, false);
+    }
+
+    public PermanentCard(Card card, UUID controllerId, Game game, boolean facedownSoSkipChecks) {
         super(card.getId(), card.getOwnerId(), controllerId, card.getName());
 
-        // usage check: you must put to play only real card's part
-        // if you use it in test code then call CardUtil.getDefaultCardSideForBattlefield for default side
-        // it's a basic check and still allows to create permanent from instant or sorcery
-        boolean goodForBattlefield = true;
-        if (card instanceof ModalDoubleFacedCard) {
-            goodForBattlefield = false;
-        } else if (card instanceof SplitCard) {
-            // fused spells allowed (it uses main card)
-            if (card.getSpellAbility() != null && !card.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+        if (!facedownSoSkipChecks) {
+            // usage check: you must put to play only real card's part
+            // if you use it in test code then call CardUtil.getDefaultCardSideForBattlefield for default side
+            // it's a basic check and still allows to create permanent from instant or sorcery
+            boolean goodForBattlefield = true;
+            if (card instanceof ModalDoubleFacedCard) {
                 goodForBattlefield = false;
+            } else if (card instanceof SplitCard) {
+                // fused spells allowed (it uses main card)
+                if (card.getSpellAbility() != null && !card.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+                    goodForBattlefield = false;
+                }
             }
-        }
-        if (!goodForBattlefield) {
-            throw new IllegalArgumentException("ERROR, can't create permanent card from split or mdf: " + card.getName());
+            if (!goodForBattlefield) {
+                throw new IllegalArgumentException("ERROR, can't create permanent card from split or mdf: " + card.getName());
+            }
         }
 
         this.card = card;

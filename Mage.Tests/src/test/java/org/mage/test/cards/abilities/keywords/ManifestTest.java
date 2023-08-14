@@ -11,6 +11,7 @@ import mage.view.GameView;
 import mage.view.PermanentView;
 import mage.view.PlayerView;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -529,6 +530,88 @@ public class ManifestTest extends CardTestPlayerBase {
 
         assertHandCount(playerB, "Mountain", 1);
 
+    }
+
+    // Bug: Game exception when manifesting a split card #10608
+    private void test_ManifestThenBlink(String card, String afterBlink) {
+        setStrictChooseMode(true);
+
+        // Sorcery
+        // Manifest the top card of your library.
+        addCard(Zone.HAND, playerA, "Soul Summons", 1);
+        addCard(Zone.HAND, playerA, "Cloudshift", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+
+        addCard(Zone.LIBRARY, playerA, card, 1);
+
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Summons");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+
+        execute();
+
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", EmptyNames.FACE_DOWN_CREATURE.toString());
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        if (afterBlink == null) {
+            assertExileCount(playerA, card, 1);
+        } else {
+            assertPermanentCount(playerA, afterBlink, 1);
+        }
+    }
+
+    private void test_ManifestThenBlink(String card) {
+        test_ManifestThenBlink(card, null);
+    }
+
+    @Test
+    public void test_ManifestThenBlinkAnAftermathCard() {
+        test_ManifestThenBlink("Dusk // Dawn");
+    }
+
+
+    // Need better card -> permanent tracking to use in ManifestEffect and handle manifested MDFC correctly.
+    // For now it does throw an "IllegalStateException: Unexpected trying of move mdf card to battlefield facedown instead half"
+    // caught by GameImpl.playPriority .
+    @Ignore
+    @Test
+    public void test_ManifestThenBlinkMDFCNotPermanentCard() {
+        test_ManifestThenBlink("Agadeem's Awakening // Agadeem, the Undercrypt", null);
+    }
+
+    // Need better card -> permanent tracking to use in ManifestEffect and handle manifested MDFC correctly.
+    // For now it does throw an "IllegalStateException: Unexpected trying of move mdf card to battlefield facedown instead half"
+    // caught by GameImpl.playPriority .
+    @Ignore
+    @Test // Need better card -> permanent tracking to use in ManifestEffect and handle manifested MDFC correctly.
+    public void test_ManifestThenBlinkMDFCPermanentCard() {
+        test_ManifestThenBlink("Akoum Warrior // Akoum Teeth", "Akoum Warrior");
+    }
+
+    @Test
+    public void test_ManifestThenBlinkAFuseSplitCard() {
+        test_ManifestThenBlink("Alive // Well");
+    }
+
+    @Test
+    public void test_ManifestThenBlinkASplitCard() {
+        test_ManifestThenBlink("Assault // Battery");
+    }
+
+    @Test
+    public void test_ManifestThenBlinkHalfMeldCard() {
+        test_ManifestThenBlink("Graf Rats", "Graf Rats");
+    }
+
+    @Test
+    public void test_ManifestThenBlinkAnAdventureCard() {
+        test_ManifestThenBlink("Ardenvale Tactician // Dizzying Swoop", "Ardenvale Tactician");
     }
 
     private PermanentView findFaceDownPermanent(Game game, TestPlayer viewFromPlayer, TestPlayer searchInPlayer) {
