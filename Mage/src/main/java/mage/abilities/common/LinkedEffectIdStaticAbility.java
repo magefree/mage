@@ -15,7 +15,7 @@ import java.util.UUID;
  *
  * @author Susucr
  */
-public class LinkedSimpleStaticAbility extends SimpleStaticAbility {
+public class LinkedEffectIdStaticAbility extends SimpleStaticAbility {
 
     public interface ChildEffect extends Effect {
         /**
@@ -35,26 +35,26 @@ public class LinkedSimpleStaticAbility extends SimpleStaticAbility {
      */
     private UUID linkedHandshake;
 
-    public LinkedSimpleStaticAbility(ChildEffect effect) {
+    public LinkedEffectIdStaticAbility(ChildEffect effect) {
         this(Zone.BATTLEFIELD, effect);
     }
 
-    public LinkedSimpleStaticAbility(Zone zone, ChildEffect effect) {
+    public LinkedEffectIdStaticAbility(Zone zone, ChildEffect effect) {
         super(Zone.BATTLEFIELD, effect);
         this.linkedHandshake = UUID.randomUUID();
         initHandshake();
         setEffectIdManually();
     }
 
-    private LinkedSimpleStaticAbility(final LinkedSimpleStaticAbility effect) {
+    private LinkedEffectIdStaticAbility(final LinkedEffectIdStaticAbility effect) {
         super(effect);
         this.linkedHandshake = UUID.randomUUID();
         initHandshake();
     }
 
     @Override
-    public LinkedSimpleStaticAbility copy() {
-        return new LinkedSimpleStaticAbility(this);
+    public LinkedEffectIdStaticAbility copy() {
+        return new LinkedEffectIdStaticAbility(this);
     }
 
     private void initHandshake() {

@@ -3,7 +3,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.LinkedSimpleStaticAbility;
+import mage.abilities.common.LinkedEffectIdStaticAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,7 +37,7 @@ public final class WhipgrassEntangler extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{W}: Until end of turn, target creature gains "This creature can't attack or block unless its controller pays {1} for each Cleric on the battlefield."
-        Ability gainedAbility = new LinkedSimpleStaticAbility(new WhipgrassEntanglerCantAttackUnlessYouPayEffect());
+        Ability gainedAbility = new LinkedEffectIdStaticAbility(new WhipgrassEntanglerCantAttackUnlessYouPayEffect());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn).setText("Until end of turn, target creature gains \"This creature can't attack or block unless its controller pays {1} for each Cleric on the battlefield.\""),
                 new ManaCostsImpl<>("{1}{W}"));
@@ -56,7 +56,7 @@ public final class WhipgrassEntangler extends CardImpl {
     }
 }
 
-class WhipgrassEntanglerCantAttackUnlessYouPayEffect extends CantAttackBlockUnlessPaysSourceEffect implements LinkedSimpleStaticAbility.ChildEffect {
+class WhipgrassEntanglerCantAttackUnlessYouPayEffect extends CantAttackBlockUnlessPaysSourceEffect implements LinkedEffectIdStaticAbility.ChildEffect {
 
     private static final FilterPermanent filter = new FilterPermanent("Cleric on the battlefield");
     private UUID parentLinkHandshake = null;
@@ -78,8 +78,8 @@ class WhipgrassEntanglerCantAttackUnlessYouPayEffect extends CantAttackBlockUnle
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.getSourceId().equals(event.getSourceId())
-                && source instanceof LinkedSimpleStaticAbility
-                && ((LinkedSimpleStaticAbility) source).checkLinked(this.parentLinkHandshake);
+                && source instanceof LinkedEffectIdStaticAbility
+                && ((LinkedEffectIdStaticAbility) source).checkLinked(this.parentLinkHandshake);
     }
 
     @Override
