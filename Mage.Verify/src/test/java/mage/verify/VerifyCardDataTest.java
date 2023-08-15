@@ -1643,6 +1643,9 @@ public class VerifyCardDataTest {
         }
     }
 
+    // "copy" fails means that the copy constructor are not correct inside a card.
+    // To fix those, try to find the class that did trigger the copy failure, and check
+    // that copy() exists, a copy constructor exists, and the copy constructor is right. 
     private void checkCardCanBeCopied(Card card1) {
         Card card2;
         try {
@@ -1765,7 +1768,8 @@ public class VerifyCardDataTest {
                     }
 
                     // Do check that the expected special fields were encountered.
-                    // If those field are no relevant, or were renamed, please modify the relevant code block above.
+                    // If those field are no relevant anymore, or were renamed, please modify the matching code
+                    // block above on how to loop into those fields.
                     if (class1 == CardImpl.class) {
                         if (!hasSpellAbilityField) {
                             fail(originalCard, "copy", "was expecting a spellAbility field, but found none " + msg + "]");
