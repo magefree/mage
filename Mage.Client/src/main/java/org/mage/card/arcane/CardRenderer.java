@@ -504,7 +504,7 @@ public abstract class CardRenderer {
     protected String getCardSuperTypeLine() {
         StringBuilder spType = new StringBuilder();
         if (cardView.isToken()) {
-            // "Token" is shown on the token line of printed token.
+            // "Token" is shown on the type line. As recent printing of tokens do.
             spType.append("Token ");
         }
         for (SuperType superType : cardView.getSuperTypes()) {
