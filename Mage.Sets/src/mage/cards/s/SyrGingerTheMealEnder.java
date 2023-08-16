@@ -2,9 +2,9 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.ZoneChangeAllTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.OpponentControlsPermanentCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -21,7 +21,10 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -72,11 +75,9 @@ public final class SyrGingerTheMealEnder extends CardImpl {
         this.addAbility(ability);
 
         // Whenever another artifact you control is put into a graveyard from the battlefield, put a +1/+1 counter on Syr Ginger and scry 1.
-        ability = new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD,
+        ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-                filter,
-                "Whenever another artifact you control is put into a graveyard from the battlefield, ",
-                false
+                false, filter, false
         );
         ability.addEffect(new ScryEffect(1).concatBy("and"));
         this.addAbility(ability);
