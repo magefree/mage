@@ -24,7 +24,7 @@ public final class TorchTheTower extends CardImpl {
     public TorchTheTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
-        // Bargain
+        // Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
         this.addAbility(new BargainAbility());
 
         // Torch the Tower deals 2 damage to target creature or planeswalker. If this spell was bargained, instead it deals 3 damage to that permanent and you scry 1.

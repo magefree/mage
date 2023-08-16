@@ -22,6 +22,8 @@ public class BargainTest extends CardTestPlayerBase {
 
     // Artifact to be targetted by Troublemaker's Ouphe trigger, and be bargain fodder.
     private static final String glider = "Aesthir Glider";
+    // To blink Ouphe.
+    private static final String cloudshift = "Cloudshift";
 
     /**
      * Torch the Tower
@@ -37,8 +39,8 @@ public class BargainTest extends CardTestPlayerBase {
     // 3 damage to target -- to finish off creatures and check torch's exile.
     private static final String lightningBolt = "Lightning Bolt";
 
-    // 4/4
-    private static final String obsidianGiant = "Obsidian Giant";
+    // 4/4 Artifact
+    private static final String stoneGolem = "Stone Golem";
 
     @Test
     public void testBargainNotPaidOuphe() {
@@ -131,6 +133,39 @@ public class BargainTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void testBargainPaidOupheThenFlicker() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, troublemakerOuphe);
+        addCard(Zone.HAND, playerA, cloudshift);
+        addCard(Zone.BATTLEFIELD, playerA, "Savannah", 3);
+        addCard(Zone.BATTLEFIELD, playerA, glider); // Is an artifact, hence something you can sac to Bargain.
+
+        addCard(Zone.BATTLEFIELD, playerB, glider);
+        addCard(Zone.BATTLEFIELD, playerB, stoneGolem);
+
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, troublemakerOuphe);
+        setChoice(playerA, true); // true to bargain
+        setChoice(playerA, glider); // choose to sac glider.
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1); // let Ouphe resolve, trigger on the stack.
+        addTarget(playerA, glider); // exile opponent's glider with etb.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cloudshift, troublemakerOuphe); // blink Ouphe.
+        // No trigger. It is no longer bargaining.
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerB, glider, 0);
+        assertExileCount(playerB, glider, 1);
+        assertPermanentCount(playerB, stoneGolem, 1);
+        assertExileCount(playerB, stoneGolem, 0);
+        assertGraveyardCount(playerA, glider, 1);
+    }
+
+    @Test
     public void testBargainNotPaidTorch() {
         setStrictChooseMode(true);
 
@@ -139,26 +174,26 @@ public class BargainTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.BATTLEFIELD, playerA, glider); // Could be bargain.
 
-        addCard(Zone.BATTLEFIELD, playerB, obsidianGiant);
+        addCard(Zone.BATTLEFIELD, playerB, stoneGolem);
 
         setStrictChooseMode(true);
         skipInitShuffling();
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, torchTheTower, obsidianGiant);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, torchTheTower, stoneGolem);
         setChoice(playerA, false); // Do not bargain.
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertDamageReceived(playerB, obsidianGiant, 2);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lightningBolt, obsidianGiant);
+        assertDamageReceived(playerB, stoneGolem, 2);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lightningBolt, stoneGolem);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, glider, 1);
-        assertPermanentCount(playerB, obsidianGiant, 0);
-        assertExileCount(playerB, obsidianGiant, 1);
+        assertPermanentCount(playerB, stoneGolem, 0);
+        assertExileCount(playerB, stoneGolem, 1);
     }
 
     @Test
@@ -170,26 +205,26 @@ public class BargainTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.BATTLEFIELD, playerA, glider); // Could be bargain.
 
-        addCard(Zone.BATTLEFIELD, playerB, obsidianGiant);
+        addCard(Zone.BATTLEFIELD, playerB, stoneGolem);
 
         setStrictChooseMode(true);
         skipInitShuffling();
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, torchTheTower, obsidianGiant);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, torchTheTower, stoneGolem);
         setChoice(playerA, true); // Do bargain.
         setChoice(playerA, glider); // Bargain the glider away.
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertDamageReceived(playerB, obsidianGiant, 3);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lightningBolt, obsidianGiant);
+        assertDamageReceived(playerB, stoneGolem, 3);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lightningBolt, stoneGolem);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, glider, 0);
-        assertPermanentCount(playerB, obsidianGiant, 0);
-        assertExileCount(playerB, obsidianGiant, 1);
+        assertPermanentCount(playerB, stoneGolem, 0);
+        assertExileCount(playerB, stoneGolem, 1);
     }
 }

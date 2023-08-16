@@ -23,7 +23,7 @@ public enum BargainedCondition implements Condition {
         if (sourceObject instanceof Card) {
             for (Ability ability : ((Card) sourceObject).getAbilities(game)) {
                 if (ability instanceof BargainAbility) {
-                    return ((BargainAbility) ability).wasBargained();
+                    return ((BargainAbility) ability).wasBargained(game, source);
                 }
             }
         }
