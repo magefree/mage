@@ -25,7 +25,7 @@ public class ChissGoriaForgeTyrantTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, COLOSSUS, 1);
         skipInitShuffling();
 
-        // Chiss-Goria should cost 3 mana, leaving 6 untapped
+        // Chiss-Goria should cost 3 mana, leaving 12 untapped
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, CHISS);
 
         attack(1, playerA, CHISS);
