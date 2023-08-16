@@ -25,7 +25,7 @@ public final class CrittersAndMagic extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0; //no mythics
-        this.maxCardNumberInBooster = 110; //small set
+        this.maxCardNumberInBooster = 116; //small set
 
         cards.add(new SetCardInfo("Abrade", 45, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Alchemists Gift", 31, Rarity.COMMON, mage.cards.a.AlchemistsGift.class));
