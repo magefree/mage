@@ -13,6 +13,7 @@ import java.util.function.Supplier;
  */
 public enum RoleType {
     CURSED("Cursed", CursedRoleToken::new),
+    MONSTER("Monster", MonsterRoleToken::new),
     ROYAL("Royal", RoyalRoleToken::new),
     WICKED("Wicked", WickedRoleToken::new),
     YOUNG_HERO("Young Hero", YoungHeroRoleToken::new);
