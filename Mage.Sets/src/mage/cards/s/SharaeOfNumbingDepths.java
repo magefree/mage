@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -81,10 +82,8 @@ class SharaeOfNumbingDepthsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && game.getOpponents(controllerId).contains(permanent.getControllerId())) {
-            return controllerId.equals(event.getPlayerId());
-        }
-
-        return false;
+        return permanent != null
+                && StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE.match(permanent, game)
+                && isControlledBy(event.getPlayerId());
     }
 }
