@@ -44,7 +44,7 @@ public enum RoleType {
             if (aura == null || !aura.hasSubtype(SubType.AURA, game)) {
                 continue;
             }
-            aura.getAbilities().get(0).getTargets().get(0).add(source.getFirstTarget(), game);
+            aura.getAbilities().get(0).getTargets().get(0).add(permanent.getId(), game);
             aura.getAbilities().get(0).getEffects().get(0).apply(game, aura.getAbilities().get(0));
         }
         return token;

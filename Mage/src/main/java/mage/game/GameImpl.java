@@ -2744,11 +2744,12 @@ public abstract class GameImpl implements Game {
                     .collect(Collectors.toList());
             if (!rolesToHandle.isEmpty()) {
                 for (Set<Permanent> roleSet : rolesToHandle) {
-                    int newest = roleSet.stream().mapToInt(Permanent::getCreateOrder).max().orElse(-1);
-                    // using the world enchantment rule for ties until otherwise corrected
-                    if (roleSet.stream().mapToInt(Permanent::getCreateOrder).filter(i -> i == newest).count() < 2) {
-                        roleSet.removeIf(permanent -> permanent.getCreateOrder() < newest);
-                    }
+                    int newest = roleSet
+                            .stream()
+                            .mapToInt(Permanent::getCreateOrder)
+                            .max()
+                            .orElse(-1);
+                    roleSet.removeIf(permanent -> permanent.getCreateOrder() == newest);
                     for (Permanent permanent : roleSet) {
                         movePermanentToGraveyardWithInfo(permanent);
                         somethingHappened = true;
