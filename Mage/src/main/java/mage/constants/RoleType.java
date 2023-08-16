@@ -3,10 +3,7 @@ package mage.constants;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.CursedRoleToken;
-import mage.game.permanent.token.Token;
-import mage.game.permanent.token.WickedRoleToken;
-import mage.game.permanent.token.YoungHeroRoleToken;
+import mage.game.permanent.token.*;
 
 import java.util.UUID;
 import java.util.function.Supplier;
@@ -16,6 +13,7 @@ import java.util.function.Supplier;
  */
 public enum RoleType {
     CURSED("Cursed", CursedRoleToken::new),
+    ROYAL("Royal", RoyalRoleToken::new),
     WICKED("Wicked", WickedRoleToken::new),
     YOUNG_HERO("Young Hero", YoungHeroRoleToken::new);
 

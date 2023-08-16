@@ -21,6 +21,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Ash, Party Crasher", 201, Rarity.UNCOMMON, mage.cards.a.AshPartyCrasher.class));
+        cards.add(new SetCardInfo("Besotted Knight", 4, Rarity.COMMON, mage.cards.b.BesottedKnight.class));
         cards.add(new SetCardInfo("Conceited Witch", 84, Rarity.COMMON, mage.cards.c.ConceitedWitch.class));
         cards.add(new SetCardInfo("Cruel Somnophage", 222, Rarity.RARE, mage.cards.c.CruelSomnophage.class));
         cards.add(new SetCardInfo("Cursed Courtier", 9, Rarity.UNCOMMON, mage.cards.c.CursedCourtier.class));
