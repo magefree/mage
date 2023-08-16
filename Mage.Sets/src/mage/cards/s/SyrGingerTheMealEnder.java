@@ -79,7 +79,7 @@ public final class SyrGingerTheMealEnder extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
                 false, filter, false
         );
-        ability.addEffect(new ScryEffect(1).concatBy("and"));
+        ability.addEffect(new ScryEffect(1, false).concatBy("and"));
         this.addAbility(ability);
 
         // {2}, {T}, Sacrifice Syr Ginger: You gain life equal to its power.
