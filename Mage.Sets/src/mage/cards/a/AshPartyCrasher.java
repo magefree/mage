@@ -38,10 +38,11 @@ public final class AshPartyCrasher extends CardImpl {
         // Celebration -- Whenever Ash, Party Crasher attacks, if two or more nonland permanents entered the battlefield under your control this turn, put a +1/+1 counter on Ash.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false),
-                CelebrationCondition.instance,
-                "Whenever {this} attacks, if two or more nonland permanents entered the battlefield under your control this turn, put a +1/+1 counter on {this}."
+                CelebrationCondition.instance, "Whenever {this} attacks, if two or more nonland permanents " +
+                "entered the battlefield under your control this turn, put a +1/+1 counter on {this}."
         );
         ability.setAbilityWord(AbilityWord.CELEBRATION);
+        ability.addHint(CelebrationCondition.getHint());
         this.addAbility(ability, new CelebrationWatcher());
     }
 
