@@ -37,6 +37,9 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
     private static final String reminderText = "You may sacrifice an artifact, enchantment, or token as you cast this spell.";
     private final String rule;
 
+    private boolean pastBargaining;
+    private boolean choseToNotBargain;
+
     private String activationKey; // TODO: replace by Tag Cost Tracking.
 
     protected OptionalAdditionalCost additionalCost;
@@ -57,6 +60,8 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
         this.setRuleAtTheTop(true);
         this.addHint(BargainCostWasPaidHint.instance);
         this.activationKey = null;
+        this.pastBargaining = false;
+        this.choseToNotBargain = false;
     }
 
     private BargainAbility(final BargainAbility ability) {
@@ -64,6 +69,8 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
         this.rule = ability.rule;
         this.additionalCost = ability.additionalCost.copy();
         this.activationKey = ability.activationKey;
+        this.pastBargaining = ability.pastBargaining;
+        this.choseToNotBargain = ability.choseToNotBargain;
     }
 
     @Override
@@ -76,6 +83,8 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
             additionalCost.reset();
         }
         this.activationKey = null;
+        this.pastBargaining = false;
+        this.choseToNotBargain = false;
     }
 
     @Override
@@ -91,7 +100,10 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
 
         this.resetBargain();
         boolean canPay = additionalCost.canPay(ability, this, ability.getControllerId(), game);
-        if (!canPay || !player.chooseUse(Outcome.Sacrifice, promptString, ability, game)) {
+        boolean chooseToBargain = canPay && player.chooseUse(Outcome.Sacrifice, promptString, ability, game);
+        pastBargaining = true;
+        if (!chooseToBargain) {
+            choseToNotBargain = true;
             return;
         }
 
@@ -109,6 +121,15 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
 
     public boolean wasBargained(Game game, Ability source) {
         return activationKey != null && getActivationKey(source, game).equalsIgnoreCase(activationKey);
+    }
+
+    // Returns true if the bargain cost is activated.
+    public boolean isBargaining(Game game, Ability source) {
+        return pastBargaining;
+    }
+
+    public boolean choseToNotBargain(Game game, Ability source) {
+        return choseToNotBargain;
     }
 
 
