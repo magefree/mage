@@ -339,19 +339,11 @@ public class GameEvent implements Serializable {
         /* TAPPED,
          targetId    tapped permanent
          sourceId    id of the ability's source (can be null for standard tap actions like combat)
-         playerId    controller of the tapped permanent
+         playerId    source's controller, null if no source
          amount      not used for this event
          flag        is it tapped for combat
          */
         TAPPED,
-        /* TAPPED,
-         targetId    tapped permanent
-         sourceId    id of the ability's source (can be null for standard tap actions like combat)
-         playerId    controller of the **source** ability
-         amount      not used for this event
-         flag        is it tapped for combat
-         */
-        TAPPED_BY,
         TAPPED_FOR_MANA,
         /* TAPPED_FOR_MANA
          During calculation of the available mana for a player the "TappedForMana" event is fired to simulate triggered mana production.

@@ -75,7 +75,7 @@ class SharaeOfNumbingDepthsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TAPPED_BY;
+        return event.getType() == GameEvent.EventType.TAPPED;
     }
 
     @Override
