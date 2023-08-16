@@ -10,11 +10,12 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -94,10 +95,14 @@ class ChissGoriaForgeTyrantEffect extends OneShotEffect {
         if (cards.isEmpty()) {
             return true;
         }
-        player.moveCards(cards, Zone.EXILED, source, game);
+        player.moveCardsToExile(cards.getCards(game), source, game, false, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source));
 
         Cards castableCards = new CardsImpl(cards.getCards(StaticFilters.FILTER_CARD_NON_LAND, game));
-        game.addEffect(new ChissGoriaForgeTyrantCanPlayEffect(castableCards, game), source);
+        Set<MageObjectReference> morSet = new HashSet<>();
+        castableCards.stream().map(uuid -> new MageObjectReference(uuid, game)).forEach(morSet::add);
+
+        game.addEffect(new ChissGoriaForgeTyrantCanPlayEffect(morSet, game), source);
+        game.addEffect(new ChissGoriaForgeTyrantAffinityEffect(morSet, game), source);
         return true;
     }
 }
@@ -106,9 +111,9 @@ class ChissGoriaForgeTyrantCanPlayEffect extends AsThoughEffectImpl {
 
     private final Set<MageObjectReference> morSet = new HashSet<>();
 
-    ChissGoriaForgeTyrantCanPlayEffect(Cards cards, Game game) {
+    ChissGoriaForgeTyrantCanPlayEffect(Set<MageObjectReference> morSet, Game game) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        cards.stream().map(uuid -> new MageObjectReference(uuid, game)).forEach(morSet::add);
+        this.morSet.addAll(morSet);
     }
 
     private ChissGoriaForgeTyrantCanPlayEffect(final ChissGoriaForgeTyrantCanPlayEffect effect) {
@@ -138,37 +143,48 @@ class ChissGoriaForgeTyrantCanPlayEffect extends AsThoughEffectImpl {
     }
 }
 
-// TODO: Unsure where to apply this effect (or AffinityForArtifactsAbility) to make it work.
-class ChissGoriaForgeTyrantCostEffect extends CostModificationEffectImpl {
+class ChissGoriaForgeTyrantAffinityEffect extends ContinuousEffectImpl {
 
-    public ChissGoriaForgeTyrantCostEffect() {
-        super(Duration.OneUse, Outcome.Benefit, CostModificationType.REDUCE_COST);
+    private final Set<MageObjectReference> morSet = new HashSet<>();
+
+    public ChissGoriaForgeTyrantAffinityEffect(Set<MageObjectReference> morSet, Game game) {
+        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.Benefit);
+        this.morSet.addAll(morSet);
     }
 
-    protected ChissGoriaForgeTyrantCostEffect(ChissGoriaForgeTyrantCostEffect effect) {
+    protected ChissGoriaForgeTyrantAffinityEffect(final ChissGoriaForgeTyrantAffinityEffect effect) {
         super(effect);
+        this.morSet.addAll(effect.morSet);
     }
 
     @Override
-    public ChissGoriaForgeTyrantCostEffect copy() {
-        return new ChissGoriaForgeTyrantCostEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int artifactCount = game.getBattlefield().getAllActivePermanents(
-            StaticFilters.FILTER_PERMANENT_ARTIFACT_AN, 
-            source.getControllerId(), 
-            game)
-        .size();
-        CardUtil.reduceCost(abilityToModify, artifactCount);
-        return true;
+    public ChissGoriaForgeTyrantAffinityEffect copy() {
+        return new ChissGoriaForgeTyrantAffinityEffect(this);
     }
 
     @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        // TODO: Unsure what to put here.
-        return true;
+    public boolean apply(Game game, Ability source) {
+        // if (!ChissGoriaForgeTyrantWatcher.checkRef(source, morSet, game)) {
+        //     discard();
+        //     return false;
+        // }
+
+        UUID sourceId = source.getSourceId();
+        UUID objectIdToCast = CardUtil.getMainCardId(game, sourceId);
+
+        if (morSet.stream().anyMatch(mor -> mor.refersTo(objectIdToCast, game))) {
+            Card card = game.getCard(objectIdToCast);
+            if (card != null) {
+                card.addAbility(new AffinityForArtifactsAbility());
+                return true;
+            }
+            Spell spell = game.getSpell(source.getSourceId());
+            if (spell != null) {
+                spell.addAbility(new AffinityForArtifactsAbility());
+                return true;
+            }
+        }
+        return false;
     }
 }
 
