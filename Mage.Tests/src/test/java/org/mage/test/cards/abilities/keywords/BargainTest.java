@@ -10,17 +10,35 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class BargainTest extends CardTestPlayerBase {
 
-    // Troublemaker Ouphe
-    // {1}{G}
-    // Creature — Ouphe
-    //
-    // Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
-    // When Troublemaker Ouphe enters the battlefield, if it was bargained, exile target artifact or enchantment an opponent controls.
+    /**
+     * Troublemaker Ouphe
+     * {1}{G}
+     * Creature — Ouphe
+     * <p>
+     * Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
+     * When Troublemaker Ouphe enters the battlefield, if it was bargained, exile target artifact or enchantment an opponent controls.
+     */
     private static final String troublemakerOuphe = "Troublemaker Ouphe";
 
-    // Artifact to be targetted by Troublemaker's Ouphe trigger.
+    // Artifact to be targetted by Troublemaker's Ouphe trigger, and be bargain fodder.
     private static final String glider = "Aesthir Glider";
 
+    /**
+     * Torch the Tower
+     * {R}
+     * Instant
+     * <p>
+     * Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
+     * Torch the Tower deals 2 damage to target creature or planeswalker. If this spell was bargained, instead it deals 3 damage to that permanent and you scry 1.
+     * If a permanent dealt damage by Torch the Tower would die this turn, exile it instead.
+     */
+    private static final String torchTheTower = "Torch the Tower";
+
+    // 3 damage to target -- to finish off creatures and check torch's exile.
+    private static final String lightningBolt = "Lightning Bolt";
+
+    // 4/4
+    private static final String obsidianGiant = "Obsidian Giant";
 
     @Test
     public void testBargainNotPaidOuphe() {
@@ -110,5 +128,68 @@ public class BargainTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, glider, 0);
         assertExileCount(playerB, glider, 1);
         assertGraveyardCount(playerA, glider, 1);
+    }
+
+    @Test
+    public void testBargainNotPaidTorch() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, torchTheTower, 1);
+        addCard(Zone.HAND, playerA, lightningBolt, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, glider); // Could be bargain.
+
+        addCard(Zone.BATTLEFIELD, playerB, obsidianGiant);
+
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, torchTheTower, obsidianGiant);
+        setChoice(playerA, false); // Do not bargain.
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertDamageReceived(playerB, obsidianGiant, 2);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lightningBolt, obsidianGiant);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, glider, 1);
+        assertPermanentCount(playerB, obsidianGiant, 0);
+        assertExileCount(playerB, obsidianGiant, 1);
+    }
+
+    @Test
+    public void testBargainPaidTorch() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.HAND, playerA, torchTheTower, 1);
+        addCard(Zone.HAND, playerA, lightningBolt, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, glider); // Could be bargain.
+
+        addCard(Zone.BATTLEFIELD, playerB, obsidianGiant);
+
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, torchTheTower, obsidianGiant);
+        setChoice(playerA, true); // Do bargain.
+        setChoice(playerA, glider); // Bargain the glider away.
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertDamageReceived(playerB, obsidianGiant, 3);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lightningBolt, obsidianGiant);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, glider, 0);
+        assertPermanentCount(playerB, obsidianGiant, 0);
+        assertExileCount(playerB, obsidianGiant, 1);
     }
 }
