@@ -560,6 +560,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (!tapped && !replaceEvent(EventType.TAP, game)) {
             this.tapped = true;
             game.fireEvent(new GameEvent(GameEvent.EventType.TAPPED, objectId, source, controllerId, 0, forCombat));
+            game.fireEvent(new GameEvent(GameEvent.EventType.TAPPED_BY, objectId, source, source == null ? null : source.getControllerId(), 0, forCombat));
             return true;
         }
         return false;
