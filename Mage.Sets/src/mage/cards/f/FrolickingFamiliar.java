@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class FrolickingFamiliar extends AdventureCard {
 
     public FrolickingFamiliar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{2}{U}", "Blow Off Steam", "{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{2}{U}", "Blow Off Steam", "{R}");
 
         this.subtype.add(SubType.OTTER);
         this.subtype.add(SubType.WIZARD);

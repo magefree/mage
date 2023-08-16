@@ -50,7 +50,7 @@ public final class NevaStalkedByNightmares extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Neva, Stalked by Nightmares enters the battlefield, return target creature or enchantment card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
@@ -63,7 +63,7 @@ public final class NevaStalkedByNightmares extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 false, filter2, false
         );
-        ability.addEffect(new ScryEffect(1).concatBy(", then"));
+        ability.addEffect(new ScryEffect(1, false).concatBy(", then"));
         this.addAbility(ability);
     }
 
