@@ -70,7 +70,7 @@ class LastMarchOfTheEntsEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInHand(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURES);
-        player.choose(outcome, player.getHand(), target, source, game);
+        player.choose(Outcome.PutCreatureInPlay, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;
     }
