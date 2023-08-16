@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.HalfValue;
+import mage.abilities.dynamicvalue.common.HalfValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 public final class TheGooseMother extends CardImpl {
 
-    private static final DynamicValue halfX = HalfValue.roundedUp(ManacostVariableValue.ETB);
+    private static final DynamicValue halfX = new HalfValue(ManacostVariableValue.ETB, true);
 
     public TheGooseMother(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{G}{U}");
