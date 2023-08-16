@@ -11,28 +11,28 @@ import mage.game.permanent.Permanent;
 /**
  * @author TheElk801
  */
-public class CreateRoleAttachedTargetEffect extends OneShotEffect {
+public class CreateRoleAttachedSourceEffect extends OneShotEffect {
 
     private final RoleType roleType;
 
-    public CreateRoleAttachedTargetEffect(RoleType roleType) {
+    public CreateRoleAttachedSourceEffect(RoleType roleType) {
         super(Outcome.Benefit);
         this.roleType = roleType;
     }
 
-    private CreateRoleAttachedTargetEffect(final CreateRoleAttachedTargetEffect effect) {
+    private CreateRoleAttachedSourceEffect(final CreateRoleAttachedSourceEffect effect) {
         super(effect);
         this.roleType = effect.roleType;
     }
 
     @Override
-    public CreateRoleAttachedTargetEffect copy() {
-        return new CreateRoleAttachedTargetEffect(this);
+    public CreateRoleAttachedSourceEffect copy() {
+        return new CreateRoleAttachedSourceEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return false;
         }
@@ -45,7 +45,6 @@ public class CreateRoleAttachedTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "create a " + roleType.getName() + " Role token attached to " +
-                getTargetPointer().describeTargets(mode.getTargets(), "it");
+        return "create a " + roleType.getName() + " Role token attached to it";
     }
 }
