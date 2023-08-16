@@ -5,6 +5,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.CursedRoleToken;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.WickedRoleToken;
 import mage.game.permanent.token.YoungHeroRoleToken;
 
 import java.util.UUID;
@@ -15,6 +16,7 @@ import java.util.function.Supplier;
  */
 public enum RoleType {
     CURSED("Cursed", CursedRoleToken::new),
+    WICKED("Wicked", WickedRoleToken::new),
     YOUNG_HERO("Young Hero", YoungHeroRoleToken::new);
 
     private final String name;
