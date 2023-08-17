@@ -130,9 +130,11 @@ class ChissGoriaForgeTyrantCanPlayEffect extends AsThoughEffectImpl {
             return false;
         }
         UUID objectIdToCast = CardUtil.getMainCardId(game, sourceId);
-        return game.getCard(objectIdToCast).isArtifact(game) 
+        Card card = game.getCard(objectIdToCast);
+        
+        return (card != null && card.isArtifact(game)
             && morSet.stream().anyMatch(mor -> mor.refersTo(objectIdToCast, game))
-            && ChissGoriaForgeTyrantWatcher.checkRef(source, morSet, game);
+            && ChissGoriaForgeTyrantWatcher.checkRef(source, morSet, game));
     }
 }
 
