@@ -6,7 +6,6 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -16,7 +15,7 @@ import mage.util.CardUtil;
 /**
  * @Author Susucr
  * <p>
- * Have the Controller of target permanent (or LKI controller) create a single Token.
+ * Have the Controller of target permanent (or LKI controller) create Tokens.
  */
 public class CreateTokenControllerTargetPermanentEffect extends OneShotEffect {
     private final Token token;
@@ -68,7 +67,7 @@ public class CreateTokenControllerTargetPermanentEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = (Permanent) game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
+        Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (creature != null) {
             Player controllerOfTarget = game.getPlayer(creature.getControllerId());
             if (controllerOfTarget != null) {
