@@ -1011,6 +1011,12 @@ public final class StaticFilters {
         FILTER_SPELL_KICKED_A.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_PERMANENT_TOKEN = new FilterPermanent("token");
+
+    static {
+        FILTER_PERMANENT_TOKEN.add(TokenPredicate.TRUE);
+    }
+
     public static final FilterCreaturePermanent FILTER_CREATURE_TOKEN = new FilterCreaturePermanent("creature token");
 
     static {
