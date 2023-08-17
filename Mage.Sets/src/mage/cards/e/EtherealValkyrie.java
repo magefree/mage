@@ -121,7 +121,7 @@ class EtherealValkyrieEffect extends OneShotEffect {
             game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Cost", creatureCost);
             game.getState().setValue(exileCard.getMainCard().getId().toString() + "Foretell Split Cost", spellCost);
             foretellAbility = new ForetellAbility(exileCard, creatureCost, spellCost);
-        } else if (!exileCard.isLand()){
+        } else if (!exileCard.isLand(game)){
             // normal card
             String costText = CardUtil.reduceCost(exileCard.getManaCost(), 2).getText();
             game.getState().setValue(exileCard.getId().toString() + "Foretell Cost", costText);

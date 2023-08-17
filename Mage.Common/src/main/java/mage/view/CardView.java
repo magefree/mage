@@ -706,7 +706,7 @@ public class CardView extends SimpleCardView {
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = emblem.getExpansionSetCode();
         this.cardNumber = "";
-        this.imageNumber = 0;
+        this.imageNumber = emblem.getImageNumber();
         this.rarity = Rarity.COMMON;
 
         this.playableStats = emblem.playableStats.copy();

@@ -25,19 +25,20 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
         return new Counters(this);
     }
 
-    public void addCounter(String name, int amount) {
+    public Counters addCounter(String name, int amount) {
         putIfAbsent(name, new Counter(name));
         this.get(name).add(amount);
+        return this;
     }
 
-    public void addCounter(Counter counter) {
+    public Counters addCounter(Counter counter) {
         if (!containsKey(counter.name)) {
             put(counter.name, counter);
         } else {
 
             get(counter.name).add(counter.getCount());
         }
-
+        return this;
     }
 
     public boolean removeCounter(String name) {

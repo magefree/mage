@@ -23,7 +23,7 @@ public final class PhyrexiaAllWillBeOneCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Signet", 125, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Assemble the Legion", 115, Rarity.RARE, mage.cards.a.AssembleTheLegion.class));
         cards.add(new SetCardInfo("Battle Screech", 59, Rarity.UNCOMMON, mage.cards.b.BattleScreech.class));
-        cards.add(new SetCardInfo("Beast Within", 104, Rarity.SPECIAL, mage.cards.b.BeastWithin.class));
+        cards.add(new SetCardInfo("Beast Within", 104, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Blight Mamba", 105, Rarity.COMMON, mage.cards.b.BlightMamba.class));
         cards.add(new SetCardInfo("Bojuka Bog", 145, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Boros Charm", 116, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));

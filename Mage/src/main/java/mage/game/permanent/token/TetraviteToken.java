@@ -16,8 +16,8 @@ public final class TetraviteToken extends TokenImpl {
 
     public TetraviteToken() {
         super("Tetravite Token", "1/1 colorless Tetravite artifact creature token with flying and \"This creature can't be enchanted.\"");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         subtype.add(SubType.TETRAVITE);
         power = new MageInt(1);
         toughness = new MageInt(1);

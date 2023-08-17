@@ -157,7 +157,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             sb.append(CardUtil.getTextWithFirstCharUpperCase(ability.getRule()));
             sb.append('"');
         } else {
-            sb.append(ability.getRule());
+            sb.append(CardUtil.stripReminderText(ability.getRule()));
         }
         if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());

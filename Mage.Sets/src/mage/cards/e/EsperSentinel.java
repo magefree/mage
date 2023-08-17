@@ -37,7 +37,7 @@ public final class EsperSentinel extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever an opponent casts their first noncreature spell each turn, draw a card unless that player pays {X}, where X is Esper Sentinel's power.
-        this.addAbility(new EsperSentinelTriggeredAbility(), new SpellsCastWatcher());
+        this.addAbility(new EsperSentinelTriggeredAbility());
     }
 
     private EsperSentinel(final EsperSentinel card) {
