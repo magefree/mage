@@ -23,7 +23,7 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author Susucr
  */
 public final class RestlessVinestalk extends CardImpl {
 
