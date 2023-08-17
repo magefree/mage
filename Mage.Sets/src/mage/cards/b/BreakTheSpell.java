@@ -60,7 +60,7 @@ class BreakTheSpellEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        boolean followupEffect = permanent.getControllerId().equals(source.getControllerId())
+        boolean followupEffect = permanent.isControlledBy(source.getControllerId())
                 || StaticFilters.FILTER_PERMANENT_TOKEN.match(permanent, game);
         boolean destroyed = permanent.destroy(source, game, false);
         game.getState().processAction(game);
