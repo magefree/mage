@@ -154,10 +154,10 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         }
         if (quotes) {
             sb.append('"');
-            sb.append(CardUtil.stripReminderText(CardUtil.getTextWithFirstCharUpperCase(ability.getRule())));
+            sb.append(CardUtil.getTextWithFirstCharUpperCase(ability.getRule()));
             sb.append('"');
         } else {
-            sb.append(ability.getRule());
+            sb.append(CardUtil.stripReminderText(ability.getRule()));
         }
         if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
