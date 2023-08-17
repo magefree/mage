@@ -78,6 +78,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Troyan, Gutsy Explorer", 217, Rarity.UNCOMMON, mage.cards.t.TroyanGutsyExplorer.class));
         cards.add(new SetCardInfo("Twisted Fealty", 154, Rarity.UNCOMMON, mage.cards.t.TwistedFealty.class));
         cards.add(new SetCardInfo("Warehouse Tabby", 117, Rarity.COMMON, mage.cards.w.WarehouseTabby.class));
+        cards.add(new SetCardInfo("Will, Scion of Peace", 218, Rarity.MYTHIC, mage.cards.w.WillScionOfPeace.class));
     }
 
 //    @Override
