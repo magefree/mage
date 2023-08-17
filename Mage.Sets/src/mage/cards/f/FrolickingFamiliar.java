@@ -39,7 +39,7 @@ public final class FrolickingFamiliar extends AdventureCard {
 
         // Blow Off Steam
         // Blow Off Steam deals 1 damage to any target.
-        this.getSpellCard().getSpellAbility().addEffect(new DamageTargetEffect(2));
+        this.getSpellCard().getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellCard().getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
