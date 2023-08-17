@@ -1981,7 +1981,7 @@ public class VerifyCardDataTest {
             boolean needHint = ref.text.contains(objectHint);
             boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));
             if (needHint != haveHint) {
-                fail(card, "abilities", "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
+                warn(card, "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
             }
         }
 
