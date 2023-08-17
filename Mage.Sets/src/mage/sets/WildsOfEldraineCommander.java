@@ -18,5 +18,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
     private WildsOfEldraineCommander() {
         super("Wilds of Eldraine Commander", "WOC", ExpansionSet.buildDate(2023, 9, 8), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+
+        cards.add(new SetCardInfo("Ellivere of the Wild Court", 2, Rarity.MYTHIC, mage.cards.e.EllivereOfTheWildCourt.class));
     }
 }
