@@ -47,8 +47,8 @@ class GruulWarPlowToken extends TokenImpl {
 
     GruulWarPlowToken() {
         super("Juggernaut", "4/4 Juggernaut artifact creature");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         subtype.add(SubType.JUGGERNAUT);
         power = new MageInt(4);
         toughness = new MageInt(4);

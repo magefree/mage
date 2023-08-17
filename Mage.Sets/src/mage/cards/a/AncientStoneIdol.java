@@ -15,7 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.permanent.token.StoneTrapIdolToken;
+import mage.game.permanent.token.StoneIdolToken;
 
 import java.util.UUID;
 
@@ -44,7 +44,7 @@ public final class AncientStoneIdol extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Ancient Stone Idol dies, create a 6/12 colorless Construct artifact creature token with trample.
-        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new StoneTrapIdolToken())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new StoneIdolToken())));
     }
 
     private AncientStoneIdol(final AncientStoneIdol card) {
