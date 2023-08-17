@@ -91,7 +91,7 @@ public class EvolveAbility extends EntersBattlefieldAllTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "evolve <i>(Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)</i>";
+        return "Evolve <i>(Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)</i>";
     }
 
     @Override
