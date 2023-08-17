@@ -1015,6 +1015,7 @@ public final class StaticFilters {
 
     static {
         FILTER_PERMANENT_TOKEN.add(TokenPredicate.TRUE);
+        FILTER_PERMANENT_TOKEN.setLockedFilter(true);
     }
 
     public static final FilterCreaturePermanent FILTER_CREATURE_TOKEN = new FilterCreaturePermanent("creature token");
