@@ -16,6 +16,7 @@ public enum RoleType {
     MONSTER("Monster", MonsterRoleToken::new),
     ROYAL("Royal", RoyalRoleToken::new),
     SORCERER("Sorcerer", SorcererRoleToken::new),
+    VIRTUOUS("Virtuous", VirtuousRoleToken::new),
     WICKED("Wicked", WickedRoleToken::new),
     YOUNG_HERO("Young Hero", YoungHeroRoleToken::new);
 
