@@ -3,7 +3,7 @@ package mage.game.events;
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author Susucr
  */
 public class DamagedPlayerBatchOnePlayerEvent extends DamagedBatchEvent {
 
