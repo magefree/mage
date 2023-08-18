@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.AdditionalTriggerControlledETBReplacementEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,7 +14,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
@@ -36,7 +35,7 @@ public final class EleshNornMotherOfMachines extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EleshNornMotherOfMachinesDoublingEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AdditionalTriggerControlledETBReplacementEffect()));
 
         // Permanents entering the battlefield don't cause abilities of permanents your opponents control to trigger.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EleshNornMotherOfMachinesPreventionEffect()));
@@ -46,55 +45,6 @@ public final class EleshNornMotherOfMachines extends CardImpl {
 
     @Override
     public EleshNornMotherOfMachines copy() {return new EleshNornMotherOfMachines(this);}
-}
-
-class EleshNornMotherOfMachinesDoublingEffect extends ReplacementEffectImpl {
-
-    EleshNornMotherOfMachinesDoublingEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time";
-    }
-
-    EleshNornMotherOfMachinesDoublingEffect(final EleshNornMotherOfMachinesDoublingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EleshNornMotherOfMachinesDoublingEffect copy() {
-        return new EleshNornMotherOfMachinesDoublingEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.NUMBER_OF_TRIGGERS;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event instanceof NumberOfTriggersEvent) {
-            NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
-            // Only triggers for the controller of Elesh Norn
-            if (source.isControlledBy(event.getPlayerId())) {
-                GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
-                // Only EtB triggers
-                if (sourceEvent != null
-                        && sourceEvent.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                        && sourceEvent instanceof EntersTheBattlefieldEvent) {
-                    // Only for triggers of permanents
-                    if (game.getPermanent(numberOfTriggersEvent.getSourceId()) != null) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
-        return false;
-    }
 }
 
 class EleshNornMotherOfMachinesPreventionEffect extends ContinuousRuleModifyingEffectImpl {
