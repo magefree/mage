@@ -88,7 +88,6 @@ class TalionsMessengerEffect extends OneShotEffect {
                     false
             );
             reflexive.addTarget(new TargetPermanent(filter));
-            reflexive.setTriggerPhrase("When you discard a card this way, ");
             game.fireReflexiveTriggeredAbility(reflexive, source);
         }
         return true;
