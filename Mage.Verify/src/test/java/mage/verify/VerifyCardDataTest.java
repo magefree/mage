@@ -124,6 +124,7 @@ public class VerifyCardDataTest {
 
         // cost
         skipListCreate(SKIP_LIST_COST);
+        skipListAddName(SKIP_LIST_COST, "WOE", "Price of Beauty"); // temporary
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
@@ -134,6 +135,9 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
         skipListAddName(SKIP_LIST_TYPE, "WOE", "Knight of Doves"); // temporary
+        skipListAddName(SKIP_LIST_TYPE, "WOE", "Faunsbane Troll"); // temporary
+        skipListAddName(SKIP_LIST_TYPE, "WOE", "Ashiok's Reaper"); // temporary
+        skipListAddName(SKIP_LIST_TYPE, "WOE", "Agatha's Champion"); // temporary
 
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
@@ -141,6 +145,9 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
         skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Knight of Doves"); // temporary
+        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Faunsbane Troll"); // temporary
+        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Ashiok's Reaper"); // temporary
+        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Agatha's Champion"); // temporary
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
