@@ -7,6 +7,7 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.*;
 import mage.constants.*;
@@ -108,7 +109,7 @@ class SiphonInsightEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(card.getId(), game));
             game.addEffect(effect, source);
             // For as long as that card remains exiled, you may look at it
-            effect = new SiphonInsightLookEffect(controller.getId());
+            effect = new MayLookAtTargetCardEffect(controller.getId());
             effect.setTargetPointer(new FixedTarget(card.getId(), game));
             game.addEffect(effect, source);
         }
@@ -204,41 +205,5 @@ class SiphonInsightSpendAnyManaEffect extends AsThoughEffectImpl implements AsTh
     @Override
     public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
         return mana.getFirstAvailable();
-    }
-}
-
-class SiphonInsightLookEffect extends AsThoughEffectImpl {
-
-    private final UUID authorizedPlayerId;
-
-    public SiphonInsightLookEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        this.authorizedPlayerId = authorizedPlayerId;
-        staticText = "You may look at the cards exiled with {this}";
-    }
-
-    private SiphonInsightLookEffect(final SiphonInsightLookEffect effect) {
-        super(effect);
-        this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public SiphonInsightLookEffect copy() {
-        return new SiphonInsightLookEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-        if (cardId == null) {
-            this.discard(); // card is no longer in the origin zone, effect can be discarded
-        }
-        return affectedControllerId.equals(authorizedPlayerId)
-                && objectId.equals(cardId);
     }
 }
