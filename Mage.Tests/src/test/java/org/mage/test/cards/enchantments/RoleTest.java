@@ -20,6 +20,7 @@ public class RoleTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, courtier);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -38,6 +39,7 @@ public class RoleTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{1}, Sacrifice", courtier);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

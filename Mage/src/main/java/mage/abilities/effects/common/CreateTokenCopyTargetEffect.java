@@ -42,6 +42,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
     private final CardType additionalCardType;
     private SubType additionalSubType;
     private final UUID attackedPlayer;
+    private UUID attachedTo = null;
     private final boolean attacking;
     private boolean becomesArtifact;
     private ObjectColor color;
@@ -264,7 +265,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             }
         }
 
-        token.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer);
+        token.putOntoBattlefield(number, game, source, playerId == null ? source.getControllerId() : playerId, tapped, attacking, attackedPlayer, attachedTo);
         for (UUID tokenId : token.getLastAddedTokenIds()) { // by cards like Doubling Season multiple tokens can be added to the battlefield
             Permanent tokenPermanent = game.getPermanent(tokenId);
             if (tokenPermanent != null) {
@@ -383,6 +384,11 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
 
     public CreateTokenCopyTargetEffect setPermanentModifier(PermanentModifier permanentModifier) {
         this.permanentModifier = permanentModifier;
+        return this;
+    }
+
+    public CreateTokenCopyTargetEffect setAttachedTo(UUID attachedTo) {
+        this.attachedTo = attachedTo;
         return this;
     }
 
