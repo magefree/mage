@@ -97,6 +97,7 @@ class AlelaCunningConquerorTriggeredAbility extends TriggeredAbilityImpl {
         List<DamagedEvent> events = dEvent
                 .getEvents()
                 .stream()
+                .filter(DamagedEvent::isCombatDamage)
                 .filter(e -> {
                     Permanent permanent = game.getPermanentOrLKIBattlefield(e.getSourceId());
                     return permanent != null
