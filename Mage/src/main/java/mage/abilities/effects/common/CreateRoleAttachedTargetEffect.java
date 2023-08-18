@@ -46,6 +46,6 @@ public class CreateRoleAttachedTargetEffect extends OneShotEffect {
             return staticText;
         }
         return "create a " + roleType.getName() + " Role token attached to " +
-                getTargetPointer().describeTargets(mode.getTargets(), "it");
+                getTargetPointer().describeTargets(mode.getTargets(), "that creature");
     }
 }
