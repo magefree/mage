@@ -268,6 +268,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             if (attachedTo != null) {
                 permanentAttachedTo = game.getPermanent(attachedTo);
                 if (permanentAttachedTo == null || permanentAttachedTo.cantBeAttachedBy(token, source, game, true)) {
+                    game.informPlayers(token.getName() + " will not be created as it cannot be attached to the chosen permanent");
                     continue;
                 }
             } else {
