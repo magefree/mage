@@ -143,7 +143,7 @@ class ChissGoriaForgeTyrantAffinityEffect extends ContinuousEffectImpl {
     private final Set<MageObjectReference> morSet = new HashSet<>();
 
     public ChissGoriaForgeTyrantAffinityEffect(Set<MageObjectReference> morSet) {
-        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.Benefit);
+        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.Benefit);
         this.morSet.addAll(morSet);
     }
 
