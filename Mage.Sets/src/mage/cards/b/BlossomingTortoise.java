@@ -34,7 +34,6 @@ public final class BlossomingTortoise extends CardImpl {
 
     static {
         filter.add(CardType.LAND.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public BlossomingTortoise(UUID ownerId, CardSetInfo setInfo) {
@@ -46,7 +45,7 @@ public final class BlossomingTortoise extends CardImpl {
 
         // Whenever Blossoming Tortoise enters the battlefield or attacks, mill three cards, then return a land card from your graveyard to the battlefield tapped.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new MillCardsControllerEffect(3));
-        ability.addEffect(new BlossomingTortoiseEffect().concatBy(", then"));
+        ability.addEffect(new BlossomingTortoiseEffect());
         this.addAbility(ability);
 
         // Activated abilities of lands you control cost {1} less to activate.
@@ -72,7 +71,7 @@ class BlossomingTortoiseEffect extends OneShotEffect {
 
     BlossomingTortoiseEffect() {
         super(Outcome.Benefit);
-        staticText = "return a land card from your graveyard to the battlefield tapped";
+        staticText = ", then return a land card from your graveyard to the battlefield tapped";
     }
 
     private BlossomingTortoiseEffect(final BlossomingTortoiseEffect effect) {
