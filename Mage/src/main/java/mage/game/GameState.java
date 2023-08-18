@@ -1,5 +1,6 @@
 package mage.game;
 
+import static java.util.Collections.emptyList;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -43,8 +44,6 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -819,18 +818,30 @@ public class GameState implements Serializable, Copyable<GameState> {
     public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
         // combine damages per type (player or permanent)
         boolean flag = false;
+        Set<UUID> flagPerPlayer = new HashSet<>();
         for (GameEvent event : simultaneousEvents) {
             if ((event instanceof DamagedBatchEvent)
                     && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
                 // old batch
                 ((DamagedBatchEvent) event).addEvent(damagedEvent);
                 flag = true;
-                break;
+            }
+            if (event instanceof DamagedPlayerBatchOnePlayerEvent
+                    && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
+                // old batch for that player
+                ((DamagedBatchEvent) event).addEvent(damagedEvent);
+                flagPerPlayer.add(event.getPlayerId());
             }
         }
         if (!flag) {
             // new batch
             addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
+        }
+        if (!flagPerPlayer.contains(damagedEvent.getPlayerId())) {
+            // new batch for that player
+            DamagedBatchEvent event = new DamagedPlayerBatchOnePlayerEvent(damagedEvent.getPlayerId());
+            event.addEvent(damagedEvent);
+            addSimultaneousEvent(event, game);
         }
     }
 

@@ -20,6 +20,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Ajani's Chosen", 59, Rarity.RARE, mage.cards.a.AjanisChosen.class));
+        cards.add(new SetCardInfo("Alela, Cunning Conqueror", 3, Rarity.MYTHIC, mage.cards.a.AlelaCunningConqueror.class));
         cards.add(new SetCardInfo("Ancestral Mask", 119, Rarity.COMMON, mage.cards.a.AncestralMask.class));
         cards.add(new SetCardInfo("Angelic Destiny", 60, Rarity.MYTHIC, mage.cards.a.AngelicDestiny.class));
         cards.add(new SetCardInfo("Arcane Denial", 84, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
