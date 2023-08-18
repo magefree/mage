@@ -37,7 +37,7 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
     private static final String reminderText = "You may sacrifice an artifact, enchantment, or token as you cast this spell.";
     private final String rule;
 
-    private String activationKey; // TODO: replace by Tag Cost Tracking.
+    public static final String BARGAIN_ACTIVATION_VALUE_KEY = "bargainActivation";
 
     protected OptionalAdditionalCost additionalCost;
 
@@ -56,14 +56,12 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
         this.rule = additionalCost.getName() + additionalCost.getReminderText();
         this.setRuleAtTheTop(true);
         this.addHint(BargainCostWasPaidHint.instance);
-        this.activationKey = null;
     }
 
     private BargainAbility(final BargainAbility ability) {
         super(ability);
         this.rule = ability.rule;
         this.additionalCost = ability.additionalCost.copy();
-        this.activationKey = ability.activationKey;
     }
 
     @Override
@@ -75,7 +73,6 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
         if (additionalCost != null) {
             additionalCost.reset();
         }
-        this.activationKey = null;
     }
 
     @Override
@@ -99,47 +96,12 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
         for (Cost cost : ((Costs<Cost>) additionalCost)) {
             ability.getCosts().add(cost.copy());
         }
-        this.activationKey = getActivationKey(ability, game);
+        ability.getCostsTagMap().put(BARGAIN_ACTIVATION_VALUE_KEY,1);
     }
 
     @Override
     public String getCastMessageSuffix() {
         return additionalCost.getCastSuffixMessage(0);
-    }
-
-    public boolean wasBargained(Game game, Ability source) {
-        return activationKey != null && getActivationKey(source, game).equalsIgnoreCase(activationKey);
-    }
-
-
-    /**
-     * TODO: remove with Tag Cost Tracking.
-     * Return activation zcc key for searching spell's settings in source object
-     *
-     * @param source
-     * @param game
-     */
-    public static String getActivationKey(Ability source, Game game) {
-        // Bargain activates in STACK zone so all zcc must be from "stack moment"
-        // Use cases:
-        // * resolving spell have same zcc (example: check kicker status in sorcery/instant);
-        // * copied spell have same zcc as source spell (see Spell.copySpell and zcc sync);
-        // * creature/token from resolved spell have +1 zcc after moved to battlefield (example: check kicker status in ETB triggers/effects);
-
-        // find object info from the source ability (it can be a permanent or a spell on stack, on the moment of trigger/resolve)
-        MageObject sourceObject = source.getSourceObject(game);
-        Zone sourceObjectZone = game.getState().getZone(sourceObject.getId());
-        int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
-
-        // find "stack moment" zcc:
-        // * permanent cards enters from STACK to BATTLEFIELD (+1 zcc)
-        // * permanent tokens enters from OUTSIDE to BATTLEFIELD (+1 zcc, see prepare code in TokenImpl.putOntoBattlefieldHelper)
-        // * spells and copied spells resolves on STACK (zcc not changes)
-        if (sourceObjectZone != Zone.STACK) {
-            --zcc;
-        }
-
-        return zcc + "";
     }
 
     @Override
