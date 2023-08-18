@@ -81,6 +81,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Sweettooth Witch", 111, Rarity.COMMON, mage.cards.s.SweettoothWitch.class));
         cards.add(new SetCardInfo("Syr Armont, the Redeemer", 214, Rarity.UNCOMMON, mage.cards.s.SyrArmontTheRedeemer.class));
         cards.add(new SetCardInfo("Syr Ginger, the Meal Ender", 252, Rarity.RARE, mage.cards.s.SyrGingerTheMealEnder.class));
+        cards.add(new SetCardInfo("Talion's Messenger", 73, Rarity.RARE, mage.cards.t.TalionsMessenger.class));
         cards.add(new SetCardInfo("Taken by Nightmares", 112, Rarity.UNCOMMON, mage.cards.t.TakenByNightmares.class));
         cards.add(new SetCardInfo("Talion, the Kindly Lord", 215, Rarity.MYTHIC, mage.cards.t.TalionTheKindlyLord.class));
         cards.add(new SetCardInfo("Tanglespan Lookout", 188, Rarity.UNCOMMON, mage.cards.t.TanglespanLookout.class));
