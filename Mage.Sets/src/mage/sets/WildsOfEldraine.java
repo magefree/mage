@@ -38,6 +38,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Cursed Courtier", 9, Rarity.UNCOMMON, mage.cards.c.CursedCourtier.class));
         cards.add(new SetCardInfo("Cut In", 125, Rarity.COMMON, mage.cards.c.CutIn.class));
         cards.add(new SetCardInfo("Decadent Dragon", 223, Rarity.RARE, mage.cards.d.DecadentDragon.class));
+        cards.add(new SetCardInfo("Dutiful Griffin", 11, Rarity.UNCOMMON, mage.cards.d.DutifulGriffin.class));
         cards.add(new SetCardInfo("Edgewall Inn", 255, Rarity.UNCOMMON, mage.cards.e.EdgewallInn.class));
         cards.add(new SetCardInfo("Elvish Archivist", 168, Rarity.RARE, mage.cards.e.ElvishArchivist.class));
         cards.add(new SetCardInfo("Embereth Veteran", 127, Rarity.UNCOMMON, mage.cards.e.EmberethVeteran.class));
