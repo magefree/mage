@@ -27,7 +27,7 @@ public class CounterTargetAndSearchGraveyardHandLibraryEffect extends SearchTarg
         super(graveyardExileOptional, searchWhatText, searchForText);
     }
 
-    public CounterTargetAndSearchGraveyardHandLibraryEffect(final CounterTargetAndSearchGraveyardHandLibraryEffect effect) {
+    protected CounterTargetAndSearchGraveyardHandLibraryEffect(final CounterTargetAndSearchGraveyardHandLibraryEffect effect) {
         super(effect);
     }
 
@@ -65,9 +65,8 @@ public class CounterTargetAndSearchGraveyardHandLibraryEffect extends SearchTarg
 
     @Override
     public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Counter target ").append(mode.getTargets().get(0).getFilter().getMessage()).append(". ");
-        sb.append(CardUtil.getTextWithFirstCharUpperCase(super.getText(mode)));
-        return sb.toString();
+        return "counter " +
+                getTargetPointer().describeTargets(mode.getTargets(), "that spell") + ". " +
+                CardUtil.getTextWithFirstCharUpperCase(super.getText(mode));
     }
 }

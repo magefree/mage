@@ -8,10 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopySourceSpellEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -46,7 +43,7 @@ public final class JinGitaxiasProgressTyrant extends CardImpl {
         // Whenever you cast an artifact, instant, or sorcery spell, copy that spell. You may choose new targets for the copy. This ability triggers only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new CopySourceSpellEffect().setText("copy that spell. You may choose new targets for the copy"),
-                filter, false, true
+                filter, false, SetTargetPointer.SPELL
         ).setTriggersOnceEachTurn(true));
 
         // Whenever an opponent casts an artifact, instant, or sorcery spell, counter that spell. This ability triggers only once each turn.
@@ -85,7 +82,8 @@ class JinGitaxiasProgressTyrantEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) getValue("spellCast");
         if (spell != null) {
-            game.getStack().counter(spell.getId(), source, game);;
+            game.getStack().counter(spell.getId(), source, game);
+            ;
         }
         return true;
     }

@@ -10,7 +10,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class LevelUpAbility extends ActivatedAbilityImpl {
@@ -20,7 +19,7 @@ public class LevelUpAbility extends ActivatedAbilityImpl {
         this.timing = TimingRule.SORCERY;
     }
 
-    public LevelUpAbility(final LevelUpAbility ability) {
+    protected LevelUpAbility(final LevelUpAbility ability) {
         super(ability);
     }
 

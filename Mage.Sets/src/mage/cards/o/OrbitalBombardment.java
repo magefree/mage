@@ -1,7 +1,6 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -10,8 +9,9 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class OrbitalBombardment extends CardImpl {
@@ -23,10 +23,10 @@ public final class OrbitalBombardment extends CardImpl {
     }
 
     public OrbitalBombardment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
 
         // Destroy all non-Starship creatuers.
-        getSpellAbility().getEffects().add(new DestroyAllEffect(new FilterCreaturePermanent(filter)));
+        getSpellAbility().getEffects().add(new DestroyAllEffect(filter));
     }
 
     private OrbitalBombardment(final OrbitalBombardment card) {

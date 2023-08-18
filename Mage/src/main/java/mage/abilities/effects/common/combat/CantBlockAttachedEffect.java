@@ -41,7 +41,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
         staticText = sb.toString();
     }
 
-    public CantBlockAttachedEffect(final CantBlockAttachedEffect effect) {
+    protected CantBlockAttachedEffect(final CantBlockAttachedEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

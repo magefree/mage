@@ -27,7 +27,7 @@ public class ModalDoubleFacedCardHalfImpl extends CardImpl implements ModalDoubl
         this.parentCard = parentCard;
     }
 
-    public ModalDoubleFacedCardHalfImpl(final ModalDoubleFacedCardHalfImpl card) {
+    protected ModalDoubleFacedCardHalfImpl(final ModalDoubleFacedCardHalfImpl card) {
         super(card);
         this.parentCard = card.parentCard;
     }

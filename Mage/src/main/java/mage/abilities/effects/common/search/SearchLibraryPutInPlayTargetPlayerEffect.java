@@ -33,7 +33,7 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
         }
     }
 
-    public SearchLibraryPutInPlayTargetPlayerEffect(final SearchLibraryPutInPlayTargetPlayerEffect effect) {
+    protected SearchLibraryPutInPlayTargetPlayerEffect(final SearchLibraryPutInPlayTargetPlayerEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
         this.ownerIsController = effect.ownerIsController;
@@ -67,11 +67,11 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
             return staticText;
         }
         return getTargetPointer().describeTargets(mode.getTargets(), "that player")
-            + " searches their library for "
-            + target.getDescription()
-            + ", "
-            + (target.getMaxNumberOfTargets() > 1 ? "puts them onto the battlefield" : "puts it onto the battlefield")
-            + (tapped ? " tapped" : "")
-            + ", then shuffles";
+                + " searches their library for "
+                + target.getDescription()
+                + ", "
+                + (target.getMaxNumberOfTargets() > 1 ? "puts them onto the battlefield" : "puts it onto the battlefield")
+                + (tapped ? " tapped" : "")
+                + ", then shuffles";
     }
 }

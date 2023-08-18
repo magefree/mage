@@ -27,14 +27,14 @@ public class BackupAbility extends EntersBattlefieldTriggeredAbility {
     private final List<Ability> abilitiesToAdd = new ArrayList<>();
 
     public BackupAbility(Card card, int amount) {
-        super(null, true);
+        super(null, false);
         this.addEffect(new BackupEffect(amount, abilitiesToAdd));
         this.card = card;
         this.amount = amount;
         this.addTarget(new TargetCreaturePermanent());
     }
 
-    public BackupAbility(final BackupAbility ability) {
+    protected BackupAbility(final BackupAbility ability) {
         super(ability);
         this.amount = ability.amount;
         this.card = ability.card;
@@ -88,12 +88,12 @@ class BackupEffect extends OneShotEffect {
     private final List<Ability> abilitiesToAdd = new ArrayList<>();
 
     public BackupEffect(int amount, List<Ability> abilitiesToAdd) {
-        super(Outcome.Detriment);
+        super(Outcome.BoostCreature);
         this.amount = amount;
         this.abilitiesToAdd.addAll(abilitiesToAdd);
     }
 
-    public BackupEffect(final BackupEffect effect) {
+    protected BackupEffect(final BackupEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.abilitiesToAdd.addAll(effect.abilitiesToAdd);

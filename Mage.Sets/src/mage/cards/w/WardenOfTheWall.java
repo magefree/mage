@@ -55,8 +55,8 @@ class GargoyleToken extends TokenImpl {
 
     public GargoyleToken() {
         super("", "2/3 Gargoyle artifact creature with flying");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         subtype.add(SubType.GARGOYLE);
         power = new MageInt(2);
         toughness = new MageInt(3);

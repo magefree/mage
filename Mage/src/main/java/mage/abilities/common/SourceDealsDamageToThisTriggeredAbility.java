@@ -22,7 +22,7 @@ public class SourceDealsDamageToThisTriggeredAbility extends TriggeredAbilityImp
         setTriggerPhrase("Whenever a source deals damage to {this}, ");
     }
 
-    public SourceDealsDamageToThisTriggeredAbility(final SourceDealsDamageToThisTriggeredAbility ability) {
+    protected SourceDealsDamageToThisTriggeredAbility(final SourceDealsDamageToThisTriggeredAbility ability) {
         super(ability);
     }
 

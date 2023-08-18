@@ -30,7 +30,7 @@ public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public BeginningOfEndStepTriggeredAbility(final BeginningOfEndStepTriggeredAbility ability) {
+    protected BeginningOfEndStepTriggeredAbility(final BeginningOfEndStepTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.interveningIfClauseCondition = ability.interveningIfClauseCondition;

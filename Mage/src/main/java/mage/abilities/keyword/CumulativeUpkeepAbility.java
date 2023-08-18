@@ -21,7 +21,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author Plopman
  */
 public class CumulativeUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
@@ -34,7 +33,7 @@ public class CumulativeUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
         this.cumulativeCost = cumulativeCost;
     }
 
-    public CumulativeUpkeepAbility(final CumulativeUpkeepAbility ability) {
+    protected CumulativeUpkeepAbility(final CumulativeUpkeepAbility ability) {
         super(ability);
         this.cumulativeCost = ability.cumulativeCost.copy();
     }

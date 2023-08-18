@@ -18,7 +18,7 @@ public final class ThrullToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public ThrullToken(final ThrullToken token) {
+    protected ThrullToken(final ThrullToken token) {
         super(token);
     }
 

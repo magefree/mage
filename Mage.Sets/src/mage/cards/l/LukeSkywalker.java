@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -15,19 +14,15 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class LukeSkywalker extends CardImpl {
@@ -48,7 +43,7 @@ public final class LukeSkywalker extends CardImpl {
 
         // Whenever another creature enters the battlefield under your conrol, put a +1/+1 counter on Luke Skywalker.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new FilterControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
 
         // Remove all +1/+1 counters from Luke Skywalker: Luke gains hexproof until end of turn. Activate this ability only if at least one +1/+1 counter is removed this way.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn), new LukeSkywalkerCost()));

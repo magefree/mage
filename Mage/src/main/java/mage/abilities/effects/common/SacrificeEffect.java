@@ -37,7 +37,7 @@ public class SacrificeEffect extends OneShotEffect {
         setText();
     }
 
-    public SacrificeEffect(final SacrificeEffect effect) {
+    protected SacrificeEffect(final SacrificeEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.count = effect.count;

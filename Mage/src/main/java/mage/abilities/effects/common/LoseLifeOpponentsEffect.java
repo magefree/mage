@@ -29,7 +29,7 @@ public class LoseLifeOpponentsEffect extends OneShotEffect {
         staticText = generateStaticText();
     }
 
-    public LoseLifeOpponentsEffect(final LoseLifeOpponentsEffect effect) {
+    protected LoseLifeOpponentsEffect(final LoseLifeOpponentsEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

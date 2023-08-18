@@ -39,7 +39,7 @@ public final class MageDuel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL,
                 new SpellCostReductionSourceEffect(2, MageDuelCondition.instance).setCanWorksOnStackOnly(true)
-        ).setRuleAtTheTop(true), new SpellsCastWatcher());
+        ).setRuleAtTheTop(true).addHint(hint));
 
         // Target creature you control gets +1/+2 until end of turn. Then it fights target creature you don't control.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 2));
@@ -48,7 +48,6 @@ public final class MageDuel extends CardImpl {
                 "<i>(Each deals damage equal to its power to the other.)</i>"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
-        this.getSpellAbility().addWatcher(new SpellsCastWatcher());
     }
 
     private MageDuel(final MageDuel card) {

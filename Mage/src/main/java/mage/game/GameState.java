@@ -76,7 +76,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private SpecialActions specialActions;
     private Watchers watchers;
     private Turn turn;
-    private TurnMods turnMods;
+    private TurnMods turnMods; // one time turn modifications (turn, phase or step)
     private UUID activePlayerId; // playerId which turn it is
     private UUID priorityPlayerId; // player that has currently priority
     private UUID playerByOrderId; // player that has currently priority
@@ -135,7 +135,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         applyEffectsCounter = 0;
     }
 
-    public GameState(final GameState state) {
+    protected GameState(final GameState state) {
         this.players = state.players.copy();
         this.playerList = state.playerList.copy();
         this.choosingPlayerId = state.choosingPlayerId;

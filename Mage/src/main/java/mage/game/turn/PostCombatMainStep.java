@@ -6,7 +6,6 @@ import mage.constants.PhaseStep;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PostCombatMainStep extends Step {
@@ -18,7 +17,7 @@ public class PostCombatMainStep extends Step {
         this.postStepEvent = EventType.POSTCOMBAT_MAIN_STEP_POST;
     }
 
-    public PostCombatMainStep(final PostCombatMainStep step) {
+    protected PostCombatMainStep(final PostCombatMainStep step) {
         super(step);
     }
 

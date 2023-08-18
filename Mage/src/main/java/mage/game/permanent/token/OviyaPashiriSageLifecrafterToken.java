@@ -22,7 +22,7 @@ public final class OviyaPashiriSageLifecrafterToken extends TokenImpl {
         toughness = new MageInt(number);
     }
 
-    public OviyaPashiriSageLifecrafterToken(final OviyaPashiriSageLifecrafterToken token) {
+    protected OviyaPashiriSageLifecrafterToken(final OviyaPashiriSageLifecrafterToken token) {
         super(token);
     }
 

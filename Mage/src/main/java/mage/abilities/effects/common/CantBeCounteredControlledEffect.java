@@ -30,7 +30,7 @@ public class CantBeCounteredControlledEffect extends ContinuousRuleModifyingEffe
         this(filterTarget, null, duration);
     }
 
-    public CantBeCounteredControlledEffect(final CantBeCounteredControlledEffect effect) {
+    protected CantBeCounteredControlledEffect(final CantBeCounteredControlledEffect effect) {
         super(effect);
         if (effect.filterTarget != null) {
             this.filterTarget = effect.filterTarget.copy();

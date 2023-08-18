@@ -23,7 +23,7 @@ public class SourcePermanentPowerCount implements DynamicValue {
         this.allowNegativeValues = allowNegativeValues;
     }
 
-    public SourcePermanentPowerCount(final SourcePermanentPowerCount dynamicValue) {
+    protected SourcePermanentPowerCount(final SourcePermanentPowerCount dynamicValue) {
         super();
         this.allowNegativeValues = dynamicValue.allowNegativeValues;
     }

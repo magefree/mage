@@ -21,7 +21,7 @@ public final class LeafdrakeRoostDrakeToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public LeafdrakeRoostDrakeToken(final LeafdrakeRoostDrakeToken token) {
+    protected LeafdrakeRoostDrakeToken(final LeafdrakeRoostDrakeToken token) {
         super(token);
     }
 

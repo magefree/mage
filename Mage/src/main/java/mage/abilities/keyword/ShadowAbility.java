@@ -50,7 +50,7 @@ class ShadowEffect extends RestrictionEffect implements MageSingleton {
         super(Duration.EndOfGame);
     }
 
-    public ShadowEffect(final ShadowEffect effect) {
+    protected ShadowEffect(final ShadowEffect effect) {
         super(effect);
     }
 

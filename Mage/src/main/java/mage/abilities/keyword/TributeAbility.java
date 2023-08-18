@@ -2,6 +2,7 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -15,7 +16,6 @@ import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class TributeAbility extends EntersBattlefieldAbility {
@@ -27,7 +27,7 @@ public class TributeAbility extends EntersBattlefieldAbility {
         this.tributeValue = tributeValue;
     }
 
-    public TributeAbility(final TributeAbility ability) {
+    protected TributeAbility(final TributeAbility ability) {
         super(ability);
         this.tributeValue = ability.tributeValue;
     }
@@ -53,7 +53,7 @@ class TributeEffect extends OneShotEffect {
         this.tributeValue = tributeValue;
     }
 
-    public TributeEffect(final TributeEffect effect) {
+    protected TributeEffect(final TributeEffect effect) {
         super(effect);
         this.tributeValue = effect.tributeValue;
     }
@@ -88,7 +88,7 @@ class TributeEffect extends OneShotEffect {
                             game.informPlayers(opponent.getLogName() + " pays tribute to " + sourcePermanent.getLogName());
                         }
                         game.getState().setValue("tributeValue" + source.getSourceId(), "yes");
-                        return sourcePermanent.addCounters(CounterType.P1P1.createInstance(tributeValue),opponent.getId(),source,game);
+                        return sourcePermanent.addCounters(CounterType.P1P1.createInstance(tributeValue), opponent.getId(), source, game);
                     } else {
                         if (!game.isSimulation()) {
                             game.informPlayers(opponent.getLogName() + " does not pay tribute to " + sourcePermanent.getLogName());

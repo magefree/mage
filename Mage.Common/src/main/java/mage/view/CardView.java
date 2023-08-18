@@ -88,6 +88,7 @@ public class CardView extends SimpleCardView {
     protected CardView ability;
     protected int imageNumber;
 
+    protected boolean extraDeckCard;
     protected boolean transformable; // can toggle one card side to another (transformable cards, modal double faces)
     protected CardView secondCardFace;
     protected boolean transformed;
@@ -177,7 +178,7 @@ public class CardView extends SimpleCardView {
         this.defense = cardView.defense;
         this.startingDefense = cardView.startingDefense;
         this.cardTypes = new ArrayList<>(cardView.cardTypes);
-        this.subTypes = new SubTypes(cardView.subTypes);
+        this.subTypes = cardView.subTypes.copy();
         this.superTypes = cardView.superTypes;
 
         this.expansionSetCode = cardView.expansionSetCode;
@@ -198,6 +199,7 @@ public class CardView extends SimpleCardView {
         this.isToken = cardView.isToken;
         this.ability = cardView.ability; // reference, not copy
 
+        this.extraDeckCard = cardView.extraDeckCard;
         this.transformable = cardView.transformable;
         this.secondCardFace = cardView.secondCardFace == null ? null : new CardView(cardView.secondCardFace);
         this.transformed = cardView.transformed;
@@ -484,7 +486,7 @@ public class CardView extends SimpleCardView {
         this.power = Integer.toString(card.getPower().getValue());
         this.toughness = Integer.toString(card.getToughness().getValue());
         this.cardTypes = new ArrayList<>(card.getCardType(game));
-        this.subTypes = new SubTypes(card.getSubtype(game));
+        this.subTypes = card.getSubtype(game).copy();
         this.superTypes = card.getSuperType(game);
         this.color = card.getColor(game).copy();
         this.flipCard = card.isFlipCard();
@@ -499,6 +501,8 @@ public class CardView extends SimpleCardView {
             this.rarity = card.getRarity();
             this.isToken = false;
         }
+
+        this.extraDeckCard = card.isExtraDeckCard();
 
         // transformable, double faces cards
         this.transformable = card.isTransformable();
@@ -631,7 +635,7 @@ public class CardView extends SimpleCardView {
             this.defense = "";
         }
         this.cardTypes = new ArrayList<>(object.getCardType(game));
-        this.subTypes = new SubTypes(object.getSubtype(game));
+        this.subTypes = object.getSubtype(game).copy();
         this.superTypes = new ArrayList<>(object.getSuperType(game));
         this.color = object.getColor(game).copy();
         this.manaCostLeftStr = String.join("", object.getManaCostSymbols());
@@ -702,7 +706,7 @@ public class CardView extends SimpleCardView {
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = emblem.getExpansionSetCode();
         this.cardNumber = "";
-        this.imageNumber = 0;
+        this.imageNumber = emblem.getImageNumber();
         this.rarity = Rarity.COMMON;
 
         this.playableStats = emblem.playableStats.copy();
@@ -848,7 +852,7 @@ public class CardView extends SimpleCardView {
         this.defense = "";
         this.startingDefense = "";
         this.cardTypes = new ArrayList<>(token.getCardType(game));
-        this.subTypes = new SubTypes(token.getSubtype(game));
+        this.subTypes = token.getSubtype(game).copy();
         this.superTypes = new ArrayList<>(token.getSuperType(game));
         this.color = token.getColor(game).copy();
         this.frameColor = token.getFrameColor(game).copy();
@@ -1246,6 +1250,9 @@ public class CardView extends SimpleCardView {
         return typeText.toString();
     }
 
+    public boolean isExtraDeckCard() {
+        return this.extraDeckCard;
+    }
     public boolean isLand() {
         return cardTypes.contains(CardType.LAND);
     }

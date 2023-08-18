@@ -164,7 +164,7 @@ class SearchTheCityExiledCardToHandEffect extends OneShotEffect {
                         if (permanent != null) {
                             permanent.sacrifice(source, game);
                             // extra turn
-                            game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
+                            game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
                         }
                     }
                     return true;

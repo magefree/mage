@@ -16,7 +16,7 @@ public class CopyTargetStackAbilityEffect extends OneShotEffect {
         super(Outcome.Copy);
     }
 
-    public CopyTargetStackAbilityEffect(final CopyTargetStackAbilityEffect effect) {
+    protected CopyTargetStackAbilityEffect(final CopyTargetStackAbilityEffect effect) {
         super(effect);
     }
 

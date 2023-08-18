@@ -31,7 +31,7 @@ public class DestroyAllEffect extends OneShotEffect {
         }
     }
 
-    public DestroyAllEffect(final DestroyAllEffect effect) {
+    protected DestroyAllEffect(final DestroyAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
         this.noRegen = effect.noRegen;

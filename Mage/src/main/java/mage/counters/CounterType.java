@@ -23,6 +23,7 @@ public enum CounterType {
     ARROWHEAD("arrowhead"),
     AWAKENING("awakening"),
     BLAZE("blaze"),
+    BLESSING("blessing"),
     BLOOD("blood"),
     BLOODLINE("bloodline"),
     BOOK("book"),

@@ -61,7 +61,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
+    protected EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.rule = ability.rule;
@@ -81,14 +81,14 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         if (!filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
-        this.getEffects().setValue("permanentEnteringBattlefield", permanent);
-        this.getEffects().setValue("permanentEnteringControllerId", permanent.getControllerId());
+        this.getAllEffects().setValue("permanentEnteringBattlefield", permanent);
+        this.getAllEffects().setValue("permanentEnteringControllerId", permanent.getControllerId());
         switch (setTargetPointer) {
             case PLAYER:
-                this.getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                this.getAllEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
                 break;
             case PERMANENT:
-                this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
+                this.getAllEffects().setTargetPointer(new FixedTarget(permanent, game));
                 break;
             default:
         }

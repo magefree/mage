@@ -27,7 +27,7 @@ public class TapVariableTargetCost extends VariableCostImpl {
                 .append(this.xText).append(' ').append(filter.getMessage()).toString();
     }
 
-    public TapVariableTargetCost(final TapVariableTargetCost cost) {
+    protected TapVariableTargetCost(final TapVariableTargetCost cost) {
         super(cost);
         this.filter = cost.filter.copy();
     }

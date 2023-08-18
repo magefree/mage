@@ -59,7 +59,7 @@ class InspiredUltimatumEffect extends OneShotEffect {
         if (player != null) {
             player.gainLife(5, game, source);
         }
-        game.damagePlayerOrPlaneswalker(
+        game.damagePlayerOrPermanent(
                 source.getTargets().get(1).getFirstTarget(), 5,
                 source.getSourceId(), source, game, false, true
         );

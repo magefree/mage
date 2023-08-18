@@ -10,7 +10,6 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class AttacksIfAbleSourceEffect extends RequirementEffect {
@@ -31,7 +30,7 @@ public class AttacksIfAbleSourceEffect extends RequirementEffect {
         }
     }
 
-    public AttacksIfAbleSourceEffect(final AttacksIfAbleSourceEffect effect) {
+    protected AttacksIfAbleSourceEffect(final AttacksIfAbleSourceEffect effect) {
         super(effect);
         this.eachCombat = effect.eachCombat;
     }

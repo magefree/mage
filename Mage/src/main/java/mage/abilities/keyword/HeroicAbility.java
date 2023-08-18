@@ -38,7 +38,7 @@ public class HeroicAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you cast a spell that targets {this}, ");
     }
 
-    public HeroicAbility(final HeroicAbility ability) {
+    protected HeroicAbility(final HeroicAbility ability) {
         super(ability);
     }
 

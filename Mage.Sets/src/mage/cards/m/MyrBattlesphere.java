@@ -142,7 +142,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
                 // boost effect
                 game.addEffect(new BoostSourceEffect(tappedAmount, 0, Duration.EndOfTurn), source);
                 // damage to defender
-                return game.damagePlayerOrPlaneswalker(targetPointer.getFirst(game, source), tappedAmount, myr.getId(), source, game, false, true) > 0;
+                return game.damagePlayerOrPermanent(targetPointer.getFirst(game, source), tappedAmount, myr.getId(), source, game, false, true) > 0;
             }
             return true;
         }

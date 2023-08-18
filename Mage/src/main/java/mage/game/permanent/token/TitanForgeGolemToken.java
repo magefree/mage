@@ -1,12 +1,12 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class TitanForgeGolemToken extends TokenImpl {
@@ -20,7 +20,7 @@ public final class TitanForgeGolemToken extends TokenImpl {
         toughness = new MageInt(9);
     }
 
-    public TitanForgeGolemToken(final TitanForgeGolemToken token) {
+    protected TitanForgeGolemToken(final TitanForgeGolemToken token) {
         super(token);
     }
 

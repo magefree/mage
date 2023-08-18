@@ -17,7 +17,7 @@ public final class TeyoToken extends TokenImpl {
         addAbility(DefenderAbility.getInstance());
     }
 
-    public TeyoToken(final TeyoToken token) {
+    protected TeyoToken(final TeyoToken token) {
         super(token);
     }
 

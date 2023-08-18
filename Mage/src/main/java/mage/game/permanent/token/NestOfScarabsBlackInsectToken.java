@@ -18,7 +18,7 @@ public final class NestOfScarabsBlackInsectToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public NestOfScarabsBlackInsectToken(final NestOfScarabsBlackInsectToken token) {
+    protected NestOfScarabsBlackInsectToken(final NestOfScarabsBlackInsectToken token) {
         super(token);
     }
 

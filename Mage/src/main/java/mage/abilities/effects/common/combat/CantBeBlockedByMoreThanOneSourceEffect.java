@@ -14,7 +14,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author Quercitron
  */
 public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl {
@@ -33,10 +32,10 @@ public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl
         super(duration, Outcome.Benefit);
         this.amount = amount;
         staticText = "{this} can't be blocked by more than " + CardUtil.numberToText(amount) + " creature" + (amount > 1 ? "s" : "")
-        + (duration == Duration.EndOfTurn ? " each combat this turn" : "");
+                + (duration == Duration.EndOfTurn ? " each combat this turn" : "");
     }
 
-    public CantBeBlockedByMoreThanOneSourceEffect(final CantBeBlockedByMoreThanOneSourceEffect effect) {
+    protected CantBeBlockedByMoreThanOneSourceEffect(final CantBeBlockedByMoreThanOneSourceEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

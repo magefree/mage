@@ -38,9 +38,11 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -53,7 +55,6 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.SnakeToken;
 import mage.game.permanent.token.TokenImpl;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -77,7 +78,7 @@ public final class OrochiEggwatcher extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(new ShidakoBroodmistress()),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(), ComparisonType.MORE_THAN, 9), "If you control ten or more creatures, flip {this}"));
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(new ValueHint("Creatures you control", new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE))));
     }
 
     private OrochiEggwatcher(final OrochiEggwatcher card) {

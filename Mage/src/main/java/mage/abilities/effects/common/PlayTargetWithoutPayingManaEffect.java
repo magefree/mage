@@ -12,7 +12,6 @@ import mage.players.Player;
 import mage.target.Target;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
@@ -21,7 +20,7 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
         super(Outcome.GainControl);
     }
 
-    public PlayTargetWithoutPayingManaEffect(final PlayTargetWithoutPayingManaEffect effect) {
+    protected PlayTargetWithoutPayingManaEffect(final PlayTargetWithoutPayingManaEffect effect) {
         super(effect);
     }
 

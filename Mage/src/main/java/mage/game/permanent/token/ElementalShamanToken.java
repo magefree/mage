@@ -29,7 +29,7 @@ public final class ElementalShamanToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public ElementalShamanToken(final ElementalShamanToken token) {
+    protected ElementalShamanToken(final ElementalShamanToken token) {
         super(token);
     }
 

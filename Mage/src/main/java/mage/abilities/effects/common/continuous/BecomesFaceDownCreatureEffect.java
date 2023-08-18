@@ -66,7 +66,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         this.faceDownType = faceDownType;
     }
 
-    public BecomesFaceDownCreatureEffect(final BecomesFaceDownCreatureEffect effect) {
+    protected BecomesFaceDownCreatureEffect(final BecomesFaceDownCreatureEffect effect) {
         super(effect);
         this.zoneChangeCounter = effect.zoneChangeCounter;
         if (effect.turnFaceUpAbility != null) {

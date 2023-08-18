@@ -55,7 +55,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
         staticText = CardUtil.getAddRemoveCountersText(amount, counter, "{this}", true);
     }
 
-    public AddCountersSourceEffect(final AddCountersSourceEffect effect) {
+    protected AddCountersSourceEffect(final AddCountersSourceEffect effect) {
         super(effect);
         if (effect.counter != null) {
             this.counter = effect.counter.copy();

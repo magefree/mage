@@ -76,7 +76,7 @@ class AdventureCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "Then exile this card. You may cast the creature later from exile.";
     }
 
-    public AdventureCastFromExileEffect(final AdventureCastFromExileEffect effect) {
+    protected AdventureCastFromExileEffect(final AdventureCastFromExileEffect effect) {
         super(effect);
     }
 

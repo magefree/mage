@@ -24,8 +24,8 @@ public class DamageWithExcessEffect extends OneShotEffect {
     public DamageWithExcessEffect(DynamicValue amount) {
         super(Outcome.Damage);
         this.amount = amount;
-        this.staticText = "{this} deals " + amount + " damage to target creature" +
-                (amount instanceof StaticValue ? "" : ", where X is " + amount.getMessage()) +
+        this.staticText = "{this} deals " + (amount instanceof StaticValue ? amount : "X") + " damage to target creature" +
+                (amount instanceof StaticValue ? "" : ", where X is the number of " + amount.getMessage()) +
                 ". Excess damage is dealt to that creature's controller instead";
     }
 

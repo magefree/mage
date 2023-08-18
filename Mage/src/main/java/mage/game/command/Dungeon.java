@@ -59,7 +59,7 @@ public class Dungeon extends CommandObjectImpl {
         super(name);
     }
 
-    public Dungeon(final Dungeon dungeon) {
+    protected Dungeon(final Dungeon dungeon) {
         super(dungeon);
         this.frameStyle = dungeon.frameStyle;
         this.controllerId = dungeon.controllerId;

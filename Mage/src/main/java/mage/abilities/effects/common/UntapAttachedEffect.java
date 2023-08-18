@@ -9,7 +9,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX
  */
 public class UntapAttachedEffect extends OneShotEffect {
@@ -23,7 +22,7 @@ public class UntapAttachedEffect extends OneShotEffect {
         staticText = "untap " + CardUtil.getTextWithFirstCharLowerCase(attachmentType.verb()) + ' ' + name;
     }
 
-    public UntapAttachedEffect(final UntapAttachedEffect effect) {
+    protected UntapAttachedEffect(final UntapAttachedEffect effect) {
         super(effect);
     }
 

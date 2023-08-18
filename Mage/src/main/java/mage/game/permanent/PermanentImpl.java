@@ -12,7 +12,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
 import mage.cards.Card;
@@ -279,18 +278,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 return rules;
             }
 
-            // ability hints
-            List<String> abilityHints = new ArrayList<>();
-            if (HintUtils.ABILITY_HINTS_ENABLE) {
-                for (Ability ability : getAbilities(game)) {
-                    for (Hint hint : ability.getHints()) {
-                        String s = hint.getText(game, ability);
-                        if (s != null && !s.isEmpty()) {
-                            abilityHints.add(s);
-                        }
-                    }
-                }
-            }
+            // ability hints already collected in super call
 
             // restrict hints
             List<String> restrictHints = new ArrayList<>();
@@ -353,13 +341,22 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     }
                 }
 
+                // Goaded hints.
+                for (UUID playerId : getGoadingPlayers()) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        restrictHints.add(HintUtils.prepareText("Goaded by " + player.getLogName(), null, HintUtils.HINT_ICON_REQUIRE));
+                    }
+                }
+
                 restrictHints.sort(String::compareTo);
             }
 
             // total hints
-            if (!abilityHints.isEmpty() || !restrictHints.isEmpty()) {
-                rules.add(HintUtils.HINT_START_MARK);
-                HintUtils.appendHints(rules, abilityHints);
+            if (!restrictHints.isEmpty()) {
+                if (rules.stream().noneMatch(s -> s.contains(HintUtils.HINT_START_MARK))) {
+                    rules.add(HintUtils.HINT_START_MARK);
+                }
                 HintUtils.appendHints(rules, restrictHints);
             }
 
@@ -562,7 +559,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         //20091005 - 701.15a
         if (!tapped && !replaceEvent(EventType.TAP, game)) {
             this.tapped = true;
-            game.fireEvent(new GameEvent(GameEvent.EventType.TAPPED, objectId, source, controllerId, 0, forCombat));
+            game.fireEvent(new GameEvent(GameEvent.EventType.TAPPED, objectId, source, source == null ? null : source.getControllerId(), 0, forCombat));
             return true;
         }
         return false;
@@ -672,7 +669,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     attachedPerm.phaseIn(game, false);
                 }
             }
-            fireEvent(EventType.PHASED_IN, game);
+            game.addSimultaneousEvent(GameEvent.getEvent(EventType.PHASED_IN, this.objectId, null, this.controllerId));
             return true;
         }
         return false;
@@ -1639,11 +1636,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public void setRingBearer(Game game, boolean value) {
-        if(value == this.ringBearerFlag){
+        if (value == this.ringBearerFlag) {
             return;
         }
 
-        if(value) {
+        if (value) {
             // The player may have another Ringbearer. We need to clear it if so.
             //
             // 701.52a Certain spells and abilities have the text “the Ring tempts you.”
@@ -1652,17 +1649,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             // becomes your Ring-bearer or another player gains control of it.
             Player player = game.getPlayer(getControllerId());
             String playername = "";
-            if(player != null){
+            if (player != null) {
                 playername = player.getLogName();
                 Permanent existingRingbearer = player.getRingBearer(game);
-                if(existingRingbearer != null && existingRingbearer.getId() != this.getId()){
+                if (existingRingbearer != null && existingRingbearer.getId() != this.getId()) {
                     existingRingbearer.setRingBearer(game, false);
                 }
             }
 
             addInfo(ringbearerInfoKey, CardUtil.addToolTipMarkTags("Is " + playername + "'s Ring-bearer"), game);
-        }
-        else {
+        } else {
             addInfo(ringbearerInfoKey, null, game);
         }
 
@@ -1824,7 +1820,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean isRingBearer() { return ringBearerFlag; }
+    public boolean isRingBearer() {
+        return ringBearerFlag;
+    }
 
     @Override
     public boolean fight(Permanent fightTarget, Ability source, Game game) {

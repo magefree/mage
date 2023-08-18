@@ -73,7 +73,7 @@ class TheGreatForestCombatDamageRuleEffect extends ContinuousEffectImpl {
         staticText = "Each creature assigns combat damage equal to its toughness rather than its power";
     }
 
-    public TheGreatForestCombatDamageRuleEffect(final TheGreatForestCombatDamageRuleEffect effect) {
+    protected TheGreatForestCombatDamageRuleEffect(final TheGreatForestCombatDamageRuleEffect effect) {
         super(effect);
     }
 

@@ -7,7 +7,6 @@ import mage.util.Copyable;
 import java.io.Serializable;
 
 /**
- *
  * @author LevelX2
  */
 public class DeckCardInfo implements Serializable, Copyable<DeckCardInfo> {
@@ -21,7 +20,7 @@ public class DeckCardInfo implements Serializable, Copyable<DeckCardInfo> {
         super();
     }
 
-    public DeckCardInfo(final DeckCardInfo info) {
+    protected DeckCardInfo(final DeckCardInfo info) {
         this.cardName = info.cardName;
         this.setCode = info.setCode;
         this.cardNum = info.cardNum;

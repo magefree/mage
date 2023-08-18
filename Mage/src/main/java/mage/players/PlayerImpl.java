@@ -119,6 +119,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected int turns;
     protected int storedBookmark = -1;
     protected int priorityTimeLeft = Integer.MAX_VALUE;
+    protected int bufferTimeLeft = 0;
 
     // conceded or connection lost game
     protected boolean left;
@@ -275,6 +276,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.justActivatedType = player.justActivatedType;
 
         this.priorityTimeLeft = player.getPriorityTimeLeft();
+        this.bufferTimeLeft = player.getBufferTimeLeft();
         this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
 
         this.castSourceIdWithAlternateMana.addAll(player.getCastSourceIdWithAlternateMana());
@@ -386,11 +388,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void useDeck(Deck deck, Game game) {
         library.clear();
-        library.addAll(deck.getCards(), game);
+        library.addAll(deck.getMaindeckCards(), game);
         sideboard.clear();
         for (Card card : deck.getSideboard()) {
             sideboard.add(card);
         }
+        //TODO ARTI initialize extra decks here!
     }
 
     /**
@@ -545,17 +548,17 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerId) {
-        Player player = game.getPlayer(playerId);
-        player.setTurnControlledBy(this.getId());
-        game.informPlayers(getLogName() + " controls the turn of " + player.getLogName());
-        if (!playerId.equals(this.getId())) {
-            this.playersUnderYourControl.add(playerId);
-            if (!player.hasLeft() && !player.hasLost()) {
-                player.setGameUnderYourControl(false);
+    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
+        Player playerUnderControl = game.getPlayer(playerUnderControlId);
+        playerUnderControl.setTurnControlledBy(this.getId());
+        game.informPlayers(getLogName() + " taken turn control of " + playerUnderControl.getLogName() + info);
+        if (!playerUnderControlId.equals(this.getId())) {
+            this.playersUnderYourControl.add(playerUnderControlId);
+            if (!playerUnderControl.hasLeft() && !playerUnderControl.hasLost()) {
+                playerUnderControl.setGameUnderYourControl(false);
             }
             DelayedTriggeredAbility ability = new AtTheEndOfTurnStepPostDelayedTriggeredAbility(
-                    new LoseControlOnOtherPlayersControllerEffect(this.getLogName(), player.getLogName()));
+                    new LoseControlOnOtherPlayersControllerEffect(this.getLogName(), playerUnderControl.getLogName()));
             ability.setSourceId(getId());
             ability.setControllerId(getId());
             game.addDelayedTriggeredAbility(ability, null);
@@ -1209,7 +1212,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.fireEvent(castEvent);
                 if (spell.activate(game, noMana)) {
                     GameEvent castedEvent = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
-                            spell.getSpellAbility().getId(), spell.getSpellAbility(), playerId, approvingObject);
+                            ability.getId(), ability, playerId, approvingObject);
                     castedEvent.setZone(fromZone);
                     game.fireEvent(castedEvent);
                     if (!game.isSimulation()) {
@@ -2124,20 +2127,12 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (damage < 1) {
             return 0;
         }
-        if (!canDamage(game.getObject(attackerId), game)) {
-            MageObject sourceObject = game.getObject(attackerId);
-            game.informPlayers(damage + " damage "
-                    + (sourceObject == null ? "" : "from " + sourceObject.getLogName())
-                    + " to " + getLogName()
-                    + (damage > 1 ? " were" : "was") + " prevented because of protection");
-            return 0;
-        }
         DamageEvent event = new DamagePlayerEvent(playerId, attackerId, playerId, damage, preventable, combatDamage);
         event.setAppliedEffects(appliedEffects);
         if (game.replaceEvent(event)) {
             return 0;
         }
-        int actualDamage = event.getAmount();
+        int actualDamage = checkProtectionAbilities(event, attackerId, source, game);
         if (actualDamage < 1) {
             return 0;
         }
@@ -2198,6 +2193,22 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.fireEvent(damagedEvent);
         game.getState().addSimultaneousDamage(damagedEvent, game);
         return actualDamage;
+    }
+
+    private int checkProtectionAbilities(GameEvent event, UUID attackerId, Ability source, Game game) {
+        MageObject attacker = game.getObject(attackerId);
+        if (attacker != null && hasProtectionFrom(attacker, game)) {
+            GameEvent preventEvent = new PreventDamageEvent(playerId, attackerId, source, playerId, event.getAmount(), ((DamageEvent) event).isCombatDamage());
+            if (!game.replaceEvent(preventEvent)) {
+                int preventedDamage = event.getAmount();
+                event.setAmount(0);
+                game.fireEvent(new PreventedDamageEvent(playerId, attackerId, source, playerId, preventedDamage));
+                game.informPlayers(preventedDamage + " damage from " + attacker.getLogName() + " to " + getLogName()
+                        + (preventedDamage > 1 ? " were" : "was") + " prevented because of protection");
+                return 0;
+            }
+        }
+        return event.getAmount();
     }
 
     @Override
@@ -2265,15 +2276,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         event.setData(name);
         event.setAmount(finalAmount);
         game.fireEvent(event);
-    }
-
-    protected boolean canDamage(MageObject source, Game game) {
-        for (ProtectionAbility ability : abilities.getProtectionAbilities()) {
-            if (!ability.canTarget(source, game)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override
@@ -2665,7 +2667,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         // P.S. no needs in searchingController, but it helps with unit tests, see TakeControlWhileSearchingLibraryTest
         boolean takeControl = false;
         if (!searchingPlayer.getId().equals(searchingController.getId())) {
-            CardUtil.takeControlUnderPlayerStart(game, searchingController, searchingPlayer, true);
+            // game logs added in child's call
+            CardUtil.takeControlUnderPlayerStart(game, source, searchingController, searchingPlayer, true);
             takeControl = true;
         }
 
@@ -2710,8 +2713,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             // END SEARCH
             if (takeControl) {
-                CardUtil.takeControlUnderPlayerEnd(game, searchingController, searchingPlayer);
-                game.informPlayers("Control of " + searchingPlayer.getLogName() + " is back" + CardUtil.getSourceLogName(game, source));
+                // game logs added in child's call
+                CardUtil.takeControlUnderPlayerEnd(game, source, searchingController, searchingPlayer);
             }
 
             LibrarySearchedEvent searchedEvent = new LibrarySearchedEvent(targetPlayer.getId(), source, searchingPlayer.getId(), target);
@@ -4456,6 +4459,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void setBufferTimeLeft(int timeLeft) {
+        bufferTimeLeft = timeLeft;
+    }
+
+    @Override
+    public int getBufferTimeLeft() {
+        return bufferTimeLeft;
+    }
+
+    @Override
     public boolean hasQuit() {
         return quit;
     }
@@ -4708,7 +4721,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 boolean chooseOrder = false;
                 if (userData.askMoveToGraveOrder() && (cards.size() > 1)) {
                     chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral,
-                                "Choose the order in which the cards go to the graveyard?", source, game);
+                            "Choose the order in which the cards go to the graveyard?", source, game);
                 }
                 if (chooseOrder) {
                     TargetCard target = new TargetCard(fromZone,
@@ -5132,13 +5145,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public Permanent getRingBearer(Game game) {
         return game.getBattlefield()
-            .getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_RINGBEARER,
-                getId(),null, game)
-            .stream()
-            .filter(Objects::nonNull)
-            .findFirst()
-            .orElse(null);
+                .getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_RINGBEARER,
+                        getId(), null, game)
+                .stream()
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
     }
 
     // 701.52a Certain spells and abilities have the text “the Ring tempts you.” Each time the Ring tempts
@@ -5150,11 +5163,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         UUID currentBearerId = currentBearer == null ? null : currentBearer.getId();
 
         List<UUID> ids = game.getBattlefield()
-            .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game)
-            .stream()
-            .filter(Objects::nonNull)
-            .map(p -> p.getId())
-            .collect(Collectors.toList());
+                .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game)
+                .stream()
+                .filter(Objects::nonNull)
+                .map(p -> p.getId())
+                .collect(Collectors.toList());
 
         if (ids.isEmpty()) {
             game.informPlayers(getLogName() + " has no creature to be Ring-bearer.");
@@ -5183,8 +5196,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 choose(Outcome.Neutral, target, null, game);
 
                 newBearerId = target.getFirstTarget();
-            }
-            else {
+            } else {
                 newBearerId = currentBearerId;
             }
         }
@@ -5198,11 +5210,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             // or abilities that care about which creature was chosen as your Ring-bearer.
             // (2023-06-16)
             game.informPlayers(getLogName() + " did not choose a new Ring-bearer. " +
-                "It is still " + (currentBearer == null ? "" : currentBearer.getLogName()) + ".");
+                    "It is still " + (currentBearer == null ? "" : currentBearer.getLogName()) + ".");
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.RING_BEARER_CHOSEN, currentBearerId, null, getId()));
         } else {
             Permanent ringBearer = game.getPermanent(newBearerId);
-            if(ringBearer != null){
+            if (ringBearer != null) {
                 // The setRingBearer method is taking care of removing
                 // the status from the current ring bearer, if existing.
                 ringBearer.setRingBearer(game, true);

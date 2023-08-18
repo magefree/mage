@@ -6,7 +6,7 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.hint.Hint;
@@ -46,7 +46,7 @@ public final class WillowduskEssenceSeer extends CardImpl {
                 "life you lost this turn, whichever is greater"), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
-        ability.addHint(ControllerGotLifeCount.getHint());
+        ability.addHint(ControllerGainedLifeCount.getHint());
         ability.addHint(WillowduskEssenceSeerHint.instance);
         this.addAbility(ability, new PlayerGainedLifeWatcher());
     }

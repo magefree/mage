@@ -81,7 +81,7 @@ class DefiantThundermawEffect extends OneShotEffect {
         if (mor == null) {
             return false;
         }
-        game.damagePlayerOrPlaneswalker(
+        game.damagePlayerOrPermanent(
                 getTargetPointer().getFirst(game, source), 2,
                 mor.getSourceId(), source, game, false, true
         );

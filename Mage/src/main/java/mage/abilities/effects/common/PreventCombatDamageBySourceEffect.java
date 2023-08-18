@@ -16,7 +16,7 @@ public class PreventCombatDamageBySourceEffect extends PreventionEffectImpl {
         staticText = "Prevent all combat damage that would be dealt by {this}" + duration.toString();
     }
 
-    public PreventCombatDamageBySourceEffect(final PreventCombatDamageBySourceEffect effect) {
+    protected PreventCombatDamageBySourceEffect(final PreventCombatDamageBySourceEffect effect) {
         super(effect);
     }
 

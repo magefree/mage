@@ -339,7 +339,7 @@ public class GameEvent implements Serializable {
         /* TAPPED,
          targetId    tapped permanent
          sourceId    id of the ability's source (can be null for standard tap actions like combat)
-         playerId    controller of the tapped permanent
+         playerId    source's controller, null if no source
          amount      not used for this event
          flag        is it tapped for combat
          */

@@ -104,7 +104,7 @@ public class ChooseACardNameEffect extends OneShotEffect {
         }
     }
 
-    public ChooseACardNameEffect(final ChooseACardNameEffect effect) {
+    protected ChooseACardNameEffect(final ChooseACardNameEffect effect) {
         super(effect);
         this.typeOfName = effect.typeOfName;
         this.lookAtOpponentHand = effect.lookAtOpponentHand;

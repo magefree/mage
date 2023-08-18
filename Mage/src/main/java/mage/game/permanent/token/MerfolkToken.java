@@ -18,7 +18,7 @@ public final class MerfolkToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public MerfolkToken(final MerfolkToken token) {
+    protected MerfolkToken(final MerfolkToken token) {
         super(token);
     }
 

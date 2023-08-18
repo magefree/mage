@@ -7,7 +7,7 @@ import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -29,7 +29,7 @@ public final class WizardsRockets extends CardImpl {
 
         // {X}, {T}, Sacrifice Wizard's Rockets: Add X mana in any combination of colors.
         Ability ability = new DynamicManaAbility(
-                Mana.AnyMana(1), GetXValue.instance,
+                Mana.AnyMana(1), ManacostVariableValue.REGULAR,
                 new ManaCostsImpl<>("{X}"), "Add X mana in any combination of colors."
         );
         ability.addCost(new TapSourceCost());

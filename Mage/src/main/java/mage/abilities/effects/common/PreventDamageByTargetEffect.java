@@ -31,7 +31,7 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
         super(duration, amount, onlyCombat);
     }
 
-    public PreventDamageByTargetEffect(final PreventDamageByTargetEffect effect) {
+    protected PreventDamageByTargetEffect(final PreventDamageByTargetEffect effect) {
         super(effect);
     }
 

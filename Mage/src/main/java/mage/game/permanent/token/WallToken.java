@@ -6,7 +6,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author lagdotcom
  */
 public final class WallToken extends TokenImpl {
@@ -21,7 +20,7 @@ public final class WallToken extends TokenImpl {
         addAbility(DefenderAbility.getInstance());
     }
 
-    public WallToken(final WallToken token) {
+    protected WallToken(final WallToken token) {
         super(token);
     }
 

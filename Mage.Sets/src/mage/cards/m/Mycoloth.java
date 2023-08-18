@@ -1,12 +1,10 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DevourEffect.DevourFactor;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,6 +13,8 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.permanent.token.SaprolingToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,7 +30,7 @@ public final class Mycoloth extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Devour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)
-        this.addAbility(new DevourAbility(DevourFactor.Devour2));
+        this.addAbility(new DevourAbility(2));
 
         // At the beginning of your upkeep, create a 1/1 green Saproling creature token for each +1/+1 counter on Mycoloth.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

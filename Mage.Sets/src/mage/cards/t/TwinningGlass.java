@@ -39,7 +39,7 @@ public final class TwinningGlass extends CardImpl {
                 ), new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability, new SpellsCastWatcher());
+        this.addAbility(ability);
     }
 
     private TwinningGlass(final TwinningGlass card) {

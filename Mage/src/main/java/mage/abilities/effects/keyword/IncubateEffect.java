@@ -27,7 +27,7 @@ public class IncubateEffect extends OneShotEffect {
                 " on it and \"{2}: Transform this artifact.\" It transforms into a 0/0 Phyrexian artifact creature.)</i>";
     }
 
-    public IncubateEffect(final IncubateEffect effect) {
+    protected IncubateEffect(final IncubateEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

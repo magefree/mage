@@ -69,7 +69,6 @@ class RashmiAndRagavanTriggeredAbility extends SpellCastControllerTriggeredAbili
     RashmiAndRagavanTriggeredAbility() {
         super(new CreateTokenEffect(new TreasureToken()), false);
         this.addTarget(new TargetOpponent());
-        this.addWatcher(new SpellsCastWatcher());
         this.addEffect(new RashmiAndRagavanEffect());
     }
 
@@ -152,7 +151,7 @@ class RashmiAndRagavanEffect extends OneShotEffect {
         ).calculate(game, source, this);
         FilterCard filter = new FilterCard();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, artifactCount));
-        Boolean cardWasCast = CardUtil.castSpellWithAttributesForFree(controller, source, game, new CardsImpl(card), filter);
+        boolean cardWasCast = CardUtil.castSpellWithAttributesForFree(controller, source, game, new CardsImpl(card), filter);
         if (!cardWasCast) {
             ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, false, true);
             effect.setTargetPointer(new FixedTargets(cards, game));

@@ -37,7 +37,7 @@ public class ReturnToBattlefieldUnderOwnerControlTargetEffect extends OneShotEff
         staticText = "return " + description + " to the battlefield " + (tapped ? "tapped " : "") + "under its owner's control";
     }
 
-    public ReturnToBattlefieldUnderOwnerControlTargetEffect(final ReturnToBattlefieldUnderOwnerControlTargetEffect effect) {
+    protected ReturnToBattlefieldUnderOwnerControlTargetEffect(final ReturnToBattlefieldUnderOwnerControlTargetEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
         this.returnFromExileZoneOnly = effect.returnFromExileZoneOnly;

@@ -10,7 +10,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author garnold
  */
 public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl {
@@ -33,7 +32,7 @@ public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever " + attachedDescription + " creature blocks" + (setFixedTargetPointerToBlocked ? " a creature, " : ", "));
     }
 
-    public BlocksAttachedTriggeredAbility(final BlocksAttachedTriggeredAbility ability) {
+    protected BlocksAttachedTriggeredAbility(final BlocksAttachedTriggeredAbility ability) {
         super(ability);
         this.setFixedTargetPointer = ability.setFixedTargetPointer;
         this.setFixedTargetPointerToBlocked = ability.setFixedTargetPointerToBlocked;

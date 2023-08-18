@@ -18,7 +18,7 @@ public class SpellCastOpponentNoManaSpentTriggeredAbility extends TriggeredAbili
         this.setTriggerPhrase("Whenever an opponent casts a spell, if no mana was spent to cast it, ");
     }
 
-    public SpellCastOpponentNoManaSpentTriggeredAbility(final SpellCastOpponentNoManaSpentTriggeredAbility ability) {
+    protected SpellCastOpponentNoManaSpentTriggeredAbility(final SpellCastOpponentNoManaSpentTriggeredAbility ability) {
         super(ability);
     }
 

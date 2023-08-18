@@ -59,9 +59,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     private int effectStartingOnTurn = 0; // turn the effect started
     private int effectStartingEndStep = 0;
     private int nextTurnNumber = Integer.MAX_VALUE; // effect is waiting for a step during your next turn, we store it if found.
-                                                    // set to the turn number on your next turn.
+    // set to the turn number on your next turn.
     private int effectStartingStepNum = 0; // Some continuous are waiting for the next step of a kind.
-                                           // Avoid miscancelling if the start step is of that kind.
+    // Avoid miscancelling if the start step is of that kind.
 
     public ContinuousEffectImpl(Duration duration, Outcome outcome) {
         super(outcome);
@@ -78,7 +78,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.sublayer = sublayer;
     }
 
-    public ContinuousEffectImpl(final ContinuousEffectImpl effect) {
+    protected ContinuousEffectImpl(final ContinuousEffectImpl effect) {
         super(effect);
         this.duration = effect.duration;
         this.layer = effect.layer;
@@ -233,22 +233,22 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     public boolean isEndCombatOfYourNextTurn(Game game) {
         int currentTurn = game.getTurnNum();
-        if(nextTurnNumber != Integer.MAX_VALUE && nextTurnNumber < currentTurn){
+        if (nextTurnNumber != Integer.MAX_VALUE && nextTurnNumber < currentTurn) {
             return false; // This is a turn after your next turn.
         }
-        if(nextTurnNumber == Integer.MAX_VALUE && isYourNextTurn(game)) {
+        if (nextTurnNumber == Integer.MAX_VALUE && isYourNextTurn(game)) {
             nextTurnNumber = currentTurn;
         }
 
         return isYourNextTurn(game)
-            && game.getPhase().getType() == TurnPhase.POSTCOMBAT_MAIN;
+                && game.getPhase().getType() == TurnPhase.POSTCOMBAT_MAIN;
     }
 
     public boolean isYourNextUpkeepStep(Game game) {
         return (effectStartingOnTurn < game.getTurnNum() ||
                 effectStartingStepNum < game.getState().getStepNum())
-            && game.isActivePlayer(startingControllerId)
-            && game.getStep().getType() == PhaseStep.UPKEEP;
+                && game.isActivePlayer(startingControllerId)
+                && game.getStep().getType() == PhaseStep.UPKEEP;
     }
 
     @Override

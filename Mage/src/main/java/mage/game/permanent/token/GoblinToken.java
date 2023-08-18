@@ -29,7 +29,7 @@ public final class GoblinToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public GoblinToken(final GoblinToken token) {
+    protected GoblinToken(final GoblinToken token) {
         super(token);
     }
 

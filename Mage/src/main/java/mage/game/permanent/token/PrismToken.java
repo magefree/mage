@@ -18,7 +18,7 @@ public final class PrismToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public PrismToken(final PrismToken token) {
+    protected PrismToken(final PrismToken token) {
         super(token);
     }
 

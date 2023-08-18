@@ -132,6 +132,52 @@ public class GainAbilitiesTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void nextSpellCastHasConvoke() {
+
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul"); // to give next spell convoke
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear"); // for convoke
+        addCard(Zone.HAND, playerA, "Elvish Mystic"); // to cast with convoke
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elvish Mystic");
+        addTarget(playerA, "Runeclaw Bear"); // tap for G
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertTapped("Runeclaw Bear", true);
+        assertPermanentCount(playerA, "Elvish Mystic", 1);
+
+    }
+
+    @Test
+    public void onlyNextSpellCastHasConvoke() {
+
+        addCard(Zone.BATTLEFIELD, playerA, "Wand of the Worldsoul", 2); // to give next spell convoke
+        addCard(Zone.BATTLEFIELD, playerA, "Goblin Piker"); // for convoke
+        addCard(Zone.HAND, playerA, "Shock"); // cast first
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear"); // for convoke
+        addCard(Zone.HAND, playerA, "Elvish Mystic"); // to cast with convoke
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: The next spell you cast this turn");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
+        addTarget(playerA, "Goblin Piker"); // tap for R
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("no convoke", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Elvish Mystic", false);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, 20 - 2);
+        assertTapped("Goblin Piker", true);
+    }
+
     /**
      * Reported bug: https://github.com/magefree/mage/issues/9565
      *  1. Cast all three of Frondland Felidar, Jubilant Skybonder, and Proud Wildbonder.

@@ -21,7 +21,7 @@ public final class SpiritWhiteToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public SpiritWhiteToken(final SpiritWhiteToken token) {
+    protected SpiritWhiteToken(final SpiritWhiteToken token) {
         super(token);
     }
 

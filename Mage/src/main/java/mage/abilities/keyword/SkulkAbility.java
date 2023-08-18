@@ -17,7 +17,7 @@ public class SkulkAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, new SkulkEffect(Duration.WhileOnBattlefield));
     }
 
-    public SkulkAbility(final SkulkAbility ability) {
+    protected SkulkAbility(final SkulkAbility ability) {
         super(ability);
     }
 
@@ -40,7 +40,7 @@ class SkulkEffect extends RestrictionEffect {
         staticText = "Skulk <i>(This creature can't be blocked by creatures with greater power.)</i>";
     }
 
-    public SkulkEffect(final SkulkEffect effect) {
+    protected SkulkEffect(final SkulkEffect effect) {
         super(effect);
     }
 

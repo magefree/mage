@@ -76,7 +76,7 @@ class TheEonFogSkipUntapStepEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players skip their untap steps";
     }
 
-    public TheEonFogSkipUntapStepEffect(final TheEonFogSkipUntapStepEffect effect) {
+    protected TheEonFogSkipUntapStepEffect(final TheEonFogSkipUntapStepEffect effect) {
         super(effect);
         this.allPlayers = effect.allPlayers;
     }

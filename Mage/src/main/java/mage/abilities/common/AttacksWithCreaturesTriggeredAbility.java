@@ -53,7 +53,7 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         }
     }
 
-    public AttacksWithCreaturesTriggeredAbility(final AttacksWithCreaturesTriggeredAbility ability) {
+    protected AttacksWithCreaturesTriggeredAbility(final AttacksWithCreaturesTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.minAttackers = ability.minAttackers;

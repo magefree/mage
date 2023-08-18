@@ -22,7 +22,7 @@ public class ChangeMaxNumberThatCanAttackSourceEffect extends ContinuousEffectIm
         staticText = "No more than " + (maxAttackedBy == 1 ? "one" : "two") + " creatures can attack you each combat";
     }
 
-    public ChangeMaxNumberThatCanAttackSourceEffect(final ChangeMaxNumberThatCanAttackSourceEffect effect) {
+    protected ChangeMaxNumberThatCanAttackSourceEffect(final ChangeMaxNumberThatCanAttackSourceEffect effect) {
         super(effect);
         this.maxAttackedBy = effect.maxAttackedBy;
     }
@@ -43,7 +43,7 @@ public class ChangeMaxNumberThatCanAttackSourceEffect extends ContinuousEffectIm
             return false;
         }
         // Change the rule
-        if (controller.getMaxAttackedBy()> maxAttackedBy) {
+        if (controller.getMaxAttackedBy() > maxAttackedBy) {
             controller.setMaxAttackedBy(maxAttackedBy);
         }
         return true;

@@ -19,7 +19,7 @@ public final class PhyrexianGoblinToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public PhyrexianGoblinToken(final PhyrexianGoblinToken token) {
+    protected PhyrexianGoblinToken(final PhyrexianGoblinToken token) {
         super(token);
     }
 

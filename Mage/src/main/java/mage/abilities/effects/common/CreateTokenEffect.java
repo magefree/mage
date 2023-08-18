@@ -60,7 +60,7 @@ public class CreateTokenEffect extends OneShotEffect {
         setText();
     }
 
-    public CreateTokenEffect(final CreateTokenEffect effect) {
+    protected CreateTokenEffect(final CreateTokenEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.token = effect.token.copy();

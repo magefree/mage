@@ -49,6 +49,7 @@ import mage.players.net.UserData;
 import mage.target.*;
 import mage.target.common.*;
 import mage.util.CardUtil;
+import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -815,6 +816,13 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check may attack ability:
+                        if (params[0].equals(CHECK_COMMAND_MAY_ATTACK_DEFENDER) && params.length == 4) {
+                            assertMayAttackDefender(action, game, computerPlayer, params[1], game.getPlayer(UUID.fromString(params[2])), Boolean.parseBoolean(params[3]));
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check battlefield count: target player, card name, count
                         if (params[0].equals(CHECK_COMMAND_PERMANENT_COUNT) && params.length == 4) {
                             assertPermanentCount(action, game, game.getPlayer(UUID.fromString(params[1])), params[2], Integer.parseInt(params[3]));
@@ -1134,7 +1142,7 @@ public class TestPlayer implements Player {
             // all fine
             return perm;
         }
-        Assert.fail(action.getActionName() + " - can''t find permanent to check: " + cardName);
+        Assert.fail(action.getActionName() + " - can't find permanent to check: " + cardName);
         return null;
     }
     
@@ -1369,6 +1377,29 @@ public class TestPlayer implements Player {
             printAbilities(game, computerPlayer.getPlayable(game, true));
             printEnd();
             Assert.fail("Must not have playable ability, but found: " + abilityStartText);
+        }
+    }
+
+    private void assertMayAttackDefender(PlayerAction action, Game game, Player controller, String permanentName, Player defender, boolean expectedMayAttack) {
+        Permanent attackingPermanent = findPermanentWithAssert(action, game, controller, permanentName);
+
+        // Is the defender in range of the controller?
+        boolean mayAttack = game.getState().getPlayersInRange(controller.getId(), game).contains(defender.getId());
+        // Can the attacking permanent attack the defender?
+        mayAttack &= attackingPermanent.canAttack(defender.getId(), game);
+        // Not allowed to attack self.
+        mayAttack &= !controller.getId().equals(defender.getId());
+
+        if (expectedMayAttack && !mayAttack) {
+            printStart(game, action.getActionName());
+            printEnd();
+            Assert.fail(permanentName + " was expected to be able to attack " + defender.getName() + " but is not able to.");
+        }
+
+        if (!expectedMayAttack && mayAttack) {
+            printStart(game, action.getActionName());
+            printEnd();
+            Assert.fail(permanentName + " was not expected to be able to attack " + defender.getName() + " but is able to.");
         }
     }
 
@@ -2831,11 +2862,12 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
+            int min, int max, MultiAmountType type, Game game) {
         assertAliasSupportInChoices(false);
 
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
         if (needCount == 0) {
             return defaultList;
         }
@@ -2861,7 +2893,7 @@ public class TestPlayer implements Player {
             }
 
             // extra check
-            if (!MultiAmountType.isGoodValues(answer, needCount, min, max)) {
+            if (!MultiAmountType.isGoodValues(answer, messages, min, max)) {
                 Assert.fail("Wrong choices in multi amount: " + answer
                         .stream()
                         .map(String::valueOf)
@@ -2872,7 +2904,7 @@ public class TestPlayer implements Player {
         }
 
         this.chooseStrictModeFailed("choice", game, "Multi amount: " + type.getHeader());
-        return computerPlayer.getMultiAmount(outcome, messages, min, max, type, game);
+        return computerPlayer.getMultiAmountWithIndividualConstraints(outcome, messages, min, max, type, game);
     }
 
     @Override
@@ -2960,8 +2992,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerId) {
-        computerPlayer.controlPlayersTurn(game, playerId);
+    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
+        computerPlayer.controlPlayersTurn(game, playerUnderControlId, info);
     }
 
     @Override
@@ -3852,6 +3884,16 @@ public class TestPlayer implements Player {
     @Override
     public int getPriorityTimeLeft() {
         return computerPlayer.getPriorityTimeLeft();
+    }
+
+    @Override
+    public void setBufferTimeLeft(int timeLeft) {
+        computerPlayer.setBufferTimeLeft(timeLeft);
+    }
+
+    @Override
+    public int getBufferTimeLeft() {
+        return computerPlayer.getBufferTimeLeft();
     }
 
     @Override

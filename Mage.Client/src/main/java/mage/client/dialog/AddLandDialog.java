@@ -473,7 +473,7 @@ public class AddLandDialog extends MageDialog {
 
     private void autoAddLands() {
         int deckSize = ((Number) spnDeckSize.getValue()).intValue();
-        int[] lands = DeckBuildUtils.landCountSuggestion(deckSize, deck.getCards());
+        int[] lands = DeckBuildUtils.landCountSuggestion(deckSize, deck.getMaindeckCards());
         spnPlains.setValue(lands[0]);
         spnIsland.setValue(lands[1]);
         spnSwamp.setValue(lands[2]);

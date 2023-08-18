@@ -11,7 +11,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
@@ -31,7 +30,7 @@ public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
                 + (amount == 1 ? "card" : " cards") + " of their library";
     }
 
-    public ExileCardsFromTopOfLibraryTargetEffect(final ExileCardsFromTopOfLibraryTargetEffect effect) {
+    protected ExileCardsFromTopOfLibraryTargetEffect(final ExileCardsFromTopOfLibraryTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
 

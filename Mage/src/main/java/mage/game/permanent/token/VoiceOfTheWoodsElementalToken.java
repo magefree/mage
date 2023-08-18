@@ -22,7 +22,7 @@ public final class VoiceOfTheWoodsElementalToken extends TokenImpl {
         addAbility(TrampleAbility.getInstance());
     }
 
-    public VoiceOfTheWoodsElementalToken(final VoiceOfTheWoodsElementalToken token) {
+    protected VoiceOfTheWoodsElementalToken(final VoiceOfTheWoodsElementalToken token) {
         super(token);
     }
 

@@ -113,6 +113,8 @@ public class CardInfo {
     protected String modalDoubleFacedSecondSideName;
     @DatabaseField
     protected String meldsToCardName;
+    @DatabaseField
+    protected boolean isExtraDeckCard;
 
     // if you add new field with card side name then update CardRepository.addNewNames too
 
@@ -232,6 +234,8 @@ public class CardInfo {
         // Starting loyalty
         this.startingLoyalty = CardUtil.convertLoyaltyOrDefense(card.getStartingLoyalty());
         this.startingDefense = CardUtil.convertLoyaltyOrDefense(card.getStartingDefense());
+
+        this.isExtraDeckCard = card.isExtraDeckCard();
     }
 
     public Card getCard() {
@@ -481,5 +485,9 @@ public class CardInfo {
     @Override
     public String toString() {
         return String.format("%s (%s, %s)", getName(), getSetCode(), getCardNumber());
+    }
+
+    public boolean isExtraDeckCard() {
+        return isExtraDeckCard;
     }
 }

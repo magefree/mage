@@ -28,7 +28,7 @@ public final class HellionToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public HellionToken(final HellionToken token) {
+    protected HellionToken(final HellionToken token) {
         super(token);
     }
 

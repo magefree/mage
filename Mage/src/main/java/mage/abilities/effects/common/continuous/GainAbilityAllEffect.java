@@ -56,7 +56,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         this.generateGainAbilityDependencies(ability, filter);
     }
 
-    public GainAbilityAllEffect(final GainAbilityAllEffect effect) {
+    protected GainAbilityAllEffect(final GainAbilityAllEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
@@ -157,7 +157,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             sb.append(CardUtil.getTextWithFirstCharUpperCase(ability.getRule()));
             sb.append('"');
         } else {
-            sb.append(ability.getRule());
+            sb.append(CardUtil.stripReminderText(ability.getRule()));
         }
         if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());

@@ -4,6 +4,7 @@ package mage.abilities.effects.common;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -57,7 +58,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
         this.onlyIfControlledByPlayer = onlyIfControlledByPlayer;
     }
 
-    public DontUntapInControllersNextUntapStepTargetEffect(final DontUntapInControllersNextUntapStepTargetEffect effect) {
+    protected DontUntapInControllersNextUntapStepTargetEffect(final DontUntapInControllersNextUntapStepTargetEffect effect) {
         super(effect);
         this.targetName = effect.targetName;
         this.twoSteps = effect.twoSteps;

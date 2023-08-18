@@ -12,7 +12,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author Styxo
  */
 public class ExileUntilSourceLeavesEffect extends OneShotEffect {
@@ -29,6 +28,7 @@ public class ExileUntilSourceLeavesEffect extends OneShotEffect {
 
     /**
      * Exiles target(s) until source leaves battlefield
+     *
      * @param returnToZone The zone to which the exiled card will be returned when source leaves
      */
     public ExileUntilSourceLeavesEffect(Zone returnToZone) {
@@ -36,7 +36,7 @@ public class ExileUntilSourceLeavesEffect extends OneShotEffect {
         this.returnToZone = returnToZone;
     }
 
-    public ExileUntilSourceLeavesEffect(final ExileUntilSourceLeavesEffect effect) {
+    protected ExileUntilSourceLeavesEffect(final ExileUntilSourceLeavesEffect effect) {
         super(effect);
         this.returnToZone = effect.returnToZone;
     }

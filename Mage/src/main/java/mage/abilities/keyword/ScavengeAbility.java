@@ -18,7 +18,6 @@ import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- *
  * @author magenoxx_at_gmail.com
  */
 
@@ -42,7 +41,7 @@ public class ScavengeAbility extends ActivatedAbilityImpl {
         this.addTarget(new TargetCreaturePermanent());
     }
 
-    public ScavengeAbility(final ScavengeAbility ability) {
+    protected ScavengeAbility(final ScavengeAbility ability) {
         super(ability);
     }
 

@@ -20,7 +20,7 @@ public final class DeathtouchSnakeToken extends TokenImpl {
         addAbility(DeathtouchAbility.getInstance());
     }
 
-    public DeathtouchSnakeToken(final DeathtouchSnakeToken token) {
+    protected DeathtouchSnakeToken(final DeathtouchSnakeToken token) {
         super(token);
     }
 
