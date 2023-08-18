@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class BlossomingTortoise extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("land creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("land creatures");
 
     static {
         filter.add(CardType.LAND.getPredicate());
