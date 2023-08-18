@@ -12,7 +12,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
@@ -24,9 +24,9 @@ import java.util.UUID;
 public final class TegwyllDukeOfSplendor extends CardImpl {
 
     private static final FilterCreaturePermanent filter =
-            new FilterCreaturePermanent(SubType.FAERIE, "Faeries you control");
-    private static final FilterControlledCreaturePermanent filter2 =
-            new FilterControlledCreaturePermanent(SubType.FAERIE, "another Faerie you control");
+            new FilterCreaturePermanent(SubType.FAERIE, "Faeries");
+    private static final FilterControlledPermanent filter2 =
+            new FilterControlledPermanent(SubType.FAERIE, "another Faerie you control");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());
