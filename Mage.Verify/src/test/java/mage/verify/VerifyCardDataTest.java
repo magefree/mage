@@ -137,6 +137,8 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "WOE", "Knight of Doves"); // temporary
         skipListAddName(SKIP_LIST_TYPE, "WOE", "Faunsbane Troll"); // temporary
         skipListAddName(SKIP_LIST_TYPE, "WOE", "Blossoming Tortoise"); // temporary
+        skipListAddName(SKIP_LIST_TYPE, "WOE", "Ashiok's Reaper"); // temporary
+        skipListAddName(SKIP_LIST_TYPE, "WOE", "Agatha's Champion"); // temporary
 
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
@@ -146,6 +148,8 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Knight of Doves"); // temporary
         skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Faunsbane Troll"); // temporary
         skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Blossoming Tortoise"); // temporary
+        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Ashiok's Reaper"); // temporary
+        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Agatha's Champion"); // temporary
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);

@@ -286,7 +286,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     /**
-     * Returns a card object with the spell characteristics like calor, types,
+     * Returns a card object with the spell characteristics like color, types,
      * subtypes etc. E.g. if you cast a Bestow card as enchantment, the
      * characteristics don't include the creature type.
      *
