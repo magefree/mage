@@ -21,8 +21,10 @@ public final class WildsOfEldraine extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Ash, Party Crasher", 201, Rarity.UNCOMMON, mage.cards.a.AshPartyCrasher.class));
+        cards.add(new SetCardInfo("Ashiok's Reaper", 79, Rarity.UNCOMMON, mage.cards.a.AshioksReaper.class));
         cards.add(new SetCardInfo("Beanstalk Wurm", 161, Rarity.COMMON, mage.cards.b.BeanstalkWurm.class));
         cards.add(new SetCardInfo("Besotted Knight", 4, Rarity.COMMON, mage.cards.b.BesottedKnight.class));
+        cards.add(new SetCardInfo("Bitter Chill", 44, Rarity.UNCOMMON, mage.cards.b.BitterChill.class));
         cards.add(new SetCardInfo("Break the Spell", 5, Rarity.COMMON, mage.cards.b.BreakTheSpell.class));
         cards.add(new SetCardInfo("Conceited Witch", 84, Rarity.COMMON, mage.cards.c.ConceitedWitch.class));
         cards.add(new SetCardInfo("Cruel Somnophage", 222, Rarity.RARE, mage.cards.c.CruelSomnophage.class));
@@ -33,11 +35,13 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Faerie Dreamthief", 89, Rarity.UNCOMMON, mage.cards.f.FaerieDreamthief.class));
         cards.add(new SetCardInfo("Farsight Ritual", 49, Rarity.RARE, mage.cards.f.FarsightRitual.class));
         cards.add(new SetCardInfo("Faunsbane Troll", 203, Rarity.RARE, mage.cards.f.FaunsbaneTroll.class));
+        cards.add(new SetCardInfo("Flick a Coin", 128, Rarity.COMMON, mage.cards.f.FlickACoin.class));
         cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frolicking Familiar", 226, Rarity.UNCOMMON, mage.cards.f.FrolickingFamiliar.class));
         cards.add(new SetCardInfo("Gallant Pie-Wielder", 15, Rarity.UNCOMMON, mage.cards.g.GallantPieWielder.class));
         cards.add(new SetCardInfo("Glass Casket", 16, Rarity.UNCOMMON, mage.cards.g.GlassCasket.class));
         cards.add(new SetCardInfo("Greta, Sweettooth Scourge", 205, Rarity.UNCOMMON, mage.cards.g.GretaSweettoothScourge.class));
+        cards.add(new SetCardInfo("Howling Galefang", 175, Rarity.UNCOMMON, mage.cards.h.HowlingGalefang.class));
         cards.add(new SetCardInfo("Island", 263, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Knight of Doves", 19, Rarity.UNCOMMON, mage.cards.k.KnightOfDoves.class));
         cards.add(new SetCardInfo("Living Lectern", 59, Rarity.COMMON, mage.cards.l.LivingLectern.class));
@@ -61,6 +65,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Sharae of Numbing Depths", 213, Rarity.UNCOMMON, mage.cards.s.SharaeOfNumbingDepths.class));
         cards.add(new SetCardInfo("Skybeast Tracker", 185, Rarity.COMMON, mage.cards.s.SkybeastTracker.class));
         cards.add(new SetCardInfo("Sleight of Hand", 67, Rarity.COMMON, mage.cards.s.SleightOfHand.class));
+        cards.add(new SetCardInfo("Soul-Guide Lantern", 251, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
         cards.add(new SetCardInfo("Spellbook Vendor", 31, Rarity.RARE, mage.cards.s.SpellbookVendor.class));
         cards.add(new SetCardInfo("Swamp", 264, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sweettooth Witch", 111, Rarity.COMMON, mage.cards.s.SweettoothWitch.class));
