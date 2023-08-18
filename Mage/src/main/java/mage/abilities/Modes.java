@@ -15,6 +15,7 @@ import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -94,6 +95,15 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             modeToGet = selectedDuplicateModes.get(key);
         }
         return modeToGet;
+    }
+
+    public Stream<Mode> stream() {
+        return super.values().stream();
+    }
+
+    public Stream<Mode> streamAlreadySelected(Ability source, Game game) {
+        Set<UUID> selected = getAlreadySelectedModes(source, game);
+        return stream().filter(m -> selected.contains(m.getId()));
     }
 
     public Mode getMode() {

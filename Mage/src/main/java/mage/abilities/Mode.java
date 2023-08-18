@@ -17,6 +17,7 @@ public class Mode implements Serializable {
     protected final Targets targets;
     protected final Effects effects;
     protected String flavorWord;
+    protected String modeTag;
 
     public Mode(Effect effect) {
         this.id = UUID.randomUUID();
@@ -32,6 +33,7 @@ public class Mode implements Serializable {
         this.targets = mode.targets.copy();
         this.effects = mode.effects.copy();
         this.flavorWord = mode.flavorWord;
+        this.modeTag = mode.modeTag;
     }
 
     public UUID setRandomId() {
@@ -69,6 +71,15 @@ public class Mode implements Serializable {
     public Mode addEffect(Effect effect) {
         effects.add(effect);
         return this;
+    }
+
+    public Mode setModeTag(String tag) {
+        this.modeTag = tag;
+        return this;
+    }
+
+    public String getModeTag() {
+        return this.modeTag == null ? "" : this.modeTag;
     }
 
     public String getFlavorWord() {

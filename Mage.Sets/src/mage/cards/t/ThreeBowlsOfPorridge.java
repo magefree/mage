@@ -9,23 +9,25 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.hint.Hint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
- *
  * @author Susucr
  */
 public final class ThreeBowlsOfPorridge extends CardImpl {
 
     public ThreeBowlsOfPorridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-
         this.subtype.add(SubType.FOOD);
 
         // {2}, {T}: Choose one that hasn't been chosen --
@@ -36,17 +38,21 @@ public final class ThreeBowlsOfPorridge extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
+        ability.setModeTag("deals damage");
         ability.getModes().setEachModeOnlyOnce(true);
 
         // * Tap target creature.
         Mode mode = new Mode(new TapTargetEffect());
         mode.addTarget(new TargetCreaturePermanent());
+        mode.setModeTag("tap");
         ability.addMode(mode);
 
         // * Sacrifice Three Bowls of Porridge. You gain 3 life.
         mode = new Mode(new SacrificeSourceEffect());
         mode.addEffect(new GainLifeEffect(3));
+        mode.setModeTag("sacrifice and gain life");
         ability.addMode(mode);
+        ability.addHint(ThreeBowlsOfPorridgeHint.instance);
 
         this.addAbility(ability);
     }
@@ -58,5 +64,30 @@ public final class ThreeBowlsOfPorridge extends CardImpl {
     @Override
     public ThreeBowlsOfPorridge copy() {
         return new ThreeBowlsOfPorridge(this);
+    }
+}
+
+enum ThreeBowlsOfPorridgeHint implements Hint {
+    instance;
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        List<String> used = ability
+                .getModes()
+                .streamAlreadySelected(ability, game)
+                .map(Mode::getModeTag)
+                .filter(tag -> tag != null && !tag.isEmpty())
+                .collect(Collectors.toList());
+
+        if (used.isEmpty()) {
+            return "";
+        }
+
+        return "Already used: [" + String.join(", ", used) + "]";
+    }
+
+    @Override
+    public ThreeBowlsOfPorridgeHint copy() {
+        return instance;
     }
 }

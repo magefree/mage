@@ -1391,6 +1391,16 @@ public abstract class AbilityImpl implements Ability {
         return this;
     }
 
+    /**
+     * set the mode tag for the latest mode.
+     */
+    @Override
+    public void setModeTag(String tag) {
+        if (getModes().getMode() != null) {
+            getModes().getMode().setModeTag(tag);
+        }
+    }
+
     @Override
     public final List<CardIcon> getIcons() {
         return getIcons(null);
