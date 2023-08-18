@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class EdgewallInn extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("card with an Adventure from your graveyard");
+    private static final FilterCard filter = new FilterCard("card that has an Adventure from your graveyard");
 
     static {
         filter.add(AdventurePredicate.instance);
@@ -46,7 +46,7 @@ public final class EdgewallInn extends CardImpl {
         // {T}: Add one mana of the chosen color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaChosenColorEffect(), new TapSourceCost()));
 
-        // {3}, {T}, Sacrifice Edgewall Inn: Return target card with an Adventure from your graveyard to your hand.
+        // {3}, {T}, Sacrifice Edgewall Inn: Return target card that has an Adventure from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(
                 new ReturnFromGraveyardToHandTargetEffect(),
                 new ManaCostsImpl("{3}")
