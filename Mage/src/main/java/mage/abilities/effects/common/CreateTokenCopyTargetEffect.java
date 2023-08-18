@@ -135,6 +135,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
         this.additionalCardType = effect.additionalCardType;
         this.additionalSubType = effect.additionalSubType;
         this.attackedPlayer = effect.attackedPlayer;
+        this.attachedTo = effect.attachedTo;
         this.attacking = effect.attacking;
         this.becomesArtifact = effect.becomesArtifact;
         this.color = effect.color;
