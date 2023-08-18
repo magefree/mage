@@ -28,6 +28,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Beanstalk Wurm", 161, Rarity.COMMON, mage.cards.b.BeanstalkWurm.class));
         cards.add(new SetCardInfo("Beseech the Mirror", 82, Rarity.MYTHIC, mage.cards.b.BeseechTheMirror.class));
         cards.add(new SetCardInfo("Besotted Knight", 4, Rarity.COMMON, mage.cards.b.BesottedKnight.class));
+        cards.add(new SetCardInfo("Blossoming Tortoise", 163, Rarity.MYTHIC, mage.cards.b.BlossomingTortoise.class));
         cards.add(new SetCardInfo("Bitter Chill", 44, Rarity.UNCOMMON, mage.cards.b.BitterChill.class));
         cards.add(new SetCardInfo("Break the Spell", 5, Rarity.COMMON, mage.cards.b.BreakTheSpell.class));
         cards.add(new SetCardInfo("Callous Sell-Sword", 221, Rarity.UNCOMMON, mage.cards.c.CallousSellSword.class));
