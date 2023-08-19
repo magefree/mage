@@ -33,6 +33,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Break the Spell", 5, Rarity.COMMON, mage.cards.b.BreakTheSpell.class));
         cards.add(new SetCardInfo("Callous Sell-Sword", 221, Rarity.UNCOMMON, mage.cards.c.CallousSellSword.class));
         cards.add(new SetCardInfo("Chancellor of Tales", 45, Rarity.UNCOMMON, mage.cards.c.ChancellorOfTales.class));
+        cards.add(new SetCardInfo("Charmed Clothier", 6, Rarity.COMMON, mage.cards.c.CharmedClothier.class));
         cards.add(new SetCardInfo("Conceited Witch", 84, Rarity.COMMON, mage.cards.c.ConceitedWitch.class));
         cards.add(new SetCardInfo("Cruel Somnophage", 222, Rarity.RARE, mage.cards.c.CruelSomnophage.class));
         cards.add(new SetCardInfo("Cursed Courtier", 9, Rarity.UNCOMMON, mage.cards.c.CursedCourtier.class));
