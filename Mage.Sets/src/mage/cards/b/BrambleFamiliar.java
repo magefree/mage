@@ -107,7 +107,7 @@ class FetchQuestEffect extends OneShotEffect {
             return true;
         }
 
-        TargetCard target = new TargetCardInYourGraveyard(1, filter);
+        TargetCard target = new TargetCardInYourGraveyard(1, 1, filter, true);
         player.choose(Outcome.PutCardInPlay, cards, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
         return true;
