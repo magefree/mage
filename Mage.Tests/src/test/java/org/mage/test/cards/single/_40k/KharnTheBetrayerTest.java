@@ -10,6 +10,12 @@ public class KharnTheBetrayerTest extends CardTestCommander4Players {
     
     private static String KHARN = "Kharn the Betrayer";
 
+    /**
+     * 
+        Berzerker — Khârn the Betrayer attacks or blocks each combat if able.
+        Sigil of Corruption — When you lose control of Khârn the Betrayer, draw two cards.
+        The Betrayer — If damage would be dealt to Khârn the Betrayer, prevent that damage and an opponent of your choice gains control of it.
+     */
     @Test
     public void testEffect() {
         addCard(Zone.BATTLEFIELD, playerA, KHARN, 1);
