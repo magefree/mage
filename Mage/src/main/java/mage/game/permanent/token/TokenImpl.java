@@ -263,7 +263,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             Token token = entry.getKey();
             int amount = entry.getValue();
 
-            // check if token needs to be attached to something
+            // check if token needs to be attached to a specific object (e.g. Estrid the Masked, Role Token)
             Permanent permanentAttachedTo;
             if (attachedTo != null) {
                 permanentAttachedTo = game.getPermanent(attachedTo);
@@ -332,6 +332,8 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 }
 
                 // if token was created (not a spell copy) handle auras coming into the battlefield
+                // that must determine what to enchant
+                // see #9583 for the root cause issue of why this convoluted searching is necessary
                 // code blindly copied from CopyPermanentEffect
                 // TODO: clean this up -- half the comments make no sense in the context of creating a token
                 if (created && permanent.getSubtype().contains(SubType.AURA) && attachedTo == null) {
@@ -390,8 +392,9 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                         targetPlayer.addAttachment(permanent.getId(), source, game);
                     }
                 }
-                // end of aura code : just remove this line if everything works out well
+                // end of messy target-groping code to handle auras
 
+                // this section is for tokens created attached to a specific known object
                 if (permanentAttachedTo != null) {
                     if (permanent.hasSubtype(SubType.AURA, game)) {
                         permanent.getAbilities().get(0).getTargets().get(0).add(permanentAttachedTo.getId(), game);
