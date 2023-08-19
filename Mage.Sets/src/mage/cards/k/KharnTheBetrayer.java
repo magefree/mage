@@ -44,13 +44,14 @@ public class KharnTheBetrayer extends CardImpl {
         // {this} attacks or blocks each combat if able
         Ability ability = new SimpleStaticAbility(new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield).setText("{this} attacks"));
         ability.addEffect(new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield).setText("blocks each combat if able").concatBy("or"));
-        this.addAbility(ability);
+        this.addAbility(ability.withFlavorWord("Berzerker"));
 
         // When you lose control of {this}, draw two cards
-        this.addAbility(new KharnTheBetrayerTriggeredAbility());
+        this.addAbility(new KharnTheBetrayerTriggeredAbility().withFlavorWord("Sigil of Corruption"));
 
         // If damage would be dealt to {this}, prevent that damage and an opponent of your choice gains control of it.
-        this.addAbility(new SimpleStaticAbility(new KharnTheBetrayerEffect()));
+        Ability replacementAbility = new SimpleStaticAbility(new KharnTheBetrayerEffect());
+        this.addAbility(replacementAbility.withFlavorWord("The Betrayer"));
     }
 
     protected KharnTheBetrayer(final KharnTheBetrayer card) {
