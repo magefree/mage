@@ -6,7 +6,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -50,12 +49,12 @@ public final class FaerieFencing extends CardImpl {
 
 class FaerieFencingEffect extends OneShotEffect {
 
-    public FaerieFencingEffect() {
+    FaerieFencingEffect() {
         super(Outcome.UnboostCreature);
         this.staticText = "target creature gets -X/-X until end of turn. It gets an additional -3/-3 if you controlled a Faerie as you cast this spell.";
     }
 
-    protected FaerieFencingEffect(final FaerieFencingEffect effect) {
+    private FaerieFencingEffect(final FaerieFencingEffect effect) {
         super(effect);
     }
 
@@ -63,13 +62,9 @@ class FaerieFencingEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ControlledFaerieAsSpellCastWatcher watcher = game.getState().getWatcher(ControlledFaerieAsSpellCastWatcher.class);
         MageObject mo = source.getSourceObject(game);
-
-        if (watcher == null || mo == null) {
-            return false;
-        }
-
         int reduction = source.getManaCostsToPay().getX();
-        if (watcher.getCount(new MageObjectReference(mo, game)) > 0) {
+
+        if (watcher != null && mo != null && watcher.getCount(new MageObjectReference(mo, game)) > 0) {
             reduction += 3;
         }
         game.addEffect(new BoostTargetEffect(-reduction, -reduction, Duration.EndOfTurn), source);
@@ -77,7 +72,7 @@ class FaerieFencingEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public FaerieFencingEffect copy() {
         return new FaerieFencingEffect(this);
     }
 
@@ -87,7 +82,7 @@ class ControlledFaerieAsSpellCastWatcher extends Watcher {
 
     private final FilterPermanent filter = new FilterPermanent(SubType.FAERIE, "");
 
-    public ControlledFaerieAsSpellCastWatcher() {
+    ControlledFaerieAsSpellCastWatcher() {
         super(WatcherScope.GAME);
     }
 
