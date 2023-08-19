@@ -40,7 +40,7 @@ public final class OptimusPrimeHero extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new BolsterEffect(1), TargetController.ANY, false));
 
         // When Optimus Prime dies, return it to the battlefield converted under its owner’s control.
-        this.addAbility(new DiesSourceTriggeredAbility(new OptimusPrimeHeroEffect()).setTriggerPhrase("When Optimus Prime dies, "));
+        this.addAbility(new DiesSourceTriggeredAbility(new OptimusPrimeHeroEffect()));
     }
 
     private OptimusPrimeHero(final OptimusPrimeHero card) {
