@@ -321,7 +321,7 @@ public class MeldTest extends CardTestPlayerBase {
         Assert.assertEquals("Clone of Urza, Planeswalker should have mana value 0", manaValue, 0);
     }
 
-    // bug report: Eliminate can kill Urza's Planeswalker.
+    // Eliminate can not kill Urza's Planeswalker.
     @Test
     public void testMeld_Urza_Eliminate() {
         setStrictChooseMode(true);
@@ -346,14 +346,40 @@ public class MeldTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Eliminate", urzaPlaneswalker);
 
         setStopAt(1, PhaseStep.END_TURN);
-        //try {
-        execute();
-        /*    Assert.fail("must throw exception on execute");
+        try {
+            execute();
+            Assert.fail("must throw exception on execute");
         } catch (Throwable e) {
-            //if (!e.getMessage().contains("Cast Silvercoat Lion")) {
-            //    Assert.fail("Should have thrown error about casting Silvercoat Lion, but got:\n" + e.getMessage());
-            //}
-            Assert.fail("!");
-        }*/
+            Assert.assertEquals("Player PlayerB must have 0 actions but found 1", e.getMessage());
+        }
+    }
+
+
+    // Bug report: after rollback, Eliminate can kill Urza's Planeswalker.
+    // Issue seem was that after rollback, Urza had mana value 0.
+    @Test
+    public void testMeld_Urza_Eliminate_After_Rollback() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, urza);
+        addCard(Zone.BATTLEFIELD, playerA, stones);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{7}: If you both own and control {this} and");
+        setChoice(playerA, stones);
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+        assertPermanentCount(playerA, urzaPlaneswalker, 1);
+
+        rollbackTurns(2, PhaseStep.POSTCOMBAT_MAIN, playerA, 0);
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, urzaPlaneswalker, 1);
+        int manaValue = getPermanent(urzaPlaneswalker, playerA).getManaValue();
+        Assert.assertEquals("Melded Urza, Planeswalker's mana value", manaValue, 3 + 5);
     }
 }
