@@ -80,6 +80,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rat Out", 103, Rarity.COMMON, mage.cards.r.RatOut.class));
         cards.add(new SetCardInfo("Ratcatcher Trainee", 144, Rarity.COMMON, mage.cards.r.RatcatcherTrainee.class));
+        cards.add(new SetCardInfo("Restless Bivouac", 257, Rarity.RARE, mage.cards.r.RestlessBivouac.class));
         cards.add(new SetCardInfo("Realm-Scorcher Hellkite", 145, Rarity.MYTHIC, mage.cards.r.RealmScorcherHellkite.class));
         cards.add(new SetCardInfo("Redcap Gutter-Dweller", 146, Rarity.RARE, mage.cards.r.RedcapGutterDweller.class));
         cards.add(new SetCardInfo("Restless Cottage", 258, Rarity.RARE, mage.cards.r.RestlessCottage.class));
