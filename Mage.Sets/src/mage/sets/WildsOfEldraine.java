@@ -110,6 +110,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Talion's Messenger", 73, Rarity.RARE, mage.cards.t.TalionsMessenger.class));
         cards.add(new SetCardInfo("Talion, the Kindly Lord", 215, Rarity.MYTHIC, mage.cards.t.TalionTheKindlyLord.class));
         cards.add(new SetCardInfo("Tanglespan Lookout", 188, Rarity.UNCOMMON, mage.cards.t.TanglespanLookout.class));
+        cards.add(new SetCardInfo("Tattered Ratter", 152, Rarity.UNCOMMON, mage.cards.t.TatteredRatter.class));
         cards.add(new SetCardInfo("The Goose Mother", 204, Rarity.RARE, mage.cards.t.TheGooseMother.class));
         cards.add(new SetCardInfo("The Huntsman's Redemption", 176, Rarity.RARE, mage.cards.t.TheHuntsmansRedemption.class));
         cards.add(new SetCardInfo("Threadbind Clique", 239, Rarity.UNCOMMON, mage.cards.t.ThreadbindClique.class));
