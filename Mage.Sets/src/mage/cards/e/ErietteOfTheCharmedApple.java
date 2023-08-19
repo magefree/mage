@@ -1,13 +1,11 @@
 package mage.cards.e;
 
-import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
@@ -17,22 +15,26 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.permanent.EnchantedByPlayerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 
 /**
  *
  * @author Xanderhall
  */
 public final class ErietteOfTheCharmedApple extends CardImpl {
+
+    private FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures enchanted by an Aura you control");
+
+    {
+        filter.add(CardType.CREATURE.getPredicate());
+    }
 
     public ErietteOfTheCharmedApple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
@@ -44,7 +46,8 @@ public final class ErietteOfTheCharmedApple extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Each creature that's enchanted by an Aura you control can't attack you or planeswalkers you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ErietteOfTheCharmedAppleEffect()));
+        filter.add(new EnchantedByPlayerPredicate(ownerId));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.EndOfGame, filter, true)));
 
         // At the beginning of your end step, each opponent loses X life and you gain X life, where X is the number of Auras you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new LoseLifeOpponentsEffect(ErietteOfTheCharmedAppleValue.instance), TargetController.YOU, false);
@@ -60,42 +63,6 @@ public final class ErietteOfTheCharmedApple extends CardImpl {
     public ErietteOfTheCharmedApple copy() {
         return new ErietteOfTheCharmedApple(this);
     }
-}
-
-class ErietteOfTheCharmedAppleEffect extends ContinuousEffectImpl {
-
-    ErietteOfTheCharmedAppleEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        this.staticText = "Each creature that's enchanted by an Aura you control can't attack you or planeswalkers you control.";
-    }
-
-    private ErietteOfTheCharmedAppleEffect(final ErietteOfTheCharmedAppleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ErietteOfTheCharmedAppleEffect copy() {
-        return new ErietteOfTheCharmedAppleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        // Implementation taken from Kaima, The Fractured Calm
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {
-            if (permanent.getAttachments()
-                    .stream()
-                    .map(game::getPermanent)
-                    .filter(Objects::nonNull)
-                    .noneMatch(p -> p.isControlledBy(source.getControllerId()) && p.hasSubtype(SubType.AURA, game))
-            ) {
-                continue;
-            }
-            game.addEffect(new CantAttackYouAllEffect(Duration.Custom).setTargetPointer(new FixedTarget(permanent, game)), source);
-        }
-
-        return true;
-    }
-
 }
 
 enum ErietteOfTheCharmedAppleValue implements DynamicValue {
