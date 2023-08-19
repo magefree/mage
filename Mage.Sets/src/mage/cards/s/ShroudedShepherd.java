@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class ShroudedShepherd extends AdventureCard {
 
     public ShroudedShepherd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{W}", "Cleave Shadoows", "{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{W}", "Cleave Shadows", "{1}{B}");
 
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.WARRIOR);
@@ -33,7 +33,7 @@ public final class ShroudedShepherd extends AdventureCard {
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
-        // Cleave Shadoows
+        // Cleave Shadows
         // Creatures your opponents control get -1/-1 until end of turn.
         this.getSpellCard().getSpellAbility().addEffect(new BoostAllEffect(
                 -1, -1, Duration.EndOfTurn,
