@@ -1,15 +1,23 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
+import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.TotalCardsExiledOwnedManaValue;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.ExileCardsFromTopOfLibraryTargetEffect;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.token.AshiokWickedManipulatorNightmareToken;
 import mage.players.Player;
+import mage.target.TargetPlayer;
+import mage.watchers.common.CardsExiledThisTurnWatcher;
 
 import java.util.Set;
 import java.util.UUID;
@@ -30,8 +38,29 @@ public final class AshiokWickedManipulator extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new AshiokWickedManipulatorReplacementEffect()));
 
         // +1: Look at the top two cards of your library. Exile one of them and put the other into your hand.
+        this.addAbility(new LoyaltyAbility(
+                new LookLibraryAndPickControllerEffect(2, 1, PutCards.EXILED, PutCards.HAND),
+                1
+        ));
+
         // -2: Create two 1/1 black Nightmare creature tokens with "At the beginning of combat on your turn, if a card was put into exile this turn, put a +1/+1 counter on this creature."
+        this.addAbility(new LoyaltyAbility(
+                new CreateTokenEffect(new AshiokWickedManipulatorNightmareToken(), 2),
+                -2
+        ), new CardsExiledThisTurnWatcher());
+
         // -7: Target player exiles the top X cards of their library, where X is the total mana value of cards you own in exile.
+        Ability ability = new LoyaltyAbility(
+                new ExileCardsFromTopOfLibraryTargetEffect(
+                        TotalCardsExiledOwnedManaValue.instance,
+                        "target player"
+                ).setText("target player exiles the top X cards of their library, "
+                        + "where X is the total mana value of cards you own in exile"),
+                -7
+        );
+        ability.addTarget(new TargetPlayer());
+        ability.addHint(TotalCardsExiledOwnedManaValue.getHint());
+        this.addAbility(ability);
     }
 
     private AshiokWickedManipulator(final AshiokWickedManipulator card) {
