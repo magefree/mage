@@ -13,7 +13,6 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleSourceEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -67,12 +66,12 @@ public class KharnTheBetrayer extends CardImpl {
 
 class KharnTheBetrayerEffect extends ReplacementEffectImpl {
 
-    public KharnTheBetrayerEffect() {
+    KharnTheBetrayerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
         this.staticText = "If damage would be dealt to {this}, prevent that damage and an opponent of your choice gains control of it.";
     }
 
-    protected KharnTheBetrayerEffect(final KharnTheBetrayerEffect effect) {
+    private KharnTheBetrayerEffect(final KharnTheBetrayerEffect effect) {
         super(effect);
     }
 
@@ -116,12 +115,12 @@ class KharnTheBetrayerEffect extends ReplacementEffectImpl {
 
 class KharnTheBetrayerTriggeredAbility extends TriggeredAbilityImpl {
 
-    public KharnTheBetrayerTriggeredAbility () {
+    KharnTheBetrayerTriggeredAbility () {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2));
         this.setTriggerPhrase("When you lose control of {this}, ");
     }
 
-    protected KharnTheBetrayerTriggeredAbility(KharnTheBetrayerTriggeredAbility ability) {
+    private KharnTheBetrayerTriggeredAbility(KharnTheBetrayerTriggeredAbility ability) {
         super(ability);
     }
     
