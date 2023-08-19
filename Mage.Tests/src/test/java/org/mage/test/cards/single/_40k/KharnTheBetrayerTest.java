@@ -34,7 +34,7 @@ public class KharnTheBetrayerTest extends CardTestCommander4Players {
         execute();
 
         assertHandCount(playerA, 3);
-        assertHandCount(playerB, 3);
+        assertHandCount(playerB, 2);
         assertHandCount(playerC, 0);
         assertPermanentCount(playerC, KHARN, 1);
     }
