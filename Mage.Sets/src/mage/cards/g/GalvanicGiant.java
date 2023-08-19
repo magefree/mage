@@ -25,7 +25,7 @@ public final class GalvanicGiant extends AdventureCard {
 
     private static FilterSpell filter = new FilterSpell("a spell with mana value 5 or greater");
 
-    {
+    static {
         filter.add(new ManaValuePredicate(ComparisonType.OR_GREATER, 5));
     }
 
