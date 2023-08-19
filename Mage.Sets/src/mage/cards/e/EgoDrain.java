@@ -21,8 +21,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
@@ -38,15 +38,15 @@ public final class EgoDrain extends CardImpl {
     public EgoDrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
-        // Target player reveals their hand. You choose a nonland card from it. That player discards that card. Then exile a card from your hand if you don't control a Faerie.
+        // Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. If you don't control a Faerie, exile a card from your hand.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(
                 StaticFilters.FILTER_CARD_NON_LAND, TargetController.ANY
         ));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new EgoDrainEffect(),
                 new InvertCondition(condition),
-                "then exile a card from your hand if you don't control a Faerie."
+                "if you don't control a Faerie, exile a card from your hand."
         ));
         this.getSpellAbility().addHint(hint);
 
