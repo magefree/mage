@@ -49,7 +49,7 @@ public final class Vorinclex extends CardImpl {
 
         // When Vorinclex enters the battlefield, search your library for up to two Forest cards, reveal them, put them into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(0, 2, filter), true, true
+                new TargetCardInLibrary(0, 2, filter), true
         )));
 
         // {6}{G}{G}: Exile Vorinclex, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.

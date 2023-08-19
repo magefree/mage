@@ -70,9 +70,9 @@ class WrennAndSixEmblemEffect extends ContinuousEffectImpl {
                     game.getState().addOtherAbility(rightHalfCard, ability);
                 }
             }
-            if (card instanceof ModalDoubleFacesCard) {
-                ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
-                ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+            if (card instanceof ModalDoubleFacedCard) {
+                ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+                ModalDoubleFacedCardHalf rightHalfCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
                 if (leftHalfCard.isInstantOrSorcery(game)) {
                     Ability ability = new RetraceAbility(leftHalfCard);
                     ability.setSourceId(cardId);

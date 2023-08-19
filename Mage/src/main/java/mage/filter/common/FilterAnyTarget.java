@@ -21,7 +21,7 @@ public class FilterAnyTarget extends FilterPermanentOrPlayer {
         ));
     }
 
-    public FilterAnyTarget(final FilterAnyTarget filter) {
+    protected FilterAnyTarget(final FilterAnyTarget filter) {
         super(filter);
     }
 

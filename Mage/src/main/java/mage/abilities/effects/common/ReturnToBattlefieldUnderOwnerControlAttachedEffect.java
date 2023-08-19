@@ -11,7 +11,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author Quercitron
  */
 public class ReturnToBattlefieldUnderOwnerControlAttachedEffect extends OneShotEffect {
@@ -21,7 +20,7 @@ public class ReturnToBattlefieldUnderOwnerControlAttachedEffect extends OneShotE
         staticText = "return that card to the battlefield under its owner's control";
     }
 
-    public ReturnToBattlefieldUnderOwnerControlAttachedEffect(final ReturnToBattlefieldUnderOwnerControlAttachedEffect effect) {
+    protected ReturnToBattlefieldUnderOwnerControlAttachedEffect(final ReturnToBattlefieldUnderOwnerControlAttachedEffect effect) {
         super(effect);
     }
 

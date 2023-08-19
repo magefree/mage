@@ -11,7 +11,6 @@ import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class PreventionEffectImpl extends ReplacementEffectImpl implements PreventionEffect {
@@ -34,13 +33,12 @@ public abstract class PreventionEffectImpl extends ReplacementEffectImpl impleme
     }
 
     /**
-     *
      * @param duration
      * @param amountToPrevent
      * @param onlyCombat
      * @param consumable
      * @param amountToPreventDynamic if set, on init amountToPrevent is set to
-     * calculated value of amountToPreventDynamic
+     *                               calculated value of amountToPreventDynamic
      */
     public PreventionEffectImpl(Duration duration, int amountToPrevent, boolean onlyCombat, boolean consumable, DynamicValue amountToPreventDynamic) {
         super(duration, Outcome.PreventDamage);
@@ -51,7 +49,7 @@ public abstract class PreventionEffectImpl extends ReplacementEffectImpl impleme
         this.consumable = consumable;
     }
 
-    public PreventionEffectImpl(final PreventionEffectImpl effect) {
+    protected PreventionEffectImpl(final PreventionEffectImpl effect) {
         super(effect);
         this.amountToPrevent = effect.amountToPrevent;
         this.amountToPreventDynamic = effect.amountToPreventDynamic;

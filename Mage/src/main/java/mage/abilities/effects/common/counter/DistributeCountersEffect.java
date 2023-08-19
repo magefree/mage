@@ -37,7 +37,7 @@ public class DistributeCountersEffect extends OneShotEffect {
         this.targetDescription = targetDescription;
     }
 
-    public DistributeCountersEffect(final DistributeCountersEffect effect) {
+    protected DistributeCountersEffect(final DistributeCountersEffect effect) {
         super(effect);
         this.counterType = effect.counterType;
         this.amount = effect.amount;
@@ -101,7 +101,7 @@ class RemoveCountersAtEndOfTurn extends OneShotEffect {
                 + name + " counter from that creature at the beginning of the next cleanup step.";
     }
 
-    public RemoveCountersAtEndOfTurn(final RemoveCountersAtEndOfTurn effect) {
+    protected RemoveCountersAtEndOfTurn(final RemoveCountersAtEndOfTurn effect) {
         super(effect);
         this.counterType = effect.counterType;
     }

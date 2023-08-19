@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author fwannmacher
  */
 public class ReturnToLibraryPermanentEffect extends OneShotEffect {
@@ -19,11 +18,11 @@ public class ReturnToLibraryPermanentEffect extends OneShotEffect {
 
     public ReturnToLibraryPermanentEffect(boolean top) {
         super(Outcome.Neutral);
-        staticText = "Put {this} on "+ (top ? "top":"the bottom") + " of its owner's library";
+        staticText = "Put {this} on " + (top ? "top" : "the bottom") + " of its owner's library";
         this.toTop = top;
     }
 
-    public ReturnToLibraryPermanentEffect(final ReturnToLibraryPermanentEffect effect) {
+    protected ReturnToLibraryPermanentEffect(final ReturnToLibraryPermanentEffect effect) {
         super(effect);
         this.toTop = effect.toTop;
     }

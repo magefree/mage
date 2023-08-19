@@ -38,7 +38,10 @@ public final class NectarFaerie extends CardImpl {
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
         // {B}, {tap}: Target Faerie or Elf gains lifelink until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(
+                LifelinkAbility.getInstance(), Duration.EndOfTurn)
+                .setText("target Faerie or Elf gains lifelink until end of turn"),
+                new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

@@ -90,7 +90,7 @@ class NinjutsuEffect extends OneShotEffect {
                 + "from your hand tapped and attacking";
     }
 
-    public NinjutsuEffect(final NinjutsuEffect effect) {
+    protected NinjutsuEffect(final NinjutsuEffect effect) {
         super(effect);
     }
 
@@ -138,7 +138,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
     private UUID defendingPlayerId = null;
 
     public ReturnAttackerToHandTargetCost() {
-        this.addTarget(new TargetControlledPermanent(filter));
+        this.addTarget(new TargetControlledPermanent(1, 1, filter, true));
         this.text = "Return an unblocked attacker you control to hand";
     }
 

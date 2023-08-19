@@ -18,7 +18,7 @@ public final class FilterOut extends CardImpl {
     private static final FilterPermanent filter = new FilterNonlandPermanent("noncreature, nonland permanents");
 
     static {
-        filter.add(Predicates.not(CardType.LAND.getPredicate()));
+        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public FilterOut(UUID ownerId, CardSetInfo setInfo) {

@@ -87,6 +87,10 @@ public final class Main {
         logger.info("Logging level: " + logger.getEffectiveLevel());
         logger.info("Default charset: " + Charset.defaultCharset());
         String adminPassword = "";
+
+        // enable test mode by default for developer build (if you run it from source code)
+        testMode |= version.isDeveloperBuild();
+
         for (String arg : args) {
             if (arg.startsWith(testModeArg)) {
                 testMode = Boolean.parseBoolean(arg.replace(testModeArg, ""));
@@ -97,9 +101,6 @@ public final class Main {
                 fastDbMode = Boolean.parseBoolean(arg.replace(fastDBModeArg, ""));
             }
         }
-
-        // enable test mode by default for developer build (if you run it from source code)
-        testMode |= version.isDeveloperBuild();
 
         final String configPath = Optional.ofNullable(System.getProperty(configPathProp))
                 .orElse(defaultConfigPath);

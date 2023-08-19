@@ -18,7 +18,7 @@ public final class ApeToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public ApeToken(final ApeToken token) {
+    protected ApeToken(final ApeToken token) {
         super(token);
     }
 

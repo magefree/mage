@@ -19,7 +19,7 @@ public final class HammerOfPurphorosGolemToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public HammerOfPurphorosGolemToken(final HammerOfPurphorosGolemToken token) {
+    protected HammerOfPurphorosGolemToken(final HammerOfPurphorosGolemToken token) {
         super(token);
     }
 

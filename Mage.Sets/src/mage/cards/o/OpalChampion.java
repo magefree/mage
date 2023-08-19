@@ -30,7 +30,7 @@ public final class OpalChampion extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
         // When an opponent casts a creature spell, if Opal Champion is an enchantment, Opal Champion becomes a 3/3 Knight creature with first strike.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalChampionKnight(), "", Duration.WhileOnBattlefield, true, false),
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalChampionKnight(), null, Duration.WhileOnBattlefield),
                 new FilterCreatureSpell(), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
                 "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 3/3 Knight creature with first strike."));

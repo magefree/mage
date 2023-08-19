@@ -64,7 +64,7 @@ class MoonlightBargainEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             Set<Card> topFive = controller.getLibrary().getTopCards(game, 5);
             Cards lookAtCards = new CardsImpl();
-            lookAtCards.addAll(topFive);
+            lookAtCards.addAllCards(topFive);
             controller.lookAtCards(sourceObject.getIdName(), lookAtCards, game);
             Cards toHand = new CardsImpl();
             for (Card card : topFive) {

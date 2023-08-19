@@ -20,7 +20,7 @@ public final class DemonToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public DemonToken(final DemonToken token) {
+    protected DemonToken(final DemonToken token) {
         super(token);
     }
 

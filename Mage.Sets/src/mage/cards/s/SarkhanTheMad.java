@@ -158,7 +158,7 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
         List<Permanent> dragons = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
         if (dragons != null && !dragons.isEmpty()) {
             for (Permanent dragon : dragons) {
-                game.damagePlayerOrPlaneswalker(source.getFirstTarget(), dragon.getPower().getValue(), dragon.getId(), source, game, false, true);
+                game.damagePlayerOrPermanent(source.getFirstTarget(), dragon.getPower().getValue(), dragon.getId(), source, game, false, true);
             }
             return true;
         }

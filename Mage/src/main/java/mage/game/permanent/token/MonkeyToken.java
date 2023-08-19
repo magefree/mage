@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class MonkeyToken extends TokenImpl {
@@ -20,7 +19,7 @@ public final class MonkeyToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public MonkeyToken(final MonkeyToken token) {
+    protected MonkeyToken(final MonkeyToken token) {
         super(token);
     }
 

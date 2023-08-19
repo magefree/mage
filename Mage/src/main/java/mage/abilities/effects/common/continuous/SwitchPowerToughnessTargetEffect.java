@@ -21,7 +21,7 @@ public class SwitchPowerToughnessTargetEffect extends ContinuousEffectImpl {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SwitchPT_e, Outcome.BoostCreature);
     }
 
-    public SwitchPowerToughnessTargetEffect(final SwitchPowerToughnessTargetEffect effect) {
+    protected SwitchPowerToughnessTargetEffect(final SwitchPowerToughnessTargetEffect effect) {
         super(effect);
     }
 

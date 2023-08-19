@@ -29,7 +29,7 @@ public final class AvenEternal extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Aven Eternal enters the battlefield, amass 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(1, SubType.ZOMBIE)));
     }
 
     private AvenEternal(final AvenEternal card) {

@@ -34,7 +34,7 @@ public final class HostileDesert extends CardImpl {
         // {2}, Exile a land card from your graveyard: Hostile Desert becomes a 3/4 Elemental creature until end of turn. It's still a land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
                 new CreatureToken(3, 4, "3/4 Elemental creature", SubType.ELEMENTAL),
-                "land", Duration.EndOfTurn), new GenericManaCost(2));
+                CardType.LAND, Duration.EndOfTurn), new GenericManaCost(2));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterLandCard("land card from your graveyard"))));
         addAbility(ability);
     }

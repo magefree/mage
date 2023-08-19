@@ -12,6 +12,7 @@ import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -51,7 +52,7 @@ public final class SphereOfSafety extends CardImpl {
 class SphereOfSafetyPayManaToAttackAllEffect extends CantAttackYouUnlessPayAllEffect {
 
     SphereOfSafetyPayManaToAttackAllEffect() {
-        super(null, true);
+        super(Duration.WhileOnBattlefield, new ManaCostsImpl<>("{X}"), Scope.YOU_AND_CONTROLLED_PLANESWALKERS);
         staticText = "Creatures can't attack you or planeswalkers you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.";
     }
 

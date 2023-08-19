@@ -4,7 +4,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 
 /**
- *
  * @author TheElk801
  */
 public class FilterTeamCreaturePermanent extends FilterCreaturePermanent {
@@ -24,7 +23,7 @@ public class FilterTeamCreaturePermanent extends FilterCreaturePermanent {
         this.add(TargetController.TEAM.getControllerPredicate());
     }
 
-    public FilterTeamCreaturePermanent(final FilterTeamCreaturePermanent filter) {
+    protected FilterTeamCreaturePermanent(final FilterTeamCreaturePermanent filter) {
         super(filter);
     }
 

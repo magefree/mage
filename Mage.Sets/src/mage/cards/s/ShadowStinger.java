@@ -5,7 +5,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
@@ -68,7 +68,7 @@ public final class ShadowStinger extends CardImpl {
 class ShadowStingerTriggeredAbility extends TriggeredAbilityImpl {
 
     ShadowStingerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(3));
+        super(Zone.BATTLEFIELD, new MillCardsTargetEffect(3));
     }
 
     private ShadowStingerTriggeredAbility(final ShadowStingerTriggeredAbility ability) {

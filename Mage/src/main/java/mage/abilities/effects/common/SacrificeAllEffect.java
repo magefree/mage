@@ -40,7 +40,7 @@ public class SacrificeAllEffect extends OneShotEffect {
         setText();
     }
 
-    public SacrificeAllEffect(final SacrificeAllEffect effect) {
+    protected SacrificeAllEffect(final SacrificeAllEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.filter = effect.filter.copy();

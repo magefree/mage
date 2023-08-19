@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -32,7 +32,7 @@ public final class DimirHouseGuard extends CardImpl {
         this.addAbility(FearAbility.getInstance());
         // Sacrifice a creature: Regenerate Dimir House Guard.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         // Transmute {1}{B}{B}
         this.addAbility(new TransmuteAbility("{1}{B}{B}"));
     }

@@ -42,7 +42,7 @@ public final class SlipperyScoundrel extends CardImpl {
         // As long as you have the city's blessing Slippery Scoundrel has Hexproof and can't be blocked.
         ContinuousEffect boostSource = new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, CitysBlessingCondition.instance,
-                "As long as you have the city's blessing {this} has Hexproof");
+                "As long as you have the city's blessing, {this} has hexproof");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         RestrictionEffect restrictionEffect = new CantBeBlockedSourceEffect(Duration.WhileOnBattlefield);
         Effect effect2 = new ConditionalRestrictionEffect(restrictionEffect, CitysBlessingCondition.instance)

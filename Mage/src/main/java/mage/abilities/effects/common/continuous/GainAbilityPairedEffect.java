@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author noxx
  */
 public class GainAbilityPairedEffect extends ContinuousEffectImpl {
@@ -25,7 +24,7 @@ public class GainAbilityPairedEffect extends ContinuousEffectImpl {
         staticText = rule;
     }
 
-    public GainAbilityPairedEffect(final GainAbilityPairedEffect effect) {
+    protected GainAbilityPairedEffect(final GainAbilityPairedEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents

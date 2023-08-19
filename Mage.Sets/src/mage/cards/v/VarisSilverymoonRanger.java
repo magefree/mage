@@ -52,7 +52,7 @@ public final class VarisSilverymoonRanger extends CardImpl {
         // Whenever you cast a creature or planeswalker spell, venture into the dungeon. This ability triggers only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new VentureIntoTheDungeonEffect(), filter, false
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
 
         // Whenever you complete a dungeon, create a 2/2 green Wolf creature token.
         this.addAbility(new CompletedDungeonTriggeredAbility(new CreateTokenEffect(new WolfToken())));

@@ -37,7 +37,7 @@ public final class PhyrexianTotem extends CardImpl {
         this.addAbility(new BlackManaAbility());
         // {2}{B}: {this} becomes a 5/5 black Horror artifact creature with trample until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
-                new PhyrexianTotemToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}")));
+                new PhyrexianTotemToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}")));
         // Whenever {this} is dealt damage, if it's a creature, sacrifice that many permanents.
         this.addAbility(new PhyrexianTotemTriggeredAbility());
     }

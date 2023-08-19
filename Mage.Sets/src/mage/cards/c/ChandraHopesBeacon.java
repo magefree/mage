@@ -39,8 +39,9 @@ public class ChandraHopesBeacon extends CardImpl {
         //triggers only once each turn.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new CopyTargetSpellEffect(true).withSpellName("it"),
-                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false, true
-        ).setTriggersOnce(true));
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
+                false, SetTargetPointer.SPELL
+        ).setTriggersOnceEachTurn(true));
 
         //+2: Add two mana in any combination of colors.
         this.addAbility(new LoyaltyAbility(new AddManaInAnyCombinationEffect(2), 2));

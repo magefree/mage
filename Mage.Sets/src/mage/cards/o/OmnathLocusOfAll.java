@@ -1,10 +1,12 @@
 package mage.cards.o;
 
 import mage.MageInt;
+import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
@@ -16,8 +18,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.UUID;
 
 public class OmnathLocusOfAll extends CardImpl {
@@ -108,13 +108,11 @@ class OmnathLocusOfAllCardEffect extends OneShotEffect {
             return false;
         }
         player.lookAtCards(null, card, game);
-        if (card.getManaCostSymbols()
+        if (card.getManaCost()
                 .stream()
-                .map(String::toCharArray)
-                .map(Arrays::asList)
-                .flatMap(Collection::stream)
-                .map(c -> "" + c)
-                .filter(wubrg::contains)
+                .map(ManaCost::getMana)
+                .map(Mana::getDifferentColors)
+                .filter(x -> x > 0)
                 .count() >= 3
                 && player.chooseUse(outcome, "Reveal " + card.getName() + '?', source, game)
         ) {

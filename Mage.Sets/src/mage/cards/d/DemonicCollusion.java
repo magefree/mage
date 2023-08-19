@@ -26,7 +26,7 @@ public final class DemonicCollusion extends CardImpl {
         this.addAbility(new BuybackAbility(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS))));
 
         // Search your library for a card and put that card into your hand. Then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(),false));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(),false, true));
     }
 
     private DemonicCollusion(final DemonicCollusion card) {

@@ -2,6 +2,7 @@
 package mage.abilities.effects.common.discard;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -13,7 +14,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DiscardTargetEffect extends OneShotEffect {
@@ -36,10 +36,8 @@ public class DiscardTargetEffect extends OneShotEffect {
     }
 
     /**
-     *
-     * @param amount amount of cards to discard
+     * @param amount        amount of cards to discard
      * @param randomDiscard discard the cards by random
-     *
      */
     public DiscardTargetEffect(int amount, boolean randomDiscard) {
         super(Outcome.Discard);
@@ -47,7 +45,7 @@ public class DiscardTargetEffect extends OneShotEffect {
         this.amount = StaticValue.get(amount);
     }
 
-    public DiscardTargetEffect(final DiscardTargetEffect effect) {
+    protected DiscardTargetEffect(final DiscardTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.randomDiscard = effect.randomDiscard;

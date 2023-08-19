@@ -45,7 +45,7 @@ public final class MonkClass extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalCostModificationEffect(
                 new SpellsCostReductionControllerEffect(StaticFilters.FILTER_CARD, 1),
                 MonkClassCondition.instance, "the second spell you cast each turn costs {1} less to cast"
-        )), new SpellsCastWatcher());
+        )));
 
         // {W}{U}: Level 2
         this.addAbility(new ClassLevelAbility(2, "{W}{U}"));
@@ -142,7 +142,7 @@ class MonkClassCastEffect extends AsThoughEffectImpl {
         Card card = game.getCard(sourceId);
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         return card != null && watcher != null && !card.isLand(game)
-                && watcher.getSpellsCastThisTurn(affectedControllerId).size() > 0;
+                && watcher.getCount(affectedControllerId) > 0;
     }
 
     @Override

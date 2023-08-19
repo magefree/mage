@@ -92,6 +92,7 @@ enum TheFiligreeSylexPredicate implements ObjectSourcePlayerPredicate<Permanent>
                 .filter(Objects::nonNull)
                 .map(permanent -> permanent.getCounters(game))
                 .map(counters -> counters.getCount(CounterType.OIL))
+                .orElse(-1)
                 .equals(input.getObject().getManaValue());
     }
 }

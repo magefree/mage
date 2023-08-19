@@ -16,7 +16,7 @@ public final class DinosaurCatToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public DinosaurCatToken(final DinosaurCatToken token) {
+    protected DinosaurCatToken(final DinosaurCatToken token) {
         super(token);
     }
 

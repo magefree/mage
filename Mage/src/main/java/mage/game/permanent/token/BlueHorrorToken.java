@@ -31,7 +31,7 @@ public final class BlueHorrorToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public BlueHorrorToken(final BlueHorrorToken token) {
+    protected BlueHorrorToken(final BlueHorrorToken token) {
         super(token);
     }
 

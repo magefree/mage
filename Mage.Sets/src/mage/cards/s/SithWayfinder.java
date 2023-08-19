@@ -23,7 +23,7 @@ public class SithWayfinder extends CardImpl {
         //{2}, {T}, Sacrifice Sith Wayfinder: Search your library for a land card, reveal it, and put it into your hand.
         //Then shuffle your library.
         SimpleActivatedAbility simpleActivatedAbility = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_LAND), true, true),
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_LAND), true),
                 new ManaCostsImpl<>("{2}"));
         simpleActivatedAbility.addCost(new TapSourceCost());
         simpleActivatedAbility.addCost(new SacrificeSourceCost());

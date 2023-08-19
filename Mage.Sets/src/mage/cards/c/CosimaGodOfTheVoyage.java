@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 /**
  * @author TheElk801
  */
-public final class CosimaGodOfTheVoyage extends ModalDoubleFacesCard {
+public final class CosimaGodOfTheVoyage extends ModalDoubleFacedCard {
 
     private static final FilterPermanent filter = new FilterControlledPermanent(SubType.VEHICLE, "a Vehicle you control");
 

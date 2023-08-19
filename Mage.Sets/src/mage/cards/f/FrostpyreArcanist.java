@@ -65,7 +65,7 @@ public final class FrostpyreArcanist extends CardImpl {
 
         // When Frostpyre Arcanist enters the battlefield, search your library for an instant or sorcery card with the same name as a card in your graveyard, reveal it, put it into your hand, then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter2), true, true
+                new TargetCardInLibrary(filter2), true
         )));
     }
 

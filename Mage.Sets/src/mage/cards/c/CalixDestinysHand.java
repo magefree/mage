@@ -27,7 +27,6 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static mage.constants.Outcome.Benefit;
 import mage.util.CardUtil;
 
 /**
@@ -88,7 +87,7 @@ public final class CalixDestinysHand extends CardImpl {
 class CalixDestinysHandExileEffect extends OneShotEffect {
 
     CalixDestinysHandExileEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "Exile target creature or enchantment you don't control "
                 + "until target enchantment you control leaves the battlefield.";
     }
@@ -172,7 +171,7 @@ class CalixDestinysHandDelayedTriggeredAbility extends DelayedTriggeredAbility {
 class CalixDestinysHandReturnEffect extends OneShotEffect {
 
     CalixDestinysHandReturnEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "return all enchantment cards from your graveyard to the battlefield";
     }
 

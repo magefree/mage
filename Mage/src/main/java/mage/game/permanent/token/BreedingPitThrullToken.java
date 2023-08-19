@@ -18,7 +18,7 @@ public final class BreedingPitThrullToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public BreedingPitThrullToken(final BreedingPitThrullToken token) {
+    protected BreedingPitThrullToken(final BreedingPitThrullToken token) {
         super(token);
     }
 

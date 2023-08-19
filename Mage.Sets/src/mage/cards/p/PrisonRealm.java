@@ -2,8 +2,6 @@ package mage.cards.p;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
@@ -34,7 +32,6 @@ public final class PrisonRealm extends CardImpl {
         // When Prison Realm enters the battlefield, exile target creature or planeswalker an opponent controls until Prison Realm leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetPermanent(filter));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
 
         // When Prison Realm enters the battlefield, scry 1.

@@ -32,7 +32,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public final class NahiriTheLithomancer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("an Equipment");
+    private static final FilterCard filter = new FilterCard("an Equipment card");
 
     static {
         filter.add(SubType.EQUIPMENT.getPredicate());

@@ -39,7 +39,7 @@ public class UnearthAbility extends ActivatedAbilityImpl {
         this.addEffect(new UnearthLeavesBattlefieldEffect());
     }
 
-    public UnearthAbility(final UnearthAbility ability) {
+    protected UnearthAbility(final UnearthAbility ability) {
         super(ability);
     }
 
@@ -64,7 +64,7 @@ class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new ExileSourceEffect());
     }
 
-    public UnearthDelayedTriggeredAbility(final UnearthDelayedTriggeredAbility ability) {
+    protected UnearthDelayedTriggeredAbility(final UnearthDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -97,7 +97,7 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
         staticText = "When {this} leaves the battlefield, exile it";
     }
 
-    public UnearthLeavesBattlefieldEffect(final UnearthLeavesBattlefieldEffect effect) {
+    protected UnearthLeavesBattlefieldEffect(final UnearthLeavesBattlefieldEffect effect) {
         super(effect);
     }
 

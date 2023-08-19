@@ -32,7 +32,7 @@ public final class VolosJournalToken extends TokenImpl {
         ).addHint(VolosJournalTokenHint.instance));
     }
 
-    public VolosJournalToken(final VolosJournalToken token) {
+    protected VolosJournalToken(final VolosJournalToken token) {
         super(token);
     }
 

@@ -66,13 +66,15 @@ class KarnsTemporalSunderingEffect extends OneShotEffect {
             return false;
         }
 
-        game.getState().getTurnMods().add(new TurnMod(source.getTargets().getFirstTarget(), false));
+        if (source.getTargets().getFirstTarget() != null) {
+            game.getState().getTurnMods().add(new TurnMod(source.getTargets().getFirstTarget()).withExtraTurn());
+        }
 
         Permanent returnPermanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-
         if (returnPermanent != null) {
             controller.moveCards(returnPermanent, Zone.HAND, source, game);
         }
+
         return true;
     }
 

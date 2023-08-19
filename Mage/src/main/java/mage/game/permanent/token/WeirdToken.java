@@ -22,7 +22,7 @@ public final class WeirdToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WeirdToken(final WeirdToken token) {
+    protected WeirdToken(final WeirdToken token) {
         super(token);
     }
 

@@ -27,7 +27,7 @@ public class FightTargetsEffect extends OneShotEffect {
         this.showEffectHint = showEffectHint;
     }
 
-    public FightTargetsEffect(final FightTargetsEffect effect) {
+    protected FightTargetsEffect(final FightTargetsEffect effect) {
         super(effect);
         this.showEffectHint = effect.showEffectHint;
     }
@@ -81,11 +81,11 @@ public class FightTargetsEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        Target target=mode.getTargets().get(1);
-        StringBuilder sb=new StringBuilder("target ");
+        Target target = mode.getTargets().get(1);
+        StringBuilder sb = new StringBuilder("target ");
         sb.append(mode.getTargets().get(0).getTargetName());
         sb.append(" fights ");
-        if(!target.getTargetName().contains("other")){
+        if (!target.getTargetName().contains("other")) {
             sb.append("target ");
         }
         sb.append(target.getTargetName());

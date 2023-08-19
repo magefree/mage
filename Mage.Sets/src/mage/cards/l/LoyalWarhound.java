@@ -42,7 +42,7 @@ public final class LoyalWarhound extends CardImpl {
         // When Loyal Warhound enters the battlefield, if an opponent controls more lands than you,
         // search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, true)),
+                new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true)),
                 new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS),
                 "When {this} enters the battlefield, if an opponent controls more lands than you, "
                 + "search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle."

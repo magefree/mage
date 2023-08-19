@@ -6,7 +6,7 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.hint.Hint;
@@ -16,9 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
@@ -30,12 +28,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class WillowduskEssenceSeer extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public WillowduskEssenceSeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
@@ -53,8 +45,8 @@ public final class WillowduskEssenceSeer extends CardImpl {
                 "equal to the amount of life you gained this turn or the amount of " +
                 "life you lost this turn, whichever is greater"), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
-        ability.addHint(ControllerGotLifeCount.getHint());
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        ability.addHint(ControllerGainedLifeCount.getHint());
         ability.addHint(WillowduskEssenceSeerHint.instance);
         this.addAbility(ability, new PlayerGainedLifeWatcher());
     }

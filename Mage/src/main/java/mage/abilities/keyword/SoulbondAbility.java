@@ -23,7 +23,7 @@ import mage.util.GameLog;
 
 /**
  * 702.94. Soulbond
- *
+ * <p>
  * 702.94a Soulbond is a keyword that represents two triggered abilities.
  * “Soulbond” means “When this creature enters the battlefield, if you control
  * both this creature and another creature and both are unpaired, you may pair
@@ -33,19 +33,19 @@ import mage.util.GameLog;
  * creature and this one and both are unpaired, you may pair that creature with
  * this creature for as long as both remain creatures on the battlefield under
  * your control.”
- *
+ * <p>
  * 702.94b A creature becomes “paired” with another as the result of a soulbond
  * ability. Abilities may refer to a paired creature, the creature another
  * creature is paired with, or whether a creature is paired. An “unpaired”
  * creature is one that is not paired.
- *
+ * <p>
  * 702.94c When the soulbond ability resolves, if either object that would be
  * paired is no longer a creature, no longer on the battlefield, or no longer
  * under the control of the player who controls the soulbond ability, neither
  * object becomes paired.
- *
+ * <p>
  * 702.94d A creature can be paired with only one other creature.
- *
+ * <p>
  * 702.94e A paired creature becomes unpaired if any of the following occur:
  * another player gains control of it or the creature it's paired with; it or
  * the creature it's paired with stops being a creature; or it or the creature
@@ -119,7 +119,7 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public SoulboundEntersSelfEffect(final SoulboundEntersSelfEffect effect) {
+    protected SoulboundEntersSelfEffect(final SoulboundEntersSelfEffect effect) {
         super(effect);
     }
 
@@ -163,7 +163,6 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
  * control both that creature and this one and both are unpaired, you may pair
  * that creature with this creature for as long as both remain creatures on the
  * battlefield under your control.”
- *
  */
 class SoulbondEntersOtherAbility extends EntersBattlefieldAllTriggeredAbility {
 
@@ -221,7 +220,7 @@ class SoulboundEntersOtherEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public SoulboundEntersOtherEffect(final SoulboundEntersOtherEffect effect) {
+    protected SoulboundEntersOtherEffect(final SoulboundEntersOtherEffect effect) {
         super(effect);
     }
 

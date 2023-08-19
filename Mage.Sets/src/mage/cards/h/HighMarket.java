@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -28,7 +28,7 @@ public final class HighMarket extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {tap}, Sacrifice a creature: You gain 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
         this.addAbility(ability);
     }
 

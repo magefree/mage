@@ -32,7 +32,7 @@ public final class MomirEmblem extends Emblem {
     // Faking Vanguard as an Emblem; need to come back to this and add a new type of CommandObject
 
     public MomirEmblem() {
-        super("Emblem Momir Vig, Simic Visionary");
+        super("Emblem Momir");
 
         // {X}, Discard a card: Create a token that's a copy of a creature card with converted mana cost X chosen at random.
         // Activate this ability only any time you could cast a sorcery and only once each turn.

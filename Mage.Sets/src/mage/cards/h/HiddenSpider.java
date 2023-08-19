@@ -38,7 +38,7 @@ public final class HiddenSpider extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // When an opponent casts a creature spell with flying, if Hidden Spider is an enchantment, Hidden Spider becomes a 3/5 Spider creature with reach.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenSpiderToken(), "", Duration.WhileOnBattlefield, true, false),
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenSpiderToken(), null, Duration.WhileOnBattlefield),
                 filter, false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
                 "When an opponent casts a creature spell with flying, if {this} is an enchantment, {this} becomes a 3/5 Spider creature with reach."));

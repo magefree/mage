@@ -24,7 +24,7 @@ public class FlipSourceEffect extends OneShotEffect {
         staticText = "flip it";
     }
 
-    public FlipSourceEffect(final FlipSourceEffect effect) {
+    protected FlipSourceEffect(final FlipSourceEffect effect) {
         super(effect);
         this.flipToken = effect.flipToken;
     }

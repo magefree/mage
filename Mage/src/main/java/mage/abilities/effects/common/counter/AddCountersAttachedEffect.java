@@ -34,7 +34,7 @@ public class AddCountersAttachedEffect extends OneShotEffect {
         staticText = CardUtil.getAddRemoveCountersText(amount, counter, textEnchanted, true);
     }
 
-    public AddCountersAttachedEffect(final AddCountersAttachedEffect effect) {
+    protected AddCountersAttachedEffect(final AddCountersAttachedEffect effect) {
         super(effect);
         if (effect.counter != null) {
             this.counter = effect.counter.copy();

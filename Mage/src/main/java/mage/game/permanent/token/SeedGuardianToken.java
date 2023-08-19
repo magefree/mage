@@ -22,7 +22,7 @@ public final class SeedGuardianToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    public SeedGuardianToken(final SeedGuardianToken token) {
+    protected SeedGuardianToken(final SeedGuardianToken token) {
         super(token);
     }
 

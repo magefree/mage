@@ -2,8 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,8 +32,7 @@ public final class TeleportationCircle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // At the beginning of your end step, exile up to one target artifact or creature you control, then return that card to the battlefield under its owner's control.
-        Ability ability = new BeginningOfYourEndStepTriggeredAbility(new ExileTargetForSourceEffect(), false);
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).concatBy(", then"));
+        Ability ability = new BeginningOfYourEndStepTriggeredAbility(new ExileThenReturnTargetEffect(false, true), false);
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }

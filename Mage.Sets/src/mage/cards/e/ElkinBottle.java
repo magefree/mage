@@ -1,21 +1,22 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -65,55 +66,10 @@ class ElkinBottleExileEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 controller.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
-                ContinuousEffect effect = new ElkinBottleCastFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId(), game));
-                game.addEffect(effect, source);
+                CardUtil.makeCardPlayable(game, source, card, Duration.UntilYourNextUpkeepStep, false);
             }
             return true;
         }
         return false;
     }
-}
-
-class ElkinBottleCastFromExileEffect extends AsThoughEffectImpl {
-
-    private boolean sameStep = true;
-
-    public ElkinBottleCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
-        this.staticText = "Until the beginning of your next upkeep, you may play that card.";
-    }
-
-    public ElkinBottleCastFromExileEffect(final ElkinBottleCastFromExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ElkinBottleCastFromExileEffect copy() {
-        return new ElkinBottleCastFromExileEffect(this);
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == PhaseStep.UPKEEP) {
-            if (!sameStep && game.isActivePlayer(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
-                return true;
-            }
-        } else {
-            sameStep = false;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return source.isControlledBy(affectedControllerId)
-                && sourceId.equals(getTargetPointer().getFirst(game, source));
-    }
-
 }

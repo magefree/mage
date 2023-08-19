@@ -36,7 +36,7 @@ public final class SidisiUndeadVizier extends CardImpl {
         this.addAbility(new ExploitAbility());
         
         // When Sidisi, Undead Vizier exploits a creature, you may search your library for a card, put it into your hand, then shuffle your library.
-        this.addAbility(new ExploitCreatureTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("card")), false, true), false));
+        this.addAbility(new ExploitCreatureTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("card")), false), false));
     }
 
     private SidisiUndeadVizier(final SidisiUndeadVizier card) {

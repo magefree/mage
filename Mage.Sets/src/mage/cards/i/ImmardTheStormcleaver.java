@@ -58,7 +58,7 @@ class ImmardTheStormcleaverEffect extends OneShotEffect {
 
     ImmardTheStormcleaverEffect() {
         super(Outcome.Benefit);
-        staticText = "put a charge counter on him or remove one from him. When you remove a counter this way, "
+        staticText = "put a charge counter on it or remove one from it. When you remove a counter this way, "
                 + CardUtil.getTextWithFirstCharLowerCase(ability.getRule());
     }
 
@@ -90,7 +90,7 @@ class ImmardTheStormcleaverEffect extends OneShotEffect {
         return true;
     }
 
-    private static final ReflexiveTriggeredAbility makeAbility() {
+    private static ReflexiveTriggeredAbility makeAbility() {
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                 new DamageTargetEffect(4), false
         );
@@ -101,7 +101,7 @@ class ImmardTheStormcleaverEffect extends OneShotEffect {
         mode.addEffect(new GainAbilitySourceEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
         ).setText("and indestructible until end of turn"));
-        ability.withFirstModeFlavorWord("Sonic Boom").addMode(mode.withFlavorWord("Flash Kick"));
+        ability.addMode(mode);
         return ability;
     }
 }

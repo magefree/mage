@@ -11,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -31,7 +31,7 @@ public final class DrogskolShieldmate extends CardImpl {
 
         // When Drogskol Shieldmate enters the battlefield, other creatures you control get +0/+1 until end of turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new BoostControlledEffect(0, 1, Duration.EndOfTurn, FILTER_PERMANENT_CREATURES, true), false));
+                new BoostControlledEffect(0, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, true), false));
     }
 
     private DrogskolShieldmate(final DrogskolShieldmate card) {

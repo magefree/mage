@@ -47,7 +47,7 @@ public class ChoiceImpl implements Choice {
         this.hintType = hintType;
     }
 
-    public ChoiceImpl(final ChoiceImpl choice) {
+    protected ChoiceImpl(final ChoiceImpl choice) {
         this.choice = choice.choice;
         this.chosenNormal = choice.chosenNormal;
         this.chosenSpecial = choice.chosenSpecial;

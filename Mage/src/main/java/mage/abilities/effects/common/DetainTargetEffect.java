@@ -37,7 +37,7 @@ public class DetainTargetEffect extends OneShotEffect {
         staticText = ruleText;
     }
 
-    public DetainTargetEffect(final DetainTargetEffect effect) {
+    protected DetainTargetEffect(final DetainTargetEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class DetainRestrictionEffect extends RestrictionEffect {
         staticText = "";
     }
 
-    public DetainRestrictionEffect(final DetainRestrictionEffect effect) {
+    protected DetainRestrictionEffect(final DetainRestrictionEffect effect) {
         super(effect);
     }
 

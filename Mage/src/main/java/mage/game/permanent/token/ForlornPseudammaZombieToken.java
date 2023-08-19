@@ -19,7 +19,7 @@ public final class ForlornPseudammaZombieToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public ForlornPseudammaZombieToken(final ForlornPseudammaZombieToken token) {
+    protected ForlornPseudammaZombieToken(final ForlornPseudammaZombieToken token) {
         super(token);
     }
 

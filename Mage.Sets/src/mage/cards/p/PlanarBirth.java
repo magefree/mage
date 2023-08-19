@@ -62,7 +62,7 @@ class PlanarBirthEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    toBattlefield.addAll(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_BASIC_LAND, controller.getId(), source, game));
+                    toBattlefield.addAllCards(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_BASIC_LAND, controller.getId(), source, game));
                 }
             }
             controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);

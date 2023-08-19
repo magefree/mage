@@ -9,7 +9,7 @@ import mage.abilities.keyword.NightboundAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
 import mage.constants.SpellAbilityType;
 import mage.game.Game;
@@ -41,7 +41,7 @@ public class PermanentCard extends PermanentImpl {
         // if you use it in test code then call CardUtil.getDefaultCardSideForBattlefield for default side
         // it's a basic check and still allows to create permanent from instant or sorcery
         boolean goodForBattlefield = true;
-        if (card instanceof ModalDoubleFacesCard) {
+        if (card instanceof ModalDoubleFacedCard) {
             goodForBattlefield = false;
         } else if (card instanceof SplitCard) {
             // fused spells allowed (it uses main card)
@@ -81,7 +81,7 @@ public class PermanentCard extends PermanentImpl {
         }
     }
 
-    public PermanentCard(final PermanentCard permanent) {
+    protected PermanentCard(final PermanentCard permanent) {
         super(permanent);
         this.card = permanent.card.copy();
         this.maxLevelCounters = permanent.maxLevelCounters;

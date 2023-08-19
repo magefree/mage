@@ -165,9 +165,9 @@ class JestersScepterCost extends CostImpl {
                         if (card instanceof SplitCard) {
                             game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", ((SplitCard) card).getLeftHalfCard().getName());
                             game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment2", ((SplitCard) card).getRightHalfCard().getName());
-                        } else if (card instanceof ModalDoubleFacesCard) {
-                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", ((ModalDoubleFacesCard) card).getLeftHalfCard().getName());
-                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment2", ((ModalDoubleFacesCard) card).getRightHalfCard().getName());
+                        } else if (card instanceof ModalDoubleFacedCard) {
+                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", ((ModalDoubleFacedCard) card).getLeftHalfCard().getName());
+                            game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment2", ((ModalDoubleFacedCard) card).getRightHalfCard().getName());
                         } else {
                             game.getState().setValue(source.getSourceId() + "_nameOfExiledCardPayment", card.getName());
                         }

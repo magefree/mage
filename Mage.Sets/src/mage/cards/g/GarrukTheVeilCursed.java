@@ -49,7 +49,7 @@ public final class GarrukTheVeilCursed extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DoIfCostPaid(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                         StaticFilters.FILTER_CARD_CREATURE_A
-                ), true, true),
+                ), true),
                 null,
                 new SacrificeTargetCost(new TargetControlledPermanent(
                         StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT

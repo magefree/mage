@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PreventDamageToTargetEffect extends PreventionEffectImpl {
@@ -35,7 +34,7 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
         super(duration, 0, onlyCombat, consumable, amountToPreventDynamic);
     }
 
-    public PreventDamageToTargetEffect(final PreventDamageToTargetEffect effect) {
+    protected PreventDamageToTargetEffect(final PreventDamageToTargetEffect effect) {
         super(effect);
     }
 

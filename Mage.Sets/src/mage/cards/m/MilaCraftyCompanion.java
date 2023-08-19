@@ -3,7 +3,7 @@ package mage.cards.m;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BecomesTargetControlledPermanentTriggeredAbility;
+import mage.abilities.common.BecomesTargetOpponentAllTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -14,7 +14,7 @@ import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -30,12 +30,10 @@ import mage.target.targetpointer.FixedTarget;
 import java.util.Objects;
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
-public final class MilaCraftyCompanion extends ModalDoubleFacesCard {
+public final class MilaCraftyCompanion extends ModalDoubleFacedCard {
 
     public MilaCraftyCompanion(UUID ownerId, CardSetInfo setInfo) {
         super(
@@ -54,7 +52,7 @@ public final class MilaCraftyCompanion extends ModalDoubleFacesCard {
         this.getLeftHalfCard().addAbility(new MilaCraftyCompanionTriggeredAbility());
 
         // Whenever a permanent you control becomes the target of a spell or ability and opponent controls, you may draw a card.
-        this.getLeftHalfCard().addAbility(new BecomesTargetControlledPermanentTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new BecomesTargetOpponentAllTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), true
         ));
 
@@ -133,7 +131,7 @@ class MilaCraftyCompanionTriggeredAbility extends TriggeredAbilityImpl {
 class LukkaWaywardBonderDiscardEffect extends OneShotEffect {
 
     LukkaWaywardBonderDiscardEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "you may discard a card. If you do, draw a card. " +
                 "If a creature card was discarded this way, draw two cards instead";
     }

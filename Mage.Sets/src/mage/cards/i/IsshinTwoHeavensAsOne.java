@@ -71,7 +71,12 @@ class IsshinTwoHeavensAsOneEffect extends ReplacementEffectImpl {
         if (sourcePermanent == null || !sourcePermanent.isControlledBy(source.getControllerId())) {
             return false;
         }
+
         GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+        if (sourceEvent == null) {
+            return false;
+        }
+
         switch (sourceEvent.getType()) {
             case ATTACKER_DECLARED:
             case DECLARED_ATTACKERS:

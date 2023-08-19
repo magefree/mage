@@ -22,7 +22,7 @@ public final class TyranidGargoyleToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public TyranidGargoyleToken(final TyranidGargoyleToken token) {
+    protected TyranidGargoyleToken(final TyranidGargoyleToken token) {
         super(token);
     }
 

@@ -20,7 +20,7 @@ public class TransformTargetEffect extends OneShotEffect {
         super(Outcome.Transform);
     }
 
-    public TransformTargetEffect(final TransformTargetEffect effect) {
+    protected TransformTargetEffect(final TransformTargetEffect effect) {
         super(effect);
     }
 

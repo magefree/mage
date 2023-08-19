@@ -3,12 +3,12 @@
 package mage.game.turn;
 
 import java.util.UUID;
+
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DeclareAttackersStep extends Step {
@@ -20,7 +20,7 @@ public class DeclareAttackersStep extends Step {
         this.postStepEvent = EventType.DECLARE_ATTACKERS_STEP_POST;
     }
 
-    public DeclareAttackersStep(final DeclareAttackersStep step) {
+    protected DeclareAttackersStep(final DeclareAttackersStep step) {
         super(step);
     }
 
@@ -40,7 +40,7 @@ public class DeclareAttackersStep extends Step {
     public void resumeBeginStep(Game game, UUID activePlayerId) {
         super.resumeBeginStep(game, activePlayerId);
         game.getCombat().resumeSelectAttackers(game);
-    }    
+    }
 
     @Override
     public DeclareAttackersStep copy() {

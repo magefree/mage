@@ -30,7 +30,6 @@ import java.util.UUID;
  */
 public abstract class Emblem extends CommandObjectImpl {
 
-    private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts emptyCost = new ManaCostsImpl<>();
 
     private UUID controllerId;
@@ -44,7 +43,7 @@ public abstract class Emblem extends CommandObjectImpl {
         super(name);
     }
 
-    public Emblem(final Emblem emblem) {
+    protected Emblem(final Emblem emblem) {
         super(emblem);
         this.frameStyle = emblem.frameStyle;
         this.controllerId = emblem.controllerId;
@@ -153,17 +152,17 @@ public abstract class Emblem extends CommandObjectImpl {
 
     @Override
     public ObjectColor getColor() {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getFrameColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override

@@ -25,7 +25,7 @@ public final class RecklessHandling extends CardImpl {
 
         // Search your library for an artifact card, reveal it, put it into your hand, shuffle, then discard a card at random. If an artifact card was discarded this way, Reckless Handling deals 2 damage to each opponent.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_ARTIFACT_AN), true, true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_ARTIFACT_AN), true
         ).setText("search your library for an artifact card, reveal it, put it into your hand, shuffle"));
         this.getSpellAbility().addEffect(new RecklessHandlingEffect());
     }

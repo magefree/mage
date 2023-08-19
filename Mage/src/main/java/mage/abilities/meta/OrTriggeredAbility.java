@@ -37,10 +37,15 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     public OrTriggeredAbility(Zone zone, Effect effect, boolean optional, String ruleTrigger, TriggeredAbility... abilities) {
         super(zone, effect, optional);
         this.ruleTrigger = ruleTrigger;
+        this.replaceRuleText = false;
         Collections.addAll(this.triggeredAbilities, abilities);
         for (TriggeredAbility ability : triggeredAbilities) {
             //Remove useless data
             ability.getEffects().clear();
+
+            for(Watcher watcher : ability.getWatchers()) {
+                super.addWatcher(watcher);
+            }
         }
         setTriggerPhrase(generateTriggerPhrase());
     }

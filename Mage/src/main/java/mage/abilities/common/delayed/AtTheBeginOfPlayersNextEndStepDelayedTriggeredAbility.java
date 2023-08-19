@@ -10,7 +10,7 @@ import mage.game.events.GameEvent;
 
 public class AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-      protected UUID playerId;
+    protected UUID playerId;
 
 
     public AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(Effect effect, UUID playerId) {
@@ -18,29 +18,29 @@ public class AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility extends Delay
         this.playerId = playerId;
     }
 
-    public AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(final AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility ability) {
+    protected AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(final AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility ability) {
         super(ability);
         this.playerId = ability.playerId;
     }
-  
-      @Override
-      public AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility copy() {
-          return new AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(this);
-      }
-  
-      @Override
-      public boolean checkEventType(GameEvent event, Game game) {
-          return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
-      }
-  
-      @Override
-      public boolean checkTrigger(GameEvent event, Game game) {
-          return game.getActivePlayerId().equals(playerId);
-      }
-  
-      @Override
-      public String getRule() {
-          return "At the beginning of its owners next end step, " + super.getRule();
-      }
-  
+
+    @Override
+    public AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility copy() {
+        return new AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return game.getActivePlayerId().equals(playerId);
+    }
+
+    @Override
+    public String getRule() {
+        return "At the beginning of its owners next end step, " + super.getRule();
+    }
+
 }

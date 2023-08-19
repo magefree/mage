@@ -29,7 +29,8 @@ public final class SerpentineBasilisk extends CardImpl {
         // Whenever Serpentine Basilisk deals combat damage to a creature, destroy that creature at end of combat.
         this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(
                 new CreateDelayedTriggeredAbilityEffect(
-                        new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect("destroy that creature at end of combat")), true), false, true));
+                        new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect("destroy that creature at end of combat"))
+                                .setTriggerPhrase(""), true), false, true));
         // Morph {1}{G}{G}
         this.addAbility(new MorphAbility(new ManaCostsImpl<>("{1}{G}{G}")));
     }

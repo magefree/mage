@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -35,10 +36,10 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
         setLeavesTheBattlefieldTrigger(true);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever you sacrifice " + filter.getMessage() + ", ");
+        setTriggerPhrase("Whenever you sacrifice " + CardUtil.addArticle(filter.getMessage()) + ", ");
     }
 
-    public SacrificePermanentTriggeredAbility(final SacrificePermanentTriggeredAbility ability) {
+    protected SacrificePermanentTriggeredAbility(final SacrificePermanentTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;

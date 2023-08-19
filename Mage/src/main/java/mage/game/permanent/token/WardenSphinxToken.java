@@ -23,7 +23,7 @@ public final class WardenSphinxToken extends TokenImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public WardenSphinxToken(final WardenSphinxToken token) {
+    protected WardenSphinxToken(final WardenSphinxToken token) {
         super(token);
     }
 

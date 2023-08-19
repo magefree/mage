@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author L_J
  */
 public final class RabidSheepToken extends TokenImpl {
@@ -20,7 +19,7 @@ public final class RabidSheepToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public RabidSheepToken(final RabidSheepToken token) {
+    protected RabidSheepToken(final RabidSheepToken token) {
         super(token);
     }
 

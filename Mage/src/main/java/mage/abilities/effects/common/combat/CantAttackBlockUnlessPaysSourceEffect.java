@@ -8,7 +8,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  * @author LevelX2
@@ -26,7 +25,7 @@ public class CantAttackBlockUnlessPaysSourceEffect extends PayCostToAttackBlockE
         staticText = "{this} can't " + restrictType.toString() + " unless you pay " + (manaCosts == null ? "" : manaCosts.getText());
     }
 
-    public CantAttackBlockUnlessPaysSourceEffect(CantAttackBlockUnlessPaysSourceEffect effect) {
+    protected CantAttackBlockUnlessPaysSourceEffect(final CantAttackBlockUnlessPaysSourceEffect effect) {
         super(effect);
     }
 

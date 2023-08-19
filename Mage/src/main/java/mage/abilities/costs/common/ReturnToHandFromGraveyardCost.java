@@ -22,7 +22,7 @@ public class ReturnToHandFromGraveyardCost extends CostImpl {
 
     public ReturnToHandFromGraveyardCost(TargetCardInYourGraveyard target) {
         this.addTarget(target);
-        this.text = "return " + target.getDescription() + " from graveyard to it's owner's hand";
+        this.text = "return " + target.getDescription() + " from your graveyard to your hand";
     }
 
     public ReturnToHandFromGraveyardCost(ReturnToHandFromGraveyardCost cost) {

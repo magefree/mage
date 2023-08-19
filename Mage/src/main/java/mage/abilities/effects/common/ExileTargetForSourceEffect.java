@@ -37,7 +37,7 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
         super(Outcome.Exile);
     }
 
-    public ExileTargetForSourceEffect(final ExileTargetForSourceEffect effect) {
+    protected ExileTargetForSourceEffect(final ExileTargetForSourceEffect effect) {
         super(effect);
     }
 

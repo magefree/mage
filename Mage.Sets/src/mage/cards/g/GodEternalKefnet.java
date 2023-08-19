@@ -96,14 +96,13 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
             if (blueprint instanceof SplitCard) {
                 ((SplitCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
                 ((SplitCard) blueprint).getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
-            } else if (blueprint instanceof ModalDoubleFacesCard) {
-                ((ModalDoubleFacesCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
-                ((ModalDoubleFacesCard) blueprint).getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
+            } else if (blueprint instanceof ModalDoubleFacedCard) {
+                ((ModalDoubleFacedCard) blueprint).getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
+                ((ModalDoubleFacedCard) blueprint).getRightHalfCard().addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
             } else {
                 blueprint.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2)));
             }
             Card copiedCard = game.copyCard(blueprint, source, source.getControllerId());
-            you.moveCardToHandWithInfo(copiedCard, source, game, true); // The copy is created in and cast from your hand. (2019-05-03)
             game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
             you.cast(you.chooseAbilityForCast(copiedCard, game, false), game, false, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);

@@ -67,7 +67,7 @@ class WeaverOfLiesEffect extends OneShotEffect {
 
     WeaverOfLiesEffect() {
         super(Outcome.Benefit);
-        this.staticText = "turn any number of target creatures with a morph ability other than {this} face down";
+        this.staticText = "turn any number of target creatures with morph abilities other than {this} face down";
     }
 
     WeaverOfLiesEffect(final WeaverOfLiesEffect effect) {

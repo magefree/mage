@@ -14,8 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -28,12 +27,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class AvacynGuardianAngel extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public AvacynGuardianAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{W}");
@@ -51,7 +44,7 @@ public final class AvacynGuardianAngel extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AvacynGuardianAngelPreventToCreatureEffect(),
                 new ManaCostsImpl<>("{1}{W}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
 
         // {5}{W}{W}: Prevent all damage that would be dealt to target player this turn by sources of the color of your choice.

@@ -16,8 +16,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- * 
- * 
  * @author LevelX2
  */
 
@@ -25,14 +23,14 @@ public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModi
 
     TargetController targetController;
     FilterPermanent filter;
-    
+
     public DontUntapInControllersUntapStepAllEffect(Duration duration, TargetController targetController, FilterPermanent filter) {
         super(duration, Outcome.Detriment, false, false);
         this.targetController = targetController;
         this.filter = filter;
     }
 
-    public DontUntapInControllersUntapStepAllEffect(final DontUntapInControllersUntapStepAllEffect effect) {
+    protected DontUntapInControllersUntapStepAllEffect(final DontUntapInControllersUntapStepAllEffect effect) {
         super(effect);
         this.targetController = effect.targetController;
         this.filter = effect.filter;
@@ -47,7 +45,7 @@ public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModi
     public boolean apply(Game game, Ability source) {
         return false;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.UNTAP;
@@ -58,7 +56,7 @@ public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModi
         if (game.getTurnStepType() == PhaseStep.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
-                switch(targetController) {
+                switch (targetController) {
                     case YOU:
                         if (!permanent.isControlledBy(source.getControllerId())) {
                             return false;
@@ -89,14 +87,14 @@ public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModi
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb =  new StringBuilder(filter.getMessage()).append(" don't untap during ");
-        switch(targetController) {
+        StringBuilder sb = new StringBuilder(filter.getMessage()).append(" don't untap during ");
+        switch (targetController) {
             case ANY:
                 sb.append("their controllers' ");
                 break;
             default:
                 throw new RuntimeException("Type of TargetController not supported yet!");
-        }        
+        }
         sb.append("untap steps");
         return sb.toString();
     }

@@ -30,7 +30,7 @@ public final class FoodToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public FoodToken(final FoodToken token) {
+    protected FoodToken(final FoodToken token) {
         super(token);
     }
 

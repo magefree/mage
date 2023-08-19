@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlankingAbility;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class SkulkingKnight extends CardImpl {
         // Flanking
         this.addAbility(new FlankingAbility());
         // When Skulking Knight becomes the target of a spell or ability, sacrifice it.
-        this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect().setText("sacrifice it")));
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect().setText("sacrifice it")));
     }
 
     private SkulkingKnight(final SkulkingKnight card) {

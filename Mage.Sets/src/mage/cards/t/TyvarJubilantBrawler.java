@@ -24,7 +24,6 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801

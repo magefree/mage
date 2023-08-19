@@ -6,7 +6,9 @@ import mage.constants.SubType;
 
 public final class GeminiEngineTwinToken extends TokenImpl {
 
-    public GeminiEngineTwinToken() { this(0, 0); }
+    public GeminiEngineTwinToken() {
+        this(0, 0);
+    }
 
     public GeminiEngineTwinToken(int power, int toughness) {
         super("Twin", "colorless Construct artifact creature token named Twin that's attacking. Its power is equal to Gemini Engine's power and its toughness is equal to Gemini Engine's toughness.");
@@ -17,7 +19,7 @@ public final class GeminiEngineTwinToken extends TokenImpl {
         this.toughness = new MageInt(toughness);
     }
 
-    public GeminiEngineTwinToken(final GeminiEngineTwinToken token) {
+    protected GeminiEngineTwinToken(final GeminiEngineTwinToken token) {
         super(token);
     }
 

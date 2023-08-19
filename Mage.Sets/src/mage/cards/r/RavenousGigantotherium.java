@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
-import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.keyword.DevourAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +36,7 @@ public final class RavenousGigantotherium extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Devour 3
-        this.addAbility(new DevourAbility(DevourEffect.DevourFactor.Devour3));
+        this.addAbility(new DevourAbility(3));
 
         // When Ravenous Gigantotherium enters the battlefield, it deals X damage divided as you choose among up to X target creatures, where X is its power. Each of those creatures deals damage equal to its power to Ravenous Gigantotherium.
         this.addAbility(new RavenousGigantotheriumAbility());

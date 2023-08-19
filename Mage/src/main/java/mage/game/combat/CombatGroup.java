@@ -46,7 +46,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         this.defendingPlayerId = defendingPlayerId;
     }
 
-    public CombatGroup(final CombatGroup group) {
+    protected CombatGroup(final CombatGroup group) {
         this.attackers.addAll(group.attackers);
         this.blockers.addAll(group.blockers);
         this.blockerOrder.addAll(group.blockerOrder);
@@ -67,7 +67,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     /**
-     *
      * @return can be null
      */
     public UUID getDefenderId() {
@@ -663,15 +662,15 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public void pickAttackerOrder(UUID playerId, Game game) {
-        if (attackers.isEmpty()) {
+        Player player = game.getPlayer(playerId);
+        if (attackers.isEmpty() || player == null) {
             return;
         }
-        Player player = game.getPlayer(playerId);
         List<UUID> attackerList = new ArrayList<>(attackers);
-        attackerOrder.clear();
+        List<UUID> newAttackerOrder = new ArrayList<>();
         while (true) {
             if (attackerList.size() == 1) {
-                attackerOrder.add(attackerList.get(0));
+                newAttackerOrder.add(attackerList.get(0));
                 break;
             } else {
                 List<Permanent> attackerPerms = new ArrayList<>();
@@ -682,12 +681,19 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 if (attackerId == null) {
                     break;
                 }
-                attackerOrder.add(attackerId);
+                newAttackerOrder.add(attackerId);
                 attackerList.remove(attackerId);
             }
         }
-        if (!game.isSimulation() && attackerOrder.size() > 1) {
-            logDamageAssignmentOrder("Creatures blocked by ", blockers, attackerOrder, game);
+        if (attackerOrder.isEmpty() || newAttackerOrder.size() == attackerOrder.size()) {
+            attackerOrder.clear();
+            attackerOrder.addAll(newAttackerOrder);
+
+            if (!game.isSimulation() && attackerOrder.size() > 1) {
+                logDamageAssignmentOrder("Creatures blocked by ", blockers, attackerOrder, game);
+            }
+        } else {
+            game.informPlayers(player.getLogName() + " try to skip choose attacker order");
         }
     }
 

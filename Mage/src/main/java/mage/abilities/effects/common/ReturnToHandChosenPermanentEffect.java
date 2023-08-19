@@ -13,7 +13,6 @@ import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author Plopmans
  */
 public class ReturnToHandChosenPermanentEffect extends OneShotEffect {
@@ -32,7 +31,7 @@ public class ReturnToHandChosenPermanentEffect extends OneShotEffect {
         this.staticText = getText();
     }
 
-    public ReturnToHandChosenPermanentEffect(final ReturnToHandChosenPermanentEffect effect) {
+    protected ReturnToHandChosenPermanentEffect(final ReturnToHandChosenPermanentEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.number = effect.number;

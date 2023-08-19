@@ -43,7 +43,7 @@ public class PermanentToken extends PermanentImpl {
         }
     }
 
-    public PermanentToken(final PermanentToken permanent) {
+    protected PermanentToken(final PermanentToken permanent) {
         super(permanent);
         this.token = permanent.token.copy();
     }

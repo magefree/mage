@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -13,8 +12,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Dreamcatcher extends CardImpl {
@@ -27,8 +27,12 @@ public final class Dreamcatcher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a Spirit or Arcane spell, you may sacrifice Dreamcatcher. If you do, draw a card.
-        Ability ability = new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD, true,
-                "Whenever you cast a Spirit or Arcane spell, you may sacrifice {this}. If you do, draw a card.");
+        Ability ability = SpellCastControllerTriggeredAbility.createWithRule(
+                new SacrificeSourceEffect(),
+                StaticFilters.FILTER_SPIRIT_OR_ARCANE_CARD,
+                true,
+                "Whenever you cast a Spirit or Arcane spell, you may sacrifice {this}. If you do, draw a card."
+        );
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);
     }

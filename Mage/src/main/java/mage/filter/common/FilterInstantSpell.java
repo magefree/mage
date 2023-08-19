@@ -14,7 +14,7 @@ public class FilterInstantSpell extends FilterSpell {
         this.add(CardType.INSTANT.getPredicate());
     }
 
-    public FilterInstantSpell(final FilterInstantSpell filter) {
+    protected FilterInstantSpell(final FilterInstantSpell filter) {
         super(filter);
     }
 

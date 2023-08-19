@@ -57,7 +57,7 @@ public final class TheOneRing extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.BURDEN.createInstance()), new TapSourceCost()
         );
-        ability.addEffect(new DrawCardSourceControllerEffect(xValue));
+        ability.addEffect(new DrawCardSourceControllerEffect(xValue).concatBy(", then"));
         this.addAbility(ability);
     }
 

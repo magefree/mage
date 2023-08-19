@@ -43,7 +43,7 @@ public class TargetCardInExile extends TargetCard {
         this.allExileZones = zoneId == null || allExileZones;
     }
 
-    public TargetCardInExile(final TargetCardInExile target) {
+    protected TargetCardInExile(final TargetCardInExile target) {
         super(target);
         this.zoneId = target.zoneId;
         this.allExileZones = target.allExileZones;

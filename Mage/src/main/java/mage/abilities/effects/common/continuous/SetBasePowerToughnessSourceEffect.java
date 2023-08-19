@@ -14,6 +14,7 @@ import mage.game.Game;
 
 /**
  * RENAME
+ *
  * @author BetaSteward_at_googlemail.com, North, Alex-Vasile, xenohedron
  */
 public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
@@ -44,7 +45,7 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         this.staticText = "{this} has base power and toughness " + power + '/' + toughness + ' ' + duration.toString();
     }
 
-    public SetBasePowerToughnessSourceEffect(final SetBasePowerToughnessSourceEffect effect) {
+    protected SetBasePowerToughnessSourceEffect(final SetBasePowerToughnessSourceEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

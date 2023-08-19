@@ -60,7 +60,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
                 if (permanent == null) {
                     return false;
                 }
-                permanents.add(permanent.copy());
+                addSacrificeTarget(game, permanent);
                 paid |= permanent.sacrifice(source, game);
             }
             if (!paid && targets.get(0).getNumberOfTargets() == 0) {
@@ -68,6 +68,10 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
             }
         }
         return paid;
+    }
+
+    protected void addSacrificeTarget(Game game, Permanent permanent) {
+        permanents.add(permanent.copy());
     }
 
     @Override

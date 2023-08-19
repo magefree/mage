@@ -10,7 +10,7 @@ import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -22,7 +22,7 @@ import java.util.UUID;
 /**
  * @author weirddan455
  */
-public final class BlexVexingPest extends ModalDoubleFacesCard {
+public final class BlexVexingPest extends ModalDoubleFacedCard {
 
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent("Pests, Bats, Insects, Snakes, and Spiders");

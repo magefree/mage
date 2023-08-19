@@ -15,7 +15,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class ProtectionChosenColorSourceEffect extends ContinuousEffectImpl {
@@ -28,7 +27,7 @@ public class ProtectionChosenColorSourceEffect extends ContinuousEffectImpl {
         staticText = "{this} has protection from the chosen color";
     }
 
-    public ProtectionChosenColorSourceEffect(final ProtectionChosenColorSourceEffect effect) {
+    protected ProtectionChosenColorSourceEffect(final ProtectionChosenColorSourceEffect effect) {
         super(effect);
         if (effect.chosenColor != null) {
             this.chosenColor = effect.chosenColor.copy();

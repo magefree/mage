@@ -3,12 +3,17 @@ package mage.game.turn;
 
 import java.io.Serializable;
 import java.util.UUID;
+
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
 /**
+ * Game's step
+ * <p>
+ * Warning, don't use a changeable data in step's implementations
+ * TODO: implement copyable<> interface and copy usage in GameState
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -32,7 +37,7 @@ public abstract class Step implements Serializable {
         this.hasPriority = hasPriority;
     }
 
-    public Step(final Step step) {
+    protected Step(final Step step) {
         this.type = step.type;
         this.hasPriority = step.hasPriority;
         this.stepEvent = step.stepEvent;

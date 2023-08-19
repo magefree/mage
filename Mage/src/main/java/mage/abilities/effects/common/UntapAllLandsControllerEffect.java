@@ -10,7 +10,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author Viserion
  */
 public class UntapAllLandsControllerEffect extends OneShotEffect {
@@ -23,7 +22,7 @@ public class UntapAllLandsControllerEffect extends OneShotEffect {
         filter = new FilterLandPermanent();
     }
 
-    public UntapAllLandsControllerEffect(final UntapAllLandsControllerEffect effect) {
+    protected UntapAllLandsControllerEffect(final UntapAllLandsControllerEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

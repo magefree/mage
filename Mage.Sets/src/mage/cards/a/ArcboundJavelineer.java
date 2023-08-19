@@ -31,7 +31,7 @@ public final class ArcboundJavelineer extends CardImpl {
 
         // {T}, Remove X +1/+1 counters from Arcbound Javelineer: It deals X damage to target attacking or blocking creature.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(GetXValue.instance, "It"), new TapSourceCost());
-        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1.createInstance()));
+        ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1));
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(ability);
 

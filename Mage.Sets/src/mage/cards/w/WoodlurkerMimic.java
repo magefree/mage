@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -12,16 +11,16 @@ import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class WoodlurkerMimic extends CardImpl {
 
@@ -35,7 +34,7 @@ public final class WoodlurkerMimic extends CardImpl {
     private static final String rule = "Whenever you cast a spell that's both black and green, {this} has base power and toughness 4/5 until end of turn and gains wither until end of turn.";
 
     public WoodlurkerMimic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B/G}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         this.color.setGreen(true);
@@ -44,7 +43,10 @@ public final class WoodlurkerMimic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a spell that's both black and green, Woodlurker Mimic has base power and toughness 4/5 until end of turn and gains wither until end of turn.
-        Ability ability = new SpellCastControllerTriggeredAbility(new SetBasePowerToughnessSourceEffect(4, 5, Duration.EndOfTurn, SubLayer.SetPT_7b), filter, false, rule);
+        Ability ability = SpellCastControllerTriggeredAbility.createWithRule(
+                new SetBasePowerToughnessSourceEffect(4, 5, Duration.EndOfTurn, SubLayer.SetPT_7b),
+                filter, false, rule
+        );
         ability.addEffect(new GainAbilitySourceEffect(WitherAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);
 

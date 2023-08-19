@@ -11,7 +11,6 @@ import mage.game.events.GameEvent;
 import mage.target.TargetSource;
 
 /**
- *
  * @author LevelX2
  */
 public class PreventAllDamageFromChosenSourceToYouEffect extends PreventionEffectImpl {
@@ -32,7 +31,7 @@ public class PreventAllDamageFromChosenSourceToYouEffect extends PreventionEffec
         this.staticText = setText();
     }
 
-    public PreventAllDamageFromChosenSourceToYouEffect(final PreventAllDamageFromChosenSourceToYouEffect effect) {
+    protected PreventAllDamageFromChosenSourceToYouEffect(final PreventAllDamageFromChosenSourceToYouEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }

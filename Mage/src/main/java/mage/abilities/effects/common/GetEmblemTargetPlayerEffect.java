@@ -24,7 +24,7 @@ public class GetEmblemTargetPlayerEffect extends OneShotEffect {
 
     }
 
-    public GetEmblemTargetPlayerEffect(final GetEmblemTargetPlayerEffect effect) {
+    protected GetEmblemTargetPlayerEffect(final GetEmblemTargetPlayerEffect effect) {
         super(effect);
         this.emblem = effect.emblem;
     }

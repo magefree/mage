@@ -18,7 +18,7 @@ public final class WalkerToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public WalkerToken(final WalkerToken token) {
+    protected WalkerToken(final WalkerToken token) {
         super(token);
     }
 

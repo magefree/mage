@@ -28,7 +28,7 @@ public final class ElfhameSanctuary extends CardImpl {
 
         // At the beginning of your upkeep, you may search your library for a basic land card, reveal that card, and put it into your hand. If you do, you skip your draw step this turn and shuffle your library.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true
         ), TargetController.YOU, true);
         ability.addEffect(new SkipDrawStepThisTurn());
 

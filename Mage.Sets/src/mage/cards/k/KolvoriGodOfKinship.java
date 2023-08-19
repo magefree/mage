@@ -21,7 +21,7 @@ import mage.abilities.mana.ConditionalColoredManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardSetInfo;
-import mage.cards.ModalDoubleFacesCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -33,7 +33,7 @@ import java.util.UUID;
 /**
  * @author weirddan455
  */
-public final class KolvoriGodOfKinship extends ModalDoubleFacesCard {
+public final class KolvoriGodOfKinship extends ModalDoubleFacedCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private static final FilterCreatureCard filter2 = new FilterCreatureCard("a legendary creature card");

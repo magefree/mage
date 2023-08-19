@@ -108,11 +108,13 @@ public class CardInfo {
     @DatabaseField
     protected String adventureSpellName;
     @DatabaseField
-    protected boolean modalDoubleFacesCard;
+    protected boolean modalDoubleFacedCard;
     @DatabaseField
-    protected String modalDoubleFacesSecondSideName;
+    protected String modalDoubleFacedSecondSideName;
     @DatabaseField
     protected String meldsToCardName;
+    @DatabaseField
+    protected boolean isExtraDeckCard;
 
     // if you add new field with card side name then update CardRepository.addNewNames too
 
@@ -157,9 +159,9 @@ public class CardInfo {
             this.adventureSpellName = ((AdventureCard) card).getSpellCard().getName();
         }
 
-        if (card instanceof ModalDoubleFacesCard) {
-            this.modalDoubleFacesCard = true;
-            this.modalDoubleFacesSecondSideName = ((ModalDoubleFacesCard) card).getRightHalfCard().getName();
+        if (card instanceof ModalDoubleFacedCard) {
+            this.modalDoubleFacedCard = true;
+            this.modalDoubleFacedSecondSideName = ((ModalDoubleFacedCard) card).getRightHalfCard().getName();
         }
 
         this.frameStyle = card.getFrameStyle().toString();
@@ -180,9 +182,9 @@ public class CardInfo {
             List<String> manaCostLeft = ((SplitCard) card).getLeftHalfCard().getManaCostSymbols();
             List<String> manaCostRight = ((SplitCard) card).getRightHalfCard().getManaCostSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
-        } else if (card instanceof ModalDoubleFacesCard) {
-            List<String> manaCostLeft = ((ModalDoubleFacesCard) card).getLeftHalfCard().getManaCostSymbols();
-            List<String> manaCostRight = ((ModalDoubleFacesCard) card).getRightHalfCard().getManaCostSymbols();
+        } else if (card instanceof ModalDoubleFacedCard) {
+            List<String> manaCostLeft = ((ModalDoubleFacedCard) card).getLeftHalfCard().getManaCostSymbols();
+            List<String> manaCostRight = ((ModalDoubleFacedCard) card).getRightHalfCard().getManaCostSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
         } else if (card instanceof AdventureCard) {
             List<String> manaCostLeft = ((AdventureCard) card).getSpellCard().getManaCostSymbols();
@@ -232,6 +234,8 @@ public class CardInfo {
         // Starting loyalty
         this.startingLoyalty = CardUtil.convertLoyaltyOrDefense(card.getStartingLoyalty());
         this.startingDefense = CardUtil.convertLoyaltyOrDefense(card.getStartingDefense());
+
+        this.isExtraDeckCard = card.isExtraDeckCard();
     }
 
     public Card getCard() {
@@ -460,12 +464,12 @@ public class CardInfo {
         return adventureSpellName;
     }
 
-    public boolean isModalDoubleFacesCard() {
-        return modalDoubleFacesCard;
+    public boolean isModalDoubleFacedCard() {
+        return modalDoubleFacedCard;
     }
 
-    public String getModalDoubleFacesSecondSideName() {
-        return modalDoubleFacesSecondSideName;
+    public String getModalDoubleFacedSecondSideName() {
+        return modalDoubleFacedSecondSideName;
     }
 
     @Override
@@ -481,5 +485,9 @@ public class CardInfo {
     @Override
     public String toString() {
         return String.format("%s (%s, %s)", getName(), getSetCode(), getCardNumber());
+    }
+
+    public boolean isExtraDeckCard() {
+        return isExtraDeckCard;
     }
 }
