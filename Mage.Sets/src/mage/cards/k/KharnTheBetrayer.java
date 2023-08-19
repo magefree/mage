@@ -59,7 +59,7 @@ public class KharnTheBetrayer extends CardImpl {
     }
 
     @Override
-    public Card copy() {
+    public KharnTheBetrayer copy() {
         return new KharnTheBetrayer(this);
     }
     
@@ -108,7 +108,7 @@ class KharnTheBetrayerEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public ContinuousEffect copy() {
+    public KharnTheBetrayerEffect copy() {
         return new KharnTheBetrayerEffect(this);
     }
     
@@ -116,11 +116,12 @@ class KharnTheBetrayerEffect extends ReplacementEffectImpl {
 
 class KharnTheBetrayerTriggeredAbility extends TriggeredAbilityImpl {
 
-    KharnTheBetrayerTriggeredAbility () {
-        super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2).setText("When you lose control of {this}, draw two cards"));
+    public KharnTheBetrayerTriggeredAbility () {
+        super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2));
+        this.setTriggerPhrase("When you lose control of {this}, ");
     }
 
-    KharnTheBetrayerTriggeredAbility(KharnTheBetrayerTriggeredAbility ability) {
+    protected KharnTheBetrayerTriggeredAbility(KharnTheBetrayerTriggeredAbility ability) {
         super(ability);
     }
     
@@ -132,7 +133,7 @@ class KharnTheBetrayerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(sourceId)) {
-            this.getEffects().stream().findFirst().ifPresent(e -> e.setTargetPointer(new FixedTarget(event.getPlayerId())));
+            this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
             return true;
         }
         return false;
