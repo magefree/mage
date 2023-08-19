@@ -15,6 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -24,10 +25,11 @@ import java.util.UUID;
  */
 public final class WerefoxBodyguard extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Fox creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other target non-Fox creature");
 
     static {
         filter.add(Predicates.not(SubType.FOX.getPredicate()));
+        filter.add(AnotherPredicate.instance);
     }
 
     public WerefoxBodyguard(UUID ownerId, CardSetInfo setInfo) {
@@ -42,7 +44,7 @@ public final class WerefoxBodyguard extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
 
-        // When Werefox Bodyguard enters the battlefield, exile up to one target non-Fox creature until Werefox Bodyguard leaves the battlefield.
+        // When Werefox Bodyguard enters the battlefield, exile up to one other target non-Fox creature until Werefox Bodyguard leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect());
         ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
         this.addAbility(ability);
