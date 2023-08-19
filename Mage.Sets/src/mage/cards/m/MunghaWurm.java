@@ -60,7 +60,7 @@ class MunghaWurmEffect extends RestrictionUntapNotMoreThanEffect {
 
     @Override
     public boolean applies(Player player, Ability source, Game game) {
-        return player != null && player.getId().equals(source.getControllerId());
+        return player.getId().equals(source.getControllerId());
     }
 
     @Override
