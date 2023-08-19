@@ -356,7 +356,7 @@ public class MeldTest extends CardTestPlayerBase {
 
 
     // Bug report: after rollback, Eliminate can kill Urza's Planeswalker.
-    // Issue seem was that after rollback, Urza had mana value 0.
+    // Issue was that after rollback, Urza had mana value 0 due to a missing copy constructor.
     @Test
     public void testMeld_Urza_Eliminate_After_Rollback() {
         setStrictChooseMode(true);
