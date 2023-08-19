@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
 import mage.abilities.effects.common.combat.BlocksIfAbleSourceEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -117,7 +117,7 @@ class KharnTheBetrayerEffect extends ReplacementEffectImpl {
 class KharnTheBetrayerTriggeredAbility extends TriggeredAbilityImpl {
 
     KharnTheBetrayerTriggeredAbility () {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2));
+        super(Zone.BATTLEFIELD, new DrawCardTargetEffect(2).setText("When you lose control of {this}, draw two cards"));
     }
 
     KharnTheBetrayerTriggeredAbility(KharnTheBetrayerTriggeredAbility ability) {
@@ -131,12 +131,15 @@ class KharnTheBetrayerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(controllerId);
+        if (event.getTargetId().equals(sourceId)) {
+            this.getEffects().stream().findFirst().ifPresent(e -> e.setTargetPointer(new FixedTarget(event.getPlayerId())));
+            return true;
+        }
+        return false;
     }
     
     @Override
     public KharnTheBetrayerTriggeredAbility copy() {
         return new KharnTheBetrayerTriggeredAbility(this);
     }
-    
 }
