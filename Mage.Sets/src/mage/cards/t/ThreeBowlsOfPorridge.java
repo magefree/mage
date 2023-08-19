@@ -9,17 +9,14 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.hint.Hint;
+import mage.abilities.hint.common.ModesAlreadyUsedHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author Susucr
@@ -52,7 +49,7 @@ public final class ThreeBowlsOfPorridge extends CardImpl {
         mode.addEffect(new GainLifeEffect(3));
         mode.setModeTag("sacrifice and gain life");
         ability.addMode(mode);
-        ability.addHint(ThreeBowlsOfPorridgeHint.instance);
+        ability.addHint(ModesAlreadyUsedHint.instance);
 
         this.addAbility(ability);
     }
@@ -64,30 +61,5 @@ public final class ThreeBowlsOfPorridge extends CardImpl {
     @Override
     public ThreeBowlsOfPorridge copy() {
         return new ThreeBowlsOfPorridge(this);
-    }
-}
-
-enum ThreeBowlsOfPorridgeHint implements Hint {
-    instance;
-
-    @Override
-    public String getText(Game game, Ability ability) {
-        List<String> used = ability
-                .getModes()
-                .streamAlreadySelected(ability, game)
-                .map(Mode::getModeTag)
-                .filter(tag -> tag != null && !tag.isEmpty())
-                .collect(Collectors.toList());
-
-        if (used.isEmpty()) {
-            return "";
-        }
-
-        return "Already used: [" + String.join(", ", used) + "]";
-    }
-
-    @Override
-    public ThreeBowlsOfPorridgeHint copy() {
-        return instance;
     }
 }

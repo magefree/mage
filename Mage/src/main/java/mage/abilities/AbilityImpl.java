@@ -1392,7 +1392,7 @@ public abstract class AbilityImpl implements Ability {
     }
 
     /**
-     * set the mode tag for the latest mode.
+     * sets the mode tag for the current mode.
      */
     @Override
     public void setModeTag(String tag) {
