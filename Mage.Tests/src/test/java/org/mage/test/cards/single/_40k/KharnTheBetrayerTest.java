@@ -8,7 +8,7 @@ import mage.constants.Zone;
 
 public class KharnTheBetrayerTest extends CardTestCommander4Players {
     
-    private static String KHARN = "Khârn the Betrayer";
+    private static String KHARN = "Kharn the Betrayer";
 
     @Test
     public void testEffect() {
