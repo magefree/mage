@@ -26,6 +26,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Ashiok's Reaper", 79, Rarity.UNCOMMON, mage.cards.a.AshioksReaper.class));
         cards.add(new SetCardInfo("Asinine Antics", 42, Rarity.MYTHIC, mage.cards.a.AsinineAntics.class));
         cards.add(new SetCardInfo("Beanstalk Wurm", 161, Rarity.COMMON, mage.cards.b.BeanstalkWurm.class));
+        cards.add(new SetCardInfo("Beluna Grandsquall", 220, Rarity.MYTHIC, mage.cards.b.BelunaGrandsquall.class));
         cards.add(new SetCardInfo("Beseech the Mirror", 82, Rarity.MYTHIC, mage.cards.b.BeseechTheMirror.class));
         cards.add(new SetCardInfo("Besotted Knight", 4, Rarity.COMMON, mage.cards.b.BesottedKnight.class));
         cards.add(new SetCardInfo("Bitter Chill", 44, Rarity.UNCOMMON, mage.cards.b.BitterChill.class));
