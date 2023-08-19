@@ -26,7 +26,7 @@ public final class GalvanicGiant extends AdventureCard {
     private static FilterSpell filter = new FilterSpell("a spell with mana value 5 or greater");
 
     {
-        filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 4));
+        filter.add(new ManaValuePredicate(ComparisonType.OR_GREATER, 5));
     }
 
     public GalvanicGiant(UUID ownerId, CardSetInfo setInfo) {
@@ -39,7 +39,7 @@ public final class GalvanicGiant extends AdventureCard {
 
         // Whenever you cast a spell with mana value 5 or greater, tap target creature an opponent controls and put a stun counter on it.
         Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), filter, false);
-        ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance(3)).setText("and put a stun counter on it."));
+        ability.addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance(1)).setText("and put a stun counter on it."));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
 
