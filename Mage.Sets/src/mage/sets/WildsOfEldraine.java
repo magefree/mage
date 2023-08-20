@@ -20,6 +20,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         this.blockName = "Wilds of Eldraine";
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("A Tale for the Ages", 34, Rarity.RARE, mage.cards.a.ATaleForTheAges.class));
         cards.add(new SetCardInfo("Agatha's Champion", 160, Rarity.UNCOMMON, mage.cards.a.AgathasChampion.class));
         cards.add(new SetCardInfo("Armory Mice", 3, Rarity.COMMON, mage.cards.a.ArmoryMice.class));
         cards.add(new SetCardInfo("Ash, Party Crasher", 201, Rarity.UNCOMMON, mage.cards.a.AshPartyCrasher.class));
