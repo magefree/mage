@@ -9,7 +9,6 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
@@ -27,7 +26,6 @@ import java.util.UUID;
 public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
 
     private final FilterCard filter;
-    private final TargetController targetController;
     private DynamicValue numberCardsToReveal;
     private final DynamicValue numberCardsToDiscard;
     private final boolean revealAllCards;
@@ -47,7 +45,6 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
 
     public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToDiscard, FilterCard filter) {
         super(Outcome.Discard);
-        this.targetController = TargetController.OPPONENT;
         this.filter = filter;
 
         this.numberCardsToDiscard = numberCardsToDiscard;
@@ -55,21 +52,20 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         this.revealAllCards = true;
     }
 
-    public DiscardCardYouChooseTargetEffect(TargetController targetController, int numberCardsToReveal) {
-        this(targetController, StaticValue.get(numberCardsToReveal));
+    public DiscardCardYouChooseTargetEffect(int numberCardsToReveal) {
+        this(StaticValue.get(numberCardsToReveal));
     }
 
-    public DiscardCardYouChooseTargetEffect(TargetController targetController, DynamicValue numberCardsToReveal) {
-        this(StaticValue.get(1), StaticFilters.FILTER_CARD_A, targetController, numberCardsToReveal);
+    public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToReveal) {
+        this(StaticValue.get(1), StaticFilters.FILTER_CARD_A, numberCardsToReveal);
     }
 
-    public DiscardCardYouChooseTargetEffect(int numberCardsToDiscard, TargetController targetController, int numberCardsToReveal) {
-        this(StaticValue.get(numberCardsToDiscard), StaticFilters.FILTER_CARD_CARDS, targetController, StaticValue.get(numberCardsToReveal));
+    public DiscardCardYouChooseTargetEffect(int numberCardsToDiscard, int numberCardsToReveal) {
+        this(StaticValue.get(numberCardsToDiscard), StaticFilters.FILTER_CARD_CARDS, StaticValue.get(numberCardsToReveal));
     }
 
-    public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToDiscard, FilterCard filter, TargetController targetController, DynamicValue numberCardsToReveal) {
+    public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToDiscard, FilterCard filter, DynamicValue numberCardsToReveal) {
         super(Outcome.Discard);
-        this.targetController = targetController;
         this.filter = filter;
 
         this.revealAllCards = false;
@@ -80,7 +76,6 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
     protected DiscardCardYouChooseTargetEffect(final DiscardCardYouChooseTargetEffect effect) {
         super(effect);
         this.filter = effect.filter;
-        this.targetController = effect.targetController;
         this.numberCardsToDiscard = effect.numberCardsToDiscard;
         this.numberCardsToReveal = effect.numberCardsToReveal;
         this.revealAllCards = effect.revealAllCards;
