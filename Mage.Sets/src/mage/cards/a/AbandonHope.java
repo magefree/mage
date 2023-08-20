@@ -10,7 +10,6 @@ import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -36,7 +35,7 @@ public final class AbandonHope extends CardImpl {
 
         // Look at target opponent's hand and choose X cards from it. That player discards those cards.
         this.getSpellAbility().addEffect(
-                new DiscardCardYouChooseTargetEffect(ManacostVariableValue.REGULAR, TargetController.ANY)
+                new DiscardCardYouChooseTargetEffect(ManacostVariableValue.REGULAR, StaticFilters.FILTER_CARD_CARDS)
                 .setText("Look at target opponent's hand and choose X cards from it. That player discards those cards"));
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().setCostAdjuster(AbandonHopeAdjuster.instance);
