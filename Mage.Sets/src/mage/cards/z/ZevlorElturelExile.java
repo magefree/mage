@@ -69,6 +69,7 @@ public final class ZevlorElturelExile extends CardImpl {
 }
 
 class ZevlorElturelExileTriggeredAbility extends DelayedTriggeredAbility {
+    // TODO: it might be possible to refactor Zevlor using the same Trigger/filter than Ivy, Gleeful Spellthief.
 
     ZevlorElturelExileTriggeredAbility() {
         super(new ZevlorElturelExileEffect(), Duration.EndOfTurn, true, false);
