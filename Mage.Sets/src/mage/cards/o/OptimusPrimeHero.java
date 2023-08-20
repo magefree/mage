@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.keyword.BolsterEffect;
 import mage.abilities.keyword.MoreThanMeetsTheEyeAbility;
 import mage.abilities.keyword.TransformAbility;
@@ -14,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -73,15 +71,10 @@ class OptimusPrimeHeroEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getSourceId());
-
         if (card == null || controller == null) {
             return false;
         }
-
         game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-        game.getState().processAction(game);
-
-        return true;
+        return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }
