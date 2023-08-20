@@ -38,11 +38,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
     }
 
     public DiscardCardYouChooseTargetEffect(FilterCard filter) {
-        this(filter, TargetController.OPPONENT);
-    }
-
-    public DiscardCardYouChooseTargetEffect(FilterCard filter, TargetController targetController) {
-        this(StaticValue.get(1), filter, targetController);
+        this(StaticValue.get(1), filter, TargetController.OPPONENT);
     }
 
     public DiscardCardYouChooseTargetEffect(int numberCardsToDiscard, TargetController targetController) {
