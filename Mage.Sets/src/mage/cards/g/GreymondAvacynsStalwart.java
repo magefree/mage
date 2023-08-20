@@ -32,7 +32,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class GreymondAvacynsStalward extends CardImpl {
+public final class GreymondAvacynsStalwart extends CardImpl {
 
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent(SubType.HUMAN, "");
@@ -41,7 +41,7 @@ public final class GreymondAvacynsStalward extends CardImpl {
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(filter2, ComparisonType.MORE_THAN, 3);
 
-    public GreymondAvacynsStalward(UUID ownerId, CardSetInfo setInfo) {
+    public GreymondAvacynsStalwart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -63,13 +63,13 @@ public final class GreymondAvacynsStalward extends CardImpl {
         )));
     }
 
-    private GreymondAvacynsStalward(final GreymondAvacynsStalward card) {
+    private GreymondAvacynsStalwart(final GreymondAvacynsStalwart card) {
         super(card);
     }
 
     @Override
-    public GreymondAvacynsStalward copy() {
-        return new GreymondAvacynsStalward(this);
+    public GreymondAvacynsStalwart copy() {
+        return new GreymondAvacynsStalwart(this);
     }
 }
 

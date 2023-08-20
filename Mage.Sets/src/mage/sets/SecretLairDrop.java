@@ -166,7 +166,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Decimate", 140, Rarity.RARE, mage.cards.d.Decimate.class));
         cards.add(new SetCardInfo("Dreadbore", 141, Rarity.RARE, mage.cards.d.Dreadbore.class));
         cards.add(new SetCardInfo("Thraximundar", 142, Rarity.MYTHIC, mage.cards.t.Thraximundar.class));
-        cards.add(new SetCardInfo("Greymond, Avacyn's Stalward", 143, Rarity.MYTHIC, mage.cards.g.GreymondAvacynsStalward.class));
+        cards.add(new SetCardInfo("Greymond, Avacyn's Stalwart", 143, Rarity.MYTHIC, mage.cards.g.GreymondAvacynsStalwart.class));
         cards.add(new SetCardInfo("Hansk, Slayer Zealot", 144, Rarity.MYTHIC, mage.cards.h.HanskSlayerZealot.class));
         cards.add(new SetCardInfo("Gregor, Shrewd Magistrate", 145, Rarity.MYTHIC, mage.cards.g.GregorShrewdMagistrate.class));
         cards.add(new SetCardInfo("Enkira, Hostile Scavenger", 146, Rarity.MYTHIC, mage.cards.e.EnkiraHostileScavenger.class));
