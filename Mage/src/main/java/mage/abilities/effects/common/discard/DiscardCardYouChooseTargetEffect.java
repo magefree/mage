@@ -1,6 +1,7 @@
 package mage.abilities.effects.common.discard;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -65,8 +66,6 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         this.numberCardsToDiscard = numberCardsToDiscard;
         this.numberCardsToReveal = null;
         this.revealAllCards = true;
-
-        staticText = this.setText();
     }
 
     public DiscardCardYouChooseTargetEffect(TargetController targetController, int numberCardsToReveal) {
@@ -89,8 +88,6 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         this.revealAllCards = false;
         this.numberCardsToReveal = numberCardsToReveal;
         this.numberCardsToDiscard = numberCardsToDiscard;
-
-        staticText = this.setText();
     }
 
     protected DiscardCardYouChooseTargetEffect(final DiscardCardYouChooseTargetEffect effect) {
@@ -105,7 +102,6 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
 
     public void setOptional(boolean optional) {
         this.optional = optional;
-        staticText = this.setText();
     }
 
     @Override
@@ -165,19 +161,13 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         return new DiscardCardYouChooseTargetEffect(this);
     }
 
-    private String setText() {
-        boolean discardMultipleCards = !numberCardsToDiscard.toString().equals("1");
-        StringBuilder sb = new StringBuilder("target ");
-        switch (targetController) {
-            case OPPONENT:
-                sb.append("opponent");
-                break;
-            case ANY:
-                sb.append("player");
-                break;
-            default:
-                throw new UnsupportedOperationException("target controller not supported");
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
         }
+        boolean discardMultipleCards = !numberCardsToDiscard.toString().equals("1");
+        StringBuilder sb = new StringBuilder(getTargetPointer().describeTargets(mode.getTargets(), "that player"));
         sb.append(" reveals ");
         if (revealAllCards) {
             sb.append("their hand. You ");
