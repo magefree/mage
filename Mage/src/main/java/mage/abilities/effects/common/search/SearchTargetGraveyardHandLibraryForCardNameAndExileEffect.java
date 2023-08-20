@@ -60,11 +60,11 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
         if (cardName != null && controller != null) {
             Player targetPlayer = game.getPlayer(targetPlayerId);
             if (targetPlayer != null) {
-                FilterCard filter = new FilterCard("card named " + cardName);
+                FilterCard filter = new FilterCard("card named \"" + cardName + "\"");
                 filter.add(new NamePredicate(cardName));
 
                 // cards in Graveyard
-                int cardsCount = (cardName.isEmpty() ? 0 : targetPlayer.getGraveyard().count(filter, game));
+                int cardsCount = targetPlayer.getGraveyard().count(filter, game);
                 if (cardsCount > 0) {
                     filter.setMessage("card named " + cardName + " in the graveyard of " + targetPlayer.getName());
                     TargetCard target = new TargetCard((graveyardExileOptional ? 0 : cardsCount), cardsCount, Zone.GRAVEYARD, filter);
@@ -74,7 +74,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 }
 
                 // cards in Hand
-                cardsCount = (cardName.isEmpty() ? 0 : targetPlayer.getHand().count(filter, game));
+                cardsCount = targetPlayer.getHand().count(filter, game);
                 filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getName());
                 TargetCard target = new TargetCard(0, cardsCount, Zone.HAND, filter);
                 if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, source, game)) {
@@ -84,7 +84,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 // cards in Library
                 Cards cardsInLibrary = new CardsImpl();
                 cardsInLibrary.addAllCards(targetPlayer.getLibrary().getCards(game));
-                cardsCount = (cardName.isEmpty() ? 0 : cardsInLibrary.count(filter, game));
+                cardsCount = cardsInLibrary.count(filter, game);
                 filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
                 TargetCardInLibrary targetLib = new TargetCardInLibrary(0, cardsCount, filter);
                 if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, source, game)) {
