@@ -44,6 +44,8 @@ public final class ThePrincessTakesFlight extends CardImpl {
 
         // III -- Return the exiled card to the battlefield under its owner's control.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD));
+
+        this.addAbility(sagaAbility);
     }
 
     private ThePrincessTakesFlight(final ThePrincessTakesFlight card) {
