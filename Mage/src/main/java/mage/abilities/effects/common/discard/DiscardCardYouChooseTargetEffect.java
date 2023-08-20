@@ -82,8 +82,9 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         this.optional = effect.optional;
     }
 
-    public void setOptional(boolean optional) {
+    public DiscardCardYouChooseTargetEffect setOptional(boolean optional) {
         this.optional = optional;
+        return this;
     }
 
     @Override
