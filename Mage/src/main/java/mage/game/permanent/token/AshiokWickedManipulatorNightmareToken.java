@@ -19,6 +19,9 @@ public final class AshiokWickedManipulatorNightmareToken extends TokenImpl {
 
     private static final Hint hint = new ConditionHint(WasCardExiledThisTurnCondition.instance);
 
+    /**
+     * /!\ You need to add CardsExiledThisTurnWatcher to any card using this token
+     */
     public AshiokWickedManipulatorNightmareToken() {
         super("Nightmare Token", "1/1 black Nightmare creature tokens with \"At the beginning of combat on your turn, if a card was put into exile this turn, put a +1/+1 counter on this creature.\"");
         cardType.add(CardType.CREATURE);
