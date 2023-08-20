@@ -52,7 +52,7 @@ public final class SvyelunOfSeaAndSky extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                 condition, "{this} has indestructible as long as you control at least two other Merfolk"
-        )));
+        )).addHint(hint));
 
         // Whenever Svyelun attacks, draw a card.
         this.addAbility(new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
@@ -60,7 +60,9 @@ public final class SvyelunOfSeaAndSky extends CardImpl {
         // Other Merfolk you control have ward {1}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new WardAbility(new GenericManaCost(1)), Duration.WhileOnBattlefield, filter, true
-        )));
+        ).setText("Other Merfolk you control have ward {1}. " +
+                "<i>(Whenever another Merfolk you control becomes the target of a spell or ability an opponent controls, " +
+                "counter it unless that player pays {1}.)</i>")));
     }
 
     private SvyelunOfSeaAndSky(final SvyelunOfSeaAndSky card) {

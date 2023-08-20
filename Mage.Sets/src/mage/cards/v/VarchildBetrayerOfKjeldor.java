@@ -50,7 +50,7 @@ public final class VarchildBetrayerOfKjeldor extends CardImpl {
         // Survivors your opponents control can't block, and they can't attack you or a planeswalker you control.
         Ability ability = new SimpleStaticAbility(new CantBlockAllEffect(filter1, Duration.WhileOnBattlefield));
         ability.addEffect(new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter1, true)
-                .setText("and they can't attack you or planeswalkers you control"));
+                .setText(", and they can't attack you or planeswalkers you control"));
         this.addAbility(ability);
 
         // When Varchild leaves the battlefield, gain control of all Survivors.

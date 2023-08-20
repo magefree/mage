@@ -61,7 +61,7 @@ class ChissGoriaForgeTyrantEffect extends OneShotEffect {
 
     ChissGoriaForgeTyrantEffect() {
         super(Outcome.Benefit);
-        staticText = "exile the top five cards of your library. You may cast an artifact spell from among them this turn. If you do, it gains affinity for artifacts.";
+        staticText = "exile the top five cards of your library. You may cast an artifact spell from among them this turn. If you do, it has affinity for artifacts.";
     }
 
     private ChissGoriaForgeTyrantEffect(final ChissGoriaForgeTyrantEffect effect) {
