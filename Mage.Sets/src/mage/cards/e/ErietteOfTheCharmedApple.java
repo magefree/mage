@@ -35,6 +35,9 @@ public final class ErietteOfTheCharmedApple extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures enchanted by an Aura you control");
     private static final Hint hint = new ValueHint("Number of Auras you control", ErietteOfTheCharmedAppleValue.instance);
 
+    static {
+        filter.add(EnchantedByPlayerPredicate.instance);
+    }
     public ErietteOfTheCharmedApple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
         
@@ -45,7 +48,6 @@ public final class ErietteOfTheCharmedApple extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Each creature that's enchanted by an Aura you control can't attack you or planeswalkers you control.
-        filter.add(new EnchantedByPlayerPredicate(ownerId));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.EndOfGame, filter, true)));
 
         // At the beginning of your end step, each opponent loses X life and you gain X life, where X is the number of Auras you control.

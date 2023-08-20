@@ -1,35 +1,30 @@
 package mage.filter.predicate.permanent;
 
 import mage.constants.SubType;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author Xanderhall
  */
-public class EnchantedByPlayerPredicate implements Predicate<Permanent> {
-    private final UUID playerId;
-    
-    public EnchantedByPlayerPredicate(UUID playerId) {
-        this.playerId = playerId;
-    }
+public enum EnchantedByPlayerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+instance;
 
     @Override
-    public boolean apply(Permanent input, Game game) {
-        return input.getAttachments()
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return input.getObject().getAttachments()
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .anyMatch(p -> p.hasSubtype(SubType.AURA, game) && p.isControlledBy(playerId));
+                .anyMatch(p -> p.hasSubtype(SubType.AURA, game) && p.isControlledBy(input.getPlayerId()));
     }
 
     @Override
     public String toString() {
         return "Enchanted by player";
     }
-
 }
