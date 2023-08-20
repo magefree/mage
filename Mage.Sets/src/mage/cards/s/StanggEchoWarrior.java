@@ -105,7 +105,6 @@ class StanggEchoWarriorEffect extends OneShotEffect {
             return toSacrifice;
         }
         for (UUID tokenId : token.getLastAddedTokenIds()) {
-            Permanent permanent = game.getPermanent(tokenId);
             for (Permanent attachment : attachments) {
                 CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
                 effect.setSavedPermanent(attachment);
