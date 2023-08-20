@@ -32,8 +32,8 @@ import mage.constants.Duration;
  */
 public final class ErietteOfTheCharmedApple extends CardImpl {
 
-    private FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures enchanted by an Aura you control");
-    private final Hint hint = new ValueHint("Number of Auras you control", ErietteOfTheCharmedAppleValue.instance);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures enchanted by an Aura you control");
+    private static final Hint hint = new ValueHint("Number of Auras you control", ErietteOfTheCharmedAppleValue.instance);
 
     public ErietteOfTheCharmedApple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
@@ -51,7 +51,7 @@ public final class ErietteOfTheCharmedApple extends CardImpl {
         // At the beginning of your end step, each opponent loses X life and you gain X life, where X is the number of Auras you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new LoseLifeOpponentsEffect(ErietteOfTheCharmedAppleValue.instance), TargetController.YOU, false);
         ability.addEffect(new GainLifeEffect(ErietteOfTheCharmedAppleValue.instance));
-        ability.addHint(this.hint);
+        ability.addHint(hint);
         this.addAbility(ability);
     }
 
