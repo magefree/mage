@@ -62,7 +62,7 @@ public class LimitedTimesPerTurnActivatedManaAbility extends ActivatedManaAbilit
         String text = super.getRule() + " Activate ";
         text += maxActivationsPerTurn == 1
                 ? "only once"
-                : "no more than " + CardUtil.numberToText(maxActivationsPerTurn) + "times";
+                : "no more than " + CardUtil.numberToText(maxActivationsPerTurn) + " times";
         text += " each turn.";
         return text;
     }
