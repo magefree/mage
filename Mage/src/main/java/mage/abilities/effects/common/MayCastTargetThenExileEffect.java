@@ -59,6 +59,7 @@ public class MayCastTargetThenExileEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
+        FixedTarget fixedTarget = new FixedTarget(card, game);
         if (duration == Duration.OneUse) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller == null || !controller.chooseUse(outcome, "Cast " + card.getLogName() + '?', source, game)) {
@@ -72,7 +73,7 @@ public class MayCastTargetThenExileEffect extends OneShotEffect {
             CardUtil.makeCardPlayable(game, source, card, duration, false);
         }
         ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(true);
-        effect.setTargetPointer(new FixedTarget(card, game));
+        effect.setTargetPointer(fixedTarget);
         game.addEffect(effect, source);
         return true;
     }
