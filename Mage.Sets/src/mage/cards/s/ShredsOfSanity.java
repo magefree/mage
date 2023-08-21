@@ -1,10 +1,9 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +38,7 @@ public final class ShredsOfSanity extends CardImpl {
         this.getSpellAbility().addEffect(new ShredsOfSanityEffect());
         this.getSpellAbility().addTarget(new TargetCard(0, 1, Zone.GRAVEYARD, filterInstant));
         this.getSpellAbility().addTarget(new TargetCard(0, 1, Zone.GRAVEYARD, filterSorcery));
-        this.getSpellAbility().addEffect(new ExileSourceEffect());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
     }
 
     private ShredsOfSanity(final ShredsOfSanity card) {
