@@ -10,18 +10,20 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetOpponentsCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.delayed.WhenTargetLeavesBattlefieldDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 
 /**
  *
@@ -42,7 +44,8 @@ public final class LuciusTheEternal extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Armor of Shrieking Souls -- When Lucius the Eternal dies, exile it and choose target creature an opponent controls. When that creature leaves the battlefield, return Lucius the Eternal from exile to the battlefield under its owner's control.
-        this.addAbility(new DiesSourceTriggeredAbility(new LuciusTheEternalEffect()).withFlavorWord("Armor of Shrieking Souls"));
+        Ability ability = new DiesSourceTriggeredAbility(new LuciusTheEternalEffect());
+        this.addAbility(ability.withFlavorWord("Armor of Shrieking Souls"));
     }
 
     private LuciusTheEternal(final LuciusTheEternal card) {
@@ -71,7 +74,7 @@ class LuciusTheEternalEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Target target = new TargetOpponentsCreaturePermanent();
 
-        if (player == null || !player.chooseTarget(Outcome.AddAbility, new TargetOpponentsCreaturePermanent(), source, game)) {
+        if (player == null || !player.chooseTarget(Outcome.AddAbility, target, source, game)) {
             return false;
         }
 
@@ -79,11 +82,19 @@ class LuciusTheEternalEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
+        // Move Lucius to exile
+        UUID exileId = CardUtil.getExileZoneId(game, source);
+        String exileName = CardUtil.getSourceName(game, source);
+        player.moveCardsToExile(game.getCard(source.getSourceId()), source, game, false, exileId, exileName);
 
-        Effect effect = new ExileUntilSourceLeavesEffect(Zone.BATTLEFIELD);
-        effect.setTargetPointer(new FixedTarget(source.getSourceId(), game));
-        // Need to apply effect with correct source.
-        // effect.apply(game, source);
+        // Create effect to return him
+        DelayedTriggeredAbility ability = new WhenTargetLeavesBattlefieldDelayedTriggeredAbility(
+            new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), 
+            Duration.Custom, 
+            SetTargetPointer.PERMANENT_TARGET
+        );
+        ability.addTarget(target);
+        game.addDelayedTriggeredAbility(ability, source);
         return true;
     }
 
