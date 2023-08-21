@@ -70,6 +70,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Ingenious Prodigy", 56, Rarity.RARE, mage.cards.i.IngeniousProdigy.class));
         cards.add(new SetCardInfo("Into the Fae Court", 57, Rarity.COMMON, mage.cards.i.IntoTheFaeCourt.class));
         cards.add(new SetCardInfo("Island", 263, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Johann's Stopgap", 58, Rarity.COMMON, mage.cards.j.JohannsStopgap.class));
         cards.add(new SetCardInfo("Johann, Apprentice Sorcerer", 207, Rarity.UNCOMMON, mage.cards.j.JohannApprenticeSorcerer.class));
         cards.add(new SetCardInfo("Kellan, the Fae-Blooded", 230, Rarity.MYTHIC, mage.cards.k.KellanTheFaeBlooded.class));
         cards.add(new SetCardInfo("Knight of Doves", 19, Rarity.UNCOMMON, mage.cards.k.KnightOfDoves.class));
