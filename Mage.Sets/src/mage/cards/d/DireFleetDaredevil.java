@@ -65,15 +65,14 @@ public final class DireFleetDaredevil extends CardImpl {
 
 class DireFleetDaredevilEffect extends OneShotEffect {
 
-    public DireFleetDaredevilEffect() {
+    DireFleetDaredevilEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile target instant or sorcery card from an opponent's graveyard. " +
-                "You may cast it this turn, and you may spend mana as though it were mana of any type " +
-                "to cast that spell. "
+                "You may cast it this turn, and mana of any type can be spent to cast that spell. "
                 + ThatSpellGraveyardExileReplacementEffect.RULE_A;
     }
 
-    public DireFleetDaredevilEffect(final DireFleetDaredevilEffect effect) {
+    private DireFleetDaredevilEffect(final DireFleetDaredevilEffect effect) {
         super(effect);
     }
 

@@ -1,16 +1,11 @@
 package mage.cards.w;
 
-import java.util.UUID;
-import mage.ApprovingObject;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.MayCastTargetThenExileEffect;
 import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.abilities.keyword.SwampwalkAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -23,11 +18,11 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
- *
- * @author jeffwadsworth
+ * @author jeffwadsworth, xenohedron
  */
 public final class WrexialTheRisenDeep extends CardImpl {
 
@@ -61,11 +56,15 @@ public final class WrexialTheRisenDeep extends CardImpl {
 
 class WrexialTheRisenDeepTriggeredAbility extends TriggeredAbilityImpl {
 
-    public WrexialTheRisenDeepTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new WrexialTheRisenDeepEffect(), true);
+    WrexialTheRisenDeepTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new MayCastTargetThenExileEffect(true)
+                .setText("you may cast target instant or sorcery card from "
+                        + "that player's graveyard without paying its mana cost. "
+                        + ThatSpellGraveyardExileReplacementEffect.RULE_A), false);
+        setTriggerPhrase("Whenever {this} deals combat damage to a player, ");
     }
 
-    public WrexialTheRisenDeepTriggeredAbility(final WrexialTheRisenDeepTriggeredAbility ability) {
+    private WrexialTheRisenDeepTriggeredAbility(final WrexialTheRisenDeepTriggeredAbility ability) {
         super(ability);
     }
 
@@ -88,60 +87,15 @@ class WrexialTheRisenDeepTriggeredAbility extends TriggeredAbilityImpl {
         if (damagedPlayer == null) {
             return false;
         }
-        FilterCard filter = new FilterCard("target instant or sorcery card from "
-                + damagedPlayer.getName() + "'s graveyard");
+        FilterCard filter = new FilterCard("instant or sorcery card from that player's graveyard");
         filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
         filter.add(Predicates.or(
                 CardType.INSTANT.getPredicate(),
-                CardType.SORCERY.getPredicate()));
-
+                CardType.SORCERY.getPredicate()
+                ));
         Target target = new TargetCardInGraveyard(filter);
         this.getTargets().clear();
         this.addTarget(target);
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, "
-                + "you may cast target instant or sorcery card "
-                + "from that player's graveyard without paying its mana cost. "
-                + ThatSpellGraveyardExileReplacementEffect.RULE_A;
-    }
-}
-
-class WrexialTheRisenDeepEffect extends OneShotEffect {
-
-    public WrexialTheRisenDeepEffect() {
-        super(Outcome.PlayForFree);
-        staticText = "you may cast target instant or sorcery card from "
-                + "that player's graveyard without paying its mana cost. "
-                + ThatSpellGraveyardExileReplacementEffect.RULE_A;
-    }
-
-    public WrexialTheRisenDeepEffect(final WrexialTheRisenDeepEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WrexialTheRisenDeepEffect copy() {
-        return new WrexialTheRisenDeepEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(source.getFirstTarget());
-        if (controller == null || card == null) {
-            return false;
-        }
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-        controller.cast(controller.chooseAbilityForCast(card, game, true),
-                game, true, new ApprovingObject(source, game));
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-        ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(false);
-        effect.setTargetPointer(new FixedTarget(card, game));
-        game.addEffect(effect, source);
         return true;
     }
 }

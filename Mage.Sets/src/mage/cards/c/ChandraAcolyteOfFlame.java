@@ -1,18 +1,18 @@
 package mage.cards.c;
 
-import mage.ApprovingObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.*;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.MayCastTargetThenExileEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
-import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -27,21 +27,20 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.RedElementalToken;
 import mage.game.permanent.token.Token;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author TheElk801, xenohedron
  */
 public final class ChandraAcolyteOfFlame extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterControlledPlaneswalkerPermanent("red planeswalker you control");
     private static final FilterCard filter2
-            = new FilterInstantOrSorceryCard("instant or sorcery card with mana value 3 or less");
+            = new FilterInstantOrSorceryCard("instant or sorcery card with mana value 3 or less from your graveyard");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
@@ -62,7 +61,7 @@ public final class ChandraAcolyteOfFlame extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ChandraAcolyteOfFlameEffect(), 0));
 
         // -2: You may cast target instant or sorcery card with converted mana cost 3 or less from your graveyard. If that card would be put into your graveyard this turn, exile it instead.
-        Ability ability = new LoyaltyAbility(new ChandraAcolyteOfFlameCastGraveyardEffect(), -2);
+        Ability ability = new LoyaltyAbility(new MayCastTargetThenExileEffect(false), -2);
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);
     }
@@ -117,44 +116,6 @@ class ChandraAcolyteOfFlameEffect extends OneShotEffect {
             InfoEffect.addInfoToPermanent(game, source, permanent, "<i><b>Warning</b>: It will be sacrificed at the beginning of the next end step</i>");
         });
 
-        return true;
-    }
-}
-
-class ChandraAcolyteOfFlameCastGraveyardEffect extends OneShotEffect {
-
-    ChandraAcolyteOfFlameCastGraveyardEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "You may cast target instant or sorcery card " +
-                "with mana value 3 or less from your graveyard. " +
-                ThatSpellGraveyardExileReplacementEffect.RULE_YOUR;
-    }
-
-    private ChandraAcolyteOfFlameCastGraveyardEffect(final ChandraAcolyteOfFlameCastGraveyardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChandraAcolyteOfFlameCastGraveyardEffect copy() {
-        return new ChandraAcolyteOfFlameCastGraveyardEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (controller == null || card == null) {
-            return false;
-        }
-        if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + '?', source, game)) {
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-            controller.cast(controller.chooseAbilityForCast(card, game, false),
-                    game, false, new ApprovingObject(source, game));
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-            ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect();
-            effect.setTargetPointer(new FixedTarget(card, game));
-            game.addEffect(effect, source);
-        }
         return true;
     }
 }

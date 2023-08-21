@@ -1,16 +1,12 @@
 package mage.cards.d;
 
-import mage.ApprovingObject;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleEvasionAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.MayCastTargetThenExileEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.CrewAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -22,13 +18,13 @@ import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author TheElk801, Grath, xenohedron
  */
 public final class DeluxeDragster extends CardImpl {
 
@@ -68,11 +64,15 @@ public final class DeluxeDragster extends CardImpl {
 
 class DeluxeDragsterTriggeredAbility extends TriggeredAbilityImpl {
 
-    public DeluxeDragsterTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DeluxeDragsterEffect(), true);
+    DeluxeDragsterTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new MayCastTargetThenExileEffect(true)
+                .setText("you may cast target instant or sorcery card from "
+                        + "that player's graveyard without paying its mana cost. "
+                        + ThatSpellGraveyardExileReplacementEffect.RULE_A), false);
+        setTriggerPhrase("Whenever {this} deals combat damage to a player, ");
     }
 
-    public DeluxeDragsterTriggeredAbility(final DeluxeDragsterTriggeredAbility ability) {
+    private DeluxeDragsterTriggeredAbility(final DeluxeDragsterTriggeredAbility ability) {
         super(ability);
     }
 
@@ -95,56 +95,15 @@ class DeluxeDragsterTriggeredAbility extends TriggeredAbilityImpl {
         if (damagedPlayer == null) {
             return false;
         }
-        FilterCard filter = new FilterCard("instant or sorcery in " + damagedPlayer.getName() + "'s graveyard");
-        filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
+        FilterCard filter = new FilterCard("instant or sorcery card from that player's graveyard");
         filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
-        TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
+        filter.add(Predicates.or(
+                CardType.INSTANT.getPredicate(),
+                CardType.SORCERY.getPredicate()
+        ));
+        Target target = new TargetCardInGraveyard(filter);
         this.getTargets().clear();
         this.addTarget(target);
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, "
-                + "you may cast target instant or sorcery card from "
-                + "that player's graveyard without paying its mana cost. "
-                + ThatSpellGraveyardExileReplacementEffect.RULE_A;
-    }
-}
-
-class DeluxeDragsterEffect extends OneShotEffect {
-
-    public DeluxeDragsterEffect() {
-        super(Outcome.PlayForFree);
-        this.staticText = "cast target instant or sorcery card from "
-                + "that player's graveyard without paying its mana cost. "
-                + ThatSpellGraveyardExileReplacementEffect.RULE_A;
-    }
-
-    public DeluxeDragsterEffect(final DeluxeDragsterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DeluxeDragsterEffect copy() {
-        return new DeluxeDragsterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(source.getFirstTarget());
-        if (controller == null || card == null) {
-            return false;
-        }
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-        controller.cast(controller.chooseAbilityForCast(card, game, true),
-                game, true, new ApprovingObject(source, game));
-        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-        ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(false);
-        effect.setTargetPointer(new FixedTarget(card, game));
-        game.addEffect(effect, source);
         return true;
     }
 }

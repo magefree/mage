@@ -19,14 +19,6 @@ public class ThatSpellGraveyardExileReplacementEffect extends ReplacementEffectI
     public static final String RULE_YOUR = "If that spell would be put into your graveyard, exile it instead.";
 
     /**
-     * If that spell would be put into your graveyard, exiles it instead.
-     * Must set target pointer to fixed target.
-     */
-    public ThatSpellGraveyardExileReplacementEffect() {
-        this(true);
-    }
-
-    /**
      * If that spell would be put into a graveyard, exiles it instead.
      * Must set target pointer to fixed target.
      */
