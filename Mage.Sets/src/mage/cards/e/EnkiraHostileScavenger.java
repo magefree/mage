@@ -1,4 +1,4 @@
-package mage.cards.m;
+package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -23,9 +23,9 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class MichonneRuthlessSurvivor extends CardImpl {
+public final class EnkiraHostileScavenger extends CardImpl {
 
-    public MichonneRuthlessSurvivor(UUID ownerId, CardSetInfo setInfo) {
+    public EnkiraHostileScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -47,13 +47,13 @@ public final class MichonneRuthlessSurvivor extends CardImpl {
         this.addAbility(new MichonneRuthlessSurvivorAbility());
     }
 
-    private MichonneRuthlessSurvivor(final MichonneRuthlessSurvivor card) {
+    private EnkiraHostileScavenger(final EnkiraHostileScavenger card) {
         super(card);
     }
 
     @Override
-    public MichonneRuthlessSurvivor copy() {
-        return new MichonneRuthlessSurvivor(this);
+    public EnkiraHostileScavenger copy() {
+        return new EnkiraHostileScavenger(this);
     }
 }
 
