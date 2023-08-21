@@ -5,8 +5,9 @@ import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.Card;
@@ -19,11 +20,10 @@ import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -44,10 +44,8 @@ public final class WrexialTheRisenDeep extends CardImpl {
         // Swampwalk
         this.addAbility(new SwampwalkAbility());
 
-        // Whenever Wrexial, the Risen Deep deals combat damage to a player, 
-        // you may cast target instant or sorcery card from that player's graveyard 
-        // without paying its mana cost. If that card would be put into a graveyard 
-        // this turn, exile it instead.
+        // Whenever Wrexial, the Risen Deep deals combat damage to a player, you may cast target instant or sorcery card from that player's graveyard without paying its mana cost.
+        // If that card would be put into a graveyard this turn, exile it instead.
         this.addAbility(new WrexialTheRisenDeepTriggeredAbility());
     }
 
@@ -108,7 +106,7 @@ class WrexialTheRisenDeepTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever {this} deals combat damage to a player, "
                 + "you may cast target instant or sorcery card "
                 + "from that player's graveyard without paying its mana cost. "
-                + "If that spell would be put into a graveyard, exile it instead.";
+                + ThatSpellGraveyardExileReplacementEffect.RULE_A;
     }
 }
 
@@ -118,7 +116,7 @@ class WrexialTheRisenDeepEffect extends OneShotEffect {
         super(Outcome.PlayForFree);
         staticText = "you may cast target instant or sorcery card from "
                 + "that player's graveyard without paying its mana cost. "
-                + "If that spell would be put into a graveyard this turn, exile it instead";
+                + ThatSpellGraveyardExileReplacementEffect.RULE_A;
     }
 
     public WrexialTheRisenDeepEffect(final WrexialTheRisenDeepEffect effect) {
@@ -134,61 +132,16 @@ class WrexialTheRisenDeepEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getFirstTarget());
-        if (controller == null
-                || card == null) {
+        if (controller == null || card == null) {
             return false;
         }
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
         controller.cast(controller.chooseAbilityForCast(card, game, true),
                 game, true, new ApprovingObject(source, game));
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-        game.addEffect(new WrexialReplacementEffect(card.getId()), source);
+        ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(false);
+        effect.setTargetPointer(new FixedTarget(card, game));
+        game.addEffect(effect, source);
         return true;
     }
-}
-
-class WrexialReplacementEffect extends ReplacementEffectImpl {
-
-    private final UUID cardid;
-
-    public WrexialReplacementEffect(UUID cardid) {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        this.cardid = cardid;
-    }
-
-    public WrexialReplacementEffect(final WrexialReplacementEffect effect) {
-        super(effect);
-        this.cardid = effect.cardid;
-    }
-
-    @Override
-    public WrexialReplacementEffect copy() {
-        return new WrexialReplacementEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && event.getTargetId().equals(cardid);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        UUID eventObject = event.getTargetId();
-        StackObject card = game.getStack().getStackObject(eventObject);
-        Player controller = game.getPlayer(source.getControllerId());
-        if (card != null && controller != null) {
-            if (card instanceof Card) {
-                return controller.moveCards((Card) card, Zone.EXILED, source, game);
-            }
-        }
-        return false;
-    }
-
 }

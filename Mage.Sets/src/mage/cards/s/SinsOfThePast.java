@@ -1,11 +1,11 @@
-
 package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileCardEnteringGraveyardReplacementEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
+import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,7 +16,6 @@ import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 
 /**
  * @author emerald000
@@ -28,7 +27,7 @@ public final class SinsOfThePast extends CardImpl {
 
         // Until end of turn, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that card would be put into your graveyard this turn, exile it instead. Exile Sins of the Past.
         this.getSpellAbility().addEffect(new SinsOfThePastEffect());
-        this.getSpellAbility().addEffect(new ExileSourceEffect());
+        this.getSpellAbility().addEffect(new ExileSpellEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard()));
     }
 
@@ -46,7 +45,8 @@ class SinsOfThePastEffect extends OneShotEffect {
 
     SinsOfThePastEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Until end of turn, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead";
+        this.staticText = "Until end of turn, you may cast target instant or sorcery card from your graveyard without paying its mana cost. "
+                + ThatSpellGraveyardExileReplacementEffect.RULE_YOUR;
     }
 
     SinsOfThePastEffect(final SinsOfThePastEffect effect) {
@@ -65,8 +65,9 @@ class SinsOfThePastEffect extends OneShotEffect {
             ContinuousEffect effect = new PlayFromNotOwnHandZoneTargetEffect(Zone.GRAVEYARD, TargetController.YOU, Duration.EndOfTurn, true);
             effect.setTargetPointer(new FixedTarget(card, game));
             game.addEffect(effect, source);
-            effect = new ExileCardEnteringGraveyardReplacementEffect(card.getId());
-            game.addEffect(effect, source);
+            ContinuousEffect effect2 = new ThatSpellGraveyardExileReplacementEffect();
+            effect2.setTargetPointer(new FixedTarget(card, game));
+            game.addEffect(effect2, source);
             return true;
         }
         return false;

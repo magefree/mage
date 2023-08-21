@@ -1,31 +1,28 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,7 +69,7 @@ class GoblinDarkDwellersEffect extends OneShotEffect {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast target instant or sorcery card with "
                 + "mana value 3 or less from your graveyard without paying its mana cost. "
-                + "If that spell would be put into your graveyard, exile it instead";
+                + ThatSpellGraveyardExileReplacementEffect.RULE_YOUR;
     }
 
     GoblinDarkDwellersEffect(final GoblinDarkDwellersEffect effect) {
@@ -87,62 +84,19 @@ class GoblinDarkDwellersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
-            if (card != null) {
-                if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + '?', source, game)) {
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                    boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                            game, true, new ApprovingObject(source, game));
-                    game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                    if (cardWasCast) {
-                        ContinuousEffect effect = new GoblinDarkDwellersReplacementEffect(card.getId());
-                        effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
-                        game.addEffect(effect, source);
-                    }
-                }
-            }
-            return true;
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
+        if (controller == null || card == null) {
+            return false;
         }
-        return false;
-    }
-}
-
-class GoblinDarkDwellersReplacementEffect extends ReplacementEffectImpl {
-
-    private final UUID cardId;
-
-    GoblinDarkDwellersReplacementEffect(UUID cardId) {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        this.cardId = cardId;
-        staticText = "If that card would be put into your graveyard this turn, exile it instead";
-    }
-
-    GoblinDarkDwellersReplacementEffect(final GoblinDarkDwellersReplacementEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-    }
-
-    @Override
-    public GoblinDarkDwellersReplacementEffect copy() {
-        return new GoblinDarkDwellersReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getTargetId().equals(this.cardId);
+        if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + '?', source, game)) {
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+            controller.cast(controller.chooseAbilityForCast(card, game, true),
+                    game, true, new ApprovingObject(source, game));
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+            ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect();
+            effect.setTargetPointer(new FixedTarget(card, game));
+            game.addEffect(effect, source);
+        }
+        return true;
     }
 }

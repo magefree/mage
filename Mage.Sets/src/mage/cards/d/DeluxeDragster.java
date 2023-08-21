@@ -7,8 +7,8 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleEvasionAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
+import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.CrewAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -21,7 +21,6 @@ import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
@@ -109,9 +108,8 @@ class DeluxeDragsterTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever {this} deals combat damage to a player, "
                 + "you may cast target instant or sorcery card from "
-                + "that player's graveyard without paying its mana "
-                + "cost. If that spell would be put into a graveyard, "
-                + "exile it instead.";
+                + "that player's graveyard without paying its mana cost. "
+                + ThatSpellGraveyardExileReplacementEffect.RULE_A;
     }
 }
 
@@ -119,10 +117,9 @@ class DeluxeDragsterEffect extends OneShotEffect {
 
     public DeluxeDragsterEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may cast target instant or sorcery card from "
-                + "that player's graveyard without paying its mana "
-                + "cost. If that spell would be put into a graveyard, "
-                + "exile it instead";
+        this.staticText = "cast target instant or sorcery card from "
+                + "that player's graveyard without paying its mana cost. "
+                + ThatSpellGraveyardExileReplacementEffect.RULE_A;
     }
 
     public DeluxeDragsterEffect(final DeluxeDragsterEffect effect) {
@@ -137,61 +134,17 @@ class DeluxeDragsterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card targetCard = game.getCard(source.getFirstTarget());
-            if (targetCard != null) {
-                game.getState().setValue("PlayFromNotOwnHandZone" + targetCard.getId(), Boolean.TRUE);
-                Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(targetCard, game, true),
-                        game, true, new ApprovingObject(source, game));
-                game.getState().setValue("PlayFromNotOwnHandZone" + targetCard.getId(), null);
-                if (cardWasCast) {
-                    ContinuousEffect effect = new DeluxeDragsterReplacementEffect();
-                    effect.setTargetPointer(new FixedTarget(targetCard.getId(), game.getState().getZoneChangeCounter(targetCard.getId())));
-                    game.addEffect(effect, source);
-                }
-            }
-            return true;
+        Card card = game.getCard(source.getFirstTarget());
+        if (controller == null || card == null) {
+            return false;
         }
-        return false;
-    }
-}
-
-class DeluxeDragsterReplacementEffect extends ReplacementEffectImpl {
-
-    public DeluxeDragsterReplacementEffect() {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        staticText = "If that spell would be put into a graveyard this turn, exile it instead";
-    }
-
-    public DeluxeDragsterReplacementEffect(final DeluxeDragsterReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DeluxeDragsterReplacementEffect copy() {
-        return new DeluxeDragsterReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
+        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+        controller.cast(controller.chooseAbilityForCast(card, game, true),
+                game, true, new ApprovingObject(source, game));
+        game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+        ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(false);
+        effect.setTargetPointer(new FixedTarget(card, game));
+        game.addEffect(effect, source);
         return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && event.getTargetId().equals(getTargetPointer().getFirst(game, source));
     }
 }

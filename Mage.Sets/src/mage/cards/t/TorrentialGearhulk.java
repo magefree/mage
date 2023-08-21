@@ -6,16 +6,16 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
@@ -65,7 +65,7 @@ class TorrentialGearhulkEffect extends OneShotEffect {
     TorrentialGearhulkEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast target instant card from your graveyard without paying its mana cost. "
-                + "If that spell would be put into your graveyard, exile it instead";
+                + ThatSpellGraveyardExileReplacementEffect.RULE_YOUR;
     }
 
     TorrentialGearhulkEffect(final TorrentialGearhulkEffect effect) {
@@ -81,59 +81,18 @@ class TorrentialGearhulkEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
-        if (controller != null && card != null) {
-            if (controller.chooseUse(outcome, "Cast " + card.getLogName() + '?', source, game)) {
-                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-                boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
-                        game, true, new ApprovingObject(source, game));
-                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-                if (cardWasCast) {
-                    ContinuousEffect effect = new TorrentialGearhulkReplacementEffect(card.getId());
-                    effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
-                    game.addEffect(effect, source);
-                }
-            }
-            return true;
+        if (controller == null || card == null) {
+            return false;
         }
-        return false;
-    }
-}
-
-class TorrentialGearhulkReplacementEffect extends ReplacementEffectImpl {
-
-    private final UUID cardId;
-
-    TorrentialGearhulkReplacementEffect(UUID cardId) {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        this.cardId = cardId;
-        staticText = "If that card would be put into your graveyard this turn, exile it instead";
-    }
-
-    TorrentialGearhulkReplacementEffect(final TorrentialGearhulkReplacementEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-    }
-
-    @Override
-    public TorrentialGearhulkReplacementEffect copy() {
-        return new TorrentialGearhulkReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getTargetId().equals(this.cardId);
+        if (controller.chooseUse(outcome, "Cast " + card.getLogName() + '?', source, game)) {
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+            controller.cast(controller.chooseAbilityForCast(card, game, true),
+                    game, true, new ApprovingObject(source, game));
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+            ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect();
+            effect.setTargetPointer(new FixedTarget(card, game));
+            game.addEffect(effect, source);
+        }
+        return true;
     }
 }

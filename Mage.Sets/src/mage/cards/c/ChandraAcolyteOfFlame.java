@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.ApprovingObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -9,6 +10,7 @@ import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
+import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -22,11 +24,10 @@ import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.RedElementalToken;
 import mage.game.permanent.token.Token;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
@@ -61,7 +62,7 @@ public final class ChandraAcolyteOfFlame extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ChandraAcolyteOfFlameEffect(), 0));
 
         // -2: You may cast target instant or sorcery card with converted mana cost 3 or less from your graveyard. If that card would be put into your graveyard this turn, exile it instead.
-        Ability ability = new LoyaltyAbility(new ChandraAcolyteOfFlameGraveyardEffect(), -2);
+        Ability ability = new LoyaltyAbility(new ChandraAcolyteOfFlameCastGraveyardEffect(), -2);
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);
     }
@@ -120,100 +121,40 @@ class ChandraAcolyteOfFlameEffect extends OneShotEffect {
     }
 }
 
-class ChandraAcolyteOfFlameGraveyardEffect extends OneShotEffect {
+class ChandraAcolyteOfFlameCastGraveyardEffect extends OneShotEffect {
 
-    ChandraAcolyteOfFlameGraveyardEffect() {
+    ChandraAcolyteOfFlameCastGraveyardEffect() {
         super(Outcome.Benefit);
         this.staticText = "You may cast target instant or sorcery card " +
-                "with mana value 3 or less from your graveyard this turn. " +
-                "If that card would be put into your graveyard this turn, exile it instead";
+                "with mana value 3 or less from your graveyard. " +
+                ThatSpellGraveyardExileReplacementEffect.RULE_YOUR;
     }
 
-    private ChandraAcolyteOfFlameGraveyardEffect(final ChandraAcolyteOfFlameGraveyardEffect effect) {
+    private ChandraAcolyteOfFlameCastGraveyardEffect(final ChandraAcolyteOfFlameCastGraveyardEffect effect) {
         super(effect);
     }
 
     @Override
-    public ChandraAcolyteOfFlameGraveyardEffect copy() {
-        return new ChandraAcolyteOfFlameGraveyardEffect(this);
+    public ChandraAcolyteOfFlameCastGraveyardEffect copy() {
+        return new ChandraAcolyteOfFlameCastGraveyardEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
-        if (card != null) {
-            ContinuousEffect effect = new ChandraAcolyteOfFlameCastFromGraveyardEffect();
+        Player controller = game.getPlayer(source.getControllerId());
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
+        if (controller == null || card == null) {
+            return false;
+        }
+        if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + '?', source, game)) {
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+            controller.cast(controller.chooseAbilityForCast(card, game, false),
+                    game, false, new ApprovingObject(source, game));
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+            ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect();
             effect.setTargetPointer(new FixedTarget(card, game));
             game.addEffect(effect, source);
-            effect = new ChandraAcolyteOfFlameReplacementEffect(card.getId());
-            game.addEffect(effect, source);
-            return true;
         }
-        return false;
-    }
-}
-
-class ChandraAcolyteOfFlameCastFromGraveyardEffect extends AsThoughEffectImpl {
-
-    ChandraAcolyteOfFlameCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-    }
-
-    private ChandraAcolyteOfFlameCastFromGraveyardEffect(final ChandraAcolyteOfFlameCastFromGraveyardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return true;
-    }
-
-    @Override
-    public ChandraAcolyteOfFlameCastFromGraveyardEffect copy() {
-        return new ChandraAcolyteOfFlameCastFromGraveyardEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return objectId.equals(this.getTargetPointer().getFirst(game, source)) && affectedControllerId.equals(source.getControllerId());
-    }
-}
-
-class ChandraAcolyteOfFlameReplacementEffect extends ReplacementEffectImpl {
-
-    private final UUID cardId;
-
-    ChandraAcolyteOfFlameReplacementEffect(UUID cardId) {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        this.cardId = cardId;
-        staticText = "If that card would be put into your graveyard this turn, exile it instead";
-    }
-
-    private ChandraAcolyteOfFlameReplacementEffect(final ChandraAcolyteOfFlameReplacementEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-    }
-
-    @Override
-    public ChandraAcolyteOfFlameReplacementEffect copy() {
-        return new ChandraAcolyteOfFlameReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getTargetId().equals(this.cardId);
     }
 }

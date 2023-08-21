@@ -1,30 +1,30 @@
 package mage.cards.d;
 
+import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author TheElk801
@@ -86,7 +86,7 @@ class DreadhordeArcanistEffect extends OneShotEffect {
         super(Outcome.PlayForFree);
         this.staticText = "you may cast target instant or sorcery card with mana value "
                 + "less than or equal to {this}'s power from your graveyard without paying its mana cost. "
-                + "If that spell would be put into your graveyard this turn, exile it instead.";
+                + ThatSpellGraveyardExileReplacementEffect.RULE_YOUR;
     }
 
     private DreadhordeArcanistEffect(final DreadhordeArcanistEffect effect) {
@@ -101,59 +101,19 @@ class DreadhordeArcanistEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
+        if (controller == null || card == null) {
             return false;
         }
-        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
-        if (card != null
-                && controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + '?', source, game)) {
+        if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + '?', source, game)) {
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
             controller.cast(controller.chooseAbilityForCast(card, game, true),
                     game, true, new ApprovingObject(source, game));
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+            ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect();
+            effect.setTargetPointer(new FixedTarget(card, game));
+            game.addEffect(effect, source);
         }
-        ContinuousEffect effect = new DreadhordeArcanistReplacementEffect(card.getId());
-        effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
-        game.addEffect(effect, source);
         return true;
-    }
-}
-
-class DreadhordeArcanistReplacementEffect extends ReplacementEffectImpl {
-
-    private final UUID cardId;
-
-    DreadhordeArcanistReplacementEffect(UUID cardId) {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        this.cardId = cardId;
-        staticText = "If that card would be put into your graveyard this turn, exile it instead";
-    }
-
-    private DreadhordeArcanistReplacementEffect(final DreadhordeArcanistReplacementEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-    }
-
-    @Override
-    public DreadhordeArcanistReplacementEffect copy() {
-        return new DreadhordeArcanistReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getTargetId().equals(this.cardId);
     }
 }

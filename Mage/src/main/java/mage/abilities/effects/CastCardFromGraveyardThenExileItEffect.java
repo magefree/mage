@@ -1,15 +1,12 @@
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
+import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -38,8 +35,9 @@ public class CastCardFromGraveyardThenExileItEffect extends OneShotEffect {
         ContinuousEffect effect = new CastCardFromGraveyardEffect();
         effect.setTargetPointer(new FixedTarget(card, game));
         game.addEffect(effect, source);
-        effect = new ExileReplacementEffect(card.getId());
-        game.addEffect(effect, source);
+        ContinuousEffect effect2 = new ThatSpellGraveyardExileReplacementEffect();
+        effect2.setTargetPointer(new FixedTarget(card, game));
+        game.addEffect(effect2, source);
         return true;
     }
 }
@@ -69,47 +67,5 @@ class CastCardFromGraveyardEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         return objectId.equals(this.getTargetPointer().getFirst(game, source))
                 && affectedControllerId.equals(source.getControllerId());
-    }
-}
-
-class ExileReplacementEffect extends ReplacementEffectImpl {
-
-    private final UUID cardId;
-
-    ExileReplacementEffect(UUID cardId) {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        this.cardId = cardId;
-        this.staticText = "If that card would be put into your graveyard this turn, exile it instead";
-    }
-
-    private ExileReplacementEffect(final ExileReplacementEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-    }
-
-    @Override
-    public ExileReplacementEffect copy() {
-        return new ExileReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(this.cardId);
-        return controller != null
-                && card != null
-                && controller.moveCards(card, Zone.EXILED, source, game);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getTargetId().equals(this.cardId);
     }
 }

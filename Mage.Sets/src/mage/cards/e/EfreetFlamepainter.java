@@ -4,8 +4,9 @@ import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileCardEnteringGraveyardReplacementEffect;
+import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -17,6 +18,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -57,7 +59,8 @@ class EfreetFlamepainterEffect extends OneShotEffect {
 
     EfreetFlamepainterEffect() {
         super(Outcome.PlayForFree);
-        staticText = "you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead";
+        staticText = "you may cast target instant or sorcery card from your graveyard without paying its mana cost. "
+                + ThatSpellGraveyardExileReplacementEffect.RULE_YOUR;
     }
 
     EfreetFlamepainterEffect(EfreetFlamepainterEffect effect) {
@@ -71,11 +74,13 @@ class EfreetFlamepainterEffect extends OneShotEffect {
         if (targetId != null) {
             Card card = game.getCard(targetId);
             if (card != null && controller.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
-                game.addEffect(new ExileCardEnteringGraveyardReplacementEffect(card.getId()), source);
                 game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                 controller.cast(controller.chooseAbilityForCast(card, game, true),
                     game, true, new ApprovingObject(source, game));
                 game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+                ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect();
+                effect.setTargetPointer(new FixedTarget(card, game));
+                game.addEffect(effect, source);
             }
         }
         return true;
