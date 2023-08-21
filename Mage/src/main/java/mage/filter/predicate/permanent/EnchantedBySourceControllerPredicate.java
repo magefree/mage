@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * @author Xanderhall
  */
-public enum EnchantedByPlayerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+public enum EnchantedBySourceControllerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
 instance;
 
     @Override
@@ -25,6 +25,6 @@ instance;
 
     @Override
     public String toString() {
-        return "Enchanted by player";
+        return "Enchanted by source";
     }
 }

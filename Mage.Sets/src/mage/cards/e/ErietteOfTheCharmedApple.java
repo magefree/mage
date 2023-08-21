@@ -17,7 +17,7 @@ import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.EnchantedByPlayerPredicate;
+import mage.filter.predicate.permanent.EnchantedBySourceControllerPredicate;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -30,14 +30,9 @@ import mage.constants.Duration;
 public final class ErietteOfTheCharmedApple extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures enchanted by an Aura you control");
-    private static final DynamicValue count;
 
     static {
-        filter.add(EnchantedByPlayerPredicate.instance);
-
-        FilterPermanent auraFilter = new FilterControlledEnchantmentPermanent();
-        auraFilter.add(SubType.AURA.getPredicate());
-        count = new PermanentsOnBattlefieldCount(auraFilter);
+        filter.add(EnchantedBySourceControllerPredicate.instance);   
     }
 
     public ErietteOfTheCharmedApple(UUID ownerId, CardSetInfo setInfo) {
@@ -53,6 +48,10 @@ public final class ErietteOfTheCharmedApple extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter, true)));
 
         // At the beginning of your end step, each opponent loses X life and you gain X life, where X is the number of Auras you control.
+        FilterPermanent auraFilter = new FilterControlledEnchantmentPermanent();
+        auraFilter.add(SubType.AURA.getPredicate());
+        DynamicValue count = new PermanentsOnBattlefieldCount(auraFilter);
+
         Ability ability = new BeginningOfEndStepTriggeredAbility(new LoseLifeOpponentsEffect(count), TargetController.YOU, false);
         ability.addEffect(new GainLifeEffect(count));
         ability.addHint(new ValueHint("Number of Auras you control", count));
