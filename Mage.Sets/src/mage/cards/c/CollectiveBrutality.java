@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCreaturePermanent;
@@ -45,7 +44,7 @@ public final class CollectiveBrutality extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(3);
 
         // Target opponent reveals their hand. You choose an instant or sorcery card from it. That player discards that card.
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.OPPONENT));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
         this.getSpellAbility().addTarget(new TargetOpponent().withChooseHint("reveals hand, you choose to discard"));
 
         // Target creature gets -2/-2 until end of turn.

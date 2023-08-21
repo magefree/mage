@@ -20,6 +20,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Ellivere of the Wild Court", 2, Rarity.MYTHIC, mage.cards.e.EllivereOfTheWildCourt.class));
+        cards.add(new SetCardInfo("Gylwain, Casting Director", 4, Rarity.MYTHIC, mage.cards.g.GylwainCastingDirector.class));
         cards.add(new SetCardInfo("Tegwyll, Duke of Splendor", 1, Rarity.MYTHIC, mage.cards.t.TegwyllDukeOfSplendor.class));
     }
 }
