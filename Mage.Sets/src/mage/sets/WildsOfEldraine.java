@@ -64,6 +64,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Harried Spearguard", 135, Rarity.COMMON, mage.cards.h.HarriedSpearguard.class));
         cards.add(new SetCardInfo("Hopeless Nightmare", 95, Rarity.COMMON, mage.cards.h.HopelessNightmare.class));
         cards.add(new SetCardInfo("Howling Galefang", 175, Rarity.UNCOMMON, mage.cards.h.HowlingGalefang.class));
+        cards.add(new SetCardInfo("Icewrought Sentry", 55, Rarity.UNCOMMON, mage.cards.i.IcewroughtSentry.class));
         cards.add(new SetCardInfo("Ingenious Prodigy", 56, Rarity.RARE, mage.cards.i.IngeniousProdigy.class));
         cards.add(new SetCardInfo("Into the Fae Court", 57, Rarity.COMMON, mage.cards.i.IntoTheFaeCourt.class));
         cards.add(new SetCardInfo("Island", 263, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
