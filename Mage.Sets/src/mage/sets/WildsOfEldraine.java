@@ -37,6 +37,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Blossoming Tortoise", 163, Rarity.MYTHIC, mage.cards.b.BlossomingTortoise.class));
         cards.add(new SetCardInfo("Boundary Lands Ranger", 123, Rarity.UNCOMMON, mage.cards.b.BoundaryLandsRanger.class));
         cards.add(new SetCardInfo("Bramble Familiar", 164, Rarity.RARE, mage.cards.b.BrambleFamiliar.class));
+        cards.add(new SetCardInfo("Brave the Wilds", 165, Rarity.COMMON, mage.cards.b.BraveTheWilds.class));
         cards.add(new SetCardInfo("Break the Spell", 5, Rarity.COMMON, mage.cards.b.BreakTheSpell.class));
         cards.add(new SetCardInfo("Callous Sell-Sword", 221, Rarity.UNCOMMON, mage.cards.c.CallousSellSword.class));
         cards.add(new SetCardInfo("Chancellor of Tales", 45, Rarity.UNCOMMON, mage.cards.c.ChancellorOfTales.class));
