@@ -4,9 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetOpponentsCreaturePermanent;
@@ -16,7 +14,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.delayed.WhenTargetLeavesBattlefieldDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -62,7 +60,7 @@ class LuciusTheEternalEffect extends OneShotEffect {
 
     LuciusTheEternalEffect() {
         super(Outcome.Benefit);
-        this.staticText = "and choose target creature an opponent controls. When that creature leaves the battlefield, return Lucius the Eternal from exile to the battlefield under its owner's control.";
+        this.staticText = "exile it and choose target creature an opponent controls. When that creature leaves the battlefield, return {this} from exile to the battlefield under its owner's control.";
     }
 
     private LuciusTheEternalEffect(final LuciusTheEternalEffect effect) {
@@ -78,10 +76,10 @@ class LuciusTheEternalEffect extends OneShotEffect {
             return false;
         }
 
-        Permanent permanent = game.getPermanent(target.getFirstTarget());
-        if (permanent == null) {
+        if (game.getPermanent(target.getFirstTarget()) == null) {
             return false;
         }
+
         // Move Lucius to exile
         UUID exileId = CardUtil.getExileZoneId(game, source);
         String exileName = CardUtil.getSourceName(game, source);
@@ -89,12 +87,13 @@ class LuciusTheEternalEffect extends OneShotEffect {
 
         // Create effect to return him
         DelayedTriggeredAbility ability = new WhenTargetLeavesBattlefieldDelayedTriggeredAbility(
-            new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), 
+            new ReturnToBattlefieldUnderOwnerControlSourceEffect(), 
             Duration.Custom, 
-            SetTargetPointer.PERMANENT_TARGET
+            SetTargetPointer.CARD
         );
         ability.addTarget(target);
         game.addDelayedTriggeredAbility(ability, source);
+
         return true;
     }
 
