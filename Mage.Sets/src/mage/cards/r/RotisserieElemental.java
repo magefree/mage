@@ -43,9 +43,9 @@ public final class RotisserieElemental extends CardImpl {
         ability.addEffect(new DoIfCostPaid(
                 new ExileTopXMayPlayUntilEndOfTurnEffect(xValue)
                         .setText("exile the top X cards of your library, where X is the number of skewer counters "
-                                + "on Rotisserie Elemental. You may play those cards this turn"),
+                                + "on {this}. You may play those cards this turn"),
                 new SacrificeSourceCost().setText("sacrifice it")
-        ));
+        ).concatBy("Then"));
         this.addAbility(ability);
     }
 
