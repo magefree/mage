@@ -86,6 +86,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Lord Skitter's Blessing", 98, Rarity.RARE, mage.cards.l.LordSkittersBlessing.class));
         cards.add(new SetCardInfo("Lord Skitter's Butcher", 99, Rarity.UNCOMMON, mage.cards.l.LordSkittersButcher.class));
         cards.add(new SetCardInfo("Lord Skitter, Sewer King", 97, Rarity.RARE, mage.cards.l.LordSkitterSewerKing.class));
+        cards.add(new SetCardInfo("Mocking Sprite", 62, Rarity.COMMON, mage.cards.m.MockingSprite.class));
         cards.add(new SetCardInfo("Monstrous Rage", 142, Rarity.UNCOMMON, mage.cards.m.MonstrousRage.class));
         cards.add(new SetCardInfo("Moonshaker Cavalry", 21, Rarity.MYTHIC, mage.cards.m.MoonshakerCavalry.class));
         cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
