@@ -110,6 +110,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Royal Treatment", 183, Rarity.UNCOMMON, mage.cards.r.RoyalTreatment.class));
         cards.add(new SetCardInfo("Ruby, Daring Tracker", 212, Rarity.UNCOMMON, mage.cards.r.RubyDaringTracker.class));
         cards.add(new SetCardInfo("Scalding Viper", 235, Rarity.RARE, mage.cards.s.ScaldingViper.class));
+        cards.add(new SetCardInfo("Sentinel of Lost Lore", 184, Rarity.RARE, mage.cards.s.SentinelOfLostLore.class));
         cards.add(new SetCardInfo("Sharae of Numbing Depths", 213, Rarity.UNCOMMON, mage.cards.s.SharaeOfNumbingDepths.class));
         cards.add(new SetCardInfo("Shrouded Shepherd", 236, Rarity.UNCOMMON, mage.cards.s.ShroudedShepherd.class));
         cards.add(new SetCardInfo("Skybeast Tracker", 185, Rarity.COMMON, mage.cards.s.SkybeastTracker.class));
