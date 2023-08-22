@@ -1,4 +1,4 @@
-package mage.cards.r;
+package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -25,7 +25,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -33,7 +32,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class RickSteadfastLeader extends CardImpl {
+public final class GreymondAvacynsStalwart extends CardImpl {
 
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent(SubType.HUMAN, "");
@@ -42,7 +41,7 @@ public final class RickSteadfastLeader extends CardImpl {
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(filter2, ComparisonType.MORE_THAN, 3);
 
-    public RickSteadfastLeader(UUID ownerId, CardSetInfo setInfo) {
+    public GreymondAvacynsStalwart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -64,13 +63,13 @@ public final class RickSteadfastLeader extends CardImpl {
         )));
     }
 
-    private RickSteadfastLeader(final RickSteadfastLeader card) {
+    private GreymondAvacynsStalwart(final GreymondAvacynsStalwart card) {
         super(card);
     }
 
     @Override
-    public RickSteadfastLeader copy() {
-        return new RickSteadfastLeader(this);
+    public GreymondAvacynsStalwart copy() {
+        return new GreymondAvacynsStalwart(this);
     }
 }
 

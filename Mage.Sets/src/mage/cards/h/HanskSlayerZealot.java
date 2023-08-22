@@ -1,4 +1,4 @@
-package mage.cards.d;
+package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -25,7 +25,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class DarylHunterOfWalkers extends CardImpl {
+public final class HanskSlayerZealot extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterPermanent(SubType.ZOMBIE, "a Zombie an opponent controls");
@@ -34,7 +34,7 @@ public final class DarylHunterOfWalkers extends CardImpl {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
-    public DarylHunterOfWalkers(UUID ownerId, CardSetInfo setInfo) {
+    public HanskSlayerZealot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -62,12 +62,12 @@ public final class DarylHunterOfWalkers extends CardImpl {
         ));
     }
 
-    private DarylHunterOfWalkers(final DarylHunterOfWalkers card) {
+    private HanskSlayerZealot(final HanskSlayerZealot card) {
         super(card);
     }
 
     @Override
-    public DarylHunterOfWalkers copy() {
-        return new DarylHunterOfWalkers(this);
+    public HanskSlayerZealot copy() {
+        return new HanskSlayerZealot(this);
     }
 }
