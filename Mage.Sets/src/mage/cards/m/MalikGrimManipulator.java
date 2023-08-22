@@ -1,4 +1,4 @@
-package mage.cards.n;
+package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -25,9 +25,9 @@ import java.util.*;
 /**
  * @author TheElk801
  */
-public final class NeganTheColdBlooded extends CardImpl {
+public final class MalikGrimManipulator extends CardImpl {
 
-    public NeganTheColdBlooded(UUID ownerId, CardSetInfo setInfo) {
+    public MalikGrimManipulator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}{B}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -49,13 +49,13 @@ public final class NeganTheColdBlooded extends CardImpl {
         ));
     }
 
-    private NeganTheColdBlooded(final NeganTheColdBlooded card) {
+    private MalikGrimManipulator(final MalikGrimManipulator card) {
         super(card);
     }
 
     @Override
-    public NeganTheColdBlooded copy() {
-        return new NeganTheColdBlooded(this);
+    public MalikGrimManipulator copy() {
+        return new MalikGrimManipulator(this);
     }
 }
 

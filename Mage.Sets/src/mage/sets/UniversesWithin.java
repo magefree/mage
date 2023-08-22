@@ -27,11 +27,17 @@ public final class UniversesWithin extends ExpansionSet {
         cards.add(new SetCardInfo("Bjorna, Nightfall Alchemist", 2, Rarity.RARE, mage.cards.b.BjornaNightfallAlchemist.class));
         cards.add(new SetCardInfo("Cecily, Haunted Mage", 3, Rarity.RARE, mage.cards.c.CecilyHauntedMage.class));
         cards.add(new SetCardInfo("Elmar, Ulvenwald Informant", 4, Rarity.RARE, mage.cards.e.ElmarUlvenwaldInformant.class));
+        cards.add(new SetCardInfo("Enkira, Hostile Scavenger", 20, Rarity.MYTHIC, mage.cards.e.EnkiraHostileScavenger.class));
+        cards.add(new SetCardInfo("Gisa's Favorite Shovel", 19, Rarity.MYTHIC, mage.cards.g.GisasFavoriteShovel.class));
+        cards.add(new SetCardInfo("Gregor, Shrewd Magistrate", 21, Rarity.MYTHIC, mage.cards.g.GregorShrewdMagistrate.class));
+        cards.add(new SetCardInfo("Greymond, Avacyn's Stalwart", 18, Rarity.MYTHIC, mage.cards.g.GreymondAvacynsStalwart.class));
+        cards.add(new SetCardInfo("Hansk, Slayer Zealot", 22, Rarity.MYTHIC, mage.cards.h.HanskSlayerZealot.class));
         cards.add(new SetCardInfo("Hargilde, Kindly Runechanter", 5, Rarity.RARE, mage.cards.h.HargildeKindlyRunechanter.class));
         cards.add(new SetCardInfo("Havengul Laboratory", 9, Rarity.RARE, mage.cards.h.HavengulLaboratory.class));
         cards.add(new SetCardInfo("Havengul Mystery", 9, Rarity.RARE, mage.cards.h.HavengulMystery.class));
         cards.add(new SetCardInfo("Immard, the Stormcleaver", 14, Rarity.RARE, mage.cards.i.ImmardTheStormcleaver.class));
         cards.add(new SetCardInfo("Maarika, Brutal Gladiator", 15, Rarity.RARE, mage.cards.m.MaarikaBrutalGladiator.class));
+        cards.add(new SetCardInfo("Malik, Grim Manipulator", 23, Rarity.MYTHIC, mage.cards.m.MalikGrimManipulator.class));
         cards.add(new SetCardInfo("Othelm, Sigardian Outcast", 6, Rarity.RARE, mage.cards.o.OthelmSigardianOutcast.class));
         cards.add(new SetCardInfo("Sophina, Spearsage Deserter", 7, Rarity.RARE, mage.cards.s.SophinaSpearsageDeserter.class));
         cards.add(new SetCardInfo("Tadeas, Juniper Ascendant", 16, Rarity.RARE, mage.cards.t.TadeasJuniperAscendant.class));

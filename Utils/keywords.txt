@@ -5,6 +5,7 @@ Ascend|new|
 Assist|new|
 Backup|card, number|
 Basic landcycling|cost|
+Bargain|new|
 Battle cry|new|
 Bestow|card, manaString|
 Blitz|card, manaString|

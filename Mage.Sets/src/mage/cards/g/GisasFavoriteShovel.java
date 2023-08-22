@@ -1,4 +1,4 @@
-package mage.cards.l;
+package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
@@ -24,9 +24,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 /**
  * @author TheElk801
  */
-public final class Lucille extends CardImpl {
+public final class GisasFavoriteShovel extends CardImpl {
 
-    public Lucille(UUID ownerId, CardSetInfo setInfo) {
+    public GisasFavoriteShovel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{B}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -46,13 +46,13 @@ public final class Lucille extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
-    private Lucille(final Lucille card) {
+    private GisasFavoriteShovel(final GisasFavoriteShovel card) {
         super(card);
     }
 
     @Override
-    public Lucille copy() {
-        return new Lucille(this);
+    public GisasFavoriteShovel copy() {
+        return new GisasFavoriteShovel(this);
     }
 }
 
