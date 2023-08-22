@@ -43,7 +43,7 @@ public final class SpecterOfMortality extends CardImpl {
                         new ExileFromGraveCost(
                                 new TargetCardInYourGraveyard(
                                         1, Integer.MAX_VALUE,
-                                        StaticFilters.FILTER_CARD_CREATURES, true
+                                        StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD, true
                                 ), true
                         ),
                         "Exile creature cards from your graveyard?"
@@ -65,7 +65,7 @@ class SpecterOfMortalityEffect extends OneShotEffect {
 
     SpecterOfMortalityEffect() {
         super(Outcome.Removal);
-        staticText = "Each other creature gets -X/-X until end of turn, where X is the number of cards exiled this way";
+        staticText = "each other creature gets -X/-X until end of turn, where X is the number of cards exiled this way";
     }
 
     private SpecterOfMortalityEffect(final SpecterOfMortalityEffect effect) {
