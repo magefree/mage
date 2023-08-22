@@ -45,7 +45,7 @@ public final class TempestHart extends AdventureCard {
 
         // Scan the Clouds
         // Draw two cards, then discard two cards.
-        this.getSpellCard().getSpellAbility().addEffect(new DrawDiscardControllerEffect(2, 1));
+        this.getSpellCard().getSpellAbility().addEffect(new DrawDiscardControllerEffect(2, 2));
     }
 
     private TempestHart(final TempestHart card) {
