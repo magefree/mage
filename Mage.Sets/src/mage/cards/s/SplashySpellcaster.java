@@ -43,6 +43,8 @@ public final class SplashySpellcaster extends CardImpl {
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
         );
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1, filter, false));
+
+        this.addAbility(ability);
     }
 
     private SplashySpellcaster(final SplashySpellcaster card) {
