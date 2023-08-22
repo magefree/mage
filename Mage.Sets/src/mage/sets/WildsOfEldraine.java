@@ -49,6 +49,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Cut In", 125, Rarity.COMMON, mage.cards.c.CutIn.class));
         cards.add(new SetCardInfo("Decadent Dragon", 223, Rarity.RARE, mage.cards.d.DecadentDragon.class));
         cards.add(new SetCardInfo("Discerning Financier", 10, Rarity.UNCOMMON, mage.cards.d.DiscerningFinancier.class));
+        cards.add(new SetCardInfo("Disdainful Stroke", 47, Rarity.UNCOMMON, mage.cards.d.DisdainfulStroke.class));
         cards.add(new SetCardInfo("Dutiful Griffin", 11, Rarity.UNCOMMON, mage.cards.d.DutifulGriffin.class));
         cards.add(new SetCardInfo("Edgewall Inn", 255, Rarity.UNCOMMON, mage.cards.e.EdgewallInn.class));
         cards.add(new SetCardInfo("Elvish Archivist", 168, Rarity.RARE, mage.cards.e.ElvishArchivist.class));
@@ -67,6 +68,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Gadwick's First Duel", 51, Rarity.UNCOMMON, mage.cards.g.GadwicksFirstDuel.class));
         cards.add(new SetCardInfo("Gallant Pie-Wielder", 15, Rarity.UNCOMMON, mage.cards.g.GallantPieWielder.class));
         cards.add(new SetCardInfo("Galvanic Giant", 52, Rarity.UNCOMMON, mage.cards.g.GalvanicGiant.class));
+        cards.add(new SetCardInfo("Gingerbrute", 246, Rarity.COMMON, mage.cards.g.Gingerbrute.class));
         cards.add(new SetCardInfo("Glass Casket", 16, Rarity.UNCOMMON, mage.cards.g.GlassCasket.class));
         cards.add(new SetCardInfo("Graceful Takedown", 171, Rarity.UNCOMMON, mage.cards.g.GracefulTakedown.class));
         cards.add(new SetCardInfo("Grand Ball Guest", 134, Rarity.COMMON, mage.cards.g.GrandBallGuest.class));
@@ -100,7 +102,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Night of the Sweets' Revenge", 178, Rarity.UNCOMMON, mage.cards.n.NightOfTheSweetsRevenge.class));
         cards.add(new SetCardInfo("Not Dead After All", 101, Rarity.COMMON, mage.cards.n.NotDeadAfterAll.class));
         cards.add(new SetCardInfo("Obyra, Dreaming Duelist", 210, Rarity.UNCOMMON, mage.cards.o.ObyraDreamingDuelist.class));
-        cards.add(new SetCardInfo("Picklock Prankster", 64, Rarity.COMMON, mage.cards.p.PicklockPrankster.class));
+        cards.add(new SetCardInfo("Picklock Prankster", 64, Rarity.UNCOMMON, mage.cards.p.PicklockPrankster.class));
         cards.add(new SetCardInfo("Picnic Ruiner", 232, Rarity.UNCOMMON, mage.cards.p.PicnicRuiner.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prophetic Prism", 249, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
@@ -162,7 +164,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Twisted Fealty", 154, Rarity.UNCOMMON, mage.cards.t.TwistedFealty.class));
         cards.add(new SetCardInfo("Twisted Sewer-Witch", 114, Rarity.UNCOMMON, mage.cards.t.TwistedSewerWitch.class));
         cards.add(new SetCardInfo("Two-Headed Hunter", 155, Rarity.UNCOMMON, mage.cards.t.TwoHeadedHunter.class));
-        cards.add(new SetCardInfo("Up the Beanstalk", 195, Rarity.COMMON, mage.cards.u.UpTheBeanstalk.class));
+        cards.add(new SetCardInfo("Up the Beanstalk", 195, Rarity.UNCOMMON, mage.cards.u.UpTheBeanstalk.class));
         cards.add(new SetCardInfo("Virtue of Knowledge", 76, Rarity.MYTHIC, mage.cards.v.VirtueOfKnowledge.class));
         cards.add(new SetCardInfo("Virtue of Loyalty", 38, Rarity.MYTHIC, mage.cards.v.VirtueOfLoyalty.class));
         cards.add(new SetCardInfo("Virtue of Persistence", 115, Rarity.MYTHIC, mage.cards.v.VirtueOfPersistence.class));
