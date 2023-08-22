@@ -126,6 +126,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Solitary Sanctuary", 30, Rarity.UNCOMMON, mage.cards.s.SolitarySanctuary.class));
         cards.add(new SetCardInfo("Soul-Guide Lantern", 251, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
         cards.add(new SetCardInfo("Specter of Mortality", 107, Rarity.RARE, mage.cards.s.SpecterOfMortality.class));
+        cards.add(new SetCardInfo("Spell Stutter", 69, Rarity.COMMON, mage.cards.s.SpellStutter.class));
         cards.add(new SetCardInfo("Spellbook Vendor", 31, Rarity.RARE, mage.cards.s.SpellbookVendor.class));
         cards.add(new SetCardInfo("Spellscorn Coven", 237, Rarity.UNCOMMON, mage.cards.s.SpellscornCoven.class));
         cards.add(new SetCardInfo("Spiteful Hexmage", 108, Rarity.RARE, mage.cards.s.SpitefulHexmage.class));
