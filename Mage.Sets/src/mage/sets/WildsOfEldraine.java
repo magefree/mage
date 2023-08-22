@@ -120,6 +120,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Restless Bivouac", 257, Rarity.RARE, mage.cards.r.RestlessBivouac.class));
         cards.add(new SetCardInfo("Restless Cottage", 258, Rarity.RARE, mage.cards.r.RestlessCottage.class));
         cards.add(new SetCardInfo("Restless Fortress", 259, Rarity.RARE, mage.cards.r.RestlessFortress.class));
+        cards.add(new SetCardInfo("Restless Vinestalk", 261, Rarity.RARE, mage.cards.r.RestlessVinestalk.class));
         cards.add(new SetCardInfo("Restless Spire", 260, Rarity.RARE, mage.cards.r.RestlessSpire.class));
         cards.add(new SetCardInfo("Return Triumphant", 26, Rarity.COMMON, mage.cards.r.ReturnTriumphant.class));
         cards.add(new SetCardInfo("Return from the Wilds", 181, Rarity.COMMON, mage.cards.r.ReturnFromTheWilds.class));
