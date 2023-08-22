@@ -12,7 +12,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -34,7 +34,7 @@ public final class NotDeadAfterAll extends CardImpl {
         ).setText("until end of turn, target creature you control gains \"When this creature dies, "
                 + "return it to the battlefield tapped under its owner's control, then create a Wicked "
                 + "Role token attached to it.\""));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
     private NotDeadAfterAll(final NotDeadAfterAll card) {
