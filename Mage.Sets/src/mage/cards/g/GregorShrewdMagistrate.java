@@ -17,11 +17,11 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class GlennTheVoiceOfCalm extends CardImpl {
+public final class GregorShrewdMagistrate extends CardImpl {
 
     private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
 
-    public GlennTheVoiceOfCalm(UUID ownerId, CardSetInfo setInfo) {
+    public GregorShrewdMagistrate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
 
         this.supertype.add(SuperType.LEGENDARY);
@@ -39,12 +39,12 @@ public final class GlennTheVoiceOfCalm extends CardImpl {
         ));
     }
 
-    private GlennTheVoiceOfCalm(final GlennTheVoiceOfCalm card) {
+    private GregorShrewdMagistrate(final GregorShrewdMagistrate card) {
         super(card);
     }
 
     @Override
-    public GlennTheVoiceOfCalm copy() {
-        return new GlennTheVoiceOfCalm(this);
+    public GregorShrewdMagistrate copy() {
+        return new GregorShrewdMagistrate(this);
     }
 }
