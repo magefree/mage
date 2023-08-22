@@ -122,6 +122,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Spellbook Vendor", 31, Rarity.RARE, mage.cards.s.SpellbookVendor.class));
         cards.add(new SetCardInfo("Spiteful Hexmage", 108, Rarity.RARE, mage.cards.s.SpitefulHexmage.class));
         cards.add(new SetCardInfo("Stonesplitter Bolt", 151, Rarity.UNCOMMON, mage.cards.s.StonesplitterBolt.class));
+        cards.add(new SetCardInfo("Stormkeld Vanguard", 187, Rarity.UNCOMMON, mage.cards.s.StormkeldVanguard.class));
         cards.add(new SetCardInfo("Stroke of Midnight", 33, Rarity.UNCOMMON, mage.cards.s.StrokeOfMidnight.class));
         cards.add(new SetCardInfo("Swamp", 264, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sweettooth Witch", 111, Rarity.COMMON, mage.cards.s.SweettoothWitch.class));
