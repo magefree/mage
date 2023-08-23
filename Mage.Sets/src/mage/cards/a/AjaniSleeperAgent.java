@@ -1,26 +1,25 @@
 package mage.cards.a;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
+import mage.abilities.keyword.CompleatedAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
-import mage.cards.CardsImpl;
-import mage.constants.*;
-import mage.abilities.keyword.CompleatedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.command.emblems.AjaniSleeperAgentEmblem;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.target.common.TargetUpToCreaturePermanentAmount;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,10 +43,7 @@ public final class AjaniSleeperAgent extends CardImpl {
         // −3: Distribute three +1/+1 counters among up to three target creatures. They gain vigilance until end of turn.
         Ability ability = new LoyaltyAbility(new DistributeCountersEffect(CounterType.P1P1, 3, false, "up to three target creatures"), -3);
         ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance()).setText("They gain vigilance until end of turn"));
-        Target target = new TargetCreaturePermanentAmount(3);
-        target.setMinNumberOfTargets(0);
-        target.setMaxNumberOfTargets(3);
-        ability.addTarget(target);
+        ability.addTarget(new TargetUpToCreaturePermanentAmount(3));
         this.addAbility(ability);
 
         // −6: You get an emblem with "Whenever you cast a creature or planeswalker spell, target opponent gets two poison counters."
