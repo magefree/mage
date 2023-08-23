@@ -13,10 +13,8 @@ import mage.util.RandomUtil;
 
 import java.util.*;
 
-public class SmoothedLondonMulligan extends Mulligan {
+public class SmoothedLondonMulligan extends LondonMulligan {
 
-    private final Map<UUID, Integer> startingHandSizes = new HashMap<>();
-    private final Map<UUID, Integer> openingHandSizes = new HashMap<>();
 
     public SmoothedLondonMulligan(int freeMulligans) {
         super(freeMulligans);
@@ -24,46 +22,6 @@ public class SmoothedLondonMulligan extends Mulligan {
 
     SmoothedLondonMulligan(final SmoothedLondonMulligan mulligan) {
         super(mulligan);
-
-        this.startingHandSizes.putAll(mulligan.startingHandSizes);
-        this.openingHandSizes.putAll(mulligan.openingHandSizes);
-    }
-
-    @Override
-    public void executeMulliganPhase(Game game, int startingHandSize) {
-        /*
-         * Based on the London Mulligan, but looks at two hands from the top of the deck. Draws one and shuffles
-         * the other away based on a stochastic process which leans towards the average land ratio of the deck.
-         */
-
-        for (UUID playerId : game.getState().getPlayerList(game.getStartingPlayerId())) {
-            openingHandSizes.put(playerId, startingHandSize);
-            startingHandSizes.put(playerId, startingHandSize);
-        }
-
-        super.executeMulliganPhase(game, startingHandSize);
-    }
-
-    @Override
-    public int mulliganDownTo(Game game, UUID playerId) {
-        Player player = game.getPlayer(playerId);
-        int deduction = 1;
-        if (freeMulligans > 0) {
-            if (usedFreeMulligans.containsKey(player.getId())) {
-                int used = usedFreeMulligans.get(player.getId());
-                if (used < freeMulligans) {
-                    deduction = 0;
-                }
-            } else {
-                deduction = 0;
-            }
-        }
-        return openingHandSizes.get(playerId) - deduction;
-    }
-
-    @Override
-    public boolean canTakeMulligan(Game game, Player player) {
-        return super.canTakeMulligan(game, player) && openingHandSizes.get(player.getId()) > 0;
     }
 
     @Override
@@ -126,10 +84,6 @@ public class SmoothedLondonMulligan extends Mulligan {
             player.chooseTarget(Outcome.Discard, target, null, game);
             player.putCardsOnBottomOfLibrary(new CardsImpl(target.getTargets()), game, null, true);
         }
-    }
-
-    @Override
-    public void endMulligan(Game game, UUID playerId) {
     }
 
     @Override
