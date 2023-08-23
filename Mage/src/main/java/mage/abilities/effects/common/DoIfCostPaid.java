@@ -160,9 +160,8 @@ public class DoIfCostPaid extends OneShotEffect {
             return staticText;
         }
         return (optional ? "you may " : "")
-                + CardUtil.addCostVerb(cost.getText())
-                + ". If you do, "
-                + executingEffects.getText(mode)
+                + CardUtil.addCostVerb(cost.getText()) + "."
+                + (!executingEffects.isEmpty() ? " If you do, " + executingEffects.getText(mode) : "")
                 + (!otherwiseEffects.isEmpty() ? " If you don't, " + otherwiseEffects.getText(mode) : "");
     }
 
