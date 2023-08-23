@@ -3,18 +3,13 @@ package mage.game.mulligan;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetCardInHand;
 import mage.util.RandomUtil;
 
 import java.util.*;
 
 public class SmoothedLondonMulligan extends LondonMulligan {
-
 
     public SmoothedLondonMulligan(int freeMulligans) {
         super(freeMulligans);
@@ -25,15 +20,15 @@ public class SmoothedLondonMulligan extends LondonMulligan {
     }
 
     @Override
-    protected void drawHand(int numCards, Player player, Game game){
+    public void drawHand(int numCards, Player player, Game game){
         List<Card> library = player.getLibrary().getCards(game);
         if (library.size() >= numCards*2 && numCards > 1) {
             double land_ratio = (double) library.stream().filter(w -> w.getCardType().contains(CardType.LAND)).count() / (double) library.size();
             Set<Card> hand1 = player.getLibrary().getTopCards(game, numCards);
             Set<Card> hand2 = player.getLibrary().getTopCards(game, numCards * 2);
             hand2.removeAll(hand1);
-            double hand1_ratio = (double) (hand1.stream().filter(w -> w.getCardType().contains(CardType.LAND)).count()) / (double) numCards;
-            double hand2_ratio = (double) (hand2.stream().filter(w -> w.getCardType().contains(CardType.LAND)).count()) / (double) numCards;
+            double hand1_ratio = (double) (hand1.stream().filter(Card::isLand).count()) / (double) numCards;
+            double hand2_ratio = (double) (hand2.stream().filter(Card::isLand).count()) / (double) numCards;
             //distance = max(0,abs(land_ratio-hand_ratio)-0.15)+random()*0.3
             //Where land_ratio is (deck lands/deck size) and hand_ratio is (hand lands/hand size)
             //Keeps whichever hand's distance is smaller. Note that a 1-land difference is 1/7 = 0.143
@@ -56,6 +51,7 @@ public class SmoothedLondonMulligan extends LondonMulligan {
             player.drawCards(numCards, null, game);
         }
     }
+
     @Override
     public SmoothedLondonMulligan copy() {
         return new SmoothedLondonMulligan(this);

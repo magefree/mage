@@ -76,9 +76,6 @@ public class LondonMulligan extends Mulligan {
         return super.canTakeMulligan(game, player) && openingHandSizes.get(player.getId()) > 0;
     }
 
-    protected void drawHand(int numCards, Player player, Game game){
-        player.drawCards(numCards, null, game);
-    }
     @Override
     public void mulligan(Game game, UUID playerId) {
         Player player = game.getPlayer(playerId);
