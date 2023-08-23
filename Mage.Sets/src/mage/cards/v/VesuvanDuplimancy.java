@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.other.HasOnlySingleTargetPermanentPredicate;
@@ -38,7 +37,7 @@ public final class VesuvanDuplimancy extends CardImpl {
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate()
         ));
-        filter.add(new HasOnlySingleTargetPermanentPredicate(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
+        filter.add(new HasOnlySingleTargetPermanentPredicate(subfilter));
     }
 
     public VesuvanDuplimancy(UUID ownerId, CardSetInfo setInfo) {

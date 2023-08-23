@@ -86,7 +86,7 @@ public class ImodaneThePyrohammerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerB, 20); // Only damage on the bears should be accounted for.
+        assertLife(playerB, 20); // No damage from Imodane
         assertPermanentCount(playerB, bears, 0);
         assertPermanentCount(playerB, lion, 0);
     }
@@ -109,7 +109,7 @@ public class ImodaneThePyrohammerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertLife(playerB, 20 - 1);
+        assertLife(playerB, 20 - 1); // No damage from Imodane, but one from Shower of Sparks
         assertPermanentCount(playerB, bears, 1);
         assertDamageReceived(playerB, bears, 1);
     }
@@ -133,7 +133,7 @@ public class ImodaneThePyrohammerTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerB, 20);
+        assertLife(playerB, 20); // No damage from Imodane
         assertPermanentCount(playerB, bears, 1);
         assertDamageReceived(playerB, bears, 1);
     }
