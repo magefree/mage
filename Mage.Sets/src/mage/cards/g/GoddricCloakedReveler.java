@@ -57,7 +57,7 @@ public final class GoddricCloakedReveler extends CardImpl {
                                 .withSubType(SubType.DRAGON)
                                 .withAbility(FlyingAbility.getInstance())
                                 .withAbility(dragonFirebreath),
-                        null, Duration.WhileOnBattlefield
+                        CardType.CREATURE, Duration.WhileOnBattlefield
                 ),
                 CelebrationCondition.instance, "As long as two or more nonland permanents entered the battlefield under "
                 + "your control this turn, {this} is a Dragon with base power and toughness 4/4, flying, "
