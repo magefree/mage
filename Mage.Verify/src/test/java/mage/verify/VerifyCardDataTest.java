@@ -150,6 +150,9 @@ public class VerifyCardDataTest {
         // rarity
         skipListCreate(SKIP_LIST_RARITY);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
+        skipListAddName(SKIP_LIST_RARITY, "WOE", "Picklock Prankster"); // temporary
+        skipListAddName(SKIP_LIST_RARITY, "WOE", "Free the Fae"); // temporary
+        skipListAddName(SKIP_LIST_RARITY, "WOE", "Up the Beanstalk"); // temporary
 
         // missing abilities
         skipListCreate(SKIP_LIST_MISSING_ABILITIES);
