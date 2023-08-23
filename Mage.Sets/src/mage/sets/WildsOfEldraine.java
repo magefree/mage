@@ -41,7 +41,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Break the Spell", 5, Rarity.COMMON, mage.cards.b.BreakTheSpell.class));
         cards.add(new SetCardInfo("Callous Sell-Sword", 221, Rarity.UNCOMMON, mage.cards.c.CallousSellSword.class));
         cards.add(new SetCardInfo("Candy Grapple", 83, Rarity.COMMON, mage.cards.c.CandyGrapple.class));
-        cards.add(new SetCardInfo("Candy Trail", 105, Rarity.COMMON, mage.cards.c.CandyTrail.class));
+        cards.add(new SetCardInfo("Candy Trail", 243, Rarity.COMMON, mage.cards.c.CandyTrail.class));
         cards.add(new SetCardInfo("Chancellor of Tales", 45, Rarity.UNCOMMON, mage.cards.c.ChancellorOfTales.class));
         cards.add(new SetCardInfo("Charmed Clothier", 6, Rarity.COMMON, mage.cards.c.CharmedClothier.class));
         cards.add(new SetCardInfo("Charming Scoundrel", 124, Rarity.RARE, mage.cards.c.CharmingScoundrel.class));
@@ -53,9 +53,10 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Discerning Financier", 10, Rarity.UNCOMMON, mage.cards.d.DiscerningFinancier.class));
         cards.add(new SetCardInfo("Dream Spoilers", 85, Rarity.UNCOMMON, mage.cards.d.DreamSpoilers.class));
         cards.add(new SetCardInfo("Disdainful Stroke", 47, Rarity.UNCOMMON, mage.cards.d.DisdainfulStroke.class));
+        cards.add(new SetCardInfo("Dream Spoilers", 85, Rarity.UNCOMMON, mage.cards.d.DreamSpoilers.class));
         cards.add(new SetCardInfo("Dutiful Griffin", 11, Rarity.UNCOMMON, mage.cards.d.DutifulGriffin.class));
         cards.add(new SetCardInfo("Edgewall Inn", 255, Rarity.UNCOMMON, mage.cards.e.EdgewallInn.class));
-        cards.add(new SetCardInfo("Eerie Interference", 12, Rarity.UNCOMMON, mage.cards.e.EerieInterference.class));
+        cards.add(new SetCardInfo("Eerie Interference", 12, Rarity.RARE, mage.cards.e.EerieInterference.class));
         cards.add(new SetCardInfo("Elvish Archivist", 168, Rarity.RARE, mage.cards.e.ElvishArchivist.class));
         cards.add(new SetCardInfo("Embereth Veteran", 127, Rarity.UNCOMMON, mage.cards.e.EmberethVeteran.class));
         cards.add(new SetCardInfo("Eriette of the Charmed Apple", 202, Rarity.MYTHIC, mage.cards.e.ErietteOfTheCharmedApple.class));
@@ -120,8 +121,8 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Restless Bivouac", 257, Rarity.RARE, mage.cards.r.RestlessBivouac.class));
         cards.add(new SetCardInfo("Restless Cottage", 258, Rarity.RARE, mage.cards.r.RestlessCottage.class));
         cards.add(new SetCardInfo("Restless Fortress", 259, Rarity.RARE, mage.cards.r.RestlessFortress.class));
-        cards.add(new SetCardInfo("Restless Vinestalk", 261, Rarity.RARE, mage.cards.r.RestlessVinestalk.class));
         cards.add(new SetCardInfo("Restless Spire", 260, Rarity.RARE, mage.cards.r.RestlessSpire.class));
+        cards.add(new SetCardInfo("Restless Vinestalk", 261, Rarity.RARE, mage.cards.r.RestlessVinestalk.class));
         cards.add(new SetCardInfo("Return Triumphant", 26, Rarity.COMMON, mage.cards.r.ReturnTriumphant.class));
         cards.add(new SetCardInfo("Return from the Wilds", 181, Rarity.COMMON, mage.cards.r.ReturnFromTheWilds.class));
         cards.add(new SetCardInfo("Rootrider Faun", 182, Rarity.COMMON, mage.cards.r.RootriderFaun.class));
@@ -175,7 +176,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Twisted Sewer-Witch", 114, Rarity.UNCOMMON, mage.cards.t.TwistedSewerWitch.class));
         cards.add(new SetCardInfo("Two-Headed Hunter", 155, Rarity.UNCOMMON, mage.cards.t.TwoHeadedHunter.class));
         cards.add(new SetCardInfo("Unruly Catapult", 156, Rarity.COMMON, mage.cards.u.UnrulyCatapult.class));
-        cards.add(new SetCardInfo("Up the Beanstalk", 195, Rarity.COMMON, mage.cards.u.UpTheBeanstalk.class));
+        cards.add(new SetCardInfo("Up the Beanstalk", 195, Rarity.UNCOMMON, mage.cards.u.UpTheBeanstalk.class));
         cards.add(new SetCardInfo("Virtue of Knowledge", 76, Rarity.MYTHIC, mage.cards.v.VirtueOfKnowledge.class));
         cards.add(new SetCardInfo("Virtue of Loyalty", 38, Rarity.MYTHIC, mage.cards.v.VirtueOfLoyalty.class));
         cards.add(new SetCardInfo("Virtue of Persistence", 115, Rarity.MYTHIC, mage.cards.v.VirtueOfPersistence.class));
