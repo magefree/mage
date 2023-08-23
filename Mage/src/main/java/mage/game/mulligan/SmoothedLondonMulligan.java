@@ -25,36 +25,7 @@ public class SmoothedLondonMulligan extends LondonMulligan {
     }
 
     @Override
-    public void mulligan(Game game, UUID playerId) {
-        Player player = game.getPlayer(playerId);
-        int numCards = startingHandSizes.get(player.getId());
-        player.getLibrary().addAll(player.getHand().getCards(game), game);
-        player.getHand().clear();
-        player.shuffleLibrary(null, game);
-        int deduction = 1;
-        if (freeMulligans > 0) {
-            if (usedFreeMulligans.containsKey(player.getId())) {
-                int used = usedFreeMulligans.get(player.getId());
-                if (used < freeMulligans) {
-                    deduction = 0;
-                    usedFreeMulligans.put(player.getId(), used + 1);
-                }
-            } else {
-                deduction = 0;
-                usedFreeMulligans.put(player.getId(), 1);
-            }
-        }
-        openingHandSizes.put(playerId, openingHandSizes.get(playerId) - deduction);
-        int newHandSize = openingHandSizes.get(player.getId());
-        if (deduction == 0) {
-            game.fireInformEvent(player.getLogName() +
-                    " mulligans for free.");
-        } else {
-            game.fireInformEvent(player.getLogName() +
-                    " mulligans down to " +
-                    newHandSize +
-                    (newHandSize == 1 ? " card" : " cards"));
-        }
+    protected void drawHand(int numCards, Player player, Game game){
         List<Card> library = player.getLibrary().getCards(game);
         if (library.size() >= numCards*2 && numCards > 1) {
             double land_ratio = (double) library.stream().filter(w -> w.getCardType().contains(CardType.LAND)).count() / (double) library.size();
@@ -62,8 +33,12 @@ public class SmoothedLondonMulligan extends LondonMulligan {
             Set<Card> hand2 = player.getLibrary().getTopCards(game, numCards * 2);
             hand2.removeAll(hand1);
             double hand1_ratio = (double) (hand1.stream().filter(w -> w.getCardType().contains(CardType.LAND)).count()) / (double) numCards;
-            double hand1_distance = Math.max(0,Math.abs(land_ratio - hand1_ratio)-0.15)+RandomUtil.nextDouble()*0.3;
             double hand2_ratio = (double) (hand2.stream().filter(w -> w.getCardType().contains(CardType.LAND)).count()) / (double) numCards;
+            //distance = max(0,abs(land_ratio-hand_ratio)-0.15)+random()*0.3
+            //Where land_ratio is (deck lands/deck size) and hand_ratio is (hand lands/hand size)
+            //Keeps whichever hand's distance is smaller. Note that a 1-land difference is 1/7 = 0.143
+            //So -0.15 means that there's no change in relative probabilities if within +1/-1 of the expected amount
+            double hand1_distance = Math.max(0,Math.abs(land_ratio - hand1_ratio)-0.15)+RandomUtil.nextDouble()*0.3;
             double hand2_distance = Math.max(0,Math.abs(land_ratio - hand2_ratio)-0.15)+RandomUtil.nextDouble()*0.3;
             double crossover_point = hand1_distance / (hand1_distance + hand2_distance);
             //game.debugMessage("1: "+hand1_ratio+", 2 = "+hand2_ratio+", expected = "+land_ratio);
@@ -80,14 +55,7 @@ public class SmoothedLondonMulligan extends LondonMulligan {
         } else { //not enough cards in library or hand, just do a normal draw instead
             player.drawCards(numCards, null, game);
         }
-
-        while (player.canRespond() && player.getHand().size() > newHandSize) {
-            Target target = new TargetCardInHand(new FilterCard("card (" + (player.getHand().size() - newHandSize) + " more) to put on the bottom of your library"));
-            player.chooseTarget(Outcome.Discard, target, null, game);
-            player.putCardsOnBottomOfLibrary(new CardsImpl(target.getTargets()), game, null, true);
-        }
     }
-
     @Override
     public SmoothedLondonMulligan copy() {
         return new SmoothedLondonMulligan(this);
