@@ -55,9 +55,7 @@ public class Commander extends CommandObjectImpl {
                     case ADVENTURE_SPELL:
                         // can be used from command zone
                         if (canUseAbilityFromCommandZone(spellAbility)) {
-                            SpellAbility tmp = spellAbility.copy();
-                            tmp.modifyZone(Zone.COMMAND);
-                            abilities.add(tmp);
+                            abilities.add(spellAbility.copyWithZone(Zone.COMMAND));
                         }
                         break;
                     case FACE_DOWN_CREATURE: // dynamic added spell for alternative cost like cast as face down
