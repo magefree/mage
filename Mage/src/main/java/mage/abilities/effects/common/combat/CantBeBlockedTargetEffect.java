@@ -25,17 +25,14 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect {
 
     public CantBeBlockedTargetEffect(Duration duration) {
         this(StaticFilters.FILTER_PERMANENT_CREATURE, duration);
-        this.staticText = null;
     }
 
     public CantBeBlockedTargetEffect(FilterCreaturePermanent filter, Duration duration) {
         super(duration, Outcome.Benefit);
         this.filter = filter;
-        staticText = new StringBuilder("{this} can't be blocked ")
-                .append(filter.getMessage().startsWith("except by") ? "" : "by ").append(filter.getMessage()).toString();
     }
 
-    public CantBeBlockedTargetEffect(CantBeBlockedTargetEffect effect) {
+    protected CantBeBlockedTargetEffect(final CantBeBlockedTargetEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
