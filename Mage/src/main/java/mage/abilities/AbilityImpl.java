@@ -1458,6 +1458,7 @@ public abstract class AbilityImpl implements Ability {
     public AbilityImpl copyWithZone(Zone zone) {
         AbilityImpl copy = ((AbilityImpl)this.copy());
         copy.zone = zone;
+        copy.newId();
         return copy;
     }
 }
