@@ -85,10 +85,18 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (otherwiseEffects.isEmpty()) {
-            return "if " + condition.toString() + ", " + CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode));
+
+        String conditionText = condition.toString();
+        if (conditionText.startsWith("if ") || conditionText.startsWith("If ")) {
+            conditionText = conditionText.substring(3);
         }
-        return effects.getText(mode) + ". If " + condition.toString() + ", " + CardUtil.getTextWithFirstCharLowerCase(otherwiseEffects.getText(mode));
+
+        if (otherwiseEffects.isEmpty()) {
+            return "if " + conditionText + ", "
+                    + CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode));
+        }
+        return effects.getText(mode) + ". If " + conditionText + ", "
+                + CardUtil.getTextWithFirstCharLowerCase(otherwiseEffects.getText(mode));
     }
 
     @Override
