@@ -23,6 +23,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("A Tale for the Ages", 34, Rarity.RARE, mage.cards.a.ATaleForTheAges.class));
         cards.add(new SetCardInfo("Agatha of the Vile Cauldron", 199, Rarity.MYTHIC, mage.cards.a.AgathaOfTheVileCauldron.class));
         cards.add(new SetCardInfo("Agatha's Champion", 160, Rarity.UNCOMMON, mage.cards.a.AgathasChampion.class));
+        cards.add(new SetCardInfo("Archon of the Wild Rose", 1, Rarity.RARE, mage.cards.a.ArchonOfTheWildRose.class));
         cards.add(new SetCardInfo("Armory Mice", 3, Rarity.COMMON, mage.cards.a.ArmoryMice.class));
         cards.add(new SetCardInfo("Ash, Party Crasher", 201, Rarity.UNCOMMON, mage.cards.a.AshPartyCrasher.class));
         cards.add(new SetCardInfo("Ashiok's Reaper", 79, Rarity.UNCOMMON, mage.cards.a.AshioksReaper.class));

@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Xanderhall
  */
 public enum EnchantedBySourceControllerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
-instance;
+    instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
