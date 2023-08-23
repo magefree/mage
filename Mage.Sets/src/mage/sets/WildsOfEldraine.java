@@ -110,6 +110,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Not Dead After All", 101, Rarity.COMMON, mage.cards.n.NotDeadAfterAll.class));
         cards.add(new SetCardInfo("Obyra, Dreaming Duelist", 210, Rarity.UNCOMMON, mage.cards.o.ObyraDreamingDuelist.class));
         cards.add(new SetCardInfo("Old Flitterfang", 316, Rarity.UNCOMMON, mage.cards.o.OldFlitterfang.class));
+        cards.add(new SetCardInfo("Pests of Honor", 310, Rarity.UNCOMMON, mage.cards.p.PestsOfHonor.class));
         cards.add(new SetCardInfo("Picklock Prankster", 64, Rarity.UNCOMMON, mage.cards.p.PicklockPrankster.class));
         cards.add(new SetCardInfo("Picnic Ruiner", 232, Rarity.UNCOMMON, mage.cards.p.PicnicRuiner.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
