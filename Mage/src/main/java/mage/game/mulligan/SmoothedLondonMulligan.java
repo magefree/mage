@@ -2,7 +2,6 @@ package mage.game.mulligan;
 
 import mage.cards.Card;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.RandomUtil;
@@ -19,16 +18,33 @@ public class SmoothedLondonMulligan extends LondonMulligan {
         super(mulligan);
     }
 
+    private static double count_lands(Collection<Card> cards, Boolean library){
+        double land_count = 0;
+        for (Card card : cards){
+            if (card.isLand()) {
+                land_count += 1;
+            } else if (card.getSecondCardFace() != null && card.getSecondCardFace().isLand()){
+                if (library) { //count MDFCs with a nonland front and a land back as:
+                    land_count += 0.5;//half a land in a library
+                } else if (RandomUtil.nextBoolean()){
+                    land_count += 1; //randomly as a land or nonland in a hand
+                    // This avoids the bias problem where adjusting the deck land ratio to be (integer vs X.5)/7
+                    // can greatly affect the chance of drawing an MDFC
+                }
+            }
+        }
+        return land_count;
+    }
     @Override
     public void drawHand(int numCards, Player player, Game game){
         List<Card> library = player.getLibrary().getCards(game);
         if (library.size() >= numCards*2 && numCards > 1) {
-            double land_ratio = (double) library.stream().filter(w -> w.getCardType().contains(CardType.LAND)).count() / (double) library.size();
+            double land_ratio = count_lands(library, true) / (double) library.size();
             Set<Card> hand1 = player.getLibrary().getTopCards(game, numCards);
             Set<Card> hand2 = player.getLibrary().getTopCards(game, numCards * 2);
             hand2.removeAll(hand1);
-            double hand1_ratio = (double) (hand1.stream().filter(Card::isLand).count()) / (double) numCards;
-            double hand2_ratio = (double) (hand2.stream().filter(Card::isLand).count()) / (double) numCards;
+            double hand1_ratio = count_lands(hand1, false) / (double) numCards;
+            double hand2_ratio = count_lands(hand2, false) / (double) numCards;
             //distance = max(0,abs(land_ratio-hand_ratio)-0.15)+random()*0.3
             //Where land_ratio is (deck lands/deck size) and hand_ratio is (hand lands/hand size)
             //Keeps whichever hand's distance is smaller. Note that a 1-land difference is 1/7 = 0.143
