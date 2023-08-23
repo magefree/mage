@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
-//Copied from LondonMulliganTest but with the library checks commented out since they are random
+//Copied from LondonMulliganTest, modified library checks to account for the extra hand put on the bottom
 public class SmoothedLondonMulliganTest extends MulliganTestBase {
 
     @Test
@@ -42,14 +42,14 @@ public class SmoothedLondonMulliganTest extends MulliganTestBase {
         scenario.discardBottom(count -> {
             scenario.assertSizes(7, 33);
             assertEquals(1, count);
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
             scenario.getHand().stream().limit(count).forEach(discarded::add);
             remainingHand.addAll(Sets.difference(scenario.getHand(), new HashSet<>(discarded)));
             return discarded;
         });
         scenario.mulligan(() -> {
             scenario.assertSizes(6, 34);
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
             assertEquals(remainingHand, scenario.getHand());
             hand2.addAll(scenario.getHand());
             return false;
@@ -57,7 +57,7 @@ public class SmoothedLondonMulliganTest extends MulliganTestBase {
         scenario.run(() -> {
             scenario.assertSizes(6, 34);
             assertEquals(remainingHand, new HashSet<>(scenario.getHand()));
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
             assertEquals(hand2, scenario.getHand());
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
         });
@@ -79,23 +79,23 @@ public class SmoothedLondonMulliganTest extends MulliganTestBase {
         scenario.discardBottom(count -> {
             scenario.assertSizes(7, 33);
             assertEquals(1, count);
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
             scenario.getHand().stream().limit(count).forEach(discarded::add);
             remainingHand.addAll(Sets.difference(scenario.getHand(), new HashSet<>(discarded)));
             return discarded;
         });
         scenario.mulligan(() -> {
             scenario.assertSizes(6, 34);
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
             hand2.addAll(scenario.getHand());
             return true;
         });
         scenario.discardBottom(count -> {
             scenario.assertSizes(7, 33);
             assertEquals(1, count);
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
-            //assertEquals(discarded, scenario.getLibraryRangeSize(26, 1));
-            //assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(27, 6)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(5, 7)));
+            assertEquals(discarded, scenario.getLibraryRangeSize(19, 1));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(20, 6)));
             discarded.clear();
             remainingHand.clear();
             scenario.getHand().stream().limit(count).forEach(discarded::add);
@@ -105,9 +105,9 @@ public class SmoothedLondonMulliganTest extends MulliganTestBase {
         scenario.discardBottom(count -> {
             scenario.assertSizes(6, 34);
             assertEquals(1, count);
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(5, 7)));
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
-            //assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(27, 6)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(20, 6)));
             discarded.clear();
             remainingHand.clear();
             scenario.getHand().stream().limit(count).forEach(discarded::add);
@@ -116,8 +116,8 @@ public class SmoothedLondonMulliganTest extends MulliganTestBase {
         });
         scenario.mulligan(() -> {
             scenario.assertSizes(5, 35);
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
-            //assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(27, 6)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(5, 7)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(20, 6)));
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
             hand3.addAll(scenario.getHand());
             return false;
@@ -125,9 +125,9 @@ public class SmoothedLondonMulliganTest extends MulliganTestBase {
         scenario.run(() -> {
             scenario.assertSizes(5, 35);
             assertEquals(remainingHand, new HashSet<>(scenario.getHand()));
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
-            //assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(27, 6)));
-            //assertEquals(hand3, scenario.getHand());
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(5, 7)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(20, 6)));
+            assertEquals(hand3, scenario.getHand());
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
         });
     }
@@ -160,12 +160,12 @@ public class SmoothedLondonMulliganTest extends MulliganTestBase {
         scenario.mulligan(() -> {
             scenario.assertSizes(7, 33);
             hand2.addAll(scenario.getHand());
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
             return false;
         });
         scenario.run(() -> {
             scenario.assertSizes(7, 33);
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
             assertEquals(hand2, new HashSet<>(scenario.getHand()));
         });
     }
@@ -185,31 +185,31 @@ public class SmoothedLondonMulliganTest extends MulliganTestBase {
         });
         scenario.mulligan(() -> {
             scenario.assertSizes(7, 33);
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
             hand2.addAll(scenario.getHand());
             return true;
         });
         scenario.discardBottom(count -> {
             scenario.assertSizes(7, 33);
             assertEquals(1, count);
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
-            //assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(5, 7)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
             scenario.getHand().stream().limit(count).forEach(discarded::add);
             remainingHand.addAll(Sets.difference(scenario.getHand(), new HashSet<>(discarded)));
             return discarded;
         });
         scenario.mulligan(() -> {
             scenario.assertSizes(6, 34);
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
-            //assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(5, 7)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
             hand3.addAll(scenario.getHand());
             return false;
         });
         scenario.run(() -> {
             scenario.assertSizes(6, 34);
-            //assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
-            //assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(5, 7)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
             assertEquals(hand3, scenario.getHand());
             assertEquals(remainingHand, new HashSet<>(scenario.getHand()));
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));

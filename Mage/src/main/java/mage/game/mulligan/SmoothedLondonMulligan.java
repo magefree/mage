@@ -62,14 +62,16 @@ public class SmoothedLondonMulligan extends LondonMulligan {
             Set<Card> hand2 = player.getLibrary().getTopCards(game, numCards * 2);
             hand2.removeAll(hand1);
             double hand1_ratio = (double) (hand1.stream().filter(w -> w.getCardType().contains(CardType.LAND)).count()) / (double) numCards;
-            double hand1_distance = Math.abs(land_ratio - hand1_ratio)+RandomUtil.nextDouble()*0.4;
+            double hand1_distance = Math.max(0,Math.abs(land_ratio - hand1_ratio)-0.15)+RandomUtil.nextDouble()*0.3;
             double hand2_ratio = (double) (hand2.stream().filter(w -> w.getCardType().contains(CardType.LAND)).count()) / (double) numCards;
-            double hand2_distance = Math.abs(land_ratio - hand2_ratio)+RandomUtil.nextDouble()*0.4;
+            double hand2_distance = Math.max(0,Math.abs(land_ratio - hand2_ratio)-0.15)+RandomUtil.nextDouble()*0.3;
             double crossover_point = hand1_distance / (hand1_distance + hand2_distance);
             //game.debugMessage("1: "+hand1_ratio+", 2 = "+hand2_ratio+", expected = "+land_ratio);
             //game.debugMessage("hand1: "+hand1_distance+", hand2: "+hand2_distance+", point: "+crossover_point);
             if (crossover_point < 0.5) {
                 player.drawCards(numCards, null, game);
+                player.putCardsOnBottomOfLibrary(new CardsImpl(hand2), game, null, false);
+                //These are immediately shuffled away, but needed for consistent testing
             } else {
                 player.putCardsOnBottomOfLibrary(new CardsImpl(hand1), game, null, false);
                 player.drawCards(numCards, null, game);
