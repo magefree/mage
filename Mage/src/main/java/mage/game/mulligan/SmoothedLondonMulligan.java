@@ -2,6 +2,7 @@ package mage.game.mulligan;
 
 import mage.cards.Card;
 import mage.cards.CardsImpl;
+import mage.cards.ModalDoubleFacedCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.RandomUtil;
@@ -23,7 +24,7 @@ public class SmoothedLondonMulligan extends LondonMulligan {
         for (Card card : cards){
             if (card.isLand()) {
                 land_count += 1;
-            } else if (card.getSecondCardFace() != null && card.getSecondCardFace().isLand()){
+            } else if (card instanceof ModalDoubleFacedCard && ((ModalDoubleFacedCard)card).getRightHalfCard().isLand()){
                 if (library) { //count MDFCs with a nonland front and a land back as:
                     land_count += 0.5;//half a land in a library
                 } else if (RandomUtil.nextBoolean()){
