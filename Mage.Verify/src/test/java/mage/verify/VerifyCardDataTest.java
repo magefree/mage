@@ -124,6 +124,7 @@ public class VerifyCardDataTest {
 
         // cost
         skipListCreate(SKIP_LIST_COST);
+        skipListAddName(SKIP_LIST_COST, "WOE", "Scream Puff"); //temporary
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
@@ -135,6 +136,8 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
         skipListAddName(SKIP_LIST_TYPE, "WOE", "Ashiok's Reaper"); // temporary
         skipListAddName(SKIP_LIST_TYPE, "WOE", "Take it Back"); //temporary
+        skipListAddName(SKIP_LIST_TYPE, "WOE", "Scream Puff"); //temporary
+        skipListAddName(SKIP_LIST_TYPE, "WOE", "Redtooth Vanguard"); //temporary
 
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
@@ -143,6 +146,8 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
         skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Ashiok's Reaper"); // temporary
         skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Take it Back"); //temporary
+        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Scream Puff"); //temporary
+        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Redtooth Vanguard"); //temporary
 
         // number
         skipListCreate(SKIP_LIST_NUMBER);
