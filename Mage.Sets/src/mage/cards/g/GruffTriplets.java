@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.NameLikeSourcePredicate;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
 import java.util.UUID;
@@ -27,11 +27,11 @@ import java.util.UUID;
 public final class GruffTriplets extends CardImpl {
 
     private static final FilterPermanent filterNonToken = new FilterPermanent("non-token permanent");
-    private static final FilterControlledPermanent filterNamedThis = new FilterControlledPermanent("creature you control named {this}");
+    private static final FilterControlledPermanent filterNamedGruffTriplets = new FilterControlledPermanent("creature you control named Gruff Triplets");
 
     static {
         filterNonToken.add(TokenPredicate.FALSE);
-        filterNamedThis.add(NameLikeSourcePredicate.instance);
+        filterNamedGruffTriplets.add(new NamePredicate("Gruff Triplets"));
     }
 
     public GruffTriplets(UUID ownerId, CardSetInfo setInfo) {
@@ -57,8 +57,8 @@ public final class GruffTriplets extends CardImpl {
                 new AddCountersAllEffect(
                         CounterType.P1P1.createInstance(),
                         new SourcePermanentPowerCount(),
-                        filterNamedThis
-                ).setText("put a number of +1/+1 counters equal to its power on each creature you control named {this}.")
+                        filterNamedGruffTriplets
+                ).setText("put a number of +1/+1 counters equal to its power on each creature you control named Gruff Triplets.")
         ));
     }
 
