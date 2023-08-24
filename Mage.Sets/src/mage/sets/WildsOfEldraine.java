@@ -136,6 +136,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Neva, Stalked by Nightmares", 209, Rarity.UNCOMMON, mage.cards.n.NevaStalkedByNightmares.class));
         cards.add(new SetCardInfo("Night of the Sweets' Revenge", 178, Rarity.UNCOMMON, mage.cards.n.NightOfTheSweetsRevenge.class));
         cards.add(new SetCardInfo("Not Dead After All", 101, Rarity.COMMON, mage.cards.n.NotDeadAfterAll.class));
+        cards.add(new SetCardInfo("Obyra's Attendants", 63, Rarity.COMMON, mage.cards.o.ObyrasAttendants.class));
         cards.add(new SetCardInfo("Obyra, Dreaming Duelist", 210, Rarity.UNCOMMON, mage.cards.o.ObyraDreamingDuelist.class));
         cards.add(new SetCardInfo("Old Flitterfang", 316, Rarity.UNCOMMON, mage.cards.o.OldFlitterfang.class));
         cards.add(new SetCardInfo("Pests of Honor", 310, Rarity.UNCOMMON, mage.cards.p.PestsOfHonor.class));
