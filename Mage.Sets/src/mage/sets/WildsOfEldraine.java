@@ -48,7 +48,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Charmed Clothier", 6, Rarity.COMMON, mage.cards.c.CharmedClothier.class));
         cards.add(new SetCardInfo("Charming Scoundrel", 124, Rarity.RARE, mage.cards.c.CharmingScoundrel.class));
         cards.add(new SetCardInfo("Cheeky House-Mouse", 7, Rarity.UNCOMMON, mage.cards.c.CheekyHouseMouse.class));
-        cards.add(new SetCardInfo("Collector's Vault", 244, Rarity.COMMON, mage.cards.c.CollectorsVault.class));
+        cards.add(new SetCardInfo("Collector's Vault", 244, Rarity.UNCOMMON, mage.cards.c.CollectorsVault.class));
         cards.add(new SetCardInfo("Conceited Witch", 84, Rarity.COMMON, mage.cards.c.ConceitedWitch.class));
         cards.add(new SetCardInfo("Cruel Somnophage", 222, Rarity.RARE, mage.cards.c.CruelSomnophage.class));
         cards.add(new SetCardInfo("Cursed Courtier", 9, Rarity.UNCOMMON, mage.cards.c.CursedCourtier.class));
