@@ -81,6 +81,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Gadwick's First Duel", 51, Rarity.UNCOMMON, mage.cards.g.GadwicksFirstDuel.class));
         cards.add(new SetCardInfo("Gallant Pie-Wielder", 15, Rarity.UNCOMMON, mage.cards.g.GallantPieWielder.class));
         cards.add(new SetCardInfo("Galvanic Giant", 52, Rarity.UNCOMMON, mage.cards.g.GalvanicGiant.class));
+        cards.add(new SetCardInfo("Gingerbread Hunter", 227, Rarity.UNCOMMON, mage.cards.g.GingerbreadHunter.class));
         cards.add(new SetCardInfo("Gingerbrute", 246, Rarity.COMMON, mage.cards.g.Gingerbrute.class));
         cards.add(new SetCardInfo("Glass Casket", 16, Rarity.UNCOMMON, mage.cards.g.GlassCasket.class));
         cards.add(new SetCardInfo("Goddric, Cloaked Reveler", 132, Rarity.RARE, mage.cards.g.GoddricCloakedReveler.class));
