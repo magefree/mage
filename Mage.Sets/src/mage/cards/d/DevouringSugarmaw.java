@@ -38,7 +38,7 @@ public final class DevouringSugarmaw extends AdventureCard {
     }
 
     public DevouringSugarmaw(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{2}{B}{B}", "Have for Dinner", "{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{2}{B}{B}", "Have for Dinner", "{1}{W}");
 
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(6);
