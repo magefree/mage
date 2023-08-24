@@ -64,6 +64,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Dream Spoilers", 85, Rarity.UNCOMMON, mage.cards.d.DreamSpoilers.class));
         cards.add(new SetCardInfo("Dutiful Griffin", 11, Rarity.UNCOMMON, mage.cards.d.DutifulGriffin.class));
         cards.add(new SetCardInfo("Edgewall Inn", 255, Rarity.UNCOMMON, mage.cards.e.EdgewallInn.class));
+        cards.add(new SetCardInfo("Edgewall Pack", 126, Rarity.COMMON, mage.cards.e.EdgewallPack.class));
         cards.add(new SetCardInfo("Eerie Interference", 12, Rarity.UNCOMMON, mage.cards.e.EerieInterference.class));
         cards.add(new SetCardInfo("Elvish Archivist", 168, Rarity.RARE, mage.cards.e.ElvishArchivist.class));
         cards.add(new SetCardInfo("Embereth Veteran", 127, Rarity.UNCOMMON, mage.cards.e.EmberethVeteran.class));
