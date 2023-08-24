@@ -1,19 +1,18 @@
-package mage.game.draft;
+package mage.cards;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.*;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.Card;
 import mage.cards.repository.CardScanner;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.SubType;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.view.CardView;
 import org.apache.log4j.Logger;
 
 import java.io.InputStream;
@@ -30,7 +29,8 @@ public final class RateCard {
     public static final boolean PRELOAD_CARD_RATINGS_ON_STARTUP = false; // warning, rating and card classes preloading can cause lags for users with low memory
 
     private static Map<String, Integer> baseRatings = new HashMap<>();
-    private static final Map<String, Integer> rated = new HashMap<>();
+    private static final Map<String, Integer> ratedCard = new HashMap<>();
+    private static final Map<String, Integer> ratedCardView = new HashMap<>(); // Rating is not exactly the same for CardView, so cached in a different map.
     private static boolean isLoaded = false;
 
     /**
@@ -80,42 +80,96 @@ public final class RateCard {
         return rateCard(card, allowedColors, true);
     }
 
+    public static int rateCard(CardView cardview, List<ColoredManaSymbol> allowedColors) {
+        return rateCard(cardview, allowedColors, true);
+    }
+
     public static int rateCard(Card card, List<ColoredManaSymbol> allowedColors, boolean useCache) {
         if (card == null) {
             return 0;
         }
 
-        if (useCache && allowedColors == null && rated.containsKey(card.getName())) {
-            int rate = rated.get(card.getName());
+        String name = card.getName();
+        if (useCache && allowedColors == null && ratedCard.containsKey(name)) {
+            int rate = ratedCard.get(name);
             return rate;
         }
 
-        int type;
-        if (card.isPlaneswalker()) {
-            type = 15;
-        } else if (card.isCreature()) {
-            type = 10;
-        } else if (card.getSubtype().contains(SubType.EQUIPMENT)) {
-            type = 8;
-        } else if (card.getSubtype().contains(SubType.AURA)) {
-            type = 5;
-        } else if (card.isInstant()) {
-            type = 7;
-        } else {
-            type = 6;
-        }
-        int score = getBaseCardScore(card) + 2 * type + getManaCostScore(card, allowedColors)
+        int typeMultiplier = typeMultiplier(card);
+        int score = getBaseCardScore(card) + 2 * typeMultiplier + getManaCostScore(card, allowedColors)
                 + 40 * isRemoval(card);
 
         if (useCache && allowedColors == null)
-            rated.put(card.getName(), score);
+            ratedCard.put(name, score);
 
         return score;
     }
 
+    public static int rateCard(CardView cardview, List<ColoredManaSymbol> allowedColors, boolean useCache) {
+        if (cardview == null) {
+            return 0;
+        }
+
+        String name = cardview.getName();
+        if (useCache && allowedColors == null && ratedCardView.containsKey(name)) {
+            int rate = ratedCardView.get(name);
+            return rate;
+        }
+
+        int typeMultiplier = typeMultiplier(cardview);
+        int score = getBaseCardScore(cardview) + 2 * typeMultiplier + getManaCostScore(cardview, allowedColors);
+        // Cardview does not have enough info to know the card is a removal.
+
+        if (useCache && allowedColors == null)
+            ratedCardView.put(name, score);
+
+        return score;
+    }
+
+    protected static int typeMultiplier(Card card) {
+        return typeMultiplier(
+                card.isPlaneswalker(),
+                card.isCreature(),
+                card.getSubtype().contains(SubType.EQUIPMENT),
+                card.getSubtype().contains(SubType.AURA),
+                card.isInstant()
+        );
+    }
+
+    protected static int typeMultiplier(CardView cardview) {
+        return typeMultiplier(
+                cardview.isPlaneswalker(),
+                cardview.isCreature(),
+                cardview.getSubTypes().contains(SubType.EQUIPMENT),
+                cardview.getSubTypes().contains(SubType.AURA),
+                cardview.isInstant()
+        );
+    }
+
+    protected static int typeMultiplier(
+            boolean isPlaneswalker,
+            boolean isCreature,
+            boolean isEquipment,
+            boolean isAura,
+            boolean isInstant
+    ) {
+        if (isPlaneswalker) {
+            return 15;
+        } else if (isCreature) {
+            return 10;
+        } else if (isEquipment) {
+            return 8;
+        } else if (isAura) {
+            return 5;
+        } else if (isInstant) {
+            return 7;
+        } else {
+            return 6;
+        }
+    }
+
     private static int isRemoval(Card card) {
         if (card.isEnchantment() || card.isInstantOrSorcery()) {
-
             for (Ability ability : card.getAbilities()) {
                 for (Effect effect : ability.getEffects()) {
                     if (isEffectRemoval(card, ability, effect) == 1) {
@@ -130,7 +184,6 @@ public final class RateCard {
                     }
                 }
             }
-
         }
         return 0;
     }
@@ -168,7 +221,6 @@ public final class RateCard {
         return 0;
     }
 
-
     /**
      * Return rating of the card.
      *
@@ -176,6 +228,20 @@ public final class RateCard {
      * @return Rating number from [1:100].
      */
     public static int getBaseCardScore(Card card) {
+        return getBaseScore(
+                card.getName(),
+                card.getRarity()
+        );
+    }
+
+    public static int getBaseCardScore(CardView cardview) {
+        return getBaseScore(
+                cardview.getName(),
+                cardview.getRarity()
+        );
+    }
+
+    protected static int getBaseScore(String name, Rarity rarity) {
         // same card name must have same rating
 
         // ratings from files
@@ -185,8 +251,8 @@ public final class RateCard {
         // ratings from card rarity
         // some cards can have different rarity -- it's will be used from first set
         int newRating;
-        if (card.getRarity() != null) {
-            switch (card.getRarity()) {
+        if (rarity != null) {
+            switch (rarity) {
                 case COMMON:
                     newRating = DEFAULT_NOT_RATED_CARD_RATING;
                     break;
@@ -200,7 +266,7 @@ public final class RateCard {
                     newRating = DEFAULT_NOT_RATED_MYTHIC_RATING;
                     break;
                 default:
-                    if (isBasicLand(card)) {
+                    if (isBasicLand(name)) {
                         newRating = DEFAULT_BASIC_LAND_RATING;
                     } else {
                         newRating = DEFAULT_NOT_RATED_CARD_RATING;
@@ -212,7 +278,7 @@ public final class RateCard {
             newRating = DEFAULT_NOT_RATED_CARD_RATING;
         }
 
-        int oldRating = baseRatings.getOrDefault(card.getName(), 0);
+        int oldRating = baseRatings.getOrDefault(name, 0);
         if (oldRating != 0 && oldRating != newRating) {
             //log.info("card have different rating by sets: " + card.getName() + " (" + oldRating + " <> " + newRating + ")");
         }
@@ -220,7 +286,7 @@ public final class RateCard {
         if (oldRating != 0) {
             return oldRating;
         } else {
-            baseRatings.put(card.getName(), newRating);
+            baseRatings.put(name, newRating);
             return newRating;
         }
     }
@@ -316,26 +382,44 @@ public final class RateCard {
      * @param allowedColors Can be null.
      * @return
      */
+
     private static int getManaCostScore(Card card, List<ColoredManaSymbol> allowedColors) {
-        int converted = card.getManaValue();
+        return getManaCostScore(
+                card.getName(),
+                card.getManaValue(),
+                card.getManaCostSymbols(),
+                allowedColors
+        );
+    }
+
+    private static int getManaCostScore(CardView cardview, List<ColoredManaSymbol> allowedColors) {
+        return getManaCostScore(
+                cardview.getName(),
+                cardview.getManaValue(),
+                cardview.getManaCostSymbols(),
+                allowedColors
+        );
+    }
+
+    private static int getManaCostScore(String name, int manaValue, List<String> manaCostSymbols, List<ColoredManaSymbol> allowedColors) {
         if (allowedColors == null) {
             int colorPenalty = 0;
-            for (String symbol : card.getManaCostSymbols()) {
+            for (String symbol : manaCostSymbols) {
                 if (isColoredMana(symbol)) {
                     colorPenalty++;
                 }
             }
-            return 2 * (converted - colorPenalty + 1);
+            return 2 * (manaValue - colorPenalty + 1);
         }
-        
+
         // Basic lands have no value so they're always treated as off-color
-        if (isBasicLand(card)) {
+        if (isBasicLand(name)) {
             return OFF_COLOR_PENALTY;
         }
-        
+
         final Map<String, Integer> singleCount = new HashMap<>();
         int maxSingleCount = 0;
-        for (String symbol : card.getManaCostSymbols()) {
+        for (String symbol : manaCostSymbols) {
             int count = 0;
             symbol = symbol.replace("{", "").replace("}", "");
             if (isColoredMana(symbol)) {
@@ -359,7 +443,7 @@ public final class RateCard {
         if (maxSingleCount > 5)
             maxSingleCount = 5;
 
-        int rate = 2 * converted + 3 * (10 - SINGLE_PENALTY[maxSingleCount]);
+        int rate = 2 * manaValue + 3 * (10 - SINGLE_PENALTY[maxSingleCount]);
         if (singleCount.size() > 1 && singleCount.size() < 5) {
             rate += MULTICOLOR_BONUS;
         }
@@ -414,15 +498,14 @@ public final class RateCard {
         }
         return symbols.size();
     }
-    
+
     /**
      * Return true if the card is one of the basic land types that can be added to the deck for free.
      *
-     * @param card
+     * @param name
      * @return
      */
-     public static boolean isBasicLand(Card card) {
-        String name = card.getName();
+    public static boolean isBasicLand(String name) {
         if (name.equals("Plains")
                 || name.equals("Island")
                 || name.equals("Swamp")
