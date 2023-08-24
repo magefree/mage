@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.KnightToken;
 
 import java.util.UUID;
@@ -32,8 +33,12 @@ public final class ImodanesRecruiter extends AdventureCard {
         // When Imodane's Recruiter enters the battlefield, creatures you control get +1/+0 and gain haste until end of turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new BoostControlledEffect(1, 0, Duration.EndOfTurn)
+                        .setText("creatures you control get +1/+0")
         );
-        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        ability.addEffect(new GainAbilityControlledEffect(
+                HasteAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_CONTROLLED_CREATURES
+        ).setText("and gain haste until end of turn"));
         this.addAbility(ability);
 
         // Train Troops
