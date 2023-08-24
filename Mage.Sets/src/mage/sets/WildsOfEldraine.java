@@ -129,6 +129,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Prophetic Prism", 249, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Provisions Merchant", 321, Rarity.UNCOMMON, mage.cards.p.ProvisionsMerchant.class));
         cards.add(new SetCardInfo("Questing Druid", 234, Rarity.RARE, mage.cards.q.QuestingDruid.class));
+        cards.add(new SetCardInfo("Quick Study", 65, Rarity.RARE, mage.cards.q.QuickStudy.class));
         cards.add(new SetCardInfo("Raging Battle Mouse", 143, Rarity.RARE, mage.cards.r.RagingBattleMouse.class));
         cards.add(new SetCardInfo("Rankle's Prank", 102, Rarity.RARE, mage.cards.r.RanklesPrank.class));
         cards.add(new SetCardInfo("Rat Out", 103, Rarity.COMMON, mage.cards.r.RatOut.class));
