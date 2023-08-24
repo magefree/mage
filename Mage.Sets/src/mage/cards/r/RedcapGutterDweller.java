@@ -35,7 +35,7 @@ public final class RedcapGutterDweller extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Redcap Gutter-Dweller enters the battlefield, create two 1/1 black Rat creature tokens with "This creature can't block."
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new RatCantBlockToken(), 2)));
