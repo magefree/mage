@@ -49,8 +49,10 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Charming Scoundrel", 124, Rarity.RARE, mage.cards.c.CharmingScoundrel.class));
         cards.add(new SetCardInfo("Cheeky House-Mouse", 7, Rarity.UNCOMMON, mage.cards.c.CheekyHouseMouse.class));
         cards.add(new SetCardInfo("Collector's Vault", 244, Rarity.UNCOMMON, mage.cards.c.CollectorsVault.class));
+        cards.add(new SetCardInfo("Commune with Nature", 166, Rarity.COMMON, mage.cards.c.CommuneWithNature.class));
         cards.add(new SetCardInfo("Conceited Witch", 84, Rarity.COMMON, mage.cards.c.ConceitedWitch.class));
         cards.add(new SetCardInfo("Cruel Somnophage", 222, Rarity.RARE, mage.cards.c.CruelSomnophage.class));
+        cards.add(new SetCardInfo("Crystal Grotto", 254, Rarity.COMMON, mage.cards.c.CrystalGrotto.class));
         cards.add(new SetCardInfo("Cursed Courtier", 9, Rarity.UNCOMMON, mage.cards.c.CursedCourtier.class));
         cards.add(new SetCardInfo("Cut In", 125, Rarity.COMMON, mage.cards.c.CutIn.class));
         cards.add(new SetCardInfo("Decadent Dragon", 223, Rarity.RARE, mage.cards.d.DecadentDragon.class));
@@ -193,6 +195,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Three Blind Mice", 35, Rarity.RARE, mage.cards.t.ThreeBlindMice.class));
         cards.add(new SetCardInfo("Three Bowls of Porridge", 253, Rarity.UNCOMMON, mage.cards.t.ThreeBowlsOfPorridge.class));
         cards.add(new SetCardInfo("Thunderous Debut", 190, Rarity.RARE, mage.cards.t.ThunderousDebut.class));
+        cards.add(new SetCardInfo("Titanic Growth", 191, Rarity.COMMON, mage.cards.t.TitanicGrowth.class));
         cards.add(new SetCardInfo("Torch the Tower", 153, Rarity.COMMON, mage.cards.t.TorchTheTower.class));
         cards.add(new SetCardInfo("Totentanz, Swarm Piper", 216, Rarity.UNCOMMON, mage.cards.t.TotentanzSwarmPiper.class));
         cards.add(new SetCardInfo("Tough Cookie", 193, Rarity.UNCOMMON, mage.cards.t.ToughCookie.class));
