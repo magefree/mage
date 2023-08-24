@@ -19,7 +19,7 @@ import java.util.UUID;
 public final class GingerbreadHunter extends AdventureCard {
 
     public GingerbreadHunter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{4}{G}", "Gingerbread Hunter", "{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{4}{G}", "Puny Snack", "{2}{B}");
 
         this.subtype.add(SubType.GIANT);
         this.power = new MageInt(5);
