@@ -199,6 +199,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Two-Headed Hunter", 155, Rarity.UNCOMMON, mage.cards.t.TwoHeadedHunter.class));
         cards.add(new SetCardInfo("Unruly Catapult", 156, Rarity.COMMON, mage.cards.u.UnrulyCatapult.class));
         cards.add(new SetCardInfo("Up the Beanstalk", 195, Rarity.UNCOMMON, mage.cards.u.UpTheBeanstalk.class));
+        cards.add(new SetCardInfo("Virtue of Courage", 157, Rarity.MYTHIC, mage.cards.v.VirtueOfCourage.class));
         cards.add(new SetCardInfo("Virtue of Knowledge", 76, Rarity.MYTHIC, mage.cards.v.VirtueOfKnowledge.class));
         cards.add(new SetCardInfo("Virtue of Loyalty", 38, Rarity.MYTHIC, mage.cards.v.VirtueOfLoyalty.class));
         cards.add(new SetCardInfo("Virtue of Persistence", 115, Rarity.MYTHIC, mage.cards.v.VirtueOfPersistence.class));
