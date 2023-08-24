@@ -211,6 +211,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Three Bowls of Porridge", 253, Rarity.UNCOMMON, mage.cards.t.ThreeBowlsOfPorridge.class));
         cards.add(new SetCardInfo("Thunderous Debut", 190, Rarity.RARE, mage.cards.t.ThunderousDebut.class));
         cards.add(new SetCardInfo("Titanic Growth", 191, Rarity.COMMON, mage.cards.t.TitanicGrowth.class));
+        cards.add(new SetCardInfo("Toadstool Admirer", 192, Rarity.COMMON, mage.cards.t.ToadstoolAdmirer.class));
         cards.add(new SetCardInfo("Torch the Tower", 153, Rarity.COMMON, mage.cards.t.TorchTheTower.class));
         cards.add(new SetCardInfo("Totentanz, Swarm Piper", 216, Rarity.UNCOMMON, mage.cards.t.TotentanzSwarmPiper.class));
         cards.add(new SetCardInfo("Tough Cookie", 193, Rarity.UNCOMMON, mage.cards.t.ToughCookie.class));
