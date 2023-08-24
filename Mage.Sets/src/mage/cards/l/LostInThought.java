@@ -164,12 +164,12 @@ class LostInThoughtSpecialAction extends SpecialAction {
 
 class LostInThoughtIgnoreEffect extends OneShotEffect {
 
-    public LostInThoughtIgnoreEffect() {
+    LostInThoughtIgnoreEffect() {
         super(Outcome.Benefit);
         this.staticText = "Its controller may exile three cards from their graveyard for that player to ignore this effect until end of turn";
     }
 
-    public LostInThoughtIgnoreEffect(final LostInThoughtIgnoreEffect effect) {
+    private LostInThoughtIgnoreEffect(final LostInThoughtIgnoreEffect effect) {
         super(effect);
     }
 

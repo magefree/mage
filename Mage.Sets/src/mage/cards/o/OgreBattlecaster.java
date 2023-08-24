@@ -8,8 +8,8 @@ import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.replacement.ThatSpellGraveyardExileReplacementEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -18,8 +18,6 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
@@ -64,9 +62,10 @@ class OgreBattlecasterEffect extends OneShotEffect {
 
     OgreBattlecasterEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "you may cast target instant or sorcery card from your graveyard " + 
-            "by paying {R}{R} in addition to its other costs. If that spell would be put into a graveyard, exile it instead. " + 
-            "When you cast that spell, {this} gets +X/+0 until end of turn, where X is that spell's mana value";
+        this.staticText = "you may cast target instant or sorcery card from your graveyard "
+                + "by paying {R}{R} in addition to its other costs. "
+                + ThatSpellGraveyardExileReplacementEffect.RULE_A
+                + " When you cast that spell, {this} gets +X/+0 until end of turn, where X is that spell's mana value";
     }
 
     private OgreBattlecasterEffect(final OgreBattlecasterEffect effect) {
@@ -81,7 +80,7 @@ class OgreBattlecasterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller == null || card == null) {
             return false;
         }
@@ -98,49 +97,10 @@ class OgreBattlecasterEffect extends OneShotEffect {
                 game.fireReflexiveTriggeredAbility(new ReflexiveTriggeredAbility(effect, false,
                         "When you cast that spell, {this} gets +X/+0 until end of turn, where X is that spell's mana value"), source);
             }
+            ContinuousEffect effect = new ThatSpellGraveyardExileReplacementEffect(false);
+            effect.setTargetPointer(new FixedTarget(card, game));
+            game.addEffect(effect, source);
         }
-        ContinuousEffect effect = new OgreBattlecasterReplacementEffect(card.getId());
-        effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
-        game.addEffect(effect, source);
         return true;
-    }
-}
-
-class OgreBattlecasterReplacementEffect extends ReplacementEffectImpl {
-
-    private final UUID cardId;
-
-    OgreBattlecasterReplacementEffect(UUID cardId) {
-        super(Duration.EndOfTurn, Outcome.Exile);
-        this.cardId = cardId;
-        staticText = "if that spell would be put into a graveyard, exile it instead";
-    }
-
-    private OgreBattlecasterReplacementEffect(final OgreBattlecasterReplacementEffect effect) {
-        super(effect);
-        this.cardId = effect.cardId;
-    }
-
-    @Override
-    public OgreBattlecasterReplacementEffect copy() {
-        return new OgreBattlecasterReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        return zEvent.getToZone() == Zone.GRAVEYARD
-                && zEvent.getTargetId().equals(this.cardId);
     }
 }
