@@ -82,6 +82,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Frantic Firebolt", 130, Rarity.COMMON, mage.cards.f.FranticFirebolt.class));
         cards.add(new SetCardInfo("Freeze in Place", 50, Rarity.COMMON, mage.cards.f.FreezeInPlace.class));
         cards.add(new SetCardInfo("Frolicking Familiar", 226, Rarity.UNCOMMON, mage.cards.f.FrolickingFamiliar.class));
+        cards.add(new SetCardInfo("Frostbridge Guard", 14, Rarity.COMMON, mage.cards.f.FrostbridgeGuard.class));
         cards.add(new SetCardInfo("Gadwick's First Duel", 51, Rarity.UNCOMMON, mage.cards.g.GadwicksFirstDuel.class));
         cards.add(new SetCardInfo("Gallant Pie-Wielder", 15, Rarity.UNCOMMON, mage.cards.g.GallantPieWielder.class));
         cards.add(new SetCardInfo("Galvanic Giant", 52, Rarity.UNCOMMON, mage.cards.g.GalvanicGiant.class));
