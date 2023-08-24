@@ -95,6 +95,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Greta, Sweettooth Scourge", 205, Rarity.UNCOMMON, mage.cards.g.GretaSweettoothScourge.class));
         cards.add(new SetCardInfo("Harried Spearguard", 135, Rarity.COMMON, mage.cards.h.HarriedSpearguard.class));
         cards.add(new SetCardInfo("Hearth Elemental", 136, Rarity.UNCOMMON, mage.cards.h.HearthElemental.class));
+        cards.add(new SetCardInfo("Hopeful Vigil", 17, Rarity.COMMON, mage.cards.h.HopefulVigil.class));
         cards.add(new SetCardInfo("Hopeless Nightmare", 95, Rarity.COMMON, mage.cards.h.HopelessNightmare.class));
         cards.add(new SetCardInfo("Howling Galefang", 175, Rarity.UNCOMMON, mage.cards.h.HowlingGalefang.class));
         cards.add(new SetCardInfo("Hylda of the Icy Crown", 206, Rarity.MYTHIC, mage.cards.h.HyldaOfTheIcyCrown.class));
