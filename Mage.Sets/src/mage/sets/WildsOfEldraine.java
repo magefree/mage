@@ -73,6 +73,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Embereth Veteran", 127, Rarity.UNCOMMON, mage.cards.e.EmberethVeteran.class));
         cards.add(new SetCardInfo("Eriette of the Charmed Apple", 202, Rarity.MYTHIC, mage.cards.e.ErietteOfTheCharmedApple.class));
         cards.add(new SetCardInfo("Eriette's Tempting Apple", 245, Rarity.UNCOMMON, mage.cards.e.EriettesTemptingApple.class));
+        cards.add(new SetCardInfo("Eriette's Whisper", 88, Rarity.COMMON, mage.cards.e.EriettesWhisper.class));
         cards.add(new SetCardInfo("Evolving Wilds", 256, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Expel the Interlopers", 13, Rarity.RARE, mage.cards.e.ExpelTheInterlopers.class));
         cards.add(new SetCardInfo("Experimental Confectioner", 314, Rarity.UNCOMMON, mage.cards.e.ExperimentalConfectioner.class));
