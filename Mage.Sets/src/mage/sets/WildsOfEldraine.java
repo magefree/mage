@@ -147,6 +147,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Rotisserie Elemental", 148, Rarity.RARE, mage.cards.r.RotisserieElemental.class));
         cards.add(new SetCardInfo("Rowan's Grim Search", 104, Rarity.COMMON, mage.cards.r.RowansGrimSearch.class));
         cards.add(new SetCardInfo("Rowan, Scion of War", 211, Rarity.MYTHIC, mage.cards.r.RowanScionOfWar.class));
+        cards.add(new SetCardInfo("Rowdy Research", 312, Rarity.UNCOMMON, mage.cards.r.RowdyResearch.class));
         cards.add(new SetCardInfo("Royal Treatment", 183, Rarity.UNCOMMON, mage.cards.r.RoyalTreatment.class));
         cards.add(new SetCardInfo("Ruby, Daring Tracker", 212, Rarity.UNCOMMON, mage.cards.r.RubyDaringTracker.class));
         cards.add(new SetCardInfo("Scalding Viper", 235, Rarity.RARE, mage.cards.s.ScaldingViper.class));
@@ -208,6 +209,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Welcome to Sweettooth", 198, Rarity.UNCOMMON, mage.cards.w.WelcomeToSweettooth.class));
         cards.add(new SetCardInfo("Werefox Bodyguard", 39, Rarity.RARE, mage.cards.w.WerefoxBodyguard.class));
         cards.add(new SetCardInfo("Will, Scion of Peace", 218, Rarity.MYTHIC, mage.cards.w.WillScionOfPeace.class));
+        cards.add(new SetCardInfo("Witchstalker Frenzy", 159, Rarity.UNCOMMON, mage.cards.w.WitchstalkerFrenzy.class));
         cards.add(new SetCardInfo("Woodland Acolyte", 241, Rarity.UNCOMMON, mage.cards.w.WoodlandAcolyte.class));
     }
 
