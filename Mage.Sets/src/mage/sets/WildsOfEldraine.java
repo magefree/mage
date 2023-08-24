@@ -143,6 +143,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Picklock Prankster", 64, Rarity.UNCOMMON, mage.cards.p.PicklockPrankster.class));
         cards.add(new SetCardInfo("Picnic Ruiner", 232, Rarity.UNCOMMON, mage.cards.p.PicnicRuiner.class));
         cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plunge into Winter", 22, Rarity.COMMON, mage.cards.p.PlungeIntoWinter.class));
         cards.add(new SetCardInfo("Prophetic Prism", 249, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Protective Parents", 24, Rarity.COMMON, mage.cards.p.ProtectiveParents.class));
         cards.add(new SetCardInfo("Provisions Merchant", 321, Rarity.UNCOMMON, mage.cards.p.ProvisionsMerchant.class));
