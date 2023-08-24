@@ -1,5 +1,6 @@
 package mage.target.common;
 
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -18,6 +19,16 @@ public class TargetUpToCreaturePermanentAmount extends TargetPermanentAmount {
         super(amount, filter);
         this.setMinNumberOfTargets(0);
         this.setMaxNumberOfTargets(amount);
+    }
+
+    public TargetUpToCreaturePermanentAmount(DynamicValue amount) {
+        this(amount, defaultFilter);
+    }
+
+    public TargetUpToCreaturePermanentAmount(DynamicValue amount, FilterPermanent filter) {
+        super(amount, filter);
+        this.setMinNumberOfTargets(0);
+        this.setMaxNumberOfTargets(Integer.MAX_VALUE);
     }
 
     private TargetUpToCreaturePermanentAmount(final TargetUpToCreaturePermanentAmount target) {
