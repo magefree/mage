@@ -186,6 +186,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Storyteller Pixie", 313, Rarity.UNCOMMON, mage.cards.s.StorytellerPixie.class));
         cards.add(new SetCardInfo("Stroke of Midnight", 33, Rarity.UNCOMMON, mage.cards.s.StrokeOfMidnight.class));
         cards.add(new SetCardInfo("Succumb to the Cold", 72, Rarity.UNCOMMON, mage.cards.s.SuccumbToTheCold.class));
+        cards.add(new SetCardInfo("Sugar Rush", 110, Rarity.COMMON, mage.cards.s.SugarRush.class));
         cards.add(new SetCardInfo("Swamp", 264, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sweettooth Witch", 111, Rarity.COMMON, mage.cards.s.SweettoothWitch.class));
         cards.add(new SetCardInfo("Syr Armont, the Redeemer", 214, Rarity.UNCOMMON, mage.cards.s.SyrArmontTheRedeemer.class));
