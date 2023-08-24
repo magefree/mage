@@ -62,6 +62,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Cut In", 125, Rarity.COMMON, mage.cards.c.CutIn.class));
         cards.add(new SetCardInfo("Decadent Dragon", 223, Rarity.RARE, mage.cards.d.DecadentDragon.class));
         cards.add(new SetCardInfo("Devouring Sugarmaw", 224, Rarity.RARE, mage.cards.d.DevouringSugarmaw.class));
+        cards.add(new SetCardInfo("Diminisher Witch", 46, Rarity.COMMON, mage.cards.d.DiminisherWitch.class));
         cards.add(new SetCardInfo("Discerning Financier", 10, Rarity.UNCOMMON, mage.cards.d.DiscerningFinancier.class));
         cards.add(new SetCardInfo("Disdainful Stroke", 47, Rarity.UNCOMMON, mage.cards.d.DisdainfulStroke.class));
         cards.add(new SetCardInfo("Dream Spoilers", 85, Rarity.UNCOMMON, mage.cards.d.DreamSpoilers.class));
