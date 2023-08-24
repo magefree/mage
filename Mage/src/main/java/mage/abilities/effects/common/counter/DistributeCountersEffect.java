@@ -5,13 +5,14 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
 import mage.abilities.common.delayed.AtTheBeginOfNextCleanupDelayedTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -21,7 +22,7 @@ import java.util.UUID;
 public class DistributeCountersEffect extends OneShotEffect {
 
     private final CounterType counterType;
-    private final int amount;
+    private final DynamicValue amount;
     private final boolean removeAtEndOfTurn;
     private final String targetDescription;
 
@@ -30,6 +31,10 @@ public class DistributeCountersEffect extends OneShotEffect {
     }
 
     public DistributeCountersEffect(CounterType counterType, int amount, boolean removeAtEndOfTurn, String targetDescription) {
+        this(counterType, StaticValue.get(amount), removeAtEndOfTurn, targetDescription);
+    }
+
+    public DistributeCountersEffect(CounterType counterType, DynamicValue amount, boolean removeAtEndOfTurn, String targetDescription) {
         super(Outcome.BoostCreature);
         this.counterType = counterType;
         this.amount = amount;
@@ -80,7 +85,7 @@ public class DistributeCountersEffect extends OneShotEffect {
         }
 
         String name = counterType.getName();
-        String text = "distribute " + CardUtil.numberToText(amount) + ' ' + name + " counters among " + targetDescription;
+        String text = "distribute " + amount + ' ' + name + " counters among " + targetDescription;
         if (removeAtEndOfTurn) {
             text += " For each " + name + " counter you put on a creature this way, remove a "
                     + name + " counter from that creature at the beginning of the next cleanup step.";
