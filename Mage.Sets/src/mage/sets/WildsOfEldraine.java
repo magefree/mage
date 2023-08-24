@@ -90,6 +90,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Hylda's Crown of Winter", 247, Rarity.RARE, mage.cards.h.HyldasCrownOfWinter.class));
         cards.add(new SetCardInfo("Ice Out", 54, Rarity.COMMON, mage.cards.i.IceOut.class));
         cards.add(new SetCardInfo("Icewrought Sentry", 55, Rarity.UNCOMMON, mage.cards.i.IcewroughtSentry.class));
+        cards.add(new SetCardInfo("Imodane, the Pyrohammer", 137, Rarity.RARE, mage.cards.i.ImodaneThePyrohammer.class));
         cards.add(new SetCardInfo("Ingenious Prodigy", 56, Rarity.RARE, mage.cards.i.IngeniousProdigy.class));
         cards.add(new SetCardInfo("Into the Fae Court", 57, Rarity.COMMON, mage.cards.i.IntoTheFaeCourt.class));
         cards.add(new SetCardInfo("Island", 263, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
