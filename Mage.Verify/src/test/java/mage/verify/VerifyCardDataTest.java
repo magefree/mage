@@ -134,8 +134,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-        skipListAddName(SKIP_LIST_TYPE, "WOE", "Ashiok's Reaper"); // temporary
-        skipListAddName(SKIP_LIST_TYPE, "WOE", "Take it Back"); //temporary
         skipListAddName(SKIP_LIST_TYPE, "WOE", "Scream Puff"); //temporary
         skipListAddName(SKIP_LIST_TYPE, "WOE", "Redtooth Vanguard"); //temporary
 
@@ -144,8 +142,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
-        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Ashiok's Reaper"); // temporary
-        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Take it Back"); //temporary
         skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Scream Puff"); //temporary
         skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Redtooth Vanguard"); //temporary
 
@@ -155,9 +151,7 @@ public class VerifyCardDataTest {
         // rarity
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
-        skipListAddName(SKIP_LIST_RARITY, "WOE", "Picklock Prankster"); // temporary
-        skipListAddName(SKIP_LIST_RARITY, "WOE", "Free the Fae"); // temporary
-        skipListAddName(SKIP_LIST_RARITY, "WOE", "Up the Beanstalk"); // temporary
+        skipListAddName(SKIP_LIST_RARITY, "WOE", "Eerie Interference"); // temporary
 
         // missing abilities
         // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
