@@ -84,6 +84,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Faerie Fencing", 90, Rarity.UNCOMMON, mage.cards.f.FaerieFencing.class));
         cards.add(new SetCardInfo("Farsight Ritual", 49, Rarity.RARE, mage.cards.f.FarsightRitual.class));
         cards.add(new SetCardInfo("Faunsbane Troll", 203, Rarity.RARE, mage.cards.f.FaunsbaneTroll.class));
+        cards.add(new SetCardInfo("Feed the Cauldron", 91, Rarity.COMMON, mage.cards.f.FeedTheCauldron.class));
         cards.add(new SetCardInfo("Ferocious Werefox", 170, Rarity.COMMON, mage.cards.f.FerociousWerefox.class));
         cards.add(new SetCardInfo("Flick a Coin", 128, Rarity.COMMON, mage.cards.f.FlickACoin.class));
         cards.add(new SetCardInfo("Food Coma", 308, Rarity.UNCOMMON, mage.cards.f.FoodComa.class));
