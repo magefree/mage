@@ -265,6 +265,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Werefox Bodyguard", 39, Rarity.RARE, mage.cards.w.WerefoxBodyguard.class));
         cards.add(new SetCardInfo("Wicked Visitor", 118, Rarity.COMMON, mage.cards.w.WickedVisitor.class));
         cards.add(new SetCardInfo("Will, Scion of Peace", 218, Rarity.MYTHIC, mage.cards.w.WillScionOfPeace.class));
+        cards.add(new SetCardInfo("Witch's Mark", 158, Rarity.COMMON, mage.cards.w.WitchsMark.class));
         cards.add(new SetCardInfo("Witchstalker Frenzy", 159, Rarity.UNCOMMON, mage.cards.w.WitchstalkerFrenzy.class));
         cards.add(new SetCardInfo("Woodland Acolyte", 241, Rarity.UNCOMMON, mage.cards.w.WoodlandAcolyte.class));
     }
