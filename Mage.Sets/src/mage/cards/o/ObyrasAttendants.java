@@ -30,7 +30,7 @@ public final class ObyrasAttendants extends AdventureCard {
         // Desperate Parry
         // Target creature gets -4/-0 until end of turn.
         this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(-4, 0));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private ObyrasAttendants(final ObyrasAttendants card) {

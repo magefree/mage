@@ -32,7 +32,7 @@ public final class MerfolkCoralsmith extends CardImpl {
         ));
 
         // When Merfolk Coralsmith dies, scry 2.
-        this.addAbility(new DiesSourceTriggeredAbility(new ScryEffect(2)));
+        this.addAbility(new DiesSourceTriggeredAbility(new ScryEffect(2, false)));
     }
 
     private MerfolkCoralsmith(final MerfolkCoralsmith card) {

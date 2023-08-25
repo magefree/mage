@@ -24,7 +24,7 @@ public final class FeedTheCauldron extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature with mana value 3 or less");
 
     static {
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
+        filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, 3));
     }
 
     public FeedTheCauldron(UUID ownerId, CardSetInfo setInfo) {

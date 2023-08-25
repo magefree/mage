@@ -24,7 +24,7 @@ public final class EriettesWhisper extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new CreateRoleAttachedTargetEffect(RoleType.WICKED).setTargetPointer(new SecondTargetPointer()));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1));
     }
 
     private EriettesWhisper(final EriettesWhisper card) {
