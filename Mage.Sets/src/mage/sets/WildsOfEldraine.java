@@ -145,6 +145,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Mintstrosity", 100, Rarity.COMMON, mage.cards.m.Mintstrosity.class));
         cards.add(new SetCardInfo("Misleading Motes", 61, Rarity.COMMON, mage.cards.m.MisleadingMotes.class));
         cards.add(new SetCardInfo("Mocking Sprite", 62, Rarity.COMMON, mage.cards.m.MockingSprite.class));
+        cards.add(new SetCardInfo("Moment of Valor", 20, Rarity.COMMON, mage.cards.m.MomentOfValor.class));
         cards.add(new SetCardInfo("Monstrous Rage", 142, Rarity.UNCOMMON, mage.cards.m.MonstrousRage.class));
         cards.add(new SetCardInfo("Moonshaker Cavalry", 21, Rarity.MYTHIC, mage.cards.m.MoonshakerCavalry.class));
         cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
