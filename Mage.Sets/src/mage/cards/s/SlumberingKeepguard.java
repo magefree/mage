@@ -9,6 +9,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.hint.ValueHint;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterEnchantmentPermanent;
@@ -36,7 +37,10 @@ public final class SlumberingKeepguard extends CardImpl {
         // Whenever an enchantment enters the battlefield under your control, scry 1.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ScryEffect(1, false), new FilterEnchantmentPermanent("an enchantment")));
         // {2}{W}: Slumbering Keepguard gets +1/+1 until end of turn for each enchantment you control.
-        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(value, value, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{W}")));
+        this.addAbility(new SimpleActivatedAbility(
+            new BoostSourceEffect(value, value, Duration.EndOfTurn, true), new ManaCostsImpl<>("{2}{W}"))
+            .addHint(new ValueHint("Enchantments you control", value))
+        );
     }
 
     private SlumberingKeepguard(final SlumberingKeepguard card) {
