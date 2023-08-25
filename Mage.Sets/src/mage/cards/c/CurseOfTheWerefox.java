@@ -11,8 +11,10 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.RoleType;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -25,9 +27,8 @@ public final class CurseOfTheWerefox extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Create a Monster Role token attached to target creature you control. When you do, that creature fights up to one target creature you don't control.
-        this.getSpellAbility().addEffect(new CreateRoleAttachedTargetEffect(RoleType.MONSTER));
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new CurseOfTheWerefoxEffect());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
     private CurseOfTheWerefox(final CurseOfTheWerefox card) {
@@ -44,7 +45,8 @@ class CurseOfTheWerefoxEffect extends OneShotEffect {
 
     CurseOfTheWerefoxEffect() {
         super(Outcome.Benefit);
-        staticText = "when you do, that creature fights up to one target creature you don't control";
+        staticText = "create a Monster Role token attached to target creature you control. "
+                + "When you do, that creature fights up to one target creature you don't control";
     }
 
     private CurseOfTheWerefoxEffect(final CurseOfTheWerefoxEffect effect) {
@@ -58,6 +60,19 @@ class CurseOfTheWerefoxEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Permanent target = game.getPermanent(source.getFirstTarget());
+        if (target == null) {
+            return false;
+        }
+
+        boolean didCreate =
+                new CreateRoleAttachedTargetEffect(RoleType.MONSTER)
+                        .setTargetPointer(new FixedTarget(target, game))
+                        .apply(game, source);
+        if (!didCreate) {
+            return false;
+        }
+
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                 new FightTargetsEffect(false), false,
                 "that creature fights up to one target creature you don't control"
