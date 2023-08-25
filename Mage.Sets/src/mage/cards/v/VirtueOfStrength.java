@@ -4,7 +4,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class VirtueOfStrength extends AdventureCard {
 
-    private static final FilterCard filter = new FilterCard("creature or land card from a graveyard");
+    private static final FilterCard filter = new FilterCard("creature or land card from your graveyard");
 
     static {
         filter.add(Predicates.or(
@@ -44,7 +44,7 @@ public final class VirtueOfStrength extends AdventureCard {
 
         // Garenbrig Growth
         // Return target creature or land card from your graveyard to your hand.
-        this.getSpellCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
     }
 
