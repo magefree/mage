@@ -197,6 +197,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Scream Puff", 105, Rarity.COMMON, mage.cards.s.ScreamPuff.class));
         cards.add(new SetCardInfo("Sentinel of Lost Lore", 184, Rarity.RARE, mage.cards.s.SentinelOfLostLore.class));
         cards.add(new SetCardInfo("Sharae of Numbing Depths", 213, Rarity.UNCOMMON, mage.cards.s.SharaeOfNumbingDepths.class));
+        cards.add(new SetCardInfo("Shatter the Oath", 106, Rarity.COMMON, mage.cards.s.ShatterTheOath.class));
         cards.add(new SetCardInfo("Shrouded Shepherd", 236, Rarity.UNCOMMON, mage.cards.s.ShroudedShepherd.class));
         cards.add(new SetCardInfo("Skybeast Tracker", 185, Rarity.COMMON, mage.cards.s.SkybeastTracker.class));
         cards.add(new SetCardInfo("Sleep-Cursed Faerie", 66, Rarity.RARE, mage.cards.s.SleepCursedFaerie.class));
