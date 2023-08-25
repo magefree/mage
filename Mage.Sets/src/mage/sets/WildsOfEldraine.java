@@ -106,6 +106,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Grand Ball Guest", 134, Rarity.COMMON, mage.cards.g.GrandBallGuest.class));
         cards.add(new SetCardInfo("Greta, Sweettooth Scourge", 205, Rarity.UNCOMMON, mage.cards.g.GretaSweettoothScourge.class));
         cards.add(new SetCardInfo("Gruff Triplets", 172, Rarity.RARE, mage.cards.g.GruffTriplets.class));
+        cards.add(new SetCardInfo("Hamlet Glutton", 173, Rarity.COMMON, mage.cards.h.HamletGlutton.class));
         cards.add(new SetCardInfo("Harried Spearguard", 135, Rarity.COMMON, mage.cards.h.HarriedSpearguard.class));
         cards.add(new SetCardInfo("Hearth Elemental", 136, Rarity.UNCOMMON, mage.cards.h.HearthElemental.class));
         cards.add(new SetCardInfo("High Fae Negotiator", 94, Rarity.UNCOMMON, mage.cards.h.HighFaeNegotiator.class));
