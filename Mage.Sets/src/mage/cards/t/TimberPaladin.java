@@ -49,9 +49,9 @@ public final class TimberPaladin extends CardImpl {
         Ability ability2 = new SimpleStaticAbility(new ConditionalContinuousEffect(
             new SetBasePowerToughnessSourceEffect(5, 5, Duration.WhileOnBattlefield, SubLayer.SetPT_7b),
             exactlyTwo,
-            "As long as {this} is enchanted by exactly two Auras, it has base power and toughness 5/5 and vigilance."
+            "As long as {this} is enchanted by exactly two Auras, it has base power and toughness 5/5"
         ));
-        ability2.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), exactlyTwo, ""));
+        ability2.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), exactlyTwo, "and vigilance."));
 
         this.addAbility(ability2);
         
@@ -59,10 +59,10 @@ public final class TimberPaladin extends CardImpl {
         Ability ability3 = new SimpleStaticAbility(new ConditionalContinuousEffect(
             new SetBasePowerToughnessSourceEffect(10, 10, Duration.WhileOnBattlefield, SubLayer.SetPT_7b),
             threeOrMore,
-            "As long as {this} is enchanted by three or more Auras, it has base power and toughness 10/10, vigilance, and trample."
+            "As long as {this} is enchanted by three or more Auras, it has base power and toughness 10/10"
         ));
-        ability3.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), threeOrMore, ""));
-        ability3.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), threeOrMore, ""));
+        ability3.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), threeOrMore, ", vigilance"));
+        ability3.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), threeOrMore, ", and trample."));
         this.addAbility(ability3);
     }
 
