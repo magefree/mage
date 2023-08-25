@@ -14,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.MageObjectType;
 import mage.game.Game;
 import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
+import mage.target.Target;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.GameLog;
@@ -21,8 +23,6 @@ import mage.util.GameLog;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.game.stack.StackObject;
-import mage.target.Target;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -49,8 +49,8 @@ public class StackAbilityView extends CardView {
         this.subTypes = ability.getSubtype(game);
         this.superTypes = ability.getSuperType(game);
         this.color = ability.getColor(game);
-        this.manaCostLeftStr = String.join("", ability.getManaCostSymbols());
-        this.manaCostRightStr = "";
+        this.manaCostLeftStr = ability.getManaCostSymbols();
+        this.manaCostRightStr = new ArrayList<>();
         this.cardTypes = ability.getCardType(game);
         this.subTypes = ability.getSubtype(game);
         this.superTypes = ability.getSuperType(game);
@@ -65,8 +65,8 @@ public class StackAbilityView extends CardView {
             tmpSourceCard.subTypes.clear();
             tmpSourceCard.cardTypes.clear();
             tmpSourceCard.cardTypes.add(CardType.CREATURE);
-            tmpSourceCard.manaCostLeftStr = "";
-            tmpSourceCard.manaCostRightStr = "";
+            tmpSourceCard.manaCostLeftStr = new ArrayList<>();
+            tmpSourceCard.manaCostRightStr = new ArrayList<>();
             tmpSourceCard.power = "2";
             tmpSourceCard.toughness = "2";
             nameToShow = "creature without name";

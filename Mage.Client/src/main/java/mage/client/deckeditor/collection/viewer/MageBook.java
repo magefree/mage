@@ -1,5 +1,6 @@
 package mage.client.deckeditor.collection.viewer;
 
+import static java.lang.Math.min;
 import mage.abilities.icon.CardIconRenderSettings;
 import mage.cards.CardDimensions;
 import mage.cards.ExpansionSet;
@@ -21,7 +22,7 @@ import mage.components.ImagePanelStyle;
 import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
-import mage.game.draft.RateCard;
+import mage.cards.RateCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
@@ -41,8 +42,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import static java.lang.Math.min;
 
 /**
  * Card viewer (mage book) with cards and page flipping
@@ -388,9 +387,9 @@ public class MageBook extends JComponent {
             draftRating.setBounds(rectangle.x, rectangle.y + cardImg.getCardLocation().getCardHeight() + dy, cardDimensions.getFrameWidth(), 20);
             draftRating.setHorizontalAlignment(SwingConstants.CENTER);
             draftRating.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
-            if (card.getOriginalCard() != null) {
+            if (card.isOriginalACard()) {
                 // card
-                draftRating.setText("draft rating: " + RateCard.rateCard(card.getOriginalCard(), null));
+                draftRating.setText("draft rating: " + RateCard.rateCard(card, null));
             } else {
                 // token
                 draftRating.setText("");
