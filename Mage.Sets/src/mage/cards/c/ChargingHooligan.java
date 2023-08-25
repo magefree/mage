@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -15,11 +16,12 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.permanent.AttackingPredicate;
 
 import java.util.UUID;
 
@@ -28,7 +30,20 @@ import java.util.UUID;
  */
 public final class ChargingHooligan extends CardImpl {
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_ATTACKING_CREATURE);
+    private static final DynamicValue xValue =
+            new PermanentsOnBattlefieldCount(StaticFilters.FILTER_ATTACKING_CREATURE);
+
+    private static final FilterPermanent filterForCondition = new FilterPermanent(SubType.RAT, "");
+
+    static {
+        filterForCondition.add(AttackingPredicate.instance);
+    }
+
+    private static final Condition condition =
+            new PermanentsOnTheBattlefieldCondition(
+                    filterForCondition, ComparisonType.MORE_THAN,
+                    0, false, "a Rat is attacking"
+            );
 
     public ChargingHooligan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -45,8 +60,7 @@ public final class ChargingHooligan extends CardImpl {
         ability.addEffect(new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(
                         new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
-                ),
-                ChargingHooliganCondition.instance
+                ), condition
         ));
 
         this.addAbility(ability);
@@ -59,27 +73,5 @@ public final class ChargingHooligan extends CardImpl {
     @Override
     public ChargingHooligan copy() {
         return new ChargingHooligan(this);
-    }
-}
-
-enum ChargingHooliganCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID attackingCreatureId : game.getCombat().getAttackers()) {
-            Permanent attackingCreature = game.getPermanent(attackingCreatureId);
-            if (attackingCreature != null) {
-                if (attackingCreature.getSubtype(game).contains(SubType.RAT)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "a Rat is attacking";
     }
 }

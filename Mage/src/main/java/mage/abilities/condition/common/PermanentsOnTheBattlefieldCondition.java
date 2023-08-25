@@ -21,6 +21,7 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
     private final ComparisonType type;
     private final int count;
     private final boolean onlyControlled;
+    private final String staticText;
 
     /**
      * Applies a filter and delegates creation to
@@ -52,10 +53,15 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
     }
 
     public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, ComparisonType type, int count, boolean onlyControlled) {
+        this(filter, type, count, onlyControlled, "");
+    }
+
+    public PermanentsOnTheBattlefieldCondition(FilterPermanent filter, ComparisonType type, int count, boolean onlyControlled, String staticText) {
         this.filter = filter;
         this.type = type;
         this.count = count;
         this.onlyControlled = onlyControlled;
+        this.staticText = staticText;
     }
 
     @Override
@@ -74,6 +80,6 @@ public class PermanentsOnTheBattlefieldCondition implements Condition {
 
     @Override
     public String toString() {
-        return filter.getMessage();
+        return staticText.isEmpty() ? filter.getMessage() : staticText;
     }
 }
