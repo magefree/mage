@@ -100,6 +100,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Gingerbrute", 246, Rarity.COMMON, mage.cards.g.Gingerbrute.class));
         cards.add(new SetCardInfo("Glass Casket", 16, Rarity.UNCOMMON, mage.cards.g.GlassCasket.class));
         cards.add(new SetCardInfo("Goddric, Cloaked Reveler", 132, Rarity.RARE, mage.cards.g.GoddricCloakedReveler.class));
+        cards.add(new SetCardInfo("Grabby Giant", 133, Rarity.COMMON, mage.cards.g.GrabbyGiant.class));
         cards.add(new SetCardInfo("Graceful Takedown", 171, Rarity.UNCOMMON, mage.cards.g.GracefulTakedown.class));
         cards.add(new SetCardInfo("Grand Ball Guest", 134, Rarity.COMMON, mage.cards.g.GrandBallGuest.class));
         cards.add(new SetCardInfo("Greta, Sweettooth Scourge", 205, Rarity.UNCOMMON, mage.cards.g.GretaSweettoothScourge.class));
