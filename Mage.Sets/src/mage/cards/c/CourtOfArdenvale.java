@@ -26,7 +26,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class CourtOfArdenvale extends CardImpl {
 
-    private static final FilterCard filter = new FilterPermanentCard("permanent card");
+    private static final FilterCard filter = new FilterPermanentCard("permanent card with mana value 3 or less in your graveyard");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, 3));
