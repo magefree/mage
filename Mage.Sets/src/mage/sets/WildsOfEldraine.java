@@ -40,6 +40,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Beluna's Gatekeeper", 43, Rarity.COMMON, mage.cards.b.BelunasGatekeeper.class));
         cards.add(new SetCardInfo("Beseech the Mirror", 82, Rarity.MYTHIC, mage.cards.b.BeseechTheMirror.class));
         cards.add(new SetCardInfo("Besotted Knight", 4, Rarity.COMMON, mage.cards.b.BesottedKnight.class));
+        cards.add(new SetCardInfo("Bespoke Battlegarb", 122, Rarity.COMMON, mage.cards.b.BespokeBattlegarb.class));
         cards.add(new SetCardInfo("Bestial Bloodline", 162, Rarity.COMMON, mage.cards.b.BestialBloodline.class));
         cards.add(new SetCardInfo("Bitter Chill", 44, Rarity.UNCOMMON, mage.cards.b.BitterChill.class));
         cards.add(new SetCardInfo("Blossoming Tortoise", 163, Rarity.MYTHIC, mage.cards.b.BlossomingTortoise.class));
