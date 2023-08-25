@@ -89,7 +89,6 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Flick a Coin", 128, Rarity.COMMON, mage.cards.f.FlickACoin.class));
         cards.add(new SetCardInfo("Food Coma", 308, Rarity.UNCOMMON, mage.cards.f.FoodComa.class));
         cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Gruff Triplets", 172, Rarity.RARE, mage.cards.g.GruffTriplets.class));
         cards.add(new SetCardInfo("Frantic Firebolt", 130, Rarity.COMMON, mage.cards.f.FranticFirebolt.class));
         cards.add(new SetCardInfo("Freeze in Place", 50, Rarity.COMMON, mage.cards.f.FreezeInPlace.class));
         cards.add(new SetCardInfo("Frolicking Familiar", 226, Rarity.UNCOMMON, mage.cards.f.FrolickingFamiliar.class));
@@ -104,6 +103,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Graceful Takedown", 171, Rarity.UNCOMMON, mage.cards.g.GracefulTakedown.class));
         cards.add(new SetCardInfo("Grand Ball Guest", 134, Rarity.COMMON, mage.cards.g.GrandBallGuest.class));
         cards.add(new SetCardInfo("Greta, Sweettooth Scourge", 205, Rarity.UNCOMMON, mage.cards.g.GretaSweettoothScourge.class));
+        cards.add(new SetCardInfo("Gruff Triplets", 172, Rarity.RARE, mage.cards.g.GruffTriplets.class));
         cards.add(new SetCardInfo("Harried Spearguard", 135, Rarity.COMMON, mage.cards.h.HarriedSpearguard.class));
         cards.add(new SetCardInfo("Hearth Elemental", 136, Rarity.UNCOMMON, mage.cards.h.HearthElemental.class));
         cards.add(new SetCardInfo("High Fae Negotiator", 94, Rarity.UNCOMMON, mage.cards.h.HighFaeNegotiator.class));
