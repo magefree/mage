@@ -52,6 +52,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Candy Grapple", 83, Rarity.COMMON, mage.cards.c.CandyGrapple.class));
         cards.add(new SetCardInfo("Candy Trail", 243, Rarity.COMMON, mage.cards.c.CandyTrail.class));
         cards.add(new SetCardInfo("Chancellor of Tales", 45, Rarity.UNCOMMON, mage.cards.c.ChancellorOfTales.class));
+        cards.add(new SetCardInfo("Charging Hooligan", 318, Rarity.UNCOMMON, mage.cards.c.ChargingHooligan.class));
         cards.add(new SetCardInfo("Charmed Clothier", 6, Rarity.COMMON, mage.cards.c.CharmedClothier.class));
         cards.add(new SetCardInfo("Charming Scoundrel", 124, Rarity.RARE, mage.cards.c.CharmingScoundrel.class));
         cards.add(new SetCardInfo("Cheeky House-Mouse", 7, Rarity.UNCOMMON, mage.cards.c.CheekyHouseMouse.class));
