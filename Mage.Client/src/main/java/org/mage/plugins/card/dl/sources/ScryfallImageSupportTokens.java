@@ -1758,6 +1758,7 @@ public class ScryfallImageSupportTokens {
 
             // DMU
             put("DMU/Emblem Ajani", "https://api.scryfall.com/cards/tdmu/25/en?format=image");
+            // TODO: KarnLivingLegacyEmblem don't have official emblem card, so it must be replaced by default
             put("DMU/Beast", "https://api.scryfall.com/cards/tdmu/16/en?format=image");
             put("DMU/Bird/1", "https://api.scryfall.com/cards/tdmu/6/en?format=image");
             put("DMU/Bird/2", "https://api.scryfall.com/cards/tdmu/2/en?format=image");
