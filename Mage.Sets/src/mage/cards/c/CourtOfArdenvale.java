@@ -16,7 +16,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -26,7 +26,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class CourtOfArdenvale extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard(StaticFilters.FILTER_CARD_PERMANENT);
+    private static final FilterCard filter = new FilterPermanentCard("permanent card");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, 3));
