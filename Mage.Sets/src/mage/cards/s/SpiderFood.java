@@ -38,7 +38,7 @@ public final class SpiderFood extends CardImpl {
 
         // Destroy up to one target artifact, enchantment, or creature with flying. Create a Food token.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FoodToken()));
     }
 
