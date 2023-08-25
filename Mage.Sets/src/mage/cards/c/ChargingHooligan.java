@@ -33,7 +33,7 @@ public final class ChargingHooligan extends CardImpl {
     private static final DynamicValue xValue =
             new PermanentsOnBattlefieldCount(StaticFilters.FILTER_ATTACKING_CREATURE);
 
-    private static final FilterPermanent filterForCondition = new FilterPermanent(SubType.RAT, "");
+    private static final FilterPermanent filterForCondition = new FilterPermanent(SubType.RAT, "a Rat is attacking");
 
     static {
         filterForCondition.add(AttackingPredicate.instance);
@@ -42,7 +42,7 @@ public final class ChargingHooligan extends CardImpl {
     private static final Condition condition =
             new PermanentsOnTheBattlefieldCondition(
                     filterForCondition, ComparisonType.MORE_THAN,
-                    0, false, "a Rat is attacking"
+                    0, false
             );
 
     public ChargingHooligan(UUID ownerId, CardSetInfo setInfo) {
