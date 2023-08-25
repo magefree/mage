@@ -124,6 +124,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Johann, Apprentice Sorcerer", 207, Rarity.UNCOMMON, mage.cards.j.JohannApprenticeSorcerer.class));
         cards.add(new SetCardInfo("Kellan's Lightblades", 18, Rarity.COMMON, mage.cards.k.KellansLightblades.class));
         cards.add(new SetCardInfo("Kellan, the Fae-Blooded", 230, Rarity.MYTHIC, mage.cards.k.KellanTheFaeBlooded.class));
+        cards.add(new SetCardInfo("Kindled Heroism", 138, Rarity.COMMON, mage.cards.k.KindledHeroism.class));
         cards.add(new SetCardInfo("Knight of Doves", 19, Rarity.UNCOMMON, mage.cards.k.KnightOfDoves.class));
         cards.add(new SetCardInfo("Korvold and the Noble Thief", 139, Rarity.UNCOMMON, mage.cards.k.KorvoldAndTheNobleThief.class));
         cards.add(new SetCardInfo("Lady of Laughter", 309, Rarity.RARE, mage.cards.l.LadyOfLaughter.class));
