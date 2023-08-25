@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.t.TwiningTwins;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -194,7 +195,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Tough Cookie", 193, Rarity.UNCOMMON, mage.cards.t.ToughCookie.class));
         cards.add(new SetCardInfo("Troublemaker Ouphe", 194, Rarity.COMMON, mage.cards.t.TroublemakerOuphe.class));
         cards.add(new SetCardInfo("Troyan, Gutsy Explorer", 217, Rarity.UNCOMMON, mage.cards.t.TroyanGutsyExplorer.class));
-        cards.add(new SetCardInfo("Twinning Twins", 240, Rarity.RARE, mage.cards.t.TwinningTwins.class));
+        cards.add(new SetCardInfo("Twining Twins", 240, Rarity.RARE, TwiningTwins.class));
         cards.add(new SetCardInfo("Twisted Fealty", 154, Rarity.UNCOMMON, mage.cards.t.TwistedFealty.class));
         cards.add(new SetCardInfo("Twisted Sewer-Witch", 114, Rarity.UNCOMMON, mage.cards.t.TwistedSewerWitch.class));
         cards.add(new SetCardInfo("Two-Headed Hunter", 155, Rarity.UNCOMMON, mage.cards.t.TwoHeadedHunter.class));

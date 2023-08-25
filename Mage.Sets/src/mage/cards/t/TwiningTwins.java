@@ -28,9 +28,9 @@ import java.util.UUID;
 /**
  * @author Susucr
  */
-public final class TwinningTwins extends AdventureCard {
+public final class TwiningTwins extends AdventureCard {
 
-    public TwinningTwins(UUID ownerId, CardSetInfo setInfo) {
+    public TwiningTwins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{2}{U}{U}", "Swift Spiral", "{1}{W}");
 
         this.subtype.add(SubType.FAERIE);
@@ -49,29 +49,29 @@ public final class TwinningTwins extends AdventureCard {
 
         // Swift Spiral
         // Exile target nontoken creature. Return it to the battlefield under its owner’s control at the beginning of the next end step.
-        this.getSpellCard().getSpellAbility().addEffect(new TwinningTwinsEffect());
+        this.getSpellCard().getSpellAbility().addEffect(new TwiningTwinsEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_NON_TOKEN));
     }
 
-    private TwinningTwins(final TwinningTwins card) {
+    private TwiningTwins(final TwiningTwins card) {
         super(card);
     }
 
     @Override
-    public TwinningTwins copy() {
-        return new TwinningTwins(this);
+    public TwiningTwins copy() {
+        return new TwiningTwins(this);
     }
 }
 
-class TwinningTwinsEffect extends OneShotEffect {
+class TwiningTwinsEffect extends OneShotEffect {
 
-    TwinningTwinsEffect() {
+    TwiningTwinsEffect() {
         super(Outcome.Detriment);
         staticText = "Exile target nontoken creature. Return that card to the battlefield under its "
                 + "owner's control at the beginning of the next end step";
     }
 
-    private TwinningTwinsEffect(final TwinningTwinsEffect effect) {
+    private TwiningTwinsEffect(final TwiningTwinsEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class TwinningTwinsEffect extends OneShotEffect {
     }
 
     @Override
-    public TwinningTwinsEffect copy() {
-        return new TwinningTwinsEffect(this);
+    public TwiningTwinsEffect copy() {
+        return new TwiningTwinsEffect(this);
     }
 }
