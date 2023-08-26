@@ -6,7 +6,7 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -50,7 +50,7 @@ public final class TalionTheKindlyLord extends CardImpl {
 
         // Whenever an opponent casts a spell with mana value, power, or toughness equal to the chosen number, that player loses 2 life and you draw a card.
         Ability ability = new SpellCastOpponentTriggeredAbility(
-                Zone.BATTLEFIELD, new LoseLifeTargetControllerEffect(2)
+                Zone.BATTLEFIELD, new LoseLifeTargetEffect(2)
                 .setText("that player loses 2 life"),
                 filter, false, SetTargetPointer.PLAYER
         );
