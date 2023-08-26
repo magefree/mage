@@ -2308,6 +2308,12 @@ public class VerifyCardDataTest {
 
         boolean isFine = true;
         for (int i = 0; i < cardRules.length; i++) {
+            if (cardRules[i].startsWith("Use the Special button")) {
+                // This is a rules text for GUI implication like Quenchable Fire
+                cardRules[i] = "+ " + cardRules[i];
+                continue;
+            }
+
             boolean isAbilityFounded = false;
             for (int j = 0; j < refRules.length; j++) {
                 String refRule = refRules[j];
