@@ -3,7 +3,6 @@ package mage.cards.z;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -51,7 +50,7 @@ class ZilorthaStrengthIncarnateEffect extends ContinuousEffectImpl {
         staticText = "Lethal damage dealt to creatures you control is determined by their power rather than their toughness";
     }
 
-    private ZilorthaStrengthIncarnateEffect(ZilorthaStrengthIncarnateEffect effect) {
+    private ZilorthaStrengthIncarnateEffect(final ZilorthaStrengthIncarnateEffect effect) {
         super(effect);
     }
 
@@ -75,7 +74,7 @@ class ZilorthaStrengthIncarnateEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public ContinuousEffect copy() {
+    public ZilorthaStrengthIncarnateEffect copy() {
         return new ZilorthaStrengthIncarnateEffect(this);
     }
 }

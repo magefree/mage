@@ -3,7 +3,6 @@ package mage.cards.d;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,17 +48,17 @@ public final class DuelingGrounds extends CardImpl {
 
 class NoMoreThanOneCreatureCanAttackEachTurnEffect extends RestrictionEffect {
 
-    public NoMoreThanOneCreatureCanAttackEachTurnEffect() {
+    NoMoreThanOneCreatureCanAttackEachTurnEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "No more than one creature can attack each turn";
     }
 
-    public NoMoreThanOneCreatureCanAttackEachTurnEffect(final NoMoreThanOneCreatureCanAttackEachTurnEffect effect) {
+    private NoMoreThanOneCreatureCanAttackEachTurnEffect(final NoMoreThanOneCreatureCanAttackEachTurnEffect effect) {
         super(effect);
     }
 
     @Override
-    public ContinuousEffect copy() {
+    public NoMoreThanOneCreatureCanAttackEachTurnEffect copy() {
         return new NoMoreThanOneCreatureCanAttackEachTurnEffect(this);
     }
 
@@ -86,17 +85,17 @@ class NoMoreThanOneCreatureCanAttackEachTurnEffect extends RestrictionEffect {
 
 class NoMoreThanOneCreatureCanBlockEachTurnEffect extends RestrictionEffect {
 
-    public NoMoreThanOneCreatureCanBlockEachTurnEffect() {
+    NoMoreThanOneCreatureCanBlockEachTurnEffect() {
         super(Duration.WhileOnBattlefield);
         this.staticText = "No more than one creature can block each turn";
     }
 
-    public NoMoreThanOneCreatureCanBlockEachTurnEffect(final NoMoreThanOneCreatureCanBlockEachTurnEffect effect) {
+    private NoMoreThanOneCreatureCanBlockEachTurnEffect(final NoMoreThanOneCreatureCanBlockEachTurnEffect effect) {
         super(effect);
     }
 
     @Override
-    public ContinuousEffect copy() {
+    public NoMoreThanOneCreatureCanBlockEachTurnEffect copy() {
         return new NoMoreThanOneCreatureCanBlockEachTurnEffect(this);
     }
 
