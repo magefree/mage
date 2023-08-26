@@ -2,6 +2,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -21,8 +22,7 @@ import java.util.UUID;
 public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbilityImpl {
 
     private final Set<UUID> damagedPlayerIds = new HashSet<>();
-    private final boolean setTargetPointer;
-    private final boolean onlyOpponents;
+    private final SetTargetPointer setTargetPointer;
     private final FilterCreaturePermanent filter;
 
     public DealCombatDamageControlledTriggeredAbility(Effect effect) {
@@ -42,22 +42,19 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
     }
 
     public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, boolean setTargetPointer, boolean onlyOpponents, boolean optional) {
-        this(zone, effect, new FilterCreaturePermanent("creatures"), setTargetPointer, onlyOpponents, false);
+        this(zone, effect, new FilterCreaturePermanent("creatures"), setTargetPointer ? SetTargetPointer.PLAYER : SetTargetPointer.NONE, onlyOpponents, false);
     }
 
-    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, FilterCreaturePermanent filter, boolean setTargetPointer, boolean onlyOpponents, boolean optional) {
+    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, FilterCreaturePermanent filter, SetTargetPointer setTargetPointer, boolean onlyOpponents, boolean optional) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
-        this.onlyOpponents = onlyOpponents;
         this.filter = filter;
-        setTriggerPhrase("Whenever one or more " + filter.getMessage() + " you control deal combat damage to "
-                + (onlyOpponents ? "an opponent" : "a player") + ", ");
+        setTriggerPhrase("Whenever one or more " + filter.getMessage() + " you control deal combat damage to a player, ");
     }
 
     protected DealCombatDamageControlledTriggeredAbility(final DealCombatDamageControlledTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
-        this.onlyOpponents = ability.onlyOpponents;
         this.filter = ability.filter;
     }
 
@@ -69,33 +66,39 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
+                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH
                 || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRIORITY
                 || event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRIORITY ||
-                (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(getSourceId()))) {
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRIORITY 
+            || (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(getSourceId()))) {
             damagedPlayerIds.clear();
             return false;
         }
-        if (event.getType() != EventType.DAMAGED_PLAYER) {
-            return false;
-        }
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        Permanent p = game.getPermanent(event.getSourceId());
-        if (!damageEvent.isCombatDamage()
+
+        if (event.getType() == EventType.DAMAGED_PLAYER) {
+            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+            Permanent p = game.getPermanent(event.getSourceId());
+            if (!damageEvent.isCombatDamage()
                 || p == null
                 || !p.isControlledBy(this.getControllerId())
                 || !filter.match(p, game)
-                || damagedPlayerIds.contains(event.getPlayerId())
-                || (onlyOpponents && !game.getOpponents(getControllerId()).contains(event.getPlayerId()))) {
-            return false;
+                || damagedPlayerIds.contains(event.getPlayerId())) {
+                return false;
+            }
+            
+            damagedPlayerIds.add(event.getPlayerId());
         }
-        damagedPlayerIds.add(event.getPlayerId());
-        if (setTargetPointer) {
-            this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+
+        switch (setTargetPointer) {
+            case PLAYER:
+                this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                break;
+            default:
+                break;
         }
         return true;
     }
