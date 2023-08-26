@@ -51,7 +51,7 @@ class FaerieFencingEffect extends OneShotEffect {
 
     FaerieFencingEffect() {
         super(Outcome.UnboostCreature);
-        this.staticText = "target creature gets -X/-X until end of turn. It gets an additional -3/-3 if you controlled a Faerie as you cast this spell.";
+        this.staticText = "target creature gets -X/-X until end of turn. That creature gets an additional -3/-3 if you controlled a Faerie as you cast this spell.";
     }
 
     private FaerieFencingEffect(final FaerieFencingEffect effect) {

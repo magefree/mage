@@ -54,7 +54,7 @@ public final class TalionTheKindlyLord extends CardImpl {
                 .setText("that player loses 2 life"),
                 filter, false, SetTargetPointer.PLAYER
         );
-        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
+        ability.addEffect(new DrawCardSourceControllerEffect(1, "you").concatBy("and"));
         this.addAbility(ability);
     }
 

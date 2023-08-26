@@ -32,7 +32,7 @@ public final class SpellStutter extends CardImpl {
 
         // Counter target spell unless its controller pays {2} plus an additional {1} for each Faerie you control.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(xValue).setText(
-                "Counter target spell unless its controller pays {2}"
+                "Counter target spell unless its controller pays {2} "
                         + "plus an additional {1} for each Faerie you control."
         ));
         this.getSpellAbility().addTarget(new TargetSpell());

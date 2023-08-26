@@ -38,7 +38,7 @@ class EerieInterferenceEffect extends PreventionEffectImpl {
 
     EerieInterferenceEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
-        staticText = "prevent all damage that would be dealt to you and creatures you control by creatures this turn";
+        staticText = "prevent all damage that would be dealt to you and creatures you control this turn by creatures";
     }
 
     private EerieInterferenceEffect(final EerieInterferenceEffect effect) {

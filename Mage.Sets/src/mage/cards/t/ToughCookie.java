@@ -54,7 +54,7 @@ public final class ToughCookie extends CardImpl {
         ).setText("target noncreature artifact you control becomes"), new ManaCostsImpl<>("{2}{G}"));
         ability.addEffect(new SetBasePowerToughnessTargetEffect(
                 4, 4, Duration.EndOfTurn
-        ).setText("a 4/4 artifact creature until end of turn"));
+        ).setText(" a 4/4 artifact creature until end of turn"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 

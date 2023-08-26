@@ -28,7 +28,7 @@ import mage.constants.Duration;
  */
 public final class ErietteOfTheCharmedApple extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures enchanted by an Aura you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature that's enchanted by an Aura you control");
     private static final DynamicValue count = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.AURA));
 
     static {
@@ -48,8 +48,10 @@ public final class ErietteOfTheCharmedApple extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter, true)));
 
         // At the beginning of your end step, each opponent loses X life and you gain X life, where X is the number of Auras you control.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new LoseLifeOpponentsEffect(count), TargetController.YOU, false);
-        ability.addEffect(new GainLifeEffect(count));
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new LoseLifeOpponentsEffect(count)
+                .setText("each opponent loses X life"), TargetController.YOU, false);
+        ability.addEffect(new GainLifeEffect(count)
+                .setText("and you gain X life, where X is the number of Auras you control"));
         ability.addHint(new ValueHint("Number of Auras you control", count));
         this.addAbility(ability);
     }
