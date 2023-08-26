@@ -118,7 +118,9 @@ class AdventureCardSpellAbility extends SpellAbility {
     // The exile effect needs to be added last.
     public void finalizeAdventure() {
         if (finalized) {
-            throw new IllegalStateException("Wrong code usage. Adventures need to call finalizeAdventure() exactly once.");
+            throw new IllegalStateException("Wrong code usage. "
+                    + "Adventure (" + cardName + ") "
+                    + "need to call finalizeAdventure() exactly once.");
         }
         this.addEffect(ExileAdventureSpellEffect.getInstance());
         this.finalized = true;
@@ -128,7 +130,9 @@ class AdventureCardSpellAbility extends SpellAbility {
         super(ability);
         this.nameFull = ability.nameFull;
         if (!ability.finalized) {
-            throw new IllegalStateException("Wrong code usage. Adventures need to call finalizeAdventure() at the very end of the card's constructor.");
+            throw new IllegalStateException("Wrong code usage. "
+                    + "Adventure (" + cardName + ") "
+                    + "need to call finalizeAdventure() at the very end of the card's constructor.");
         }
         this.finalized = true;
     }
