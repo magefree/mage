@@ -36,6 +36,7 @@ public final class FellHorseman extends AdventureCard {
         this.getSpellCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
+        this.finalizeAdventure();
     }
 
     private FellHorseman(final FellHorseman card) {
