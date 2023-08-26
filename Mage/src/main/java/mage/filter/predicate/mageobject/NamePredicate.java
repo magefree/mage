@@ -28,7 +28,7 @@ public class NamePredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        if (name == null) {
+        if (name == null || (name.isEmpty() && !this.ignoreMtgRuleForEmptyNames)) {
             return false;
         }
         // If a player names a card, the player may name either half of a split card, but not both. 
