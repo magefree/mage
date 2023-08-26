@@ -1,9 +1,9 @@
 package mage.cards.s;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
-import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,10 +38,10 @@ public final class StockpilingCelebrant extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Stockpiling Celebrant enters the battlefield, you may return another target nonland permanent you control to its owner's hand. If you do, scry 2.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
-                new ScryEffect(2, false),
-                new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter))
-        )));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        ability.addTarget(new TargetControlledPermanent(filter));
+        ability.addEffect(new ScryEffect(2, false).concatBy("If you do,"));
+        this.addAbility(ability);
     }
 
     private StockpilingCelebrant(final StockpilingCelebrant card) {
