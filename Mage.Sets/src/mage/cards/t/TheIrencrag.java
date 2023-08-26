@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
@@ -40,9 +40,9 @@ public final class TheIrencrag extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // Whenever a legendary creature enters the battlefield under your control, you may have The Irencrag become a legendary Equipment artifact named Everflame, Heroes' Legacy. If you do, it gains equip {3} and "Equipped creature gets +3/+3" and loses all other abilities.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new AddContinuousEffectToGame(new TheIrencragBecomesContinuousEffect()),
-                filter, true, SetTargetPointer.NONE, null, true
+                filter, true, SetTargetPointer.NONE, null
         ));
     }
 
