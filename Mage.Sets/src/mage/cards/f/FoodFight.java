@@ -5,10 +5,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.hint.Hint;
@@ -37,7 +36,7 @@ public final class FoodFight extends CardImpl {
 
     private static final DynamicValue countFoodFight = new PermanentsOnBattlefieldCount(filter);
     private static final Hint hint = new ValueHint("Food Fight you control", countFoodFight);
-    private static final DynamicValue xValue = new AdditiveDynamicValue(StaticValue.get(1), countFoodFight);
+    private static final DynamicValue xValue = new IntPlusDynamicValue(1, countFoodFight);
 
 
     public FoodFight(UUID ownerId, CardSetInfo setInfo) {
