@@ -19,7 +19,7 @@ public class SmoothedLondonMulligan extends LondonMulligan {
         super(mulligan);
     }
 
-    private static double count_lands(Collection<Card> cards, Boolean library){
+    private static double count_lands(Collection<Card> cards, boolean library){
         double land_count = 0;
         for (Card card : cards){
             if (card.isLand()) {

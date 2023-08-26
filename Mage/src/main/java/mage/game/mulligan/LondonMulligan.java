@@ -14,8 +14,8 @@ import java.util.UUID;
 
 public class LondonMulligan extends Mulligan {
 
-    protected final Map<UUID, Integer> startingHandSizes = new HashMap<>();
-    protected final Map<UUID, Integer> openingHandSizes = new HashMap<>();
+    private final Map<UUID, Integer> startingHandSizes = new HashMap<>();
+    private final Map<UUID, Integer> openingHandSizes = new HashMap<>();
 
     public LondonMulligan(int freeMulligans) {
         super(freeMulligans);
