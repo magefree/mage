@@ -483,6 +483,12 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_ENCHANTMENT.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT = new FilterControlledEnchantmentPermanent("an enchantment you control");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT = new FilterControlledPermanent("another enchantment");
 
     static {

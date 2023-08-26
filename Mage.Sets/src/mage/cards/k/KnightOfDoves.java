@@ -28,7 +28,7 @@ public final class KnightOfDoves extends CardImpl {
         // Whenever an enchantment you control is put into a graveyard from the battlefield, create a 1/1 white Bird creature token with flying.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new CreateTokenEffect(new BirdToken()), false,
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_ENCHANTMENT, false
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT, false
         ));
     }
 

@@ -32,7 +32,7 @@ public final class SaviorOfTheSleeping extends CardImpl {
         // Whenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on Savior of the Sleeping.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false,
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_ENCHANTMENT, false
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT, false
         ));
     }
 
