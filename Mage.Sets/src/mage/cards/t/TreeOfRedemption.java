@@ -1,13 +1,11 @@
-
 package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBaseToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -65,7 +63,6 @@ class TreeOfRedemptionEffect extends OneShotEffect {
             return false;
         }
 
-
         int amount = perm.getToughness().getValue();
         int life = player.getLife();
         if (life == amount) {
@@ -78,7 +75,7 @@ class TreeOfRedemptionEffect extends OneShotEffect {
             return false;
         }
         player.setLife(amount, game, source);
-        game.addEffect(new SetBasePowerToughnessSourceEffect(null, StaticValue.get(life), Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
+        game.addEffect(new SetBaseToughnessSourceEffect(life, Duration.Custom), source);
         return true;
     }
 
