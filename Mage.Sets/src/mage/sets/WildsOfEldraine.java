@@ -145,6 +145,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Lord Skitter's Blessing", 98, Rarity.RARE, mage.cards.l.LordSkittersBlessing.class));
         cards.add(new SetCardInfo("Lord Skitter's Butcher", 99, Rarity.UNCOMMON, mage.cards.l.LordSkittersButcher.class));
         cards.add(new SetCardInfo("Lord Skitter, Sewer King", 97, Rarity.RARE, mage.cards.l.LordSkitterSewerKing.class));
+        cards.add(new SetCardInfo("Malevolent Witchkite", 315, Rarity.RARE, mage.cards.m.MalevolentWitchkite.class));
         cards.add(new SetCardInfo("Merfolk Coralsmith", 60, Rarity.COMMON, mage.cards.m.MerfolkCoralsmith.class));
         cards.add(new SetCardInfo("Merry Bards", 140, Rarity.COMMON, mage.cards.m.MerryBards.class));
         cards.add(new SetCardInfo("Minecart Daredevil", 141, Rarity.COMMON, mage.cards.m.MinecartDaredevil.class));
