@@ -2,7 +2,7 @@ package mage.client.deckeditor.table;
 
 import mage.cards.MageCard;
 import mage.client.util.comparators.CardViewComparator;
-import mage.game.draft.RateCard;
+import mage.cards.RateCard;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
 
@@ -83,8 +83,8 @@ public class MageCardComparator implements CardViewComparator {
                 bCom = Integer.parseInt(b.getCardNumber().replaceAll("[\\D]", ""));
                 break;
             case 9:
-                aCom = RateCard.rateCard(a.getOriginalCard(), null);
-                bCom = RateCard.rateCard(b.getOriginalCard(), null);
+                aCom = RateCard.rateCard(a, null);
+                bCom = RateCard.rateCard(b, null);
                 break;
             case 10:
                 aCom = a.getColorIdentityStr();

@@ -41,7 +41,7 @@ public final class CircleOfSolace extends CardImpl {
 
 class CircleOfSolaceEffect extends PreventionEffectImpl {
 
-    public CircleOfSolaceEffect() {
+    CircleOfSolaceEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false);
         this.staticText = "The next time a creature of the chosen type would deal damage to you this turn, prevent that damage.";
     }
@@ -67,7 +67,7 @@ class CircleOfSolaceEffect extends PreventionEffectImpl {
         return false;
     }
 
-    public CircleOfSolaceEffect(CircleOfSolaceEffect effect) {
+    private CircleOfSolaceEffect(final CircleOfSolaceEffect effect) {
         super(effect);
     }
 

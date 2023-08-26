@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -45,7 +44,7 @@ public final class Grief extends CardImpl {
 
         // When Grief enters the battlefield, target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_NON_LAND, TargetController.OPPONENT)
+                new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_NON_LAND)
         );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

@@ -45,7 +45,7 @@ public final class RestlessCottage extends CardImpl {
 
         // Whenever Restless Cottage attacks, create a Food token and exile up to one target card from a graveyard.
         Ability ability = new AttacksTriggeredAbility(new CreateTokenEffect(new FoodToken()));
-        ability.addEffect(new ExileTargetEffect());
+        ability.addEffect(new ExileTargetEffect().concatBy("and"));
         ability.addTarget(new TargetCardInGraveyard(0, 1));
         this.addAbility(ability);
     }

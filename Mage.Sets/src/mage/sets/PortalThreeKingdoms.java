@@ -19,10 +19,10 @@ public final class PortalThreeKingdoms extends ExpansionSet {
         super("Portal Three Kingdoms", "PTK", ExpansionSet.buildDate(1999, 5, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Beginner";
         this.hasBasicLands = true;
-        this.hasBoosters = true;
-        this.numBoosterLands = 2;
-        this.numBoosterCommon = 5;
-        this.numBoosterUncommon = 2;
+        this.hasBoosters = true; // note: paper boosters had only 10 cards (2 lands, 5 commons, 2 uncommons, 1 rare)
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Alert Shu Infantry", 1, Rarity.UNCOMMON, mage.cards.a.AlertShuInfantry.class));

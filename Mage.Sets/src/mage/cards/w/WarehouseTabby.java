@@ -32,7 +32,7 @@ public final class WarehouseTabby extends CardImpl {
         // Whenever an enchantment you control is put into a graveyard from the battlefield, create a 1/1 black Rat creature token with "This creature can't block."
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new CreateTokenEffect(new RatCantBlockToken()), false,
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_ENCHANTMENT, false
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT, false
         ));
 
         // {1}{B}: Warehouse Tabby gains deathtouch until end of turn.

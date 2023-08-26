@@ -166,11 +166,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Decimate", 140, Rarity.RARE, mage.cards.d.Decimate.class));
         cards.add(new SetCardInfo("Dreadbore", 141, Rarity.RARE, mage.cards.d.Dreadbore.class));
         cards.add(new SetCardInfo("Thraximundar", 142, Rarity.MYTHIC, mage.cards.t.Thraximundar.class));
-        cards.add(new SetCardInfo("Rick, Steadfast Leader", 143, Rarity.MYTHIC, mage.cards.r.RickSteadfastLeader.class));
-        cards.add(new SetCardInfo("Daryl, Hunter of Walkers", 144, Rarity.MYTHIC, mage.cards.d.DarylHunterOfWalkers.class));
-        cards.add(new SetCardInfo("Glenn, the Voice of Calm", 145, Rarity.MYTHIC, mage.cards.g.GlennTheVoiceOfCalm.class));
-        cards.add(new SetCardInfo("Michonne, Ruthless Survivor", 146, Rarity.MYTHIC, mage.cards.m.MichonneRuthlessSurvivor.class));
-        cards.add(new SetCardInfo("Negan, the Cold-Blooded", 147, Rarity.MYTHIC, mage.cards.n.NeganTheColdBlooded.class));
+        cards.add(new SetCardInfo("Greymond, Avacyn's Stalwart", 143, Rarity.MYTHIC, mage.cards.g.GreymondAvacynsStalwart.class));
+        cards.add(new SetCardInfo("Hansk, Slayer Zealot", 144, Rarity.MYTHIC, mage.cards.h.HanskSlayerZealot.class));
+        cards.add(new SetCardInfo("Gregor, Shrewd Magistrate", 145, Rarity.MYTHIC, mage.cards.g.GregorShrewdMagistrate.class));
+        cards.add(new SetCardInfo("Enkira, Hostile Scavenger", 146, Rarity.MYTHIC, mage.cards.e.EnkiraHostileScavenger.class));
+        cards.add(new SetCardInfo("Malik, Grim Manipulator", 147, Rarity.MYTHIC, mage.cards.m.MalikGrimManipulator.class));
         cards.add(new SetCardInfo("Admonition Angel", 154, Rarity.MYTHIC, mage.cards.a.AdmonitionAngel.class));
         cards.add(new SetCardInfo("Roil Elemental", 155, Rarity.RARE, mage.cards.r.RoilElemental.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 156, Rarity.RARE, mage.cards.z.ZulaportCutthroat.class));
@@ -584,7 +584,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 577, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 578, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 579, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Lucille", 581, Rarity.MYTHIC, mage.cards.l.Lucille.class));
+        cards.add(new SetCardInfo("Gisa's Favorite Shovel", 581, Rarity.MYTHIC, mage.cards.g.GisasFavoriteShovel.class));
         cards.add(new SetCardInfo("Brainstorm", 582, Rarity.RARE, mage.cards.b.Brainstorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fblthp, the Lost", 583, Rarity.RARE, mage.cards.f.FblthpTheLost.class));
         cards.add(new SetCardInfo("Wrexial, the Risen Deep", 584, Rarity.MYTHIC, mage.cards.w.WrexialTheRisenDeep.class));

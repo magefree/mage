@@ -35,7 +35,7 @@ public final class GallantPieWielder extends CardImpl {
         // Celebration -- Gallant Pie-Wielder has double strike as long as two or more nonland permanents entered the battlefield under your control this turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance()),
-                CelebrationCondition.instance, "{this} as double strike as long as two or " +
+                CelebrationCondition.instance, "{this} has double strike as long as two or " +
                 "more nonland permanents entered the battlefield under your control this turn"
         )).addHint(CelebrationCondition.getHint()).setAbilityWord(AbilityWord.CELEBRATION), new CelebrationWatcher());
     }

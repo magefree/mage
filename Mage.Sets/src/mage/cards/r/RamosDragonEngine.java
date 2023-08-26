@@ -9,7 +9,7 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.mana.ActivateOncePerTurnManaAbility;
+import mage.abilities.mana.LimitedTimesPerTurnActivatedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -45,7 +45,10 @@ public final class RamosDragonEngine extends CardImpl {
         ));
 
         // Remove five +1/+1 counters from Ramos: Add {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}. Activate this ability only once each turn.        
-        Ability ability = new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(2, 2, 2, 2, 2, 0, 0, 0)), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(5)));
+        Ability ability = new LimitedTimesPerTurnActivatedManaAbility(
+                Zone.BATTLEFIELD, new BasicManaEffect(new Mana(2, 2, 2, 2, 2, 0, 0, 0)),
+                new RemoveCountersSourceCost(CounterType.P1P1.createInstance(5))
+        );
         this.addAbility(ability);
     }
 
