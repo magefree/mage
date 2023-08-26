@@ -3,7 +3,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
@@ -38,7 +38,7 @@ public final class LoamcrafterFaun extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Loamcrafter Faun enters the battlefield, you may discard one or more land cards. When you do, return up to that many target nonland permanent cards from your graveyard to your hand.
-        this.addAbility(new EntersBattlefieldAbility(new LoamcrafterFaunDiscardEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new LoamcrafterFaunDiscardEffect()));
     }
 
     private LoamcrafterFaun(final LoamcrafterFaun card) {
@@ -53,7 +53,7 @@ public final class LoamcrafterFaun extends CardImpl {
 
 class LoamcrafterFaunDiscardEffect extends OneShotEffect {
 
-    private static FilterCard filter = new FilterPermanentCard("nonland permanent(s) in your graveyard");
+    private static FilterCard filter = new FilterPermanentCard("nonland permanent cards in your graveyard");
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
