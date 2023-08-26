@@ -19,7 +19,7 @@ public class SmoothedLondonMulligan extends LondonMulligan {
         super(mulligan);
     }
 
-    private static double count_lands(Collection<Card> cards, boolean library){
+    private static double countLands(Collection<Card> cards, boolean library){
         double land_count = 0;
         for (Card card : cards){
             if (card.isLand()) {
@@ -40,12 +40,12 @@ public class SmoothedLondonMulligan extends LondonMulligan {
     public void drawHand(int numCards, Player player, Game game){
         List<Card> library = player.getLibrary().getCards(game);
         if (library.size() >= numCards*2 && numCards > 1) {
-            double land_ratio = count_lands(library, true) / (double) library.size();
+            double land_ratio = countLands(library, true) / (double) library.size();
             Set<Card> hand1 = player.getLibrary().getTopCards(game, numCards);
             Set<Card> hand2 = player.getLibrary().getTopCards(game, numCards * 2);
             hand2.removeAll(hand1);
-            double hand1_ratio = count_lands(hand1, false) / (double) numCards;
-            double hand2_ratio = count_lands(hand2, false) / (double) numCards;
+            double hand1_ratio = countLands(hand1, false) / (double) numCards;
+            double hand2_ratio = countLands(hand2, false) / (double) numCards;
             //distance = max(0,abs(land_ratio-hand_ratio)-0.15)+random()*0.3
             //Where land_ratio is (deck lands/deck size) and hand_ratio is (hand lands/hand size)
             //Keeps whichever hand's distance is smaller. Note that a 1-land difference is 1/7 = 0.143

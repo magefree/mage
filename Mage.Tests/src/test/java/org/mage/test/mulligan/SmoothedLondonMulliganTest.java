@@ -2,10 +2,10 @@ package org.mage.test.mulligan;
 import mage.game.mulligan.MulliganType;
 
 public class SmoothedLondonMulliganTest extends LondonMulliganTest {
-    protected MulliganType get_mulligantype() {
+    protected MulliganType getMullType() {
         return MulliganType.SMOOTHED_LONDON;
     }
-    protected int cards_per_mull() {
+    protected int getCardsPerMull() {
         return 14;
     }
 }
