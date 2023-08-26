@@ -82,9 +82,8 @@ class TangledColonyWatcher extends Watcher {
         if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT) {
             return;
         }
-        UUID damageControllerId = game.getControllerId(event.getSourceId());
         Permanent damaged = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (damaged == null || !damaged.isCreature(game) || damageControllerId == null) {
+        if (damaged == null) {
             return;
         }
         MageObjectReference mor = new MageObjectReference(damaged, game);
