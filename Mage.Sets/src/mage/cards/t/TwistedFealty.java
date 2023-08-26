@@ -33,7 +33,7 @@ public final class TwistedFealty extends CardImpl {
 
         // Create a Wicked Role token attached to up to one target creature.
         this.getSpellAbility().addEffect(new CreateRoleAttachedTargetEffect(RoleType.WICKED)
-                .setTargetPointer(new SecondTargetPointer()));
+                .setTargetPointer(new SecondTargetPointer()).concatBy("<br>"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
     }
 

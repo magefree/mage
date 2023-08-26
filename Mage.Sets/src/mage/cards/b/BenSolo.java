@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -39,12 +38,12 @@ public class BenSolo extends CardImpl {
         this.addAbility(new BenSoloTriggeredAbility());
     }
 
-    public BenSolo(final BenSolo card) {
+    private BenSolo(final BenSolo card) {
         super(card);
     }
 
     @Override
-    public Card copy() {
+    public BenSolo copy() {
         return new BenSolo(this);
     }
 }

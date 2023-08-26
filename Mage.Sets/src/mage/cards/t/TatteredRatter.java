@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public final class TatteredRatter extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.RAT, "Rat you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.RAT, "a Rat you control");
 
     public TatteredRatter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

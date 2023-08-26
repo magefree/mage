@@ -113,14 +113,14 @@ class IntellectDevourerExileEffect extends OneShotEffect {
         UUID exileZoneId = CardUtil.getExileZoneId(game, sourceObject.getId(), sourceObject.getZoneChangeCounter(game));
 
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            Cards cardsOpponentsChoseToExile = new CardsImpl();
+            Cards opponentCardsToExile = new CardsImpl();
             Player opponent = game.getPlayer(opponentId);
-            if (opponent == null || !cardsToExile.containsKey(opponentId)) {
+            if (opponent == null || !cardsToExile.containsKey(opponentId) || cardsToExile.get(opponentId).isEmpty()) {
                 continue;
             }
-            cardsOpponentsChoseToExile.addAll(cardsToExile.get(opponentId));
-            opponent.moveCardsToExile(cardsOpponentsChoseToExile.getCards(game), source, game, false, exileZoneId, sourceObject.getIdName());
-            Card thisCard = cardsOpponentsChoseToExile.getCards(game).iterator().next();
+            opponentCardsToExile.addAll(cardsToExile.get(opponentId));
+            opponent.moveCardsToExile(opponentCardsToExile.getCards(game), source, game, false, exileZoneId, sourceObject.getIdName());
+            Card thisCard = opponentCardsToExile.getCards(game).iterator().next();
             game.getState().setValue(thisCard.getId().toString() + game.getState().getZoneChangeCounter(thisCard.getId()), exileZoneId);
             applied = true;
         }

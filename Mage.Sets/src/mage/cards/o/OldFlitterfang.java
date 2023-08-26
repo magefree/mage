@@ -6,7 +6,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.hint.common.MorbidHint;
@@ -42,9 +42,9 @@ public final class OldFlitterfang extends CardImpl {
                 MorbidCondition.instance, false
         ).addHint(MorbidHint.instance));
 
-        // {2}, Sacrifice another creature or artifact: Old Flitterfang gets +2/+2 until end of turn.
+        // {2}{B}, Sacrifice another creature or artifact: Old Flitterfang gets +2/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                new BoostSourceEffect(2, 2, Duration.EndOfTurn), new GenericManaCost(2)
+                new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT));
         this.addAbility(ability);

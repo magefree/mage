@@ -15,8 +15,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -36,9 +35,6 @@ public final class NevaStalkedByNightmares extends CardImpl {
                 CardType.ENCHANTMENT.getPredicate()
         ));
     }
-
-    private static final FilterPermanent filter2
-            = new FilterControlledEnchantmentPermanent("an enchantment you control");
 
     public NevaStalkedByNightmares(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
@@ -61,7 +57,7 @@ public final class NevaStalkedByNightmares extends CardImpl {
         // Whenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on Neva, then scry 1.
         ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                false, filter2, false
+                false, StaticFilters.FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT, false
         );
         ability.addEffect(new ScryEffect(1, false).concatBy(", then"));
         this.addAbility(ability);

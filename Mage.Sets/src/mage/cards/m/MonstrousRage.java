@@ -21,7 +21,7 @@ public final class MonstrousRage extends CardImpl {
         // Target creature gets +2/+0 until end of turn. Create a Monster Role attached to it.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new CreateRoleAttachedTargetEffect(RoleType.MONSTER).setText("create a Monster Role attached to it"));
+        this.getSpellAbility().addEffect(new CreateRoleAttachedTargetEffect(RoleType.MONSTER).setText("create a Monster Role token attached to it"));
     }
 
     private MonstrousRage(final MonstrousRage card) {

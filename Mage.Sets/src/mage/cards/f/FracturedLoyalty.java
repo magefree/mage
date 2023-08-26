@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -52,12 +51,12 @@ public final class FracturedLoyalty extends CardImpl {
 
     private static class FracturedLoyaltyEffect extends OneShotEffect {
 
-        public FracturedLoyaltyEffect() {
+        FracturedLoyaltyEffect() {
             super(Outcome.GainControl);
             this.staticText = "that spell or ability's controller gains control of that creature";
         }
 
-        private FracturedLoyaltyEffect(FracturedLoyaltyEffect effect) {
+        private FracturedLoyaltyEffect(final FracturedLoyaltyEffect effect) {
             super(effect);
         }
 
@@ -87,7 +86,7 @@ public final class FracturedLoyalty extends CardImpl {
         }
 
         @Override
-        public Effect copy() {
+        public FracturedLoyaltyEffect copy() {
             return new FracturedLoyaltyEffect(this);
         }
 
