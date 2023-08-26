@@ -7,11 +7,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -32,7 +28,7 @@ public final class EgoDrain extends CardImpl {
         
         // Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. 
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_NON_LAND, TargetController.ANY));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_NON_LAND));
         
         // If you don't control a Faerie, exile a card from your hand.
         this.getSpellAbility().addEffect(new EgoDrainEffect());
@@ -50,14 +46,14 @@ public final class EgoDrain extends CardImpl {
 
 class EgoDrainEffect extends OneShotEffect {
 
-    private static FilterPermanent filter = new FilterPermanent(SubType.FAERIE, "");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.FAERIE, "");
 
-    public EgoDrainEffect() {
+    EgoDrainEffect() {
         super(Outcome.Detriment);
         this.staticText = "if you don't control a Faerie, exile a card from your hand.";
     }
 
-    public EgoDrainEffect(final EgoDrainEffect effect) {
+    private EgoDrainEffect(final EgoDrainEffect effect) {
         super(effect);
     }
 
@@ -77,7 +73,6 @@ class EgoDrainEffect extends OneShotEffect {
         }
 
         TargetCard target = new TargetCardInHand(new FilterCard("card in your hand (to exile)"));
-        target.setNotTarget(true);
         return player.choose(Outcome.Detriment, player.getHand(), target, source, game)
             && player.moveCards(game.getCard(target.getFirstTarget()), Zone.EXILED, source, game);
     }
