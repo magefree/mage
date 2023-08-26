@@ -127,6 +127,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of the False God", 172, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Theoretical Duplication", 112, Rarity.RARE, mage.cards.t.TheoreticalDuplication.class));
         cards.add(new SetCardInfo("Thrilling Encore", 118, Rarity.RARE, mage.cards.t.ThrillingEncore.class));
+        cards.add(new SetCardInfo("Timber Paladin", 20, Rarity.RARE, mage.cards.t.TimberPaladin.class));
         cards.add(new SetCardInfo("Timely Ward", 79, Rarity.RARE, mage.cards.t.TimelyWard.class));
         cards.add(new SetCardInfo("Tithe Taker", 80, Rarity.RARE, mage.cards.t.TitheTaker.class));
         cards.add(new SetCardInfo("Transcendent Envoy", 81, Rarity.COMMON, mage.cards.t.TranscendentEnvoy.class));
