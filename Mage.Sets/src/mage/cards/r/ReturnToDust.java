@@ -1,8 +1,6 @@
-
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,7 +50,7 @@ class ReturnToDustEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public ReturnToDustEffect copy() {
         return new ReturnToDustEffect(this);
     }
 

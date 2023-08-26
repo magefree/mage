@@ -10,7 +10,6 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -154,5 +153,5 @@ class TimotharBaronOfBatsReturnEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() { return new TimotharBaronOfBatsReturnEffect(this); }
+    public TimotharBaronOfBatsReturnEffect copy() { return new TimotharBaronOfBatsReturnEffect(this); }
 }
