@@ -59,7 +59,7 @@ public final class WildwoodMentor extends CardImpl {
         // Whenever Wildwood Mentor attacks, another target attacking creature gets +X/+X until end of turn, where X is Wildwood Mentor's power.
         Ability ability = new AttacksTriggeredAbility(
                 new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn)
-                        .setText("another target attacking creature gets +X/+X until end of turn, where X is Wildwood Mentor's power"),
+                        .setText("another target attacking creature gets +X/+X until end of turn, where X is {this}'s power"),
                 false
         );
         ability.addTarget(new TargetCreaturePermanent(filter));
