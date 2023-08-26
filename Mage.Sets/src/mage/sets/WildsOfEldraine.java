@@ -241,6 +241,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Taken by Nightmares", 112, Rarity.UNCOMMON, mage.cards.t.TakenByNightmares.class));
         cards.add(new SetCardInfo("Talion's Messenger", 73, Rarity.RARE, mage.cards.t.TalionsMessenger.class));
         cards.add(new SetCardInfo("Talion, the Kindly Lord", 215, Rarity.MYTHIC, mage.cards.t.TalionTheKindlyLord.class));
+        cards.add(new SetCardInfo("Tangled Colony", 113, Rarity.RARE, mage.cards.t.TangledColony.class));
         cards.add(new SetCardInfo("Tanglespan Lookout", 188, Rarity.UNCOMMON, mage.cards.t.TanglespanLookout.class));
         cards.add(new SetCardInfo("Tattered Ratter", 152, Rarity.UNCOMMON, mage.cards.t.TatteredRatter.class));
         cards.add(new SetCardInfo("Tempest Hart", 238, Rarity.UNCOMMON, mage.cards.t.TempestHart.class));
