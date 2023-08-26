@@ -42,7 +42,7 @@ public final class HornedLochWhale extends AdventureCard {
         this.addAbility(FlashAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Horned Loch-Whale enters the battlefield tapped unless it's your turn.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(
