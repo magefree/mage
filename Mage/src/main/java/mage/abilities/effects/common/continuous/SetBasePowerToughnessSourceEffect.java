@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.MageObject;
@@ -13,8 +12,6 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 
 /**
- * RENAME
- *
  * @author BetaSteward_at_googlemail.com, North, Alex-Vasile, xenohedron
  */
 public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
@@ -72,15 +69,11 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
             discard();
             return false;
         }
-
         if (this.power != null) {
-            int power = this.power.calculate(game, source, this);
-            mageObject.getPower().setModifiedBaseValue(power);
+            mageObject.getPower().setModifiedBaseValue(this.power.calculate(game, source, this));
         }
-
         if (this.toughness != null) {
-            int toughness = this.toughness.calculate(game, source, this);
-            mageObject.getToughness().setModifiedBaseValue(toughness);
+            mageObject.getToughness().setModifiedBaseValue(this.toughness.calculate(game, source, this));
         }
         return true;
     }
