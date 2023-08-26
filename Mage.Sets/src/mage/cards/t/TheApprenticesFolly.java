@@ -32,9 +32,6 @@ public final class TheApprenticesFolly extends CardImpl {
     private static final FilterControlledCreaturePermanent filter =
             new FilterControlledCreaturePermanent("nontoken creature you control that doesn't have the same name as a token you control");
 
-    private static final FilterControlledPermanent filterReflection =
-            new FilterControlledPermanent(SubType.REFLECTION, "Reflection you control");
-
     static {
         filter.add(TokenPredicate.FALSE);
         filter.add(TheApprenticesFollyPredicate.instance);
@@ -54,7 +51,7 @@ public final class TheApprenticesFolly extends CardImpl {
                         .setIsntLegendary(true)
                         .setAdditionalSubType(SubType.REFLECTION)
                         .setText("choose target nontoken creature you control that doesn't have the same name as a "
-                                + "token you control. create a token that's a copy of it, except it isn't legendary, "
+                                + "token you control. Create a token that's a copy of it, except it isn't legendary, "
                                 + "is a Reflection in addition to its other types, and has haste"),
                 new TargetControlledCreaturePermanent(filter)
         );
@@ -90,18 +87,19 @@ enum TheApprenticesFollyPredicate implements ObjectSourcePlayerPredicate<Permane
         FilterControlledPermanent filter = new FilterControlledPermanent();
         filter.add(new NamePredicate(name));
         filter.add(TokenPredicate.TRUE);
-        // This works due to the non-token close on the target. There should be no controlled token with that name.
+        // This works due to the non-token clause on the target. There should be no controlled token with that name.
         return game.getBattlefield().count(filter, input.getPlayerId(), input.getSource(), game) == 0;
     }
 }
 
 class TheApprenticesFollySacrificeAllEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.REFLECTION, "");
+    private static final FilterControlledPermanent filterReflection =
+            new FilterControlledPermanent(SubType.REFLECTION, "Reflections you control");
 
     TheApprenticesFollySacrificeAllEffect() {
         super(Outcome.Sacrifice);
-        staticText = "sacrifice all Reflection you control";
+        staticText = "sacrifice all Reflections you control";
     }
 
     private TheApprenticesFollySacrificeAllEffect(final TheApprenticesFollySacrificeAllEffect effect) {
@@ -116,7 +114,7 @@ class TheApprenticesFollySacrificeAllEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield()
-                .getAllActivePermanents(filter, source.getControllerId(), game);
+                .getAllActivePermanents(filterReflection, source.getControllerId(), game);
         for (Permanent permanent : permanents) {
             permanent.sacrifice(source, game);
         }
