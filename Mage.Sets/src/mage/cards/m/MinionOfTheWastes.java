@@ -35,7 +35,7 @@ public final class MinionOfTheWastes extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // As Minion of the Wastes enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.
+        // As Minion of the Wastes enters the battlefield, pay any amount of life.
         this.addAbility(new AsEntersBattlefieldAbility(new MinionOfTheWastesEffect()));
 
         // Minion of the Wastes's power and toughness are each equal to the life paid as it entered the battlefield.
