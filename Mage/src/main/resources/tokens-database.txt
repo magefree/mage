@@ -1834,7 +1834,7 @@
 |Generate|TOK:40K|Blue Horror|||BlueHorrorToken|
 |Generate|TOK:40K|Cherubael|||CherubaelToken|
 |Generate|TOK:40K|Clue|||ClueArtifactToken|
-|Generate|TOK:40K|Insect|||InsectColorlessToken|
+|Generate|TOK:40K|Insect|||InsectColorlessArtifactToken|
 |Generate|TOK:40K|Necron Warrior|||NecronWarriorToken|
 |Generate|TOK:40K|Plaguebearer of Nurgle|||PlaguebearerOfNurgleToken|
 |Generate|TOK:40K|Robot|||RobotToken|
