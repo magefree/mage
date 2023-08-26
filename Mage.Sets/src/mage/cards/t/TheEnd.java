@@ -79,7 +79,7 @@ class TheEndEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEf
             return false;
         }
 
-        permanent.moveToExile(null, "", source, game);
+        player.moveCards(permanent, Zone.EXILED, source, game);
 
         FilterCard filter = new FilterCard();
         filter.add(new NamePredicate(name));
