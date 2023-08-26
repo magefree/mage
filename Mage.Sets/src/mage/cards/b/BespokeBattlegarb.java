@@ -49,7 +49,7 @@ public final class BespokeBattlegarb extends CardImpl {
         this.addAbility(ability, new CelebrationWatcher());
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
     private BespokeBattlegarb(final BespokeBattlegarb card) {
