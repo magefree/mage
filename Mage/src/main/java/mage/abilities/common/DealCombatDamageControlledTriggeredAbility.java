@@ -3,6 +3,7 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -22,6 +23,7 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
     private final Set<UUID> damagedPlayerIds = new HashSet<>();
     private final boolean setTargetPointer;
     private final boolean onlyOpponents;
+    private final FilterCreaturePermanent filter;
 
     public DealCombatDamageControlledTriggeredAbility(Effect effect) {
         this(Zone.BATTLEFIELD, effect);
@@ -40,10 +42,15 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
     }
 
     public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, boolean setTargetPointer, boolean onlyOpponents, boolean optional) {
+        this(zone, effect, new FilterCreaturePermanent("creatures"), setTargetPointer, onlyOpponents, false);
+    }
+
+    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, FilterCreaturePermanent filter, boolean setTargetPointer, boolean onlyOpponents, boolean optional) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
         this.onlyOpponents = onlyOpponents;
-        setTriggerPhrase("Whenever one or more creatures you control deal combat damage to "
+        this.filter = filter;
+        setTriggerPhrase("Whenever one or more " + filter.getMessage() + " you control deal combat damage to "
                 + (onlyOpponents ? "an opponent" : "a player") + ", ");
     }
 
@@ -51,6 +58,7 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.onlyOpponents = ability.onlyOpponents;
+        this.filter = ability.filter;
     }
 
     @Override
@@ -80,6 +88,7 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
         if (!damageEvent.isCombatDamage()
                 || p == null
                 || !p.isControlledBy(this.getControllerId())
+                || !filter.match(p, game)
                 || damagedPlayerIds.contains(event.getPlayerId())
                 || (onlyOpponents && !game.getOpponents(getControllerId()).contains(event.getPlayerId()))) {
             return false;
