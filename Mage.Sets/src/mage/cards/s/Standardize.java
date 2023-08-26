@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
 import mage.cards.CardImpl;
@@ -44,13 +43,13 @@ public final class Standardize extends CardImpl {
 
 class StandardizeEffect extends OneShotEffect {
 
-    public StandardizeEffect() {
+    StandardizeEffect() {
         super(Outcome.BoostCreature);
         staticText = "choose a creature type other than Wall. Each creature becomes that type until end of turn";
 
     }
 
-    public StandardizeEffect(final StandardizeEffect effect) {
+    private StandardizeEffect(final StandardizeEffect effect) {
         super(effect);
     }
 
@@ -82,7 +81,7 @@ class StandardizeEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public StandardizeEffect copy() {
         return new StandardizeEffect(this);
     }
 }

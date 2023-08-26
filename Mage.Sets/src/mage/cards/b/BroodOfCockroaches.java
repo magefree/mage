@@ -32,9 +32,7 @@ public final class BroodOfCockroaches extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Brood of Cockroaches is put into your graveyard from the battlefield,
-        // at the beginning of the next end step,
-        // you lose 1 life
-        // and return Brood of Cockroaches to your hand.
+        // at the beginning of the next end step, you lose 1 life and return Brood of Cockroaches to your hand.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new BroodOfCockroachesEffect(), false, true));
     }
 
@@ -56,8 +54,8 @@ class BroodOfCockroachesEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    BroodOfCockroachesEffect(BroodOfCockroachesEffect broodOfCockroachesEffect) {
-        super(broodOfCockroachesEffect);
+    private BroodOfCockroachesEffect(final BroodOfCockroachesEffect effect) {
+        super(effect);
     }
 
     @Override
@@ -76,7 +74,7 @@ class BroodOfCockroachesEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public BroodOfCockroachesEffect copy() {
         return new BroodOfCockroachesEffect(this);
     }
 }

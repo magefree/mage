@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -91,7 +90,7 @@ class DonalHeraldOfWingsEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public DonalHeraldOfWingsEffect copy() {
         return new DonalHeraldOfWingsEffect(this);
     }
 }

@@ -82,7 +82,7 @@ public class CompositeCost implements Cost {
     }
 
     @Override
-    public Cost copy() {
+    public CompositeCost copy() {
         return new CompositeCost(this);
     }
 }
