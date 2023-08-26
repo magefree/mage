@@ -84,6 +84,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nymris, Oona's Trickster", 141, Rarity.RARE, mage.cards.n.NymrisOonasTrickster.class));
         cards.add(new SetCardInfo("Oona, Queen of the Fae", 142, Rarity.RARE, mage.cards.o.OonaQueenOfTheFae.class));
         cards.add(new SetCardInfo("Opt", 101, Rarity.COMMON, mage.cards.o.Opt.class));
+        cards.add(new SetCardInfo("Ox Drover", 6, Rarity.RARE, mage.cards.o.OxDrover.class));
         cards.add(new SetCardInfo("Paradise Druid", 129, Rarity.UNCOMMON, mage.cards.p.ParadiseDruid.class));
         cards.add(new SetCardInfo("Path of Ancestry", 165, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Perplexing Test", 102, Rarity.RARE, mage.cards.p.PerplexingTest.class));
