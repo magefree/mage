@@ -40,7 +40,7 @@ public final class RestlessSpire extends CardImpl {
 
         // {U}{R}: Until end of turn, Restless Spire becomes a 2/1 blue and red Elemental creature with "As long as it's your turn, this creature has first strike". It's still a land.
         this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
-                new CreatureToken(2, 1, "2/1 blue and red Elemental creature with \"As long as it's your turn, this creature has first strike\"")
+                new CreatureToken(2, 1, "2/1 blue and red Elemental creature with \"As long as it's your turn, this creature has first strike.\"")
                         .withColor("UR").withSubType(SubType.ELEMENTAL)
                         .withAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
