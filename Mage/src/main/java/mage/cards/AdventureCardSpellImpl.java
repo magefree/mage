@@ -107,19 +107,18 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
 class AdventureCardSpellAbility extends SpellAbility {
 
     private String nameFull;
-    private boolean finalized;
+    private boolean finalized = false;
 
     public AdventureCardSpellAbility(final SpellAbility baseSpellAbility, String adventureName, CardType[] cardTypes, String costs) {
         super(baseSpellAbility);
         this.setName(cardTypes, adventureName, costs);
         this.setCardName(adventureName);
-        this.finalized = false;
     }
 
     // The exile effect needs to be added last.
     public void finalizeAdventure() {
         if (finalized) {
-            throw new IllegalStateException("Adventures need to call finalizeAdventure() exactly once.");
+            throw new IllegalStateException("Wrong code usage. Adventures need to call finalizeAdventure() exactly once.");
         }
         this.addEffect(ExileAdventureSpellEffect.getInstance());
         this.finalized = true;
@@ -129,7 +128,7 @@ class AdventureCardSpellAbility extends SpellAbility {
         super(ability);
         this.nameFull = ability.nameFull;
         if (!ability.finalized) {
-            throw new IllegalStateException("Adventures need to call finalizeAdventure()");
+            throw new IllegalStateException("Wrong code usage. Adventures need to call finalizeAdventure() at the very end of the card's constructor.");
         }
         this.finalized = true;
     }
