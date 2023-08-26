@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class CallousSellSword extends AdventureCard {
 
-    private static final FilterAnyTarget filterSecondTarget = new FilterAnyTarget("other target");
+    private static final FilterAnyTarget filterSecondTarget = new FilterAnyTarget("any other target");
 
     private static final Hint hint = new ValueHint(
             "Creatures that died under your control this turn", CallousSellSwordValue.instance
