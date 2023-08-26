@@ -36,7 +36,8 @@ public final class VerdantOutrider extends CardImpl {
 
         // {1}{G}: Verdant Outrider can't be blocked by creatures with power 2 or less this turn.
         this.addAbility(new SimpleActivatedAbility(
-                new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn),
+                new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn)
+                        .setText("{this} can't be blocked by creatures with power 2 or less this turn"),
                 new ManaCostsImpl<>("{1}{G}")
         ));
     }
