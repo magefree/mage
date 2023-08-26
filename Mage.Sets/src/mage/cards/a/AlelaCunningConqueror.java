@@ -52,7 +52,6 @@ public final class AlelaCunningConqueror extends CardImpl {
 
         // Whenever one or more Faeries you control deal combat damage to a player, goad target creature that player controls.
         TriggeredAbility trigger = new AlelaCunningConquerorTriggeredAbility();
-        trigger.addTarget(new TargetCreaturePermanent()); // will be adjusted on trigger.
         this.addAbility(trigger);
     }
 
