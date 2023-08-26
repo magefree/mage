@@ -11,6 +11,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -34,6 +35,7 @@ public final class ArchonsGlory extends CardImpl {
                 ), BargainedCondition.instance, "if this spell was bargained, " +
                 "that creature also gains flying and lifelink until end of turn"
         ));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     private ArchonsGlory(final ArchonsGlory card) {

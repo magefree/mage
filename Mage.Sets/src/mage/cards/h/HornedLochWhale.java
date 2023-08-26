@@ -47,7 +47,7 @@ public final class HornedLochWhale extends AdventureCard {
         // Horned Loch-Whale enters the battlefield tapped unless it's your turn.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(
                 new TapSourceEffect(true), NotMyTurnCondition.instance,
-                "{this} enters the battlefield tapped unless it's your turn"
+                "tapped unless it's your turn"
         )));
 
         // Lagoon Breach

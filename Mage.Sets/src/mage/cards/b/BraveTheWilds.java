@@ -49,7 +49,7 @@ public final class BraveTheWilds extends CardImpl {
         // Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true
-        ));
+        ).concatBy("<br>"));
     }
 
     private BraveTheWilds(final BraveTheWilds card) {

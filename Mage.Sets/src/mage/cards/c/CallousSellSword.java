@@ -54,7 +54,7 @@ public final class CallousSellSword extends AdventureCard {
         this.getSpellCard().getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
         this.getSpellCard().getSpellAbility().addTarget(new TargetAnyTarget().setTargetTag(2));
-        this.getSpellCard().getSpellAbility().addEffect(new CallousSellSwordSacrificeFirstTargetEffect().concatBy(". Then"));
+        this.getSpellCard().getSpellAbility().addEffect(new CallousSellSwordSacrificeFirstTargetEffect().concatBy("Then"));
     }
 
     private CallousSellSword(final CallousSellSword card) {

@@ -30,7 +30,7 @@ public final class OgreChitterlord extends CardImpl {
     private static final FilterControlledCreaturePermanent filter =
             new FilterControlledCreaturePermanent(SubType.RAT, "each Rat you control");
     private static final FilterControlledPermanent filterCondition =
-            new FilterControlledPermanent(SubType.RAT, "five or more Rats");
+            new FilterControlledPermanent(SubType.RAT, "you control five or more Rats");
     private static final Condition condition =
             new PermanentsOnTheBattlefieldCondition(filterCondition, ComparisonType.OR_GREATER, 5);
 

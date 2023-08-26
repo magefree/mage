@@ -53,7 +53,7 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
         super(Zone.STACK, null);
         this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderText, new SacrificeTargetCost(bargainFilter));
         this.additionalCost.setRepeatable(false);
-        this.rule = additionalCost.getName() + additionalCost.getReminderText();
+        this.rule = additionalCost.getName() + ' ' + additionalCost.getReminderText();
         this.setRuleAtTheTop(true);
         this.addHint(BargainCostWasPaidHint.instance);
         this.activationKey = null;

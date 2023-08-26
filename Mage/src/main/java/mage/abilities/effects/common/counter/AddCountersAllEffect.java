@@ -32,6 +32,7 @@ public class AddCountersAllEffect extends OneShotEffect {
         this.counter = counter;
         this.amount = amount;
         this.filter = filter;
+        staticText = "put " + counter.getDescription() + " on each " + filter.getMessage();
     }
 
     protected AddCountersAllEffect(final AddCountersAllEffect effect) {
@@ -70,14 +71,6 @@ public class AddCountersAllEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
-            return staticText;
-        }
-        return CardUtil.getAddRemoveCountersText(amount, counter, getTargetPointer().describeTargets(mode.getTargets(), "that creature"), true);
     }
 
     @Override
