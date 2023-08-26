@@ -103,7 +103,7 @@ enum DonalHeraldOfWingsApplier implements StackObjectCopyApplier {
         copiedSpell.addSubType(SubType.SPIRIT);
         copiedSpell.getPower().setModifiedBaseValue(1);
         copiedSpell.getToughness().setModifiedBaseValue(1);
-        Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(1,1, Duration.Custom, SubLayer.SetPT_7b));
+        Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(1,1, Duration.Custom));
         ability.setRuleVisible(false);
         copiedSpell.getAbilities().add(ability);
     }

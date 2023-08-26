@@ -42,8 +42,8 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         this.staticText = "{this}'s power and toughness are each equal to the number of " + amount.getMessage();
     }
 
-    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration, SubLayer subLayer) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, subLayer);
+    public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration) {
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, SubLayer.SetPT_7b);
         this.staticText = "{this} has base power and toughness " + power + '/' + toughness + ' ' + duration.toString();
     }
 
