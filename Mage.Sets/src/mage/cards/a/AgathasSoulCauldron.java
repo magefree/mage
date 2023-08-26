@@ -33,8 +33,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -70,7 +68,7 @@ public final class AgathasSoulCauldron extends CardImpl {
 class AgathasSoulCauldronManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
 
     AgathasSoulCauldronManaEffect() {
-        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Benefit);
+        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "you may spend mana as though it were mana of any color to activate abilities of creatures you control";
     }
 
