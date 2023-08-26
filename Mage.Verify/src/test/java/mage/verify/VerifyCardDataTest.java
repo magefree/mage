@@ -29,7 +29,6 @@ import mage.filter.Filter;
 import mage.game.command.Dungeon;
 import mage.game.command.Plane;
 import mage.game.draft.DraftCube;
-import mage.cards.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
@@ -53,6 +52,8 @@ import java.lang.reflect.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -62,7 +63,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "WOE"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = "ALA;CON;ARB"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
@@ -2224,7 +2225,11 @@ public class VerifyCardDataTest {
             refText += "<br>";
             refText = refText.replace("<br>", "\n");
         }
+
         // mana ability fix
+        // Current implementation makes one Activated Ability per kind of color.
+        // We split such abilities in the reference text.
+        // TODO: extend to more complex ones. See https://github.com/magefree/mage/issues/10832
         for (String s : refText.split("[\\$\\\n]")) {
             if (!(s.startsWith("{T}: Add {") || s.startsWith("({T}: Add {"))
                     || !(s.contains("} or {") || s.contains("}, or {"))) {
@@ -2239,6 +2244,30 @@ public class VerifyCardDataTest {
             if (!newStr.isEmpty()) {
                 newStr = newStr.substring(0, newStr.length() - 1);
             }
+            refText = refText.replace(s, newStr);
+        }
+
+        // cycling fix
+        // Current implementation makes one CyclingAbility per quality,
+        // We split such abilities in the reference text.
+        //
+        // For instance "Swampcycling {2}, mountaincycling {2}"
+        //      becomes "Swampcycling {2}\nMountaincycling {2}"
+        for (String s : refText.split("[\\$\\\n]")) {
+            if (!Pattern.matches("^[a-zA-Z]*cycling .*, [a-zA-Z]*cycling.*", s)) {
+                continue;
+            }
+            String newStr = "";
+            Pattern p = Pattern.compile(", [a-zA-Z]*cycling");
+            Matcher m = p.matcher(s);
+            int start = 0;
+            while (m.find()) {
+                String group = m.group();
+                int newStart = m.start();
+                newStr += s.substring(start, newStart) + "\n" + group.substring(2, 3).toUpperCase() + group.substring(3);
+                start = newStart + group.length();
+            }
+            newStr += s.substring(start);
             refText = refText.replace(s, newStr);
         }
 
