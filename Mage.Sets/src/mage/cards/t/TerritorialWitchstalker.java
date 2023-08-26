@@ -5,10 +5,14 @@ import mage.MageInt;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -34,9 +38,15 @@ public final class TerritorialWitchstalker extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // At the beginning of combat on your turn, if you control a creature with power 4 or greater, Territorial Witchstalker gets +1/+0 until end of turn and can attack this turn as though it didn't have defender.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new ConditionalContinuousEffect(new BoostSourceEffect(1, 0, Duration.EndOfTurn), FerociousCondition.instance, "if you control a creature with power 4 or greater, Territorial Witchstalker gets +1/+0 until end of turn"), TargetController.YOU, false);
-        ability.addEffect(new ConditionalAsThoughEffect(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), FerociousCondition.instance).setText("and can attack this turn as though it didn't have defender"));
-        this.addAbility(ability);
+        TriggeredAbility ability = new BeginningOfCombatTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), TargetController.YOU, false);
+        ability.addEffect(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn));
+        
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+            ability, 
+            FerociousCondition.instance, 
+            "At the beginning of combat on your turn, if you control a creature with power 4 or greater, "
+            + "Territorial Witchstalker gets +1/+0 until end of turn and can attack this turn as though it didn't have defender"
+        ));
 
     }
 
