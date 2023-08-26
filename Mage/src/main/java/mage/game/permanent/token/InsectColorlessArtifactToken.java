@@ -8,9 +8,9 @@ import mage.constants.SubType;
 /**
  * @author Susucr
  */
-public final class InsectArtifactToken extends TokenImpl {
+public final class InsectColorlessArtifactToken extends TokenImpl {
 
-    public InsectArtifactToken() {
+    public InsectColorlessArtifactToken() {
         super("Insect Token", "1/1 colorless Insect artifact creature token with flying");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
@@ -21,11 +21,11 @@ public final class InsectArtifactToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    protected InsectArtifactToken(final InsectArtifactToken token) {
+    protected InsectColorlessArtifactToken(final InsectColorlessArtifactToken token) {
         super(token);
     }
 
-    public InsectArtifactToken copy() {
-        return new InsectArtifactToken(this);
+    public InsectColorlessArtifactToken copy() {
+        return new InsectColorlessArtifactToken(this);
     }
 }
