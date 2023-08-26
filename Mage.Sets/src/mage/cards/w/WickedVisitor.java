@@ -26,7 +26,7 @@ public final class WickedVisitor extends CardImpl {
         // Whenever an enchantment you control is put into a graveyard from the battlefield, each opponent loses 1 life.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new LoseLifeOpponentsEffect(1), false,
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_ENCHANTMENT, false
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT, false
         ));
     }
 
