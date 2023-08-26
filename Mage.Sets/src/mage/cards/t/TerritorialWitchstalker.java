@@ -1,18 +1,12 @@
 package mage.cards.t;
 
 import java.util.UUID;
+
 import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
-import mage.abilities.decorator.ConditionalAsThoughEffect;
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -20,6 +14,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.TargetController;
 
 /**
  *
