@@ -123,7 +123,9 @@ class AgathasSoulCauldronAbilityEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(
+                game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId())
+        ));
         if (exileZone == null || exileZone.isEmpty()) {
             return false;
         }
