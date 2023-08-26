@@ -108,6 +108,7 @@
 |Generate|EMBLEM:2X2|Emblem Wrenn|||WrennAndSixEmblem|
 |Generate|EMBLEM:DMU|Emblem Ajani|||AjaniSleeperAgentEmblem|
 |Generate|EMBLEM:DMU|Emblem Jaya|||JayaFieryNegotiatorEmblem|
+|Generate|EMBLEM:DMU|Emblem Karn|||KarnLivingLegacyEmblem|
 |Generate|EMBLEM:BRO|Emblem Saheeli|||SaheeliFiligreeMasterEmblem|
 |Generate|EMBLEM:ONE|Emblem Koth|||KothFireOfResistanceEmblem|
 |Generate|EMBLEM:MOM|Emblem Teferi|||TeferiAkosaOfZhalfirEmblem|
