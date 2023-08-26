@@ -361,14 +361,16 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 if (power != null) {
                     // might be missing canDamage condition?
                     Permanent blocker = game.getPermanent(blockerId);
-                    if (!assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
+                    if (blocker != null && !assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
                         attacker.markDamage(power, blockerId, null, game, true, true);
                     }
                 }
             }
             for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
                 Permanent blocker = game.getPermanent(entry.getKey());
-                blocker.markDamage(entry.getValue(), attacker.getId(), null, game, true, true);
+                if (blocker != null) {
+                    blocker.markDamage(entry.getValue(), attacker.getId(), null, game, true, true);
+                }
             }
         } else {
             for (UUID blockerId : blockerOrder) {

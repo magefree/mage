@@ -4,7 +4,6 @@ import mage.abilities.MageSingleton;
 import mage.abilities.Mode;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
-import mage.players.Player;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.TargetPointer;
 
@@ -104,12 +103,6 @@ public abstract class EffectImpl implements Effect {
             if (values == null) {
                 values = new HashMap<>();
             }
-        }
-        if (value instanceof Player) {
-            // If Player are set as value, there might be PlayerImpl serialized in ClientMessage's GameView.
-            // That does cause the message's data to not be unzippable, since the PlayerImpl class are not
-            // client-side.
-            throw new IllegalArgumentException("Players should not be set as value, set the UUID instead.");
         }
         values.put(key, value);
     }

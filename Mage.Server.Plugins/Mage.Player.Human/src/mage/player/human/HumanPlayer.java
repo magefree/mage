@@ -467,6 +467,13 @@ public class HumanPlayer extends PlayerImpl {
             return true;
         }
 
+        if (choice.isKeyChoice() && choice.getKeyChoices().isEmpty()) {
+            throw new IllegalArgumentException("Wrong code usage. Key choices must contains some values");
+        }
+        if (!choice.isKeyChoice() && choice.getChoices().isEmpty()) {
+            throw new IllegalArgumentException("Wrong code usage. Choices must contains some values");
+        }
+
         // Try to autopay for mana
         if (Outcome.PutManaInPool == outcome && currentlyUnpaidMana != null) {
             // Check check if the spell being paid for cares about the color of mana being paid

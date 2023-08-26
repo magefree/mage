@@ -29,7 +29,7 @@ import mage.filter.Filter;
 import mage.game.command.Dungeon;
 import mage.game.command.Plane;
 import mage.game.draft.DraftCube;
-import mage.game.draft.RateCard;
+import mage.cards.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
@@ -111,62 +111,51 @@ public class VerifyCardDataTest {
         // can be full set ignore list or set + cardname
 
         // power-toughness
-        skipListCreate(SKIP_LIST_PT);
+        // skipListAddName(SKIP_LIST_PT, set, cardName);
 
         // loyalty
-        skipListCreate(SKIP_LIST_LOYALTY);
+        // skipListAddName(SKIP_LIST_LOYALTY, set, cardName);
 
         // defense
-        skipListCreate(SKIP_LIST_DEFENSE);
+        // skipListAddName(SKIP_LIST_DEFENSE, set, cardName);
 
         // color
-        skipListCreate(SKIP_LIST_COLOR);
+        // skipListAddName(SKIP_LIST_COLOR, set, cardName);
 
         // cost
-        skipListCreate(SKIP_LIST_COST);
-        skipListAddName(SKIP_LIST_COST, "WOE", "Price of Beauty"); // temporary
+        // skipListAddName(SKIP_LIST_COST, set, cardName);
 
         // supertype
-        skipListCreate(SKIP_LIST_SUPERTYPE);
+        // skipListAddName(SKIP_LIST_SUPERTYPE, set, cardName);
 
         // type
-        skipListCreate(SKIP_LIST_TYPE);
+        // skipListAddName(SKIP_LIST_TYPE, set, cardName);
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-        skipListAddName(SKIP_LIST_TYPE, "WOE", "Knight of Doves"); // temporary
-        skipListAddName(SKIP_LIST_TYPE, "WOE", "Faunsbane Troll"); // temporary
-        skipListAddName(SKIP_LIST_TYPE, "WOE", "Blossoming Tortoise"); // temporary
-        skipListAddName(SKIP_LIST_TYPE, "WOE", "Ashiok's Reaper"); // temporary
-        skipListAddName(SKIP_LIST_TYPE, "WOE", "Agatha's Champion"); // temporary
 
         // subtype
-        skipListCreate(SKIP_LIST_SUBTYPE);
+        // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
-        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Knight of Doves"); // temporary
-        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Faunsbane Troll"); // temporary
-        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Blossoming Tortoise"); // temporary
-        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Ashiok's Reaper"); // temporary
-        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Agatha's Champion"); // temporary
+        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Hare Raising"); // temporary
 
         // number
-        skipListCreate(SKIP_LIST_NUMBER);
+        // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
 
         // rarity
-        skipListCreate(SKIP_LIST_RARITY);
+        // skipListAddName(SKIP_LIST_RARITY, set, cardName);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
 
         // missing abilities
-        skipListCreate(SKIP_LIST_MISSING_ABILITIES);
+        // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
 
         // double rare cards
-        skipListCreate(SKIP_LIST_DOUBLE_RARE);
+        // skipListAddName(SKIP_LIST_DOUBLE_RARE, set, cardName);
 
         // Un-supported sets (mtgjson/scryfall contains that set but xmage don't implement it)
         // Example: Non-English or empty sets: Token sets, Archenemy Schemes, Plane-Chase Planes, etc.
-        skipListCreate(SKIP_LIST_UNSUPPORTED_SETS);
         //
         // Non-English-only sets should not be added. https://github.com/magefree/mage/pull/6190#issuecomment-582354790
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "4BB"); // 4th Edition Foreign black border.
@@ -236,7 +225,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PTG"); // Ponies: The Galloping
 
         // wrond card numbers skip list
-        skipListCreate(SKIP_LIST_WRONG_CARD_NUMBERS);
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "SWS"); // Star Wars
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UND"); // un-sets don't have full implementation of card variations
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UST"); // un-sets don't have full implementation of card variations
@@ -250,13 +238,11 @@ public class VerifyCardDataTest {
 
 
         // scryfall download sets (missing from scryfall website)
-        skipListCreate(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS);
         skipListAddName(SKIP_LIST_SCRYFALL_DOWNLOAD_SETS, "SWS"); // Star Wars
 
         // sample decks checking - some decks can contains unimplemented cards, so ignore it
         // file name must be related to sample-decks folder
         // for linux/windows build system use paths constructor
-        skipListCreate(SKIP_LIST_SAMPLE_DECKS);
         skipListAddName(SKIP_LIST_SAMPLE_DECKS, Paths.get("Jumpstart", "jumpstart_custom.txt").toString()); // it's not a deck file
         skipListAddName(SKIP_LIST_SAMPLE_DECKS, Paths.get("Commander", "Commander 2019", "Merciless Rage.dck").toString()); // TODO: delete after Aeon Engine implemented
     }
@@ -267,25 +253,25 @@ public class VerifyCardDataTest {
     private int wrongAbilityStatsGood = 0;
     private int wrongAbilityStatsBad = 0;
 
-    private static void skipListCreate(String listName) {
-        skipCheckLists.put(listName, new LinkedHashSet<>());
+    private static Set<String> skipListGet(String listName) {
+        return skipCheckLists.computeIfAbsent(listName, x -> new LinkedHashSet<>());
     }
 
     private static void skipListAddName(String listName, String set, String cardName) {
-        skipCheckLists.get(listName).add(set + " - " + cardName);
+        skipListGet(listName).add(set + " - " + cardName);
     }
 
     private static void skipListAddName(String listName, String set) {
-        skipCheckLists.get(listName).add(set);
+        skipListGet(listName).add(set);
     }
 
     private static boolean skipListHaveName(String listName, String set, String cardName) {
-        return skipCheckLists.get(listName).contains(set + " - " + cardName)
-                || skipCheckLists.get(listName).contains(set);
+        return skipListGet(listName).contains(set + " - " + cardName)
+                || skipListGet(listName).contains(set);
     }
 
     private static boolean skipListHaveName(String listName, String set) {
-        return skipCheckLists.get(listName).contains(set);
+        return skipListGet(listName).contains(set);
     }
 
     private static boolean evergreenCheck(String s) {
