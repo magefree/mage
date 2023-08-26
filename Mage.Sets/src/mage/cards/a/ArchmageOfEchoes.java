@@ -10,10 +10,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CopySourceSpellEffect;
+import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 
 /**
  *
@@ -43,7 +45,7 @@ public final class ArchmageOfEchoes extends CardImpl {
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
 
         // Whenever you cast a Faerie or Wizard permanent spell, copy it.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CopySourceSpellEffect(), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CopyTargetSpellEffect(), filter, false, SetTargetPointer.SPELL));
     }
 
     private ArchmageOfEchoes(final ArchmageOfEchoes card) {
