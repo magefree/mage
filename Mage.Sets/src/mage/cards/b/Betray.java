@@ -2,7 +2,6 @@ package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,12 +27,12 @@ public class Betray extends CardImpl {
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, false));
     }
 
-    public Betray(final Betray card) {
+    private Betray(final Betray card) {
         super(card);
     }
 
     @Override
-    public Card copy() {
+    public Betray copy() {
         return new Betray(this);
     }
 }

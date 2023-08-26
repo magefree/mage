@@ -66,7 +66,7 @@ public class TimotharBaronOfBats extends CardImpl {
     private TimotharBaronOfBats(final TimotharBaronOfBats card) { super(card); }
 
     @Override
-    public Card copy() { return new TimotharBaronOfBats(this); }
+    public TimotharBaronOfBats copy() { return new TimotharBaronOfBats(this); }
 }
 
 class TimotharBaronOfBatsCreateBatEffect extends OneShotEffect {

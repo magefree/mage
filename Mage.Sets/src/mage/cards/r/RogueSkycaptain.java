@@ -9,7 +9,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -54,7 +53,7 @@ public class RogueSkycaptain extends CardImpl {
     }
 
     @Override
-    public Card copy() {
+    public RogueSkycaptain copy() {
         return new RogueSkycaptain(this);
     }
 

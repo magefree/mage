@@ -71,7 +71,7 @@ public final class MoiraAndTeshar extends CardImpl {
   }
 
   @Override
-  public Card copy() {
+  public MoiraAndTeshar copy() {
     return new MoiraAndTeshar(this);
   }
 }

@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -40,7 +39,7 @@ public final class ZilorthaStrengthIncarnate extends CardImpl {
     }
 
     @Override
-    public Card copy() {
+    public ZilorthaStrengthIncarnate copy() {
         return new ZilorthaStrengthIncarnate(this);
     }
 }
