@@ -75,7 +75,7 @@ class PresenceOfTheMasterTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player casts an enchantment spell, counter it";
+        return "Whenever a player casts an enchantment spell, counter it.";
     }
 }
 

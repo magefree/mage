@@ -28,8 +28,8 @@ public final class ArgothianEnchantress extends CardImpl {
         // Shroud
         this.addAbility(ShroudAbility.getInstance());
 
-        // Whenever you cast an Enchantment spell, you draw a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false));
+        // Whenever you cast an enchantment spell, draw a card.
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false));
     }
 
     private ArgothianEnchantress(final ArgothianEnchantress card) {

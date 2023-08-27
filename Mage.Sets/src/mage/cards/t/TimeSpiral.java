@@ -31,7 +31,7 @@ public final class TimeSpiral extends CardImpl {
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new UntapLandsEffect(6));
+        this.getSpellAbility().addEffect(new UntapLandsEffect(6).concatBy("You"));
     }
 
     private TimeSpiral(final TimeSpiral card) {

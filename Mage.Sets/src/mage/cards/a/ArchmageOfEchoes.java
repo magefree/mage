@@ -41,7 +41,7 @@ public final class ArchmageOfEchoes extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Whenever you cast a Faerie or Wizard permanent spell, copy it.
         this.addAbility(new SpellCastControllerTriggeredAbility(
