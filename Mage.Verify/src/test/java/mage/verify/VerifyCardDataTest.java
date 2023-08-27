@@ -2449,16 +2449,16 @@ public class VerifyCardDataTest {
                 splitManaAbilities("{T}: Each player creates a colorless artifact token named Banana with \"{T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life.\"")
         );
         Assert.assertEquals(
-                "+1: Add {R} or {G}. Creature spells you cast this turn can’t be countered.",
-                splitManaAbilities("+1: Add {R} or {G}. Creature spells you cast this turn can’t be countered.")
+                "+1: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
+                splitManaAbilities("+1: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
         );
         Assert.assertEquals(
-                "0: Add {R} or {G}. Creature spells you cast this turn can’t be countered.",
-                splitManaAbilities("0: Add {R} or {G}. Creature spells you cast this turn can’t be countered.")
+                "0: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
+                splitManaAbilities("0: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
         );
         Assert.assertEquals(
-                "-1: Add {R} or {G}. Creature spells you cast this turn can’t be countered.",
-                splitManaAbilities("-1: Add {R} or {G}. Creature spells you cast this turn can’t be countered.")
+                "-1: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
+                splitManaAbilities("-1: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
         );
         Assert.assertEquals(
                 "{T}: Add {G} for each creature with power 4 or greater you control.",
