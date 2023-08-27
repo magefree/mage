@@ -13,8 +13,7 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -27,13 +26,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class Soulherder extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter
-            = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public Soulherder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
@@ -49,7 +41,7 @@ public final class Soulherder extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new ExileThenReturnTargetEffect(false, true), TargetController.YOU, true
         );
-        ability.addTarget(new TargetControlledCreaturePermanent(filter));
+        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 

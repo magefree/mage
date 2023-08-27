@@ -39,7 +39,7 @@ public final class TorchTheTower extends CardImpl {
 
         // If a permanent dealt damage by Torch the Tower would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn)
-                .setText("if a permanent dealt damage by {this} would die this turn, exile it instead"));
+                .setText("<br>If a permanent dealt damage by {this} would die this turn, exile it instead"));
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 

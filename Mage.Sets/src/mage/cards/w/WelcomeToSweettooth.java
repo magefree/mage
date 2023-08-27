@@ -1,10 +1,9 @@
 package mage.cards.w;
 
 import mage.abilities.common.SagaAbility;
-import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.hint.Hint;
@@ -29,7 +28,7 @@ public final class WelcomeToSweettooth extends CardImpl {
 
     private static final DynamicValue numberFood =
             new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_FOOD);
-    private static final DynamicValue xValue = new AdditiveDynamicValue(StaticValue.get(1), numberFood);
+    private static final DynamicValue xValue = new IntPlusDynamicValue(1, numberFood);
 
     private static final Hint hint = new ValueHint("Controlled Foods", numberFood);
 

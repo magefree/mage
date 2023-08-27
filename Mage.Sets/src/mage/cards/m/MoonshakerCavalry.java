@@ -37,7 +37,7 @@ public final class MoonshakerCavalry extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(
                 FlyingAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURES
-        ));
+        ).setText("creatures you control gain flying"));
         ability.addEffect(new BoostControlledEffect(
                 CreaturesYouControlCount.instance, CreaturesYouControlCount.instance, Duration.EndOfTurn
         ).setText("and get +X/+X until end of turn, where X is the number of creatures you control"));

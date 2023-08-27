@@ -8,19 +8,13 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author TheElk801
  */
 public final class SatyrEnchanter extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
-
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
 
     public SatyrEnchanter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
@@ -32,7 +26,7 @@ public final class SatyrEnchanter extends CardImpl {
 
         // Whenever you cast an enchantment spell, draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), filter, false
+                new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false
         ));
     }
 

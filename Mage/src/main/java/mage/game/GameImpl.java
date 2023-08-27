@@ -1263,7 +1263,7 @@ public abstract class GameImpl implements Game {
                 player.initLife(this.getStartingLife());
             }
             if (!gameOptions.testMode) {
-                player.drawCards(startingHandSize, null, this);
+                mulligan.drawHand(startingHandSize, player, this);
             }
         }
 

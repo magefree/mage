@@ -119,7 +119,19 @@ public abstract class TargetImpl implements Target {
             sb.append(CardUtil.numberToText(max));
             sb.append(' ');
         }
-        if (!isNotTarget() && !getTargetName().contains("target ") && !getTargetName().endsWith("any target")) {
+        boolean addTargetWord = false;
+        if (!isNotTarget()) {
+            addTargetWord = true;
+            if (getTargetName().contains("target ")) {
+                addTargetWord = false;
+            } else if (getTargetName().endsWith("any target")
+                    || getTargetName().endsWith("any other target")) {
+                addTargetWord = false;
+            }
+            // endsWith needs to be specific.
+            // e.g. "spell with a single target" => need to prefix with "target ".
+        }
+        if (addTargetWord) {
             sb.append("target ");
         }
         if (isNotTarget() && min == 1 && max == 1) {

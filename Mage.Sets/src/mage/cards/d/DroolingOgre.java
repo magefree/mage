@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -6,7 +5,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
@@ -49,12 +47,12 @@ public final class DroolingOgre extends CardImpl {
 
     private static class DroolingOgreEffect extends OneShotEffect {
 
-        public DroolingOgreEffect() {
+        DroolingOgreEffect() {
             super(Outcome.GainControl);
             this.staticText = "that player gains control of {this}";
         }
 
-        private DroolingOgreEffect(DroolingOgreEffect effect) {
+        private DroolingOgreEffect(final DroolingOgreEffect effect) {
             super(effect);
         }
 
@@ -74,7 +72,7 @@ public final class DroolingOgre extends CardImpl {
         }
 
         @Override
-        public Effect copy() {
+        public DroolingOgreEffect copy() {
             return new DroolingOgreEffect(this);
         }
 

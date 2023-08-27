@@ -44,7 +44,8 @@ public final class SentinelOfLostLore extends CardImpl {
 
         // When Sentinel of Lost Lore enters the battlefield, choose one or more —
         // • Return target card you own in exile that has an Adventure to your hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()
+                .setText("return target card you own in exile that has an Adventure to your hand"));
         ability.addTarget(new TargetCardInExile(filterOwnedCard));
         ability.getModes().setMinModes(1);
         ability.getModes().setMaxModes(3);

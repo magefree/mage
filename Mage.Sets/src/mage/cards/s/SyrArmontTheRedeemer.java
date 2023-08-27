@@ -38,7 +38,7 @@ public final class SyrArmontTheRedeemer extends CardImpl {
 
         // When Syr Armont, the Redeemer enters the battlefield, create a Monster Role token attached to another target creature you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateRoleAttachedTargetEffect(RoleType.MONSTER));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
 
         // Enchanted creatures you control get +1/+1.

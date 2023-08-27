@@ -8,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -16,12 +16,6 @@ import java.util.UUID;
  * @author Backfir3
  */
 public final class ArgothianEnchantress extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an Enchantment spell");
-
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
 
     public ArgothianEnchantress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -34,8 +28,8 @@ public final class ArgothianEnchantress extends CardImpl {
         // Shroud
         this.addAbility(ShroudAbility.getInstance());
 
-        // Whenever you cast an Enchantment spell, you draw a card.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), filter, false));
+        // Whenever you cast an enchantment spell, draw a card.
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false));
     }
 
     private ArgothianEnchantress(final ArgothianEnchantress card) {

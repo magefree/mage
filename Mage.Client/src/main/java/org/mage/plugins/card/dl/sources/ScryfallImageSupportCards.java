@@ -540,6 +540,7 @@ public class ScryfallImageSupportCards {
             add("CMM"); // Commander Masters
             add("WHO"); // Doctor Who
             add("WOE"); // Wilds of Eldraine
+            add("WOT"); // Wilds of Eldraine: Enchanting Tales
             add("WOC"); // Wilds of Eldraine Commander
         }
     };

@@ -433,8 +433,9 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (!isBanded) {
             return;
         }
+        int bandSize = attacker.getBandedCards().size() + 1;
         StringBuilder sb = new StringBuilder(player.getLogName()).append(" formed a band with ")
-                .append(attacker.getBandedCards().size()).append(1).append(" creatures: ");
+                .append(bandSize).append(" creatures: ");
         sb.append(attacker.getLogName());
         for (UUID id : attacker.getBandedCards()) {
             sb.append(", ");

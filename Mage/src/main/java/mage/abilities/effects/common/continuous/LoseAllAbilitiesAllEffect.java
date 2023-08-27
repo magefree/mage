@@ -46,6 +46,9 @@ public class LoseAllAbilitiesAllEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         if (duration == Duration.EndOfTurn) {
             sb.append(duration.toString()).append(", ");

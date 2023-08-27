@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -18,12 +18,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SythisHarvestsHand extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
-
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
 
     public SythisHarvestsHand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{G}{W}");
@@ -34,7 +28,7 @@ public final class SythisHarvestsHand extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast an enchantment spell, you gain 1 life and draw a card.
-        Ability ability = new SpellCastControllerTriggeredAbility(new GainLifeEffect(1), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new GainLifeEffect(1), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false);
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
     }

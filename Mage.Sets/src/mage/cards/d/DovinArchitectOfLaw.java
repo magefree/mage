@@ -38,7 +38,7 @@ public final class DovinArchitectOfLaw extends CardImpl {
         this.addAbility(ability);
 
         // -9: Tap all permanents target opponent controls. That player skips their next untap step.
-        ability = new LoyaltyAbility(new TapAllTargetPlayerControlsEffect(StaticFilters.FILTER_PERMANENT), -9);
+        ability = new LoyaltyAbility(new TapAllTargetPlayerControlsEffect(StaticFilters.FILTER_PERMANENTS), -9);
         ability.addEffect(new SkipNextPlayerUntapStepEffect("That player"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

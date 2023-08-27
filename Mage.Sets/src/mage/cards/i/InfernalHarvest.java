@@ -121,7 +121,7 @@ class InfernalHarvestAdditionalCost extends VariableCostImpl {
         }
 
         @Override
-        public Cost copy() {
+        public InfernalHarvestCost copy() {
             return new InfernalHarvestCost(this);
         }
     }
