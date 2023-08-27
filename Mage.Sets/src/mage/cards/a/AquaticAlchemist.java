@@ -9,8 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterInstantOrSorceryCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -27,9 +26,6 @@ import java.util.stream.Collectors;
  */
 public final class AquaticAlchemist extends AdventureCard {
 
-    private static final FilterCard filterCard =
-            new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard");
-
     public AquaticAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.SORCERY}, "{1}{U}", "Bubble Up", "{2}{U}");
 
@@ -43,7 +39,9 @@ public final class AquaticAlchemist extends AdventureCard {
         // Bubble up
         // Put target instant or sorcery card from your graveyard on top of your library.
         this.getSpellCard().getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCard));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(
+                StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD
+        ));
     }
 
     private AquaticAlchemist(final AquaticAlchemist card) {
