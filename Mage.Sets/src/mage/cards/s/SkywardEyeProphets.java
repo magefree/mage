@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -12,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  * @author North
@@ -29,7 +30,7 @@ public final class SkywardEyeProphets extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {tap}: Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RevealTopLandToBattlefieldElseHandEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RevealTopLandToBattlefieldElseHandEffect("it"), new TapSourceCost()));
     }
 
     private SkywardEyeProphets(final SkywardEyeProphets card) {
