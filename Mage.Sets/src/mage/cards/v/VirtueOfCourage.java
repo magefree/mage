@@ -6,9 +6,7 @@ import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
 import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterStackObject;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -20,13 +18,6 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class VirtueOfCourage extends AdventureCard {
-
-    private static final FilterStackObject filter
-            = new FilterStackObject("activated or triggered ability you control");
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     public VirtueOfCourage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, new CardType[]{CardType.INSTANT}, "{3}{R}{R}", "Embereth Blaze", "{1}{R}");
