@@ -1,7 +1,6 @@
 package mage.game.command.planes;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
@@ -16,8 +15,8 @@ import mage.constants.Duration;
 import mage.constants.Planes;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
@@ -31,8 +30,6 @@ import java.util.List;
  * @author spjspj
  */
 public class TazeemPlane extends Plane {
-
-    private static final String rule = "Creatures can't block";
 
     public TazeemPlane() {
         this.setPlaneType(Planes.PLANE_TAZEEM);
@@ -70,15 +67,13 @@ public class TazeemPlane extends Plane {
 
 class TazeemCantBlockAllEffect extends RestrictionEffect {
 
-    private FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
-
-    public TazeemCantBlockAllEffect() {
+    TazeemCantBlockAllEffect() {
         super(Duration.Custom);
+        staticText = "creatures can't block";
     }
 
     protected TazeemCantBlockAllEffect(final TazeemCantBlockAllEffect effect) {
         super(effect);
-        this.filter = effect.filter;
     }
 
     @Override
@@ -88,7 +83,7 @@ class TazeemCantBlockAllEffect extends RestrictionEffect {
         if (cPlane == null || !cPlane.getPlaneType().equals(Planes.PLANE_TAZEEM)) {
             return false;
         }
-        return filter.match(permanent, source.getControllerId(), source, game);
+        return StaticFilters.FILTER_PERMANENT_CREATURES.match(permanent, source.getControllerId(), source, game);
     }
 
     @Override
@@ -101,10 +96,4 @@ class TazeemCantBlockAllEffect extends RestrictionEffect {
         return new TazeemCantBlockAllEffect(this);
     }
 
-    @Override
-    public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(filter.getMessage()).append(" can't block");
-        return sb.toString();
-    }
 }
