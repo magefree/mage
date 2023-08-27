@@ -61,7 +61,7 @@ public class IdentityThiefTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Primal Clay");
-        setChoice(playerA, "a 3/3 artifact creature");
+        setChoice(playerA, "3/3 artifact creature");
 
         attack(2, playerB, "Identity Thief");
         setChoice(playerB, "Yes");

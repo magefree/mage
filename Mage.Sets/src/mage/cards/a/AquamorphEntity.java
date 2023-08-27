@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.MageInt;
@@ -6,23 +5,21 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
+import mage.abilities.effects.common.SelectCopiableCharacteristicsSourceEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.game.permanent.token.TokenImpl;
 
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author xenohedron
  */
 public final class AquamorphEntity extends CardImpl {
 
@@ -53,9 +50,6 @@ public final class AquamorphEntity extends CardImpl {
 
 class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
 
-    private static final String choice51 = "a 5/1 creature";
-    private static final String choice15 = "a 1/5 creature";
-
     AquamorphEntityReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "as {this} enters the battlefield or is turned face up, it becomes your choice of 5/1 or 1/5";
@@ -78,18 +72,18 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
-                if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
-                    return true;
+        switch (event.getType()) {
+            case ENTERS_THE_BATTLEFIELD:
+                if (!event.getTargetId().equals(source.getSourceId())) {
+                    return false;
                 }
-            }
+                Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
+                return sourcePermanent != null && !sourcePermanent.isFaceDown(game);
+            case TURNFACEUP:
+                return event.getTargetId().equals(source.getSourceId());
+            default:
+                return false;
         }
-        if (event.getType() == GameEvent.EventType.TURNFACEUP) {
-            return event.getTargetId().equals(source.getSourceId());
-        }
-        return false;
     }
 
     @Override
@@ -103,28 +97,9 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
         if (permanent == null) {
             return false;
         }
-        Choice choice = new ChoiceImpl(true);
-        choice.setMessage("Choose what the creature becomes to");
-        choice.getChoices().add(choice51);
-        choice.getChoices().add(choice15);
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && !controller.choose(Outcome.Neutral, choice, game)) {
-            discard();
-            return false;
-        }
-        int power = 0;
-        int toughness = 0;
-        switch (choice.getChoice()) {
-            case choice51:
-                power = 5;
-                toughness = 1;
-                break;
-            case choice15:
-                power = 1;
-                toughness = 5;
-                break;
-        }
-        game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a), source);
+        new SelectCopiableCharacteristicsSourceEffect(
+                new AquamorphEntity51Token(), new AquamorphEntity15Token()
+        ).apply(game, source);
         return false;
     }
 
@@ -133,4 +108,38 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
         return new AquamorphEntityReplacementEffect(this);
     }
 
+}
+
+class AquamorphEntity51Token extends TokenImpl {
+
+    AquamorphEntity51Token() {
+        super("", "5/1");
+        power = new MageInt(5);
+        toughness = new MageInt(1);
+    }
+
+    private AquamorphEntity51Token(final AquamorphEntity51Token token) {
+        super(token);
+    }
+
+    public AquamorphEntity51Token copy() {
+        return new AquamorphEntity51Token(this);
+    }
+}
+
+class AquamorphEntity15Token extends TokenImpl {
+
+    AquamorphEntity15Token() {
+        super("", "1/5");
+        power = new MageInt(1);
+        toughness = new MageInt(5);
+    }
+
+    private AquamorphEntity15Token(final AquamorphEntity15Token token) {
+        super(token);
+    }
+
+    public AquamorphEntity15Token copy() {
+        return new AquamorphEntity15Token(this);
+    }
 }
