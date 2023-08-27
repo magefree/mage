@@ -55,7 +55,9 @@ class TheEndEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEf
 
     TheEndEffect() {
         super(true, "its controller's", "any number of cards with the same name as that permanent");
-        this.staticText = "Exile target creature or planeswalker. Search its controller's graveyard, hand, and library for any number of cards with the same name as that permanent and exile them. That player shuffles, then draws card for each card exiled from their hand this way";
+        this.staticText = "Exile target creature or planeswalker. Search its controller's graveyard, hand, and library" +
+                " for any number of cards with the same name as that permanent and exile them." +
+                " That player shuffles, then draws a card for each card exiled from their hand this way";
     }
 
     private TheEndEffect(final TheEndEffect effect) {
@@ -70,12 +72,12 @@ class TheEndEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEf
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if(permanent == null) {
+        if (permanent == null) {
             return false;
         }
         String name = permanent.getName();
         Player player = game.getPlayer(permanent.getControllerId());
-        if(player == null) {
+        if (player == null) {
             return false;
         }
 

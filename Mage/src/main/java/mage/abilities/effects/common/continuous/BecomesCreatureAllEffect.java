@@ -164,6 +164,9 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         if (duration.toString() != null && !duration.toString().isEmpty()) {
             sb.append(duration.toString()).append(", ");
