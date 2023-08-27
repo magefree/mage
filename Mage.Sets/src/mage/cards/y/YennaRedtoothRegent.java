@@ -89,8 +89,8 @@ class YennaRedtoothRegentEffect extends OneShotEffect {
 
     YennaRedtoothRegentEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Choose target enchantment you control that doesn't have the same name as another "
-                + "permanent you control. Create a token that's a copy of it, except it isn't legendary"
+        staticText = "choose target enchantment you control that doesn't have the same name as another "
+                + "permanent you control. Create a token that's a copy of it, except it isn't legendary. "
                 + "If the token is an Aura, untap {this}, then scry 2";
     }
 
@@ -113,15 +113,16 @@ class YennaRedtoothRegentEffect extends OneShotEffect {
         }
 
         Permanent token = create.getAddedPermanents().get(0);
-        Player controller = game.getPlayer(source.getControllerId());
         if (token == null || !token.hasSubtype(SubType.AURA, game)) {
             return true;
         }
 
-        Permanent yenna = game.getPermanent(source.getSourceId());
+        Permanent yenna = source.getSourcePermanentIfItStillExists(game);
         if (yenna != null) {
             yenna.untap(game);
         }
+        
+        Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.scry(2, source, game);
         }
