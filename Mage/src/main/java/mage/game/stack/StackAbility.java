@@ -700,6 +700,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public void setModeTag(String tag) {
+        throw new IllegalArgumentException("Stack ability does not supports setting modeTag");
+    }
+
+    @Override
     public List<CardIcon> getIcons() {
         return this.ability.getIcons();
     }
