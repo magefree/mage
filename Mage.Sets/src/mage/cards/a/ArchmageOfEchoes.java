@@ -9,7 +9,6 @@ import mage.filter.predicate.mageobject.PermanentPredicate;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CopySourceSpellEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
@@ -23,7 +22,7 @@ import mage.constants.SetTargetPointer;
  */
 public final class ArchmageOfEchoes extends CardImpl {
 
-    private static FilterSpell filter = new FilterSpell("Faerie or Wizard permanent spell");
+    private static final FilterSpell filter = new FilterSpell("a Faerie or Wizard permanent spell");
 
     static {
         filter.add(PermanentPredicate.instance);
@@ -45,7 +44,9 @@ public final class ArchmageOfEchoes extends CardImpl {
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
 
         // Whenever you cast a Faerie or Wizard permanent spell, copy it.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new CopyTargetSpellEffect(), filter, false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new CopyTargetSpellEffect(false, false, false).setText("copy it"),
+                filter, false, SetTargetPointer.SPELL));
     }
 
     private ArchmageOfEchoes(final ArchmageOfEchoes card) {
