@@ -58,15 +58,15 @@ public class BlitzAbility extends SpellAbility {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder("Blitz");
-        if (costs.isEmpty()) {
+        if (getCosts().isEmpty()) {
             sb.append(' ');
         } else {
             sb.append("&mdash;");
         }
-        sb.append(manaCosts.getText());
-        if (!costs.isEmpty()) {
+        sb.append(getManaCosts().getText());
+        if (!getCosts().isEmpty()) {
             sb.append(", ");
-            sb.append(costs.getText());
+            sb.append(getCosts().getText());
             sb.append('.');
         }
         sb.append(" <i>(If you cast this spell for its blitz cost, it gains haste ");
