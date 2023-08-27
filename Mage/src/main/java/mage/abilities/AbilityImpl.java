@@ -430,7 +430,6 @@ public abstract class AbilityImpl implements Ability {
         if (this instanceof SpellAbility) {
             // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
             switch (((SpellAbility) this).getSpellAbilityCastMode()) {
-
                 case FLASHBACK:
                 case MADNESS:
                 case TRANSFORMED:
@@ -1416,6 +1415,16 @@ public abstract class AbilityImpl implements Ability {
         return this;
     }
 
+    /**
+     * sets the mode tag for the current mode.
+     */
+    @Override
+    public void setModeTag(String tag) {
+        if (getModes().getMode() != null) {
+            getModes().getMode().setModeTag(tag);
+        }
+    }
+
     @Override
     public final List<CardIcon> getIcons() {
         return getIcons(null);
@@ -1478,5 +1487,12 @@ public abstract class AbilityImpl implements Ability {
                 .map(Effect::getCondition)
                 .filter(Objects::nonNull)
                 .anyMatch(Condition::caresAboutManaColor);
+    }
+
+    public AbilityImpl copyWithZone(Zone zone) {
+        AbilityImpl copy = ((AbilityImpl)this.copy());
+        copy.zone = zone;
+        copy.newId();
+        return copy;
     }
 }

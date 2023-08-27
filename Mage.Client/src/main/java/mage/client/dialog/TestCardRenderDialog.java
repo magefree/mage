@@ -28,7 +28,6 @@ import mage.game.command.Plane;
 import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 import mage.game.mulligan.MulliganType;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentMeld;
 import mage.game.permanent.PermanentToken;
@@ -402,9 +401,9 @@ public class TestCardRenderDialog extends MageDialog {
                 if (main.getGameCard() instanceof PermanentView) {
                     // new settings must be as a new copy -- it would activate the animations
                     PermanentView oldPermanent = (PermanentView) main.getGameCard();
-                    PermanentView newPermament = new PermanentView( // ???
-                            (Permanent) oldPermanent.getOriginalCard(),
-                            game.getCard(oldPermanent.getOriginalCard().getId()),
+                    PermanentView newPermament = new PermanentView(
+                            oldPermanent,
+                            game.getCard(oldPermanent.getOriginalId()),
                             UUID.randomUUID(),
                             game
                     );

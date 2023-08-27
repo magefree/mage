@@ -44,7 +44,7 @@ public final class Demilich extends CardImpl {
         // This spell costs {U} less to cast for each instant and sorcery you've cast this turn.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(
                 new ManaCostsImpl<>("{U}"), DemilichValue.instance
-        )).addHint(new ValueHint("Instants and sorceries you've cast this turn", DemilichValue.instance)), new SpellsCastWatcher());
+        )).addHint(new ValueHint("Instants and sorceries you've cast this turn", DemilichValue.instance)));
 
         // Whenever Demilich attacks, exile up to one target instant or sorcery card from your graveyard. Copy it. You may cast the copy.
         Ability ability = new AttacksTriggeredAbility(new ExileTargetCardCopyAndCastEffect(false).setText(

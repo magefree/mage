@@ -37,7 +37,7 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
         }
     }
 
-    public ReturnToHandChosenControlledPermanentCost(ReturnToHandChosenControlledPermanentCost cost) {
+    private ReturnToHandChosenControlledPermanentCost(final ReturnToHandChosenControlledPermanentCost cost) {
         super(cost);
     }
 

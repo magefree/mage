@@ -32,11 +32,11 @@ public class CantAttackYouAllEffect extends RestrictionEffect {
         this.filterAttacker = filter;
         this.alsoPlaneswalker = alsoPlaneswalker;
         staticText = filterAttacker.getMessage() + " can't attack you"
-                + (alsoPlaneswalker ? " or a planeswalker you control" : "")
+                + (alsoPlaneswalker ? " or planeswalkers you control" : "")
                 + (duration == Duration.UntilYourNextTurn || duration == Duration.UntilEndOfYourNextTurn ? " " + duration.toString() : "");
     }
 
-    CantAttackYouAllEffect(final CantAttackYouAllEffect effect) {
+    protected CantAttackYouAllEffect(final CantAttackYouAllEffect effect) {
         super(effect);
         this.filterAttacker = effect.filterAttacker;
         this.alsoPlaneswalker = effect.alsoPlaneswalker;
@@ -54,7 +54,7 @@ public class CantAttackYouAllEffect extends RestrictionEffect {
         }
         if (alsoPlaneswalker) {
             Permanent planeswalker = game.getPermanent(defenderId);
-            if (planeswalker != null) {
+            if (planeswalker != null && planeswalker.isPlaneswalker(game)) {
                 defenderId = planeswalker.getControllerId();
             }
         }

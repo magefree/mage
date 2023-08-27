@@ -14,8 +14,8 @@ public final class BallisticBoulder extends TokenImpl {
 
     public BallisticBoulder() {
         super("Ballistic Boulder", "2/1 colorless Construct artifact creature token with flying named Ballistic Boulder");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         subtype.add(SubType.CONSTRUCT);
         power = new MageInt(2);
         toughness = new MageInt(1);

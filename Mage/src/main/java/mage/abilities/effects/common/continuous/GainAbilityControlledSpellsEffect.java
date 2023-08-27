@@ -10,6 +10,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author Styxo
@@ -23,7 +24,7 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.filter = filter;
-        staticText = filter.getMessage() + " have " + ability.getRule();
+        staticText = filter.getMessage() + " have " + CardUtil.getTextWithFirstCharLowerCase(CardUtil.stripReminderText(ability.getRule()));
     }
 
     private GainAbilityControlledSpellsEffect(final GainAbilityControlledSpellsEffect effect) {
@@ -78,10 +79,9 @@ public class GainAbilityControlledSpellsEffect extends ContinuousEffectImpl {
             }
             // TODO: Distinguish "you cast" to exclude copies
             Card card = game.getCard(stackObject.getSourceId());
-            if (card == null || !filter.match((Spell) stackObject, game)) {
-                continue;
+            if (card != null && filter.match((Spell) stackObject, game)) {
+                game.getState().addOtherAbility(card, ability);
             }
-            game.getState().addOtherAbility(card, ability);
         }
         return true;
     }

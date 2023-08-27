@@ -983,6 +983,10 @@ public final class CardUtil {
         return "<i>" + text + "</i> &mdash; ";
     }
 
+    public static String stripReminderText(String text) {
+        return text.endsWith(")</i>") ? text.substring(0, text.indexOf(" <i>(")) : text;
+    }
+
     public static Set<UUID> getAllSelectedTargets(Ability ability, Game game) {
         return ability.getModes().getSelectedModes()
                 .stream()
@@ -1251,7 +1255,11 @@ public final class CardUtil {
     private static final FilterCard defaultFilter = new FilterCard("card to cast");
 
     public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Card card) {
-        return castSpellWithAttributesForFree(player, source, game, new CardsImpl(card), StaticFilters.FILTER_CARD);
+        return castSpellWithAttributesForFree(player, source, game, card, StaticFilters.FILTER_CARD);
+    }
+
+    public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Card card, FilterCard filter) {
+        return castSpellWithAttributesForFree(player, source, game, new CardsImpl(card), filter);
     }
 
     public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter) {

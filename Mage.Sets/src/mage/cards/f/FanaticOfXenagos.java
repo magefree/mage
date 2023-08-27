@@ -36,11 +36,11 @@ public final class FanaticOfXenagos extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // Tribute 1
         this.addAbility(new TributeAbility(1));
-        // When Fanatic of Xenagos enters the battlefield, if its tribute wasn't paid, it gets +1/+1 and gains haste until end of turn.
+        // When Fanatic of Xenagos enters the battlefield, if tribute wasn't paid, it gets +1/+1 and gains haste until end of turn.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn));
         ability.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
-                "When {this} enters the battlefield, if its tribute wasn't paid, it gets +1/+1 and gains haste until end of turn."));
+                "When {this} enters the battlefield, if tribute wasn't paid, it gets +1/+1 and gains haste until end of turn."));
     }
 
     private FanaticOfXenagos(final FanaticOfXenagos card) {

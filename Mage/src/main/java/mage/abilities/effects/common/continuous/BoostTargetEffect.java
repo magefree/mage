@@ -30,6 +30,10 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         this(StaticValue.get(power), StaticValue.get(toughness), duration);
     }
 
+    public BoostTargetEffect(DynamicValue power, DynamicValue toughness) {
+        this(power, toughness, Duration.EndOfTurn);
+    }
+
     /**
      * @param power
      * @param toughness

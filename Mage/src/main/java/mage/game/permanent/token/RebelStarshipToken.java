@@ -14,8 +14,8 @@ public final class RebelStarshipToken extends TokenImpl {
         super("B-Wing Token", "2/3 blue Rebel Starship artifact creature tokens with spaceflight name B-Wing");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         abilities.add(SpaceflightAbility.getInstance());
         color.setBlue(true);
         subtype.add(SubType.REBEL);

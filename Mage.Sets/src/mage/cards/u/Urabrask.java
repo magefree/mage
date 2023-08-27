@@ -54,7 +54,7 @@ public final class Urabrask extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED),
                 new ManaCostsImpl<>("{R}"), UrabraskCondition.instance
-        ).setTiming(TimingRule.SORCERY), new SpellsCastWatcher());
+        ).setTiming(TimingRule.SORCERY));
     }
 
     private Urabrask(final Urabrask card) {
