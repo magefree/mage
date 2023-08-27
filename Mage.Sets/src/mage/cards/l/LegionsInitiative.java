@@ -66,10 +66,7 @@ public final class LegionsInitiative extends CardImpl {
         // {R}{W}, Exile Legion's Initiative: Exile all creatures you control. At the beginning of the next combat, return those cards to the battlefield under their owner's control and those creatures gain haste until end of turn.
         Ability ability = new SimpleActivatedAbility(new LegionsInitiativeExileEffect(), new ManaCostsImpl<>("{R}{W}"));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfCombatDelayedTriggeredAbility(
-                        new LegionsInitiativeReturnFromExileEffect(),
-                        AtTheBeginOfCombatDelayedTriggeredAbility.PhaseSelection.NEXT_COMBAT
-                )
+                new AtTheBeginOfCombatDelayedTriggeredAbility(new LegionsInitiativeReturnFromExileEffect())
         ));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
