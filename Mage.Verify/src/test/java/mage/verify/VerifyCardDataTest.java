@@ -2373,7 +2373,15 @@ public class VerifyCardDataTest {
 
     private String splitManaAbilities(String refText) {
         for (String s : refText.split("[\\$\\\n]")) {
-            if (!Pattern.matches(".*: Add [^\\.]* or.*\\..*", s)) {
+            if (!Pattern.matches("[^\"']*: Add [^\\.]* or.*\\..*", s)) {
+                continue;
+            }
+            // Loyalty Abilities
+            if (s.startsWith("0") || s.startsWith("+") || s.startsWith("-")) {
+                continue;
+            }
+            // Leafkin Avenger
+            if (s.contains("} for")) {
                 continue;
             }
 
@@ -2432,6 +2440,29 @@ public class VerifyCardDataTest {
         Assert.assertEquals(
                 "{T}: Add {B}. Activate only if you control a swamp.\n{T}: Add {U}. Activate only if you control a swamp.",
                 splitManaAbilities("{T}: Add {B} or {U}. Activate only if you control a swamp.")
+        );
+
+
+        // Not splitting those:
+        Assert.assertEquals(
+                "{T}: Each player creates a colorless artifact token named Banana with \"{T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life.\"",
+                splitManaAbilities("{T}: Each player creates a colorless artifact token named Banana with \"{T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life.\"")
+        );
+        Assert.assertEquals(
+                "+1: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
+                splitManaAbilities("+1: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
+        );
+        Assert.assertEquals(
+                "0: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
+                splitManaAbilities("0: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
+        );
+        Assert.assertEquals(
+                "-1: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
+                splitManaAbilities("-1: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
+        );
+        Assert.assertEquals(
+                "{T}: Add {G} for each creature with power 4 or greater you control.",
+                splitManaAbilities("{T}: Add {G} for each creature with power 4 or greater you control.")
         );
     }
 
