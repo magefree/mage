@@ -1,9 +1,8 @@
 package mage.cards.s;
 
-import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
@@ -23,7 +22,7 @@ public final class SpellStutter extends CardImpl {
 
     private static final DynamicValue faerieCount =
             new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.FAERIE));
-    private static final DynamicValue xValue = new AdditiveDynamicValue(StaticValue.get(2), faerieCount);
+    private static final DynamicValue xValue = new IntPlusDynamicValue(2, faerieCount);
 
     private static final Hint hint = new ValueHint("Faeries controlled", faerieCount);
 

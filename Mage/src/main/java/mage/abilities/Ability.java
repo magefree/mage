@@ -558,6 +558,11 @@ public interface Ability extends Controllable, Serializable {
     Ability addHint(Hint hint);
 
     /**
+     * Tag the current mode to be retrieved elsewhere thanks to the tag.
+     */
+    void setModeTag(String tag);
+
+    /**
      * For abilities with static icons
      *
      * @return

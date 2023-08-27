@@ -80,7 +80,6 @@ class MercadianLiftEffect extends OneShotEffect {
                     numberOfCounters = ((RemoveVariableCountersSourceCost) cost).getAmount();
                 }
             }
-            System.out.println("The number is " + numberOfCounters);
             FilterCreatureCard filter = new FilterCreatureCard();
             filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, numberOfCounters));
             filter.setMessage("creature card with mana value " + numberOfCounters);

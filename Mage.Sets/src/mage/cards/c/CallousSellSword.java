@@ -16,6 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.common.FilterAnyTarget;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
@@ -28,6 +29,8 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class CallousSellSword extends AdventureCard {
+
+    private static final FilterAnyTarget filterSecondTarget = new FilterAnyTarget("any other target");
 
     private static final Hint hint = new ValueHint(
             "Creatures that died under your control this turn", CallousSellSwordValue.instance
@@ -53,7 +56,7 @@ public final class CallousSellSword extends AdventureCard {
         // Target creature you control deals damage equal to its power to any other target. Then sacrifice it.
         this.getSpellCard().getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent().setTargetTag(1));
-        this.getSpellCard().getSpellAbility().addTarget(new TargetAnyTarget().setTargetTag(2));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetAnyTarget(1, 1, filterSecondTarget).setTargetTag(2));
         this.getSpellCard().getSpellAbility().addEffect(new CallousSellSwordSacrificeFirstTargetEffect().concatBy("Then"));
     }
 

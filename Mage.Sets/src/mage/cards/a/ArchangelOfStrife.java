@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -6,7 +5,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -57,13 +55,13 @@ public final class ArchangelOfStrife extends CardImpl {
 
 class ArchangelOfStrifeChooseEffect extends OneShotEffect {
 
-    public ArchangelOfStrifeChooseEffect() {
+    ArchangelOfStrifeChooseEffect() {
         super(Outcome.Neutral);
 
         this.staticText = "each player chooses war or peace.";
     }
 
-    public ArchangelOfStrifeChooseEffect(ArchangelOfStrifeChooseEffect effect) {
+    private ArchangelOfStrifeChooseEffect(final ArchangelOfStrifeChooseEffect effect) {
         super(effect);
     }
 
@@ -101,7 +99,7 @@ class ArchangelOfStrifeChooseEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public ArchangelOfStrifeChooseEffect copy() {
         return new ArchangelOfStrifeChooseEffect(this);
     }
 

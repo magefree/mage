@@ -74,6 +74,9 @@ public class ConjureCardEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder("conjure ");
         sb.append(CardUtil.numberToText(amount, "a"));
         sb.append(' ');

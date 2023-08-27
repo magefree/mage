@@ -9,6 +9,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.hint.common.ModesAlreadyUsedHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,14 +19,12 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author Susucr
  */
 public final class ThreeBowlsOfPorridge extends CardImpl {
 
     public ThreeBowlsOfPorridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
-
         this.subtype.add(SubType.FOOD);
 
         // {2}, {T}: Choose one that hasn't been chosen --
@@ -36,17 +35,21 @@ public final class ThreeBowlsOfPorridge extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
+        ability.setModeTag("deals damage");
         ability.getModes().setEachModeOnlyOnce(true);
 
         // * Tap target creature.
         Mode mode = new Mode(new TapTargetEffect());
         mode.addTarget(new TargetCreaturePermanent());
+        mode.setModeTag("tap");
         ability.addMode(mode);
 
         // * Sacrifice Three Bowls of Porridge. You gain 3 life.
         mode = new Mode(new SacrificeSourceEffect());
         mode.addEffect(new GainLifeEffect(3));
+        mode.setModeTag("sacrifice and gain life");
         ability.addMode(mode);
+        ability.addHint(ModesAlreadyUsedHint.instance);
 
         this.addAbility(ability);
     }

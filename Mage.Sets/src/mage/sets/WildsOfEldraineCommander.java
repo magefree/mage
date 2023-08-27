@@ -20,10 +20,12 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Ajani's Chosen", 59, Rarity.RARE, mage.cards.a.AjanisChosen.class));
+        cards.add(new SetCardInfo("Alela, Cunning Conqueror", 3, Rarity.MYTHIC, mage.cards.a.AlelaCunningConqueror.class));
         cards.add(new SetCardInfo("Ancestral Mask", 119, Rarity.COMMON, mage.cards.a.AncestralMask.class));
         cards.add(new SetCardInfo("Angelic Destiny", 60, Rarity.MYTHIC, mage.cards.a.AngelicDestiny.class));
         cards.add(new SetCardInfo("Arcane Denial", 84, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
         cards.add(new SetCardInfo("Arcane Signet", 367, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Archmage of Echoes", 9, Rarity.RARE, mage.cards.a.ArchmageOfEchoes.class));
         cards.add(new SetCardInfo("Archon of Sun's Grace", 61, Rarity.RARE, mage.cards.a.ArchonOfSunsGrace.class));
         cards.add(new SetCardInfo("Aura Gnarlid", 120, Rarity.COMMON, mage.cards.a.AuraGnarlid.class));
         cards.add(new SetCardInfo("Austere Command", 62, Rarity.RARE, mage.cards.a.AustereCommand.class));
@@ -75,6 +77,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kindred Dominance", 113, Rarity.RARE, mage.cards.k.KindredDominance.class));
         cards.add(new SetCardInfo("Kor Spiritdancer", 69, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
         cards.add(new SetCardInfo("Krosan Verge", 163, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
+        cards.add(new SetCardInfo("Loamcrafter Faun", 19, Rarity.RARE, mage.cards.l.LoamcrafterFaun.class));
         cards.add(new SetCardInfo("Mantle of the Ancients", 70, Rarity.RARE, mage.cards.m.MantleOfTheAncients.class));
         cards.add(new SetCardInfo("Midnight Clock", 99, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Mind Stone", 148, Rarity.COMMON, mage.cards.m.MindStone.class));

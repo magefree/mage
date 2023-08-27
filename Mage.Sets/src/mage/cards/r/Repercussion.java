@@ -82,11 +82,11 @@ class RepercussionTriggeredAbility extends TriggeredAbilityImpl {
 
 class RepercussionEffect extends OneShotEffect {
 
-    public RepercussionEffect() {
+    RepercussionEffect() {
         super(Outcome.Damage);
     }
 
-    public RepercussionEffect(final RepercussionEffect effect) {
+    private RepercussionEffect(final RepercussionEffect effect) {
         super(effect);
     }
 
@@ -108,7 +108,7 @@ class RepercussionEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public RepercussionEffect copy() {
         return new RepercussionEffect(this);
     }
 

@@ -67,7 +67,7 @@ class TwiningTwinsEffect extends OneShotEffect {
 
     TwiningTwinsEffect() {
         super(Outcome.Detriment);
-        staticText = "Exile target nontoken creature. Return that card to the battlefield under its "
+        staticText = "Exile target nontoken creature. Return it to the battlefield under its "
                 + "owner's control at the beginning of the next end step";
     }
 

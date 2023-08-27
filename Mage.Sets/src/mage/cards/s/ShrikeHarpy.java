@@ -40,7 +40,7 @@ public final class ShrikeHarpy extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_A_CREATURE, 1, "target opponent"), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TributeNotPaidCondition.instance,
-                "When {this} enters the battlefield, if its tribute wasn't paid, target opponent sacrifices a creature."));
+                "When {this} enters the battlefield, if tribute wasn't paid, target opponent sacrifices a creature."));
     }
 
     private ShrikeHarpy(final ShrikeHarpy card) {

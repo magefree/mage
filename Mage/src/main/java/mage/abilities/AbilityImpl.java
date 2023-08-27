@@ -1390,6 +1390,16 @@ public abstract class AbilityImpl implements Ability {
         return this;
     }
 
+    /**
+     * sets the mode tag for the current mode.
+     */
+    @Override
+    public void setModeTag(String tag) {
+        if (getModes().getMode() != null) {
+            getModes().getMode().setModeTag(tag);
+        }
+    }
+
     @Override
     public final List<CardIcon> getIcons() {
         return getIcons(null);
