@@ -2229,23 +2229,11 @@ public class VerifyCardDataTest {
         // mana ability fix
         // Current implementation makes one Activated Ability per kind of color.
         // We split such abilities in the reference text.
-        // TODO: extend to more complex ones. See https://github.com/magefree/mage/issues/10832
-        for (String s : refText.split("[\\$\\\n]")) {
-            if (!(s.startsWith("{T}: Add {") || s.startsWith("({T}: Add {"))
-                    || !(s.contains("} or {") || s.contains("}, or {"))) {
-                continue;
-            }
-            String newStr = "";
-            for (String c : s.split("[\\{\\}]")) {
-                if ("WUBRG".contains(c) && c.length() > 0) {
-                    newStr += "{T}: Add {" + c + "}.\n";
-                }
-            }
-            if (!newStr.isEmpty()) {
-                newStr = newStr.substring(0, newStr.length() - 1);
-            }
-            refText = refText.replace(s, newStr);
-        }
+        // For instance "{T}: Add {G} or {W}."
+        //      becomes "{T}: Add {G}.\n{T}: Add {W}."
+        //
+        // The regex down handle more complex situations.
+        refText = splitManaAbilities(refText);
 
         // cycling fix
         // Current implementation makes one CyclingAbility per quality,
@@ -2253,24 +2241,7 @@ public class VerifyCardDataTest {
         //
         // For instance "Swampcycling {2}, mountaincycling {2}"
         //      becomes "Swampcycling {2}\nMountaincycling {2}"
-        for (String s : refText.split("[\\$\\\n]")) {
-            if (!Pattern.matches("^[a-zA-Z]*cycling .*, [a-zA-Z]*cycling.*", s)) {
-                continue;
-            }
-            String newStr = "";
-            Pattern p = Pattern.compile(", [a-zA-Z]*cycling");
-            Matcher m = p.matcher(s);
-            int start = 0;
-            while (m.find()) {
-                String group = m.group();
-                int newStart = m.start();
-                newStr += s.substring(start, newStart) + "\n" + group.substring(2, 3).toUpperCase() + group.substring(3);
-                start = newStart + group.length();
-            }
-            newStr += s.substring(start);
-            refText = refText.replace(s, newStr);
-        }
-
+        refText = splitCyclingAbilities(refText);
 
         String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
         for (int i = 0; i < refRules.length; i++) {
@@ -2367,6 +2338,101 @@ public class VerifyCardDataTest {
 
             System.out.println();
         }
+    }
+
+    private String splitCyclingAbilities(String refText) {
+        for (String s : refText.split("[\\$\\\n]")) {
+            if (!Pattern.matches("^[a-zA-Z]*cycling .*, [a-zA-Z]*cycling.*", s)) {
+                continue;
+            }
+            String newStr = "";
+            Pattern p = Pattern.compile(", [a-zA-Z]*cycling");
+            Matcher m = p.matcher(s);
+            int start = 0;
+            while (m.find()) {
+                String group = m.group();
+                int newStart = m.start();
+                newStr += s.substring(start, newStart) + "\n" + group.substring(2, 3).toUpperCase() + group.substring(3);
+                start = newStart + group.length();
+            }
+            newStr += s.substring(start);
+            refText = refText.replace(s, newStr);
+        }
+        return refText;
+    }
+
+    @Test
+    public void checkSplitCyclingAbilities() {
+        // Test the function splitting cycling abilities is correct.
+
+        Assert.assertEquals(
+                "Swampcycling {2}\nMountaincycling {2}",
+                splitCyclingAbilities("Swampcycling {2}, mountaincycling {2}")
+        );
+    }
+
+    private String splitManaAbilities(String refText) {
+        for (String s : refText.split("[\\$\\\n]")) {
+            if (!Pattern.matches(".*: Add [^\\.]* or.*\\..*", s)) {
+                continue;
+            }
+
+            // Splitting the ability into three segments:
+            //
+            // {G/W}, {T}: Add {G}{G}, {G}{W}, or {W}{W}. This mana can only be used to cast multicolor spells.
+            // ^^^^^^^^^^^^^^^^                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            //     before      ^^^^^^^^^^^^^^^^^^^^^^^^^                    after
+            //                       middle
+            int beforeLength = s.indexOf(": Add ");
+            String before = s.substring(0, beforeLength + 6);
+            int middleIndex = s.indexOf('.', beforeLength);
+            String middle = s.substring(beforeLength + 6, middleIndex);
+            String after = s.substring(middleIndex);
+
+            //making life easier on the split
+            middle = middle
+                    .replace(", or ", "|")
+                    .replace(" or ", "|")
+                    .replace(", ", "|");
+
+            // This now looks like "{G}{G}|{G}{W}|{W}{W}".
+            // for each part, make a new line with 'before + part + end'
+            String newStr = "";
+            for (String part : middle.split("[|]")) {
+                newStr += before + part + after + "\n";
+            }
+            if (!newStr.isEmpty()) {
+                newStr = newStr.substring(0, newStr.length() - 1);
+            }
+            refText = refText.replace(s, newStr);
+        }
+        return refText;
+    }
+
+    @Test
+    public void checkSplitManaAbilities() {
+        // Test the function splitting mana abilities is correct.
+
+        Assert.assertEquals(
+                "{T}: Add {G}.\n{T}: Add {W}.",
+                splitManaAbilities("{T}: Add {G} or {W}.")
+        );
+        Assert.assertEquals(
+                "{T}: Add {G}.\n{T}: Add {W}.\n{T}: Add {R}.",
+                splitManaAbilities("{T}: Add {G}, {W}, or {R}.")
+        );
+        Assert.assertEquals(
+                "{G/W}, {T}: Add {G}{G}.\n{G/W}, {T}: Add {G}{W}.\n{G/W}, {T}: Add {W}{W}.",
+                splitManaAbilities("{G/W}, {T}: Add {G}{G}, {G}{W}, or {W}{W}.")
+        );
+        Assert.assertEquals(
+                "{T}: Add {R}.\n{T}: Add one mana of the chosen color.",
+                splitManaAbilities("{T}: Add {R} or one mana of the chosen color.")
+        );
+        Assert.assertEquals(
+                "{T}: Add {B}. Activate only if you control a swamp.\n{T}: Add {U}. Activate only if you control a swamp.",
+                splitManaAbilities("{T}: Add {B} or {U}. Activate only if you control a swamp.")
+        );
     }
 
     private void checkTypes(Card card, MtgJsonCard ref) {
