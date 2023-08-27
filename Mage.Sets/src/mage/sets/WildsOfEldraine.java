@@ -281,6 +281,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Virtue of Knowledge", 76, Rarity.MYTHIC, mage.cards.v.VirtueOfKnowledge.class));
         cards.add(new SetCardInfo("Virtue of Loyalty", 38, Rarity.MYTHIC, mage.cards.v.VirtueOfLoyalty.class));
         cards.add(new SetCardInfo("Virtue of Persistence", 115, Rarity.MYTHIC, mage.cards.v.VirtueOfPersistence.class));
+        cards.add(new SetCardInfo("Virtue of Strength", 197, Rarity.MYTHIC, mage.cards.v.VirtueOfStrength.class));
         cards.add(new SetCardInfo("Voracious Vermin", 116, Rarity.COMMON, mage.cards.v.VoraciousVermin.class));
         cards.add(new SetCardInfo("Warehouse Tabby", 117, Rarity.COMMON, mage.cards.w.WarehouseTabby.class));
         cards.add(new SetCardInfo("Water Wings", 77, Rarity.COMMON, mage.cards.w.WaterWings.class));
