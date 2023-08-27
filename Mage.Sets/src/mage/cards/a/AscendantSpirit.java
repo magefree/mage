@@ -39,7 +39,7 @@ public final class AscendantSpirit extends CardImpl {
         ability.addEffect(new SetBasePowerToughnessSourceEffect(
                 2,
                 3,
-                Duration.WhileOnBattlefield
+                Duration.Custom
         ).setText("with base power and toughness 2/3"));
         this.addAbility(ability);
 

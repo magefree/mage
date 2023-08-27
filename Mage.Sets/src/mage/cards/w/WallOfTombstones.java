@@ -64,7 +64,7 @@ class WallOfTombstonesEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int newToughness = CardUtil.overflowInc(1, new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE).calculate(game, source, this));
-        game.addEffect(new SetBaseToughnessSourceEffect(newToughness, Duration.WhileOnBattlefield), source);
+        game.addEffect(new SetBaseToughnessSourceEffect(newToughness, Duration.Custom), source);
         return true;
     }
 }

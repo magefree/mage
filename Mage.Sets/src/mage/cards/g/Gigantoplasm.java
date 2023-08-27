@@ -53,7 +53,7 @@ class GigantoplasmCopyApplier extends CopyApplier {
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
-        Effect effect = new SetBasePowerToughnessSourceEffect(ManacostVariableValue.REGULAR, Duration.WhileOnBattlefield);
+        Effect effect = new SetBasePowerToughnessSourceEffect(ManacostVariableValue.REGULAR, Duration.Custom);
         effect.setText("This creature has base power and toughness X/X");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}"));
         blueprint.getAbilities().add(ability);
