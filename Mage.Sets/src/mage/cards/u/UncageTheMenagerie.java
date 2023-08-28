@@ -46,7 +46,7 @@ class UncageTheMenagerieEffect extends OneShotEffect {
                 "that each have mana value X, reveal them, put them into your hand, then shuffle.";
     }
 
-    public UncageTheMenagerieEffect(final UncageTheMenagerieEffect effect) {
+    private UncageTheMenagerieEffect(final UncageTheMenagerieEffect effect) {
         super(effect);
     }
 

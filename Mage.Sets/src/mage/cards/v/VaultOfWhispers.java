@@ -2,11 +2,12 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -14,12 +15,12 @@ import mage.constants.CardType;
  */
 public final class VaultOfWhispers extends CardImpl {
 
-    public VaultOfWhispers (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.LAND},null);
+    public VaultOfWhispers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.LAND}, null);
         this.addAbility(new BlackManaAbility());
     }
 
-    public VaultOfWhispers (final VaultOfWhispers card) {
+    private VaultOfWhispers(final VaultOfWhispers card) {
         super(card);
     }
 

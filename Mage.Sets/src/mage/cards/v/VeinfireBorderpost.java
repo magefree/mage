@@ -2,7 +2,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -18,6 +17,8 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
@@ -30,10 +31,8 @@ public final class VeinfireBorderpost extends CardImpl {
         filter.add(SuperType.BASIC.getPredicate());
     }
 
-    public VeinfireBorderpost (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{B}{R}");
-        
-
+    public VeinfireBorderpost(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{B}{R}");
 
         // You may pay {1} and return a basic land you control to its owner's hand rather than pay Veinfire Borderpost's mana cost.
         Ability ability = new AlternativeCostSourceAbility(new GenericManaCost(1));
@@ -48,7 +47,7 @@ public final class VeinfireBorderpost extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public VeinfireBorderpost (final VeinfireBorderpost card) {
+    private VeinfireBorderpost(final VeinfireBorderpost card) {
         super(card);
     }
 

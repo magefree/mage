@@ -50,7 +50,7 @@ class UbaMaskReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "If a player would draw a card, that player exiles that card face up instead";
     }
 
-    UbaMaskReplacementEffect(final UbaMaskReplacementEffect effect) {
+    private UbaMaskReplacementEffect(final UbaMaskReplacementEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class UbaMaskPlayEffect extends AsThoughEffectImpl {
         staticText = "Each player may play lands and cast spells from among cards they exiled with {this} this turn";
     }
 
-    public UbaMaskPlayEffect(final UbaMaskPlayEffect effect) {
+    private UbaMaskPlayEffect(final UbaMaskPlayEffect effect) {
         super(effect);
     }
 

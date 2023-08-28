@@ -54,7 +54,7 @@ class VerdantMasteryEffect extends OneShotEffect {
         this.alternativeCostOriginalID = alternativeCostOriginalID;
     }
 
-    private VerdantMasteryEffect(VerdantMasteryEffect effect) {
+    private VerdantMasteryEffect(final VerdantMasteryEffect effect) {
         super(effect);
         this.alternativeCostOriginalID = effect.alternativeCostOriginalID;
     }

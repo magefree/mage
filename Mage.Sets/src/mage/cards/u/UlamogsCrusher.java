@@ -2,7 +2,6 @@
 
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.keyword.AnnihilatorAbility;
@@ -11,14 +10,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
  */
 public final class UlamogsCrusher extends CardImpl {
 
-    public UlamogsCrusher (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");
+    public UlamogsCrusher(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{8}");
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -26,7 +27,7 @@ public final class UlamogsCrusher extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public UlamogsCrusher (final UlamogsCrusher card) {
+    private UlamogsCrusher(final UlamogsCrusher card) {
         super(card);
     }
 

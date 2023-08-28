@@ -62,7 +62,7 @@ class VolcanicEruptionEffect extends OneShotEffect {
         this.staticText = "Destroy X target Mountains. {this} deals damage to each creature and each player equal to the number of Mountains put into a graveyard this way.";
     }
 
-    public VolcanicEruptionEffect(final VolcanicEruptionEffect effect) {
+    private VolcanicEruptionEffect(final VolcanicEruptionEffect effect) {
         super(effect);
     }
 

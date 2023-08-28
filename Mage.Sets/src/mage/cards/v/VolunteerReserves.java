@@ -2,7 +2,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.BandingAbility;
@@ -12,14 +11,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class VolunteerReserves extends CardImpl {
 
-    public VolunteerReserves (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+    public VolunteerReserves(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
@@ -33,7 +33,7 @@ public final class VolunteerReserves extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
     }
 
-    public VolunteerReserves (final VolunteerReserves card) {
+    private VolunteerReserves(final VolunteerReserves card) {
         super(card);
     }
 

@@ -63,7 +63,7 @@ class LeavesTheBattlefieldAttachedTriggeredAbility extends ZoneChangeTriggeredAb
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()), "When enchanted creature leaves the battlefield, ", Boolean.FALSE);
     }
 
-    public LeavesTheBattlefieldAttachedTriggeredAbility(final LeavesTheBattlefieldAttachedTriggeredAbility ability) {
+    private LeavesTheBattlefieldAttachedTriggeredAbility(final LeavesTheBattlefieldAttachedTriggeredAbility ability) {
         super(ability);
     }
 

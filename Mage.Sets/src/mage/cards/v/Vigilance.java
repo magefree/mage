@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -12,14 +11,16 @@ import mage.constants.*;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
  */
 public final class Vigilance extends CardImpl {
 
-    public Vigilance (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
+    public Vigilance(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.subtype.add(SubType.AURA);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -29,7 +30,7 @@ public final class Vigilance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Vigilance (final Vigilance card) {
+    private Vigilance(final Vigilance card) {
         super(card);
     }
 

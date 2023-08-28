@@ -1,6 +1,5 @@
 package mage.cards.u;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,14 +11,12 @@ import mage.abilities.keyword.BandingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +40,7 @@ public final class UrzasEngine extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasEngineEffect(), new ManaCostsImpl<>("{3}")));
     }
 
-    public UrzasEngine(final UrzasEngine card) {
+    private UrzasEngine(final UrzasEngine card) {
         super(card);
     }
 
@@ -61,7 +58,7 @@ class UrzasEngineEffect extends OneShotEffect {
         this.staticText = "Attacking creatures banded with {this} gain trample until end of turn";
     }
 
-    public UrzasEngineEffect(final UrzasEngineEffect effect) {
+    private UrzasEngineEffect(final UrzasEngineEffect effect) {
         super(effect);
     }
 

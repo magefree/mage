@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -14,14 +13,16 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
  */
 public final class VictorysHerald extends CardImpl {
 
-    public VictorysHerald (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}{W}");
+    public VictorysHerald(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{W}");
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(4);
@@ -36,7 +37,7 @@ public final class VictorysHerald extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VictorysHerald (final VictorysHerald card) {
+    private VictorysHerald(final VictorysHerald card) {
         super(card);
     }
 

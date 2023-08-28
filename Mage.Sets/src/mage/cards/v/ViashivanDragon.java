@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
@@ -8,11 +7,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
+
+import java.util.UUID;
 
 public final class ViashivanDragon extends CardImpl {
 
@@ -34,7 +31,7 @@ public final class ViashivanDragon extends CardImpl {
 
     }
 
-    public ViashivanDragon(ViashivanDragon other){
+    private ViashivanDragon(final ViashivanDragon other) {
         super(other);
     }
 

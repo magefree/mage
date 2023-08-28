@@ -2,8 +2,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -15,8 +13,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,8 +24,8 @@ import mage.constants.Outcome;
  */
 public final class ViridianClaw extends CardImpl {
 
-    public ViridianClaw (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+    public ViridianClaw(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 and has first strike.
@@ -39,7 +39,7 @@ public final class ViridianClaw extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), false));
     }
 
-    public ViridianClaw (final ViridianClaw card) {
+    private ViridianClaw(final ViridianClaw card) {
         super(card);
     }
 

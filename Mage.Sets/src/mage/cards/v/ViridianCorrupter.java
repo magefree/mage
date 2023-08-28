@@ -1,7 +1,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -13,14 +12,16 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetArtifactPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
  */
 public final class ViridianCorrupter extends CardImpl {
 
-    public ViridianCorrupter (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");
+    public ViridianCorrupter(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.subtype.add(SubType.PHYREXIAN);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
@@ -35,7 +36,7 @@ public final class ViridianCorrupter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ViridianCorrupter (final ViridianCorrupter card) {
+    private ViridianCorrupter(final ViridianCorrupter card) {
         super(card);
     }
 

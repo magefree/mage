@@ -2,7 +2,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -12,21 +11,22 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class VaultSkyward extends CardImpl {
 
-    public VaultSkyward (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+    public VaultSkyward(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public VaultSkyward (final VaultSkyward card) {
+    private VaultSkyward(final VaultSkyward card) {
         super(card);
     }
 

@@ -63,7 +63,7 @@ class VoraciousFellBeastEffect extends OneShotEffect {
             "Create a Food token for each creature sacrificed this way";
     }
 
-    VoraciousFellBeastEffect(final VoraciousFellBeastEffect effect) {
+    private VoraciousFellBeastEffect(final VoraciousFellBeastEffect effect) {
         super(effect);
     }
 

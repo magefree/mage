@@ -19,15 +19,15 @@ import java.util.UUID;
  */
 public final class UnnaturalSpeed extends CardImpl {
 
-    public UnnaturalSpeed (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
+    public UnnaturalSpeed(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
         this.subtype.add(SubType.ARCANE);
 
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public UnnaturalSpeed (final UnnaturalSpeed card) {
+    private UnnaturalSpeed(final UnnaturalSpeed card) {
         super(card);
     }
 

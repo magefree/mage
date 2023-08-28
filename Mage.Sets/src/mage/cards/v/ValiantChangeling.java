@@ -59,7 +59,7 @@ class ValiantChangelingCostReductionEffect extends CostModificationEffectImpl {
                 "This effect can't reduce the amount of mana this spell costs by more than {5}.";
     }
 
-    private ValiantChangelingCostReductionEffect(ValiantChangelingCostReductionEffect effect) {
+    private ValiantChangelingCostReductionEffect(final ValiantChangelingCostReductionEffect effect) {
         super(effect);
     }
 

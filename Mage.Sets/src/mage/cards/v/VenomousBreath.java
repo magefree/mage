@@ -53,7 +53,7 @@ class VenomousBreathCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         this.staticText = "At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn";
     }
 
-    public VenomousBreathCreateDelayedTriggeredAbilityEffect(final VenomousBreathCreateDelayedTriggeredAbilityEffect effect) {
+    private VenomousBreathCreateDelayedTriggeredAbilityEffect(final VenomousBreathCreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class VenomousBreathEffect extends OneShotEffect {
         this.targetCreature = targetCreature;
     }
 
-    public VenomousBreathEffect(final VenomousBreathEffect effect) {
+    private VenomousBreathEffect(final VenomousBreathEffect effect) {
         super(effect);
         targetCreature = effect.targetCreature;
     }

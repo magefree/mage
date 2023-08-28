@@ -2,7 +2,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
@@ -15,21 +14,22 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class ViridianRevel extends CardImpl {
 
-    public ViridianRevel (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");
+    public ViridianRevel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
 
 
         // Whenever an artifact is put into an opponent's graveyard from the battlefield, you may draw a card.
         this.addAbility(new ViridianRevelTriggeredAbility());
     }
 
-    public ViridianRevel (final ViridianRevel card) {
+    private ViridianRevel(final ViridianRevel card) {
         super(card);
     }
 
@@ -44,7 +44,7 @@ class ViridianRevelTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    ViridianRevelTriggeredAbility(final ViridianRevelTriggeredAbility ability) {
+    private ViridianRevelTriggeredAbility(final ViridianRevelTriggeredAbility ability) {
         super(ability);
     }
 

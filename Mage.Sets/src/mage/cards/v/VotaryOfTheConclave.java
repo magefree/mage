@@ -2,7 +2,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -13,14 +12,16 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
  */
 public final class VotaryOfTheConclave extends CardImpl {
 
-    public VotaryOfTheConclave (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+    public VotaryOfTheConclave(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
@@ -29,7 +30,7 @@ public final class VotaryOfTheConclave extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{G}")));
     }
 
-    public VotaryOfTheConclave (final VotaryOfTheConclave card) {
+    private VotaryOfTheConclave(final VotaryOfTheConclave card) {
         super(card);
     }
 

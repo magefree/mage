@@ -64,7 +64,7 @@ class UnnaturalHungerEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to that player equal to that creature's power unless they sacrifice another creature";
     }
 
-    private UnnaturalHungerEffect(UnnaturalHungerEffect effect) {
+    private UnnaturalHungerEffect(final UnnaturalHungerEffect effect) {
         super(effect);
     }
 

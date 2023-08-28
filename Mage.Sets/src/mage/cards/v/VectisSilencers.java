@@ -2,7 +2,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,18 +10,19 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class VectisSilencers extends CardImpl {
 
-    public VectisSilencers (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{U}");
+    public VectisSilencers(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
 
@@ -31,7 +31,7 @@ public final class VectisSilencers extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}")));
     }
 
-    public VectisSilencers (final VectisSilencers card) {
+    private VectisSilencers(final VectisSilencers card) {
         super(card);
     }
 

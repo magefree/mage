@@ -2,7 +2,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -15,14 +14,16 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.target.common.TargetArtifactPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
  */
 public final class VedalkenInfuser extends CardImpl {
 
-    public VedalkenInfuser (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+    public VedalkenInfuser(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add(SubType.VEDALKEN);
         this.subtype.add(SubType.WIZARD);
 
@@ -35,7 +36,7 @@ public final class VedalkenInfuser extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VedalkenInfuser (final VedalkenInfuser card) {
+    private VedalkenInfuser(final VedalkenInfuser card) {
         super(card);
     }
 

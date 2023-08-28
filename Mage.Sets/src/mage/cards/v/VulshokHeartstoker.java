@@ -2,7 +2,6 @@
 
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -10,9 +9,11 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -20,8 +21,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class VulshokHeartstoker extends CardImpl {
 
-    public VulshokHeartstoker (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+    public VulshokHeartstoker(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
 
@@ -32,7 +33,7 @@ public final class VulshokHeartstoker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VulshokHeartstoker (final VulshokHeartstoker card) {
+    private VulshokHeartstoker(final VulshokHeartstoker card) {
         super(card);
     }
 

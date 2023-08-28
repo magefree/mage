@@ -65,7 +65,7 @@ class VirtueOfStrengthReplacementEffect extends ReplacementEffectImpl {
         staticText = "if you tap a basic land for mana, it produces three times as much of that mana instead";
     }
 
-    private VirtueOfStrengthReplacementEffect(VirtueOfStrengthReplacementEffect effect) {
+    private VirtueOfStrengthReplacementEffect(final VirtueOfStrengthReplacementEffect effect) {
         super(effect);
     }
 

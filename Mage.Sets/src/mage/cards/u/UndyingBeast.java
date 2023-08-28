@@ -49,7 +49,7 @@ class UndyingBeastEffect extends OneShotEffect {
         staticText = "put it on top of its owner's library";
     }
 
-    public UndyingBeastEffect(final UndyingBeastEffect effect) {
+    private UndyingBeastEffect(final UndyingBeastEffect effect) {
         super(effect);
     }
 

@@ -105,7 +105,7 @@ class VialSmasherTheFierceEffect extends OneShotEffect {
         this.staticText = "{this} choose an opponent at random. {this} deals damage equal to that spell's mana value to that player or a planeswalker that player controls";
     }
 
-    public VialSmasherTheFierceEffect(final VialSmasherTheFierceEffect effect) {
+    private VialSmasherTheFierceEffect(final VialSmasherTheFierceEffect effect) {
         super(effect);
     }
 

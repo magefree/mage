@@ -64,7 +64,7 @@ class UncivilUnrestRiotEffect extends ReplacementEffectImpl {
                 "<i>(They enter the battlefield with your choice of a +1/+1 counter or haste.)</i>";
     }
 
-    private UncivilUnrestRiotEffect(UncivilUnrestRiotEffect effect) {
+    private UncivilUnrestRiotEffect(final UncivilUnrestRiotEffect effect) {
         super(effect);
     }
 
