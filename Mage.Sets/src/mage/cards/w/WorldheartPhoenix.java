@@ -64,7 +64,7 @@ public final class WorldheartPhoenix extends CardImpl {
             staticText = "You may cast {this} from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost";
         }
 
-        public WorldheartPhoenixPlayEffect(final WorldheartPhoenixPlayEffect effect) {
+        private WorldheartPhoenixPlayEffect(final WorldheartPhoenixPlayEffect effect) {
             super(effect);
         }
 

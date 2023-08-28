@@ -54,7 +54,7 @@ class ZilorthaApexOfIkoriaEffect extends AsThoughEffectImpl {
                 "creature assign its combat damage as though it weren't blocked";
     }
 
-    private ZilorthaApexOfIkoriaEffect(ZilorthaApexOfIkoriaEffect effect) {
+    private ZilorthaApexOfIkoriaEffect(final ZilorthaApexOfIkoriaEffect effect) {
         super(effect);
     }
 

@@ -2,7 +2,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.BandingAbility;
 import mage.abilities.keyword.DefenderAbility;
@@ -11,14 +10,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class WallOfShields extends CardImpl {
 
-    public WallOfShields (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");
+    public WallOfShields(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.subtype.add(SubType.WALL);
 
         this.power = new MageInt(0);
@@ -31,7 +31,7 @@ public final class WallOfShields extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public WallOfShields (final WallOfShields card) {
+    private WallOfShields(final WallOfShields card) {
         super(card);
     }
 

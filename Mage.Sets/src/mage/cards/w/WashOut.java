@@ -49,7 +49,7 @@ class WashOutEffect extends OneShotEffect {
         staticText = "Return all permanents of the color of your choice to their owners' hands";
     }
 
-    public WashOutEffect(final WashOutEffect effect) {
+    private WashOutEffect(final WashOutEffect effect) {
         super(effect);
     }
 

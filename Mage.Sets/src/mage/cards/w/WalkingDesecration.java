@@ -55,7 +55,7 @@ class WalkingDesecrationEffect extends OneShotEffect {
         staticText = "Creatures of the creature type of your choice attack this turn if able";
     }
 
-    public WalkingDesecrationEffect(final WalkingDesecrationEffect effect) {
+    private WalkingDesecrationEffect(final WalkingDesecrationEffect effect) {
         super(effect);
     }
 

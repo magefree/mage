@@ -2,7 +2,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.AlternativeCostSourceAbility;
@@ -18,6 +17,8 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
@@ -30,9 +31,8 @@ public final class WildfieldBorderpost extends CardImpl {
         filter.add(SuperType.BASIC.getPredicate());
     }
 
-    public WildfieldBorderpost (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}{G}{W}");
-
+    public WildfieldBorderpost(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{G}{W}");
 
 
         // You may pay {1} and return a basic land you control to its owner's hand rather than pay Wildfield Borderpost's mana cost.
@@ -48,7 +48,7 @@ public final class WildfieldBorderpost extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public WildfieldBorderpost (final WildfieldBorderpost card) {
+    private WildfieldBorderpost(final WildfieldBorderpost card) {
         super(card);
     }
 

@@ -17,15 +17,15 @@ import java.util.UUID;
  */
 public final class WakingNightmare extends CardImpl {
 
-    public WakingNightmare (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
+    public WakingNightmare(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.subtype.add(SubType.ARCANE);
 
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public WakingNightmare (final WakingNightmare card) {
+    private WakingNightmare(final WakingNightmare card) {
         super(card);
     }
 

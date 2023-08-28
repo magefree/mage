@@ -2,7 +2,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlashAbility;
@@ -12,14 +11,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class WingedCoatl extends CardImpl {
 
-    public WingedCoatl (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");
+    public WingedCoatl(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
         this.subtype.add(SubType.SNAKE);
 
 
@@ -30,7 +30,7 @@ public final class WingedCoatl extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public WingedCoatl (final WingedCoatl card) {
+    private WingedCoatl(final WingedCoatl card) {
         super(card);
     }
 

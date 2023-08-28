@@ -33,7 +33,7 @@ public final class ZilorthaStrengthIncarnate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ZilorthaStrengthIncarnateEffect()));
     }
 
-    private ZilorthaStrengthIncarnate(ZilorthaStrengthIncarnate card) {
+    private ZilorthaStrengthIncarnate(final ZilorthaStrengthIncarnate card) {
         super(card);
     }
 

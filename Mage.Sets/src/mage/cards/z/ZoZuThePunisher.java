@@ -1,7 +1,6 @@
 
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -17,6 +16,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -48,16 +49,16 @@ public final class ZoZuThePunisher extends CardImpl {
 class ZoZuThePunisherAbility extends TriggeredAbilityImpl {
 
     public ZoZuThePunisherAbility() {
-            super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }
 
-    ZoZuThePunisherAbility(final ZoZuThePunisherAbility ability) {
-            super(ability);
+    private ZoZuThePunisherAbility(final ZoZuThePunisherAbility ability) {
+        super(ability);
     }
 
     @Override
     public ZoZuThePunisherAbility copy() {
-            return new ZoZuThePunisherAbility(this);
+        return new ZoZuThePunisherAbility(this);
     }
 
     @Override

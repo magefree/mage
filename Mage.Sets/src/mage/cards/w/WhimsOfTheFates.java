@@ -50,7 +50,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
         this.staticText = "Starting with you, each player separates all permanents they control into three piles. Then each player chooses one of their piles at random and sacrifices those permanents.";
     }
 
-    public WhimsOfTheFateEffect(final WhimsOfTheFateEffect effect) {
+    private WhimsOfTheFateEffect(final WhimsOfTheFateEffect effect) {
         super(effect);
     }
 

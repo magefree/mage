@@ -2,7 +2,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -11,14 +10,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
  */
 public final class WistfulSelkie extends CardImpl {
 
-    public WistfulSelkie (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/U}{G/U}{G/U}");
+    public WistfulSelkie(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G/U}{G/U}{G/U}");
         this.subtype.add(SubType.MERFOLK);
         this.subtype.add(SubType.WIZARD);
 
@@ -28,7 +29,7 @@ public final class WistfulSelkie extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public WistfulSelkie (final WistfulSelkie card) {
+    private WistfulSelkie(final WistfulSelkie card) {
         super(card);
     }
 

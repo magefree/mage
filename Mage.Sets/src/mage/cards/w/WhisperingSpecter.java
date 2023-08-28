@@ -55,7 +55,7 @@ class WhisperingSpecterEffect extends OneShotEffect {
         staticText = "If you do, that player discards a card for each poison counter they have";
     }
 
-    WhisperingSpecterEffect(final WhisperingSpecterEffect effect) {
+    private WhisperingSpecterEffect(final WhisperingSpecterEffect effect) {
         super(effect);
     }
 

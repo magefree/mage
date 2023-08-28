@@ -2,7 +2,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
@@ -12,12 +11,14 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,8 +26,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class WallOfReverence extends CardImpl {
 
-    public WallOfReverence (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+    public WallOfReverence(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.WALL);
 
@@ -39,7 +40,7 @@ public final class WallOfReverence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WallOfReverence (final WallOfReverence card) {
+    private WallOfReverence(final WallOfReverence card) {
         super(card);
     }
 

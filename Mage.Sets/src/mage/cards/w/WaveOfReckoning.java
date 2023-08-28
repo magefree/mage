@@ -43,7 +43,7 @@ class WaveOfReckoningDamageEffect extends OneShotEffect {
             staticText = "each creature deals damage to itself equal to its power";
         }
 
-        public WaveOfReckoningDamageEffect(final WaveOfReckoningDamageEffect effect) {
+        private WaveOfReckoningDamageEffect(final WaveOfReckoningDamageEffect effect) {
             super(effect);
         }
 

@@ -61,7 +61,7 @@ class WordOfCommandEffect extends OneShotEffect {
         this.staticText = "Look at target opponent's hand and choose a card from it. You control that player until {this} finishes resolving. The player plays that card if able. While doing so, the player can activate mana abilities only if they're from lands that player controls and only if mana they produce is spent to activate other mana abilities of lands the player controls and/or to play that card. If the chosen card is cast as a spell, you control the player while that spell is resolving";
     }
 
-    public WordOfCommandEffect(final WordOfCommandEffect effect) {
+    private WordOfCommandEffect(final WordOfCommandEffect effect) {
         super(effect);
     }
 
@@ -196,7 +196,7 @@ class WordOfCommandCantActivateEffect extends RestrictionEffect {
         super(Duration.EndOfTurn);
     }
 
-    public WordOfCommandCantActivateEffect(final WordOfCommandCantActivateEffect effect) {
+    private WordOfCommandCantActivateEffect(final WordOfCommandCantActivateEffect effect) {
         super(effect);
     }
 
@@ -222,7 +222,7 @@ class WordOfCommandTestFlashEffect extends AsThoughEffectImpl {
         super(AsThoughEffectType.CAST_AS_INSTANT, Duration.EndOfTurn, Outcome.Benefit);
     }
 
-    public WordOfCommandTestFlashEffect(final WordOfCommandTestFlashEffect effect) {
+    private WordOfCommandTestFlashEffect(final WordOfCommandTestFlashEffect effect) {
         super(effect);
     }
 

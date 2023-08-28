@@ -2,7 +2,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -12,14 +11,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.UUID;
+
 /**
  *
  * @author Loki
  */
 public final class WallOfDenial extends CardImpl {
 
-    public WallOfDenial (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
+    public WallOfDenial(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
         this.subtype.add(SubType.WALL);
 
 
@@ -30,7 +31,7 @@ public final class WallOfDenial extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public WallOfDenial (final WallOfDenial card) {
+    private WallOfDenial(final WallOfDenial card) {
         super(card);
     }
 

@@ -2,11 +2,12 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+
+import java.util.UUID;
 
 /**
  *
@@ -14,13 +15,13 @@ import mage.constants.CardType;
  */
 public final class WhitesunsPassage extends CardImpl {
 
-    public WhitesunsPassage (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
+    public WhitesunsPassage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         this.getSpellAbility().addEffect(new GainLifeEffect(5));
     }
 
-    public WhitesunsPassage (final WhitesunsPassage card) {
+    private WhitesunsPassage(final WhitesunsPassage card) {
         super(card);
     }
 
