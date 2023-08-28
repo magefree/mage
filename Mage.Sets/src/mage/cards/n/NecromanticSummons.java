@@ -1,6 +1,5 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -18,6 +17,8 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
+
+import java.util.UUID;
 
 /**
  *

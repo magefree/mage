@@ -1,6 +1,5 @@
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -11,6 +10,8 @@ import mage.filter.predicate.other.PlayerCanGainLifePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +33,7 @@ public class GainLifeOpponentCost extends CostImpl {
         this.text = "an opponent gains " + amount + " life";
     }
 
-    public GainLifeOpponentCost(GainLifeOpponentCost cost) {
+    private GainLifeOpponentCost(final GainLifeOpponentCost cost) {
         super(cost);
         this.amount = cost.amount;
     }

@@ -61,7 +61,7 @@ class ScavengeEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
     }
 
-    ScavengeEffect(final ScavengeEffect effect) {
+    private ScavengeEffect(final ScavengeEffect effect) {
         super(effect);
     }
 

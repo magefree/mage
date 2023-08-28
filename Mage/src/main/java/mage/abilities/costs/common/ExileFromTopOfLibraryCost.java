@@ -1,7 +1,6 @@
 
 package mage.abilities.costs.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
@@ -9,6 +8,8 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +25,7 @@ public class ExileFromTopOfLibraryCost extends CostImpl {
                 + " of your library";
     }
 
-    public ExileFromTopOfLibraryCost(ExileFromTopOfLibraryCost cost) {
+    private ExileFromTopOfLibraryCost(final ExileFromTopOfLibraryCost cost) {
         super(cost);
         this.amount = cost.amount;
     }

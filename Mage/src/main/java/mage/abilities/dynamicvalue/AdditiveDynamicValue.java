@@ -37,9 +37,14 @@ public class AdditiveDynamicValue implements DynamicValue {
         return dynamicValues.stream().mapToInt(d -> d.calculate(game, sourceAbility, effect)).sum();
     }
 
+
+    private AdditiveDynamicValue(final AdditiveDynamicValue value) {
+        this(value.dynamicValues);
+    }
+
     @Override
     public AdditiveDynamicValue copy() {
-        return new AdditiveDynamicValue(this.dynamicValues);
+        return new AdditiveDynamicValue(this);
     }
 
     @Override

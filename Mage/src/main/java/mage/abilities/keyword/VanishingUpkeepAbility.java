@@ -56,7 +56,7 @@ class VanishingEffect extends OneShotEffect {
         super(Outcome.Sacrifice);
     }
 
-    VanishingEffect(final VanishingEffect effect) {
+    private VanishingEffect(final VanishingEffect effect) {
         super(effect);
     }
 

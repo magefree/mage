@@ -35,7 +35,7 @@ public class ExileTargetCost extends CostImpl {
         this.addTarget(target);
     }
 
-    public ExileTargetCost(ExileTargetCost cost) {
+    protected ExileTargetCost(final ExileTargetCost cost) {
         super(cost);
         for (Permanent permanent : cost.permanents) {
             this.permanents.add(permanent.copy());

@@ -22,7 +22,7 @@ public class AtTheBeginOfNextUpkeepDelayedTriggeredAbility extends DelayedTrigge
         super(effect, duration);
     }
 
-    public AtTheBeginOfNextUpkeepDelayedTriggeredAbility(AtTheBeginOfNextUpkeepDelayedTriggeredAbility ability) {
+    private AtTheBeginOfNextUpkeepDelayedTriggeredAbility(final AtTheBeginOfNextUpkeepDelayedTriggeredAbility ability) {
         super(ability);
     }
 

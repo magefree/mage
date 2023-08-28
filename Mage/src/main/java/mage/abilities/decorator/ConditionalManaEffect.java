@@ -32,7 +32,7 @@ public class ConditionalManaEffect extends ManaEffect {
         this.staticText = text;
     }
 
-    public ConditionalManaEffect(ConditionalManaEffect effect) {
+    protected ConditionalManaEffect(final ConditionalManaEffect effect) {
         super(effect);
         this.effect = effect.effect.copy();
         this.otherwiseEffect = effect.otherwiseEffect.copy();

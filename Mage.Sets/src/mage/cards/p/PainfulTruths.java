@@ -22,10 +22,10 @@ public final class PainfulTruths extends CardImpl {
 
         // <i>Converge</i> &mdash; You draw X cards and lose X life, where X is the number of colors of mana spent to cast Painful Truths.
         getSpellAbility().setAbilityWord(AbilityWord.CONVERGE);
-        Effect effect = new DrawCardSourceControllerEffect(ColorsOfManaSpentToCastCount.getInstance());
+        Effect effect = new DrawCardSourceControllerEffect(ColorsOfManaSpentToCastCount.instance);
         effect.setText("You draw X cards");
         getSpellAbility().addEffect(effect);
-        effect = new LoseLifeSourceControllerEffect(ColorsOfManaSpentToCastCount.getInstance());
+        effect = new LoseLifeSourceControllerEffect(ColorsOfManaSpentToCastCount.instance);
         effect.setText("and you lose X life, where X is the number of colors of mana spent to cast this spell");
         getSpellAbility().addEffect(effect);
     }

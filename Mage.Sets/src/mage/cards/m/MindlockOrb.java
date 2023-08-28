@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -13,7 +12,8 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +47,7 @@ class MindlockRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can't search libraries";
     }
 
-    MindlockRuleModifyingEffect ( MindlockRuleModifyingEffect effect ) {
+    private MindlockRuleModifyingEffect(final MindlockRuleModifyingEffect effect) {
         super(effect);
     }
 

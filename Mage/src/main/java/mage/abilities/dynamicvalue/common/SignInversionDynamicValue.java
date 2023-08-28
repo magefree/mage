@@ -19,7 +19,7 @@ public class SignInversionDynamicValue implements DynamicValue {
         this.canBePositive = canBePositive;
     }
 
-    SignInversionDynamicValue(final SignInversionDynamicValue dynamicValue) {
+    private SignInversionDynamicValue(final SignInversionDynamicValue dynamicValue) {
         this.value = dynamicValue.value.copy();
         this.canBePositive = dynamicValue.canBePositive;
     }

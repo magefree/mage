@@ -9,7 +9,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
@@ -64,7 +63,7 @@ class CantHaveMoreThanAmountCountersSourceEffect extends ReplacementEffectImpl {
         this.amount = amount;
     }
 
-    CantHaveMoreThanAmountCountersSourceEffect(final CantHaveMoreThanAmountCountersSourceEffect effect) {
+    private CantHaveMoreThanAmountCountersSourceEffect(final CantHaveMoreThanAmountCountersSourceEffect effect) {
         super(effect);
         this.counterType = effect.counterType;
         this.amount = effect.amount;

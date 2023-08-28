@@ -67,7 +67,7 @@ class CumulativeUpkeepEffect extends OneShotEffect {
         this.cumulativeCost = cumulativeCost;
     }
 
-    CumulativeUpkeepEffect(final CumulativeUpkeepEffect effect) {
+    private CumulativeUpkeepEffect(final CumulativeUpkeepEffect effect) {
         super(effect);
         this.cumulativeCost = effect.cumulativeCost.copy();
     }

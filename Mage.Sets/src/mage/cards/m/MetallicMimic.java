@@ -1,14 +1,13 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.continuous.AddChosenSubtypeEffect;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
+import mage.abilities.effects.common.continuous.AddChosenSubtypeEffect;
 import mage.abilities.effects.common.enterAttribute.EnterAttributeAddChosenSubtypeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,6 +17,8 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *

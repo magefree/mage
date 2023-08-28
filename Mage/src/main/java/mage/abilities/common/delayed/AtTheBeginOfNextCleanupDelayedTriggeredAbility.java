@@ -21,7 +21,7 @@ public class AtTheBeginOfNextCleanupDelayedTriggeredAbility extends DelayedTrigg
         super(effect, duration);
     }
 
-    public AtTheBeginOfNextCleanupDelayedTriggeredAbility(AtTheBeginOfNextCleanupDelayedTriggeredAbility ability) {
+    private AtTheBeginOfNextCleanupDelayedTriggeredAbility(final AtTheBeginOfNextCleanupDelayedTriggeredAbility ability) {
         super(ability);
     }
 

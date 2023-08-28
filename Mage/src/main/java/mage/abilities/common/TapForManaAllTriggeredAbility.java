@@ -30,7 +30,7 @@ public class TapForManaAllTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever " + filter.getMessage() + " for mana, ");
     }
 
-    public TapForManaAllTriggeredAbility(TapForManaAllTriggeredAbility ability) {
+    protected TapForManaAllTriggeredAbility(final TapForManaAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
         this.setTargetPointer = ability.setTargetPointer;

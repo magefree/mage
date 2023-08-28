@@ -27,7 +27,7 @@ public class RevealLibraryPickControllerEffect extends LookLibraryAndPickControl
         this.revealPickedCards = false;
     }
 
-    public RevealLibraryPickControllerEffect(final LookLibraryAndPickControllerEffect effect) {
+    protected RevealLibraryPickControllerEffect(final LookLibraryAndPickControllerEffect effect) {
         super(effect);
     }
 

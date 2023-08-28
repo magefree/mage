@@ -66,7 +66,7 @@ class BringToLightEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int numberColors = ColorsOfManaSpentToCastCount.getInstance().calculate(game, source, this);
+        int numberColors = ColorsOfManaSpentToCastCount.instance.calculate(game, source, this);
         FilterCard filter = new FilterCard("a creature, instant, or sorcery card with mana value "
                 + "less than or equal to " + numberColors);
         filter.add(Predicates.or(CardType.CREATURE.getPredicate(),

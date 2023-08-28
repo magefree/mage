@@ -51,7 +51,7 @@ class ScionOfHalasterReplacementEffect extends ReplacementEffectImpl {
         staticText = "The first time you would draw a card each turn, instead look at the top two cards of your library. Put one of them into your graveyard and the other back on top of your library. Then draw a card";
     }
 
-    ScionOfHalasterReplacementEffect(final mage.cards.s.ScionOfHalasterReplacementEffect effect) {
+    private ScionOfHalasterReplacementEffect(final mage.cards.s.ScionOfHalasterReplacementEffect effect) {
         super(effect);
     }
 

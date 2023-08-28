@@ -10,7 +10,7 @@ import mage.players.ManaPool;
 
 public class ColoredManaCost extends ManaCostImpl {
 
-    protected ColoredManaSymbol mana;
+    protected final ColoredManaSymbol mana;
 
     public ColoredManaCost(ColoredManaSymbol mana) {
         this.mana = mana;
@@ -18,7 +18,7 @@ public class ColoredManaCost extends ManaCostImpl {
         addColoredOption(mana);
     }
 
-    public ColoredManaCost(ColoredManaCost manaCost) {
+    protected ColoredManaCost(final ColoredManaCost manaCost) {
         super(manaCost);
         this.mana = manaCost.mana;
     }

@@ -11,7 +11,7 @@ public class AtTheEndOfCombatDelayedTriggeredAbility extends DelayedTriggeredAbi
         setTriggerPhrase("At end of combat, ");
     }
 
-    public AtTheEndOfCombatDelayedTriggeredAbility(AtTheEndOfCombatDelayedTriggeredAbility ability) {
+    private AtTheEndOfCombatDelayedTriggeredAbility(final AtTheEndOfCombatDelayedTriggeredAbility ability) {
         super(ability);
     }
 

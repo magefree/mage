@@ -24,7 +24,7 @@ public class AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility extends DelayedTr
         super(effect, duration, triggerOnlyOnce);
     }
 
-    public AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility ability) {
+    private AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(final AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility ability) {
         super(ability);
     }
 

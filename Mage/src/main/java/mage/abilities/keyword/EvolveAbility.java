@@ -68,7 +68,7 @@ public class EvolveAbility extends EntersBattlefieldAllTriggeredAbility {
         super(Zone.BATTLEFIELD, new EvolveEffect(), StaticFilters.FILTER_CONTROLLED_CREATURE, false);
     }
 
-    public EvolveAbility(EvolveAbility ability) {
+    private EvolveAbility(final EvolveAbility ability) {
         super(ability);
     }
 

@@ -23,7 +23,7 @@ public class PreventDamageByColorEffect extends PreventionEffectImpl {
         this.staticText = "If a " + color.getDescription() + " source would deal damage to you, prevent " + amount + " of that damage";
     }
 
-    public PreventDamageByColorEffect(PreventDamageByColorEffect effect) {
+    private PreventDamageByColorEffect(final PreventDamageByColorEffect effect) {
         super(effect);
         this.color = effect.color;
     }

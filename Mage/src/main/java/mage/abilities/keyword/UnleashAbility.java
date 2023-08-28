@@ -49,7 +49,7 @@ class UnleashReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfGame, Outcome.Detriment);
     }
 
-    public UnleashReplacementEffect(UnleashReplacementEffect effect) {
+    private UnleashReplacementEffect(final UnleashReplacementEffect effect) {
         super(effect);
     }
 

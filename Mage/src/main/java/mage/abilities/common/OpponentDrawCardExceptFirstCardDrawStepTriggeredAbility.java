@@ -19,7 +19,7 @@ public class OpponentDrawCardExceptFirstCardDrawStepTriggeredAbility extends Tri
         setTriggerPhrase("Whenever an opponent draws a card except the first one they draw in each of their draw steps, ");
     }
 
-    public OpponentDrawCardExceptFirstCardDrawStepTriggeredAbility(OpponentDrawCardExceptFirstCardDrawStepTriggeredAbility ability) {
+    private OpponentDrawCardExceptFirstCardDrawStepTriggeredAbility(final OpponentDrawCardExceptFirstCardDrawStepTriggeredAbility ability) {
         super(ability);
     }
 

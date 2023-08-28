@@ -53,7 +53,7 @@ class FabricateEffect extends OneShotEffect {
         this.value = value;
     }
 
-    FabricateEffect(final FabricateEffect effect) {
+    private FabricateEffect(final FabricateEffect effect) {
         super(effect);
         this.value = effect.value;
     }

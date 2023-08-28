@@ -1,9 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,14 +10,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CantBeTargetedSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterObject;
-import mage.filter.FilterStackObject;
 import mage.filter.FilterPermanent;
+import mage.filter.FilterStackObject;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -30,6 +23,10 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *

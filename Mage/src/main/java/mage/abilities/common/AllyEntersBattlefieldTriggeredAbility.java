@@ -21,7 +21,7 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
         setTriggerPhrase("Whenever {this} or another Ally enters the battlefield under your control, ");
     }
 
-    public AllyEntersBattlefieldTriggeredAbility(AllyEntersBattlefieldTriggeredAbility ability) {
+    private AllyEntersBattlefieldTriggeredAbility(final AllyEntersBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 

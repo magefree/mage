@@ -63,7 +63,7 @@ class EnlistEffect extends ReplacementEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
     }
 
-    public EnlistEffect(EnlistEffect effect) {
+    private EnlistEffect(final EnlistEffect effect) {
         super(effect);
     }
 

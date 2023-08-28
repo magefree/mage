@@ -42,7 +42,7 @@ public class ProliferateEffect extends OneShotEffect {
         }
     }
 
-    public ProliferateEffect(ProliferateEffect effect) {
+    private ProliferateEffect(final ProliferateEffect effect) {
         super(effect);
     }
 

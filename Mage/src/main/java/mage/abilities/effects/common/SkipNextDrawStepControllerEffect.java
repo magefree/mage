@@ -23,7 +23,7 @@ public class SkipNextDrawStepControllerEffect extends OneShotEffect {
         this.staticText = text;
     }
 
-    public SkipNextDrawStepControllerEffect(SkipNextDrawStepControllerEffect effect) {
+    private SkipNextDrawStepControllerEffect(final SkipNextDrawStepControllerEffect effect) {
         super(effect);
     }
 

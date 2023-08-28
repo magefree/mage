@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -20,6 +19,8 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,7 +63,7 @@ class PendrellFluxEffect extends OneShotEffect {
         staticText =  "sacrifice this creature unless you pay its mana cost";
     }
 
-    public PendrellFluxEffect(final mage.cards.p.PendrellFluxEffect effect) {
+    private PendrellFluxEffect(final PendrellFluxEffect effect) {
         super(effect);
     }
 

@@ -61,7 +61,7 @@ class BloodthirstEffect extends OneShotEffect {
         staticText = "this permanent comes into play with " + this.amount + " +1/+1 counters on it";
     }
 
-    BloodthirstEffect(final BloodthirstEffect effect) {
+    private BloodthirstEffect(final BloodthirstEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

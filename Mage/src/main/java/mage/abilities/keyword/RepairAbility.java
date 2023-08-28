@@ -90,12 +90,12 @@ class RepairedCastFromGraveyardEffect extends OneShotEffect {
 
 class RepairCastFromGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
-    public RepairCastFromGraveyardTriggeredAbility() {
+    RepairCastFromGraveyardTriggeredAbility() {
         super(Zone.GRAVEYARD, new RepairedCastFromGraveyardEffect());
         setRuleVisible(false);
     }
 
-    public RepairCastFromGraveyardTriggeredAbility(RepairCastFromGraveyardTriggeredAbility ability) {
+    private RepairCastFromGraveyardTriggeredAbility(final RepairCastFromGraveyardTriggeredAbility ability) {
         super(ability);
     }
 

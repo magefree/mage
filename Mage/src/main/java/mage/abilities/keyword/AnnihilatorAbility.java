@@ -83,7 +83,7 @@ class AnnihilatorEffect extends OneShotEffect {
         this.count = count;
     }
 
-    AnnihilatorEffect(AnnihilatorEffect effect) {
+    private AnnihilatorEffect(final AnnihilatorEffect effect) {
         super(effect);
         this.count = effect.count;
     }

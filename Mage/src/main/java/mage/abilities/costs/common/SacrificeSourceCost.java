@@ -19,7 +19,7 @@ public class SacrificeSourceCost extends CostImpl implements SacrificeCost {
         this.text = "sacrifice {this}";
     }
 
-    public SacrificeSourceCost(SacrificeSourceCost cost) {
+    protected SacrificeSourceCost(final SacrificeSourceCost cost) {
         super(cost);
     }
 

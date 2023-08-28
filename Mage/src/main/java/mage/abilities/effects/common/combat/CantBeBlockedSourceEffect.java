@@ -23,7 +23,7 @@ public class CantBeBlockedSourceEffect extends RestrictionEffect {
         }
     }
 
-    public CantBeBlockedSourceEffect(CantBeBlockedSourceEffect effect) {
+    protected CantBeBlockedSourceEffect(final CantBeBlockedSourceEffect effect) {
         super(effect);
     }
 

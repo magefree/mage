@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
@@ -17,6 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,7 +67,7 @@ class ExertInfluenceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && sourceObject != null) {
-            int colors = new ColorsOfManaSpentToCastCount().calculate(game, source, this);
+            int colors = ColorsOfManaSpentToCastCount.instance.calculate(game, source, this);
             if (targetCreature.getPower().getValue() <= colors) {
                 game.addEffect(new GainControlTargetEffect(Duration.Custom, true), source);
             }

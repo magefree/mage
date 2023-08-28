@@ -50,7 +50,7 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public OrTriggeredAbility(OrTriggeredAbility ability) {
+    protected OrTriggeredAbility(final OrTriggeredAbility ability) {
         super(ability);
         this.ruleTrigger = ability.ruleTrigger;
         for (TriggeredAbility triggeredAbility : ability.triggeredAbilities) {

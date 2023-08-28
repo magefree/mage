@@ -8,7 +8,6 @@ import mage.game.turn.TurnMod;
 import mage.players.Player;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -20,7 +19,7 @@ public class ControlTargetPlayerNextTurnEffect extends OneShotEffect {
         staticText = "You control target player during that player's next turn. <i>(You see all cards that player could see and make all decisions for the player.)</i>";
     }
 
-    public ControlTargetPlayerNextTurnEffect(ControlTargetPlayerNextTurnEffect effect) {
+    protected ControlTargetPlayerNextTurnEffect(final ControlTargetPlayerNextTurnEffect effect) {
         super(effect);
     }
 

@@ -54,6 +54,6 @@ enum SteelExemplarCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return ColorsOfManaSpentToCastCount.getInstance().calculate(game, source, null) < 2;
+        return ColorsOfManaSpentToCastCount.instance.calculate(game, source, null) < 2;
     }
 }

@@ -25,7 +25,7 @@ public class ExileSourceCost extends CostImpl {
         this.text = "exile {this}";
     }
 
-    public ExileSourceCost(ExileSourceCost cost) {
+    private ExileSourceCost(final ExileSourceCost cost) {
         super(cost);
     }
 

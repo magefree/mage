@@ -59,7 +59,7 @@ class PrismaticEndingEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        int colors = ColorsOfManaSpentToCastCount.getInstance().calculate(game, source, this);
+        int colors = ColorsOfManaSpentToCastCount.instance.calculate(game, source, this);
         return player != null
                 && permanent != null
                 && permanent.getManaValue() <= colors
