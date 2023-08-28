@@ -17,7 +17,7 @@ public class OpponentPlaysLandTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an opponent plays a land, ");
     }
 
-    public OpponentPlaysLandTriggeredAbility(OpponentPlaysLandTriggeredAbility ability) {
+    private OpponentPlaysLandTriggeredAbility(final OpponentPlaysLandTriggeredAbility ability) {
         super(ability);
     }
 

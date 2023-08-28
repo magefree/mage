@@ -1,7 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.AttacksAloneSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -14,8 +12,13 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy
@@ -40,7 +43,7 @@ public final class GrunnTheLonelyKing extends CardImpl {
 
         //Whenever Grunn attacks alone, double its power and toughness until end of turn.
         SourcePermanentPowerCount power = new SourcePermanentPowerCount();
-        Effect effect = new BoostSourceEffect(power, SourcePermanentToughnessValue.getInstance(), Duration.EndOfTurn, true);
+        Effect effect = new BoostSourceEffect(power, SourcePermanentToughnessValue.instance, Duration.EndOfTurn, true);
         effect.setText("double its power and toughness until end of turn");
         this.addAbility(new AttacksAloneSourceTriggeredAbility(effect));
     }

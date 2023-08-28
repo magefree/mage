@@ -44,7 +44,7 @@ public final class PhenaxGodOfDeception extends CardImpl {
 
         // Creatures you control have "{T}: Target player puts the top X cards of their library into their graveyard, where X is this creature's toughness."
         Ability ability = new SimpleActivatedAbility(
-                new MillCardsTargetEffect(SourcePermanentToughnessValue.getInstance())
+                new MillCardsTargetEffect(SourcePermanentToughnessValue.instance)
                         .setText("Target player mills X cards, where X is this creature's toughness"), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(new SimpleStaticAbility(

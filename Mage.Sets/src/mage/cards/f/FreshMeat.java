@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -13,6 +12,8 @@ import mage.game.Game;
 import mage.game.permanent.token.BeastToken;
 import mage.watchers.common.CreaturesDiedWatcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author North
@@ -23,7 +24,7 @@ public final class FreshMeat extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");
 
         // Create a 3/3 green Beast creature token for each creature put into your graveyard from the battlefield this turn.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken(), new FreshMeatDynamicValue()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken(), FreshMeatDynamicValue.instance));
     }
 
     private FreshMeat(final FreshMeat card) {
@@ -36,7 +37,8 @@ public final class FreshMeat extends CardImpl {
     }
 }
 
-class FreshMeatDynamicValue implements DynamicValue {
+enum FreshMeatDynamicValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -49,7 +51,7 @@ class FreshMeatDynamicValue implements DynamicValue {
 
     @Override
     public FreshMeatDynamicValue copy() {
-        return new FreshMeatDynamicValue();
+        return this;
     }
 
     @Override

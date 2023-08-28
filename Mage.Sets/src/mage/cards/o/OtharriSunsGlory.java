@@ -59,7 +59,7 @@ public final class OtharriSunsGlory extends CardImpl {
         // Whenever Otharri, Suns' Glory attacks, you get an experience counter.
         // Then create a 2/2 red Rebel creature token that’s tapped and attacking for each experience counter you have.
         Ability ability = new AttacksTriggeredAbility(new AddCountersPlayersEffect(CounterType.EXPERIENCE.createInstance(), TargetController.YOU));
-        DynamicValue value = new OtharriSunsGloryCount();
+        DynamicValue value = OtharriSunsGloryCount.instance;
         ability.addEffect(new CreateTokenEffect(new RebelRedToken(), value, true, true).concatBy("Then"));
         this.addAbility(ability);
 
@@ -83,7 +83,8 @@ public final class OtharriSunsGlory extends CardImpl {
     }
 }
 
-class OtharriSunsGloryCount implements DynamicValue {
+enum OtharriSunsGloryCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -97,7 +98,7 @@ class OtharriSunsGloryCount implements DynamicValue {
 
     @Override
     public OtharriSunsGloryCount copy() {
-        return new OtharriSunsGloryCount();
+        return this;
     }
 
     @Override

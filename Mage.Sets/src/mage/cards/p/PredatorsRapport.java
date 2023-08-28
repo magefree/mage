@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -14,6 +13,8 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  *
  * @author LevelX2
@@ -25,7 +26,7 @@ public final class PredatorsRapport extends CardImpl {
 
 
         // Choose target creature you control. You gain life equal to that creature's power plus its toughness.
-        Effect effect = new GainLifeEffect(new TargetPermanentPowerPlusToughnessCount());
+        Effect effect = new GainLifeEffect(TargetPermanentPowerPlusToughnessCount.instance);
         effect.setText("Choose target creature you control. You gain life equal to that creature's power plus its toughness");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
@@ -41,7 +42,8 @@ public final class PredatorsRapport extends CardImpl {
     }
 }
 
-class TargetPermanentPowerPlusToughnessCount implements DynamicValue {
+enum TargetPermanentPowerPlusToughnessCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -54,7 +56,7 @@ class TargetPermanentPowerPlusToughnessCount implements DynamicValue {
 
     @Override
     public TargetPermanentPowerPlusToughnessCount copy() {
-        return new TargetPermanentPowerPlusToughnessCount();
+        return this;
     }
 
     @Override

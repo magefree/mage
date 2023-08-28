@@ -1,7 +1,6 @@
 
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -13,13 +12,11 @@ import mage.abilities.effects.common.ChooseOpponentEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,7 +35,7 @@ public final class Nyxathid extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
 
         // Nyxathid gets -1/-1 for each card in the chosen player's hand.
-        DynamicValue chosenPlayerHand = new SignInversionDynamicValue(new CardsInChosenPlayerHandCount());
+        DynamicValue chosenPlayerHand = new SignInversionDynamicValue(CardsInChosenPlayerHandCount.instance);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(chosenPlayerHand, chosenPlayerHand, Duration.WhileOnBattlefield)));
 
     }
@@ -53,7 +50,8 @@ public final class Nyxathid extends CardImpl {
     }
 }
 
-class CardsInChosenPlayerHandCount implements DynamicValue {
+enum CardsInChosenPlayerHandCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -69,7 +67,7 @@ class CardsInChosenPlayerHandCount implements DynamicValue {
 
     @Override
     public CardsInChosenPlayerHandCount copy() {
-        return new CardsInChosenPlayerHandCount();
+        return this;
     }
 
     @Override

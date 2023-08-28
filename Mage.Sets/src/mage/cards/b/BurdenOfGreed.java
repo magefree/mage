@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -15,6 +14,8 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
  *
  * @author wetterlicht
@@ -26,7 +27,7 @@ public final class BurdenOfGreed extends CardImpl {
 
         // Target player loses 1 life for each tapped artifact they control.
         getSpellAbility().addTarget(new TargetPlayer());
-        getSpellAbility().addEffect(new LoseLifeTargetEffect(new BurdenOfGreedCount()));
+        getSpellAbility().addEffect(new LoseLifeTargetEffect(BurdenOfGreedCount.instance));
 
     }
 
@@ -40,7 +41,8 @@ public final class BurdenOfGreed extends CardImpl {
     }
 }
 
-class BurdenOfGreedCount implements DynamicValue {
+enum BurdenOfGreedCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -55,7 +57,7 @@ class BurdenOfGreedCount implements DynamicValue {
 
     @Override
     public BurdenOfGreedCount copy() {
-        return new BurdenOfGreedCount();
+        return this;
     }
 
     @Override

@@ -22,7 +22,7 @@ public class ExileTopCreatureCardOfGraveyardCost extends CostImpl {
         this.text = "exile the top creature card of your graveyard";
     }
 
-    public ExileTopCreatureCardOfGraveyardCost(ExileTopCreatureCardOfGraveyardCost cost) {
+    private ExileTopCreatureCardOfGraveyardCost(final ExileTopCreatureCardOfGraveyardCost cost) {
         super(cost);
         this.amount = cost.amount;
     }

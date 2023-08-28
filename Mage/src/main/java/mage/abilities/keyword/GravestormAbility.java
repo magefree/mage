@@ -64,7 +64,7 @@ class GravestormEffect extends OneShotEffect {
         super(Outcome.Copy);
     }
 
-    GravestormEffect(final GravestormEffect effect) {
+    private GravestormEffect(final GravestormEffect effect) {
         super(effect);
     }
 
