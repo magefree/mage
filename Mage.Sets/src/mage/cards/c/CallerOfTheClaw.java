@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -23,6 +22,8 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.BearToken;
 import mage.watchers.Watcher;
 
+import java.util.UUID;
+
 /**
  *
  * @author Plopman
@@ -41,7 +42,7 @@ public final class CallerOfTheClaw extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         // When Caller of the Claw enters the battlefield, create a 2/2 green Bear creature token for each nontoken creature put into your graveyard from the battlefield this turn.
         this.getSpellAbility().addWatcher(new CallerOfTheClawWatcher());
-        Effect effect = new CreateTokenEffect(new BearToken(), new CallerOfTheClawDynamicValue());
+        Effect effect = new CreateTokenEffect(new BearToken(), CallerOfTheClawDynamicValue.instance);
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }
 
@@ -85,11 +86,12 @@ class CallerOfTheClawWatcher extends Watcher {
     }
 }
 
-class CallerOfTheClawDynamicValue implements DynamicValue {
+enum CallerOfTheClawDynamicValue implements DynamicValue {
+    instance;
 
     @Override
     public CallerOfTheClawDynamicValue copy() {
-        return new CallerOfTheClawDynamicValue();
+        return this;
     }
 
     @Override

@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -15,6 +14,8 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +59,7 @@ class CentaurOmenreaderSpellsCostReductionEffect extends SpellsCostReductionCont
         staticText = "As long as {this} is tapped, creature spells you cast cost {2} less to cast";
     }
 
-    protected CentaurOmenreaderSpellsCostReductionEffect(SpellsCostReductionControllerEffect effect) {
+    protected CentaurOmenreaderSpellsCostReductionEffect(CentaurOmenreaderSpellsCostReductionEffect effect) {
         super(effect);
     }
 

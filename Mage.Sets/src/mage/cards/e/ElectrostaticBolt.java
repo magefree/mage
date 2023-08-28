@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -14,6 +13,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
  * @author LoneFox
@@ -24,7 +25,7 @@ public final class ElectrostaticBolt extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Electrostatic Bolt deals 2 damage to target creature. If it's an artifact creature, Electrostatic Bolt deals 4 damage to it instead.
-        Effect effect = new DamageTargetEffect(new ElectrostaticBoltDamageValue());
+        Effect effect = new DamageTargetEffect(ElectrostaticBoltDamageValue.instance);
         effect.setText("{this} deals 2 damage to target creature. If it's an artifact creature, {this} deals 4 damage to it instead.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -40,7 +41,8 @@ public final class ElectrostaticBolt extends CardImpl {
     }
 }
 
-class ElectrostaticBoltDamageValue implements DynamicValue {
+enum ElectrostaticBoltDamageValue implements DynamicValue {
+    instance;
 
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
@@ -51,8 +53,8 @@ class ElectrostaticBoltDamageValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent targetPermanent = game.getPermanent(sourceAbility.getFirstTarget());
-        if(targetPermanent != null) {
-            if(filter.match(targetPermanent, game)) {
+        if (targetPermanent != null) {
+            if (filter.match(targetPermanent, game)) {
                 return 4;
             }
             return 2;
@@ -62,7 +64,7 @@ class ElectrostaticBoltDamageValue implements DynamicValue {
 
     @Override
     public ElectrostaticBoltDamageValue copy() {
-        return new ElectrostaticBoltDamageValue();
+        return this;
     }
 
     @Override

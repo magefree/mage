@@ -2,7 +2,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.watchers.common.ZuberasDiedWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class SilentChantZubera extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new DiesSourceTriggeredAbility(new GainLifeEffect(new SilentChantZuberaDynamicValue()));
+        Ability ability = new DiesSourceTriggeredAbility(new GainLifeEffect(SilentChantZuberaDynamicValue.instance));
         this.addAbility(ability, new ZuberasDiedWatcher());
     }
 
@@ -44,20 +45,21 @@ public final class SilentChantZubera extends CardImpl {
 
 }
 
-class SilentChantZuberaDynamicValue implements DynamicValue {
+enum SilentChantZuberaDynamicValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         ZuberasDiedWatcher watcher = game.getState().getWatcher(ZuberasDiedWatcher.class);
-       if(watcher != null) {
-           return watcher.getZuberasDiedThisTurn() * 2;
-       }
-       return 0;
+        if (watcher != null) {
+            return watcher.getZuberasDiedThisTurn() * 2;
+        }
+        return 0;
     }
 
     @Override
     public SilentChantZuberaDynamicValue copy() {
-        return new SilentChantZuberaDynamicValue();
+        return this;
     }
 
     @Override

@@ -47,7 +47,7 @@ public final class Necrosynthesis extends CardImpl {
 
         // When enchanted creature dies, look at the top X cards of your library, where X is its power.
         // Put one of those cards into your hand and the rest on the bottom of your library in a random order.
-        DynamicValue attachedPower = new NecrosynthesisAttachedPermanentPowerCount();
+        DynamicValue attachedPower = NecrosynthesisAttachedPermanentPowerCount.instance;
         effect = new LookLibraryAndPickControllerEffect(attachedPower, 1, PutCards.HAND, PutCards.BOTTOM_RANDOM);
         effect.setText("look at the top X cards of your library, where X is its power. " +
                 "Put one of those cards into your hand and the rest on the bottom of your library in a random order");
@@ -65,7 +65,8 @@ public final class Necrosynthesis extends CardImpl {
     }
 }
 
-class NecrosynthesisAttachedPermanentPowerCount implements DynamicValue {
+enum NecrosynthesisAttachedPermanentPowerCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -86,7 +87,7 @@ class NecrosynthesisAttachedPermanentPowerCount implements DynamicValue {
 
     @Override
     public NecrosynthesisAttachedPermanentPowerCount copy() {
-        return new NecrosynthesisAttachedPermanentPowerCount();
+        return this;
     }
 
     @Override

@@ -36,7 +36,7 @@ public final class AlphaStatus extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 for each other creature on the battlefield that shares a creature type with it.
-        DynamicValue dynamicValue = new AlphaStatusDynamicValue();
+        DynamicValue dynamicValue = AlphaStatusDynamicValue.instance;
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(dynamicValue, dynamicValue, Duration.WhileOnBattlefield)));
     }
 
@@ -50,7 +50,8 @@ public final class AlphaStatus extends CardImpl {
     }
 }
 
-class AlphaStatusDynamicValue implements DynamicValue {
+enum AlphaStatusDynamicValue implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -73,7 +74,7 @@ class AlphaStatusDynamicValue implements DynamicValue {
 
     @Override
     public AlphaStatusDynamicValue copy() {
-        return new AlphaStatusDynamicValue();
+        return this;
     }
 
     @Override

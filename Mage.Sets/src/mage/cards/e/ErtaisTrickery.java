@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -12,14 +11,15 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class ErtaisTrickery extends CardImpl {
 
     public ErtaisTrickery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Counter target spell if it was kicked.
         this.getSpellAbility().addEffect(new ErtaisTrickeryEffect());
@@ -38,12 +38,12 @@ public final class ErtaisTrickery extends CardImpl {
 
 class ErtaisTrickeryEffect extends CounterTargetEffect {
 
-    public ErtaisTrickeryEffect() {
+    ErtaisTrickeryEffect() {
         super();
         staticText = "Counter target spell if it was kicked.";
     }
 
-    public ErtaisTrickeryEffect(final CounterTargetEffect effect) {
+    private ErtaisTrickeryEffect(final ErtaisTrickeryEffect effect) {
         super(effect);
     }
 
