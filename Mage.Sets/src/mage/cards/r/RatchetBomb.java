@@ -2,7 +2,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -17,6 +16,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,42 +46,42 @@ public final class RatchetBomb extends CardImpl {
         return new RatchetBomb(this);
     }
 
-    class RatchetBombEffect extends OneShotEffect {
+}
 
-        public RatchetBombEffect() {
-            super(Outcome.DestroyPermanent);
-            staticText = "Destroy each nonland permanent with mana value equal to the number of charge counters on {this}";
-        }
+class RatchetBombEffect extends OneShotEffect {
 
-        private RatchetBombEffect(final RatchetBombEffect effect) {
-            super(effect);
-        }
+    public RatchetBombEffect() {
+        super(Outcome.DestroyPermanent);
+        staticText = "Destroy each nonland permanent with mana value equal to the number of charge counters on {this}";
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent p = game.getBattlefield().getPermanent(source.getSourceId());
+    private RatchetBombEffect(final RatchetBombEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent p = game.getBattlefield().getPermanent(source.getSourceId());
+        if (p == null) {
+            p = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             if (p == null) {
-                p = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-                if (p == null) {
-                    return false;
-                }
+                return false;
             }
-
-            int count = p.getCounters(game).getCount(CounterType.CHARGE);
-            for (Permanent perm: game.getBattlefield().getAllActivePermanents()) {
-                if (perm.getManaValue() == count && !(perm.isLand(game))) {
-                    perm.destroy(source, game, false);
-                }
-            }
-
-            return true;
         }
 
-        @Override
-        public RatchetBombEffect copy() {
-            return new RatchetBombEffect(this);
+        int count = p.getCounters(game).getCount(CounterType.CHARGE);
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
+            if (perm.getManaValue() == count && !(perm.isLand(game))) {
+                perm.destroy(source, game, false);
+            }
         }
 
+        return true;
+    }
+
+    @Override
+    public RatchetBombEffect copy() {
+        return new RatchetBombEffect(this);
     }
 
 }

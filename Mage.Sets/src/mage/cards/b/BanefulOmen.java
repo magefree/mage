@@ -36,78 +36,79 @@ public final class BanefulOmen extends CardImpl {
         return new BanefulOmen(this);
     }
 
-    class BanefulOmenTriggeredAbility extends TriggeredAbilityImpl {
+}
 
-        BanefulOmenTriggeredAbility() {
-            super(Zone.BATTLEFIELD, new BanefulOmenEffect(), true);
-        }
+class BanefulOmenTriggeredAbility extends TriggeredAbilityImpl {
 
-        private BanefulOmenTriggeredAbility(BanefulOmenTriggeredAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public BanefulOmenTriggeredAbility copy() {
-            return new BanefulOmenTriggeredAbility(this);
-        }
-
-        @Override
-        public boolean checkEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            return event.getPlayerId().equals(this.controllerId);
-        }
-
-        @Override
-        public String getRule() {
-            return "At the beginning of your end step, you may reveal the top card of your library. If you do, each opponent loses life equal to that card's mana value.";
-        }
+    BanefulOmenTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new BanefulOmenEffect(), true);
     }
 
-    static class BanefulOmenEffect extends OneShotEffect {
+    private BanefulOmenTriggeredAbility(final BanefulOmenTriggeredAbility ability) {
+        super(ability);
+    }
 
-        BanefulOmenEffect() {
-            super(Outcome.Benefit);
+    @Override
+    public BanefulOmenTriggeredAbility copy() {
+        return new BanefulOmenTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.END_TURN_STEP_PRE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getPlayerId().equals(this.controllerId);
+    }
+
+    @Override
+    public String getRule() {
+        return "At the beginning of your end step, you may reveal the top card of your library. If you do, each opponent loses life equal to that card's mana value.";
+    }
+}
+
+class BanefulOmenEffect extends OneShotEffect {
+
+    BanefulOmenEffect() {
+        super(Outcome.Benefit);
+    }
+
+    private BanefulOmenEffect(final BanefulOmenEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
         }
-
-        private BanefulOmenEffect(final BanefulOmenEffect effect) {
-            super(effect);
+        if (!player.getLibrary().hasCards()) {
+            return false;
         }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player == null) {
-                return false;
-            }
-            if (!player.getLibrary().hasCards()) {
-                return false;
-            }
-            Card card = player.getLibrary().getFromTop(game);
-            if (card == null) {
-                return false;
-            }
-            Cards cards = new CardsImpl(card);
-            player.revealCards("Baneful Omen", cards, game);
-
-
-            int loseLife = card.getManaValue();
-            Set<UUID> opponents = game.getOpponents(source.getControllerId());
-            for (UUID opponentUuid : opponents) {
-                Player opponent = game.getPlayer(opponentUuid);
-                if (opponent != null) {
-                    opponent.loseLife(loseLife, game, source, false);
-                }
-            }
-            return true;
+        Card card = player.getLibrary().getFromTop(game);
+        if (card == null) {
+            return false;
         }
+        Cards cards = new CardsImpl(card);
+        player.revealCards("Baneful Omen", cards, game);
 
-        @Override
-        public BanefulOmenEffect copy() {
-            return new BanefulOmenEffect(this);
+
+        int loseLife = card.getManaValue();
+        Set<UUID> opponents = game.getOpponents(source.getControllerId());
+        for (UUID opponentUuid : opponents) {
+            Player opponent = game.getPlayer(opponentUuid);
+            if (opponent != null) {
+                opponent.loseLife(loseLife, game, source, false);
+            }
         }
+        return true;
+    }
+
+    @Override
+    public BanefulOmenEffect copy() {
+        return new BanefulOmenEffect(this);
     }
 }

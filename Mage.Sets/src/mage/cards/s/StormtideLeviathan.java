@@ -59,35 +59,36 @@ public final class StormtideLeviathan extends CardImpl {
         return new StormtideLeviathan(this);
     }
 
-    class StormtideLeviathanEffect extends ContinuousEffectImpl {
+}
 
-        private StormtideLeviathanEffect() {
-            super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
-            staticText = "All lands are Islands in addition to their other types";
-            this.dependencyTypes.add(DependencyType.BecomeIsland);
-        }
+class StormtideLeviathanEffect extends ContinuousEffectImpl {
 
-        private StormtideLeviathanEffect(final StormtideLeviathanEffect effect) {
-            super(effect);
-        }
+    StormtideLeviathanEffect() {
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
+        staticText = "All lands are Islands in addition to their other types";
+        this.dependencyTypes.add(DependencyType.BecomeIsland);
+    }
 
-        @Override
-        public StormtideLeviathanEffect copy() {
-            return new StormtideLeviathanEffect(this);
-        }
+    private StormtideLeviathanEffect(final StormtideLeviathanEffect effect) {
+        super(effect);
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            for (Permanent land : game.getBattlefield().getActivePermanents(
-                    StaticFilters.FILTER_LAND, source.getControllerId(), game
-            )) {
-                // land abilities are intrinsic, so add them here, not in layer 6
-                land.addSubType(game, SubType.ISLAND);
-                if (!land.getAbilities(game).containsClass(BlueManaAbility.class)) {
-                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
-                }
+    @Override
+    public StormtideLeviathanEffect copy() {
+        return new StormtideLeviathanEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Permanent land : game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_LAND, source.getControllerId(), game
+        )) {
+            // land abilities are intrinsic, so add them here, not in layer 6
+            land.addSubType(game, SubType.ISLAND);
+            if (!land.getAbilities(game).containsClass(BlueManaAbility.class)) {
+                land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
             }
-            return true;
         }
+        return true;
     }
 }

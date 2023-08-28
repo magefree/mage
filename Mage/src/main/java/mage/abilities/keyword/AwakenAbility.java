@@ -29,12 +29,10 @@ import java.util.UUID;
  */
 public class AwakenAbility extends SpellAbility {
 
-    private static final Logger logger = Logger.getLogger(AwakenAbility.class);
+    private static final String filterMessage = "a land you control to awake";
 
-    private static String filterMessage = "a land you control to awake";
-
-    private String rule;
-    private int awakenValue;
+    private final String rule;
+    private final int awakenValue;
 
     public AwakenAbility(Card card, int awakenValue, String awakenCosts) {
         super(card.getSpellAbility());
@@ -48,7 +46,7 @@ public class AwakenAbility extends SpellAbility {
         this.addManaCost(new ManaCostsImpl<>(awakenCosts));
 
         this.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent(filterMessage)));
-        this.addEffect(new AwakenEffect());
+        this.addEffect(new AwakenEffect(awakenValue));
         this.awakenValue = awakenValue;
         rule = "Awaken " + awakenValue + "&mdash;" + awakenCosts
                 + " <i>(If you cast this spell for " + awakenCosts + ", also put "
@@ -77,61 +75,68 @@ public class AwakenAbility extends SpellAbility {
         return rule;
     }
 
-    class AwakenEffect extends OneShotEffect {
+}
 
-        private AwakenEffect() {
-            super(Outcome.BoostCreature);
-            this.staticText = "put " + CardUtil.numberToText(awakenValue, "a") + " +1/+1 counters on target land you control";
-        }
+class AwakenEffect extends OneShotEffect {
 
-        protected AwakenEffect(final AwakenEffect effect) {
-            super(effect);
-        }
+    private static final Logger logger = Logger.getLogger(AwakenEffect.class);
 
-        @Override
-        public AwakenEffect copy() {
-            return new AwakenEffect(this);
-        }
+    private final int awakenValue;
+    private static final String filterMessage = "a land you control to awake";
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            UUID targetId = null;
-            if (source != null && source.getTargets() != null) {
-                for (Target target : source.getTargets()) {
-                    if (target.getFilter() != null && target.getFilter().getMessage().equals(filterMessage)) {
-                        targetId = target.getFirstTarget();
-                    }
-                }
-                if (targetId != null) {
-                    FixedTarget fixedTarget = new FixedTarget(targetId, game);
-                    ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new AwakenElementalToken(), false, true, Duration.Custom);
-                    continuousEffect.setTargetPointer(fixedTarget);
-                    game.addEffect(continuousEffect, source);
-                    Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(awakenValue));
-                    effect.setTargetPointer(fixedTarget);
-                    return effect.apply(game, source);
-                }
-            } else // source should never be null, but we are seeing a lot of NPEs from this section
-                if (source == null) {
-                    logger.fatal("Source was null in AwakenAbility: Create a bug report or fix the source code");
-                } else if (source.getTargets() == null) {
-                    MageObject sourceObj = source.getSourceObject(game);
-                    if (sourceObj != null) {
-                        Class<? extends MageObject> sourceClass = sourceObj.getClass();
-                        if (sourceClass != null) {
-                            logger.fatal("getTargets was null in AwakenAbility for " + sourceClass.toString() + " : Create a bug report or fix the source code");
-                        }
-                    }
-                }
-            return true;
-        }
+    AwakenEffect(int awakenValue) {
+        super(Outcome.BoostCreature);
+        this.awakenValue = awakenValue;
+        this.staticText = "put " + CardUtil.numberToText(awakenValue, "a") + " +1/+1 counters on target land you control";
     }
 
+    protected AwakenEffect(final AwakenEffect effect) {
+        super(effect);
+        this.awakenValue = effect.awakenValue;
+    }
+
+    @Override
+    public AwakenEffect copy() {
+        return new AwakenEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        UUID targetId = null;
+        if (source != null && source.getTargets() != null) {
+            for (Target target : source.getTargets()) {
+                if (target.getFilter() != null && target.getFilter().getMessage().equals(filterMessage)) {
+                    targetId = target.getFirstTarget();
+                }
+            }
+            if (targetId != null) {
+                FixedTarget fixedTarget = new FixedTarget(targetId, game);
+                ContinuousEffect continuousEffect = new BecomesCreatureTargetEffect(new AwakenElementalToken(), false, true, Duration.Custom);
+                continuousEffect.setTargetPointer(fixedTarget);
+                game.addEffect(continuousEffect, source);
+                Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(awakenValue));
+                effect.setTargetPointer(fixedTarget);
+                return effect.apply(game, source);
+            }
+        } else // source should never be null, but we are seeing a lot of NPEs from this section
+            if (source == null) {
+                logger.fatal("Source was null in AwakenAbility: Create a bug report or fix the source code");
+            } else if (source.getTargets() == null) {
+                MageObject sourceObj = source.getSourceObject(game);
+                if (sourceObj != null) {
+                    Class<? extends MageObject> sourceClass = sourceObj.getClass();
+                    if (sourceClass != null) {
+                        logger.fatal("getTargets was null in AwakenAbility for " + sourceClass.toString() + " : Create a bug report or fix the source code");
+                    }
+                }
+            }
+        return true;
+    }
 }
 
 class AwakenElementalToken extends TokenImpl {
 
-    public AwakenElementalToken() {
+    AwakenElementalToken() {
         super("", "0/0 Elemental creature with haste");
         this.cardType.add(CardType.CREATURE);
 
@@ -142,7 +147,7 @@ class AwakenElementalToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    protected AwakenElementalToken(final AwakenElementalToken token) {
+    private AwakenElementalToken(final AwakenElementalToken token) {
         super(token);
     }
 

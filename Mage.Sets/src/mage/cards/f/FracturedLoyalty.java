@@ -1,6 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTargetAttachedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -18,6 +17,8 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -94,4 +95,43 @@ class FracturedLoyaltyEffect extends OneShotEffect {
         return new FracturedLoyaltyEffect(this);
     }
 
+}
+
+class FracturedLoyaltyTriggeredAbility extends TriggeredAbilityImpl {
+
+    public FracturedLoyaltyTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new FracturedLoyaltyEffect(), false);
+    }
+
+    private FracturedLoyaltyTriggeredAbility(final FracturedLoyaltyTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public FracturedLoyaltyTriggeredAbility copy() {
+        return new FracturedLoyaltyTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TARGETED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(this.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
+            if (enchantedCreature != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever enchanted creature becomes the target of a spell or ability, that spell or ability's controller gains control of that creature.";
+    }
 }
