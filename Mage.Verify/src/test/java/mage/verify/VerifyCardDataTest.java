@@ -1735,27 +1735,27 @@ public class VerifyCardDataTest {
 
                             boolean doFieldRecurse = true;
                             if (class1 == CardImpl.class) {
-                                if (field1.getName() == "spellAbility") {
+                                if (field1.getName().equals("spellAbility")) {
                                     compareClassRecursive(((CardImpl) obj1).getSpellAbility(), ((CardImpl) obj2).getSpellAbility(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
                                     hasSpellAbilityField = true;
-                                } else if (field1.getName() == "meldsToCard") {
+                                } else if (field1.getName().equals("meldsToCard")) {
                                     compareClassRecursive(((CardImpl) obj1).getMeldsToCard(), ((CardImpl) obj2).getMeldsToCard(), originalCard, msg + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
                                     hasMeldField = true;
-                                } else if (field1.getName() == "secondSideCard") {
+                                } else if (field1.getName().equals("secondSideCard")) {
                                     compareClassRecursive(((CardImpl) obj1).getSecondCardFace(), ((CardImpl) obj2).getSecondCardFace(), originalCard, msg + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
                                     hasSecondSideCardField = true;
                                 }
                             }
                             if (class1 == AbilityImpl.class) {
-                                if (field1.getName() == "watchers") {
+                                if (field1.getName().equals("watchers")) {
                                     // Watchers are only used on initialization, they are not copied.
                                     doFieldRecurse = false;
                                     hasWatchersField = true;
                                 }
-                                if (field1.getName() == "modes") {
+                                if (field1.getName().equals("modes")) {
                                     //compareClassRecursive(((AbilityImpl) obj1).getModes(), ((AbilityImpl) obj2).getModes(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1);
                                     compareClassRecursive(((AbilityImpl) obj1).getEffects(), ((AbilityImpl) obj2).getEffects(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
