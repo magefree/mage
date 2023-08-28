@@ -133,9 +133,9 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
         ability.getAllEffects().setValue("ConspireActivation" + conspireId + addedById, true);
         for (Cost cost : (Costs<Cost>) conspireCost) {
             if (cost instanceof ManaCostsImpl) {
-                ability.getManaCostsToPay().add((ManaCostsImpl<?>) cost.copy());
+                ability.addManaCostsToPay((ManaCostsImpl<?>) cost.copy());
             } else {
-                ability.getCosts().add(cost.copy());
+                ability.addCost(cost.copy());
             }
         }
     }

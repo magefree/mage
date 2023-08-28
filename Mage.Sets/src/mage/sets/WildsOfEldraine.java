@@ -24,6 +24,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Agatha of the Vile Cauldron", 199, Rarity.MYTHIC, mage.cards.a.AgathaOfTheVileCauldron.class));
         cards.add(new SetCardInfo("Agatha's Champion", 160, Rarity.UNCOMMON, mage.cards.a.AgathasChampion.class));
         cards.add(new SetCardInfo("Agatha's Soul Cauldron", 242, Rarity.MYTHIC, mage.cards.a.AgathasSoulCauldron.class));
+        cards.add(new SetCardInfo("Aquatic Alchemist", 40, Rarity.COMMON, mage.cards.a.AquaticAlchemist.class));
         cards.add(new SetCardInfo("Archive Dragon", 41, Rarity.UNCOMMON, mage.cards.a.ArchiveDragon.class));
         cards.add(new SetCardInfo("Archon of the Wild Rose", 1, Rarity.RARE, mage.cards.a.ArchonOfTheWildRose.class));
         cards.add(new SetCardInfo("Archon's Glory", 2, Rarity.COMMON, mage.cards.a.ArchonsGlory.class));
@@ -90,6 +91,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Faunsbane Troll", 203, Rarity.RARE, mage.cards.f.FaunsbaneTroll.class));
         cards.add(new SetCardInfo("Feed the Cauldron", 91, Rarity.COMMON, mage.cards.f.FeedTheCauldron.class));
         cards.add(new SetCardInfo("Fell Horseman", 92, Rarity.COMMON, mage.cards.f.FellHorseman.class));
+        cards.add(new SetCardInfo("Feral Encounter", 169, Rarity.RARE, mage.cards.f.FeralEncounter.class));
         cards.add(new SetCardInfo("Ferocious Werefox", 170, Rarity.COMMON, mage.cards.f.FerociousWerefox.class));
         cards.add(new SetCardInfo("Flick a Coin", 128, Rarity.COMMON, mage.cards.f.FlickACoin.class));
         cards.add(new SetCardInfo("Food Coma", 308, Rarity.UNCOMMON, mage.cards.f.FoodComa.class));
@@ -275,9 +277,11 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Up the Beanstalk", 195, Rarity.UNCOMMON, mage.cards.u.UpTheBeanstalk.class));
         cards.add(new SetCardInfo("Vantress Transmuter", 75, Rarity.COMMON, mage.cards.v.VantressTransmuter.class));
         cards.add(new SetCardInfo("Verdant Outrider", 196, Rarity.COMMON, mage.cards.v.VerdantOutrider.class));
+        cards.add(new SetCardInfo("Virtue of Courage", 157, Rarity.MYTHIC, mage.cards.v.VirtueOfCourage.class));
         cards.add(new SetCardInfo("Virtue of Knowledge", 76, Rarity.MYTHIC, mage.cards.v.VirtueOfKnowledge.class));
         cards.add(new SetCardInfo("Virtue of Loyalty", 38, Rarity.MYTHIC, mage.cards.v.VirtueOfLoyalty.class));
         cards.add(new SetCardInfo("Virtue of Persistence", 115, Rarity.MYTHIC, mage.cards.v.VirtueOfPersistence.class));
+        cards.add(new SetCardInfo("Virtue of Strength", 197, Rarity.MYTHIC, mage.cards.v.VirtueOfStrength.class));
         cards.add(new SetCardInfo("Voracious Vermin", 116, Rarity.COMMON, mage.cards.v.VoraciousVermin.class));
         cards.add(new SetCardInfo("Warehouse Tabby", 117, Rarity.COMMON, mage.cards.w.WarehouseTabby.class));
         cards.add(new SetCardInfo("Water Wings", 77, Rarity.COMMON, mage.cards.w.WaterWings.class));

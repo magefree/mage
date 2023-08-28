@@ -50,7 +50,7 @@ class DefenseGridCostModificationEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        spellAbility.getManaCostsToPay().add(new GenericManaCost(3));
+        spellAbility.addManaCostsToPay(new GenericManaCost(3));
         return true;
     }
 

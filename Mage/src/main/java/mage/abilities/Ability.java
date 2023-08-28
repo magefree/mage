@@ -102,6 +102,18 @@ public interface Ability extends Controllable, Serializable {
      */
     void setSourceId(UUID sourceID);
 
+    default void clearCosts() {
+        getCosts().clear();
+    }
+
+    default void clearManaCosts() {
+        getManaCosts().clear();
+    }
+
+    default void clearManaCostsToPay() {
+        getManaCostsToPay().clear();
+    }
+
     /**
      * Gets all {@link Costs} associated with this ability.
      *
@@ -150,6 +162,8 @@ public interface Ability extends Controllable, Serializable {
      * @param cost The {@link ManaCost} to add.
      */
     void addManaCost(ManaCost cost);
+
+    void addManaCostsToPay(ManaCost manaCost);
 
     /**
      * Retrieves the effects that are put into the place by the resolution of

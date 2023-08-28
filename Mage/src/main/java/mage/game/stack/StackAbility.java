@@ -394,7 +394,13 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void addManaCost(ManaCost cost) {
+    public void addManaCost(ManaCost manaCost) {
+        // Do nothing
+    }
+
+    @Override
+    public void addManaCostsToPay(ManaCost manaCost) {
+        // Do nothing
     }
 
     @Override
