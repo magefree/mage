@@ -34,7 +34,7 @@ public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
     }
 
     @Override
-    public BeginningOfUpkeepTriggeredAbility copy() {
+    public VanishingUpkeepAbility copy() {
         return new VanishingUpkeepAbility(this);
     }
 

@@ -15,7 +15,7 @@ public class AttacksEachCombatStaticAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield, true));
     }
 
-    public AttacksEachCombatStaticAbility(AttacksEachCombatStaticAbility ability) {
+    protected AttacksEachCombatStaticAbility(AttacksEachCombatStaticAbility ability) {
         super(ability);
     }
 

@@ -31,7 +31,7 @@ public class StriveAbility extends SimpleStaticAbility {
     }
 
     @Override
-    public SimpleStaticAbility copy() {
+    public StriveAbility copy() {
         return new StriveAbility(this);
     }
 

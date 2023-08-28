@@ -55,7 +55,7 @@ public class FadingAbility extends EntersBattlefieldAbility {
     }
 
     @Override
-    public EntersBattlefieldAbility copy() {
+    public FadingAbility copy() {
         return new FadingAbility(this);
     }
 

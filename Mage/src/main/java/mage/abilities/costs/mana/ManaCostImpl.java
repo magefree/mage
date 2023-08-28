@@ -46,6 +46,9 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     }
 
     @Override
+    abstract public ManaCostImpl copy();
+
+    @Override
     public Mana getPayment() {
         return payment;
     }

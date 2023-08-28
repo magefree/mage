@@ -39,7 +39,7 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         this.staticText = text;
     }
 
-    public ConditionalOneShotEffect(ConditionalOneShotEffect effect) {
+    protected ConditionalOneShotEffect(final ConditionalOneShotEffect effect) {
         super(effect);
         this.effects.addAll(effect.effects.copy());
         this.otherwiseEffects.addAll(effect.otherwiseEffects.copy());

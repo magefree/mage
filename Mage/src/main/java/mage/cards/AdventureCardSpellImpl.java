@@ -77,7 +77,7 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
     }
 
     @Override
-    public AdventureCardSpell copy() {
+    public AdventureCardSpellImpl copy() {
         return new AdventureCardSpellImpl(this);
     }
 
@@ -155,7 +155,7 @@ class AdventureCardSpellAbility extends SpellAbility {
     }
 
     @Override
-    public SpellAbility copy() {
+    public AdventureCardSpellAbility copy() {
         return new AdventureCardSpellAbility(this);
     }
 }

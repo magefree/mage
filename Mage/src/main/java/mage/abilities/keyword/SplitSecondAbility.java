@@ -30,13 +30,13 @@ public class SplitSecondAbility extends SimpleStaticAbility  {
         return "Split second <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
     }
 
-    public SplitSecondAbility(SplitSecondAbility ability) {
+    protected SplitSecondAbility(final SplitSecondAbility ability) {
         super(ability);
     }
 
     @Override
-    public SimpleStaticAbility copy() {
-          return new SplitSecondAbility(this);
+    public SplitSecondAbility copy() {
+        return new SplitSecondAbility(this);
     }
 }
 

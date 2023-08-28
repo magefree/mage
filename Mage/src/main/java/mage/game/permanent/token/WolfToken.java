@@ -24,7 +24,7 @@ public final class WolfToken extends TokenImpl {
     }
 
     @Override
-    public Token copy() {
+    public WolfToken copy() {
         return new WolfToken(this);
     }
 }
