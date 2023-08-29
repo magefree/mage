@@ -17,7 +17,9 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -163,40 +165,33 @@ class ExtraordinaryJourneyTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
+        EntersTheBattlefieldEvent zEvent = (EntersTheBattlefieldEvent) event;
         if(zEvent == null){
             return false;
         }
 
-        Set<Card> cards = zEvent.getCards();
-        if(cards == null || zEvent.getToZone() != Zone.BATTLEFIELD) {
+        Permanent permanent = zEvent.getTarget();
+        if(permanent == null || !permanent.isCreature(game)) {
             return false;
         }
 
         Zone fromZone = zEvent.getFromZone();
+        if(fromZone == Zone.EXILED) {
+            // Directly from exile
+            return true;
+        }
 
-        for(Card card: cards) {
-            if(!card.isCreature(game)) {
-                continue;
-            }
-
-            if(fromZone == Zone.EXILED) {
-                // Found one creature, and the cards were from exile.
+        if(fromZone == Zone.STACK) {
+            // Get spell in the stack.
+            Spell spell = game.getSpellOrLKIStack(permanent.getId());
+            if(spell != null && spell.getFromZone() == Zone.EXILED) {
+                // Creature was cast from exile
                 return true;
-            }
-
-            if(fromZone == Zone.STACK) {
-                // Get spell in the stack.
-                Spell spell = game.getSpellOrLKIStack(card.getId());
-                if(spell != null && spell.getFromZone() == Zone.EXILED) {
-                    // Found one creature, that was cast from exile.
-                    return true;
-                }
             }
         }
 
