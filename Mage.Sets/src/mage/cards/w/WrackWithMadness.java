@@ -44,7 +44,7 @@ class WrackWithMadnessEffect extends OneShotEffect {
         this.staticText = "Target creature deals damage to itself equal to its power";
     }
 
-    public WrackWithMadnessEffect(final WrackWithMadnessEffect effect) {
+    private WrackWithMadnessEffect(final WrackWithMadnessEffect effect) {
         super(effect);
     }
 

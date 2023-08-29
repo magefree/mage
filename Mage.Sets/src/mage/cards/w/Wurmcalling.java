@@ -44,7 +44,7 @@ class WurmcallingEffect extends OneShotEffect {
         staticText = "Create an X/X green Wurm creature token";
     }
 
-    public WurmcallingEffect(WurmcallingEffect ability) {
+    private WurmcallingEffect(final WurmcallingEffect ability) {
         super(ability);
     }
 

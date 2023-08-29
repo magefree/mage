@@ -39,7 +39,7 @@ public final class WallOfReverence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WallOfReverence (final WallOfReverence card) {
+    private WallOfReverence(final WallOfReverence card) {
         super(card);
     }
 

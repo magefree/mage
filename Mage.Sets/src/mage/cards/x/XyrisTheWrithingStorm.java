@@ -58,7 +58,7 @@ class XyrisTheWrithingStormCombatDamageEffect extends OneShotEffect {
         this.staticText = "you and that player each draw that many cards.";
     }
 
-    public XyrisTheWrithingStormCombatDamageEffect(final XyrisTheWrithingStormCombatDamageEffect effect) {
+    private XyrisTheWrithingStormCombatDamageEffect(final XyrisTheWrithingStormCombatDamageEffect effect) {
         super(effect);
     }
 

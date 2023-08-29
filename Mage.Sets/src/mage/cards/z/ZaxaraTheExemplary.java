@@ -67,7 +67,7 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you cast a spell with {X} in its mana cost");
     }
 
-    public ZaxaraTheExemplaryHydraTokenAbility(final ZaxaraTheExemplaryHydraTokenAbility ability) {
+    private ZaxaraTheExemplaryHydraTokenAbility(final ZaxaraTheExemplaryHydraTokenAbility ability) {
         super(ability);
     }
 

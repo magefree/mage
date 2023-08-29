@@ -55,7 +55,7 @@ class WitchbaneOrbEffect extends OneShotEffect {
         staticText = "destroy all Curses attached to you";
     }
 
-    public WitchbaneOrbEffect(final WitchbaneOrbEffect effect) {
+    private WitchbaneOrbEffect(final WitchbaneOrbEffect effect) {
         super(effect);
     }
 

@@ -48,7 +48,7 @@ class WordsOfWildingEffect extends ReplacementEffectImpl {
         staticText = "The next time you would draw a card this turn, create a 2/2 green Bear creature token instead";
     }
 
-    public WordsOfWildingEffect(final WordsOfWildingEffect effect) {
+    private WordsOfWildingEffect(final WordsOfWildingEffect effect) {
         super(effect);
     }
 

@@ -47,7 +47,7 @@ class XenograftAddSubtypeEffect extends ContinuousEffectImpl {
         staticText = "Each creature you control is the chosen type in addition to its other types";
     }
 
-    public XenograftAddSubtypeEffect(final XenograftAddSubtypeEffect effect) {
+    private XenograftAddSubtypeEffect(final XenograftAddSubtypeEffect effect) {
         super(effect);
     }
 
