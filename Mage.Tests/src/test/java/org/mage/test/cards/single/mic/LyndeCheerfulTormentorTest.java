@@ -116,6 +116,9 @@ public class LyndeCheerfulTormentorTest extends CardTestPlayerBase {
         // Do not use Lynde's ability on upkeep
         setChoice(playerB, false);
 
+        // Player B took one damage from Player A's curse
+        checkLife("Turn 2 Upkeep", 2, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 1);
+
         // Player B casts the copy spell, choosing to copy the curse and enchant player A
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, copy);
         setChoice(playerB, true);
@@ -140,6 +143,10 @@ public class LyndeCheerfulTormentorTest extends CardTestPlayerBase {
         setChoice(playerB, true);
         setChoice(playerB, curse);
 
+        // At the beginning of turn 4, player B should have two triggers
+        setChoice(playerB, "At the beginning of enchanted");
+        setChoice(playerB, false);
+
         setStopAt(4, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
@@ -147,8 +154,7 @@ public class LyndeCheerfulTormentorTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, curse, 1);
         assertPermanentCount(playerB, curse, 1);
 
-        // Player A's curse has been attached to Player B for 2 upkeeps, and Player B's curse has been attached to them for 1 upkeep
-        assertLife(playerB, 20 - 2 - 1);
         assertLife(playerA, 20);
+        assertLife(playerB, 20 - 2);
     }
 }
