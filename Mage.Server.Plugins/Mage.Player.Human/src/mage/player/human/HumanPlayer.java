@@ -7,6 +7,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -53,6 +54,7 @@ import java.util.List;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static mage.constants.PlayerAction.REQUEST_AUTO_ANSWER_RESET_ALL;
 import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
@@ -1307,6 +1309,7 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         String autoOrderRuleText = null;
+        Ability autoOrderAbility = null;
         boolean autoOrderUse = getControllingPlayersUserData(game).isAutoOrderTrigger();
         while (canRespond()) {
             // try to set trigger auto order
@@ -1332,8 +1335,27 @@ public class HumanPlayer extends PlayerImpl {
                 if (autoOrderUse) {
                     if (autoOrderRuleText == null) {
                         autoOrderRuleText = rule;
+                        autoOrderAbility = ability;
                     } else if (!rule.equals(autoOrderRuleText)) {
                         autoOrderUse = false;
+                    } else {
+                        Effects effects1 = autoOrderAbility.getEffects();
+                        Effects effects2 = ability.getEffects();
+
+                        if (effects1.size() != effects2.size()) {
+                            autoOrderUse = false;
+                        } else {
+                            for (int i = 0; i < effects1.size(); i++) {
+                                List<UUID> targets1 = effects1.get(i).getTargetPointer().getTargets(game,
+                                        autoOrderAbility);
+                                List<UUID> targets2 = effects2.get(i).getTargetPointer().getTargets(game, ability);
+
+                                if (!targets1.equals(targets2)) {
+                                    autoOrderUse = false;
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
                 abilitiesWithNoOrderSet.add(ability);
