@@ -32,6 +32,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bear Umbra", 121, Rarity.RARE, mage.cards.b.BearUmbra.class));
         cards.add(new SetCardInfo("Bojuka Bog", 152, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Brazen Borrower", 85, Rarity.MYTHIC, mage.cards.b.BrazenBorrower.class));
+        cards.add(new SetCardInfo("Brenard, Ginger Sculptor", 27, Rarity.MYTHIC, mage.cards.b.BrenardGingerSculptor.class));
         cards.add(new SetCardInfo("Canopy Vista", 153, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Careful Cultivation", 122, Rarity.COMMON, mage.cards.c.CarefulCultivation.class));
         cards.add(new SetCardInfo("Castle Ardenvale", 154, Rarity.RARE, mage.cards.c.CastleArdenvale.class));
