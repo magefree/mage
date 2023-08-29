@@ -10,6 +10,7 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
@@ -37,7 +38,7 @@ public final class DescendantsFury extends CardImpl {
                         new DescendantsFuryEffect(),
                         new DescendantsFurySacrificeCost()
                 ),
-                true
+                SetTargetPointer.PLAYER
         );
 
         ability.addWatcher(new DamagedPlayerThisCombatWatcher());

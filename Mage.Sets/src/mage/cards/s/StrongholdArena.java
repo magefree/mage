@@ -37,7 +37,7 @@ public final class StrongholdArena extends CardImpl {
         // Whenever one or more creatures you control deal combat damage to a player, you may reveal the top card of your library and put it into your hand.
         // If you do, you lose life equal to its mana value.
         this.addAbility(new DealCombatDamageControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new StrongholdArenaDrawEffect(), false, false, true
+                Zone.BATTLEFIELD, new StrongholdArenaDrawEffect(), true
         ));
     }
 
