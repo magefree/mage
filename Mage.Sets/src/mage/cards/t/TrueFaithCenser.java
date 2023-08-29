@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ import mage.constants.*;
  */
 public final class TrueFaithCenser extends CardImpl {
 
-    private static final String staticText = "As long as equipped creature is a Human, it gets an addtional +1/+0";
+    private static final String staticText = "As long as equipped creature is a Human, it gets an additional +1/+0";
 
     public TrueFaithCenser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

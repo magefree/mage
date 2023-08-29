@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -31,7 +30,7 @@ public final class InquisitionOfKozilek extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
     }
 
     private InquisitionOfKozilek(final InquisitionOfKozilek card) {

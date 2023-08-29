@@ -9,7 +9,6 @@ import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -48,7 +47,7 @@ public final class KjeldoranEliteGuard extends CardImpl {
     private KjeldoranEliteGuard(final KjeldoranEliteGuard card) { super(card); }
 
     @Override
-    public Card copy() {
+    public KjeldoranEliteGuard copy() {
         return new KjeldoranEliteGuard(this);
     }
 }

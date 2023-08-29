@@ -1,24 +1,24 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CreateTokenControllerTargetPermanentEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.PowerstoneToken;
 import mage.target.common.TargetNonlandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,6 +38,7 @@ public final class CityscapeLeveler extends CardImpl {
 
         // When you cast this spell and whenever Cityscape Leveler attacks, destroy up to one target nonland permanent. Its controller creates a tapped Powerstone token.
         Ability ability = new CityscapeLevelerAbility();
+        ability.addEffect(new CreateTokenControllerTargetPermanentEffect(new PowerstoneToken(), 1, true));
         ability.addTarget(new TargetNonlandPermanent(0, 1));
         this.addAbility(ability);
 
@@ -58,7 +59,7 @@ public final class CityscapeLeveler extends CardImpl {
 class CityscapeLevelerAbility extends TriggeredAbilityImpl {
 
     public CityscapeLevelerAbility() {
-        super(Zone.ALL, new CityscapeLevelerEffect());
+        super(Zone.ALL, new DestroyTargetEffect());
         setTriggerPhrase("When you cast this spell and whenever {this} attacks, ");
     }
 
@@ -95,34 +96,5 @@ class CityscapeLevelerAbility extends TriggeredAbilityImpl {
             default:
                 return false;
         }
-    }
-}
-
-class CityscapeLevelerEffect extends OneShotEffect {
-
-    public CityscapeLevelerEffect() {
-        super(Outcome.DestroyPermanent);
-        this.staticText = "destroy up to one target nonland permanent. Its controller creates a tapped Powerstone token.";
-    }
-
-    private CityscapeLevelerEffect(final CityscapeLevelerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CityscapeLevelerEffect copy() {
-        return new CityscapeLevelerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null) {
-            return false;
-        }
-        UUID controllerId = permanent.getControllerId();
-        permanent.destroy(source, game);
-        new PowerstoneToken().putOntoBattlefield(1, game, source, controllerId, true, false);
-        return true;
     }
 }

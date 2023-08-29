@@ -2,7 +2,6 @@ package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.choices.Choice;
@@ -80,7 +79,7 @@ public class BecomesChosenCreatureTypeTargetEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public BecomesChosenCreatureTypeTargetEffect copy() {
         return new BecomesChosenCreatureTypeTargetEffect(this);
     }
 

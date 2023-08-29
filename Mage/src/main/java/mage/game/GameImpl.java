@@ -65,11 +65,7 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.util.CardUtil;
-import mage.util.GameLog;
-import mage.util.MessageToClient;
-import mage.util.MultiAmountMessage;
-import mage.util.RandomUtil;
+import mage.util.*;
 import mage.util.functions.CopyApplier;
 import mage.watchers.Watcher;
 import mage.watchers.common.*;
@@ -1269,7 +1265,7 @@ public abstract class GameImpl implements Game {
                 player.initLife(this.getStartingLife());
             }
             if (!gameOptions.testMode) {
-                player.drawCards(startingHandSize, null, this);
+                mulligan.drawHand(startingHandSize, player, this);
             }
         }
 
@@ -1361,6 +1357,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new CommanderPlaysCountWatcher()); // commander plays count uses in non commander games by some cards
         newWatchers.add(new CreaturesDiedWatcher());
         newWatchers.add(new TemptedByTheRingWatcher());
+        newWatchers.add(new SpellsCastWatcher());
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
@@ -2348,6 +2345,7 @@ public abstract class GameImpl implements Game {
 
         List<Permanent> legendary = new ArrayList<>();
         List<Permanent> worldEnchantment = new ArrayList<>();
+        Map<UUID, Map<UUID, Set<Permanent>>> roleMap = new HashMap<>();
         List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters();
         for (Permanent perm : getBattlefield().getAllActivePermanents()) {
             if (perm.isCreature(this)) {
@@ -2526,6 +2524,11 @@ public abstract class GameImpl implements Game {
                             }
                         }
                     }
+                }
+                if (perm.hasSubtype(SubType.ROLE, this) && state.getZone(perm.getId()) == Zone.BATTLEFIELD) {
+                    roleMap.computeIfAbsent(perm.getControllerId(), x -> new HashMap<>())
+                            .computeIfAbsent(perm.getAttachedTo(), x -> new HashSet<>())
+                            .add(perm);
                 }
             }
             // 704.5s If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number
@@ -2743,6 +2746,29 @@ public abstract class GameImpl implements Game {
                 for (Permanent permanent : worldEnchantment) {
                     if (newestPermanentControllerRange.contains(permanent.getControllerId())
                             && !Objects.equals(newestPermanent, permanent)) {
+                        movePermanentToGraveyardWithInfo(permanent);
+                        somethingHappened = true;
+                    }
+                }
+            }
+        }
+
+        if (!roleMap.isEmpty()) {
+            List<Set<Permanent>> rolesToHandle = roleMap.values()
+                    .stream()
+                    .map(Map::values)
+                    .flatMap(Collection::stream)
+                    .filter(s -> s.size() > 1)
+                    .collect(Collectors.toList());
+            if (!rolesToHandle.isEmpty()) {
+                for (Set<Permanent> roleSet : rolesToHandle) {
+                    int newest = roleSet
+                            .stream()
+                            .mapToInt(Permanent::getCreateOrder)
+                            .max()
+                            .orElse(-1);
+                    roleSet.removeIf(permanent -> permanent.getCreateOrder() == newest);
+                    for (Permanent permanent : roleSet) {
                         movePermanentToGraveyardWithInfo(permanent);
                         somethingHappened = true;
                     }
@@ -3882,7 +3908,7 @@ public abstract class GameImpl implements Game {
         return filterCommandersBySearchZone(mainCards, returnAllCardParts);
     }
 
-    final protected Set<UUID> filterCommandersBySearchZone(Set<UUID> commanderMainCards, boolean returnAllCardParts) {
+    protected final Set<UUID> filterCommandersBySearchZone(Set<UUID> commanderMainCards, boolean returnAllCardParts) {
         // filter by zone search (example: if you search commanders on battlefield then must see all sides of mdf cards)
         Set<UUID> filteredCards = new HashSet<>();
         if (returnAllCardParts) {

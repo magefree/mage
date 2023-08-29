@@ -327,6 +327,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Izzet Boilerworks", 897, Rarity.UNCOMMON, mage.cards.i.IzzetBoilerworks.class));
         cards.add(new SetCardInfo("Izzet Chemister", 798, Rarity.RARE, mage.cards.i.IzzetChemister.class));
         cards.add(new SetCardInfo("Izzet Signet", 863, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
+        cards.add(new SetCardInfo("Jade Orb of Dragonkind", 236, Rarity.COMMON, mage.cards.j.JadeOrbOfDragonkind.class));
         cards.add(new SetCardInfo("Jaheira's Respite", 238, Rarity.RARE, mage.cards.j.JaheirasRespite.class));
         cards.add(new SetCardInfo("Jaheira, Friend of the Forest", 237, Rarity.RARE, mage.cards.j.JaheiraFriendOfTheForest.class));
         cards.add(new SetCardInfo("Jan Jansen, Chaos Crafter", 277, Rarity.RARE, mage.cards.j.JanJansenChaosCrafter.class));
@@ -335,6 +336,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Jeska's Will", 799, Rarity.RARE, mage.cards.j.JeskasWill.class));
         cards.add(new SetCardInfo("Journey to the Lost City", 681, Rarity.RARE, mage.cards.j.JourneyToTheLostCity.class));
         cards.add(new SetCardInfo("Juvenile Mist Dragon", 79, Rarity.UNCOMMON, mage.cards.j.JuvenileMistDragon.class));
+        cards.add(new SetCardInfo("Kagha, Shadow Archdruid", 279, Rarity.UNCOMMON, mage.cards.k.KaghaShadowArchdruid.class));
         cards.add(new SetCardInfo("Karlach, Fury of Avernus", 186, Rarity.MYTHIC, mage.cards.k.KarlachFuryOfAvernus.class));
         cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 800, Rarity.RARE, mage.cards.k.KazuulTyrantOfTheCliffs.class));
         cards.add(new SetCardInfo("Keiga, the Tide Star", 725, Rarity.RARE, mage.cards.k.KeigaTheTideStar.class));

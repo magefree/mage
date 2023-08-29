@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -16,6 +15,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.TargetStackObject;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class TeferisResponse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetStackObject(filter));
         
         // Draw two cards.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).concatBy("<br>"));
     }
 
     private TeferisResponse(final TeferisResponse card) {

@@ -39,7 +39,7 @@ public final class KalamaxTheStormsire extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you cast your first instant spell each turn, if Kalamax, the Stormsire is tapped, copy that spell. You may choose new targets for the copy.
-        this.addAbility(new KalamaxTheStormsireSpellCastAbility(), new SpellsCastWatcher());
+        this.addAbility(new KalamaxTheStormsireSpellCastAbility());
         // Whenever you copy an instant spell, put a +1/+1 counter on Kalamax.
         this.addAbility(new KalamaxTheStormsireCopyTriggeredAbility());
     }

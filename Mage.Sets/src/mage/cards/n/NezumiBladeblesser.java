@@ -47,7 +47,7 @@ public final class NezumiBladeblesser extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new MenaceAbility()),
                 enchantmentCondition,
-                "{this} has menace as long as you control an enchantment <i>(This creature can't be blocked except by two or more creatures.)</i>" // temporary
+                "{this} has menace as long as you control an enchantment. <i>(This creature can't be blocked except by two or more creatures.)</i>" // temporary
         )).addHint(enchantmentHint));
     }
 

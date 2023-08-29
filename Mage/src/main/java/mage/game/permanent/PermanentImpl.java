@@ -559,7 +559,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         //20091005 - 701.15a
         if (!tapped && !replaceEvent(EventType.TAP, game)) {
             this.tapped = true;
-            game.fireEvent(new GameEvent(GameEvent.EventType.TAPPED, objectId, source, controllerId, 0, forCombat));
+            game.fireEvent(new GameEvent(GameEvent.EventType.TAPPED, objectId, source, source == null ? null : source.getControllerId(), 0, forCombat));
             return true;
         }
         return false;
@@ -1693,21 +1693,31 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void chooseProtector(Game game, Ability source) {
         Set<UUID> opponents = game.getOpponents(this.getControllerId());
+        Player controller = game.getPlayer(this.getControllerId());
+        if (controller == null) {
+            return;
+        }
+
         Player newProtector;
         if (opponents.size() > 1) {
             TargetPlayer target = new TargetPlayer(new FilterOpponent("protector for " + getName()));
             target.setNotTarget(true);
             target.setRequired(true);
-            game.getPlayer(getControllerId()).choose(Outcome.Neutral, target, source, game);
+            controller.choose(Outcome.Neutral, target, source, game);
             newProtector = game.getPlayer(target.getFirstTarget());
-        } else {
+        } else if (opponents.size() == 1) {
             newProtector = game.getPlayer(opponents.iterator().next());
+        } else {
+            newProtector = null;
         }
+
         if (newProtector != null) {
             String protectorName = newProtector.getLogName();
             game.informPlayers(protectorName + " has been chosen to protect " + this.getLogName());
             this.addInfo("protector", "Protected by " + protectorName, game);
             this.setProtectorId(newProtector.getId());
+        } else {
+            game.informPlayers(controller.getLogName() + " remains in protect of " + this.getLogName() + " as there are no opponents for new protector");
         }
     }
 

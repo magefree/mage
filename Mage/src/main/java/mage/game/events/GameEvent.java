@@ -123,6 +123,11 @@ public class GameEvent implements Serializable {
          */
         DAMAGED_PLAYER_BATCH,
 
+        /* DAMAGED_PLAYER_BATCH_ONE_PLAYER
+         combines all player damaged events for a single player in one single event
+         */
+        DAMAGED_PLAYER_BATCH_ONE_PLAYER,
+
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage, can be null for default events like combat
@@ -339,7 +344,7 @@ public class GameEvent implements Serializable {
         /* TAPPED,
          targetId    tapped permanent
          sourceId    id of the ability's source (can be null for standard tap actions like combat)
-         playerId    controller of the tapped permanent
+         playerId    source's controller, null if no source
          amount      not used for this event
          flag        is it tapped for combat
          */

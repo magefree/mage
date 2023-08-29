@@ -15,8 +15,8 @@ public final class ATATToken extends TokenImpl {
         super("AT-AT Token", "5/5 white artifact AT-AT creature tokens with \"When this creature dies, create two 1/1 white Trooper creature tokens.\"");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         color.setWhite(true);
         addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TrooperToken(), 2)));
         subtype.add(SubType.ATAT);
@@ -30,4 +30,3 @@ public final class ATATToken extends TokenImpl {
         return new ATATToken(this);
     }
 }
-

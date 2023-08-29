@@ -1,7 +1,6 @@
 package org.mage.card.arcane;
 
 import mage.abilities.hint.HintUtils;
-import mage.cards.ArtRect;
 import mage.client.dialog.PreferencesDialog;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
@@ -504,6 +503,10 @@ public abstract class CardRenderer {
 
     protected String getCardSuperTypeLine() {
         StringBuilder spType = new StringBuilder();
+        if (cardView.isToken()) {
+            // "Token" is shown on the type line. As recent printing of tokens do.
+            spType.append("Token ");
+        }
         for (SuperType superType : cardView.getSuperTypes()) {
             spType.append(superType).append(' ');
         }

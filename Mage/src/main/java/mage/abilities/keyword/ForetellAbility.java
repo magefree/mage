@@ -404,9 +404,9 @@ public class ForetellAbility extends SpecialAction {
                         return null;
                     }
                     spellAbilityCopy.setId(this.getId());
-                    spellAbilityCopy.getManaCosts().clear();
-                    spellAbilityCopy.getManaCostsToPay().clear();
-                    spellAbilityCopy.getCosts().addAll(this.getCosts().copy());
+                    spellAbilityCopy.clearManaCosts();
+                    spellAbilityCopy.clearManaCostsToPay();
+                    spellAbilityCopy.addCost(this.getCosts().copy());
                     spellAbilityCopy.addCost(this.getManaCosts().copy());
                     spellAbilityCopy.setSpellAbilityCastMode(this.getSpellAbilityCastMode());
                     spellAbilityToResolve = spellAbilityCopy;
@@ -431,19 +431,19 @@ public class ForetellAbility extends SpecialAction {
         @Override
         public String getRule(boolean all) {
             StringBuilder sbRule = new StringBuilder("Foretell");
-            if (!costs.isEmpty()) {
+            if (!getCosts().isEmpty()) {
                 sbRule.append("&mdash;");
             } else {
                 sbRule.append(' ');
             }
-            if (!manaCosts.isEmpty()) {
-                sbRule.append(manaCosts.getText());
+            if (!getManaCosts().isEmpty()) {
+                sbRule.append(getManaCosts().getText());
             }
-            if (!costs.isEmpty()) {
-                if (!manaCosts.isEmpty()) {
+            if (!getCosts().isEmpty()) {
+                if (!getManaCosts().isEmpty()) {
                     sbRule.append(", ");
                 }
-                sbRule.append(costs.getText());
+                sbRule.append(getCosts().getText());
                 sbRule.append('.');
             }
             if (abilityName != null) {

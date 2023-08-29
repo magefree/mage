@@ -35,7 +35,7 @@ public final class MindsDilation extends CardImpl {
         // that player exiles the top card of their library. If it's a nonland card,
         // you may cast it without paying its mana cost.
         this.addAbility(new MindsDilationTriggeredAbility(new MindsDilationEffect(),
-                false), new SpellsCastWatcher());
+                false));
     }
 
     private MindsDilation(final MindsDilation card) {

@@ -67,7 +67,7 @@ class StriveCostIncreasingEffect extends CostModificationEffectImpl {
                     sb.append(striveCosts.getText());
                 }
                 String finalCost = ManaUtil.condenseManaCostString(sb.toString());
-                abilityToModify.getManaCostsToPay().add(new ManaCostsImpl<>(finalCost));
+                abilityToModify.addManaCostsToPay(new ManaCostsImpl<>(finalCost));
                 return true;
             }
         }

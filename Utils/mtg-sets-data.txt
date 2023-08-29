@@ -259,6 +259,7 @@ Welcome Deck 2016|W16|
 Welcome Deck 2017|W17|
 Weatherlight|WTH|
 Wilds of Eldraine|WOE|
+Wilds of Eldraine Commander|WOC|
 Worldwake|WWK|
 Ixalan|XLN|
 Zendikar|ZEN|

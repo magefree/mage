@@ -146,7 +146,7 @@ public class OrCost implements Cost {
     }
 
     @Override
-    public Cost copy() {
+    public OrCost copy() {
         return new OrCost(this);
     }
 }
