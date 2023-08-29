@@ -15,6 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.GameLog;
 
 import java.util.UUID;
 
@@ -74,12 +75,42 @@ class CurseOfTheWerefoxEffect extends OneShotEffect {
         }
 
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new FightTargetsEffect(false), false,
+                new CurseOfTheWerefoxFightEffect(), false,
                 "that creature fights up to one target creature you don't control"
         );
-        ability.addTarget(source.getTargets().get(0));
+        ability.getEffects().setTargetPointer(new FixedTarget(target.getId(), game));
         ability.addTarget(new TargetOpponentsCreaturePermanent(0, 1));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
+    }
+}
+
+
+class CurseOfTheWerefoxFightEffect extends OneShotEffect {
+
+    CurseOfTheWerefoxFightEffect() {
+        super(Outcome.Damage);
+    }
+
+    private CurseOfTheWerefoxFightEffect(final CurseOfTheWerefoxFightEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent triggeredCreature = game.getPermanent(this.targetPointer.getFirst(game, source));
+        Permanent target = game.getPermanent(source.getFirstTarget());
+        if (triggeredCreature != null
+                && target != null
+                && triggeredCreature.isCreature(game)
+                && target.isCreature(game)) {
+            return triggeredCreature.fight(target, source, game);
+        }
+        return false;
+    }
+
+    @Override
+    public CurseOfTheWerefoxFightEffect copy() {
+        return new CurseOfTheWerefoxFightEffect(this);
     }
 }
