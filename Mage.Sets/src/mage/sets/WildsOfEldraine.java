@@ -295,6 +295,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Witch's Mark", 158, Rarity.COMMON, mage.cards.w.WitchsMark.class));
         cards.add(new SetCardInfo("Witchstalker Frenzy", 159, Rarity.UNCOMMON, mage.cards.w.WitchstalkerFrenzy.class));
         cards.add(new SetCardInfo("Woodland Acolyte", 241, Rarity.UNCOMMON, mage.cards.w.WoodlandAcolyte.class));
+        cards.add(new SetCardInfo("Yenna, Redtooth Regent", 219, Rarity.RARE, mage.cards.y.YennaRedtoothRegent.class));
     }
 
 //    @Override
