@@ -50,7 +50,7 @@ class UndyingFlamesEffect extends OneShotEffect {
         staticText = "Exile cards from the top of your library until you exile a nonland card. {this} deals damage to any target equal to that card's mana value";
     }
 
-    public UndyingFlamesEffect(final UndyingFlamesEffect effect) {
+    private UndyingFlamesEffect(final UndyingFlamesEffect effect) {
         super(effect);
     }
 

@@ -60,7 +60,7 @@ class VectisDominatorEffect extends OneShotEffect {
         this.cost = cost;
     }
 
-    public VectisDominatorEffect(final VectisDominatorEffect effect) {
+    private VectisDominatorEffect(final VectisDominatorEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

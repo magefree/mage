@@ -60,7 +60,7 @@ class VigeanIntuitionEffect extends OneShotEffect {
         staticText = "Choose a card type, then reveal the top four cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest into your graveyard";
     }
 
-    public VigeanIntuitionEffect(final VigeanIntuitionEffect effect) {
+    private VigeanIntuitionEffect(final VigeanIntuitionEffect effect) {
         super(effect);
     }
 

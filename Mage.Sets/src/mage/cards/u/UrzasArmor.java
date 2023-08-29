@@ -43,7 +43,7 @@ class UrzasArmorEffect extends PreventionEffectImpl {
         this.staticText = "If a source would deal damage to you, prevent 1 of that damage";
     }
 
-    public UrzasArmorEffect(UrzasArmorEffect effect) {
+    private UrzasArmorEffect(final UrzasArmorEffect effect) {
         super(effect);
     }
 

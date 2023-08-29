@@ -44,7 +44,7 @@ class UndertowEffect extends AsThoughEffectImpl {
         staticText = "Creatures with islandwalk can be blocked as though they didn't have islandwalk";
     }
 
-    public UndertowEffect(final UndertowEffect effect) {
+    private UndertowEffect(final UndertowEffect effect) {
         super(effect);
     }
 

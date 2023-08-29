@@ -54,7 +54,7 @@ class UrgorosTheEmptyOneEffect extends OneShotEffect {
         this.staticText = "that player discards a card at random. If the player can't, you draw a card";
     }
 
-    public UrgorosTheEmptyOneEffect(final UrgorosTheEmptyOneEffect effect) {
+    private UrgorosTheEmptyOneEffect(final UrgorosTheEmptyOneEffect effect) {
         super(effect);
     }
 

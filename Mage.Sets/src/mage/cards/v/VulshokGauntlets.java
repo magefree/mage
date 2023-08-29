@@ -61,7 +61,7 @@ class VulshokGauntletsEffect extends ReplacementEffectImpl {
         staticText = "Equipped creature doesn't untap during its controller's untap step";
     }
 
-    public VulshokGauntletsEffect(final VulshokGauntletsEffect effect) {
+    private VulshokGauntletsEffect(final VulshokGauntletsEffect effect) {
         super(effect);
     }
 

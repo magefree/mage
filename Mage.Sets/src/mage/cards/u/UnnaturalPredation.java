@@ -26,7 +26,7 @@ public final class UnnaturalPredation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public UnnaturalPredation (final UnnaturalPredation card) {
+    private UnnaturalPredation(final UnnaturalPredation card) {
         super(card);
     }
 
