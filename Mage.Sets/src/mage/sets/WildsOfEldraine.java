@@ -160,6 +160,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Moment of Valor", 20, Rarity.COMMON, mage.cards.m.MomentOfValor.class));
         cards.add(new SetCardInfo("Monstrous Rage", 142, Rarity.UNCOMMON, mage.cards.m.MonstrousRage.class));
         cards.add(new SetCardInfo("Moonshaker Cavalry", 21, Rarity.MYTHIC, mage.cards.m.MoonshakerCavalry.class));
+        cards.add(new SetCardInfo("Mosswood Dreadknight", 231, Rarity.RARE, mage.cards.m.MosswoodDreadknight.class));
         cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Neva, Stalked by Nightmares", 209, Rarity.UNCOMMON, mage.cards.n.NevaStalkedByNightmares.class));
         cards.add(new SetCardInfo("Night of the Sweets' Revenge", 178, Rarity.UNCOMMON, mage.cards.n.NightOfTheSweetsRevenge.class));

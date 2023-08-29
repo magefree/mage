@@ -3848,6 +3848,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // play hand from non hand zone (except battlefield - you can't play already played permanents)
                 approvingObject = game.getContinuousEffects().asThough(object.getId(),
                         AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
+
+                if (approvingObject == null && isPlaySpell
+                        && ((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.ADVENTURE_SPELL)) {
+                    approvingObject = game.getContinuousEffects().asThough(object.getId(),
+                            AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
+                }
             } else {
                 // other abilities from direct zones
                 approvingObject = null;
