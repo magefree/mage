@@ -1,13 +1,8 @@
 package mage.game.permanent.token;
 
-import mage.abilities.Ability;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.token.TreasureAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 /**
  * @author TheElk801
@@ -19,10 +14,7 @@ public final class TreasureToken extends TokenImpl {
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.TREASURE);
 
-        // {T}, Sacrifice this artifact: Add one mana of any color.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost().setText("sacrifice this artifact"));
-        this.addAbility(ability);
+        this.addAbility(new TreasureAbility(false));
     }
 
     protected TreasureToken(final TreasureToken token) {
