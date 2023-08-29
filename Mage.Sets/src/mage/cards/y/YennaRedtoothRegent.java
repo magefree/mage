@@ -14,6 +14,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -23,6 +24,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -74,14 +76,15 @@ enum YennaRedtoothRegentPredicate implements ObjectSourcePlayerPredicate<Permane
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        String name = input.getObject().getName();
-        if (name == null || name.isEmpty()) {
-            return true;
-        }
-
-        FilterControlledPermanent filter = new FilterControlledPermanent();
-        filter.add(new NamePredicate(name));
-        return game.getBattlefield().count(filter, input.getPlayerId(), input.getSource(), game) == 1;
+        return game
+                .getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_PERMANENT,
+                        input.getPlayerId(), input.getSource(), game
+                )
+                .stream()
+                .noneMatch(permanent -> !permanent.getId().equals(input.getObject().getId())
+                        && CardUtil.haveSameNames(permanent, input.getObject()));
     }
 }
 
@@ -108,13 +111,9 @@ class YennaRedtoothRegentEffect extends OneShotEffect {
         CreateTokenCopyTargetEffect create = new CreateTokenCopyTargetEffect()
                 .setPermanentModifier((token) -> token.removeSuperType(SuperType.LEGENDARY));
 
-        if (!create.apply(game, source)) {
-            return false;
-        }
-
-        Permanent token = create.getAddedPermanents().get(0);
-        if (token == null || !token.hasSubtype(SubType.AURA, game)) {
-            return true;
+        create.apply(game, source);
+        if(create.getAddedPermanents().stream().noneMatch(t -> t != null && t.hasSubtype(SubType.AURA, game))){
+            return create.getAddedPermanents().size() > 0;
         }
 
         Permanent yenna = source.getSourcePermanentIfItStillExists(game);
