@@ -62,6 +62,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fertile Ground", 126, Rarity.COMMON, mage.cards.f.FertileGround.class));
         cards.add(new SetCardInfo("Frantic Search", 93, Rarity.COMMON, mage.cards.f.FranticSearch.class));
         cards.add(new SetCardInfo("Generous Gift", 68, Rarity.UNCOMMON, mage.cards.g.GenerousGift.class));
+        cards.add(new SetCardInfo("Giant Inheritance", 17, Rarity.RARE, mage.cards.g.GiantInheritance.class));
         cards.add(new SetCardInfo("Glen Elendra Archmage", 94, Rarity.RARE, mage.cards.g.GlenElendraArchmage.class));
         cards.add(new SetCardInfo("Glen Elendra Liege", 138, Rarity.RARE, mage.cards.g.GlenElendraLiege.class));
         cards.add(new SetCardInfo("Gylwain, Casting Director", 4, Rarity.MYTHIC, mage.cards.g.GylwainCastingDirector.class));
