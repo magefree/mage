@@ -50,10 +50,10 @@ public final class KorvoldGleefulGlutton extends CardImpl {
 
         // This spell costs {1} less to cast for each card type among permanents you've sacrificed this turn.
         Ability staticAbility = new SimpleStaticAbility(Zone.ALL, 
-            new SpellCostReductionSourceEffect(CardTypesAmongSacrifiedPermanents.instance)
+            new SpellCostReductionSourceEffect(CardTypesAmongSacrificedPermanentsCount.instance)
                 .setText("this spell costs {1} less to cast for each card type among permanents you've sacrificed this turn")
         );
-        staticAbility.addHint(new ValueHint("card types among permanents you've sacrificed this turn", CardTypesAmongSacrifiedPermanents.instance));
+        staticAbility.addHint(new ValueHint("card types among permanents you've sacrificed this turn", CardTypesAmongSacrificedPermanentsCount.instance));
         
         this.addAbility(staticAbility, new KorvoldGleefulGluttonWatcher());
 
@@ -116,7 +116,7 @@ class KorvoldGleefulGluttonWatcher extends Watcher {
     };
 }
 
-enum CardTypesAmongSacrifiedPermanents implements DynamicValue {
+enum CardTypesAmongSacrificedPermanentsCount implements DynamicValue {
     instance;
 
     @Override
@@ -126,7 +126,7 @@ enum CardTypesAmongSacrifiedPermanents implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public CardTypesAmongSacrificedPermanentsCount copy() {
         return instance;
     }
 
@@ -140,7 +140,7 @@ enum PermanentTypesInGraveyardCount implements DynamicValue {
     instance;
 
     @Override
-    public DynamicValue copy() {
+    public PermanentTypesInGraveyardCount copy() {
         return instance;
     }
 
