@@ -51,11 +51,9 @@ public final class AshiokWickedManipulator extends CardImpl {
 
         // -7: Target player exiles the top X cards of their library, where X is the total mana value of cards you own in exile.
         Ability ability = new LoyaltyAbility(
-                new ExileCardsFromTopOfLibraryTargetEffect(
-                        TotalCardsExiledOwnedManaValue.instance,
-                        "target player"
-                ).setText("target player exiles the top X cards of their library, "
-                        + "where X is the total mana value of cards you own in exile"),
+                new ExileCardsFromTopOfLibraryTargetEffect(TotalCardsExiledOwnedManaValue.instance)
+                        .setText("target player exiles the top X cards of their library, "
+                                + "where X is the total mana value of cards you own in exile"),
                 -7
         );
         ability.addTarget(new TargetPlayer());

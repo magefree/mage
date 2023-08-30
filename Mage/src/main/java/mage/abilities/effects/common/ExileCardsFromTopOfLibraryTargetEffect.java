@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -10,6 +11,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2, Susucr
@@ -18,15 +20,13 @@ public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
 
     private final DynamicValue amount;
 
-    public ExileCardsFromTopOfLibraryTargetEffect(int amount, String targetName) {
-        this(StaticValue.get(amount), targetName);
+    public ExileCardsFromTopOfLibraryTargetEffect(int amount) {
+        this(StaticValue.get(amount));
     }
 
-    public ExileCardsFromTopOfLibraryTargetEffect(DynamicValue amount, String targetName) {
+    public ExileCardsFromTopOfLibraryTargetEffect(DynamicValue amount) {
         super(Outcome.Exile);
         this.amount = amount.copy();
-        this.staticText = targetName + " exiles the top " + amount + " card"
-                + (amount.toString().equals("1") ? " " : "s ") + " of their library";
     }
 
     protected ExileCardsFromTopOfLibraryTargetEffect(final ExileCardsFromTopOfLibraryTargetEffect effect) {
@@ -49,5 +49,16 @@ public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
             return targetPlayer.moveCards(cards, Zone.EXILED, source, game);
         }
         return false;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return getTargetPointer().describeTargets(mode.getTargets(), "that player")
+                + " exiles the top "
+                + (amount.toString().equals("1") ? "card" : CardUtil.numberToText(amount.toString(), "a") + " cards")
+                + " of their library";
     }
 }
