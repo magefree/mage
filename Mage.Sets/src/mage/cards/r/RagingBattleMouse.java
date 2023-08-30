@@ -40,11 +40,11 @@ public final class RagingBattleMouse extends CardImpl {
                 YouCastExactOneSpellThisTurnCondition.instance, "the second spell you cast each turn costs {1} less to cast"
         )));
 
-        // Celebration -- At the beginning of combat on each of your turns, if two or more nonland permanents entered the battlefield under your control this turn, target creature you control gets +1/+1 until end of turn.
+        // Celebration -- At the beginning of combat on your turn, if two or more nonland permanents entered the battlefield under your control this turn, target creature you control gets +1/+1 until end of turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new BoostTargetEffect(1, 1, Duration.EndOfTurn), TargetController.YOU, false
-                ), CelebrationCondition.instance, "At the beginning of combat on each of your turns, "
+                ), CelebrationCondition.instance, "At the beginning of combat on your turn, "
                         + "if two or more nonland permanents entered the battlefield under your control this turn, "
                         + "target creature you control gets +1/+1 until end of turn."
         );

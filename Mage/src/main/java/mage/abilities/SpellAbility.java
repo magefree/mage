@@ -117,6 +117,11 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
             // play from not own hand
             ApprovingObject approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
+            if (approvingObject == null && getSpellAbilityType().equals(SpellAbilityType.ADVENTURE_SPELL)) {
+                // allowed to cast adventures from non-hand?
+                approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
+            }
+
             if (approvingObject == null) {
                 Card card = game.getCard(sourceId);
                 if (!(card != null && card.isOwnedBy(playerId))) {
@@ -147,7 +152,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
             }
 
             // can pay all costs and choose targets
-            if (costs.canPay(this, this, playerId, game)) {
+            if (getCosts().canPay(this, this, playerId, game)) {
                 if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
                     if (splitCard != null) {
@@ -178,12 +183,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
             return new StringBuilder(super.getRule(all)).append(name).toString();
         }
         return super.getRule(false);
-    }
-
-    public void clear() {
-        getTargets().clearChosen();
-        this.manaCosts.clearPaid();
-        this.costs.clearPaid();
     }
 
     public String getName() {

@@ -20,10 +20,12 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Ajani's Chosen", 59, Rarity.RARE, mage.cards.a.AjanisChosen.class));
+        cards.add(new SetCardInfo("Alela, Cunning Conqueror", 3, Rarity.MYTHIC, mage.cards.a.AlelaCunningConqueror.class));
         cards.add(new SetCardInfo("Ancestral Mask", 119, Rarity.COMMON, mage.cards.a.AncestralMask.class));
         cards.add(new SetCardInfo("Angelic Destiny", 60, Rarity.MYTHIC, mage.cards.a.AngelicDestiny.class));
         cards.add(new SetCardInfo("Arcane Denial", 84, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
         cards.add(new SetCardInfo("Arcane Signet", 367, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Archmage of Echoes", 9, Rarity.RARE, mage.cards.a.ArchmageOfEchoes.class));
         cards.add(new SetCardInfo("Archon of Sun's Grace", 61, Rarity.RARE, mage.cards.a.ArchonOfSunsGrace.class));
         cards.add(new SetCardInfo("Aura Gnarlid", 120, Rarity.COMMON, mage.cards.a.AuraGnarlid.class));
         cards.add(new SetCardInfo("Austere Command", 62, Rarity.RARE, mage.cards.a.AustereCommand.class));
@@ -38,6 +40,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cloud of Faeries", 86, Rarity.COMMON, mage.cards.c.CloudOfFaeries.class));
         cards.add(new SetCardInfo("Command Tower", 156, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Consider", 87, Rarity.COMMON, mage.cards.c.Consider.class));
+        cards.add(new SetCardInfo("Court of Ardenvale", 21, Rarity.RARE, mage.cards.c.CourtOfArdenvale.class));
         cards.add(new SetCardInfo("Danitha Capashen, Paragon", 64, Rarity.UNCOMMON, mage.cards.d.DanithaCapashenParagon.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 157, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Daybreak Coronet", 65, Rarity.RARE, mage.cards.d.DaybreakCoronet.class));
@@ -74,6 +77,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kindred Dominance", 113, Rarity.RARE, mage.cards.k.KindredDominance.class));
         cards.add(new SetCardInfo("Kor Spiritdancer", 69, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
         cards.add(new SetCardInfo("Krosan Verge", 163, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
+        cards.add(new SetCardInfo("Loamcrafter Faun", 19, Rarity.RARE, mage.cards.l.LoamcrafterFaun.class));
         cards.add(new SetCardInfo("Mantle of the Ancients", 70, Rarity.RARE, mage.cards.m.MantleOfTheAncients.class));
         cards.add(new SetCardInfo("Midnight Clock", 99, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Mind Stone", 148, Rarity.COMMON, mage.cards.m.MindStone.class));
@@ -83,6 +87,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Nymris, Oona's Trickster", 141, Rarity.RARE, mage.cards.n.NymrisOonasTrickster.class));
         cards.add(new SetCardInfo("Oona, Queen of the Fae", 142, Rarity.RARE, mage.cards.o.OonaQueenOfTheFae.class));
         cards.add(new SetCardInfo("Opt", 101, Rarity.COMMON, mage.cards.o.Opt.class));
+        cards.add(new SetCardInfo("Ox Drover", 6, Rarity.RARE, mage.cards.o.OxDrover.class));
         cards.add(new SetCardInfo("Paradise Druid", 129, Rarity.UNCOMMON, mage.cards.p.ParadiseDruid.class));
         cards.add(new SetCardInfo("Path of Ancestry", 165, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Perplexing Test", 102, Rarity.RARE, mage.cards.p.PerplexingTest.class));
@@ -125,6 +130,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of the False God", 172, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
         cards.add(new SetCardInfo("Theoretical Duplication", 112, Rarity.RARE, mage.cards.t.TheoreticalDuplication.class));
         cards.add(new SetCardInfo("Thrilling Encore", 118, Rarity.RARE, mage.cards.t.ThrillingEncore.class));
+        cards.add(new SetCardInfo("Timber Paladin", 20, Rarity.RARE, mage.cards.t.TimberPaladin.class));
         cards.add(new SetCardInfo("Timely Ward", 79, Rarity.RARE, mage.cards.t.TimelyWard.class));
         cards.add(new SetCardInfo("Tithe Taker", 80, Rarity.RARE, mage.cards.t.TitheTaker.class));
         cards.add(new SetCardInfo("Transcendent Envoy", 81, Rarity.COMMON, mage.cards.t.TranscendentEnvoy.class));

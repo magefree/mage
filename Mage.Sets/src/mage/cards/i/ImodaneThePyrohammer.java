@@ -63,7 +63,8 @@ class ImodaneThePyrohammerTriggeredAbility extends TriggeredAbilityImpl {
     private static final Hint hint = new ValuePositiveHint("Damage dealt to the target", ImodaneThePyrohammerDynamicValue.instance);
 
     ImodaneThePyrohammerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamagePlayersEffect(Outcome.Damage, ImodaneThePyrohammerDynamicValue.instance, TargetController.OPPONENT), false);
+        super(Zone.BATTLEFIELD, new DamagePlayersEffect(Outcome.Damage, ImodaneThePyrohammerDynamicValue.instance, TargetController.OPPONENT)
+                .setText("{this} deals that much damage to each opponent"), false);
         setTriggerPhrase("Whenever an instant or sorcery spell you control that targets only a single creature deals damage to that creature, ");
         addHint(hint);
     }

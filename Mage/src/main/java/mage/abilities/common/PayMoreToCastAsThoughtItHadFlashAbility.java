@@ -41,7 +41,7 @@ public class PayMoreToCastAsThoughtItHadFlashAbility extends SpellAbility {
 
     @Override
     public String getRule() {
-        return "You may cast this spell as though it had flash if you pay " + costsToAdd.getText() + " more to cast it. <i>(You may cast it any time you could cast an instant.)</i>";
+        return "You may cast {this} as though it had flash if you pay " + costsToAdd.getText() + " more to cast it. <i>(You may cast it any time you could cast an instant.)</i>";
     }
 
 }

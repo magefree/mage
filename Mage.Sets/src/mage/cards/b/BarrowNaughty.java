@@ -48,7 +48,7 @@ public final class BarrowNaughty extends CardImpl {
         // Barrow Naughty has lifelink as long as you control another Faerie.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(LifelinkAbility.getInstance()), condition,
-                "has lifelink as long as you control another Faerie"
+                "{this} has lifelink as long as you control another Faerie"
         )));
 
         // {2}{B}: Barrow Naughty gets +1/+0 until end of turn.

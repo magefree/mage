@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -26,12 +26,9 @@ public final class DistinguishedConjurer extends CardImpl {
 
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent("another creature");
-    private static final FilterControlledCreaturePermanent filter2
-            = new FilterControlledCreaturePermanent("another target creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter2.add(AnotherPredicate.instance);
     }
 
     public DistinguishedConjurer(UUID ownerId, CardSetInfo setInfo) {
@@ -48,7 +45,7 @@ public final class DistinguishedConjurer extends CardImpl {
         // {4}{W}, {T}: Exile another target creature you control, then return it to the battlefield under its owner’s control.
         Ability ability = new SimpleActivatedAbility(new ExileThenReturnTargetEffect(false, false), new ManaCostsImpl<>("{4}{W}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledCreaturePermanent(filter2));
+        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 

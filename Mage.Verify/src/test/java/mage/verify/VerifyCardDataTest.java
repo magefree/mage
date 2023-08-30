@@ -29,7 +29,6 @@ import mage.filter.Filter;
 import mage.game.command.Dungeon;
 import mage.game.command.Plane;
 import mage.game.draft.DraftCube;
-import mage.cards.RateCard;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.custom.CreatureToken;
@@ -53,6 +52,8 @@ import java.lang.reflect.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -62,7 +63,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "LTR;LTC;CMM"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = "WOE"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
@@ -1734,27 +1735,27 @@ public class VerifyCardDataTest {
 
                             boolean doFieldRecurse = true;
                             if (class1 == CardImpl.class) {
-                                if (field1.getName() == "spellAbility") {
+                                if (field1.getName().equals("spellAbility")) {
                                     compareClassRecursive(((CardImpl) obj1).getSpellAbility(), ((CardImpl) obj2).getSpellAbility(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
                                     hasSpellAbilityField = true;
-                                } else if (field1.getName() == "meldsToCard") {
+                                } else if (field1.getName().equals("meldsToCard")) {
                                     compareClassRecursive(((CardImpl) obj1).getMeldsToCard(), ((CardImpl) obj2).getMeldsToCard(), originalCard, msg + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
                                     hasMeldField = true;
-                                } else if (field1.getName() == "secondSideCard") {
+                                } else if (field1.getName().equals("secondSideCard")) {
                                     compareClassRecursive(((CardImpl) obj1).getSecondCardFace(), ((CardImpl) obj2).getSecondCardFace(), originalCard, msg + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
                                     hasSecondSideCardField = true;
                                 }
                             }
                             if (class1 == AbilityImpl.class) {
-                                if (field1.getName() == "watchers") {
+                                if (field1.getName().equals("watchers")) {
                                     // Watchers are only used on initialization, they are not copied.
                                     doFieldRecurse = false;
                                     hasWatchersField = true;
                                 }
-                                if (field1.getName() == "modes") {
+                                if (field1.getName().equals("modes")) {
                                     //compareClassRecursive(((AbilityImpl) obj1).getModes(), ((AbilityImpl) obj2).getModes(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1);
                                     compareClassRecursive(((AbilityImpl) obj1).getEffects(), ((AbilityImpl) obj2).getEffects(), originalCard, msg + "<" + obj1.getClass() + ">" + "::" + field1.getName(), maxDepth - 1, alreadyChecked, doRecurse);
                                     doFieldRecurse = false;
@@ -2224,24 +2225,23 @@ public class VerifyCardDataTest {
             refText += "<br>";
             refText = refText.replace("<br>", "\n");
         }
-        // mana ability fix
-        for (String s : refText.split("[\\$\\\n]")) {
-            if (!(s.startsWith("{T}: Add {") || s.startsWith("({T}: Add {"))
-                    || !(s.contains("} or {") || s.contains("}, or {"))) {
-                continue;
-            }
-            String newStr = "";
-            for (String c : s.split("[\\{\\}]")) {
-                if ("WUBRG".contains(c) && c.length() > 0) {
-                    newStr += "{T}: Add {" + c + "}.\n";
-                }
-            }
-            if (!newStr.isEmpty()) {
-                newStr = newStr.substring(0, newStr.length() - 1);
-            }
-            refText = refText.replace(s, newStr);
-        }
 
+        // mana ability fix
+        // Current implementation makes one Activated Ability per kind of color.
+        // We split such abilities in the reference text.
+        // For instance "{T}: Add {G} or {W}."
+        //      becomes "{T}: Add {G}.\n{T}: Add {W}."
+        //
+        // The regex down handle more complex situations.
+        refText = splitManaAbilities(refText);
+
+        // cycling fix
+        // Current implementation makes one CyclingAbility per quality,
+        // We split such abilities in the reference text.
+        //
+        // For instance "Swampcycling {2}, mountaincycling {2}"
+        //      becomes "Swampcycling {2}\nMountaincycling {2}"
+        refText = splitCyclingAbilities(refText);
 
         String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
         for (int i = 0; i < refRules.length; i++) {
@@ -2279,6 +2279,12 @@ public class VerifyCardDataTest {
 
         boolean isFine = true;
         for (int i = 0; i < cardRules.length; i++) {
+            if (cardRules[i].startsWith("Use the Special button")) {
+                // This is a rules text for GUI implication like Quenchable Fire
+                cardRules[i] = "+ " + cardRules[i];
+                continue;
+            }
+
             boolean isAbilityFounded = false;
             for (int j = 0; j < refRules.length; j++) {
                 String refRule = refRules[j];
@@ -2332,6 +2338,132 @@ public class VerifyCardDataTest {
 
             System.out.println();
         }
+    }
+
+    private String splitCyclingAbilities(String refText) {
+        for (String s : refText.split("[\\$\\\n]")) {
+            if (!Pattern.matches("^[a-zA-Z]*cycling .*, [a-zA-Z]*cycling.*", s)) {
+                continue;
+            }
+            String newStr = "";
+            Pattern p = Pattern.compile(", [a-zA-Z]*cycling");
+            Matcher m = p.matcher(s);
+            int start = 0;
+            while (m.find()) {
+                String group = m.group();
+                int newStart = m.start();
+                newStr += s.substring(start, newStart) + "\n" + group.substring(2, 3).toUpperCase() + group.substring(3);
+                start = newStart + group.length();
+            }
+            newStr += s.substring(start);
+            refText = refText.replace(s, newStr);
+        }
+        return refText;
+    }
+
+    @Test
+    public void checkSplitCyclingAbilities() {
+        // Test the function splitting cycling abilities is correct.
+
+        Assert.assertEquals(
+                "Swampcycling {2}\nMountaincycling {2}",
+                splitCyclingAbilities("Swampcycling {2}, mountaincycling {2}")
+        );
+    }
+
+    private String splitManaAbilities(String refText) {
+        for (String s : refText.split("[\\$\\\n]")) {
+            if (!Pattern.matches("[^\"']*: Add [^\\.]* or.*\\..*", s)) {
+                continue;
+            }
+            // Loyalty Abilities
+            if (s.startsWith("0") || s.startsWith("+") || s.startsWith("-")) {
+                continue;
+            }
+            // Leafkin Avenger
+            if (s.contains("} for")) {
+                continue;
+            }
+
+            // Splitting the ability into three segments:
+            //
+            // {G/W}, {T}: Add {G}{G}, {G}{W}, or {W}{W}. This mana can only be used to cast multicolor spells.
+            // ^^^^^^^^^^^^^^^^                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            //     before      ^^^^^^^^^^^^^^^^^^^^^^^^^                    after
+            //                       middle
+            int beforeLength = s.indexOf(": Add ");
+            String before = s.substring(0, beforeLength + 6);
+            int middleIndex = s.indexOf('.', beforeLength);
+            String middle = s.substring(beforeLength + 6, middleIndex);
+            String after = s.substring(middleIndex);
+
+            //making life easier on the split
+            middle = middle
+                    .replace(", or ", "|")
+                    .replace(" or ", "|")
+                    .replace(", ", "|");
+
+            // This now looks like "{G}{G}|{G}{W}|{W}{W}".
+            // for each part, make a new line with 'before + part + end'
+            String newStr = "";
+            for (String part : middle.split("[|]")) {
+                newStr += before + part + after + "\n";
+            }
+            if (!newStr.isEmpty()) {
+                newStr = newStr.substring(0, newStr.length() - 1);
+            }
+            refText = refText.replace(s, newStr);
+        }
+        return refText;
+    }
+
+    @Test
+    public void checkSplitManaAbilities() {
+        // Test the function splitting mana abilities is correct.
+
+        Assert.assertEquals(
+                "{T}: Add {G}.\n{T}: Add {W}.",
+                splitManaAbilities("{T}: Add {G} or {W}.")
+        );
+        Assert.assertEquals(
+                "{T}: Add {G}.\n{T}: Add {W}.\n{T}: Add {R}.",
+                splitManaAbilities("{T}: Add {G}, {W}, or {R}.")
+        );
+        Assert.assertEquals(
+                "{G/W}, {T}: Add {G}{G}.\n{G/W}, {T}: Add {G}{W}.\n{G/W}, {T}: Add {W}{W}.",
+                splitManaAbilities("{G/W}, {T}: Add {G}{G}, {G}{W}, or {W}{W}.")
+        );
+        Assert.assertEquals(
+                "{T}: Add {R}.\n{T}: Add one mana of the chosen color.",
+                splitManaAbilities("{T}: Add {R} or one mana of the chosen color.")
+        );
+        Assert.assertEquals(
+                "{T}: Add {B}. Activate only if you control a swamp.\n{T}: Add {U}. Activate only if you control a swamp.",
+                splitManaAbilities("{T}: Add {B} or {U}. Activate only if you control a swamp.")
+        );
+
+
+        // Not splitting those:
+        Assert.assertEquals(
+                "{T}: Each player creates a colorless artifact token named Banana with \"{T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life.\"",
+                splitManaAbilities("{T}: Each player creates a colorless artifact token named Banana with \"{T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life.\"")
+        );
+        Assert.assertEquals(
+                "+1: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
+                splitManaAbilities("+1: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
+        );
+        Assert.assertEquals(
+                "0: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
+                splitManaAbilities("0: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
+        );
+        Assert.assertEquals(
+                "-1: Add {R} or {G}. Creature spells you cast this turn can't be countered.",
+                splitManaAbilities("-1: Add {R} or {G}. Creature spells you cast this turn can't be countered.")
+        );
+        Assert.assertEquals(
+                "{T}: Add {G} for each creature with power 4 or greater you control.",
+                splitManaAbilities("{T}: Add {G} for each creature with power 4 or greater you control.")
+        );
     }
 
     private void checkTypes(Card card, MtgJsonCard ref) {

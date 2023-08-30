@@ -100,50 +100,45 @@ public class DoIfCostPaid extends OneShotEffect {
             message = CardUtil.replaceSourceName(message, mageObject.getName());
             boolean result = true;
             Outcome payOutcome = executingEffects.getOutcome(source, this.outcome);
-            if (cost.canPay(source, source, player.getId(), game)
-                    && (!optional || player.chooseUse(payOutcome, message, source, game))) {
+            boolean canPay = cost.canPay(source, source, player.getId(), game);
+            boolean didPay = false;
+            if (canPay && (!optional || player.chooseUse(payOutcome, message, source, game))) {
                 cost.clearPaid();
                 int bookmark = game.bookmarkState();
                 if (cost.pay(source, game, source, player.getId(), false)) {
+                    didPay = true;
                     game.informPlayers(player.getLogName() + " paid for " + mageObject.getLogName() + " - " + message);
-                    if (!executingEffects.isEmpty()) {
-                        for (Effect effect : executingEffects) {
-                            effect.setTargetPointer(this.targetPointer);
-                            if (effect instanceof OneShotEffect) {
-                                result &= effect.apply(game, source);
-                            } else {
-                                game.addEffect((ContinuousEffect) effect, source);
-                            }
-                        }
-                    }
+                    result &= applyEffects(game, source, executingEffects);
                     player.resetStoredBookmark(game); // otherwise you can e.g. undo card drawn with Mentor of the Meek
                 } else {
                     // Paying cost was cancels so try to undo payment so far
                     player.restoreState(bookmark, DoIfCostPaid.class.getName(), game);
-                    if (!otherwiseEffects.isEmpty()) {
-                        for (Effect effect : otherwiseEffects) {
-                            effect.setTargetPointer(this.targetPointer);
-                            if (effect instanceof OneShotEffect) {
-                                result &= effect.apply(game, source);
-                            } else {
-                                game.addEffect((ContinuousEffect) effect, source);
-                            }
-                        }
-                    }
                 }
-            } else if (!otherwiseEffects.isEmpty()) {
-                for (Effect effect : otherwiseEffects) {
-                    effect.setTargetPointer(this.targetPointer);
-                    if (effect instanceof OneShotEffect) {
-                        result &= effect.apply(game, source);
-                    } else {
-                        game.addEffect((ContinuousEffect) effect, source);
-                    }
-                }
+            }
+            if (!didPay) {
+                // Not leaking the information in the game log that the player could
+                // not actually pay the cost, in case it is an hidden one.
+                game.informPlayers(player.getLogName() + " did not pay for " + mageObject.getLogName() + " - " + message);
+                result &= applyEffects(game, source, otherwiseEffects);
             }
             return result;
         }
         return false;
+    }
+
+    private boolean applyEffects(Game game, Ability source, Effects effects) {
+        boolean result = true;
+        if (!effects.isEmpty()) {
+            for (Effect effect : effects) {
+                effect.setTargetPointer(this.targetPointer);
+                if (effect instanceof OneShotEffect) {
+                    result &= effect.apply(game, source);
+                } else {
+                    game.addEffect((ContinuousEffect) effect, source);
+                }
+            }
+        }
+        return result;
     }
 
     protected Player getPayingPlayer(Game game, Ability source) {
@@ -153,7 +148,7 @@ public class DoIfCostPaid extends OneShotEffect {
     public Cost getCost() {
         return cost;
     }
-    
+
     @Override
     public String getText(Mode mode) {
         if (!staticText.isEmpty()) {

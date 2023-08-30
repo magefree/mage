@@ -143,7 +143,6 @@ class GiantOysterLeaveUntapDelayedTriggeredAbility extends DelayedTriggeredAbili
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType().equals(GameEvent.EventType.UNTAPPED) && event.getTargetId() != null
                 && event.getTargetId().equals(getSourceId())) {
-            System.out.println("Untapped");
             return true;
         }
         return event.getType().equals(GameEvent.EventType.ZONE_CHANGE) && event.getTargetId() != null

@@ -30,7 +30,7 @@ public final class OgreChitterlord extends CardImpl {
     private static final FilterControlledCreaturePermanent filter =
             new FilterControlledCreaturePermanent(SubType.RAT, "each Rat you control");
     private static final FilterControlledPermanent filterCondition =
-            new FilterControlledPermanent(SubType.RAT, "five or more Rats");
+            new FilterControlledPermanent(SubType.RAT, "you control five or more Rats");
     private static final Condition condition =
             new PermanentsOnTheBattlefieldCondition(filterCondition, ComparisonType.OR_GREATER, 5);
 
@@ -43,7 +43,7 @@ public final class OgreChitterlord extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         //  Whenever Ogre Chitterlord enters the battlefield or attacks, create two 1/1 black Rat creature tokens with "This creature can't block." Then if you control five or more Rats, each Rat you control gets +2/+0 until end of turn.
         Ability ability = new OrTriggeredAbility(

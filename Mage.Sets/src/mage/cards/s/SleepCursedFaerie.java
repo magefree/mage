@@ -35,7 +35,7 @@ public final class SleepCursedFaerie extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Sleep-Cursed Faerie enters the battlefield tapped with three stun counters on it.
         Ability ability = new EntersBattlefieldAbility(

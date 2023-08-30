@@ -65,6 +65,6 @@ class ChitteringDoomTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you roll a 4 or higher on a die, create a 1/1 green Squirrel creature token";
+        return "Whenever you roll a 4 or higher on a die, create a 1/1 green Squirrel creature token.";
     }
 }

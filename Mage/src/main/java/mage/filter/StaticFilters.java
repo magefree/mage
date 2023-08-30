@@ -483,6 +483,12 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT_ENCHANTMENT.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT = new FilterControlledEnchantmentPermanent("an enchantment you control");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_ANOTHER_ENCHANTMENT_SHORT_TEXT = new FilterControlledPermanent("another enchantment");
 
     static {
@@ -659,6 +665,13 @@ public final class StaticFilters {
     static {
         FILTER_ANOTHER_CREATURE_YOU_CONTROL.add(AnotherPredicate.instance);
         FILTER_ANOTHER_CREATURE_YOU_CONTROL.setLockedFilter(true);
+    }
+
+    public static final FilterControlledCreaturePermanent FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL = new FilterControlledCreaturePermanent("another target creature you control");
+
+    static {
+        FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL.add(AnotherPredicate.instance);
+        FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL.setLockedFilter(true);
     }
 
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_UNTAPPED_CREATURE = new FilterControlledCreaturePermanent("untapped creature you control");

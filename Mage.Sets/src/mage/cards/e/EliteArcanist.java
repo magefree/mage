@@ -75,8 +75,8 @@ enum EliteArcanistAdjuster implements CostAdjuster {
         }
         int cmc = imprintedInstant.getManaValue();
         if (cmc > 0) {
-            ability.getManaCostsToPay().clear();
-            ability.getManaCostsToPay().add(new GenericManaCost(cmc));
+            ability.clearManaCostsToPay();
+            ability.addManaCostsToPay(new GenericManaCost(cmc));
         }
     }
 }

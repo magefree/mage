@@ -142,7 +142,7 @@ class AdventureCardSpellAbility extends SpellAbility {
         StringBuilder sbRule = new StringBuilder();
         sbRule.append(this.nameFull);
         sbRule.append(" ");
-        sbRule.append(manaCosts.getText());
+        sbRule.append(getManaCosts().getText());
         sbRule.append(" &mdash; ");
         Modes modes = this.getModes();
         if (modes.size() <= 1) {

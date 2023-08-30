@@ -72,14 +72,14 @@ class TroyanGutsyExplorerManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public String getRule() {
-        return "Spend this mana only to cast spells with mana value 5 or greater or spells with X in their mana costs";
+        return "Spend this mana only to cast spells with mana value 5 or greater or spells with {X} in their mana costs";
     }
 }
 
 class TroyanGutsyExplorerConditionalMana extends ConditionalMana {
     TroyanGutsyExplorerConditionalMana(Mana mana) {
         super(mana);
-        staticText = "Spend this mana only to cast spells with mana value 5 or greater or spells with X in their mana costs";
+        staticText = "Spend this mana only to cast spells with mana value 5 or greater or spells with {X} in their mana costs";
         addCondition(TroyanGutsyExplorerCondition.instance);
     }
 }

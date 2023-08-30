@@ -72,9 +72,6 @@ public interface ContinuousEffect extends Effect {
     boolean isYourNextUpkeepStep(Game game);
 
     @Override
-    void newId();
-
-    @Override
     ContinuousEffect copy();
 
     boolean isTemporary();

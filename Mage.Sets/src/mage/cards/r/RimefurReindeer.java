@@ -25,7 +25,7 @@ public final class RimefurReindeer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever an enchantment enters the battlefield under your control, tap target creature an opponent controls.
-        Ability ability = new ConstellationAbility(new TapTargetEffect());
+        Ability ability = new ConstellationAbility(new TapTargetEffect(), false, false);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability.setAbilityWord(null));
     }

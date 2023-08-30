@@ -74,7 +74,7 @@ public class ExileFromHandCost extends CostImpl {
                 // TODO: wtf, look at setXFromCMC usage -- it used in cards with alternative costs, not additional... need to fix?
                 vmc.setAmount(cmc, cmc, false);
                 vmc.setPaid();
-                ability.getManaCostsToPay().add(vmc);
+                ability.addManaCostsToPay(vmc);
             }
         }
         return paid;

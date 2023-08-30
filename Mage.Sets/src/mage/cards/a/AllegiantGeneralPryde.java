@@ -7,7 +7,6 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -54,12 +53,12 @@ public class AllegiantGeneralPryde extends CardImpl {
         this.addAbility(new SimpleStaticAbility(effect));
     }
 
-    public AllegiantGeneralPryde(final AllegiantGeneralPryde card) {
+    private AllegiantGeneralPryde(final AllegiantGeneralPryde card) {
         super(card);
     }
 
     @Override
-    public Card copy() {
+    public AllegiantGeneralPryde copy() {
         return new AllegiantGeneralPryde(this);
     }
 }

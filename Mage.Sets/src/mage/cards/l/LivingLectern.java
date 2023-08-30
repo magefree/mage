@@ -12,7 +12,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.RoleType;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -21,6 +22,13 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class LivingLectern extends CardImpl {
+
+    private static final FilterControlledCreaturePermanent filter =
+            new FilterControlledCreaturePermanent("other target creature you control");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
 
     public LivingLectern(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{U}");
@@ -36,7 +44,7 @@ public final class LivingLectern extends CardImpl {
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new CreateRoleAttachedTargetEffect(RoleType.SORCERER));
         ability.addTarget(new TargetPermanent(
-                0, 1, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL
+                0, 1, filter
         ));
         this.addAbility(ability);
     }
