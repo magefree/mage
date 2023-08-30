@@ -49,7 +49,7 @@ class WriteIntoBeingEffect extends OneShotEffect {
                 + "<i>(To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)</i>";
     }
 
-    public WriteIntoBeingEffect(final WriteIntoBeingEffect effect) {
+    private WriteIntoBeingEffect(final WriteIntoBeingEffect effect) {
         super(effect);
     }
 

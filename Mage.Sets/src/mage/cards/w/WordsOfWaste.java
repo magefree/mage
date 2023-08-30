@@ -48,7 +48,7 @@ class WordsOfWasteEffect extends ReplacementEffectImpl {
         staticText = "The next time you would draw a card this turn, each opponent discards a card instead";
     }
 
-    public WordsOfWasteEffect(final WordsOfWasteEffect effect) {
+    private WordsOfWasteEffect(final WordsOfWasteEffect effect) {
         super(effect);
     }
 

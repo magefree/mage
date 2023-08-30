@@ -66,7 +66,7 @@ class WildwoodEscortEffect extends ReplacementEffectImpl {
         staticText = "if {this} would die, exile it instead";
     }
 
-    public WildwoodEscortEffect(final WildwoodEscortEffect effect) {
+    private WildwoodEscortEffect(final WildwoodEscortEffect effect) {
         super(effect);
     }
 

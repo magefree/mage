@@ -48,7 +48,7 @@ class WildcallEffect extends OneShotEffect {
         this.staticText = "Manifest the top card of your library, then put X +1/+1 counters on it";
     }
 
-    public WildcallEffect(final WildcallEffect effect) {
+    private WildcallEffect(final WildcallEffect effect) {
         super(effect);
     }
 

@@ -62,7 +62,7 @@ class WhirlpoolWarriorActivatedEffect extends OneShotEffect {
         this.staticText = "Each player shuffles the cards from their hand into their library, then draws that many cards";
     }
 
-    public WhirlpoolWarriorActivatedEffect(final WhirlpoolWarriorActivatedEffect effect) {
+    private WhirlpoolWarriorActivatedEffect(final WhirlpoolWarriorActivatedEffect effect) {
         super(effect);
     }
 

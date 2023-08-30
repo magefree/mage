@@ -52,7 +52,7 @@ class WorldAtWarEffect extends OneShotEffect {
         staticText = "After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn";
     }
 
-    public WorldAtWarEffect(final WorldAtWarEffect effect) {
+    private WorldAtWarEffect(final WorldAtWarEffect effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class UntapDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new UntapAttackingThisTurnEffect());
     }
 
-    public UntapDelayedTriggeredAbility(UntapDelayedTriggeredAbility ability) {
+    private UntapDelayedTriggeredAbility(final UntapDelayedTriggeredAbility ability) {
         super(ability);
         this.connectedTurnMod = ability.connectedTurnMod;
         this.enabled = ability.enabled;
@@ -130,7 +130,7 @@ class UntapAttackingThisTurnEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public UntapAttackingThisTurnEffect(final UntapAttackingThisTurnEffect effect) {
+    private UntapAttackingThisTurnEffect(final UntapAttackingThisTurnEffect effect) {
         super(effect);
     }
 

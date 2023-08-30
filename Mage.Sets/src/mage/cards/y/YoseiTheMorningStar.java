@@ -64,7 +64,7 @@ class YoseiTheMorningStarTarget extends TargetPermanent {
         super(0, 5, filterTemplate, false);
     }
 
-    public YoseiTheMorningStarTarget(final YoseiTheMorningStarTarget target) {
+    private YoseiTheMorningStarTarget(final YoseiTheMorningStarTarget target) {
         super(target);
     }
 

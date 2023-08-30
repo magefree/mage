@@ -48,7 +48,7 @@ class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a spell or ability causes its controller to shuffle their library, ");
     }
 
-    public WidespreadPanicTriggeredAbility(final WidespreadPanicTriggeredAbility ability) {
+    private WidespreadPanicTriggeredAbility(final WidespreadPanicTriggeredAbility ability) {
         super(ability);
     }
 
@@ -82,7 +82,7 @@ class WidespreadPanicEffect extends OneShotEffect {
         this.staticText = "that player puts a card from their hand on top of their library";
     }
 
-    public WidespreadPanicEffect(final WidespreadPanicEffect effect) {
+    private WidespreadPanicEffect(final WidespreadPanicEffect effect) {
         super(effect);
     }
 

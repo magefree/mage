@@ -61,7 +61,7 @@ class WitchHuntEffect extends ContinuousEffectImpl {
         staticText = "target opponent chosen at random gains control of {this}";
     }
 
-    public WitchHuntEffect(final WitchHuntEffect effect) {
+    private WitchHuntEffect(final WitchHuntEffect effect) {
         super(effect);
     }
 

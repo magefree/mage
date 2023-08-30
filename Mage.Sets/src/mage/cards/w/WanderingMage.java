@@ -88,7 +88,7 @@ class WanderingMageCost extends CostImpl {
         this.text = "Put a -1/-1 counter on a creature you control";
     }
 
-    public WanderingMageCost(WanderingMageCost cost) {
+    private WanderingMageCost(final WanderingMageCost cost) {
         super(cost);
     }
 

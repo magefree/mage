@@ -71,7 +71,7 @@ class WoodwraithCorrupterToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
-    public WoodwraithCorrupterToken(final WoodwraithCorrupterToken token) {
+    private WoodwraithCorrupterToken(final WoodwraithCorrupterToken token) {
         super(token);
     }
 

@@ -55,7 +55,7 @@ class WingPunctureEffect extends OneShotEffect {
         staticText = "Target creature you control deals damage equal to its power to target creature with flying";
      }
 
-    public WingPunctureEffect(final WingPunctureEffect effect) {
+    private WingPunctureEffect(final WingPunctureEffect effect) {
         super(effect);
     }
 

@@ -67,7 +67,7 @@ public final class WindZendikon extends CardImpl {
             toughness = new MageInt(2);
             addAbility(FlyingAbility.getInstance());
         }
-        public WindZendikonElementalToken(final WindZendikonElementalToken token) {
+        private WindZendikonElementalToken(final WindZendikonElementalToken token) {
             super(token);
         }
 

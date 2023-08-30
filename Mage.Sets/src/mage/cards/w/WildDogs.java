@@ -58,7 +58,7 @@ class WildDogsEffect extends OneShotEffect {
         this.staticText = "the player with the most life gains control of {this}";
     }
 
-    public WildDogsEffect(final WildDogsEffect effect) {
+    private WildDogsEffect(final WildDogsEffect effect) {
         super(effect);
     }
 

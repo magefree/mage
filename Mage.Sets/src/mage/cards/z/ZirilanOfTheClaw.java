@@ -63,7 +63,7 @@ class ZirilanOfTheClawEffect extends OneShotEffect {
                 + " That Dragon gains haste until end of turn. Exile it at the beginning of the next end step";
     }
 
-    public ZirilanOfTheClawEffect(final ZirilanOfTheClawEffect effect) {
+    private ZirilanOfTheClawEffect(final ZirilanOfTheClawEffect effect) {
         super(effect);
     }
 
