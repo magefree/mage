@@ -59,6 +59,8 @@ public final class HearthElemental extends AdventureCard {
         this.getSpellCard().getSpellAbility().addEffect(new DiscardHandControllerEffect());
         this.getSpellCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2)
                 .concatBy(", then"));
+
+        this.finalizeAdventure();
     }
 
     private HearthElemental(final HearthElemental card) {

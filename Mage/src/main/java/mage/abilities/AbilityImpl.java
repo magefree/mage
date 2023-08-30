@@ -56,8 +56,8 @@ public abstract class AbilityImpl implements Ability {
     protected AbilityType abilityType;
     protected UUID controllerId;
     protected UUID sourceId;
-    private ManaCosts<ManaCost> manaCosts;
-    private ManaCosts<ManaCost> manaCostsToPay;
+    private final ManaCosts<ManaCost> manaCosts;
+    private final ManaCosts<ManaCost> manaCostsToPay;
     private Costs<Cost> costs;
     protected Modes modes; // access to it by GetModes only (it can be overridden by some abilities)
     protected Zone zone;
@@ -83,7 +83,7 @@ public abstract class AbilityImpl implements Ability {
     protected String appendToRule = null;
     protected int sourcePermanentTransformCount = 0;
 
-    public AbilityImpl(AbilityType abilityType, Zone zone) {
+    protected AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
         this.originalId = id;
         this.abilityType = abilityType;
@@ -879,9 +879,6 @@ public abstract class AbilityImpl implements Ability {
         if (manaCost == null) {
             return;
         }
-        if (manaCostsToPay == null) {
-            manaCostsToPay = new ManaCostsImpl<>();
-        }
         if (manaCost instanceof ManaCosts) {
             manaCostsToPay.addAll((ManaCosts) manaCost);
         } else {
@@ -894,14 +891,6 @@ public abstract class AbilityImpl implements Ability {
         if (manaCost == null) {
             return;
         }
-
-        if (manaCosts == null) {
-            manaCosts = new ManaCostsImpl<>();
-        }
-        if (manaCostsToPay == null) {
-            manaCostsToPay = new ManaCostsImpl<>();
-        }
-
         manaCosts.add(manaCost);
         manaCostsToPay.add(manaCost);
     }

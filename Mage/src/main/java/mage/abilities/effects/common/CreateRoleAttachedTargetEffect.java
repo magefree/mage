@@ -7,6 +7,7 @@ import mage.constants.Outcome;
 import mage.constants.RoleType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.Token;
 
 /**
  * @author TheElk801
@@ -36,8 +37,9 @@ public class CreateRoleAttachedTargetEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        roleType.createToken(permanent, game, source);
-        return true;
+        Token token = roleType.createToken(permanent, game, source);
+        // The token may not be created, for instance if the creature has protection from enchantments.
+        return token.getLastAddedTokenIds().size() > 0;
     }
 
     @Override

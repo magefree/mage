@@ -44,6 +44,8 @@ public final class HeartflameDuelist extends AdventureCard {
         // Heartflame Slash deals 3 damage to any target.
         this.getSpellCard().getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellCard().getSpellAbility().addTarget(new TargetAnyTarget());
+
+        this.finalizeAdventure();
     }
 
     private HeartflameDuelist(final HeartflameDuelist card) {

@@ -31,6 +31,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Armory Mice", 3, Rarity.COMMON, mage.cards.a.ArmoryMice.class));
         cards.add(new SetCardInfo("Ash, Party Crasher", 201, Rarity.UNCOMMON, mage.cards.a.AshPartyCrasher.class));
         cards.add(new SetCardInfo("Ashiok's Reaper", 79, Rarity.UNCOMMON, mage.cards.a.AshioksReaper.class));
+        cards.add(new SetCardInfo("Ashiok, Wicked Manipulator", 78, Rarity.MYTHIC, mage.cards.a.AshiokWickedManipulator.class));
         cards.add(new SetCardInfo("Asinine Antics", 42, Rarity.MYTHIC, mage.cards.a.AsinineAntics.class));
         cards.add(new SetCardInfo("Back for Seconds", 80, Rarity.UNCOMMON, mage.cards.b.BackForSeconds.class));
         cards.add(new SetCardInfo("Barrow Naughty", 81, Rarity.COMMON, mage.cards.b.BarrowNaughty.class));
@@ -64,6 +65,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Cooped Up", 8, Rarity.COMMON, mage.cards.c.CoopedUp.class));
         cards.add(new SetCardInfo("Cruel Somnophage", 222, Rarity.RARE, mage.cards.c.CruelSomnophage.class));
         cards.add(new SetCardInfo("Crystal Grotto", 254, Rarity.COMMON, mage.cards.c.CrystalGrotto.class));
+        cards.add(new SetCardInfo("Curse of the Werefox", 167, Rarity.COMMON, mage.cards.c.CurseOfTheWerefox.class));
         cards.add(new SetCardInfo("Cursed Courtier", 9, Rarity.UNCOMMON, mage.cards.c.CursedCourtier.class));
         cards.add(new SetCardInfo("Cut In", 125, Rarity.COMMON, mage.cards.c.CutIn.class));
         cards.add(new SetCardInfo("Decadent Dragon", 223, Rarity.RARE, mage.cards.d.DecadentDragon.class));
@@ -77,6 +79,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Edgewall Pack", 126, Rarity.COMMON, mage.cards.e.EdgewallPack.class));
         cards.add(new SetCardInfo("Eerie Interference", 12, Rarity.UNCOMMON, mage.cards.e.EerieInterference.class));
         cards.add(new SetCardInfo("Ego Drain", 86, Rarity.UNCOMMON, mage.cards.e.EgoDrain.class));
+        cards.add(new SetCardInfo("Elusive Otter", 225, Rarity.RARE, mage.cards.e.ElusiveOtter.class));
         cards.add(new SetCardInfo("Elvish Archivist", 168, Rarity.RARE, mage.cards.e.ElvishArchivist.class));
         cards.add(new SetCardInfo("Embereth Veteran", 127, Rarity.UNCOMMON, mage.cards.e.EmberethVeteran.class));
         cards.add(new SetCardInfo("Eriette of the Charmed Apple", 202, Rarity.MYTHIC, mage.cards.e.ErietteOfTheCharmedApple.class));
@@ -85,8 +88,10 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Evolving Wilds", 256, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Expel the Interlopers", 13, Rarity.RARE, mage.cards.e.ExpelTheInterlopers.class));
         cards.add(new SetCardInfo("Experimental Confectioner", 314, Rarity.UNCOMMON, mage.cards.e.ExperimentalConfectioner.class));
+        cards.add(new SetCardInfo("Extraordinary Journey", 48, Rarity.RARE, mage.cards.e.ExtraordinaryJourney.class));
         cards.add(new SetCardInfo("Faerie Dreamthief", 89, Rarity.UNCOMMON, mage.cards.f.FaerieDreamthief.class));
         cards.add(new SetCardInfo("Faerie Fencing", 90, Rarity.UNCOMMON, mage.cards.f.FaerieFencing.class));
+        cards.add(new SetCardInfo("Faerie Slumber Party", 371, Rarity.RARE, mage.cards.f.FaerieSlumberParty.class));
         cards.add(new SetCardInfo("Farsight Ritual", 49, Rarity.RARE, mage.cards.f.FarsightRitual.class));
         cards.add(new SetCardInfo("Faunsbane Troll", 203, Rarity.RARE, mage.cards.f.FaunsbaneTroll.class));
         cards.add(new SetCardInfo("Feed the Cauldron", 91, Rarity.COMMON, mage.cards.f.FeedTheCauldron.class));
@@ -160,6 +165,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Moment of Valor", 20, Rarity.COMMON, mage.cards.m.MomentOfValor.class));
         cards.add(new SetCardInfo("Monstrous Rage", 142, Rarity.UNCOMMON, mage.cards.m.MonstrousRage.class));
         cards.add(new SetCardInfo("Moonshaker Cavalry", 21, Rarity.MYTHIC, mage.cards.m.MoonshakerCavalry.class));
+        cards.add(new SetCardInfo("Mosswood Dreadknight", 231, Rarity.RARE, mage.cards.m.MosswoodDreadknight.class));
         cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Neva, Stalked by Nightmares", 209, Rarity.UNCOMMON, mage.cards.n.NevaStalkedByNightmares.class));
         cards.add(new SetCardInfo("Night of the Sweets' Revenge", 178, Rarity.UNCOMMON, mage.cards.n.NightOfTheSweetsRevenge.class));
@@ -249,6 +255,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Tattered Ratter", 152, Rarity.UNCOMMON, mage.cards.t.TatteredRatter.class));
         cards.add(new SetCardInfo("Tempest Hart", 238, Rarity.UNCOMMON, mage.cards.t.TempestHart.class));
         cards.add(new SetCardInfo("Tenacious Tomeseeker", 74, Rarity.UNCOMMON, mage.cards.t.TenaciousTomeseeker.class));
+        cards.add(new SetCardInfo("Territorial Witchstalker", 189, Rarity.COMMON, mage.cards.t.TerritorialWitchstalker.class));
         cards.add(new SetCardInfo("The Apprentice's Folly", 200, Rarity.RARE, mage.cards.t.TheApprenticesFolly.class));
         cards.add(new SetCardInfo("The End", 87, Rarity.RARE, mage.cards.t.TheEnd.class));
         cards.add(new SetCardInfo("The Goose Mother", 204, Rarity.RARE, mage.cards.t.TheGooseMother.class));
@@ -293,6 +300,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Witch's Mark", 158, Rarity.COMMON, mage.cards.w.WitchsMark.class));
         cards.add(new SetCardInfo("Witchstalker Frenzy", 159, Rarity.UNCOMMON, mage.cards.w.WitchstalkerFrenzy.class));
         cards.add(new SetCardInfo("Woodland Acolyte", 241, Rarity.UNCOMMON, mage.cards.w.WoodlandAcolyte.class));
+        cards.add(new SetCardInfo("Yenna, Redtooth Regent", 219, Rarity.RARE, mage.cards.y.YennaRedtoothRegent.class));
     }
 
 //    @Override

@@ -331,7 +331,7 @@ public class GameEvent implements Serializable {
         PLANESWALK, PLANESWALKED,
         PAID_CUMULATIVE_UPKEEP,
         DIDNT_PAY_CUMULATIVE_UPKEEP,
-        LIFE_PAID,
+        PAY_LIFE, LIFE_PAID,
         CASCADE_LAND,
         LEARN,
         //permanent events
