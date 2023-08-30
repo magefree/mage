@@ -10,9 +10,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.RoleType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.GameLog;
@@ -79,7 +81,7 @@ class CurseOfTheWerefoxEffect extends OneShotEffect {
                 "that creature fights up to one target creature you don't control"
         );
         ability.getEffects().setTargetPointer(new FixedTarget(target.getId(), game));
-        ability.addTarget(new TargetOpponentsCreaturePermanent(0, 1));
+        ability.addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }
