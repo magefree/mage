@@ -77,6 +77,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kenrith's Transformation", 128, Rarity.UNCOMMON, mage.cards.k.KenrithsTransformation.class));
         cards.add(new SetCardInfo("Kindred Dominance", 113, Rarity.RARE, mage.cards.k.KindredDominance.class));
         cards.add(new SetCardInfo("Kor Spiritdancer", 69, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
+        cards.add(new SetCardInfo("Korvold, Gleeful Glutton", 26, Rarity.MYTHIC, mage.cards.k.KorvoldGleefulGlutton.class));
         cards.add(new SetCardInfo("Krosan Verge", 163, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
         cards.add(new SetCardInfo("Loamcrafter Faun", 19, Rarity.RARE, mage.cards.l.LoamcrafterFaun.class));
         cards.add(new SetCardInfo("Mantle of the Ancients", 70, Rarity.RARE, mage.cards.m.MantleOfTheAncients.class));
