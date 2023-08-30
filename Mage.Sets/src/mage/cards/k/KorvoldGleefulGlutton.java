@@ -14,16 +14,18 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
+import mage.players.Player;
 import mage.watchers.Watcher;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -47,21 +49,27 @@ public final class KorvoldGleefulGlutton extends CardImpl {
         this.toughness = new MageInt(4);
 
         // This spell costs {1} less to cast for each card type among permanents you've sacrificed this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(CardTypesAmongSacrifiedPermanents.instance)), new KorvoldGleefulGluttonWatcher());
+        Ability staticAbility = new SimpleStaticAbility(Zone.ALL, 
+            new SpellCostReductionSourceEffect(CardTypesAmongSacrifiedPermanents.instance)
+                .setText("this spell costs {1} less to cast for each card type among permanents you've sacrificed this turn")
+        );
+        staticAbility.addHint(new ValueHint("card types among permanents you've sacrificed this turn", CardTypesAmongSacrifiedPermanents.instance));
+        
+        this.addAbility(staticAbility, new KorvoldGleefulGluttonWatcher());
 
         // Flying, Trample, Haste
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
 
-        // Whenever Korvold deals combat damage to a player, put X +1/+1 counters on Korvold and draw X cards, 
-        // where X is the number of permanent types among cards in your graveyard.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(
-            CounterType.P1P1.createInstance(), CardTypesInGraveyardCount.YOU, true),
-        false);
-        ability.addEffect(new DrawCardSourceControllerEffect(CardTypesInGraveyardCount.YOU));
-
-        this.addAbility(ability);
+        // Whenever Korvold deals combat damage to a player, put X +1/+1 counters on Korvold and draw X cards, where X is the number of permanent types among cards in your graveyard.
+        Ability combatDamageAbility = new DealsCombatDamageToAPlayerTriggeredAbility(
+            new AddCountersSourceEffect(CounterType.P1P1.createInstance(), PermanentTypesInGraveyardCount.instance, true),
+        false
+        );
+        combatDamageAbility.addEffect(new DrawCardSourceControllerEffect(PermanentTypesInGraveyardCount.instance).setText("and draw X cards, where X is the number of permanent types among cards in your graveyard"));
+        combatDamageAbility.addHint(new ValueHint("permanent types among cards in your graveyard", PermanentTypesInGraveyardCount.instance));
+        this.addAbility(combatDamageAbility);
     }
 
     private KorvoldGleefulGlutton(final KorvoldGleefulGlutton card) {
@@ -90,13 +98,11 @@ class KorvoldGleefulGluttonWatcher extends Watcher {
 
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
 
-        if (permanent == null) {
-            return;
+        if (permanent != null) {
+            permanent.getCardType(game).forEach(type -> 
+                map.computeIfAbsent(event.getPlayerId(), (key) -> new HashSet<>()).add(type)
+            );
         }
-
-        permanent.getCardType(game).forEach(type -> 
-            map.computeIfAbsent(event.getPlayerId(), (key) -> new HashSet<>()).add(type)
-        );
     }
 
     @Override
@@ -128,5 +134,35 @@ enum CardTypesAmongSacrifiedPermanents implements DynamicValue {
     public String getMessage() {
         return "card types among permanents you sacrificed";
     }
-    
+}
+
+enum PermanentTypesInGraveyardCount implements DynamicValue {
+    instance;
+
+    @Override
+    public DynamicValue copy() {
+        return instance;
+    }
+
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Player player = game.getPlayer(sourceAbility.getControllerId());
+        if (player == null) {
+            return 0;
+        }
+
+        return player.getGraveyard().getCards(game).stream()
+            .filter(card -> !card.isCopy() && !(card instanceof PermanentToken))
+            .map(card -> card.getCardType(game))
+            .flatMap(types -> types.stream().filter(CardType::isPermanentType))
+            .distinct()
+            .mapToInt(x -> 1)
+            .sum();
+    }
+
+    @Override
+    public String getMessage() {
+        return "permanent types among cards in your graveyard";
+    }
+
 }
