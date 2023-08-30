@@ -65,6 +65,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Cooped Up", 8, Rarity.COMMON, mage.cards.c.CoopedUp.class));
         cards.add(new SetCardInfo("Cruel Somnophage", 222, Rarity.RARE, mage.cards.c.CruelSomnophage.class));
         cards.add(new SetCardInfo("Crystal Grotto", 254, Rarity.COMMON, mage.cards.c.CrystalGrotto.class));
+        cards.add(new SetCardInfo("Curse of the Werefox", 167, Rarity.COMMON, mage.cards.c.CurseOfTheWerefox.class));
         cards.add(new SetCardInfo("Cursed Courtier", 9, Rarity.UNCOMMON, mage.cards.c.CursedCourtier.class));
         cards.add(new SetCardInfo("Cut In", 125, Rarity.COMMON, mage.cards.c.CutIn.class));
         cards.add(new SetCardInfo("Decadent Dragon", 223, Rarity.RARE, mage.cards.d.DecadentDragon.class));
