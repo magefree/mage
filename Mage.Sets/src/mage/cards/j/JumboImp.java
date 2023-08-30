@@ -1,9 +1,6 @@
 
 package mage.cards.j;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -14,16 +11,16 @@ import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -65,11 +62,11 @@ public final class JumboImp extends CardImpl {
 
 class JumboImpEffect extends EntersBattlefieldWithXCountersEffect {
 
-    public JumboImpEffect(Counter counter) {
+    JumboImpEffect(Counter counter) {
         super(counter);
     }
 
-    public JumboImpEffect(EntersBattlefieldWithXCountersEffect effect) {
+    private JumboImpEffect(JumboImpEffect effect) {
         super(effect);
     }
 
@@ -87,7 +84,7 @@ class JumboImpEffect extends EntersBattlefieldWithXCountersEffect {
     }
 
     @Override
-    public EntersBattlefieldWithXCountersEffect copy() {
+    public JumboImpEffect copy() {
         return new JumboImpEffect(this);
     }
 
