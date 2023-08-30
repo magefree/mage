@@ -26,6 +26,8 @@ import java.util.UUID;
  */
 public final class DoranTheSiegeTower extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature");
+
     public DoranTheSiegeTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}{G}");
         this.supertype.add(SuperType.LEGENDARY);
@@ -36,7 +38,7 @@ public final class DoranTheSiegeTower extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Each creature assigns combat damage equal to its toughness rather than its power.
-        this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessAllEffect(new FilterCreaturePermanent("each creature"))));
+        this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessAllEffect(filter)));
     }
 
     private DoranTheSiegeTower(final DoranTheSiegeTower card) {

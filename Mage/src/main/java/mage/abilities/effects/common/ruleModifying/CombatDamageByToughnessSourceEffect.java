@@ -7,7 +7,7 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -29,13 +29,14 @@ public class CombatDamageByToughnessSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
+            discard();
             return false;
         }
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new PermanentIdPredicate(permanent.getId()));
+        filter.add(new MageObjectReferencePredicate(permanent.getId(), game));
         game.getCombat().setUseToughnessForDamage(true);
         game.getCombat().addUseToughnessForDamageFilter(filter);
 

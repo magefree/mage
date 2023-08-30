@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -22,7 +21,7 @@ import java.util.UUID;
 public final class AncientLumberknot extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creatures you control with toughness greater than its power");
+            = new FilterCreaturePermanent("each creature you control with toughness greater than its power");
 
     static {
         filter.add(AncientLumberknotPredicate.instance);
