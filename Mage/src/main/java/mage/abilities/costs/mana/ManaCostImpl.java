@@ -33,7 +33,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         options = new ManaOptions();
     }
 
-    public ManaCostImpl(final ManaCostImpl manaCost) {
+    protected ManaCostImpl(final ManaCostImpl manaCost) {
         super(manaCost);
         this.payment = manaCost.payment.copy();
         this.usedManaToPay = manaCost.usedManaToPay.copy();
@@ -85,9 +85,9 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
 
     @Override
     public void clearPaid() {
+        super.clearPaid();
         payment.clear();
         usedManaToPay.clear();
-        super.clearPaid();
     }
 
     @Override

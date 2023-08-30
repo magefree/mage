@@ -7,7 +7,7 @@ public class ChoiceColorOrArtifact extends ChoiceColor {
         this.message = "Choose protection from";
     }
 
-    public ChoiceColorOrArtifact(final ChoiceColorOrArtifact choice) {
+    protected ChoiceColorOrArtifact(final ChoiceColorOrArtifact choice) {
         super(choice);
     }
 

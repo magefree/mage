@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -75,6 +76,6 @@ class EnterTheGodEternalsEffect extends OneShotEffect {
                 }
             }
         }
-        return new AmassEffect(4).apply(game, source);
+        return new AmassEffect(4, SubType.ZOMBIE).apply(game, source);
     }
 }

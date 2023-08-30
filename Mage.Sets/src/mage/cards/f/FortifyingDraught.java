@@ -1,6 +1,6 @@
 package mage.cards.f;
 
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -23,12 +23,12 @@ public final class FortifyingDraught extends CardImpl {
         // You gain 2 life. Target creature gets +X/+X until end of turn, where X is the amount of life you gained this turn.
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                ControllerGotLifeCount.instance,
-                ControllerGotLifeCount.instance,
+                ControllerGainedLifeCount.instance,
+                ControllerGainedLifeCount.instance,
                 Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addWatcher(new PlayerGainedLifeWatcher());
-        this.getSpellAbility().addHint(ControllerGotLifeCount.getHint());
+        this.getSpellAbility().addHint(ControllerGainedLifeCount.getHint());
     }
 
     private FortifyingDraught(final FortifyingDraught card) {

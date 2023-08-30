@@ -45,7 +45,7 @@ class CorruptionOfTowashiTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
         this.setTriggerPhrase("Whenever a permanent you control transforms " +
                 "or a permanent enters the battlefield under your control transformed, ");
-        this.setDoOnlyOnce(true);
+        this.setDoOnlyOnceEachTurn(true);
     }
 
     private CorruptionOfTowashiTriggeredAbility(final CorruptionOfTowashiTriggeredAbility ability) {

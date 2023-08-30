@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.ExileTargetCardCopyAndCastEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -31,7 +32,8 @@ public final class MizzixsMastery extends CardImpl {
         // Exile target card that's an instant or sorcery from your graveyard. 
         // For each card exiled this way, copy it, and you may cast the copy 
         // without paying its mana cost. Exile Mizzix's Mastery.
-        this.getSpellAbility().addEffect(new MizzixsMasteryEffect());
+        this.getSpellAbility().addEffect(new ExileTargetCardCopyAndCastEffect(true).setText(
+                "Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost. Exile Mizzix's Mastery."));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(
                 new FilterInstantOrSorceryCard("card that's an instant or sorcery from your graveyard")));
         this.getSpellAbility().addEffect(new ExileSpellEffect());
@@ -50,48 +52,6 @@ public final class MizzixsMastery extends CardImpl {
     @Override
     public MizzixsMastery copy() {
         return new MizzixsMastery(this);
-    }
-}
-
-class MizzixsMasteryEffect extends OneShotEffect {
-
-    public MizzixsMasteryEffect() {
-        super(Outcome.PlayForFree);
-        this.staticText = "Exile target card that's an instant or sorcery from your "
-                + "graveyard. For each card exiled this way, copy it, and you "
-                + "may cast the copy without paying its mana cost";
-    }
-
-    public MizzixsMasteryEffect(final MizzixsMasteryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MizzixsMasteryEffect copy() {
-        return new MizzixsMasteryEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = game.getCard(getTargetPointer().getFirst(game, source));
-            if (card != null) {
-                if (controller.moveCards(card, Zone.EXILED, source, game)) {
-                    Card cardCopy = game.copyCard(card, source, source.getControllerId());
-                    if (cardCopy.getSpellAbility().canChooseTarget(game, controller.getId())
-                            && controller.chooseUse(outcome, "Cast copy of "
-                            + card.getName() + " without paying its mana cost?", source, game)) {
-                        game.getState().setValue("PlayFromNotOwnHandZone" + cardCopy.getId(), Boolean.TRUE);
-                        controller.cast(controller.chooseAbilityForCast(cardCopy, game, true),
-                                game, true, new ApprovingObject(source, game));
-                        game.getState().setValue("PlayFromNotOwnHandZone" + cardCopy.getId(), null);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
 
@@ -129,7 +89,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                     while (controller.canRespond()
                             && continueCasting
                             && !copiedCards.isEmpty()) {
-                        TargetCard targetCard = new TargetCard(0, 1, Zone.OUTSIDE,
+                        TargetCard targetCard = new TargetCard(0, 1, Zone.EXILED,
                                 new FilterCard("copied card to cast without paying its mana cost?"));
                         targetCard.setNotTarget(true);
                         if (controller.chooseTarget(Outcome.PlayForFree, copiedCards, targetCard, source, game)) {

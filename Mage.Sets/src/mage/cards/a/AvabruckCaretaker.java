@@ -16,10 +16,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -28,13 +25,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AvabruckCaretaker extends TransformingDoubleFacedCard {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public AvabruckCaretaker(UUID ownerId, CardSetInfo setInfo) {
         super(
@@ -55,7 +45,7 @@ public final class AvabruckCaretaker extends TransformingDoubleFacedCard {
                         CounterType.P1P1.createInstance(2)
                 ), TargetController.YOU, false
         );
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.getLeftHalfCard().addAbility(ability);
 
         // Daybound

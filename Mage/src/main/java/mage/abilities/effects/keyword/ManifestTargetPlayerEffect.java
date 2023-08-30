@@ -20,7 +20,6 @@ import mage.util.CardUtil;
 import java.util.Set;
 
 /**
- *
  * @author LevelX2
  */
 public class ManifestTargetPlayerEffect extends OneShotEffect {
@@ -35,7 +34,7 @@ public class ManifestTargetPlayerEffect extends OneShotEffect {
         this.staticText = setText();
     }
 
-    public ManifestTargetPlayerEffect(final ManifestTargetPlayerEffect effect) {
+    protected ManifestTargetPlayerEffect(final ManifestTargetPlayerEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.prefix = effect.prefix;
@@ -56,7 +55,7 @@ public class ManifestTargetPlayerEffect extends OneShotEffect {
             for (Card card : cards) {
                 ManaCosts manaCosts = null;
                 if (card.isCreature(game)) {
-                    manaCosts = card.getSpellAbility().getManaCosts();
+                    manaCosts = card.getSpellAbility() != null ? card.getSpellAbility().getManaCosts() : null;
                     if (manaCosts == null) {
                         manaCosts = new ManaCostsImpl<>("{0}");
                     }

@@ -59,6 +59,7 @@ public class ExileTargetAndSearchGraveyardHandLibraryEffect extends SearchTarget
 
     @Override
     public String getText(Mode mode) {
+        // TODO: Parent class sets static text so it must be overridden here for now
         StringBuilder sb = new StringBuilder();
         sb.append("Exile target ").append(mode.getTargets().get(0).getTargetName()).append(". ");
         sb.append(CardUtil.getTextWithFirstCharUpperCase(super.getText(mode)));

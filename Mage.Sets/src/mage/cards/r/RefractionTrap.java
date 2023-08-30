@@ -36,7 +36,7 @@ public final class RefractionTrap extends CardImpl {
         this.subtype.add(SubType.TRAP);
 
         // If an opponent cast a red instant or sorcery spell this turn, you may pay {W} rather than pay Refraction Trap's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{W}"), RefractionTrapCondition.instance), new SpellsCastWatcher());
+        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{W}"), RefractionTrapCondition.instance));
 
         // Prevent the next 3 damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, Refraction Trap deals that much damage to any target.
         this.getSpellAbility().addEffect(new RefractionTrapPreventDamageEffect(Duration.EndOfTurn, 3));
@@ -156,11 +156,9 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
             // check target
             //   check permanent first
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null) {
-                if (permanent.isControlledBy(source.getControllerId())) {
-                    // it's your permanent
-                    return true;
-                }
+            if (permanent != null && (permanent.isControlledBy(source.getControllerId()))) {
+                // it's your permanent
+                return true;
             }
             //   check player
             Player player = game.getPlayer(event.getTargetId());

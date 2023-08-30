@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceTargetsPermanentCondition;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.abilities.effects.common.cost.SpellCostIncreaseSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +27,7 @@ public final class VanishIntoEternity extends CardImpl {
 
         // This spell costs {3} more to cast if it targets a creature.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(3, condition).setCanWorksOnStackOnly(true)
+                Zone.ALL, new SpellCostIncreaseSourceEffect(3, condition).setCanWorksOnStackOnly(true)
         ).setRuleAtTheTop(true));
 
         // Exile target nonland permanent.

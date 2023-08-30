@@ -52,7 +52,7 @@ public final class SekkiSeasonsGuide extends CardImpl {
         // Sacrifice eight Spirits: Return Sekki from your graveyard to the battlefield.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                new ReturnSourceFromGraveyardToBattlefieldEffect(false, false),
                 new SacrificeTargetCost(new TargetControlledPermanent(8, 8, filter, true))));
     }
 

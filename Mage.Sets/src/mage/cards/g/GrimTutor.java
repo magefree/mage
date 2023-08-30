@@ -18,7 +18,7 @@ public final class GrimTutor extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
         // Search your library for a card and put that card into your hand, then shuffle your library.
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true));
 
         // You lose 3 life.
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(3));

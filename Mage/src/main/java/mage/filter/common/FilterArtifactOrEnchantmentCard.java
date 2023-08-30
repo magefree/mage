@@ -6,7 +6,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 
 /**
- *
  * @author TheElk801
  */
 public class FilterArtifactOrEnchantmentCard extends FilterCard {
@@ -20,7 +19,7 @@ public class FilterArtifactOrEnchantmentCard extends FilterCard {
         this.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.ENCHANTMENT.getPredicate()));
     }
 
-    public FilterArtifactOrEnchantmentCard(final FilterArtifactOrEnchantmentCard filter) {
+    protected FilterArtifactOrEnchantmentCard(final FilterArtifactOrEnchantmentCard filter) {
         super(filter);
     }
 

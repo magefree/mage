@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.counters.Counters;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
@@ -167,12 +168,14 @@ class AscentOfTheWorthyReturnEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
+        Counters countersToAdd = new Counters();
+        countersToAdd.addCounter(CounterType.FLYING.createInstance());
+        game.setEnterWithCounters(card.getId(), countersToAdd);
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
         Permanent permanent = game.getPermanent(card.getId());
         if (permanent == null) {
             return false;
         }
-        permanent.addCounters(CounterType.FLYING.createInstance(), source.getControllerId(), source, game);
         game.addEffect(new AddCardSubTypeTargetEffect(
                 SubType.ANGEL, Duration.Custom
         ).setTargetPointer(new FixedTarget(permanent, game)), source);

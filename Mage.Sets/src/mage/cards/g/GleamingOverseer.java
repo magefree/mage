@@ -38,7 +38,7 @@ public final class GleamingOverseer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Gleaming Overseer enters the battlefield, amass 1.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(1)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AmassEffect(1, SubType.ZOMBIE)));
 
         // Zombie tokens you control have hexproof and menace.
         Ability ability = new SimpleStaticAbility(new GainAbilityControlledEffect(

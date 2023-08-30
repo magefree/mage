@@ -14,6 +14,7 @@ import mage.game.Game;
 
 /**
  * RENAME
+ *
  * @author BetaSteward_at_googlemail.com, North, Alex-Vasile, xenohedron
  */
 public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
@@ -22,7 +23,9 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
     private final DynamicValue toughness;
 
     /**
-     * Note: Need to set text manually if calling this constructor directly
+     * Note: Need to set text manually if calling this constructor directly.
+     * <p>
+     * It is possible to have power or toughness to null, in which case only the other is modified.
      */
     public SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, SubLayer subLayer) {
         super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);
@@ -44,7 +47,7 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         this.staticText = "{this} has base power and toughness " + power + '/' + toughness + ' ' + duration.toString();
     }
 
-    public SetBasePowerToughnessSourceEffect(final SetBasePowerToughnessSourceEffect effect) {
+    protected SetBasePowerToughnessSourceEffect(final SetBasePowerToughnessSourceEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

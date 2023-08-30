@@ -77,6 +77,6 @@ class SecretSalvageEffect extends OneShotEffect {
         nameFilter.add(new NamePredicate(nameToSearch));
         return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                 0, Integer.MAX_VALUE, nameFilter
-        ), true, true).apply(game, source);
+        ), true).apply(game, source);
     }
 }

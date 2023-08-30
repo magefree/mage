@@ -18,7 +18,7 @@ public final class HunterToken extends TokenImpl {
         subtype.add(SubType.HUNTER);
     }
 
-    public HunterToken(final HunterToken token) {
+    protected HunterToken(final HunterToken token) {
         super(token);
     }
 

@@ -27,7 +27,7 @@ public final class FaerieConclave extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new BlueManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new FaerieConclaveToken(), "land", Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new FaerieConclaveToken(), CardType.LAND, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")));
     }
 
     private FaerieConclave(final FaerieConclave card) {

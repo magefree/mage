@@ -7,14 +7,14 @@ import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -22,12 +22,7 @@ import mage.target.TargetPlayer;
  */
 public final class MoggBombers extends CardImpl {
     
-    private static final String rule = "When another creature enters the battlefield, sacrifice {this} and it deals 3 damage to target player.";
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
+    private static final String rule = "When another creature enters the battlefield, sacrifice {this} and it deals 3 damage to target player or planeswalker.";
 
     public MoggBombers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -40,11 +35,13 @@ public final class MoggBombers extends CardImpl {
         Effect sacrificeMoggBombers = new SacrificeSourceEffect();
         Effect damageTargetPlayer = new DamageTargetEffect(3);
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
-                Zone.BATTLEFIELD, 
-                sacrificeMoggBombers, 
-                filter, false, rule);
+                Zone.BATTLEFIELD,
+                sacrificeMoggBombers,
+                StaticFilters.FILTER_ANOTHER_CREATURE,
+                false,
+                rule);
         ability.addEffect(damageTargetPlayer);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
 
     }

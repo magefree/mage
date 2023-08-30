@@ -26,7 +26,8 @@ public final class SpittingEarth extends CardImpl {
     public SpittingEarth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter))
+                .setText("{this} deals damage to target creature equal to the number of Mountains you control"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

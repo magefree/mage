@@ -26,7 +26,7 @@ public final class LolthSpiderToken extends TokenImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public LolthSpiderToken(final LolthSpiderToken token) {
+    protected LolthSpiderToken(final LolthSpiderToken token) {
         super(token);
     }
 

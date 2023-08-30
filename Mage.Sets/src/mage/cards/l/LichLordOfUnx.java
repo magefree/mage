@@ -9,7 +9,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
@@ -51,7 +51,7 @@ public final class LichLordOfUnx extends CardImpl {
                         .setText("target player loses X life"),
                 new ManaCostsImpl<>("{U}{U}{B}{B}")
         );
-        ability.addEffect(new PutLibraryIntoGraveTargetEffect(xValue)
+        ability.addEffect(new MillCardsTargetEffect(xValue)
                 .setText("and mills X cards, where X is the number of Zombies you control"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability.addHint(hint));

@@ -46,6 +46,7 @@ Core Set 2021|CoreSet2021|
 Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
+Doctor Who|DoctorWho|
 Dominaria|Dominaria|
 Dominaria United|DominariaUnited|
 Dominaria United Commander|DominariaUnitedCommander|
@@ -248,6 +249,8 @@ War of the Spark|WarOfTheSpark|
 Weatherlight|Weatherlight|
 Welcome Deck 2016|WelcomeDeck2016|
 Welcome Deck 2017|WelcomeDeck2017|
+Wilds of Eldraine|WildsOfEldraine|
+Wilds of Eldraine Commander|WildsOfEldraineCommander|
 World Magic Cup Qualifier|WorldMagicCupQualifier|
 Worldwake|Worldwake|
 WPN Gateway|WPNAndGatewayPromos|

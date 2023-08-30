@@ -35,7 +35,7 @@ public final class PatternOfRebirth extends CardImpl {
         this.addAbility(ability);
 
         // When enchanted creature dies, that creature's controller may search their library for a creature card and put that card onto the battlefield. If that player does, they shuffle their library.
-        Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), false, false, Outcome.PutCreatureInPlay);
+        Effect effect = new SearchLibraryPutInPlayTargetPlayerEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), false);
         effect.setText("that creature's controller may search their library for a creature card and put that card onto the battlefield. If that player does, they shuffle");
         this.addAbility(new DiesAttachedTriggeredAbility(effect, "enchanted creature", true, true, SetTargetPointer.ATTACHED_TO_CONTROLLER));
 

@@ -10,6 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -41,7 +42,8 @@ public final class SmolderingEgg extends TransformingDoubleFacedCard {
 
         // Whenever you cast an instant or sorcery spell, put a number of ember counters on Smoldering Egg equal to the amount of mana spent to cast that spell. Then if Smoldering Egg has seven or more ember counters on it, remove them and transform Smoldering Egg.
         this.getLeftHalfCard().addAbility(new SpellCastControllerTriggeredAbility(
-                new SmolderingEggEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false, true
+                new SmolderingEggEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
+                false, SetTargetPointer.SPELL
         ));
 
         // Ashmouth Dragon

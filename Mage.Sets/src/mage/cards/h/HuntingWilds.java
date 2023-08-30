@@ -39,7 +39,7 @@ public final class HuntingWilds extends CardImpl {
         // Kicker {3}{G}
         this.addAbility(new KickerAbility("{3}{G}"));
 
-        FilterLandCard filter = new FilterLandCard("Forest card");
+        FilterLandCard filter = new FilterLandCard("Forest cards");
         filter.add(SubType.FOREST.getPredicate());
 
         // Search your library for up to two Forest cards and put them onto the battlefield tapped. Then shuffle your library.

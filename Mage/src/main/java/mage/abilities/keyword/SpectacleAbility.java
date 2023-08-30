@@ -29,8 +29,8 @@ public class SpectacleAbility extends SpellAbility {
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
 
-        this.getManaCosts().clear();
-        this.getManaCostsToPay().clear();
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
         this.addManaCost(spectacleCosts.copy());
 
         this.setRuleAtTheTop(true);
@@ -39,7 +39,7 @@ public class SpectacleAbility extends SpellAbility {
         this.addHint(OpponentsLostLifeHint.instance);
     }
 
-    public SpectacleAbility(final SpectacleAbility ability) {
+    protected SpectacleAbility(final SpectacleAbility ability) {
         super(ability);
         this.rule = ability.rule;
     }

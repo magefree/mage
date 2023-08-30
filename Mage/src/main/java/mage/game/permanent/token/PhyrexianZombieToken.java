@@ -19,7 +19,7 @@ public final class PhyrexianZombieToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public PhyrexianZombieToken(final PhyrexianZombieToken token) {
+    protected PhyrexianZombieToken(final PhyrexianZombieToken token) {
         super(token);
     }
 

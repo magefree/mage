@@ -15,7 +15,6 @@ import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
 
 /**
- *
  * @author Styxo
  */
 public class SearchLibraryWithLessCMCPutInPlayEffect extends OneShotEffect {
@@ -32,7 +31,7 @@ public class SearchLibraryWithLessCMCPutInPlayEffect extends OneShotEffect {
         staticText = "Search your library for " + CardUtil.addArticle(filter.getMessage()) + " with mana value X or less, put it onto the battlefield, then shuffle";
     }
 
-    public SearchLibraryWithLessCMCPutInPlayEffect(final SearchLibraryWithLessCMCPutInPlayEffect effect) {
+    protected SearchLibraryWithLessCMCPutInPlayEffect(final SearchLibraryWithLessCMCPutInPlayEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

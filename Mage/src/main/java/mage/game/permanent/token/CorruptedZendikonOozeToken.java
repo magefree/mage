@@ -1,12 +1,12 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class CorruptedZendikonOozeToken extends TokenImpl {
@@ -19,7 +19,8 @@ public final class CorruptedZendikonOozeToken extends TokenImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
-    public CorruptedZendikonOozeToken(final CorruptedZendikonOozeToken token) {
+
+    protected CorruptedZendikonOozeToken(final CorruptedZendikonOozeToken token) {
         super(token);
     }
 

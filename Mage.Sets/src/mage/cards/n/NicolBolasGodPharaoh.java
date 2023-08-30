@@ -123,6 +123,7 @@ class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent == null || !cardsToExile.containsKey(opponentId)) {
+                continue;
             }
             cardsOpponentsChoseToExile.addAll(cardsToExile.get(opponentId));
             opponent.moveCards(cardsOpponentsChoseToExile, Zone.EXILED, source, game);

@@ -6,7 +6,7 @@ import mage.cards.decks.DeckValidatorFactory;
 import mage.cards.repository.CardScanner;
 import mage.cards.repository.PluginClassloaderRegistery;
 import mage.cards.repository.RepositoryUtil;
-import mage.game.draft.RateCard;
+import mage.cards.RateCard;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;

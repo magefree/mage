@@ -75,7 +75,7 @@ class GhastlyRemainsTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "At the beginning of your upkeep, if {this} is in your graveyard, you may pay {B}{B}{B}. If you do, return {this} to your hand";
+        return "At the beginning of your upkeep, if {this} is in your graveyard, you may pay {B}{B}{B}. If you do, return {this} to your hand.";
     }
 
 }

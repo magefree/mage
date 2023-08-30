@@ -42,8 +42,8 @@ public final class AjaniCallerOfThePride extends CardImpl {
         this.addAbility(ability);
         // -3: Target creature gains flying and double strike until end of turn.
         Effects effects = new Effects();
-        effects.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
-        effects.add(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
+        effects.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("target creature gains flying"));
+        effects.add(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn).setText("and double strike until end of turn"));
         ability = new LoyaltyAbility(effects, -3);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

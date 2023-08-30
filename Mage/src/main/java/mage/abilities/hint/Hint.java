@@ -11,10 +11,12 @@ import java.io.Serializable;
 public interface Hint extends Serializable {
 
     // It's a constant hint for cards/permanents (e.g. visible all the time)
-    // If you want to use a temporary hint for permanent then possible solutions availeable:
-    // 1. Add card hint to gained ability (ability create code);
+    //
+    // Another solutions are possible:
+    // 1. Add direct card hint to gained ability (ability create code);
     // 2. Add constant text: InfoEffect.addInfoToPermanent
-    // 3. Add dynamic card hint: InfoEffect.addCardHintToPermanent
+    // 3. Add dynamic text: InfoEffect.addCardHintToPermanent
+    // 4. Add direct text to the rules: permanent.addInfo, card.addInfo
 
     // TODO: add card hint for ActivateIfConditionActivatedAbility
     //  * remove my turn condition from cards construction

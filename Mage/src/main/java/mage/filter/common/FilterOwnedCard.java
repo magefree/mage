@@ -6,7 +6,6 @@ import mage.constants.TargetController;
 import mage.filter.FilterCard;
 
 /**
- *
  * @author LevelX2
  */
 public class FilterOwnedCard extends FilterCard {
@@ -20,7 +19,7 @@ public class FilterOwnedCard extends FilterCard {
         this.add(TargetController.YOU.getOwnerPredicate());
     }
 
-    public FilterOwnedCard(final FilterOwnedCard filter) {
+    protected FilterOwnedCard(final FilterOwnedCard filter) {
         super(filter);
     }
 

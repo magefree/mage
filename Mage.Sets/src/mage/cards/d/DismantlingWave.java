@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -25,9 +26,6 @@ import java.util.UUID;
  */
 public final class DismantlingWave extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterArtifactOrEnchantmentPermanent("artifacts and enchantments");
-
     public DismantlingWave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
 
@@ -41,7 +39,7 @@ public final class DismantlingWave extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{6}{W}{W}")));
 
         // When you cycle Dismantling Wave, destroy all artifacts and enchantments.
-        this.addAbility(new CycleTriggeredAbility(new DestroyAllEffect(filter)));
+        this.addAbility(new CycleTriggeredAbility(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_ARTIFACTS_AND_ENCHANTMENTS)));
     }
 
     private DismantlingWave(final DismantlingWave card) {

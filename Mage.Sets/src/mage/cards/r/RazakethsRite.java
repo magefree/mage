@@ -17,7 +17,7 @@ public final class RazakethsRite extends CardImpl {
         // Search your library for a card and put that card into your hand
         // Then shuffle your library
         TargetCardInLibrary target = new TargetCardInLibrary();
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target, false, true));
 
         // Cycling {B}
 

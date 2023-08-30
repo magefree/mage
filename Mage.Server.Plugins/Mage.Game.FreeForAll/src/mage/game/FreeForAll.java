@@ -15,7 +15,7 @@ public class FreeForAll extends GameImpl {
     private int numPlayers;
 
     public FreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 60);
+        super(attackOption, range, mulligan, startLife, 60, 7);
     }
 
     public FreeForAll(final FreeForAll game) {

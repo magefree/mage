@@ -52,7 +52,7 @@ public final class HiveheartShaman extends CardImpl {
 
         // Whenever Hiveheart Shaman attacks, you may search your library for a basic land card that doesn't share a land type with a land you control, put that card onto the battlefield, then shuffle.
         this.addAbility(new AttacksTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), true
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true), true
         ));
 
         // {5}{G}: Create a 1/1 green Insect creature token. Put X +1/+1 counters on it, where X is the number of basic land types among lands you control. Activate only as a sorcery.

@@ -39,7 +39,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfGame, Outcome.Neutral);
     }
 
-    public AuraReplacementEffect(final AuraReplacementEffect effect) {
+    protected AuraReplacementEffect(final AuraReplacementEffect effect) {
         super(effect);
     }
 

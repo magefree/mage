@@ -1,24 +1,18 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SourceDealsDamageToThisTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.PhyrexianZombieToken;
-import mage.game.permanent.token.ZombieToken;
+
+import java.util.UUID;
 
 /**
- *
- * @author Loki
+ * @author xenohedron
  */
 public final class NestedGhoul extends CardImpl {
 
@@ -30,7 +24,9 @@ public final class NestedGhoul extends CardImpl {
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
-        this.addAbility(new NestedGhoulTriggeredAbility());
+
+        // Whenever a source deals damage to Nested Ghoul, create a 2/2 black Phyrexian Zombie creature token.
+        this.addAbility(new SourceDealsDamageToThisTriggeredAbility(new CreateTokenEffect(new PhyrexianZombieToken())));
     }
 
     private NestedGhoul(final NestedGhoul card) {
@@ -42,35 +38,4 @@ public final class NestedGhoul extends CardImpl {
         return new NestedGhoul(this);
     }
 
-}
-
-class NestedGhoulTriggeredAbility extends TriggeredAbilityImpl {
-
-    NestedGhoulTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new PhyrexianZombieToken()));
-    }
-
-    NestedGhoulTriggeredAbility(final NestedGhoulTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public NestedGhoulTriggeredAbility copy() {
-        return new NestedGhoulTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getTargetId().equals(this.sourceId);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a source deals damage to {this}, create a 2/2 black Phyrexian Zombie creature token.";
-    }
 }

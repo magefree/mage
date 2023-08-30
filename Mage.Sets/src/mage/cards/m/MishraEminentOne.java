@@ -79,13 +79,14 @@ class MishraEminentOneEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect().setPermanentModifier((token, g) -> {
-            token.setName("Mishra's Warform");
-            token.setPower(4);
-            token.setToughness(4);
-            token.addCardType(CardType.ARTIFACT, CardType.CREATURE);
-            token.addSubType(SubType.CONSTRUCT);
-        });
+        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect().setPermanentModifier(
+            (token) -> {
+                token.setName("Mishra's Warform");
+                token.setPower(4);
+                token.setToughness(4);
+                token.addCardType(CardType.ARTIFACT, CardType.CREATURE);
+                token.addSubType(SubType.CONSTRUCT);
+            });
         effect.apply(game, source);
         game.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
                 .setTargetPointer(new FixedTargets(effect.getAddedPermanents(), game)), source);

@@ -137,12 +137,6 @@ class KozilekDiscardCost extends CostImpl {
     }
 
     @Override
-    public void clearPaid() {
-        super.clearPaid();
-        this.targets.clearChosen();
-    }
-
-    @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         if (game.getStack().isEmpty()) {
             return false;

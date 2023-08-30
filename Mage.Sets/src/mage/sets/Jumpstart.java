@@ -344,7 +344,7 @@ public final class Jumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Patron of the Valiant", 128, Rarity.UNCOMMON, mage.cards.p.PatronOfTheValiant.class));
         cards.add(new SetCardInfo("Peel from Reality", 163, Rarity.COMMON, mage.cards.p.PeelFromReality.class));
         cards.add(new SetCardInfo("Penumbra Bobcat", 418, Rarity.COMMON, mage.cards.p.PenumbraBobcat.class));
-        cards.add(new SetCardInfo("Perilous Myr", 476, Rarity.UNCOMMON, mage.cards.p.PerilousMyr.class));
+        cards.add(new SetCardInfo("Perilous Myr", 476, Rarity.COMMON, mage.cards.p.PerilousMyr.class));
         cards.add(new SetCardInfo("Phyrexian Broodlings", 263, Rarity.COMMON, mage.cards.p.PhyrexianBroodlings.class));
         cards.add(new SetCardInfo("Phyrexian Debaser", 264, Rarity.COMMON, mage.cards.p.PhyrexianDebaser.class));
         cards.add(new SetCardInfo("Phyrexian Gargantua", 265, Rarity.UNCOMMON, mage.cards.p.PhyrexianGargantua.class));

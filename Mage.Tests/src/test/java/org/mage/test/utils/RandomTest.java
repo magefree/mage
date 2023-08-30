@@ -144,7 +144,7 @@ public class RandomTest {
         Player player = new HumanPlayer("random", RangeOfInfluence.ALL, 1);
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 50);
         Deck deck = DeckTestUtils.buildRandomDeck("WGUBR", false, "GRN");
-        player.getLibrary().addAll(deck.getCards(), game);
+        player.getLibrary().addAll(deck.getMaindeckCards(), game);
 
         // multiple cards analyze
         for (int i = 0; i < player.getLibrary().size(); i++) {

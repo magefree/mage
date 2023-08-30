@@ -14,7 +14,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect {
@@ -26,7 +25,7 @@ public class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect
         protectionFilter = (FilterCard) ((ProtectionAbility) ability).getFilter();
     }
 
-    public GainProtectionFromColorSourceEffect(final GainProtectionFromColorSourceEffect effect) {
+    protected GainProtectionFromColorSourceEffect(final GainProtectionFromColorSourceEffect effect) {
         super(effect);
         this.protectionFilter = effect.protectionFilter.copy();
     }

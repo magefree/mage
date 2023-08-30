@@ -12,7 +12,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.*;
 import mage.constants.*;
-import static mage.constants.Outcome.Benefit;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -96,7 +95,7 @@ class TectonicGiantTriggeredAbility extends TriggeredAbilityImpl {
 class TectonicGiantEffect extends OneShotEffect {
 
     TectonicGiantEffect() {
-        super(Benefit);
+        super(Outcome.Benefit);
         staticText = "exile the top two cards of your library. Choose one of them. "
                 + "Until the end of your next turn, you may play that card";
     }

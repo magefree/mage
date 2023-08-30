@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class LizardToken extends TokenImpl {
@@ -20,7 +19,7 @@ public final class LizardToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public LizardToken(final LizardToken token) {
+    protected LizardToken(final LizardToken token) {
         super(token);
     }
 

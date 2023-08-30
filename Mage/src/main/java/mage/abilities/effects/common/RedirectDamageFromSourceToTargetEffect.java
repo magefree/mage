@@ -8,7 +8,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class RedirectDamageFromSourceToTargetEffect extends RedirectionEffect {
@@ -18,7 +17,7 @@ public class RedirectDamageFromSourceToTargetEffect extends RedirectionEffect {
         staticText = "The next " + amountToRedirect + " damage that would be dealt to {this} this turn is dealt to target creature you control instead.";
     }
 
-    public RedirectDamageFromSourceToTargetEffect(final RedirectDamageFromSourceToTargetEffect effect) {
+    protected RedirectDamageFromSourceToTargetEffect(final RedirectDamageFromSourceToTargetEffect effect) {
         super(effect);
     }
 

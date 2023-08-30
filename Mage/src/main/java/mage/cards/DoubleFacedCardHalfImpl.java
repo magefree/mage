@@ -41,7 +41,7 @@ public class DoubleFacedCardHalfImpl extends CardImpl implements DoubleFacedCard
         this.color.addColor(new ObjectColor(colors));
     }
 
-    public DoubleFacedCardHalfImpl(final DoubleFacedCardHalfImpl card) {
+    protected DoubleFacedCardHalfImpl(final DoubleFacedCardHalfImpl card) {
         super(card);
         this.parentCard = card.parentCard;
         this.isFront = card.isFront;

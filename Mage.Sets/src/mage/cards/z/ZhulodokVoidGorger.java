@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class ZhulodokVoidGorger extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("colorless spells you cast from your hand with mana value 7 or greater");
 
     static {
         filter.add(ColorlessPredicate.instance);
@@ -37,9 +37,9 @@ public final class ZhulodokVoidGorger extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Colorless spells you cast from your hand with mana value 7 or greater have "Cascade, cascade."
-        Ability ability = new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new CascadeAbility(), filter)
+        Ability ability = new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new CascadeAbility(false), filter)
                 .setText("colorless spells you cast from your hand with mana value 7"));
-        ability.addEffect(new GainAbilityControlledSpellsEffect(new CascadeAbility(), filter)
+        ability.addEffect(new GainAbilityControlledSpellsEffect(new CascadeAbility(false), filter)
                 .setText("or greater have \"Cascade, cascade.\""));
         this.addAbility(ability);
     }

@@ -126,6 +126,7 @@ class FirkraagCunningInstigatorTriggeredAbility extends TriggeredAbilityImpl {
             );
             filter.add(new ControllerIdPredicate(event.getTargetId()));
             this.addTarget(new TargetPermanent(filter));
+            return true;
         }
         return false;
     }

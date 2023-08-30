@@ -5,13 +5,12 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
-import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.PreventDamageAndRemoveCountersEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -36,7 +35,8 @@ public final class MagmaPummeler extends CardImpl {
         // Magma Pummeler enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
-        // If damage would be dealt to Magma Pummeler while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from it. When one or more counters are removed from Magma Pummeler this way, it deals that much damage to any target.
+        // If damage would be dealt to Magma Pummeler while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from it.
+        // When one or more counters are removed from Magma Pummeler this way, it deals that much damage to any target.
         this.addAbility(new SimpleStaticAbility(new MagmaPummelerEffect()));
     }
 
@@ -50,13 +50,11 @@ public final class MagmaPummeler extends CardImpl {
     }
 }
 
-class MagmaPummelerEffect extends PreventionEffectImpl {
+class MagmaPummelerEffect extends PreventDamageAndRemoveCountersEffect {
 
     public MagmaPummelerEffect() {
-        super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
-        staticText = "If damage would be dealt to {this} while it has a +1/+1 counter on it, " +
-                "prevent that damage and remove that many +1/+1 counters from it. " +
-                "When one or more counters are removed from {this} this way, it deals that much damage to any target.";
+        super(true, true, true);
+        staticText += ". When one or more counters are removed from {this} this way, it deals that much damage to any target";
     }
 
     private MagmaPummelerEffect(final MagmaPummelerEffect effect) {
@@ -69,20 +67,13 @@ class MagmaPummelerEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        int damage = event.getAmount();
-        preventDamageAction(event, source, game);
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
             return false;
         }
         int beforeCounters = permanent.getCounters(game).getCount(CounterType.P1P1);
-        permanent.removeCounters(CounterType.P1P1.createInstance(damage), source, game);
+        super.replaceEvent(event, source, game);
         int countersRemoved = beforeCounters - permanent.getCounters(game).getCount(CounterType.P1P1);
         if (countersRemoved > 0) {
             ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
@@ -95,12 +86,4 @@ class MagmaPummelerEffect extends PreventionEffectImpl {
         return false;
     }
 
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        return super.applies(event, source, game)
-                && permanent != null
-                && event.getTargetId().equals(source.getSourceId())
-                && permanent.getCounters(game).containsKey(CounterType.P1P1);
-    }
 }

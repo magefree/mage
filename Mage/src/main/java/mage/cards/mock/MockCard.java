@@ -80,9 +80,11 @@ public class MockCard extends CardImpl {
         for (String ruleText : card.getRules()) {
             this.addAbility(textAbilityFromString(ruleText));
         }
+
+        this.extraDeckCard = card.isExtraDeckCard();
     }
 
-    public MockCard(final MockCard card) {
+    protected MockCard(final MockCard card) {
         super(card);
 
         this.startingLoyalty = card.startingLoyalty;

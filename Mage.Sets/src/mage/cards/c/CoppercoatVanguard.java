@@ -39,7 +39,7 @@ public final class CoppercoatVanguard extends CardImpl {
         ));
         ability.addEffect(new GainAbilityControlledEffect(
                 new WardAbility(new GenericManaCost(1), false),
-                Duration.WhileOnBattlefield, filter2
+                Duration.WhileOnBattlefield, filter2, true
         ).setText("and has ward {1}. <i>(Whenever it becomes the target " +
                 "of a spell or ability an opponent controls, counter it unless that player pays {1}.)</i>"));
         this.addAbility(ability);

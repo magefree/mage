@@ -99,7 +99,6 @@ class TheEternalWandererExileEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            System.out.println(permanent);
             if (permanent != null) {
                 UUID exileId = UUID.randomUUID();
                 if (controller.moveCardsToExile(permanent, source, game, true, exileId, sourceObject.getIdName())) {

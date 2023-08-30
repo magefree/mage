@@ -48,7 +48,7 @@ class CerebralVortexEffect extends OneShotEffect {
 
     CerebralVortexEffect() {
         super(Outcome.Damage);
-        this.staticText = ", then Cerebral Vortex deals damage to that player equal to the number of cards they have drawn this turn";
+        this.staticText = ", then Cerebral Vortex deals damage to that player equal to the number of cards they've drawn this turn";
     }
 
     CerebralVortexEffect(final CerebralVortexEffect effect) {

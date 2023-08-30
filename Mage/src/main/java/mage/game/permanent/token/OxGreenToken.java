@@ -19,7 +19,7 @@ public final class OxGreenToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public OxGreenToken(final OxGreenToken token) {
+    protected OxGreenToken(final OxGreenToken token) {
         super(token);
     }
 

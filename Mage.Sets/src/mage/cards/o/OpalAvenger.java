@@ -40,7 +40,8 @@ public final class OpalAvenger extends CardImpl {
 class OpalAvengerStateTriggeredAbility extends StateTriggeredAbility {
 
     public OpalAvengerStateTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new OpalAvengerToken(), "", Duration.Custom, true, false));
+        super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new OpalAvengerToken(), null, Duration.Custom));
+        this.replaceRuleText = false;
         setTriggerPhrase("When you have 10 or less life, if {this} is an enchantment, ");
     }
 

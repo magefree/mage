@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.constants.SubType;
@@ -31,7 +31,7 @@ public final class DiamondMare extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As Diamond Mare enters the battlefield, choose a color.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
 
         // Whenever you cast a spell of the chosen color, you gain 1 life.
         this.addAbility(new DiamondMareTriggeredAbility());

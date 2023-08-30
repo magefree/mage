@@ -1,7 +1,7 @@
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -30,7 +30,7 @@ public final class LivewireLash extends CardImpl {
 
         // Equipped creature gets +2/+0 and has "Whenever this creature becomes the target of a spell, this creature deals 2 damage to any target."
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 0));
-        Ability ability2 = new BecomesTargetTriggeredAbility(
+        Ability ability2 = new SourceBecomesTargetTriggeredAbility(
                 new DamageTargetEffect(2, "it"), StaticFilters.FILTER_SPELL_A
         ).setTriggerPhrase("Whenever this creature becomes the target of a spell, ");
         ability2.addTarget(new TargetAnyTarget());

@@ -35,7 +35,7 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
         this.adventureCardParent = adventureCardParent;
     }
 
-    public AdventureCardSpellImpl(final AdventureCardSpellImpl card) {
+    protected AdventureCardSpellImpl(final AdventureCardSpellImpl card) {
         super(card);
         this.adventureCardParent = card.adventureCardParent;
     }
@@ -109,7 +109,7 @@ class AdventureCardSpellAbility extends SpellAbility {
         this.setCardName(adventureName);
     }
 
-    public AdventureCardSpellAbility(final AdventureCardSpellAbility ability) {
+    protected AdventureCardSpellAbility(final AdventureCardSpellAbility ability) {
         super(ability);
         this.nameFull = ability.nameFull;
     }
@@ -142,7 +142,7 @@ class AdventureCardSpellAbility extends SpellAbility {
         StringBuilder sbRule = new StringBuilder();
         sbRule.append(this.nameFull);
         sbRule.append(" ");
-        sbRule.append(manaCosts.getText());
+        sbRule.append(getManaCosts().getText());
         sbRule.append(" &mdash; ");
         Modes modes = this.getModes();
         if (modes.size() <= 1) {

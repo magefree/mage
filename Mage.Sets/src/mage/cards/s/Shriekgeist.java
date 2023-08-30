@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -49,7 +48,7 @@ public final class Shriekgeist extends CardImpl {
 class ShriekgeistTriggeredAbility extends TriggeredAbilityImpl {
 
     public ShriekgeistTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2));
+        super(Zone.BATTLEFIELD, new MillCardsTargetEffect(2));
     }
 
     public ShriekgeistTriggeredAbility(final ShriekgeistTriggeredAbility ability) {

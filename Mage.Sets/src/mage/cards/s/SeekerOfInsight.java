@@ -38,8 +38,7 @@ public final class SeekerOfInsight extends CardImpl {
                         Zone.BATTLEFIELD,
                         new DrawDiscardControllerEffect(),
                         new TapSourceCost(),
-                        new CastNonCreatureSpellCondition()),
-                new SpellsCastWatcher());
+                        new CastNonCreatureSpellCondition()));
     }
 
     private SeekerOfInsight(final SeekerOfInsight card) {

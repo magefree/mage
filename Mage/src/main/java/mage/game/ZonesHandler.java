@@ -420,7 +420,7 @@ public final class ZonesHandler {
             cards.remove(targetObjectId);
             target.clearChosen();
         }
-        order.add(cards.getCards(game).iterator().next());
+        order.addAll(cards.getCards(game));
         return order;
     }
 

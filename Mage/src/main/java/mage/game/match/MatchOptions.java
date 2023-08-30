@@ -1,6 +1,7 @@
 
 package mage.game.match;
 
+import mage.constants.MatchBufferTime;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
@@ -48,6 +49,7 @@ public class MatchOptions implements Serializable {
      * Time each player has during the game to play using his\her priority.
      */
     protected MatchTimeLimit matchTimeLimit; // 0 = no priorityTime handling
+    protected MatchBufferTime matchBufferTime; // Amount of time each player gets before their normal time limit counts down. Refreshes each time the normal timer is invoked.
     protected MulliganType mulliganType;
 
     /*public MatchOptions(String name, String gameType) {
@@ -158,6 +160,21 @@ public class MatchOptions implements Serializable {
 
     public void setMatchTimeLimit(MatchTimeLimit matchTimeLimit) {
         this.matchTimeLimit = matchTimeLimit;
+    }
+
+    public int getBufferTime() {
+        if (matchBufferTime == null) {
+            return MatchBufferTime.NONE.getBufferTime();
+        }
+        return matchBufferTime.getBufferTime();
+    }
+
+    public MatchBufferTime getMatchBufferTime() {
+        return this.matchBufferTime;
+    }
+
+    public void setMatchBufferTime(MatchBufferTime matchBufferTime) {
+        this.matchBufferTime = matchBufferTime;
     }
 
     public String getPassword() {

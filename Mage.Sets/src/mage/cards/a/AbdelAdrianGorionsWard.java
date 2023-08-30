@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -99,7 +99,7 @@ class AbdelAdrianGorionsWardEffect extends OneShotEffect {
         if (count > 0) {
             new SoldierToken().putOntoBattlefield(count, game, source);
         }
-        game.addDelayedTriggeredAbility(new OnLeaveReturnExiledToBattlefieldAbility(), source);
+        game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
         return true;
     }
 }

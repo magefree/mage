@@ -1,6 +1,8 @@
 package mage.client.dialog;
 
 import mage.constants.ColoredManaSymbol;
+import mage.util.MultiAmountMessage;
+
 import org.mage.card.arcane.ManaSymbols;
 
 import javax.swing.*;
@@ -25,7 +27,7 @@ public class PickMultiNumberDialog extends MageDialog {
         this.setModal(true);
     }
 
-    public void showDialog(List<String> messages, int min, int max, Map<String, Serializable> options) {
+    public void showDialog(List<MultiAmountMessage> messages, int min, int max, Map<String, Serializable> options) {
         this.header.setText((String) options.get("header"));
         this.header.setHorizontalAlignment(SwingConstants.CENTER);
         this.setTitle((String) options.get("title"));
@@ -51,7 +53,7 @@ public class PickMultiNumberDialog extends MageDialog {
 
             // mana mode
             String manaText = null;
-            String input = messages.get(i);
+            String input = messages.get(i).message;
             switch (input) {
                 case "W":
                     manaText = ColoredManaSymbol.W.getColorHtmlName();
@@ -87,13 +89,13 @@ public class PickMultiNumberDialog extends MageDialog {
             labelList.add(label);
 
             JSpinner spinner = new JSpinner();
-            spinner.setModel(new SpinnerNumberModel(0, 0, max, 1));
+            spinner.setModel(new SpinnerNumberModel(0, messages.get(i).min, messages.get(i).max, 1));
             spinnerC.weightx = 0.5;
             spinnerC.gridx = 1;
             spinnerC.gridy = i;
             spinnerC.ipadx = 20;
             spinner.addChangeListener(e -> {
-                updateControls(min, max);
+                updateControls(min, max, messages);
             });
             jPanel1.add(spinner, spinnerC);
             spinnerList.add(spinner);
@@ -101,20 +103,28 @@ public class PickMultiNumberDialog extends MageDialog {
         this.counterText.setText("0 out of 0");
         this.counterText.setHorizontalAlignment(SwingConstants.CENTER);
 
-        updateControls(min, max);
+        updateControls(min, max, messages);
 
         this.pack();
         this.makeWindowCentered();
         this.setVisible(true);
     }
 
-    private void updateControls(int min, int max) {
+    private void updateControls(int min, int max, List<MultiAmountMessage> messages) {
         int totalChosenAmount = 0;
-        for (JSpinner jSpinner : spinnerList) {
-            totalChosenAmount += ((Number) jSpinner.getValue()).intValue();
+        boolean chooseEnabled = true;
+
+        for (int i = 0; i < spinnerList.size(); i++) {
+            JSpinner jSpinner = spinnerList.get(i);
+            int value = ((Number) jSpinner.getValue()).intValue();
+            totalChosenAmount += value;
+
+            chooseEnabled &= value >= messages.get(i).min && value <= messages.get(i).max;
         }
         counterText.setText(totalChosenAmount + " out of " + max);
-        chooseButton.setEnabled(totalChosenAmount >= min && totalChosenAmount <= max);
+
+        chooseEnabled &= totalChosenAmount >= min && totalChosenAmount <= max;
+        chooseButton.setEnabled(chooseEnabled);
     }
 
     public String getMultiAmount() {

@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TimingRule;
 
 /**
  *
@@ -22,7 +21,7 @@ public final class FlaringPain extends CardImpl {
 
 
         // Damage can't be prevented this turn.
-        this.getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn, "Damage can't be prevented this turn", false, false));
+        this.getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn, "Damage can't be prevented this turn"));
         // Flashback {R}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{R}")));
     }

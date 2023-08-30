@@ -2,9 +2,7 @@ package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.common.TransformsOrEntersTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.DayboundAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -38,7 +36,6 @@ public final class BrutalCathar extends TransformingDoubleFacedCard {
                 new ExileUntilSourceLeavesEffect().setText("exile target creature an opponent controls until this creature leaves the battlefield"), false
         ).setTriggerPhrase("When this creature enters the battlefield or transforms into {this}, ");
         ability.addTarget(new TargetOpponentsCreaturePermanent());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.getLeftHalfCard().addAbility(ability);
 
         // Daybound

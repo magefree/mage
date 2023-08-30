@@ -18,7 +18,7 @@ public class Effects extends ArrayList<Effect> {
         this.addAll(Arrays.asList(effects));
     }
 
-    public Effects(final Effects effects) {
+    protected Effects(final Effects effects) {
         for (Effect effect : effects) {
             this.add(effect.copy());
         }

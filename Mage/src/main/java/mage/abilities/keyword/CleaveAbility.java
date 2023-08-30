@@ -20,7 +20,7 @@ public class CleaveAbility extends SpellAbility {
         this.timing = (card.isSorcery(null) ? TimingRule.SORCERY : TimingRule.INSTANT);
     }
 
-    public CleaveAbility(final CleaveAbility ability) {
+    protected CleaveAbility(final CleaveAbility ability) {
         super(ability);
     }
 

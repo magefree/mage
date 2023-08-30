@@ -33,7 +33,6 @@ import java.util.UUID;
  */
 public abstract class Plane extends CommandObjectImpl {
 
-    private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts emptyCost = new ManaCostsImpl<>();
 
     private Planes planeType = null;
@@ -50,7 +49,7 @@ public abstract class Plane extends CommandObjectImpl {
         this.frameStyle = FrameStyle.M15_NORMAL;
     }
 
-    public Plane(final Plane plane) {
+    protected Plane(final Plane plane) {
         super(plane);
         this.planeType = plane.planeType;
         this.frameStyle = plane.frameStyle;
@@ -178,17 +177,17 @@ public abstract class Plane extends CommandObjectImpl {
 
     @Override
     public ObjectColor getColor() {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getFrameColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override

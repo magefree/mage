@@ -30,7 +30,7 @@ public final class DokaiWeaverofLifeToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(controlledLands, controlledLands, Duration.WhileOnBattlefield)));
     }
 
-    public DokaiWeaverofLifeToken(final DokaiWeaverofLifeToken token) {
+    protected DokaiWeaverofLifeToken(final DokaiWeaverofLifeToken token) {
         super(token);
     }
 

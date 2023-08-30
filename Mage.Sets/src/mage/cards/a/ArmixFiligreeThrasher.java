@@ -20,7 +20,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -33,7 +33,7 @@ public final class ArmixFiligreeThrasher extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     private static final DynamicValue xValue = new SignInversionDynamicValue(new AdditiveDynamicValue(
@@ -53,7 +53,7 @@ public final class ArmixFiligreeThrasher extends CardImpl {
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                 new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), false,
                 "target creature defending player controls gets -X/-X until end of turn, " +
-                "where X is the number of artifacts you control plus the number of artifact cards in your graveyard"
+                        "where X is the number of artifacts you control plus the number of artifact cards in your graveyard"
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(new AttacksTriggeredAbility(new DoWhenCostPaid(

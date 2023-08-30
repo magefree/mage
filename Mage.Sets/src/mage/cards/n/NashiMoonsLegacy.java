@@ -1,21 +1,17 @@
 package mage.cards.n;
 
-import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTargetCardCopyAndCastEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.WardAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -50,7 +46,8 @@ public final class NashiMoonsLegacy extends CardImpl {
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}"), false));
 
         // Whenever Nashi, Moon's Legacy attacks, exile up to one target legendary or Rat card from your graveyard and copy it. You may cast the copy.
-        Ability ability = new AttacksTriggeredAbility(new NashiMoonsLegacyEffect());
+        Ability ability = new AttacksTriggeredAbility(new ExileTargetCardCopyAndCastEffect(false).setText(
+                "exile up to one target legendary or Rat card from your graveyard and copy it. You may cast the copy"));
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
         this.addAbility(ability);
     }
@@ -62,40 +59,5 @@ public final class NashiMoonsLegacy extends CardImpl {
     @Override
     public NashiMoonsLegacy copy() {
         return new NashiMoonsLegacy(this);
-    }
-}
-
-class NashiMoonsLegacyEffect extends OneShotEffect {
-
-    NashiMoonsLegacyEffect() {
-        super(Outcome.Benefit);
-        staticText = "exile up to one target legendary or Rat card from your graveyard and copy it. You may cast the copy";
-    }
-
-    private NashiMoonsLegacyEffect(final NashiMoonsLegacyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public NashiMoonsLegacyEffect copy() {
-        return new NashiMoonsLegacyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (player == null || card == null) {
-            return false;
-        }
-        player.moveCards(card, Zone.EXILED, source, game);
-        Card copiedCard = game.copyCard(card, source, player.getId());
-        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
-        player.cast(
-                player.chooseAbilityForCast(copiedCard, game, false),
-                game, false, new ApprovingObject(source, game)
-        );
-        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
-        return true;
     }
 }

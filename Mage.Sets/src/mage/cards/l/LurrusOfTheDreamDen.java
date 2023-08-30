@@ -1,7 +1,5 @@
 package mage.cards.l;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.common.CastFromGraveyardOnceStaticAbility;
@@ -17,6 +15,9 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -67,7 +68,7 @@ enum LurrusOfTheDreamDenCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingHandSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         return deck.stream()
                 .filter(MageObject::isPermanent)
                 .mapToInt(MageObject::getManaValue)

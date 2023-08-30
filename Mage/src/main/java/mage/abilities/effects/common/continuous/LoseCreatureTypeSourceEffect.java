@@ -30,7 +30,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl {
         setText();
     }
 
-    public LoseCreatureTypeSourceEffect(final LoseCreatureTypeSourceEffect effect) {
+    protected LoseCreatureTypeSourceEffect(final LoseCreatureTypeSourceEffect effect) {
         super(effect);
         this.dynamicValue = effect.dynamicValue;
         this.lessThan = effect.lessThan;

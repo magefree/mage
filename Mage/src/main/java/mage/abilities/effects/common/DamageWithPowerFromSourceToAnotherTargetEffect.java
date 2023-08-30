@@ -24,7 +24,7 @@ public class DamageWithPowerFromSourceToAnotherTargetEffect extends OneShotEffec
         this.sourceTargetName = sourceTargetName;
     }
 
-    public DamageWithPowerFromSourceToAnotherTargetEffect(final DamageWithPowerFromSourceToAnotherTargetEffect effect) {
+    protected DamageWithPowerFromSourceToAnotherTargetEffect(final DamageWithPowerFromSourceToAnotherTargetEffect effect) {
         super(effect);
         this.sourceTargetName = effect.sourceTargetName;
     }

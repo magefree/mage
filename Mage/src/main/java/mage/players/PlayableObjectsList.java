@@ -25,7 +25,7 @@ public class PlayableObjectsList implements Serializable, Copyable<PlayableObjec
         load(playableObjects);
     }
 
-    public PlayableObjectsList(final PlayableObjectsList source) {
+    protected PlayableObjectsList(final PlayableObjectsList source) {
         source.objects.entrySet().forEach(entry -> {
             this.objects.put(entry.getKey(), entry.getValue().copy());
         });

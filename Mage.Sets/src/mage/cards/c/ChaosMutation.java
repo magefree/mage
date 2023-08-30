@@ -82,9 +82,10 @@ class ChaosMutationEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         controller.moveCards(permanents, Zone.EXILED, source, game);
+        game.getState().processAction(game);
         for (Player player : players) {
             Cards cards = new CardsImpl();
-            Card card = this.getCreatureCard(player, cards, game);
+            Card card = getCreatureCard(player, cards, game);
             player.revealCards(source, cards, game);
             player.moveCards(card, Zone.BATTLEFIELD, source, game);
             cards.retainZone(Zone.LIBRARY, game);

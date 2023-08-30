@@ -37,7 +37,7 @@ public final class SquadronHawk extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Squadron Hawk enters the battlefield, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 3, filter);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true), true));
     }
 
     private SquadronHawk(final SquadronHawk card) {

@@ -47,7 +47,7 @@ class ResearchEffect extends OneShotEffect {
 
     public ResearchEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Choose up to four cards you own from outside the game and shuffle them into your library";
+        this.staticText = "Shuffle up to four cards you own from outside the game into your library";
     }
 
     public ResearchEffect(final ResearchEffect effect) {

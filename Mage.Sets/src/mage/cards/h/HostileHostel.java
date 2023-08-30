@@ -29,8 +29,6 @@ import mage.util.CardUtil;
 
 import java.util.UUID;
 
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-
 /**
  * @author LePwnerer
  */
@@ -51,7 +49,7 @@ public final class HostileHostel extends TransformingDoubleFacedCard {
         // {1}, {T}, Sacrifice a creature: Put a soul counter on Hostile Hostel. Then if there are three or more soul counters on it, remove those counters, transform it, then untap it. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(new HostileHostelEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.getLeftHalfCard().addAbility(ability);
 
         // Creeping Inn

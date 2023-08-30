@@ -66,7 +66,8 @@ class DungeonDelverEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         GameEvent gameEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
-        return gameEvent.getType() == GameEvent.EventType.ROOM_ENTERED
+        return gameEvent != null
+                && gameEvent.getType() == GameEvent.EventType.ROOM_ENTERED
                 && source.isControlledBy(gameEvent.getPlayerId());
     }
 

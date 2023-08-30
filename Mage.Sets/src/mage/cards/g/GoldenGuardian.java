@@ -16,9 +16,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -31,13 +29,6 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class GoldenGuardian extends TransformingDoubleFacedCard {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public GoldenGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(
@@ -53,7 +44,7 @@ public final class GoldenGuardian extends TransformingDoubleFacedCard {
 
         // {2}: Golden Guardian fights another target creature you control. When Golden Guardian dies this turn, return it to the battlefield transformed under your control.
         Ability ability = new SimpleActivatedAbility(new FightTargetSourceEffect(), new GenericManaCost(2));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new GoldenGuardianDelayedTriggeredAbility(), false
         ));

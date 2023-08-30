@@ -26,7 +26,7 @@ public final class PhyrexianMiteToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(new CantBlockSourceEffect(Duration.WhileOnBattlefield).setText("this creature can't block")));
     }
 
-    public PhyrexianMiteToken(final PhyrexianMiteToken token) {
+    protected PhyrexianMiteToken(final PhyrexianMiteToken token) {
         super(token);
     }
 

@@ -8,9 +8,9 @@ import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class PreventDamageToAttachedEffect extends PreventionEffectImpl {
@@ -27,7 +27,7 @@ public class PreventDamageToAttachedEffect extends PreventionEffectImpl {
         staticText = setText();
     }
 
-    public PreventDamageToAttachedEffect(final PreventDamageToAttachedEffect effect) {
+    protected PreventDamageToAttachedEffect(final PreventDamageToAttachedEffect effect) {
         super(effect);
         this.attachmentType = effect.attachmentType;
     }
@@ -61,14 +61,14 @@ public class PreventDamageToAttachedEffect extends PreventionEffectImpl {
                 sb.append("combat ");
             }
             sb.append("damage that would be dealt to ");
-            sb.append(attachmentType.verb()).append(" creature");
+            sb.append(CardUtil.getTextWithFirstCharLowerCase(attachmentType.verb())).append(" creature");
         } else {
             sb.append("If a source would deal ");
             if (onlyCombat) {
                 sb.append("combat ");
             }
             sb.append("damage to ");
-            sb.append(attachmentType.verb());
+            sb.append(CardUtil.getTextWithFirstCharLowerCase(attachmentType.verb()));
             sb.append(" creature, prevent ").append(amountToPrevent);
             sb.append(" of that damage");
         }

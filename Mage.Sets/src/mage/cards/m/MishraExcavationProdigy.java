@@ -49,7 +49,7 @@ public final class MishraExcavationProdigy extends CardImpl {
         // Whenever you discard one or more artifact cards, add {R}{R}. This ability triggers only once each turn.
         this.addAbility(new DiscardCardControllerTriggeredAbility(
                 new BasicManaEffect(Mana.RedMana(2)), false, filter
-        ).setTriggersOnce(true));
+        ).setTriggersOnceEachTurn(true));
     }
 
     private MishraExcavationProdigy(final MishraExcavationProdigy card) {

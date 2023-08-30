@@ -27,7 +27,7 @@ public abstract class MeldCard extends CardImpl {
         halves = new CardsImpl();
     }
 
-    public MeldCard(final MeldCard card) {
+    protected MeldCard(final MeldCard card) {
         super(card);
         this.topHalfCard = card.topHalfCard;
         this.bottomHalfCard = card.bottomHalfCard;

@@ -21,7 +21,7 @@ public final class GarrukApexPredatorBeastToken extends TokenImpl {
         abilities.add(DeathtouchAbility.getInstance());
     }
 
-    public GarrukApexPredatorBeastToken(final GarrukApexPredatorBeastToken token) {
+    protected GarrukApexPredatorBeastToken(final GarrukApexPredatorBeastToken token) {
         super(token);
     }
 

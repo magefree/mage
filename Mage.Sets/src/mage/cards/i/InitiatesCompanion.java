@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import java.util.UUID;
@@ -10,8 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 /**
@@ -19,13 +17,6 @@ import mage.target.TargetPermanent;
  * @author fireshoes
  */
 public final class InitiatesCompanion extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("creature or land");
-
-    static {
-        filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
-                CardType.LAND.getPredicate()));
-    }
 
     public InitiatesCompanion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -36,7 +27,7 @@ public final class InitiatesCompanion extends CardImpl {
 
         // Whenever Initiate's Companion deals combat damage to a player, untap target creature or land.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new UntapTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_LAND));
         this.addAbility(ability);
     }
 

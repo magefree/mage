@@ -8,9 +8,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
@@ -54,7 +56,7 @@ public final class BloodlineKeeper extends TransformingDoubleFacedCard {
                 Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{B}"),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 4)
         );
-        this.getLeftHalfCard().addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability.addHint(new ValueHint("Vampires you control", new PermanentsOnBattlefieldCount(filter))));
 
         // Lord of Lineage
         // Flying

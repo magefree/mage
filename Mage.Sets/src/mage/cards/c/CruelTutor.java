@@ -21,7 +21,7 @@ public final class CruelTutor extends CardImpl {
 
         // Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
         TargetCardInLibrary target = new TargetCardInLibrary();
-        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(target, false, true));
+        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(target, false));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 

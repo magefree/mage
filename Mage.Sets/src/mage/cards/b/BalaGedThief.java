@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
 
@@ -34,7 +33,7 @@ public final class BalaGedThief extends CardImpl {
         // Whenever Bala Ged Thief or another Ally enters the battlefield under your control,
         // target player reveals a number of cards from their hand equal to the number of Allies you control.
         // You choose one of them. That player discards that card.
-        Ability ability = new AllyEntersBattlefieldTriggeredAbility(new DiscardCardYouChooseTargetEffect(TargetController.ANY, xValue), false);
+        Ability ability = new AllyEntersBattlefieldTriggeredAbility(new DiscardCardYouChooseTargetEffect(xValue), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability.setAbilityWord(null));
     }

@@ -32,7 +32,7 @@ public final class InsultInjury extends SplitCard {
         // Insult
         // Damage can't be prevented this turn. If a source you control would deal damage this turn it deals
         // double that damage instead.
-        getLeftHalfCard().getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn, "Damage can't be prevented this turn", true, false));
+        getLeftHalfCard().getSpellAbility().addEffect(new DamageCantBePreventedEffect(Duration.EndOfTurn, "Damage can't be prevented this turn"));
         getLeftHalfCard().getSpellAbility().addEffect(new InsultDoubleDamageEffect());
 
         // to
@@ -97,7 +97,7 @@ class InjuryEffect extends OneShotEffect {
 
     InjuryEffect() {
         super(Outcome.Damage);
-        this.staticText = "{this} deals 2 damage to target creature and 2 damage to target player";
+        this.staticText = "{this} deals 2 damage to target creature and 2 damage to target player or planeswalker";
     }
 
     InjuryEffect(final InjuryEffect effect) {

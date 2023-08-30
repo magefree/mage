@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author Styxo
  */
 public class CountersCount implements DynamicValue {
@@ -27,7 +26,7 @@ public class CountersCount implements DynamicValue {
         this.filter = filter;
     }
 
-    public CountersCount(final CountersCount countersCount) {
+    protected CountersCount(final CountersCount countersCount) {
         this.counter = countersCount.counter;
         this.filter = countersCount.filter;
     }

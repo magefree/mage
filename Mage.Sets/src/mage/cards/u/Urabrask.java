@@ -63,7 +63,7 @@ public final class Urabrask extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(new ConditionalActivatedAbility(
                 new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED),
                 new ManaCostsImpl<>("{R}"), UrabraskCondition.instance
-        ).setTiming(TimingRule.SORCERY), new SpellsCastWatcher());
+        ).setTiming(TimingRule.SORCERY));
 
         // (As this Saga enters and after your draw step, add a lore counter.)
         SagaAbility sagaAbility = new SagaAbility(this.getRightHalfCard());

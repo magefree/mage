@@ -23,7 +23,7 @@ public final class PhyrexianHydraWithLifelinkToken extends TokenImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public PhyrexianHydraWithLifelinkToken(final PhyrexianHydraWithLifelinkToken token) {
+    protected PhyrexianHydraWithLifelinkToken(final PhyrexianHydraWithLifelinkToken token) {
         super(token);
     }
 

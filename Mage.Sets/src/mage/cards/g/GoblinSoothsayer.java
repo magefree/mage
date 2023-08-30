@@ -28,11 +28,10 @@ import mage.target.common.TargetControlledPermanent;
 public final class GoblinSoothsayer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
-    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("goblin");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.GOBLIN, "Goblin");
     
-    static    {
+    static {
         filter.add(new ColorPredicate(ObjectColor.RED));
-        filter2.add(SubType.GOBLIN.getPredicate());
     }
     
     public GoblinSoothsayer(UUID ownerId, CardSetInfo setInfo) {

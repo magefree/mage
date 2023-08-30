@@ -116,7 +116,7 @@ class JalumGrifterEffect extends OneShotEffect {
             game.informPlayers(controller.getLogName() + " shuffles the face-down pile");
             TargetCard targetCard = new TargetCard(Zone.HAND, new FilterCard());
             CardsImpl cards = new CardsImpl();
-            cards.addAll(shellGamePile);
+            cards.addAllCards(shellGamePile);
             if (opponent.choose(Outcome.Sacrifice, cards, targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {

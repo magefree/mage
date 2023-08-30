@@ -40,7 +40,7 @@ public final class AssaultSuit extends CardImpl {
         Effect effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText(", has haste");
         ability.addEffect(effect);
-        effect = new CantAttackControllerAttachedEffect(AttachmentType.EQUIPMENT);
+        effect = new CantAttackControllerAttachedEffect(AttachmentType.EQUIPMENT, true);
         effect.setText(", can't attack you or planeswalkers you control");
         ability.addEffect(effect);
         effect = new AssaultSuitCantBeSacrificed();

@@ -71,7 +71,7 @@ public final class InvasionOfTheros extends TransformingDoubleFacedCard {
 
         // When Invasion of Theros enters the battlefield, search your library for an Aura, God, or Demigod card, reveal it, put it into your hand, then shuffle.
         this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true)
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true)
         ));
 
         // Ephara, Ever-Sheltering

@@ -101,6 +101,10 @@ class BlotOutEffect extends OneShotEffect {
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
         opponent.choose(outcome, target, source, game);
-        return opponent.moveCards(game.getCard(target.getFirstTarget()), Zone.EXILED, source, game);
+        Permanent permanent = game.getPermanent(target.getFirstTarget());
+        if (permanent == null) {
+            return false;
+        }
+        return opponent.moveCards(permanent, Zone.EXILED, source, game);
     }
 }

@@ -5,7 +5,6 @@ package mage.filter.common;
 import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
- *
  * @author noxx
  */
 public class FilterUntappedCreature extends FilterCreaturePermanent {
@@ -19,7 +18,7 @@ public class FilterUntappedCreature extends FilterCreaturePermanent {
         this.add(TappedPredicate.UNTAPPED);
     }
 
-    public FilterUntappedCreature(final FilterUntappedCreature filter) {
+    protected FilterUntappedCreature(final FilterUntappedCreature filter) {
         super(filter);
     }
 

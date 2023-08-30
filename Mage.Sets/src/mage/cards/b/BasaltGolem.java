@@ -41,7 +41,7 @@ public final class BasaltGolem extends CardImpl {
 
         // Whenever Basalt Golem becomes blocked by a creature, that creature's controller sacrifices it at end of combat. If the player does, they put a 0/2 colorless Wall artifact creature token with defender onto the battlefield.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new BasaltGolemEffect()), true);
-        effect.setText("that creature's controller sacrifices it at end of combat. If the player does, they put a 0/2 colorless Wall artifact creature token with defender onto the battlefield.");
+        effect.setText("that creature's controller sacrifices it at end of combat. If the player does, they create a 0/2 colorless Wall artifact creature token with defender");
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(effect, false));
     }
 
@@ -58,7 +58,7 @@ public final class BasaltGolem extends CardImpl {
 class BasaltGolemEffect extends OneShotEffect {
     BasaltGolemEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "that creature's controller sacrifices it. If the player does, they create a 0/2 colorless Wall artifact creature token with defender.";
+        staticText = "that creature's controller sacrifices it. If the player does, they create a 0/2 colorless Wall artifact creature token with defender";
     }
 
     private BasaltGolemEffect(final BasaltGolemEffect effect) {

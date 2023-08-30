@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -30,7 +31,9 @@ public class ChandraDressedToKillEmblem extends Emblem {
     // Whenever you cast a red spell, this emblem deals X damage to any target, where X is the amount of mana spent to cast that spell.
     public ChandraDressedToKillEmblem() {
         super("Emblem Chandra");
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, new ChandraDressedToKillEmblemEffect(), filter, false, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                Zone.COMMAND, new ChandraDressedToKillEmblemEffect(),
+                filter, false, SetTargetPointer.SPELL);
         ability.addTarget(new TargetAnyTarget());
         this.getAbilities().add(ability);
     }

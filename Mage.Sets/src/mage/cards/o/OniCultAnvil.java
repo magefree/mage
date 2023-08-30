@@ -55,7 +55,7 @@ class OniCultAnvilTriggeredAbility extends TriggeredAbilityImpl {
 
     public OniCultAnvilTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new ConstructToken()));
-        this.setTriggersOnce(true);
+        this.setTriggersOnceEachTurn(true);
         setTriggerPhrase("Whenever one or more artifacts you control leave the battlefield during your turn, ");
     }
 

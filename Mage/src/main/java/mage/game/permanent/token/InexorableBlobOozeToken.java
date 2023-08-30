@@ -6,7 +6,6 @@ import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class InexorableBlobOozeToken extends TokenImpl {
@@ -20,7 +19,7 @@ public final class InexorableBlobOozeToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public InexorableBlobOozeToken(final InexorableBlobOozeToken token) {
+    protected InexorableBlobOozeToken(final InexorableBlobOozeToken token) {
         super(token);
     }
 

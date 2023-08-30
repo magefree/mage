@@ -45,6 +45,8 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.MessageToClient;
+import mage.util.MultiAmountMessage;
+
 import org.apache.log4j.Logger;
 
 import java.awt.*;
@@ -465,6 +467,13 @@ public class HumanPlayer extends PlayerImpl {
             return true;
         }
 
+        if (choice.isKeyChoice() && choice.getKeyChoices().isEmpty()) {
+            throw new IllegalArgumentException("Wrong code usage. Key choices must contains some values");
+        }
+        if (!choice.isKeyChoice() && choice.getChoices().isEmpty()) {
+            throw new IllegalArgumentException("Wrong code usage. Choices must contains some values");
+        }
+
         // Try to autopay for mana
         if (Outcome.PutManaInPool == outcome && currentlyUnpaidMana != null) {
             // Check check if the spell being paid for cares about the color of mana being paid
@@ -540,7 +549,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
+            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
@@ -640,7 +649,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
+            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
@@ -738,7 +747,8 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
+            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets)
+                    : null;
 
             if (responseId == null) {
                 Map<String, Serializable> options = getOptions(target, null);
@@ -819,7 +829,8 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
+            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets)
+                    : null;
 
             if (responseId == null) {
                 List<UUID> chosenTargets = target.getTargets();
@@ -894,7 +905,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
+            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
@@ -1003,6 +1014,8 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
 
+            // TODO: check that all skips and stops used from real controlling player
+            //  like holdingPriority (is it a bug here?)
             if (getJustActivatedType() != null && !holdingPriority) {
                 if (controllingPlayer.getUserData().isPassPriorityCast()
                         && getJustActivatedType() == AbilityType.SPELL) {
@@ -2045,10 +2058,12 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
+            int min, int max, MultiAmountType type, Game game) {
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
-        if (needCount == 0) {
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
+        if (needCount == 0 || (needCount == 1 && min == max)
+                || messages.stream().map(m -> m.min == m.max).reduce(true, Boolean::logicalAnd)) {
             return defaultList;
         }
 
@@ -2070,8 +2085,8 @@ public class HumanPlayer extends PlayerImpl {
 
             // waiting correct values only
             if (response.getString() != null) {
-                answer = MultiAmountType.parseAnswer(response.getString(), needCount, min, max, false);
-                if (MultiAmountType.isGoodValues(answer, needCount, min, max)) {
+                answer = MultiAmountType.parseAnswer(response.getString(), messages, min, max, false);
+                if (MultiAmountType.isGoodValues(answer, messages, min, max)) {
                     break;
                 } else {
                     // it's not normal: can be cheater or a wrong GUI checks

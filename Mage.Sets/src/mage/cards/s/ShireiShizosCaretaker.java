@@ -29,7 +29,7 @@ public final class ShireiShizosCaretaker extends CardImpl {
     }
 
     private static final String rule1 = "you may return that card to the battlefield " +
-            "t the beginning of the next end step if {this} is still on the battlefield";
+            "at the beginning of the next end step if {this} is still on the battlefield";
     private static final String rule2 = "Whenever a creature with power 1 or less " +
             "is put into your graveyard from the battlefield, ";
 

@@ -1,12 +1,12 @@
 
 
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
 /**
- *
  * @author spjspj
  */
 public final class PenumbraKavuToken extends TokenImpl {
@@ -20,7 +20,7 @@ public final class PenumbraKavuToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public PenumbraKavuToken(final PenumbraKavuToken token) {
+    protected PenumbraKavuToken(final PenumbraKavuToken token) {
         super(token);
     }
 

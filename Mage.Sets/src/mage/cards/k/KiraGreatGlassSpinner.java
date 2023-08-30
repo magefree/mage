@@ -11,7 +11,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -40,7 +40,7 @@ public final class KiraGreatGlassSpinner extends CardImpl {
         effect.setText("counter that spell or ability");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(new KiraGreatGlassSpinnerAbility(effect), Duration.WhileOnBattlefield,
-                        FILTER_PERMANENT_CREATURES)),
+                        StaticFilters.FILTER_PERMANENT_CREATURES)),
                 new NumberOfTimesPermanentTargetedATurnWatcher());
 
     }

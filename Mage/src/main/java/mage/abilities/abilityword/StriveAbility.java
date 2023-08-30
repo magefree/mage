@@ -25,7 +25,7 @@ public class StriveAbility extends SimpleStaticAbility {
         setAbilityWord(AbilityWord.STRIVE);
     }
 
-    public StriveAbility(final StriveAbility ability) {
+    protected StriveAbility(final StriveAbility ability) {
         super(ability);
         this.striveCost = ability.striveCost;
     }
@@ -67,7 +67,7 @@ class StriveCostIncreasingEffect extends CostModificationEffectImpl {
                     sb.append(striveCosts.getText());
                 }
                 String finalCost = ManaUtil.condenseManaCostString(sb.toString());
-                abilityToModify.getManaCostsToPay().add(new ManaCostsImpl<>(finalCost));
+                abilityToModify.addManaCostsToPay(new ManaCostsImpl<>(finalCost));
                 return true;
             }
         }

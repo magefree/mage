@@ -45,7 +45,6 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     private static final List<CardType> emptyCardType = Collections.unmodifiableList(new ArrayList<>());
     private static final List<String> emptyString = Collections.unmodifiableList(new ArrayList<>());
-    private static final ObjectColor emptyColor = new ObjectColor();
     private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
     private static final Costs<Cost> emptyCosts = new CostsImpl<>();
     private static final Abilities<Ability> emptyAbilites = new AbilitiesImpl<>();
@@ -65,7 +64,7 @@ public class StackAbility extends StackObjectImpl implements Ability {
         this.name = "stack ability (" + ability.getRule() + ')';
     }
 
-    public StackAbility(final StackAbility stackAbility) {
+    protected StackAbility(final StackAbility stackAbility) {
         super();
         this.ability = stackAbility.ability.copy();
         this.controllerId = stackAbility.controllerId;
@@ -223,12 +222,12 @@ public class StackAbility extends StackObjectImpl implements Ability {
 
     @Override
     public ObjectColor getColor() {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
     public ObjectColor getColor(Game game) {
-        return emptyColor;
+        return ObjectColor.COLORLESS;
     }
 
     @Override
@@ -395,7 +394,13 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public void addManaCost(ManaCost cost) {
+    public void addManaCost(ManaCost manaCost) {
+        // Do nothing
+    }
+
+    @Override
+    public void addManaCostsToPay(ManaCost manaCost) {
+        // Do nothing
     }
 
     @Override
@@ -698,6 +703,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     @Override
     public Ability addHint(Hint hint) {
         throw new IllegalArgumentException("Stack ability is not supports hint adding");
+    }
+
+    @Override
+    public void setModeTag(String tag) {
+        throw new IllegalArgumentException("Stack ability does not supports setting modeTag");
     }
 
     @Override

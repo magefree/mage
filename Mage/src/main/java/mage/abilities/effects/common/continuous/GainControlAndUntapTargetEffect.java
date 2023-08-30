@@ -60,7 +60,7 @@ public class GainControlAndUntapTargetEffect extends ContinuousEffectImpl {
         this.condition = condition;
     }
 
-    public GainControlAndUntapTargetEffect(final GainControlAndUntapTargetEffect effect) {
+    protected GainControlAndUntapTargetEffect(final GainControlAndUntapTargetEffect effect) {
         super(effect);
         this.controllingPlayerId = effect.controllingPlayerId;
         this.fixedControl = effect.fixedControl;

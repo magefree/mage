@@ -75,6 +75,10 @@ class VeyranVoiceOfDualityEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
         GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+        if (sourceEvent == null) {
+            return false;
+        }
+
         if (sourceEvent.getType() == GameEvent.EventType.SPELL_CAST
                 || sourceEvent.getType() == GameEvent.EventType.COPIED_STACKOBJECT) {
             Spell spell = game.getSpell(sourceEvent.getTargetId());

@@ -22,7 +22,7 @@ public final class StitcherGeralfZombieToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    public StitcherGeralfZombieToken(final StitcherGeralfZombieToken token) {
+    protected StitcherGeralfZombieToken(final StitcherGeralfZombieToken token) {
         super(token);
     }
 

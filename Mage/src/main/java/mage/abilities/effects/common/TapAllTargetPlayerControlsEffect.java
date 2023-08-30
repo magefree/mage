@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.List;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -11,7 +12,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LoneFox
  */
 public class TapAllTargetPlayerControlsEffect extends OneShotEffect {
@@ -23,7 +23,7 @@ public class TapAllTargetPlayerControlsEffect extends OneShotEffect {
         this.filter = filter;
     }
 
-    public TapAllTargetPlayerControlsEffect(final TapAllTargetPlayerControlsEffect effect) {
+    protected TapAllTargetPlayerControlsEffect(final TapAllTargetPlayerControlsEffect effect) {
         super(effect);
         filter = effect.filter.copy();
     }

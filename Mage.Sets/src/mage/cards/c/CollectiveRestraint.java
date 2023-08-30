@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCosts;
@@ -13,12 +12,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Simown
  */
 public final class CollectiveRestraint extends CardImpl {
@@ -46,7 +47,7 @@ public final class CollectiveRestraint extends CardImpl {
 class CollectiveRestraintPayManaToAttackAllEffect extends CantAttackYouUnlessPayAllEffect {
 
     CollectiveRestraintPayManaToAttackAllEffect() {
-        super(null, false);
+        super(Duration.WhileOnBattlefield, new ManaCostsImpl<>("{X}"));
         staticText = "Creatures can't attack you unless their controller pays {X} for each creature they control that's attacking you, where X is the number of basic land types among lands you control.";
     }
 

@@ -3,7 +3,7 @@ package mage.cards.i;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,7 +38,7 @@ public final class IcebergCancrix extends CardImpl {
 
         // Whenever another snow permanent enters the battlefield under your control, you may have target player put the top two cards of their library into their graveyard.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), filter,
+                Zone.BATTLEFIELD, new MillCardsTargetEffect(2), filter,
                 true, "Whenever another snow permanent enters the battlefield under your control, " +
                 "you may have target player mill two cards."
         );

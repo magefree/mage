@@ -4,7 +4,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.SourceBecomesTargetTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
@@ -31,7 +31,7 @@ public final class PhantasmalImage extends CardImpl {
         public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
             // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
             blueprint.addSubType(SubType.ILLUSION);
-            blueprint.getAbilities().add(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+            blueprint.getAbilities().add(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
             return true;
         }
     };

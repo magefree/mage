@@ -268,7 +268,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 8: // JACE MEMORY ADEPT 2
                                 sb.append("Target player mills ten cards.");
-                                effects.add(new PutLibraryIntoGraveTargetEffect(10));
+                                effects.add(new MillCardsTargetEffect(10));
                                 target = new TargetPlayer();
                                 break;
                             case 9: // JACE ARCHITECT OF THOUGHT 2
@@ -286,7 +286,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 12: // (altered) LILIANA VESS 2
                                 sb.append("Search your library for a card and put that card into your hand. Then shuffle.");
-                                effects.add(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("a card")), false, true));
+                                effects.add(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("a card")), false));
                                 break;
                             case 13: // (double) LILIANA OF THE VEIL 2
                                 sb.append("Target player sacrifices two creatures.");

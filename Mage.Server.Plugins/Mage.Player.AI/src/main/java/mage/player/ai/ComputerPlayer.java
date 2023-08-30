@@ -16,6 +16,7 @@ import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.RateCard;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.cards.decks.DeckValidatorFactory;
@@ -34,7 +35,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
-import mage.game.draft.RateCard;
 import mage.game.events.GameEvent;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
@@ -2169,11 +2169,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
+            int min, int max, MultiAmountType type, Game game) {
         log.debug("getMultiAmount");
 
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
         if (needCount == 0) {
             return defaultList;
         }
@@ -2188,7 +2189,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // GOOD effect
         // values must be stable, so AI must able to simulate it and choose correct actions
         // fill max values as much as possible
-        return MultiAmountType.prepareMaxValues(needCount, min, max);
+        return MultiAmountType.prepareMaxValues(messages, min, max);
     }
 
     @Override
@@ -2256,7 +2257,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         List<Card> sortedCards = new ArrayList<>(cardPool);
         if (!sortedCards.isEmpty()) {
-            while (deck.getCards().size() < DECK_SIZE) {
+            while (deck.getMaindeckCards().size() < DECK_SIZE) {
                 deck.getCards().add(sortedCards.get(RandomUtil.nextInt(sortedCards.size())));
             }
             return deck;
@@ -2286,7 +2287,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
         // get top cards
         int cardNum = 0;
-        while (deck.getCards().size() < DECK_CARDS_COUNT && sortedCards.size() > cardNum) {
+        while (deck.getMaindeckCards().size() < DECK_CARDS_COUNT && sortedCards.size() > cardNum) {
             Card card = sortedCards.get(cardNum);
             if (!card.isBasic()) {
                 deck.getCards().add(card);
@@ -2348,7 +2349,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
 
         // adds remaining lands (most popular name)
-        addBasicLands(deck, mostLandName, DECK_SIZE - deck.getCards().size());
+        addBasicLands(deck, mostLandName, DECK_SIZE - deck.getMaindeckCards().size());
 
         return deck;
     }
@@ -2358,7 +2359,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         DeckValidator deckValidator = DeckValidatorFactory.instance.createDeckValidator(tournament.getOptions().getMatchOptions().getDeckType());
         int deckMinSize = deckValidator != null ? deckValidator.getDeckMinSize() : 0;
 
-        if (deck != null && deck.getCards().size() < deckMinSize && !deck.getSideboard().isEmpty()) {
+        if (deck != null && deck.getMaindeckCards().size() < deckMinSize && !deck.getSideboard().isEmpty()) {
             if (chosenColors == null) {
                 for (Card card : deck.getSideboard()) {
                     rememberPick(card, RateCard.rateCard(card, null));

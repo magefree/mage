@@ -11,7 +11,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author noxx
  */
 public class ReturnToBattlefieldUnderYourControlAttachedEffect extends OneShotEffect {
@@ -21,16 +20,15 @@ public class ReturnToBattlefieldUnderYourControlAttachedEffect extends OneShotEf
     }
 
     /**
-     *
      * @param objectText text for the object to return (default: "that card") if
-     * you use constructor without this param
+     *                   you use constructor without this param
      */
     public ReturnToBattlefieldUnderYourControlAttachedEffect(String objectText) {
         super(Outcome.Benefit);
         staticText = "return " + objectText + " to the battlefield under your control";
     }
 
-    public ReturnToBattlefieldUnderYourControlAttachedEffect(final ReturnToBattlefieldUnderYourControlAttachedEffect effect) {
+    protected ReturnToBattlefieldUnderYourControlAttachedEffect(final ReturnToBattlefieldUnderYourControlAttachedEffect effect) {
         super(effect);
     }
 

@@ -21,7 +21,7 @@ public final class HissingMiasma extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
 
         // Whenever a creature attacks you, its controller loses 1 life.
-        this.addAbility(new AttackedByCreatureTriggeredAbility(new LoseLifeTargetEffect(1), false, SetTargetPointer.PLAYER));
+        this.addAbility(new AttackedByCreatureTriggeredAbility(new LoseLifeTargetEffect(1).setText("its controller loses 1 life"), false, SetTargetPointer.PLAYER));
     }
 
     private HissingMiasma(final HissingMiasma card) {

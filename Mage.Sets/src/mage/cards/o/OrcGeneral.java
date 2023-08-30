@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ import mage.target.common.TargetControlledPermanent;
 public final class OrcGeneral extends CardImpl {
     
     private static final FilterControlledPermanent filterOrcOrGoblin = new FilterControlledPermanent("another Orc or Goblin");
-    private static final FilterCreaturePermanent filterOrc = new FilterCreaturePermanent("Other Orc creatures");
+    private static final FilterCreaturePermanent filterOrc = new FilterCreaturePermanent("Orc creatures");
     
     static {
         filterOrcOrGoblin.add(Predicates.or(SubType.ORC.getPredicate(),

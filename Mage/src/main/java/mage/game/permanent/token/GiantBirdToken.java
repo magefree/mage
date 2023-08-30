@@ -20,7 +20,7 @@ public final class GiantBirdToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public GiantBirdToken(final GiantBirdToken token) {
+    protected GiantBirdToken(final GiantBirdToken token) {
         super(token);
     }
 

@@ -26,8 +26,8 @@ public class MoreThanMeetsTheEyeAbility extends SpellAbility {
         this.spellAbilityCastMode = SpellAbilityCastMode.TRANSFORMED;
 
         this.manaCost = manaCost;
-        this.getManaCosts().clear();
-        this.getManaCostsToPay().clear();
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
         this.addManaCost(new ManaCostsImpl<>(manaCost));
     }
 
@@ -61,7 +61,7 @@ public class MoreThanMeetsTheEyeAbility extends SpellAbility {
     @Override
     public String getRule() {
         return "More Than Meets the Eye " + this.manaCost
-                + " <i>(You may cast this card converted for" + this.manaCost + ".)</i>";
+            + " <i>(You may cast this card converted for " + this.manaCost + ".)</i>";
     }
 }
 

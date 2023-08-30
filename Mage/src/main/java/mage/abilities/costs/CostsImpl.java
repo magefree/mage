@@ -22,6 +22,7 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
     }
 
     public CostsImpl(final CostsImpl<T> costs) {
+        this.ensureCapacity(costs.size());
         for (Cost cost : costs) {
             this.add((T) cost.copy());
         }

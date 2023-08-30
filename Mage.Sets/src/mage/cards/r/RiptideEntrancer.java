@@ -91,6 +91,6 @@ class RiptideEntrancerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever {this} deals combat damage to a player, you may sacrifice it. "
-                + "If you do, gain control of target creature that player controls";
+                + "If you do, gain control of target creature that player controls.";
     }
 }

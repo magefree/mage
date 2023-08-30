@@ -53,7 +53,7 @@ public final class TheRestorationOfEiganjo extends TransformingDoubleFacedCard {
         // I - Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
         sagaAbility.addChapterEffect(
                 this.getLeftHalfCard(), SagaChapter.CHAPTER_I, new SearchLibraryPutInHandEffect(
-                        new TargetCardInLibrary(filter), true, true
+                        new TargetCardInLibrary(filter), true
                 )
         );
 

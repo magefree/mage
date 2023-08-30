@@ -3,6 +3,7 @@ package mage.game.command.emblems;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
@@ -18,7 +19,7 @@ public final class NarsetOfTheAncientWayEmblem extends Emblem {
         super("Emblem Narset");
         Ability ability = new SpellCastControllerTriggeredAbility(
                 Zone.COMMAND, new DamageTargetEffect(2, "this emblem"),
-                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, false
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, SetTargetPointer.NONE
         );
         ability.addTarget(new TargetAnyTarget());
         this.getAbilities().add(ability);

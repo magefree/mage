@@ -15,6 +15,7 @@ import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -53,7 +54,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         this.eachModeMoreThanOnce = false;
     }
 
-    public Modes(final Modes modes) {
+    protected Modes(final Modes modes) {
         for (Map.Entry<UUID, Mode> entry : modes.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
@@ -96,6 +97,15 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         return modeToGet;
     }
 
+    public Stream<Mode> stream() {
+        return super.values().stream();
+    }
+
+    public Stream<Mode> streamAlreadySelected(Ability source, Game game) {
+        Set<UUID> selected = getAlreadySelectedModes(source, game);
+        return stream().filter(m -> selected.contains(m.getId()));
+    }
+
     public Mode getMode() {
         return currentMode;
     }
@@ -129,7 +139,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
     public List<UUID> getSelectedModes() {
         // modes can be selected in any order by user, but execution must be in rule's order
-        List<UUID> res = new ArrayList<>();
+        List<UUID> res = new ArrayList<>(this.size());
         for (Mode mode : this.values()) {
             for (UUID selectedId : this.selectedModes) {
                 // selectedModes contains original mode and 2+ selected as duplicates (new modes)
@@ -208,9 +218,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
             return realMaxModes;
         }
 
-        // use case: make all modes chooseable
+        // use case: make two modes chooseable (all cards that use this currently go from one to two)
         if (moreCondition != null && moreCondition.apply(game, source)) {
-            realMaxModes = this.size();
+            realMaxModes = 2;
         }
 
         // use case: limit max modes by opponents (wtf?!)

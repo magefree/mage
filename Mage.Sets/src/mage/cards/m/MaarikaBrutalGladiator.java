@@ -57,12 +57,12 @@ public final class MaarikaBrutalGladiator extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance()),
                 MyTurnCondition.instance, "as long as it's your turn, {this} has indestructible"
-        )).withFlavorWord("Iron Muscle"));
+        )));
 
         // Spinning Piledriver—Whenever Zangief deals damage to a creature, if that creature was dealt excess damage this turn, that creature's controller sacrifices a noncreature, nonland permanent.
         this.addAbility(new DealsDamageToACreatureTriggeredAbility(
                 new MaarikaBrutalGladiatorEffect(), false, false, true, filter
-        ).withFlavorWord("Spinning Piledriver"), new MaarikaBrutalGladiatorWatcher());
+        ), new MaarikaBrutalGladiatorWatcher());
     }
 
     private MaarikaBrutalGladiator(final MaarikaBrutalGladiator card) {

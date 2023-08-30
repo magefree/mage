@@ -34,14 +34,14 @@ public class EmergeAbility extends SpellAbility {
         zone = Zone.HAND;
         spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
 
-        this.getManaCosts().clear();
-        this.getManaCostsToPay().clear();
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
         this.addManaCost(emergeCost.copy());
 
-        this.setRuleAtTheTop(true);        
+        this.setRuleAtTheTop(true);
     }
 
-    public EmergeAbility(final EmergeAbility ability) {
+    protected EmergeAbility(final EmergeAbility ability) {
         super(ability);
         this.emergeCost = ability.emergeCost.copy();
     }

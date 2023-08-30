@@ -33,7 +33,7 @@ public class GainLifeEffect extends OneShotEffect {
         staticText = rule;
     }
 
-    public GainLifeEffect(final GainLifeEffect effect) {
+    protected GainLifeEffect(final GainLifeEffect effect) {
         super(effect);
         this.life = effect.life.copy();
     }

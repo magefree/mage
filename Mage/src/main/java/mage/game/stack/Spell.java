@@ -60,7 +60,8 @@ public class Spell extends StackObjectImpl implements Card {
     private boolean faceDown;
     private boolean countered;
     private boolean resolving = false;
-    private UUID commandedBy = null; // for Word of Command
+    private UUID commandedByPlayerId = null; // controller of the spell resolve, example: Word of Command
+    private String commandedByInfo; // info about spell commanded, e.g. source
     private int startingLoyalty;
     private int startingDefense;
 
@@ -100,7 +101,7 @@ public class Spell extends StackObjectImpl implements Card {
         this.countered = false;
     }
 
-    public Spell(final Spell spell) {
+    protected Spell(final Spell spell) {
         this.id = spell.id;
         this.zoneChangeCounter = spell.zoneChangeCounter;
         for (SpellAbility spellAbility : spell.spellAbilities) {
@@ -124,7 +125,8 @@ public class Spell extends StackObjectImpl implements Card {
         this.faceDown = spell.faceDown;
         this.countered = spell.countered;
         this.resolving = spell.resolving;
-        this.commandedBy = spell.commandedBy;
+        this.commandedByPlayerId = spell.commandedByPlayerId;
+        this.commandedByInfo = spell.commandedByInfo;
 
         this.currentActivatingManaAbilitiesStep = spell.currentActivatingManaAbilitiesStep;
         this.targetChanged = spell.targetChanged;
@@ -232,12 +234,16 @@ public class Spell extends StackObjectImpl implements Card {
             return false;
         }
         this.resolving = true;
-        if (commandedBy != null && !commandedBy.equals(getControllerId())) {
-            Player turnController = game.getPlayer(commandedBy);
-            if (turnController != null) {
-                turnController.controlPlayersTurn(game, controller.getId());
+
+        // setup new turn controller for spell's resolve, example: Word of Command
+        // original controller will be reset after spell's resolve
+        if (commandedByPlayerId != null && !commandedByPlayerId.equals(getControllerId())) {
+            Player newTurnController = game.getPlayer(commandedByPlayerId);
+            if (newTurnController != null) {
+                newTurnController.controlPlayersTurn(game, controller.getId(), commandedByInfo);
             }
         }
+
         if (this.isInstantOrSorcery(game)) {
             int index = 0;
             result = false;
@@ -300,7 +306,7 @@ public class Spell extends StackObjectImpl implements Card {
                 if (isCopy()) {
                     Token token = CopyTokenFunction.createTokenCopy(card, game, this);
                     // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
-                    if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false)) {
+                    if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, null, false)) {
                         permId = token.getLastAddedTokenIds().stream().findFirst().orElse(null);
                         flag = true;
                     } else {
@@ -367,7 +373,7 @@ public class Spell extends StackObjectImpl implements Card {
         } else if (isCopy()) {
             Token token = CopyTokenFunction.createTokenCopy(card, game, this);
             // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
-            token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false);
+            token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, null, false);
             return true;
         } else {
             return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);
@@ -1109,12 +1115,24 @@ public class Spell extends StackObjectImpl implements Card {
         throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setCommandedBy(UUID playerId) {
-        this.commandedBy = playerId;
+    /**
+     * Add temporary turn controller while resolving (e.g. all choices will be made by another player)
+     * Example: Word of Command
+     *
+     * @param newTurnControllerId
+     * @param info                additional info for game logs
+     */
+    public void setCommandedBy(UUID newTurnControllerId, String info) {
+        this.commandedByPlayerId = newTurnControllerId;
+        this.commandedByInfo = info;
     }
 
-    public UUID getCommandedBy() {
-        return commandedBy;
+    public UUID getCommandedByPlayerId() {
+        return commandedByPlayerId;
+    }
+
+    public String getCommandedByInfo() {
+        return commandedByInfo == null ? "" : commandedByInfo;
     }
 
     @Override

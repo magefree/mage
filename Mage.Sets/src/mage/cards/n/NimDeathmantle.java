@@ -48,7 +48,7 @@ public final class NimDeathmantle extends CardImpl {
         ).setText(", and is a black"));
         ability.addEffect(new SetCardSubtypeAttachedEffect(
                 Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT, SubType.ZOMBIE
-        ).setText("Zombie"));
+        ).setText(" Zombie"));
         this.addAbility(ability);
 
         // Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {4}. If you do, return that card to the battlefield and attach Nim Deathmantle to it.

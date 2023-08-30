@@ -5,7 +5,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author TheElk801
  */
 public final class PlanewideCelebrationToken extends TokenImpl {
@@ -24,7 +23,7 @@ public final class PlanewideCelebrationToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public PlanewideCelebrationToken(final PlanewideCelebrationToken token) {
+    protected PlanewideCelebrationToken(final PlanewideCelebrationToken token) {
         super(token);
     }
 

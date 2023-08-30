@@ -20,7 +20,7 @@ public final class VampireToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public VampireToken(final VampireToken token) {
+    protected VampireToken(final VampireToken token) {
         super(token);
     }
 

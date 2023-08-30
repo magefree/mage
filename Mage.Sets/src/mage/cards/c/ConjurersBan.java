@@ -46,7 +46,7 @@ class ConjurersBanEffect extends ContinuousRuleModifyingEffectImpl {
 
     ConjurersBanEffect() {
         super(Duration.UntilYourNextTurn, Outcome.Detriment, true, false);
-        this.staticText = "Until your next turn spells with the chosen name can't be cast and lands with the chosen name can't be played";
+        this.staticText = "Until your next turn, spells with the chosen name can't be cast and lands with the chosen name can't be played";
     }
 
     private ConjurersBanEffect(final ConjurersBanEffect effect) {

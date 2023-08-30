@@ -6,7 +6,7 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.SkulkAbility;
 import mage.cards.Card;
@@ -37,7 +37,7 @@ public final class StartledAwake extends TransformingDoubleFacedCard {
         this.getRightHalfCard().setPT(1, 1);
 
         // Target opponent puts the top thirteen cards of their library into their graveyard.
-        this.getLeftHalfCard().getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));
+        this.getLeftHalfCard().getSpellAbility().addEffect(new MillCardsTargetEffect(13));
         this.getLeftHalfCard().getSpellAbility().addTarget(new TargetOpponent());
 
         // {3}{U}{U}: Put Startled Awake from your graveyard onto the battlefield transformed. Activate this ability only any time you could cast a sorcery.

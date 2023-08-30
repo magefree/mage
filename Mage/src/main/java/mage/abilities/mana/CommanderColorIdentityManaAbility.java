@@ -32,7 +32,7 @@ public class CommanderColorIdentityManaAbility extends ActivatedManaAbilityImpl 
         super(Zone.BATTLEFIELD, new CommanderIdentityManaEffect(), cost);
     }
 
-    public CommanderColorIdentityManaAbility(final CommanderColorIdentityManaAbility ability) {
+    protected CommanderColorIdentityManaAbility(final CommanderColorIdentityManaAbility ability) {
         super(ability);
     }
 
@@ -55,7 +55,7 @@ class CommanderIdentityManaEffect extends ManaEffect {
         this.staticText = "Add one mana of any color in your commander's color identity";
     }
 
-    public CommanderIdentityManaEffect(final CommanderIdentityManaEffect effect) {
+    protected CommanderIdentityManaEffect(final CommanderIdentityManaEffect effect) {
         super(effect);
     }
 

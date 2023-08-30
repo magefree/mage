@@ -38,7 +38,7 @@ public class TargetStackObject extends TargetObject {
         this.targetName = filter.getMessage();
     }
 
-    public TargetStackObject(final TargetStackObject target) {
+    protected TargetStackObject(final TargetStackObject target) {
         super(target);
         this.filter = target.filter.copy();
     }

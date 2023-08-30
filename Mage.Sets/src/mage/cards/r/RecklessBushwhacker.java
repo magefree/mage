@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -15,20 +14,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author fireshoes
  */
 public final class RecklessBushwhacker extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent FILTER = new FilterControlledCreaturePermanent("other creatures you control");
-
-    static {
-        FILTER.add(AnotherPredicate.instance);
-    }
 
     public RecklessBushwhacker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
@@ -46,7 +38,7 @@ public final class RecklessBushwhacker extends CardImpl {
 
         // When Reckless Bushwhacker enters the battlefield, if its surge cost was paid, other creatures you control get +1/+0 and gain haste until end of turn.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn, true), false);
-        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, FILTER, true));
+        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES, true));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, SurgedCondition.instance,
                 "When {this} enters the battlefield, if its surge cost was paid, other creatures you control get +1/+0 and gain haste until end of turn."));
 

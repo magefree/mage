@@ -22,7 +22,7 @@ public final class PhyrexianBeastToxicToken extends TokenImpl {
         addAbility(new ToxicAbility(1));
     }
 
-    public PhyrexianBeastToxicToken(final PhyrexianBeastToxicToken token) {
+    protected PhyrexianBeastToxicToken(final PhyrexianBeastToxicToken token) {
         super(token);
     }
 

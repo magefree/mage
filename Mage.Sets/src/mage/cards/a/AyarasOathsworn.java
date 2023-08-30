@@ -47,7 +47,7 @@ public final class AyarasOathsworn extends CardImpl {
                 "search your library for a card, put it into your hand, then shuffle."
         );
         ability.addEffect(new ConditionalOneShotEffect(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary()), condition2
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false), condition2
         ));
         this.addAbility(ability);
     }

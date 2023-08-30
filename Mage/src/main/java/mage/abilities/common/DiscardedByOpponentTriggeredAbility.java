@@ -9,7 +9,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author Styxo
  */
 public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
@@ -23,7 +22,7 @@ public class DiscardedByOpponentTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When a spell or ability an opponent controls causes you to discard this card, ");
     }
 
-    public DiscardedByOpponentTriggeredAbility(final DiscardedByOpponentTriggeredAbility ability) {
+    protected DiscardedByOpponentTriggeredAbility(final DiscardedByOpponentTriggeredAbility ability) {
         super(ability);
     }
 

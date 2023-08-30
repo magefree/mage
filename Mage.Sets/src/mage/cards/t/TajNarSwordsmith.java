@@ -71,7 +71,7 @@ class TajNarSwordsmithEffect extends OneShotEffect {
             FilterCard filter = new FilterCard("Equipment card with mana value {" + payCount + "} or less");
             filter.add(SubType.EQUIPMENT.getPredicate());
             filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, payCount + 1));
-            new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, filter), false, true).apply(game, source);
+            new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, filter), false).apply(game, source);
             return true;
         }
         return false;

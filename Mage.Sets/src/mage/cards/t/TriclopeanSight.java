@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.UntapEnchantedEffect;
+import mage.abilities.effects.common.UntapAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -37,7 +37,7 @@ public final class TriclopeanSight extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // When Triclopean Sight enters the battlefield, untap enchanted creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapEnchantedEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapAttachedEffect()));
 
         // Enchanted creature gets +1/+1 and has vigilance.
         Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(

@@ -21,7 +21,6 @@ public class CantAttackAnyPlayerAllEffect extends RestrictionEffect {
         this.filter = filter;
         StringBuilder sb = new StringBuilder(filter.getMessage()).append(" can't attack");
         if (!duration.toString().isEmpty()) {
-            sb.append(' ');
             if (duration == Duration.EndOfTurn) {
                 sb.append(" this turn");
             } else {
@@ -31,7 +30,7 @@ public class CantAttackAnyPlayerAllEffect extends RestrictionEffect {
         staticText = sb.toString();
     }
 
-    public CantAttackAnyPlayerAllEffect(final CantAttackAnyPlayerAllEffect effect) {
+    protected CantAttackAnyPlayerAllEffect(final CantAttackAnyPlayerAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

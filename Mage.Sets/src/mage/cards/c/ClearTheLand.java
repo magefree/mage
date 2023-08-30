@@ -68,7 +68,7 @@ class ClearTheLandEffect extends OneShotEffect {
                 if (player != null) {
                     Library library = player.getLibrary();
                     Cards cardsToReveal = new CardsImpl();
-                    cardsToReveal.addAll(library.getTopCards(game, 5));
+                    cardsToReveal.addAllCards(library.getTopCards(game, 5));
                     if (!cardsToReveal.isEmpty()) {
                         player.revealCards(source, "Revealed cards for " + player.getName(), cardsToReveal, game);
                         Cards cardsToPutOnBattlefield = new CardsImpl();

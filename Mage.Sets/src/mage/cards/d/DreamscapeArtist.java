@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -39,7 +38,7 @@ public final class DreamscapeArtist extends CardImpl {
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS);
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay),
+                new SearchLibraryPutInPlayEffect(target, false),
                 new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());

@@ -22,7 +22,7 @@ public final class IncubatorToken extends TokenImpl {
         ));
     }
 
-    public IncubatorToken(final IncubatorToken token) {
+    protected IncubatorToken(final IncubatorToken token) {
         super(token);
     }
 

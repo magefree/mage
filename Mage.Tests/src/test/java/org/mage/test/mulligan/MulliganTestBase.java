@@ -3,6 +3,7 @@ package org.mage.test.mulligan;
 import mage.cards.CardSetInfo;
 import mage.cards.basiclands.Forest;
 import mage.cards.decks.Deck;
+import mage.cards.s.Squire;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.GameOptions;
@@ -141,7 +142,10 @@ public class MulliganTestBase {
     public static Deck generateDeck(UUID playerId, int count) {
         Deck deck = new Deck();
         Stream.generate(() -> new Forest(playerId, new CardSetInfo("Forest", "TEST", "1", LAND)))
-                .limit(count)
+                .limit(count/2+(count & 1)) //If odd number of cards, add one extra forest
+                .forEach(deck.getCards()::add);
+        Stream.generate(() -> new Squire(playerId, new CardSetInfo("Squire", "TEST", "2", LAND)))
+                .limit(count/2)
                 .forEach(deck.getCards()::add);
         return deck;
     }

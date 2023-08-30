@@ -29,7 +29,7 @@ public class MentorAbility extends AttacksTriggeredAbility {
         this.addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public MentorAbility(final MentorAbility ability) {
+    protected MentorAbility(final MentorAbility ability) {
         super(ability);
     }
 
