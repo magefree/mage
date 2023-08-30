@@ -52,6 +52,22 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
         }
     }
 
+    /**
+     * @param power set in layer 7b
+     * @param toughness set in layer 7b
+     * @param duration Duration for the effect
+     * @param text Text to set as staticText
+     */
+    public SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, String text) {
+        this(power, toughness, duration, SubLayer.SetPT_7b);
+        this.staticText = text;
+    }
+
+    /**
+     * @param power set in layer 7b
+     * @param toughness set in layer 7b
+     * @param duration Duration for the effect
+     */
     public SetBasePowerToughnessSourceEffect(int power, int toughness, Duration duration) {
         this(StaticValue.get(power), StaticValue.get(toughness), duration, SubLayer.SetPT_7b);
         this.staticText = "{this} has base power and toughness " + power + '/' + toughness + ' ' + duration.toString();
