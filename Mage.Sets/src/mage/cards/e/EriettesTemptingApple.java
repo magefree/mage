@@ -6,12 +6,12 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.token.FoodAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,10 +42,7 @@ public final class EriettesTemptingApple extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {T}, Sacrifice Eriette's Tempting Apple: You gain 3 life.
-        ability = new SimpleActivatedAbility(new GainLifeEffect(3), new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability);
+        this.addAbility(new FoodAbility(true));
 
         // {2}, {T}, Sacrifice Eriette's Tempting Apple: Target opponent loses 3 life.
         ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(3), new GenericManaCost(2));
