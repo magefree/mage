@@ -69,7 +69,7 @@ public class SplitCardHalfImpl extends CardImpl implements SplitCardHalf {
     }
 
     @Override
-    public SplitCardHalf copy() {
+    public SplitCardHalfImpl copy() {
         return new SplitCardHalfImpl(this);
     }
 

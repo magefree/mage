@@ -30,7 +30,7 @@ public abstract class AdventureCard extends CardImpl {
         spellCard.finalizeAdventure();
     }
 
-    public AdventureCard(AdventureCard card) {
+    protected AdventureCard(final AdventureCard card) {
         super(card);
         this.spellCard = card.getSpellCard().copy();
         this.spellCard.setParentCard(this);

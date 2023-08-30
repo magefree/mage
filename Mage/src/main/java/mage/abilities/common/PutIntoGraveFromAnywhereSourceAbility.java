@@ -36,7 +36,7 @@ public class PutIntoGraveFromAnywhereSourceAbility extends SimpleStaticAbility {
     }
 
     @Override
-    public SimpleStaticAbility copy() {
+    public PutIntoGraveFromAnywhereSourceAbility copy() {
         return new PutIntoGraveFromAnywhereSourceAbility(this);
     }
 
