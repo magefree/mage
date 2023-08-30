@@ -4,6 +4,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedBatchEvent;
@@ -31,7 +32,7 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
     }
 
     public DealCombatDamageControlledTriggeredAbility(Effect effect, SetTargetPointer setTargetPointer) {
-        this(Zone.BATTLEFIELD, effect, new FilterCreaturePermanent("creatures"), setTargetPointer, false);
+        this(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_PERMANENT_CREATURES, setTargetPointer, false);
     }
 
     public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, FilterCreaturePermanent filter, SetTargetPointer setTargetPointer, boolean optional) {
