@@ -23,7 +23,7 @@ public class CombatDamageByToughnessAllEffect extends ContinuousEffectImpl {
     }
      
     public CombatDamageByToughnessAllEffect(FilterCreaturePermanent filter, Duration duration) {
-        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Neutral);
         this.filter = filter;
         this.staticText = filter.getMessage() + " assigns combat damage equal to its toughness rather than its power";
     }
