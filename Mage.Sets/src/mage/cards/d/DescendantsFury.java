@@ -33,7 +33,6 @@ public final class DescendantsFury extends CardImpl {
 
         // Whenever one or more creatures you control deal combat damage to a player, you may sacrifice one of them. If you do, reveal cards from the top of your library until you reveal a creature card that shares a creature type with the sacrificed creature. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
         Ability ability = new DealCombatDamageControlledTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new DoIfCostPaid(
                         new DescendantsFuryEffect(),
                         new DescendantsFurySacrificeCost()

@@ -25,7 +25,7 @@ public final class FeywildVisitor extends CardImpl {
 
         // Commander creatures you own have "Whenever one or more nontoken creatures you control deal combat damage to a player, you create a 1/1 blue Faerie Dragon creature token with flying."
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
-                new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new FaerieDragonToken()), StaticFilters.FILTER_CREATURE_NON_TOKEN), 
+                new DealCombatDamageControlledTriggeredAbility(new CreateTokenEffect(new FaerieDragonToken()), StaticFilters.FILTER_CREATURE_NON_TOKEN), 
                 Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
         )));

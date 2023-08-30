@@ -32,7 +32,7 @@ public final class ThopterSpyNetwork extends CardImpl {
         this.addAbility(new ThopterSpyNetworkUpkeepTriggeredAbility());
 
         // Whenever one or more artifact creatures you control deals combat damage to a player, draw a card.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter));
+        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
     }
 
     private ThopterSpyNetwork(final ThopterSpyNetwork card) {

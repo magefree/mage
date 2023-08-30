@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.TreasureToken;
@@ -38,7 +37,7 @@ public final class ProsperousThief extends CardImpl {
         this.addAbility(new NinjutsuAbility("{1}{U}"));
 
         // Whenever one or more Ninja or Rogue creatures you control deal combat damage to a player, create a Treasure token.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()), filter));
+        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new CreateTokenEffect(new TreasureToken()), filter));
     }
 
     private ProsperousThief(final ProsperousThief card) {

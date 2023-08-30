@@ -23,27 +23,15 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
     private final FilterCreaturePermanent filter;
 
     public DealCombatDamageControlledTriggeredAbility(Effect effect) {
-        this(Zone.BATTLEFIELD, effect);
+        this(effect, SetTargetPointer.NONE);
     }
 
-    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect) {
-        this(zone, effect, SetTargetPointer.NONE);
+    public DealCombatDamageControlledTriggeredAbility(Effect effect, FilterCreaturePermanent filter) {
+        this(Zone.BATTLEFIELD, effect, filter, SetTargetPointer.NONE, false);
     }
 
-    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, FilterCreaturePermanent filter) {
-        this(zone, effect, filter, SetTargetPointer.NONE, false);
-    }
-
-    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, SetTargetPointer setTargetPointer) {
-        this(zone, effect, setTargetPointer, false);
-    }
-
-    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, boolean optional) {
-        this(zone, effect, SetTargetPointer.NONE, optional);
-    }
-
-    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, SetTargetPointer setTargetPointer, boolean optional) {
-        this(zone, effect, new FilterCreaturePermanent("creatures"), setTargetPointer, optional);
+    public DealCombatDamageControlledTriggeredAbility(Effect effect, SetTargetPointer setTargetPointer) {
+        this(Zone.BATTLEFIELD, effect, new FilterCreaturePermanent("creatures"), setTargetPointer, false);
     }
 
     public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, FilterCreaturePermanent filter, SetTargetPointer setTargetPointer, boolean optional) {
@@ -71,7 +59,6 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        
         List<DamagedEvent> events = ((DamagedBatchEvent) event).getEvents().stream()
             .filter(DamagedEvent::isCombatDamage)
             .filter(e -> {
@@ -85,13 +72,16 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
         if (events.isEmpty()) {
             return false;
         }
-
+        
+        this.getEffects().setValue("totalDamage", events.stream().mapToInt(DamagedEvent::getAmount).sum());
         switch (setTargetPointer) {
             case PLAYER:
                 this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
                 break;
-            default:
+            case NONE:
                 break;
+            default:
+                throw new IllegalArgumentException("Invalid SetTargetPointer option");
         }
 
         return true;

@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import java.util.UUID;
@@ -31,7 +30,7 @@ public final class KeeperOfFables extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever one or more non-Human creatures you control deal combat damage to a player, draw a card.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter));
+        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
     }
 
     private KeeperOfFables(final KeeperOfFables card) {
