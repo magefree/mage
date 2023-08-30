@@ -40,7 +40,7 @@ public final class ThunderbladeCharge extends CardImpl {
             Zone.GRAVEYARD,
             new DoIfCostPaid(new ThunderbladeChargeCastEffect(), new ManaCostsImpl<>("{2}{R}{R}{R}"))
                     .setText("if {this} is in your graveyard, you may pay {2}{R}{R}{R}. If you do, you may cast it without paying its mana cost"),
-            StaticFilters.FILTER_PERMANENT_CREATURES, SetTargetPointer.NONE, true)
+            StaticFilters.FILTER_PERMANENT_CREATURES, SetTargetPointer.NONE, false)
         );
     }
 

@@ -35,7 +35,7 @@ public final class PyrewildShaman extends CardImpl {
         this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.GRAVEYARD,
                 new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl<>("{3}"))
                         .setText("if {this} is in your graveyard, you may pay {3}. If you do, return {this} to your hand"),
-                        StaticFilters.FILTER_PERMANENT_CREATURES, SetTargetPointer.NONE, true));
+                        StaticFilters.FILTER_PERMANENT_CREATURES, SetTargetPointer.NONE, false));
 
     }
 
