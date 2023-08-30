@@ -33,7 +33,7 @@ public final class ViridescentWisps extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
-    public ViridescentWisps(final ViridescentWisps card) {
+    private ViridescentWisps(final ViridescentWisps card) {
         super(card);
     }
 

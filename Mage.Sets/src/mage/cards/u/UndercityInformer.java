@@ -61,7 +61,7 @@ class UndercityInformerEffect extends OneShotEffect {
         this.staticText = "Target player reveals the top card of their library until they reveal a land card, then puts those cards into their graveyard";
     }
 
-    public UndercityInformerEffect(final UndercityInformerEffect effect) {
+    private UndercityInformerEffect(final UndercityInformerEffect effect) {
         super(effect);
     }
 

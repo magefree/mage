@@ -63,7 +63,7 @@ class VastwoodAnimistEffect extends OneShotEffect {
         this.staticText = "Target land you control becomes an X/X Elemental creature until end of turn, where X is the number of Allies you control. It's still a land.";
     }
 
-    public VastwoodAnimistEffect(final VastwoodAnimistEffect effect) {
+    private VastwoodAnimistEffect(final VastwoodAnimistEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class VastwoodAnimistElementalToken extends TokenImpl {
         power = new MageInt(amount);
         toughness = new MageInt(amount);
     }
-    public VastwoodAnimistElementalToken(final VastwoodAnimistElementalToken token) {
+    private VastwoodAnimistElementalToken(final VastwoodAnimistElementalToken token) {
         super(token);
     }
 

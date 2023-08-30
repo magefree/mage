@@ -112,7 +112,7 @@ class UrzaLordHighArtificerManaEffect extends BasicManaEffect {
         this.filter = filter;
     }
 
-    public UrzaLordHighArtificerManaEffect(final UrzaLordHighArtificerManaEffect effect) {
+    private UrzaLordHighArtificerManaEffect(final UrzaLordHighArtificerManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

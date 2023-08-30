@@ -29,7 +29,7 @@ public final class ViridianRevel extends CardImpl {
         this.addAbility(new ViridianRevelTriggeredAbility());
     }
 
-    public ViridianRevel (final ViridianRevel card) {
+    private ViridianRevel(final ViridianRevel card) {
         super(card);
     }
 

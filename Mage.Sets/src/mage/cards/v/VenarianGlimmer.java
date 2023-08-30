@@ -49,7 +49,7 @@ class VenarianGlimmerEffect extends OneShotEffect {
         this.staticText = "Target player reveals their hand. You choose a nonland card with mana value X or less from it. That player discards that card";
     }
 
-    public VenarianGlimmerEffect(final VenarianGlimmerEffect effect) {
+    private VenarianGlimmerEffect(final VenarianGlimmerEffect effect) {
         super(effect);
     }
 

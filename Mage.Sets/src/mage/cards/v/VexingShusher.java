@@ -60,7 +60,7 @@ class VexingShusherCantCounterTargetEffect extends ContinuousRuleModifyingEffect
         staticText = "Target spell can't be countered";
     }
 
-    public VexingShusherCantCounterTargetEffect(final VexingShusherCantCounterTargetEffect effect) {
+    private VexingShusherCantCounterTargetEffect(final VexingShusherCantCounterTargetEffect effect) {
         super(effect);
     }
 

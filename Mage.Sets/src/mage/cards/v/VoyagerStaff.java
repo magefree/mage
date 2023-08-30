@@ -53,7 +53,7 @@ class VoyagerStaffEffect extends OneShotEffect {
         staticText = "exile target creature. Return the exiled card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public VoyagerStaffEffect(final VoyagerStaffEffect effect) {
+    private VoyagerStaffEffect(final VoyagerStaffEffect effect) {
         super(effect);
     }
 

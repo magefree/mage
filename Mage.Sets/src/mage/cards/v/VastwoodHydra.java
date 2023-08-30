@@ -67,7 +67,7 @@ class VastwoodHydraDistributeEffect extends OneShotEffect {
         this.staticText = "distribute a number of +1/+1 counters equal to the number of +1/+1 counters on {this} among any number of creatures you control";
     }
 
-    public VastwoodHydraDistributeEffect(final VastwoodHydraDistributeEffect effect) {
+    private VastwoodHydraDistributeEffect(final VastwoodHydraDistributeEffect effect) {
         super(effect);
     }
 
