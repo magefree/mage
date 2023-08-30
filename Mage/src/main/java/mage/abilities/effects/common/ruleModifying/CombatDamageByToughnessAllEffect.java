@@ -2,7 +2,6 @@
 package mage.abilities.effects.common.ruleModifying;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -26,6 +25,7 @@ public class CombatDamageByToughnessAllEffect extends ContinuousEffectImpl {
     public CombatDamageByToughnessAllEffect(FilterCreaturePermanent filter, Duration duration) {
         super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
         this.filter = filter;
+        this.staticText = filter.getMessage() + " assigns combat damage equal to its toughness rather than its power";
     }
     
 
@@ -44,15 +44,5 @@ public class CombatDamageByToughnessAllEffect extends ContinuousEffectImpl {
         game.getCombat().setUseToughnessForDamage(true);
         game.getCombat().addUseToughnessForDamageFilter(filter);
         return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        StringBuilder sb = new StringBuilder(filter.getMessage());
-        sb.append(" assigns combat damage equal to its toughness rather than its power");
-        return sb.toString();
     }
 }
