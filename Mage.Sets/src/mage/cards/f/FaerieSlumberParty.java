@@ -12,6 +12,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FaerieBlockFliersToken;
+import mage.game.permanent.token.Token;
 
 import java.util.Objects;
 import java.util.Set;
@@ -65,9 +66,9 @@ class FaerieSlumberPartyEffect extends OneShotEffect {
                 .getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)
                 .stream()
                 .filter(Objects::nonNull)
-                .map(Permanent::getOwnerId)
+                .map(Permanent::getControllerId)
                 .distinct()
-                .filter(id -> opponents.contains(id))
+                .filter(opponents::contains)
                 .mapToInt(id -> 1)
                 .sum();
 
@@ -77,8 +78,8 @@ class FaerieSlumberPartyEffect extends OneShotEffect {
         }
 
         if(count > 0) {
-            new CreateTokenEffect(new FaerieBlockFliersToken(), 2*count)
-                    .apply(game, source);
+            Token token = new FaerieBlockFliersToken();
+            token.putOntoBattlefield(2 * count, game, source, source.getControllerId());
         }
 
         return true;
