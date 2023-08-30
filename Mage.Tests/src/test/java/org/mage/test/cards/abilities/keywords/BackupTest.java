@@ -149,6 +149,7 @@ public class BackupTest extends CardTestPlayerBase {
         // Should deal 6 damage
         attack(1, playerA, "Aegis Turtle");
 
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
         execute();
 
