@@ -7,15 +7,15 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.CastCardFromGraveyardThenExileItEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
+import mage.abilities.effects.common.MayCastTargetThenExileEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardSetInfo;
 import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
-import mage.filter.common.FilterInstantOrSorceryCard;
+import mage.filter.StaticFilters;
 import mage.game.command.emblems.JaceTelepathUnboundEmblem;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -56,10 +56,8 @@ public final class JaceVrynsProdigy extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(ability);
 
         // -3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
-        ability = new LoyaltyAbility(new CastCardFromGraveyardThenExileItEffect()
-                .setText("You may cast target instant or sorcery card from your graveyard this turn. " +
-                        "If that spell would be put into your graveyard, exile it instead"), -3);
-        ability.addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard()));
+        ability = new LoyaltyAbility(new MayCastTargetThenExileEffect(Duration.EndOfTurn), -3);
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD));
         this.getRightHalfCard().addAbility(ability);
 
         // −9: You get an emblem with "Whenever you cast a spell, target opponent mills five cards."

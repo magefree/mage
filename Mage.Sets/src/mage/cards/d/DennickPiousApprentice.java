@@ -49,7 +49,7 @@ public final class DennickPiousApprentice extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new InvestigateEffect(1), false,
                 StaticFilters.FILTER_CARD_CREATURE, TargetController.ANY
-        ).setTriggersOnce(true).setTriggerPhrase("Whenever one or more creature cards are put into graveyards from anywhere, "));
+        ).setTriggersOnceEachTurn(true).setTriggerPhrase("Whenever one or more creature cards are put into graveyards from anywhere, "));
 
         // If Dennick, Pious Apparition would be put into a graveyard from anywhere, exile it instead.
         this.getRightHalfCard().addAbility(DisturbAbility.makeExileAbility());

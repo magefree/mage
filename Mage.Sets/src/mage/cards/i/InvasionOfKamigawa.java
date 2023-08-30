@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrBattleTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SiegeAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -47,9 +47,9 @@ public final class InvasionOfKamigawa extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Whenever Rooftop Saboteurs deals combat damage to a player or battle, draw a card.
-        this.getRightHalfCard().addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+        this.getRightHalfCard().addAbility(new DealsCombatDamageToAPlayerOrBattleTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), false
-        ).setOrBattle(true));
+        ));
     }
 
     private InvasionOfKamigawa(final InvasionOfKamigawa card) {

@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrBattleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -41,9 +41,9 @@ public final class AetherbladeAgent extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(DeathtouchAbility.getInstance());
 
         // Whenever Gitaxian Mindstinger deals combat damage to a player or battle, draw a card.
-        this.getRightHalfCard().addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+        this.getRightHalfCard().addAbility(new DealsCombatDamageToAPlayerOrBattleTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), false
-        ).setOrBattle(true));
+        ));
     }
 
     private AetherbladeAgent(final AetherbladeAgent card) {

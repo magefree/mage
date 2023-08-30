@@ -51,7 +51,9 @@ public final class LunarchVeteran extends TransformingDoubleFacedCard {
         this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Whenever another creature you control leaves the battlefield, you gain 1 life.
-        this.getRightHalfCard().addAbility(new LeavesBattlefieldAllTriggeredAbility(new GainLifeEffect(1), filter));
+        this.getRightHalfCard().addAbility(new LeavesBattlefieldAllTriggeredAbility(
+                new GainLifeEffect(1), StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL
+        ));
 
         // If Luminous Phantom would be put into a graveyard from anywhere, exile it instead.
         this.getRightHalfCard().addAbility(DisturbAbility.makeExileAbility());

@@ -61,7 +61,7 @@ public final class InvasionOfErgamon extends TransformingDoubleFacedCard {
         // When Truga Cliffcharger enters the battlefield, you may discard a card. If you do, search your library for a land or battle card, reveal it, put it into your hand, then shuffle.
         this.getRightHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(
                 new DoIfCostPaid(new SearchLibraryPutInHandEffect(
-                        new TargetCardInLibrary(filter), true, true
+                        new TargetCardInLibrary(filter), true
                 ), new DiscardCardCost())
         ));
     }

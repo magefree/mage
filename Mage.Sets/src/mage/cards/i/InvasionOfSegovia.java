@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class InvasionOfSegovia extends TransformingDoubleFacedCard {
 
-    private static final FilterCard filter = new FilterCard("noncreature spells");
+    private static final FilterCard filter = new FilterCard("noncreature spells you cast");
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));

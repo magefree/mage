@@ -82,7 +82,7 @@ public final class KytheonHeroOfAkros extends TransformingDoubleFacedCard {
 
         // 0: Until end of turn, Gideon, Battle-Forged becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
         ability = new LoyaltyAbility(new BecomesCreatureSourceEffect(
-                new GideonBattleForgedToken(), "planeswalker", Duration.EndOfTurn
+                new GideonBattleForgedToken(), CardType.PLANESWALKER, Duration.EndOfTurn
         ), 0);
         ability.addEffect(new PreventAllDamageToSourceEffect(Duration.EndOfTurn)
                 .setText("Prevent all damage that would be dealt to him this turn"));

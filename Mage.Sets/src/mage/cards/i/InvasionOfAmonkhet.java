@@ -86,7 +86,7 @@ class LazotepConvertCopyEffect extends OneShotEffect {
     public LazotepConvertCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "as a copy of any creature card in a graveyard, " +
-                "except it's a 4/4 black Zombie in addition to its other colors and types";
+                "except it's a 4/4 black Zombie in addition to its other types";
     }
 
     public LazotepConvertCopyEffect(final LazotepConvertCopyEffect effect) {
@@ -106,8 +106,11 @@ class LazotepConvertCopyEffect extends OneShotEffect {
         if (copyFromCard == null) {
             return true;
         }
+        Card modifiedCopy = copyFromCard.copy();
+        //Appliers must be applied before CopyEffect, its applier setting is just for copies of copies
+        applier.apply(game, modifiedCopy, source, source.getSourceId());
         game.addEffect(new CopyEffect(
-                Duration.Custom, copyFromCard, source.getSourceId()
+                Duration.Custom, modifiedCopy, source.getSourceId()
         ).setApplier(applier), source);
         return true;
     }
