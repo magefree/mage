@@ -720,7 +720,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Thought-Knot Seer", 720, Rarity.RARE, mage.cards.t.ThoughtKnotSeer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diabolic Tutor", 721, Rarity.RARE, mage.cards.d.DiabolicTutor.class));
         cards.add(new SetCardInfo("Delver of Secrets", 722, Rarity.RARE, mage.cards.d.DelverOfSecrets.class));
-        cards.add(new SetCardInfo("Insectile Aberration", 722, Rarity.RARE, mage.cards.i.InsectileAberration.class));
         cards.add(new SetCardInfo("Lightning Strike", 724, Rarity.RARE, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Zur the Enchanter", 726, Rarity.RARE, mage.cards.z.ZurTheEnchanter.class));
         cards.add(new SetCardInfo("Fabled Passage", 727, Rarity.RARE, mage.cards.f.FabledPassage.class, NON_FULL_USE_VARIOUS));
@@ -882,13 +881,9 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Eldrazi Temple", 1154, Rarity.RARE, mage.cards.e.EldraziTemple.class));
         cards.add(new SetCardInfo("Esika, God of the Tree", 1155, Rarity.MYTHIC, mage.cards.e.EsikaGodOfTheTree.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archangel Avacyn", 1156, Rarity.MYTHIC, mage.cards.a.ArchangelAvacyn.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Avacyn, the Purifier", 1156, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodline Keeper", 1157, Rarity.RARE, mage.cards.b.BloodlineKeeper.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Lord of Lineage", 1157, Rarity.RARE, mage.cards.l.LordOfLineage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 1158, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Nicol Bolas, the Arisen", 1158, Rarity.MYTHIC, mage.cards.n.NicolBolasTheArisen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Westvale Abbey", 1159, Rarity.RARE, mage.cards.w.WestvaleAbbey.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ormendahl, Profane Prince", 1159, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baral, Chief of Compliance", 1164, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class));
         cards.add(new SetCardInfo("Spellseeker", 1165, Rarity.RARE, mage.cards.s.Spellseeker.class));
         cards.add(new SetCardInfo("Magus of the Wheel", 1166, Rarity.RARE, mage.cards.m.MagusOfTheWheel.class));
@@ -935,13 +930,9 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Inkmoth Nexus", 1207, Rarity.RARE, mage.cards.i.InkmothNexus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Esika, God of the Tree", 1208, Rarity.MYTHIC, mage.cards.e.EsikaGodOfTheTree.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archangel Avacyn", 1209, Rarity.MYTHIC, mage.cards.a.ArchangelAvacyn.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Avacyn, the Purifier", 1209, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodline Keeper", 1210, Rarity.RARE, mage.cards.b.BloodlineKeeper.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Lord of Lineage", 1210, Rarity.RARE, mage.cards.l.LordOfLineage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 1211, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Nicol Bolas, the Arisen", 1211, Rarity.MYTHIC, mage.cards.n.NicolBolasTheArisen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Westvale Abbey", 1212, Rarity.RARE, mage.cards.w.WestvaleAbbey.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ormendahl, Profane Prince", 1212, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phyrexian Unlife", 1213, Rarity.RARE, mage.cards.p.PhyrexianUnlife.class));
         cards.add(new SetCardInfo("Phyrexian Crusader", 1214, Rarity.RARE, mage.cards.p.PhyrexianCrusader.class));
         cards.add(new SetCardInfo("Plague Engineer", 1215, Rarity.RARE, mage.cards.p.PlagueEngineer.class));

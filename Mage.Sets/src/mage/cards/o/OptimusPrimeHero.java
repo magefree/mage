@@ -1,18 +1,26 @@
 package mage.cards.o;
 
-import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.keyword.BolsterEffect;
+import mage.abilities.keyword.LivingMetalAbility;
 import mage.abilities.keyword.MoreThanMeetsTheEyeAbility;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -20,25 +28,40 @@ import java.util.UUID;
 /**
  * @author jbureau88
  */
-public final class OptimusPrimeHero extends CardImpl {
+public final class OptimusPrimeHero extends TransformingDoubleFacedCard {
 
     public OptimusPrimeHero(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}{R}{W}");
-
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.ROBOT);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(8);
-        this.secondSideCardClazz = mage.cards.o.OptimusPrimeAutobotLeader.class;
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, new SubType[]{SubType.ROBOT}, "{3}{U}{R}{W}",
+                "Optimus Prime, Autobot Leader",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.VEHICLE}, "RUW"
+        );
+        this.getLeftHalfCard().setPT(4, 8);
+        this.getRightHalfCard().setPT(6, 8);
 
         // More Than Meets the Eye {2}{U}{R}{W}
-        this.addAbility(new MoreThanMeetsTheEyeAbility(this, "{2}{U}{R}{W}"));
+        this.getLeftHalfCard().addAbility(new MoreThanMeetsTheEyeAbility(this, "{2}{U}{R}{W}"));
 
         // At the beginning of each end step, bolster 1.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new BolsterEffect(1), TargetController.ANY, false));
+        this.getLeftHalfCard().addAbility(new BeginningOfEndStepTriggeredAbility(new BolsterEffect(1), TargetController.ANY, false));
 
         // When Optimus Prime dies, return it to the battlefield converted under its owner’s control.
-        this.addAbility(new DiesSourceTriggeredAbility(new OptimusPrimeHeroEffect()));
+        this.getLeftHalfCard().addAbility(new DiesSourceTriggeredAbility(new OptimusPrimeHeroEffect()));
+
+        // Optimus Prime, Autobot Leader
+        // Living metal
+        this.getRightHalfCard().addAbility(new LivingMetalAbility());
+
+        // Trample
+        this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
+
+        // Whenever you attack, bolster 2. The chosen creature gains trample until end of turn. When that creature deals combat damage to a player this turn, convert Optimus Prime.
+        this.getRightHalfCard().addAbility(new AttacksWithCreaturesTriggeredAbility(new BolsterEffect(2)
+                .withAdditionalEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance()))
+                .withAdditionalEffect(new OptimusPrimeAutobotLeaderEffect())
+                .setText("bolster 2. The chosen creature gains trample until end of turn. When that creature deals combat damage to a player this turn, convert {this}"),
+                1));
     }
 
     private OptimusPrimeHero(final OptimusPrimeHero card) {
@@ -74,7 +97,70 @@ class OptimusPrimeHeroEffect extends OneShotEffect {
         if (card == null || controller == null) {
             return false;
         }
-        game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
+        TransformingDoubleFacedCard.setCardTransformed(card, game);
         return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
+}
+
+class OptimusPrimeAutobotLeaderEffect extends OneShotEffect {
+
+    OptimusPrimeAutobotLeaderEffect() {
+        super(Outcome.Transform);
+    }
+
+    private OptimusPrimeAutobotLeaderEffect(final OptimusPrimeAutobotLeaderEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OptimusPrimeAutobotLeaderEffect copy() {
+        return new OptimusPrimeAutobotLeaderEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (creature == null) {
+            return false;
+        }
+        game.addDelayedTriggeredAbility(new OptimusPrimeAutobotLeaderDelayedTriggeredAbility(new MageObjectReference(creature, game)), source);
+        return true;
+    }
+
+}
+
+class OptimusPrimeAutobotLeaderDelayedTriggeredAbility extends DelayedTriggeredAbility {
+
+    private final MageObjectReference mor;
+
+    OptimusPrimeAutobotLeaderDelayedTriggeredAbility(MageObjectReference mor) {
+        super(new TransformSourceEffect().setText("convert {this}"), Duration.EndOfTurn);
+        this.mor = mor;
+        setTriggerPhrase("When that creature deals combat damage to a player this turn, ");
+    }
+
+    private OptimusPrimeAutobotLeaderDelayedTriggeredAbility(final OptimusPrimeAutobotLeaderDelayedTriggeredAbility ability) {
+        super(ability);
+        this.mor = ability.mor;
+    }
+
+    @Override
+    public OptimusPrimeAutobotLeaderDelayedTriggeredAbility copy() {
+        return new OptimusPrimeAutobotLeaderDelayedTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (((DamagedPlayerEvent) event).isCombatDamage()) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            return mor.refersTo(permanent, game);
+        }
+        return false;
+    }
+
 }

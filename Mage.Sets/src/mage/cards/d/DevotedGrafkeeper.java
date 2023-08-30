@@ -37,7 +37,7 @@ public final class DevotedGrafkeeper extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(2)));
 
         // Whenever you cast a spell from your graveyard, tap target creature you don't control.
-        Ability ability = new SpellCastControllerTriggeredAbility(
+        Ability ability = SpellCastControllerTriggeredAbility.createWithFromZone(
                 new TapTargetEffect(), StaticFilters.FILTER_SPELL_A, false, Zone.GRAVEYARD
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));

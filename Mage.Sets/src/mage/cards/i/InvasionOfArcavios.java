@@ -41,7 +41,7 @@ public final class InvasionOfArcavios extends TransformingDoubleFacedCard {
         this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new InvasionOfArcaviosEffect()));
 
         // Whenever you cast an instant or sorcery spell from your hand, you may copy that spell. You may choose new targets for the copy.
-        this.getRightHalfCard().addAbility(new SpellCastControllerTriggeredAbility(
+        this.getRightHalfCard().addAbility(SpellCastControllerTriggeredAbility.createWithFromZone(
                 new InvocationOfTheFoundersEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, true, Zone.HAND
         ));
     }
