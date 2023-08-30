@@ -39,6 +39,8 @@ public final class ThreadbindClique extends AdventureCard {
         // Destroy target tapped creature.
         this.getSpellCard().getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetPermanent(filter));
+
+        this.finalizeAdventure();
     }
 
     private ThreadbindClique(final ThreadbindClique card) {

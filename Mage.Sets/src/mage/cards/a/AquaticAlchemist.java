@@ -42,6 +42,8 @@ public final class AquaticAlchemist extends AdventureCard {
         this.getSpellCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard(
                 StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD
         ));
+
+        this.finalizeAdventure();
     }
 
     private AquaticAlchemist(final AquaticAlchemist card) {

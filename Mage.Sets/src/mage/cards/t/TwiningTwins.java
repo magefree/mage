@@ -51,6 +51,8 @@ public final class TwiningTwins extends AdventureCard {
         // Exile target nontoken creature. Return it to the battlefield under its owner’s control at the beginning of the next end step.
         this.getSpellCard().getSpellAbility().addEffect(new TwiningTwinsEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_NON_TOKEN));
+
+        this.finalizeAdventure();
     }
 
     private TwiningTwins(final TwiningTwins card) {

@@ -56,6 +56,8 @@ public final class BrambleFamiliar extends AdventureCard {
         // Fetch Quest
         // Mill seven cards, then put a creature, enchantment, or land card from among cards milled this way onto the battlefield.
         this.getSpellCard().getSpellAbility().addEffect(new FetchQuestEffect());
+
+        this.finalizeAdventure();
     }
 
     private BrambleFamiliar(final BrambleFamiliar card) {

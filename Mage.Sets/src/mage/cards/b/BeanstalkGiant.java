@@ -39,6 +39,8 @@ public final class BeanstalkGiant extends AdventureCard {
         this.getSpellCard().getSpellAbility().addEffect(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND))
         );
+
+        this.finalizeAdventure();
     }
 
     private BeanstalkGiant(final BeanstalkGiant card) {
