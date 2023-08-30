@@ -252,6 +252,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Tattered Ratter", 152, Rarity.UNCOMMON, mage.cards.t.TatteredRatter.class));
         cards.add(new SetCardInfo("Tempest Hart", 238, Rarity.UNCOMMON, mage.cards.t.TempestHart.class));
         cards.add(new SetCardInfo("Tenacious Tomeseeker", 74, Rarity.UNCOMMON, mage.cards.t.TenaciousTomeseeker.class));
+        cards.add(new SetCardInfo("Territorial Witchstalker", 189, Rarity.COMMON, mage.cards.t.TerritorialWitchstalker.class));
         cards.add(new SetCardInfo("The Apprentice's Folly", 200, Rarity.RARE, mage.cards.t.TheApprenticesFolly.class));
         cards.add(new SetCardInfo("The End", 87, Rarity.RARE, mage.cards.t.TheEnd.class));
         cards.add(new SetCardInfo("The Goose Mother", 204, Rarity.RARE, mage.cards.t.TheGooseMother.class));
