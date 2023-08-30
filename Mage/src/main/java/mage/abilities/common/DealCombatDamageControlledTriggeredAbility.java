@@ -73,7 +73,7 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
             return false;
         }
         
-        this.getEffects().setValue("totalDamage", events.stream().mapToInt(DamagedEvent::getAmount).sum());
+        this.getEffects().setValue("damage", events.stream().mapToInt(DamagedEvent::getAmount).sum());
         switch (setTargetPointer) {
             case PLAYER:
                 this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
