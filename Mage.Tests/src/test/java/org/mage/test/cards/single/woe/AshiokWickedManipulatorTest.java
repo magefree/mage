@@ -75,23 +75,18 @@ public class AshiokWickedManipulatorTest extends CardTestPlayerBase {
      */
     private static final String poet = "Arrogant Poet";
 
-    // Move all cards from the player's library into its graveyard (exile is not where we want them here.).
-    private void millAllLibrary(Player player) {
-        Set<Card> cards = currentGame.getPlayer(player.getId()).getLibrary().getTopCards(currentGame, 100);
-        player.moveCards(cards, Zone.GRAVEYARD, null, currentGame);
-    }
-
     @Test
     public void emptyALibrary() {
         setStrictChooseMode(true);
 
         skipInitShuffling();
-        millAllLibrary(playerA);
+        removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, lion, 10);
 
         setStopAt(1, PhaseStep.UPKEEP);
         execute();
 
+        assertExileCount(playerA, 0);
         assertLibraryCount(playerA, 10);
         assertLibraryCount(playerA, lion, 10);
     }
@@ -100,7 +95,7 @@ public class AshiokWickedManipulatorTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         skipInitShuffling();
-        millAllLibrary(playerA);
+        removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, lion, lionInLibrary);
 
         addCard(Zone.BATTLEFIELD, playerA, ashiok);
@@ -145,7 +140,7 @@ public class AshiokWickedManipulatorTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         skipInitShuffling();
-        millAllLibrary(playerA);
+        removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, lion, 10);
 
         addCard(Zone.BATTLEFIELD, playerA, ashiok);
@@ -166,7 +161,7 @@ public class AshiokWickedManipulatorTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         skipInitShuffling();
-        millAllLibrary(playerA);
+        removeAllCardsFromLibrary(playerA);
         int libraryCount = 18;
         int exileCount = 0;
         int lifeCount = 20;
@@ -213,7 +208,7 @@ public class AshiokWickedManipulatorTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         skipInitShuffling();
-        millAllLibrary(playerA);
+        removeAllCardsFromLibrary(playerA);
         addCard(Zone.LIBRARY, playerA, lion, 10);
 
         addCard(Zone.BATTLEFIELD, playerA, ashiok);
@@ -234,7 +229,7 @@ public class AshiokWickedManipulatorTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         skipInitShuffling();
-        millAllLibrary(playerA);
+        removeAllCardsFromLibrary(playerA);
         for (int i = 0; i < 10; ++i) {
             // Alternating, so choices are possible on Ashiok's +1
             addCard(Zone.LIBRARY, playerA, lion);
@@ -284,7 +279,7 @@ public class AshiokWickedManipulatorTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
 
         skipInitShuffling();
-        millAllLibrary(playerA);
+        removeAllCardsFromLibrary(playerA);
         for (int i = 0; i < 10; ++i) {
             // Alternating, so choices are possible on Ashiok's +1
             addCard(Zone.LIBRARY, playerA, lion);

@@ -25,8 +25,8 @@ public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
     public ExileCardsFromTopOfLibraryTargetEffect(DynamicValue amount, String targetName) {
         super(Outcome.Exile);
         this.amount = amount.copy();
-        this.staticText = (targetName == null ? "that player" : targetName) + " exiles the top "
-                + amount + " card" + (amount.toString().equals("1") ? " " : "s ") + " of their library";
+        this.staticText = targetName + " exiles the top " + amount + " card"
+                + (amount.toString().equals("1") ? " " : "s ") + " of their library";
     }
 
     protected ExileCardsFromTopOfLibraryTargetEffect(final ExileCardsFromTopOfLibraryTargetEffect effect) {

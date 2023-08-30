@@ -111,15 +111,11 @@ class AshiokWickedManipulatorReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         UUID playerId = source.getControllerId();
-        if (playerId == null || !event.getPlayerId().equals(playerId)) {
+        if (!event.getPlayerId().equals(playerId)) {
             return false;
         }
 
         Player player = game.getPlayer(playerId);
-        if (player == null) {
-            return false;
-        }
-
-        return player.getLibrary().size() >= event.getAmount();
+        return player != null && player.getLibrary().size() >= event.getAmount();
     }
 }
