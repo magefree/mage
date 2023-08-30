@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -34,7 +33,10 @@ public class CombatDamageByToughnessTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Set<Permanent> set = targetPointer.getTargets(game, source).stream().map(game::getPermanent).filter(Objects::isNull).collect(Collectors.toSet());
+        Set<Permanent> set = targetPointer.getTargets(game, source).stream()
+            .map(game::getPermanent)
+            .filter(Objects::isNull)
+            .collect(Collectors.toSet());
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new PermanentReferenceInCollectionPredicate(set, game));
@@ -47,7 +49,7 @@ public class CombatDamageByToughnessTargetEffect extends ContinuousEffectImpl {
     @Override
     public String getText(Mode mode) {
         return getTargetPointer().describeTargets(mode.getTargets(), "that creature") 
-            + "assigns combat damage equal to its toughness rather than its power";
+            + " assigns combat damage equal to its toughness rather than its power";
     }
 
 }
