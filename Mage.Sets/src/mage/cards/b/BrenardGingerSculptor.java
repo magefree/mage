@@ -5,17 +5,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.token.FoodAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -112,11 +108,7 @@ class BrenardGingerSculptorEffect extends OneShotEffect {
         effect.setBecomesArtifact(true);
         effect.setAdditionalSubType(SubType.FOOD);
         effect.setAdditionalSubType(SubType.GOLEM);
-
-        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(3), new GenericManaCost(2));
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        effect.addAdditionalAbilities(ability);
+        effect.addAdditionalAbilities(new FoodAbility(false));
 
         player.moveCards(card, Zone.EXILED, source, game);
         effect.apply(game, source);
