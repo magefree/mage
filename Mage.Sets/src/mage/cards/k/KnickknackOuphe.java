@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
@@ -44,7 +45,7 @@ public final class KnickknackOuphe extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
 
         // When Knickknack Ouphe enters the battlefield, reveal the top X cards of your library. You may put any number of Aura cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield on the bottom of your library in a random order.
-        this.addAbility(new EntersBattlefieldAbility(new KnickknackOuphePutOntoBattlefieldEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new KnickknackOuphePutOntoBattlefieldEffect()));
 
     }
 

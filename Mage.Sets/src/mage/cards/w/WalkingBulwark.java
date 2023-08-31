@@ -43,9 +43,9 @@ public final class WalkingBulwark extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {2}: Until end of turn, target creature with defender gains haste, can attack as though it didn't have defender, and assigns combat damage equal to its toughness rather than its power. Activate only as a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2).setText("until end of turn, target creature with defender gains haste,"));
-        ability.addEffect(new CanAttackAsThoughItDidntHaveDefenderTargetEffect(Duration.EndOfTurn).setText("can attack as though it didn't have defender,"));
-        ability.addEffect(new CombatDamageByToughnessTargetEffect(Duration.EndOfTurn).setText("and assigns combat damage equal to its toughness rather than its power."));
+        Ability ability = new ActivateAsSorceryActivatedAbility(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("until end of turn, target creature with defender gains haste"), new GenericManaCost(2));
+        ability.addEffect(new CanAttackAsThoughItDidntHaveDefenderTargetEffect(Duration.EndOfTurn).setText(", can attack as though it didn't have defender"));
+        ability.addEffect(new CombatDamageByToughnessTargetEffect(Duration.EndOfTurn).setText(", and assigns combat damage equal to its toughness rather than its power"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

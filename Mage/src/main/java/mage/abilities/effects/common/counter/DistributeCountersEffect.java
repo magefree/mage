@@ -13,6 +13,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -80,12 +81,12 @@ public class DistributeCountersEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
         String name = counterType.getName();
-        String text = "distribute " + amount + ' ' + name + " counters among " + targetDescription;
+        String number = (amount instanceof StaticValue) ? CardUtil.numberToText(((StaticValue) amount).getValue()) : amount.toString();
+        String text = "distribute " + number + ' ' + name + " counters among " + targetDescription;
         if (removeAtEndOfTurn) {
             text += " For each " + name + " counter you put on a creature this way, remove a "
                     + name + " counter from that creature at the beginning of the next cleanup step.";

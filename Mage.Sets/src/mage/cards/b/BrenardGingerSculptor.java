@@ -82,7 +82,7 @@ class BrenardGingerSculptorEffect extends OneShotEffect {
     BrenardGingerSculptorEffect() {
         super(Outcome.Copy);
         this.staticText = "you may exile it. If you do, create a token that's a copy of that creature, except it's a 1/1 Food Golem artifact creature in "+ 
-        "addition to its other types and it has \"2, {T}, Sacrifice this artifact: You gain 3 life.\"";
+        "addition to its other types and it has \"{2}, {T}, Sacrifice this artifact: You gain 3 life.\"";
     }
 
     private BrenardGingerSculptorEffect(final BrenardGingerSculptorEffect effect) {

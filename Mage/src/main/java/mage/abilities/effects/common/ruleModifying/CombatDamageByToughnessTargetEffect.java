@@ -48,7 +48,11 @@ public class CombatDamageByToughnessTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
-        return getTargetPointer().describeTargets(mode.getTargets(), "that creature") 
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return (duration.toString().isEmpty() ? "" : duration.toString() + ", ")
+                + getTargetPointer().describeTargets(mode.getTargets(), "that creature")
             + " assigns combat damage equal to its toughness rather than its power";
     }
 
