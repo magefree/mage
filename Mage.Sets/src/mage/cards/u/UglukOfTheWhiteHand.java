@@ -74,7 +74,7 @@ class UglukOfTheWhiteHandEffect extends OneShotEffect {
             "If that creature was a Goblin or Orc, put two +1/+1 counters on Ugluk instead.";
     }
 
-    public UglukOfTheWhiteHandEffect(final UglukOfTheWhiteHandEffect effect) {
+    private UglukOfTheWhiteHandEffect(final UglukOfTheWhiteHandEffect effect) {
         super(effect);
     }
 

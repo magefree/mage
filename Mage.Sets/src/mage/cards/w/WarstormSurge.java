@@ -47,7 +47,7 @@ class WarstormSurgeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new WarstormSurgeEffect(), false);
     }
 
-    public WarstormSurgeTriggeredAbility(WarstormSurgeTriggeredAbility ability) {
+    private WarstormSurgeTriggeredAbility(final WarstormSurgeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -87,7 +87,7 @@ class WarstormSurgeEffect extends OneShotEffect {
         staticText = "it deals damage equal to its power to any target";
     }
 
-    public WarstormSurgeEffect(final WarstormSurgeEffect effect) {
+    private WarstormSurgeEffect(final WarstormSurgeEffect effect) {
         super(effect);
     }
 

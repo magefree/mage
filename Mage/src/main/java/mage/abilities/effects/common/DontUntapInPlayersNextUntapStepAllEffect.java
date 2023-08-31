@@ -20,7 +20,6 @@ import mage.players.Player;
 public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModifyingEffectImpl {
 
     private int validForTurnNum;
-    //private String targetName;
     FilterPermanent filter;
 
     /**
@@ -114,6 +113,9 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return filter.getMessage() + " target opponent controls don't untap during their next untap step.";
+        return filter.getMessage()
+                + ' '
+                + getTargetPointer().describeTargets(mode.getTargets(), "target opponent")
+                + " controls don't untap during their next untap step";
     }
 }

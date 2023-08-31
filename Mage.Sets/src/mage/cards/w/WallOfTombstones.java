@@ -53,7 +53,7 @@ class WallOfTombstonesEffect extends OneShotEffect {
         this.staticText = "change {this}'s base toughness to 1 plus the number of creature cards in your graveyard";
     }
 
-    public WallOfTombstonesEffect(final WallOfTombstonesEffect effect) {
+    private WallOfTombstonesEffect(final WallOfTombstonesEffect effect) {
         super(effect);
     }
 

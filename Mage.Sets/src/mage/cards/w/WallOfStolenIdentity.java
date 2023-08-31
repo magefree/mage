@@ -71,7 +71,7 @@ class WallOfStolenIdentityCopyEffect extends OneShotEffect {
         staticText = rule2;
     }
 
-    public WallOfStolenIdentityCopyEffect(final WallOfStolenIdentityCopyEffect effect) {
+    private WallOfStolenIdentityCopyEffect(final WallOfStolenIdentityCopyEffect effect) {
         super(effect);
     }
 

@@ -119,7 +119,7 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities";
     }
 
-    public YasharnImplacableEarthEffect(final YasharnImplacableEarthEffect effect) {
+    private YasharnImplacableEarthEffect(final YasharnImplacableEarthEffect effect) {
         super(effect);
     }
 
@@ -166,7 +166,7 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
                 return true;  // can't pay with life
             }
             if (cost instanceof SacrificeSourceCost
-                    && !permanent.isLand()) {
+                    && !permanent.isLand(game)) {
                 return true;
             }
             if (cost instanceof SacrificeTargetCost) {

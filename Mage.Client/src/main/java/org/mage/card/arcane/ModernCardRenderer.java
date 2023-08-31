@@ -12,6 +12,7 @@ import mage.util.SubTypes;
 import mage.view.CardView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;
+import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,8 +28,6 @@ import java.text.CharacterIterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import static org.mage.card.arcane.ManaSymbols.getSizedManaSymbol;
 
 
 /*
@@ -964,6 +963,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Replace "Legendary" in type line if there's not enough space
         if (g.getFontMetrics().stringWidth(types) > availableWidth) {
+            types = types.replace("Token", "T.");
             types = types.replace("Legendary", "L.");
         }
 
@@ -1096,20 +1096,8 @@ public class ModernCardRenderer extends CardRenderer {
             g.setFont(ptTextFont);
 
             // real PT info
-            MageInt currentPower;
-            MageInt currentToughness;
-            if (cardView.getOriginalCard() != null) {
-                // card
-                currentPower = cardView.getOriginalCard().getPower();
-                currentToughness = cardView.getOriginalCard().getToughness();
-            } else if (cardView.getOriginalToken() != null) {
-                // token
-                currentPower = cardView.getOriginalToken().getPower();
-                currentToughness = cardView.getOriginalToken().getToughness();
-            } else {
-                currentPower = null;
-                currentToughness = null;
-            }
+            MageInt currentPower = cardView.getOriginalPower();
+            MageInt currentToughness = cardView.getOriginalToughness();
 
             // draws
             int ptEmptySpace = (partBoxWidth - ptContentWidth) / 2;

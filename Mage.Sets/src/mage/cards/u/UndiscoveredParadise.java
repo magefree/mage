@@ -49,7 +49,7 @@ class UndiscoveredParadiseEffect extends OneShotEffect {
         staticText = "During your next untap step, as you untap your permanents, return {this} to its owner's hand";
     }
 
-    public UndiscoveredParadiseEffect(final UndiscoveredParadiseEffect effect) {
+    private UndiscoveredParadiseEffect(final UndiscoveredParadiseEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class AtBeginningOfUntapDelayedTriggeredAbility extends DelayedTriggeredAbility 
         this.usesStack = false;
     }
 
-    public AtBeginningOfUntapDelayedTriggeredAbility(AtBeginningOfUntapDelayedTriggeredAbility ability) {
+    private AtBeginningOfUntapDelayedTriggeredAbility(final AtBeginningOfUntapDelayedTriggeredAbility ability) {
         super(ability);
     }
 

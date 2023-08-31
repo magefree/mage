@@ -12,8 +12,8 @@ public final class ThopterToken extends TokenImpl {
 
     public ThopterToken() {
         super("Thopter Token", "1/1 blue Thopter artifact creature token with flying");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.THOPTER);
         power = new MageInt(1);

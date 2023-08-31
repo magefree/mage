@@ -55,7 +55,7 @@ class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} is dealt combat damage, ");
     }
 
-    public WallOfSoulsTriggeredAbility(final WallOfSoulsTriggeredAbility effect) {
+    private WallOfSoulsTriggeredAbility(final WallOfSoulsTriggeredAbility effect) {
         super(effect);
     }
 

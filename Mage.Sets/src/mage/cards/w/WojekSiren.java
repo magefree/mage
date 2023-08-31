@@ -46,7 +46,7 @@ class WojekSirenBoostEffect extends ContinuousEffectImpl {
         staticText = "Target creature and each other creature that shares a color with it get +1/+1 until end of turn";
     }
 
-    public WojekSirenBoostEffect(final WojekSirenBoostEffect effect) {
+    private WojekSirenBoostEffect(final WojekSirenBoostEffect effect) {
         super(effect);
     }
 

@@ -47,7 +47,7 @@ public final class Wirecat extends CardImpl {
             staticText = "{this} can't attack or block if an enchantment is on the battlefield";
         }
 
-        public WirecatEffect(final WirecatEffect effect) {
+        private WirecatEffect(final WirecatEffect effect) {
             super(effect);
         }
 

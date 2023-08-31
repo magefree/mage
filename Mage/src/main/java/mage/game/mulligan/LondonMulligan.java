@@ -107,7 +107,7 @@ public class LondonMulligan extends Mulligan {
                     newHandSize +
                     (newHandSize == 1 ? " card" : " cards"));
         }
-        player.drawCards(numCards, null, game);
+        drawHand(numCards, player, game);
 
         while (player.canRespond() && player.getHand().size() > newHandSize) {
             Target target = new TargetCardInHand(new FilterCard("card (" + (player.getHand().size() - newHandSize) + " more) to put on the bottom of your library"));

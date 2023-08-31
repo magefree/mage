@@ -103,6 +103,72 @@ public class ReplicateTest extends CardTestPlayerBase {
         assertLife(playerB, 20 - 3); // 1 + 2 replicates
     }
 
+    private static final String hatchery = "Hatchery Sliver"; // 1G, Replicate 1G, Sliver spells you cast have replicate.
+
+    @Test
+    public void testMultipleInstancesReplicate() {
+
+        String metallic = "Metallic Sliver"; // 1
+
+        addCard(Zone.HAND, playerA, hatchery);
+        addCard(Zone.HAND, playerA, metallic);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4 + 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hatchery);
+        setChoice(playerA, true); // pay 1 time replicate
+        setChoice(playerA, false); // don't pay 2 times replicate
+        // Now there are two Hatchery Slivers on the battlefield, so Sliver spells have two instances of replicate.
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, metallic);
+        setChoice(playerA, true); // pay 1 time replicate (first instance)
+        setChoice(playerA, false); // don't pay 2 times replicate (first instance)
+        setChoice(playerA, true); // pay 1 time replicate (second instance)
+        setChoice(playerA, true); // pay 2 times replicate (second instance)
+        setChoice(playerA, false); // don't pay 3 times replicate (second instance)
+        setChoice(playerA, "Replicate"); // order triggers (currently appear identical)
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTappedCount("Forest", false, 0); // all mana should have been used to pay costs
+        assertPermanentCount(playerA, hatchery, 2);
+        assertPermanentCount(playerA, metallic, 4);
+    }
+
+    @Test
+    public void testReplicateProperlyGranted() {
+
+        String diffusion = "Diffusion Sliver"; // 1/1 Sliver for 1U
+        // "Whenever a Sliver creature you control becomes the target of a spell or ability an opponent controls,
+        // counter that spell or ability unless its controller pays {2}."
+
+        addCard(Zone.HAND, playerA, hatchery);
+        addCard(Zone.HAND, playerA, diffusion);
+        addCard(Zone.HAND, playerB, "Disfigure"); // -2/-2 to kill creature
+        addCard(Zone.BATTLEFIELD, playerA, "Tropical Island", 2 + 6);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hatchery);
+        setChoice(playerA, false); // don't pay 1 time replicate
+        // Metallic Sliver now has one instance of replicate
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, diffusion);
+        setChoice(playerA, true); // pay 1 time replicate
+        setChoice(playerA, true); // pay 2 times replicate
+        setChoice(playerA, false); // don't pay 3 times replicate
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Disfigure", hatchery);
+        // Diffusion Slivers not yet on the battlefield, so Disfigure can resolve
+        // Replicate should still trigger even though the Hatchery Sliver which granted it to Diffusion Sliver has died
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTappedCount("Tropical Island", false, 0); // all mana should have been used to pay costs
+        assertGraveyardCount(playerA, hatchery, 1);
+        assertGraveyardCount(playerB, "Disfigure", 1);
+        assertPermanentCount(playerA, diffusion, 3);
+    }
+
     @Test
     @Ignore // TODO: enable test after replicate ability will be supported by AI
     public void testReplicate_AI() {

@@ -26,7 +26,7 @@ public final class VaultSkyward extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public VaultSkyward (final VaultSkyward card) {
+    private VaultSkyward(final VaultSkyward card) {
         super(card);
     }
 

@@ -210,7 +210,7 @@ public interface Card extends MageObject {
         CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
         int castCount = watcher.getPlaysCount(getMainCard().getId());
         if (castCount > 0) {
-            abilityToModify.getManaCostsToPay().add(ManaUtil.createManaCost(2 * castCount, false));
+            abilityToModify.addManaCostsToPay(ManaUtil.createManaCost(2 * castCount, false));
         }
         return true;
     }

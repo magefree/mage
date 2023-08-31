@@ -66,7 +66,7 @@ class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
         staticText = "all Slivers have protection from the chosen color";
     }
 
-    public WardSliverGainAbilityControlledEffect(final WardSliverGainAbilityControlledEffect effect) {
+    private WardSliverGainAbilityControlledEffect(final WardSliverGainAbilityControlledEffect effect) {
         super(effect);
         protectionFilter = effect.protectionFilter;
     }

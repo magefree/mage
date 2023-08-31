@@ -1,6 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.Iterator;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,6 +17,8 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.Iterator;
 
 /**
  * 702.45. Splice
@@ -116,7 +117,7 @@ public class SpliceAbility extends SimpleStaticAbility {
     }
 
     @Override
-    public SimpleStaticAbility copy() {
+    public SpliceAbility copy() {
         return new SpliceAbility(this);
     }
 
@@ -174,9 +175,9 @@ class SpliceCardEffectImpl extends ContinuousEffectImpl implements SpliceCardEff
                 for (Iterator it = ((SpliceAbility) source).getSpliceCosts().iterator(); it.hasNext();) {
                     Cost cost = (Cost) it.next();
                     if (cost instanceof ManaCost) {
-                        spell.getSpellAbility().getManaCostsToPay().add((ManaCost) cost.copy());
+                        spell.getSpellAbility().addManaCostsToPay((ManaCost) cost.copy());
                     } else {
-                        spell.getSpellAbility().getCosts().add(cost.copy());
+                        spell.getSpellAbility().addCost(cost.copy());
                     }
                 }
             }

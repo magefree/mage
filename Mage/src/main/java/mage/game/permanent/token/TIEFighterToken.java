@@ -14,8 +14,8 @@ public final class TIEFighterToken extends TokenImpl {
         super("TIE Fighter", "1/1 black Starship artifact creature tokens with Spaceflight named TIE Fighter");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         color.setBlack(true);
         addAbility(SpaceflightAbility.getInstance());
         subtype.add(SubType.STARSHIP);

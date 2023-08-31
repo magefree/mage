@@ -1194,15 +1194,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (alternateCosts == null) {
                         noMana = true;
                     } else {
-                        spellAbility.getManaCosts().clear();
-                        spellAbility.getManaCostsToPay().clear();
-                        spellAbility.getManaCosts().add(alternateCosts.copy());
-                        spellAbility.getManaCostsToPay().add(alternateCosts.copy());
+                        spellAbility.clearManaCosts();
+                        spellAbility.clearManaCostsToPay();
+                        spellAbility.addManaCost(alternateCosts.copy());
                     }
-                    spellAbility.getCosts().clear();
-                    if (costs != null) {
-                        spellAbility.getCosts().addAll(costs);
-                    }
+                    spellAbility.clearCosts();
+                    spellAbility.addCost(costs);
                 }
                 clearCastSourceIdManaCosts(); // TODO: test multiple alternative cost for different cards as same time
 
@@ -1212,7 +1209,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.fireEvent(castEvent);
                 if (spell.activate(game, noMana)) {
                     GameEvent castedEvent = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
-                            spell.getSpellAbility().getId(), spell.getSpellAbility(), playerId, approvingObject);
+                            ability.getId(), ability, playerId, approvingObject);
                     castedEvent.setZone(fromZone);
                     game.fireEvent(castedEvent);
                     if (!game.isSimulation()) {
@@ -3620,8 +3617,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                                 // alternative cost reduce
                                 copyAbility = ability.copy();
-                                copyAbility.getManaCostsToPay().clear();
-                                copyAbility.getManaCostsToPay().addAll(manaCosts.copy());
+                                copyAbility.clearManaCostsToPay();
+                                copyAbility.addManaCostsToPay(manaCosts.copy());
                                 copyAbility.adjustCosts(game);
                                 game.getContinuousEffects().costModification(copyAbility, game);
 
@@ -3686,12 +3683,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                                 // alternative cost reduce
                                 copyAbility = ability.copy();
-                                copyAbility.getManaCostsToPay().clear();
+                                copyAbility.clearManaCostsToPay();
                                 // TODO: IDE warning:
                                 //              Unchecked assignment: 'mage.abilities.costs.mana.ManaCosts' to
                                 //              'java.util.Collection<? extends mage.abilities.costs.mana.ManaCost>'.
                                 //              Reason: 'manaCosts' has raw type, so result of copy is erased
-                                copyAbility.getManaCostsToPay().addAll(manaCosts.copy());
+                                copyAbility.addManaCostsToPay(manaCosts.copy());
                                 copyAbility.adjustCosts(game);
                                 game.getContinuousEffects().costModification(copyAbility, game);
 
@@ -3851,6 +3848,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // play hand from non hand zone (except battlefield - you can't play already played permanents)
                 approvingObject = game.getContinuousEffects().asThough(object.getId(),
                         AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
+
+                if (approvingObject == null && isPlaySpell
+                        && ((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.ADVENTURE_SPELL)) {
+                    approvingObject = game.getContinuousEffects().asThough(object.getId(),
+                            AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
+                }
             } else {
                 // other abilities from direct zones
                 approvingObject = null;
@@ -4721,7 +4724,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 boolean chooseOrder = false;
                 if (userData.askMoveToGraveOrder() && (cards.size() > 1)) {
                     chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral,
-                                "Choose the order in which the cards go to the graveyard?", source, game);
+                            "Choose the order in which the cards go to the graveyard?", source, game);
                 }
                 if (chooseOrder) {
                     TargetCard target = new TargetCard(fromZone,
@@ -5145,13 +5148,13 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public Permanent getRingBearer(Game game) {
         return game.getBattlefield()
-            .getActivePermanents(
-                StaticFilters.FILTER_CONTROLLED_RINGBEARER,
-                getId(),null, game)
-            .stream()
-            .filter(Objects::nonNull)
-            .findFirst()
-            .orElse(null);
+                .getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_RINGBEARER,
+                        getId(), null, game)
+                .stream()
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
     }
 
     // 701.52a Certain spells and abilities have the text “the Ring tempts you.” Each time the Ring tempts
@@ -5163,11 +5166,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         UUID currentBearerId = currentBearer == null ? null : currentBearer.getId();
 
         List<UUID> ids = game.getBattlefield()
-            .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game)
-            .stream()
-            .filter(Objects::nonNull)
-            .map(p -> p.getId())
-            .collect(Collectors.toList());
+                .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, getId(), null, game)
+                .stream()
+                .filter(Objects::nonNull)
+                .map(p -> p.getId())
+                .collect(Collectors.toList());
 
         if (ids.isEmpty()) {
             game.informPlayers(getLogName() + " has no creature to be Ring-bearer.");
@@ -5196,8 +5199,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 choose(Outcome.Neutral, target, null, game);
 
                 newBearerId = target.getFirstTarget();
-            }
-            else {
+            } else {
                 newBearerId = currentBearerId;
             }
         }
@@ -5211,11 +5213,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             // or abilities that care about which creature was chosen as your Ring-bearer.
             // (2023-06-16)
             game.informPlayers(getLogName() + " did not choose a new Ring-bearer. " +
-                "It is still " + (currentBearer == null ? "" : currentBearer.getLogName()) + ".");
+                    "It is still " + (currentBearer == null ? "" : currentBearer.getLogName()) + ".");
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.RING_BEARER_CHOSEN, currentBearerId, null, getId()));
         } else {
             Permanent ringBearer = game.getPermanent(newBearerId);
-            if(ringBearer != null){
+            if (ringBearer != null) {
                 // The setRingBearer method is taking care of removing
                 // the status from the current ring bearer, if existing.
                 ringBearer.setRingBearer(game, true);

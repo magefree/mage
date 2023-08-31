@@ -130,13 +130,6 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     }
 
     @Override
-    public void newId() {
-        if (!(this instanceof MageSingleton)) {
-            this.id = UUID.randomUUID();
-        }
-    }
-
-    @Override
     public boolean hasLayer(Layer layer) {
         return this.layer == layer;
     }

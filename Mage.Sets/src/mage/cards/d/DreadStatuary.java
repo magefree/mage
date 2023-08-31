@@ -43,8 +43,8 @@ class DreadStatuaryToken extends TokenImpl {
 
     public DreadStatuaryToken() {
         super("", "4/2 Golem artifact creature");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOLEM);
         power = new MageInt(4);
         toughness = new MageInt(2);

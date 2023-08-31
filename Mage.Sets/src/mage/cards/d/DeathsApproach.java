@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -12,11 +11,7 @@ import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -24,6 +19,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -62,13 +59,13 @@ public final class DeathsApproach extends CardImpl {
 
 class CardsInEnchantedCreaturesControllerGraveyardCount implements DynamicValue {
 
-    private FilterCard filter;
+    private final FilterCard filter;
 
-    public CardsInEnchantedCreaturesControllerGraveyardCount(FilterCard filter) {
+    CardsInEnchantedCreaturesControllerGraveyardCount(FilterCard filter) {
         this.filter = filter;
     }
 
-    public CardsInEnchantedCreaturesControllerGraveyardCount(final CardsInEnchantedCreaturesControllerGraveyardCount dynamicValue) {
+    private CardsInEnchantedCreaturesControllerGraveyardCount(final CardsInEnchantedCreaturesControllerGraveyardCount dynamicValue) {
         this.filter = dynamicValue.filter;
     }
 
@@ -89,7 +86,7 @@ class CardsInEnchantedCreaturesControllerGraveyardCount implements DynamicValue 
     }
 
     @Override
-    public DynamicValue copy() {
+    public CardsInEnchantedCreaturesControllerGraveyardCount copy() {
         return new CardsInEnchantedCreaturesControllerGraveyardCount(this);
     }
 

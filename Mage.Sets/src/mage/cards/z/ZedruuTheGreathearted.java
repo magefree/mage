@@ -68,7 +68,7 @@ public final class ZedruuTheGreathearted extends CardImpl {
             this.staticText = "Target opponent gains control of target permanent you control";
         }
 
-        public ZedruuTheGreatheartedEffect(final ZedruuTheGreatheartedEffect effect) {
+        private ZedruuTheGreatheartedEffect(final ZedruuTheGreatheartedEffect effect) {
             super(effect);
             this.targetPermanentReference = effect.targetPermanentReference;
         }

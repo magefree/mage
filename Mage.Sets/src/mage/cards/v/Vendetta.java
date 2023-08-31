@@ -46,7 +46,7 @@ class VendettaEffect extends OneShotEffect {
         staticText = "You lose life equal to that creature's toughness";
     }
 
-    public VendettaEffect(final VendettaEffect effect) {
+    private VendettaEffect(final VendettaEffect effect) {
         super(effect);
     }
 

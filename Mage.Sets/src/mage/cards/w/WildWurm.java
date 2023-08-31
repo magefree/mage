@@ -49,7 +49,7 @@ class WildWurmEffect extends OneShotEffect {
         staticText = "flip a coin. If you lose the flip, return {this} to its owner's hand";
     }
 
-    public WildWurmEffect(WildWurmEffect effect) {
+    private WildWurmEffect(final WildWurmEffect effect) {
         super(effect);
     }
 

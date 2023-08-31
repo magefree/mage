@@ -64,7 +64,7 @@ class VoidMawEffect extends ReplacementEffectImpl {
         staticText = "If another creature would die, exile it instead";
     }
 
-    public VoidMawEffect(final VoidMawEffect effect) {
+    private VoidMawEffect(final VoidMawEffect effect) {
         super(effect);
     }
 
@@ -127,7 +127,7 @@ class VoidMawCost extends CostImpl {
         this.text = "Put a card exiled with {this} into its owner's graveyard";
     }
 
-    public VoidMawCost(VoidMawCost cost) {
+    private VoidMawCost(final VoidMawCost cost) {
         super(cost);
     }
 

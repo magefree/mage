@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -17,6 +16,8 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -51,16 +52,16 @@ public final class GhastlyRemains extends CardImpl {
 
 class GhastlyRemainsTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
-    public GhastlyRemainsTriggeredAbility() {
+    GhastlyRemainsTriggeredAbility() {
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{B}{B}{B}")), TargetController.YOU, false);
     }
 
-    public GhastlyRemainsTriggeredAbility(GhastlyRemainsTriggeredAbility ability) {
+    private GhastlyRemainsTriggeredAbility(final GhastlyRemainsTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public BeginningOfUpkeepTriggeredAbility copy() {
+    public GhastlyRemainsTriggeredAbility copy() {
         return new GhastlyRemainsTriggeredAbility(this);
     }
 

@@ -55,7 +55,7 @@ class WildSwingEffect extends OneShotEffect {
         this.staticText = "Choose three target nonenchantment permanents. Destroy one of them at random";
     }
 
-    public WildSwingEffect(final WildSwingEffect effect) {
+    private WildSwingEffect(final WildSwingEffect effect) {
         super(effect);
     }
 

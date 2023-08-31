@@ -19,7 +19,8 @@ public final class Misstep extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
         // Creatures target player controls don't untap during that player's next untap step.
-        this.getSpellAbility().addEffect(new DontUntapInPlayersNextUntapStepAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().addEffect(new DontUntapInPlayersNextUntapStepAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES)
+                .setText("creatures target player controls don't untap during that player's next untap step"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

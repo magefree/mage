@@ -10,6 +10,8 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -89,6 +91,10 @@ public class ProtectionAbility extends StaticAbility {
                 return !((FilterCard) filter).match((Card) source, ((Permanent) source).getControllerId(), this, game);
             } else if (source instanceof Card) {
                 return !((FilterCard) filter).match((Card) source, ((Card) source).getOwnerId(), this, game);
+            } else if (source instanceof Token) {
+                // Fake a permanent with the Token info.
+                PermanentToken token = new PermanentToken((Token) source, null, game);
+                return !((FilterCard) filter).match((Card) token, game);
             }
             return true;
         }

@@ -28,7 +28,6 @@ public final class SeeTheTruth extends CardImpl {
 
         // Look at the top three cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order. If this spell was cast from anywhere other than your hand, put each of those cards into your hand instead.
         this.getSpellAbility().addEffect(new SeeTheTruthEffect());
-        this.getSpellAbility().addWatcher(new SpellsCastWatcher());
     }
 
     private SeeTheTruth(final SeeTheTruth card) {

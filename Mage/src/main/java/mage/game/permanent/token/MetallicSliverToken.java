@@ -11,8 +11,8 @@ public final class MetallicSliverToken extends TokenImpl {
 
     public MetallicSliverToken() {
         super("Metallic Sliver", "1/1 colorless Sliver artifact creature token named Metallic Sliver");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         subtype.add(SubType.SLIVER);
         power = new MageInt(1);
         toughness = new MageInt(1);

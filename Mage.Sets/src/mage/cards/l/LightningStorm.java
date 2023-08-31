@@ -61,11 +61,11 @@ class LightningStormCountCondition implements DynamicValue {
 
     private final CounterType counter;
 
-    public LightningStormCountCondition(CounterType counter) {
+    LightningStormCountCondition(CounterType counter) {
         this.counter = counter;
     }
 
-    public LightningStormCountCondition(final LightningStormCountCondition countersCount) {
+    private LightningStormCountCondition(final LightningStormCountCondition countersCount) {
         this.counter = countersCount.counter;
     }
 
@@ -79,7 +79,7 @@ class LightningStormCountCondition implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public LightningStormCountCondition copy() {
         return new LightningStormCountCondition(this);
     }
 

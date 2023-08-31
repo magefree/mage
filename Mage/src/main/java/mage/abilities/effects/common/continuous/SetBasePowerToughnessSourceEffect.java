@@ -23,7 +23,9 @@ public class SetBasePowerToughnessSourceEffect extends ContinuousEffectImpl {
     private final DynamicValue toughness;
 
     /**
-     * Note: Need to set text manually if calling this constructor directly
+     * Note: Need to set text manually if calling this constructor directly.
+     * <p>
+     * It is possible to have power or toughness to null, in which case only the other is modified.
      */
     public SetBasePowerToughnessSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, SubLayer subLayer) {
         super(duration, Layer.PTChangingEffects_7, subLayer, Outcome.BoostCreature);

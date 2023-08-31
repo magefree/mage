@@ -137,4 +137,22 @@ public class BackupTest extends CardTestPlayerBase {
         execute();
         assertPowerToughness(playerA, "Mirror-Shield Hoplite", 4, 4);
     }
+
+    @Test
+    public void StreetwiseNegotiatorTest() {
+        addCard(Zone.BATTLEFIELD, playerA, "Aegis Turtle");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerA, "Streetwise Negotiator", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Streetwise Negotiator");
+        addTarget(playerA, "Aegis Turtle");
+        // Should deal 6 damage
+        attack(1, playerA, "Aegis Turtle");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerB, 14);
+    }
 }

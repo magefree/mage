@@ -62,7 +62,7 @@ class WitchEngineEffect extends ContinuousEffectImpl {
         staticText = "target opponent gains control of {this}";
     }
 
-    public WitchEngineEffect(final WitchEngineEffect effect) {
+    private WitchEngineEffect(final WitchEngineEffect effect) {
         super(effect);
     }
 

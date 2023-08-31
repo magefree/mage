@@ -42,7 +42,7 @@ class VisionsOfBeyondEffect extends OneShotEffect {
         staticText = "Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead";
     }
 
-    public VisionsOfBeyondEffect(VisionsOfBeyondEffect effect) {
+    private VisionsOfBeyondEffect(final VisionsOfBeyondEffect effect) {
         super(effect);
     }
 

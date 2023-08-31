@@ -61,7 +61,7 @@ class UrzasScienceFairProjectEffect extends OneShotEffect {
                 "<br>6 - It gets +2/+2 until end of turn";
     }
 
-    public UrzasScienceFairProjectEffect(final UrzasScienceFairProjectEffect effect) {
+    private UrzasScienceFairProjectEffect(final UrzasScienceFairProjectEffect effect) {
         super(effect);
     }
 
