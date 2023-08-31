@@ -25,16 +25,21 @@ public class KorvoldGleefulGluttonTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, OVEN);
         addCard(Zone.BATTLEFIELD, playerA, DOG);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.GRAVEYARD, playerA, CAT);
 
         // Sacrifice dog to oven
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
         setChoice(playerA, DOG);
 
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
         // Sacrifice food to cat
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice a Food");
+        setChoice(playerA, "Food Token");
+
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         // Korvold should be reduced by 3 (enchantment, creature, artifact sacrificed)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, KORVOLD);
@@ -44,9 +49,9 @@ public class KorvoldGleefulGluttonTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
+        execute();
 
-        // Account for initial draw plus Korvold
         assertCounterCount(KORVOLD, CounterType.P1P1, 2);
-        assertHandCount(playerA, 1 + 2);
+        assertHandCount(playerA, 2);
     }
 }
