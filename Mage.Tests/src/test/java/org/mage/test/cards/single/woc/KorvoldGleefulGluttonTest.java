@@ -18,22 +18,20 @@ public class KorvoldGleefulGluttonTest extends CardTestPlayerBase {
     private final String OVEN = "Witch's Oven";
     private final String CAT = "Cauldron Familiar";
     private final String DOG = "Spirited Companion";
-    private final String LAND = "Archway Commons";
-
-    private void setup() {
-        addCard(Zone.HAND, playerA, KORVOLD);
-        addCard(Zone.BATTLEFIELD, playerA, OVEN);
-        addCard(Zone.BATTLEFIELD, playerA, DOG);
-        addCard(Zone.BATTLEFIELD, playerA, LAND, 5, false);
-        addCard(Zone.GRAVEYARD, playerA, CAT);
-    }
 
     @Test
     public void testEffects() {
-        setup();
+        addCard(Zone.HAND, playerA, KORVOLD);
+        addCard(Zone.BATTLEFIELD, playerA, OVEN);
+        addCard(Zone.BATTLEFIELD, playerA, DOG);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.GRAVEYARD, playerA, CAT);
 
         // Sacrifice dog to oven
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice");
+        setChoice(playerA, DOG);
 
         // Sacrifice food to cat
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice a Food");
@@ -47,8 +45,8 @@ public class KorvoldGleefulGluttonTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
 
-        assertCounterCount(KORVOLD, CounterType.P1P1, 2);
         // Account for initial draw plus Korvold
+        assertCounterCount(KORVOLD, CounterType.P1P1, 2);
         assertHandCount(playerA, 1 + 2);
     }
 }

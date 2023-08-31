@@ -53,7 +53,7 @@ public final class KorvoldGleefulGlutton extends CardImpl {
             new SpellCostReductionSourceEffect(CardTypesAmongSacrificedPermanentsCount.instance)
                 .setText("this spell costs {1} less to cast for each card type among permanents you've sacrificed this turn")
         );
-        staticAbility.addHint(new ValueHint("card types among permanents you've sacrificed this turn", CardTypesAmongSacrificedPermanentsCount.instance));
+        staticAbility.addHint(new ValueHint("Card types among permanents you've sacrificed this turn", CardTypesAmongSacrificedPermanentsCount.instance));
         
         this.addAbility(staticAbility, new KorvoldGleefulGluttonWatcher());
 
@@ -68,7 +68,7 @@ public final class KorvoldGleefulGlutton extends CardImpl {
         false
         );
         combatDamageAbility.addEffect(new DrawCardSourceControllerEffect(PermanentTypesInGraveyardCount.instance).setText("and draw X cards, where X is the number of permanent types among cards in your graveyard"));
-        combatDamageAbility.addHint(new ValueHint("permanent types among cards in your graveyard", PermanentTypesInGraveyardCount.instance));
+        combatDamageAbility.addHint(new ValueHint("Permanent types among cards in your graveyard", PermanentTypesInGraveyardCount.instance));
         this.addAbility(combatDamageAbility);
     }
 
@@ -121,7 +121,7 @@ enum CardTypesAmongSacrificedPermanentsCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        KorvoldGleefulGluttonWatcher watcher = game.getState().getWatcher(null);
+        KorvoldGleefulGluttonWatcher watcher = game.getState().getWatcher(KorvoldGleefulGluttonWatcher.class);
         return watcher == null ? 0 : watcher.getNumberOfTypes(sourceAbility.getControllerId());
     }
 
