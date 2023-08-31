@@ -2115,6 +2115,7 @@ public class ScryfallImageSupportTokens {
             put("CMM/Thopter", "https://api.scryfall.com/cards/tcmm/47/en?format=image");
             put("CMM/Thrull", "https://api.scryfall.com/cards/tcmm/18/en?format=image");
             put("CMM/Treasure", "https://api.scryfall.com/cards/tcmm/48/en?format=image");
+            put("CMM/Wall", "https://api.scryfall.com/cards/tcmm/67/en?format=image");
             put("CMM/Wizard", "https://api.scryfall.com/cards/tcmm/71/en?format=image");
             put("CMM/Wurm", "https://api.scryfall.com/cards/tcmm/73/en?format=image");
             put("CMM/Zombie/1", "https://api.scryfall.com/cards/tcmm/19/en?format=image");

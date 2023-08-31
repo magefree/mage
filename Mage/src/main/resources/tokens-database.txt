@@ -2108,7 +2108,7 @@
 |Generate|TOK:CMM|Thopter|||ThopterColorlessToken|
 |Generate|TOK:CMM|Thrull|||ThrullToken|
 |Generate|TOK:CMM|Treasure|||TreasureToken|
-// TODO: add Teyo, Geometric Tactician wall token when implemented
+|Generate|TOK:CMM|Wall|||WallFlyingToken|
 |Generate|TOK:CMM|Wizard|||CommodoreGuffToken|
 |Generate|TOK:CMM|Wurm|||Wurm55Token|
 |Generate|TOK:CMM|Zombie|1||ZombieToken|

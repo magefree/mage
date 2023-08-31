@@ -12,6 +12,7 @@ public final class WallFlyingToken extends TokenImpl {
         super("Wall Token", "0/4 white Wall creature token with defender and flying");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.WALL);
+        color.setWhite(true);
         power = new MageInt(0);
         toughness = new MageInt(4);
 
