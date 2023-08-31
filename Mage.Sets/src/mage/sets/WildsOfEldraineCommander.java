@@ -32,6 +32,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bear Umbra", 121, Rarity.RARE, mage.cards.b.BearUmbra.class));
         cards.add(new SetCardInfo("Bojuka Bog", 152, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Brazen Borrower", 85, Rarity.MYTHIC, mage.cards.b.BrazenBorrower.class));
+        cards.add(new SetCardInfo("Brenard, Ginger Sculptor", 27, Rarity.MYTHIC, mage.cards.b.BrenardGingerSculptor.class));
         cards.add(new SetCardInfo("Canopy Vista", 153, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Careful Cultivation", 122, Rarity.COMMON, mage.cards.c.CarefulCultivation.class));
         cards.add(new SetCardInfo("Castle Ardenvale", 154, Rarity.RARE, mage.cards.c.CastleArdenvale.class));
@@ -56,6 +57,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ethereal Armor", 67, Rarity.COMMON, mage.cards.e.EtherealArmor.class));
         cards.add(new SetCardInfo("Exotic Orchard", 159, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Fact or Fiction", 90, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
+        cards.add(new SetCardInfo("Faerie Bladecrafter", 14, Rarity.RARE, mage.cards.f.FaerieBladecrafter.class));
         cards.add(new SetCardInfo("Faerie Formation", 91, Rarity.RARE, mage.cards.f.FaerieFormation.class));
         cards.add(new SetCardInfo("Faerie Seer", 92, Rarity.COMMON, mage.cards.f.FaerieSeer.class));
         cards.add(new SetCardInfo("Fellwar Stone", 147, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
@@ -76,10 +78,12 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Keep Watch", 98, Rarity.COMMON, mage.cards.k.KeepWatch.class));
         cards.add(new SetCardInfo("Kenrith's Transformation", 128, Rarity.UNCOMMON, mage.cards.k.KenrithsTransformation.class));
         cards.add(new SetCardInfo("Kindred Dominance", 113, Rarity.RARE, mage.cards.k.KindredDominance.class));
+        cards.add(new SetCardInfo("Knickknack Ouphe", 18, Rarity.RARE, mage.cards.k.KnickknackOuphe.class));
         cards.add(new SetCardInfo("Kor Spiritdancer", 69, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
         cards.add(new SetCardInfo("Korvold, Gleeful Glutton", 26, Rarity.MYTHIC, mage.cards.k.KorvoldGleefulGlutton.class));
         cards.add(new SetCardInfo("Krosan Verge", 163, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
         cards.add(new SetCardInfo("Loamcrafter Faun", 19, Rarity.RARE, mage.cards.l.LoamcrafterFaun.class));
+        cards.add(new SetCardInfo("Malleable Impostor", 10, Rarity.RARE, mage.cards.m.MalleableImpostor.class));
         cards.add(new SetCardInfo("Mantle of the Ancients", 70, Rarity.RARE, mage.cards.m.MantleOfTheAncients.class));
         cards.add(new SetCardInfo("Midnight Clock", 99, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Mind Stone", 148, Rarity.COMMON, mage.cards.m.MindStone.class));

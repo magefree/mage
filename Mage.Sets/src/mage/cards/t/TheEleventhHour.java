@@ -49,7 +49,7 @@ public final class TheEleventhHour extends CardImpl {
                 new CreateTokenEffect(new FoodToken()),
                 new CreateTokenEffect(new TheEleventhHourToken())
                         .setText("and a 1/1 white Human creature token with " +
-                                "\"Doctor spells you cast cost 1 less to cast.\"")
+                                "\"Doctor spells you cast cost {1} less to cast.\"")
         );
 
         // III -- Create a token that's a copy of target creature, except it's a legendary Alien named Prisoner Zero.

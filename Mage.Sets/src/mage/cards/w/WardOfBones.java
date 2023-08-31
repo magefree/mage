@@ -55,7 +55,7 @@ class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
                 + "Each opponent who controls more lands than you can't play lands.";
     }
 
-    public WardOfBonesEffect(final WardOfBonesEffect effect) {
+    private WardOfBonesEffect(final WardOfBonesEffect effect) {
         super(effect);
     }
 

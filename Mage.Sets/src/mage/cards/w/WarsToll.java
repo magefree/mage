@@ -53,7 +53,7 @@ class WarsTollTapEffect extends OneShotEffect {
         staticText = "tap all lands that player controls";
     }
 
-    public WarsTollTapEffect(final WarsTollTapEffect effect) {
+    private WarsTollTapEffect(final WarsTollTapEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class WarsTollAttackRestrictionEffect extends RestrictionEffect {
         staticText = "If a creature an opponent controls attacks, all creatures that opponent controls attack if able";
     }
 
-    public WarsTollAttackRestrictionEffect(final WarsTollAttackRestrictionEffect effect) {
+    private WarsTollAttackRestrictionEffect(final WarsTollAttackRestrictionEffect effect) {
         super(effect);
     }
 

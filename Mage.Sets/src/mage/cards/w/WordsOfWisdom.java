@@ -45,7 +45,7 @@ class WordsOfWisdomEffect extends OneShotEffect {
         this.staticText = ", then each other player draws a card";
     }
 
-    public WordsOfWisdomEffect(final WordsOfWisdomEffect effect) {
+    private WordsOfWisdomEffect(final WordsOfWisdomEffect effect) {
         super(effect);
     }
 

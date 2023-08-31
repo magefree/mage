@@ -1,8 +1,6 @@
 
 package mage.abilities.keyword;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -14,6 +12,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -33,7 +33,7 @@ public class TributeAbility extends EntersBattlefieldAbility {
     }
 
     @Override
-    public EntersBattlefieldAbility copy() {
+    public TributeAbility copy() {
         return new TributeAbility(this);
     }
 

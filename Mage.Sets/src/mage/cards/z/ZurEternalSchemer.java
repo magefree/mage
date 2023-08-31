@@ -81,7 +81,7 @@ class ZurEternalSchemerEffect extends ContinuousEffectImpl {
                 "and has base power and base toughness each equal to its mana value.";
     }
 
-    public ZurEternalSchemerEffect(final ZurEternalSchemerEffect effect) {
+    private ZurEternalSchemerEffect(final ZurEternalSchemerEffect effect) {
         super(effect);
     }
 

@@ -19,8 +19,6 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -108,7 +106,7 @@ class ExtraordinaryJourneyEffect extends OneShotEffect {
 
         Set<Card> cards = permanents
                 .stream()
-                .map(p -> p.getMainCard())
+                .map(Card::getMainCard)
                 .filter(Objects::nonNull)
                 .filter(card -> game.getState().getZone(card.getId()) == Zone.EXILED)
                 .collect(Collectors.toSet());
@@ -148,7 +146,7 @@ class ExtraordinaryJourneyEffect extends OneShotEffect {
 class ExtraordinaryJourneyTriggeredAbility extends TriggeredAbilityImpl {
 
     ExtraordinaryJourneyTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1, "you"), false);
         setTriggerPhrase("Whenever one or more nontoken creatures enter the battlefield, "
             + "if one or more of them entered from exile or was cast from exile, ");
         setTriggersOnceEachTurn(true);

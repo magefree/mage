@@ -55,7 +55,7 @@ class WildEvocationEffect extends OneShotEffect {
                 + "Otherwise, the player casts it without paying its mana cost if able";
     }
 
-    public WildEvocationEffect(final WildEvocationEffect effect) {
+    private WildEvocationEffect(final WildEvocationEffect effect) {
         super(effect);
     }
 

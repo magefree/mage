@@ -20,7 +20,7 @@ public class SimpleEvasionAbility extends EvasionAbility {
         }
     }
 
-    public SimpleEvasionAbility(SimpleEvasionAbility ability) {
+    protected SimpleEvasionAbility(final SimpleEvasionAbility ability) {
         super(ability);
     }
 

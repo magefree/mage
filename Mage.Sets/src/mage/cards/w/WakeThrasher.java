@@ -52,7 +52,7 @@ class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilit
         setTriggerPhrase("Whenever a permanent you control becomes untapped, ");
     }
 
-    public BecomesUntappedControlledPermanentTriggeredAbility(final BecomesUntappedControlledPermanentTriggeredAbility ability) {
+    private BecomesUntappedControlledPermanentTriggeredAbility(final BecomesUntappedControlledPermanentTriggeredAbility ability) {
         super(ability);
     }
 

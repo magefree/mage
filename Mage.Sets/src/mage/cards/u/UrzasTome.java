@@ -51,7 +51,7 @@ class UrzasTomeEffect extends OneShotEffect {
         staticText = "Draw a card. Then discard a card unless you exile a historic card from your graveyard";
     }
 
-    public UrzasTomeEffect(final UrzasTomeEffect effect) {
+    private UrzasTomeEffect(final UrzasTomeEffect effect) {
         super(effect);
     }
 

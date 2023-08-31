@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -74,7 +73,7 @@ class ShapeStealerEffect extends OneShotEffect {
             return false;
         }
 
-        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn, SubLayer.SetPT_7b);
+        ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(permanent.getPower().getValue(), permanent.getToughness().getValue(), Duration.EndOfTurn);
         game.addEffect(effect, source);
         return true;
     }

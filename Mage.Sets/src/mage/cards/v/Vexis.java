@@ -41,7 +41,7 @@ public class Vexis extends CardImpl {
                 VigilanceAbility.getInstance(), Duration.EndOfTurn), false, CounterType.P1P1));
     }
 
-    public Vexis(final Vexis card) {
+    private Vexis(final Vexis card) {
         super(card);
     }
 

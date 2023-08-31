@@ -31,6 +31,8 @@ public final class BellowingBruiser extends AdventureCard {
         // Up to two target creatures can't block this turn.
         this.getSpellCard().getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
+
+        this.finalizeAdventure();
     }
 
     private BellowingBruiser(final BellowingBruiser card) {

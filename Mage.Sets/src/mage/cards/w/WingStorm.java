@@ -49,7 +49,7 @@ class WingStormEffect extends OneShotEffect {
         this.staticText = "{this} deals damage to each player equal to twice the number of creatures with flying that player controls";
     }
 
-    public WingStormEffect(final WingStormEffect effect) {
+    private WingStormEffect(final WingStormEffect effect) {
         super(effect);
     }
 

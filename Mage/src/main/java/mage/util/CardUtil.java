@@ -1496,6 +1496,11 @@ public final class CardUtil {
             return false;
         }
 
+        if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PAY_LIFE, player.getId(), source, player.getId(), lifeToPay))) {
+            // 2023-08-20: For now, Cost being replaced are paid.
+            // Waiting on actual ruling of Ashiok, Wicked Manipulator.
+            return true;
+        }
         if (player.loseLife(lifeToPay, game, source, false) >= lifeToPay) {
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIFE_PAID, player.getId(), source, player.getId(), lifeToPay));
             return true;

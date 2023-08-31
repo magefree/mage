@@ -24,7 +24,7 @@ public final class WickedReward extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WickedReward(WickedReward other) {
+    private WickedReward(final WickedReward other) {
         super(other);
     }
 

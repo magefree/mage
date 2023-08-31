@@ -24,7 +24,7 @@ public final class Watchwolf extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public Watchwolf (final Watchwolf card) {
+    private Watchwolf(final Watchwolf card) {
         super(card);
     }
 

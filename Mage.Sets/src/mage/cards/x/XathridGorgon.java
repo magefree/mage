@@ -75,7 +75,7 @@ class XathridGorgonCantActivateEffect extends RestrictionEffect {
         staticText = "Its activated abilities can't be activated";
     }
 
-    public XathridGorgonCantActivateEffect(final XathridGorgonCantActivateEffect effect) {
+    private XathridGorgonCantActivateEffect(final XathridGorgonCantActivateEffect effect) {
         super(effect);
     }
 

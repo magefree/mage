@@ -63,7 +63,7 @@ class WildPairEffect extends OneShotEffect {
         this.staticText = "search your library for a creature card with the same total power and toughness and put it onto the battlefield";
     }
 
-    public WildPairEffect(final WildPairEffect effect) {
+    private WildPairEffect(final WildPairEffect effect) {
         super(effect);
     }
 

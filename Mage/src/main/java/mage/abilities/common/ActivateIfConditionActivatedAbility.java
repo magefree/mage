@@ -19,7 +19,7 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
         this.condition = condition;
     }
 
-    public ActivateIfConditionActivatedAbility(ActivateIfConditionActivatedAbility ability) {
+    protected ActivateIfConditionActivatedAbility(final ActivateIfConditionActivatedAbility ability) {
         super(ability);
     }
 

@@ -50,7 +50,7 @@ class WorldlyCounselEffect extends OneShotEffect {
         this.staticText = "<i>Domain</i> &mdash; Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put one of those cards into your hand and the rest on the bottom of your library in any order";
     }
 
-    public WorldlyCounselEffect(final WorldlyCounselEffect effect) {
+    private WorldlyCounselEffect(final WorldlyCounselEffect effect) {
         super(effect);
     }
 

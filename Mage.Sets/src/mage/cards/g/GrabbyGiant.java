@@ -52,6 +52,8 @@ public final class GrabbyGiant extends AdventureCard {
         // That's Mine
         // Create a Treasure token.
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken()));
+
+        this.finalizeAdventure();
     }
 
     private GrabbyGiant(final GrabbyGiant card) {

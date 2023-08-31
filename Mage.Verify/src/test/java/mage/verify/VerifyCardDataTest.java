@@ -2646,6 +2646,7 @@ public class VerifyCardDataTest {
                             setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
                     if (card == null) {
                         errorsList.add("Error: broken constructor " + setInfo.getCardClass());
+                        continue;
                     }
                     if (!card.getExpansionSetCode().equals(set.getCode())) {
                         errorsList.add("Error: card constructor have custom expansionSetCode, must be removed " + setInfo.getCardClass());

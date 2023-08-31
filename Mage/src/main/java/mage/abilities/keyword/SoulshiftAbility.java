@@ -57,7 +57,7 @@ public class SoulshiftAbility extends DiesSourceTriggeredAbility {
     }
 
     @Override
-    public DiesSourceTriggeredAbility copy() {
+    public SoulshiftAbility copy() {
         return new SoulshiftAbility(this);
     }
 

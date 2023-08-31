@@ -29,7 +29,7 @@ public final class VotaryOfTheConclave extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{G}")));
     }
 
-    public VotaryOfTheConclave (final VotaryOfTheConclave card) {
+    private VotaryOfTheConclave(final VotaryOfTheConclave card) {
         super(card);
     }
 

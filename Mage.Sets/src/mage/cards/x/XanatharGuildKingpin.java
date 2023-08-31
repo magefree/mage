@@ -142,7 +142,7 @@ class SpendManaAsAnyColorToCastTopOfLibraryTargetEffect extends AsThoughEffectIm
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.EndOfTurn, Outcome.Benefit);
     }
 
-    public SpendManaAsAnyColorToCastTopOfLibraryTargetEffect(final SpendManaAsAnyColorToCastTopOfLibraryTargetEffect effect) {
+    private SpendManaAsAnyColorToCastTopOfLibraryTargetEffect(final SpendManaAsAnyColorToCastTopOfLibraryTargetEffect effect) {
         super(effect);
     }
 

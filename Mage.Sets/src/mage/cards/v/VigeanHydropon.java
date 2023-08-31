@@ -52,7 +52,7 @@ class VigeanHydroponEffect extends RestrictionEffect {
         staticText = "{this} can't attack or block";
     }
 
-    public VigeanHydroponEffect(final VigeanHydroponEffect effect) {
+    private VigeanHydroponEffect(final VigeanHydroponEffect effect) {
         super(effect);
     }
 

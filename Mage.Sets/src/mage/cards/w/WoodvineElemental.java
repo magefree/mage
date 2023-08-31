@@ -63,7 +63,7 @@ class WoodvineElementalEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public WoodvineElementalEffect(final WoodvineElementalEffect effect) {
+    private WoodvineElementalEffect(final WoodvineElementalEffect effect) {
         super(effect);
     }
 

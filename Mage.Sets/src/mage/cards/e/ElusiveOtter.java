@@ -45,6 +45,8 @@ public final class ElusiveOtter extends AdventureCard {
         target.setMinNumberOfTargets(0);
         target.setMaxNumberOfTargets(Integer.MAX_VALUE);
         this.getSpellCard().getSpellAbility().addTarget(target);
+
+        this.finalizeAdventure();
     }
 
     private ElusiveOtter(final ElusiveOtter card) {

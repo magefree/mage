@@ -40,7 +40,8 @@ public final class MythRealized extends CardImpl {
         // {W}: Until end of turn, Myth Realized becomes a Monk Avatar creature in addition to its other types and gains "This creature's power and toughness are each equal to the number of lore counters on it."
         Effect effect = new BecomesCreatureSourceEffect(new MythRealizedToken(), CardType.ENCHANTMENT, Duration.EndOfTurn).withDurationRuleAtStart(true);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{W}"));
-        ability.addEffect(new SetBasePowerToughnessSourceEffect(loreCounterCount, loreCounterCount, Duration.EndOfTurn, SubLayer.SetPT_7b).setText("and gains \"This creature's power and toughness are each equal to the number of lore counters on it.\""));
+        ability.addEffect(new SetBasePowerToughnessSourceEffect(loreCounterCount, Duration.EndOfTurn)
+                .setText("and gains \"This creature's power and toughness are each equal to the number of lore counters on it.\""));
 
         this.addAbility(ability);
     }

@@ -45,7 +45,7 @@ class UnexpectedlyAbsentEffect extends OneShotEffect {
         this.staticText = "Put target nonland permanent into its owner's library just beneath the top X cards of that library";
     }
 
-    public UnexpectedlyAbsentEffect(final UnexpectedlyAbsentEffect effect) {
+    private UnexpectedlyAbsentEffect(final UnexpectedlyAbsentEffect effect) {
         super(effect);
     }
 

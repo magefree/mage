@@ -1,9 +1,8 @@
-
-
 package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -29,8 +28,11 @@ public final class Painsmith extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), StaticFilters.FILTER_SPELL_AN_ARTIFACT, true);
-        ability.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
+        // Whenever you cast an artifact spell, you may have target creature get +2/+0 and gain deathtouch until end of turn.
+        Ability ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn)
+                .setText("target creature get +2/+0"), StaticFilters.FILTER_SPELL_AN_ARTIFACT, true);
+        ability.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn)
+                .setText("and gain deathtouch until end of turn"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

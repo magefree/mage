@@ -63,7 +63,7 @@ class WormfangCrabExileEffect extends OneShotEffect {
         this.staticText = "an opponent chooses a permanent you control other than {this} and exiles it";
     }
 
-    public WormfangCrabExileEffect(final WormfangCrabExileEffect effect) {
+    private WormfangCrabExileEffect(final WormfangCrabExileEffect effect) {
         super(effect);
     }
 

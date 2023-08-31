@@ -63,7 +63,7 @@ class VergeRangersEffect extends PlayTheTopCardEffect {
         staticText = "As long as an opponent controls more lands than you, you may play lands from the top of your library";
     }
 
-    public VergeRangersEffect(final VergeRangersEffect effect) {
+    private VergeRangersEffect(final VergeRangersEffect effect) {
         super(effect);
     }
 
