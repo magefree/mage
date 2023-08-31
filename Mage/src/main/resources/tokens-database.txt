@@ -2136,3 +2136,22 @@
 |Generate|TOK:WOE|Treasure|||TreasureToken|
 |Generate|TOK:WOE|Wicked|||WickedRoleToken|
 |Generate|TOK:WOE|Young Hero|||YoungHeroRoleToken|
+
+# WOC
+|Generate|TOK:WOC|Cat|1||CatToken2|
+|Generate|TOK:WOC|Cat|2||CatToken|
+|Generate|TOK:WOC|Elephant|||ElephantToken|
+|Generate|TOK:WOC|Faerie|||FaerieToken|
+|Generate|TOK:WOC|Faerie Rogue|1||FaerieRogueToken|
+|Generate|TOK:WOC|Faerie Rogue|2||OonaQueenFaerieRogueToken|
+|Generate|TOK:WOC|Human Monk|||HumanMonkToken|
+|Generate|TOK:WOC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:WOC|Monster|||MonsterRoleToken|
+|Generate|TOK:WOC|Ox|||OxToken|
+|Generate|TOK:WOC|Pegasus|||PegasusToken2|
+// TODO: add Nettling Nuisance pirate token when merged (#11076)
+|Generate|TOK:WOC|Royal|||RoyalRoleToken|
+|Generate|TOK:WOC|Saproling|||SaprolingToken|
+|Generate|TOK:WOC|Sorcerer|||SorcererRoleToken|
+|Generate|TOK:WOC|Spirit|||WhiteBlackSpiritToken|
+|Generate|TOK:WOC|Virtuous|||VirtuousRoleToken|

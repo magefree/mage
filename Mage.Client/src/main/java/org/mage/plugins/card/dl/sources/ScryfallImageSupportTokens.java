@@ -2143,6 +2143,24 @@ public class ScryfallImageSupportTokens {
             put("WOE/Wicked", "https://api.scryfall.com/cards/twoe/17/en?format=image");
             put("WOE/Young Hero", "https://api.scryfall.com/cards/twoe/16/en?format=image");
 
+            // WOC
+            put("WOC/Cat/1", "https://api.scryfall.com/cards/twoc/6/en?format=image");
+            put("WOC/Cat/2", "https://api.scryfall.com/cards/twoc/5/en?format=image");
+            put("WOC/Elephant", "https://api.scryfall.com/cards/twoc/13/en?format=image");
+            put("WOC/Faerie", "https://api.scryfall.com/cards/twoc/10/en?format=image");
+            put("WOC/Faerie Rogue/1", "https://api.scryfall.com/cards/twoc/11/en?format=image");
+            put("WOC/Faerie Rogue/2", "https://api.scryfall.com/cards/twoc/16/en?format=image");
+            put("WOC/Human Monk", "https://api.scryfall.com/cards/twoc/14/en?format=image");
+            put("WOC/Human Soldier", "https://api.scryfall.com/cards/twoc/7/en?format=image");
+            put("WOC/Monster", "https://api.scryfall.com/cards/twoc/1/en?format=image");
+            put("WOC/Ox", "https://api.scryfall.com/cards/twoc/8/en?format=image");
+            put("WOC/Pegasus", "https://api.scryfall.com/cards/twoc/9/en?format=image");
+            put("WOC/Royal", "https://api.scryfall.com/cards/twoc/2/en?format=image");
+            put("WOC/Saproling", "https://api.scryfall.com/cards/twoc/15/en?format=image");
+            put("WOC/Sorcerer", "https://api.scryfall.com/cards/twoc/3/en?format=image");
+            put("WOC/Spirit", "https://api.scryfall.com/cards/twoc/17/en?format=image");
+            put("WOC/Virtuous", "https://api.scryfall.com/cards/twoc/3/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
