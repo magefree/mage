@@ -69,7 +69,7 @@ class BlightwingBanditEffect extends OneShotEffect {
 
     public BlightwingBanditEffect() {
         super(Outcome.Benefit);
-        this.staticText = "look at the top card of that player’s library, then exile it face down. "
+        this.staticText = "look at the top card of that player's library, then exile it face down. "
         + "You may play that card for as long as it remains exiled, and mana of any type can be spent to cast it.";
     }
 
