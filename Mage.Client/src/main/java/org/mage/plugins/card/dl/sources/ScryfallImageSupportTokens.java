@@ -2121,6 +2121,28 @@ public class ScryfallImageSupportTokens {
             put("CMM/Zombie/2", "https://api.scryfall.com/cards/tcmm/13/en?format=image");
             put("CMM/Zombie Army", "https://api.scryfall.com/cards/tcmm/69/en?format=image");
 
+            // WOE
+            put("WOE/Beast", "https://api.scryfall.com/cards/twoe/8/en?format=image");
+            put("WOE/Bird", "https://api.scryfall.com/cards/twoe/1/en?format=image");
+            put("WOE/Cursed", "https://api.scryfall.com/cards/twoe/17/en?format=image");
+            put("WOE/Elemental", "https://api.scryfall.com/cards/twoe/9/en?format=image");
+            put("WOE/Faerie", "https://api.scryfall.com/cards/twoe/5/en?format=image");
+            put("WOE/Food/1", "https://api.scryfall.com/cards/twoe/10/en?format=image");
+            put("WOE/Food/2", "https://api.scryfall.com/cards/twoe/11/en?format=image");
+            put("WOE/Food/3", "https://api.scryfall.com/cards/twoe/12/en?format=image");
+            put("WOE/Food/4", "https://api.scryfall.com/cards/twoe/13/en?format=image");
+            put("WOE/Human", "https://api.scryfall.com/cards/twoe/2/en?format=image");
+            put("WOE/Knight", "https://api.scryfall.com/cards/twoe/3/en?format=image");
+            put("WOE/Monster", "https://api.scryfall.com/cards/twoe/15/en?format=image");
+            put("WOE/Mouse", "https://api.scryfall.com/cards/twoe/4/en?format=image");
+            put("WOE/Nightmare", "https://api.scryfall.com/cards/twoe/6/en?format=image");
+            put("WOE/Rat", "https://api.scryfall.com/cards/twoe/7/en?format=image");
+            put("WOE/Royal", "https://api.scryfall.com/cards/twoe/16/en?format=image");
+            put("WOE/Sorcerer", "https://api.scryfall.com/cards/twoe/15/en?format=image");
+            put("WOE/Treasure", "https://api.scryfall.com/cards/twoe/14/en?format=image");
+            put("WOE/Wicked", "https://api.scryfall.com/cards/twoe/17/en?format=image");
+            put("WOE/Young Hero", "https://api.scryfall.com/cards/twoe/16/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

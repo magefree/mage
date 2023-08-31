@@ -2114,3 +2114,25 @@
 |Generate|TOK:CMM|Zombie|1||ZombieToken|
 |Generate|TOK:CMM|Zombie|2||StitcherGeralfZombieToken|
 |Generate|TOK:CMM|Zombie Army|||ZombieArmyToken|
+
+# WOE
+|Generate|TOK:WOE|Beast|||BeastToken|
+|Generate|TOK:WOE|Bird|||BirdToken|
+|Generate|TOK:WOE|Cursed|||CursedRoleToken|
+|Generate|TOK:WOE|Elemental|||Elemental44WUToken|
+|Generate|TOK:WOE|Faerie|||FaerieBlockFliersToken|
+|Generate|TOK:WOE|Food|1||FoodToken|
+|Generate|TOK:WOE|Food|2||FoodToken|
+|Generate|TOK:WOE|Food|3||FoodToken|
+|Generate|TOK:WOE|Food|4||FoodToken|
+|Generate|TOK:WOE|Human|||HumanToken|
+|Generate|TOK:WOE|Knight|||KnightToken|
+|Generate|TOK:WOE|Monster|||MonsterRoleToken|
+|Generate|TOK:WOE|Mouse|||MouseToken|
+|Generate|TOK:WOE|Nightmare|||AshiokWickedManipulatorNightmareToken|
+|Generate|TOK:WOE|Rat|||RatCantBlockToken|
+|Generate|TOK:WOE|Royal|||RoyalRoleToken|
+|Generate|TOK:WOE|Sorcerer|||SorcererRoleToken|
+|Generate|TOK:WOE|Treasure|||TreasureToken|
+|Generate|TOK:WOE|Wicked|||WickedRoleToken|
+|Generate|TOK:WOE|Young Hero|||YoungHeroRoleToken|
