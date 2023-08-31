@@ -39,7 +39,7 @@ public final class GumdropPoisoner extends AdventureCard {
 
         // When Gumdrop Poisoner enters the battlefield, up to one target creature gets -X/-X until end of turn, where X is the amount of life you gained this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(xValue, xValue)
-                .setText("target creature gets -X/-X until end of turn, where X is the amount of life you gained this turn"));
+                .setText("up to one target creature gets -X/-X until end of turn, where X is the amount of life you gained this turn"));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability.addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
 
