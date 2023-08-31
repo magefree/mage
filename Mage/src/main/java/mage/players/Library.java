@@ -103,6 +103,7 @@ public class Library implements Serializable {
     public void putOnTop(Card card, Game game) {
         if (card.isOwnedBy(playerId)) {
             card.setZone(Zone.LIBRARY, game);
+            library.remove(card.getId());
             library.addFirst(card.getId());
         } else {
             game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
@@ -144,13 +145,6 @@ public class Library implements Serializable {
 
     public int size() {
         return library.size();
-    }
-
-    public void set(Library newLibrary) {
-        library.clear();
-        for (UUID card : newLibrary.getCardList()) {
-            library.add(card);
-        }
     }
 
     public List<UUID> getCardList() {
@@ -202,8 +196,10 @@ public class Library implements Serializable {
     }
 
     public void addAll(Set<Card> cards, Game game) {
+        // put on bottom
         for (Card card : cards) {
             card.setZone(Zone.LIBRARY, game);
+            library.remove(card.getId());
             library.add(card.getId());
         }
     }
