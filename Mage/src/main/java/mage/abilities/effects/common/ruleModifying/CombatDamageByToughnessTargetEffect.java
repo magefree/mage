@@ -35,7 +35,7 @@ public class CombatDamageByToughnessTargetEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Set<Permanent> set = targetPointer.getTargets(game, source).stream()
             .map(game::getPermanent)
-            .filter(Objects::isNull)
+            .filter(Objects::nonNull)
             .collect(Collectors.toSet());
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
