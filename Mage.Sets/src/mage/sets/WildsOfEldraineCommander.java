@@ -57,6 +57,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ethereal Armor", 67, Rarity.COMMON, mage.cards.e.EtherealArmor.class));
         cards.add(new SetCardInfo("Exotic Orchard", 159, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Fact or Fiction", 90, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
+        cards.add(new SetCardInfo("Faerie Bladecrafter", 14, Rarity.RARE, mage.cards.f.FaerieBladecrafter.class));
         cards.add(new SetCardInfo("Faerie Formation", 91, Rarity.RARE, mage.cards.f.FaerieFormation.class));
         cards.add(new SetCardInfo("Faerie Seer", 92, Rarity.COMMON, mage.cards.f.FaerieSeer.class));
         cards.add(new SetCardInfo("Fellwar Stone", 147, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
