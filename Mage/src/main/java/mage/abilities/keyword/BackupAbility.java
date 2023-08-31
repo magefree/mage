@@ -1,10 +1,14 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
+import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.Card;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -85,12 +89,25 @@ public class BackupAbility extends EntersBattlefieldTriggeredAbility {
     }
 
     /**
-     *
      * @param ability
      * @param watcher
      * @param dontAddToCard use it on multiple instances of backups (example: Conclave Sledge-Captain)
      */
     public void addAbility(Ability ability, Watcher watcher, boolean dontAddToCard) {
+        // runtime/verify check: wrong duration in backup's static effects
+        if (ability instanceof StaticAbility) {
+            Effect wrongEffect = ability.getEffects().stream()
+                    .filter(effect -> effect instanceof ContinuousEffect)
+                    .map(effect -> (ContinuousEffect) effect)
+                    .filter(effect -> effect.getDuration().equals(Duration.EndOfTurn))
+                    .findFirst()
+                    .orElse(null);
+            if (wrongEffect != null) {
+                // how-to fix: add effect with Duration.EndOfGame (backup's abilities for permanent controls by GainAbility)
+                throw new IllegalArgumentException("Wrong code usage. Backup ability and source card must contains static effects. Wrong effect: " + wrongEffect.getClass().getName());
+            }
+        }
+
         if (watcher != null) {
             ability.addWatcher(watcher);
         }

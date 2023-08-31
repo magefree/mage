@@ -22,7 +22,7 @@ public class BackupTest extends CardTestPlayerBase {
         addTarget(playerA, "Raging Goblin");//Now a 4/4
 
         attack(1, playerA, "Raging Goblin");
-        block(1,playerB,"Memnite","Raging Goblin");
+        block(1, playerB, "Memnite", "Raging Goblin");
 
         setStrictChooseMode(false); //auto-stack triggers
         setStopAt(1, PhaseStep.END_TURN);
@@ -33,6 +33,7 @@ public class BackupTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Conclave Sledge-Captain", 1);
         assertPowerToughness(playerA, "Conclave Sledge-Captain", 4, 4);
     }
+
     @Test
     public void ConclaveSledgeCaptainSelfTest() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
@@ -49,6 +50,7 @@ public class BackupTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Conclave Sledge-Captain", 1);
         assertPowerToughness(playerA, "Conclave Sledge-Captain", 14, 14);
     }
+
     @Test
     public void ConclaveSledgeCaptainSplitTest() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
@@ -75,6 +77,7 @@ public class BackupTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Raging Minotaur", 8, 8);
         assertPowerToughness(playerA, "Conclave Sledge-Captain", 4, 4);
     }
+
     @Test
     public void MirrorShieldHopliteStrictTest() {
         addCard(Zone.BATTLEFIELD, playerA, "Mirror-Shield Hoplite");
@@ -83,7 +86,7 @@ public class BackupTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Consuming Aetherborn");
         addTarget(playerA, "Consuming Aetherborn");
-        setChoice(playerA,true);
+        setChoice(playerA, true);
         addTarget(playerA, "Mirror-Shield Hoplite");
 
         setStrictChooseMode(true);
@@ -92,6 +95,7 @@ public class BackupTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Mirror-Shield Hoplite", 3, 3);
         assertPowerToughness(playerA, "Consuming Aetherborn", 3, 3);
     }
+
     @Test
     public void MirrorShieldHopliteTriggeredTest() {
         addCard(Zone.BATTLEFIELD, playerA, "Mirror-Shield Hoplite");
@@ -102,7 +106,7 @@ public class BackupTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enduring Bondwarden");
         addTarget(playerA, "Mirror-Shield Hoplite");
-        setChoice(playerA,false); //2 +1/+1 counters
+        setChoice(playerA, false); //2 +1/+1 counters
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murder", "Mirror-Shield Hoplite");
@@ -113,6 +117,7 @@ public class BackupTest extends CardTestPlayerBase {
         execute();
         assertPowerToughness(playerA, "Enduring Bondwarden", 4, 5);
     }
+
     @Test
     public void MirrorShieldHopliteSourceTest() {
         addCard(Zone.BATTLEFIELD, playerA, "Mirror-Shield Hoplite");
@@ -123,7 +128,7 @@ public class BackupTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enduring Bondwarden");
         addTarget(playerA, "Mirror-Shield Hoplite");
-        setChoice(playerA,true);
+        setChoice(playerA, true);
         addTarget(playerA, "Enduring Bondwarden");
         //The source of the copy is the same as the source of the original backup ability.
         //So the Bondwarden shouldn't gain the ability again
@@ -140,19 +145,25 @@ public class BackupTest extends CardTestPlayerBase {
 
     @Test
     public void StreetwiseNegotiatorTest() {
-        addCard(Zone.BATTLEFIELD, playerA, "Aegis Turtle");
+        addCard(Zone.BATTLEFIELD, playerA, "Air-Cult Elemental"); // 2/5
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
-        addCard(Zone.HAND, playerA, "Streetwise Negotiator", 1);
+        addCard(Zone.HAND, playerA, "Streetwise Negotiator", 1); // 0/2
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Streetwise Negotiator");
-        addTarget(playerA, "Aegis Turtle");
-        // Should deal 6 damage
-        attack(1, playerA, "Aegis Turtle");
+        addTarget(playerA, "Air-Cult Elemental");
 
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        // turn 1 - counter + active backup
+        attack(1, playerA, "Air-Cult Elemental"); // deals 1 + 5 damage due backup
+        checkLife("after 1", 1, PhaseStep.POSTCOMBAT_MAIN, playerB, 20 - 1 - 5);
+
+        // turn 3 - counter only
+        attack(3, playerA, "Air-Cult Elemental"); // deals 1 + 2 damage
+        attack(3, playerA, "Streetwise Negotiator"); // deals 2 damage due static ability
+
         setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertLife(playerB, 14);
+        assertLife(playerB, 20 - (1 + 5) - (1 + 2 + 2));
     }
 }

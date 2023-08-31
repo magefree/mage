@@ -31,7 +31,6 @@ public class CombatDamageByToughnessSourceEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
-            discard();
             return false;
         }
 
