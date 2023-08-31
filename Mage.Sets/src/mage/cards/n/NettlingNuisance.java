@@ -60,7 +60,7 @@ class NettlingNuisanceEffect extends OneShotEffect {
     NettlingNuisanceEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "that player creates a 4/2 red Pirate creature token with \"This creature can't block.\" The token is goaded for the rest of the game. " 
-            + "(It attacks each combat if able and attacks a player other than you if able.)";
+            + "<i>(It attacks each combat if able and attacks a player other than you if able.)</i>";
     }
 
     private NettlingNuisanceEffect(final NettlingNuisanceEffect effect) {
