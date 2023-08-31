@@ -69,7 +69,7 @@ class WoodElementalEffect extends OneShotEffect {
         staticText = "sacrifice any number of untapped Forests";
     }
 
-    public WoodElementalEffect(final WoodElementalEffect effect) {
+    private WoodElementalEffect(final WoodElementalEffect effect) {
         super(effect);
     }
 

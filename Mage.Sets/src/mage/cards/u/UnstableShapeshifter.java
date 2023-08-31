@@ -61,7 +61,7 @@ class UnstableShapeshifterEffect extends OneShotEffect {
         this.staticText = "{this} becomes a copy of that creature, except it has this ability";
     }
 
-    public UnstableShapeshifterEffect(final UnstableShapeshifterEffect effect) {
+    private UnstableShapeshifterEffect(final UnstableShapeshifterEffect effect) {
         super(effect);
     }
 

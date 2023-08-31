@@ -53,7 +53,7 @@ class VexingArcanixEffect extends OneShotEffect {
                 "the player puts it into their graveyard and {this} deals 2 damage to them";
     }
 
-    public VexingArcanixEffect(final VexingArcanixEffect effect) {
+    private VexingArcanixEffect(final VexingArcanixEffect effect) {
         super(effect);
     }
 

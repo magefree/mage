@@ -57,7 +57,7 @@ class UrbanBurgeoningUntapEffect extends ContinuousEffectImpl {
         staticText = "Untap this land during each other player's untap step";
     }
 
-    public UrbanBurgeoningUntapEffect(final UrbanBurgeoningUntapEffect effect) {
+    private UrbanBurgeoningUntapEffect(final UrbanBurgeoningUntapEffect effect) {
         super(effect);
     }
 

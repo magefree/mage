@@ -54,7 +54,7 @@ class WatchersOfTheDeadEffect extends OneShotEffect {
         this.staticText = "Each opponent chooses 2 cards in their graveyard and exiles the rest";
     }
 
-    public WatchersOfTheDeadEffect(final WatchersOfTheDeadEffect effect) {
+    private WatchersOfTheDeadEffect(final WatchersOfTheDeadEffect effect) {
         super(effect);
     }
 

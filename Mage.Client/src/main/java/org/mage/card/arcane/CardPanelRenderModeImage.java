@@ -446,20 +446,8 @@ public class CardPanelRenderModeImage extends CardPanel {
             if (cardView.showPT()) {
 
                 // real PT info
-                MageInt currentPower;
-                MageInt currentToughness;
-                if (cardView.getOriginalCard() != null) {
-                    // card
-                    currentPower = cardView.getOriginalCard().getPower();
-                    currentToughness = cardView.getOriginalCard().getToughness();
-                } else if (cardView.getOriginalToken() != null) {
-                    // token
-                    currentPower = cardView.getOriginalToken().getPower();
-                    currentToughness = cardView.getOriginalToken().getToughness();
-                } else {
-                    currentPower = null;
-                    currentToughness = null;
-                }
+                MageInt currentPower = cardView.getOriginalPower();
+                MageInt currentToughness = cardView.getOriginalToughness();
 
                 prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), currentPower, false);
                 prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, fontSize), null, false);

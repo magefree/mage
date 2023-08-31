@@ -60,7 +60,7 @@ class UnholyIndentureReturnEffect extends OneShotEffect {
         staticText = "return that card to the battlefield under your control with a +1/+1 counter on it";
     }
 
-    public UnholyIndentureReturnEffect(final UnholyIndentureReturnEffect effect) {
+    private UnholyIndentureReturnEffect(final UnholyIndentureReturnEffect effect) {
         super(effect);
     }
 

@@ -51,7 +51,7 @@ class UnmooredEgoEffect extends OneShotEffect {
         this.staticText = "Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way";
     }
 
-    public UnmooredEgoEffect(final UnmooredEgoEffect effect) {
+    private UnmooredEgoEffect(final UnmooredEgoEffect effect) {
         super(effect);
     }
 

@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,23 +9,17 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
 public final class DeputyOfAcquittals extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature you control");
-    static {
-        filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
 
     public DeputyOfAcquittals(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
@@ -41,7 +33,7 @@ public final class DeputyOfAcquittals extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         // When Deputy of Acquittals enters the battlefield, you may return another target creature you control to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
-        Target target = new TargetCreaturePermanent(filter);
+        Target target = new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL);
         ability.addTarget(target);
         this.addAbility(ability);
     }

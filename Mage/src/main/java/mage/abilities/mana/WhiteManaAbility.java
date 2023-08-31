@@ -17,7 +17,7 @@ public class WhiteManaAbility extends BasicManaAbility {
         this.netMana.add(new Mana(ColoredManaSymbol.W));
     }
 
-    public WhiteManaAbility(WhiteManaAbility ability) {
+    private WhiteManaAbility(final WhiteManaAbility ability) {
         super(ability);
     }
 

@@ -108,6 +108,7 @@
 |Generate|EMBLEM:2X2|Emblem Wrenn|||WrennAndSixEmblem|
 |Generate|EMBLEM:DMU|Emblem Ajani|||AjaniSleeperAgentEmblem|
 |Generate|EMBLEM:DMU|Emblem Jaya|||JayaFieryNegotiatorEmblem|
+|Generate|EMBLEM:DMU|Emblem Karn|||KarnLivingLegacyEmblem|
 |Generate|EMBLEM:BRO|Emblem Saheeli|||SaheeliFiligreeMasterEmblem|
 |Generate|EMBLEM:ONE|Emblem Koth|||KothFireOfResistanceEmblem|
 |Generate|EMBLEM:MOM|Emblem Teferi|||TeferiAkosaOfZhalfirEmblem|
@@ -1833,7 +1834,7 @@
 |Generate|TOK:40K|Blue Horror|||BlueHorrorToken|
 |Generate|TOK:40K|Cherubael|||CherubaelToken|
 |Generate|TOK:40K|Clue|||ClueArtifactToken|
-|Generate|TOK:40K|Insect|||InsectColorlessToken|
+|Generate|TOK:40K|Insect|||InsectColorlessArtifactToken|
 |Generate|TOK:40K|Necron Warrior|||NecronWarriorToken|
 |Generate|TOK:40K|Plaguebearer of Nurgle|||PlaguebearerOfNurgleToken|
 |Generate|TOK:40K|Robot|||RobotToken|

@@ -66,7 +66,7 @@ class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetAttackingCreature());
     }
 
-    public VengefulPharaohTriggeredAbility(final VengefulPharaohTriggeredAbility ability) {
+    private VengefulPharaohTriggeredAbility(final VengefulPharaohTriggeredAbility ability) {
         super(ability);
         this.stepTriggeredPlansewalker = ability.stepTriggeredPlansewalker;
         this.turnTriggeredPlaneswalker = ability.turnTriggeredPlaneswalker;
@@ -133,7 +133,7 @@ class VengefulPharaohEffect extends OneShotEffect {
         this.staticText = "destroy target attacking creature, then put {this} on top of your library";
     }
 
-    public VengefulPharaohEffect(final VengefulPharaohEffect effect) {
+    private VengefulPharaohEffect(final VengefulPharaohEffect effect) {
         super(effect);
     }
 

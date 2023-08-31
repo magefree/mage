@@ -48,7 +48,7 @@ public class TransmuteAbility extends SimpleActivatedAbility {
     }
 
     @Override
-    public SimpleActivatedAbility copy() {
+    public TransmuteAbility copy() {
         return new TransmuteAbility(this);
     }
 
@@ -67,7 +67,7 @@ class TransmuteEffect extends OneShotEffect {
         staticText = "Transmute";
     }
 
-    TransmuteEffect(final TransmuteEffect effect) {
+    private TransmuteEffect(final TransmuteEffect effect) {
         super(effect);
     }
 

@@ -51,7 +51,7 @@ class WarmongersChariotEffect extends AsThoughEffectImpl {
         staticText = "As long as equipped creature has defender, it can attack as though it didn't have defender";
     }
 
-    public WarmongersChariotEffect(final WarmongersChariotEffect effect) {
+    private WarmongersChariotEffect(final WarmongersChariotEffect effect) {
         super(effect);
     }
 

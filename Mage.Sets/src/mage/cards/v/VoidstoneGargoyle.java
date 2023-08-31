@@ -57,7 +57,7 @@ class VoidstoneGargoyleReplacementEffect1 extends ContinuousRuleModifyingEffectI
         staticText = "Spells with the chosen name can't be cast";
     }
 
-    public VoidstoneGargoyleReplacementEffect1(final VoidstoneGargoyleReplacementEffect1 effect) {
+    private VoidstoneGargoyleReplacementEffect1(final VoidstoneGargoyleReplacementEffect1 effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class VoidstoneGargoyleRuleModifyingEffect2 extends ContinuousRuleModifyingEffec
         staticText = "Activated abilities of sources with the chosen name can't be activated";
     }
 
-    public VoidstoneGargoyleRuleModifyingEffect2(final VoidstoneGargoyleRuleModifyingEffect2 effect) {
+    private VoidstoneGargoyleRuleModifyingEffect2(final VoidstoneGargoyleRuleModifyingEffect2 effect) {
         super(effect);
     }
 

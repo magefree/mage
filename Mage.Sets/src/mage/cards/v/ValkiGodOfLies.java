@@ -150,7 +150,7 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
         this.staticText = "Choose a creature card exiled with Valki with mana value X. Valki becomes a copy of that card.";
     }
 
-    public ValkiGodOfLiesCopyExiledEffect(final ValkiGodOfLiesCopyExiledEffect effect) {
+    private ValkiGodOfLiesCopyExiledEffect(final ValkiGodOfLiesCopyExiledEffect effect) {
         super(effect);
     }
 
@@ -193,7 +193,7 @@ class ExileTopCardEachPlayersLibrary extends OneShotEffect {
         this.staticText = "Exile the top card of each player's library";
     }
 
-    public ExileTopCardEachPlayersLibrary(final ExileTopCardEachPlayersLibrary effect) {
+    private ExileTopCardEachPlayersLibrary(final ExileTopCardEachPlayersLibrary effect) {
         super(effect);
     }
 
@@ -234,7 +234,7 @@ class ExileTargetArtifactOrCreatureEffect extends OneShotEffect {
         this.staticText = "Exile target artifact or creature";
     }
 
-    public ExileTargetArtifactOrCreatureEffect(final ExileTargetArtifactOrCreatureEffect effect) {
+    private ExileTargetArtifactOrCreatureEffect(final ExileTargetArtifactOrCreatureEffect effect) {
         super(effect);
     }
 
@@ -267,7 +267,7 @@ class ExileAllCardsFromAllGraveyards extends OneShotEffect {
         this.staticText = "Exile all graveyards. Add {R}{R}{R}";
     }
 
-    public ExileAllCardsFromAllGraveyards(final ExileAllCardsFromAllGraveyards effect) {
+    private ExileAllCardsFromAllGraveyards(final ExileAllCardsFromAllGraveyards effect) {
         super(effect);
     }
 

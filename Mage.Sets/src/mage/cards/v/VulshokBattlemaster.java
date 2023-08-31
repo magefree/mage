@@ -50,7 +50,7 @@ public final class VulshokBattlemaster extends CardImpl {
             this.staticText = "attach all Equipment on the battlefield to it";
         }
 
-        public VulshokBattlemasterEffect(final VulshokBattlemasterEffect effect) {
+        private VulshokBattlemasterEffect(final VulshokBattlemasterEffect effect) {
             super(effect);
         }
 

@@ -65,7 +65,7 @@ class VeiledSerpentToken extends TokenImpl {
                         new FilterLandPermanent(SubType.ISLAND, "an Island"))));
     }
 
-    public VeiledSerpentToken(final VeiledSerpentToken token) {
+    private VeiledSerpentToken(final VeiledSerpentToken token) {
         super(token);
     }
 

@@ -100,7 +100,7 @@ class UrzaPlaneswalkerEffect extends ContinuousEffectImpl {
         staticText = "once during each of your turns, you may activate an additional loyalty ability of {this}";
     }
 
-    public UrzaPlaneswalkerEffect(final UrzaPlaneswalkerEffect effect) {
+    private UrzaPlaneswalkerEffect(final UrzaPlaneswalkerEffect effect) {
         super(effect);
     }
 

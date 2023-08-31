@@ -2,11 +2,9 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.TargetOfOpponentsSpellOrAbilityTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
@@ -62,7 +60,7 @@ class ParnesseTheSubtleBrushCopySpellOpponentEffect extends OneShotEffect {
                 "They may choose new targets for that copy";
     }
 
-    ParnesseTheSubtleBrushCopySpellOpponentEffect(final ParnesseTheSubtleBrushCopySpellOpponentEffect effect) {
+    private ParnesseTheSubtleBrushCopySpellOpponentEffect(final ParnesseTheSubtleBrushCopySpellOpponentEffect effect) {
         super(effect);
     }
 
@@ -79,7 +77,7 @@ class ParnesseTheSubtleBrushCopySpellOpponentEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public ParnesseTheSubtleBrushCopySpellOpponentEffect copy() {
         return new ParnesseTheSubtleBrushCopySpellOpponentEffect(this);
     }
 }
@@ -112,7 +110,7 @@ class ParnesseTheSubtleBrushCopySpellTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public ParnesseTheSubtleBrushCopySpellTriggeredAbility copy() {
         return new ParnesseTheSubtleBrushCopySpellTriggeredAbility(this);
     }
 }

@@ -1,11 +1,12 @@
 package mage.abilities.dynamicvalue;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AdditiveDynamicValue implements DynamicValue {
 
@@ -37,7 +38,7 @@ public class AdditiveDynamicValue implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public AdditiveDynamicValue copy() {
         return new AdditiveDynamicValue(this.dynamicValues);
     }
 

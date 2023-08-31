@@ -27,7 +27,7 @@ public final class ReturnFromTheWilds extends CardImpl {
 
         // * Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(
-                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true
+                new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, false
         ));
 
         // * Create a 1/1 white Human creature token.

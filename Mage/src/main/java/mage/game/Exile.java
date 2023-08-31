@@ -76,7 +76,7 @@ public class Exile implements Serializable, Copyable<Exile> {
     }
 
     /**
-     * Return exiled cards from specific player. Use it in effects to find all cards in range.
+     * Return exiled cards owned by a specific player. Use it in effects to find all cards in range.
      *
      * @param game
      * @param fromPlayerId

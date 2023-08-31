@@ -31,7 +31,7 @@ public final class VensersDiffusion extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public VensersDiffusion (final VensersDiffusion card) {
+    private VensersDiffusion(final VensersDiffusion card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
         setTriggerPhrase("Whenever {this} or another " + filter.getMessage() + " dies, ");
     }
 
-    public DiesThisOrAnotherCreatureTriggeredAbility(DiesThisOrAnotherCreatureTriggeredAbility ability) {
+    protected DiesThisOrAnotherCreatureTriggeredAbility(final DiesThisOrAnotherCreatureTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.applyFilterOnSource = ability.applyFilterOnSource;

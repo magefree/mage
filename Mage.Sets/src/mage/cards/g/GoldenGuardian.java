@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -19,8 +18,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -33,12 +31,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author LevelX2
  */
 public final class GoldenGuardian extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public GoldenGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
@@ -55,7 +47,7 @@ public final class GoldenGuardian extends CardImpl {
         // {2}: Golden Guardian fights another target creature you control. When Golden Guardian dies this turn, return it to the battlefield transformed under your control.
         this.addAbility(new TransformAbility());
         Ability ability = new SimpleActivatedAbility(new GoldenGuardianEffect(), new GenericManaCost(2));
-        ability.addTarget(new TargetControlledCreaturePermanent(filter));
+        ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new GoldenGuardianDelayedTriggeredAbility(), false));
         this.addAbility(ability);
 

@@ -62,7 +62,7 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
         super(Outcome.Copy);
     }
 
-    public VesuvanDoppelgangerCopyEffect(final VesuvanDoppelgangerCopyEffect effect) {
+    private VesuvanDoppelgangerCopyEffect(final VesuvanDoppelgangerCopyEffect effect) {
         super(effect);
     }
 

@@ -30,6 +30,8 @@ public final class BeanstalkWurm extends AdventureCard {
         // Plant Beans
         // You may play an additional land this turn.
         this.getSpellCard().getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
+        
+        this.finalizeAdventure();
     }
 
     private BeanstalkWurm(final BeanstalkWurm card) {

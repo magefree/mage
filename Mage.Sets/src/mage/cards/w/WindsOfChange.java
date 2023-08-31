@@ -44,7 +44,7 @@ class WindsOfChangeEffect extends OneShotEffect {
         this.staticText = "Each player shuffles the cards from their hand into their library, then draws that many cards";
     }
 
-    public WindsOfChangeEffect(final WindsOfChangeEffect effect) {
+    private WindsOfChangeEffect(final WindsOfChangeEffect effect) {
         super(effect);
     }
 

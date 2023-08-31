@@ -146,19 +146,19 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                         CardUtil.reduceCost((SpellAbility) ability, ability.getManaCosts());
 
                     } else {
-                        ability.getManaCostsToPay().clear();
+                        ability.clearManaCostsToPay();
                     }
                     if (!onlyMana) {
-                        ability.getCosts().clear();
+                        ability.clearCosts();
                     }
                     for (AlternativeCost alternateCost : alternativeCostsToCheck) {
                         alternateCost.activate();
                         for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext(); ) {
                             Cost costDetailed = (Cost) it.next();
                             if (costDetailed instanceof ManaCost) {
-                                ability.getManaCostsToPay().add((ManaCost) costDetailed.copy());
+                                ability.addManaCostsToPay((ManaCost) costDetailed.copy());
                             } else if (costDetailed != null) {
-                                ability.getCosts().add(costDetailed.copy());
+                                ability.addCost(costDetailed.copy());
                             }
                         }
                     }

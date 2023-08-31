@@ -55,7 +55,7 @@ class WardscaleDragonRuleEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "As long as {this} is attacking, defending player can't cast spells";
     }
 
-    public WardscaleDragonRuleEffect(final WardscaleDragonRuleEffect effect) {
+    private WardscaleDragonRuleEffect(final WardscaleDragonRuleEffect effect) {
         super(effect);
     }
 

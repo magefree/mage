@@ -69,7 +69,7 @@ class VampirismBoostEnchantedEffect extends ContinuousEffectImpl {
         staticText = "Enchanted creature gets +1/+1 for each other creature you control";
     }
 
-    public VampirismBoostEnchantedEffect(final VampirismBoostEnchantedEffect effect) {
+    private VampirismBoostEnchantedEffect(final VampirismBoostEnchantedEffect effect) {
         super(effect);
     }
 

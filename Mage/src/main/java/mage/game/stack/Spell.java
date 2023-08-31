@@ -311,7 +311,7 @@ public class Spell extends StackObjectImpl implements Card {
                 if (isCopy()) {
                     Token token = CopyTokenFunction.createTokenCopy(card, game, this);
                     // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
-                    if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false)) {
+                    if (token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, null, false)) {
                         permId = token.getLastAddedTokenIds().stream().findFirst().orElse(null);
                         flag = true;
                     } else {
@@ -380,7 +380,7 @@ public class Spell extends StackObjectImpl implements Card {
         } else if (isCopy()) {
             Token token = CopyTokenFunction.createTokenCopy(card, game, this);
             // The token that a resolving copy of a spell becomes isn’t said to have been “created.” (2020-09-25)
-            token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, false);
+            token.putOntoBattlefield(1, game, ability, getControllerId(), false, false, null, null, false);
             return true;
         } else {
             MageObjectReference mor = new MageObjectReference(getSpellAbility());

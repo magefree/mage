@@ -59,7 +59,7 @@ class VildinPackAlphaEffect extends OneShotEffect {
         this.staticText = "you may transform it";
     }
 
-    public VildinPackAlphaEffect(final VildinPackAlphaEffect effect) {
+    private VildinPackAlphaEffect(final VildinPackAlphaEffect effect) {
         super(effect);
     }
 
