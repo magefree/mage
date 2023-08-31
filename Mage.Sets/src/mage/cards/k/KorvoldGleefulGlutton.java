@@ -152,7 +152,6 @@ enum PermanentTypesInGraveyardCount implements DynamicValue {
         }
 
         return player.getGraveyard().getCards(game).stream()
-            .filter(card -> !card.isCopy() && !(card instanceof PermanentToken))
             .map(card -> card.getCardType(game))
             .flatMap(types -> types.stream().filter(CardType::isPermanentType))
             .distinct()
