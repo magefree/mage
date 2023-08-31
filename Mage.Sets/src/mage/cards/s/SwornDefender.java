@@ -78,7 +78,7 @@ class SwornDefenderEffect extends OneShotEffect {
         if (controller != null && targetPermanent != null) {
             int newPower = CardUtil.overflowDec(targetPermanent.getToughness().getValue(), 1);
             int newToughness = CardUtil.overflowInc(targetPermanent.getPower().getValue(), 1);
-            game.addEffect(new SetBasePowerToughnessSourceEffect(newPower, newToughness, Duration.EndOfTurn, SubLayer.SetPT_7b), source);
+            game.addEffect(new SetBasePowerToughnessSourceEffect(newPower, newToughness, Duration.EndOfTurn), source);
             return true;
         }
         return false;

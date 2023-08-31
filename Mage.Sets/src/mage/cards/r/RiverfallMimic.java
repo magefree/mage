@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SubLayer;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -44,7 +43,7 @@ public final class RiverfallMimic extends CardImpl {
 
         // Whenever you cast a spell that's both blue and red, Riverfall Mimic has base power and toughness 3/3 until end of turn and can't be blocked this turn.
         Ability ability = SpellCastControllerTriggeredAbility.createWithRule(
-                new SetBasePowerToughnessSourceEffect(3, 3, Duration.EndOfTurn, SubLayer.SetPT_7b),
+                new SetBasePowerToughnessSourceEffect(3, 3, Duration.EndOfTurn),
                 filter, false, rule
         );
         ability.addEffect(new GainAbilitySourceEffect(new CantBeBlockedSourceAbility(), Duration.EndOfTurn, false, true));
