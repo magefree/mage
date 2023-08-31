@@ -216,7 +216,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                     sb.append("you may ");
                 } else if (!ruleLow.startsWith("its controller may")) {
                     sb.append("you may have ");
-                    superRule = ruleWithFixedVerbGrammar(superRule);
+                    superRule = superRule.replaceFirst(" (become|block|deal|discard|gain|get|lose|mill|sacrifice)s? ", " $1 ");
                 }
             }
             if (replaceRuleText
@@ -264,18 +264,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 || ruleLow.startsWith("turn")
                 || ruleLow.startsWith("tap")
                 || ruleLow.startsWith("untap");
-    }
-
-    private static String ruleWithFixedVerbGrammar(String rule) {
-        return rule.replace(" becomes ", " become ")
-                .replace(" blocks ", " block ")
-                .replace(" deals ", " deal ")
-                .replace(" discards ", " discard ")
-                .replace(" gains ", " gain ")
-                .replace(" gets ", " get ")
-                .replace(" loses ", " lose ")
-                .replace(" mills ", " mill ")
-                .replace(" sacrifices ", " sacrifice ");
     }
 
     @Override

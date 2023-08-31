@@ -25,7 +25,7 @@ public class SkipNextPlayerUntapStepEffect extends OneShotEffect {
                 : text + " skips their next untap step";
     }
 
-    public SkipNextPlayerUntapStepEffect(SkipNextPlayerUntapStepEffect effect) {
+    protected SkipNextPlayerUntapStepEffect(final SkipNextPlayerUntapStepEffect effect) {
         super(effect);
     }
 

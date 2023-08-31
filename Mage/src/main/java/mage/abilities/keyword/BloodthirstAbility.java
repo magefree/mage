@@ -1,9 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -14,6 +10,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.BloodthirstWatcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -33,7 +33,7 @@ public class BloodthirstAbility extends EntersBattlefieldAbility {
     }
 
     @Override
-    public EntersBattlefieldAbility copy() {
+    public BloodthirstAbility copy() {
         return new BloodthirstAbility(this);
     }
 

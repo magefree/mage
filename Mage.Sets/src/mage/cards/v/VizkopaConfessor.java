@@ -64,7 +64,7 @@ class VizkopaConfessorEffect extends OneShotEffect {
         this.staticText = "pay any amount of life. Target opponent reveals that many cards from their hand. You choose one of them and exile it";
     }
 
-    public VizkopaConfessorEffect(final VizkopaConfessorEffect effect) {
+    private VizkopaConfessorEffect(final VizkopaConfessorEffect effect) {
         super(effect);
     }
 

@@ -58,7 +58,7 @@ class WoebringerDemonEffect extends OneShotEffect {
         this.staticText = "that player sacrifices a creature. If the player can't, sacrifice {this}";
     }
 
-    public WoebringerDemonEffect(final WoebringerDemonEffect effect) {
+    private WoebringerDemonEffect(final WoebringerDemonEffect effect) {
         super(effect);
     }
 

@@ -67,7 +67,7 @@ class YukoraThePrisonerEffect extends OneShotEffect {
         this.staticText = "sacrifice all non-Ogre creatures you control";
     }
 
-    public YukoraThePrisonerEffect(final YukoraThePrisonerEffect effect) {
+    private YukoraThePrisonerEffect(final YukoraThePrisonerEffect effect) {
         super(effect);
     }
 

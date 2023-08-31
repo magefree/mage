@@ -97,7 +97,7 @@ class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} attacks, ");
     }
 
-    public UlamogAttackTriggeredAbility(final UlamogAttackTriggeredAbility ability) {
+    private UlamogAttackTriggeredAbility(final UlamogAttackTriggeredAbility ability) {
         super(ability);
     }
 
@@ -132,7 +132,7 @@ class UlamogExileLibraryEffect extends OneShotEffect {
         this.staticText = "defending player exiles the top twenty cards of their library";
     }
 
-    public UlamogExileLibraryEffect(final UlamogExileLibraryEffect effect) {
+    private UlamogExileLibraryEffect(final UlamogExileLibraryEffect effect) {
         super(effect);
     }
 

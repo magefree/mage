@@ -39,6 +39,8 @@ public final class ShroudedShepherd extends AdventureCard {
                 -1, -1, Duration.EndOfTurn,
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES, false
         ));
+
+        this.finalizeAdventure();
     }
 
     private ShroudedShepherd(final ShroudedShepherd card) {

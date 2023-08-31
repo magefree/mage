@@ -34,7 +34,7 @@ public class FilterCard extends FilterObject<Card> {
         super(name);
     }
 
-    public FilterCard(FilterCard filter) {
+    protected FilterCard(final FilterCard filter) {
         super(filter);
         this.extraPredicates.addAll(filter.extraPredicates);
     }

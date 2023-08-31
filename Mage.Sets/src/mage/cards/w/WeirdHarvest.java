@@ -48,7 +48,7 @@ class WeirdHarvestEffect extends OneShotEffect {
         this.staticText = "each player may search their library for up to X creature cards, reveal those cards, put them into their hand, then shuffle";
     }
 
-    public WeirdHarvestEffect(final WeirdHarvestEffect effect) {
+    private WeirdHarvestEffect(final WeirdHarvestEffect effect) {
         super(effect);
     }
 

@@ -58,7 +58,7 @@ class ZombieMobEffect extends OneShotEffect {
         staticText = "{this} enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard. When {this} enters the battlefield, exile all creature cards from your graveyard.";
     }
 
-    public ZombieMobEffect(final ZombieMobEffect effect) {
+    private ZombieMobEffect(final ZombieMobEffect effect) {
         super(effect);
     }
 

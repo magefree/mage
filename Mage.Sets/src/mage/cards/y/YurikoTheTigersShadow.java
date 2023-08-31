@@ -74,7 +74,7 @@ class YurikoTheTigersShadowEffect extends OneShotEffect {
                 + "equal to that card's mana value";
     }
 
-    public YurikoTheTigersShadowEffect(final YurikoTheTigersShadowEffect effect) {
+    private YurikoTheTigersShadowEffect(final YurikoTheTigersShadowEffect effect) {
         super(effect);
     }
 

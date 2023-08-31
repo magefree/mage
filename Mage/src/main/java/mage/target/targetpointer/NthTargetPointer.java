@@ -26,7 +26,7 @@ public abstract class NthTargetPointer extends TargetPointerImpl {
         this.targetNumber = targetNumber;
     }
 
-    public NthTargetPointer(final  NthTargetPointer nthTargetPointer) {
+    protected NthTargetPointer(final NthTargetPointer nthTargetPointer) {
         super(nthTargetPointer);
         this.targetNumber = nthTargetPointer.targetNumber;
 

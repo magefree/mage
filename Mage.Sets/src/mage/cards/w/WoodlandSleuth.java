@@ -60,7 +60,7 @@ class WoodlandSleuthEffect extends OneShotEffect {
         this.staticText = "return a creature card at random from your graveyard to your hand";
     }
 
-    public WoodlandSleuthEffect(final WoodlandSleuthEffect effect) {
+    private WoodlandSleuthEffect(final WoodlandSleuthEffect effect) {
         super(effect);
     }
 

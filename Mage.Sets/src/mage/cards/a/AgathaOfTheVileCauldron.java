@@ -68,11 +68,11 @@ public final class AgathaOfTheVileCauldron extends CardImpl {
 
 class AgathaOfTheVileCauldronEffect extends CostModificationEffectImpl {
 
-    private final static DynamicValue xValue = new SourcePermanentPowerCount(false);
+    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
 
     AgathaOfTheVileCauldronEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "Activated abilities of creatures you control cost X less to activate, "
+        staticText = "Activated abilities of creatures you control cost {X} less to activate, "
                 + "where X is {this}'s power. "
                 + "This effect can't reduce the mana in that cost to less than one mana.";
     }

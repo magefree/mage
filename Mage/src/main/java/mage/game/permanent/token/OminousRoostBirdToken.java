@@ -25,7 +25,7 @@ public class OminousRoostBirdToken extends TokenImpl {
     }
 
     @Override
-    public Token copy() {
+    public OminousRoostBirdToken copy() {
         return new OminousRoostBirdToken(this);
     }
 }

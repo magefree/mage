@@ -62,7 +62,7 @@ class XenagosManaEffect extends OneShotEffect {
         this.staticText = "Add X mana in any combination of {R} and/or {G}, where X is the number of creatures you control";
     }
 
-    public XenagosManaEffect(final XenagosManaEffect effect) {
+    private XenagosManaEffect(final XenagosManaEffect effect) {
         super(effect);
     }
 
@@ -101,7 +101,7 @@ class XenagosExileEffect extends OneShotEffect {
         this.staticText = "Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield";
     }
 
-    public XenagosExileEffect(final XenagosExileEffect effect) {
+    private XenagosExileEffect(final XenagosExileEffect effect) {
         super(effect);
     }
 

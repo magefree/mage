@@ -40,6 +40,8 @@ public final class CheekyHouseMouse extends AdventureCard {
         this.getSpellCard().getSpellAbility().addEffect(new CantBeBlockedTargetEffect(filter, Duration.EndOfTurn)
                 .setText("it can't be blocked by creatures with power 3 or greater this turn"));
         this.getSpellCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+
+        this.finalizeAdventure();
     }
 
     private CheekyHouseMouse(final CheekyHouseMouse card) {

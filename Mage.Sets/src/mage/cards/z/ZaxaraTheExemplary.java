@@ -2,7 +2,6 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
@@ -67,7 +66,7 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you cast a spell with {X} in its mana cost");
     }
 
-    public ZaxaraTheExemplaryHydraTokenAbility(final ZaxaraTheExemplaryHydraTokenAbility ability) {
+    private ZaxaraTheExemplaryHydraTokenAbility(final ZaxaraTheExemplaryHydraTokenAbility ability) {
         super(ability);
     }
 
@@ -90,7 +89,7 @@ class ZaxaraTheExemplaryHydraTokenAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public ZaxaraTheExemplaryHydraTokenAbility copy() {
         return new ZaxaraTheExemplaryHydraTokenAbility(this);
     }
 }

@@ -88,7 +88,7 @@ class WorldslayerEffect extends OneShotEffect {
         staticText = "destroy all permanents other than {this}";
     }
 
-    public WorldslayerEffect(final WorldslayerEffect effect) {
+    private WorldslayerEffect(final WorldslayerEffect effect) {
         super(effect);
     }
 

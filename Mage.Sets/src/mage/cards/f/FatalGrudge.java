@@ -1,6 +1,7 @@
 package mage.cards.f;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import mage.MageObject;
@@ -95,9 +96,9 @@ class FatalGrudgeEffect extends OneShotEffect {
 
 class FatalGrudgePredicate implements Predicate<MageObject> {
 
-    private final HashSet<CardType> types;
+    private final Set<CardType> types;
 
-    public FatalGrudgePredicate(HashSet<CardType> types) {
+    public FatalGrudgePredicate(Set<CardType> types) {
         this.types = types;
     }
 

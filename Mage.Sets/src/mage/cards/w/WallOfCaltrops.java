@@ -59,7 +59,7 @@ class WallOfCaltropsAbility extends BlocksCreatureTriggeredAbility {
         super(new GainAbilitySourceEffect(BandingAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public WallOfCaltropsAbility(WallOfCaltropsAbility ability) {
+    private WallOfCaltropsAbility(final WallOfCaltropsAbility ability) {
         super(ability);
     }
 

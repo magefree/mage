@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
-import mage.constants.SubLayer;
 
 /**
  *
@@ -38,7 +37,7 @@ public final class TimberPaladin extends CardImpl {
 
         // As long as Timber Paladin is enchanted by exactly one Aura, it has base power and toughness 3/3.
         Ability ability1 = new SimpleStaticAbility(new ConditionalContinuousEffect(
-            new SetBasePowerToughnessSourceEffect(3, 3, Duration.WhileOnBattlefield, SubLayer.SetPT_7b),
+            new SetBasePowerToughnessSourceEffect(3, 3, Duration.WhileOnBattlefield),
             exactlyOne,
             "As long as {this} is enchanted by exactly one Aura, it has base power and toughness 3/3."
         ));
@@ -47,7 +46,7 @@ public final class TimberPaladin extends CardImpl {
         // As long as Timber Paladin is enchanted by exactly two Auras, it has base power and toughness 5/5 and vigilance.
 
         Ability ability2 = new SimpleStaticAbility(new ConditionalContinuousEffect(
-            new SetBasePowerToughnessSourceEffect(5, 5, Duration.WhileOnBattlefield, SubLayer.SetPT_7b),
+            new SetBasePowerToughnessSourceEffect(5, 5, Duration.WhileOnBattlefield),
             exactlyTwo,
             "As long as {this} is enchanted by exactly two Auras, it has base power and toughness 5/5"
         ));
@@ -57,7 +56,7 @@ public final class TimberPaladin extends CardImpl {
         
         // As long as Timber Paladin is enchanted by three or more Auras, it has base power and toughness 10/10, vigilance, and trample.
         Ability ability3 = new SimpleStaticAbility(new ConditionalContinuousEffect(
-            new SetBasePowerToughnessSourceEffect(10, 10, Duration.WhileOnBattlefield, SubLayer.SetPT_7b),
+            new SetBasePowerToughnessSourceEffect(10, 10, Duration.WhileOnBattlefield),
             threeOrMore,
             "As long as {this} is enchanted by three or more Auras, it has base power and toughness 10/10"
         ));

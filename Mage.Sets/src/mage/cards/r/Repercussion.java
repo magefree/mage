@@ -2,7 +2,6 @@ package mage.cards.r;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -49,7 +48,7 @@ class RepercussionTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public RepercussionTriggeredAbility(final RepercussionTriggeredAbility ability) {
+    private RepercussionTriggeredAbility(final RepercussionTriggeredAbility ability) {
         super(ability);
     }
 
@@ -75,7 +74,7 @@ class RepercussionTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public RepercussionTriggeredAbility copy() {
         return new RepercussionTriggeredAbility(this);
     }
 }

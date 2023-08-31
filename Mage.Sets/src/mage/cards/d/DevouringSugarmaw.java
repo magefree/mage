@@ -67,6 +67,8 @@ public final class DevouringSugarmaw extends AdventureCard {
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new HumanToken()));
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new FoodToken())
                 .setText("and a Food token"));
+
+        this.finalizeAdventure();
     }
 
     private DevouringSugarmaw(final DevouringSugarmaw card) {

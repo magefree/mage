@@ -57,7 +57,7 @@ class VolcanicVisionReturnToHandTargetEffect extends OneShotEffect {
         staticText = "Return target instant or sorcery card from your graveyard to your hand. {this} deals damage equal to that card's mana value to each creature your opponents control";
     }
 
-    public VolcanicVisionReturnToHandTargetEffect(final VolcanicVisionReturnToHandTargetEffect effect) {
+    private VolcanicVisionReturnToHandTargetEffect(final VolcanicVisionReturnToHandTargetEffect effect) {
         super(effect);
     }
 

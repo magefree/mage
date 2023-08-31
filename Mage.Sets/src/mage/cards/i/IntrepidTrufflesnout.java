@@ -21,7 +21,7 @@ public final class IntrepidTrufflesnout extends AdventureCard {
 
     public IntrepidTrufflesnout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{1}{G}", "Go Hog Wild", "{1}{G}");
-        
+
         this.subtype.add(SubType.BOAR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
@@ -32,6 +32,8 @@ public final class IntrepidTrufflesnout extends AdventureCard {
         // Target creature gets +2/+2 until end of turn.
         this.getSpellCard().getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        this.finalizeAdventure();
     }
 
     private IntrepidTrufflesnout(final IntrepidTrufflesnout card) {

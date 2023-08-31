@@ -82,7 +82,7 @@ class VodalianWarMachineEffect extends OneShotEffect {
         staticText = "destroy all " + filter.getMessage();
     }
 
-    public VodalianWarMachineEffect(final VodalianWarMachineEffect effect) {
+    private VodalianWarMachineEffect(final VodalianWarMachineEffect effect) {
         super(effect);
     }
 

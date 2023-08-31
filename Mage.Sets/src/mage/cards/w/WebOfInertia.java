@@ -47,7 +47,7 @@ class WebOfInertiaEffect extends OneShotEffect {
         this.staticText = "that player may exile a card from their graveyard. If the player doesn't, creatures they control can't attack you this turn";
     }
 
-    public WebOfInertiaEffect(final WebOfInertiaEffect effect) {
+    private WebOfInertiaEffect(final WebOfInertiaEffect effect) {
         super(effect);
     }
 
@@ -87,7 +87,7 @@ class WebOfInertiaRestrictionEffect extends RestrictionEffect {
         this.attackerID = attackerID;
     }
 
-    public WebOfInertiaRestrictionEffect(final WebOfInertiaRestrictionEffect effect) {
+    private WebOfInertiaRestrictionEffect(final WebOfInertiaRestrictionEffect effect) {
         super(effect);
         this.attackerID = effect.attackerID;
     }

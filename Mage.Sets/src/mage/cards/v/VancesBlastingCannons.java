@@ -80,7 +80,7 @@ class VancesBlastingCannonsExileEffect extends OneShotEffect {
         this.staticText = "exile the top card of your library. If it's a nonland card, you may cast that card this turn";
     }
 
-    public VancesBlastingCannonsExileEffect(final VancesBlastingCannonsExileEffect effect) {
+    private VancesBlastingCannonsExileEffect(final VancesBlastingCannonsExileEffect effect) {
         super(effect);
     }
 
@@ -117,7 +117,7 @@ class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
         staticText = "If it's a nonland card, you may cast that card this turn";
     }
 
-    public CastFromNonHandZoneTargetEffect(final CastFromNonHandZoneTargetEffect effect) {
+    private CastFromNonHandZoneTargetEffect(final CastFromNonHandZoneTargetEffect effect) {
         super(effect);
     }
 
@@ -150,7 +150,7 @@ class VancesBlastingCannonsFlipTrigger extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new TransformSourceEffect(), true);
     }
 
-    public VancesBlastingCannonsFlipTrigger(final VancesBlastingCannonsFlipTrigger ability) {
+    private VancesBlastingCannonsFlipTrigger(final VancesBlastingCannonsFlipTrigger ability) {
         super(ability);
     }
 

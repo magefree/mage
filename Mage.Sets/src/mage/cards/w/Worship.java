@@ -42,7 +42,7 @@ class WorshipReplacementEffect extends ReplacementEffectImpl {
         staticText = "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }
 
-    public WorshipReplacementEffect(final WorshipReplacementEffect effect) {
+    private WorshipReplacementEffect(final WorshipReplacementEffect effect) {
         super(effect);
     }
 

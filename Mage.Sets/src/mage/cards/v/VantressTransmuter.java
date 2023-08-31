@@ -32,6 +32,8 @@ public final class VantressTransmuter extends AdventureCard {
         this.getSpellCard().getSpellAbility().addEffect(new CreateRoleAttachedTargetEffect(RoleType.CURSED)
                 .setText("create a Cursed Role token attached to it"));
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        this.finalizeAdventure();
     }
 
     private VantressTransmuter(final VantressTransmuter card) {

@@ -1213,7 +1213,7 @@ public class HumanPlayer extends PlayerImpl {
                     Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
                         // look at card or try to cast/activate abilities
-                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = new LinkedHashMap<>();
+                        Map<UUID, ActivatedAbility> useableAbilities = new LinkedHashMap<>();
 
                         Player actingPlayer = null;
                         if (playerId.equals(game.getPriorityPlayerId())) {
@@ -1559,7 +1559,7 @@ public class HumanPlayer extends PlayerImpl {
 
         Zone zone = game.getState().getZone(object.getId());
         if (zone != null) {
-            LinkedHashMap<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
+            Map<UUID, ActivatedManaAbilityImpl> useableAbilities = getUseableManaAbilities(object, zone, game);
             if (!useableAbilities.isEmpty()) {
                 // Added to ensure that mana is not being autopaid for spells that care about the color of mana being paid
                 // See https://github.com/magefree/mage/issues/9070
@@ -2164,7 +2164,7 @@ public class HumanPlayer extends PlayerImpl {
         return super.activateAbility(ability, game);
     }
 
-    protected void activateAbility(LinkedHashMap<UUID, ? extends ActivatedAbility> abilities, MageObject object, Game game) {
+    protected void activateAbility(Map<UUID, ? extends ActivatedAbility> abilities, MageObject object, Game game) {
         if (gameInCheckPlayableState(game)) {
             return;
         }
@@ -2268,7 +2268,7 @@ public class HumanPlayer extends PlayerImpl {
         MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
         if (object != null) {
             String message = "Choose ability to cast" + (noMana ? " for FREE" : "") + "<br>" + object.getLogName();
-            LinkedHashMap<UUID, SpellAbility> useableAbilities = PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana);
+            Map<UUID, SpellAbility> useableAbilities = PlayerImpl.getCastableSpellAbilities(game, playerId, object, game.getState().getZone(object.getId()), noMana);
             if (useableAbilities != null
                     && useableAbilities.size() == 1) {
                 return useableAbilities.values().iterator().next();

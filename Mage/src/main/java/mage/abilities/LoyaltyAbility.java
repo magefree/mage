@@ -33,7 +33,7 @@ public class LoyaltyAbility extends ActivatedAbilityImpl {
         this.timing = TimingRule.SORCERY;
     }
 
-    public LoyaltyAbility(LoyaltyAbility ability) {
+    protected LoyaltyAbility(final LoyaltyAbility ability) {
         super(ability);
     }
 

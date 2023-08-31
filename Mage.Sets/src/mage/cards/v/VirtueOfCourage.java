@@ -29,6 +29,8 @@ public final class VirtueOfCourage extends AdventureCard {
         // Embereth Blaze deals 2 damage to any target.
         this.getSpellCard().getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellCard().getSpellAbility().addTarget(new TargetAnyTarget());
+
+        this.finalizeAdventure();
     }
 
     private VirtueOfCourage(final VirtueOfCourage card) {
@@ -78,6 +80,6 @@ class VirtueOfCourageTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "whenever a source you control deals noncombat damage to an opponent, "
                 + "you may exile that many cards from the top of your library. "
-                + "You may play those cards this turn";
+                + "You may play those cards this turn.";
     }
 }

@@ -69,7 +69,7 @@ class UnderrealmLichReplacementEffect extends ReplacementEffectImpl {
                 + "and the rest into your graveyard.";
     }
 
-    public UnderrealmLichReplacementEffect(final UnderrealmLichReplacementEffect effect) {
+    private UnderrealmLichReplacementEffect(final UnderrealmLichReplacementEffect effect) {
         super(effect);
     }
 

@@ -44,7 +44,7 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
         condition = new IsStepCondition(PhaseStep.DRAW, false);
     }
 
-    public WellOfKnowledgeConditionalActivatedAbility(final WellOfKnowledgeConditionalActivatedAbility ability) {
+    private WellOfKnowledgeConditionalActivatedAbility(final WellOfKnowledgeConditionalActivatedAbility ability) {
         super(ability);
         this.condition = ability.condition;
     }
@@ -86,7 +86,7 @@ class WellOfKnowledgeEffect extends OneShotEffect {
         super(Outcome.DrawCard);
     }
 
-    public WellOfKnowledgeEffect(final WellOfKnowledgeEffect effect) {
+    private WellOfKnowledgeEffect(final WellOfKnowledgeEffect effect) {
         super(effect);
     }
 

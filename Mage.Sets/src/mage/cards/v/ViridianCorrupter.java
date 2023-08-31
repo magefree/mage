@@ -35,7 +35,7 @@ public final class ViridianCorrupter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ViridianCorrupter (final ViridianCorrupter card) {
+    private ViridianCorrupter(final ViridianCorrupter card) {
         super(card);
     }
 

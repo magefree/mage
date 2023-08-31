@@ -33,7 +33,7 @@ public final class WallOfTanglecord extends CardImpl {
                 new ManaCostsImpl<>("{G}")));
     }
 
-    public WallOfTanglecord (final WallOfTanglecord card) {
+    private WallOfTanglecord(final WallOfTanglecord card) {
         super(card);
     }
 
