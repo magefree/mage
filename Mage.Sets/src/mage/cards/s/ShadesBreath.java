@@ -55,7 +55,7 @@ class ShadesBreathSetColorEffect extends ContinuousEffectImpl {
         staticText = "Until end of turn, each creature you control becomes a black";
     }
 
-    public ShadesBreathSetColorEffect(final ShadesBreathSetColorEffect effect) {
+    private ShadesBreathSetColorEffect(final ShadesBreathSetColorEffect effect) {
         super(effect);
     }
 

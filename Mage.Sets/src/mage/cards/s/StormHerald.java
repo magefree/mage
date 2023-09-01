@@ -76,7 +76,7 @@ class StormHeraldEffect extends OneShotEffect {
                 + "If those Auras would leave the battlefield, exile them instead of putting them anywhere else";
     }
 
-    public StormHeraldEffect(final StormHeraldEffect effect) {
+    private StormHeraldEffect(final StormHeraldEffect effect) {
         super(effect);
     }
 

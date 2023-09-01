@@ -70,7 +70,7 @@ class ReturnSengirNosferatuEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public ReturnSengirNosferatuEffect(final ReturnSengirNosferatuEffect effect) {
+    private ReturnSengirNosferatuEffect(final ReturnSengirNosferatuEffect effect) {
         super(effect);
     }
 

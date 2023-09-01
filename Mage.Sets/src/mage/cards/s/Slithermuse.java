@@ -61,7 +61,7 @@ class SlithermuseEffect extends OneShotEffect {
         this.staticText = "choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference";
     }
 
-    public SlithermuseEffect(final SlithermuseEffect effect) {
+    private SlithermuseEffect(final SlithermuseEffect effect) {
         super(effect);
     }
 

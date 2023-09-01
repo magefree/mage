@@ -47,7 +47,7 @@ class SorcerousSpyglassActivationEffect extends ContinuousRuleModifyingEffectImp
         staticText = "Activated abilities of sources with the chosen name can't be activated unless they're mana abilities";
     }
 
-    public SorcerousSpyglassActivationEffect(final SorcerousSpyglassActivationEffect effect) {
+    private SorcerousSpyglassActivationEffect(final SorcerousSpyglassActivationEffect effect) {
         super(effect);
     }
 

@@ -47,7 +47,7 @@ public final class SithRuins extends CardImpl {
 
     public static class SithRuinsAbility extends ActivatedAbilityImpl {
 
-        public SithRuinsAbility(SithRuinsAbility ability) {
+        private SithRuinsAbility(final SithRuinsAbility ability) {
             super(ability);
         }
 

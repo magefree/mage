@@ -56,7 +56,7 @@ class SaheelisDirectiveEffect extends OneShotEffect {
                 + "put onto the battlefield into your graveyard.";
     }
 
-    public SaheelisDirectiveEffect(final SaheelisDirectiveEffect effect) {
+    private SaheelisDirectiveEffect(final SaheelisDirectiveEffect effect) {
         super(effect);
     }
 

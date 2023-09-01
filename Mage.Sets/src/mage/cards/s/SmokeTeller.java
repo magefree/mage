@@ -66,7 +66,7 @@ class SmokeTellerLookFaceDownEffect extends OneShotEffect {
         this.staticText = "Look at target face-down creature";
     }
 
-    public SmokeTellerLookFaceDownEffect(final SmokeTellerLookFaceDownEffect effect) {
+    private SmokeTellerLookFaceDownEffect(final SmokeTellerLookFaceDownEffect effect) {
         super(effect);
     }
 

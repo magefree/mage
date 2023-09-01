@@ -90,7 +90,7 @@ class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
         this.staticText = "Move a +1/+1 counter from target creature onto another target creature with the same controller";
     }
 
-    public MoveCounterFromTargetToTargetEffect(final MoveCounterFromTargetToTargetEffect effect) {
+    private MoveCounterFromTargetToTargetEffect(final MoveCounterFromTargetToTargetEffect effect) {
         super(effect);
     }
 
@@ -154,7 +154,7 @@ class MoveAuraEffect extends OneShotEffect {
         staticText = "Attach target Aura attached to a permanent to another permanent with the same controller.";
     }
 
-    public MoveAuraEffect(final MoveAuraEffect effect) {
+    private MoveAuraEffect(final MoveAuraEffect effect) {
         super(effect);
     }
 

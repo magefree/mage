@@ -66,7 +66,7 @@ class SetonKrosanProtectorManaEffect extends BasicManaEffect {
         this.filter = filter;
     }
 
-    public SetonKrosanProtectorManaEffect(final SetonKrosanProtectorManaEffect effect) {
+    private SetonKrosanProtectorManaEffect(final SetonKrosanProtectorManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

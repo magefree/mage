@@ -74,7 +74,7 @@ class ShrineOfPiercingVisionEffect extends OneShotEffect {
         this.staticText = "Look at the top X cards of your library, where X is the number of charge counters on {this}. Put one of those cards into your hand and the rest on the bottom of your library in any order";
     }
 
-    public ShrineOfPiercingVisionEffect(final ShrineOfPiercingVisionEffect effect) {
+    private ShrineOfPiercingVisionEffect(final ShrineOfPiercingVisionEffect effect) {
         super(effect);
     }
 

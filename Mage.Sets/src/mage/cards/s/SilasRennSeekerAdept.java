@@ -60,7 +60,7 @@ class SilasRennSeekerAdeptPlayEffect extends AsThoughEffectImpl {
         staticText = "choose target artifact card in your graveyard. You may cast that card this turn";
     }
 
-    public SilasRennSeekerAdeptPlayEffect(final SilasRennSeekerAdeptPlayEffect effect) {
+    private SilasRennSeekerAdeptPlayEffect(final SilasRennSeekerAdeptPlayEffect effect) {
         super(effect);
     }
 

@@ -76,7 +76,7 @@ class SorinLordOfInnistradEffect extends OneShotEffect {
         this.staticText = "Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control";
     }
 
-    public SorinLordOfInnistradEffect(final SorinLordOfInnistradEffect effect) {
+    private SorinLordOfInnistradEffect(final SorinLordOfInnistradEffect effect) {
         super(effect);
     }
 

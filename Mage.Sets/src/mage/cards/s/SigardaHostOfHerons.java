@@ -53,7 +53,7 @@ class SigardaHostOfHeronsEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Spells and abilities your opponents control can't cause you to sacrifice permanents";
     }
 
-    public SigardaHostOfHeronsEffect(final SigardaHostOfHeronsEffect effect) {
+    private SigardaHostOfHeronsEffect(final SigardaHostOfHeronsEffect effect) {
         super(effect);
     }
 

@@ -81,7 +81,7 @@ class SpiritOfTheLabyrinthEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Each player can't draw more than one card each turn";
     }
 
-    public SpiritOfTheLabyrinthEffect(final SpiritOfTheLabyrinthEffect effect) {
+    private SpiritOfTheLabyrinthEffect(final SpiritOfTheLabyrinthEffect effect) {
         super(effect);
     }
 

@@ -25,7 +25,7 @@ public final class StomperCub extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public StomperCub (final StomperCub card) {
+    private StomperCub(final StomperCub card) {
         super(card);
     }
 

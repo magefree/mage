@@ -136,7 +136,7 @@ class ShrivelingRotEffect extends OneShotEffect {
         staticText = "that creature's controller loses life equal to its toughness";
     }
 
-    public ShrivelingRotEffect(final ShrivelingRotEffect effect) {
+    private ShrivelingRotEffect(final ShrivelingRotEffect effect) {
         super(effect);
     }
 

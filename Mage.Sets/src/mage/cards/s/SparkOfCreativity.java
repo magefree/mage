@@ -51,7 +51,7 @@ class SparkOfCreativityEffect extends OneShotEffect {
         this.staticText = "Choose target creature. Exile the top card of your library. You may have {this} deal damage to that creature equal to the exiled card's mana value. If you don't, you may play that card until end of turn";
     }
 
-    public SparkOfCreativityEffect(final SparkOfCreativityEffect effect) {
+    private SparkOfCreativityEffect(final SparkOfCreativityEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class SparkOfCreativityPlayEffect extends AsThoughEffectImpl {
         staticText = "you may play that card until end of turn";
     }
 
-    public SparkOfCreativityPlayEffect(final SparkOfCreativityPlayEffect effect) {
+    private SparkOfCreativityPlayEffect(final SparkOfCreativityPlayEffect effect) {
         super(effect);
         this.objectReference = effect.objectReference;
     }

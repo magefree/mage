@@ -47,7 +47,7 @@ class SereneRemembranceEffect extends OneShotEffect {
         this.staticText = "Shuffle {this} and up to three target cards from a single graveyard into their owners' libraries";
     }
 
-    public SereneRemembranceEffect(final SereneRemembranceEffect effect) {
+    private SereneRemembranceEffect(final SereneRemembranceEffect effect) {
         super(effect);
     }
 

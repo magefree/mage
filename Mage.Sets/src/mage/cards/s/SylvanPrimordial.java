@@ -89,7 +89,7 @@ class SylvanPrimordialEffect extends OneShotEffect {
         this.staticText = "for each opponent, destroy target noncreature permanent that player controls. For each permanent destroyed this way, search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle";
     }
 
-    public SylvanPrimordialEffect(final SylvanPrimordialEffect effect) {
+    private SylvanPrimordialEffect(final SylvanPrimordialEffect effect) {
         super(effect);
     }
 

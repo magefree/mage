@@ -64,7 +64,7 @@ class StitchersGraftTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepTargetEffect());
     }
 
-    public StitchersGraftTriggeredAbility(final StitchersGraftTriggeredAbility ability) {
+    private StitchersGraftTriggeredAbility(final StitchersGraftTriggeredAbility ability) {
         super(ability);
     }
 

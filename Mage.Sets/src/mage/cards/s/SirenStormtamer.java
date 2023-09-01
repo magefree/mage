@@ -71,7 +71,7 @@ class SirenStormtamerTargetObject extends TargetObject {
         this.targetName = "spell or ability that targets you or a creature you control";
     }
 
-    public SirenStormtamerTargetObject(final SirenStormtamerTargetObject target) {
+    private SirenStormtamerTargetObject(final SirenStormtamerTargetObject target) {
         super(target);
     }
 

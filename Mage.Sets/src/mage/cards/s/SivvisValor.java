@@ -69,7 +69,7 @@ class SivvisValorEffect extends ReplacementEffectImpl {
         staticText = "All damage that would be dealt to target creature this turn is dealt to you instead";
     }
 
-    public SivvisValorEffect(final SivvisValorEffect effect) {
+    private SivvisValorEffect(final SivvisValorEffect effect) {
         super(effect);
     }
 

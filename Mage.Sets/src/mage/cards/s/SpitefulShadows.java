@@ -54,7 +54,7 @@ class SpitefulShadowsEffect extends OneShotEffect {
         this.staticText = "it deals that much damage to its controller";
     }
 
-    public SpitefulShadowsEffect(final SpitefulShadowsEffect effect) {
+    private SpitefulShadowsEffect(final SpitefulShadowsEffect effect) {
         super(effect);
     }
 

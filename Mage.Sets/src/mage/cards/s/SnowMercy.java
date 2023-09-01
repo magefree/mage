@@ -64,7 +64,7 @@ class AddGlobeCountersAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.GLOBE.createInstance()));
     }
 
-    public AddGlobeCountersAbility(final AddGlobeCountersAbility ability) {
+    private AddGlobeCountersAbility(final AddGlobeCountersAbility ability) {
         super(ability);
     }
 

@@ -35,7 +35,7 @@ public class SithEternalLightning extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(4));
     }
 
-    public SithEternalLightning(final SithEternalLightning card) {
+    private SithEternalLightning(final SithEternalLightning card) {
         super(card);
     }
 
@@ -52,7 +52,7 @@ class SithEternalLightningEffect extends OneShotEffect {
         this.staticText = "Tap all creatures your opponents control. Those creatures don't untap during their controller's next untap step.";
     }
 
-    public SithEternalLightningEffect(final SithEternalLightningEffect effect) {
+    private SithEternalLightningEffect(final SithEternalLightningEffect effect) {
         super(effect);
     }
 

@@ -132,7 +132,7 @@ class SaheeliTheGiftedTokenEffect extends OneShotEffect {
                 + "Exile those tokens at the beginning of the next end step.";
     }
 
-    public SaheeliTheGiftedTokenEffect(final SaheeliTheGiftedTokenEffect effect) {
+    private SaheeliTheGiftedTokenEffect(final SaheeliTheGiftedTokenEffect effect) {
         super(effect);
     }
 
