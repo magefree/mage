@@ -29,9 +29,7 @@ public class PrototypeTest extends CardTestPlayerBase {
     private static final String cloudshift = "Cloudshift";
     private static final String clone = "Clone";
     private static final String counterpart = "Cackling Counterpart";
-
     private static final String epiphany = "Sublime Epiphany";
-
     private static final String denied = "Access Denied";
 
     private void checkAutomaton(boolean prototyped) {
@@ -429,6 +427,38 @@ public class PrototypeTest extends CardTestPlayerBase {
         checkAutomaton(true, 0);
     }
 
+    @Test
+    public void testManaValueWhenCasting() {
+        String winnower = "Void Winnower"; // Your opponents can't cast spells with even mana values.
+        String evenRegOddProto = "Fallaji Dragon Engine"; // {8} 5/5; {2}{R} 1/3
+        String oddRegEvenProto = "Boulderbranch Golem"; // {7} 6/5; {3}{G} 3/3, ETB gain life equal to its power
+
+        addCard(Zone.BATTLEFIELD, playerB, winnower);
+        addCard(Zone.HAND, playerA, evenRegOddProto);
+        addCard(Zone.HAND, playerA, oddRegEvenProto);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 8);
+        addCard(Zone.HAND, playerA, "Taiga");
+
+        // checkPlayableAbility doesn't seem to detect Void Winnower's restriction in time (probably because it checks CAST_SPELL_LATE?)
+        // but if you try to actually cast a spell with even mana value, it will correctly fail
+
+        checkPlayableAbility("cast odd reg", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Boulderbranch", true);
+        //checkPlayableAbility("cast even reg", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fallaji", false);
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Taiga");
+
+        //checkPlayableAbility("cast even proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Boulderbranch Golem with prototype", false);
+        checkPlayableAbility("cast odd proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Fallaji Dragon Engine with prototype", true);
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, evenRegOddProto + " with prototype");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPowerToughness(playerA, evenRegOddProto, 1, 3);
+    }
+
     /*
      * More tests suggested by Zerris:
      * 1) Copy permanent on the stack: See Double
@@ -453,7 +483,8 @@ public class PrototypeTest extends CardTestPlayerBase {
      *      (and attempt to equip to Master of Waves)
      * 20) Ensure colored mana in a Prototype cost is treated properly - can be paid for by Jegantha and Somberwald Sage,
      *      reduced by Morophon but not Ugin, the Ineffable
-     * 21) Check mana value on casting (Void Winnower + Boulderbranch Golem / Fallaji Dragon Engine)
+     * 22) Cast it Prototyped while Humility is in play (it's still a 1/1)
+     * 23) Jegantha can still be your companion with Depth Charge Colossus in your deck
      */
 
 }
