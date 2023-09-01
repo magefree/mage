@@ -23,7 +23,7 @@ public class DoubleCounterOnEachPermanentEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
         this.counterType = counterType;
         this.filter = filter.copy();
-        this.staticText = "double the number of +1/+1 counters on each " + filter.getMessage();
+        this.staticText = "double the number of " + counterType.getName() + " counters on each " + filter.getMessage();
     }
 
     private DoubleCounterOnEachPermanentEffect(final DoubleCounterOnEachPermanentEffect effect) {
