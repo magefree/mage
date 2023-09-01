@@ -63,7 +63,7 @@ class NayaSoulbeastCastEffect extends OneShotEffect {
         this.staticText = "each player reveals the top card of their library";
     }
 
-    public NayaSoulbeastCastEffect(final NayaSoulbeastCastEffect effect) {
+    private NayaSoulbeastCastEffect(final NayaSoulbeastCastEffect effect) {
         super(effect);
     }
 
@@ -106,7 +106,7 @@ class NayaSoulbeastReplacementEffect extends ReplacementEffectImpl {
         staticText = "{this} enters the battlefield with X +1/+1 counters on it, where X is the total mana value of all cards revealed this way";
     }
 
-    public NayaSoulbeastReplacementEffect(final NayaSoulbeastReplacementEffect effect) {
+    private NayaSoulbeastReplacementEffect(final NayaSoulbeastReplacementEffect effect) {
         super(effect);
     }
 

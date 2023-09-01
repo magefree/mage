@@ -58,7 +58,7 @@ class OgreMarauderEffect extends OneShotEffect {
         this.staticText = "it gains \"{this} can't be blocked\" until end of turn unless defending player sacrifices a creature";
     }
 
-    public OgreMarauderEffect(final OgreMarauderEffect effect) {
+    private OgreMarauderEffect(final OgreMarauderEffect effect) {
         super(effect);
     }
 

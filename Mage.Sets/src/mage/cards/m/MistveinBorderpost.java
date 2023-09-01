@@ -48,7 +48,7 @@ public final class MistveinBorderpost extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public MistveinBorderpost (final MistveinBorderpost card) {
+    private MistveinBorderpost(final MistveinBorderpost card) {
         super(card);
     }
 

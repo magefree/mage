@@ -73,7 +73,7 @@ class MeasureOfWickednessControlSourceEffect extends ContinuousEffectImpl {
         staticText = "target opponent gains control of {this}";
     }
 
-    public MeasureOfWickednessControlSourceEffect(final MeasureOfWickednessControlSourceEffect effect) {
+    private MeasureOfWickednessControlSourceEffect(final MeasureOfWickednessControlSourceEffect effect) {
         super(effect);
     }
 

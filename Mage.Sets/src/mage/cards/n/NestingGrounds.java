@@ -74,7 +74,7 @@ class NestingGroundsEffect extends OneShotEffect {
         this.staticText = "Move a counter from target permanent you control onto another target permanent";
     }
 
-    public NestingGroundsEffect(final NestingGroundsEffect effect) {
+    private NestingGroundsEffect(final NestingGroundsEffect effect) {
         super(effect);
     }
 

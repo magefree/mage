@@ -58,7 +58,7 @@ class MetalworkerManaEffect extends ManaEffect {
         staticText = "Reveal any number of artifact cards in your hand. Add {C}{C} for each card revealed this way";
     }
 
-    public MetalworkerManaEffect(final MetalworkerManaEffect effect) {
+    private MetalworkerManaEffect(final MetalworkerManaEffect effect) {
         super(effect);
     }
 

@@ -66,7 +66,7 @@ class MythRealizedToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
     }
-    public MythRealizedToken(final MythRealizedToken token) {
+    private MythRealizedToken(final MythRealizedToken token) {
         super(token);
     }
 

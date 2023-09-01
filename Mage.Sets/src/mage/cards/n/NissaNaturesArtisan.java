@@ -65,7 +65,7 @@ class NissaNaturesArtisanEffect extends OneShotEffect {
                 + "from among them onto the battlefield and the rest into your hand";
     }
 
-    public NissaNaturesArtisanEffect(final NissaNaturesArtisanEffect effect) {
+    private NissaNaturesArtisanEffect(final NissaNaturesArtisanEffect effect) {
         super(effect);
     }
 

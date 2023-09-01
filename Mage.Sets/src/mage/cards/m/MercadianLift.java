@@ -61,7 +61,7 @@ class MercadianLiftEffect extends OneShotEffect {
         staticText = "You may put a creature card with mana value X from your hand onto the battlefield";
     }
 
-    public MercadianLiftEffect(final MercadianLiftEffect effect) {
+    private MercadianLiftEffect(final MercadianLiftEffect effect) {
         super(effect);
     }
 

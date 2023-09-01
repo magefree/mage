@@ -68,7 +68,7 @@ class ManaforgeCinderManaEffect extends ManaEffect {
         this.staticText = "Add {B} or {R}";
     }
 
-    public ManaforgeCinderManaEffect(final ManaforgeCinderManaEffect effect) {
+    private ManaforgeCinderManaEffect(final ManaforgeCinderManaEffect effect) {
         super(effect);
     }
 

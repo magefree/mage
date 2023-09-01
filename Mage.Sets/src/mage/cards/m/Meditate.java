@@ -44,7 +44,7 @@ class SpipTurnEffect extends OneShotEffect {
         staticText = "You skip your next turn";
     }
 
-    public SpipTurnEffect(final SpipTurnEffect effect) {
+    private SpipTurnEffect(final SpipTurnEffect effect) {
         super(effect);
     }
 

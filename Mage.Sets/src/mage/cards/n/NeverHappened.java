@@ -50,7 +50,7 @@ class NeverHappenedEffect extends OneShotEffect {
                 + "or hand and exile it.";
     }
 
-    public NeverHappenedEffect(final NeverHappenedEffect effect) {
+    private NeverHappenedEffect(final NeverHappenedEffect effect) {
         super(effect);
     }
 

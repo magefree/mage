@@ -45,7 +45,7 @@ class MiseEffect extends OneShotEffect {
         staticText = "then reveal the top card of your library. If that card has the chosen name, you draw three cards";
     }
 
-    public MiseEffect(final MiseEffect effect) {
+    private MiseEffect(final MiseEffect effect) {
         super(effect);
     }
 

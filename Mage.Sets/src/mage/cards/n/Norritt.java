@@ -90,7 +90,7 @@ class NorrittDelayedDestroyEffect extends OneShotEffect {
         this.staticText = "If it doesn't, destroy it at the beginning of the next end step";
     }
 
-    public NorrittDelayedDestroyEffect(final NorrittDelayedDestroyEffect effect) {
+    private NorrittDelayedDestroyEffect(final NorrittDelayedDestroyEffect effect) {
         super(effect);
     }
 

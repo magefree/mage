@@ -95,7 +95,7 @@ class OathOfTeferiLoyaltyEffect extends ContinuousEffectImpl {
         staticText = "You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once";
     }
 
-    public OathOfTeferiLoyaltyEffect(final OathOfTeferiLoyaltyEffect effect) {
+    private OathOfTeferiLoyaltyEffect(final OathOfTeferiLoyaltyEffect effect) {
         super(effect);
     }
 

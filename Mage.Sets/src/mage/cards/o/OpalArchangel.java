@@ -58,7 +58,7 @@ class OpalArchangelToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(VigilanceAbility.getInstance());
     }
-    public OpalArchangelToken(final OpalArchangelToken token) {
+    private OpalArchangelToken(final OpalArchangelToken token) {
         super(token);
     }
 

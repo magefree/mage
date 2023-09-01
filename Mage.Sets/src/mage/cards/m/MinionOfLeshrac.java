@@ -64,7 +64,7 @@ class MinionLeshracEffect extends OneShotEffect {
         staticText = "{this} deals 5 damage to you unless you sacrifice a creature other than {this}. If {this} deals damage to you this way, tap it";
     }
 
-    public MinionLeshracEffect(final MinionLeshracEffect effect) {
+    private MinionLeshracEffect(final MinionLeshracEffect effect) {
         super(effect);
     }
 

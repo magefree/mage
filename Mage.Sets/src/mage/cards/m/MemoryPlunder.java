@@ -57,7 +57,7 @@ class MemoryPlunderEffect extends OneShotEffect {
                 + "an opponent's graveyard without paying its mana cost";
     }
 
-    public MemoryPlunderEffect(final MemoryPlunderEffect effect) {
+    private MemoryPlunderEffect(final MemoryPlunderEffect effect) {
         super(effect);
     }
 

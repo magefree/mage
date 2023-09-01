@@ -60,7 +60,7 @@ class NantukoMentorEffect extends OneShotEffect {
         this.staticText = "Target creature gets +X/+X until end of turn, where X is that creature's power";
     }
 
-    public NantukoMentorEffect(final NantukoMentorEffect effect) {
+    private NantukoMentorEffect(final NantukoMentorEffect effect) {
         super(effect);
     }
 

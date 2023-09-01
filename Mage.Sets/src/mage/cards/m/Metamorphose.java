@@ -70,7 +70,7 @@ class MetamorphoseEffect extends OneShotEffect {
         this.staticText = "That opponent may put an artifact, creature, enchantment, or land card from their hand onto the battlefield.";
     }
 
-    public MetamorphoseEffect (final MetamorphoseEffect effect) { super(effect); }
+    private MetamorphoseEffect(final MetamorphoseEffect effect) { super(effect); }
 
     @Override
     public boolean apply(Game game, Ability source) {

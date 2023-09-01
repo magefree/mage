@@ -53,7 +53,7 @@ class MantellianSavripRestrictionEffect extends RestrictionEffect {
         staticText = "Creatures with power less than {this}'s power can't block it";
     }
 
-    public MantellianSavripRestrictionEffect(final MantellianSavripRestrictionEffect effect) {
+    private MantellianSavripRestrictionEffect(final MantellianSavripRestrictionEffect effect) {
         super(effect);
     }
 

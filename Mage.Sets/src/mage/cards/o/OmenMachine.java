@@ -53,7 +53,7 @@ class OmenMachineEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can't draw cards";
     }
 
-    public OmenMachineEffect(final OmenMachineEffect effect) {
+    private OmenMachineEffect(final OmenMachineEffect effect) {
         super(effect);
     }
 
@@ -86,7 +86,7 @@ class OmenMachineEffect2 extends OneShotEffect {
         staticText = "that player exiles the top card of their library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able";
     }
 
-    public OmenMachineEffect2(final OmenMachineEffect2 effect) {
+    private OmenMachineEffect2(final OmenMachineEffect2 effect) {
         super(effect);
     }
 

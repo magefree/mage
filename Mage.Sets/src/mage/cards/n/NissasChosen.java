@@ -55,7 +55,7 @@ class NissasChosenEffect extends ReplacementEffectImpl {
         staticText = "If {this} would die, put it on the bottom of its owner's library instead";
     }
 
-    public NissasChosenEffect(final NissasChosenEffect effect) {
+    private NissasChosenEffect(final NissasChosenEffect effect) {
         super(effect);
     }
 

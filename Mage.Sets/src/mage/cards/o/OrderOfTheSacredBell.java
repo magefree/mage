@@ -24,7 +24,7 @@ public final class OrderOfTheSacredBell extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public OrderOfTheSacredBell (final OrderOfTheSacredBell card) {
+    private OrderOfTheSacredBell(final OrderOfTheSacredBell card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ class MurderOfCrowsEffect extends OneShotEffect {
         this.staticText = "you may draw a card. If you do, discard a card";
     }
 
-    public MurderOfCrowsEffect(final MurderOfCrowsEffect effect) {
+    private MurderOfCrowsEffect(final MurderOfCrowsEffect effect) {
         super(effect);
     }
 
