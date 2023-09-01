@@ -450,7 +450,7 @@ public final class TheLordOfTheRingsTalesOfMiddleEarth extends ExpansionSet {
         cards.add(new SetCardInfo("The Grey Havens", 255, Rarity.UNCOMMON, mage.cards.t.TheGreyHavens.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Grey Havens", 443, Rarity.UNCOMMON, mage.cards.t.TheGreyHavens.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Mouth of Sauron", 216, Rarity.UNCOMMON, mage.cards.t.TheMouthOfSauron.class));
-        cards.add(new SetCardInfo("The One Ring", 0, Rarity.MYTHIC, mage.cards.t.TheOneRing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The One Ring", "001", Rarity.MYTHIC, mage.cards.t.TheOneRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The One Ring", 246, Rarity.MYTHIC, mage.cards.t.TheOneRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The One Ring", 380, Rarity.MYTHIC, mage.cards.t.TheOneRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The One Ring", 451, Rarity.MYTHIC, mage.cards.t.TheOneRing.class, NON_FULL_USE_VARIOUS));
