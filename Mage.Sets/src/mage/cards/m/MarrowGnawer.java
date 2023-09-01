@@ -50,7 +50,7 @@ public final class MarrowGnawer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MarrowGnawer (final MarrowGnawer card) {
+    private MarrowGnawer(final MarrowGnawer card) {
         super(card);
     }
 

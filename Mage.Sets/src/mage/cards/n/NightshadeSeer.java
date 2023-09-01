@@ -68,7 +68,7 @@ class NightshadeSeerEffect extends OneShotEffect {
                 + "where X is the number of cards revealed this way";
     }
 
-    public NightshadeSeerEffect(final NightshadeSeerEffect effect) {
+    private NightshadeSeerEffect(final NightshadeSeerEffect effect) {
         super(effect);
     }
 

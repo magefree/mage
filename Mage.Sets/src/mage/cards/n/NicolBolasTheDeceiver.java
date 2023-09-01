@@ -66,7 +66,7 @@ class NicolBolasTheDeceiverFirstEffect extends OneShotEffect {
         staticText = "Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card";
     }
 
-    public NicolBolasTheDeceiverFirstEffect(final NicolBolasTheDeceiverFirstEffect effect) {
+    private NicolBolasTheDeceiverFirstEffect(final NicolBolasTheDeceiverFirstEffect effect) {
         super(effect);
     }
 

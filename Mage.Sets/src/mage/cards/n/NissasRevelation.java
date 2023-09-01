@@ -48,7 +48,7 @@ class NissasRevelationEffect extends OneShotEffect {
         this.staticText = ", then reveal the top card of your library. If it's a creature card, you draw cards equal to its power and you gain life equal to its toughness";
     }
 
-    public NissasRevelationEffect(final NissasRevelationEffect effect) {
+    private NissasRevelationEffect(final NissasRevelationEffect effect) {
         super(effect);
     }
 

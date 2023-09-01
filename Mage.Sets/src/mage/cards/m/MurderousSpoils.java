@@ -51,7 +51,7 @@ class MurderousSpoilsEffect extends OneShotEffect {
         staticText = "Destroy target nonblack creature. It can't be regenerated. You gain control of all Equipment that were attached to it.";
     }
 
-    public MurderousSpoilsEffect(final MurderousSpoilsEffect effect) {
+    private MurderousSpoilsEffect(final MurderousSpoilsEffect effect) {
         super(effect);
     }
 

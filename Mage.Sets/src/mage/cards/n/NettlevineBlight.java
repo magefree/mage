@@ -64,7 +64,7 @@ class NettlevineBlightEffect extends OneShotEffect {
         this.staticText = "sacrifice this permanent and attach {this} to a creature or land you control";
     }
 
-    public NettlevineBlightEffect(final NettlevineBlightEffect effect) {
+    private NettlevineBlightEffect(final NettlevineBlightEffect effect) {
         super(effect);
     }
 

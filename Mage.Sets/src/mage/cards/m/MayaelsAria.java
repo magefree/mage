@@ -52,7 +52,7 @@ class MayaelsAriaEffect extends OneShotEffect {
         this.staticText = "put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater. Then you gain 10 life if you control a creature with power 10 or greater. Then you win the game if you control a creature with power 20 or greater";
     }
 
-    public MayaelsAriaEffect(final MayaelsAriaEffect effect) {
+    private MayaelsAriaEffect(final MayaelsAriaEffect effect) {
         super(effect);
     }
 

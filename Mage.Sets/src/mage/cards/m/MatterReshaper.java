@@ -55,7 +55,7 @@ class MatterReshaperEffect extends OneShotEffect {
                 + " with mana value 3 or less. Otherwise, put that card into your hand";
     }
 
-    public MatterReshaperEffect(final MatterReshaperEffect effect) {
+    private MatterReshaperEffect(final MatterReshaperEffect effect) {
         super(effect);
     }
 

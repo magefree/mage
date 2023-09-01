@@ -78,7 +78,7 @@ class MaintenanceDroidEffect extends OneShotEffect {
         staticText = "Choose target card you own with a repair counter on it. You may remove a repair counter from it or put another repair counter on it";
     }
 
-    public MaintenanceDroidEffect(final MaintenanceDroidEffect effect) {
+    private MaintenanceDroidEffect(final MaintenanceDroidEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class NyleasPresenceLandTypeEffect extends ContinuousEffectImpl {
         dependencyTypes.add(DependencyType.BecomeForest);
     }
 
-    public NyleasPresenceLandTypeEffect(final NyleasPresenceLandTypeEffect effect) {
+    private NyleasPresenceLandTypeEffect(final NyleasPresenceLandTypeEffect effect) {
         super(effect);
     }
 

@@ -65,7 +65,7 @@ class MuseVesselExileEffect extends OneShotEffect {
         staticText = "target player exiles a card from their hand";
     }
 
-    public MuseVesselExileEffect(final MuseVesselExileEffect effect) {
+    private MuseVesselExileEffect(final MuseVesselExileEffect effect) {
         super(effect);
     }
 
@@ -102,7 +102,7 @@ class MuseVesselMayPlayExiledEffect extends AsThoughEffectImpl {
         this.staticText = "Choose a card exiled with {this}. You may play that card this turn";
     }
 
-    public MuseVesselMayPlayExiledEffect(final MuseVesselMayPlayExiledEffect effect) {
+    private MuseVesselMayPlayExiledEffect(final MuseVesselMayPlayExiledEffect effect) {
         super(effect);
     }
 
@@ -130,7 +130,7 @@ class TargetCardInMuseVesselExile extends TargetCardInExile {
         super(1, 1, new FilterCard("card exiled with Muse Vessel"), null);
     }
 
-    public TargetCardInMuseVesselExile(final TargetCardInMuseVesselExile target) {
+    private TargetCardInMuseVesselExile(final TargetCardInMuseVesselExile target) {
         super(target);
     }
 

@@ -48,7 +48,7 @@ class MossdogAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
     }
 
-    public MossdogAbility(final MossdogAbility ability) {
+    private MossdogAbility(final MossdogAbility ability) {
         super(ability);
     }
 

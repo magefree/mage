@@ -59,7 +59,7 @@ class MissDemeanorEffect extends OneShotEffect {
         this.staticText = "you may compliment that player on their game play. If you don't, sacrifice {this}";
     }
 
-    public MissDemeanorEffect(final MissDemeanorEffect effect) {
+    private MissDemeanorEffect(final MissDemeanorEffect effect) {
         super(effect);
     }
 

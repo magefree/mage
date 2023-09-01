@@ -70,7 +70,7 @@ class NacatlWarPrideEffect extends OneShotEffect {
         this.staticText = "create X tokens that are copies of {this} tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step";
     }
 
-    public NacatlWarPrideEffect(final NacatlWarPrideEffect effect) {
+    private NacatlWarPrideEffect(final NacatlWarPrideEffect effect) {
         super(effect);
     }
 

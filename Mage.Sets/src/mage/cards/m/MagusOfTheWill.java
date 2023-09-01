@@ -71,7 +71,7 @@ class CanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
         staticText = "Until end of turn, you may play cards from your graveyard";
     }
 
-    public CanPlayCardsFromGraveyardEffect(final CanPlayCardsFromGraveyardEffect effect) {
+    private CanPlayCardsFromGraveyardEffect(final CanPlayCardsFromGraveyardEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class MagusOfTheWillReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "If a card would be put into your graveyard from anywhere else this turn, exile that card instead";
     }
 
-    public MagusOfTheWillReplacementEffect(final MagusOfTheWillReplacementEffect effect) {
+    private MagusOfTheWillReplacementEffect(final MagusOfTheWillReplacementEffect effect) {
         super(effect);
     }
 

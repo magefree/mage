@@ -52,7 +52,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl {
         dependendToTypes.add(DependencyType.ArtifactAddingRemoving);
     }
 
-    public MarchOfTheMachinesEffect(final MarchOfTheMachinesEffect effect) {
+    private MarchOfTheMachinesEffect(final MarchOfTheMachinesEffect effect) {
         super(effect);
     }
 

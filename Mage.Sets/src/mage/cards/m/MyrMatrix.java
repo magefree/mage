@@ -38,7 +38,7 @@ public final class MyrMatrix extends CardImpl {
 
     }
 
-    public MyrMatrix (final MyrMatrix card) {
+    private MyrMatrix(final MyrMatrix card) {
         super(card);
     }
 

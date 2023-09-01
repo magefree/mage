@@ -57,7 +57,7 @@ class OonaQueenOfTheFaeEffect extends OneShotEffect {
         this.staticText = "Choose a color. Target opponent exiles the top X cards of their library. For each card of the chosen color exiled this way, create a 1/1 blue and black Faerie Rogue creature token with flying";
     }
 
-    public OonaQueenOfTheFaeEffect(final OonaQueenOfTheFaeEffect effect) {
+    private OonaQueenOfTheFaeEffect(final OonaQueenOfTheFaeEffect effect) {
         super(effect);
     }
 

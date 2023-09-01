@@ -69,7 +69,7 @@ class MindWhipEffect extends OneShotEffect {
         staticText = "";
     }
 
-    public MindWhipEffect(final MindWhipEffect effect) {
+    private MindWhipEffect(final MindWhipEffect effect) {
         super(effect);
     }
 

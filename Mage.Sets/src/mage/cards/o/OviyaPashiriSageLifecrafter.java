@@ -60,7 +60,7 @@ class OviyaPashiriSageLifecrafterEffect extends OneShotEffect {
         this.staticText = "Create an X/X colorless Construct artifact creature token, where X is the number of creatures you control";
     }
 
-    public OviyaPashiriSageLifecrafterEffect(final OviyaPashiriSageLifecrafterEffect effect) {
+    private OviyaPashiriSageLifecrafterEffect(final OviyaPashiriSageLifecrafterEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class OgreGeargrabberEffect1 extends OneShotEffect {
         staticText = "Attach it to {this}. When you lose control of that Equipment, unattach it.";
     }
 
-    public OgreGeargrabberEffect1(final OgreGeargrabberEffect1 effect) {
+    private OgreGeargrabberEffect1(final OgreGeargrabberEffect1 effect) {
         super(effect);
     }
 
@@ -132,7 +132,7 @@ class OgreGeargrabberEffect2 extends OneShotEffect {
         staticText = "When you lose control of that Equipment, unattach it.";
     }
 
-    public OgreGeargrabberEffect2(final OgreGeargrabberEffect2 effect) {
+    private OgreGeargrabberEffect2(final OgreGeargrabberEffect2 effect) {
         super(effect);
         this.equipmentId = effect.equipmentId;
     }

@@ -63,7 +63,7 @@ class NeedleSpiresToken extends TokenImpl {
         toughness = new MageInt(1);
         addAbility(DoubleStrikeAbility.getInstance());
     }
-    public NeedleSpiresToken(final NeedleSpiresToken token) {
+    private NeedleSpiresToken(final NeedleSpiresToken token) {
         super(token);
     }
 

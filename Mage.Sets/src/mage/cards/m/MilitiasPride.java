@@ -48,7 +48,7 @@ class MilitiasPrideTriggerAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new KithkinSoldierToken(), 1, true, true), new ManaCostsImpl<>("{W}")));
     }
 
-    public MilitiasPrideTriggerAbility(final MilitiasPrideTriggerAbility ability) {
+    private MilitiasPrideTriggerAbility(final MilitiasPrideTriggerAbility ability) {
         super(ability);
     }
 

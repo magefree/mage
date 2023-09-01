@@ -56,7 +56,7 @@ class OreskosExplorerEffect extends OneShotEffect {
         this.staticText = "search your library for up to X Plains cards, where X is the number of players who control more lands than you. Reveal those cards, put them into your hand, then shuffle";
     }
 
-    public OreskosExplorerEffect(final OreskosExplorerEffect effect) {
+    private OreskosExplorerEffect(final OreskosExplorerEffect effect) {
         super(effect);
     }
 

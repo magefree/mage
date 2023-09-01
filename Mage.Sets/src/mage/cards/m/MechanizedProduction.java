@@ -64,7 +64,7 @@ class MechanizedProductionEffect extends OneShotEffect {
         this.staticText = "create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game";
     }
 
-    public MechanizedProductionEffect(final MechanizedProductionEffect effect) {
+    private MechanizedProductionEffect(final MechanizedProductionEffect effect) {
         super(effect);
     }
 

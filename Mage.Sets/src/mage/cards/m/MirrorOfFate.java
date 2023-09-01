@@ -55,7 +55,7 @@ class MirrorOfFateEffect extends OneShotEffect {
         this.staticText = "Choose up to seven face-up exiled cards you own. Exile all the cards from your library, then put the chosen cards on top of your library";
     }
 
-    public MirrorOfFateEffect(final MirrorOfFateEffect effect) {
+    private MirrorOfFateEffect(final MirrorOfFateEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class MirrorOfFateTarget extends TargetCardInExile {
         this.targetName = "face-up exiled cards you own";
     }
 
-    public MirrorOfFateTarget(final MirrorOfFateTarget target) {
+    private MirrorOfFateTarget(final MirrorOfFateTarget target) {
         super(target);
     }
 

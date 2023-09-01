@@ -54,7 +54,7 @@ class NightmareIncursionEffect extends OneShotEffect {
                 "Then that player shuffles";
     }
 
-    public NightmareIncursionEffect(final NightmareIncursionEffect effect) {
+    private NightmareIncursionEffect(final NightmareIncursionEffect effect) {
         super(effect);
     }
 

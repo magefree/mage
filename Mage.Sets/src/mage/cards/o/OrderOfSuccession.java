@@ -54,7 +54,7 @@ class OrderOfSuccessionEffect extends OneShotEffect {
         this.staticText = "Starting with you and proceeding in the chosen direction, each player chooses a creature controlled by the next player in that direction. Each player gains control of the creature they chose";
     }
 
-    public OrderOfSuccessionEffect(final OrderOfSuccessionEffect effect) {
+    private OrderOfSuccessionEffect(final OrderOfSuccessionEffect effect) {
         super(effect);
     }
 

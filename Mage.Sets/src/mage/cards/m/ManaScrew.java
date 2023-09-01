@@ -46,7 +46,7 @@ class ManaScrewAbility extends ActivatedManaAbilityImpl {
         }
     }
 
-    public ManaScrewAbility(final ManaScrewAbility ability) {
+    private ManaScrewAbility(final ManaScrewAbility ability) {
         super(ability);
     }
 
@@ -77,7 +77,7 @@ class ManaScrewEffect extends ManaEffect {
         this.staticText = "Flip a coin. If you win the flip, add {C}{C}";
     }
 
-    public ManaScrewEffect(final ManaScrewEffect effect) {
+    private ManaScrewEffect(final ManaScrewEffect effect) {
         super(effect);
     }
 

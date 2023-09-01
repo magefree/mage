@@ -98,7 +98,7 @@ class MaddeningImpCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         this.staticText = "At the beginning of the next end step, destroy each of those creatures that didn't attack this turn";
     }
 
-    public MaddeningImpCreateDelayedTriggeredAbilityEffect(final MaddeningImpCreateDelayedTriggeredAbilityEffect effect) {
+    private MaddeningImpCreateDelayedTriggeredAbilityEffect(final MaddeningImpCreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
     }
 
