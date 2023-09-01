@@ -63,7 +63,7 @@ class LaquatussChampionEntersBattlefieldTriggeredAbility extends EntersBattlefie
         super(effect, false);
     }
 
-    public LaquatussChampionEntersBattlefieldTriggeredAbility(final LaquatussChampionEntersBattlefieldTriggeredAbility ability) {
+    private LaquatussChampionEntersBattlefieldTriggeredAbility(final LaquatussChampionEntersBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 
@@ -92,7 +92,7 @@ class LaquatussChampionLeavesBattlefieldTriggeredAbility extends LeavesBattlefie
         super(new GainLifeTargetEffect(6), false);
     }
 
-    public LaquatussChampionLeavesBattlefieldTriggeredAbility(LaquatussChampionLeavesBattlefieldTriggeredAbility ability) {
+    private LaquatussChampionLeavesBattlefieldTriggeredAbility(final LaquatussChampionLeavesBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 

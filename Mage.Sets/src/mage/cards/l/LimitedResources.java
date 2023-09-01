@@ -62,7 +62,7 @@ class LimitedResourcesEffect extends OneShotEffect {
         this.staticText = "each player chooses five lands they control and sacrifices the rest";
     }
 
-    public LimitedResourcesEffect(final LimitedResourcesEffect effect) {
+    private LimitedResourcesEffect(final LimitedResourcesEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class CantPlayLandEffect extends ContinuousRuleModifyingEffectImpl {
         this.staticText = "Players can't play lands as long as ten or more lands are on the battlefield";
     }
 
-    public CantPlayLandEffect(final CantPlayLandEffect effect) {
+    private CantPlayLandEffect(final CantPlayLandEffect effect) {
         super(effect);
     }
 

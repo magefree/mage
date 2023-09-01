@@ -48,7 +48,7 @@ class LatNamsLegacyEffect extends OneShotEffect {
         staticText = "Shuffle a card from your hand into your library. If you do, draw two cards at the beginning of the next turn's upkeep";
     }
 
-    public LatNamsLegacyEffect(LatNamsLegacyEffect effect) {
+    private LatNamsLegacyEffect(final LatNamsLegacyEffect effect) {
         super(effect);
     }
 

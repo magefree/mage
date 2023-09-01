@@ -79,7 +79,7 @@ class LichsMasteryCantLoseEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "You can't lose the game";
     }
 
-    public LichsMasteryCantLoseEffect(final LichsMasteryCantLoseEffect effect) {
+    private LichsMasteryCantLoseEffect(final LichsMasteryCantLoseEffect effect) {
         super(effect);
     }
 
@@ -106,7 +106,7 @@ class LichsMasteryDrawCardsEffect extends OneShotEffect {
         this.staticText = "draw that many cards";
     }
 
-    public LichsMasteryDrawCardsEffect(final LichsMasteryDrawCardsEffect effect) {
+    private LichsMasteryDrawCardsEffect(final LichsMasteryDrawCardsEffect effect) {
         super(effect);
     }
 
@@ -131,7 +131,7 @@ class LichsMasteryLoseLifeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LichsMasteryLoseLifeEffect(), false);
     }
 
-    public LichsMasteryLoseLifeTriggeredAbility(final LichsMasteryLoseLifeTriggeredAbility ability) {
+    private LichsMasteryLoseLifeTriggeredAbility(final LichsMasteryLoseLifeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -173,7 +173,7 @@ class LichsMasteryLoseLifeEffect extends OneShotEffect {
         this.staticText = "for each 1 life you lost, exile a permanent you control or a card from your hand or graveyard.";
     }
 
-    public LichsMasteryLoseLifeEffect(final LichsMasteryLoseLifeEffect effect) {
+    private LichsMasteryLoseLifeEffect(final LichsMasteryLoseLifeEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

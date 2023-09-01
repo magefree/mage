@@ -59,7 +59,7 @@ class LeoninArbiterSpecialAction extends SpecialAction {
         this.setMayActivate(TargetController.ANY);
     }
 
-    public LeoninArbiterSpecialAction(final LeoninArbiterSpecialAction ability) {
+    private LeoninArbiterSpecialAction(final LeoninArbiterSpecialAction ability) {
         super(ability);
     }
 
@@ -79,7 +79,7 @@ class LeoninArbiterIgnoreEffect extends OneShotEffect {
         this.staticText = "Any player may pay {2} for that player to ignore this effect until end of turn";
     }
 
-    public LeoninArbiterIgnoreEffect(final LeoninArbiterIgnoreEffect effect) {
+    private LeoninArbiterIgnoreEffect(final LeoninArbiterIgnoreEffect effect) {
         super(effect);
         this.keyString = effect.keyString;
     }
@@ -120,7 +120,7 @@ class LeoninArbiterCantSearchEffect extends ContinuousRuleModifyingEffectImpl {
         this.keyString = keyString;
     }
 
-    public LeoninArbiterCantSearchEffect(LeoninArbiterCantSearchEffect effect) {
+    private LeoninArbiterCantSearchEffect(final LeoninArbiterCantSearchEffect effect) {
         super(effect);
         this.keyString = effect.keyString;
     }

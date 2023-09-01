@@ -96,7 +96,7 @@ class LurkingEvilToken extends TokenImpl {
         cardType.add(CardType.CREATURE);
         this.addAbility(FlyingAbility.getInstance());
     }
-    public LurkingEvilToken(final LurkingEvilToken token) {
+    private LurkingEvilToken(final LurkingEvilToken token) {
         super(token);
     }
 

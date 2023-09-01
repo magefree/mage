@@ -60,7 +60,7 @@ class KarnsSylexEffect extends ContinuousEffectImpl {
         staticText = "Players can't pay life to cast spells or to activate abilities that aren't mana abilities";
     }
 
-    public KarnsSylexEffect(final KarnsSylexEffect effect) {
+    private KarnsSylexEffect(final KarnsSylexEffect effect) {
         super(effect);
     }
 

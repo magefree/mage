@@ -71,7 +71,7 @@ class LordOfShatterskullPassEffect extends OneShotEffect {
         this.staticText = "it deals 6 damage to each creature defending player controls";
     }
 
-    public LordOfShatterskullPassEffect(final LordOfShatterskullPassEffect effect) {
+    private LordOfShatterskullPassEffect(final LordOfShatterskullPassEffect effect) {
         super(effect);
     }
 

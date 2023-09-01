@@ -68,7 +68,7 @@ class LilianaTheNecromancerEffect extends OneShotEffect {
         this.staticText = "Put up to two creature cards from graveyards onto the battlefield under your control";
     }
 
-    public LilianaTheNecromancerEffect(final LilianaTheNecromancerEffect effect) {
+    private LilianaTheNecromancerEffect(final LilianaTheNecromancerEffect effect) {
         super(effect);
     }
 

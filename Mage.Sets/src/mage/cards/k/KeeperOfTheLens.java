@@ -62,7 +62,7 @@ class KeeperOfTheLensLookFaceDownAbility extends ActivatedAbilityImpl {
         this.addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public KeeperOfTheLensLookFaceDownAbility(KeeperOfTheLensLookFaceDownAbility ability) {
+    private KeeperOfTheLensLookFaceDownAbility(final KeeperOfTheLensLookFaceDownAbility ability) {
         super(ability);
     }
 
@@ -80,7 +80,7 @@ class KeeperOfTheLensLookFaceDownEffect extends OneShotEffect {
         this.staticText = "You may look at face-down creatures you don't control any time";
     }
 
-    public KeeperOfTheLensLookFaceDownEffect(final KeeperOfTheLensLookFaceDownEffect effect) {
+    private KeeperOfTheLensLookFaceDownEffect(final KeeperOfTheLensLookFaceDownEffect effect) {
         super(effect);
     }
 

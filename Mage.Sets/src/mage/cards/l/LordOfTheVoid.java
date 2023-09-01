@@ -57,7 +57,7 @@ class LordOfTheVoidEffect extends OneShotEffect {
         this.staticText = "exile the top seven cards of that player's library, then put a creature card from among them onto the battlefield under your control";
     }
 
-    public LordOfTheVoidEffect(final LordOfTheVoidEffect effect) {
+    private LordOfTheVoidEffect(final LordOfTheVoidEffect effect) {
         super(effect);
     }
 

@@ -76,7 +76,7 @@ class LazotepConvertCopyEffect extends OneShotEffect {
                 "except it's a 4/4 black Zombie in addition to its other types";
     }
 
-    public LazotepConvertCopyEffect(final LazotepConvertCopyEffect effect) {
+    private LazotepConvertCopyEffect(final LazotepConvertCopyEffect effect) {
         super(effect);
     }
 

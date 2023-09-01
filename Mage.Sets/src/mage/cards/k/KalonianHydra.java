@@ -62,7 +62,7 @@ class KalonianHydraEffect extends OneShotEffect {
         this.staticText = "double the number of +1/+1 counters on each creature you control";
     }
 
-    public KalonianHydraEffect(final KalonianHydraEffect effect) {
+    private KalonianHydraEffect(final KalonianHydraEffect effect) {
         super(effect);
     }
 

@@ -48,7 +48,7 @@ class LifesLegacyEffect extends OneShotEffect {
         staticText = "Draw cards equal to the sacrificed creature's power";
     }
 
-    public LifesLegacyEffect(final LifesLegacyEffect effect) {
+    private LifesLegacyEffect(final LifesLegacyEffect effect) {
         super(effect);
     }
 

@@ -30,7 +30,7 @@ public final class JoyousRespite extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public JoyousRespite (final JoyousRespite card) {
+    private JoyousRespite(final JoyousRespite card) {
         super(card);
     }
 

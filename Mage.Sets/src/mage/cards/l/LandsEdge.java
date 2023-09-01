@@ -57,7 +57,7 @@ class LandsEdgeEffect extends OneShotEffect {
         staticText = "If the discarded card was a land card, {this} deals 2 damage to target player";
     }
 
-    public LandsEdgeEffect(final LandsEdgeEffect effect) {
+    private LandsEdgeEffect(final LandsEdgeEffect effect) {
         super(effect);
     }
 

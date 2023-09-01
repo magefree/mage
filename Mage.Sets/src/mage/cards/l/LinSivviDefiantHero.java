@@ -75,7 +75,7 @@ class LinSivviDefiantHeroEffect extends OneShotEffect {
         this.staticText = "Search your library for a Rebel permanent card with mana value X or less, put it onto the battlefield, then shuffle";
     }
 
-    public LinSivviDefiantHeroEffect(final LinSivviDefiantHeroEffect effect) {
+    private LinSivviDefiantHeroEffect(final LinSivviDefiantHeroEffect effect) {
         super(effect);
     }
 

@@ -57,7 +57,7 @@ class LumengridAugurEffect extends OneShotEffect {
         staticText = "Target player draws a card, then discards a card. If that player discards an artifact card this way, untap {this}";
     }
 
-    public LumengridAugurEffect(final LumengridAugurEffect effect) {
+    private LumengridAugurEffect(final LumengridAugurEffect effect) {
         super(effect);
     }
 

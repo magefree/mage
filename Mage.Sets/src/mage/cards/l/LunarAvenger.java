@@ -72,7 +72,7 @@ class LunarAvengerEffect extends OneShotEffect {
         staticText = "{this} gains your choice of flying, first strike, or haste until end of turn";
     }
 
-    public LunarAvengerEffect(final LunarAvengerEffect effect) {
+    private LunarAvengerEffect(final LunarAvengerEffect effect) {
         super(effect);
     }
 

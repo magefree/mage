@@ -75,7 +75,7 @@ class KayaGhostAssassinEffect extends OneShotEffect {
                 + "You lose 2 life";
     }
 
-    public KayaGhostAssassinEffect(final KayaGhostAssassinEffect effect) {
+    private KayaGhostAssassinEffect(final KayaGhostAssassinEffect effect) {
         super(effect);
     }
 

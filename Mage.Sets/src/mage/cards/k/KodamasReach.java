@@ -51,7 +51,7 @@ class KodamasReachEffect extends OneShotEffect {
                 "put one onto the battlefield tapped and the other into your hand, then shuffle";
     }
 
-    public KodamasReachEffect(final KodamasReachEffect effect) {
+    private KodamasReachEffect(final KodamasReachEffect effect) {
         super(effect);
     }
 
