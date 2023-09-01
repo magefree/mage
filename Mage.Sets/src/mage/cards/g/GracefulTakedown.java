@@ -73,7 +73,7 @@ class GracefulTakedownTarget extends TargetPermanent {
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .allMatch(p -> EnchantedPredicate.instance.apply(p, game)));
+                .allMatch(p -> p.getId().equals(id) || EnchantedPredicate.instance.apply(p, game)));
     }
 }
 
@@ -96,9 +96,10 @@ class GracefulTakedownEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = this
-                .getTargetPointer()
-                .getTargets(game, source)
+        List<Permanent> permanents = source
+                .getTargets()
+                .get(0)
+                .getTargets()
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
