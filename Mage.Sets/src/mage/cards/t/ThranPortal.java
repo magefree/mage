@@ -81,7 +81,7 @@ class ThranPortalManaAbilityContinousEffect extends ContinuousEffectImpl {
         staticText = "mana abilities of {this} cost an additional 1 life to activate";
     }
 
-    public ThranPortalManaAbilityContinousEffect(final ThranPortalManaAbilityContinousEffect effect) {
+    private ThranPortalManaAbilityContinousEffect(final ThranPortalManaAbilityContinousEffect effect) {
         super(effect);
     }
 

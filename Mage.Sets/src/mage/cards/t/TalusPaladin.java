@@ -102,7 +102,7 @@ class TalusPaladinEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
     
-    public TalusPaladinEffect(final TalusPaladinEffect effect) {
+    private TalusPaladinEffect(final TalusPaladinEffect effect) {
         super(effect);
     }
     

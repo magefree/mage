@@ -51,7 +51,7 @@ class TunnelVisionEffect extends OneShotEffect {
                 + "Otherwise, the player shuffles";
     }
 
-    public TunnelVisionEffect(final TunnelVisionEffect effect) {
+    private TunnelVisionEffect(final TunnelVisionEffect effect) {
         super(effect);
     }
 

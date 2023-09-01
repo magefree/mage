@@ -51,7 +51,7 @@ class TemporalCascadeDrawEffect extends OneShotEffect {
         staticText = "Each player draws seven cards";
     }
 
-    public TemporalCascadeDrawEffect(final TemporalCascadeDrawEffect effect) {
+    private TemporalCascadeDrawEffect(final TemporalCascadeDrawEffect effect) {
         super(effect);
     }
 

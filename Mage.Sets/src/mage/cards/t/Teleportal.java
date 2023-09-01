@@ -56,7 +56,7 @@ class TeleportalEffect extends OneShotEffect {
         staticText = "each creature you control can't be blocked this turn";
     }
 
-    public TeleportalEffect(final TeleportalEffect effect) {
+    private TeleportalEffect(final TeleportalEffect effect) {
         super(effect);
     }
 

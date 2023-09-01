@@ -49,7 +49,7 @@ class TurfWoundEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Target player can't play land cards this turn";
     }
 
-    public TurfWoundEffect(final TurfWoundEffect effect) {
+    private TurfWoundEffect(final TurfWoundEffect effect) {
         super(effect);
     }
 

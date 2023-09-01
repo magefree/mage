@@ -44,7 +44,7 @@ class TimeWarpEffect extends OneShotEffect {
         staticText = "Target player takes an extra turn after this one";
     }
 
-    public TimeWarpEffect(final TimeWarpEffect effect) {
+    private TimeWarpEffect(final TimeWarpEffect effect) {
         super(effect);
     }
 

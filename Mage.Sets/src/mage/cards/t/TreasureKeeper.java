@@ -54,7 +54,7 @@ class TreasureKeeperEffect extends OneShotEffect {
                 + "cards not cast this way on the bottom of your library in a random order";
     }
 
-    public TreasureKeeperEffect(TreasureKeeperEffect effect) {
+    private TreasureKeeperEffect(final TreasureKeeperEffect effect) {
         super(effect);
     }
 

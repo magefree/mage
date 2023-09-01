@@ -59,7 +59,7 @@ class TheMendingOfDominariaFirstEffect extends OneShotEffect {
         this.staticText = "Mill two cards, then you may return a creature card from your graveyard to your hand";
     }
 
-    public TheMendingOfDominariaFirstEffect(final TheMendingOfDominariaFirstEffect effect) {
+    private TheMendingOfDominariaFirstEffect(final TheMendingOfDominariaFirstEffect effect) {
         super(effect);
     }
 

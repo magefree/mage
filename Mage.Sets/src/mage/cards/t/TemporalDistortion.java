@@ -69,7 +69,7 @@ class TemporalDistortionRemovalEffect extends OneShotEffect {
         staticText = "remove all hourglass counters from permanents that player controls";
     }
 
-    public TemporalDistortionRemovalEffect(final TemporalDistortionRemovalEffect effect) {
+    private TemporalDistortionRemovalEffect(final TemporalDistortionRemovalEffect effect) {
         super(effect);
     }
 

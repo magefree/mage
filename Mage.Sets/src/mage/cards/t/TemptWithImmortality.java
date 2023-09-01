@@ -50,7 +50,7 @@ class TemptWithImmortalityEffect extends OneShotEffect {
 
     }
 
-    public TemptWithImmortalityEffect(final TemptWithImmortalityEffect effect) {
+    private TemptWithImmortalityEffect(final TemptWithImmortalityEffect effect) {
         super(effect);
     }
 

@@ -55,7 +55,7 @@ class TrenchGorgerEffect extends OneShotEffect {
                 "If you do, {this} has base power and base toughness each equal to the number of cards exiled this way";
     }
 
-    public TrenchGorgerEffect(final TrenchGorgerEffect effect) {
+    private TrenchGorgerEffect(final TrenchGorgerEffect effect) {
         super(effect);
     }
 

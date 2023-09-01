@@ -68,7 +68,7 @@ class TyvarJubilantBrawlerHasteEffect extends AsThoughEffectImpl {
         staticText = "you may activate abilities of creatures you control as though those creatures had haste";
     }
 
-    public TyvarJubilantBrawlerHasteEffect(final TyvarJubilantBrawlerHasteEffect effect) {
+    private TyvarJubilantBrawlerHasteEffect(final TyvarJubilantBrawlerHasteEffect effect) {
         super(effect);
     }
 

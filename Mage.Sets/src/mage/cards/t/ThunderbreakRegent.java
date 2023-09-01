@@ -59,7 +59,7 @@ class ThunderbreakRegentTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public ThunderbreakRegentTriggeredAbility(final ThunderbreakRegentTriggeredAbility ability) {
+    private ThunderbreakRegentTriggeredAbility(final ThunderbreakRegentTriggeredAbility ability) {
         super(ability);
     }
 

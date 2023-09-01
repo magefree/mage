@@ -56,7 +56,7 @@ class TerritorialDisputeEffect extends ContinuousRuleModifyingEffectImpl {
         this.staticText = "Players can't play lands";
     }
     
-    public TerritorialDisputeEffect(final TerritorialDisputeEffect effect) {
+    private TerritorialDisputeEffect(final TerritorialDisputeEffect effect) {
         super(effect);
     }
 

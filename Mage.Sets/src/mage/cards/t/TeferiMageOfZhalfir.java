@@ -59,7 +59,7 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
         this.staticText = "Creature cards you own that aren't on the battlefield have flash";
     }
 
-    public TeferiMageOfZhalfirAddFlashEffect(final TeferiMageOfZhalfirAddFlashEffect effect) {
+    private TeferiMageOfZhalfirAddFlashEffect(final TeferiMageOfZhalfirAddFlashEffect effect) {
         super(effect);
     }
 
