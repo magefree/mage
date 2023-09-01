@@ -43,7 +43,7 @@ public final class UrzasEngine extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasEngineEffect(), new ManaCostsImpl<>("{3}")));
     }
 
-    public UrzasEngine(final UrzasEngine card) {
+    private UrzasEngine(final UrzasEngine card) {
         super(card);
     }
 
@@ -61,7 +61,7 @@ class UrzasEngineEffect extends OneShotEffect {
         this.staticText = "Attacking creatures banded with {this} gain trample until end of turn";
     }
 
-    public UrzasEngineEffect(final UrzasEngineEffect effect) {
+    private UrzasEngineEffect(final UrzasEngineEffect effect) {
         super(effect);
     }
 

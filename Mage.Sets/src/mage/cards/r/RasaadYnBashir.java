@@ -9,7 +9,7 @@ import mage.abilities.condition.common.HaveInitiativeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessEffect;
+import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,9 +38,7 @@ public final class RasaadYnBashir extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Each creature you control assigns combat damage equal to its toughness rather than its power.
-        this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessEffect(
-                StaticFilters.FILTER_PERMANENT_CREATURE, true
-        )));
+        this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_EACH)));
 
         // Whenever Rasaad yn Bashir attacks, if you have the initiative, double the toughness of each creature you control until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

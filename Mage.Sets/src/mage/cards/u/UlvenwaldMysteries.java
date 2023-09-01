@@ -60,7 +60,7 @@ class UlvenwaldMysteriesTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you sacrifice a Clue, ");
     }
 
-    public UlvenwaldMysteriesTriggeredAbility(final UlvenwaldMysteriesTriggeredAbility ability) {
+    private UlvenwaldMysteriesTriggeredAbility(final UlvenwaldMysteriesTriggeredAbility ability) {
         super(ability);
     }
 

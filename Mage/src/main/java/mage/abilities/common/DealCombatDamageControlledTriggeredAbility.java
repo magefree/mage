@@ -2,55 +2,50 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.DamagedBatchEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
  */
 public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final Set<UUID> damagedPlayerIds = new HashSet<>();
-    private final boolean setTargetPointer;
-    private final boolean onlyOpponents;
+    private final SetTargetPointer setTargetPointer;
+    private final FilterCreaturePermanent filter;
 
     public DealCombatDamageControlledTriggeredAbility(Effect effect) {
-        this(Zone.BATTLEFIELD, effect);
+        this(effect, SetTargetPointer.NONE);
     }
 
-    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect) {
-        this(zone, effect, false);
+    public DealCombatDamageControlledTriggeredAbility(Effect effect, FilterCreaturePermanent filter) {
+        this(Zone.BATTLEFIELD, effect, filter, SetTargetPointer.NONE, false);
     }
 
-    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, boolean setTargetPointer) {
-        this(zone, effect, setTargetPointer, false);
+    public DealCombatDamageControlledTriggeredAbility(Effect effect, SetTargetPointer setTargetPointer) {
+        this(Zone.BATTLEFIELD, effect, StaticFilters.FILTER_PERMANENT_CREATURES, setTargetPointer, false);
     }
 
-    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, boolean setTargetPointer, boolean onlyOpponents) {
-        this(zone, effect, setTargetPointer, onlyOpponents, false);
-    }
-
-    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, boolean setTargetPointer, boolean onlyOpponents, boolean optional) {
+    public DealCombatDamageControlledTriggeredAbility(Zone zone, Effect effect, FilterCreaturePermanent filter, SetTargetPointer setTargetPointer, boolean optional) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
-        this.onlyOpponents = onlyOpponents;
-        setTriggerPhrase("Whenever one or more creatures you control deal combat damage to "
-                + (onlyOpponents ? "an opponent" : "a player") + ", ");
+        this.filter = filter;
+        setTriggerPhrase("Whenever one or more " + filter.getMessage() + " you control deal combat damage to a player, ");
     }
 
     protected DealCombatDamageControlledTriggeredAbility(final DealCombatDamageControlledTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
-        this.onlyOpponents = ability.onlyOpponents;
+        this.filter = ability.filter;
     }
 
     @Override
@@ -60,34 +55,36 @@ public class DealCombatDamageControlledTriggeredAbility extends TriggeredAbility
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRIORITY
-                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH_ONE_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_PRIORITY ||
-                (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(getSourceId()))) {
-            damagedPlayerIds.clear();
+        List<DamagedEvent> events = ((DamagedBatchEvent) event).getEvents().stream()
+            .filter(DamagedEvent::isCombatDamage)
+            .filter(e -> {
+                Permanent permanent = game.getPermanentOrLKIBattlefield(e.getSourceId());
+                return permanent != null
+                        && filter.match(permanent, game)
+                        && permanent.isControlledBy(this.getControllerId());
+            })
+            .collect(Collectors.toList());
+        
+        if (events.isEmpty()) {
             return false;
         }
-        if (event.getType() != EventType.DAMAGED_PLAYER) {
-            return false;
+        
+        this.getEffects().setValue("damage", events.stream().mapToInt(DamagedEvent::getAmount).sum());
+        switch (setTargetPointer) {
+            case PLAYER:
+                this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                break;
+            case NONE:
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid SetTargetPointer option");
         }
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-        Permanent p = game.getPermanent(event.getSourceId());
-        if (!damageEvent.isCombatDamage()
-                || p == null
-                || !p.isControlledBy(this.getControllerId())
-                || damagedPlayerIds.contains(event.getPlayerId())
-                || (onlyOpponents && !game.getOpponents(getControllerId()).contains(event.getPlayerId()))) {
-            return false;
-        }
-        damagedPlayerIds.add(event.getPlayerId());
-        if (setTargetPointer) {
-            this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
-        }
+
         return true;
     }
 }

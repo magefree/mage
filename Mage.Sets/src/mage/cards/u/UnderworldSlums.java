@@ -47,7 +47,7 @@ public final class UnderworldSlums extends CardImpl {
 
     public static class UnderworldSlumsAbility extends ActivatedAbilityImpl {
 
-        public UnderworldSlumsAbility(UnderworldSlumsAbility ability) {
+        private UnderworldSlumsAbility(final UnderworldSlumsAbility ability) {
             super(ability);
         }
 

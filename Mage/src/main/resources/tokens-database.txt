@@ -108,6 +108,7 @@
 |Generate|EMBLEM:2X2|Emblem Wrenn|||WrennAndSixEmblem|
 |Generate|EMBLEM:DMU|Emblem Ajani|||AjaniSleeperAgentEmblem|
 |Generate|EMBLEM:DMU|Emblem Jaya|||JayaFieryNegotiatorEmblem|
+|Generate|EMBLEM:DMU|Emblem Karn|||KarnLivingLegacyEmblem|
 |Generate|EMBLEM:BRO|Emblem Saheeli|||SaheeliFiligreeMasterEmblem|
 |Generate|EMBLEM:ONE|Emblem Koth|||KothFireOfResistanceEmblem|
 |Generate|EMBLEM:MOM|Emblem Teferi|||TeferiAkosaOfZhalfirEmblem|
@@ -1833,7 +1834,7 @@
 |Generate|TOK:40K|Blue Horror|||BlueHorrorToken|
 |Generate|TOK:40K|Cherubael|||CherubaelToken|
 |Generate|TOK:40K|Clue|||ClueArtifactToken|
-|Generate|TOK:40K|Insect|||InsectColorlessToken|
+|Generate|TOK:40K|Insect|||InsectColorlessArtifactToken|
 |Generate|TOK:40K|Necron Warrior|||NecronWarriorToken|
 |Generate|TOK:40K|Plaguebearer of Nurgle|||PlaguebearerOfNurgleToken|
 |Generate|TOK:40K|Robot|||RobotToken|
@@ -2107,9 +2108,50 @@
 |Generate|TOK:CMM|Thopter|||ThopterColorlessToken|
 |Generate|TOK:CMM|Thrull|||ThrullToken|
 |Generate|TOK:CMM|Treasure|||TreasureToken|
-// TODO: add Teyo, Geometric Tactician wall token when implemented
+|Generate|TOK:CMM|Wall|||WallFlyingToken|
 |Generate|TOK:CMM|Wizard|||CommodoreGuffToken|
 |Generate|TOK:CMM|Wurm|||Wurm55Token|
 |Generate|TOK:CMM|Zombie|1||ZombieToken|
 |Generate|TOK:CMM|Zombie|2||StitcherGeralfZombieToken|
 |Generate|TOK:CMM|Zombie Army|||ZombieArmyToken|
+
+# WOE
+|Generate|TOK:WOE|Beast|||BeastToken|
+|Generate|TOK:WOE|Bird|||BirdToken|
+|Generate|TOK:WOE|Cursed|||CursedRoleToken|
+|Generate|TOK:WOE|Elemental|||Elemental44WUToken|
+|Generate|TOK:WOE|Faerie|||FaerieBlockFliersToken|
+|Generate|TOK:WOE|Food|1||FoodToken|
+|Generate|TOK:WOE|Food|2||FoodToken|
+|Generate|TOK:WOE|Food|3||FoodToken|
+|Generate|TOK:WOE|Food|4||FoodToken|
+|Generate|TOK:WOE|Human|||HumanToken|
+|Generate|TOK:WOE|Knight|||KnightToken|
+|Generate|TOK:WOE|Monster|||MonsterRoleToken|
+|Generate|TOK:WOE|Mouse|||MouseToken|
+|Generate|TOK:WOE|Nightmare|||AshiokWickedManipulatorNightmareToken|
+|Generate|TOK:WOE|Rat|||RatCantBlockToken|
+|Generate|TOK:WOE|Royal|||RoyalRoleToken|
+|Generate|TOK:WOE|Sorcerer|||SorcererRoleToken|
+|Generate|TOK:WOE|Treasure|||TreasureToken|
+|Generate|TOK:WOE|Wicked|||WickedRoleToken|
+|Generate|TOK:WOE|Young Hero|||YoungHeroRoleToken|
+
+# WOC
+|Generate|TOK:WOC|Cat|1||CatToken2|
+|Generate|TOK:WOC|Cat|2||CatToken|
+|Generate|TOK:WOC|Elephant|||ElephantToken|
+|Generate|TOK:WOC|Faerie|||FaerieToken|
+|Generate|TOK:WOC|Faerie Rogue|1||FaerieRogueToken|
+|Generate|TOK:WOC|Faerie Rogue|2||OonaQueenFaerieRogueToken|
+|Generate|TOK:WOC|Human Monk|||HumanMonkToken|
+|Generate|TOK:WOC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:WOC|Monster|||MonsterRoleToken|
+|Generate|TOK:WOC|Ox|||OxToken|
+|Generate|TOK:WOC|Pegasus|||PegasusToken2|
+// TODO: add Nettling Nuisance pirate token when merged (#11076)
+|Generate|TOK:WOC|Royal|||RoyalRoleToken|
+|Generate|TOK:WOC|Saproling|||SaprolingToken|
+|Generate|TOK:WOC|Sorcerer|||SorcererRoleToken|
+|Generate|TOK:WOC|Spirit|||WhiteBlackSpiritToken|
+|Generate|TOK:WOC|Virtuous|||VirtuousRoleToken|

@@ -13,8 +13,8 @@ public final class HomunculusToken extends TokenImpl {
 
     public HomunculusToken() {
         super("Homunculus Token", "0/1 blue Homunculus artifact creature token");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add(SubType.HOMUNCULUS);
         power = new MageInt(0);

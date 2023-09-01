@@ -49,7 +49,7 @@ class UrDragoEffect extends AsThoughEffectImpl {
         staticText = "Creatures with swampwalk can be blocked as though they didn't have swampwalk";
     }
 
-    public UrDragoEffect(final UrDragoEffect effect) {
+    private UrDragoEffect(final UrDragoEffect effect) {
         super(effect);
     }
 

@@ -62,7 +62,7 @@ class VizierOfTheMenagerieManaEffect extends AsThoughEffectImpl implements AsTho
         staticText = "You may spend mana as though it were mana of any type to cast creature spells";
     }
 
-    public VizierOfTheMenagerieManaEffect(final VizierOfTheMenagerieManaEffect effect) {
+    private VizierOfTheMenagerieManaEffect(final VizierOfTheMenagerieManaEffect effect) {
         super(effect);
     }
 

@@ -50,7 +50,7 @@ class XanthicStatueCreature extends TokenImpl {
 
         this.addAbility(TrampleAbility.getInstance());
     }
-    public XanthicStatueCreature(final XanthicStatueCreature token) {
+    private XanthicStatueCreature(final XanthicStatueCreature token) {
         super(token);
     }
 

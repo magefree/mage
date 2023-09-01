@@ -28,7 +28,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -150,7 +149,7 @@ class VivienMonstersAdvocateTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public DelayedTriggeredAbility copy() {
+    public VivienMonstersAdvocateTriggeredAbility copy() {
         return new VivienMonstersAdvocateTriggeredAbility(this);
     }
 

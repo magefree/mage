@@ -58,7 +58,7 @@ class UnbenderTineEffect extends OneShotEffect {
         this.staticText = "Untap another target permanent";
     }
 
-    public UnbenderTineEffect(final UnbenderTineEffect effect) {
+    private UnbenderTineEffect(final UnbenderTineEffect effect) {
         super(effect);
     }
 

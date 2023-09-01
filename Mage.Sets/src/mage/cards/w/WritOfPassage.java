@@ -72,7 +72,7 @@ class WritOfPassageAttachedEffect extends RestrictionEffect {
         this.staticText = attachmentType.verb() + " creature can't be blocked";
     }
 
-    public WritOfPassageAttachedEffect(WritOfPassageAttachedEffect effect) {
+    private WritOfPassageAttachedEffect(final WritOfPassageAttachedEffect effect) {
         super(effect);
     }
 

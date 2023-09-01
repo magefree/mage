@@ -2,11 +2,12 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessEffect;
+import mage.abilities.effects.common.ruleModifying.CombatDamageByToughnessAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -20,10 +21,11 @@ import java.util.UUID;
 public final class AncientLumberknot extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("creature you control with toughness greater than its power");
+            = new FilterCreaturePermanent("each creature you control with toughness greater than its power");
 
     static {
         filter.add(AncientLumberknotPredicate.instance);
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public AncientLumberknot(UUID ownerId, CardSetInfo setInfo) {
@@ -34,7 +36,7 @@ public final class AncientLumberknot extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Each creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.
-        this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessEffect(filter, true)));
+        this.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessAllEffect(filter)));
     }
 
     private AncientLumberknot(final AncientLumberknot card) {

@@ -72,7 +72,7 @@ class VraskaRegalGorgonEffect extends OneShotEffect {
                 + "put a +1/+1 counter on each creature you control.";
     }
 
-    public VraskaRegalGorgonEffect(final VraskaRegalGorgonEffect effect) {
+    private VraskaRegalGorgonEffect(final VraskaRegalGorgonEffect effect) {
         super(effect);
     }
 

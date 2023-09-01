@@ -36,7 +36,7 @@ public class ReinforceAbility extends SimpleActivatedAbility {
     }
 
     @Override
-    public SimpleActivatedAbility copy() {
+    public ReinforceAbility copy() {
         return new ReinforceAbility(this);
     }
 

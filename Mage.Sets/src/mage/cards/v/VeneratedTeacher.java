@@ -53,7 +53,7 @@ class VeneratedTeacherEffect extends OneShotEffect {
         staticText = "put two level counters on each creature you control with level up";
     }
 
-    public VeneratedTeacherEffect(final VeneratedTeacherEffect effect) {
+    private VeneratedTeacherEffect(final VeneratedTeacherEffect effect) {
         super(effect);
     }
 

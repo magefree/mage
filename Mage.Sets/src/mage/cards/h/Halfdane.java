@@ -81,8 +81,8 @@ class HalfdaneUpkeepEffect extends OneShotEffect {
         ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(
             permanent.getPower().getValue(),
             permanent.getToughness().getValue(),
-            Duration.UntilYourNextUpkeepStep,
-            SubLayer.SetPT_7b);
+            Duration.UntilYourNextUpkeepStep
+        );
         game.addEffect(effect, source);
         return true;
     }

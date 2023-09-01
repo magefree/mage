@@ -144,15 +144,15 @@ public final class MtgJsonService {
 
     private static final class AtomicCardsModel {
 
-        // list by card names, each name can havem multiple cards (two faces, different cards with same name from un-sets)
-        public HashMap<String, ArrayList<MtgJsonCard>> data;
+        // list by card names, each name can have multiple cards (two faces, different cards with same name from un-sets)
+        public Map<String, ArrayList<MtgJsonCard>> data;
 
         private boolean containsSameNames(ArrayList<MtgJsonCard> list) {
             Set<String> names = list.stream().map(MtgJsonCard::getNameAsFace).collect(Collectors.toSet());
             return names.size() == 1;
         }
 
-        public HashMap<String, MtgJsonCard> prepareIndex() {
+        public Map<String, MtgJsonCard> prepareIndex() {
             HashMap<String, MtgJsonCard> index = new HashMap<>();
             for (Map.Entry<String, ArrayList<MtgJsonCard>> rec : data.entrySet()) {
                 if (rec.getValue().size() == 1) {
@@ -179,7 +179,7 @@ public final class MtgJsonService {
     }
 
     private static final class AllPrintingsModel {
-        public HashMap<String, MtgJsonSet> data;
+        public Map<String, MtgJsonSet> data;
         public MtgJsonMetadata meta;
     }
 

@@ -55,7 +55,7 @@ class WoodenStakeBlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbility
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(true), false);
     }
 
-    public WoodenStakeBlocksOrBecomesBlockedTriggeredAbility(final WoodenStakeBlocksOrBecomesBlockedTriggeredAbility ability) {
+    private WoodenStakeBlocksOrBecomesBlockedTriggeredAbility(final WoodenStakeBlocksOrBecomesBlockedTriggeredAbility ability) {
         super(ability);
     }
 

@@ -46,7 +46,7 @@ class VeiledCrocodileStateTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When a player has no cards in hand, if {this} is an enchantment, ");
     }
 
-    public VeiledCrocodileStateTriggeredAbility(final VeiledCrocodileStateTriggeredAbility ability) {
+    private VeiledCrocodileStateTriggeredAbility(final VeiledCrocodileStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -112,7 +112,7 @@ class VeilCrocodileToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public VeilCrocodileToken(final VeilCrocodileToken token) {
+    private VeilCrocodileToken(final VeilCrocodileToken token) {
         super(token);
     }
 

@@ -46,7 +46,7 @@ class UnifiedWillEffect extends OneShotEffect {
         staticText = "Counter target spell if you control more creatures than that spell's controller";
     }
 
-    public UnifiedWillEffect(final UnifiedWillEffect effect) {
+    private UnifiedWillEffect(final UnifiedWillEffect effect) {
         super(effect);
     }
 

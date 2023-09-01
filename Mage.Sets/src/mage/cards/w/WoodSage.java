@@ -55,7 +55,7 @@ class WoodSageEffect extends OneShotEffect {
                 "and put all of them with that name into your hand. Put the rest into your graveyard";
     }
 
-    public WoodSageEffect(final WoodSageEffect effect) {
+    private WoodSageEffect(final WoodSageEffect effect) {
         super(effect);
     }
 

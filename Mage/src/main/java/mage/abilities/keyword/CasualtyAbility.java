@@ -84,7 +84,7 @@ public class CasualtyAbility extends StaticAbility implements OptionalAdditional
 
         additionalCost.activate();
         for (Cost cost : ((Costs<Cost>) additionalCost)) {
-            ability.getCosts().add(cost.copy());
+            ability.addCost(cost.copy());
         }
         game.fireReflexiveTriggeredAbility(new ReflexiveTriggeredAbility(
                 new CopySourceSpellEffect(), false, "when you do, copy this spell"

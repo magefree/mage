@@ -12,6 +12,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.Iterator;
 
@@ -123,7 +124,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl {
         if (excludeSource) {
             sb.append("other ");
         }
-        String gainedAbility = ability.getRule();
+        String gainedAbility = CardUtil.stripReminderText(ability.getRule());
         sb.append(filter.getMessage()).append(" you control ");
         if (duration == Duration.WhileOnBattlefield || duration == Duration.EndOfGame) {
             sb.append("have ");

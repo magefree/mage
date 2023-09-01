@@ -71,7 +71,7 @@ class VorelOfTheHullCladeEffect extends OneShotEffect {
         staticText = "double the number of each kind of counter on target artifact, creature, or land";
     }
 
-    public VorelOfTheHullCladeEffect(VorelOfTheHullCladeEffect effect) {
+    private VorelOfTheHullCladeEffect(final VorelOfTheHullCladeEffect effect) {
         super(effect);
     }
 

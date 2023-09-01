@@ -63,7 +63,7 @@ class WhiptongueHydraEffect extends OneShotEffect {
                 + "Put a +1/+1 counter on {this} for each creature destroyed this way";
     }
 
-    public WhiptongueHydraEffect(final WhiptongueHydraEffect effect) {
+    private WhiptongueHydraEffect(final WhiptongueHydraEffect effect) {
         super(effect);
     }
 

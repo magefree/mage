@@ -28,8 +28,8 @@ public class MoreThanMeetsTheEyeAbility extends SpellAbility {
         this.setSpellAbilityCastMode(SpellAbilityCastMode.MORE_THAN_MEETS_THE_EYE);
 
         this.manaCost = manaCost;
-        this.getManaCosts().clear();
-        this.getManaCostsToPay().clear();
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
         this.addManaCost(new ManaCostsImpl<>(manaCost));
         this.addSubAbility(new TransformAbility());
     }

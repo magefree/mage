@@ -92,7 +92,7 @@ public class StrefanMaurerProgenitor extends CardImpl {
     private StrefanMaurerProgenitor(final StrefanMaurerProgenitor card) { super(card);}
 
     @Override
-    public Card copy() {
+    public StrefanMaurerProgenitor copy() {
         return new StrefanMaurerProgenitor(this);
     }
 }

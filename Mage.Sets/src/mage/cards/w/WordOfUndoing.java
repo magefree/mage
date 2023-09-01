@@ -50,7 +50,7 @@ class WordOfUndoingReturnToHandEffect extends OneShotEffect {
         this.staticText = "Return target creature and all white Auras you own attached to it to their owners' hands.";
     }
 
-    public WordOfUndoingReturnToHandEffect(final WordOfUndoingReturnToHandEffect effect) {
+    private WordOfUndoingReturnToHandEffect(final WordOfUndoingReturnToHandEffect effect) {
         super(effect);
     }
 

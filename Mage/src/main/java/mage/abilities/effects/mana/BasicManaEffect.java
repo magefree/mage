@@ -12,12 +12,11 @@ import mage.game.Game;
 
 public class BasicManaEffect extends ManaEffect {
 
-    protected Mana manaTemplate;
+    private final Mana manaTemplate; // This field must not become directly accessible outside this class
     private final DynamicValue netAmount;
 
     public BasicManaEffect(Mana mana) {
         this(mana, null);
-        this.manaTemplate = mana;
     }
 
     public BasicManaEffect(Mana mana, DynamicValue netAmount) {
@@ -40,9 +39,8 @@ public class BasicManaEffect extends ManaEffect {
 
     protected BasicManaEffect(final BasicManaEffect effect) {
         super(effect);
-        this.manaTemplate = effect.manaTemplate.copy();
+        this.manaTemplate = effect.manaTemplate; // Not copying for performance reasons. Never modified within the class.
         this.netAmount = effect.netAmount;
-
     }
 
     @Override
@@ -88,7 +86,7 @@ public class BasicManaEffect extends ManaEffect {
     }
 
     public Mana getManaTemplate() {
-        return manaTemplate;
+        return manaTemplate.copy(); // Copy is needed here to prevent unintentional modification
     }
 
     @Override

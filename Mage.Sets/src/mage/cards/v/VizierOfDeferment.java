@@ -66,7 +66,7 @@ class VizierOfDefermentEffect extends OneShotEffect {
                 "Return that card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public VizierOfDefermentEffect(final VizierOfDefermentEffect effect) {
+    private VizierOfDefermentEffect(final VizierOfDefermentEffect effect) {
         super(effect);
     }
 

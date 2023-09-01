@@ -7,7 +7,7 @@ import mage.filter.common.FilterAnyTarget;
  */
 public class TargetAnyTarget extends TargetPermanentOrPlayer {
 
-    private static final FilterAnyTarget filter = new FilterAnyTarget();
+    private static final FilterAnyTarget defaultFilter = new FilterAnyTarget();
 
     public TargetAnyTarget() {
         this(1);
@@ -18,6 +18,10 @@ public class TargetAnyTarget extends TargetPermanentOrPlayer {
     }
 
     public TargetAnyTarget(int minNumTargets, int maxNumTargets) {
+        this(minNumTargets, maxNumTargets, defaultFilter);
+    }
+
+    public TargetAnyTarget(int minNumTargets, int maxNumTargets, FilterAnyTarget filter) {
         super(minNumTargets, maxNumTargets, filter, false);
     }
 

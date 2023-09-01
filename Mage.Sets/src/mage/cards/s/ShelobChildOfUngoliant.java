@@ -4,19 +4,15 @@ import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.WardAbility;
+import mage.abilities.token.FoodAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -225,12 +221,7 @@ class ShelobChildOfUngoliantEffect extends OneShotEffect {
                 token.addSubType(SubType.FOOD);
 
                 // {2}, {T}, Sacrifice this artifact: You gain 3 life.
-                Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new GenericManaCost(2));
-                ability.addCost(new TapSourceCost());
-                SacrificeSourceCost cost = new SacrificeSourceCost();
-                cost.setText("Sacrifice this artifact");
-                ability.addCost(cost);
-                token.addAbility(ability);
+                token.addAbility(new FoodAbility(false));
             }).apply(game, source);
     }
 }

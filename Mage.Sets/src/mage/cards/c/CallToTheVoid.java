@@ -73,7 +73,7 @@ class CallToTheVoidEffect extends OneShotEffect {
         Map<String, List<String>> map = new HashMap<>();
         Set<Permanent> permanents = new HashSet<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(source.getControllerId());
+            Player player = game.getPlayer(playerId);
             if (player != null) {
                 chooseCreature(map, permanents, StaticFilters.FILTER_CONTROLLED_CREATURE, player, source, game);
                 chooseCreature(map, permanents, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, player, source, game);

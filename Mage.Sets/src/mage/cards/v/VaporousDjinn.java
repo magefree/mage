@@ -55,7 +55,7 @@ class VaporousDjinnEffect extends OneShotEffect {
         this.staticText = "{this} phases out unless you pay {U}{U}";
     }
 
-    public VaporousDjinnEffect(final VaporousDjinnEffect effect) {
+    private VaporousDjinnEffect(final VaporousDjinnEffect effect) {
         super(effect);
     }
 
