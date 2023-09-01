@@ -30,6 +30,10 @@ public class PrototypeTest extends CardTestPlayerBase {
     private static final String clone = "Clone";
     private static final String counterpart = "Cackling Counterpart";
 
+    private static final String epiphany = "Sublime Epiphany";
+
+    private static final String denied = "Access Denied";
+
     private void checkAutomaton(boolean prototyped) {
         checkAutomaton(prototyped, 1);
     }
@@ -69,12 +73,13 @@ public class PrototypeTest extends CardTestPlayerBase {
 
     @Test
     public void testNormal() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 7);
         addCard(Zone.HAND, playerA, automaton);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automaton);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
         execute();
 
         checkAutomaton(false);
@@ -88,6 +93,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
         execute();
 
         checkAutomaton(true);
@@ -104,6 +110,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, bolt, automaton);
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         assertGraveyardCount(playerA, automaton, 1);
@@ -116,7 +123,7 @@ public class PrototypeTest extends CardTestPlayerBase {
                 .orElse(null);
         Assert.assertTrue("Card should be colorless", card.getColor(currentGame).isColorless());
         Assert.assertEquals("Card should have 6 power", 6, card.getPower().getValue());
-        Assert.assertEquals("Card should have 4 power", 4, card.getToughness().getValue());
+        Assert.assertEquals("Card should have 4 toughness", 4, card.getToughness().getValue());
     }
 
     @Test
@@ -130,6 +137,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, cloudshift, automaton);
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         checkAutomaton(false);
@@ -137,13 +145,14 @@ public class PrototypeTest extends CardTestPlayerBase {
 
     @Test
     public void testTriggerColorlessSpell() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 7);
         addCard(Zone.HAND, playerA, automaton);
 
         makeTester(ColorlessPredicate.instance);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automaton);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
         execute();
 
         assertLife(playerA, 20 + 1);
@@ -158,6 +167,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
         execute();
 
         assertLife(playerA, 20 + 1);
@@ -165,7 +175,7 @@ public class PrototypeTest extends CardTestPlayerBase {
 
     @Test
     public void testTrigger64Spell() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 7);
         addCard(Zone.HAND, playerA, automaton);
 
         makeTester(
@@ -175,6 +185,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automaton);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
         execute();
 
         assertLife(playerA, 20 + 1);
@@ -192,6 +203,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
         execute();
 
         assertLife(playerA, 20 + 1);
@@ -199,13 +211,14 @@ public class PrototypeTest extends CardTestPlayerBase {
 
     @Test
     public void testTrigger7MVSpell() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 7);
         addCard(Zone.HAND, playerA, automaton);
 
         makeTester(new ManaValuePredicate(ComparisonType.EQUAL_TO, 7));
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automaton);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
         execute();
 
         assertLife(playerA, 20 + 1);
@@ -220,6 +233,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
         execute();
 
         assertLife(playerA, 20 + 1);
@@ -233,8 +247,11 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automaton);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, clone);
+        setChoice(playerA, true); // yes to clone
+        setChoice(playerA, automaton);
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         checkAutomaton(false, 2);
@@ -248,8 +265,11 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, clone);
+        setChoice(playerA, true); // yes to clone
+        setChoice(playerA, automaton);
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         checkAutomaton(true, 2);
@@ -265,6 +285,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, counterpart, automaton);
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         checkAutomaton(false, 2);
@@ -280,8 +301,159 @@ public class PrototypeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, counterpart, automaton);
 
         setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
         execute();
 
         checkAutomaton(true, 2);
     }
+
+    @Test
+    public void testTokenCopyRegularLKI() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7 + 6);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, epiphany);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automaton);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, epiphany);
+        setModeChoice(playerA, "3"); // Return target nonland permanent to its owner's hand.
+        setModeChoice(playerA, "4"); // Create a token that's a copy of target creature you control.
+        addTarget(playerA, automaton);
+        addTarget(playerA, automaton);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertHandCount(playerA, automaton, 1);
+        checkAutomaton(false, 1);
+    }
+
+    @Test
+    public void testTokenCopyPrototypeLKI() {
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3 + 6);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.HAND, playerA, epiphany);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, epiphany);
+        setModeChoice(playerA, "3"); // Return target nonland permanent to its owner's hand.
+        setModeChoice(playerA, "4"); // Create a token that's a copy of target creature you control.
+        addTarget(playerA, automaton);
+        addTarget(playerA, automaton);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertHandCount(playerA, automaton, 1);
+        checkAutomaton(true, 1);
+    }
+
+    @Test
+    public void testStackToughnessPrototyped() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Stern Scolding");
+        // Counter target creature spell with power or toughness 2 or less.
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Stern Scolding");
+        addTarget(playerB, automaton);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertGraveyardCount(playerA, automaton, 1);
+        checkAutomaton(true, 0);
+    }
+
+    @Test
+    public void testStackColorPrototyped() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Douse");
+        // {1}{U}: Counter target red spell.
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{U}: Counter target red spell");
+        addTarget(playerB, automaton);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertGraveyardCount(playerA, automaton, 1);
+        checkAutomaton(true, 0);
+    }
+
+    @Test
+    public void testStackManaValueRegular() {
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 7);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
+        addCard(Zone.HAND, playerB, denied);
+        // Counter target spell. Create X 1/1 colorless Thopter artifact creature tokens with flying, where X is that spell’s mana value.
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automaton);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, denied, automaton);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerB, "Thopter Token", 7);
+        assertGraveyardCount(playerA, automaton, 1);
+        checkAutomaton(false, 0);
+    }
+
+    @Test
+    public void testStackManaValuePrototype() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, automaton);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
+        addCard(Zone.HAND, playerB, denied);
+        // Counter target spell. Create X 1/1 colorless Thopter artifact creature tokens with flying, where X is that spell’s mana value.
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automatonWithPrototype);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, denied, automaton);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerB, "Thopter Token", 3);
+        assertGraveyardCount(playerA, automaton, 1);
+        checkAutomaton(true, 0);
+    }
+
+    /*
+     * More tests suggested by Zerris:
+     * 1) Copy permanent on the stack: See Double
+     * 2) Gain control of spell on the stack: Aethersnatch
+     * 3) Check LKI if card immediately leaves the battlefield due to state-based actions:
+     *      4x Flowstone Surge, Absolute Law, Electropotence, Drizzt Do'Urden, Flayer of the Hatebound in play.
+     *      (Cast both Prototype and Normal, assert both have expected P/T on entering and leaving battlefield for all triggers;
+     *      Absolute Law protects as expected against colors.
+     *      Reanimate the card after having prototyped it, assert the reanimated copy has correct P/T and Absolute Law fails to protect.)
+     * 4) Ensure Copy effects layer properly: Essence of the Wild in play
+     * 5) Check other things becoming copies of it, particularly other prototype cards:
+     *      Infinite Reflection on it, followed by casting a copy of a different prototype-able card (both Prototyped and Normal for each)
+     * 6) Ensure Prototype is not treated as an ability while in play, but does remove the textbox: Dress Down with it in play
+     * 7) Phasing: Slip Out the Back
+     * 8) Alternate Cost: Fires of Invention (Cannot cast at all with fires on 3 lands, cannot cast prototyped even on 7)
+     * 9) Delayed copies of a clone copy: Progenitor Mimic
+     * 14) Cast from zones other than the hand: Ensure that if you cast a card from exile (Gonti, Lord of Luxury) you can Prototype it
+     *      (and use mana of any color) as expected, and the same for Graveyards (Chainer, Nightmare Adept)
+     * 15) Yixlid Jailer + Chainer, Nightmare Adept - I believe you should be able to cast your card, but not Prototype it,
+     *      because that decision is made before it goes on the stack (and thus leaves the graveyard).
+     * 19) Ensure Prototype is preserved through type changes - Swift Reconfiguration + Bludgeon Brawl on a prototyped card
+     *      (and attempt to equip to Master of Waves)
+     * 20) Ensure colored mana in a Prototype cost is treated properly - can be paid for by Jegantha and Somberwald Sage,
+     *      reduced by Morophon but not Ugin, the Ineffable
+     * 21) Check mana value on casting (Void Winnower + Boulderbranch Golem / Fallaji Dragon Engine)
+     */
+
 }
