@@ -47,7 +47,7 @@ public class PrototypeAbility extends SpellAbility {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder("Prototype ");
-        sb.append(this.manaCosts.getText());
+        sb.append(getManaCosts().getText());
         sb.append(" &mdash; ").append(this.power).append("/").append(this.toughness);
         sb.append(" <i>(You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)</i>");
         return sb.toString();
