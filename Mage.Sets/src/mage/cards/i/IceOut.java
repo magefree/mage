@@ -3,6 +3,7 @@ package mage.cards.i;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.BargainedCondition;
 import mage.abilities.costs.CostAdjuster;
+import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.BargainAbility;
@@ -48,9 +49,12 @@ public final class IceOut extends CardImpl {
 enum IceOutAdjuster implements CostAdjuster {
     instance;
 
+    private static OptionalAdditionalCost bargainCost = BargainAbility.makeBargainCost();
+
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        if (BargainedCondition.instance.apply(game, ability)) {
+        if (BargainedCondition.instance.apply(game, ability)
+                || (game.inCheckPlayableState() && bargainCost.canPay(ability, null, ability.getControllerId(), game))) {
             CardUtil.reduceCost(ability, 1);
         }
     }
