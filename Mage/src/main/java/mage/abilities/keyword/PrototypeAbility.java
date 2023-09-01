@@ -17,8 +17,7 @@ import mage.game.stack.Spell;
  */
 public class PrototypeAbility extends SpellAbility {
 
-    private final int power;
-    private final int toughness;
+    private final String rule;
 
     public PrototypeAbility(Card card, String manaString, int power, int toughness) {
         super(new ManaCostsImpl<>(manaString), card.getName() + " with prototype", Zone.HAND, SpellAbilityType.PROTOTYPE);
@@ -26,17 +25,14 @@ public class PrototypeAbility extends SpellAbility {
         this.addSubAbility(new SimpleStaticAbility(
                 Zone.ALL, new PrototypeEffect(power, toughness, manaString)
         ).setRuleVisible(false));
-
-        this.power = power;
-        this.toughness = toughness;
-
+        this.rule = "Prototype " + manaString + " &mdash; " + power + "/" + toughness +
+                " <i>(You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)</i>";
         setRuleAtTheTop(true);
     }
 
     private PrototypeAbility(final PrototypeAbility ability) {
         super(ability);
-        this.power = ability.power;
-        this.toughness = ability.toughness;
+        this.rule = ability.rule;
     }
 
     @Override
@@ -46,11 +42,7 @@ public class PrototypeAbility extends SpellAbility {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Prototype ");
-        sb.append(getManaCosts().getText());
-        sb.append(" &mdash; ").append(this.power).append("/").append(this.toughness);
-        sb.append(" <i>(You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)</i>");
-        return sb.toString();
+        return rule;
     }
 }
 
