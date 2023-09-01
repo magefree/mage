@@ -85,7 +85,7 @@ class RaziaBorosArchangelEffect extends RedirectionEffect {
         staticText = "The next " + amount + " damage that would be dealt to target creature you control this turn is dealt to another target creature instead";
     }
 
-    public RaziaBorosArchangelEffect(final RaziaBorosArchangelEffect effect) {
+    private RaziaBorosArchangelEffect(final RaziaBorosArchangelEffect effect) {
         super(effect);
     }
 

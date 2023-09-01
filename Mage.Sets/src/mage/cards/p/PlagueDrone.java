@@ -49,7 +49,7 @@ class PlagueDroneReplacementEffect extends ReplacementEffectImpl {
         staticText = "If an opponent would gain life, that player loses that much life instead";
     }
 
-    public PlagueDroneReplacementEffect(final PlagueDroneReplacementEffect effect) {
+    private PlagueDroneReplacementEffect(final PlagueDroneReplacementEffect effect) {
         super(effect);
     }
 

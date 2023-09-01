@@ -58,7 +58,7 @@ class RockJockeyEffect extends ContinuousRuleModifyingEffectImpl {
         this.staticText = "You can't play lands if you've cast {this} this turn";
     }
 
-    public RockJockeyEffect(final RockJockeyEffect effect) {
+    private RockJockeyEffect(final RockJockeyEffect effect) {
         super(effect);
     }
 

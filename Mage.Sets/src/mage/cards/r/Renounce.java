@@ -44,7 +44,7 @@ class RenounceEffect extends OneShotEffect {
         staticText  = "Sacrifice any number of permanents. You gain 2 life for each permanent sacrificed this way";
     }
 
-    public RenounceEffect(final RenounceEffect effect) {
+    private RenounceEffect(final RenounceEffect effect) {
         super(effect);
     }
 

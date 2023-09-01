@@ -48,7 +48,7 @@ class ReveilleSquadTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new UntapAllControllerEffect(new FilterCreaturePermanent("all creatures you control")), true);
     }
 
-    public ReveilleSquadTriggeredAbility(final ReveilleSquadTriggeredAbility ability) {
+    private ReveilleSquadTriggeredAbility(final ReveilleSquadTriggeredAbility ability) {
         super(ability);
     }
 

@@ -50,7 +50,7 @@ class PublicExecutionEffect extends OneShotEffect {
         staticText = "Each other creature that player controls gets -2/-0 until end of turn";
     }
 
-    public PublicExecutionEffect(final PublicExecutionEffect effect) {
+    private PublicExecutionEffect(final PublicExecutionEffect effect) {
         super(effect);
     }
 

@@ -53,7 +53,7 @@ class PiousWarriorTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} is dealt combat damage, ");
     }
 
-    public PiousWarriorTriggeredAbility(final PiousWarriorTriggeredAbility effect) {
+    private PiousWarriorTriggeredAbility(final PiousWarriorTriggeredAbility effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class PiousWarriorGainLifeEffect extends OneShotEffect {
 		staticText = "you gain that much life";
 	}
 
-    public PiousWarriorGainLifeEffect(final PiousWarriorGainLifeEffect effect) {
+    private PiousWarriorGainLifeEffect(final PiousWarriorGainLifeEffect effect) {
         super(effect);
     }
 

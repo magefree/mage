@@ -53,7 +53,7 @@ class PolymorphousRushCopyEffect extends OneShotEffect {
         this.staticText = "Choose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn";
     }
 
-    public PolymorphousRushCopyEffect(final PolymorphousRushCopyEffect effect) {
+    private PolymorphousRushCopyEffect(final PolymorphousRushCopyEffect effect) {
         super(effect);
     }
 

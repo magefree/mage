@@ -82,7 +82,7 @@ class RatadrabikOfUrborgEffect extends OneShotEffect {
                 "except it's not legendary and it's a 2/2 black Zombie in addition to its other colors and types.";
     }
 
-    public RatadrabikOfUrborgEffect(final RatadrabikOfUrborgEffect effect) {
+    private RatadrabikOfUrborgEffect(final RatadrabikOfUrborgEffect effect) {
         super(effect);
     }
 

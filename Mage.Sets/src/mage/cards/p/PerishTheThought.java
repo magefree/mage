@@ -49,7 +49,7 @@ class PerishTheThoughtEffect extends OneShotEffect {
         this.staticText = "Target opponent reveals their hand. You choose a card from it. That player shuffles that card into their library";
     }
 
-    public PerishTheThoughtEffect(final PerishTheThoughtEffect effect) {
+    private PerishTheThoughtEffect(final PerishTheThoughtEffect effect) {
         super(effect);
     }
 

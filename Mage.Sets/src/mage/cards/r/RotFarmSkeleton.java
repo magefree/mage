@@ -41,7 +41,7 @@ public final class RotFarmSkeleton extends CardImpl {
 
     }
 
-    public RotFarmSkeleton (final RotFarmSkeleton card) {
+    private RotFarmSkeleton(final RotFarmSkeleton card) {
         super(card);
     }
 

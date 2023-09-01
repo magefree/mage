@@ -76,7 +76,7 @@ class RevengeEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
     }
 
-    public RevengeEffect(final RevengeEffect effect) {
+    private RevengeEffect(final RevengeEffect effect) {
         super(effect);
     }
 

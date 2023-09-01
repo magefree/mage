@@ -48,7 +48,7 @@ class PatriarchsBiddingEffect extends OneShotEffect {
         this.staticText = "each player chooses a creature type. Each player returns all creature cards of a type chosen this way from their graveyard to the battlefield";
     }
 
-    public PatriarchsBiddingEffect(final PatriarchsBiddingEffect effect) {
+    private PatriarchsBiddingEffect(final PatriarchsBiddingEffect effect) {
         super(effect);
     }
 

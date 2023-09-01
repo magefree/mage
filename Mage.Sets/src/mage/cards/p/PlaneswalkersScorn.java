@@ -59,7 +59,7 @@ class PlaneswalkersScornEffect extends OneShotEffect {
         staticText = "Target opponent reveals a card at random from their hand. Target creature gets -X/-X until end of turn, where X is the revealed card's mana value";
     }
 
-    public PlaneswalkersScornEffect(final PlaneswalkersScornEffect effect) {
+    private PlaneswalkersScornEffect(final PlaneswalkersScornEffect effect) {
         super(effect);
     }
 

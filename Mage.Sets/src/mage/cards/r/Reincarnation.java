@@ -55,7 +55,7 @@ class ReincarnationEffect extends OneShotEffect {
         staticText = "return a creature card from its owner's graveyard to the battlefield under the control of that creature's owner";
     }
 
-    public ReincarnationEffect(final ReincarnationEffect effect) {
+    private ReincarnationEffect(final ReincarnationEffect effect) {
         super(effect);
     }
 

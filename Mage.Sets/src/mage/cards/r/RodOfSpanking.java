@@ -53,7 +53,7 @@ class RodOfSpankingEffect extends OneShotEffect {
         staticText = "{this} deals 1 damage to target player. Then untap {this} unless that player says \"Thank you, sir. May I have another?\"";
     }
 
-    public RodOfSpankingEffect(final RodOfSpankingEffect effect) {
+    private RodOfSpankingEffect(final RodOfSpankingEffect effect) {
         super(effect);
     }
 

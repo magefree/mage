@@ -72,7 +72,7 @@ class PatronOfTheVeinCreatureDiesTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new PatronOfTheVeinExileCreatureEffect(), false);
     }
 
-    public PatronOfTheVeinCreatureDiesTriggeredAbility(final PatronOfTheVeinCreatureDiesTriggeredAbility ability) {
+    private PatronOfTheVeinCreatureDiesTriggeredAbility(final PatronOfTheVeinCreatureDiesTriggeredAbility ability) {
         super(ability);
     }
 
@@ -122,7 +122,7 @@ class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
         this.staticText = "exile it and put a +1/+1 counter on each Vampire you control";
     }
 
-    public PatronOfTheVeinExileCreatureEffect(final PatronOfTheVeinExileCreatureEffect effect) {
+    private PatronOfTheVeinExileCreatureEffect(final PatronOfTheVeinExileCreatureEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class PromiseOfPowerEffect extends OneShotEffect {
         staticText = "Create an X/X black Demon creature token with flying, where X is the number of cards in your hand";
     }
 
-    public PromiseOfPowerEffect(PromiseOfPowerEffect ability) {
+    private PromiseOfPowerEffect(final PromiseOfPowerEffect ability) {
         super(ability);
     }
 

@@ -51,7 +51,7 @@ class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an opponent shuffles their library, ");
     }
 
-    public PsychicSurgeryTriggeredAbility(final PsychicSurgeryTriggeredAbility ability) {
+    private PsychicSurgeryTriggeredAbility(final PsychicSurgeryTriggeredAbility ability) {
         super(ability);
     }
 
@@ -82,7 +82,7 @@ class PsychicSurgeryEffect extends OneShotEffect {
         this.staticText = "you may look at the top two cards of that library. You may exile one of those cards. Then put the rest on top of that library in any order";
     }
 
-    public PsychicSurgeryEffect(final PsychicSurgeryEffect effect) {
+    private PsychicSurgeryEffect(final PsychicSurgeryEffect effect) {
         super(effect);
     }
 

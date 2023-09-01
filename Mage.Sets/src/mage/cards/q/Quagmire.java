@@ -44,7 +44,7 @@ class QuagmireEffect extends AsThoughEffectImpl {
         staticText = "Creatures with swampwalk can be blocked as though they didn't have swampwalk";
     }
 
-    public QuagmireEffect(final QuagmireEffect effect) {
+    private QuagmireEffect(final QuagmireEffect effect) {
         super(effect);
     }
 

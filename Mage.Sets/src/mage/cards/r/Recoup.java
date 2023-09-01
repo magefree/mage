@@ -54,7 +54,7 @@ class RecoupEffect extends ContinuousEffectImpl {
         this.staticText = "Target sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost";
     }
 
-    public RecoupEffect(final RecoupEffect effect) {
+    private RecoupEffect(final RecoupEffect effect) {
         super(effect);
     }
 

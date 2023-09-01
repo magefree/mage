@@ -53,7 +53,7 @@ class RichesEffect extends OneShotEffect {
         this.staticText = "Each opponent chooses a creature they control. You gain control of each of those creatures.";
     }
 
-    public RichesEffect(final RichesEffect effect) {
+    private RichesEffect(final RichesEffect effect) {
         super(effect);
     }
 

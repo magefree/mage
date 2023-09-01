@@ -52,7 +52,7 @@ class PatientRebuildingEffect extends OneShotEffect {
                 + "then you draw a card for each land card put into that graveyard this way";
     }
 
-    public PatientRebuildingEffect(final PatientRebuildingEffect effect) {
+    private PatientRebuildingEffect(final PatientRebuildingEffect effect) {
         super(effect);
     }
 

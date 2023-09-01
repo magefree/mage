@@ -74,7 +74,7 @@ class PhantasmalSphereEffect extends OneShotEffect {
                 + "of +1/+1 counters on {this}";
     }
 
-    public PhantasmalSphereEffect(final PhantasmalSphereEffect effect) {
+    private PhantasmalSphereEffect(final PhantasmalSphereEffect effect) {
         super(effect);
     }
 
@@ -111,7 +111,7 @@ class PhantasmalSphereToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public PhantasmalSphereToken(final PhantasmalSphereToken token) {
+    private PhantasmalSphereToken(final PhantasmalSphereToken token) {
         super(token);
     }
 

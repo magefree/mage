@@ -54,7 +54,7 @@ class RoninCliffriderEffect extends OneShotEffect {
         this.staticText = "you may have it deal 1 damage to each creature defending player controls";
     }
 
-    public RoninCliffriderEffect(final RoninCliffriderEffect effect) {
+    private RoninCliffriderEffect(final RoninCliffriderEffect effect) {
         super(effect);
     }
 

@@ -51,7 +51,7 @@ class PeacekeeperCantAttackEffect extends RestrictionEffect {
         staticText = "Creatures can't attack";
     }
 
-    public PeacekeeperCantAttackEffect(final PeacekeeperCantAttackEffect effect) {
+    private PeacekeeperCantAttackEffect(final PeacekeeperCantAttackEffect effect) {
         super(effect);
     }
 

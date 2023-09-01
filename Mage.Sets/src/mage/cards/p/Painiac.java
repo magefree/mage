@@ -52,7 +52,7 @@ class PainiacEffect extends OneShotEffect {
         this.staticText = "Roll a six-sided die. {this} gets +X/+0 until end of turn, where X is the result";
     }
 
-    public PainiacEffect(final PainiacEffect effect) {
+    private PainiacEffect(final PainiacEffect effect) {
         super(effect);
     }
 

@@ -56,7 +56,7 @@ class PullFromEternityEffect extends OneShotEffect {
         this.staticText = "Put target face-up exiled card into its owner's graveyard.";
     }
 
-    public PullFromEternityEffect(final PullFromEternityEffect effect) {
+    private PullFromEternityEffect(final PullFromEternityEffect effect) {
         super(effect);
     }
 

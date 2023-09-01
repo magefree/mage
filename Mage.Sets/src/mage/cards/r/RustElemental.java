@@ -60,7 +60,7 @@ class RustElementalEffect extends OneShotEffect {
         this.staticText = "Sacrifice an artifact other than {this}. If you can't, tap {this} and you lose 4 life.";
     }
 
-    public RustElementalEffect(final RustElementalEffect effect) {
+    private RustElementalEffect(final RustElementalEffect effect) {
         super(effect);
     }
 
