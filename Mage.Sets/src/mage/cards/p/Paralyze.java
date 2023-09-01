@@ -59,7 +59,7 @@ class ParalyzeEffect extends DoIfCostPaid {
         super(new UntapAttachedEffect(), new GenericManaCost(4));
     }
 
-    public ParalyzeEffect(final ParalyzeEffect effect) {
+    private ParalyzeEffect(final ParalyzeEffect effect) {
         super(effect);
     }
 

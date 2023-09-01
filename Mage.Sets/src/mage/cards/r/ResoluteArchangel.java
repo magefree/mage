@@ -54,7 +54,7 @@ class ResoluteArchangelEffect extends OneShotEffect {
         this.staticText = "if your life total is lower than your starting life total, it becomes equal to your starting life total";
     }
 
-    public ResoluteArchangelEffect(final ResoluteArchangelEffect effect) {
+    private ResoluteArchangelEffect(final ResoluteArchangelEffect effect) {
         super(effect);
     }
 

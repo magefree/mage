@@ -54,7 +54,7 @@ class RofellossGiftEffect extends OneShotEffect {
                 "Return an enchantment card from your graveyard to your hand for each card revealed this way.";
     }
 
-    public RofellossGiftEffect(final RofellossGiftEffect effect) {
+    private RofellossGiftEffect(final RofellossGiftEffect effect) {
         super(effect);
     }
 

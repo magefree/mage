@@ -44,7 +44,7 @@ class PhosphorescentFeastEffect extends OneShotEffect {
         super(Outcome.GainLife);
     }
 
-    public PhosphorescentFeastEffect(final PhosphorescentFeastEffect effect) {
+    private PhosphorescentFeastEffect(final PhosphorescentFeastEffect effect) {
         super(effect);
     }
 

@@ -71,7 +71,7 @@ class PortalMageEffect extends OneShotEffect {
         this.staticText = "you may reselect which player or planeswalker target attacking creature is attacking";
     }
 
-    public PortalMageEffect(final PortalMageEffect effect) {
+    private PortalMageEffect(final PortalMageEffect effect) {
         super(effect);
     }
 

@@ -47,7 +47,7 @@ class RitualOfTheReturnedExileEffect extends OneShotEffect {
         this.staticText = "Exile target creature card from your graveyard. Create a black Zombie creature token. Its power is equal to that card's power and its toughness is equal to that card's toughness.";
     }
 
-    public RitualOfTheReturnedExileEffect(final RitualOfTheReturnedExileEffect effect) {
+    private RitualOfTheReturnedExileEffect(final RitualOfTheReturnedExileEffect effect) {
         super(effect);
     }
 

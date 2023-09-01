@@ -70,7 +70,7 @@ class PilgrimOfVirtueEffect extends PreventionEffectImpl {
         staticText = "The next time a black source of your choice would deal damage to you this turn, prevent that damage";
     }
 
-    public PilgrimOfVirtueEffect(final PilgrimOfVirtueEffect effect) {
+    private PilgrimOfVirtueEffect(final PilgrimOfVirtueEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }

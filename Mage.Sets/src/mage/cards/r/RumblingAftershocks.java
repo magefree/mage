@@ -82,7 +82,7 @@ class RumblingAftershocksDealDamageEffect extends OneShotEffect {
         this.staticText = "you may have {this} deal damage to any target equal to the number of times that spell was kicked";
     }
 
-    public RumblingAftershocksDealDamageEffect(final RumblingAftershocksDealDamageEffect effect) {
+    private RumblingAftershocksDealDamageEffect(final RumblingAftershocksDealDamageEffect effect) {
         super(effect);
     }
 

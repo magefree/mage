@@ -47,7 +47,7 @@ class PryingQuestionsEffect extends OneShotEffect {
         this.staticText = "puts a card from their hand on top of their library";
     }
 
-    public PryingQuestionsEffect(final PryingQuestionsEffect effect) {
+    private PryingQuestionsEffect(final PryingQuestionsEffect effect) {
         super(effect);
     }
 

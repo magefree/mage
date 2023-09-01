@@ -53,7 +53,7 @@ class PlagueFiendEffect extends OneShotEffect {
         this.cost = cost;
     }
 
-    public PlagueFiendEffect(final PlagueFiendEffect effect) {
+    private PlagueFiendEffect(final PlagueFiendEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

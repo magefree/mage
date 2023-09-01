@@ -54,7 +54,7 @@ class RealmsUnchartedEffect extends OneShotEffect {
                 "and the rest into your hand. Then shuffle";
     }
 
-    public RealmsUnchartedEffect(final RealmsUnchartedEffect effect) {
+    private RealmsUnchartedEffect(final RealmsUnchartedEffect effect) {
         super(effect);
     }
 

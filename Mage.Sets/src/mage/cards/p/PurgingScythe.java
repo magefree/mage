@@ -52,7 +52,7 @@ class PurgingScytheEffect extends OneShotEffect {
                 + "If two or more creatures are tied for least toughness, you choose one of them";
     }
 
-    public PurgingScytheEffect(final PurgingScytheEffect effect) {
+    private PurgingScytheEffect(final PurgingScytheEffect effect) {
         super(effect);
     }
 

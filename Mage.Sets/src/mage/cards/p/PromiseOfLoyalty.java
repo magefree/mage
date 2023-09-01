@@ -103,7 +103,7 @@ class PromiseOfLoyaltyAttackEffect extends RestrictionEffect {
         super(Duration.Custom);
     }
 
-    public PromiseOfLoyaltyAttackEffect(final PromiseOfLoyaltyAttackEffect effect) {
+    private PromiseOfLoyaltyAttackEffect(final PromiseOfLoyaltyAttackEffect effect) {
         super(effect);
     }
 

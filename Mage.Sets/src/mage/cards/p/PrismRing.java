@@ -47,7 +47,7 @@ class PrismRingTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), false);
     }
 
-    public PrismRingTriggeredAbility(final PrismRingTriggeredAbility ability) {
+    private PrismRingTriggeredAbility(final PrismRingTriggeredAbility ability) {
         super(ability);
     }
 

@@ -70,7 +70,7 @@ class PolisCrusherTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
     }
 
-    public PolisCrusherTriggeredAbility(final PolisCrusherTriggeredAbility ability) {
+    private PolisCrusherTriggeredAbility(final PolisCrusherTriggeredAbility ability) {
         super(ability);
     }
 

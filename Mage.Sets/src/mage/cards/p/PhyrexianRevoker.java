@@ -53,7 +53,7 @@ class PhyrexianRevokerEffect2 extends ContinuousRuleModifyingEffectImpl {
         staticText = "Activated abilities of sources with the chosen name can't be activated";
     }
 
-    public PhyrexianRevokerEffect2(final PhyrexianRevokerEffect2 effect) {
+    private PhyrexianRevokerEffect2(final PhyrexianRevokerEffect2 effect) {
         super(effect);
     }
 

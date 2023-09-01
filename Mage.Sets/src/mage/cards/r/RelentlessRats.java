@@ -58,7 +58,7 @@ public final class RelentlessRats extends CardImpl {
             staticText = "{this} gets +1/+1 for each other creature on the battlefield named Relentless Rats";
         }
 
-        public RelentlessRatsEffect(final RelentlessRatsEffect effect) {
+        private RelentlessRatsEffect(final RelentlessRatsEffect effect) {
             super(effect);
         }
 

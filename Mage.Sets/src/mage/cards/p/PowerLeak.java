@@ -58,7 +58,7 @@ class PowerLeakEffect extends OneShotEffect {
         this.staticText = "that player may pay any amount of mana. {this} deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way";
     }
 
-    public PowerLeakEffect(final PowerLeakEffect effect) {
+    private PowerLeakEffect(final PowerLeakEffect effect) {
         super(effect);
     }
 

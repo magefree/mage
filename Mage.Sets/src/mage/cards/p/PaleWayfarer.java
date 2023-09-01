@@ -69,7 +69,7 @@ class PaleWayfarerEffect extends OneShotEffect {
         staticText = "Target creature gains protection from the color of its controller's choice until end of turn";
     }
 
-    public PaleWayfarerEffect(final PaleWayfarerEffect effect) {
+    private PaleWayfarerEffect(final PaleWayfarerEffect effect) {
         super(effect);
     }
 
@@ -112,7 +112,7 @@ class ProtectionChosenColorTargetEffect extends ContinuousEffectImpl {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
     }
 
-    public ProtectionChosenColorTargetEffect(final ProtectionChosenColorTargetEffect effect) {
+    private ProtectionChosenColorTargetEffect(final ProtectionChosenColorTargetEffect effect) {
         super(effect);
         if (effect.chosenColor != null) {
             this.chosenColor = effect.chosenColor.copy();

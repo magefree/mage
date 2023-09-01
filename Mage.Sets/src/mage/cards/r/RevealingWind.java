@@ -59,7 +59,7 @@ class RevealingWindEffect extends OneShotEffect {
         this.staticText = "You may look at each face-down creature that's attacking or blocking";
     }
 
-    public RevealingWindEffect(final RevealingWindEffect effect) {
+    private RevealingWindEffect(final RevealingWindEffect effect) {
         super(effect);
     }
 

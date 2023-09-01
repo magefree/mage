@@ -66,7 +66,7 @@ class PrismaticWardPreventDamageEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to enchanted creature by sources of the chosen color.";
     }
 
-    public PrismaticWardPreventDamageEffect(final PrismaticWardPreventDamageEffect effect) {
+    private PrismaticWardPreventDamageEffect(final PrismaticWardPreventDamageEffect effect) {
         super(effect);
     }
 

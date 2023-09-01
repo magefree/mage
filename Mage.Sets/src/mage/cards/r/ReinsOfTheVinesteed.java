@@ -63,7 +63,7 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
         staticText = "you may return {this} from your graveyard to the battlefield attached to a creature that shares a creature type with that creature";
     }
 
-    public ReinsOfTheVinesteedEffect(final ReinsOfTheVinesteedEffect effect) {
+    private ReinsOfTheVinesteedEffect(final ReinsOfTheVinesteedEffect effect) {
         super(effect);
     }
 

@@ -65,7 +65,7 @@ class PrecognitionFieldExileEffect extends OneShotEffect {
         staticText = "exile the top card of your library";
     }
 
-    public PrecognitionFieldExileEffect(final PrecognitionFieldExileEffect effect) {
+    private PrecognitionFieldExileEffect(final PrecognitionFieldExileEffect effect) {
         super(effect);
     }
 

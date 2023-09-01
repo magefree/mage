@@ -29,7 +29,7 @@ public final class RallyTheForces extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public RallyTheForces (final RallyTheForces card) {
+    private RallyTheForces(final RallyTheForces card) {
         super(card);
     }
 

@@ -61,7 +61,7 @@ class RysorianBadgerEffect extends OneShotEffect {
                 + "and {this} assigns no combat damage this turn.";
     }
 
-    public RysorianBadgerEffect(final RysorianBadgerEffect effect) {
+    private RysorianBadgerEffect(final RysorianBadgerEffect effect) {
         super(effect);
     }
 

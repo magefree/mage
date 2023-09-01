@@ -55,7 +55,7 @@ class RansackEffect extends OneShotEffect {
                 + "and the rest on top of the library in any order";
     }
 
-    public RansackEffect(final RansackEffect effect) {
+    private RansackEffect(final RansackEffect effect) {
         super(effect);
     }
 

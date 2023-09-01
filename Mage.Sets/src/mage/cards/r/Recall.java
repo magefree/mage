@@ -49,7 +49,7 @@ class RecallEffect extends OneShotEffect {
         this.staticText = "Discard X cards, then return a card from your graveyard to your hand for each card discarded this way";
     }
 
-    public RecallEffect(final RecallEffect effect) {
+    private RecallEffect(final RecallEffect effect) {
         super(effect);
     }
 
