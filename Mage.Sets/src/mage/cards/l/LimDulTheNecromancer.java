@@ -71,7 +71,7 @@ class LimDulTheNecromancerEffect extends OneShotEffect {
         staticText = "return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types";
     }
 
-    public LimDulTheNecromancerEffect(final LimDulTheNecromancerEffect effect) {
+    private LimDulTheNecromancerEffect(final LimDulTheNecromancerEffect effect) {
         super(effect);
     }
 

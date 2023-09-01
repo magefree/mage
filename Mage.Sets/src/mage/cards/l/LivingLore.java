@@ -73,7 +73,7 @@ class LivingLoreExileEffect extends OneShotEffect {
         staticText = "exile an instant or sorcery card from your graveyard";
     }
 
-    public LivingLoreExileEffect(final LivingLoreExileEffect effect) {
+    private LivingLoreExileEffect(final LivingLoreExileEffect effect) {
         super(effect);
     }
 
@@ -143,7 +143,7 @@ class LivingLoreCastEffect extends OneShotEffect {
         this.staticText = "you may cast the exiled card without paying its mana cost";
     }
 
-    public LivingLoreCastEffect(final LivingLoreCastEffect effect) {
+    private LivingLoreCastEffect(final LivingLoreCastEffect effect) {
         super(effect);
     }
 

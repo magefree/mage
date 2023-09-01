@@ -56,7 +56,7 @@ class KazuulsTollCollectorEffect extends OneShotEffect {
         staticText = "attach target Equipment you control to {this}";
     }
 
-    public KazuulsTollCollectorEffect(final KazuulsTollCollectorEffect effect) {
+    private KazuulsTollCollectorEffect(final KazuulsTollCollectorEffect effect) {
         super(effect);
     }
 

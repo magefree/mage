@@ -60,7 +60,7 @@ class KalitasDestroyEffect extends OneShotEffect {
         this.staticText = "Destroy target creature. If that creature dies this way, create a black Vampire creature token. Its power is equal to that creature's power and its toughness is equal to that creature's toughness";
     }
 
-    public KalitasDestroyEffect(final KalitasDestroyEffect effect) {
+    private KalitasDestroyEffect(final KalitasDestroyEffect effect) {
         super(effect);
     }
 

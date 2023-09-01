@@ -64,7 +64,7 @@ class JarJarBinksEffect extends OneShotEffect {
         this.staticText = "target opponent gains control of it";
     }
 
-    public JarJarBinksEffect(final JarJarBinksEffect effect) {
+    private JarJarBinksEffect(final JarJarBinksEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class JarJarBinksGainControlSourceEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 
-    public JarJarBinksGainControlSourceEffect(final JarJarBinksGainControlSourceEffect effect) {
+    private JarJarBinksGainControlSourceEffect(final JarJarBinksGainControlSourceEffect effect) {
         super(effect);
     }
 
@@ -125,7 +125,7 @@ class JarJarBinksTapEffect extends OneShotEffect {
         this.staticText = "tap the creature you control with the highest power. If two or more creatures are tied for the greatest power, you choose one of them";
     }
 
-    public JarJarBinksTapEffect(final JarJarBinksTapEffect effect) {
+    private JarJarBinksTapEffect(final JarJarBinksTapEffect effect) {
         super(effect);
     }
 

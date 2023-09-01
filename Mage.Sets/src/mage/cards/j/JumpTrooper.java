@@ -65,7 +65,7 @@ class JumpTrooperTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public JumpTrooperTriggeredAbility(final JumpTrooperTriggeredAbility ability) {
+    private JumpTrooperTriggeredAbility(final JumpTrooperTriggeredAbility ability) {
         super(ability);
     }
 

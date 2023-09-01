@@ -24,7 +24,7 @@ public final class LeadenMyr extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public LeadenMyr (final LeadenMyr card) {
+    private LeadenMyr(final LeadenMyr card) {
         super(card);
     }
 

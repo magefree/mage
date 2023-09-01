@@ -132,7 +132,7 @@ class KingNarfisBetrayalSecondEffect extends OneShotEffect {
                 " and you may spend mana as though it were mana of any color to cast those spells";
     }
 
-    public KingNarfisBetrayalSecondEffect(final KingNarfisBetrayalSecondEffect effect) {
+    private KingNarfisBetrayalSecondEffect(final KingNarfisBetrayalSecondEffect effect) {
         super(effect);
     }
 

@@ -29,7 +29,7 @@ public final class LiquimetalCoating extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LiquimetalCoating (final LiquimetalCoating card) {
+    private LiquimetalCoating(final LiquimetalCoating card) {
         super(card);
     }
 

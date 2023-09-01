@@ -48,7 +48,7 @@ class LithomancersFocusPreventDamageToTargetEffect extends PreventionEffectImpl 
         staticText = "Prevent all damage that would be dealt to that creature this turn by colorless sources";
     }
 
-    public LithomancersFocusPreventDamageToTargetEffect(final LithomancersFocusPreventDamageToTargetEffect effect) {
+    private LithomancersFocusPreventDamageToTargetEffect(final LithomancersFocusPreventDamageToTargetEffect effect) {
         super(effect);
     }
 

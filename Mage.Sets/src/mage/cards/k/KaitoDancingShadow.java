@@ -118,7 +118,7 @@ class KaitoDancingShadowIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
         super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
     }
 
-    public KaitoDancingShadowIncreaseLoyaltyUseEffect(final KaitoDancingShadowIncreaseLoyaltyUseEffect effect) {
+    private KaitoDancingShadowIncreaseLoyaltyUseEffect(final KaitoDancingShadowIncreaseLoyaltyUseEffect effect) {
         super(effect);
     }
 

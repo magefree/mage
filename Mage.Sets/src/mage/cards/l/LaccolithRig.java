@@ -57,7 +57,7 @@ class LaccolithRigEffect extends OneShotEffect {
         this.staticText = "it deal damage equal to its power to target creature";
     }
 
-    public LaccolithRigEffect(final LaccolithRigEffect effect) {
+    private LaccolithRigEffect(final LaccolithRigEffect effect) {
         super(effect);
     }
 

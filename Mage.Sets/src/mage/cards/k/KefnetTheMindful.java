@@ -66,7 +66,7 @@ class KefnetTheMindfulRestrictionEffect extends RestrictionEffect {
         staticText = "{this} can't attack or block unless you have seven or more cards in your hand";
     }
 
-    public KefnetTheMindfulRestrictionEffect(final KefnetTheMindfulRestrictionEffect effect) {
+    private KefnetTheMindfulRestrictionEffect(final KefnetTheMindfulRestrictionEffect effect) {
         super(effect);
     }
 

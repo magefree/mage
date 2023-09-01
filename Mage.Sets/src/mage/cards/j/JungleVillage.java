@@ -47,7 +47,7 @@ public final class JungleVillage extends CardImpl {
 
     public final class JungleVillageAbility extends ActivatedAbilityImpl {
 
-        public JungleVillageAbility(JungleVillageAbility ability) {
+        private JungleVillageAbility(final JungleVillageAbility ability) {
             super(ability);
         }
 

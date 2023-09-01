@@ -68,7 +68,7 @@ class JourneyToEternityReturnTransformedSourceEffect extends OneShotEffect {
         this.staticText = ", then return {this} to the battlefield transformed under your control.";
     }
 
-    public JourneyToEternityReturnTransformedSourceEffect(final JourneyToEternityReturnTransformedSourceEffect effect) {
+    private JourneyToEternityReturnTransformedSourceEffect(final JourneyToEternityReturnTransformedSourceEffect effect) {
         super(effect);
     }
 

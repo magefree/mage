@@ -61,7 +61,7 @@ class KillSuitCultistEffect extends ReplacementEffectImpl {
         staticText = "The next time damage would be dealt to target creature this turn, destroy that creature instead";
     }
 
-    public KillSuitCultistEffect(final KillSuitCultistEffect effect) {
+    private KillSuitCultistEffect(final KillSuitCultistEffect effect) {
         super(effect);
     }
 

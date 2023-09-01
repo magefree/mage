@@ -55,7 +55,7 @@ class LeovoldEmissaryOfTrestEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Each opponent can't draw more than one card each turn";
     }
 
-    public LeovoldEmissaryOfTrestEffect(final LeovoldEmissaryOfTrestEffect effect) {
+    private LeovoldEmissaryOfTrestEffect(final LeovoldEmissaryOfTrestEffect effect) {
         super(effect);
     }
 

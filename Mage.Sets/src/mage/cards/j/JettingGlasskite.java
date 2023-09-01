@@ -56,7 +56,7 @@ class JettingGlasskiteAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CounterTargetEffect(), false);
     }
 
-    public JettingGlasskiteAbility(final JettingGlasskiteAbility ability) {
+    private JettingGlasskiteAbility(final JettingGlasskiteAbility ability) {
         super(ability);
         turnUsed = ability.turnUsed;
     }
