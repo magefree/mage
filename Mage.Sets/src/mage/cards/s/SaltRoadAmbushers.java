@@ -58,7 +58,7 @@ private static final FilterControlledCreaturePermanent filter = new FilterContro
         super(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), filter, true);
     }
 
-    public SaltRoadAmbushersTriggeredAbility(final SaltRoadAmbushersTriggeredAbility ability) {
+    private SaltRoadAmbushersTriggeredAbility(final SaltRoadAmbushersTriggeredAbility ability) {
         super(ability);
     }
 

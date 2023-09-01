@@ -51,7 +51,7 @@ class SuddenReclamationEffect extends OneShotEffect {
         this.staticText = ", then return a creature card and a land card from your graveyard to your hand";
     }
 
-    public SuddenReclamationEffect(final SuddenReclamationEffect effect) {
+    private SuddenReclamationEffect(final SuddenReclamationEffect effect) {
         super(effect);
     }
 

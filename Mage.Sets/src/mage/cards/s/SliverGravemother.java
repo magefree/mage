@@ -69,7 +69,7 @@ class SliverGravemotherEffect extends ContinuousEffectImpl {
         this.staticText = "each Sliver creature card in your graveyard has encore {X}, where X is its mana value";
     }
 
-    public SliverGravemotherEffect(final SliverGravemotherEffect effect) {
+    private SliverGravemotherEffect(final SliverGravemotherEffect effect) {
         super(effect);
     }
 

@@ -53,7 +53,7 @@ class BecomesAllColorsEffect extends ContinuousEffectImpl {
         staticText = "{this} becomes all colors until end of turn";
     }
 
-    public BecomesAllColorsEffect(final BecomesAllColorsEffect effect) {
+    private BecomesAllColorsEffect(final BecomesAllColorsEffect effect) {
         super(effect);
     }
 

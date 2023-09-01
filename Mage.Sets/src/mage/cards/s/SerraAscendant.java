@@ -60,7 +60,7 @@ class SerraAscendantEffect extends ContinuousEffectImpl {
         staticText = "As long as you have 30 or more life, {this} gets +5/+5 and has flying";
     }
 
-    public SerraAscendantEffect(final SerraAscendantEffect effect) {
+    private SerraAscendantEffect(final SerraAscendantEffect effect) {
         super(effect);
     }
 

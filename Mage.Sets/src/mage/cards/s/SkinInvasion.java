@@ -69,7 +69,7 @@ class SkinInvasionEffect extends OneShotEffect {
         this.staticText = "return {this} to the battlefield transformed under your control";
     }
 
-    public SkinInvasionEffect(final SkinInvasionEffect effect) {
+    private SkinInvasionEffect(final SkinInvasionEffect effect) {
         super(effect);
     }
 

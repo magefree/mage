@@ -56,7 +56,7 @@ class SidisiBroodTyrantTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), false);
     }
 
-    public SidisiBroodTyrantTriggeredAbility(final SidisiBroodTyrantTriggeredAbility ability) {
+    private SidisiBroodTyrantTriggeredAbility(final SidisiBroodTyrantTriggeredAbility ability) {
         super(ability);
     }
 

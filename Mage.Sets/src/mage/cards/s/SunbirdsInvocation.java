@@ -96,7 +96,7 @@ class SunbirdsInvocationEffect extends OneShotEffect {
         super(Outcome.PutCardInPlay);
     }
 
-    public SunbirdsInvocationEffect(final SunbirdsInvocationEffect effect) {
+    private SunbirdsInvocationEffect(final SunbirdsInvocationEffect effect) {
         super(effect);
     }
 

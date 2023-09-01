@@ -132,7 +132,7 @@ class SenTripletsPlayFromOpponentsHandEffect extends AsThoughEffectImpl {
         staticText = "You may play lands and cast spells from that player's hand this turn";
     }
 
-    public SenTripletsPlayFromOpponentsHandEffect(final SenTripletsPlayFromOpponentsHandEffect effect) {
+    private SenTripletsPlayFromOpponentsHandEffect(final SenTripletsPlayFromOpponentsHandEffect effect) {
         super(effect);
     }
 

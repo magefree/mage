@@ -71,7 +71,7 @@ class SerraBestiaryRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl
         staticText = ", and its activated abilities with {T} in their costs can't be activated";
     }
 
-    public SerraBestiaryRuleModifyingEffect(final SerraBestiaryRuleModifyingEffect effect) {
+    private SerraBestiaryRuleModifyingEffect(final SerraBestiaryRuleModifyingEffect effect) {
         super(effect);
     }
 

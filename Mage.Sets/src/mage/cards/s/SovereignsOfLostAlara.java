@@ -57,7 +57,7 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
         staticText = "search your library for an Aura card that could enchant that creature, put it onto the battlefield attached to that creature, then shuffle";
     }
 
-    public SovereignsOfLostAlaraEffect(final SovereignsOfLostAlaraEffect effect) {
+    private SovereignsOfLostAlaraEffect(final SovereignsOfLostAlaraEffect effect) {
         super(effect);
     }
 

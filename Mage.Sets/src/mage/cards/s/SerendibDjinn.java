@@ -58,7 +58,7 @@ class SerendibDjinnEffect extends OneShotEffect {
         this.staticText = "sacrifice a Land. If it is an Island {this} deals 3 damage to you";
     }
 
-    public SerendibDjinnEffect(final SerendibDjinnEffect effect) {
+    private SerendibDjinnEffect(final SerendibDjinnEffect effect) {
         super(effect);
     }
 

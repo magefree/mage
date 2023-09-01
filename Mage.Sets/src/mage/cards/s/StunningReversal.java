@@ -47,7 +47,7 @@ class StunningReversalEffect extends ReplacementEffectImpl {
         staticText = "The next time you would lose the game this turn, instead draw seven cards and your life total becomes 1";
     }
 
-    public StunningReversalEffect(final StunningReversalEffect effect) {
+    private StunningReversalEffect(final StunningReversalEffect effect) {
         super(effect);
     }
 

@@ -51,7 +51,7 @@ class ScarscaleRitualCost extends CostImpl {
         this.text = "put a -1/-1 counter on a creature you control";
     }
 
-    public ScarscaleRitualCost(ScarscaleRitualCost cost) {
+    private ScarscaleRitualCost(final ScarscaleRitualCost cost) {
         super(cost);
     }
 

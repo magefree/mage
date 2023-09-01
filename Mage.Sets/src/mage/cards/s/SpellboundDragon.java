@@ -57,7 +57,7 @@ class SpellboundDragonEffect extends OneShotEffect {
         staticText = "draw a card, then discard a card. Spellbound Dragon gets +X/+0 until end of turn, where X is the discarded card's mana value";
     }
 
-    public SpellboundDragonEffect(final SpellboundDragonEffect effect) {
+    private SpellboundDragonEffect(final SpellboundDragonEffect effect) {
         super(effect);
     }
 

@@ -50,7 +50,7 @@ class SkulduggeryEffect extends OneShotEffect {
         this.staticText = "Until end of turn, target creature you control gets +1/+1 and target creature an opponent controls gets -1/-1";
     }
 
-    public SkulduggeryEffect(final SkulduggeryEffect effect) {
+    private SkulduggeryEffect(final SkulduggeryEffect effect) {
         super(effect);
     }
 

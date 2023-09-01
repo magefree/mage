@@ -60,7 +60,7 @@ class ScourgeOfNelTothPlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard by paying {B}{B} and sacrificing two creatures rather than paying its mana cost";
     }
 
-    public ScourgeOfNelTothPlayEffect(final ScourgeOfNelTothPlayEffect effect) {
+    private ScourgeOfNelTothPlayEffect(final ScourgeOfNelTothPlayEffect effect) {
         super(effect);
     }
 

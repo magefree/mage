@@ -49,7 +49,7 @@ class SpiritualFocusTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new SpiritualFocusDrawCardEffect());
     }
 
-    public SpiritualFocusTriggeredAbility(final SpiritualFocusTriggeredAbility ability) {
+    private SpiritualFocusTriggeredAbility(final SpiritualFocusTriggeredAbility ability) {
         super(ability);
     }
 
@@ -91,7 +91,7 @@ class SpiritualFocusDrawCardEffect extends OneShotEffect {
         super(Outcome.DrawCard);
     }
 
-    public SpiritualFocusDrawCardEffect(final SpiritualFocusDrawCardEffect effect) {
+    private SpiritualFocusDrawCardEffect(final SpiritualFocusDrawCardEffect effect) {
         super(effect);
     }
 

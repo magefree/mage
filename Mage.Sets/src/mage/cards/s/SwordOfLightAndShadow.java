@@ -69,7 +69,7 @@ class SwordOfLightAndShadowEffect extends OneShotEffect {
         staticText = "and you may return up to one target creature card from your graveyard to your hand";
     }
 
-    public SwordOfLightAndShadowEffect(final SwordOfLightAndShadowEffect effect) {
+    private SwordOfLightAndShadowEffect(final SwordOfLightAndShadowEffect effect) {
         super(effect);
     }
 

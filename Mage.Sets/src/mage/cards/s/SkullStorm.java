@@ -52,7 +52,7 @@ class SkullStormEffect extends OneShotEffect {
                 + "Each opponent who can't loses half their life, rounded up.";
     }
 
-    public SkullStormEffect(final SkullStormEffect effect) {
+    private SkullStormEffect(final SkullStormEffect effect) {
         super(effect);
     }
 

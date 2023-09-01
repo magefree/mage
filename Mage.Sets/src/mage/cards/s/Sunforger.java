@@ -79,7 +79,7 @@ class SunforgerEffect extends OneShotEffect {
                 + "card without paying its mana cost. Then shuffle";
     }
 
-    public SunforgerEffect(final SunforgerEffect effect) {
+    private SunforgerEffect(final SunforgerEffect effect) {
         super(effect);
     }
 
@@ -131,7 +131,7 @@ class SunforgerUnattachCost extends CostImpl {
         this.text = "Unattach " + name;
     }
 
-    public SunforgerUnattachCost(final SunforgerUnattachCost cost) {
+    private SunforgerUnattachCost(final SunforgerUnattachCost cost) {
         super(cost);
     }
 

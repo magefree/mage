@@ -43,7 +43,7 @@ public final class SoulsMajesty extends CardImpl {
             staticText = "Draw cards equal to the power of target creature you control";
         }
 
-        public SoulsMajestyEffect(final SoulsMajestyEffect effect) {
+        private SoulsMajestyEffect(final SoulsMajestyEffect effect) {
             super(effect);
         }
 

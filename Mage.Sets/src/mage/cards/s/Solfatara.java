@@ -52,7 +52,7 @@ class SolfataraEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Target player can't play land cards this turn";
     }
 
-    public SolfataraEffect(final SolfataraEffect effect) {
+    private SolfataraEffect(final SolfataraEffect effect) {
         super(effect);
     }
 

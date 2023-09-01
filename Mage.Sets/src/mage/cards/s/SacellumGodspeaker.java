@@ -61,7 +61,7 @@ class SacellumGodspeakerEffect extends ManaEffect {
         staticText = "Reveal any number of creature cards with power 5 or greater from your hand. Add {G} for each card revealed this way";
     }
 
-    public SacellumGodspeakerEffect(final SacellumGodspeakerEffect effect) {
+    private SacellumGodspeakerEffect(final SacellumGodspeakerEffect effect) {
         super(effect);
     }
 

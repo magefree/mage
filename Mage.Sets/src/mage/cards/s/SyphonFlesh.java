@@ -46,7 +46,7 @@ class SyphonFleshEffect extends OneShotEffect {
         this.staticText = "each other player sacrifices a creature. You create a 2/2 black Zombie creature token for each creature sacrificed this way.";
     }
 
-    public SyphonFleshEffect(final SyphonFleshEffect effect) {
+    private SyphonFleshEffect(final SyphonFleshEffect effect) {
         super(effect);
     }
 

@@ -45,7 +45,7 @@ class SoulsGraceEffect extends OneShotEffect {
         this.staticText = "You gain life equal to target creature's power";
     }
 
-    public SoulsGraceEffect(final SoulsGraceEffect effect) {
+    private SoulsGraceEffect(final SoulsGraceEffect effect) {
         super(effect);
     }
 

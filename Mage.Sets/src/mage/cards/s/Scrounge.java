@@ -46,7 +46,7 @@ class ScroungeEffect extends OneShotEffect {
         staticText = "Target opponent chooses an artifact card in their graveyard. Put that card onto the battlefield under your control";
     }
 
-    public ScroungeEffect(final ScroungeEffect effect) {
+    private ScroungeEffect(final ScroungeEffect effect) {
         super(effect);
     }
 

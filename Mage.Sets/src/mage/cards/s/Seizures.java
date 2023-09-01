@@ -57,7 +57,7 @@ class SeizuresEffect extends OneShotEffect {
         staticText = "{this} deals 3 damage to that creature's controller unless that player pays {3}";
     }
 
-    public SeizuresEffect(final SeizuresEffect effect) {
+    private SeizuresEffect(final SeizuresEffect effect) {
         super(effect);
     }
 

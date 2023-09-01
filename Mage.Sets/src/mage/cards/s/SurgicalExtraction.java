@@ -62,7 +62,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
                 + "with the same name as that card and exile them. Then that player shuffles";
     }
 
-    public SurgicalExtractionEffect(final SurgicalExtractionEffect effect) {
+    private SurgicalExtractionEffect(final SurgicalExtractionEffect effect) {
         super(effect);
     }
 

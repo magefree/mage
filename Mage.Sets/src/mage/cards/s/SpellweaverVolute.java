@@ -68,7 +68,7 @@ class SpellweaverVoluteEffect extends OneShotEffect {
                 + "If you do, exile the enchanted card and attach {this} to another instant card in a graveyard";
     }
 
-    public SpellweaverVoluteEffect(final SpellweaverVoluteEffect effect) {
+    private SpellweaverVoluteEffect(final SpellweaverVoluteEffect effect) {
         super(effect);
     }
 

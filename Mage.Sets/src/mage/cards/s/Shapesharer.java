@@ -63,7 +63,7 @@ class ShapesharerEffect extends OneShotEffect {
         this.staticText = "Target Shapeshifter becomes a copy of target creature until your next turn.";
     }
 
-    public ShapesharerEffect(final ShapesharerEffect effect) {
+    private ShapesharerEffect(final ShapesharerEffect effect) {
         super(effect);
     }
 

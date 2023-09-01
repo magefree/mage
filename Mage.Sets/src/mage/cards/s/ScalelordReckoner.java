@@ -62,7 +62,7 @@ class ScalelardReckonerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
     }
 
-    public ScalelardReckonerTriggeredAbility(final ScalelardReckonerTriggeredAbility ability) {
+    private ScalelardReckonerTriggeredAbility(final ScalelardReckonerTriggeredAbility ability) {
         super(ability);
     }
 

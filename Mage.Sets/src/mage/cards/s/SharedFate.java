@@ -164,7 +164,7 @@ class SharedFateLookEffect extends AsThoughEffectImpl {
         staticText = "Each player may look at the cards exiled with {this}";
     }
 
-    public SharedFateLookEffect(final SharedFateLookEffect effect) {
+    private SharedFateLookEffect(final SharedFateLookEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class SteamVinesEffect extends OneShotEffect {
         staticText = "destroy it and {this} deals 1 damage to that land's controller. That player attaches {this} to a land of their choice";
     }
 
-    public SteamVinesEffect(final SteamVinesEffect effect) {
+    private SteamVinesEffect(final SteamVinesEffect effect) {
         super(effect);
     }
 

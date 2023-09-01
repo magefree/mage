@@ -61,7 +61,7 @@ class SehtsTigerEffect extends OneShotEffect {
         staticText = "you gain protection from the color of your choice until end of turn. <i>(You can't be targeted, dealt damage, or enchanted by anything of the chosen color.)</i>";
     }
 
-    public SehtsTigerEffect(final SehtsTigerEffect effect) {
+    private SehtsTigerEffect(final SehtsTigerEffect effect) {
         super(effect);
     }
 

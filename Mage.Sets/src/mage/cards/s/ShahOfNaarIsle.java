@@ -58,7 +58,7 @@ class ShahOfNaarIsleTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this}'s echo cost is paid, ");
     }
 
-    public ShahOfNaarIsleTriggeredAbility(final ShahOfNaarIsleTriggeredAbility effect) {
+    private ShahOfNaarIsleTriggeredAbility(final ShahOfNaarIsleTriggeredAbility effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class ShahOfNaarIsleEffect extends OneShotEffect {
         this.staticText = "each opponent may draw up to three cards";
     }
 
-    public ShahOfNaarIsleEffect(final ShahOfNaarIsleEffect effect) {
+    private ShahOfNaarIsleEffect(final ShahOfNaarIsleEffect effect) {
         super(effect);
     }
 
