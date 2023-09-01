@@ -67,7 +67,7 @@ class TorrentOfSoulsEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
     }
 
-    public TorrentOfSoulsEffect(final TorrentOfSoulsEffect effect) {
+    private TorrentOfSoulsEffect(final TorrentOfSoulsEffect effect) {
         super(effect);
     }
 

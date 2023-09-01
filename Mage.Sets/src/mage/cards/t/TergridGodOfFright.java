@@ -142,7 +142,7 @@ class TergridGodOfFrightEffect extends OneShotEffect {
         super(Outcome.Neutral);
     }
 
-    public TergridGodOfFrightEffect(final TergridGodOfFrightEffect effect) {
+    private TergridGodOfFrightEffect(final TergridGodOfFrightEffect effect) {
         super(effect);
     }
 
@@ -177,7 +177,7 @@ class TergridsLaternEffect extends OneShotEffect {
         staticText = "Target player loses 3 life unless they sacrifice a nonland permanent or discard a card";
     }
 
-    public TergridsLaternEffect(final TergridsLaternEffect effect) {
+    private TergridsLaternEffect(final TergridsLaternEffect effect) {
         super(effect);
     }
 

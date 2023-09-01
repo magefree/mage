@@ -29,7 +29,7 @@ public final class TowerOfChampions extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TowerOfChampions (final TowerOfChampions card) {
+    private TowerOfChampions(final TowerOfChampions card) {
         super(card);
     }
 

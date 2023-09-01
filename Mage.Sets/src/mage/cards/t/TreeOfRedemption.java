@@ -51,7 +51,7 @@ class TreeOfRedemptionEffect extends OneShotEffect {
         staticText = "Exchange your life total with {this}'s toughness";
     }
 
-    public TreeOfRedemptionEffect(final TreeOfRedemptionEffect effect) {
+    private TreeOfRedemptionEffect(final TreeOfRedemptionEffect effect) {
         super(effect);
     }
 

@@ -57,7 +57,7 @@ class TourachsChantEffect extends OneShotEffect {
         staticText = "{this} deals 3 damage to that player unless they put a -1/-1 counter on a creature they control";
     }
 
-    public TourachsChantEffect(final TourachsChantEffect effect) {
+    private TourachsChantEffect(final TourachsChantEffect effect) {
         super(effect);
     }
 

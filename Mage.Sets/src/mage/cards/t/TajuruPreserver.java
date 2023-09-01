@@ -48,7 +48,7 @@ class TajuruPreserverEffect extends ReplacementEffectImpl {
         staticText = "Spells and abilities your opponents control can't cause you to sacrifice permanents";
     }
 
-    public TajuruPreserverEffect(final TajuruPreserverEffect effect) {
+    private TajuruPreserverEffect(final TajuruPreserverEffect effect) {
         super(effect);
     }
 

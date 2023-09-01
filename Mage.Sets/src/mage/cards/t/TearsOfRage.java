@@ -58,7 +58,7 @@ class TearsOfRageEffect extends OneShotEffect {
         this.staticText = "Sacrifice those creatures at the beginning of the next end step";
     }
 
-    public TearsOfRageEffect(final TearsOfRageEffect effect) {
+    private TearsOfRageEffect(final TearsOfRageEffect effect) {
         super(effect);
     }
 

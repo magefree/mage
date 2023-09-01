@@ -108,7 +108,7 @@ class TheBigIdeaEffect extends OneShotEffect {
         this.staticText = "Roll a six-sided die. Create a number of 1/1 red Brainiac creature tokens equal to the result";
     }
 
-    public TheBigIdeaEffect(final TheBigIdeaEffect effect) {
+    private TheBigIdeaEffect(final TheBigIdeaEffect effect) {
         super(effect);
     }
 

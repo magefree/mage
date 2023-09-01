@@ -51,7 +51,7 @@ class TimeSpiralEffect extends OneShotEffect {
         staticText = "Each player shuffles their hand and graveyard into their library";
     }
 
-    public TimeSpiralEffect(final TimeSpiralEffect effect) {
+    private TimeSpiralEffect(final TimeSpiralEffect effect) {
         super(effect);
     }
 

@@ -65,7 +65,7 @@ class TerastodonEffect extends OneShotEffect {
         this.staticText = "you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token";
     }
 
-    public TerastodonEffect(final TerastodonEffect effect) {
+    private TerastodonEffect(final TerastodonEffect effect) {
         super(effect);
     }
 

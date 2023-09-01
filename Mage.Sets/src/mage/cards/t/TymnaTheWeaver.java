@@ -63,7 +63,7 @@ class TymnaTheWeaverEffect extends OneShotEffect {
         this.staticText = "you may pay X life, where X is the number of opponents that were dealt combat damage this turn. If you do, draw X cards";
     }
 
-    public TymnaTheWeaverEffect(final TymnaTheWeaverEffect effect) {
+    private TymnaTheWeaverEffect(final TymnaTheWeaverEffect effect) {
         super(effect);
     }
 

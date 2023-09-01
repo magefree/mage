@@ -59,7 +59,7 @@ class TreacherousLinkEffect extends ReplacementEffectImpl {
         staticText = "All damage that would be dealt to enchanted creature is dealt to its controller instead";
     }
 
-    public TreacherousLinkEffect(final TreacherousLinkEffect effect) {
+    private TreacherousLinkEffect(final TreacherousLinkEffect effect) {
         super(effect);
     }
 

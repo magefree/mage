@@ -95,7 +95,7 @@ class TheBookOfVileDarknessCost extends CostImpl {
         this.text = "exile {this} and artifacts you control named Eye of Vecna and Hand of Vecna";
     }
 
-    public TheBookOfVileDarknessCost(final TheBookOfVileDarknessCost cost) {
+    private TheBookOfVileDarknessCost(final TheBookOfVileDarknessCost cost) {
         super(cost);
     }
 
