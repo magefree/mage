@@ -54,7 +54,7 @@ public class CardTextPredicate implements Predicate<Card> {
             if (input instanceof MockCard) {
                 fullName = ((MockCard) input).getFullName(true);
             } else if (input instanceof ModalDoubleFacedCard) {
-                fullName = input.getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + ((ModalDoubleFacedCard) input).getRightHalfCard().getName();
+                fullName = input.getName() + MockCard.DOUBLE_FACED_NAME_SEPARATOR + ((ModalDoubleFacedCard) input).getRightHalfCard().getName();
             } else if (input instanceof AdventureCard) {
                 fullName = input.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + ((AdventureCard) input).getSpellCard().getName();
             }

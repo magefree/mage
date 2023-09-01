@@ -1,10 +1,10 @@
 package mage.constants;
 
 import mage.abilities.Ability;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -78,7 +78,7 @@ public enum PutCards {
             case SHUFFLE:
                 return player.shuffleCardsToLibrary(card, game, source);
             case BATTLEFIELD_TRANSFORMED:
-                game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId(), Boolean.TRUE);
+                TransformingDoubleFacedCard.setCardTransformed(card, game);
             case BATTLEFIELD:
             case EXILED:
             case HAND:
@@ -104,7 +104,7 @@ public enum PutCards {
             case SHUFFLE:
                 return player.shuffleCardsToLibrary(cards, game, source);
             case BATTLEFIELD_TRANSFORMED:
-                cards.stream().forEach(uuid -> game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + uuid, Boolean.TRUE));
+                cards.getCards(game).stream().forEach(card -> TransformingDoubleFacedCard.setCardTransformed(card, game));
             case BATTLEFIELD:
             case EXILED:
             case HAND:

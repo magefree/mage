@@ -1,45 +1,59 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
-
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.game.permanent.Permanent;
+
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author halljared
  */
-public final class NeglectedHeirloom extends CardImpl {
+public final class NeglectedHeirloom extends TransformingDoubleFacedCard {
 
     public NeglectedHeirloom(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.subtype.add(SubType.EQUIPMENT);
-
-        this.secondSideCardClazz = mage.cards.a.AshmouthBlade.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.EQUIPMENT}, "{1}",
+                "Ashmouth Blade",
+                new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.EQUIPMENT}, ""
+        );
 
         // Equipped creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
 
         // When equipped creature transforms, transform Neglected Heirloom.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new NeglectedHeirloomTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new NeglectedHeirloomTriggeredAbility());
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
+        this.getLeftHalfCard().addAbility(new EquipAbility(1, false));
+
+        // Ashmouth Blade
+        // Equipped creature gets +3/+3 and has first strike.
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(3, 3));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT
+        ).setText("and has first strike"));
+        this.getRightHalfCard().addAbility(ability);
+
+        // Equip {3}
+        this.getRightHalfCard().addAbility(new EquipAbility(3, false));
     }
 
     private NeglectedHeirloom(final NeglectedHeirloom card) {
@@ -70,12 +84,11 @@ class NeglectedHeirloomTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TRANSFORMED) {
-            if (game.getPermanent(event.getTargetId()).getAttachments().contains(this.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
+        return Optional
+                .ofNullable(getSourcePermanentIfItStillExists(game))
+                .filter(Objects::nonNull)
+                .map(Permanent::getAttachedTo)
+                .equals(event.getTargetId());
     }
 
     @Override
@@ -85,6 +98,6 @@ class NeglectedHeirloomTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When equipped creature transforms, transform Neglected Heirloom.";
+        return "When equipped creature transforms, transform {this}.";
     }
 }

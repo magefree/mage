@@ -512,7 +512,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Kozilek, the Great Distortion", 493, Rarity.MYTHIC, mage.cards.k.KozilekTheGreatDistortion.class));
         cards.add(new SetCardInfo("Primeval Titan", 494, Rarity.MYTHIC, mage.cards.p.PrimevalTitan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Huntmaster of the Fells", 495, Rarity.MYTHIC, mage.cards.h.HuntmasterOfTheFells.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ravager of the Fells", 495, Rarity.MYTHIC, mage.cards.r.RavagerOfTheFells.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Platinum Angel", 496, Rarity.RARE, mage.cards.p.PlatinumAngel.class));
         cards.add(new SetCardInfo("Brimaz, King of Oreskos", 497, Rarity.MYTHIC, mage.cards.b.BrimazKingOfOreskos.class));
         cards.add(new SetCardInfo("Arcanis the Omnipotent", 498, Rarity.RARE, mage.cards.a.ArcanisTheOmnipotent.class));
@@ -620,7 +619,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Rogue's Passage", 607, Rarity.RARE, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Darksteel Citadel", 608, Rarity.RARE, mage.cards.d.DarksteelCitadel.class));
         cards.add(new SetCardInfo("Havengul Laboratory", 609, Rarity.RARE, mage.cards.h.HavengulLaboratory.class));
-        cards.add(new SetCardInfo("Havengul Mystery", 609, Rarity.RARE, mage.cards.h.HavengulMystery.class));
         cards.add(new SetCardInfo("Bonescythe Sliver", 610, Rarity.RARE, mage.cards.b.BonescytheSliver.class));
         cards.add(new SetCardInfo("Constricting Sliver", 611, Rarity.RARE, mage.cards.c.ConstrictingSliver.class));
         cards.add(new SetCardInfo("Essence Sliver", 612, Rarity.RARE, mage.cards.e.EssenceSliver.class));
@@ -704,7 +702,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Dakkon Blackblade", 698, Rarity.RARE, mage.cards.d.DakkonBlackblade.class));
         cards.add(new SetCardInfo("Olivia, Mobilized for War", 699, Rarity.MYTHIC, mage.cards.o.OliviaMobilizedForWar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Huntmaster of the Fells", 700, Rarity.MYTHIC, mage.cards.h.HuntmasterOfTheFells.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ravager of the Fells", 700, Rarity.MYTHIC, mage.cards.r.RavagerOfTheFells.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elspeth, Knight-Errant", 701, Rarity.MYTHIC, mage.cards.e.ElspethKnightErrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wastes", 704, Rarity.RARE, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wastes", 705, Rarity.RARE, mage.cards.w.Wastes.class, NON_FULL_USE_VARIOUS));
@@ -723,7 +720,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Thought-Knot Seer", 720, Rarity.RARE, mage.cards.t.ThoughtKnotSeer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Diabolic Tutor", 721, Rarity.RARE, mage.cards.d.DiabolicTutor.class));
         cards.add(new SetCardInfo("Delver of Secrets", 722, Rarity.RARE, mage.cards.d.DelverOfSecrets.class));
-        cards.add(new SetCardInfo("Insectile Aberration", 722, Rarity.RARE, mage.cards.i.InsectileAberration.class));
         cards.add(new SetCardInfo("Lightning Strike", 724, Rarity.RARE, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Zur the Enchanter", 726, Rarity.RARE, mage.cards.z.ZurTheEnchanter.class));
         cards.add(new SetCardInfo("Fabled Passage", 727, Rarity.RARE, mage.cards.f.FabledPassage.class, NON_FULL_USE_VARIOUS));
@@ -885,13 +881,9 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Eldrazi Temple", 1154, Rarity.RARE, mage.cards.e.EldraziTemple.class));
         cards.add(new SetCardInfo("Esika, God of the Tree", 1155, Rarity.MYTHIC, mage.cards.e.EsikaGodOfTheTree.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archangel Avacyn", 1156, Rarity.MYTHIC, mage.cards.a.ArchangelAvacyn.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Avacyn, the Purifier", 1156, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodline Keeper", 1157, Rarity.RARE, mage.cards.b.BloodlineKeeper.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Lord of Lineage", 1157, Rarity.RARE, mage.cards.l.LordOfLineage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 1158, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Nicol Bolas, the Arisen", 1158, Rarity.MYTHIC, mage.cards.n.NicolBolasTheArisen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Westvale Abbey", 1159, Rarity.RARE, mage.cards.w.WestvaleAbbey.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ormendahl, Profane Prince", 1159, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Baral, Chief of Compliance", 1164, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class));
         cards.add(new SetCardInfo("Spellseeker", 1165, Rarity.RARE, mage.cards.s.Spellseeker.class));
         cards.add(new SetCardInfo("Magus of the Wheel", 1166, Rarity.RARE, mage.cards.m.MagusOfTheWheel.class));
@@ -938,13 +930,9 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Inkmoth Nexus", 1207, Rarity.RARE, mage.cards.i.InkmothNexus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Esika, God of the Tree", 1208, Rarity.MYTHIC, mage.cards.e.EsikaGodOfTheTree.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archangel Avacyn", 1209, Rarity.MYTHIC, mage.cards.a.ArchangelAvacyn.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Avacyn, the Purifier", 1209, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodline Keeper", 1210, Rarity.RARE, mage.cards.b.BloodlineKeeper.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Lord of Lineage", 1210, Rarity.RARE, mage.cards.l.LordOfLineage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 1211, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Nicol Bolas, the Arisen", 1211, Rarity.MYTHIC, mage.cards.n.NicolBolasTheArisen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Westvale Abbey", 1212, Rarity.RARE, mage.cards.w.WestvaleAbbey.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Ormendahl, Profane Prince", 1212, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Phyrexian Unlife", 1213, Rarity.RARE, mage.cards.p.PhyrexianUnlife.class));
         cards.add(new SetCardInfo("Phyrexian Crusader", 1214, Rarity.RARE, mage.cards.p.PhyrexianCrusader.class));
         cards.add(new SetCardInfo("Plague Engineer", 1215, Rarity.RARE, mage.cards.p.PlagueEngineer.class));
@@ -974,7 +962,6 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Forge, Neverwinter Charlatan", 1239, Rarity.RARE, mage.cards.f.ForgeNeverwinterCharlatan.class));
         cards.add(new SetCardInfo("Holga, Relentless Rager", 1240, Rarity.RARE, mage.cards.h.HolgaRelentlessRager.class));
         cards.add(new SetCardInfo("Doric, Nature's Warden", 1241, Rarity.RARE, mage.cards.d.DoricNaturesWarden.class));
-        cards.add(new SetCardInfo("Doric, Owlbear Avenger", 1241, Rarity.RARE, mage.cards.d.DoricOwlbearAvenger.class));
         cards.add(new SetCardInfo("Edgin, Larcenous Lutenist", 1242, Rarity.RARE, mage.cards.e.EdginLarcenousLutenist.class));
         cards.add(new SetCardInfo("Ugin, the Ineffable", 1243, Rarity.RARE, mage.cards.u.UginTheIneffable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sorin, Imperious Bloodlord", 1244, Rarity.MYTHIC, mage.cards.s.SorinImperiousBloodlord.class));

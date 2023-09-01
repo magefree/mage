@@ -1,41 +1,58 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
-
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.constants.SuperType;
-import mage.cards.CardImpl;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.permanent.token.IxalanVampireToken;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
  */
-public final class LegionsLanding extends CardImpl {
+public final class LegionsLanding extends TransformingDoubleFacedCard {
 
     public LegionsLanding(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-
-        this.supertype.add(SuperType.LEGENDARY);
-
-        this.secondSideCardClazz = mage.cards.a.AdantoTheFirstFort.class;
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ENCHANTMENT}, new SubType[]{}, "{W}",
+                "Adanto, the First Fort",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
         // When Legion's Landing enters the battlefield, create a 1/1 white Vampire creature token with lifelink.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken())));
+        this.getLeftHalfCard().addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken())));
 
         // When you attack with three or more creatures, transform Legion's Landing.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new LegionsLandingTriggeredAbility(new TransformSourceEffect()));
+        this.getLeftHalfCard().addAbility(new AttacksWithCreaturesTriggeredAbility(new TransformSourceEffect(), 3)
+                .setTriggerPhrase("When you attack with three or more creatures, "));
+
+        // Adanto, the First Fort
+        // (Transforms from Legion's Landing.)
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new InfoEffect("<i>(Transforms from Legion's Landing.)</i>")));
+
+        // T: Add W.
+        this.getRightHalfCard().addAbility(new WhiteManaAbility());
+
+        // 2W, T: Create a 1/1 white Vampire creature token with lifelink.
+        Ability ability = new SimpleActivatedAbility(
+                new CreateTokenEffect(new IxalanVampireToken()), new ManaCostsImpl<>("{2}{W}")
+        );
+        ability.addCost(new TapSourceCost());
+        this.getRightHalfCard().addAbility(ability);
     }
 
     private LegionsLanding(final LegionsLanding card) {
@@ -45,32 +62,5 @@ public final class LegionsLanding extends CardImpl {
     @Override
     public LegionsLanding copy() {
         return new LegionsLanding(this);
-    }
-}
-
-class LegionsLandingTriggeredAbility extends TriggeredAbilityImpl {
-
-    public LegionsLandingTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
-        setTriggerPhrase("When you attack with three or more creatures, " );
-    }
-
-    public LegionsLandingTriggeredAbility(final LegionsLandingTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LegionsLandingTriggeredAbility copy() {
-        return new LegionsLandingTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getCombat().getAttackers().size() >= 3 && game.getCombat().getAttackingPlayerId().equals(getControllerId());
     }
 }

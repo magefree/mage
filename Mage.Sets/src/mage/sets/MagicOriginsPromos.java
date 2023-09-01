@@ -25,7 +25,6 @@ public class MagicOriginsPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Alhammarret, High Arbiter", "43s", Rarity.RARE, mage.cards.a.AlhammarretHighArbiter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chandra's Ignition", "137s", Rarity.RARE, mage.cards.c.ChandrasIgnition.class));
         cards.add(new SetCardInfo("Chandra, Fire of Kaladesh", "135s", Rarity.MYTHIC, mage.cards.c.ChandraFireOfKaladesh.class));
-        cards.add(new SetCardInfo("Chandra, Roaring Flame", "135s", Rarity.MYTHIC, mage.cards.c.ChandraRoaringFlame.class));
         cards.add(new SetCardInfo("Conclave Naturalists", 171, Rarity.UNCOMMON, mage.cards.c.ConclaveNaturalists.class));
         cards.add(new SetCardInfo("Dark Petition", "90s", Rarity.RARE, mage.cards.d.DarkPetition.class));
         cards.add(new SetCardInfo("Despoiler of Souls", "93s", Rarity.RARE, mage.cards.d.DespoilerOfSouls.class));
@@ -36,7 +35,6 @@ public class MagicOriginsPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Exquisite Firecraft", "143s", Rarity.RARE, mage.cards.e.ExquisiteFirecraft.class));
         cards.add(new SetCardInfo("Gaea's Revenge", "177s", Rarity.RARE, mage.cards.g.GaeasRevenge.class));
         cards.add(new SetCardInfo("Gideon's Phalanx", "14s", Rarity.RARE, mage.cards.g.GideonsPhalanx.class));
-        cards.add(new SetCardInfo("Gideon, Battle-Forged", "23s", Rarity.MYTHIC, mage.cards.g.GideonBattleForged.class));
         cards.add(new SetCardInfo("Gilt-Leaf Winnower", "99s", Rarity.RARE, mage.cards.g.GiltLeafWinnower.class));
         cards.add(new SetCardInfo("Goblin Piledriver", "151s", Rarity.RARE, mage.cards.g.GoblinPiledriver.class));
         cards.add(new SetCardInfo("Graveblade Marauder", "101s", Rarity.RARE, mage.cards.g.GravebladeMarauder.class));
@@ -44,7 +42,6 @@ public class MagicOriginsPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Hixus, Prison Warden", 19, Rarity.RARE, mage.cards.h.HixusPrisonWarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hixus, Prison Warden", "19s", Rarity.RARE, mage.cards.h.HixusPrisonWarden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Honored Hierarch", "182s", Rarity.RARE, mage.cards.h.HonoredHierarch.class));
-        cards.add(new SetCardInfo("Jace, Telepath Unbound", "60s", Rarity.MYTHIC, mage.cards.j.JaceTelepathUnbound.class));
         cards.add(new SetCardInfo("Jace, Vryn's Prodigy", "60s", Rarity.MYTHIC, mage.cards.j.JaceVrynsProdigy.class));
         cards.add(new SetCardInfo("Knight of the White Orchid", "21s", Rarity.RARE, mage.cards.k.KnightOfTheWhiteOrchid.class));
         cards.add(new SetCardInfo("Kothophed, Soul Hoarder", 104, Rarity.RARE, mage.cards.k.KothophedSoulHoarder.class, NON_FULL_USE_VARIOUS));
@@ -53,13 +50,11 @@ public class MagicOriginsPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Kytheon, Hero of Akros", "23s", Rarity.MYTHIC, mage.cards.k.KytheonHeroOfAkros.class));
         cards.add(new SetCardInfo("Languish", 105, Rarity.RARE, mage.cards.l.Languish.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Languish", "105s", Rarity.RARE, mage.cards.l.Languish.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Liliana, Defiant Necromancer", "106s", Rarity.MYTHIC, mage.cards.l.LilianaDefiantNecromancer.class));
         cards.add(new SetCardInfo("Liliana, Heretical Healer", "106s", Rarity.MYTHIC, mage.cards.l.LilianaHereticalHealer.class));
         cards.add(new SetCardInfo("Managorger Hydra", "186s", Rarity.RARE, mage.cards.m.ManagorgerHydra.class));
         cards.add(new SetCardInfo("Mizzium Meddler", 64, Rarity.RARE, mage.cards.m.MizziumMeddler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mizzium Meddler", "64s", Rarity.RARE, mage.cards.m.MizziumMeddler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nissa's Revelation", "191s", Rarity.RARE, mage.cards.n.NissasRevelation.class));
-        cards.add(new SetCardInfo("Nissa, Sage Animist", "189s", Rarity.MYTHIC, mage.cards.n.NissaSageAnimist.class));
         cards.add(new SetCardInfo("Nissa, Vastwood Seer", "189s", Rarity.MYTHIC, mage.cards.n.NissaVastwoodSeer.class));
         cards.add(new SetCardInfo("Outland Colossus", "193s", Rarity.RARE, mage.cards.o.OutlandColossus.class));
         cards.add(new SetCardInfo("Pia and Kiran Nalaar", 157, Rarity.RARE, mage.cards.p.PiaAndKiranNalaar.class, NON_FULL_USE_VARIOUS));

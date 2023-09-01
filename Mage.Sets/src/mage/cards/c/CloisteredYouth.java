@@ -1,35 +1,42 @@
-
 package mage.cards.c;
 
-import java.util.UUID;
-
-import mage.MageInt;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 
+import java.util.UUID;
+
 /**
  * @author Loki
  */
-public final class CloisteredYouth extends CardImpl {
+public final class CloisteredYouth extends TransformingDoubleFacedCard {
 
     public CloisteredYouth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.subtype.add(SubType.HUMAN);
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        this.secondSideCardClazz = mage.cards.u.UnholyFiend.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN}, "{1}{W}",
+                "Unholy Fiend",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HORROR}, "B"
+        );
+        this.getLeftHalfCard().setPT(1, 1);
+        this.getRightHalfCard().setPT(3, 3);
 
         // At the beginning of your upkeep, you may transform Cloistered Youth.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, true));
+        this.getLeftHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new TransformSourceEffect(), TargetController.YOU, true
+        ));
+
+        // Unholy Fiend
+        // At the beginning of your end step, you lose 1 life.
+        this.getRightHalfCard().addAbility(new BeginningOfEndStepTriggeredAbility(
+                new LoseLifeSourceControllerEffect(1), TargetController.YOU, false
+        ));
     }
 
     private CloisteredYouth(final CloisteredYouth card) {

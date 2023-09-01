@@ -20,7 +20,6 @@ public class IxalanPromos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Adanto, the First Fort", "22s", Rarity.RARE, mage.cards.a.AdantoTheFirstFort.class));
         cards.add(new SetCardInfo("Admiral Beckett Brass", "217s", Rarity.MYTHIC, mage.cards.a.AdmiralBeckettBrass.class));
         cards.add(new SetCardInfo("Angrath's Marauders", "132s", Rarity.RARE, mage.cards.a.AngrathsMarauders.class));
         cards.add(new SetCardInfo("Arcane Adaptation", "46p", Rarity.RARE, mage.cards.a.ArcaneAdaptation.class, NON_FULL_USE_VARIOUS));
@@ -29,7 +28,6 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Ashes of the Abhorrent", "2p", Rarity.RARE, mage.cards.a.AshesOfTheAbhorrent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ashes of the Abhorrent", "2s", Rarity.RARE, mage.cards.a.AshesOfTheAbhorrent.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Axis of Mortality", "3s", Rarity.MYTHIC, mage.cards.a.AxisOfMortality.class));
-        cards.add(new SetCardInfo("Azcanta, the Sunken Ruin", "74s", Rarity.RARE, mage.cards.a.AzcantaTheSunkenRuin.class));
         cards.add(new SetCardInfo("Bishop of Rebirth", 5, Rarity.RARE, mage.cards.b.BishopOfRebirth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bishop of Rebirth", "5s", Rarity.RARE, mage.cards.b.BishopOfRebirth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bloodcrazed Paladin", "93s", Rarity.RARE, mage.cards.b.BloodcrazedPaladin.class));
@@ -42,7 +40,6 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Captivating Crew", "137s", Rarity.RARE, mage.cards.c.CaptivatingCrew.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Carnage Tyrant", "179p", Rarity.MYTHIC, mage.cards.c.CarnageTyrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Carnage Tyrant", "179s", Rarity.MYTHIC, mage.cards.c.CarnageTyrant.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Conqueror's Foothold", "234s", Rarity.RARE, mage.cards.c.ConquerorsFoothold.class));
         cards.add(new SetCardInfo("Conqueror's Galleon", "234s", Rarity.RARE, mage.cards.c.ConquerorsGalleon.class));
         cards.add(new SetCardInfo("Daring Saboteur", "49s", Rarity.RARE, mage.cards.d.DaringSaboteur.class));
         cards.add(new SetCardInfo("Deadeye Tracker", "99p", Rarity.RARE, mage.cards.d.DeadeyeTracker.class, NON_FULL_USE_VARIOUS));
@@ -75,21 +72,18 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Herald of Secret Streams", "59s", Rarity.RARE, mage.cards.h.HeraldOfSecretStreams.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hostage Taker", "223s", Rarity.RARE, mage.cards.h.HostageTaker.class));
         cards.add(new SetCardInfo("Huatli, Warrior Poet", "224s", Rarity.MYTHIC, mage.cards.h.HuatliWarriorPoet.class));
-        cards.add(new SetCardInfo("Itlimoc, Cradle of the Sun", "191s", Rarity.RARE, mage.cards.i.ItlimocCradleOfTheSun.class));
         cards.add(new SetCardInfo("Jace, Cunning Castaway", "60s", Rarity.MYTHIC, mage.cards.j.JaceCunningCastaway.class));
         cards.add(new SetCardInfo("Kinjalli's Sunwing", "19p", Rarity.RARE, mage.cards.k.KinjallisSunwing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kinjalli's Sunwing", "19s", Rarity.RARE, mage.cards.k.KinjallisSunwing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kopala, Warden of Waves", "61p", Rarity.RARE, mage.cards.k.KopalaWardenOfWaves.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kopala, Warden of Waves", "61s", Rarity.RARE, mage.cards.k.KopalaWardenOfWaves.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Legion's Landing", "22s", Rarity.RARE, mage.cards.l.LegionsLanding.class));
-        cards.add(new SetCardInfo("Lost Vale", "235s", Rarity.RARE, mage.cards.l.LostVale.class));
         cards.add(new SetCardInfo("Mavren Fein, Dusk Apostle", "24p", Rarity.RARE, mage.cards.m.MavrenFeinDuskApostle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mavren Fein, Dusk Apostle", "24s", Rarity.RARE, mage.cards.m.MavrenFeinDuskApostle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Old-Growth Dryads", "199s", Rarity.RARE, mage.cards.o.OldGrowthDryads.class));
         cards.add(new SetCardInfo("Overflowing Insight", "66s", Rarity.MYTHIC, mage.cards.o.OverflowingInsight.class));
         cards.add(new SetCardInfo("Priest of the Wakening Sun", "27s", Rarity.RARE, mage.cards.p.PriestOfTheWakeningSun.class));
         cards.add(new SetCardInfo("Primal Amulet", "243s", Rarity.RARE, mage.cards.p.PrimalAmulet.class));
-        cards.add(new SetCardInfo("Primal Wellspring", "243s", Rarity.RARE, mage.cards.p.PrimalWellspring.class));
         cards.add(new SetCardInfo("Rampaging Ferocidon", "154s", Rarity.RARE, mage.cards.r.RampagingFerocidon.class));
         cards.add(new SetCardInfo("Regisaur Alpha", "227p", Rarity.RARE, mage.cards.r.RegisaurAlpha.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Regisaur Alpha", "227s", Rarity.RARE, mage.cards.r.RegisaurAlpha.class, NON_FULL_USE_VARIOUS));
@@ -118,8 +112,6 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Sorcerous Spyglass", "248s", Rarity.RARE, mage.cards.s.SorcerousSpyglass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spell Swindle", "82p", Rarity.RARE, mage.cards.s.SpellSwindle.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spell Swindle", "82s", Rarity.RARE, mage.cards.s.SpellSwindle.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Spires of Orazca", "249s", Rarity.RARE, mage.cards.s.SpiresOfOrazca.class));
-        cards.add(new SetCardInfo("Spitfire Bastion", "173s", Rarity.RARE, mage.cards.s.SpitfireBastion.class));
         cards.add(new SetCardInfo("Star of Extinction", "161p", Rarity.MYTHIC, mage.cards.s.StarOfExtinction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Star of Extinction", "161s", Rarity.MYTHIC, mage.cards.s.StarOfExtinction.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sunbird's Invocation", "165p", Rarity.RARE, mage.cards.s.SunbirdsInvocation.class, NON_FULL_USE_VARIOUS));
@@ -128,13 +120,11 @@ public class IxalanPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Sunpetal Grove", "257s", Rarity.RARE, mage.cards.s.SunpetalGrove.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword-Point Diplomacy", "126p", Rarity.RARE, mage.cards.s.SwordPointDiplomacy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword-Point Diplomacy", "126s", Rarity.RARE, mage.cards.s.SwordPointDiplomacy.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Temple of Aclazotz", "90s", Rarity.RARE, mage.cards.t.TempleOfAclazotz.class));
         cards.add(new SetCardInfo("Thaumatic Compass", "249s", Rarity.RARE, mage.cards.t.ThaumaticCompass.class));
         cards.add(new SetCardInfo("Tilonalli's Skinshifter", "170s", Rarity.RARE, mage.cards.t.TilonallisSkinshifter.class));
         cards.add(new SetCardInfo("Tishana, Voice of Thunder", "230s", Rarity.MYTHIC, mage.cards.t.TishanaVoiceOfThunder.class));
         cards.add(new SetCardInfo("Tocatli Honor Guard", "42p", Rarity.RARE, mage.cards.t.TocatliHonorGuard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tocatli Honor Guard", "42s", Rarity.RARE, mage.cards.t.TocatliHonorGuard.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Treasure Cove", "250s", Rarity.RARE, mage.cards.t.TreasureCove.class));
         cards.add(new SetCardInfo("Treasure Map", "250s", Rarity.RARE, mage.cards.t.TreasureMap.class));
         cards.add(new SetCardInfo("Unclaimed Territory", 258, Rarity.UNCOMMON, mage.cards.u.UnclaimedTerritory.class));
         cards.add(new SetCardInfo("Vance's Blasting Cannons", "173s", Rarity.RARE, mage.cards.v.VancesBlastingCannons.class));

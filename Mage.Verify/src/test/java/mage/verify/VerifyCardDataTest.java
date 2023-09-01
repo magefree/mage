@@ -89,7 +89,7 @@ public class VerifyCardDataTest {
     private static final String SKIP_LIST_SAMPLE_DECKS = "SAMPLE_DECKS";
     private static final List<String> evergreenKeywords = Arrays.asList(
             "flying", "lifelink", "menace", "trample", "haste", "first strike", "hexproof", "fear",
-            "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance",
+            "deathtouch", "double strike", "indestructible", "reach", "flash", "defender", "vigilance", "intimidate",
             "plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "myriad", "prowess", "convoke"
     );
 
@@ -334,9 +334,6 @@ public class VerifyCardDataTest {
                 // ignore double faced
                 Card realCard = CardImpl.createCard(checkCard.getCardClass(), new CardSetInfo(checkCard.getName(), set.getCode(),
                         checkCard.getCardNumber(), checkCard.getRarity(), checkCard.getGraphicInfo()));
-                if (realCard.isNightCard()) {
-                    continue;
-                }
 
                 if (cardsList.containsKey(cardNumber)) {
                     ExpansionSet.SetCardInfo prevCard = cardsList.get(cardNumber);
@@ -1915,24 +1912,19 @@ public class VerifyCardDataTest {
         }
 
         // special check: Werewolves front ability should only be on front and vice versa
-        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && card.isNightCard()) {
+        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && !((DoubleFacedCardHalf) card).isFront()) {
             fail(card, "abilities", "card is a back face werewolf with a front face ability");
         }
-        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && !card.isNightCard()) {
+        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && ((DoubleFacedCardHalf) card).isFront()) {
             fail(card, "abilities", "card is a front face werewolf with a back face ability");
         }
 
-        // special check: transform ability in TDFC should only be on front and vice versa
-        if (card.getSecondCardFace() != null && !card.isNightCard() && !card.getAbilities().containsClass(TransformAbility.class)) {
-            fail(card, "abilities", "double-faced cards should have transform ability on the front");
+        // special check: Daybound/Nightbound should only be on front/back
+        if (card.getAbilities().containsClass(DayboundAbility.class) && !((DoubleFacedCardHalf) card).isFront()) {
+            fail(card, "abilities", "card has daybound on the back face");
         }
-        if (card.getSecondCardFace() != null && card.isNightCard() && card.getAbilities().containsClass(TransformAbility.class)) {
-            fail(card, "abilities", "double-faced cards should not have transform ability on the back");
-        }
-
-        // special check: back side in TDFC must be only night card
-        if (card.getSecondCardFace() != null && !card.getSecondCardFace().isNightCard()) {
-            fail(card, "abilities", "the back face of a double-faced card should be nightCard = true");
+        if (card.getAbilities().containsClass(NightboundAbility.class) && ((DoubleFacedCardHalf) card).isFront()) {
+            fail(card, "abilities", "card has nightbound on the front face");
         }
 
         // special check: siege ability must be used in double faced cards only

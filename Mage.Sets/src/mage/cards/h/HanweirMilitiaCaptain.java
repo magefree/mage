@@ -1,44 +1,59 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
-
-import mage.MageInt;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CreaturesYouControlCount;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
+import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ComparisonType;
-import mage.constants.TargetController;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.*;
+import mage.filter.StaticFilters;
+import mage.game.permanent.token.HumanClericToken;
+
+import java.util.UUID;
 
 /**
  * @author fireshoes
  */
-public final class HanweirMilitiaCaptain extends CardImpl {
+public final class HanweirMilitiaCaptain extends TransformingDoubleFacedCard {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("if you control four or more creatures");
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(
+            StaticFilters.FILTER_CONTROLLED_CREATURE, ComparisonType.MORE_THAN, 3
+    );
 
     public HanweirMilitiaCaptain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.SOLDIER);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        this.secondSideCardClazz = mage.cards.w.WestvaleCultLeader.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.SOLDIER}, "{1}{W}",
+                "Westvale Cult Leader",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.CLERIC}, "W"
+        );
+        this.getLeftHalfCard().setPT(2, 2);
+        this.getRightHalfCard().setPT(0, 0);
 
         // At the beginning of your upkeep, if you control four or more creatures, transform Hanweir Militia Captain.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+        this.getLeftHalfCard().addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 3),
-                "At the beginning of your upkeep, if you control four or more creatures, transform {this}"));
+                condition, "At the beginning of your upkeep, if you control four or more creatures, transform {this}"
+        ));
+
+        // Westvale Cult Leader
+        // Westvale Cult Leader's power and toughness are each equal to the number of creatures you control.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(CreaturesYouControlCount.instance)
+        ).addHint(CreaturesYouControlHint.instance));
+
+        // At the beginning of your end step, create a 1/1 white and black Human Cleric creature token.
+        this.getRightHalfCard().addAbility(new BeginningOfEndStepTriggeredAbility(
+                new CreateTokenEffect(new HumanClericToken()), TargetController.YOU, false
+        ));
     }
 
     private HanweirMilitiaCaptain(final HanweirMilitiaCaptain card) {

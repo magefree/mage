@@ -9,6 +9,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -80,6 +81,10 @@ public class FlashbackAbility extends SpellAbility {
                         return ((ModalDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
                     } else if (((ModalDoubleFacedCard) card).getRightHalfCard().getName().equals(abilityName)) {
                         return ((ModalDoubleFacedCard) card).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
+                    }
+                } else if (card instanceof TransformingDoubleFacedCard) {
+                    if (((TransformingDoubleFacedCard) card).getLeftHalfCard().getName().equals(abilityName)) {
+                        return ((TransformingDoubleFacedCard) card).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
                     }
                 }
                 return card.getSpellAbility().canActivate(playerId, game);

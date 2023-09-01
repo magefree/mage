@@ -7,6 +7,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.DoubleFacedCardHalf;
 import mage.constants.Outcome;
 import mage.constants.SagaChapter;
 import mage.constants.Zone;
@@ -43,7 +44,7 @@ public class SagaAbility extends SimpleStaticAbility {
     public SagaAbility(Card card, SagaChapter maxChapter, boolean readAhead) {
         super(Zone.ALL, null);
         this.maxChapter = maxChapter;
-        this.showSacText = card.getSecondCardFace() == null && !card.isNightCard();
+        this.showSacText = !(card instanceof DoubleFacedCardHalf);
         this.readAhead = readAhead;
         this.setRuleVisible(true);
         this.setRuleAtTheTop(true);

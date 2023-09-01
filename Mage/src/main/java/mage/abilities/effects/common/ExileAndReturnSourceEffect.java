@@ -93,6 +93,6 @@ public class ExileAndReturnSourceEffect extends OneShotEffect {
         return "exile {this}, then return " + pronoun.getObjective() + ' ' +
                 putCards.getMessage(false, false).replace("onto", "to") + " under " +
                 (returnUnderYourControl ? "your" : pronoun.getPossessive() + " owner's") + " control"
-                + (additionalEffect == null ? "" : ". If you do, " + additionalEffect.getText(mode));
+                + (additionalEffect != null ? ". If you do, " + additionalEffect.getText(mode) : "");
     }
 }

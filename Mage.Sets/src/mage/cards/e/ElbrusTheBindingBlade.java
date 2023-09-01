@@ -1,45 +1,63 @@
 package mage.cards.e;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.EquipAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.IntimidateAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.*;
+import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward
  */
-public final class ElbrusTheBindingBlade extends CardImpl {
+public final class ElbrusTheBindingBlade extends TransformingDoubleFacedCard {
 
     public ElbrusTheBindingBlade(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{7}");
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.EQUIPMENT);
-
-        this.secondSideCardClazz = mage.cards.w.WithengarUnbound.class;
-        this.addAbility(new TransformAbility());
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT}, new SubType[]{SubType.EQUIPMENT}, "{7}",
+                "Withengar Unbound",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.DEMON}, "B"
+        );
+        this.getRightHalfCard().setPT(13, 13);
 
         // Equipped creature gets +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 0)));
+
         // When equipped creature deals combat damage to a player, unattach Elbrus, the Binding Blade, then transform it.
-        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new ElbrusTheBindingBladeEffect(), "equipped", true));
+        this.getLeftHalfCard().addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(
+                new ElbrusTheBindingBladeEffect(), "equipped", false
+        ).setTriggerPhrase("When equipped creature deals combat damage to a player, "));
+
         // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
+        this.getLeftHalfCard().addAbility(new EquipAbility(1, false));
+
+        // Withengar Unbound
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // Intimidate
+        this.getRightHalfCard().addAbility(IntimidateAbility.getInstance());
+
+        // Trample
+        this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
+
+        // Whenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound.
+        this.getRightHalfCard().addAbility(new WithengarUnboundTriggeredAbility());
     }
 
     private ElbrusTheBindingBlade(final ElbrusTheBindingBlade card) {
@@ -64,14 +82,15 @@ class ElbrusTheBindingBladeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent attachedTo = game.getPermanent(equipment.getAttachedTo());
-            if (attachedTo != null) {
-                attachedTo.removeAttachment(equipment.getId(), source, game);
-                equipment.transform(source, game);
-            }
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
+        if (equipment == null) {
+            return false;
         }
+        Permanent permanent = game.getPermanent(equipment.getAttachedTo());
+        if (permanent != null) {
+            permanent.removeAttachment(equipment.getId(), source, game);
+        }
+        equipment.transform(source, game);
         return false;
     }
 
@@ -80,4 +99,35 @@ class ElbrusTheBindingBladeEffect extends OneShotEffect {
         return new ElbrusTheBindingBladeEffect(this);
     }
 
+}
+
+class WithengarUnboundTriggeredAbility extends TriggeredAbilityImpl {
+
+    WithengarUnboundTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(13)), false);
+    }
+
+    private WithengarUnboundTriggeredAbility(final WithengarUnboundTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public WithengarUnboundTriggeredAbility copy() {
+        return new WithengarUnboundTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.LOST;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return true;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a player loses the game, put thirteen +1/+1 counters on {this}.";
+    }
 }

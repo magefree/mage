@@ -96,7 +96,7 @@ public enum CardRepository {
     }
 
     private void addNewNames(CardInfo card, Set<String> namesList) {
-        // require before call: qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName"...);
+        // require before call: qb.distinct().selectColumns("name", "doubleFacedSecondSideName"...);
 
         // normal names
         int result = card.getName().indexOf(" // ");
@@ -108,11 +108,8 @@ public enum CardRepository {
         }
 
         // additional names from double side cards
-        if (card.getSecondSideName() != null && !card.getSecondSideName().isEmpty()) {
-            namesList.add(card.getSecondSideName());
-        }
-        if (card.getModalDoubleFacedSecondSideName() != null && !card.getModalDoubleFacedSecondSideName().isEmpty()) {
-            namesList.add(card.getModalDoubleFacedSecondSideName());
+        if (card.getDoubleFacedSecondSideName() != null && !card.getDoubleFacedSecondSideName().isEmpty()) {
+            namesList.add(card.getDoubleFacedSecondSideName());
         }
         if (card.getFlipCardName() != null && !card.getFlipCardName().isEmpty()) {
             namesList.add(card.getFlipCardName());
@@ -130,7 +127,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "flipCardName");
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 addNewNames(card, names);
@@ -145,7 +142,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "flipCardName");
             qb.where().not().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
@@ -162,7 +159,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "flipCardName");
             Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("supertypes", '%' + SuperType.BASIC.name() + '%'),
@@ -183,7 +180,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "flipCardName");
             qb.where().not().like("supertypes", new SelectArg('%' + SuperType.BASIC.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
@@ -200,7 +197,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "flipCardName");
             qb.where().like("types", new SelectArg('%' + CardType.CREATURE.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
@@ -217,7 +214,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "flipCardName");
             qb.where().like("types", new SelectArg('%' + CardType.ARTIFACT.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
@@ -234,7 +231,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "flipCardName");
             Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("types", '%' + CardType.CREATURE.name() + '%'),
@@ -254,7 +251,7 @@ public enum CardRepository {
         Set<String> names = new TreeSet<>();
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("name", "modalDoubleFacedSecondSideName", "secondSideName", "flipCardName");
+            qb.distinct().selectColumns("name", "doubleFacedSecondSideName", "flipCardName");
             Where<CardInfo, Object> where = qb.where();
             where.and(
                     where.not().like("types", '%' + CardType.ARTIFACT.name() + '%'),
@@ -282,7 +279,7 @@ public enum CardRepository {
                 queryBuilder.limit(1L).where()
                         .eq("setCode", new SelectArg(setCode))
                         .and().eq("cardNumber", new SelectArg(cardNumber))
-                        .and().eq("nightCard", new SelectArg(false));
+                        .and().eq("meldCard", new SelectArg(false));
             } else {
                 queryBuilder.limit(1L).where()
                         .eq("setCode", new SelectArg(setCode))
@@ -290,7 +287,7 @@ public enum CardRepository {
 
                 // some double faced cards can use second side card with same number as main side
                 // (example: vow - 65 - Jacob Hauken, Inspector), so make priority for main side first
-                queryBuilder.orderBy("nightCard", true);
+                queryBuilder.orderBy("meldCard", true);
             }
             List<CardInfo> result = cardDao.query(queryBuilder.prepare());
             if (!result.isEmpty()) {
@@ -392,12 +389,12 @@ public enum CardRepository {
      * Used for building cubes, packs, and for ensuring that dual faces and split cards have sides/halves from
      * the same set and variant art.
      *
-     * @param name                  name of the card, or side of the card, to find
-     * @param expansion             the set name from which to find the card
-     * @param cardNumber            the card number for variant arts in one set
-     * @param returnSplitCardHalf   whether to return a half of a split card or the corresponding full card.
-     *                              Want this `false` when user is searching by either names in a split card so that
-     *                              the full card can be found by either name.
+     * @param name                name of the card, or side of the card, to find
+     * @param expansion           the set name from which to find the card
+     * @param cardNumber          the card number for variant arts in one set
+     * @param returnSplitCardHalf whether to return a half of a split card or the corresponding full card.
+     *                            Want this `false` when user is searching by either names in a split card so that
+     *                            the full card can be found by either name.
      * @return
      */
     public CardInfo findCardWithPreferredSetAndNumber(String name, String expansion, String cardNumber, boolean returnSplitCardHalf) {
@@ -429,22 +426,22 @@ public enum CardRepository {
      * Find a card's reprints from all sets.
      * It allows for cards to be searched by their full name, or in the case of multi-name cards of the type "A // B"
      * To search for them using "A", "B", or "A // B".
-     *
+     * <p>
      * Note of how the function works:
-     *      Out of all card types (Split, MDFC, Adventure, Flip, Transform)
-     *      ONLY Split cards (Fire // Ice) MUST be queried in the DB by the full name when querying by "name".
-     *      Searching for it by either half will return an incorrect result.
-     *      ALL the others MUST be queried for by the first half of their full name (i.e. "A" from "A // B")
-     *      when querying by "name".
+     * Out of all card types (Split, MDFC, Adventure, Flip, Transform)
+     * ONLY Split cards (Fire // Ice) MUST be queried in the DB by the full name when querying by "name".
+     * Searching for it by either half will return an incorrect result.
+     * ALL the others MUST be queried for by the first half of their full name (i.e. "A" from "A // B")
+     * when querying by "name".
      *
-     * @param name                  the name of the card to search for
-     * @param limitByMaxAmount      return max amount of different cards (if 0 then return card from all sets)
-     * @param returnSplitCardHalf   whether to return a half of a split card or the corresponding full card.
-     *                              Want this `false` when user is searching by either names in a split card so that
-     *                              the full card can be found by either name.
-     *                              Want this `true` when the client is searching for info on both halves to display it.
-     * @return                      a list of the reprints of the card if it was found (up to limitByMaxAmount number),
-     *                              or an empty list if the card was not found.
+     * @param name                the name of the card to search for
+     * @param limitByMaxAmount    return max amount of different cards (if 0 then return card from all sets)
+     * @param returnSplitCardHalf whether to return a half of a split card or the corresponding full card.
+     *                            Want this `false` when user is searching by either names in a split card so that
+     *                            the full card can be found by either name.
+     *                            Want this `true` when the client is searching for info on both halves to display it.
+     * @return a list of the reprints of the card if it was found (up to limitByMaxAmount number),
+     * or an empty list if the card was not found.
      */
     public List<CardInfo> findCards(String name, long limitByMaxAmount, boolean returnSplitCardHalf) {
         List<CardInfo> results;
@@ -475,10 +472,9 @@ public enum CardRepository {
                 if (results.isEmpty()) {
                     // Nothing found when looking for main name, try looking under the other names
                     queryBuilder.where()
-                            .eq("flipCardName",                     new SelectArg(name)).or()
-                            .eq("secondSideName",                   new SelectArg(name)).or()
-                            .eq("adventureSpellName",               new SelectArg(name)).or()
-                            .eq("modalDoubleFacedSecondSideName",   new SelectArg(name));
+                            .eq("flipCardName", new SelectArg(name)).or()
+                            .eq("adventureSpellName", new SelectArg(name)).or()
+                            .eq("doubleFacedSecondSideName", new SelectArg(name));
                     results = cardDao.query(queryBuilder.prepare());
                 } else {
                     // Check that a full card was found and not a SplitCardHalf
@@ -533,7 +529,7 @@ public enum CardRepository {
     /**
      * Warning, don't use db functions in card's code - it generates heavy db loading in AI simulations. If you
      * need that feature then check for simulation mode. See https://github.com/magefree/mage/issues/7014
-     *
+     * <p>
      * Ignoring night cards by default
      *
      * @param criteria

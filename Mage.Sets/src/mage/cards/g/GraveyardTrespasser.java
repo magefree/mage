@@ -1,16 +1,16 @@
 package mage.cards.g;
 
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DayboundAbility;
+import mage.abilities.keyword.NightboundAbility;
 import mage.abilities.keyword.WardAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -25,27 +25,44 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class GraveyardTrespasser extends CardImpl {
+public final class GraveyardTrespasser extends TransformingDoubleFacedCard {
 
     public GraveyardTrespasser(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
-
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WEREWOLF);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-        this.secondSideCardClazz = mage.cards.g.GraveyardGlutton.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WEREWOLF}, "{2}{B}",
+                "Graveyard Glutton",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.WEREWOLF}, "B"
+        );
+        this.getLeftHalfCard().setPT(3, 3);
+        this.getRightHalfCard().setPT(4, 4);
 
         // Ward—Discard a card.
-        this.addAbility(new WardAbility(new DiscardCardCost(), false));
+        this.getLeftHalfCard().addAbility(new WardAbility(new DiscardCardCost(), false));
 
         // Whenever Graveyard Trespasser enters the battlefield or attacks, exile up to one target card from a graveyard. If a creature card was exiled this way, each opponent loses 1 life and you gain 1 life.
-        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new GraveyardTrespasserEffect());
+        Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
+                new GraveyardTrespasserEffect("one target card from a graveyard. If a creature card was")
+        );
         ability.addTarget(new TargetCardInGraveyard(0, 1));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // Daybound
-        this.addAbility(new DayboundAbility());
+        this.getLeftHalfCard().addAbility(new DayboundAbility());
+
+        // Graveyard Glutton
+        // Ward—Discard a card.
+        this.getRightHalfCard().addAbility(new WardAbility(new DiscardCardCost(), false));
+
+        // Whenever Graveyard Glutton enters the battlefield or attacks, exile up to two target cards from graveyards. For each creature card exiled this way, each opponent loses 1 life and you gain 1 life.
+        ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
+                new GraveyardTrespasserEffect("two target cards from graveyards. For each creature card")
+        );
+        ability.addTarget(new TargetCardInGraveyard(0, 2));
+        this.getRightHalfCard().addAbility(ability);
+
+        // Nightbound
+        this.getRightHalfCard().addAbility(new NightboundAbility());
     }
 
     private GraveyardTrespasser(final GraveyardTrespasser card) {
@@ -60,10 +77,10 @@ public final class GraveyardTrespasser extends CardImpl {
 
 class GraveyardTrespasserEffect extends OneShotEffect {
 
-    GraveyardTrespasserEffect() {
+    GraveyardTrespasserEffect(String text) {
         super(Outcome.Benefit);
-        staticText = "exile up to one target card from a graveyard. " +
-                "If a creature card was exiled this way, each opponent loses 1 life and you gain 1 life";
+        staticText = "exile up to " + text + " exiled this way, " +
+                "each opponent loses 1 life and you gain 1 life";
     }
 
     private GraveyardTrespasserEffect(final GraveyardTrespasserEffect effect) {

@@ -1,60 +1,76 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
-
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.VampireToken;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
-public final class BloodlineKeeper extends CardImpl {
+public final class BloodlineKeeper extends TransformingDoubleFacedCard {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control five or more Vampires");
-
-    static {
-        filter.add(SubType.VAMPIRE.getPredicate());
-    }
+    private static final FilterControlledPermanent filter
+            = new FilterControlledPermanent(SubType.VAMPIRE, "you control five or more Vampires");
+    private static final FilterCreaturePermanent filter2
+            = new FilterCreaturePermanent(SubType.VAMPIRE, "Vampire creatures");
 
     public BloodlineKeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
-        this.subtype.add(SubType.VAMPIRE);
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.VAMPIRE}, "{2}{B}{B}",
+                "Lord of Lineage",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.VAMPIRE}, "B"
+        );
+        this.getLeftHalfCard().setPT(3, 3);
+        this.getRightHalfCard().setPT(5, 5);
 
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        // Flying
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
-        this.secondSideCardClazz = mage.cards.l.LordOfLineage.class;
-
-        this.addAbility(FlyingAbility.getInstance());
         // {T}: Create a 2/2 black Vampire creature token with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VampireToken()), new TapSourceCost()));
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(
+                new CreateTokenEffect(new VampireToken()), new TapSourceCost()
+        ));
+
         // {B}: Transform Bloodline Keeper. Activate this ability only if you control five or more Vampires.
-        this.addAbility(new TransformAbility());
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD,
-                new TransformSourceEffect(),
-                new ManaCostsImpl<>("{B}"),
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 4));
-        this.addAbility(ability.addHint(new ValueHint("Vampires you control", new PermanentsOnBattlefieldCount(filter))));
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{B}"),
+                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 4)
+        );
+        this.getLeftHalfCard().addAbility(ability.addHint(new ValueHint("Vampires you control", new PermanentsOnBattlefieldCount(filter))));
+
+        // Lord of Lineage
+        // Flying
+        this.getRightHalfCard().addAbility(FlyingAbility.getInstance());
+
+        // Other Vampire creatures you control get +2/+2.
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new BoostControlledEffect(
+                2, 2, Duration.WhileOnBattlefield, filter2, true
+        )));
+
+        // {tap}: Create a 2/2 black Vampire creature token with flying.
+        this.getRightHalfCard().addAbility(new SimpleActivatedAbility(
+                new CreateTokenEffect(new VampireToken()), new TapSourceCost()
+        ));
     }
 
     private BloodlineKeeper(final BloodlineKeeper card) {

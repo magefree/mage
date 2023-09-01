@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.Card;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -17,21 +17,17 @@ public class MoreThanMeetsTheEyeAbility extends SpellAbility {
     private final String manaCost;
     private SpellAbility spellAbilityToResolve;
 
-    public MoreThanMeetsTheEyeAbility(Card card, String manaCost) {
-        super(card.getSecondFaceSpellAbility());
+    public MoreThanMeetsTheEyeAbility(TransformingDoubleFacedCard card, String manaCost) {
+        super(card.getRightHalfCard().getSpellAbility());
         this.newId();
 
-        // getSecondFaceSpellAbility() already verified that second face exists
-        this.setCardName(card.getSecondCardFace().getName());
-
-        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        this.spellAbilityType = SpellAbilityType.TRANSFORMING_RIGHT;
         this.setSpellAbilityCastMode(SpellAbilityCastMode.MORE_THAN_MEETS_THE_EYE);
 
         this.manaCost = manaCost;
         this.clearManaCosts();
         this.clearManaCostsToPay();
         this.addManaCost(new ManaCostsImpl<>(manaCost));
-        this.addSubAbility(new TransformAbility());
     }
 
     private MoreThanMeetsTheEyeAbility(final MoreThanMeetsTheEyeAbility ability) {
@@ -48,7 +44,7 @@ public class MoreThanMeetsTheEyeAbility extends SpellAbility {
     @Override
     public boolean activate(Game game, boolean noMana) {
         if (super.activate(game, noMana)) {
-            game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getSourceId(), Boolean.TRUE);
+            game.getState().setValue(TransformingDoubleFacedCard.VALUE_KEY_ENTER_TRANSFORMED + getSourceId(), Boolean.TRUE);
             // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
             game.addEffect(new MoreThanMeetsTheEyeEffect(), this);
             return true;
@@ -64,7 +60,7 @@ public class MoreThanMeetsTheEyeAbility extends SpellAbility {
     @Override
     public String getRule() {
         return "More Than Meets the Eye " + this.manaCost
-            + " <i>(You may cast this card converted for " + this.manaCost + ".)</i>";
+                + " <i>(You may cast this card converted for " + this.manaCost + ".)</i>";
     }
 }
 
@@ -90,8 +86,6 @@ class MoreThanMeetsTheEyeEffect extends ContinuousEffectImpl {
         if (spell == null || spell.getCard().getSecondCardFace() == null) {
             return false;
         }
-        // simulate another side as new card (another code part in spell constructor)
-        TransformAbility.transformCardSpellDynamic(spell, spell.getCard().getSecondCardFace(), game);
         return true;
     }
 }

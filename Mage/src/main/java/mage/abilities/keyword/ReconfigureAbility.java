@@ -100,11 +100,12 @@ class ReconfigureUnattachEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent != null) {
-            permanent.unattach(game);
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
+        if (equipment == null) {
+            return false;
         }
-        return true;
+        Permanent permanent = game.getPermanent(equipment.getAttachedTo());
+        return permanent != null && permanent.removeAttachment(equipment.getId(), source, game);
     }
 }
 

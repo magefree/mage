@@ -13,7 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.ModalDoubleFacedCard;
-import mage.cards.ModalDoubleFacedCardHalf;
+import mage.cards.DoubleFacedCardHalf;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.AsThoughEffectType;
@@ -116,7 +116,7 @@ class AminatousAuguryEffect extends OneShotEffect {
         for (Card card : cardsToCast.getCards(game)) {
             // ex: Sea Gate Restoration bug #9956
             if (card instanceof ModalDoubleFacedCard) {
-                ModalDoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
+                DoubleFacedCardHalf leftHalfCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
                 if (leftHalfCard != null
                         && !leftHalfCard.isLand(game)) {
                     AminatousAuguryCastFromExileEffect effect = new AminatousAuguryCastFromExileEffect();

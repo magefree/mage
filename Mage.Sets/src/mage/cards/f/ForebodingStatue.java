@@ -1,50 +1,56 @@
 package mage.cards.f;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.TransformAbility;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.mana.AnyColorManaAbility;
-import mage.constants.SubType;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
-public final class ForebodingStatue extends CardImpl {
+public final class ForebodingStatue extends TransformingDoubleFacedCard {
 
     public ForebodingStatue(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-
-        this.subtype.add(SubType.CONSTRUCT);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-        this.secondSideCardClazz = mage.cards.f.ForsakenThresher.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, new SubType[]{SubType.CONSTRUCT}, "{3}",
+                "Forsaken Thresher",
+                new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, new SubType[]{SubType.CONSTRUCT}, ""
+        );
+        this.getLeftHalfCard().setPT(1, 2);
+        this.getRightHalfCard().setPT(5, 5);
 
         // {T}: Add one mana of any color. Put an omen counter on Foreboding Statue.
         Ability ability = new AnyColorManaAbility();
         ability.addEffect(new AddCountersSourceEffect(CounterType.OMEN.createInstance()));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
 
         // At the beginning of your end step, if there are three or more omen counters on Foreboding Statue, uptap it, then transform it.
-        this.addAbility(new TransformAbility());
         ability = new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new UntapSourceEffect().setText("untap it,"), TargetController.YOU,
+                new UntapSourceEffect().setText("untap it,"), TargetController.YOU,
                 new SourceHasCounterCondition(CounterType.OMEN, 3), false
         ).setTriggerPhrase("At the beginning of your end step, if there are three or more omen counters on {this}, ");
         ability.addEffect(new TransformSourceEffect().setText("then transform it"));
-        this.addAbility(ability);
+        this.getLeftHalfCard().addAbility(ability);
+
+        // Forsaken Thresher
+        // At the beginning of your precombat main phase, add one mana of any color.
+        this.getRightHalfCard().addAbility(new BeginningOfPreCombatMainTriggeredAbility(
+                new AddManaOfAnyColorEffect(), TargetController.YOU, false
+        ));
     }
 
     private ForebodingStatue(final ForebodingStatue card) {

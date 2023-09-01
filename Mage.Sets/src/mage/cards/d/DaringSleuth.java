@@ -1,37 +1,47 @@
-
 package mage.cards.d;
 
-import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.effects.keyword.InvestigateEffect;
+import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
 
 /**
  * @author fireshoes
  */
-public final class DaringSleuth extends CardImpl {
+public final class DaringSleuth extends TransformingDoubleFacedCard {
+
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.CLUE);
 
     public DaringSleuth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.ROGUE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        this.secondSideCardClazz = mage.cards.b.BearerOfOverwhelmingTruths.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.ROGUE}, "{1}{U}",
+                "Bearer of Overwhelming Truths",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WIZARD}, "U"
+        );
+        this.getLeftHalfCard().setPT(2, 1);
+        this.getRightHalfCard().setPT(3, 2);
 
         // When you sacrifice a Clue, transform Daring Sleuth.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DaringSleuthTriggeredAbility());
+        this.getLeftHalfCard().addAbility(new SacrificePermanentTriggeredAbility(
+                new TransformSourceEffect(), filter
+        ).setTriggerPhrase("When you sacrifice a Clue, "));
+
+        // Bearer of Overwhelming Truths
+        // Prowess
+        this.getRightHalfCard().addAbility(new ProwessAbility());
+
+        // Whenever Bearer of Overwhelming Truths deals combat damage to a player, investigate.
+        this.getRightHalfCard().addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new InvestigateEffect(), false));
     }
 
     private DaringSleuth(final DaringSleuth card) {
@@ -41,33 +51,5 @@ public final class DaringSleuth extends CardImpl {
     @Override
     public DaringSleuth copy() {
         return new DaringSleuth(this);
-    }
-}
-
-class DaringSleuthTriggeredAbility extends TriggeredAbilityImpl {
-
-    public DaringSleuthTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect());
-        setTriggerPhrase("When you sacrifice a Clue, ");
-    }
-
-    public DaringSleuthTriggeredAbility(final DaringSleuthTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DaringSleuthTriggeredAbility copy() {
-        return new DaringSleuthTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).hasSubtype(SubType.CLUE, game);
     }
 }

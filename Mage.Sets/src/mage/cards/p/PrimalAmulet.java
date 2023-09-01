@@ -1,52 +1,73 @@
-
 package mage.cards.p;
 
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
 /**
  * @author TheElk801
  */
-public final class PrimalAmulet extends CardImpl {
+public final class PrimalAmulet extends TransformingDoubleFacedCard {
 
-    private static final FilterCard filter = new FilterCard("Instant and sorcery spells");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.INSTANT.getPredicate(),
-                CardType.SORCERY.getPredicate()
-        ));
-    }
+    private static final FilterCard filter = new FilterInstantOrSorceryCard("instant and sorcery spells");
 
     public PrimalAmulet(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.secondSideCardClazz = mage.cards.p.PrimalWellspring.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{4}",
+                "Primal Wellspring",
+                new CardType[]{CardType.LAND}, new SubType[]{}, ""
+        );
 
         // Instant and sorcery spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(
+                new SpellsCostReductionControllerEffect(filter, 1)
+        ));
 
         // Whenever you cast an instant or sorcery spell, put a charge counter on Primal Amulet. Then if there are four or more charge counters on it, you may remove those counters and transform it.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new SpellCastControllerTriggeredAbility(new PrimalAmuletEffect(), new FilterInstantOrSorcerySpell(), false));
+        this.getLeftHalfCard().addAbility(new SpellCastControllerTriggeredAbility(
+                new PrimalAmuletEffect(), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
+        ));
+
+        // Primal Wellspring
+        // (Transforms from Primal Amulet.)
+        this.getRightHalfCard().addAbility(new SimpleStaticAbility(new InfoEffect("<i>(Transforms from Primal Amulet.)</i>")));
+
+        // Add one mana of any color.
+        Ability ability = new AnyColorManaAbility();
+        this.getRightHalfCard().addAbility(ability);
+
+        // When that mana is spent to cast an instant or sorcery spell, copy that spell and you may choose new targets for the copy.
+        this.getRightHalfCard().addAbility(new PrimalWellspringTriggeredAbility(
+                ability.getOriginalId(), new CopyTargetSpellEffect(true)
+                .setText("copy that spell and you may choose new targets for the copy")
+        ));
     }
 
     private PrimalAmulet(final PrimalAmulet card) {
@@ -80,16 +101,57 @@ class PrimalAmuletEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && player != null) {
-            permanent.addCounters(CounterType.CHARGE.createInstance(), source.getControllerId(), source, game);
-            int counters = permanent.getCounters(game).getCount(CounterType.CHARGE);
-            if (counters > 3 && player.chooseUse(Outcome.Benefit, "Transform this?", source, game)) {
-                permanent.removeCounters(CounterType.CHARGE.getName(), counters, source, game);
-                new TransformSourceEffect().apply(game, source);
-            }
-            return true;
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null || player == null) {
+            return false;
         }
-        return false;
+        permanent.addCounters(CounterType.CHARGE.createInstance(), source.getControllerId(), source, game);
+        int counters = permanent.getCounters(game).getCount(CounterType.CHARGE);
+        if (counters > 3 && player.chooseUse(Outcome.Benefit, "Transform this?", source, game)) {
+            permanent.removeCounters("charge", counters, source, game);
+            permanent.transform(source, game);
+        }
+        return true;
+    }
+}
+
+class PrimalWellspringTriggeredAbility extends TriggeredAbilityImpl {
+
+    private static final FilterInstantOrSorcerySpell filter = new FilterInstantOrSorcerySpell();
+
+    String abilityOriginalId;
+
+    public PrimalWellspringTriggeredAbility(UUID abilityOriginalId, Effect effect) {
+        super(Zone.ALL, effect, false);
+        this.abilityOriginalId = abilityOriginalId.toString();
+        setTriggerPhrase("When that mana is used to cast an instant or sorcery spell, ");
+    }
+
+    public PrimalWellspringTriggeredAbility(final PrimalWellspringTriggeredAbility ability) {
+        super(ability);
+        this.abilityOriginalId = ability.abilityOriginalId;
+    }
+
+    @Override
+    public PrimalWellspringTriggeredAbility copy() {
+        return new PrimalWellspringTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.MANA_PAID;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (!event.getData().equals(abilityOriginalId)) {
+            return false;
+        }
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell == null || !filter.match(spell, getControllerId(), this, game)) {
+            return false;
+        }
+        this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+        return true;
     }
 }

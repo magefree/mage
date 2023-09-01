@@ -136,6 +136,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.setStartingDefense(copyFromObject.getStartingDefense());
         if (copyFromObject instanceof Permanent) {
             Permanent targetPermanent = (Permanent) copyFromObject;
+            permanent.setTransformed(targetPermanent.isTransformed());
             //707.2. When copying an object, the copy acquires the copiable values of the original object’s characteristics [..]
             //110.5. A permanent's status is its physical state. There are four status categories, each of which has two possible values:
             // tapped/untapped, flipped/unflipped, face up/face down, and phased in/phased out.

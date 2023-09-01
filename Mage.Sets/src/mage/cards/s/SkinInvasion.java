@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -9,47 +7,45 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.TransformingDoubleFacedCard;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
-public final class SkinInvasion extends CardImpl {
+public final class SkinInvasion extends TransformingDoubleFacedCard {
 
     public SkinInvasion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
-        this.subtype.add(SubType.AURA);
-
-        this.secondSideCardClazz = mage.cards.s.SkinShedder.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.ENCHANTMENT}, new SubType[]{SubType.AURA}, "{R}",
+                "Skin Shedder",
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.INSECT, SubType.HORROR}, "R"
+        );
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.getLeftHalfCard().getSpellAbility().addTarget(auraTarget);
+        this.getLeftHalfCard().getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getLeftHalfCard().addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature attacks each combat if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA)));
 
         // When enchanted creature dies, return Skin Invasion to the battlefield transformed under your control.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new DiesAttachedTriggeredAbility(new SkinInvasionEffect(), "enchanted creature", false));
+        this.getLeftHalfCard().addAbility(new DiesAttachedTriggeredAbility(new SkinInvasionEffect(), "enchanted creature", false));
+
+        // Skin Shedder
+        this.getRightHalfCard().setPT(3, 4);
     }
 
     private SkinInvasion(final SkinInvasion card) {
@@ -82,12 +78,12 @@ class SkinInvasionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (card != null && controller != null) {
-            game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + source.getSourceId(), Boolean.TRUE);
-            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            return true;
+        if (card == null || controller == null
+                || card.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter() + 1) {
+            return false;
         }
-        return false;
+        TransformingDoubleFacedCard.setCardTransformed(card, game);
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        return true;
     }
-
 }

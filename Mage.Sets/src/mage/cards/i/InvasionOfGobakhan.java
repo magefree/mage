@@ -2,17 +2,25 @@ package mage.cards.i;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SiegeAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.*;
+import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
@@ -25,22 +33,41 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class InvasionOfGobakhan extends CardImpl {
+public final class InvasionOfGobakhan extends TransformingDoubleFacedCard {
 
     public InvasionOfGobakhan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.BATTLE}, "{1}{W}");
-
-        this.subtype.add(SubType.SIEGE);
-        this.setStartingDefense(3);
-        this.secondSideCardClazz = mage.cards.l.LightshieldArray.class;
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.BATTLE}, new SubType[]{SubType.SIEGE}, "{1}{W}",
+                "Lightshield Array",
+                new CardType[]{CardType.ENCHANTMENT}, new SubType[]{}, "W"
+        );
+        this.getLeftHalfCard().setStartingDefense(3);
 
         // (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
-        this.addAbility(new SiegeAbility());
+        this.getLeftHalfCard().addAbility(new SiegeAbility());
 
         // When Invasion of Gobakhan enters the battlefield, look at target opponent's hand. You may exile a nonland card from it. For as long as that card remains exiled, its owner may play it. A spell cast this way costs {2} more to cast.
         Ability ability = new EntersBattlefieldTriggeredAbility(new InvasionOfGobakhanEffect());
         ability.addTarget(new TargetOpponent());
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+        this.getLeftHalfCard().addAbility(ability);
+
+        // Lightshield Array
+        // At the beginning of your end step, put a +1/+1 counter on each creature that attacked this turn.
+        this.getRightHalfCard().addAbility(new BeginningOfEndStepTriggeredAbility(
+                new LightshieldArrayEffect(), TargetController.YOU, false
+        ), new AttackedThisTurnWatcher());
+
+        // Sacrifice Lightshield Array: Creatures you control gain hexproof and indestructible until end of turn.
+        ability = new SimpleActivatedAbility(new GainAbilityControlledEffect(
+                HexproofAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_CONTROLLED_CREATURE
+        ).setText("creatures you control gain hexproof"), new SacrificeSourceCost());
+        ability.addEffect(new GainAbilityControlledEffect(
+                IndestructibleAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_CONTROLLED_CREATURE
+        ).setText("and indestructible until end of turn"));
+        this.getRightHalfCard().addAbility(ability);
     }
 
     private InvasionOfGobakhan(final InvasionOfGobakhan card) {
@@ -163,5 +190,37 @@ class InvasionOfGobakhanCostEffect extends CostModificationEffectImpl {
     @Override
     public InvasionOfGobakhanCostEffect copy() {
         return new InvasionOfGobakhanCostEffect(this);
+    }
+}
+
+
+class LightshieldArrayEffect extends OneShotEffect {
+
+    LightshieldArrayEffect() {
+        super(Outcome.Benefit);
+        staticText = "put a +1/+1 counter on each creature that attacked this turn";
+    }
+
+    private LightshieldArrayEffect(final LightshieldArrayEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public LightshieldArrayEffect copy() {
+        return new LightshieldArrayEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (MageObjectReference mor : game
+                .getState()
+                .getWatcher(AttackedThisTurnWatcher.class)
+                .getAttackedThisTurnCreatures()) {
+            Permanent permanent = mor.getPermanent(game);
+            if (permanent != null) {
+                permanent.addCounters(CounterType.P1P1.createInstance(), source, game);
+            }
+        }
+        return true;
     }
 }

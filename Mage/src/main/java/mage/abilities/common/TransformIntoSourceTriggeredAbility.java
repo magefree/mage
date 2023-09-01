@@ -42,8 +42,10 @@ public class TransformIntoSourceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!event.getTargetId().equals(this.getSourceId())) {
+            System.out.println("no");
             return false;
         }
+        System.out.println("yes");
         Permanent permanent = getSourcePermanentIfItStillExists(game);
         return permanent != null && permanent.isTransformed();
     }

@@ -190,7 +190,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 12: // NISSA SAGE ANIMIST 1
                                 sb.append("Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.");
-                                effects.add(new mage.cards.n.NissaSageAnimist(controller.getId(), setInfo).getAbilities().get(2).getEffects().get(0));
+                                effects.add(new mage.cards.n.NissaVastwoodSeer(controller.getId(), setInfo).getRightHalfCard().getAbilities().get(2).getEffects().get(0));
                                 break;
                             case 13: // NISSA WORLDWAKER 1
                                 sb.append("Target land you control becomes a 4/4 Elemental creature with trample. It's still a land.");

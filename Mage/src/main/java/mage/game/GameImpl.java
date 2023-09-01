@@ -314,6 +314,9 @@ public abstract class GameImpl implements Game {
             if (card instanceof PermanentCard) {
                 card = ((PermanentCard) card).getCard();
             }
+            if (card instanceof DoubleFacedCardHalf) {
+                card = card.getMainCard();
+            }
 
             // init each card by parts... if you add new type here then getInitAbilities must be
             // implemented too (it allows to split abilities between card and parts)
@@ -323,22 +326,13 @@ public abstract class GameImpl implements Game {
             addCardToState(card);
 
             // parts
-            if (card instanceof SplitCard) {
+            if (card instanceof CardWithHalves) {
                 // left
-                Card leftCard = ((SplitCard) card).getLeftHalfCard();
+                Card leftCard = ((CardWithHalves) card).getLeftHalfCard();
                 leftCard.setOwnerId(ownerId);
                 addCardToState(leftCard);
                 // right
-                Card rightCard = ((SplitCard) card).getRightHalfCard();
-                rightCard.setOwnerId(ownerId);
-                addCardToState(rightCard);
-            } else if (card instanceof ModalDoubleFacedCard) {
-                // left
-                Card leftCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
-                leftCard.setOwnerId(ownerId);
-                addCardToState(leftCard);
-                // right
-                Card rightCard = ((ModalDoubleFacedCard) card).getRightHalfCard();
+                Card rightCard = ((CardWithHalves) card).getRightHalfCard();
                 rightCard.setOwnerId(ownerId);
                 addCardToState(rightCard);
             } else if (card instanceof AdventureCard) {
@@ -1957,9 +1951,6 @@ public abstract class GameImpl implements Game {
                 MorphAbility.setPermanentToFaceDownCreature(newBluePrint, copyFromPermanent, this);
             }
             newBluePrint.assignNewId();
-            if (copyFromPermanent.isTransformed()) {
-                TransformAbility.transformPermanent(newBluePrint, newBluePrint.getSecondCardFace(), this, source);
-            }
         }
         if (applier != null) {
             applier.apply(this, newBluePrint, source, copyToPermanentId);

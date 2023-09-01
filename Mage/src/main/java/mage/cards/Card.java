@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
 import mage.util.ManaUtil;
+import mage.watchers.Watcher;
 import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.List;
@@ -65,8 +66,6 @@ public interface Card extends MageObject {
     Card getSecondCardFace();
 
     SpellAbility getSecondFaceSpellAbility();
-
-    boolean isNightCard();
 
     default boolean meldsWith(Card card) {
         return false;
@@ -152,6 +151,11 @@ public interface Card extends MageObject {
     Counters getCounters(GameState state);
 
     void addAbility(Ability ability);
+
+    default void addAbility(Ability ability, Watcher watcher) {
+        addAbility(ability);
+        ability.addWatcher(watcher);
+    }
 
     void looseAllAbilities(Game game);
 

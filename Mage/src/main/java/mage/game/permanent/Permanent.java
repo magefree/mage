@@ -107,8 +107,6 @@ public interface Permanent extends Card, Controllable {
 
     void setFlipCardName(String flipCardName);
 
-    void setSecondCardFace(Card card);
-
     List<UUID> getAttachments();
 
     UUID getAttachedTo();

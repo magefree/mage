@@ -109,7 +109,7 @@ public class CardView extends SimpleCardView {
     protected List<String> rightSplitRules;
     protected String rightSplitTypeLine;
 
-    protected boolean isModalDoubleFacedCard;
+    protected boolean isDoubleFacedCard;
 
     protected ArtRect artRect = ArtRect.NORMAL;
 
@@ -206,7 +206,6 @@ public class CardView extends SimpleCardView {
         this.isToken = cardView.isToken;
         this.ability = cardView.ability; // reference, not copy
 
-        this.extraDeckCard = cardView.extraDeckCard;
         this.transformable = cardView.transformable;
         this.secondCardFace = cardView.secondCardFace == null ? null : new CardView(cardView.secondCardFace);
         this.transformed = cardView.transformed;
@@ -224,7 +223,7 @@ public class CardView extends SimpleCardView {
         this.rightSplitRules = cardView.rightSplitRules == null ? null : new ArrayList<>(cardView.rightSplitRules);
         this.rightSplitTypeLine = cardView.rightSplitTypeLine;
 
-        this.isModalDoubleFacedCard = cardView.isModalDoubleFacedCard;
+        this.isDoubleFacedCard = cardView.isDoubleFacedCard;
 
         this.artRect = cardView.artRect;
         this.targets = cardView.targets == null ? null : new ArrayList<>(cardView.targets);
@@ -369,6 +368,8 @@ public class CardView extends SimpleCardView {
                     break;
                 case MODAL_LEFT:
                 case MODAL_RIGHT:
+                case TRANSFORMING_LEFT:
+                case TRANSFORMING_RIGHT:
                     rotate = false;
                     break;
             }
@@ -389,10 +390,10 @@ public class CardView extends SimpleCardView {
             fullCardName = card.getName(); // split card contains full name as normal
             this.manaCostLeftStr = splitCard.getLeftHalfCard().getManaCostSymbols();
             this.manaCostRightStr = splitCard.getRightHalfCard().getManaCostSymbols();
-        } else if (card instanceof ModalDoubleFacedCard) {
-            this.isModalDoubleFacedCard = true;
-            ModalDoubleFacedCard mainCard = ((ModalDoubleFacedCard) card);
-            fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
+        } else if (card instanceof DoubleFacedCard) {
+            this.isDoubleFacedCard = true;
+            DoubleFacedCard mainCard = ((DoubleFacedCard) card);
+            fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.DOUBLE_FACED_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
             this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
             this.manaCostRightStr = mainCard.getRightHalfCard().getManaCostSymbols();
         } else if (card instanceof AdventureCard) {
@@ -449,9 +450,9 @@ public class CardView extends SimpleCardView {
             if (permanent.isFaceDown(game)) {
                 this.cardIcons.add(CardIconImpl.FACE_DOWN);
             }
+            // commander
             if (game != null) {
                 Player owner = game.getPlayer(game.getOwnerId(permanent));
-                // commander
                 if (owner != null && game.isCommanderObject(owner, permanent)) {
                     this.cardIcons.add(CardIconImpl.COMMANDER);
                 }
@@ -519,20 +520,14 @@ public class CardView extends SimpleCardView {
         // transformable, double faces cards
         this.transformable = card.isTransformable();
 
-        Card secondSideCard = card.getSecondCardFace();
-        if (secondSideCard != null) {
-            this.secondCardFace = new CardView(secondSideCard, game);
-            this.alternateName = secondCardFace.getName();
-        }
-
         this.flipCard = card.isFlipCard();
         if (card.isFlipCard() && card.getFlipCardName() != null) {
             this.alternateName = card.getFlipCardName();
         }
 
-        if (card instanceof ModalDoubleFacedCard) {
+        if (card instanceof DoubleFacedCard) {
             this.transformable = true; // enable GUI day/night button
-            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card;
+            DoubleFacedCard mdfCard = (DoubleFacedCard) card;
             this.secondCardFace = new CardView(mdfCard.getRightHalfCard(), game);
             this.alternateName = mdfCard.getRightHalfCard().getName();
         }
@@ -784,7 +779,6 @@ public class CardView extends SimpleCardView {
         this.cardNumber = "";
         this.imageNumber = 0;
         this.rarity = Rarity.COMMON;
-        // no playable/chooseable marks for designations
     }
 
     public CardView(boolean empty) {
@@ -1033,8 +1027,10 @@ public class CardView extends SimpleCardView {
     }
 
     public String getColorIdentityStr() {
-        FilterMana colorInfo = this.originalColorIdentity;
-        if (colorInfo != null) {
+        FilterMana colorInfo;
+        if (this.originalColorIdentity != null) {
+            colorInfo = this.originalColorIdentity;
+        } else {
             colorInfo = new FilterMana();
         }
 
@@ -1289,6 +1285,7 @@ public class CardView extends SimpleCardView {
     public boolean isExtraDeckCard() {
         return this.extraDeckCard;
     }
+
     public boolean isLand() {
         return cardTypes.contains(CardType.LAND);
     }

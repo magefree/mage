@@ -1,61 +1,67 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
-import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.keyword.TransformAbility;
-import mage.cards.CardImpl;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
+import mage.cards.TransformingDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.TransformedPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.game.Game;
+
+import java.util.UUID;
 
 
 /**
- *
  * @author Saga
  */
-public final class GrimlockDinobotLeader extends CardImpl{
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dinosaurs and Vehicles");
-    static {
-        filter.add(Predicates.or(SubType.DINOSAUR.getPredicate(), SubType.VEHICLE.getPredicate()));
-    }
-    
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Transformers creatures");
-    static {
-        filter2.add(Predicates.not(SubType.DINOSAUR.getPredicate()));
-        filter2.add(Predicates.not(SubType.VEHICLE.getPredicate()));
-        filter2.add(Predicates.or(new AbilityPredicate(TransformAbility.class), TransformedPredicate.instance));
-    }
-    
-    public GrimlockDinobotLeader(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT,CardType.CREATURE}, "{1}{R}{G}{W}");
-        this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.AUTOBOT);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+public final class GrimlockDinobotLeader extends TransformingDoubleFacedCard {
 
-        this.secondSideCardClazz = mage.cards.g.GrimlockFerociousKing.class;
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("Dinosaurs, Vehicles and other Transformers creatures");
+
+    static {
+        filter.add(GrimlockDinobotLeaderPredicate.instance);
+    }
+
+    public GrimlockDinobotLeader(UUID ownerId, CardSetInfo setInfo) {
+        super(
+                ownerId, setInfo,
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, new SubType[]{SubType.AUTOBOT}, "{1}{R}{G}{W}",
+                "Grimlock, Ferocious King",
+                new SuperType[]{SuperType.LEGENDARY}, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, new SubType[]{SubType.DINOSAUR}, "GRW"
+        );
+        this.getLeftHalfCard().setPT(4, 4);
+        this.getRightHalfCard().setPT(8, 8);
 
         // Dinosaurs, Vehicles and other Transformers creatures you control get +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, filter, false)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, filter2, true)));
-        
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(new BoostControlledEffect(
+                2, 0, Duration.WhileOnBattlefield, filter
+        )));
+
         // {2}: Grimlock, Dinobot Leader becomes Grimlock, Ferocious King.
-        this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{2}")));
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(
+                new TransformSourceEffect().setText("{this} becomes Grimlock, Ferocious King"), new GenericManaCost(2)
+        ));
+
+        // Grimlock, Ferocious King
+        // Trample
+        this.getRightHalfCard().addAbility(TrampleAbility.getInstance());
+
+        // {2}: Grimlock, Ferocious King becomes Grimlock, Dinobot Leader.
+        this.getRightHalfCard().addAbility(new SimpleActivatedAbility(
+                new TransformSourceEffect().setText("{this} becomes Grimlock, Dinobot Leader"), new GenericManaCost(2)
+        ));
     }
 
     private GrimlockDinobotLeader(final GrimlockDinobotLeader card) {
@@ -66,5 +72,14 @@ public final class GrimlockDinobotLeader extends CardImpl{
     public GrimlockDinobotLeader copy() {
         return new GrimlockDinobotLeader(this);
     }
-    
+}
+
+enum GrimlockDinobotLeaderPredicate implements ObjectSourcePlayerPredicate<MageObject> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
+        return (!input.getObject().hasSubtype(SubType.DINOSAUR, game) && !input.getObject().hasSubtype(SubType.VEHICLE, game))
+                || (AnotherPredicate.instance.apply(input, game) && input.getObject().getExpansionSetCode().equals("BOT"));
+    }
 }
