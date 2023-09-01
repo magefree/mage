@@ -89,6 +89,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Clock", 99, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Mind Stone", 148, Rarity.COMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Myriad Landscape", 164, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
+        cards.add(new SetCardInfo("Nettling Nuisance", 15, Rarity.RARE, mage.cards.n.NettlingNuisance.class));
         cards.add(new SetCardInfo("Nightmare Unmaking", 114, Rarity.RARE, mage.cards.n.NightmareUnmaking.class));
         cards.add(new SetCardInfo("Nightveil Sprite", 100, Rarity.UNCOMMON, mage.cards.n.NightveilSprite.class));
         cards.add(new SetCardInfo("Nymris, Oona's Trickster", 141, Rarity.RARE, mage.cards.n.NymrisOonasTrickster.class));
