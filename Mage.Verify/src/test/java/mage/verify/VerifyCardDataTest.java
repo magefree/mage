@@ -2243,6 +2243,13 @@ public class VerifyCardDataTest {
         //      becomes "Swampcycling {2}\nMountaincycling {2}"
         refText = splitCyclingAbilities(refText);
 
+        // can't attack/block alone fix
+        // Current implementation makes two separate RestrictionEffect.
+        //
+        // For instance "Jackal Familiar can't attack or block alone."
+        //      becomes "Jackal Familiar can't attack alone.\nJackal Familiar can't block alone."
+        refText = splitCantAttackBlockAlone(card.getName(), refText);
+
         String[] refRules = refText.split("[\\$\\\n]"); // ref card's abilities can be splited by \n or $ chars
         for (int i = 0; i < refRules.length; i++) {
             refRules[i] = prepareRule(card.getName(), refRules[i]);
@@ -2368,6 +2375,26 @@ public class VerifyCardDataTest {
         Assert.assertEquals(
                 "Swampcycling {2}\nMountaincycling {2}",
                 splitCyclingAbilities("Swampcycling {2}, mountaincycling {2}")
+        );
+    }
+
+    private String splitCantAttackBlockAlone(String cardName, String refText) {
+        for (String s : refText.split("[\\$\\\n]")) {
+            if (!Pattern.matches("^" + cardName + " can't attack or block alone.$", s)) {
+                continue;
+            }
+            refText = refText.replace(s, cardName + " can't attack alone.\n" + cardName + " can't block alone.");
+        }
+        return refText;
+    }
+
+    @Test
+    public void checkSplitCantAttackBlockAlone() {
+        // Test the function splitting cycling abilities is correct.
+
+        Assert.assertEquals(
+                "Jackal Familiar can't attack alone.\nJackal Familiar can't block alone.",
+                splitCantAttackBlockAlone("Jackal Familiar", "Jackal Familiar can't attack or block alone.")
         );
     }
 
