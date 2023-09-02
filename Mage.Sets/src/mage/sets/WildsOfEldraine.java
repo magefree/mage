@@ -139,7 +139,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Food Coma", 308, Rarity.UNCOMMON, mage.cards.f.FoodComa.class));
         cards.add(new SetCardInfo("Food Fight", 129, Rarity.RARE, mage.cards.f.FoodFight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Food Fight", 346, Rarity.RARE, mage.cards.f.FoodFight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 275, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 276, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frantic Firebolt", 130, Rarity.COMMON, mage.cards.f.FranticFirebolt.class));
@@ -188,7 +188,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Ingenious Prodigy", 56, Rarity.RARE, mage.cards.i.IngeniousProdigy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Into the Fae Court", 57, Rarity.COMMON, mage.cards.i.IntoTheFaeCourt.class));
         cards.add(new SetCardInfo("Intrepid Trufflesnout", 320, Rarity.UNCOMMON, mage.cards.i.IntrepidTrufflesnout.class));
-        cards.add(new SetCardInfo("Island", 263, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 263, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 269, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 270, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Johann's Stopgap", 58, Rarity.COMMON, mage.cards.j.JohannsStopgap.class));
@@ -228,7 +228,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Moonshaker Cavalry", 325, Rarity.MYTHIC, mage.cards.m.MoonshakerCavalry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mosswood Dreadknight", 231, Rarity.RARE, mage.cards.m.MosswoodDreadknight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mosswood Dreadknight", 292, Rarity.RARE, mage.cards.m.MosswoodDreadknight.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 273, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 274, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Neva, Stalked by Nightmares", 209, Rarity.UNCOMMON, mage.cards.n.NevaStalkedByNightmares.class));
@@ -242,7 +242,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Pests of Honor", 310, Rarity.UNCOMMON, mage.cards.p.PestsOfHonor.class));
         cards.add(new SetCardInfo("Picklock Prankster", 64, Rarity.UNCOMMON, mage.cards.p.PicklockPrankster.class));
         cards.add(new SetCardInfo("Picnic Ruiner", 232, Rarity.UNCOMMON, mage.cards.p.PicnicRuiner.class));
-        cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 262, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 267, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 268, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plunge into Winter", 22, Rarity.COMMON, mage.cards.p.PlungeIntoWinter.class));
@@ -333,7 +333,7 @@ public final class WildsOfEldraine extends ExpansionSet {
         cards.add(new SetCardInfo("Stroke of Midnight", 375, Rarity.UNCOMMON, mage.cards.s.StrokeOfMidnight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Succumb to the Cold", 72, Rarity.UNCOMMON, mage.cards.s.SuccumbToTheCold.class));
         cards.add(new SetCardInfo("Sugar Rush", 110, Rarity.COMMON, mage.cards.s.SugarRush.class));
-        cards.add(new SetCardInfo("Swamp", 264, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 264, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 271, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 272, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sweettooth Witch", 111, Rarity.COMMON, mage.cards.s.SweettoothWitch.class));
