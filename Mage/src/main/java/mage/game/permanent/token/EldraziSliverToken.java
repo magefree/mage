@@ -27,6 +27,6 @@ public final class EldraziSliverToken extends TokenImpl {
 
     @Override
     public EldraziSliverToken copy() {
-        return new EldraziSliverToken(this); //To change body of generated methods, choose Tools | Templates.
+        return new EldraziSliverToken(this);
     }
 }

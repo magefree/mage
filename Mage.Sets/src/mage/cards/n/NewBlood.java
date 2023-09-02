@@ -127,7 +127,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
             }
         }
 
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
     }
 
     @Override

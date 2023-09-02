@@ -53,7 +53,7 @@ public class SoulshiftAbility extends DiesSourceTriggeredAbility {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, intValue + 1));
         filter.add(SubType.SPIRIT.getPredicate());
         this.addTarget(new TargetCardInYourGraveyard(filter));
-        super.trigger(game, controllerId, triggeringEvent); //To change body of generated methods, choose Tools | Templates.
+        super.trigger(game, controllerId, triggeringEvent);
     }
 
     @Override

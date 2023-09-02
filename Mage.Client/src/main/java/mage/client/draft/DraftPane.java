@@ -39,7 +39,7 @@ public class DraftPane extends MagePane {
 
     @Override
     public void changeGUISize() {
-        super.changeGUISize(); //To change body of generated methods, choose Tools | Templates.
+        super.changeGUISize();
         draftPanel1.changeGUISize();
     }
 
