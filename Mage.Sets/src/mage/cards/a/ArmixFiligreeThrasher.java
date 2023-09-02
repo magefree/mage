@@ -11,6 +11,8 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,6 +43,12 @@ public final class ArmixFiligreeThrasher extends CardImpl {
             new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_ARTIFACT)
     ));
 
+    private static final Hint hint = new ValueHint(
+            "Artifacts under your control and in your graveyard", new AdditiveDynamicValue(
+            new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACTS),
+            new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_ARTIFACT)
+    ));
+
     public ArmixFiligreeThrasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");
 
@@ -58,7 +66,7 @@ public final class ArmixFiligreeThrasher extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(new AttacksTriggeredAbility(new DoWhenCostPaid(
                 ability, new DiscardCardCost(), "Discard a card?"
-        ), false));
+        ), false).addHint(hint));
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());
