@@ -9,6 +9,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
+import sun.plugin.dom.exception.InvalidStateException;
 
 import java.util.UUID;
 
@@ -20,8 +21,11 @@ import java.util.UUID;
 public class ReturnFromExileForSourceEffect extends OneShotEffect {
 
     private final Zone returnToZone;
-    private boolean pluralCards;
-    private boolean pluralOwners;
+
+
+    private boolean pluralCards; // for text generation
+    private boolean pluralOwners; // for text generation
+    private boolean putVerb; // for text generation
 
     /**
      * @param zone Zone the card should return to
@@ -31,6 +35,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
         this.returnToZone = zone;
         this.pluralCards = false;
         this.pluralOwners = false;
+        this.putVerb = false;
         updateText();
     }
 
@@ -39,6 +44,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
         this.returnToZone = effect.returnToZone;
         this.pluralCards = effect.pluralCards;
         this.pluralOwners = effect.pluralOwners;
+        this.putVerb = effect.putVerb;
     }
 
     @Override
@@ -84,25 +90,34 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
         return this;
     }
 
+    public ReturnFromExileForSourceEffect withPutVerb() {
+        this.putVerb = true;
+        updateText();
+        return this;
+    }
+
     private void updateText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("return the exiled ").append(pluralCards ? "cards" : "card").append(" to ");
-        if (returnToZone == Zone.BATTLEFIELD) {
-            sb.append("the battlefield under ");
+        String text = putVerb ? "put " : "return ";
+        text += "the exiled " + (pluralCards ? "cards " : "card ");
+        text += putVerb ? "into " : "to ";
+        if(returnToZone.equals(Zone.BATTLEFIELD)) {
+            text += "the battlefield under ";
         }
-        sb.append(pluralCards ? "their " : "its ").append(pluralOwners ? "owners' " : "owner's ");
+        text += (pluralCards ? "their " : "its ") + (pluralOwners ? "owners' " : "owner's ");
         switch (returnToZone) {
             case BATTLEFIELD:
-                sb.append("control");
+                text += "control";
                 break;
             case HAND:
-                sb.append(pluralOwners ? "hands" : "hand");
+                text += pluralOwners ? "hands" : "hand";
                 break;
             case GRAVEYARD:
-                sb.append(pluralOwners ? "graveyards" : "graveyard");
+                text += pluralOwners ? "graveyards" : "graveyard";
                 break;
+            default:
+                throw new IllegalStateException("Text generation for " + this.getClass().getName() + " is not expecting Zone " + returnToZone);
         }
-        staticText = sb.toString();
+        staticText = text;
     }
 
 }
