@@ -46,7 +46,10 @@ public final class GiantInheritance extends CardImpl {
         this.addAbility(ability);
 
         // When Giant Inheritance is put into a graveyard from the battlefield, return it to its owner's hand.
-        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
+        this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(
+                new ReturnToHandSourceEffect()
+                        .setText("return it to its owner's hand")
+        ));
     }
 
     private GiantInheritance(final GiantInheritance card) {
