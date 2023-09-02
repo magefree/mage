@@ -101,26 +101,6 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-
-        String amountText = "";
-        Target target = mode.getTargets().get(0);
-        if (target.getMinNumberOfTargets() < target.getMaxNumberOfTargets()) {
-            amountText = "up to " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + " ";
-        } else if (target.getMinNumberOfTargets() > 1) {
-            amountText = CardUtil.numberToText(target.getMinNumberOfTargets()) + " ";
-        }
-
-        String targetText = "";
-        if (target.getTargetName().contains("target ") || target.isNotTarget()) {
-            targetText = "";
-        } else {
-            targetText = "target ";
-        }
-
-        if (mode.getTargets().isEmpty()) {
-            return "exile it";
-        } else {
-            return "exile " + amountText + targetText + target.getTargetName();
-        }
+        return "exile " + getTargetPointer().describeTargets(mode.getTargets(), "it");
     }
 }
