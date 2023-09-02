@@ -26,7 +26,9 @@ public final class PhantasmalDragon extends CardImpl {
         this.toughness = new MageInt(5);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(
+                new SacrificeSourceEffect().setText("sacrifice it")
+        ));
     }
 
     private PhantasmalDragon(final PhantasmalDragon card) {

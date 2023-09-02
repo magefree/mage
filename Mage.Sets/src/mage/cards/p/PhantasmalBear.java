@@ -25,7 +25,9 @@ public final class PhantasmalBear extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Phantasmal Bear becomes the target of a spell or ability, sacrifice it.
-        this.addAbility(new SourceBecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+        this.addAbility(new SourceBecomesTargetTriggeredAbility(
+                new SacrificeSourceEffect().setText("sacrifice it")
+        ));
     }
 
     private PhantasmalBear(final PhantasmalBear card) {

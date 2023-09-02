@@ -42,7 +42,11 @@ public final class HoardingDragon extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HoardingDragonEffect(), true));
 
         // When Hoarding Dragon dies, you may put the exiled card into its owner's hand.
-        this.addAbility(new DiesSourceTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.HAND), true));
+        this.addAbility(new DiesSourceTriggeredAbility(
+                new ReturnFromExileForSourceEffect(Zone.HAND)
+                        .setText("put the exiled card into its owner's hand"),
+                true
+        ));
     }
 
     private HoardingDragon(final HoardingDragon card) {
