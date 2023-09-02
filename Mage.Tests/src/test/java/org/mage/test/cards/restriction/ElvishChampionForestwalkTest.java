@@ -39,9 +39,9 @@ public class ElvishChampionForestwalkTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Canyon Minotaur");
 
         attack(3, playerA, "Arbor Elf");
-        attack(3, playerA, "Defiant Elf");
+        attack(3, playerA, "Elvish Champion");
         block(3, playerB, "Silvercoat Lion", "Arbor Elf");
-        block(3, playerB, "Canyon Minotaur", "Defiant Elf");
+        block(3, playerB, "Canyon Minotaur", "Elvish Champion");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
 
