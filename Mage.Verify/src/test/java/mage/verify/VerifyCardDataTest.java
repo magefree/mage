@@ -63,7 +63,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "WOE"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = "WOE;WOC"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
@@ -2153,8 +2153,10 @@ public class VerifyCardDataTest {
     }*/
     private static boolean compareText(String cardText, String refText, String name) {
         return cardText.equals(refText)
-                || cardText.replace(name, name.split(", ")[0]).equals(refText)
-                || cardText.replace(name, name.split(" ")[0]).equals(refText);
+                || cardText.replace(name, name.split(", ")[0])
+                        .equals(refText.replace(name, name.split(", ")[0]))
+                || cardText.replace(name, name.split(" ")[0])
+                        .equals(refText.replace(name, name.split(" ")[0]));
     }
 
     private static boolean checkForEffect(Card card, Class<? extends Effect> effectClazz) {
