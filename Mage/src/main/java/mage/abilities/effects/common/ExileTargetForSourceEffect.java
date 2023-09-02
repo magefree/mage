@@ -103,14 +103,15 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
         }
 
         String amountText = "";
-        if (mode.getTargets().get(0).getMinNumberOfTargets() < mode.getTargets().get(0).getMaxNumberOfTargets()) {
-            amountText = "up to " + CardUtil.numberToText(mode.getTargets().get(0).getMaxNumberOfTargets()) + " ";
-        } else if (mode.getTargets().get(0).getMinNumberOfTargets() > 1) {
-            amountText = CardUtil.numberToText(mode.getTargets().get(0).getMinNumberOfTargets()) + " ";
+        Target target = mode.getTargets().get(0);
+        if (target.getMinNumberOfTargets() < target.getMaxNumberOfTargets()) {
+            amountText = "up to " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + " ";
+        } else if (target.getMinNumberOfTargets() > 1) {
+            amountText = CardUtil.numberToText(target.getMinNumberOfTargets()) + " ";
         }
 
         String targetText = "";
-        if (mode.getTargets().get(0).getTargetName().contains("target ")) {
+        if (target.getTargetName().contains("target ") || target.isNotTarget()) {
             targetText = "";
         } else {
             targetText = "target ";
@@ -119,7 +120,7 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
         if (mode.getTargets().isEmpty()) {
             return "exile it";
         } else {
-            return "exile " + amountText + targetText + mode.getTargets().get(0).getTargetName();
+            return "exile " + amountText + targetText + target.getTargetName();
         }
     }
 }
