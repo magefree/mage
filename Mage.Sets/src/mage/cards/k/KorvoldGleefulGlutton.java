@@ -63,8 +63,9 @@ public final class KorvoldGleefulGlutton extends CardImpl {
 
         // Whenever Korvold deals combat damage to a player, put X +1/+1 counters on Korvold and draw X cards, where X is the number of permanent types among cards in your graveyard.
         Ability combatDamageAbility = new DealsCombatDamageToAPlayerTriggeredAbility(
-            new AddCountersSourceEffect(CounterType.P1P1.createInstance(), PermanentTypesInGraveyardCount.instance, true),
-        false
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(), PermanentTypesInGraveyardCount.instance, true)
+                        .setText("put X +1/+1 counters on {this}"),
+                false
         );
         combatDamageAbility.addEffect(new DrawCardSourceControllerEffect(PermanentTypesInGraveyardCount.instance).setText("and draw X cards, where X is the number of permanent types among cards in your graveyard"));
         combatDamageAbility.addHint(new ValueHint("Permanent types among cards in your graveyard", PermanentTypesInGraveyardCount.instance));
