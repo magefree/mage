@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class PicklockPrankster extends AdventureCard {
 
-    private static final FilterCard filter = new FilterCard("instant, sorcery, or Faerie card");
+    private static final FilterCard filter = new FilterCard("an instant, sorcery, or Faerie card");
 
     static {
         filter.add(Predicates.or(
@@ -44,7 +44,7 @@ public final class PicklockPrankster extends AdventureCard {
 
         // Free the Fae
         // Mill four cards. Then put an instant, sorcery, or Faerie card from among the milled cards into your hand.
-        this.getSpellCard().getSpellAbility().addEffect(new MillThenPutInHandEffect(4, filter));
+        this.getSpellCard().getSpellAbility().addEffect(new MillThenPutInHandEffect(4, filter, true));
 
         this.finalizeAdventure();
     }
