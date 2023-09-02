@@ -43,7 +43,10 @@ public final class OssuaryRats extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Ossuary Rats enters the battlefield, it deals X damage to target creature or planeswalker an opponent controls, where X is the number of creature cards in your graveyard.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(xValue, "it"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new DamageTargetEffect(xValue, "it")
+                        .withWhereXWording()
+        );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability.addHint(hint));
     }

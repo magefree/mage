@@ -18,7 +18,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class SpireBarrage extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountains you control");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());

@@ -22,7 +22,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class FireDragon extends CardImpl {
     
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("for each Mountain you control");
+    private static final FilterControlledPermanent filter =
+            new FilterControlledPermanent("Mountains you control");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());
@@ -38,8 +39,7 @@ public final class FireDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // When Fire Dragon enters the battlefield, it deals damage equal to the number of Mountains you control to target creature.
-        Effect effect = new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter));
-        effect.setText("it deals damage equal to the number of Mountains you control to target creature");
+        Effect effect = new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter), "it");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

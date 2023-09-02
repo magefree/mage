@@ -61,7 +61,7 @@ public final class CommodoreGuff extends CardImpl {
         ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(xValue).setText("you draw X cards"), -3);
         ability.addEffect(new DamagePlayersEffect(
                 Outcome.Damage, xValue, TargetController.OPPONENT
-        ).concatBy("and"));
+        ).setText("and {this} deals X damage to each opponent, where X is the number of planeswalkers you control"));
         this.addAbility(ability.addHint(hint));
 
         // Commodore Guff can be your commander.

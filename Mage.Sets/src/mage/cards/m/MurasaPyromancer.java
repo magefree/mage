@@ -21,7 +21,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class MurasaPyromancer extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Ally you control");
+    private static final FilterControlledCreaturePermanent filter =
+            new FilterControlledCreaturePermanent("Allies you control");
 
     static {
         filter.add(SubType.ALLY.getPredicate());
@@ -37,7 +38,10 @@ public final class MurasaPyromancer extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        Ability ability = new AllyEntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), true);
+        Ability ability = new AllyEntersBattlefieldTriggeredAbility(
+                new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)),
+                true
+        );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability.setAbilityWord(null));
 

@@ -38,9 +38,10 @@ public final class MoltenHydra extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new ManaCostsImpl<>("{1}{R}{R}")
         ));
 
-        // {tap}, Remove all +1/+1 counters from Molten Hydra: Molten Hydra deals damage to any target equal to the number of +1/+1 counters removed this way.
+        // {tap}, Remove all +1/+1 counters from Molten Hydra: It deals damage to any target equal to the number of +1/+1 counters removed this way.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(MoltenHydraDynamicValue.instance), new TapSourceCost()
+                new DamageTargetEffect(MoltenHydraDynamicValue.instance, "it"),
+                new TapSourceCost()
         );
         ability.addCost(new RemoveAllCountersSourceCost(CounterType.P1P1));
         ability.addTarget(new TargetAnyTarget());

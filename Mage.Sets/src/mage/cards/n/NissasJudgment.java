@@ -34,7 +34,7 @@ public final class NissasJudgment extends CardImpl {
         effect = new NissasJudgmentEffect();
         effect.setTargetPointer(new SecondTargetPointer()); // First target is used by Support
         getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, false));
-        getSpellAbility().addEffect(effect);
+        getSpellAbility().addEffect(effect.concatBy("<br>"));
     }
 
     private NissasJudgment(final NissasJudgment card) {

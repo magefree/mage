@@ -36,6 +36,7 @@ public final class NoiseMarine extends CardImpl {
         // Sonic Blaster -- When Noise Marine enters the battlefield, it deals damage equal to the number of spells you've cast this turn to any target.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new DamageTargetEffect(NoiseMarineValue.instance, "it")
+                        .withEqualToBeforeTarget()
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability.withFlavorWord("Sonic Blaster"));

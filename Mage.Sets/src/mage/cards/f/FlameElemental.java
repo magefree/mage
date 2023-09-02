@@ -29,8 +29,12 @@ public final class FlameElemental extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // {R}, {tap}, Sacrifice Flame Elemental: Flame Elemental deals damage equal to its power to target creature.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(new SourcePermanentPowerCount(false)), new ManaCostsImpl<>("{R}"));
+        // {R}, {tap}, Sacrifice Flame Elemental: It deals damage equal to its power to target creature.
+        Ability ability = new SimpleActivatedAbility(
+                new DamageTargetEffect(new SourcePermanentPowerCount(false).setSourcePossessiveForm("its"), "it")
+                        .withEqualToBeforeTarget(),
+                new ManaCostsImpl<>("{R}")
+        );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

@@ -29,8 +29,13 @@ public final class EternalFlame extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
 
         // Eternal Flame deals X damage to target opponent, where X is the number of Mountains you control. It deals half X damage, rounded up, to you.);
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)).setText("{this} deals X damage to target opponent, where X is the number of Mountains you control"));
-        this.getSpellAbility().addEffect(new DamageControllerEffect(new HalfValue(new PermanentsOnBattlefieldCount(filter), true)).setText("It deals half X damage, rounded up, to you"));
+        this.getSpellAbility().addEffect(
+                new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter))
+                        .setText("{this} deals X damage to target opponent or planeswalker")
+        );
+        this.getSpellAbility().addEffect(
+                new DamageControllerEffect(new HalfValue(new PermanentsOnBattlefieldCount(filter), true))
+                        .setText(" and half X damage, rounded up, to you, where X is the number of Mountains you control"));
         this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
 

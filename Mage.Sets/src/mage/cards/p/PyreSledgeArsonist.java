@@ -44,7 +44,9 @@ public final class PyreSledgeArsonist extends CardImpl {
 
         // {1}, {T}: Pyre-Sledge Arsonist deals X damage to any target, where X is the number of permanents you sacrificed this turn.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(PyreSledgeArsonistValue.instance), new GenericManaCost(1)
+                new DamageTargetEffect(PyreSledgeArsonistValue.instance)
+                        .withWhereXWording(),
+                new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());

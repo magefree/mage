@@ -29,6 +29,7 @@ public final class SeasonsBeatings extends CardImpl {
         // Family gathering - Each creature target player controls deals damage equal to its power to another random creature that player controls.
         this.getSpellAbility().addEffect(new SeasonsBeatingsEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().withFlavorWord("Family gathering");
 
     }
 
@@ -46,7 +47,7 @@ class SeasonsBeatingsEffect extends OneShotEffect {
 
     SeasonsBeatingsEffect() {
         super(Outcome.Damage);
-        staticText = "Family gathering <i>Each creature target player controls deals damage equal to its power to another random creature that player controls.</i>";
+        staticText = "Each creature target player controls deals damage equal to its power to another random creature that player controls.</i>";
     }
 
     SeasonsBeatingsEffect(final SeasonsBeatingsEffect effect) {

@@ -25,7 +25,10 @@ public class DamageTargetEffect extends OneShotEffect {
     protected boolean preventable;
     protected String targetDescription;
     protected boolean useOnlyTargetPointer;
-    protected String sourceName = "{this}";
+    protected String sourceName = "{this}"; // for text generation
+    protected boolean equalToBeforeTarget = false; // for text generation
+    protected boolean whereXWording = false; // for text generation
+    protected boolean OneDamageForEachWording = false; // for text generation
 
     public DamageTargetEffect(int amount) {
         this(StaticValue.get(amount), true);
@@ -93,6 +96,9 @@ public class DamageTargetEffect extends OneShotEffect {
         this.targetDescription = effect.targetDescription;
         this.useOnlyTargetPointer = effect.useOnlyTargetPointer;
         this.sourceName = effect.sourceName;
+        this.equalToBeforeTarget = effect.equalToBeforeTarget;
+        this.whereXWording = effect.whereXWording;
+        this.OneDamageForEachWording = effect.OneDamageForEachWording;
     }
 
     public String getSourceName() {
@@ -144,6 +150,21 @@ public class DamageTargetEffect extends OneShotEffect {
         return true;
     }
 
+    public DamageTargetEffect withEqualToBeforeTarget(){
+        this.equalToBeforeTarget = true;
+        return this;
+    }
+
+    public DamageTargetEffect withWhereXWording(){
+        this.whereXWording = true;
+        return this;
+    }
+
+    public DamageTargetEffect with1DamageForEachWording(){
+        this.OneDamageForEachWording = true;
+        return this;
+    }
+
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
@@ -152,13 +173,23 @@ public class DamageTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
         sb.append(this.sourceName).append(" deals ");
-        if (message.isEmpty() || !message.equals("1")) {
+        if(whereXWording) {
+            sb.append("X ");
+        }
+        else if(OneDamageForEachWording) {
+            sb.append("1 ");
+        }
+        else if ((amount instanceof StaticValue) && !message.equals("1")) {
             sb.append(amount);
         }
         if (!sb.toString().endsWith(" ")) {
             sb.append(' ');
         }
-        sb.append("damage to ");
+        sb.append("damage");
+        if(equalToBeforeTarget) {
+            sb.append(dynamicValueText());
+        }
+        sb.append(" to ");
         if (!targetDescription.isEmpty()) {
             sb.append(targetDescription);
         } else {
@@ -187,21 +218,31 @@ public class DamageTargetEffect extends OneShotEffect {
                 sb.append("that target");
             }
         }
-        if (!message.isEmpty()) {
-            if (message.equals("1")) {
-                sb.append(" equal to the number of ");
-            } else {
-                if (message.startsWith("the") || message.startsWith("that") || message.startsWith("twice")) {
-                    sb.append(" equal to ");
-                } else {
-                    sb.append(" for each ");
-                }
-            }
-            sb.append(message);
+        if(!equalToBeforeTarget) {
+            sb.append(dynamicValueText());
         }
         if (!preventable) {
             sb.append(". The damage can't be prevented");
         }
         return sb.toString();
+    }
+
+    private String dynamicValueText() {
+        String message = amount.getMessage();
+        if (!message.isEmpty()) {
+            if(OneDamageForEachWording) {
+                return " for each " + message;
+            }
+
+            String text = whereXWording ? ", where X is " : " equal to ";
+            if (message.startsWith("the") || message.startsWith("that")
+                    || message.startsWith("twice") || message.startsWith("half")
+                    || message.startsWith("{this}") || message.startsWith("its")) {
+                return text + message;
+            } else {
+                return text + "the number of " + message;
+            }
+        }
+        return "";
     }
 }

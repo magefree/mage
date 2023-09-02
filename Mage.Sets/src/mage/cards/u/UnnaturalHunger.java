@@ -42,7 +42,7 @@ public final class UnnaturalHunger extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
-        // At the beginning of the upkeep of enchanted creature's controller, Unnatural Hunger deals damage to that player equal to that creature's power unless they sacrifice another creature.
+        // At the beginning of the upkeep of enchanted creature's controller, Unnatural Hunger deals damage equal to that creature's power to that player unless they sacrifice another creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new UnnaturalHungerEffect(),
                 TargetController.CONTROLLER_ATTACHED_TO, false));
     }
@@ -61,7 +61,7 @@ class UnnaturalHungerEffect extends OneShotEffect {
 
     public UnnaturalHungerEffect() {
         super(Outcome.Detriment);
-        this.staticText = "{this} deals damage to that player equal to that creature's power unless they sacrifice another creature";
+        this.staticText = "{this} deals damage equal to that creature's power to that player unless they sacrifice another creature";
     }
 
     private UnnaturalHungerEffect(UnnaturalHungerEffect effect) {

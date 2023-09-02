@@ -37,9 +37,9 @@ public final class MinotaurIllusionist extends CardImpl {
         // {1}{U}: Minotaur Illusionist gains shroud until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(),
             Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")));
-        // {R}, Sacrifice Minotaur Illusionist: Minotaur Illusionist deals damage equal to its power to target creature.
-        Effect effect = new DamageTargetEffect(new SourcePermanentPowerCount());
-        effect.setText("{this} deals damage equal to its power to target creature.");
+        // {R}, Sacrifice Minotaur Illusionist: It deals damage equal to its power to target creature.
+        Effect effect = new DamageTargetEffect(new SourcePermanentPowerCount().setSourcePossessiveForm("its"), "it")
+                .withEqualToBeforeTarget();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

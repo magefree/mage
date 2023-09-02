@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class BenBenAkkiHermit extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("untapped Mountain you control");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("untapped Mountains you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
@@ -39,7 +39,12 @@ public final class BenBenAkkiHermit extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter), true), new TapSourceCost());
+
+        // {T}: Ben-Ben, Akki Hermit deals damage to target attacking creature equal to the number of untapped Mountains you control.
+        Ability ability = new SimpleActivatedAbility(
+                new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter), true),
+                new TapSourceCost()
+        );
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }

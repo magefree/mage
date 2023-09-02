@@ -49,7 +49,8 @@ class CycloneEffect extends OneShotEffect {
 
     public CycloneEffect() {
         super(Outcome.Damage);
-        this.staticText = "Pay Green Mana for each counter to damage everything or sacrifice Cyclone.";
+        this.staticText = ", then sacrifice {this} unless you pay {G} for each wind counter on it. "
+                + "If you pay, {this} deals damage equal to the number of wind counters on it to each creature and each player.";
     }
 
     public CycloneEffect(final CycloneEffect effect) {

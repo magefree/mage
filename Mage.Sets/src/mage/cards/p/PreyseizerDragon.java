@@ -37,7 +37,10 @@ public final class PreyseizerDragon extends CardImpl {
         this.addAbility(new DevourAbility(2));
 
         // Whenever Preyseizer Dragon attacks, it deals damage to any target equal to the number of +1/+1 counters on Preyseizer Dragon.
-        Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1)), false);
+        Ability ability = new AttacksTriggeredAbility(
+                new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1).doPluralizeCounter()),
+                false
+        );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

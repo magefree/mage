@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class IreOfKaminari extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Arcane");
+    private static final FilterCard filter = new FilterCard("Arcane cards");
 
     static {
         filter.add(SubType.ARCANE.getPredicate());

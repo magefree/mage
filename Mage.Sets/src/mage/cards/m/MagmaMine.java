@@ -31,8 +31,16 @@ public final class MagmaMine extends CardImpl {
                 new AddCountersSourceEffect(CounterType.PRESSURE.createInstance(), true), 
                 new GenericManaCost(4)));
         
-        // {tap}, Sacrifice Magma Mine: Magma Mine deals damage equal to the number of pressure counters on it to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new CountersSourceCount(CounterType.PRESSURE)), new TapSourceCost());
+        // {tap}, Sacrifice Magma Mine: It deals damage equal to the number of pressure counters on it to any target.
+        Ability ability = new SimpleActivatedAbility(
+                new DamageTargetEffect(
+                        new CountersSourceCount(CounterType.PRESSURE)
+                                .setSourceName("it")
+                                .doPluralizeCounter(),
+                        "it"
+                ).withEqualToBeforeTarget(),
+                new TapSourceCost()
+        );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

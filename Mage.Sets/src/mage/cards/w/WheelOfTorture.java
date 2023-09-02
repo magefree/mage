@@ -39,13 +39,13 @@ public final class WheelOfTorture extends CardImpl {
 
 class WheelOfTortureEffect extends OneShotEffect {
 
-    private WheelOfTortureEffect(final WheelOfTortureEffect effect) {
-        super(effect);
-        this.staticText = "Wheel of Torture deals X damage to that player, where X is 3 minus the number of cards in their hand";
+    WheelOfTortureEffect() {
+        super(Outcome.Damage);
+        this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in their hand";
     }
 
-    public WheelOfTortureEffect() {
-        super(Outcome.Damage);
+    private WheelOfTortureEffect(final WheelOfTortureEffect effect) {
+        super(effect);
     }
 
     @Override

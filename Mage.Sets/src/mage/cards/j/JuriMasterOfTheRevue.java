@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -40,8 +41,10 @@ public final class JuriMasterOfTheRevue extends CardImpl {
         ));
 
         // When Juri dies, it deals damage equal its power to any target.
-        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(JuriMasterOfTheRevueValue.instance)
-                .setText("it deals damage equal its power to any target"));
+        Ability ability = new DiesSourceTriggeredAbility(
+                new DamageTargetEffect(new SourcePermanentPowerCount().setSourcePossessiveForm("its"), "it")
+                        .withEqualToBeforeTarget()
+        );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
@@ -53,25 +56,5 @@ public final class JuriMasterOfTheRevue extends CardImpl {
     @Override
     public JuriMasterOfTheRevue copy() {
         return new JuriMasterOfTheRevue(this);
-    }
-}
-
-enum JuriMasterOfTheRevueValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent permanent = (Permanent) effect.getValue("permanentLeftBattlefield");
-        return permanent == null ? 0 : permanent.getPower().getValue();
-    }
-
-    @Override
-    public JuriMasterOfTheRevueValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }

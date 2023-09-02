@@ -83,7 +83,7 @@ class EomerKingOfRohanEffect extends OneShotEffect {
 
     EomerKingOfRohanEffect() {
         super(Outcome.Benefit);
-        staticText = "target player becomes the monarch. {this} deals equal to its power to any target.";
+        staticText = "target player becomes the monarch. {this} deals damage equal to its power to any target.";
     }
 
     private EomerKingOfRohanEffect(final EomerKingOfRohanEffect effect) {

@@ -43,7 +43,7 @@ class PowerSurgeDamageEffect extends OneShotEffect {
 
     public PowerSurgeDamageEffect() {
         super(Outcome.Damage);
-        this.staticText = "{this} deals X damage to that player where X is the number of untapped lands they controlled at the beginning of this turn";
+        this.staticText = "{this} deals X damage to that player, where X is the number of untapped lands they controlled at the beginning of this turn";
     }
 
     private PowerSurgeDamageEffect(final PowerSurgeDamageEffect copy) {

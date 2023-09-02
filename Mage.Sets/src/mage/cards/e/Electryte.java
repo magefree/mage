@@ -48,6 +48,7 @@ class ElectryteTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredAbili
 
     ElectryteTriggeredAbility() {
         super(new ElectryteEffect(), false);
+        this.setTriggerPhrase("Whenever {this} deals combat damage to defending player, ");
     }
 
     ElectryteTriggeredAbility(final ElectryteTriggeredAbility effect) {
@@ -65,12 +66,6 @@ class ElectryteTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredAbili
             return game.getCombat().getDefenderId(getSourceId()).equals(event.getPlayerId());
         }
         return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to defending player, "
-                + "it deals damage equal to its power to each blocking creature";
     }
 }
 

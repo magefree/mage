@@ -17,7 +17,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class RockslideAmbush extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains you control");
 
     static {
         filter.add(SubType.MOUNTAIN.getPredicate());

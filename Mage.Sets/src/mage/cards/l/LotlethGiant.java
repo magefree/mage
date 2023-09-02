@@ -32,7 +32,7 @@ public final class LotlethGiant extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new DamageTargetEffect(new CardsInControllerGraveyardCount(
                         StaticFilters.FILTER_CARD_CREATURE
-                ), "it"), false);
+                ), "it").with1DamageForEachWording(), false);
         ability.addTarget(new TargetOpponent());
         ability.setAbilityWord(AbilityWord.UNDERGROWTH);
         this.addAbility(ability);

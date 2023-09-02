@@ -35,7 +35,11 @@ public final class BlazingEffigy extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Blazing Effigy dies, it deals X damage to target creature, where X is 3 plus the amount of damage dealt to Blazing Effigy this turn by other sources named Blazing Effigy.
-        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(BlazingEffigyCount.instance), false);
+        Ability ability = new DiesSourceTriggeredAbility(
+                new DamageTargetEffect(BlazingEffigyCount.instance, "it")
+                        .withWhereXWording(),
+                false
+        );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability, new BlazingEffigyWatcher());
     }

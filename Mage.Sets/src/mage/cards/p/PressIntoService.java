@@ -32,6 +32,7 @@ public final class PressIntoService extends CardImpl {
 
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn)
                 .setText("Gain control of target creature until end of turn")
+                .concatBy("<br>")
                 .setTargetPointer(new SecondTargetPointer())
         );
         this.getSpellAbility().addEffect(new UntapTargetEffect()

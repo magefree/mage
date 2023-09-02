@@ -35,7 +35,8 @@ public final class SharpshooterElf extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
+    private static final DynamicValue xValue = new SourcePermanentPowerCount(false)
+            .setSourcePossessiveForm("its");
 
     public SharpshooterElf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -55,7 +56,9 @@ public final class SharpshooterElf extends CardImpl {
 
         // When Sharpshooter Elf enters the battlefield, it deals damage equal to its power to target creature with flying an opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DamageTargetEffect(xValue, "it"), true
+                new DamageTargetEffect(xValue, "it")
+                        .withEqualToBeforeTarget(),
+                false
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

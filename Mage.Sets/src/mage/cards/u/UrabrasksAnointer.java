@@ -43,7 +43,10 @@ public final class UrabrasksAnointer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Urabrask's Anointer enters the battlefield, it deals X damage to any target, where X is the number of permanents you control with oil counters on them.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(xValue, "it"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new DamageTargetEffect(xValue, "it")
+                        .withWhereXWording()
+        );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability.addHint(hint));
     }

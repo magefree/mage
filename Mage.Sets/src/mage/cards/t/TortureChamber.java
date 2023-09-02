@@ -92,7 +92,7 @@ class TortureChamberEffect2 extends OneShotEffect {
 
     public TortureChamberEffect2() {
         super(Outcome.Damage);
-        this.staticText = "{this} deals damage to target creature equal to the number of pain counters removed this way";
+        this.staticText = "it deals damage to target creature equal to the number of pain counters removed this way";
     }
 
     private TortureChamberEffect2(final TortureChamberEffect2 effect) {

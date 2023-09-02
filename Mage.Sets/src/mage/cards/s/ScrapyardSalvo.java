@@ -7,6 +7,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -20,7 +21,9 @@ public final class ScrapyardSalvo extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(new FilterArtifactCard())));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(
+                new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_ARTIFACTS)
+        ));
     }
 
     private ScrapyardSalvo(final ScrapyardSalvo card) {

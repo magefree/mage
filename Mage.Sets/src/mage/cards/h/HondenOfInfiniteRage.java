@@ -24,7 +24,7 @@ import mage.target.common.TargetAnyTarget;
 public final class HondenOfInfiniteRage extends CardImpl {
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(
-            new FilterControlledPermanent(SubType.SHRINE)
+            new FilterControlledPermanent(SubType.SHRINE, "Shrines you control")
     );
     private static final Hint hint = new ValueHint("Shrines you control", xValue);
 

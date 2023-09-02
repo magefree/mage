@@ -40,13 +40,13 @@ public final class IronMaiden extends CardImpl {
 
 class IronMaidenEffect extends OneShotEffect {
 
-    private IronMaidenEffect(final IronMaidenEffect effect) {
-        super(effect);
-        this.staticText = "Iron Maiden deals X damage to that player, where X is the number of cards in their hand minus 4";
+    IronMaidenEffect() {
+        super(Outcome.Damage);
+        this.staticText = "{this} deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
-    public IronMaidenEffect() {
-        super(Outcome.Damage);
+    private IronMaidenEffect(final IronMaidenEffect effect) {
+        super(effect);
     }
 
     @Override

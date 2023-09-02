@@ -45,7 +45,7 @@ public final class ChandraLegacyOfFire extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new DamagePlayersEffect(
                         Outcome.Benefit, xValue, TargetController.OPPONENT
-                ), TargetController.YOU, false
+                ).setText("{this} deals X damage to each opponent, where X is the number of planeswalkers you control."), TargetController.YOU, false
         ).addHint(hint));
 
         // +1: Add {R} for each planeswalker you control.

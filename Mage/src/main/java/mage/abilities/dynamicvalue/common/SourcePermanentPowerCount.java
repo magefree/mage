@@ -13,6 +13,7 @@ import mage.game.permanent.Permanent;
 public class SourcePermanentPowerCount implements DynamicValue {
 
     private final boolean allowNegativeValues;
+    private String sourcePossessiveForm = "{this}'s"; // for text generation
 
     public SourcePermanentPowerCount() {
         this(true);
@@ -26,6 +27,7 @@ public class SourcePermanentPowerCount implements DynamicValue {
     protected SourcePermanentPowerCount(final SourcePermanentPowerCount dynamicValue) {
         super();
         this.allowNegativeValues = dynamicValue.allowNegativeValues;
+        this.sourcePossessiveForm = dynamicValue.sourcePossessiveForm;
     }
 
     @Override
@@ -53,8 +55,13 @@ public class SourcePermanentPowerCount implements DynamicValue {
         return "X";
     }
 
+    public SourcePermanentPowerCount setSourcePossessiveForm(String possessiveForm) {
+        this.sourcePossessiveForm = possessiveForm;
+        return this;
+    }
+
     @Override
     public String getMessage() {
-        return "{this}'s power";
+        return sourcePossessiveForm + " power";
     }
 }

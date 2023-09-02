@@ -72,7 +72,7 @@ class TargetPlayerCardsInHandCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "target player's cards in hand";
+        return "the number of cards in that player's hand";
     }
 }
 

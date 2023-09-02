@@ -38,9 +38,11 @@ public final class PassionateArchaeologist extends CardImpl {
         this.subtype.add(SubType.BACKGROUND);
 
         // Commander creatures you own have "Whenever you cast a spell from exile, this creature deals damage equal to that spell's mana value to target opponent."
-        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(
-                PassionateArchaeologistValue.instance, "this creature"
-        ), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new DamageTargetEffect(PassionateArchaeologistValue.instance, "this creature")
+                        .withEqualToBeforeTarget(),
+                filter, false
+        );
         ability.addTarget(new TargetOpponent());
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 ability, Duration.WhileOnBattlefield,

@@ -33,7 +33,7 @@ public final class AgonizingDemise extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetControllerEffect(TargetPermanentPowerCount.instance),
                 KickedCondition.ONCE,
-                "if this spell was kicked, it deals damage equal to that creature's power to the creature's controller."));
+                "if this spell was kicked, {this} deals damage equal to that creature's power to the creature's controller."));
 
     }
 

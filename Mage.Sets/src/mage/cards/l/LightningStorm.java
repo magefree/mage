@@ -32,9 +32,9 @@ public final class LightningStorm extends CardImpl {
     public LightningStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
 
-        // Lightning Storm deals X damage to any target, where X is 3 plus the number of charge counters on it.
+        // Lightning Storm deals X damage to any target, where X is 3 plus the number of charge counters on Lightning Storm.
         Effect effect = new DamageTargetEffect(new LightningStormCountCondition(CounterType.CHARGE));
-        effect.setText("{this} deals X damage to any target, where X is 3 plus the number of charge counters on it");
+        effect.setText("{this} deals X damage to any target, where X is 3 plus the number of charge counters on {this}");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
