@@ -27,7 +27,7 @@ public final class PhantomBeast extends CardImpl {
         this.toughness = new MageInt(5);
 
         this.addAbility(new SourceBecomesTargetTriggeredAbility(
-                new SacrificeSourceEffect().setText("sacrifice it")
+                new SacrificeSourceEffect().setSourceName("it")
         ));
     }
 

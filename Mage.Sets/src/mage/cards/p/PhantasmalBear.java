@@ -26,7 +26,7 @@ public final class PhantasmalBear extends CardImpl {
 
         // When Phantasmal Bear becomes the target of a spell or ability, sacrifice it.
         this.addAbility(new SourceBecomesTargetTriggeredAbility(
-                new SacrificeSourceEffect().setText("sacrifice it")
+                new SacrificeSourceEffect().setSourceName("it")
         ));
     }
 

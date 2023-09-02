@@ -27,7 +27,7 @@ public final class PhantasmalDragon extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new SourceBecomesTargetTriggeredAbility(
-                new SacrificeSourceEffect().setText("sacrifice it")
+                new SacrificeSourceEffect().setSourceName("it")
         ));
     }
 

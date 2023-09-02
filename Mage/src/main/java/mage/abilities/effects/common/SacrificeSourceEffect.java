@@ -2,6 +2,7 @@ package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -13,13 +14,15 @@ import mage.game.permanent.Permanent;
  */
 public class SacrificeSourceEffect extends OneShotEffect {
 
+    private String sourceName = "{this}";
+
     public SacrificeSourceEffect() {
         super(Outcome.Sacrifice);
-        staticText = "sacrifice {this}";
     }
 
     protected SacrificeSourceEffect(final SacrificeSourceEffect effect) {
         super(effect);
+        this.sourceName = effect.sourceName;
     }
 
     @Override
@@ -48,4 +51,17 @@ public class SacrificeSourceEffect extends OneShotEffect {
         return false;
     }
 
+
+    public SacrificeSourceEffect setSourceName(String sourceName) {
+        this.sourceName = sourceName;
+        return this;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return "sacrifice " + this.sourceName;
+    }
 }
