@@ -64,10 +64,7 @@ class PhosphorescentFeastEffect extends OneShotEffect {
             TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, new FilterCard());
             if (player.choose(Outcome.Benefit, target, source, game)) {
 
-                Cards cards = new CardsImpl();
-                for (UUID uuid : target.getTargets()) {
-                    cards.add(player.getHand().get(uuid, game));
-                }
+                Cards cards = new CardsImpl(target.getTargets());
                 player.revealCards("cards", cards, game);
                 for (Card card : cards.getCards(game)) {
                     chroma += card.getManaCost().getMana().getGreen();
