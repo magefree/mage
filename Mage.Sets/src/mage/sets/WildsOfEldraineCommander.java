@@ -124,7 +124,6 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Snap", 110, Rarity.COMMON, mage.cards.s.Snap.class));
         cards.add(new SetCardInfo("Sol Ring", 149, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Songbirds' Blessing", 7, Rarity.RARE, mage.cards.s.SongbirdsBlessing.class));
-        cards.add(new SetCardInfo("Songbirds' Blessing", 43, Rarity.RARE, mage.cards.s.SongbirdsBlessing.class));
         cards.add(new SetCardInfo("Sower of Temptation", 111, Rarity.RARE, mage.cards.s.SowerOfTemptation.class));
         cards.add(new SetCardInfo("Spectral Steel", 75, Rarity.UNCOMMON, mage.cards.s.SpectralSteel.class));
         cards.add(new SetCardInfo("Starfield Mystic", 76, Rarity.RARE, mage.cards.s.StarfieldMystic.class));
