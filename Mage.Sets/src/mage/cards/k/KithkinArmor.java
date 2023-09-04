@@ -1,29 +1,26 @@
 package mage.cards.k;
 
-import java.util.UUID;
-import mage.constants.SubType;
-import mage.game.events.DamageEvent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 import mage.target.TargetSource;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -102,11 +99,12 @@ class KithkinArmorCost extends CostImpl {
     }
 }
 
-class KithkinArmorRestrictionEffect extends RestrictionEffect {
+class KithkinArmorRestrictionEffect extends EvasionEffect {
 
     public KithkinArmorRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "Enchanted creature can't be blocked by creatures with power 3 or greater";
+        this.staticCantBeBlockedMessage = "can't be blocked by creatures with power 3 or greater";
+        staticText = "Enchanted creature " + this.staticCantBeBlockedMessage;
     }
 
     private KithkinArmorRestrictionEffect(final KithkinArmorRestrictionEffect effect) {
@@ -126,8 +124,8 @@ class KithkinArmorRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return blocker.getPower().getValue() < 3;
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return blocker.getPower().getValue() >= 3;
     }
 
     @Override

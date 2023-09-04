@@ -5,8 +5,8 @@ import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.ForecastAbility;
@@ -16,8 +16,6 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,8 +42,8 @@ public final class WritOfPassage extends CardImpl {
         FilterPermanent filter = new FilterPermanent("if enchanted creature's power is 2 or less");
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
         ability = new ConditionalInterveningIfTriggeredAbility(new AttacksAttachedTriggeredAbility(
-                new WritOfPassageAttachedEffect(AttachmentType.AURA), AttachmentType.AURA, false),
-                new AttachedToMatchesFilterCondition(filter), "Whenever enchanted creature attacks, if its power is 2 or less, it can't be blocked this turn.");
+            new CantBeBlockedAttachedEffect(AttachmentType.AURA), AttachmentType.AURA, false),
+            new AttachedToMatchesFilterCondition(filter), "Whenever enchanted creature attacks, if its power is 2 or less, it can't be blocked this turn.");
         this.addAbility(ability);
         // Forecast - {1}{U}, Reveal Writ of Passage from your hand: Target creature with power 2 or less is unblockable this turn.
         ForecastAbility ability2 = new ForecastAbility(new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
@@ -62,33 +60,5 @@ public final class WritOfPassage extends CardImpl {
     @Override
     public WritOfPassage copy() {
         return new WritOfPassage(this);
-    }
-}
-
-class WritOfPassageAttachedEffect extends RestrictionEffect {
-
-    public WritOfPassageAttachedEffect(AttachmentType attachmentType) {
-        super(Duration.EndOfTurn);
-        this.staticText = attachmentType.verb() + " creature can't be blocked";
-    }
-
-    private WritOfPassageAttachedEffect(final WritOfPassageAttachedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WritOfPassageAttachedEffect copy() {
-        return new WritOfPassageAttachedEffect(this);
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return false;
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        return attachment != null && attachment.isAttachedTo(permanent.getId());
     }
 }

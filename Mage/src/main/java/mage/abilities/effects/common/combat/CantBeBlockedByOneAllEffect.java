@@ -1,21 +1,24 @@
 
 package mage.abilities.effects.common.combat;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
  */
-public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
+public class CantBeBlockedByOneAllEffect extends EvasionEffect {
 
     private FilterCreaturePermanent filter;
     protected int amount;
@@ -25,15 +28,16 @@ public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
     }
 
     public CantBeBlockedByOneAllEffect(int amount, FilterCreaturePermanent filter, Duration duration) {
-        super(duration, Outcome.Benefit);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
-        StringBuilder sb = new StringBuilder("each ").append(filter.getMessage()).append(" can't be blocked ");
-        if (duration == Duration.EndOfTurn) {
-            sb.append("this turn ");
-        }
-        sb.append("except by ").append(CardUtil.numberToText(amount)).append(" or more creatures");
-        staticText = sb.toString();
+        this.staticCantBeBlockedMessage = "can't be blocked"
+                + (duration == Duration.EndOfTurn ? " this turn" : "")
+                + (" except by ")
+                + (CardUtil.numberToText(amount))
+                + (" or more creatures");
+        staticText = "Each " + (filter.getMessage()) + " "
+                + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedByOneAllEffect(final CantBeBlockedByOneAllEffect effect) {
@@ -48,24 +52,26 @@ public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        switch (layer) {
-            case RulesEffects:
-                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                    perm.setMinBlockedBy(amount);
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent != null && filter.match(permanent, source.getControllerId(), source, game);
+    }
+
+    @Override
+    public boolean cantBeBlockedCheckAfter(Permanent attacker, Ability source, Game game, boolean canUseChooseDialogs) {
+        for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+            if (combatGroup.getAttackers().contains(attacker.getId())) {
+                int count = 0;
+                for (UUID blockerId : combatGroup.getBlockers()) {
+                    Permanent blockingCreature = game.getPermanent(blockerId);
+                    if (blockingCreature != null) {
+                        count++;
+                    }
                 }
-                break;
+                if (count < amount) {
+                    return true;
+                }
+            }
         }
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

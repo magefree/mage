@@ -2,7 +2,7 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -33,9 +33,9 @@ public class SkulkAbility extends StaticAbility {
 
 }
 
-class SkulkEffect extends RestrictionEffect {
+class SkulkEffect extends EvasionEffect {
 
-    public SkulkEffect(Duration duration) {
+    SkulkEffect(Duration duration) {
         super(duration);
         staticText = "Skulk <i>(This creature can't be blocked by creatures with greater power.)</i>";
     }
@@ -50,8 +50,8 @@ class SkulkEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return blocker.getPower().getValue() <= attacker.getPower().getValue();
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return blocker.getPower().getValue() > attacker.getPower().getValue();
     }
 
     @Override

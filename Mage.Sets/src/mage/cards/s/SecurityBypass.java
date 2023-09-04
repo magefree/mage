@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -37,19 +37,19 @@ public final class SecurityBypass extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // As long as enchanted creature is attacking alone, it can't be blocked.
-        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedAttachedEffect(AttachmentType.AURA), SecurityBypassCondition.instance,
-                "as long as enchanted creature is attacking alone, it can't be blocked"
+        this.addAbility(new SimpleStaticAbility(new ConditionalEvasionEffect(
+            new CantBeBlockedAttachedEffect(AttachmentType.AURA), SecurityBypassCondition.instance,
+            "as long as enchanted creature is attacking alone, it can't be blocked"
         )));
 
         // Enchanted creature has "Whenever this creature deals combat damage to a player, it connives."
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
-                new DealsCombatDamageToAPlayerTriggeredAbility(new ConniveSourceEffect(), false)
-                        .setTriggerPhrase("Whenever this creature deals combat damage to a player, "),
-                AttachmentType.AURA, Duration.WhileOnBattlefield, "enchanted creature has " +
-                "\"Whenever this creature deals combat damage to a player, it connives.\" " +
-                "<i>(Its controller draws a card, then discards a card. If they discarded a nonland card, " +
-                "they put a +1/+1 counter on this creature.)</i>"
+            new DealsCombatDamageToAPlayerTriggeredAbility(new ConniveSourceEffect(), false)
+                .setTriggerPhrase("Whenever this creature deals combat damage to a player, "),
+            AttachmentType.AURA, Duration.WhileOnBattlefield, "enchanted creature has " +
+            "\"Whenever this creature deals combat damage to a player, it connives.\" " +
+            "<i>(Its controller draws a card, then discards a card. If they discarded a nonland card, " +
+            "they put a +1/+1 counter on this creature.)</i>"
         )));
     }
 

@@ -5,10 +5,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.hint.common.CitysBlessingHint;
@@ -42,10 +42,10 @@ public final class SlipperyScoundrel extends CardImpl {
         // As long as you have the city's blessing Slippery Scoundrel has Hexproof and can't be blocked.
         ContinuousEffect boostSource = new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, CitysBlessingCondition.instance,
-                "As long as you have the city's blessing, {this} has hexproof");
+                "As long as you have the city's blessing {this} has Hexproof");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        RestrictionEffect restrictionEffect = new CantBeBlockedSourceEffect(Duration.WhileOnBattlefield);
-        Effect effect2 = new ConditionalRestrictionEffect(restrictionEffect, CitysBlessingCondition.instance)
+        EvasionEffect evasionEffect = new CantBeBlockedSourceEffect(Duration.WhileOnBattlefield);
+        Effect effect2 = new ConditionalEvasionEffect(evasionEffect, CitysBlessingCondition.instance)
                 .setText("and can't be blocked");
         ability.addEffect(effect2);
         ability.addHint(CitysBlessingHint.instance);

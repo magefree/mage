@@ -796,39 +796,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 this.blocked = false;
             }
         }
-
-        for (UUID uuid : attackers) {
-            Permanent attacker = game.getPermanent(uuid);
-            if (attacker != null && this.blocked) {
-                // Check if there are enough blockers to have a legal block
-                if (attacker.getMinBlockedBy() > 1 && !blockers.isEmpty() && blockers.size() < attacker.getMinBlockedBy()) {
-                    for (UUID blockerId : new ArrayList<>(blockers)) {
-                        game.getCombat().removeBlocker(blockerId, game);
-                    }
-                    blockers.clear();
-                    blockerOrder.clear();
-                    if (!game.isSimulation()) {
-                        game.informPlayers(attacker.getLogName() + " can't be blocked except by " + attacker.getMinBlockedBy() + " or more creatures. Blockers discarded.");
-                    }
-                    blockWasLegal = false;
-                }
-                // Check if there are too many blockers (maxBlockedBy = 0 means no restrictions)
-                if (attacker.getMaxBlockedBy() > 0 && attacker.getMaxBlockedBy() < blockers.size()) {
-                    for (UUID blockerId : new ArrayList<>(blockers)) {
-                        game.getCombat().removeBlocker(blockerId, game);
-                    }
-                    blockers.clear();
-                    blockerOrder.clear();
-                    if (!game.isSimulation()) {
-                        game.informPlayers(new StringBuilder(attacker.getLogName())
-                                .append(" can't be blocked by more than ").append(attacker.getMaxBlockedBy())
-                                .append(attacker.getMaxBlockedBy() == 1 ? " creature." : " creatures.")
-                                .append(" Blockers discarded.").toString());
-                    }
-                    blockWasLegal = false;
-                }
-            }
-        }
         return blockWasLegal;
     }
 

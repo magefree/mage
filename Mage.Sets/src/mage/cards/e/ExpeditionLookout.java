@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInOpponentGraveyardCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -35,12 +35,12 @@ public final class ExpeditionLookout extends CardImpl {
 
         // As long as an opponent has eight or more cards in their graveyard, Expedition Lookout can attack as though it didn't have defender and it can't be blocked.
         Ability ability = new SimpleStaticAbility(new ConditionalAsThoughEffect(
-                new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
-                CardsInOpponentGraveyardCondition.EIGHT
+            new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
+            CardsInOpponentGraveyardCondition.EIGHT
         ).setText("as long as an opponent has eight or more cards in their graveyard, " +
-                "{this} can attack as though it didn't have defender"));
-        ability.addEffect(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), CardsInOpponentGraveyardCondition.EIGHT, "and it can't be blocked"
+            "{this} can attack as though it didn't have defender"));
+        ability.addEffect(new ConditionalEvasionEffect(
+            new CantBeBlockedSourceEffect(), CardsInOpponentGraveyardCondition.EIGHT, "and it can't be blocked"
         ));
         this.addAbility(ability.addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint()));
     }

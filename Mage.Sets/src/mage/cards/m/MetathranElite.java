@@ -1,16 +1,17 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EnchantedSourceCondition;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,8 +30,8 @@ public final class MetathranElite extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Metathran Elite is unblockable as long as it's enchanted.
-        ConditionalRestrictionEffect effect = new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), new EnchantedSourceCondition());
+        ConditionalEvasionEffect effect = new ConditionalEvasionEffect(
+            new CantBeBlockedSourceEffect(), new EnchantedSourceCondition());
         effect.setText(rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 

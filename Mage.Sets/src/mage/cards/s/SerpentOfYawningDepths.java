@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -43,23 +43,24 @@ public final class SerpentOfYawningDepths extends CardImpl {
     }
 }
 
-class SerpentOfYawningDepthsEffect extends RestrictionEffect {
+class SerpentOfYawningDepthsEffect extends EvasionEffect {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(Predicates.or(
-                SubType.KRAKEN.getPredicate(),
-                SubType.LEVIATHAN.getPredicate(),
-                SubType.OCTOPUS.getPredicate(),
-                SubType.SERPENT.getPredicate()
+            SubType.KRAKEN.getPredicate(),
+            SubType.LEVIATHAN.getPredicate(),
+            SubType.OCTOPUS.getPredicate(),
+            SubType.SERPENT.getPredicate()
         ));
     }
 
     SerpentOfYawningDepthsEffect() {
         super(Duration.WhileOnBattlefield);
+        this.staticCantBeBlockedMessage = "can't be blocked except by Krakens, Leviathans, Octopuses, and Serpents";
         this.staticText = "Krakens, Leviathans, Octopuses, and Serpents you control " +
-                "can't be blocked except by Krakens, Leviathans, Octopuses, and Serpents.";
+            "can't be blocked except by Krakens, Leviathans, Octopuses, and Serpents.";
     }
 
     private SerpentOfYawningDepthsEffect(SerpentOfYawningDepthsEffect effect) {
@@ -72,8 +73,8 @@ class SerpentOfYawningDepthsEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return filter.match(blocker, game);
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return !filter.match(blocker, game);
     }
 
     @Override

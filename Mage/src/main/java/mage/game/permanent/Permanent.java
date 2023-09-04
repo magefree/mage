@@ -265,21 +265,6 @@ public interface Permanent extends Card, Controllable {
 
     void setMaxBlocks(int maxBlocks);
 
-    int getMinBlockedBy();
-
-    void setMinBlockedBy(int minBlockedBy);
-
-    int getMaxBlockedBy();
-
-    /**
-     * Sets the maximum number of blockers the creature can be blocked by.
-     * Default = 0 which means there is no restriction in the number of
-     * blockers.
-     *
-     * @param maxBlockedBy maximum number of blockers
-     */
-    void setMaxBlockedBy(int maxBlockedBy);
-
     /**
      * @param defenderId id of planeswalker or player to attack - can be empty
      *                   to check generally

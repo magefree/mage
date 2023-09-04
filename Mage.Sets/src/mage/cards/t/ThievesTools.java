@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -33,9 +33,9 @@ public final class ThievesTools extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
 
         // Equipped creature can't be blocked as long as its power is 3 or less.
-        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedAttachedEffect(AttachmentType.EQUIPMENT), ThievesToolsCondition.instance,
-                "equipped creature can't be blocked as long as its power is 3 or less"
+        this.addAbility(new SimpleStaticAbility(new ConditionalEvasionEffect(
+            new CantBeBlockedAttachedEffect(AttachmentType.EQUIPMENT), ThievesToolsCondition.instance,
+            "equipped creature can't be blocked as long as its power is 3 or less"
         )));
 
         // Equip {2}

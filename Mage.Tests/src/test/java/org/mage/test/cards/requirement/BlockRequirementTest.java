@@ -192,7 +192,7 @@ public class BlockRequirementTest extends CardTestPlayerBase {
             execute();
             fail("Expected exception not thrown");
         } catch (UnsupportedOperationException e) {
-            assertEquals("Breaker of Armies is blocked by 1 creature(s). It has to be blocked by 2 or more.", e.getMessage());
+            assertEquals("Breaker of Armies is blocked incorrectly. It can't be blocked except by two or more creatures.", e.getMessage());
         }
     }
 
@@ -255,7 +255,7 @@ public class BlockRequirementTest extends CardTestPlayerBase {
             execute();
             fail("Expected exception not thrown");
         } catch (UnsupportedOperationException e) {
-            assertEquals("Challenger Troll is blocked by 2 creature(s). It can only be blocked by 1 or less.", e.getMessage());
+            assertEquals("Challenger Troll is blocked incorrectly. It can't be blocked by more than one creature.", e.getMessage());
         }
     }
 
@@ -293,7 +293,7 @@ public class BlockRequirementTest extends CardTestPlayerBase {
             execute();
             fail("Expected exception not thrown");
         } catch (UnsupportedOperationException e) {
-            assertEquals("Bloom Hulk is blocked by 2 creature(s). It can only be blocked by 1 or less.", e.getMessage());
+            assertEquals("Bloom Hulk is blocked incorrectly. It can't be blocked by more than one creature.", e.getMessage());
         }
     }
 }

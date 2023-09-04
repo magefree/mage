@@ -210,7 +210,7 @@ public class PlayerExpectedErrorsApiTest extends CardTestPlayerBase {
             execute();
             fail("Expected exception not thrown");
         } catch (UnsupportedOperationException e) {
-            TestCase.assertEquals("Boggart Brute is blocked by 1 creature(s). It has to be blocked by 2 or more.", e.getMessage());
+            TestCase.assertEquals("Boggart Brute is blocked incorrectly. It can't be blocked except by two or more creatures.", e.getMessage());
         }
     }
 
@@ -234,7 +234,7 @@ public class PlayerExpectedErrorsApiTest extends CardTestPlayerBase {
             execute();
             fail("Expected exception not thrown");
         } catch (UnsupportedOperationException e) {
-            assertEquals("Underworld Cerberus is blocked by 2 creature(s). It has to be blocked by 3 or more.", e.getMessage());
+            assertEquals("Underworld Cerberus is blocked incorrectly. It can't be blocked except by three or more creatures.", e.getMessage());
         }
     }
 

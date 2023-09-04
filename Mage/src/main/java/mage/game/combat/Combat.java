@@ -3,6 +3,7 @@ package mage.game.combat;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.BandingAbility;
@@ -861,36 +862,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 if (creature.canBlock(attackingCreatureId, game)) {
                                     Permanent attackingCreature = game.getPermanent(attackingCreatureId);
                                     if (attackingCreature != null) {
-                                        // check if the attacker is already blocked by a max of blockers, so blocker can't block it also
-                                        if (attackingCreature.getMaxBlockedBy() != 0) { // 0 = no restriction about the number of possible blockers
-                                            int alreadyBlockingCreatures = 0;
-                                            for (CombatGroup group : getGroups()) {
-                                                if (group.getAttackers().contains(attackingCreatureId)) {
-                                                    alreadyBlockingCreatures = group.getBlockers().size();
-                                                    break;
-                                                }
-                                            }
-                                            if (attackingCreature.getMaxBlockedBy() <= alreadyBlockingCreatures) {
-                                                continue; // Attacker can't be blocked by more blockers so check next attacker
-                                            }
-                                        }
-                                        // check restrictions of the creature to block that prevent it can be blocked (note L_J: not sure what this refers to...)
-
-                                        // check if enough possible blockers are available, if true, mayBlock can be set to true
-                                        if (attackingCreature.getMinBlockedBy() > 1) {
-                                            int alreadyBlockingCreatures = 0;
-                                            for (CombatGroup group : getGroups()) {
-                                                if (group.getAttackers().contains(attackingCreatureId)) {
-                                                    alreadyBlockingCreatures = group.getBlockers().size();
-                                                    break;
-                                                }
-                                            }
-                                            if (attackingCreature.getMinBlockedBy() >= alreadyBlockingCreatures) {
-                                                continue; // Attacker can't be blocked by the current blocker amount so check next attacker
-                                            }
-                                        } else {
-                                            attackersToBlock.add(attackingCreatureId);
-                                        }
+                                        attackersToBlock.add(attackingCreatureId);
                                     }
                                 }
                             }
@@ -958,37 +930,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 if (creature.canBlock(attackingCreatureId, game)) {
                                     Permanent attackingCreature = game.getPermanent(attackingCreatureId);
                                     if (attackingCreature != null) {
-                                        // check if the attacker is already blocked by a max of blockers, so blocker can't block it also
-                                        if (attackingCreature.getMaxBlockedBy() != 0) { // 0 = no restriction about the number of possible blockers
-                                            int alreadyBlockingCreatures = 0;
-                                            for (CombatGroup group : getGroups()) {
-                                                if (group.getAttackers().contains(attackingCreatureId)) {
-                                                    alreadyBlockingCreatures = group.getBlockers().size();
-                                                    break;
-                                                }
-                                            }
-                                            if (attackingCreature.getMaxBlockedBy() <= alreadyBlockingCreatures) {
-                                                continue; // Attacker can't be blocked by more blockers so check next attacker
-                                            }
-                                        }
-                                        // check restrictions of the creature to block that prevent it can be blocked (note L_J: not sure what this refers to...)
-
-                                        // check if enough possible blockers are available, if true, mayBlock can be set to true
-                                        if (attackingCreature.getMinBlockedBy() > 1) {
-                                            int alreadyBlockingCreatures = 0;
-                                            for (CombatGroup group : getGroups()) {
-                                                if (group.getAttackers().contains(attackingCreatureId)) {
-                                                    alreadyBlockingCreatures = group.getBlockers().size();
-                                                    break;
-                                                }
-                                            }
-                                            if (attackingCreature.getMinBlockedBy() >= alreadyBlockingCreatures) {
-                                                continue; // Attacker can't be blocked by the current blocker amount so check next attacker
-                                            }
-                                        } else {
-                                            mayBlock = true;
-                                            break;
-                                        }
+                                        mayBlock = true;
                                     }
                                 }
                             }
@@ -1104,11 +1046,6 @@ public class Combat implements Serializable, Copyable<Combat> {
                     Permanent attackingCreature = game.getPermanent(possibleAttackerId);
                     if (attackersGroup == null || attackingCreature == null) {
                         continue;
-                    }
-                    if (attackingCreature.getMinBlockedBy() > 1) { // e.g. Menace
-                        if (attackersGroup.getBlockers().size() + 1 < attackingCreature.getMinBlockedBy()) {
-                            blockIsValid = true;
-                        }
                     }
                 }
             } else {
@@ -1229,7 +1166,11 @@ public class Combat implements Serializable, Copyable<Combat> {
                         if (!effect.canBlockCheckAfter(ability, game, true)) {
                             if (controller.isHuman()) {
                                 controller.resetPlayerPassedActions();
-                                game.informPlayer(controller, blockingCreature.getLogName() + " can't block this way.");
+                                
+                                // Both write a line in the logs, and popup a message to the blocking player, for full clarity.
+                                String message = " can't block this way.";
+                                game.informPlayer(controller, blockingCreature.getIdName() + message);
+                                game.informPlayers(blockingCreature.getLogName() + message);
                                 return false;
                             } else {
                                 // remove blocking creatures for AI
@@ -1240,17 +1181,25 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             }
         }
-        // Restrictions applied because of attacking creatures
+        // Evasion of attacking creatures
         for (UUID attackingCreatureId : this.getAttackers()) {
             Permanent attackingCreature = game.getPermanent(attackingCreatureId);
             if (attackingCreature != null) {
-                for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(attackingCreature, game).entrySet()) {
-                    RestrictionEffect effect = entry.getKey();
+                for (Map.Entry<EvasionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableEvasionEffects(attackingCreature, game).entrySet()) {
+                    EvasionEffect effect = entry.getKey();
                     for (Ability ability : entry.getValue()) {
-                        if (!effect.canBeBlockedCheckAfter(attackingCreature, ability, game, true)) {
+                        if (effect.cantBeBlockedCheckAfter(attackingCreature, ability, game, true)) {
                             if (controller.isHuman()) {
                                 controller.resetPlayerPassedActions();
-                                game.informPlayer(controller, attackingCreature.getLogName() + " can't be blocked this way.");
+
+                                // Both write a line in the logs, and popup a message to the blocking player, for full clarity.
+                                String message = " can't be blocked this way.";
+                                String evasionMessage = effect.cantBeBlockedMessage(attackingCreature, ability, game);
+                                if (evasionMessage != null) {
+                                    message += " It " + evasionMessage;
+                                }
+                                game.informPlayer(controller, attackingCreature.getIdName() + message);
+                                game.informPlayers(attackingCreature.getLogName() + message);
                                 return false;
                             } else {
                                 // remove blocking creatures for AI

@@ -9,8 +9,8 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceAttackingCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.HexproofAbility;
@@ -106,12 +106,13 @@ class TadeasJuniperAscendantEffect extends OneShotEffect {
     }
 }
 
-class TadeasJuniperAscendantEvasionEffect extends RestrictionEffect {
+class TadeasJuniperAscendantEvasionEffect extends EvasionEffect {
 
     TadeasJuniperAscendantEvasionEffect(TargetPointer targetPointer) {
         super(Duration.EndOfCombat);
         this.targetPointer = targetPointer;
-        staticText = "and can't be blocked by creatures with greater power";
+        this.staticCantBeBlockedMessage = "can't be blocked by creatures with greater power";
+        staticText = "and " + this.staticCantBeBlockedMessage;
     }
 
     private TadeasJuniperAscendantEvasionEffect(final TadeasJuniperAscendantEvasionEffect effect) {
@@ -124,8 +125,8 @@ class TadeasJuniperAscendantEvasionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return blocker.getPower().getValue() <= attacker.getPower().getValue();
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return blocker.getPower().getValue() > attacker.getPower().getValue();
     }
 
     @Override

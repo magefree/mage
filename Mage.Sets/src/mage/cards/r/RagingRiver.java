@@ -3,8 +3,8 @@ package mage.cards.r;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByAllTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -143,7 +143,7 @@ class RagingRiverEffect extends OneShotEffect {
                                     game.informPlayers(attacker.getLogName() + ": attacks right (" + defender.getLogName() + ")");
                                 }
                             }
-                            RestrictionEffect effect = new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfCombat);
+                            EvasionEffect effect = new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfCombat);
                             effect.setTargetPointer(new FixedTarget(attacker.getId(), game));
                             game.addEffect(effect, source);
                         }

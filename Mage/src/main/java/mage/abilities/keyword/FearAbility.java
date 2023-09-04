@@ -3,7 +3,7 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -41,9 +41,9 @@ public class FearAbility extends EvasionAbility implements MageSingleton {
 
 }
 
-class FearEffect extends RestrictionEffect implements MageSingleton {
+class FearEffect extends EvasionEffect implements MageSingleton {
 
-    public FearEffect() {
+    FearEffect() {
         super(Duration.EndOfGame);
     }
 
@@ -57,8 +57,8 @@ class FearEffect extends RestrictionEffect implements MageSingleton {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return blocker.isArtifact(game) || blocker.getColor(game).isBlack();
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return !blocker.isArtifact(game) && !blocker.getColor(game).isBlack();
     }
 
     @Override

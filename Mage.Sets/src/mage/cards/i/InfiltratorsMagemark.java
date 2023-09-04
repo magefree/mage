@@ -3,7 +3,7 @@ package mage.cards.i;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -61,14 +61,15 @@ public final class InfiltratorsMagemark extends CardImpl {
     }
 }
 
-class InfiltratorsMagemarkCantBeBlockedAllEffect extends RestrictionEffect {
+class InfiltratorsMagemarkCantBeBlockedAllEffect extends EvasionEffect {
 
     private final FilterPermanent filter;
 
     public InfiltratorsMagemarkCantBeBlockedAllEffect(FilterPermanent filter, Duration duration) {
         super(duration);
         this.filter = filter;
-        this.staticText = "and can't be blocked except by creatures with defender";
+        this.staticCantBeBlockedMessage = "can't be blocked except by creatures with defender";
+        this.staticText = "and " + this.staticCantBeBlockedMessage;
     }
 
     public InfiltratorsMagemarkCantBeBlockedAllEffect(InfiltratorsMagemarkCantBeBlockedAllEffect effect) {
@@ -82,8 +83,8 @@ class InfiltratorsMagemarkCantBeBlockedAllEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return blocker.getAbilities().contains(DefenderAbility.getInstance());
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return !blocker.getAbilities().contains(DefenderAbility.getInstance());
     }
 
     @Override

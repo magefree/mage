@@ -7,10 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.RequirementEffect;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.*;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.keyword.*;
@@ -88,10 +85,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected int blocking;
     // number of creatures the permanent can block
     protected int maxBlocks = 1;
-    // minimal number of creatures the creature can be blocked by
-    protected int minBlockedBy = 1;
-    // maximal number of creatures the creature can be blocked by  0 = no restriction
-    protected int maxBlockedBy = 0;
     protected boolean deathtouched;
 
     protected Map<String, List<UUID>> connectedCards = new HashMap<>();
@@ -160,8 +153,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.counters = permanent.counters.copy();
         this.attachedTo = permanent.attachedTo;
         this.attachedToZoneChangeCounter = permanent.attachedToZoneChangeCounter;
-        this.minBlockedBy = permanent.minBlockedBy;
-        this.maxBlockedBy = permanent.maxBlockedBy;
         this.transformed = permanent.transformed;
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
@@ -212,8 +203,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public void reset(Game game) {
         this.resetControl();
         this.maxBlocks = 1;
-        this.minBlockedBy = 1;
-        this.maxBlockedBy = 0;
         this.copy = false;
         this.goadingPlayers.clear();
         this.loyaltyActivationsAvailable = 1;
@@ -280,9 +269,25 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
             // ability hints already collected in super call
 
-            // restrict hints
+            // restrict hints, evasion hints, and requirement hints.
             List<String> restrictHints = new ArrayList<>();
             if (HintUtils.RESTRICT_HINTS_ENABLE) {
+                // evasion
+                for (Map.Entry<EvasionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableEvasionEffects(this, game).entrySet()) {
+                    for (Ability ability : entry.getValue()) {
+                        String evasionMessage = entry.getKey().cantBeBlockedMessage(this, ability, game);
+                        if (evasionMessage != null) {
+                            restrictHints.add(HintUtils.prepareText(
+                                evasionMessage.substring(0, 1).toUpperCase()
+                                    + evasionMessage.substring(1)
+                                    + addSourceObjectName(game, ability, this),
+                                null,
+                                HintUtils.HINT_ICON_EVASION
+                            ));
+                        }
+                    }
+                }
+
                 // restrict
                 for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
                     for (Ability ability : entry.getValue()) {
@@ -367,9 +372,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     private String addSourceObjectName(Game game, Ability ability) {
+        return addSourceObjectName(game, ability, null);
+    }
+
+    private String addSourceObjectName(Game game, Ability ability, MageObject ignoreObject) {
         if (ability != null) {
             MageObject object = game.getObject(ability.getSourceId());
-            if (object != null) {
+            if (object != null && !object.equals(ignoreObject)) {
                 return " (" + object.getIdName() + ")";
             }
         }
@@ -736,16 +745,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public int getMaxBlocks() {
         return maxBlocks;
-    }
-
-    @Override
-    public int getMinBlockedBy() {
-        return minBlockedBy;
-    }
-
-    @Override
-    public int getMaxBlockedBy() {
-        return maxBlockedBy;
     }
 
     @Override
@@ -1475,10 +1474,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
             }
         }
-        // check also attacker's restriction effects
-        for (Map.Entry<RestrictionEffect, Set<Ability>> restrictionEntry : game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
-            for (Ability ability : restrictionEntry.getValue()) {
-                if (!restrictionEntry.getKey().canBeBlocked(attacker, this, ability, game, true)) {
+        // check also attacker's evasion effects
+        for (Map.Entry<EvasionEffect, Set<Ability>> evasionEntry : game.getContinuousEffects().getApplicableEvasionEffects(attacker, game).entrySet()) {
+            for (Ability ability : evasionEntry.getValue()) {
+                if (evasionEntry.getKey().cantBeBlocked(attacker, this, ability, game, true)) {
                     return false;
                 }
             }
@@ -1538,16 +1537,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setMaxBlocks(int maxBlocks) {
         this.maxBlocks = maxBlocks;
-    }
-
-    @Override
-    public void setMinBlockedBy(int minBlockedBy) {
-        this.minBlockedBy = minBlockedBy;
-    }
-
-    @Override
-    public void setMaxBlockedBy(int maxBlockedBy) {
-        this.maxBlockedBy = maxBlockedBy;
     }
 
     @Override

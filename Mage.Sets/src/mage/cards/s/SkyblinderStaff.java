@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -44,11 +44,12 @@ public final class SkyblinderStaff extends CardImpl {
     }
 }
 
-class CantBeBlockedByCreaturesWithFlyingAttachedEffect extends RestrictionEffect {
+class CantBeBlockedByCreaturesWithFlyingAttachedEffect extends EvasionEffect {
 
     public CantBeBlockedByCreaturesWithFlyingAttachedEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "Equipped creature can't be blocked by creatures with flying";
+        this.staticCantBeBlockedMessage = "can't be blocked by creatures with flying";
+        staticText = "Equipped creature " + this.staticCantBeBlockedMessage;
     }
 
     private CantBeBlockedByCreaturesWithFlyingAttachedEffect(final CantBeBlockedByCreaturesWithFlyingAttachedEffect effect) {
@@ -62,8 +63,8 @@ class CantBeBlockedByCreaturesWithFlyingAttachedEffect extends RestrictionEffect
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !blocker.getAbilities().contains(FlyingAbility.getInstance());
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return blocker.getAbilities().contains(FlyingAbility.getInstance());
     }
 
     @Override

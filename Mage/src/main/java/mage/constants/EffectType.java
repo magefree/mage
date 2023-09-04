@@ -13,6 +13,7 @@ public enum EffectType {
     PREVENTION("Prevention Effect"),
     REDIRECTION("Redirection Effect"),
     ASTHOUGH("As Though Effect"),
+    EVASION("Evasion Effect"),
     RESTRICTION("Restriction Effect"),
     RESTRICTION_UNTAP_NOT_MORE_THAN("Restriction untap not more than Effect"),
     REQUIREMENT("Requirement Effect"),

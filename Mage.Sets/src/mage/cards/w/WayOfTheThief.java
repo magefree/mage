@@ -1,11 +1,10 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
@@ -17,6 +16,8 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -47,7 +48,10 @@ public final class WayOfTheThief extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
 
         // Enchanted creature can't be blocked as long as you control a Gate.
-        Effect effect = new ConditionalRestrictionEffect(new CantBeBlockedAttachedEffect(AttachmentType.AURA), new PermanentsOnTheBattlefieldCondition(filter));
+        Effect effect = new ConditionalEvasionEffect(
+            new CantBeBlockedAttachedEffect(AttachmentType.AURA),
+            new PermanentsOnTheBattlefieldCondition(filter)
+        );
         effect.setText(rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

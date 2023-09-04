@@ -8,8 +8,8 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.FullPartyCondition;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -44,20 +44,20 @@ public final class NimbleTrapfinder extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Nimble Trapfinder can't be blocked if you had another Cleric, Rogue, Warrior, or Wizard enter the battlefield under your control this turn.
-        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), NimbleTrapfinderCondition.instance,
-                "{this} can't be blocked if you had another Cleric, Rogue, Warrior, or Wizard " +
-                        "enter the battlefield under your control this turn"
+        this.addAbility(new SimpleStaticAbility(new ConditionalEvasionEffect(
+            new CantBeBlockedSourceEffect(), NimbleTrapfinderCondition.instance,
+            "{this} can't be blocked if you had another Cleric, Rogue, Warrior, or Wizard " +
+                "enter the battlefield under your control this turn"
         )).addHint(NimbleTrapfinderCondition.getHint()), new NimbleTrapfinderWatcher());
 
         // At the beginning of combat on your turn, if you have a full party, creatures you control gain "Whenever this creature deals combat damage to a player, draw a card" until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(
-                        new GainAbilityAllEffect(new DealsCombatDamageToAPlayerTriggeredAbility(
-                                new DrawCardSourceControllerEffect(1), false
-                        ), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES),
-                        TargetController.YOU, false
-                ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
+            new BeginningOfCombatTriggeredAbility(
+                new GainAbilityAllEffect(new DealsCombatDamageToAPlayerTriggeredAbility(
+                    new DrawCardSourceControllerEffect(1), false
+                ), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES),
+                TargetController.YOU, false
+            ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
                 "if you have a full party, creatures you control gain " +
                 "\"Whenever this creature deals combat damage to a player, draw a card\" until end of turn."
         ).addHint(PartyCountHint.instance));

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.dynamicvalue.common.GreatestSharedCreatureTypeCount;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
@@ -29,9 +29,9 @@ public final class Graxiplon extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Graxiplon can't be blocked unless defending player controls three or more creatures that share a creature type.
-        this.addAbility(new SimpleStaticAbility(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), GraxiplonCondition.instance, "{this} can't be blocked " +
-                "unless defending player controls three or more creatures that share a creature type"
+        this.addAbility(new SimpleStaticAbility(new ConditionalEvasionEffect(
+            new CantBeBlockedSourceEffect(), GraxiplonCondition.instance, "{this} can't be blocked " +
+            "unless defending player controls three or more creatures that share a creature type"
         )));
     }
 

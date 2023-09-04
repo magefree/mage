@@ -9,6 +9,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.effects.EvasionEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
@@ -1908,7 +1909,7 @@ public class TestPlayer implements Player {
                 }
             }
         }
-        checkMultipleBlockers(game, blockedCreaturesList);
+        checkCantBeBlockedAfter(game, blockedCreaturesList);
 
         // AI FULL play if no actions available
         if (!mustBlockByAction && this.AIPlayer) {
@@ -1970,32 +1971,33 @@ public class TestPlayer implements Player {
         return true;
     }
 
-    private void checkMultipleBlockers(Game game, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
-        // Check for Menace type abilities - if creatures can be blocked by >X or <Y only
+    private void checkCantBeBlockedAfter(Game game, Map<MageObjectReference, List<MageObjectReference>> blockedCreaturesByCreature) {
+        for (Map.Entry<MageObjectReference, List<MageObjectReference>> entryBlock : blockedCreaturesByCreature.entrySet()) {
+            List<MageObjectReference> attackers = entryBlock.getValue();
+            MageObjectReference blockerMOR = entryBlock.getKey();
+            for (MageObjectReference morAttacker : attackers) {
+                Permanent attackingCreature = morAttacker.getPermanent(game);
+                if (attackingCreature == null) {
+                    continue;
+                }
 
-        // Stores the total number of blockers for each attacker
-        Map<MageObjectReference, Integer> blockersForAttacker = new HashMap<>();
-
-        // Calculate the number of blockers each attacker has
-        for (List<MageObjectReference> attackers : blockedCreaturesByCreature.values()) {
-            for (MageObjectReference mr : attackers) {
-                Integer blockers = blockersForAttacker.getOrDefault(mr, 0);
-                blockersForAttacker.put(mr, blockers + 1);
+                for (Map.Entry<EvasionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableEvasionEffects(attackingCreature, game).entrySet()) {
+                    EvasionEffect effect = entry.getKey();
+                    for (Ability ability : entry.getValue()) {
+                        if (effect.cantBeBlocked(attackingCreature, blockerMOR.getPermanent(game), ability, game, true)) {
+                            String additionalMessage = effect.cantBeBlockedMessage(attackingCreature, ability, game);
+                            throw new UnsupportedOperationException(attackingCreature.getName() + " is blocked incorrectly."
+                                    + (additionalMessage == null || additionalMessage.isEmpty() ? "" : " It " + additionalMessage + "."));
+                        }
+                        if (effect.cantBeBlockedCheckAfter(attackingCreature, ability, game, true)) {
+                            String additionalMessage = effect.cantBeBlockedMessage(attackingCreature, ability, game);
+                            throw new UnsupportedOperationException(attackingCreature.getName() + " is blocked incorrectly."
+                                    + (additionalMessage == null || additionalMessage.isEmpty() ? "" : " It " + additionalMessage + "."));
+                        }
+                    }
+                }
             }
         }
-
-        // Check each attacker is blocked by an allowed amount of creatures
-        for (Map.Entry<MageObjectReference, Integer> entry : blockersForAttacker.entrySet()) {
-            Permanent attacker = entry.getKey().getPermanent(game);
-            Integer blockers = entry.getValue();
-            // If getMaxBlockedBy() == 0 it means any number of creatures can block this creature
-            if (attacker.getMaxBlockedBy() != 0 && blockers > attacker.getMaxBlockedBy()) {
-                throw new UnsupportedOperationException(attacker.getName() + " is blocked by " + blockers + " creature(s). It can only be blocked by " + attacker.getMaxBlockedBy() + " or less.");
-            } else if (blockers < attacker.getMinBlockedBy()) {
-                throw new UnsupportedOperationException(attacker.getName() + " is blocked by " + blockers + " creature(s). It has to be blocked by " + attacker.getMinBlockedBy() + " or more.");
-            }
-        }
-        // No errors raised - all the blockers pass the test!
     }
 
     private String getInfo(MageObject o) {

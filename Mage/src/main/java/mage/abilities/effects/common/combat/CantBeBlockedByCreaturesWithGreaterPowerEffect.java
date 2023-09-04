@@ -1,7 +1,7 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -9,10 +9,11 @@ import mage.game.permanent.Permanent;
 /**
  * @author LevelX2
  */
-public class CantBeBlockedByCreaturesWithGreaterPowerEffect extends RestrictionEffect {
+public class CantBeBlockedByCreaturesWithGreaterPowerEffect extends EvasionEffect {
 
     public CantBeBlockedByCreaturesWithGreaterPowerEffect() {
         super(Duration.WhileOnBattlefield);
+        this.staticCantBeBlockedMessage = "can't be blocked by creatures with greater power";
         staticText = "Creatures with power greater than {this}'s power can't block it";
     }
 
@@ -26,8 +27,8 @@ public class CantBeBlockedByCreaturesWithGreaterPowerEffect extends RestrictionE
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return blocker.getPower().getValue() <= attacker.getPower().getValue();
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return blocker.getPower().getValue() > attacker.getPower().getValue();
     }
 
     @Override

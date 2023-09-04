@@ -1,7 +1,7 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -10,7 +10,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author LevelX2
  */
-public class CantBeBlockedByCreaturesAllEffect extends RestrictionEffect {
+public class CantBeBlockedByCreaturesAllEffect extends EvasionEffect {
 
     private final FilterCreaturePermanent filterBlockedBy;
     private final FilterCreaturePermanent filterCreatures;
@@ -19,10 +19,13 @@ public class CantBeBlockedByCreaturesAllEffect extends RestrictionEffect {
         super(duration);
         this.filterCreatures = filterCreatures;
         this.filterBlockedBy = filterBlockedBy;
-        staticText = filterCreatures.getMessage() + " can't be blocked "
+        this.staticCantBeBlockedMessage = "can't be blocked "
                 + (duration == Duration.EndOfTurn ? "this turn " : "")
                 + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
-                + filterBlockedBy.getMessage();
+                + (filterBlockedBy.getMessage());
+
+        staticText = filterCreatures.getMessage() + " "
+                + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedByCreaturesAllEffect(final CantBeBlockedByCreaturesAllEffect effect) {
@@ -37,8 +40,8 @@ public class CantBeBlockedByCreaturesAllEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !filterBlockedBy.match(blocker, source.getControllerId(), source, game);
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return filterBlockedBy.match(blocker, source.getControllerId(), source, game);
     }
 
     @Override

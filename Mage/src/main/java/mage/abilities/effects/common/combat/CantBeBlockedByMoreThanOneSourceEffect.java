@@ -1,22 +1,23 @@
 
 package mage.abilities.effects.common.combat;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
-
-
+import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author Quercitron
  */
-public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl {
+public class CantBeBlockedByMoreThanOneSourceEffect extends EvasionEffect {
 
     protected int amount;
 
@@ -29,10 +30,12 @@ public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl
     }
 
     public CantBeBlockedByMoreThanOneSourceEffect(int amount, Duration duration) {
-        super(duration, Outcome.Benefit);
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
-        staticText = "{this} can't be blocked by more than " + CardUtil.numberToText(amount) + " creature" + (amount > 1 ? "s" : "")
+        this.staticCantBeBlockedMessage = "can't be blocked by more than "
+                + (CardUtil.numberToText(amount)) + " creature" + (amount > 1 ? "s" : "")
                 + (duration == Duration.EndOfTurn ? " each combat this turn" : "");
+        staticText = "{this} " + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedByMoreThanOneSourceEffect(final CantBeBlockedByMoreThanOneSourceEffect effect) {
@@ -46,24 +49,26 @@ public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm != null) {
-            if (layer == Layer.RulesEffects) {
-                perm.setMaxBlockedBy(amount);
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent != null && permanent.getId().equals(source.getSourceId());
+    }
+
+    @Override
+    public boolean cantBeBlockedCheckAfter(Permanent attacker, Ability source, Game game, boolean canUseChooseDialogs) {
+        for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+            if (combatGroup.getAttackers().contains(attacker.getId())) {
+                int count = 0;
+                for (UUID blockerId : combatGroup.getBlockers()) {
+                    Permanent blockingCreature = game.getPermanent(blockerId);
+                    if (blockingCreature != null) {
+                        count++;
+                    }
+                }
+                if (count > amount) {
+                    return true;
+                }
             }
-            return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

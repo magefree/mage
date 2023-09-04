@@ -2,7 +2,7 @@ package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
@@ -15,7 +15,7 @@ import mage.util.CardUtil;
 /**
  * @author North
  */
-public class CantBeBlockedTargetEffect extends RestrictionEffect {
+public class CantBeBlockedTargetEffect extends EvasionEffect {
 
     private final FilterCreaturePermanent filter;
 
@@ -30,6 +30,10 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect {
     public CantBeBlockedTargetEffect(FilterCreaturePermanent filter, Duration duration) {
         super(duration, Outcome.Benefit);
         this.filter = filter;
+        this.staticCantBeBlockedMessage = "can't be blocked "
+            + (filter.getMessage().startsWith("except by") ? "" : "by ")
+            + (filter.getMessage());
+        staticText = "{this} " + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedTargetEffect(final CantBeBlockedTargetEffect effect) {
@@ -43,8 +47,8 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !filter.match(blocker, source.getControllerId(), source, game);
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return filter.match(blocker, source.getControllerId(), source, game);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.EvasionEffect;
 import mage.constants.AttachmentType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
@@ -11,17 +11,18 @@ import mage.game.permanent.Permanent;
 /**
  * @author LevelX2
  */
-public class CantBeBlockedByCreaturesAttachedEffect extends RestrictionEffect {
+public class CantBeBlockedByCreaturesAttachedEffect extends EvasionEffect {
 
     private final FilterCreaturePermanent filter;
 
     public CantBeBlockedByCreaturesAttachedEffect(Duration duration, FilterCreaturePermanent filter, AttachmentType attachmentType) {
         super(duration);
         this.filter = filter;
-        StringBuilder sb = new StringBuilder();
-        sb.append(attachmentType.verb());
-        staticText = sb.append(" creature can't be blocked ")
-                .append(filter.getMessage().startsWith("except by") ? "" : "by ").append(filter.getMessage()).toString();
+        this.staticCantBeBlockedMessage = "can't be blocked "
+                + (filter.getMessage().startsWith("except by") ? "" : "by ")
+                + (filter.getMessage());
+        staticText = attachmentType.verb() + " creature "
+                + this.staticCantBeBlockedMessage;
     }
 
     protected CantBeBlockedByCreaturesAttachedEffect(final CantBeBlockedByCreaturesAttachedEffect effect) {
@@ -35,8 +36,8 @@ public class CantBeBlockedByCreaturesAttachedEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        return !filter.match(blocker, source.getControllerId(), source, game);
+    public boolean cantBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
+        return filter.match(blocker, source.getControllerId(), source, game);
     }
 
     @Override

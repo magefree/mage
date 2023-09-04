@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.decorator.ConditionalEvasionEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
@@ -33,8 +33,8 @@ public final class FuturistOperative extends CardImpl {
 
         // As long as Futurist Operative is tapped, it's a Human Citizen with base power and toughness 1/1 and can't be blocked.
         Ability ability = new SimpleStaticAbility(new FuturistOperativeEffect());
-        ability.addEffect(new ConditionalRestrictionEffect(
-                new CantBeBlockedSourceEffect(), SourceTappedCondition.TAPPED, "and can't be blocked"
+        ability.addEffect(new ConditionalEvasionEffect(
+            new CantBeBlockedSourceEffect(), SourceTappedCondition.TAPPED, "and can't be blocked"
         ));
         this.addAbility(ability);
 

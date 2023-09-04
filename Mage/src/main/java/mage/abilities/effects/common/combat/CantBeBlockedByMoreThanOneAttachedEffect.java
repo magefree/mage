@@ -12,37 +12,37 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author Quercitron
  */
-public class CantBeBlockedByOneAttachedEffect extends EvasionEffect {
+public class CantBeBlockedByMoreThanOneAttachedEffect extends EvasionEffect {
 
     protected int amount;
     protected AttachmentType attachmentType;
 
-    public CantBeBlockedByOneAttachedEffect(AttachmentType attachmentType, int amount) {
+    public CantBeBlockedByMoreThanOneAttachedEffect(AttachmentType attachmentType, int amount) {
         this(attachmentType, amount, Duration.WhileOnBattlefield);
     }
 
-    public CantBeBlockedByOneAttachedEffect(AttachmentType attachmentType, int amount, Duration duration) {
+    public CantBeBlockedByMoreThanOneAttachedEffect(AttachmentType attachmentType, int amount, Duration duration) {
         super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.amount = amount;
         this.attachmentType = attachmentType;
-        this.staticCantBeBlockedMessage = "can't be blocked except by "
-                + (CardUtil.numberToText(amount))
-                + " or more creatures";
+        this.staticCantBeBlockedMessage = "can't be blocked by more than "
+                + (CardUtil.numberToText(amount)) + " creature" + (amount > 1 ? "s" : "")
+                + (duration == Duration.EndOfTurn ? " each combat this turn" : "");
         staticText = attachmentType.verb() + " creature "
                 + this.staticCantBeBlockedMessage;
     }
 
-    protected CantBeBlockedByOneAttachedEffect(final CantBeBlockedByOneAttachedEffect effect) {
+    protected CantBeBlockedByMoreThanOneAttachedEffect(final CantBeBlockedByMoreThanOneAttachedEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.attachmentType = effect.attachmentType;
     }
 
     @Override
-    public CantBeBlockedByOneAttachedEffect copy() {
-        return new CantBeBlockedByOneAttachedEffect(this);
+    public CantBeBlockedByMoreThanOneAttachedEffect copy() {
+        return new CantBeBlockedByMoreThanOneAttachedEffect(this);
     }
 
     @Override
@@ -56,7 +56,6 @@ public class CantBeBlockedByOneAttachedEffect extends EvasionEffect {
         return false;
     }
 
-
     @Override
     public boolean cantBeBlockedCheckAfter(Permanent attacker, Ability source, Game game, boolean canUseChooseDialogs) {
         for (CombatGroup combatGroup : game.getCombat().getGroups()) {
@@ -68,7 +67,7 @@ public class CantBeBlockedByOneAttachedEffect extends EvasionEffect {
                         count++;
                     }
                 }
-                if (count < amount) {
+                if (count > amount) {
                     return true;
                 }
             }

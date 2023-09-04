@@ -248,6 +248,8 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
     @Test
     public void testCopiedFlyingWorks() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Phantasmal Image");
         addCard(Zone.BATTLEFIELD, playerA, "Fervor");
@@ -257,17 +259,24 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // yes to "you may copy"
+        setChoice(playerA, "Azure Drake"); // copy Azure Drake
         attack(1, playerA, "Azure Drake");
         block(1, playerB, "Llanowar Elves", "Azure Drake");
 
-        attack(2, playerB, "Azure Drake");
-        block(2, playerA, "Elite Vanguard", "Azure Drake");
+        //attack(2, playerB, "Azure Drake");
+        //block(2, playerA, "Elite Vanguard", "Azure Drake");
 
         setStopAt(2, PhaseStep.END_TURN);
-        execute();
+        try {
+            execute();
+            fail("Expected exception not thrown");
+        } catch (UnsupportedOperationException e) {
+            assertEquals("Azure Drake is blocked incorrectly.", e.getMessage());
+        }
 
-        assertLife(playerB, 18);
-        assertLife(playerA, 18);
+        //assertLife(playerB, 18);
+        //assertLife(playerA, 18);
     }
 
     /**
