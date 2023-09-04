@@ -8,6 +8,7 @@ import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -88,9 +89,13 @@ class SacellumGodspeakerEffect extends ManaEffect {
     @Override
     public Mana produceMana(Game game, Ability source) {
         if (game != null) {
-            TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-            if (target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), source, game)) {
-                return Mana.GreenMana(target.getTargets().size());
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
+                if (target.choose(Outcome.Benefit, source.getControllerId(), source.getSourceId(), source, game)) {
+                    controller.revealCards(source, new CardsImpl(target.getTargets()), game);
+                    return Mana.GreenMana(target.getTargets().size());
+                }
             }
         }
         return new Mana();
