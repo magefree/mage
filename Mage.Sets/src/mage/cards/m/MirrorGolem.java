@@ -95,7 +95,7 @@ class MirrorGolemEffect extends ContinuousEffectImpl {
         staticText = "{this} has protection from each of the exiled card's card types.";
     }
 
-    public MirrorGolemEffect(final MirrorGolemEffect effect) {
+    private MirrorGolemEffect(final MirrorGolemEffect effect) {
         super(effect);
     }
 

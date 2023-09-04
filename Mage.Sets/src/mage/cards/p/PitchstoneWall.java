@@ -54,7 +54,7 @@ class PitchstoneWallTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you discard a card, ");
     }
 
-    public PitchstoneWallTriggeredAbility(final PitchstoneWallTriggeredAbility ability) {
+    private PitchstoneWallTriggeredAbility(final PitchstoneWallTriggeredAbility ability) {
         super(ability);
     }
 

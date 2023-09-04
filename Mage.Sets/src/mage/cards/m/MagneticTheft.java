@@ -54,7 +54,7 @@ class EquipEffect extends OneShotEffect {
         staticText = "Attach target Equipment to target creature";
     }
 
-    public EquipEffect(final EquipEffect effect) {
+    private EquipEffect(final EquipEffect effect) {
         super(effect);
     }
 

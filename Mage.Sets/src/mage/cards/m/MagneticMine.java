@@ -45,7 +45,7 @@ class MagneticMineTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, false);
     }
 
-    public MagneticMineTriggeredAbility(final MagneticMineTriggeredAbility ability) {
+    private MagneticMineTriggeredAbility(final MagneticMineTriggeredAbility ability) {
         super(ability);
     }
 

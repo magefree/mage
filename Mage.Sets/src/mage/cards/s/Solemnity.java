@@ -52,7 +52,7 @@ class SolemnityEffect extends ReplacementEffectImpl {
         staticText = "Players can't get counters";
     }
 
-    public SolemnityEffect(final SolemnityEffect effect) {
+    private SolemnityEffect(final SolemnityEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class SolemnityEffect2 extends ReplacementEffectImpl {
         staticText = "Counters can't be put on artifacts, creatures, enchantments, or lands";
     }
 
-    public SolemnityEffect2(final SolemnityEffect2 effect) {
+    private SolemnityEffect2(final SolemnityEffect2 effect) {
         super(effect);
     }
 

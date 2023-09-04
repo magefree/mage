@@ -65,7 +65,7 @@ class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new CreateTokenEffect(new WhiteBlackSpiritToken(), 1));
     }
 
-    public TeysaEnvoyOfGhostsTriggeredAbility(final TeysaEnvoyOfGhostsTriggeredAbility ability) {
+    private TeysaEnvoyOfGhostsTriggeredAbility(final TeysaEnvoyOfGhostsTriggeredAbility ability) {
         super(ability);
     }
 

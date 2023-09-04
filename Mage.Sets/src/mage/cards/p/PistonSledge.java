@@ -43,7 +43,7 @@ public final class PistonSledge extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new SacrificeTargetCost(new TargetControlledPermanent(filter)), false));
     }
 
-    public PistonSledge(final PistonSledge card) {
+    private PistonSledge(final PistonSledge card) {
         super(card);
     }
 

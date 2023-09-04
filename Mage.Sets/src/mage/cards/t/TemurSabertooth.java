@@ -56,7 +56,7 @@ class TemurSabertoothEffect extends OneShotEffect {
         this.staticText = "You may return another creature you control to its owner's hand. If you do, {this} gains indestructible until end of turn";
     }
 
-    public TemurSabertoothEffect(final TemurSabertoothEffect effect) {
+    private TemurSabertoothEffect(final TemurSabertoothEffect effect) {
         super(effect);
     }
 

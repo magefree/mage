@@ -108,7 +108,7 @@ class SpellbinderImprintEffect extends OneShotEffect {
         staticText = "you may exile an instant card from your hand";
     }
 
-    public SpellbinderImprintEffect(SpellbinderImprintEffect effect) {
+    private SpellbinderImprintEffect(final SpellbinderImprintEffect effect) {
         super(effect);
     }
 
@@ -155,7 +155,7 @@ class SpellbinderCopyEffect extends OneShotEffect {
                 + "you may cast the copy without paying its mana cost";
     }
 
-    public SpellbinderCopyEffect(final SpellbinderCopyEffect effect) {
+    private SpellbinderCopyEffect(final SpellbinderCopyEffect effect) {
         super(effect);
     }
 

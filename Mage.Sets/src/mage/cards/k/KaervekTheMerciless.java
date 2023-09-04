@@ -54,7 +54,7 @@ class KaervekTheMercilessEffect extends OneShotEffect {
         this.staticText = "{this} deals damage equal to that spell's mana value to any target";
     }
 
-    public KaervekTheMercilessEffect(final KaervekTheMercilessEffect effect) {
+    private KaervekTheMercilessEffect(final KaervekTheMercilessEffect effect) {
         super(effect);
     }
 

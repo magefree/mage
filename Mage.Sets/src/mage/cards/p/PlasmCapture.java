@@ -47,7 +47,7 @@ class PlasmCaptureCounterEffect extends OneShotEffect {
         this.staticText = "Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors, where X is that spell's mana value";
     }
 
-    public PlasmCaptureCounterEffect(final PlasmCaptureCounterEffect effect) {
+    private PlasmCaptureCounterEffect(final PlasmCaptureCounterEffect effect) {
         super(effect);
     }
 

@@ -46,7 +46,7 @@ class TaintedRemedyReplacementEffect extends ReplacementEffectImpl {
         staticText = "If an opponent would gain life, that player loses that much life instead";
     }
 
-    public TaintedRemedyReplacementEffect(final TaintedRemedyReplacementEffect effect) {
+    private TaintedRemedyReplacementEffect(final TaintedRemedyReplacementEffect effect) {
         super(effect);
     }
 

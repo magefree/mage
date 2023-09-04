@@ -58,7 +58,7 @@ class MirenTheMoaningWellEffect extends OneShotEffect {
         this.staticText = "You gain life equal to the sacrificed creature's toughness";
     }
 
-    public MirenTheMoaningWellEffect(final MirenTheMoaningWellEffect effect) {
+    private MirenTheMoaningWellEffect(final MirenTheMoaningWellEffect effect) {
         super(effect);
     }
 

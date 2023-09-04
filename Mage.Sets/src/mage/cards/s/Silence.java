@@ -44,7 +44,7 @@ class SilenceEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Your opponents can't cast spells this turn. <i>(Spells cast before this resolves are unaffected.)</i>";
     }
 
-    public SilenceEffect(final SilenceEffect effect) {
+    private SilenceEffect(final SilenceEffect effect) {
         super(effect);
     }
 

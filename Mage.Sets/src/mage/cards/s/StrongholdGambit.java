@@ -49,7 +49,7 @@ class StrongholdGambitEffect extends OneShotEffect {
         this.staticText = "Each player chooses a card in their hand. Then each player reveals their chosen card. The owner of each creature card revealed this way with the lowest mana value puts it onto the battlefield";
     }
 
-    public StrongholdGambitEffect(final StrongholdGambitEffect effect) {
+    private StrongholdGambitEffect(final StrongholdGambitEffect effect) {
         super(effect);
     }
 

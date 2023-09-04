@@ -55,7 +55,7 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
         this.staticText = "As {this} enters the battlefield, sacrifice any number of permanents. {this} enters the battlefield with that many +1/+1 counters on it";
     }
 
-    public ShimatsuTheBloodcloakedEffect(final ShimatsuTheBloodcloakedEffect effect) {
+    private ShimatsuTheBloodcloakedEffect(final ShimatsuTheBloodcloakedEffect effect) {
         super(effect);
     }
 

@@ -60,7 +60,7 @@ class PorphyryNodesEffect extends OneShotEffect {
         this.staticText = "destroy the creature with the least power. It can't be regenerated. If two or more creatures are tied for least power, you choose one of them";
     }
     
-    public PorphyryNodesEffect(final PorphyryNodesEffect effect) {
+    private PorphyryNodesEffect(final PorphyryNodesEffect effect) {
         super(effect);
     }
     
@@ -117,7 +117,7 @@ class PorphyryNodesStateTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When there are no creatures on the battlefield, " );
     }
 
-    public PorphyryNodesStateTriggeredAbility(final PorphyryNodesStateTriggeredAbility ability) {
+    private PorphyryNodesStateTriggeredAbility(final PorphyryNodesStateTriggeredAbility ability) {
         super(ability);
     }
 

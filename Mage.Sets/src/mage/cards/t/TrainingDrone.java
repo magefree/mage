@@ -49,7 +49,7 @@ class TrainingDroneEffect extends RestrictionEffect {
         staticText = "{this} can't attack or block unless it's equipped";
     }
 
-    public TrainingDroneEffect(final TrainingDroneEffect effect) {
+    private TrainingDroneEffect(final TrainingDroneEffect effect) {
         super(effect);
     }
 

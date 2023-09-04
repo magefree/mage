@@ -59,7 +59,7 @@ class RetetherEffect extends OneShotEffect {
         this.staticText = "Return each Aura card from your graveyard to the battlefield. Only creatures can be enchanted this way";
     }
 
-    public RetetherEffect(final RetetherEffect effect) {
+    private RetetherEffect(final RetetherEffect effect) {
         super(effect);
     }
 

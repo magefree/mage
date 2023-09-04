@@ -40,7 +40,7 @@ public final class Lure extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllAttachedEffect(AttachmentType.AURA)));
     }
 
-    public Lure (final Lure card) {
+    private Lure(final Lure card) {
         super(card);
     }
 

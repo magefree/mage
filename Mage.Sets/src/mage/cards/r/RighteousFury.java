@@ -45,7 +45,7 @@ class RighteousFuryEffect extends OneShotEffect {
         this.staticText = "Destroy all tapped creatures. You gain 2 life for each creature destroyed this way";
     }
 
-    public RighteousFuryEffect(final RighteousFuryEffect effect) {
+    private RighteousFuryEffect(final RighteousFuryEffect effect) {
         super(effect);
     }
 

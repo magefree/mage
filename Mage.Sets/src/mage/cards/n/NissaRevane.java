@@ -67,7 +67,7 @@ class NissaRevaneGainLifeEffect extends OneShotEffect {
         staticText = "You gain 2 life for each Elf you control";
     }
 
-    public NissaRevaneGainLifeEffect(final NissaRevaneGainLifeEffect effect) {
+    private NissaRevaneGainLifeEffect(final NissaRevaneGainLifeEffect effect) {
         super(effect);
     }
 

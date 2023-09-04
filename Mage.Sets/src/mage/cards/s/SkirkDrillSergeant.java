@@ -70,7 +70,7 @@ class SkirkDrillSergeantEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library. If it's a Goblin permanent card, put it onto the battlefield. Otherwise, put it into your graveyard";
     }
 
-    public SkirkDrillSergeantEffect(final SkirkDrillSergeantEffect effect) {
+    private SkirkDrillSergeantEffect(final SkirkDrillSergeantEffect effect) {
         super(effect);
     }
 

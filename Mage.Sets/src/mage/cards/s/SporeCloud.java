@@ -63,7 +63,7 @@ class SporeCloudEffect extends OneShotEffect {
         this.staticText = "Each attacking creature and each blocking creature doesn't untap during its controller's next untap step";
     }
 
-    public SporeCloudEffect(final SporeCloudEffect effect) {
+    private SporeCloudEffect(final SporeCloudEffect effect) {
         super(effect);
     }
 

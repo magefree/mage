@@ -122,7 +122,7 @@ class ShelobDreadWeaverCost extends CostImpl {
         this.text = "Put a creature card exiled with {this} into its owner's graveyard";
     }
 
-    public ShelobDreadWeaverCost(ShelobDreadWeaverCost cost) {
+    private ShelobDreadWeaverCost(final ShelobDreadWeaverCost cost) {
         super(cost);
     }
 

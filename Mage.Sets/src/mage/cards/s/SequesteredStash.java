@@ -58,7 +58,7 @@ class SequesteredStashEffect extends OneShotEffect {
         this.staticText = "Then you may put an artifact card from your graveyard on top of your library";
     }
 
-    public SequesteredStashEffect(final SequesteredStashEffect effect) {
+    private SequesteredStashEffect(final SequesteredStashEffect effect) {
         super(effect);
     }
 

@@ -57,7 +57,7 @@ public final class ThunderTotem extends CardImpl {
             this.addAbility(FlyingAbility.getInstance());
             this.addAbility(FirstStrikeAbility.getInstance());
         }
-        public ThunderTotemToken(final ThunderTotemToken token) {
+        private ThunderTotemToken(final ThunderTotemToken token) {
             super(token);
         }
     

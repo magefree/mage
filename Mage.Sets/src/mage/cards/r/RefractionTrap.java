@@ -93,7 +93,7 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
         staticText = "The next " + amount + " damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, {this} deals that much damage to any target";
     }
 
-    public RefractionTrapPreventDamageEffect(final RefractionTrapPreventDamageEffect effect) {
+    private RefractionTrapPreventDamageEffect(final RefractionTrapPreventDamageEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.target = effect.target.copy();

@@ -57,7 +57,7 @@ class TheFallenApartEntersEffect extends OneShotEffect {
         staticText = "with two arms and two legs";
     }
 
-    public TheFallenApartEntersEffect(final TheFallenApartEntersEffect effect) {
+    private TheFallenApartEntersEffect(final TheFallenApartEntersEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class TheFallenApartToggleEffect extends OneShotEffect {
         staticText = "remove an arm or a leg from it";
     }
 
-    public TheFallenApartToggleEffect(final TheFallenApartToggleEffect effect) {
+    private TheFallenApartToggleEffect(final TheFallenApartToggleEffect effect) {
         super(effect);
     }
 
@@ -147,7 +147,7 @@ class TheFallenApartRestrictionEffect extends RestrictionEffect {
         staticText = "{this} can't attack if it has no legs and can't block if it has no arms";
     }
 
-    public TheFallenApartRestrictionEffect(final TheFallenApartRestrictionEffect effect) {
+    private TheFallenApartRestrictionEffect(final TheFallenApartRestrictionEffect effect) {
         super(effect);
     }
 

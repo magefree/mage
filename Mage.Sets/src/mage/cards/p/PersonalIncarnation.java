@@ -61,7 +61,7 @@ class PersonalIncarnationRedirectEffect extends RedirectionEffect {
         staticText = "The next 1 damage that would be dealt to {this} this turn is dealt to its owner instead.";
     }
 
-    public PersonalIncarnationRedirectEffect(final PersonalIncarnationRedirectEffect effect) {
+    private PersonalIncarnationRedirectEffect(final PersonalIncarnationRedirectEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class PersonalIncarnationLoseHalfLifeEffect extends OneShotEffect {
         staticText = "its owner lose half their life, rounded up";
     }
 
-    public PersonalIncarnationLoseHalfLifeEffect(final PersonalIncarnationLoseHalfLifeEffect effect) {
+    private PersonalIncarnationLoseHalfLifeEffect(final PersonalIncarnationLoseHalfLifeEffect effect) {
         super(effect);
     }
 

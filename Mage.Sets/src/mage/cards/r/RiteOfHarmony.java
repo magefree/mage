@@ -58,7 +58,7 @@ class RiteOfHarmonyTriggeredAbility extends DelayedTriggeredAbility {
         optional = false;
     }
 
-    public RiteOfHarmonyTriggeredAbility(RiteOfHarmonyTriggeredAbility ability) {
+    private RiteOfHarmonyTriggeredAbility(final RiteOfHarmonyTriggeredAbility ability) {
         super(ability);
     }
 

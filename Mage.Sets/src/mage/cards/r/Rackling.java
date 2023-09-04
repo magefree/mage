@@ -46,7 +46,7 @@ class RacklingEffect extends OneShotEffect {
         this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in their hand";
     }
 
-    public RacklingEffect(final RacklingEffect effect) {
+    private RacklingEffect(final RacklingEffect effect) {
         super(effect);
     }
 

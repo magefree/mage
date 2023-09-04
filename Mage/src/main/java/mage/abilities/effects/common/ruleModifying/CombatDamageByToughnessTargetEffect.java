@@ -35,7 +35,7 @@ public class CombatDamageByToughnessTargetEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Set<Permanent> set = targetPointer.getTargets(game, source).stream()
             .map(game::getPermanent)
-            .filter(Objects::isNull)
+            .filter(Objects::nonNull)
             .collect(Collectors.toSet());
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
@@ -48,7 +48,11 @@ public class CombatDamageByToughnessTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
-        return getTargetPointer().describeTargets(mode.getTargets(), "that creature") 
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return (duration.toString().isEmpty() ? "" : duration.toString() + ", ")
+                + getTargetPointer().describeTargets(mode.getTargets(), "that creature")
             + " assigns combat damage equal to its toughness rather than its power";
     }
 

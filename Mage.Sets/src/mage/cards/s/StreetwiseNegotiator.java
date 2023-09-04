@@ -26,9 +26,10 @@ public final class StreetwiseNegotiator extends CardImpl {
 
         // Backup 1
         BackupAbility backupAbility = new BackupAbility(this, 1);
-        // This creature assigns combat damage equal to its toughness rather than its power.
 
-        backupAbility.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessSourceEffect(Duration.EndOfTurn)));
+        // This creature assigns combat damage equal to its toughness rather than its power.
+        backupAbility.addAbility(new SimpleStaticAbility(new CombatDamageByToughnessSourceEffect(Duration.WhileOnBattlefield)
+                .setText("this creature assigns combat damage equal to its toughness rather than its power")));
 
         this.addAbility(backupAbility);
     }

@@ -89,7 +89,7 @@ class TheEternalWandererExileEffect extends OneShotEffect {
                 "under its owner's control at the beginning of that player's next end step.";
     }
 
-    public TheEternalWandererExileEffect(final TheEternalWandererExileEffect effect) {
+    private TheEternalWandererExileEffect(final TheEternalWandererExileEffect effect) {
         super(effect);
     }
 
@@ -126,7 +126,7 @@ class TheEternalWandererSacrificeEffect extends OneShotEffect {
         staticText = "For each player, choose a creature that player controls. Each player sacrifices all creatures they control not chosen this way";
     }
 
-    public TheEternalWandererSacrificeEffect(final TheEternalWandererSacrificeEffect effect) {
+    private TheEternalWandererSacrificeEffect(final TheEternalWandererSacrificeEffect effect) {
         super(effect);
     }
 

@@ -61,7 +61,7 @@ class NobleHeritageTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public NobleHeritageTriggeredAbility(final NobleHeritageTriggeredAbility ability) {
+    private NobleHeritageTriggeredAbility(final NobleHeritageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -110,7 +110,7 @@ class NobleHeritageEffect extends OneShotEffect {
                 + "If a player does, creatures that player controls can't attack you or planeswalkers you control until your next turn";
     }
 
-    public NobleHeritageEffect(final NobleHeritageEffect effect) {
+    private NobleHeritageEffect(final NobleHeritageEffect effect) {
         super(effect);
     }
 

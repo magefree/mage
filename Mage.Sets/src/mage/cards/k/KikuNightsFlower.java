@@ -47,7 +47,7 @@ public final class KikuNightsFlower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KikuNightsFlower (final KikuNightsFlower card) {
+    private KikuNightsFlower(final KikuNightsFlower card) {
         super(card);
     }
 
@@ -64,7 +64,7 @@ class KikuNightsFlowerEffect extends OneShotEffect {
             this.staticText = "Target creature deals damage to itself equal to its power";        
         }
 
-    public KikuNightsFlowerEffect(final KikuNightsFlowerEffect effect) {
+    private KikuNightsFlowerEffect(final KikuNightsFlowerEffect effect) {
         super(effect);
     }
 

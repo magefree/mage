@@ -73,7 +73,7 @@ class SkirkAlarmistEffect extends OneShotEffect {
         staticText = "At the beginning of the next end step, sacrifice it";
     }
 
-    public SkirkAlarmistEffect(final SkirkAlarmistEffect effect) {
+    private SkirkAlarmistEffect(final SkirkAlarmistEffect effect) {
         super(effect);
     }
 

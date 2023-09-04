@@ -64,7 +64,7 @@ class LostAuramancersAbility extends PutIntoGraveFromBattlefieldSourceTriggeredA
         super(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterEnchantmentCard())));
     }
 
-    public LostAuramancersAbility(final LostAuramancersAbility ability) {
+    private LostAuramancersAbility(final LostAuramancersAbility ability) {
         super(ability);
     }
 

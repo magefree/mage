@@ -66,7 +66,7 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature dealt damage by equipped creature this turn dies, ");
     }
 
-    public ScytheOfTheWretchedTriggeredAbility(final ScytheOfTheWretchedTriggeredAbility ability) {
+    private ScytheOfTheWretchedTriggeredAbility(final ScytheOfTheWretchedTriggeredAbility ability) {
         super(ability);
     }
 

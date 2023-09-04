@@ -54,7 +54,7 @@ class MirkoVoskMindDrinkerEffect extends OneShotEffect {
         this.staticText = "that player reveals cards from the top of their library until they reveal four land cards, then puts those cards into their graveyard";
     }
 
-    public MirkoVoskMindDrinkerEffect(final MirkoVoskMindDrinkerEffect effect) {
+    private MirkoVoskMindDrinkerEffect(final MirkoVoskMindDrinkerEffect effect) {
         super(effect);
     }
 

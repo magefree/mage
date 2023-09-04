@@ -44,7 +44,7 @@ class ProtectionOfTheHekmaEffect extends PreventionEffectImpl {
         this.staticText = "If a source an opponent controls would deal damage to you, prevent 1 of that damage";
     }
 
-    public ProtectionOfTheHekmaEffect(final ProtectionOfTheHekmaEffect effect) {
+    private ProtectionOfTheHekmaEffect(final ProtectionOfTheHekmaEffect effect) {
         super(effect);
     }
 

@@ -48,7 +48,7 @@ class MoltenRainEffect extends OneShotEffect {
         this.staticText = "If that land was nonbasic, Molten Rain deals 2 damage to the land's controller";
     }
 
-    public MoltenRainEffect(final MoltenRainEffect effect) {
+    private MoltenRainEffect(final MoltenRainEffect effect) {
         super(effect);
     }
 

@@ -77,7 +77,7 @@ class TravelingPlagueTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When enchanted creature leaves the battlefield, ");
     }
 
-    public TravelingPlagueTriggeredAbility(final TravelingPlagueTriggeredAbility ability) {
+    private TravelingPlagueTriggeredAbility(final TravelingPlagueTriggeredAbility ability) {
         super(ability);
     }
 
@@ -117,7 +117,7 @@ class TravelingPlagueEffect extends OneShotEffect {
         staticText = "that creature's controller returns {this} from its owner's graveyard to the battlefield";
     }
 
-    public TravelingPlagueEffect(final TravelingPlagueEffect effect) {
+    private TravelingPlagueEffect(final TravelingPlagueEffect effect) {
         super(effect);
     }
 

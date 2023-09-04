@@ -63,7 +63,7 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new SludgeStriderEffect(), new GenericManaCost(1)), false);
     }
 
-    public SludgeStriderTriggeredAbility(final SludgeStriderTriggeredAbility ability) {
+    private SludgeStriderTriggeredAbility(final SludgeStriderTriggeredAbility ability) {
         super(ability);
     }
 

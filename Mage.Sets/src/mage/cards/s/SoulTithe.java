@@ -58,7 +58,7 @@ class SoulTitheEffect extends OneShotEffect {
         staticText = "that player sacrifices it unless they pay {X}, where X is its mana value";
     }
 
-    public SoulTitheEffect(final SoulTitheEffect effect) {
+    private SoulTitheEffect(final SoulTitheEffect effect) {
         super(effect);
     }
 

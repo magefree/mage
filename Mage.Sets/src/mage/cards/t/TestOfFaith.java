@@ -49,7 +49,7 @@ class TestOfFaithPreventDamageTargetEffect extends PreventionEffectImpl {
         staticText = "Prevent the next 3 damage that would be dealt to target creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature";
     }
 
-    public TestOfFaithPreventDamageTargetEffect(final TestOfFaithPreventDamageTargetEffect effect) {
+    private TestOfFaithPreventDamageTargetEffect(final TestOfFaithPreventDamageTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

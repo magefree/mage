@@ -45,7 +45,7 @@ class TurnTheTablesEffect extends RedirectionEffect {
         staticText = "All combat damage that would be dealt to you this turn is dealt to target attacking creature instead";
     }
 
-    public TurnTheTablesEffect(final TurnTheTablesEffect effect) {
+    private TurnTheTablesEffect(final TurnTheTablesEffect effect) {
         super(effect);
     }
 

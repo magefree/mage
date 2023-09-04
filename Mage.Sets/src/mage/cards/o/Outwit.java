@@ -72,7 +72,7 @@ public final class Outwit extends CardImpl {
             this.targetName = filter.getMessage();
         }
 
-        public CustomTargetSpell(final CustomTargetSpell target) {
+        private CustomTargetSpell(final CustomTargetSpell target) {
             super(target);
             this.filter = target.filter.copy();
         }

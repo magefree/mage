@@ -102,7 +102,7 @@ class OathOfGhoulsEffect extends OneShotEffect {
         staticText = "that player chooses target player whose graveyard has fewer creature cards in it than their graveyard does and is their opponent. The first player may return a creature card from their graveyard to their hand";
     }
 
-    public OathOfGhoulsEffect(OathOfGhoulsEffect effect) {
+    private OathOfGhoulsEffect(final OathOfGhoulsEffect effect) {
         super(effect);
     }
 

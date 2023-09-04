@@ -26,7 +26,7 @@ public final class Nighthaze extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Nighthaze (final Nighthaze card) {
+    private Nighthaze(final Nighthaze card) {
         super(card);
     }
 

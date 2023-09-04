@@ -28,7 +28,7 @@ public final class SoulParry extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public SoulParry (final SoulParry card) {
+    private SoulParry(final SoulParry card) {
         super(card);
     }
 

@@ -62,7 +62,7 @@ class MerchantsDockhandEffect extends OneShotEffect {
         this.staticText = "Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order";
     }
 
-    public MerchantsDockhandEffect(final MerchantsDockhandEffect effect) {
+    private MerchantsDockhandEffect(final MerchantsDockhandEffect effect) {
         super(effect);
     }
 
@@ -118,7 +118,7 @@ class TapXTargetCost extends VariableCostImpl {
         this.text = "Tap X untapped artifacts you control";
     }
 
-    public TapXTargetCost(final TapXTargetCost cost) {
+    private TapXTargetCost(final TapXTargetCost cost) {
         super(cost);
     }
 

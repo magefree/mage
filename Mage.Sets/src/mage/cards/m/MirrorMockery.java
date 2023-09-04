@@ -60,7 +60,7 @@ class MirrorMockeryEffect extends OneShotEffect {
         this.staticText = "you may create a token that's a copy of that creature. Exile that token at end of combat";
     }
 
-    public MirrorMockeryEffect(final MirrorMockeryEffect effect) {
+    private MirrorMockeryEffect(final MirrorMockeryEffect effect) {
         super(effect);
     }
 

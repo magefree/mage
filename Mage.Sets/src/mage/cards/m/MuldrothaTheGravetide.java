@@ -71,7 +71,7 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
                 + "<i>(If a card has multiple permanent types, choose one as you play it.)</i>";
     }
 
-    public MuldrothaTheGravetideCastFromGraveyardEffect(final MuldrothaTheGravetideCastFromGraveyardEffect effect) {
+    private MuldrothaTheGravetideCastFromGraveyardEffect(final MuldrothaTheGravetideCastFromGraveyardEffect effect) {
         super(effect);
     }
 

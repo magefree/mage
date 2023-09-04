@@ -56,7 +56,7 @@ class RhysticCaveManaAbility extends ActivatedManaAbilityImpl {
 
     }
 
-    public RhysticCaveManaAbility(final RhysticCaveManaAbility ability) {
+    private RhysticCaveManaAbility(final RhysticCaveManaAbility ability) {
         super(ability);
     }
 

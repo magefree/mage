@@ -112,7 +112,7 @@ class ShidakoBroodmistress extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public ShidakoBroodmistress(final ShidakoBroodmistress token) {
+    private ShidakoBroodmistress(final ShidakoBroodmistress token) {
         super(token);
     }
 

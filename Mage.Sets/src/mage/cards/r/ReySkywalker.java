@@ -46,7 +46,7 @@ public class ReySkywalker extends CardImpl {
         this.addAbility(loyaltyAbility0);
     }
 
-    public ReySkywalker(final ReySkywalker card) {
+    private ReySkywalker(final ReySkywalker card) {
         super(card);
     }
 

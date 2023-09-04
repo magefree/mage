@@ -68,7 +68,7 @@ class KheruMindEaterExileEffect extends OneShotEffect {
         staticText = "that player exiles a card of their hand face down";
     }
 
-    public KheruMindEaterExileEffect(final KheruMindEaterExileEffect effect) {
+    private KheruMindEaterExileEffect(final KheruMindEaterExileEffect effect) {
         super(effect);
     }
 
@@ -103,7 +103,7 @@ class KheruMindEaterEffect extends AsThoughEffectImpl {
         staticText = "You may play cards exiled with {this}";
     }
 
-    public KheruMindEaterEffect(final KheruMindEaterEffect effect) {
+    private KheruMindEaterEffect(final KheruMindEaterEffect effect) {
         super(effect);
     }
 
@@ -135,7 +135,7 @@ class KheruMindEaterLookAtCardEffect extends AsThoughEffectImpl {
         staticText = "You may look at cards exiled with {this}";
     }
 
-    public KheruMindEaterLookAtCardEffect(final KheruMindEaterLookAtCardEffect effect) {
+    private KheruMindEaterLookAtCardEffect(final KheruMindEaterLookAtCardEffect effect) {
         super(effect);
     }
 

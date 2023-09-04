@@ -54,7 +54,7 @@ class LiegeOfTheHollowsEffect extends OneShotEffect {
                 + "of 1/1 green Squirrel creature tokens equal to the amount of mana they paid this way";
     }
 
-    public LiegeOfTheHollowsEffect(final LiegeOfTheHollowsEffect effect) {
+    private LiegeOfTheHollowsEffect(final LiegeOfTheHollowsEffect effect) {
         super(effect);
     }
 

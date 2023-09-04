@@ -46,7 +46,7 @@ class RainOfDaggersEffect extends OneShotEffect {
         this.staticText = "Destroy all creatures target opponent controls. You lose 2 life for each creature destroyed this way";
     }
 
-    public RainOfDaggersEffect(final RainOfDaggersEffect effect) {
+    private RainOfDaggersEffect(final RainOfDaggersEffect effect) {
         super(effect);
     }
 

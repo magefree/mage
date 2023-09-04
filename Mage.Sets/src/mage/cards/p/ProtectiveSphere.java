@@ -63,7 +63,7 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
         this.target = new TargetSource();
     }
 
-    public ProtectiveSphereEffect(final ProtectiveSphereEffect effect) {
+    private ProtectiveSphereEffect(final ProtectiveSphereEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }

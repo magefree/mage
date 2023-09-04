@@ -75,7 +75,7 @@ class KioraPreventionEffect extends PreventionEffectImpl {
         staticText = "Until your next turn, prevent all damage that would be dealt to and dealt by target permanent an opponent controls";
     }
 
-    public KioraPreventionEffect(final KioraPreventionEffect effect) {
+    private KioraPreventionEffect(final KioraPreventionEffect effect) {
         super(effect);
     }
 

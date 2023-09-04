@@ -68,7 +68,7 @@ class StonehewerGiantEffect extends OneShotEffect {
         this.staticText = "search your library for an Equipment card, put it onto the battlefield, attach it to a creature you control, then shuffle";
     }
 
-    public StonehewerGiantEffect(final StonehewerGiantEffect effect) {
+    private StonehewerGiantEffect(final StonehewerGiantEffect effect) {
         super(effect);
     }
 

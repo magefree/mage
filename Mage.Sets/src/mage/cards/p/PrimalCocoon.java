@@ -59,7 +59,7 @@ class PrimalCocoonAbility1 extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1));
     }
 
-    public PrimalCocoonAbility1(final PrimalCocoonAbility1 ability) {
+    private PrimalCocoonAbility1(final PrimalCocoonAbility1 ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class PrimalCocoonAbility2 extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroySourceEffect());
     }
 
-    public PrimalCocoonAbility2(final PrimalCocoonAbility2 ability) {
+    private PrimalCocoonAbility2(final PrimalCocoonAbility2 ability) {
         super(ability);
     }
 

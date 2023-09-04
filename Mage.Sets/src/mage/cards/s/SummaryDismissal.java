@@ -44,7 +44,7 @@ class SummaryDismissalEffect extends OneShotEffect {
         this.staticText = "Exile all other spells and counter all abilities";
     }
 
-    public SummaryDismissalEffect(final SummaryDismissalEffect effect) {
+    private SummaryDismissalEffect(final SummaryDismissalEffect effect) {
         super(effect);
     }
 

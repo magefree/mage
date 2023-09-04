@@ -50,7 +50,7 @@ class TooGreedilyTooDeepEffect extends OneShotEffect {
         this.staticText = "put target creature card from a graveyard onto the battlefield under your control. That creature deals damage equal to its power to each other creature";
     }
 
-    public TooGreedilyTooDeepEffect(final TooGreedilyTooDeepEffect effect) {
+    private TooGreedilyTooDeepEffect(final TooGreedilyTooDeepEffect effect) {
         super(effect);
     }
 

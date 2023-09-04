@@ -37,7 +37,7 @@ public final class MosswoodDreadknight extends AdventureCard {
 
         // Dread Whispers
         // You draw a card and you lose 1 life.
-        this.getSpellCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1, "you"));
         this.getSpellCard().getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
 
         this.finalizeAdventure();

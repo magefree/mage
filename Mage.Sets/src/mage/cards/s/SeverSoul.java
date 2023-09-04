@@ -47,7 +47,7 @@ class GainLifeEqualToToughnessEffect extends OneShotEffect {
         staticText = "You gain life equal to its toughness.";
     }
 
-    public GainLifeEqualToToughnessEffect(final GainLifeEqualToToughnessEffect effect) {
+    private GainLifeEqualToToughnessEffect(final GainLifeEqualToToughnessEffect effect) {
         super(effect);
     }
 

@@ -57,7 +57,7 @@ class KamahlsDruidicVowEffect extends OneShotEffect {
         this.staticText = "Look at the top X cards of your library. You may put any number of land and/or legendary permanent cards with mana value X or less from among them onto the battlefield. Put the rest into your graveyard";
     }
 
-    public KamahlsDruidicVowEffect(final KamahlsDruidicVowEffect effect) {
+    private KamahlsDruidicVowEffect(final KamahlsDruidicVowEffect effect) {
         super(effect);
     }
 

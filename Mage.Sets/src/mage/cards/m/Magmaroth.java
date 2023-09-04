@@ -31,7 +31,7 @@ public final class Magmaroth extends CardImpl{
 
     }
 
-    public Magmaroth(final Magmaroth magmaroth){
+    private Magmaroth(final Magmaroth magmaroth){
         super(magmaroth);
     }
 

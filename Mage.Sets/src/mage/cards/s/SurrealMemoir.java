@@ -46,7 +46,7 @@ class SurrealMemoirEffect extends OneShotEffect {
         this.staticText = "Return an instant card at random from your graveyard to your hand";
     }
 
-    public SurrealMemoirEffect(final SurrealMemoirEffect effect) {
+    private SurrealMemoirEffect(final SurrealMemoirEffect effect) {
         super(effect);
     }
 

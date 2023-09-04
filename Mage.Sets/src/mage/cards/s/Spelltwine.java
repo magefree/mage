@@ -71,7 +71,7 @@ class SpelltwineEffect extends OneShotEffect {
                 + "Copy those cards. Cast the copies if able without paying their mana costs";
     }
 
-    public SpelltwineEffect(final SpelltwineEffect effect) {
+    private SpelltwineEffect(final SpelltwineEffect effect) {
         super(effect);
     }
 

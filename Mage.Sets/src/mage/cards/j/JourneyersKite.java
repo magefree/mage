@@ -34,7 +34,7 @@ public final class JourneyersKite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JourneyersKite (final JourneyersKite card) {
+    private JourneyersKite(final JourneyersKite card) {
         super(card);
     }
 

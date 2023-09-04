@@ -52,7 +52,7 @@ class PiasRevolutionReturnEffect extends OneShotEffect {
         this.staticText = "return that card to your hand unless target opponent has {this} deal 3 damage to them";
     }
 
-    public PiasRevolutionReturnEffect(final PiasRevolutionReturnEffect effect) {
+    private PiasRevolutionReturnEffect(final PiasRevolutionReturnEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a nontoken artifact is put into your graveyard from the battlefield, ");
     }
 
-    public PiasRevolutionTriggeredAbility(PiasRevolutionTriggeredAbility ability) {
+    private PiasRevolutionTriggeredAbility(final PiasRevolutionTriggeredAbility ability) {
         super(ability);
     }
 

@@ -25,7 +25,11 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
     public DiesThisOrAnotherCreatureTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter) {
         super(Zone.ALL, effect, optional); // Needs "ALL" if the source itself should trigger or multiple (incl. source go to grave)
         this.filter = filter;
-        setTriggerPhrase("Whenever {this} or another " + filter.getMessage() + " dies, ");
+        String filterMessage = filter.getMessage();
+        if (filterMessage.startsWith("a ")) {
+            filterMessage = filterMessage.substring(2);
+        }
+        setTriggerPhrase("Whenever {this} or another " + filterMessage + " dies, ");
     }
 
     protected DiesThisOrAnotherCreatureTriggeredAbility(final DiesThisOrAnotherCreatureTriggeredAbility ability) {

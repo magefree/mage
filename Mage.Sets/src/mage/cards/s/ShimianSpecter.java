@@ -73,7 +73,7 @@ class ShimianSpecterEffect extends OneShotEffect {
                 + "player shuffles";
     }
 
-    public ShimianSpecterEffect(final ShimianSpecterEffect effect) {
+    private ShimianSpecterEffect(final ShimianSpecterEffect effect) {
         super(effect);
     }
 

@@ -47,7 +47,7 @@ class FilterSteelyResolve extends FilterCreaturePermanent {
         super("All creatures of the chosen type");
     }
 
-    public FilterSteelyResolve(final FilterSteelyResolve filter) {
+    private FilterSteelyResolve(final FilterSteelyResolve filter) {
         super(filter);
     }
 

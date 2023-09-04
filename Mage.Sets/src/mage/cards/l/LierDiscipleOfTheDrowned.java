@@ -88,7 +88,7 @@ class LierDiscipleOfTheDrownedFlashbackEffect extends ContinuousEffectImpl {
                 "The flashback cost is equal to that card's mana cost";
     }
 
-    public LierDiscipleOfTheDrownedFlashbackEffect(final LierDiscipleOfTheDrownedFlashbackEffect effect) {
+    private LierDiscipleOfTheDrownedFlashbackEffect(final LierDiscipleOfTheDrownedFlashbackEffect effect) {
         super(effect);
     }
 

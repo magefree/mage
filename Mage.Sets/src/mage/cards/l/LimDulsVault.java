@@ -44,7 +44,7 @@ class LimDulsVaultEffect extends OneShotEffect {
                 + "Then shuffle and put the last cards you looked at this way on top of it in any order";
     }
 
-    public LimDulsVaultEffect(final LimDulsVaultEffect effect) {
+    private LimDulsVaultEffect(final LimDulsVaultEffect effect) {
         super(effect);
     }
 

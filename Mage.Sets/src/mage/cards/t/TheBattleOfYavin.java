@@ -49,7 +49,7 @@ class TheBattleOfYavinEffect extends OneShotEffect {
         this.staticText = "For each nonland permanent target opponent controls, that player sacrificies it unless they pay X life";
     }
 
-    public TheBattleOfYavinEffect(final TheBattleOfYavinEffect effect) {
+    private TheBattleOfYavinEffect(final TheBattleOfYavinEffect effect) {
         super(effect);
     }
 

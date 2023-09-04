@@ -45,7 +45,7 @@ class StolenStrategyEffect extends OneShotEffect {
                 + "and you may spend mana as though it were mana of any color to cast those spells";
     }
 
-    public StolenStrategyEffect(final StolenStrategyEffect effect) {
+    private StolenStrategyEffect(final StolenStrategyEffect effect) {
         super(effect);
     }
 

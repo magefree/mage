@@ -57,7 +57,7 @@ class OathOfLimDulTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new OathOfLimDulEffect());
     }
 
-    public OathOfLimDulTriggeredAbility(final OathOfLimDulTriggeredAbility ability) {
+    private OathOfLimDulTriggeredAbility(final OathOfLimDulTriggeredAbility ability) {
         super(ability);
     }
 
@@ -98,7 +98,7 @@ class OathOfLimDulEffect extends OneShotEffect {
         super(Outcome.Neutral);
     }
 
-    public OathOfLimDulEffect(final OathOfLimDulEffect effect) {
+    private OathOfLimDulEffect(final OathOfLimDulEffect effect) {
         super(effect);
     }
 

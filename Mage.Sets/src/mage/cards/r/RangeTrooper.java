@@ -64,7 +64,7 @@ class RangeTrooperEffect extends OneShotEffect {
         staticText = "exile target creature. Return that creature to the battlefield at the beginning of the next end step";
     }
 
-    public RangeTrooperEffect(final RangeTrooperEffect effect) {
+    private RangeTrooperEffect(final RangeTrooperEffect effect) {
         super(effect);
     }
 

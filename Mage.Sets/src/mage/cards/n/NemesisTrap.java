@@ -68,7 +68,7 @@ class NemesisTrapEffect extends OneShotEffect {
         this.staticText = "Exile target attacking creature. Create a token that's a copy of that creature. Exile it at the beginning of the next end step";
     }
 
-    public NemesisTrapEffect(final NemesisTrapEffect effect) {
+    private NemesisTrapEffect(final NemesisTrapEffect effect) {
         super(effect);
     }
 

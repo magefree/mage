@@ -56,7 +56,7 @@ class CheeseStandsAloneContinuousEffect extends ContinuousRuleModifyingEffectImp
         staticText = "When you control no permanents other than {this} and have no cards in hand, you win the game";
     }
 
-    public CheeseStandsAloneContinuousEffect(final CheeseStandsAloneContinuousEffect effect) {
+    private CheeseStandsAloneContinuousEffect(final CheeseStandsAloneContinuousEffect effect) {
         super(effect);
     }
 

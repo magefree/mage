@@ -103,7 +103,7 @@ class ShareTheSpoilsExileCardFromEveryoneEffect extends OneShotEffect {
         super(Outcome.Exile);
     }
 
-    public ShareTheSpoilsExileCardFromEveryoneEffect(final ShareTheSpoilsExileCardFromEveryoneEffect effect) {
+    private ShareTheSpoilsExileCardFromEveryoneEffect(final ShareTheSpoilsExileCardFromEveryoneEffect effect) {
         super(effect);
     }
 

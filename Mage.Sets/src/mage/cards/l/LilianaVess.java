@@ -65,7 +65,7 @@ class LilianaVessEffect extends OneShotEffect {
         staticText = "Put all creature cards from all graveyards onto the battlefield under your control";
     }
 
-    public LilianaVessEffect(final LilianaVessEffect effect) {
+    private LilianaVessEffect(final LilianaVessEffect effect) {
         super(effect);
     }
 

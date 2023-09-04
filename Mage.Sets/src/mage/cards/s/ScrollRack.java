@@ -52,7 +52,7 @@ class ScrollRackEffect extends OneShotEffect {
         staticText = "Exile any number of cards from your hand face down. Put that many cards from the top of your library into your hand. Then look at the exiled cards and put them on top of your library in any order";
     }
 
-    public ScrollRackEffect(final ScrollRackEffect effect) {
+    private ScrollRackEffect(final ScrollRackEffect effect) {
         super(effect);
     }
 

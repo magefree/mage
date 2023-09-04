@@ -61,7 +61,7 @@ class KnowledgePoolExileThreeCardsEffect extends OneShotEffect {
         staticText = "each player exiles the top three cards of their library";
     }
 
-    public KnowledgePoolExileThreeCardsEffect(final KnowledgePoolExileThreeCardsEffect effect) {
+    private KnowledgePoolExileThreeCardsEffect(final KnowledgePoolExileThreeCardsEffect effect) {
         super(effect);
     }
 

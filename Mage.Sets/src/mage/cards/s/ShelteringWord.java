@@ -49,7 +49,7 @@ class ShelteringWordEffect extends OneShotEffect {
         this.staticText = "You gain life equal to that creature's toughness";
     }
 
-    public ShelteringWordEffect(final ShelteringWordEffect effect) {
+    private ShelteringWordEffect(final ShelteringWordEffect effect) {
         super(effect);
     }
 

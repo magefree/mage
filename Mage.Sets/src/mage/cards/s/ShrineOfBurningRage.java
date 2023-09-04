@@ -52,7 +52,7 @@ public final class ShrineOfBurningRage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShrineOfBurningRage (final ShrineOfBurningRage card) {
+    private ShrineOfBurningRage(final ShrineOfBurningRage card) {
         super(card);
     }
 

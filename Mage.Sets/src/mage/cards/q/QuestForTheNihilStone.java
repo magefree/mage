@@ -51,7 +51,7 @@ class QuestForTheNihilStoneTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(5), true);
     }
 
-    public QuestForTheNihilStoneTriggeredAbility(final QuestForTheNihilStoneTriggeredAbility ability) {
+    private QuestForTheNihilStoneTriggeredAbility(final QuestForTheNihilStoneTriggeredAbility ability) {
         super(ability);
     }
 

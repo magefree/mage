@@ -55,7 +55,7 @@ class NovijenHeartOfProgressEffect extends OneShotEffect {
         staticText = "put a +1/+1 counter on each creature that entered the battlefield this turn";
     }
 
-    public NovijenHeartOfProgressEffect(final NovijenHeartOfProgressEffect effect) {
+    private NovijenHeartOfProgressEffect(final NovijenHeartOfProgressEffect effect) {
         super(effect);
     }
 

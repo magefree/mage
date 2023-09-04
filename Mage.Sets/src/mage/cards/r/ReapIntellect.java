@@ -66,7 +66,7 @@ class ReapIntellectEffect extends OneShotEffect {
                 + "exile them. Then that player shuffles";
     }
 
-    public ReapIntellectEffect(final ReapIntellectEffect effect) {
+    private ReapIntellectEffect(final ReapIntellectEffect effect) {
         super(effect);
     }
 

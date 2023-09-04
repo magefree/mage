@@ -26,7 +26,7 @@ public final class NoDachi extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
     }
 
-    public NoDachi (final NoDachi card) {
+    private NoDachi(final NoDachi card) {
         super(card);
     }
 

@@ -95,7 +95,7 @@ class TheChainVeilIncreaseLoyaltyUseEffect extends ContinuousEffectImpl {
         staticText = "For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities have been activated this turn";
     }
 
-    public TheChainVeilIncreaseLoyaltyUseEffect(final TheChainVeilIncreaseLoyaltyUseEffect effect) {
+    private TheChainVeilIncreaseLoyaltyUseEffect(final TheChainVeilIncreaseLoyaltyUseEffect effect) {
         super(effect);
     }
 

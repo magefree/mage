@@ -48,7 +48,7 @@ class RaziasPurificationEffect extends OneShotEffect {
         staticText = "Each player chooses three permanents they control, then sacrifices the rest";
     }
 
-    public RaziasPurificationEffect(RaziasPurificationEffect effect) {
+    private RaziasPurificationEffect(final RaziasPurificationEffect effect) {
         super(effect);
     }
 

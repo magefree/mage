@@ -79,7 +79,7 @@ class RimehornAurochsEffect extends RequirementEffect {
         staticText = "Target creature blocks target creature this turn if able";
     }
 
-    public RimehornAurochsEffect(final RimehornAurochsEffect effect) {
+    private RimehornAurochsEffect(final RimehornAurochsEffect effect) {
         super(effect);
     }
 

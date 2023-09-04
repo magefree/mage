@@ -50,7 +50,7 @@ class SilburlindSnapperEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless you've cast a noncreature spell this turn";
     }
 
-    public SilburlindSnapperEffect(final SilburlindSnapperEffect effect) {
+    private SilburlindSnapperEffect(final SilburlindSnapperEffect effect) {
         super(effect);
     }
 

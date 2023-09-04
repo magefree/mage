@@ -57,7 +57,7 @@ class MindclawShamanEffect extends OneShotEffect {
                 + "an instant or sorcery spell from among those cards without paying its mana cost";
     }
 
-    public MindclawShamanEffect(final MindclawShamanEffect effect) {
+    private MindclawShamanEffect(final MindclawShamanEffect effect) {
         super(effect);
     }
 

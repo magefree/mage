@@ -33,7 +33,7 @@ public final class NulltreadGargantuan extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new NulltreadGargantuanEffect()));
     }
 
-    public NulltreadGargantuan(final NulltreadGargantuan card) {
+    private NulltreadGargantuan(final NulltreadGargantuan card) {
         super(card);
     }
 

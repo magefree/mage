@@ -61,7 +61,7 @@ class ThunderbladeChargeCastEffect extends OneShotEffect {
         this.staticText = "you may cast {this} without paying its mana cost";
     }
 
-    public ThunderbladeChargeCastEffect(final ThunderbladeChargeCastEffect effect) {
+    private ThunderbladeChargeCastEffect(final ThunderbladeChargeCastEffect effect) {
         super(effect);
     }
 

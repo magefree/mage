@@ -51,7 +51,7 @@ class PsychicBattleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new PsychicBattleEffect(), false);
     }
 
-    public PsychicBattleTriggeredAbility(PsychicBattleTriggeredAbility ability) {
+    private PsychicBattleTriggeredAbility(final PsychicBattleTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class PsychicBattleEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public PsychicBattleEffect(final PsychicBattleEffect effect) {
+    private PsychicBattleEffect(final PsychicBattleEffect effect) {
         super(effect);
     }
 

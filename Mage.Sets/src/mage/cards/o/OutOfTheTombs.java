@@ -55,7 +55,7 @@ class OutOfTheTombsReplacementEffect extends ReplacementEffectImpl {
                 "from your graveyard to the battlefield. If you can't, you lose the game.";
     }
 
-    public OutOfTheTombsReplacementEffect(final OutOfTheTombsReplacementEffect effect) {
+    private OutOfTheTombsReplacementEffect(final OutOfTheTombsReplacementEffect effect) {
         super(effect);
     }
 

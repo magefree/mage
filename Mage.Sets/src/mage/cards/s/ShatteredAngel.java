@@ -42,7 +42,7 @@ public final class ShatteredAngel extends CardImpl {
                 Zone.BATTLEFIELD, new GainLifeEffect(3), filter, true, "Whenever a land enters the battlefield under an opponent's control, you may gain 3 life."));
     }
 
-    public ShatteredAngel (final ShatteredAngel card) {
+    private ShatteredAngel(final ShatteredAngel card) {
         super(card);
     }
 

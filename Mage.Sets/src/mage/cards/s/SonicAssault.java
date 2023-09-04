@@ -48,7 +48,7 @@ class SonicAssaultEffect extends OneShotEffect {
                 + "{this} deals 2 damage to that creature's controller.";
     }
 
-    public SonicAssaultEffect(final SonicAssaultEffect effect) {
+    private SonicAssaultEffect(final SonicAssaultEffect effect) {
         super(effect);
     }
 

@@ -67,7 +67,7 @@ class PrimevalSpawnReplacementEffect extends ReplacementEffectImpl {
                 "it wasn't cast or no mana was spent to cast it, exile it instead";
     }
 
-    public PrimevalSpawnReplacementEffect(final PrimevalSpawnReplacementEffect effect) {
+    private PrimevalSpawnReplacementEffect(final PrimevalSpawnReplacementEffect effect) {
         super(effect);
     }
 

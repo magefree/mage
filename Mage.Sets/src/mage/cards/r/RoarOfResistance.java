@@ -82,7 +82,7 @@ class RoarOfResistanceTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, false);
     }
 
-    public RoarOfResistanceTriggeredAbility(final RoarOfResistanceTriggeredAbility ability) {
+    private RoarOfResistanceTriggeredAbility(final RoarOfResistanceTriggeredAbility ability) {
         super(ability);
     }
 

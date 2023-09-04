@@ -52,7 +52,7 @@ class LethalStingCost extends CostImpl {
         this.text = "put a -1/-1 counter on a creature you control";
     }
 
-    public LethalStingCost(LethalStingCost cost) {
+    private LethalStingCost(final LethalStingCost cost) {
         super(cost);
     }
 

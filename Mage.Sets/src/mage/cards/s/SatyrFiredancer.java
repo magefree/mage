@@ -57,7 +57,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an instant or sorcery spell you control deals damage to an opponent, ");
     }
 
-    public SatyrFiredancerTriggeredAbility(final SatyrFiredancerTriggeredAbility ability) {
+    private SatyrFiredancerTriggeredAbility(final SatyrFiredancerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -103,7 +103,7 @@ class SatyrFiredancerDamageEffect extends OneShotEffect {
         this.staticText = "{this} deals that much damage to target creature that player controls";
     }
 
-    public SatyrFiredancerDamageEffect(final SatyrFiredancerDamageEffect effect) {
+    private SatyrFiredancerDamageEffect(final SatyrFiredancerDamageEffect effect) {
         super(effect);
     }
 

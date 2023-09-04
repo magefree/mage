@@ -61,7 +61,7 @@ class SkullwinderEffect extends OneShotEffect {
         this.staticText = ", then choose an opponent. That player returns a card from their graveyard to their hand";
     }
 
-    public SkullwinderEffect(final SkullwinderEffect effect) {
+    private SkullwinderEffect(final SkullwinderEffect effect) {
         super(effect);
     }
 

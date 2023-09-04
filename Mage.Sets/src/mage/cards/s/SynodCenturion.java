@@ -46,7 +46,7 @@ public final class SynodCenturion extends CardImpl {
             super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
         }
 
-        public SynodCenturionStateTriggeredAbility(final SynodCenturionStateTriggeredAbility ability) {
+        private SynodCenturionStateTriggeredAbility(final SynodCenturionStateTriggeredAbility ability) {
             super(ability);
         }
 

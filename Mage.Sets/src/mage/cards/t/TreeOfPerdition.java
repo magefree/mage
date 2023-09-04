@@ -1,16 +1,11 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
+import mage.abilities.effects.common.continuous.SetBaseToughnessSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,7 +14,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +55,7 @@ class TreeOfPerditionEffect extends OneShotEffect {
         staticText = "Exchange target opponent's life total with {this}'s toughness";
     }
 
-    public TreeOfPerditionEffect(final TreeOfPerditionEffect effect) {
+    private TreeOfPerditionEffect(final TreeOfPerditionEffect effect) {
         super(effect);
     }
 
@@ -88,9 +84,7 @@ class TreeOfPerditionEffect extends OneShotEffect {
         // For example, say Tree of Perdition is equipped with Cultist’s Staff (which makes it 2/15) and the player’s life total is 7.
         // After the exchange, Tree of Perdition would be a 2/9 creature (its toughness became 7, which was then modified by Cultist’s Staff) and the player’s life total would be 15.
         // (2016-07-13)
-        ContinuousEffect powerToughnessEffect = new SetBasePowerToughnessTargetEffect(null, StaticValue.get(life), Duration.Custom);
-        powerToughnessEffect.setTargetPointer(new FixedTarget(perm.getId()));
-        game.addEffect(powerToughnessEffect, source);
+        game.addEffect(new SetBaseToughnessSourceEffect(life, Duration.Custom), source);
         return true;
     }
 

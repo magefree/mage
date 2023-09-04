@@ -71,7 +71,7 @@ class SasayaOrochiAscendantFlipEffect extends OneShotEffect {
         this.staticText = "If you have seven or more land cards in your hand, flip {this}";
     }
 
-    public SasayaOrochiAscendantFlipEffect(final SasayaOrochiAscendantFlipEffect effect) {
+    private SasayaOrochiAscendantFlipEffect(final SasayaOrochiAscendantFlipEffect effect) {
         super(effect);
     }
 
@@ -108,7 +108,7 @@ class SasayasEssence extends TokenImpl {
                 new FilterControlledLandPermanent(), SetTargetPointer.PERMANENT));
     }
 
-    public SasayasEssence(final SasayasEssence token) {
+    private SasayasEssence(final SasayasEssence token) {
         super(token);
     }
 
@@ -125,7 +125,7 @@ class SasayasEssenceManaEffect extends ManaEffect {
         this.staticText = "for each other land you control with the same name, add one mana of any type that land produced";
     }
 
-    public SasayasEssenceManaEffect(final SasayasEssenceManaEffect effect) {
+    private SasayasEssenceManaEffect(final SasayasEssenceManaEffect effect) {
         super(effect);
     }
 

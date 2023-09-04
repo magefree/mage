@@ -63,7 +63,7 @@ class TaniwhaEffect extends OneShotEffect {
         this.staticText = "all lands you control phase out";
     }
 
-    public TaniwhaEffect(final TaniwhaEffect effect) {
+    private TaniwhaEffect(final TaniwhaEffect effect) {
         super(effect);
     }
 

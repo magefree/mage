@@ -55,7 +55,7 @@ class TempOfTheDamnedEffect extends OneShotEffect {
         staticText = "roll a six-sided die. {this} enters the battlefield with a number of funk counters on it equal to the result";
     }
 
-    public TempOfTheDamnedEffect(final TempOfTheDamnedEffect effect) {
+    private TempOfTheDamnedEffect(final TempOfTheDamnedEffect effect) {
         super(effect);
     }
 

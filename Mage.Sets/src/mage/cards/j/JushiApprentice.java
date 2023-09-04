@@ -75,7 +75,7 @@ class TomoyaTheRevealer extends TokenImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
-    public TomoyaTheRevealer(final TomoyaTheRevealer token) {
+    private TomoyaTheRevealer(final TomoyaTheRevealer token) {
         super(token);
     }
 

@@ -54,7 +54,7 @@ class LockjawSnapperEffect extends OneShotEffect {
         this.staticText = "put a -1/-1 counter on each creature with a -1/-1 counter on it";
     }
 
-    public LockjawSnapperEffect(final LockjawSnapperEffect effect) {
+    private LockjawSnapperEffect(final LockjawSnapperEffect effect) {
         super(effect);
     }
 

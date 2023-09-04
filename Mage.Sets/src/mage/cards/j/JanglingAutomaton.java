@@ -47,7 +47,7 @@ class JanglingAutomatonEffect extends OneShotEffect {
         this.staticText = "untap all creatures defending player controls";
     }
 
-    public JanglingAutomatonEffect(final JanglingAutomatonEffect effect) {
+    private JanglingAutomatonEffect(final JanglingAutomatonEffect effect) {
         super(effect);
     }
 

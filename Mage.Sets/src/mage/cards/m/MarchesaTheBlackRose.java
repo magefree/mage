@@ -69,7 +69,7 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control with a +1/+1 counter on it dies, ");
     }
 
-    public MarchesaTheBlackRoseTriggeredAbility(final MarchesaTheBlackRoseTriggeredAbility ability) {
+    private MarchesaTheBlackRoseTriggeredAbility(final MarchesaTheBlackRoseTriggeredAbility ability) {
         super(ability);
     }
 

@@ -42,6 +42,25 @@ public class BargainTest extends CardTestPlayerBase {
     // 4/4 Artifact
     private static final String stoneGolem = "Stone Golem";
 
+    /**
+     * Hamlet Glutton
+     * {5}{G}{G}
+     * Creature — Giant
+     *
+     * Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
+     *
+     * This spell costs {2} less to cast if it’s bargained.
+     *
+     * Trample
+     *
+     * When Hamlet Glutton enters the battlefield, you gain 3 life.
+     *
+     * 6/6
+     */
+    private static final String glutton = "Hamlet Glutton";
+
+    private static final String relic = "Darksteel Relic"; // {0} Artifact
+
     @Test
     public void testBargainNotPaidOuphe() {
         setStrictChooseMode(true);
@@ -226,5 +245,94 @@ public class BargainTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, glider, 0);
         assertPermanentCount(playerB, stoneGolem, 0);
         assertExileCount(playerB, stoneGolem, 1);
+    }
+
+    @Test
+    public void testBargainOn5ManaGlutton() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.HAND, playerA, glutton);
+        addCard(Zone.HAND, playerA, relic);
+
+        checkPlayableAbility("before relic", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hamlet Glutton", false);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, relic, true);
+
+        checkPlayableAbility("after relic", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hamlet Glutton", true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, glutton, true);
+        setChoice(playerA, true); // Do bargain.
+        setChoice(playerA, relic); // Bargain the relic away.
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20 + 3);
+    }
+
+    @Test
+    public void testBargainOn7ManaGlutton() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
+        addCard(Zone.HAND, playerA, glutton);
+        addCard(Zone.HAND, playerA, relic);
+
+        checkPlayableAbility("before relic", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hamlet Glutton", true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, relic, true);
+
+        checkPlayableAbility("after relic", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hamlet Glutton", true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, glutton, true);
+        setChoice(playerA, true); // Do bargain.
+        setChoice(playerA, relic); // Bargain the relic away.
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20 + 3);
+        assertTappedCount("Forest", true, 5);
+    }
+
+    @Test
+    public void testNoBargainOn7ManaGlutton() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
+        addCard(Zone.HAND, playerA, glutton);
+        addCard(Zone.HAND, playerA, relic);
+
+        checkPlayableAbility("before relic", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hamlet Glutton", true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, relic, true);
+
+        checkPlayableAbility("after relic", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Hamlet Glutton", true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, glutton, true);
+        setChoice(playerA, false); // No bargain.
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20 + 3);
+        assertTappedCount("Forest", true, 7);
+    }
+
+    @Test
+    public void testCantBargainOn7ManaGlutton() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
+        addCard(Zone.HAND, playerA, glutton);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, glutton, true);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20 + 3);
+        assertTappedCount("Forest", true, 7);
     }
 }

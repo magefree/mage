@@ -55,7 +55,7 @@ class SizzlingSoloistEffect extends RequirementEffect {
         staticText = "that creature attacks during its controller's next combat phase if able";
     }
 
-    public SizzlingSoloistEffect(final SizzlingSoloistEffect effect) {
+    private SizzlingSoloistEffect(final SizzlingSoloistEffect effect) {
         super(effect);
     }
 

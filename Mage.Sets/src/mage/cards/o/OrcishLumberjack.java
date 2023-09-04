@@ -70,7 +70,7 @@ class OrcishLumberjackManaEffect extends ManaEffect {
         netMana.add(new Mana(0, 0, 0, 3, 0, 0, 0, 0));
     }
 
-    public OrcishLumberjackManaEffect(final OrcishLumberjackManaEffect effect) {
+    private OrcishLumberjackManaEffect(final OrcishLumberjackManaEffect effect) {
         super(effect);
         netMana.addAll(effect.netMana);
     }

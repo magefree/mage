@@ -58,7 +58,7 @@ class SanguinePraetorEffect extends OneShotEffect {
         staticText = "Destroy each creature with the same mana value as the sacrificed creature";
     }
 
-    public SanguinePraetorEffect(final SanguinePraetorEffect effect) {
+    private SanguinePraetorEffect(final SanguinePraetorEffect effect) {
         super(effect);
     }
 

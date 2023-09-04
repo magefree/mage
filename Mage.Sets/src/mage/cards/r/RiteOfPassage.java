@@ -50,7 +50,7 @@ class RiteOfPassageTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control is dealt damage, ");
     }
 
-    public RiteOfPassageTriggeredAbility(final RiteOfPassageTriggeredAbility ability) {
+    private RiteOfPassageTriggeredAbility(final RiteOfPassageTriggeredAbility ability) {
         super(ability);
     }
 

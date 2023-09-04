@@ -57,7 +57,7 @@ class ThelonsChantEffect extends OneShotEffect {
         staticText = "{this} deals 3 damage to that player unless they put a -1/-1 counter on a creature they control";
     }
 
-    public ThelonsChantEffect(final ThelonsChantEffect effect) {
+    private ThelonsChantEffect(final ThelonsChantEffect effect) {
         super(effect);
     }
 

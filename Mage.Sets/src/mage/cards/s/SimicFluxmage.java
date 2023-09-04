@@ -62,7 +62,7 @@ class MoveCounterFromSourceToTargetEffect extends OneShotEffect {
         this.staticText = "Move a +1/+1 counter from {this} onto target creature";
     }
 
-    public MoveCounterFromSourceToTargetEffect(final MoveCounterFromSourceToTargetEffect effect) {
+    private MoveCounterFromSourceToTargetEffect(final MoveCounterFromSourceToTargetEffect effect) {
         super(effect);
     }
 

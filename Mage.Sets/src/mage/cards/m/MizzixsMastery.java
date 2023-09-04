@@ -64,7 +64,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                 + "and you may cast the copy without paying its mana cost. Exile {this}";
     }
 
-    public MizzixsMasteryOverloadEffect(final MizzixsMasteryOverloadEffect effect) {
+    private MizzixsMasteryOverloadEffect(final MizzixsMasteryOverloadEffect effect) {
         super(effect);
     }
 

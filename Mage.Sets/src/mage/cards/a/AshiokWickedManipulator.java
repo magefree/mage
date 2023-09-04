@@ -39,7 +39,8 @@ public final class AshiokWickedManipulator extends CardImpl {
 
         // +1: Look at the top two cards of your library. Exile one of them and put the other into your hand.
         this.addAbility(new LoyaltyAbility(
-                new LookLibraryAndPickControllerEffect(2, 1, PutCards.EXILED, PutCards.HAND),
+                new LookLibraryAndPickControllerEffect(2, 1, PutCards.EXILED, PutCards.HAND)
+                        .setText("look at the top two cards of your library. Exile one of them and put the other into your hand"),
                 1
         ));
 
