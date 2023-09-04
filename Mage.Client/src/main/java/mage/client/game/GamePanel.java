@@ -1623,8 +1623,8 @@ public final class GamePanel extends javax.swing.JPanel {
      * @param options
      * @param messageId
      */
-    public void pickTarget(GameView gameView, Map<String, Serializable> options, String message, CardsView cardsView, Set<UUID> targets, boolean required, int messageId) {
-        updateGame(gameView, false, options, targets);
+    public synchronized void pickTarget(GameView gameView, Map<String, Serializable> options, String message, CardsView cardsView, Set<UUID> targets, boolean required, int messageId) {
+        updateGame(gameView, false, options, targets); // <- this is synchronized
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
         clearPickTargetDialogs();
@@ -1650,9 +1650,9 @@ public final class GamePanel extends javax.swing.JPanel {
         ShowCardsDialog dialog = null;
         if (cardsView != null && !cardsView.isEmpty()) {
             dialog = prepareCardsDialog(message, cardsView, required, options0, popupMenuType);
-            options0.put("dialog", dialog);
+            options0.put("dialog", dialog); // <- this was not synchronized.
         }
-        this.feedbackPanel.prepareFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId, true, gameView.getPhase());
+        this.feedbackPanel.prepareFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId, true, gameView.getPhase()); // <- this starts with synchronized to retrieve options
         if (dialog != null) {
             this.pickTarget.add(dialog);
         }
