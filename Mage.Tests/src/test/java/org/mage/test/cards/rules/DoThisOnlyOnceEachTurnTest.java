@@ -106,4 +106,22 @@ public class DoThisOnlyOnceEachTurnTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, "Nykthos Paragon", 9, 11);
     }
+
+    /**
+     * Ability should be marked as used before effects resolve. See #11106
+     */
+    @Test
+    public void testOnduSpiritdancer() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Ondu Spiritdancer");
+        addCard(Zone.HAND, playerA, "Ajani's Welcome", 1); // generic enchantment
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ajani's Welcome");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true); // resolve Ajani's Welcome
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true); // resolve initial Ondu Spiritdancer trigger
+        checkStackSize("no second trigger", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+    }
 }
