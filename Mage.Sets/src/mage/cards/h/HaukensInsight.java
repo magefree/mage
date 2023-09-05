@@ -164,7 +164,7 @@ class HaukensInsightPlayEffect extends AsThoughEffectImpl {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()));
                 ExileZone exileZone = game.getExile().getExileZone(exileId);
                 if (exileZone != null && exileZone.contains(CardUtil.getMainCardId(game, objectId))) {
-                    allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
+                    allowCardToPlayWithoutMana(objectId, source, affectedControllerId, MageIdentifier.HaukensInsightWatcher, game);
                     return true;
                 }
             }

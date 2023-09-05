@@ -85,7 +85,7 @@ class GlimpseTheCosmosPlayEffect extends AsThoughEffectImpl {
             if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                 Player controller = game.getPlayer(affectedControllerId);
                 if (controller != null) {
-                    controller.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{U}"), null);
+                    controller.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{U}"), null, MageIdentifier.GlimpseTheCosmosWatcher);
                     return true;
                 }
             }
