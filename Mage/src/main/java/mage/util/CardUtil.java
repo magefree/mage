@@ -147,7 +147,7 @@ public final class CardUtil {
         ability.addManaCostsToPay(adjustedCost);
     }
 
-    private static ManaCosts<ManaCost> adjustCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
+    public static ManaCosts<ManaCost> adjustCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
         ManaCosts<ManaCost> newCost = new ManaCostsImpl<>();
 
         // nothing to change
