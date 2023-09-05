@@ -7,6 +7,8 @@ import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.game.Game;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -17,31 +19,46 @@ public interface ActivatedAbility extends Ability {
     final class ActivationStatus {
 
         private final boolean canActivate;
-        private final ApprovingObject approvingObject;
+        private final Set<ApprovingObject> approvingObjects;
 
-        public ActivationStatus(boolean canActivate, ApprovingObject approvingObject) {
+        private ActivationStatus(boolean canActivate, Set<ApprovingObject> approvingObjects) {
             this.canActivate = canActivate;
-            this.approvingObject = approvingObject;
+            this.approvingObjects = approvingObjects;
         }
 
         public boolean canActivate() {
             return canActivate;
         }
 
-        public ApprovingObject getApprovingObject() {
-            return approvingObject;
+        public Set<ApprovingObject> getApprovingObjects() {
+            return approvingObjects;
         }
 
         public static ActivationStatus getFalse() {
-            return new ActivationStatus(false, null);
+            return new ActivationStatus(false, new HashSet<>());
         }
 
         /**
          * @param approvingObjectAbility ability that allows to activate/use current ability
          */
         public static ActivationStatus getTrue(Ability approvingObjectAbility, Game game) {
-            ApprovingObject approvingObject = approvingObjectAbility == null ? null : new ApprovingObject(approvingObjectAbility, game);
-            return new ActivationStatus(true, approvingObject);
+            Set<ApprovingObject> approvingObjects = new HashSet<>();
+            if(approvingObjects != null) {
+                approvingObjects.add(new ApprovingObject(approvingObjectAbility, game));
+            }
+            return new ActivationStatus(true, approvingObjects);
+        }
+
+        public static ActivationStatus getTrue(Set<ApprovingObject> approvingObjects) {
+            Set<ApprovingObject> newApprovingObjects = new HashSet<>();
+            if(approvingObjects != null) {
+                approvingObjects.addAll(newApprovingObjects);
+            }
+            return new ActivationStatus(true, approvingObjects);
+        }
+
+        public static ActivationStatus withoutApprovingObject(boolean status) {
+            return new ActivationStatus(status, new HashSet<>());
         }
     }
 

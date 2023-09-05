@@ -6,6 +6,7 @@ import mage.constants.AsThoughEffectType;
 import mage.constants.Zone;
 import mage.game.Game;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -33,15 +34,19 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
 
         // no super.canActivate() call
 
-        ApprovingObject approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
-        if (!controlsAbility(playerId, game) && null == approvingObject) {
+        Set<ApprovingObject> approvingObjects = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
+        if (!controlsAbility(playerId, game) && approvingObjects.isEmpty()) {
             return ActivationStatus.getFalse();
         }
+
         //20091005 - 114.2a
-        return new ActivationStatus(game.isActivePlayer(playerId)
-                && game.getPlayer(playerId).canPlayLand()
-                && game.canPlaySorcery(playerId),
-                approvingObject);
+        if(!game.isActivePlayer(playerId)
+                || !game.getPlayer(playerId).canPlayLand()
+                || !game.canPlaySorcery(playerId)) {
+            return ActivationStatus.getFalse();
+        }
+
+        return ActivationStatus.getTrue(approvingObjects);
     }
 
     @Override

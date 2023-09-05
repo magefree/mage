@@ -53,7 +53,7 @@ public final class OneWithTheMultiverse extends CardImpl {
 class OneWithTheMultiverseEffect extends AsThoughEffectImpl {
 
     public OneWithTheMultiverseEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree, true);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
         staticText = "once during each of your turns, you may cast a spell from your hand " +
                 "or the top of your library without paying its mana cost.";
     }

@@ -21,5 +21,20 @@ public enum MageIdentifier {
     SerraParagonWatcher,
     OneWithTheMultiverseWatcher,
     JohannApprenticeSorcererWatcher,
-    KaghaShadowArchdruidWatcher
+    KaghaShadowArchdruidWatcher,
+    CourtOfLocthwainWatcher("Without paying manacost");
+
+    private final String additionalText;
+
+    MageIdentifier() {
+        this("");
+    }
+
+    MageIdentifier(String additionalText) {
+        this.additionalText = additionalText;
+    }
+
+    public String getAdditionalText() {
+        return this.additionalText;
+    }
 }

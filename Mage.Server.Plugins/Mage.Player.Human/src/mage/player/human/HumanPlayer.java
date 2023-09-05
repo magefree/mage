@@ -2260,7 +2260,7 @@ public class HumanPlayer extends PlayerImpl {
             }
 
             // hide on alternative cost activated
-            if (!getCastSourceIdWithAlternateMana().contains(ability.getSourceId())
+            if (!getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), new HashSet<>()).contains(null)
                     && ability.getManaCostsToPay().manaValue() > 0) {
                 return true;
             }

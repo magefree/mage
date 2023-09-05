@@ -97,7 +97,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
             }
         }
 
-        return null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
+        return !game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game).isEmpty() // check this first to allow Offering in main phase
                 || timing == TimingRule.INSTANT
                 || object.isInstant(game)
                 || object.hasAbility(FlashAbility.getInstance(), game)
@@ -116,13 +116,13 @@ public class SpellAbility extends ActivatedAbilityImpl {
             }
 
             // play from not own hand
-            ApprovingObject approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
-            if (approvingObject == null && getSpellAbilityType().equals(SpellAbilityType.ADVENTURE_SPELL)) {
+            Set<ApprovingObject> approvingObjects = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
+            if (approvingObjects.isEmpty() && getSpellAbilityType().equals(SpellAbilityType.ADVENTURE_SPELL)) {
                 // allowed to cast adventures from non-hand?
-                approvingObject = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
+                approvingObjects = game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, this, playerId, game);
             }
 
-            if (approvingObject == null) {
+            if (approvingObjects.isEmpty()) {
                 Card card = game.getCard(sourceId);
                 if (!(card != null && card.isOwnedBy(playerId))) {
                     return ActivationStatus.getFalse();
@@ -146,7 +146,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
             if (getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
                 Player player = game.getPlayer(playerId);
                 if (player != null
-                        && player.getCastSourceIdWithAlternateMana().contains(getSourceId())) {
+                        && player.getCastSourceIdWithAlternateMana().getOrDefault(getSourceId(), new HashSet<>()).contains(null)) {
                     return ActivationStatus.getFalse();
                 }
             }
@@ -159,13 +159,15 @@ public class SpellAbility extends ActivatedAbilityImpl {
                         // fused can be called from hand only, so not permitting object allows or other zones checks
                         // see https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/251926-snapcaster-mage-and-fuse
                         if (game.getState().getZone(splitCard.getId()) == Zone.HAND) {
-                            return new ActivationStatus(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)
-                                    && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId), null);
+                            return ActivationStatus.withoutApprovingObject(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)
+                                    && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId));
                         }
                     }
                     return ActivationStatus.getFalse();
                 } else {
-                    return new ActivationStatus(canChooseTarget(game, playerId), approvingObject);
+                    if(canChooseTarget(game, playerId)) {
+                        return ActivationStatus.getTrue(approvingObjects);
+                    }
                 }
             }
         }
