@@ -41,7 +41,7 @@ public final class TallAsABeanstalk extends CardImpl {
                 ReachAbility.getInstance(), AttachmentType.AURA
         ).setText(", has reach"));
         ability.addEffect(new AddCardSubtypeAttachedEffect(
-                SubType.GIANT, Duration.WhileOnBattlefield, AttachmentType.AURA
+                SubType.GIANT, AttachmentType.AURA
         ).setText(", and is a Giant in addition to its other types"));
         this.addAbility(ability);
     }
