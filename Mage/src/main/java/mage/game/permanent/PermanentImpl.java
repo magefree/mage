@@ -1701,7 +1701,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         Player newProtector;
         if (opponents.size() > 1) {
             TargetPlayer target = new TargetPlayer(new FilterOpponent("protector for " + getName()));
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             target.setRequired(true);
             controller.choose(Outcome.Neutral, target, source, game);
             newProtector = game.getPlayer(target.getFirstTarget());

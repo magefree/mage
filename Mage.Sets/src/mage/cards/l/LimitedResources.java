@@ -78,7 +78,7 @@ class LimitedResourcesEffect extends OneShotEffect {
             if (player != null) {
                 int lands = game.getBattlefield().countAll(new FilterControlledLandPermanent(), playerId, game);
                 TargetLandPermanent target = new TargetLandPermanent(Integer.min(5, lands));
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 target.setRequired(true);
                 player.chooseTarget(outcome.Benefit, target, source, game);
                 game.getBattlefield().getAllActivePermanents(new FilterControlledLandPermanent(), playerId, game).stream().filter((land) -> (!target.getTargets().contains(land.getId()))).forEachOrdered((land) -> {

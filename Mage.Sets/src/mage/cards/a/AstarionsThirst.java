@@ -90,7 +90,7 @@ class AstarionsThirstEffect extends OneShotEffect {
                 break;
             default:
                 TargetPermanent target = new TargetPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 player.choose(outcome, target, source, game);
                 commander = game.getPermanent(target.getFirstTarget());
         }

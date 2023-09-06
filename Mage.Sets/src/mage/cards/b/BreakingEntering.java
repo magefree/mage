@@ -70,7 +70,7 @@ class EnteringReturnFromGraveyardToBattlefieldEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Target target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (target.canChoose(source.getControllerId(), source, game)
                     && controller.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());

@@ -95,7 +95,7 @@ class StormHeraldEffect extends OneShotEffect {
             Set<Card> possibleTargets = controller.getGraveyard().getCards(filter, controller.getId(), source, game);
             if (!possibleTargets.isEmpty()) {
                 TargetCard targetAuras = new TargetCard(0, Integer.MAX_VALUE, Zone.GRAVEYARD, filter);
-                targetAuras.setNotTarget(true);
+                targetAuras.withNotTarget(true);
                 controller.chooseTarget(outcome, new CardsImpl(possibleTargets), targetAuras, source, game);
 
                 // Move the cards to the battlefield to a creature you control
@@ -106,7 +106,7 @@ class StormHeraldEffect extends OneShotEffect {
                         FilterPermanent filterAttachTo = new FilterControlledCreaturePermanent("creature you control to attach " + auraCard.getIdName() + " to");
                         filterAttachTo.add(new StormHeraldAttachableToPredicate(auraCard));
                         TargetPermanent targetCreature = new TargetPermanent(filterAttachTo);
-                        targetCreature.setNotTarget(true);
+                        targetCreature.withNotTarget(true);
                         if (controller.choose(Outcome.PutCardInPlay, targetCreature, source, game)) {
                             Permanent targetPermanent = game.getPermanent(targetCreature.getFirstTarget());
                             if (!targetPermanent.cantBeAttachedBy(auraCard, source, game, true)) {

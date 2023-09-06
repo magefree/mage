@@ -2776,7 +2776,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean casted = false;
         TargetCard targetCard = new TargetCard(0, 1, Zone.LIBRARY, StaticFilters.FILTER_CARD);
         targetCard.setTargetName("card to cast from library");
-        targetCard.setNotTarget(true);
+        targetCard.withNotTarget(true);
         while (!castableCards.isEmpty()) {
             targetCard.clearChosen();
             if (!targetPlayer.choose(Outcome.AIDontUseIt, new CardsImpl(castableCards), targetCard, source, game)) {
@@ -5194,7 +5194,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             if (choosing) {
                 TargetPermanent target = new TargetControlledCreaturePermanent();
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 target.withChooseHint("to be your Ring-bearer");
                 choose(Outcome.Neutral, target, null, game);
 

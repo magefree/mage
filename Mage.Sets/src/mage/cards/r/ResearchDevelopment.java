@@ -70,7 +70,7 @@ class ResearchEffect extends OneShotEffect {
                     return true;
                 }
                 TargetCard target = new TargetCard(0, 4, Zone.OUTSIDE, new FilterCard("cards you own from outside the game"));
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (controller.choose(Outcome.Benefit, controller.getSideboard(), target, source, game)) {
                     controller.shuffleCardsToLibrary(new CardsImpl(target.getTargets()), game, source);
                 }

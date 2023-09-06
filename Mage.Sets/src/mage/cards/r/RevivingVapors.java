@@ -64,7 +64,7 @@ class RevivingVaporsEffect extends OneShotEffect {
                 card = cards.getRandom(game);
             } else {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 target.setRequired(true);
                 if (controller.choose(Outcome.DrawCard, cards, target, source, game)) {
                     card = cards.get(target.getFirstTarget(), game);

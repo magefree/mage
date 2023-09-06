@@ -186,7 +186,7 @@ class MoveAuraEffect extends OneShotEffect {
             }
             boolean passed = true;
             Target chosenPermanentToAttachAuras = aura.getSpellAbility().getTargets().get(0).copy();
-            chosenPermanentToAttachAuras.setNotTarget(true);
+            chosenPermanentToAttachAuras.withNotTarget(true);
             Filter filterChoice = chosenPermanentToAttachAuras.getFilter();
             filterChoice.add(new ControllerIdPredicate(fromPermanent.getControllerId()));
             filterChoice.add(Predicates.not(new PermanentIdPredicate(fromPermanent.getId())));

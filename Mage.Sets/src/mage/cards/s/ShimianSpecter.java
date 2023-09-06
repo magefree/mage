@@ -91,7 +91,7 @@ class ShimianSpecterEffect extends OneShotEffect {
 
             // You choose a nonland card from it
             TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard());
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Card chosenCard = null;
             if (target.canChoose(controller.getId(), source, game)
                     && controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game)) {

@@ -74,7 +74,7 @@ class ReincarnationEffect extends OneShotEffect {
         FilterCreatureCard filter = new FilterCreatureCard("a creature card from " + owner.getName() + "'s graveyard");
         filter.add(new OwnerIdPredicate(owner.getId()));
         TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(controller.getId(), source, game)
                 && controller.chooseTarget(outcome, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());

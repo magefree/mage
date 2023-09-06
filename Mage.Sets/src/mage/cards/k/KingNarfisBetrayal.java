@@ -94,7 +94,7 @@ class KingNarfisBetrayalFirstEffect extends OneShotEffect {
         if (controller.getGraveyard().count(filter, game) != 0) {
             if (controller.chooseUse(outcome, "Exile a creature or planeswalker card from your graveyard?", source, game)) {
                 TargetCard target = new TargetCardInYourGraveyard(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (controller.chooseTarget(outcome, controller.getGraveyard(), target, source, game)) {
                     controller.moveCardsToExile(game.getCard(target.getFirstTarget()), source, game, true, CardUtil.getCardExileZoneId(game, source), CardUtil.createObjectRealtedWindowTitle(source, game, null));
                 }
@@ -111,7 +111,7 @@ class KingNarfisBetrayalFirstEffect extends OneShotEffect {
             if (opponent.getGraveyard().count(filter, game) != 0) {
                 if (controller.chooseUse(outcome, "Exile a creature or planeswalker card from " + opponent.getName() + "'s graveyard?", source, game)) {
                     TargetCard target = new TargetCardInOpponentsGraveyard(1, 1, filter, true);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (controller.chooseTarget(outcome, opponent.getGraveyard(), target, source, game)) {
                         controller.moveCardsToExile(game.getCard(target.getFirstTarget()), source, game, true, CardUtil.getCardExileZoneId(game, source), CardUtil.createObjectRealtedWindowTitle(source, game, null));
                     }

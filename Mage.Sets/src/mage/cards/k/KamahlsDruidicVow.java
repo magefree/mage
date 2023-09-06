@@ -79,7 +79,7 @@ class KamahlsDruidicVowEffect extends OneShotEffect {
                             SuperType.LEGENDARY.getPredicate()
                     ));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
-            target1.setNotTarget(true);
+            target1.withNotTarget(true);
             controller.choose(Outcome.PutCardInPlay, cards, target1, source, game);
             Cards toBattlefield = new CardsImpl(target1.getTargets());
             cards.removeAll(toBattlefield);

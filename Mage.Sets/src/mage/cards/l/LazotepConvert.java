@@ -87,7 +87,7 @@ class LazotepConvertCopyEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetCardInGraveyard(0, 1, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Card copyFromCard = game.getCard(target.getFirstTarget());
         if (copyFromCard == null) {

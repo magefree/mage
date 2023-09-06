@@ -58,7 +58,7 @@ class NivmagusElementalCost extends CostImpl {
     NivmagusElementalCost() {
         super();
         TargetSpell target = new TargetSpell(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         this.text = "Exile an instant or sorcery spell you control";
     }

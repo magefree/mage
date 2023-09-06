@@ -80,7 +80,7 @@ class ChooseACreature extends OneShotEffect {
             return false;
         }
         Target target = new TargetCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(controller.getId(), source, game)) {
             return true;
         }

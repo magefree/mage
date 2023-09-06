@@ -51,7 +51,7 @@ class BackFromTheBrinkCost extends CostImpl {
 
     public BackFromTheBrinkCost() {
         Target target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         this.text = "Exile a creature card from your graveyard and pay its mana cost";
     }

@@ -83,7 +83,7 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
             );
             FILTER.add(new SharesCreatureTypePredicate(lastStateCreature));
             TargetPermanent target = new TargetPermanent(FILTER);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller != null
                     && controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());

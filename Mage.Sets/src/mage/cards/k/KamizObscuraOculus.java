@@ -105,7 +105,7 @@ class KamizDoubleStrikeEffect extends OneShotEffect {
         filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, permanent.getPower().getValue()));
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.choose(outcome, source.getControllerId(), source.getSourceId(), source, game)) {
             game.addEffect(
                     new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance())

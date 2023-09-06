@@ -168,7 +168,7 @@ class KnowledgePoolExileAndPlayEffect extends OneShotEffect {
         filter.add(Predicates.not(new CardIdPredicate(spell.getSourceId())));
 
         TargetCardInExile target = new TargetCardInExile(0, 1, filter, source.getSourceId());
-        target.setNotTarget(true);
+        target.withNotTarget(true);
 
         if (!spellController.choose(Outcome.PlayForFree, game.getExile().getExileZone(exileZoneId), target, source, game)) {
             // Player chose to not cast any ofthe spells

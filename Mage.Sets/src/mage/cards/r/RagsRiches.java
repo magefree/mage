@@ -75,7 +75,7 @@ class RichesEffect extends OneShotEffect {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
                         TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                        target.setNotTarget(true);
+                        target.withNotTarget(true);
                         if (opponent.choose(Outcome.Detriment, target, source, game)) {
                             creaturesToSteal.add(target.getTargets().get(0));
                         }

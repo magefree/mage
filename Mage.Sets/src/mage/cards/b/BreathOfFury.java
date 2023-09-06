@@ -120,7 +120,7 @@ class BreathOfFuryEffect extends OneShotEffect {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control that could be enchanted by " + enchantment.getName());
         filter.add(new CanBeEnchantedByPredicate(enchantment));
         Target target = new TargetControlledCreaturePermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         // It's important to check that the creature was successfully sacrificed here. Effects that prevent sacrifice will also prevent Breath of Fury's effect from working.
         // Commanders going to the command zone and Rest in Peace style replacement effects don't make Permanent.sacrifice return false.
         if (enchantedCreature != null && controller != null

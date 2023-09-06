@@ -131,7 +131,7 @@ class TravelingPlagueEffect extends OneShotEffect {
                     && game.getState().getZone(travelingPlague.getId()) == Zone.GRAVEYARD // aura must come from the graveyard
                     && controllerOfEnchantedCreature != null) {
                 TargetPermanent target = new TargetPermanent(new FilterCreaturePermanent("creature to enchant with " + travelingPlague.getName()));
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (controllerOfEnchantedCreature.choose(Outcome.Detriment, target, source, game)) {
                     Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
                     if (!targetPermanent.cantBeAttachedBy(travelingPlague, source, game, false)) {

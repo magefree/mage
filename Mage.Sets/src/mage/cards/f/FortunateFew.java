@@ -74,7 +74,7 @@ class FortunateFewEffect extends OneShotEffect {
                     }
 
                     Target target = new TargetNonlandPermanent(filter);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (player.choose(Outcome.Exile, target, source, game)) {
                         Permanent permanent = game.getPermanent(target.getFirstTarget());
                         if (permanent != null) {

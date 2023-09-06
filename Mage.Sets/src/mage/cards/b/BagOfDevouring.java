@@ -112,7 +112,7 @@ class BagOfDevouringEffect extends OneShotEffect {
                 0, result, StaticFilters.FILTER_CARD,
                 CardUtil.getExileZoneId(game, source)
         );
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
         return true;

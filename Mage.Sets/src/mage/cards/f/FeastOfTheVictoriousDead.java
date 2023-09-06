@@ -36,7 +36,7 @@ public final class FeastOfTheVictoriousDead extends CardImpl {
         ability.addEffect(new DistributeCountersEffect(CounterType.P1P1, 1, "")
                 .setText("and distribute that many +1/+1 counters among creatures you control"));
         Target target = new TargetCreaturePermanentAmount(CreaturesDiedThisTurnCount.instance, StaticFilters.FILTER_CONTROLLED_CREATURES);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         ability.addTarget(target);
         this.addAbility(ability.addHint(CreaturesDiedThisTurnHint.instance));
     }

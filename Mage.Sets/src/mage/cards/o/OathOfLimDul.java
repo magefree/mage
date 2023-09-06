@@ -113,7 +113,7 @@ class OathOfLimDulEffect extends OneShotEffect {
         if (amountDamage > 0
                 && controller != null) {
             TargetControlledPermanent target = new TargetControlledPermanent(0, numberOfControlledPermanents, filter, true);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.choose(Outcome.Detriment, target, source, game)) {
                 for (UUID targetPermanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetPermanentId);

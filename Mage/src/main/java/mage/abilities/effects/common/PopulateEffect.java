@@ -70,7 +70,7 @@ public class PopulateEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return true;
         }
