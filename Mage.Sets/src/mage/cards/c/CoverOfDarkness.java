@@ -45,7 +45,7 @@ class FilterCoverOfDarkness extends FilterCreaturePermanent {
     private SubType subType = null;
 
     public FilterCoverOfDarkness() {
-        super("All creatures of the chosen type");
+        super("creatures of the chosen type");
     }
 
     public FilterCoverOfDarkness(final FilterCoverOfDarkness filter) {

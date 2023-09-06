@@ -44,7 +44,7 @@ public final class SteelyResolve extends CardImpl {
 class FilterSteelyResolve extends FilterCreaturePermanent {
 
     public FilterSteelyResolve() {
-        super("All creatures of the chosen type");
+        super("creatures of the chosen type");
     }
 
     private FilterSteelyResolve(final FilterSteelyResolve filter) {
