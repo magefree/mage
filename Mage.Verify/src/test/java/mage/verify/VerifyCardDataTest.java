@@ -1714,6 +1714,22 @@ public class VerifyCardDataTest {
                         fail(originalCard, "copy", "not same class for " + msg + "<" + obj1.getClass() + ">" + "]");
                         return;
                     }
+                    if (class1.equals(ArrayList.class)) {
+                        List list1 = (ArrayList) obj1;
+                        List list2 = (ArrayList) obj2;
+                        Iterator it1 = list1.iterator();
+                        Iterator it2 = list2.iterator();
+                        int i = 0;
+                        while (it1.hasNext() && it2.hasNext()) {
+                            compareClassRecursive(it1.next(), it2.next(), originalCard, msg + "<" + obj1.getClass() + ">" + "[" + i++ + "]", maxDepth - 1, alreadyChecked, useRecursive);
+                        }
+                        if (it1.hasNext() || it2.hasNext()) {
+                            fail(originalCard, "copy", "not same size for (ArrayList) " + msg + "]");
+                        }
+                        return;
+                    }
+
+
                     List<Field> ability2Fields = Arrays.stream(class2.getDeclaredFields()).collect(Collectors.toList());
 
                     // Special fields for CardImpl.class
@@ -1727,6 +1743,7 @@ public class VerifyCardDataTest {
                     int fieldIndex = 0;
                     for (Field field1 : class1.getDeclaredFields()) {
                         Field field2 = ability2Fields.get(fieldIndex);
+
                         field1.setAccessible(true);
                         field2.setAccessible(true);
                         try {
@@ -1805,7 +1822,7 @@ public class VerifyCardDataTest {
                     compareClassRecursive(it1.next(), it2.next(), originalCard, msg + "<" + obj1.getClass() + ">" + "[" + i++ + "]", maxDepth - 1, alreadyChecked, useRecursive);
                 }
                 if (it1.hasNext() || it2.hasNext()) {
-                    fail(originalCard, "copy", "not same size for " + msg + "]");
+                    fail(originalCard, "copy", "not same size for (Collection) " + msg + "]");
                 }
             } else if (obj1 instanceof Map) {
                 Map map1 = (Map) obj1;
@@ -1814,7 +1831,7 @@ public class VerifyCardDataTest {
                     compareClassRecursive(el1, ((Map<?, ?>) obj2).get(i), originalCard, msg + "<" + obj1.getClass() + ">" + ".(" + i + ")", maxDepth - 1, alreadyChecked, useRecursive);
                 });
                 if (map1.size() != map2.size()) {
-                    fail(originalCard, "copy", "not same size for " + msg + "]");
+                    fail(originalCard, "copy", "not same size for (Map) " + msg + "]");
                 }
             }
         }
