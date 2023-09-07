@@ -45,7 +45,7 @@ public final class DraconicDestiny extends CardImpl {
         ability.addEffect(new GainAbilityAttachedEffect(new SimpleActivatedAbility(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(1)
         ), AttachmentType.AURA).setText(", and \"{1}: This creature gets +1/+0 until end of turn.\""));
-        ability.addEffect(new AddCardSubtypeAttachedEffect(SubType.DRAGON, Duration.WhileOnBattlefield, AttachmentType.AURA)
+        ability.addEffect(new AddCardSubtypeAttachedEffect(SubType.DRAGON, AttachmentType.AURA)
                 .setText("It's a Dragon in addition to its other types"));
         this.addAbility(ability);
 

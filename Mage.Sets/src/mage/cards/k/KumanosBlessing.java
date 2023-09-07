@@ -64,7 +64,7 @@ class KumanosBlessingEffect extends ReplacementEffectImpl {
         staticText = "If a creature dealt damage by enchanted creature this turn would die, exile it instead";
     }
 
-    public KumanosBlessingEffect(final KumanosBlessingEffect effect) {
+    private KumanosBlessingEffect(final KumanosBlessingEffect effect) {
         super(effect);
     }
 

@@ -50,7 +50,7 @@ class PutrefactionTriggeredAbility extends SpellCastAllTriggeredAbility {
         super(new DiscardTargetEffect(1), filterGreenOrWhiteSpell, false);
     }
 
-    public PutrefactionTriggeredAbility(PutrefactionTriggeredAbility ability) {
+    private PutrefactionTriggeredAbility(final PutrefactionTriggeredAbility ability) {
         super(ability);
     }
 

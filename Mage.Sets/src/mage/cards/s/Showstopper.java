@@ -34,7 +34,7 @@ public final class Showstopper extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Showstopper (final Showstopper card) {
+    private Showstopper(final Showstopper card) {
         super(card);
     }
 

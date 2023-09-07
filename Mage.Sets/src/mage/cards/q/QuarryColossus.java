@@ -54,7 +54,7 @@ class QuarryColossusReturnLibraryEffect extends OneShotEffect {
                 + "top X cards of that library, where X is the number of Plains you control";
     }
 
-    public QuarryColossusReturnLibraryEffect(final QuarryColossusReturnLibraryEffect effect) {
+    private QuarryColossusReturnLibraryEffect(final QuarryColossusReturnLibraryEffect effect) {
         super(effect);
     }
 

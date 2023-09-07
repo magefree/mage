@@ -65,7 +65,7 @@ class JinxedChokerChangeControllerEffect extends ContinuousEffectImpl {
         staticText = "target opponent gains control of {this}";
     }
 
-    public JinxedChokerChangeControllerEffect(final JinxedChokerChangeControllerEffect effect) {
+    private JinxedChokerChangeControllerEffect(final JinxedChokerChangeControllerEffect effect) {
         super(effect);
     }
 
@@ -149,7 +149,7 @@ class JinxedChokerCounterEffect extends OneShotEffect {
         this.staticText = "Put a charge counter on {this} or remove one from it";
     }
 
-    public JinxedChokerCounterEffect(final JinxedChokerCounterEffect effect) {
+    private JinxedChokerCounterEffect(final JinxedChokerCounterEffect effect) {
         super(effect);
     }
 

@@ -66,7 +66,7 @@ class SynthesisPodCost extends CostImpl {
     SynthesisPodCost() {
         super();
         TargetSpell target = new TargetSpell(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         this.text = "Exile a spell you control";
     }

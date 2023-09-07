@@ -47,7 +47,7 @@ class SuddenDemiseDamageEffect extends OneShotEffect {
         this.staticText = "Choose a color. {this} deals X damage to each creature of the chosen color";
     }
 
-    public SuddenDemiseDamageEffect(final SuddenDemiseDamageEffect effect) {
+    private SuddenDemiseDamageEffect(final SuddenDemiseDamageEffect effect) {
         super(effect);
     }
 

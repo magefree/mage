@@ -43,7 +43,7 @@ public final class HatchetBully extends CardImpl {
         ability.addCost(new HatchetBullyCost());
         ability.addTarget(new TargetAnyTarget());
         Target target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         ability.addTarget(target);
         this.addAbility(ability);
 

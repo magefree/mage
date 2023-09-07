@@ -51,7 +51,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
         this.staticText = "Counter target spell unless its controller pays {X}. If that player doesn't, they tap all lands with mana abilities they control and lose all unspent mana";
     }
 
-    public PowerSinkCounterUnlessPaysEffect(final PowerSinkCounterUnlessPaysEffect effect) {
+    private PowerSinkCounterUnlessPaysEffect(final PowerSinkCounterUnlessPaysEffect effect) {
         super(effect);
     }
 

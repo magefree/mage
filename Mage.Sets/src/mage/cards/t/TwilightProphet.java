@@ -68,7 +68,7 @@ class TwilightProphetEffect extends OneShotEffect {
                 + "Each opponent loses X life and you gain X life, where X is that card's mana value.";
     }
 
-    public TwilightProphetEffect(final TwilightProphetEffect effect) {
+    private TwilightProphetEffect(final TwilightProphetEffect effect) {
         super(effect);
     }
 

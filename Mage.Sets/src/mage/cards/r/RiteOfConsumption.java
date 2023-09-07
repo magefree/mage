@@ -50,7 +50,7 @@ class RiteOfConsumptionEffect extends OneShotEffect {
         this.staticText = "{this} deals damage equal to the sacrificed creature's power to target player or planeswalker. You gain life equal to the damage dealt this way";
     }
 
-    public RiteOfConsumptionEffect(final RiteOfConsumptionEffect effect) {
+    private RiteOfConsumptionEffect(final RiteOfConsumptionEffect effect) {
         super(effect);
     }
 

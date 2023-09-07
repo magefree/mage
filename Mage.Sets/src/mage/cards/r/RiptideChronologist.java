@@ -57,7 +57,7 @@ class RiptideChronologistEffect extends OneShotEffect {
         staticText = "Untap all creatures of the creature type of your choice";
     }
 
-    public RiptideChronologistEffect(final RiptideChronologistEffect effect) {
+    private RiptideChronologistEffect(final RiptideChronologistEffect effect) {
         super(effect);
     }
 

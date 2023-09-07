@@ -42,7 +42,7 @@ class JusticeStrikeEffect extends OneShotEffect {
         this.staticText = "Target creature deals damage to itself equal to its power.";
     }
 
-    public JusticeStrikeEffect(final JusticeStrikeEffect effect) {
+    private JusticeStrikeEffect(final JusticeStrikeEffect effect) {
         super(effect);
     }
 

@@ -67,7 +67,7 @@ class PsychicAllergyEffect extends OneShotEffect {
         this.staticText = "{this} deals X damage to that player, where X is the number of nontoken permanents of the chosen color they control";
     }
 
-    public PsychicAllergyEffect(PsychicAllergyEffect copy) {
+    private PsychicAllergyEffect(final PsychicAllergyEffect copy) {
         super(copy);
     }
 

@@ -61,7 +61,7 @@ class SokenzanRenegadeEffect extends OneShotEffect {
         this.staticText = "the player who has the most cards in hand gains control of {this}";
     }
 
-    public SokenzanRenegadeEffect(final SokenzanRenegadeEffect effect) {
+    private SokenzanRenegadeEffect(final SokenzanRenegadeEffect effect) {
         super(effect);
     }
 

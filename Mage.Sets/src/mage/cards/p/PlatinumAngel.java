@@ -47,7 +47,7 @@ public final class PlatinumAngel extends CardImpl {
             staticText = "You can't lose the game and your opponents can't win the game";
         }
 
-        public PlatinumAngelEffect(final PlatinumAngelEffect effect) {
+        private PlatinumAngelEffect(final PlatinumAngelEffect effect) {
             super(effect);
         }
 

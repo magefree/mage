@@ -21,6 +21,7 @@ import mage.util.CardUtil;
 public class MillThenPutInHandEffect extends OneShotEffect {
 
     private final int amount;
+    private final boolean mandatory; // If true, putting a card in hand is mandatory if possible.
     private final FilterCard filter;
     private final Effect otherwiseEffect;
 
@@ -28,16 +29,26 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         this(amount, filter, null);
     }
 
+    public MillThenPutInHandEffect(int amount, FilterCard filter, boolean mandatory) {
+        this(amount, filter, null, mandatory);
+    }
+
     public MillThenPutInHandEffect(int amount, FilterCard filter, Effect otherwiseEffect) {
+        this(amount, filter, otherwiseEffect, false);
+    }
+
+    public MillThenPutInHandEffect(int amount, FilterCard filter, Effect otherwiseEffect, boolean mandatory) {
         super(Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
+        this.mandatory = mandatory;
         this.otherwiseEffect = otherwiseEffect;
     }
 
     private MillThenPutInHandEffect(final MillThenPutInHandEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.mandatory = effect.mandatory;
         this.filter = effect.filter;
         this.otherwiseEffect = effect.otherwiseEffect;
     }
@@ -57,7 +68,7 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         if (cards.isEmpty()) {
             return applyOtherwiseEffect(game, source);
         }
-        TargetCard target = new TargetCard(0, 1, Zone.ALL, filter);
+        TargetCard target = new TargetCard(this.mandatory ? 1 : 0, 1, Zone.ALL, filter);
         player.choose(Outcome.DrawCard, cards, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
@@ -82,15 +93,12 @@ public class MillThenPutInHandEffect extends OneShotEffect {
         if (staticText == null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder("mill ");
-        sb.append(CardUtil.numberToText(amount));
-        sb.append(" cards. You may put ");
-        sb.append(filter.getMessage());
-        sb.append(" from among the milled cards into your hand");
+        String text = "mill " + CardUtil.numberToText(amount) + " cards. ";
+        text += this.mandatory ? "Then " : "You may ";
+        text += "put " + filter.getMessage() + " from among the milled cards into your hand";
         if (otherwiseEffect != null) {
-            sb.append(". If you don't, ");
-            sb.append(otherwiseEffect.getText(mode));
+            text += ". If you don't, " + otherwiseEffect.getText(mode);
         }
-        return sb.toString();
+        return text;
     }
 }

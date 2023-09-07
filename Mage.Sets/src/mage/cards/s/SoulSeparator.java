@@ -68,7 +68,7 @@ class SoulSeparatorEffect extends OneShotEffect {
         this.staticText = "Create a black Zombie creature token with power equal to that card's power and toughness equal to that card's toughness";
     }
 
-    public SoulSeparatorEffect(final SoulSeparatorEffect effect) {
+    private SoulSeparatorEffect(final SoulSeparatorEffect effect) {
         super(effect);
     }
 

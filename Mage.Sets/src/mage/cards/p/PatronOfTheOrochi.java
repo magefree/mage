@@ -72,7 +72,7 @@ class PatronOfTheOrochiEffect extends OneShotEffect {
         staticText = "Untap all Forests and all green creatures";
     }
 
-    public PatronOfTheOrochiEffect(final PatronOfTheOrochiEffect effect) {
+    private PatronOfTheOrochiEffect(final PatronOfTheOrochiEffect effect) {
         super(effect);
     }
 

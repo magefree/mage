@@ -100,7 +100,7 @@ public class AmassEffect extends OneShotEffect {
             makeToken(subType).putOntoBattlefield(1, game, source);
         }
         Target target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(Outcome.BoostCreature, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {

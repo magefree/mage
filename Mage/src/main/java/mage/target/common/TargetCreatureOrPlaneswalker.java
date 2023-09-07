@@ -48,7 +48,7 @@ public class TargetCreatureOrPlaneswalker extends TargetPermanent {
                 return true;
             }
         }
-        return super.isLegal(source, game); //To change body of generated methods, choose Tools | Templates.
+        return super.isLegal(source, game);
     }
 
 }

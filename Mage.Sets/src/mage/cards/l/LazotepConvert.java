@@ -76,7 +76,7 @@ class LazotepConvertCopyEffect extends OneShotEffect {
                 "except it's a 4/4 black Zombie in addition to its other types";
     }
 
-    public LazotepConvertCopyEffect(final LazotepConvertCopyEffect effect) {
+    private LazotepConvertCopyEffect(final LazotepConvertCopyEffect effect) {
         super(effect);
     }
 
@@ -87,7 +87,7 @@ class LazotepConvertCopyEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetCardInGraveyard(0, 1, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Card copyFromCard = game.getCard(target.getFirstTarget());
         if (copyFromCard == null) {

@@ -53,7 +53,7 @@ class NeverendingTormentEffect extends OneShotEffect {
         staticText = "Search target player's library for X cards, where X is the number of cards in your hand, and exile them. Then that player shuffles";
     }
 
-    public NeverendingTormentEffect(final NeverendingTormentEffect effect) {
+    private NeverendingTormentEffect(final NeverendingTormentEffect effect) {
         super(effect);
     }
 

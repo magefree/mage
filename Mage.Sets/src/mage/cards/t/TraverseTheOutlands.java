@@ -49,7 +49,7 @@ class TraverseTheOutlandsEffect extends OneShotEffect {
         this.staticText = "Search your library for up to X basic land cards, where X is the greatest power among creatures you control. Put those cards onto the battlefield tapped, then shuffle.";
     }
 
-    public TraverseTheOutlandsEffect(final TraverseTheOutlandsEffect effect) {
+    private TraverseTheOutlandsEffect(final TraverseTheOutlandsEffect effect) {
         super(effect);
     }
 

@@ -447,7 +447,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         if (numberEditable && col == 0) {
             return true;
         }
-        return super.isCellEditable(row, col); //To change body of generated methods, choose Tools | Templates.
+        return super.isCellEditable(row, col);
     }
 
 }

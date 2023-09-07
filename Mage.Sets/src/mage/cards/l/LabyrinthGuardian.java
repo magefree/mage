@@ -57,7 +57,7 @@ class LabyrinthGuardianTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
     }
 
-    public LabyrinthGuardianTriggeredAbility(final LabyrinthGuardianTriggeredAbility ability) {
+    private LabyrinthGuardianTriggeredAbility(final LabyrinthGuardianTriggeredAbility ability) {
         super(ability);
     }
 

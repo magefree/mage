@@ -49,7 +49,7 @@ class OtherworldAtlasDrawEffect extends OneShotEffect {
         staticText = "Each player draws a card for each charge counter on {this}";
     }
 
-    public OtherworldAtlasDrawEffect(final OtherworldAtlasDrawEffect effect) {
+    private OtherworldAtlasDrawEffect(final OtherworldAtlasDrawEffect effect) {
         super(effect);
     }
 

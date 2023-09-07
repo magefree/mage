@@ -49,7 +49,7 @@ class TellingTimeEffect extends OneShotEffect {
         this.staticText = "Look at the top three cards of your library. Put one of those cards into your hand, one on top of your library, and one on the bottom of your library.";
     }
 
-    public TellingTimeEffect(final TellingTimeEffect effect) {
+    private TellingTimeEffect(final TellingTimeEffect effect) {
         super(effect);
     }
 

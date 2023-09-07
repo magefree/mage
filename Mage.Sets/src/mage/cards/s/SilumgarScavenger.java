@@ -102,7 +102,7 @@ class SilumgarScavengerBoostEffect extends OneShotEffect {
         staticText = "It gains haste until end of turn if it exploited that creature";
     }
 
-    public SilumgarScavengerBoostEffect(SilumgarScavengerBoostEffect effect) {
+    private SilumgarScavengerBoostEffect(final SilumgarScavengerBoostEffect effect) {
         super(effect);
     }
 

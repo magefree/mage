@@ -50,7 +50,7 @@ class PrimalVigorTokenEffect extends ReplacementEffectImpl {
         staticText = "If one or more tokens would be created, twice that many of those tokens are created instead";
     }
 
-    public PrimalVigorTokenEffect(final PrimalVigorTokenEffect effect) {
+    private PrimalVigorTokenEffect(final PrimalVigorTokenEffect effect) {
         super(effect);
     }
 

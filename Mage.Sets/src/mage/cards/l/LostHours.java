@@ -48,7 +48,7 @@ class LostHoursEffect extends OneShotEffect {
         this.staticText = "Target player reveals their hand. You choose a nonland card from it. That player puts that card into their library third from the top";
     }
 
-    public LostHoursEffect(final LostHoursEffect effect) {
+    private LostHoursEffect(final LostHoursEffect effect) {
         super(effect);
     }
 

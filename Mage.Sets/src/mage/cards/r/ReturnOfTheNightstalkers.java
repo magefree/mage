@@ -54,7 +54,7 @@ class ReturnOfTheNightstalkersEffect extends OneShotEffect {
         staticText = "Return all Nightstalker permanent cards from your graveyard to the battlefield. Then destroy all Swamps you control";
     }
 
-    public ReturnOfTheNightstalkersEffect(final ReturnOfTheNightstalkersEffect effect) {
+    private ReturnOfTheNightstalkersEffect(final ReturnOfTheNightstalkersEffect effect) {
         super(effect);
     }
 

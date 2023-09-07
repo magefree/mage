@@ -47,7 +47,7 @@ class ManaSeveranceEffect extends OneShotEffect {
         this.staticText = "search your library for any number of land cards, exile them, then shuffle";
     }
 
-    public ManaSeveranceEffect(final ManaSeveranceEffect effect) {
+    private ManaSeveranceEffect(final ManaSeveranceEffect effect) {
         super(effect);
     }
 

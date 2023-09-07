@@ -62,7 +62,7 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
         this.staticText = "Each player exiles the top card of their library face down";
     }
 
-    public PyxisOfPandemoniumExileEffect(final PyxisOfPandemoniumExileEffect effect) {
+    private PyxisOfPandemoniumExileEffect(final PyxisOfPandemoniumExileEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
                 + "then puts all permanent cards among them onto the battlefield";
     }
 
-    public PyxisOfPandemoniumPutOntoBattlefieldEffect(final PyxisOfPandemoniumPutOntoBattlefieldEffect effect) {
+    private PyxisOfPandemoniumPutOntoBattlefieldEffect(final PyxisOfPandemoniumPutOntoBattlefieldEffect effect) {
         super(effect);
     }
 

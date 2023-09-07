@@ -16,6 +16,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
@@ -30,13 +31,11 @@ import java.util.UUID;
 public final class Seasinger extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterPermanent("Island");
+            = new FilterLandPermanent(SubType.ISLAND, "no Islands");
     private static final FilterPermanent filter2
             = new FilterCreaturePermanent("creature whose controller controls an Island");
 
     static {
-        filter.add(SubType.ISLAND.getPredicate());
-        filter.add(TargetController.YOU.getControllerPredicate());
         filter2.add(SeasingerPredicate.instance);
     }
 

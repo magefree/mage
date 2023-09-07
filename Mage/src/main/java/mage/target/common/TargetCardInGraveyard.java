@@ -38,7 +38,7 @@ public class TargetCardInGraveyard extends TargetCard {
 
     public TargetCardInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
-        this.setNotTarget(notTarget);
+        this.withNotTarget(notTarget);
     }
 
     protected TargetCardInGraveyard(final TargetCardInGraveyard target) {

@@ -45,7 +45,7 @@ class TeferisPuzzleBoxEffect extends OneShotEffect {
         staticText = "that player puts the cards in their hand on the bottom of their library in any order, then draws that many cards";
     }
 
-    public TeferisPuzzleBoxEffect(final TeferisPuzzleBoxEffect effect) {
+    private TeferisPuzzleBoxEffect(final TeferisPuzzleBoxEffect effect) {
         super(effect);
     }
 

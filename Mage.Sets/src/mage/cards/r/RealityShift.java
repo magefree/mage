@@ -49,7 +49,7 @@ class RealityShiftEffect extends OneShotEffect {
         this.staticText = "Its controller manifests the top card of their library. <i>(That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)</i>";
     }
 
-    public RealityShiftEffect(final RealityShiftEffect effect) {
+    private RealityShiftEffect(final RealityShiftEffect effect) {
         super(effect);
     }
 

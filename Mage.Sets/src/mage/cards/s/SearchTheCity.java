@@ -57,7 +57,7 @@ class SearchTheCityExileEffect extends OneShotEffect {
         staticText = "exile the top five cards of your library";
     }
 
-    public SearchTheCityExileEffect(final SearchTheCityExileEffect effect) {
+    private SearchTheCityExileEffect(final SearchTheCityExileEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class SearchTheCityTriggeredAbility extends PlayCardTriggeredAbility {
         setTriggerPhrase("Whenever you play a card with the same name as one of the exiled cards, " );
     }
 
-    public SearchTheCityTriggeredAbility(final SearchTheCityTriggeredAbility ability) {
+    private SearchTheCityTriggeredAbility(final SearchTheCityTriggeredAbility ability) {
         super(ability);
     }
 
@@ -139,7 +139,7 @@ class SearchTheCityExiledCardToHandEffect extends OneShotEffect {
         staticText = "you may put one of those cards with that name into its owner's hand. Then if there are no cards exiled with {this}, sacrifice it. If you do, take an extra turn after this one";
     }
 
-    public SearchTheCityExiledCardToHandEffect(final SearchTheCityExiledCardToHandEffect effect) {
+    private SearchTheCityExiledCardToHandEffect(final SearchTheCityExiledCardToHandEffect effect) {
         super(effect);
     }
 

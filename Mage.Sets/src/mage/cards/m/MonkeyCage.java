@@ -51,7 +51,7 @@ class MonkeyCageEffect extends OneShotEffect {
         staticText = "and create X 2/2 green Monkey creature tokens, where X is that creature's mana value";
     }
 
-    public MonkeyCageEffect(final MonkeyCageEffect effect) {
+    private MonkeyCageEffect(final MonkeyCageEffect effect) {
         super(effect);
     }
 

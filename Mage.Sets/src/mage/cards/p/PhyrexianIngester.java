@@ -65,7 +65,7 @@ class PhyrexianIngesterImprintEffect extends OneShotEffect {
         this.staticText = "exile target nontoken creature";
     }
 
-    public PhyrexianIngesterImprintEffect(final PhyrexianIngesterImprintEffect effect) {
+    private PhyrexianIngesterImprintEffect(final PhyrexianIngesterImprintEffect effect) {
         super(effect);
     }
 
@@ -98,7 +98,7 @@ class PhyrexianIngesterBoostEffect extends ContinuousEffectImpl {
         this.staticText = "{this} gets +X/+Y, where X is the exiled creature card's power and Y is its toughness";
     }
 
-    public PhyrexianIngesterBoostEffect(final PhyrexianIngesterBoostEffect effect) {
+    private PhyrexianIngesterBoostEffect(final PhyrexianIngesterBoostEffect effect) {
         super(effect);
     }
 

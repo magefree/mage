@@ -61,7 +61,7 @@ class OblivionSowerEffect extends OneShotEffect {
         this.staticText = ", then you may put any number of land cards that player owns from exile onto the battlefield under your control";
     }
 
-    public OblivionSowerEffect(final OblivionSowerEffect effect) {
+    private OblivionSowerEffect(final OblivionSowerEffect effect) {
         super(effect);
     }
 

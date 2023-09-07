@@ -114,7 +114,7 @@ class PurgatoryExileEffect extends OneShotEffect {
         staticText = "exile that card";
     }
 
-    public PurgatoryExileEffect(PurgatoryExileEffect effect) {
+    private PurgatoryExileEffect(final PurgatoryExileEffect effect) {
         super(effect);
     }
     
@@ -148,7 +148,7 @@ class PurgatoryReturnEffect extends OneShotEffect {
         this.staticText = "return a card exiled with {this} to the battlefield";
     }
 
-    public PurgatoryReturnEffect(final PurgatoryReturnEffect effect) {
+    private PurgatoryReturnEffect(final PurgatoryReturnEffect effect) {
         super(effect);
     }
 

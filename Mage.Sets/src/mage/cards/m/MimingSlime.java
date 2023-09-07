@@ -45,7 +45,7 @@ class MimingSlimeEffect extends OneShotEffect {
         staticText = "Create an X/X green Ooze creature token, where X is the greatest power among creatures you control";
     }
 
-    public MimingSlimeEffect(final MimingSlimeEffect effect) {
+    private MimingSlimeEffect(final MimingSlimeEffect effect) {
         super(effect);
     }
 

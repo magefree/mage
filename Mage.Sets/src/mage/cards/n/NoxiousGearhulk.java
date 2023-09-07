@@ -56,7 +56,7 @@ class NoxiousGearhulkEffect extends OneShotEffect {
         this.staticText = "you may destroy another target creature. If a creature is destroyed this way, you gain life equal to its toughness";
     }
 
-    public NoxiousGearhulkEffect(final NoxiousGearhulkEffect effect) {
+    private NoxiousGearhulkEffect(final NoxiousGearhulkEffect effect) {
         super(effect);
     }
 

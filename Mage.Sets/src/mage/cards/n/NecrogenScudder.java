@@ -29,7 +29,7 @@ public final class NecrogenScudder extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public NecrogenScudder (final NecrogenScudder card) {
+    private NecrogenScudder(final NecrogenScudder card) {
         super(card);
     }
 

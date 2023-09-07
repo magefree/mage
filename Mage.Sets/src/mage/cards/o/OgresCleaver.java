@@ -32,7 +32,7 @@ public final class OgresCleaver extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5), new TargetControlledCreaturePermanent(), false));
     }
 
-    public OgresCleaver (final OgresCleaver card) {
+    private OgresCleaver(final OgresCleaver card) {
         super(card);
     }
 

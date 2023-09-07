@@ -51,7 +51,7 @@ class PhthisisEffect extends OneShotEffect {
         this.staticText = "Destroy target creature. Its controller loses life equal to its power plus its toughness";
     }
 
-    public PhthisisEffect(final PhthisisEffect effect) {
+    private PhthisisEffect(final PhthisisEffect effect) {
         super(effect);
     }
 

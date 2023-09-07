@@ -52,7 +52,7 @@ class LethalStingCost extends CostImpl {
         this.text = "put a -1/-1 counter on a creature you control";
     }
 
-    public LethalStingCost(LethalStingCost cost) {
+    private LethalStingCost(final LethalStingCost cost) {
         super(cost);
     }
 
@@ -69,7 +69,7 @@ class LethalStingCost extends CostImpl {
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller != null) {
             Target target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             controller.chooseTarget(Outcome.UnboostCreature, target, ability, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {

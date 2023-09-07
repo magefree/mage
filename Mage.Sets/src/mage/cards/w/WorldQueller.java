@@ -114,7 +114,7 @@ class WorldQuellerEffect extends OneShotEffect {
                 filter.add(type.getPredicate());
 
                 TargetPermanent target = new TargetControlledPermanent(1, 1, filter, false);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
 
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player2 = game.getPlayer(playerId);

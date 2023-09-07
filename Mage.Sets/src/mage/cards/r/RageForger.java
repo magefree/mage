@@ -71,7 +71,7 @@ class RageForgerDamageEffect extends OneShotEffect {
         this.staticText = "you may have that creature deal 1 damage to target player or planeswalker";
     }
 
-    public RageForgerDamageEffect(final RageForgerDamageEffect effect) {
+    private RageForgerDamageEffect(final RageForgerDamageEffect effect) {
         super(effect);
     }
 

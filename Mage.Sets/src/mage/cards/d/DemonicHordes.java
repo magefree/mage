@@ -92,14 +92,14 @@ class DemonicHordesEffect extends OneShotEffect {
             }
             demonicHordes.tap(source, game);
             Target choiceOpponent = new TargetOpponent();
-            choiceOpponent.setNotTarget(true);
+            choiceOpponent.withNotTarget(true);
             FilterLandPermanent filterLand = new FilterLandPermanent();
             filterLand.add(new ControllerIdPredicate(source.getControllerId()));
             if (controller.choose(Outcome.Neutral, choiceOpponent, source, game)) {
                 Player opponent = game.getPlayer(choiceOpponent.getFirstTarget());
                 if (opponent != null) {
                     Target chosenLand = new TargetLandPermanent(filterLand);
-                    chosenLand.setNotTarget(true);
+                    chosenLand.withNotTarget(true);
                     if (opponent.chooseTarget(Outcome.Sacrifice, chosenLand, source, game)) {
                         Permanent land = game.getPermanent(chosenLand.getFirstTarget());
                         if (land != null) {

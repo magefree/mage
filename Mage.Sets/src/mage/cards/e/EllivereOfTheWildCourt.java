@@ -40,7 +40,7 @@ public final class EllivereOfTheWildCourt extends CardImpl {
 
         // Whenever Ellivere of the Wild Court enters the battlefield or attacks, create a Virtuous Role token attached to another target creature you control.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new CreateRoleAttachedTargetEffect(RoleType.VIRTUOUS));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
 
         // Whenever an enchanted creature you control deals combat damage to a player, draw a card.

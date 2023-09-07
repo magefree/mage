@@ -58,7 +58,7 @@ class SurviveEffect extends OneShotEffect {
         staticText = "Each player shuffles their graveyard into their library";
     }
 
-    public SurviveEffect(final SurviveEffect effect) {
+    private SurviveEffect(final SurviveEffect effect) {
         super(effect);
     }
 

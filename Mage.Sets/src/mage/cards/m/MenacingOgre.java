@@ -60,7 +60,7 @@ class MenacingOgreEffect extends OneShotEffect {
         this.staticText = "each player secretly chooses a number. Then those numbers are revealed. Each player with the highest number loses that much life. If you are one of those players, put two +1/+1 counters on {this}";
     }
 
-    public MenacingOgreEffect(final MenacingOgreEffect effect) {
+    private MenacingOgreEffect(final MenacingOgreEffect effect) {
         super(effect);
     }
 

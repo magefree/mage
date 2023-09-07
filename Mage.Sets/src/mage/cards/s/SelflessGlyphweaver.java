@@ -81,7 +81,7 @@ class DeadlyVanityEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetCreatureOrPlaneswalker();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(outcome, target, source, game);
 
         FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();

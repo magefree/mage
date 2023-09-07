@@ -69,7 +69,7 @@ class MetallurgicSummoningsTokenEffect extends OneShotEffect {
         staticText = "create an X/X colorless Construct artifact creature token, where X is that spell's mana value";
     }
 
-    public MetallurgicSummoningsTokenEffect(MetallurgicSummoningsTokenEffect ability) {
+    private MetallurgicSummoningsTokenEffect(final MetallurgicSummoningsTokenEffect ability) {
         super(ability);
     }
 

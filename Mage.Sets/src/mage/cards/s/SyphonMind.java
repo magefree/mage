@@ -43,7 +43,7 @@ class SyphonMindEffect extends OneShotEffect {
         this.staticText = "Each other player discards a card. You draw a card for each card discarded this way";
     }
 
-    public SyphonMindEffect(final SyphonMindEffect effect) {
+    private SyphonMindEffect(final SyphonMindEffect effect) {
         super(effect);
     }
 

@@ -49,7 +49,7 @@ class LashknifeBarrierEffect extends ReplacementEffectImpl {
         staticText = "If a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.";
     }
 
-    public LashknifeBarrierEffect(final LashknifeBarrierEffect effect) {
+    private LashknifeBarrierEffect(final LashknifeBarrierEffect effect) {
         super(effect);
     }
 

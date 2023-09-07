@@ -64,7 +64,7 @@ class MarshCasualtiesEffect extends ContinuousEffectImpl {
         this.toughness = toughness;
     }
 
-    public MarshCasualtiesEffect(final MarshCasualtiesEffect effect) {
+    private MarshCasualtiesEffect(final MarshCasualtiesEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

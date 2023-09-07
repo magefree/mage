@@ -71,7 +71,7 @@ class KheruLichLordEffect extends OneShotEffect {
         this.staticText = "return a creature card at random from your graveyard to the battlefield. It gains flying, trample, and haste. Exile that card at the beginning of the next end step. If that card would leave the battlefield, exile it instead of putting it anywhere else";
     }
 
-    public KheruLichLordEffect(final KheruLichLordEffect effect) {
+    private KheruLichLordEffect(final KheruLichLordEffect effect) {
         super(effect);
     }
 

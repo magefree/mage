@@ -46,7 +46,7 @@ class OverwhelmingForcesEffect extends OneShotEffect {
         this.staticText = "Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way";
     }
 
-    public OverwhelmingForcesEffect(final OverwhelmingForcesEffect effect) {
+    private OverwhelmingForcesEffect(final OverwhelmingForcesEffect effect) {
         super(effect);
     }
 

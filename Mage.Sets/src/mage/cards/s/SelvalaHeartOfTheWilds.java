@@ -80,7 +80,7 @@ class SelvalaHeartOfTheWildsEffect extends OneShotEffect {
         this.staticText = "that creature's controller may draw a card";
     }
 
-    public SelvalaHeartOfTheWildsEffect(final SelvalaHeartOfTheWildsEffect effect) {
+    private SelvalaHeartOfTheWildsEffect(final SelvalaHeartOfTheWildsEffect effect) {
         super(effect);
     }
 

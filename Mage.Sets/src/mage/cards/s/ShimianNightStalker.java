@@ -66,7 +66,7 @@ class ShimianNightStalkerRedirectDamageEffect extends RedirectionEffect {
         this.staticText = "All damage that would be dealt to you this turn by target attacking creature is dealt to {this} instead";
     }
 
-    public ShimianNightStalkerRedirectDamageEffect(final ShimianNightStalkerRedirectDamageEffect effect) {
+    private ShimianNightStalkerRedirectDamageEffect(final ShimianNightStalkerRedirectDamageEffect effect) {
         super(effect);
     }
 

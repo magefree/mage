@@ -60,7 +60,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
         staticText = "As long as Storage Matrix is untapped, each player chooses artifact, creature, or land during their untap step. That player can untap only permanents of the chosen type this step";
     }
 
-    public StorageMatrixRestrictionEffect(final StorageMatrixRestrictionEffect effect) {
+    private StorageMatrixRestrictionEffect(final StorageMatrixRestrictionEffect effect) {
         super(effect);
         this.type = effect.type;
         this.turn = effect.turn;

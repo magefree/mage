@@ -25,7 +25,7 @@ public final class JungleShrine extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public JungleShrine (final JungleShrine card) {
+    private JungleShrine(final JungleShrine card) {
         super(card);
     }
 

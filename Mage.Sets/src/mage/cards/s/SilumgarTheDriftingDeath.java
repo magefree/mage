@@ -71,7 +71,7 @@ class UnboostCreaturesTargetPlayerEffect extends ContinuousEffectImpl {
         staticText = "creatures defending player controls get -1/-1 until end of turn";
     }
 
-    public UnboostCreaturesTargetPlayerEffect(final UnboostCreaturesTargetPlayerEffect effect) {
+    private UnboostCreaturesTargetPlayerEffect(final UnboostCreaturesTargetPlayerEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

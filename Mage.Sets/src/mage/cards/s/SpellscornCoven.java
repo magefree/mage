@@ -20,7 +20,7 @@ import java.util.UUID;
 public final class SpellscornCoven extends AdventureCard {
 
     public SpellscornCoven(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{3}{B}", "Take it Back", "{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new CardType[]{CardType.INSTANT}, "{3}{B}", "Take It Back", "{2}{U}");
 
         this.subtype.add(SubType.FAERIE);
         this.subtype.add(SubType.WARLOCK);

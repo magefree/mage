@@ -87,7 +87,7 @@ class TheScarabGodEffect extends OneShotEffect {
         staticText = "each opponent loses X life and you scry X, where X is the number of Zombies you control";
     }
 
-    public TheScarabGodEffect(final TheScarabGodEffect effect) {
+    private TheScarabGodEffect(final TheScarabGodEffect effect) {
         super(effect);
         this.numOfZombies = effect.numOfZombies;
     }
@@ -125,7 +125,7 @@ class TheScarabGodEffect2 extends OneShotEffect {
         this.staticText = "Exile target creature card from a graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie.";
     }
 
-    public TheScarabGodEffect2(final TheScarabGodEffect2 effect) {
+    private TheScarabGodEffect2(final TheScarabGodEffect2 effect) {
         super(effect);
     }
 

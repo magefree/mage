@@ -119,7 +119,7 @@ class NimDeathmantleEffect extends OneShotEffect {
 
     }
 
-    public NimDeathmantleEffect(NimDeathmantleEffect effect) {
+    private NimDeathmantleEffect(final NimDeathmantleEffect effect) {
         super(effect);
     }
 

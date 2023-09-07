@@ -58,7 +58,7 @@ class PlayerSacrificesPermanentTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player sacrifices another permanent, ");
     }
 
-    public PlayerSacrificesPermanentTriggeredAbility(final PlayerSacrificesPermanentTriggeredAbility ability) {
+    private PlayerSacrificesPermanentTriggeredAbility(final PlayerSacrificesPermanentTriggeredAbility ability) {
         super(ability);
     }
 

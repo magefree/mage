@@ -27,7 +27,7 @@ public final class LostLeonin extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public LostLeonin (final LostLeonin card) {
+    private LostLeonin(final LostLeonin card) {
         super(card);
     }
 

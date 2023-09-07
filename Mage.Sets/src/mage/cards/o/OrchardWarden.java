@@ -56,7 +56,7 @@ class OrchardWardenffect extends OneShotEffect {
         this.staticText = "you may gain life equal to that creature's toughness";
     }
     
-    public OrchardWardenffect(final OrchardWardenffect effect) {
+    private OrchardWardenffect(final OrchardWardenffect effect) {
         super(effect);
     }
     

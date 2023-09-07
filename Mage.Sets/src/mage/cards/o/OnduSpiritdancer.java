@@ -30,7 +30,7 @@ public final class OnduSpiritdancer extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new CreateTokenCopyTargetEffect().setText("create a token that's a copy of it"),
                 StaticFilters.FILTER_PERMANENT_ENCHANTMENT, true, SetTargetPointer.PERMANENT, null
-        ).setDoOnlyOnceEachTurn(true));
+        ).setDoOnlyOnceEachTurn(true).setTriggerPhrase("Whenever an enchantment enters the battlefield under your control, "));
     }
 
     private OnduSpiritdancer(final OnduSpiritdancer card) {

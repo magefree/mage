@@ -182,7 +182,7 @@ class ZevlorElturelExileEffect extends CopySpellForEachItCouldTargetEffect {
                 FilterPermanent filter = new FilterPermanent("Permanent to target");
                 filter.add(Predicates.or(targetAb.stream().map(PermanentIdPredicate::new).collect(Collectors.toSet())));
                 TargetPermanent target = new TargetPermanent(filter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 player.choose(outcome, target, source, game);
                 predicates.add(new MageObjectReferencePredicate(target.getFirstTarget(), game));
             }

@@ -53,7 +53,7 @@ class KasetoEffect extends OneShotEffect {
         staticText = "Target creature can't be blocked this turn. If that creature is a Snake, it gets +2/+2 until end of turn";
     }
 
-    public KasetoEffect(final KasetoEffect effect) {
+    private KasetoEffect(final KasetoEffect effect) {
         super(effect);
     }
 

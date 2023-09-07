@@ -59,7 +59,7 @@ class PathwayArrowsEffect extends OneShotEffect {
         this.staticText = "This creature deals 1 damage to target creature. If a colorless creature is dealt damage this way, tap it";
     }
 
-    public PathwayArrowsEffect(final PathwayArrowsEffect effect) {
+    private PathwayArrowsEffect(final PathwayArrowsEffect effect) {
         super(effect);
     }
 

@@ -92,7 +92,7 @@ class TidalInfluenceTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("Whenever there are four tide counters on {this}, ");
     }
 
-    public TidalInfluenceTriggeredAbility(final TidalInfluenceTriggeredAbility ability) {
+    private TidalInfluenceTriggeredAbility(final TidalInfluenceTriggeredAbility ability) {
         super(ability);
     }
 

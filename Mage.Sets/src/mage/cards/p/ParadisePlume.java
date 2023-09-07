@@ -58,7 +58,7 @@ class ParadisePlumeSpellCastTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player casts a spell of the chosen color, ");
     }
 
-    public ParadisePlumeSpellCastTriggeredAbility(final ParadisePlumeSpellCastTriggeredAbility ability) {
+    private ParadisePlumeSpellCastTriggeredAbility(final ParadisePlumeSpellCastTriggeredAbility ability) {
         super(ability);
     }
 

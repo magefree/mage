@@ -47,7 +47,7 @@ class TheFallenEffect extends OneShotEffect {
         this.staticText = "{this} deals 1 damage to each opponent or planeswalker it has dealt damage to this game";
     }
 
-    public TheFallenEffect(final TheFallenEffect effect) {
+    private TheFallenEffect(final TheFallenEffect effect) {
         super(effect);
     }
 

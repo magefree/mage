@@ -74,7 +74,7 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
         staticText = "The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead";
     }
 
-    public ShiningShoalRedirectDamageTargetEffect(final ShiningShoalRedirectDamageTargetEffect effect) {
+    private ShiningShoalRedirectDamageTargetEffect(final ShiningShoalRedirectDamageTargetEffect effect) {
         super(effect);
         this.dynamicAmount = effect.dynamicAmount;
     }

@@ -75,7 +75,7 @@ class RowanKenrithAttackEffect extends RequirementEffect {
         staticText = "During target player's next turn, each creature that player controls attacks if able";
     }
 
-    public RowanKenrithAttackEffect(final RowanKenrithAttackEffect effect) {
+    private RowanKenrithAttackEffect(final RowanKenrithAttackEffect effect) {
         super(effect);
     }
 

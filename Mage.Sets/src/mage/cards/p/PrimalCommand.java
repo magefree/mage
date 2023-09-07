@@ -76,7 +76,7 @@ class PrimalCommandShuffleGraveyardEffect extends OneShotEffect {
         this.staticText = "target player shuffles their graveyard into their library";
     }
 
-    public PrimalCommandShuffleGraveyardEffect(final PrimalCommandShuffleGraveyardEffect effect) {
+    private PrimalCommandShuffleGraveyardEffect(final PrimalCommandShuffleGraveyardEffect effect) {
         super(effect);
     }
 

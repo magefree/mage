@@ -68,7 +68,7 @@ class MarshlandBloodcasterEffect extends ContinuousEffectImpl {
                 "you may pay life equal to that spell's mana value";
     }
 
-    public MarshlandBloodcasterEffect(final MarshlandBloodcasterEffect effect) {
+    private MarshlandBloodcasterEffect(final MarshlandBloodcasterEffect effect) {
         super(effect);
         this.spellsCast = effect.spellsCast;
     }

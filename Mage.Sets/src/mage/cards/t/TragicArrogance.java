@@ -52,7 +52,7 @@ class TragicArroganceffect extends OneShotEffect {
         this.staticText = "For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control";
     }
 
-    public TragicArroganceffect(final TragicArroganceffect effect) {
+    private TragicArroganceffect(final TragicArroganceffect effect) {
         super(effect);
     }
 

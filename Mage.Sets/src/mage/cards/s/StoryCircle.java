@@ -59,7 +59,7 @@ class StoryCircleEffect extends PreventNextDamageFromChosenSourceToYouEffect {
         super.init(source, game);
     }
 
-    public StoryCircleEffect(StoryCircleEffect effect) {
+    private StoryCircleEffect(final StoryCircleEffect effect) {
         super(effect);
     }
 

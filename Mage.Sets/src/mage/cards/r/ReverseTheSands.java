@@ -46,7 +46,7 @@ class ReverseTheSandsEffect extends OneShotEffect {
         this.staticText = "Redistribute any number of players' life totals";
     }
 
-    public ReverseTheSandsEffect(final ReverseTheSandsEffect effect) {
+    private ReverseTheSandsEffect(final ReverseTheSandsEffect effect) {
         super(effect);
     }
 

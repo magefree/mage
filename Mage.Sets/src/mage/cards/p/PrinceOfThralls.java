@@ -94,7 +94,7 @@ class PrinceOfThrallsEffect extends OneShotEffect {
         this.staticText = "put that card onto the battlefield under your control unless that opponent pays 3 life";
     }
 
-    public PrinceOfThrallsEffect(final PrinceOfThrallsEffect effect) {
+    private PrinceOfThrallsEffect(final PrinceOfThrallsEffect effect) {
         super(effect);
     }
 

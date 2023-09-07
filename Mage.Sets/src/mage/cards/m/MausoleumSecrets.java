@@ -51,7 +51,7 @@ class MausoleumSecretsEffect extends OneShotEffect {
                 + "reveal it, put it into your hand, then shuffle.";
     }
 
-    public MausoleumSecretsEffect(final MausoleumSecretsEffect effect) {
+    private MausoleumSecretsEffect(final MausoleumSecretsEffect effect) {
         super(effect);
     }
 

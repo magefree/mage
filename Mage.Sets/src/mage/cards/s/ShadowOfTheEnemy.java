@@ -105,7 +105,7 @@ class ShadowOfTheEnemyCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "You may cast spells from among them as long as they remain exiled";
     }
 
-    public ShadowOfTheEnemyCastFromExileEffect(final ShadowOfTheEnemyCastFromExileEffect effect) {
+    private ShadowOfTheEnemyCastFromExileEffect(final ShadowOfTheEnemyCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -148,7 +148,7 @@ class ShadowOfTheEnemySpendManaEffect extends AsThoughEffectImpl implements AsTh
         staticText = "and you may spend mana as though it were mana of any type to cast those spells";
     }
 
-    public ShadowOfTheEnemySpendManaEffect(final ShadowOfTheEnemySpendManaEffect effect) {
+    private ShadowOfTheEnemySpendManaEffect(final ShadowOfTheEnemySpendManaEffect effect) {
         super(effect);
     }
 

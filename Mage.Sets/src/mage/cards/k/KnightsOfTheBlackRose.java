@@ -60,7 +60,7 @@ class KnightsOfTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an opponent becomes the monarch, if you were the monarch as the turn began, ");
     }
 
-    public KnightsOfTheBlackRoseTriggeredAbility(final KnightsOfTheBlackRoseTriggeredAbility ability) {
+    private KnightsOfTheBlackRoseTriggeredAbility(final KnightsOfTheBlackRoseTriggeredAbility ability) {
         super(ability);
     }
 

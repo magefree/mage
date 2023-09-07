@@ -87,7 +87,7 @@ class TravelThroughCaradhrasEffect extends OneShotEffect {
         }
         if (minesOfMoria > 0) {
             TargetCard target = new TargetCardInYourGraveyard(Math.min(minesOfMoria, player.getGraveyard().size()));
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             player.choose(outcome, player.getGraveyard(), target, source, game);
             player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
         }

@@ -48,7 +48,7 @@ class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
         staticText = "Create an X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control";
     }
 
-    public KinTreeInvocationCreateTokenEffect(final KinTreeInvocationCreateTokenEffect effect) {
+    private KinTreeInvocationCreateTokenEffect(final KinTreeInvocationCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class SpiritWarriorToken extends TokenImpl {
         this.toughness = new MageInt(x);
     }
 
-    public SpiritWarriorToken(final SpiritWarriorToken token) {
+    private SpiritWarriorToken(final SpiritWarriorToken token) {
         super(token);
     }
 

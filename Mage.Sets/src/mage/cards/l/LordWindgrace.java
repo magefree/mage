@@ -85,7 +85,7 @@ class LordWindgraceEffect extends OneShotEffect {
                 + "If a land card is discarded this way, draw an additional card";
     }
 
-    public LordWindgraceEffect(final LordWindgraceEffect effect) {
+    private LordWindgraceEffect(final LordWindgraceEffect effect) {
         super(effect);
     }
 

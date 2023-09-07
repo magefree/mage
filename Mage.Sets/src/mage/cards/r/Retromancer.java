@@ -50,7 +50,7 @@ class RetromancerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public RetromancerTriggeredAbility(final RetromancerTriggeredAbility ability) {
+    private RetromancerTriggeredAbility(final RetromancerTriggeredAbility ability) {
         super(ability);
     }
 

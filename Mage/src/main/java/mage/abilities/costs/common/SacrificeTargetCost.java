@@ -30,7 +30,7 @@ public class SacrificeTargetCost extends CostImpl implements SacrificeCost {
 
     public SacrificeTargetCost(TargetControlledPermanent target) {
         this.addTarget(target);
-        target.setNotTarget(true); // sacrifice is never targeted
+        target.withNotTarget(true); // sacrifice is never targeted
         target.setRequired(false); // can be canceled
         this.text = "sacrifice " + makeText(target);
         target.setTargetName(target.getTargetName() + " (to sacrifice)");

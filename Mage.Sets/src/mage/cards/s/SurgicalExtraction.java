@@ -62,7 +62,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
                 + "with the same name as that card and exile them. Then that player shuffles";
     }
 
-    public SurgicalExtractionEffect(final SurgicalExtractionEffect effect) {
+    private SurgicalExtractionEffect(final SurgicalExtractionEffect effect) {
         super(effect);
     }
 
@@ -107,7 +107,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
                 // cards in Hand
                 filterNamedCard.setMessage("card named " + nameToSearch + " in the hand of " + owner.getName());
                 TargetCard targetCardInHand = new TargetCard(0, Integer.MAX_VALUE, Zone.HAND, filterNamedCard);
-                targetCardInHand.setNotTarget(true);
+                targetCardInHand.withNotTarget(true);
                 if (controller.chooseTarget(Outcome.Exile, owner.getHand(), targetCardInHand, source, game)) {
                     List<UUID> targets = targetCardInHand.getTargets();
                     for (UUID targetId : targets) {

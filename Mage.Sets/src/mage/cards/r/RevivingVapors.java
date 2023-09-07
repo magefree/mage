@@ -43,7 +43,7 @@ class RevivingVaporsEffect extends OneShotEffect {
         staticText = "Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's mana value. Put all other cards revealed this way into your graveyard";
     }
 
-    public RevivingVaporsEffect(final RevivingVaporsEffect effect) {
+    private RevivingVaporsEffect(final RevivingVaporsEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class RevivingVaporsEffect extends OneShotEffect {
                 card = cards.getRandom(game);
             } else {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 target.setRequired(true);
                 if (controller.choose(Outcome.DrawCard, cards, target, source, game)) {
                     card = cards.get(target.getFirstTarget(), game);

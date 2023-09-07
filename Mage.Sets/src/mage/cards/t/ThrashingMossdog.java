@@ -35,7 +35,7 @@ public final class ThrashingMossdog extends CardImpl {
 
     }
 
-    public ThrashingMossdog (final ThrashingMossdog card) {
+    private ThrashingMossdog(final ThrashingMossdog card) {
         super(card);
     }
 

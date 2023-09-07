@@ -81,7 +81,7 @@ class RegnasSanctionEffect extends OneShotEffect {
         FilterPermanent filterToTap = new FilterCreaturePermanent();
         for (Player player : choice.getFoes()) {
             TargetPermanent target = new TargetPermanent(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (game.getBattlefield().contains(filter, source, game, 1)
                     && player.choose(Outcome.Benefit, target, source, game)) {
                 filterToTap.add(Predicates.not(new PermanentIdPredicate(target.getFirstTarget())));

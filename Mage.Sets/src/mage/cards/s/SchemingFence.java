@@ -65,7 +65,7 @@ class SchemingFenceChooseEffect extends OneShotEffect {
         this.staticText = "you may choose a nonland permanent";
     }
 
-    public SchemingFenceChooseEffect(final SchemingFenceChooseEffect effect) {
+    private SchemingFenceChooseEffect(final SchemingFenceChooseEffect effect) {
         super(effect);
     }
 
@@ -109,7 +109,7 @@ class SchemingFenceDisableEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "activated abilities of the chosen permanent can't be activated";
     }
 
-    public SchemingFenceDisableEffect(final SchemingFenceDisableEffect effect) {
+    private SchemingFenceDisableEffect(final SchemingFenceDisableEffect effect) {
         super(effect);
     }
 

@@ -59,7 +59,7 @@ class SleeperAgentChangeControlEffect extends ContinuousEffectImpl {
         staticText = "target opponent gains control of {this}";
     }
 
-    public SleeperAgentChangeControlEffect(final SleeperAgentChangeControlEffect effect) {
+    private SleeperAgentChangeControlEffect(final SleeperAgentChangeControlEffect effect) {
         super(effect);
     }
 

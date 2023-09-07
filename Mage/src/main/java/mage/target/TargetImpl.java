@@ -546,8 +546,9 @@ public abstract class TargetImpl implements Target {
     }
 
     @Override
-    public void setNotTarget(boolean notTarget) {
+    public TargetImpl withNotTarget(boolean notTarget) {
         this.notTarget = notTarget;
+        return this;
     }
 
     @Override

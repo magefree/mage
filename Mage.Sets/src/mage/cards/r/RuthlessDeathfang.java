@@ -56,7 +56,7 @@ class RuthlessDeathfangTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you sacrifice a creature, ");
     }
 
-    public RuthlessDeathfangTriggeredAbility(final RuthlessDeathfangTriggeredAbility ability) {
+    private RuthlessDeathfangTriggeredAbility(final RuthlessDeathfangTriggeredAbility ability) {
         super(ability);
     }
 

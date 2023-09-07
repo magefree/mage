@@ -52,7 +52,7 @@ class RancidEarthEffect extends OneShotEffect {
         this.staticText = "destroy that land and Rancid Earth deals 1 damage to each creature and each player";
     }
 
-    public RancidEarthEffect(final RancidEarthEffect effect) {
+    private RancidEarthEffect(final RancidEarthEffect effect) {
         super(effect);
     }
 

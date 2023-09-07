@@ -49,7 +49,7 @@ class TerminusEffect extends OneShotEffect {
         this.staticText = "Put all creatures on the bottom of their owners' libraries";
     }
 
-    public TerminusEffect(final TerminusEffect effect) {
+    private TerminusEffect(final TerminusEffect effect) {
         super(effect);
     }
 

@@ -30,6 +30,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Aura Gnarlid", 120, Rarity.COMMON, mage.cards.a.AuraGnarlid.class));
         cards.add(new SetCardInfo("Austere Command", 62, Rarity.RARE, mage.cards.a.AustereCommand.class));
         cards.add(new SetCardInfo("Bear Umbra", 121, Rarity.RARE, mage.cards.b.BearUmbra.class));
+        cards.add(new SetCardInfo("Blightwing Bandit", 13, Rarity.RARE, mage.cards.b.BlightwingBandit.class));
         cards.add(new SetCardInfo("Bojuka Bog", 152, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Brazen Borrower", 85, Rarity.MYTHIC, mage.cards.b.BrazenBorrower.class));
         cards.add(new SetCardInfo("Brenard, Ginger Sculptor", 27, Rarity.MYTHIC, mage.cards.b.BrenardGingerSculptor.class));
@@ -42,6 +43,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 156, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Consider", 87, Rarity.COMMON, mage.cards.c.Consider.class));
         cards.add(new SetCardInfo("Court of Ardenvale", 21, Rarity.RARE, mage.cards.c.CourtOfArdenvale.class));
+        cards.add(new SetCardInfo("Court of Vantress", 22, Rarity.RARE, mage.cards.c.CourtOfVantress.class));
         cards.add(new SetCardInfo("Danitha Capashen, Paragon", 64, Rarity.UNCOMMON, mage.cards.d.DanithaCapashenParagon.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 157, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Daybreak Coronet", 65, Rarity.RARE, mage.cards.d.DaybreakCoronet.class));
@@ -80,6 +82,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kindred Dominance", 113, Rarity.RARE, mage.cards.k.KindredDominance.class));
         cards.add(new SetCardInfo("Knickknack Ouphe", 18, Rarity.RARE, mage.cards.k.KnickknackOuphe.class));
         cards.add(new SetCardInfo("Kor Spiritdancer", 69, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
+        cards.add(new SetCardInfo("Korvold, Gleeful Glutton", 26, Rarity.MYTHIC, mage.cards.k.KorvoldGleefulGlutton.class));
         cards.add(new SetCardInfo("Krosan Verge", 163, Rarity.UNCOMMON, mage.cards.k.KrosanVerge.class));
         cards.add(new SetCardInfo("Loamcrafter Faun", 19, Rarity.RARE, mage.cards.l.LoamcrafterFaun.class));
         cards.add(new SetCardInfo("Malleable Impostor", 10, Rarity.RARE, mage.cards.m.MalleableImpostor.class));
@@ -88,6 +91,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Stone", 148, Rarity.COMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Misleading Signpost", 11, Rarity.RARE, mage.cards.m.MisleadingSignpost.class));
         cards.add(new SetCardInfo("Myriad Landscape", 164, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
+        cards.add(new SetCardInfo("Nettling Nuisance", 15, Rarity.RARE, mage.cards.n.NettlingNuisance.class));
         cards.add(new SetCardInfo("Nightmare Unmaking", 114, Rarity.RARE, mage.cards.n.NightmareUnmaking.class));
         cards.add(new SetCardInfo("Nightveil Sprite", 100, Rarity.UNCOMMON, mage.cards.n.NightveilSprite.class));
         cards.add(new SetCardInfo("Nymris, Oona's Trickster", 141, Rarity.RARE, mage.cards.n.NymrisOonasTrickster.class));
@@ -120,6 +124,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Snake Umbra", 133, Rarity.UNCOMMON, mage.cards.s.SnakeUmbra.class));
         cards.add(new SetCardInfo("Snap", 110, Rarity.COMMON, mage.cards.s.Snap.class));
         cards.add(new SetCardInfo("Sol Ring", 149, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Songbirds' Blessing", 7, Rarity.RARE, mage.cards.s.SongbirdsBlessing.class));
         cards.add(new SetCardInfo("Sower of Temptation", 111, Rarity.RARE, mage.cards.s.SowerOfTemptation.class));
         cards.add(new SetCardInfo("Spectral Steel", 75, Rarity.UNCOMMON, mage.cards.s.SpectralSteel.class));
         cards.add(new SetCardInfo("Starfield Mystic", 76, Rarity.RARE, mage.cards.s.StarfieldMystic.class));

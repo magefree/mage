@@ -60,7 +60,7 @@ class PutridWarriorDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} deals damage, " );
     }
 
-    public PutridWarriorDealsDamageTriggeredAbility(final PutridWarriorDealsDamageTriggeredAbility ability) {
+    private PutridWarriorDealsDamageTriggeredAbility(final PutridWarriorDealsDamageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -89,7 +89,7 @@ class PutridWarriorGainLifeEffect extends OneShotEffect {
         staticText = "Each player gains 1 life.";
     }
 
-    public PutridWarriorGainLifeEffect(final PutridWarriorGainLifeEffect effect) {
+    private PutridWarriorGainLifeEffect(final PutridWarriorGainLifeEffect effect) {
         super(effect);
     }
 

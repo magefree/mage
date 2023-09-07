@@ -50,7 +50,7 @@ class MutavaultToken extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
-    public MutavaultToken(final MutavaultToken token) {
+    private MutavaultToken(final MutavaultToken token) {
         super(token);
     }
 

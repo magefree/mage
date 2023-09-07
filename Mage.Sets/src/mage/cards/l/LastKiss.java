@@ -24,7 +24,7 @@ public final class LastKiss extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public LastKiss (final LastKiss card) {
+    private LastKiss(final LastKiss card) {
         super(card);
     }
 

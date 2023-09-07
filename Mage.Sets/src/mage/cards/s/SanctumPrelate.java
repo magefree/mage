@@ -54,7 +54,7 @@ class ChooseNumberEffect extends OneShotEffect {
         staticText = "choose a number";
     }
 
-    public ChooseNumberEffect(final ChooseNumberEffect effect) {
+    private ChooseNumberEffect(final ChooseNumberEffect effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class SanctumPrelateReplacementEffect extends ContinuousRuleModifyingEffectImpl 
         staticText = "Noncreature spells with mana value equal to the chosen number can't be cast";
     }
 
-    public SanctumPrelateReplacementEffect(final SanctumPrelateReplacementEffect effect) {
+    private SanctumPrelateReplacementEffect(final SanctumPrelateReplacementEffect effect) {
         super(effect);
     }
 

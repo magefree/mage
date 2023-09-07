@@ -55,7 +55,7 @@ class SavageVentmawManaEffect extends ManaEffect {
         this.staticText = "add " + mana.toString() + ". Until end of turn, you don't lose this mana as steps and phases end";
     }
 
-    public SavageVentmawManaEffect(final SavageVentmawManaEffect effect) {
+    private SavageVentmawManaEffect(final SavageVentmawManaEffect effect) {
         super(effect);
         this.mana = effect.mana.copy();
         this.staticText = effect.staticText;

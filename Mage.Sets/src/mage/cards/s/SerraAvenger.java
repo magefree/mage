@@ -61,7 +61,7 @@ class CantCastSerraAvengerEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "You can't cast this spell during your first, second, or third turns of the game";
     }
 
-    public CantCastSerraAvengerEffect(final CantCastSerraAvengerEffect effect) {
+    private CantCastSerraAvengerEffect(final CantCastSerraAvengerEffect effect) {
         super(effect);
     }
 

@@ -51,7 +51,7 @@ class TwistAllegianceEffect extends OneShotEffect {
         this.staticText = "You and target opponent each gain control of all creatures the other controls until end of turn. Untap those creatures. Those creatures gain haste until end of turn";
     }
 
-    public TwistAllegianceEffect(final TwistAllegianceEffect effect) {
+    private TwistAllegianceEffect(final TwistAllegianceEffect effect) {
         super(effect);
     }
 

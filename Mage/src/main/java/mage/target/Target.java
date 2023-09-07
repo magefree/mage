@@ -28,12 +28,17 @@ public interface Target extends Serializable {
     boolean isNotTarget();
 
     /**
-     * controls if it will be checked, if the target can be targeted from source
+     * Mark it as non target (e.g. card's rules do not contain a "target" word)
+     * <p>
+     * Non targeted abilities are unaffected by protection/hexproof and other target related effects
+     * Non targeted spells can't be fizzled on resolve with invalid targets
+     * Non targeted spells chooses targets on resolve, targeted spells chooses targets on activate
+     * All costs must be non targeted
      *
-     * @param notTarget true = do not check for protection, false = check for
-     *                  protection
+     * @param notTarget
+     * @return
      */
-    void setNotTarget(boolean notTarget);
+    Target withNotTarget(boolean notTarget);
 
     // methods for targets
     boolean canChoose(UUID sourceControllerId, Ability source, Game game);
@@ -180,7 +185,6 @@ public interface Target extends Serializable {
      * It will auto-choosen if all of the following criteria are met:
      * - The minimum and maximum number of targets is the same (i.e. effect does not have "up to" in its name)
      * - The number of valid targets is equal to the number of targets still left to be specified
-     *
      *
      * @param abilityControllerId
      * @param source

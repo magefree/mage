@@ -57,7 +57,7 @@ class LightwielderPaladinTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ExileTargetEffect(), true);
     }
 
-    public LightwielderPaladinTriggeredAbility(final LightwielderPaladinTriggeredAbility ability) {
+    private LightwielderPaladinTriggeredAbility(final LightwielderPaladinTriggeredAbility ability) {
         super(ability);
     }
 

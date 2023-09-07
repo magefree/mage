@@ -71,7 +71,7 @@ class LivingInfernoEffect extends OneShotEffect {
                 "Each of those creatures deals damage equal to its power to {this}";
     }
 
-    public LivingInfernoEffect(final LivingInfernoEffect effect) {
+    private LivingInfernoEffect(final LivingInfernoEffect effect) {
         super(effect);
     }
 

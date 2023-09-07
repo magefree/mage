@@ -46,7 +46,7 @@ class SkipNextUntapStepSourceControllerEffect extends OneShotEffect {
         this.staticText = "Skip the untap step of that turn";
     }
 
-    public SkipNextUntapStepSourceControllerEffect(SkipNextUntapStepSourceControllerEffect effect) {
+    private SkipNextUntapStepSourceControllerEffect(final SkipNextUntapStepSourceControllerEffect effect) {
         super(effect);
     }
 

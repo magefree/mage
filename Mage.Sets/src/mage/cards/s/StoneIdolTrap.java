@@ -91,7 +91,7 @@ class StoneIdolTrapEffect extends OneShotEffect {
         this.staticText = "Create a 6/12 colorless Construct artifact creature token with trample. Exile it at the beginning of your next end step";
     }
 
-    public StoneIdolTrapEffect(final StoneIdolTrapEffect effect) {
+    private StoneIdolTrapEffect(final StoneIdolTrapEffect effect) {
         super(effect);
     }
 

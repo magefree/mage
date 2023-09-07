@@ -56,7 +56,7 @@ class ShimmeringGlasskiteAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CounterTargetEffect(), false);
     }
 
-    public ShimmeringGlasskiteAbility(final ShimmeringGlasskiteAbility ability) {
+    private ShimmeringGlasskiteAbility(final ShimmeringGlasskiteAbility ability) {
         super(ability);
         turnUsed = ability.turnUsed;
     }

@@ -30,7 +30,7 @@ public final class SewnEyeDrake extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public SewnEyeDrake (final SewnEyeDrake card) {
+    private SewnEyeDrake(final SewnEyeDrake card) {
         super(card);
     }
 

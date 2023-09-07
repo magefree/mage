@@ -89,7 +89,7 @@ class CrownOfTheAgesEffect extends OneShotEffect {
         filterChoice.add(Predicates.not(new PermanentIdPredicate(fromPermanent.getId())));
 
         Target chosenCreatureToAttachAura = new TargetPermanent(filterChoice);
-        chosenCreatureToAttachAura.setNotTarget(true);
+        chosenCreatureToAttachAura.withNotTarget(true);
 
         if (chosenCreatureToAttachAura.canChoose(source.getControllerId(), source, game)
                 && controller.choose(Outcome.Neutral, chosenCreatureToAttachAura, source, game)) {

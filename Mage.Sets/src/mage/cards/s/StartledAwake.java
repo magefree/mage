@@ -57,7 +57,7 @@ class StartledAwakeReturnTransformedEffect extends OneShotEffect {
         this.staticText = "Put {this} from your graveyard onto the battlefield transformed";
     }
 
-    public StartledAwakeReturnTransformedEffect(final StartledAwakeReturnTransformedEffect effect) {
+    private StartledAwakeReturnTransformedEffect(final StartledAwakeReturnTransformedEffect effect) {
         super(effect);
     }
 

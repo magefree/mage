@@ -77,7 +77,7 @@ class NissaStewardOfElementsEffect extends OneShotEffect {
                 + "to the number of loyalty counters on {this}, you may put that card onto the battlefield";
     }
 
-    public NissaStewardOfElementsEffect(final NissaStewardOfElementsEffect effect) {
+    private NissaStewardOfElementsEffect(final NissaStewardOfElementsEffect effect) {
         super(effect);
     }
 
@@ -122,7 +122,7 @@ class NissaStewardOfElementsToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public NissaStewardOfElementsToken(final NissaStewardOfElementsToken token) {
+    private NissaStewardOfElementsToken(final NissaStewardOfElementsToken token) {
         super(token);
     }
 

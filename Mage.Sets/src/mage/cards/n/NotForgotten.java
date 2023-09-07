@@ -48,7 +48,7 @@ class NotForgottenEffect extends OneShotEffect {
         this.staticText = "Put target card from a graveyard on the top or bottom of its owner's library. Create a 1/1 white Spirit creature token with flying.";
     }
     
-    public NotForgottenEffect(final NotForgottenEffect effect) {
+    private NotForgottenEffect(final NotForgottenEffect effect) {
         super(effect);
     }
     

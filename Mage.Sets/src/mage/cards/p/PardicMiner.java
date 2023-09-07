@@ -55,7 +55,7 @@ class PardicMinerEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Target player can't play lands this turn.";
     }
 
-    public PardicMinerEffect(final PardicMinerEffect effect) {
+    private PardicMinerEffect(final PardicMinerEffect effect) {
         super(effect);
     }
 

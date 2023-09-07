@@ -71,7 +71,7 @@ class KrovikanElementalistEffect extends OneShotEffect {
         this.staticText = "Sacrifice it at the beginning of the next end step";
     }
 
-    public KrovikanElementalistEffect(final KrovikanElementalistEffect effect) {
+    private KrovikanElementalistEffect(final KrovikanElementalistEffect effect) {
         super(effect);
     }
 
