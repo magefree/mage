@@ -1911,6 +1911,8 @@ public class VerifyCardDataTest {
             return;
         }
 
+        String refLowerText = ref.text.toLowerCase(Locale.ENGLISH);
+
         // special check: kicker ability must be in rules
         if (card.getAbilities().containsClass(MultikickerAbility.class) && card.getRules().stream().noneMatch(rule -> rule.contains("Multikicker"))) {
             fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
@@ -1979,19 +1981,70 @@ public class VerifyCardDataTest {
             }
         }
 
+        // special check: wrong targeted ability
+        // possible fixes:
+        //  * on "must set withNotTarget(true)":
+        //    - check card's ability constructors and fix missing withNotTarget(true) param/field
+        //    - it's can be a keyword action (only mtg rules contains a target word), so add it to the targetedKeywords
+        // * on "must be targeted":
+        //    - TODO: enable and research checkMissTargeted - too much errors with it (is it possible to use that checks?)
+        boolean checkMissNonTargeted = true; // must set withNotTarget(true)
+        boolean checkMissTargeted = false; // must be targeted
+        List<String> targetedKeywords = Arrays.asList(
+                "target",
+                "enchant",
+                "equip",
+                "backup",
+                "modular",
+                "partner"
+        );
+        // card can contain rules text from both sides, so must search ref card for all sides too
+        String additionalName;
+        if (card instanceof AdventureCard) {
+            additionalName = ((AdventureCard) card).getSpellCard().getName();
+        } else if (card.isTransformable() && !card.isNightCard()) {
+            additionalName = card.getSecondCardFace().getName();
+        } else {
+            additionalName = null;
+        }
+        if (additionalName != null) {
+            MtgJsonCard additionalRef = MtgJsonService.cardFromSet(card.getExpansionSetCode(), additionalName, card.getCardNumber());
+            if (additionalRef == null) {
+                // how-to fix: add new card type processing for an additionalName searching above
+                fail(card, "abilities", "can't find second side info for target check");
+            } else {
+                if (additionalRef.text != null && !additionalRef.text.isEmpty()) {
+                    refLowerText += "\r\n" + additionalRef.text.toLowerCase(Locale.ENGLISH);
+                }
+            }
+        }
+        boolean needTargetedAbility = targetedKeywords.stream().anyMatch(refLowerText::contains);
+        boolean foundTargetedAbility = card.getAbilities()
+                .stream()
+                .map(Ability::getTargets)
+                .flatMap(Collection::stream)
+                .anyMatch(target -> !target.isNotTarget());
+        boolean foundProblem = needTargetedAbility != foundTargetedAbility;
+        if (checkMissTargeted && needTargetedAbility && foundProblem) {
+            fail(card, "abilities", "wrong target settings (must be targeted, but it not)");
+        }
+        if (checkMissNonTargeted && !needTargetedAbility && foundProblem) {
+            fail(card, "abilities", "wrong target settings (must set withNotTarget(true), but it not)");
+        }
+
         // special check: missing or wrong ability/effect hints
         Map<Class, String> hints = new HashMap<>();
-        hints.put(FightTargetsEffect.class, "Each deals damage equal to its power to the other");
+        hints.put(FightTargetsEffect.class, "each deals damage equal to its power to the other");
         hints.put(MenaceAbility.class, "can't be blocked except by two or more");
-        hints.put(ScryEffect.class, "Look at the top card of your library. You may put that card on the bottom of your library");
-        hints.put(EquipAbility.class, "Equip only as a sorcery.");
+        hints.put(ScryEffect.class, "look at the top card of your library. You may put that card on the bottom of your library");
+        hints.put(EquipAbility.class, "equip only as a sorcery.");
         hints.put(WardAbility.class, "becomes the target of a spell or ability an opponent controls");
-        hints.put(ProliferateEffect.class, "Choose any number of permanents and/or players, then give each another counter of each kind already there.");
+        hints.put(ProliferateEffect.class, "choose any number of permanents and/or players, then give each another counter of each kind already there.");
 
         for (Class objectClass : hints.keySet()) {
             String objectHint = hints.get(objectClass);
             // ability/effect must have description or not
-            boolean needHint = ref.text.contains(objectHint);
+            boolean needHint = refLowerText.contains(objectHint);
             boolean haveHint = card.getRules().stream().anyMatch(rule -> rule.contains(objectHint));
             if (needHint != haveHint) {
                 warn(card, "card have " + objectClass.getSimpleName() + " but hint is wrong (it must be " + (needHint ? "enabled" : "disabled") + ")");
@@ -2004,12 +2057,12 @@ public class VerifyCardDataTest {
         }
 
         // additional cost go to 1 ability
-        if (ref.text.startsWith("As an additional cost to cast")) {
+        if (refLowerText.startsWith("as an additional cost to cast")) {
             return;
         }
 
-        // always 1 ability (to cast)
-        if (card.getAbilities().toArray().length == 1) { // all cards have 1 inner ability to cast
+        // must have 1+ abilities all the time (to cast)
+        if (card.getAbilities().toArray().length <= 1) { // all cards have 1 inner ability to cast
             fail(card, "abilities", "card's abilities is empty, but ref have text");
         }
     }
@@ -2171,9 +2224,9 @@ public class VerifyCardDataTest {
     private static boolean compareText(String cardText, String refText, String name) {
         return cardText.equals(refText)
                 || cardText.replace(name, name.split(", ")[0])
-                        .equals(refText.replace(name, name.split(", ")[0]))
+                .equals(refText.replace(name, name.split(", ")[0]))
                 || cardText.replace(name, name.split(" ")[0])
-                        .equals(refText.replace(name, name.split(" ")[0]));
+                .equals(refText.replace(name, name.split(" ")[0]));
     }
 
     private static boolean checkForEffect(Card card, Class<? extends Effect> effectClazz) {

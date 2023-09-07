@@ -25,7 +25,7 @@ public final class MtgJsonCard {
     public List<String> types;
     public List<String> subtypes;
 
-    public String text; // rules splits by \n
+    public String text; // rules splits by \n, can be null on empty abilities list
 
     public String loyalty;
     public String defense;
