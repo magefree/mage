@@ -87,6 +87,6 @@ class SavageFirecatTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you tap a land for mana, remove a +1/+1 counter from {this}";
+        return "Whenever you tap a land for mana, remove a +1/+1 counter from {this}.";
     }
 }

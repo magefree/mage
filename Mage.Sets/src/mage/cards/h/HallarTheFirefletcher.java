@@ -50,9 +50,9 @@ public final class HallarTheFirefletcher extends CardImpl {
 class HallarTheFirefletcherTriggeredAbility extends TriggeredAbilityImpl {
 
     HallarTheFirefletcherTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on {this}"), true);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on {this}"), false);
         this.addEffect(new DamagePlayersEffect(Outcome.Benefit, new CountersSourceCount(CounterType.P1P1), TargetController.OPPONENT)
-                .setText("then {this} deals damage equal to the number of +1/+1 counters on it to each opponent")
+                .setText(", then {this} deals damage equal to the number of +1/+1 counters on it to each opponent")
         );
         setTriggerPhrase("Whenever you cast a spell, if that spell was kicked, ");
     }

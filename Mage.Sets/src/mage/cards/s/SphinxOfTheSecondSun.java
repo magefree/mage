@@ -50,7 +50,7 @@ class SphinxOfTheSecondSunEffect extends OneShotEffect {
 
     SphinxOfTheSecondSunEffect() {
         super(Outcome.Benefit);
-        staticText = "you get an additional beginning phase after this phase. <i>(The beginning phase includes the untap, upkeep, and draw steps.)</i>";
+        staticText = "there is an additional beginning phase after this phase. <i>(The beginning phase includes the untap, upkeep, and draw steps.)</i>";
     }
 
     private SphinxOfTheSecondSunEffect(final SphinxOfTheSecondSunEffect effect) {

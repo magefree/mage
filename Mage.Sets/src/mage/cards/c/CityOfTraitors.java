@@ -72,6 +72,6 @@ class CityOfTraitorsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When you play another land, sacrifice {this}";
+        return "When you play another land, sacrifice {this}.";
     }
 }
