@@ -115,7 +115,7 @@ class LensOfClarityLookFaceDownAbility extends ActivatedAbilityImpl {
     public LensOfClarityLookFaceDownAbility() {
         super(Zone.BATTLEFIELD, new LensOfClarityLookFaceDownEffect(), new GenericManaCost(0));
         this.usesStack = false;
-        this.addTarget(new TargetCreaturePermanent(filter));
+        this.addTarget(new TargetCreaturePermanent(filter).withNotTarget(true));
     }
 
     private LensOfClarityLookFaceDownAbility(final LensOfClarityLookFaceDownAbility ability) {

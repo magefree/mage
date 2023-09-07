@@ -59,7 +59,7 @@ class KeeperOfTheLensLookFaceDownAbility extends ActivatedAbilityImpl {
     public KeeperOfTheLensLookFaceDownAbility() {
         super(Zone.BATTLEFIELD, new KeeperOfTheLensLookFaceDownEffect(), new GenericManaCost(0));
         this.usesStack = false;
-        this.addTarget(new TargetCreaturePermanent(filter));
+        this.addTarget(new TargetCreaturePermanent(filter).withNotTarget(true));
     }
 
     private KeeperOfTheLensLookFaceDownAbility(final KeeperOfTheLensLookFaceDownAbility ability) {
