@@ -133,6 +133,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sylvan Ranger", 134, Rarity.COMMON, mage.cards.s.SylvanRanger.class));
         cards.add(new SetCardInfo("Tainted Isle", 169, Rarity.UNCOMMON, mage.cards.t.TaintedIsle.class));
         cards.add(new SetCardInfo("Talisman of Dominance", 150, Rarity.UNCOMMON, mage.cards.t.TalismanOfDominance.class));
+        cards.add(new SetCardInfo("Tegwyll's Scouring", 16, Rarity.RARE, mage.cards.t.TegwyllsScouring.class));
         cards.add(new SetCardInfo("Tegwyll, Duke of Splendor", 1, Rarity.MYTHIC, mage.cards.t.TegwyllDukeOfSplendor.class));
         cards.add(new SetCardInfo("Temple of Deceit", 170, Rarity.RARE, mage.cards.t.TempleOfDeceit.class));
         cards.add(new SetCardInfo("Temple of Plenty", 171, Rarity.RARE, mage.cards.t.TempleOfPlenty.class));
