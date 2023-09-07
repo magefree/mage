@@ -122,7 +122,7 @@ class DynaheirInvokerAdeptTriggeredAbility extends DelayedTriggeredAbility {
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
         if (stackAbility == null
                 || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl
-                || ManaPaidSourceWatcher.getTotalPaid(stackAbility.getId(), game) >= 4) {
+                || ManaPaidSourceWatcher.getTotalPaid(stackAbility.getId(), game) < 4) {
             return false;
         }
         this.getEffects().setValue("stackObject", stackAbility);
