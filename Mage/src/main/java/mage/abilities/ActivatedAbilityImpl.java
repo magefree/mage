@@ -205,7 +205,13 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         //  game.inCheckPlayableState() can't be a help here cause some cards checking activating status,
         //  activatorId must be removed
         this.activatorId = playerId;
-        return ActivationStatus.getTrue(approvingObjects);
+
+        if (approvingObjects.isEmpty()) {
+            return ActivationStatus.withoutApprovingObject(true);
+        }
+        else {
+            return new ActivationStatus(approvingObjects);
+        }
     }
 
     @Override

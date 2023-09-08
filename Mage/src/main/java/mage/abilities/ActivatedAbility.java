@@ -7,27 +7,39 @@ import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.game.Game;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, Susucr
  */
 public interface ActivatedAbility extends Ability {
 
     final class ActivationStatus {
 
-        private final boolean canActivate;
         private final Set<ApprovingObject> approvingObjects;
 
-        private ActivationStatus(boolean canActivate, Set<ApprovingObject> approvingObjects) {
-            this.canActivate = canActivate;
-            this.approvingObjects = approvingObjects;
+        // If true, the Activation Status will not check if there is an approvingObject.
+        private final boolean forcedCanActivate;
+
+        public ActivationStatus(ApprovingObject approvingObject) {
+            this(new HashSet<>(Arrays.asList(approvingObject)));
+        }
+
+        public ActivationStatus(Set<ApprovingObject> approvingObjects) {
+            this(false, approvingObjects);
+        }
+
+        private ActivationStatus(boolean forcedCanActivate, Set<ApprovingObject> approvingObjects){
+            this.forcedCanActivate = forcedCanActivate;
+            this.approvingObjects = new HashSet<>();
+            this.approvingObjects.addAll(approvingObjects);
         }
 
         public boolean canActivate() {
-            return canActivate;
+            return forcedCanActivate || !approvingObjects.isEmpty();
         }
 
         public Set<ApprovingObject> getApprovingObjects() {
@@ -35,30 +47,11 @@ public interface ActivatedAbility extends Ability {
         }
 
         public static ActivationStatus getFalse() {
-            return new ActivationStatus(false, new HashSet<>());
+            return new ActivationStatus(new HashSet<>());
         }
 
-        /**
-         * @param approvingObjectAbility ability that allows to activate/use current ability
-         */
-        public static ActivationStatus getTrue(Ability approvingObjectAbility, Game game) {
-            Set<ApprovingObject> approvingObjects = new HashSet<>();
-            if(approvingObjects != null) {
-                approvingObjects.add(new ApprovingObject(approvingObjectAbility, game));
-            }
-            return new ActivationStatus(true, approvingObjects);
-        }
-
-        public static ActivationStatus getTrue(Set<ApprovingObject> approvingObjects) {
-            Set<ApprovingObject> newApprovingObjects = new HashSet<>();
-            if(approvingObjects != null) {
-                approvingObjects.addAll(newApprovingObjects);
-            }
-            return new ActivationStatus(true, approvingObjects);
-        }
-
-        public static ActivationStatus withoutApprovingObject(boolean status) {
-            return new ActivationStatus(status, new HashSet<>());
+        public static ActivationStatus withoutApprovingObject(boolean forcedCanActivate) {
+            return new ActivationStatus(forcedCanActivate, new HashSet<>());
         }
     }
 

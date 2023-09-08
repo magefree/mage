@@ -46,7 +46,12 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
             return ActivationStatus.getFalse();
         }
 
-        return ActivationStatus.getTrue(approvingObjects);
+        if(approvingObjects.isEmpty()) {
+            return ActivationStatus.withoutApprovingObject(true);
+        }
+        else {
+            return new ActivationStatus(approvingObjects);
+        }
     }
 
     @Override

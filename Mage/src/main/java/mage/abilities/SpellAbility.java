@@ -166,7 +166,12 @@ public class SpellAbility extends ActivatedAbilityImpl {
                     return ActivationStatus.getFalse();
                 } else {
                     if(canChooseTarget(game, playerId)) {
-                        return ActivationStatus.getTrue(approvingObjects);
+                        if(approvingObjects == null || approvingObjects.isEmpty()) {
+                            return ActivationStatus.withoutApprovingObject(true);
+                        }
+                        else {
+                            return new ActivationStatus(approvingObjects);
+                        }
                     }
                 }
             }
