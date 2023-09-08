@@ -58,7 +58,7 @@ public class ReselectDefenderTargetEffectTest extends CardTestCommander4Players 
         // Player A declares an attack against Player B
         attack(1, playerA, LION, playerB);
 
-        // Player B responds by casting Signpost, redirecting the attack to Player C's planeswalker
+        // Player B responds by casting Signpost, redirecting the attack to the battle Player C is protecting
         castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, SIGNPOST);
         setChoice(playerB, true);
         addTarget(playerB, LION);
