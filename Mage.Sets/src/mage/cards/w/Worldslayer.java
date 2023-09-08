@@ -54,7 +54,7 @@ class WorldslayerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new WorldslayerEffect(), false);
     }
 
-    WorldslayerTriggeredAbility(final WorldslayerTriggeredAbility ability) {
+    private WorldslayerTriggeredAbility(final WorldslayerTriggeredAbility ability) {
         super(ability);
     }
 

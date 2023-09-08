@@ -54,7 +54,7 @@ class RiptideManglerEffect extends OneShotEffect {
         this.staticText = "Change {this}'s base power to target creature's power. <i>(This effect lasts indefinitely.)</i>";
     }
 
-    RiptideManglerEffect(final RiptideManglerEffect effect) {
+    private RiptideManglerEffect(final RiptideManglerEffect effect) {
         super(effect);
     }
 

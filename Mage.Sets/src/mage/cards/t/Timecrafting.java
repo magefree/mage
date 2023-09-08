@@ -58,7 +58,7 @@ class TimecraftingRemoveEffect extends OneShotEffect {
         this.staticText = "Remove X time counters from target permanent or suspended card";
     }
 
-    TimecraftingRemoveEffect(final TimecraftingRemoveEffect effect) {
+    private TimecraftingRemoveEffect(final TimecraftingRemoveEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class TimecraftingAddEffect extends OneShotEffect {
         this.staticText = "Put X time counters on target permanent with a time counter on it or suspended card";
     }
 
-    TimecraftingAddEffect(final TimecraftingAddEffect effect) {
+    private TimecraftingAddEffect(final TimecraftingAddEffect effect) {
         super(effect);
     }
 

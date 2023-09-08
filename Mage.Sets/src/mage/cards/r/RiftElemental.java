@@ -68,7 +68,7 @@ class RiftElementalCost extends CostImpl {
         text = "Remove a time counter from a permanent you control or suspended card you own";
     }
 
-    RiftElementalCost(final RiftElementalCost cost) {
+    private RiftElementalCost(final RiftElementalCost cost) {
         super(cost);
     }
 

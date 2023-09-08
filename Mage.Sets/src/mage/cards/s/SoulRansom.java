@@ -71,7 +71,7 @@ class SoulRansomEffect extends OneShotEffect {
         this.staticText = "{this}'s controller sacrifices it, then draws two cards. Only any opponent may activate this ability";
     }
 
-    SoulRansomEffect(final SoulRansomEffect effect) {
+    private SoulRansomEffect(final SoulRansomEffect effect) {
         super(effect);
     }
 

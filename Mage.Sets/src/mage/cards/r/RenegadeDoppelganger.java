@@ -52,7 +52,7 @@ class RenegadeDoppelgangerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new RenegadeDoppelgangerEffect(), true);
     }
 
-    RenegadeDoppelgangerTriggeredAbility(final RenegadeDoppelgangerTriggeredAbility ability) {
+    private RenegadeDoppelgangerTriggeredAbility(final RenegadeDoppelgangerTriggeredAbility ability) {
         super(ability);
     }
 

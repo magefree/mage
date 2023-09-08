@@ -106,7 +106,7 @@ class VerdantSuccessionEffect extends OneShotEffect {
         super(Outcome.PutCardInPlay);
     }
 
-    VerdantSuccessionEffect(final VerdantSuccessionEffect effect) {
+    private VerdantSuccessionEffect(final VerdantSuccessionEffect effect) {
         super(effect);
     }
 

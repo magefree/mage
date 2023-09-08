@@ -144,7 +144,7 @@ class StormHeraldReplacementEffect extends ReplacementEffectImpl {
         staticText = "If those Auras would leave the battlefield, exile them instead of putting them anywhere else";
     }
 
-    StormHeraldReplacementEffect(final StormHeraldReplacementEffect effect) {
+    private StormHeraldReplacementEffect(final StormHeraldReplacementEffect effect) {
         super(effect);
     }
 

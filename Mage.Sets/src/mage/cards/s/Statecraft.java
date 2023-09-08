@@ -48,7 +48,7 @@ class StatecraftPreventionEffect extends PreventionEffectImpl {
         this.staticText = "Prevent all combat damage that would be dealt to and dealt by creatures you control";
     }
 
-    StatecraftPreventionEffect(final StatecraftPreventionEffect effect) {
+    private StatecraftPreventionEffect(final StatecraftPreventionEffect effect) {
         super(effect);
     }
 

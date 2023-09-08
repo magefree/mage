@@ -75,7 +75,7 @@ class TotalWarDestroyEffect extends OneShotEffect {
         this.staticText = "destroy all untapped non-Wall creatures that player controls that didn't attack, except for creatures the player hasn't controlled continuously since the beginning of the turn";
     }
 
-    TotalWarDestroyEffect(final TotalWarDestroyEffect effect) {
+    private TotalWarDestroyEffect(final TotalWarDestroyEffect effect) {
         super(effect);
     }
 

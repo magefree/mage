@@ -70,7 +70,7 @@ class DeadlyVanityEffect extends OneShotEffect {
         staticText = "choose a creature or planeswalker, then destroy all other creatures and planeswalkers";
     }
 
-    DeadlyVanityEffect(DeadlyVanityEffect effect) {
+    private DeadlyVanityEffect(final DeadlyVanityEffect effect) {
         super(effect);
     }
 

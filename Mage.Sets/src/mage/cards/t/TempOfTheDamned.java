@@ -81,7 +81,7 @@ class TempOfTheDamnedUpkeepEffect extends OneShotEffect {
         staticText = "remove a funk counter from {this}. If you can't, sacrifice it";
     }
 
-    TempOfTheDamnedUpkeepEffect(final TempOfTheDamnedUpkeepEffect effect) {
+    private TempOfTheDamnedUpkeepEffect(final TempOfTheDamnedUpkeepEffect effect) {
         super(effect);
     }
 

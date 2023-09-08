@@ -51,7 +51,7 @@ class ZoZuThePunisherAbility extends TriggeredAbilityImpl {
             super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }
 
-    ZoZuThePunisherAbility(final ZoZuThePunisherAbility ability) {
+    private ZoZuThePunisherAbility(final ZoZuThePunisherAbility ability) {
             super(ability);
     }
 

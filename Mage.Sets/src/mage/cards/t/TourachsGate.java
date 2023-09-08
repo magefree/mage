@@ -105,7 +105,7 @@ class TourachsGateUpkeepEffect extends OneShotEffect {
         staticText = "remove a time counter from {this}. If there are no time counters on {this}, sacrifice it";
     }
 
-    TourachsGateUpkeepEffect(final TourachsGateUpkeepEffect effect) {
+    private TourachsGateUpkeepEffect(final TourachsGateUpkeepEffect effect) {
         super(effect);
     }
 

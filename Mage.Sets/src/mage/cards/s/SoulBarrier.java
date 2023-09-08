@@ -48,7 +48,7 @@ class SoulBarrierEffect extends OneShotEffect {
         this.staticText = "{this} deals 2 damage to that player unless they pay {2}";
     }
 
-    SoulBarrierEffect(final SoulBarrierEffect effect) {
+    private SoulBarrierEffect(final SoulBarrierEffect effect) {
         super(effect);
     }
 

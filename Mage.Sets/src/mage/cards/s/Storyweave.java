@@ -75,7 +75,7 @@ class StoryweaveReplacementEffect extends ReplacementEffectImpl {
                 "under your control this turn, each enters with two additional +1/+1 counters on it";
     }
 
-    StoryweaveReplacementEffect(StoryweaveReplacementEffect effect) {
+    private StoryweaveReplacementEffect(final StoryweaveReplacementEffect effect) {
         super(effect);
         this.counter = effect.counter;
     }

@@ -59,7 +59,7 @@ class SuturePriestSecondTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), true);
     }
 
-    SuturePriestSecondTriggeredAbility(final SuturePriestSecondTriggeredAbility ability) {
+    private SuturePriestSecondTriggeredAbility(final SuturePriestSecondTriggeredAbility ability) {
         super(ability);
     }
 
