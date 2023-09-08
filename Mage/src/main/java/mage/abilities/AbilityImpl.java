@@ -79,7 +79,7 @@ public abstract class AbilityImpl implements Ability {
     protected List<Hint> hints = new ArrayList<>();
     protected List<CardIcon> icons = new ArrayList<>();
     protected Outcome customOutcome = null; // uses for AI decisions instead effects
-    protected MageIdentifier identifier; // used to identify specific ability (e.g. to match with corresponding watcher)
+    protected MageIdentifier identifier = MageIdentifier.Default; // used to identify specific ability (e.g. to match with corresponding watcher)
     protected String appendToRule = null;
     protected int sourcePermanentTransformCount = 0;
 

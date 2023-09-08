@@ -2,6 +2,7 @@ package mage.util;
 
 import com.google.common.collect.ImmutableList;
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
@@ -1389,8 +1390,8 @@ public final class CardUtil {
                 Costs<Cost> additionalCostsLeft = leftHalfCard.getSpellAbility().getCosts();
                 Costs<Cost> additionalCostsRight = rightHalfCard.getSpellAbility().getCosts();
                 // set alternative cost and any additional cost
-                player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsLeft, null);
-                player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsRight, null);
+                player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsLeft, MageIdentifier.Default);
+                player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsRight, MageIdentifier.Default);
             }
             // allow the card to be cast
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), Boolean.TRUE);
@@ -1407,13 +1408,13 @@ public final class CardUtil {
                     // get additional cost if any
                     Costs<Cost> additionalCostsMDFCLeft = leftHalfCard.getSpellAbility().getCosts();
                     // set alternative cost and any additional cost
-                    player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsMDFCLeft, null);
+                    player.setCastSourceIdWithAlternateMana(leftHalfCard.getId(), manaCost, additionalCostsMDFCLeft, MageIdentifier.Default);
                 }
                 if (!rightHalfCard.isLand(game)) {
                     // get additional cost if any
                     Costs<Cost> additionalCostsMDFCRight = rightHalfCard.getSpellAbility().getCosts();
                     // set alternative cost and any additional cost
-                    player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsMDFCRight, null);
+                    player.setCastSourceIdWithAlternateMana(rightHalfCard.getId(), manaCost, additionalCostsMDFCRight, MageIdentifier.Default);
                 }
             }
             // allow the card to be cast
@@ -1430,8 +1431,8 @@ public final class CardUtil {
                 Costs<Cost> additionalCostsCreature = creatureCard.getSpellAbility().getCosts();
                 Costs<Cost> additionalCostsSpellCard = spellCard.getSpellAbility().getCosts();
                 // set alternative cost and any additional cost
-                player.setCastSourceIdWithAlternateMana(creatureCard.getId(), manaCost, additionalCostsCreature, null);
-                player.setCastSourceIdWithAlternateMana(spellCard.getId(), manaCost, additionalCostsSpellCard, null);
+                player.setCastSourceIdWithAlternateMana(creatureCard.getId(), manaCost, additionalCostsCreature, MageIdentifier.Default);
+                player.setCastSourceIdWithAlternateMana(spellCard.getId(), manaCost, additionalCostsSpellCard, MageIdentifier.Default);
             }
             // allow the card to be cast
             game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), Boolean.TRUE);
@@ -1442,7 +1443,7 @@ public final class CardUtil {
         if (manaCost != null) {
             // get additional cost if any
             Costs<Cost> additionalCostsNormalCard = card.getSpellAbility().getCosts();
-            player.setCastSourceIdWithAlternateMana(card.getMainCard().getId(), manaCost, additionalCostsNormalCard, null);
+            player.setCastSourceIdWithAlternateMana(card.getMainCard().getId(), manaCost, additionalCostsNormalCard, MageIdentifier.Default);
         }
 
         // cast it

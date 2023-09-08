@@ -78,7 +78,7 @@ public abstract class AsThoughEffectImpl extends ContinuousEffectImpl implements
      * @return
      */
     protected boolean allowCardToPlayWithoutMana(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return allowCardToPlayWithoutMana(objectId, source, affectedControllerId, null, game);
+        return allowCardToPlayWithoutMana(objectId, source, affectedControllerId, MageIdentifier.Default, game);
     }
 
     protected boolean allowCardToPlayWithoutMana(UUID objectId, Ability source, UUID affectedControllerId, MageIdentifier identifier, Game game){

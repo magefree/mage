@@ -1052,7 +1052,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param costs     alternate other costs you need to pay
      */
     default void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs) {
-        setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs, null);
+        setCastSourceIdWithAlternateMana(sourceId, manaCosts, costs, MageIdentifier.Default);
     }
 
     /**
@@ -1064,7 +1064,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param manaCosts alternate ManaCost, null if it can be cast without mana
      *                  cost
      * @param costs     alternate other costs you need to pay
-     * @param identifier if non-null, only apply the alternate mana when ApprovingSource if of that kind.
+     * @param identifier if not using the MageIdentifier.Default, only apply the alternate mana when ApprovingSource if of that kind.
      */
     void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs, MageIdentifier identifier);
 

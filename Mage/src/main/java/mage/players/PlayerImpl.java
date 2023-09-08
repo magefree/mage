@@ -1109,6 +1109,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         castSourceIdCosts.computeIfAbsent(sourceId, k -> new HashMap<>());
         castSourceIdCosts.get(sourceId).put(identifier, costs != null ? costs.copy() : null);
+
+        if(identifier == null) {
+            boolean a = true;
+        }
     }
 
     @Override
@@ -1211,8 +1215,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                 // ALTERNATIVE COST from dynamic effects
                 // some effects set sourceId to cast without paying mana costs or other costs
-                MageIdentifier identifier = approvingObject == null ? null : approvingObject.getApprovingAbility().getIdentifier();
-                if (identifier != null && getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), new HashSet<>()).contains(identifier)) {
+                MageIdentifier identifier = approvingObject == null
+                        ? MageIdentifier.Default
+                        : approvingObject.getApprovingAbility().getIdentifier();
+
+                if (!identifier.equals(MageIdentifier.Default)
+                        && getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), new HashSet<>()).contains(identifier)) {
                     Ability spellAbility = spell.getSpellAbility();
                     ManaCosts alternateCosts = getCastSourceIdManaCosts().get(ability.getSourceId()).get(identifier);
                     Costs<Cost> costs = getCastSourceIdCosts().get(ability.getSourceId()).get(identifier);
@@ -1225,10 +1233,10 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                     spellAbility.clearCosts();
                     spellAbility.addCost(costs);
-                } else if (getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), new HashSet<>()).contains(null)) {
+                } else if (getCastSourceIdWithAlternateMana().getOrDefault(ability.getSourceId(), new HashSet<>()).contains(MageIdentifier.Default)) {
                     Ability spellAbility = spell.getSpellAbility();
-                    ManaCosts alternateCosts = getCastSourceIdManaCosts().get(ability.getSourceId()).get(null);
-                    Costs<Cost> costs = getCastSourceIdCosts().get(ability.getSourceId()).get(null);
+                    ManaCosts alternateCosts = getCastSourceIdManaCosts().get(ability.getSourceId()).get(MageIdentifier.Default);
+                    Costs<Cost> costs = getCastSourceIdCosts().get(ability.getSourceId()).get(MageIdentifier.Default);
                     if (alternateCosts == null) {
                         noMana = true;
                     } else {
@@ -1362,7 +1370,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 MageObject mageObject = game.getObject(possibleApprovingObject.getApprovingAbility().getSourceId());
                 String choiceValue = "";
                 MageIdentifier identifier = possibleApprovingObject.getApprovingAbility().getIdentifier();
-                if(identifier != null && !identifier.getAdditionalText().isEmpty()) {
+                if(!identifier.getAdditionalText().isEmpty()) {
                     choiceValue += identifier.getAdditionalText() + ": ";
                 }
                 if (mageObject == null) {
