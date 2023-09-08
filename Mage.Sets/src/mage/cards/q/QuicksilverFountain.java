@@ -85,7 +85,7 @@ class QuicksilverFountainEffect extends OneShotEffect {
                 + "long as it has a flood counter on it";
     }
 
-    public QuicksilverFountainEffect(final QuicksilverFountainEffect effect) {
+    private QuicksilverFountainEffect(final QuicksilverFountainEffect effect) {
         super(effect);
     }
 
@@ -123,7 +123,7 @@ class QuicksilverFountainEffect2 extends OneShotEffect {
         staticText = "remove all flood counters from them";
     }
 
-    public QuicksilverFountainEffect2(final QuicksilverFountainEffect2 effect) {
+    private QuicksilverFountainEffect2(final QuicksilverFountainEffect2 effect) {
         super(effect);
     }
 

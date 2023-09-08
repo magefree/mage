@@ -78,7 +78,7 @@ class ReturnSourceFromExileToBattlefieldEffect extends OneShotEffect {
         setText();
     }
 
-    public ReturnSourceFromExileToBattlefieldEffect(final ReturnSourceFromExileToBattlefieldEffect effect) {
+    private ReturnSourceFromExileToBattlefieldEffect(final ReturnSourceFromExileToBattlefieldEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
         this.ownerControl = effect.ownerControl;

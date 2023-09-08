@@ -22,7 +22,7 @@ public final class NightOfSoulsBetrayal extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield)));
     }
 
-    public NightOfSoulsBetrayal (final NightOfSoulsBetrayal card) {
+    private NightOfSoulsBetrayal(final NightOfSoulsBetrayal card) {
         super(card);
     }
 

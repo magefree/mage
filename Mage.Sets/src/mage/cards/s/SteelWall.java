@@ -24,7 +24,7 @@ public final class SteelWall extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public SteelWall (final SteelWall card) {
+    private SteelWall(final SteelWall card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ class TormentOfVenomEffect extends OneShotEffect {
         this.staticText = "Put three -1/-1 counters on target creature. Its controller loses 3 life unless they sacrifice another nonland permanent or discards a card";
     }
 
-    public TormentOfVenomEffect(final TormentOfVenomEffect effect) {
+    private TormentOfVenomEffect(final TormentOfVenomEffect effect) {
         super(effect);
     }
 

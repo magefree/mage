@@ -53,7 +53,7 @@ class DrawCardsDefendingPlayerEffect extends OneShotEffect {
                 + "then draws that many cards";
     }
 
-    public DrawCardsDefendingPlayerEffect(final DrawCardsDefendingPlayerEffect effect) {
+    private DrawCardsDefendingPlayerEffect(final DrawCardsDefendingPlayerEffect effect) {
         super(effect);
     }
 

@@ -70,9 +70,9 @@ class NewPerspectivesCostModificationEffect extends CostModificationEffectImpl {
         if (controller != null) {
             if (game.inCheckPlayableState()
                     || controller.chooseUse(Outcome.PlayForFree, "Pay {0} to cycle?", source, game)) {
-                abilityToModify.getCosts().clear();
-                abilityToModify.getManaCostsToPay().clear();
-                abilityToModify.getCosts().add(new CyclingDiscardCost());
+                abilityToModify.clearCosts();
+                abilityToModify.clearManaCostsToPay();
+                abilityToModify.addCost(new CyclingDiscardCost());
             }
             return true;
         }

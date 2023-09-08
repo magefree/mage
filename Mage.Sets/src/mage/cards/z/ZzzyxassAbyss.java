@@ -52,7 +52,7 @@ class ZzzyxassAbyssEffect extends OneShotEffect {
         this.staticText = "destroy all nonland permanents with the first name alphabetically among nonland permanents";
     }
 
-    public ZzzyxassAbyssEffect(final ZzzyxassAbyssEffect effect) {
+    private ZzzyxassAbyssEffect(final ZzzyxassAbyssEffect effect) {
         super(effect);
     }
 

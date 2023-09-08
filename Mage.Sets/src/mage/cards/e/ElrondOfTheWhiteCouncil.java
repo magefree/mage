@@ -111,7 +111,7 @@ class ElrondOfWhiteCouncilEffect extends OneShotEffect {
             // (2023-06-16): If you have multiple votes, you can vote for fellowship multiple times. If you do, you can choose the same creature each time.
             for (int i = 0; i < countFellowship; ++i) {
                 TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
 
                 if (player.chooseTarget(Outcome.Detriment, target, source, game)) {
                     Permanent chosen = game.getPermanent(target.getFirstTarget());

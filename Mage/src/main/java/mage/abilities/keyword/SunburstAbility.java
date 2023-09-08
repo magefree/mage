@@ -37,7 +37,7 @@ public class SunburstAbility extends EntersBattlefieldAbility {
     }
 
     @Override
-    public EntersBattlefieldAbility copy() {
+    public SunburstAbility copy() {
         return new SunburstAbility(this);
     }
 

@@ -51,7 +51,7 @@ class ShoalSerpentEffect extends ContinuousEffectImpl {
         staticText = "{this} loses defender until end of turn";
     }
 
-    public ShoalSerpentEffect(final ShoalSerpentEffect effect) {
+    private ShoalSerpentEffect(final ShoalSerpentEffect effect) {
         super(effect);
     }
 

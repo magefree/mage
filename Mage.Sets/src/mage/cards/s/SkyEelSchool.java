@@ -28,7 +28,7 @@ public final class SkyEelSchool extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(), false));
     }
 
-    public SkyEelSchool (final SkyEelSchool card) {
+    private SkyEelSchool(final SkyEelSchool card) {
         super(card);
     }
 

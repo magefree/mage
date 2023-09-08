@@ -336,6 +336,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Jeska's Will", 799, Rarity.RARE, mage.cards.j.JeskasWill.class));
         cards.add(new SetCardInfo("Journey to the Lost City", 681, Rarity.RARE, mage.cards.j.JourneyToTheLostCity.class));
         cards.add(new SetCardInfo("Juvenile Mist Dragon", 79, Rarity.UNCOMMON, mage.cards.j.JuvenileMistDragon.class));
+        cards.add(new SetCardInfo("Kagha, Shadow Archdruid", 279, Rarity.UNCOMMON, mage.cards.k.KaghaShadowArchdruid.class));
         cards.add(new SetCardInfo("Karlach, Fury of Avernus", 186, Rarity.MYTHIC, mage.cards.k.KarlachFuryOfAvernus.class));
         cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 800, Rarity.RARE, mage.cards.k.KazuulTyrantOfTheCliffs.class));
         cards.add(new SetCardInfo("Keiga, the Tide Star", 725, Rarity.RARE, mage.cards.k.KeigaTheTideStar.class));

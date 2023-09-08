@@ -119,7 +119,7 @@ class GiftOfDoomEffect extends OneShotEffect {
             return false;
         }
         TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (player.choose(outcome, target, source, game)
                 && game.getPermanent(target.getFirstTarget()) != null
                 && !game.getPermanent(target.getFirstTarget()).cantBeAttachedBy(giftOfDoom, source, game, false)) {

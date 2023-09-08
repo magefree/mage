@@ -47,7 +47,7 @@ class TeleminPerformanceEffect extends OneShotEffect {
         this.staticText = "Target opponent reveals cards from the top of their library until they reveal a creature card. That player puts all noncreature cards revealed this way into their graveyard, then you put the creature card onto the battlefield under your control";
     }
 
-    public TeleminPerformanceEffect(final TeleminPerformanceEffect effect) {
+    private TeleminPerformanceEffect(final TeleminPerformanceEffect effect) {
         super(effect);
     }
 

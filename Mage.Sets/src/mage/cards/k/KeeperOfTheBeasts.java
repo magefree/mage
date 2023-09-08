@@ -59,7 +59,7 @@ class KeeperOfTheBeastsTarget extends TargetPlayer {
         super(1, 1, false, new FilterOpponent("opponent that controls more creatures than you"));
     }
 
-    public KeeperOfTheBeastsTarget(final KeeperOfTheBeastsTarget target) {
+    private KeeperOfTheBeastsTarget(final KeeperOfTheBeastsTarget target) {
         super(target);
     }
 

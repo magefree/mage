@@ -45,7 +45,7 @@ class PrimalInstictEffect extends OneShotEffect {
         staticText = "Put a +1/+1 counter on target creature, then double the number of +1/+1 counters on that creature.";
     }
 
-    public PrimalInstictEffect(PrimalInstictEffect effect) {
+    private PrimalInstictEffect(final PrimalInstictEffect effect) {
         super(effect);
     }
 

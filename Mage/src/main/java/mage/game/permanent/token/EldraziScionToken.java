@@ -29,6 +29,6 @@ public final class EldraziScionToken extends TokenImpl {
 
     @Override
     public EldraziScionToken copy() {
-        return new EldraziScionToken(this); //To change body of generated methods, choose Tools | Templates.
+        return new EldraziScionToken(this);
     }
 }

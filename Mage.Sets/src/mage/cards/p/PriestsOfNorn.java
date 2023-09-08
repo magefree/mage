@@ -28,7 +28,7 @@ public final class PriestsOfNorn extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public PriestsOfNorn (final PriestsOfNorn card) {
+    private PriestsOfNorn(final PriestsOfNorn card) {
         super(card);
     }
 

@@ -116,7 +116,7 @@ class TaigamOjutaiMasterGainReboundEffect extends ContinuousEffectImpl {
         staticText = "that spell gains rebound";
     }
 
-    public TaigamOjutaiMasterGainReboundEffect(final TaigamOjutaiMasterGainReboundEffect effect) {
+    private TaigamOjutaiMasterGainReboundEffect(final TaigamOjutaiMasterGainReboundEffect effect) {
         super(effect);
     }
 

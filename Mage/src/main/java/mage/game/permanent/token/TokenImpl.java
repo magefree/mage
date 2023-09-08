@@ -197,11 +197,16 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     @Override
     public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer) {
-        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, true);
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, null);
     }
 
     @Override
-    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created) {
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo) {
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, attachedTo, true);
+    }
+
+    @Override
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created) {
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
             return false;
@@ -233,7 +238,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                     it.remove();
                 }
             }
-            putOntoBattlefieldHelper(event, game, source, tapped, attacking, attackedPlayer, created);
+            putOntoBattlefieldHelper(event, game, source, tapped, attacking, attackedPlayer, attachedTo, created);
             event.getTokens()
                     .keySet()
                     .stream()
@@ -247,7 +252,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return false;
     }
 
-    private static void putOntoBattlefieldHelper(CreateTokenEvent event, Game game, Ability source, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created) {
+    private static void putOntoBattlefieldHelper(CreateTokenEvent event, Game game, Ability source, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created) {
         Player controller = game.getPlayer(event.getPlayerId());
         if (controller == null) {
             return;
@@ -257,6 +262,18 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         for (Map.Entry<Token, Integer> entry : event.getTokens().entrySet()) {
             Token token = entry.getKey();
             int amount = entry.getValue();
+
+            // check if token needs to be attached to a specific object (e.g. Estrid the Masked, Role Token)
+            Permanent permanentAttachedTo;
+            if (attachedTo != null) {
+                permanentAttachedTo = game.getPermanent(attachedTo);
+                if (permanentAttachedTo == null || permanentAttachedTo.cantBeAttachedBy(token, source, game, true)) {
+                    game.informPlayers(token.getName() + " will not be created as it cannot be attached to the chosen permanent");
+                    continue;
+                }
+            } else {
+                permanentAttachedTo = null;
+            }
 
             // choose token's set code due source
             TokenInfo tokenInfo = TokenImpl.generateTokenInfo((TokenImpl) token, game, source == null ? null : source.getSourceId());
@@ -315,9 +332,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 }
 
                 // if token was created (not a spell copy) handle auras coming into the battlefield
+                // that must determine what to enchant
+                // see #9583 for the root cause issue of why this convoluted searching is necessary
                 // code blindly copied from CopyPermanentEffect
                 // TODO: clean this up -- half the comments make no sense in the context of creating a token
-                if (created && permanent.getSubtype().contains(SubType.AURA)) {
+                if (created && permanent.getSubtype().contains(SubType.AURA) && attachedTo == null) {
                     Outcome auraOutcome = Outcome.BoostCreature;
                     Target auraTarget = null;
 
@@ -360,7 +379,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                     }
 
                     // select new target
-                    auraTarget.setNotTarget(true);
+                    auraTarget.withNotTarget(true);
                     if (!controller.choose(auraOutcome, auraTarget, source, game)) {
                         break;
                     }
@@ -373,7 +392,17 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                         targetPlayer.addAttachment(permanent.getId(), source, game);
                     }
                 }
-                // end of aura code : just remove this line if everything works out well
+                // end of messy target-groping code to handle auras
+
+                // this section is for tokens created attached to a specific known object
+                if (permanentAttachedTo != null) {
+                    if (permanent.hasSubtype(SubType.AURA, game)) {
+                        permanent.getAbilities().get(0).getTargets().get(0).add(permanentAttachedTo.getId(), game);
+                        permanent.getAbilities().get(0).getEffects().get(0).apply(game, permanent.getAbilities().get(0));
+                    } else {
+                        permanentAttachedTo.addAttachment(permanent.getId(), source, game);
+                    }
+                }
 
                 // must attack
                 if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {

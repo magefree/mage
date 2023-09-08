@@ -82,7 +82,7 @@ class FinalityEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetControlledCreaturePermanent(0, 1);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (player.choose(
                 Outcome.BoostCreature, target, source, game
         )) {

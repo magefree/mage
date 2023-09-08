@@ -73,7 +73,7 @@ class ShaukuEndbringerEffect extends RestrictionEffect {
         staticText = "{this} can't attack if there's another creature on the battlefield.";
     }
 
-    public ShaukuEndbringerEffect(final ShaukuEndbringerEffect effect) {
+    private ShaukuEndbringerEffect(final ShaukuEndbringerEffect effect) {
         super(effect);
     }
 

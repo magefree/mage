@@ -46,7 +46,7 @@ public final class VastwoodHydra extends CardImpl {
 
         // When Vastwood Hydra dies, you may distribute a number of +1/+1 counters equal to the number of +1/+1 counters on Vastwood Hydra among any number of creatures you control.
         Ability ability = new DiesSourceTriggeredAbility(new VastwoodHydraDistributeEffect(), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(new CountersSourceCount(CounterType.P1P1), filter));
+        ability.addTarget(new TargetCreaturePermanentAmount(new CountersSourceCount(CounterType.P1P1), filter).withNotTarget(true));
         this.addAbility(ability);
     }
 
@@ -67,7 +67,7 @@ class VastwoodHydraDistributeEffect extends OneShotEffect {
         this.staticText = "distribute a number of +1/+1 counters equal to the number of +1/+1 counters on {this} among any number of creatures you control";
     }
 
-    public VastwoodHydraDistributeEffect(final VastwoodHydraDistributeEffect effect) {
+    private VastwoodHydraDistributeEffect(final VastwoodHydraDistributeEffect effect) {
         super(effect);
     }
 

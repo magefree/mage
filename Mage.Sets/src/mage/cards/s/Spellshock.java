@@ -46,7 +46,7 @@ class SpellshockTriggeredAbility extends TriggeredAbilityImpl {
     }
 
 
-    public SpellshockTriggeredAbility(final SpellshockTriggeredAbility abiltity) {
+    private SpellshockTriggeredAbility(final SpellshockTriggeredAbility abiltity) {
         super(abiltity);
     }
 

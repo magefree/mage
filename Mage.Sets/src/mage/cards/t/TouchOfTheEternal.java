@@ -43,7 +43,7 @@ class TouchOfTheEternalEffect extends OneShotEffect {
         this.staticText = "count the number of permanents you control. Your life total becomes that number";
     }
 
-    public TouchOfTheEternalEffect(final TouchOfTheEternalEffect effect) {
+    private TouchOfTheEternalEffect(final TouchOfTheEternalEffect effect) {
         super(effect);
     }
 

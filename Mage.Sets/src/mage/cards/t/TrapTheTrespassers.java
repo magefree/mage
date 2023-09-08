@@ -98,7 +98,7 @@ class TrapTheTrespassersVote extends VoteHandler<Permanent> {
     @Override
     protected Permanent playerChoose(String voteInfo, Player player, Player decidingPlayer, Ability source, Game game) {
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         decidingPlayer.choose(Outcome.UnboostCreature, target, source, game);
         return game.getPermanent(target.getFirstTarget());
     }

@@ -81,7 +81,7 @@ class EmptyTheLaboratoryEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(toSacrifice, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(Outcome.Sacrifice, target, source, game);
         int sacrificed = 0;
         for (UUID permanentId : target.getTargets()) {

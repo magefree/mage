@@ -51,7 +51,7 @@ class SpittingImageEffect extends OneShotEffect {
         staticText = "Create a token that's a copy of target creature";
     }
 
-    public SpittingImageEffect(final SpittingImageEffect effect) {
+    private SpittingImageEffect(final SpittingImageEffect effect) {
         super(effect);
     }
 

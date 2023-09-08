@@ -67,7 +67,7 @@ class LilianaOfTheVeilEffect extends OneShotEffect {
         this.staticText = "Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of their choice";
     }
     
-    public LilianaOfTheVeilEffect(final LilianaOfTheVeilEffect effect) {
+    private LilianaOfTheVeilEffect(final LilianaOfTheVeilEffect effect) {
         super(effect);
     }
     

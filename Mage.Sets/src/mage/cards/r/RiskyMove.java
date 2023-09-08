@@ -56,7 +56,7 @@ class RiskyMoveGetControlEffect extends OneShotEffect {
         this.staticText = "that player gains control of {this}";
     }
 
-    public RiskyMoveGetControlEffect(final RiskyMoveGetControlEffect effect) {
+    private RiskyMoveGetControlEffect(final RiskyMoveGetControlEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class RiskyMoveTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When you gain control of {this} from another player, ");
     }
 
-    public RiskyMoveTriggeredAbility(final RiskyMoveTriggeredAbility ability) {
+    private RiskyMoveTriggeredAbility(final RiskyMoveTriggeredAbility ability) {
         super(ability);
     }
 
@@ -132,7 +132,7 @@ class RiskyMoveFlipCoinEffect extends OneShotEffect {
         this.staticText = "choose a creature you control and an opponent. Flip a coin. If you lose the flip, that opponent gains control of that creature";
     }
 
-    public RiskyMoveFlipCoinEffect(final RiskyMoveFlipCoinEffect effect) {
+    private RiskyMoveFlipCoinEffect(final RiskyMoveFlipCoinEffect effect) {
         super(effect);
     }
 
@@ -188,7 +188,7 @@ class RiskyMoveCreatureGainControlEffect extends ContinuousEffectImpl {
         this.staticText = "If you lose the flip, that opponent gains control of that creature";
     }
 
-    public RiskyMoveCreatureGainControlEffect(final RiskyMoveCreatureGainControlEffect effect) {
+    private RiskyMoveCreatureGainControlEffect(final RiskyMoveCreatureGainControlEffect effect) {
         super(effect);
         this.controller = effect.controller;
     }

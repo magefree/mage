@@ -63,7 +63,7 @@ class ArdentDustspeakerCost extends CostImpl {
 
     public ArdentDustspeakerCost() {
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         this.text = "put an instant or sorcery card from your graveyard on the bottom of your library";
     }

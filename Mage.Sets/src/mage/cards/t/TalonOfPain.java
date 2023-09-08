@@ -67,7 +67,7 @@ class TalonOfPainTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a source you control other than {this} deals damage to an opponent, ");
     }
 
-    public TalonOfPainTriggeredAbility(final TalonOfPainTriggeredAbility ability) {
+    private TalonOfPainTriggeredAbility(final TalonOfPainTriggeredAbility ability) {
         super(ability);
     }
 
@@ -128,7 +128,7 @@ class TalonOfPainRemoveVariableCountersSourceCost extends VariableCostImpl {
         }
     }
 
-    public TalonOfPainRemoveVariableCountersSourceCost(final TalonOfPainRemoveVariableCountersSourceCost cost) {
+    private TalonOfPainRemoveVariableCountersSourceCost(final TalonOfPainRemoveVariableCountersSourceCost cost) {
         super(cost);
         this.minimalCountersToPay = cost.minimalCountersToPay;
         this.counterName = cost.counterName;

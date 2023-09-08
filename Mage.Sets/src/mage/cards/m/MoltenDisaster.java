@@ -115,7 +115,7 @@ class MoltenDisasterEffect extends OneShotEffect {
         staticText = "{this} deals X damage to each creature without flying and each player";
     }
 
-    public MoltenDisasterEffect(final MoltenDisasterEffect effect) {
+    private MoltenDisasterEffect(final MoltenDisasterEffect effect) {
         super(effect);
     }
 

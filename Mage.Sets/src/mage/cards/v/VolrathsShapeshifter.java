@@ -54,7 +54,7 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
                 + "({this} has that card's name, mana cost, color, types, abilities, power, and toughness.) ";
     }
 
-    public VolrathsShapeshifterEffect(final VolrathsShapeshifterEffect effect) {
+    private VolrathsShapeshifterEffect(final VolrathsShapeshifterEffect effect) {
         super(effect);
     }
 

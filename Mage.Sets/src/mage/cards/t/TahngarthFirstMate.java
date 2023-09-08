@@ -126,7 +126,7 @@ class TahngarthFirstMateEffect extends OneShotEffect {
             return false;
         }
         TargetPlayerOrPlaneswalker target = new TargetPlayerOrPlaneswalker(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!controller.choose(outcome, target, source, game)) {
             return false;
         }

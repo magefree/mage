@@ -25,7 +25,7 @@ public final class MossKami extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public MossKami (final MossKami card) {
+    private MossKami(final MossKami card) {
         super(card);
     }
 

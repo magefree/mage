@@ -48,7 +48,7 @@ class PermeatingMassEffect extends OneShotEffect {
         this.staticText = "that creature becomes a copy of {this}.";
     }
 
-    public PermeatingMassEffect(final PermeatingMassEffect effect) {
+    private PermeatingMassEffect(final PermeatingMassEffect effect) {
         super(effect);
     }
 

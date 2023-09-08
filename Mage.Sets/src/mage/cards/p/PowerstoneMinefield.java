@@ -46,7 +46,7 @@ class PowerstoneMinefieldTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
     }
 
-    public PowerstoneMinefieldTriggeredAbility(PowerstoneMinefieldTriggeredAbility ability) {
+    private PowerstoneMinefieldTriggeredAbility(final PowerstoneMinefieldTriggeredAbility ability) {
         super(ability);
     }
 

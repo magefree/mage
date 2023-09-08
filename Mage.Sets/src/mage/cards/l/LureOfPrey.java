@@ -57,7 +57,7 @@ class LureOfPreyRestrictionEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Cast this spell only if an opponent cast a creature spell this turn";
     }
 
-    public LureOfPreyRestrictionEffect(final LureOfPreyRestrictionEffect effect) {
+    private LureOfPreyRestrictionEffect(final LureOfPreyRestrictionEffect effect) {
         super(effect);
     }
 

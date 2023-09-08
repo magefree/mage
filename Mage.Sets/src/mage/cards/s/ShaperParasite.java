@@ -64,7 +64,7 @@ class ShaperParasiteEffect extends ContinuousEffectImpl {
         this.staticText = "target creature gets +2/-2 or -2/+2 until end of turn";
     }
 
-    public ShaperParasiteEffect(final ShaperParasiteEffect effect) {
+    private ShaperParasiteEffect(final ShaperParasiteEffect effect) {
         super(effect);
         this.power = effect.power;
         this.toughness = effect.toughness;

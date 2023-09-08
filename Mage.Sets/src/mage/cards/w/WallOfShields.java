@@ -31,7 +31,7 @@ public final class WallOfShields extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public WallOfShields (final WallOfShields card) {
+    private WallOfShields(final WallOfShields card) {
         super(card);
     }
 

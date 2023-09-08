@@ -67,7 +67,7 @@ class PandemoniumEffect extends OneShotEffect {
         this.staticText = "that creature's controller may have it deal damage equal to its power to any target of their choice";
     }
 
-    public PandemoniumEffect(final PandemoniumEffect effect) {
+    private PandemoniumEffect(final PandemoniumEffect effect) {
         super(effect);
     }
 

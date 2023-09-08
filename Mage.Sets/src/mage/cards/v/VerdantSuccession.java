@@ -63,7 +63,7 @@ class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
         this.optional = true;
     }
 
-    public VerdantSuccessionTriggeredAbility(final VerdantSuccessionTriggeredAbility ability) {
+    private VerdantSuccessionTriggeredAbility(final VerdantSuccessionTriggeredAbility ability) {
         super(ability);
     }
 

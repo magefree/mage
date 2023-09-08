@@ -46,6 +46,9 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         if (!mode.getTargets().isEmpty()) {
             Target target = mode.getTargets().get(0);

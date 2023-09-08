@@ -56,7 +56,7 @@ public final class SimicKeyrune extends CardImpl {
             this.addAbility(HexproofAbility.getInstance());
         }
 
-        public SimicKeyruneToken(final SimicKeyruneToken token) {
+        private SimicKeyruneToken(final SimicKeyruneToken token) {
             super(token);
         }
 

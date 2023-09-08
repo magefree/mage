@@ -57,7 +57,7 @@ class KamahlsDruidicVowEffect extends OneShotEffect {
         this.staticText = "Look at the top X cards of your library. You may put any number of land and/or legendary permanent cards with mana value X or less from among them onto the battlefield. Put the rest into your graveyard";
     }
 
-    public KamahlsDruidicVowEffect(final KamahlsDruidicVowEffect effect) {
+    private KamahlsDruidicVowEffect(final KamahlsDruidicVowEffect effect) {
         super(effect);
     }
 
@@ -79,7 +79,7 @@ class KamahlsDruidicVowEffect extends OneShotEffect {
                             SuperType.LEGENDARY.getPredicate()
                     ));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
-            target1.setNotTarget(true);
+            target1.withNotTarget(true);
             controller.choose(Outcome.PutCardInPlay, cards, target1, source, game);
             Cards toBattlefield = new CardsImpl(target1.getTargets());
             cards.removeAll(toBattlefield);

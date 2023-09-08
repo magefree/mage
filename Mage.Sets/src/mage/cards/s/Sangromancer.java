@@ -35,7 +35,7 @@ public final class Sangromancer extends CardImpl {
         this.addAbility(new SangromancerSecondTriggeredAbility());
     }
 
-    public Sangromancer (final Sangromancer card) {
+    private Sangromancer(final Sangromancer card) {
         super(card);
     }
 

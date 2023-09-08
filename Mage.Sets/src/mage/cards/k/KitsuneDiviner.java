@@ -41,7 +41,7 @@ public final class KitsuneDiviner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KitsuneDiviner (final KitsuneDiviner card) {
+    private KitsuneDiviner(final KitsuneDiviner card) {
         super(card);
     }
 

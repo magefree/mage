@@ -46,7 +46,7 @@ class RivalryTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
     }
 
-    public RivalryTriggeredAbility(final RivalryTriggeredAbility ability) {
+    private RivalryTriggeredAbility(final RivalryTriggeredAbility ability) {
         super(ability);
     }
 

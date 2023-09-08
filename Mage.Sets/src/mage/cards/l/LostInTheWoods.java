@@ -44,7 +44,7 @@ class LostInTheWoodsEffect extends OneShotEffect {
         staticText = "reveal the top card of your library. If it's a Forest card, remove that creature from combat. Then put the revealed card on the bottom of your library";
     }
 
-    public LostInTheWoodsEffect(final LostInTheWoodsEffect effect) {
+    private LostInTheWoodsEffect(final LostInTheWoodsEffect effect) {
         super(effect);
     }
 

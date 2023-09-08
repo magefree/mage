@@ -178,7 +178,10 @@ public class DamageTargetEffect extends OneShotEffect {
                             sb.append(' ');
                         }
                     }
-                    sb.append("target ").append(targetName);
+                    if (!targetName.contains("target ")) {
+                        sb.append("target ");
+                    }
+                    sb.append(targetName);
                 }
             } else {
                 sb.append("that target");

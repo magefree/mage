@@ -22,7 +22,7 @@ public final class ViolentUltimatum extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(3, StaticFilters.FILTER_PERMANENTS));
     }
 
-    public ViolentUltimatum(final ViolentUltimatum card) {
+    private ViolentUltimatum(final ViolentUltimatum card) {
         super(card);
     }
 

@@ -72,7 +72,7 @@ class RemoveAllMineCountersEffect extends OneShotEffect {
         this.staticText = "remove all mine counters from all lands";
     }
 
-    public RemoveAllMineCountersEffect(final RemoveAllMineCountersEffect effect) {
+    private RemoveAllMineCountersEffect(final RemoveAllMineCountersEffect effect) {
         super(effect);
     }
 

@@ -51,7 +51,7 @@ class EachOpponentLosesYouGainSumLifeEffect extends OneShotEffect {
         staticText = "Each opponent loses 1 life. You gain life equal to the life lost this way";
     }
 
-    public EachOpponentLosesYouGainSumLifeEffect(final EachOpponentLosesYouGainSumLifeEffect effect) {
+    private EachOpponentLosesYouGainSumLifeEffect(final EachOpponentLosesYouGainSumLifeEffect effect) {
         super(effect);
     }
 

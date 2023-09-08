@@ -56,7 +56,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
         this.staticText = "Target opponent reveals their hand. You choose a nonland card from that player's graveyard or hand and exile it. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
     }
 
-    public PsychicIntrusionExileEffect(final PsychicIntrusionExileEffect effect) {
+    private PsychicIntrusionExileEffect(final PsychicIntrusionExileEffect effect) {
         super(effect);
     }
 
@@ -128,7 +128,7 @@ class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
     }
 
-    public PsychicIntrusionCastFromExileEffect(final PsychicIntrusionCastFromExileEffect effect) {
+    private PsychicIntrusionCastFromExileEffect(final PsychicIntrusionCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -164,7 +164,7 @@ class PsychicIntrusionSpendAnyManaEffect extends AsThoughEffectImpl implements A
         staticText = "you may spend mana as though it were mana of any color to cast it";
     }
 
-    public PsychicIntrusionSpendAnyManaEffect(final PsychicIntrusionSpendAnyManaEffect effect) {
+    private PsychicIntrusionSpendAnyManaEffect(final PsychicIntrusionSpendAnyManaEffect effect) {
         super(effect);
     }
 

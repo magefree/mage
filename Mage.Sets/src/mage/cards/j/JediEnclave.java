@@ -47,7 +47,7 @@ public final class JediEnclave extends CardImpl {
 
     public static class JediEnclaveAbility extends ActivatedAbilityImpl {
 
-        public JediEnclaveAbility(JediEnclaveAbility ability) {
+        private JediEnclaveAbility(final JediEnclaveAbility ability) {
             super(ability);
         }
 

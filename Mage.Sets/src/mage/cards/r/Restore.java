@@ -50,7 +50,7 @@ class RestoreEffect extends OneShotEffect {
         this.staticText = "Put target land card from a graveyard onto the battlefield under your control";
     }
 
-    public RestoreEffect(final RestoreEffect effect) {
+    private RestoreEffect(final RestoreEffect effect) {
         super(effect);
     }
 

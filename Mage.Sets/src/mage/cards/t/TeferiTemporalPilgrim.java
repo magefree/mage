@@ -83,7 +83,7 @@ class TeferiTemporalPilgrimEffect extends OneShotEffect {
             return false;
         }
         TargetControlledPermanent target = new TargetControlledPermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         opponent.chooseTarget(Outcome.ReturnToHand, target, source, game);
         Permanent toHand = game.getPermanent(target.getFirstTarget());
         if (toHand != null) {

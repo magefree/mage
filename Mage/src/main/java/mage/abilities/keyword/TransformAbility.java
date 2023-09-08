@@ -31,7 +31,7 @@ public class TransformAbility extends SimpleStaticAbility {
     }
 
     @Override
-    public SimpleStaticAbility copy() {
+    public TransformAbility copy() {
         return new TransformAbility(this);
     }
 

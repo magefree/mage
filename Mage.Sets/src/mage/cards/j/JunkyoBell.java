@@ -58,7 +58,7 @@ public final class JunkyoBell extends CardImpl {
             this.staticText = "If you do, sacrifice that creature at the beginning of the next end step";
         }
 
-        public JunkyoBellSacrificeEffect(final JunkyoBellSacrificeEffect effect) {
+        private JunkyoBellSacrificeEffect(final JunkyoBellSacrificeEffect effect) {
             super(effect);
         }
 

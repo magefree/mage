@@ -48,7 +48,7 @@ class OketrasLastMercyEffect extends OneShotEffect {
         staticText = "Your life total becomes your starting life total";
     }
 
-    public OketrasLastMercyEffect(final OketrasLastMercyEffect effect) {
+    private OketrasLastMercyEffect(final OketrasLastMercyEffect effect) {
         super(effect);
     }
 

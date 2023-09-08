@@ -85,7 +85,7 @@ class SkyfireKirinEffect extends OneShotEffect {
         this.staticText = "you may gain control of target creature with that spell's mana value until end of turn";
     }
 
-    public SkyfireKirinEffect(final SkyfireKirinEffect effect) {
+    private SkyfireKirinEffect(final SkyfireKirinEffect effect) {
         super(effect);
     }
 

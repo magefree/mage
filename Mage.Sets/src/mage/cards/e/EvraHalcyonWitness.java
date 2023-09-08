@@ -1,27 +1,21 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
@@ -88,7 +82,7 @@ class EvraHalcyonWitnessEffect extends OneShotEffect {
                 //      For example, say Evra is enchanted with Dub (which makes it 6/6) and your life total is 7.
                 //      After the exchange, Evra would be a 9/6 creature (its power became 7, which was then modified by Dub) and your life total would be 6.
                 //      (2018-04-27)
-                game.addEffect(new SetBasePowerToughnessSourceEffect(StaticValue.get(life), null, Duration.Custom, SubLayer.SetPT_7b), source);
+                game.addEffect(new SetBasePowerSourceEffect(life, Duration.Custom), source);
                 return true;
             }
         }

@@ -80,7 +80,7 @@ class ObsidianFireheartOneShotEffect extends OneShotEffect {
         super(Outcome.Detriment);
     }
 
-    public ObsidianFireheartOneShotEffect(final ObsidianFireheartOneShotEffect effect) {
+    private ObsidianFireheartOneShotEffect(final ObsidianFireheartOneShotEffect effect) {
         super(effect);
     }
 
@@ -128,7 +128,7 @@ class ObsidianFireheartGainAbilityEffect extends GainAbilityTargetEffect {
         super(ability, duration, rule);
     }
 
-    public ObsidianFireheartGainAbilityEffect(final ObsidianFireheartGainAbilityEffect effect) {
+    private ObsidianFireheartGainAbilityEffect(final ObsidianFireheartGainAbilityEffect effect) {
         super(effect);
     }
 

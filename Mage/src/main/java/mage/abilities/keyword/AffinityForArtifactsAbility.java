@@ -23,7 +23,7 @@ public class AffinityForArtifactsAbility extends SimpleStaticAbility {
     }
 
     @Override
-    public SimpleStaticAbility copy() {
+    public AffinityForArtifactsAbility copy() {
         return new AffinityForArtifactsAbility(this);
     }
 

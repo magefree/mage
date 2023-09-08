@@ -41,7 +41,7 @@ public final class SteelDromedary extends CardImpl {
 
         // Steel Dromedary enters the battlefield tapped with two +1/+1 counters on it.
         Ability ability = new EntersBattlefieldAbility(
-                new TapSourceEffect(), "tapped with two +1/+1 counters on it"
+                new TapSourceEffect(true), "tapped with two +1/+1 counters on it"
         );
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
         this.addAbility(ability);

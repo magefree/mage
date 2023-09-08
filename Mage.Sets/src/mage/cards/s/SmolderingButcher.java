@@ -26,7 +26,7 @@ public final class SmolderingButcher extends CardImpl {
         this.addAbility(WitherAbility.getInstance());
     }
 
-    public SmolderingButcher (final SmolderingButcher card) {
+    private SmolderingButcher(final SmolderingButcher card) {
         super(card);
     }
 

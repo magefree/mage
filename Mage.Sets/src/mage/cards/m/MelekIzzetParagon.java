@@ -68,7 +68,7 @@ class MelekIzzetParagonTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), false);
     }
 
-    public MelekIzzetParagonTriggeredAbility(final MelekIzzetParagonTriggeredAbility ability) {
+    private MelekIzzetParagonTriggeredAbility(final MelekIzzetParagonTriggeredAbility ability) {
         super(ability);
     }
 

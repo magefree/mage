@@ -31,7 +31,7 @@ public final class TimeSpiral extends CardImpl {
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new UntapLandsEffect(6));
+        this.getSpellAbility().addEffect(new UntapLandsEffect(6).concatBy("You"));
     }
 
     private TimeSpiral(final TimeSpiral card) {
@@ -51,7 +51,7 @@ class TimeSpiralEffect extends OneShotEffect {
         staticText = "Each player shuffles their hand and graveyard into their library";
     }
 
-    public TimeSpiralEffect(final TimeSpiralEffect effect) {
+    private TimeSpiralEffect(final TimeSpiralEffect effect) {
         super(effect);
     }
 

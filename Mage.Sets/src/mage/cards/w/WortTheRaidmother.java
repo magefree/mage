@@ -69,7 +69,7 @@ class WortGainConspireEffect extends ContinuousEffectImpl {
         this.conspireAbility = new ConspireAbility(ConspireAbility.ConspireTargets.MORE);
     }
 
-    public WortGainConspireEffect(final WortGainConspireEffect effect) {
+    private WortGainConspireEffect(final WortGainConspireEffect effect) {
         super(effect);
         this.conspireAbility = effect.conspireAbility;
     }

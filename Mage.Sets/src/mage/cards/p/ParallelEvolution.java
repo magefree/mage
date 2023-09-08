@@ -58,7 +58,7 @@ class ParallelEvolutionEffect extends OneShotEffect {
         this.staticText = "For each creature token on the battlefield, its controller creates a token that's a copy of that creature";
     }
 
-    public ParallelEvolutionEffect(final ParallelEvolutionEffect effect) {
+    private ParallelEvolutionEffect(final ParallelEvolutionEffect effect) {
         super(effect);
     }
 

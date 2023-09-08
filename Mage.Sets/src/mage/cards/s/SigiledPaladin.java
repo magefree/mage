@@ -28,7 +28,7 @@ public final class SigiledPaladin extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public SigiledPaladin (final SigiledPaladin card) {
+    private SigiledPaladin(final SigiledPaladin card) {
         super(card);
     }
 

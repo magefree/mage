@@ -60,7 +60,7 @@ class LethalSchemeEffect extends OneShotEffect {
         this.staticText = "Each creature that convoked {this} connives.";
     }
 
-    public LethalSchemeEffect(final LethalSchemeEffect effect) {
+    private LethalSchemeEffect(final LethalSchemeEffect effect) {
         super(effect);
     }
 

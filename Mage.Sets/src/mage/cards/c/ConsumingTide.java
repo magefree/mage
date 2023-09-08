@@ -69,7 +69,7 @@ class ConsumingTideEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 TargetNonlandPermanent target = new TargetNonlandPermanent();
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 player.choose(Outcome.Benefit, target, source, game);
                 UUID permId = target.getFirstTarget();
                 if (permId != null) {

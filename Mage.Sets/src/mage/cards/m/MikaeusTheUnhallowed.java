@@ -71,7 +71,7 @@ class MikaeusTheUnhallowedAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());
     }
 
-    public MikaeusTheUnhallowedAbility(final MikaeusTheUnhallowedAbility ability) {
+    private MikaeusTheUnhallowedAbility(final MikaeusTheUnhallowedAbility ability) {
         super(ability);
     }
 

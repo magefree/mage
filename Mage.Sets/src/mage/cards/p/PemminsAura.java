@@ -76,7 +76,7 @@ class PemminsAuraBoostEnchantedEffect extends OneShotEffect {
         this.staticText = "Enchanted creature gets +1/-1 or -1/+1 until end of turn";
     }
 
-    public PemminsAuraBoostEnchantedEffect(final PemminsAuraBoostEnchantedEffect effect) {
+    private PemminsAuraBoostEnchantedEffect(final PemminsAuraBoostEnchantedEffect effect) {
         super(effect);
     }
 

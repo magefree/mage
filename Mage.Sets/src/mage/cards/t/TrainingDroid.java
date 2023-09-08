@@ -23,7 +23,7 @@ public class TrainingDroid extends CardImpl {
         this.addAbility(new RepairAbility(2));
     }
 
-    public TrainingDroid(final TrainingDroid card) {
+    private TrainingDroid(final TrainingDroid card) {
         super(card);
     }
 

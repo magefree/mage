@@ -59,7 +59,7 @@ class NeglectedHeirloomTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new TransformSourceEffect(), false);
     }
 
-    public NeglectedHeirloomTriggeredAbility(final NeglectedHeirloomTriggeredAbility ability) {
+    private NeglectedHeirloomTriggeredAbility(final NeglectedHeirloomTriggeredAbility ability) {
         super(ability);
     }
 

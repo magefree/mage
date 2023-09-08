@@ -5,7 +5,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SourceDealsDamageToThisTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
@@ -51,7 +50,7 @@ class CragSaurianEffect extends OneShotEffect {
         this.staticText = "that source's controller gains control of {this}";
     }
 
-    private CragSaurianEffect(CragSaurianEffect effect) {
+    private CragSaurianEffect(final CragSaurianEffect effect) {
         super(effect);
     }
 
@@ -69,7 +68,7 @@ class CragSaurianEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public CragSaurianEffect copy() {
         return new CragSaurianEffect(this);
     }
 }

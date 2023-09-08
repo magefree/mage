@@ -64,7 +64,7 @@ class VeilApparitionToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public VeilApparitionToken(final VeilApparitionToken token) {
+    private VeilApparitionToken(final VeilApparitionToken token) {
         super(token);
     }
 

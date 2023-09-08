@@ -57,7 +57,8 @@
         </dependency>
 
         <dependency>
-            <!-- wtf lib, related to plugins system TODO: unused and can be deleted? -->
+            <!-- used in the plugins system -->
+            <!-- imported as net.xeoh.plugins -->
             <groupId>com.googlecode.jspf</groupId>
             <artifactId>jspf-core</artifactId>
             <version>0.9.1</version>

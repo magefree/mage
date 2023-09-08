@@ -112,7 +112,7 @@ class MossbridgeTrollCost extends CostImpl {
         this.text = "tap any number of untapped creatures you control other than {this} with total power 10 or greater";
     }
 
-    public MossbridgeTrollCost(final MossbridgeTrollCost cost) {
+    private MossbridgeTrollCost(final MossbridgeTrollCost cost) {
         super(cost);
     }
 

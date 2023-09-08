@@ -25,7 +25,7 @@ public final class Slagstorm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public Slagstorm (final Slagstorm card) {
+    private Slagstorm(final Slagstorm card) {
         super(card);
     }
 

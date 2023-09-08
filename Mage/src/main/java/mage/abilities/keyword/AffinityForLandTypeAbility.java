@@ -31,7 +31,7 @@ public class AffinityForLandTypeAbility extends SimpleStaticAbility {
     }
 
     @Override
-    public SimpleStaticAbility copy() {
+    public AffinityForLandTypeAbility copy() {
         return new AffinityForLandTypeAbility(this);
     }
 

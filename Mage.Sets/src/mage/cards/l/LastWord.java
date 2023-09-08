@@ -24,7 +24,7 @@ public final class LastWord extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public LastWord (final LastWord card) {
+    private LastWord(final LastWord card) {
         super(card);
     }
 

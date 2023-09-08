@@ -26,7 +26,7 @@ public final class AshioksReaper extends CardImpl {
         // Whenever an enchantment you control is put into a graveyard from the battlefield, draw a card.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), false,
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_ENCHANTMENT, false
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT, false
         ));
     }
 

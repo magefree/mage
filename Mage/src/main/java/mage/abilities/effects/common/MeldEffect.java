@@ -77,7 +77,7 @@ public class MeldEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(outcome, target, source, game);
 
         Permanent meldWithPermanent = game.getPermanent(target.getFirstTarget());

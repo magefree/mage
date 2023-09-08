@@ -1,10 +1,8 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,12 +40,12 @@ public final class PureReflection extends CardImpl {
 
     private class PureReflectionEffect extends OneShotEffect {
 
-        public PureReflectionEffect() {
+        PureReflectionEffect() {
             super(Outcome.Benefit);
             staticText = "destroy all Reflections. Then that player creates an X/X white Reflection creature token, where X is the mana value of that spell.";
         }
 
-        public PureReflectionEffect(PureReflectionEffect effect) {
+        private PureReflectionEffect(final PureReflectionEffect effect) {
             super(effect);
         }
 
@@ -81,7 +79,7 @@ public final class PureReflection extends CardImpl {
         }
 
         @Override
-        public Effect copy() {
+        public PureReflectionEffect copy() {
             return new PureReflectionEffect(this);
         }
     }

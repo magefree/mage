@@ -58,7 +58,7 @@ class MalfegorEffect extends OneShotEffect {
         staticText = "discard your hand. Each opponent sacrifices a creature for each card discarded this way";
     }
 
-    public MalfegorEffect(final MalfegorEffect effect) {
+    private MalfegorEffect(final MalfegorEffect effect) {
         super(effect);
     }
 

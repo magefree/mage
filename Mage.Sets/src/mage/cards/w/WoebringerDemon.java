@@ -58,7 +58,7 @@ class WoebringerDemonEffect extends OneShotEffect {
         this.staticText = "that player sacrifices a creature. If the player can't, sacrifice {this}";
     }
 
-    public WoebringerDemonEffect(final WoebringerDemonEffect effect) {
+    private WoebringerDemonEffect(final WoebringerDemonEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class WoebringerDemonEffect extends OneShotEffect {
             Player currentPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (currentPlayer != null) {
                 TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 if (target.canChoose(currentPlayer.getId(), source, game)) {
                     currentPlayer.chooseTarget(Outcome.Sacrifice, target, source, game);
                     Permanent permanent = game.getPermanent(target.getFirstTarget());

@@ -34,7 +34,7 @@ public final class Putrefax extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
     }
 
-    public Putrefax (final Putrefax card) {
+    private Putrefax(final Putrefax card) {
         super(card);
     }
 

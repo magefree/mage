@@ -69,7 +69,7 @@ class JaceThePerfectedMindEffect extends OneShotEffect{
                 "three cards. Otherwise, you draw a card.";
     }
 
-    public JaceThePerfectedMindEffect(JaceThePerfectedMindEffect effect){
+    private JaceThePerfectedMindEffect(final JaceThePerfectedMindEffect effect){
         super(effect);
     }
 

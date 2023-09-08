@@ -64,7 +64,7 @@ class KaerveksPurgeEffect extends OneShotEffect {
                 " to the creature's controller";
     }
 
-    public KaerveksPurgeEffect(final KaerveksPurgeEffect effect) {
+    private KaerveksPurgeEffect(final KaerveksPurgeEffect effect) {
         super(effect);
     }
 

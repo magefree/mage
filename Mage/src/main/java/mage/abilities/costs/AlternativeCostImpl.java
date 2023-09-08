@@ -26,7 +26,7 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
         this.add(cost);
     }
 
-    public AlternativeCostImpl(final AlternativeCostImpl<?> cost) {
+    protected AlternativeCostImpl(final AlternativeCostImpl<?> cost) {
         super(cost);
         this.name = cost.name;
         this.reminderText = cost.reminderText;

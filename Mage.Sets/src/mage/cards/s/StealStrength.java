@@ -58,7 +58,7 @@ class StealStrengthEffect extends ContinuousEffectImpl {
         this.staticText = "Target creature gets +1/+1 until end of turn. Another target creature gets -1/-1 until end of turn";
     }
 
-    public StealStrengthEffect(final StealStrengthEffect effect) {
+    private StealStrengthEffect(final StealStrengthEffect effect) {
         super(effect);
     }
 

@@ -61,7 +61,7 @@ class VolrathsDungeonEffect extends OneShotEffect {
         this.staticText = "Target player puts a card from their hand on top of their library";
     }
 
-    public VolrathsDungeonEffect(final VolrathsDungeonEffect effect) {
+    private VolrathsDungeonEffect(final VolrathsDungeonEffect effect) {
         super(effect);
     }
 

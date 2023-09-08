@@ -76,7 +76,7 @@ class MarduCharmCreateTokenEffect extends OneShotEffect {
         this.staticText = "Create two 1/1 white Warrior creature tokens. They gain first strike until end of turn";
     }
 
-    public MarduCharmCreateTokenEffect(final MarduCharmCreateTokenEffect effect) {
+    private MarduCharmCreateTokenEffect(final MarduCharmCreateTokenEffect effect) {
         super(effect);
     }
 

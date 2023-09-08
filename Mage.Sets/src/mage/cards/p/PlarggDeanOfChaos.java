@@ -108,7 +108,7 @@ class PlarggDeanOfChaosEffect extends OneShotEffect {
                 + "cards not cast this way on the bottom of your library in a random order";
     }
 
-    public PlarggDeanOfChaosEffect(PlarggDeanOfChaosEffect effect) {
+    private PlarggDeanOfChaosEffect(final PlarggDeanOfChaosEffect effect) {
         super(effect);
     }
 
@@ -161,7 +161,7 @@ class AugustaDeanOfOrderEffect extends OneShotEffect {
         staticText = "tap any number of creatures you control";
     }
 
-    public AugustaDeanOfOrderEffect(AugustaDeanOfOrderEffect effect) {
+    private AugustaDeanOfOrderEffect(final AugustaDeanOfOrderEffect effect) {
         super(effect);
     }
 

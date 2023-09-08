@@ -71,7 +71,7 @@ class LilianaDeathWielderEffect extends OneShotEffect {
         this.staticText = "Return all creature cards from your graveyard to the battlefield";
     }
 
-    public LilianaDeathWielderEffect(final LilianaDeathWielderEffect effect) {
+    private LilianaDeathWielderEffect(final LilianaDeathWielderEffect effect) {
         super(effect);
     }
 

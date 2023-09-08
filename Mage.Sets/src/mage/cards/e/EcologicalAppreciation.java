@@ -78,7 +78,7 @@ class EcologicalAppreciationEffect extends OneShotEffect {
         FilterCard filter = new FilterCreatureCard();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         TargetCardInLibrary targetCardsInLibrary = new TargetCardWithDifferentNameInLibrary(0, 4, filter);
-        targetCardsInLibrary.setNotTarget(true);
+        targetCardsInLibrary.withNotTarget(true);
         targetCardsInLibrary.withChooseHint("Step 1 of 2: Search library");
         player.searchLibrary(targetCardsInLibrary, source, game);
         Cards cards = new CardsImpl(targetCardsInLibrary.getTargets());
@@ -102,7 +102,7 @@ class EcologicalAppreciationEffect extends OneShotEffect {
                     return isValidTarget(card, checkList);
                 }
             };
-            targetCardsInGY.setNotTarget(true);
+            targetCardsInGY.withNotTarget(true);
             targetCardsInGY.withChooseHint("Step 2 of 2: Search graveyard");
             player.choose(Outcome.PutCreatureInPlay, player.getGraveyard(), targetCardsInGY, source, game);
             cards.addAll(targetCardsInGY.getTargets());
@@ -113,13 +113,13 @@ class EcologicalAppreciationEffect extends OneShotEffect {
         }
 
         TargetOpponent targetOpponent = new TargetOpponent();
-        targetOpponent.setNotTarget(true);
+        targetOpponent.withNotTarget(true);
         player.choose(outcome, targetOpponent, source, game);
         Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
 
         if (opponent != null) {
             TargetCard chosenCards = new TargetCard(2, Zone.ALL, StaticFilters.FILTER_CARD);
-            chosenCards.setNotTarget(true);
+            chosenCards.withNotTarget(true);
             opponent.choose(outcome, cards, chosenCards, source, game);
             Cards toShuffle = new CardsImpl(chosenCards.getTargets().stream()
                     .map(game::getCard)

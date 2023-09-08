@@ -71,7 +71,7 @@ class CantBeBlockedByMoreThanOneAttachedEffect extends ContinuousEffectImpl {
         staticText = attachmentType.verb() + " creature can't be blocked by more than " + CardUtil.numberToText(amount) + " creature" + (amount==1 ?"":"s");
     }
 
-    public CantBeBlockedByMoreThanOneAttachedEffect(final CantBeBlockedByMoreThanOneAttachedEffect effect) {
+    private CantBeBlockedByMoreThanOneAttachedEffect(final CantBeBlockedByMoreThanOneAttachedEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.attachmentType = effect.attachmentType;

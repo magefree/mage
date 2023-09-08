@@ -51,7 +51,7 @@ class MarchFromTheTombTarget extends TargetCardInYourGraveyard {
         super(minNumTargets, maxNumTargets, filter);
     }
 
-    public MarchFromTheTombTarget(MarchFromTheTombTarget target) {
+    private MarchFromTheTombTarget(final MarchFromTheTombTarget target) {
         super(target);
     }
 

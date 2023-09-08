@@ -55,7 +55,7 @@ class SkittishValeskEffect extends OneShotEffect {
         staticText = "flip a coin. If you lose the flip, turn {this} face down";
     }
 
-    public SkittishValeskEffect(SkittishValeskEffect effect) {
+    private SkittishValeskEffect(final SkittishValeskEffect effect) {
         super(effect);
     }
 

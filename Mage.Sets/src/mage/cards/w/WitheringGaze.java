@@ -76,7 +76,7 @@ class WitheringGazeEffect extends OneShotEffect {
         return false;
     }
 
-    public WitheringGazeEffect(final WitheringGazeEffect effect) {
+    private WitheringGazeEffect(final WitheringGazeEffect effect) {
         super(effect);
     }
 

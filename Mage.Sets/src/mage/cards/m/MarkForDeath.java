@@ -52,7 +52,7 @@ class MarkForDeathEffect extends OneShotEffect {
         staticText = "Target creature an opponent controls blocks this turn if able. Untap that creature. Other creatures that player controls can't block this turn";
     }
 
-    public MarkForDeathEffect(final MarkForDeathEffect effect) {
+    private MarkForDeathEffect(final MarkForDeathEffect effect) {
         super(effect);
     }
 

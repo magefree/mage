@@ -73,7 +73,7 @@ class SekkiSeasonsGuideEffect extends PreventionEffectImpl {
         staticText = "If damage would be dealt to {this}, prevent that damage, remove that many +1/+1 counters from {this}, and create that many 1/1 colorless Spirit creature tokens";
     }
 
-    public SekkiSeasonsGuideEffect(final SekkiSeasonsGuideEffect effect) {
+    private SekkiSeasonsGuideEffect(final SekkiSeasonsGuideEffect effect) {
         super(effect);
     }
 

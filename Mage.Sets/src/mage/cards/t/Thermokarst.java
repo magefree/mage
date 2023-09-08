@@ -44,7 +44,7 @@ class ThermokarstEffect extends OneShotEffect {
         this.staticText = "Destroy target land. If that land was a snow land, you gain 1 life.";
     }
 
-    public ThermokarstEffect(final ThermokarstEffect effect) {
+    private ThermokarstEffect(final ThermokarstEffect effect) {
         super(effect);
     }
 

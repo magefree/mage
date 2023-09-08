@@ -68,7 +68,7 @@ class DontUntapIfAttackedLastTurnEnchantedEffect extends ContinuousRuleModifying
         staticText = "Enchanted creature doesn't untap during its controller's untap step if it attacked during its controller's last turn";
     }
 
-    public DontUntapIfAttackedLastTurnEnchantedEffect(final DontUntapIfAttackedLastTurnEnchantedEffect effect) {
+    private DontUntapIfAttackedLastTurnEnchantedEffect(final DontUntapIfAttackedLastTurnEnchantedEffect effect) {
         super(effect);
     }
 

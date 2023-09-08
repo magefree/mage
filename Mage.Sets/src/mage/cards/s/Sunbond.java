@@ -64,7 +64,7 @@ class SunbondEffect extends OneShotEffect {
         this.staticText = "put that many +1/+1 counters on this creature";
     }
     
-    public SunbondEffect(final SunbondEffect effect) {
+    private SunbondEffect(final SunbondEffect effect) {
         super(effect);
     }
     

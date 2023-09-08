@@ -71,7 +71,7 @@ class GrappleWithThePastEffect extends OneShotEffect {
             return false;
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(source.getControllerId(), source, game)
                 && controller.chooseUse(outcome, "Return a creature or land card from your graveyard to hand?", source, game)
                 && controller.choose(Outcome.ReturnToHand, target, source, game)) {

@@ -50,7 +50,7 @@ class KirtarsWrathEffect extends OneShotEffect {
         this.staticText = "destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated";
     }
 
-    public KirtarsWrathEffect(final KirtarsWrathEffect effect) {
+    private KirtarsWrathEffect(final KirtarsWrathEffect effect) {
         super(effect);
     }
 

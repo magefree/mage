@@ -62,7 +62,7 @@ class MyrBattlesphereTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MyrBattlesphereEffect(), true);
     }
 
-    public MyrBattlesphereTriggeredAbility(final MyrBattlesphereTriggeredAbility ability) {
+    private MyrBattlesphereTriggeredAbility(final MyrBattlesphereTriggeredAbility ability) {
         super(ability);
     }
 
@@ -107,7 +107,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
         staticText = "you may tap X untapped Myr you control. If you do, {this} gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking.";
     }
 
-    public MyrBattlesphereEffect(final MyrBattlesphereEffect effect) {
+    private MyrBattlesphereEffect(final MyrBattlesphereEffect effect) {
         super(effect);
     }
 

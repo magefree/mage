@@ -31,7 +31,7 @@ public final class WarElephant extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public WarElephant (final WarElephant card) {
+    private WarElephant(final WarElephant card) {
         super(card);
     }
 

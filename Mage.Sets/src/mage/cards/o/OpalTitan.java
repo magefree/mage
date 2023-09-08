@@ -53,7 +53,7 @@ class OpalTitanBecomesCreatureEffect extends ContinuousEffectImpl {
         this.addDependencyType(DependencyType.BecomeCreature);
     }
 
-    public OpalTitanBecomesCreatureEffect(final OpalTitanBecomesCreatureEffect effect) {
+    private OpalTitanBecomesCreatureEffect(final OpalTitanBecomesCreatureEffect effect) {
         super(effect);
     }
 

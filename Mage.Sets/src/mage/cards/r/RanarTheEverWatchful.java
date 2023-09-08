@@ -80,8 +80,8 @@ class RanarTheEverWatchfulCostReductionEffect extends CostModificationEffectImpl
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        abilityToModify.getManaCostsToPay().clear();
-        abilityToModify.getManaCostsToPay().addAll(new ManaCostsImpl<>("{0}"));
+        abilityToModify.clearManaCostsToPay();
+        abilityToModify.addManaCostsToPay(new ManaCostsImpl<>("{0}"));
         return true;
     }
 

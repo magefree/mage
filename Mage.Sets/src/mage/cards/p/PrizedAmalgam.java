@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -21,6 +20,8 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CastFromGraveyardWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -60,16 +61,16 @@ public final class PrizedAmalgam extends CardImpl {
 
 class PrizedAmalgamTriggerdAbility extends EntersBattlefieldAllTriggeredAbility {
 
-    public PrizedAmalgamTriggerdAbility(Effect effect, FilterPermanent filter) {
+    PrizedAmalgamTriggerdAbility(Effect effect, FilterPermanent filter) {
         super(Zone.GRAVEYARD, effect, filter, false);
     }
 
-    public PrizedAmalgamTriggerdAbility(EntersBattlefieldAllTriggeredAbility ability) {
+    private PrizedAmalgamTriggerdAbility(PrizedAmalgamTriggerdAbility ability) {
         super(ability);
     }
 
     @Override
-    public EntersBattlefieldAllTriggeredAbility copy() {
+    public PrizedAmalgamTriggerdAbility copy() {
         return new PrizedAmalgamTriggerdAbility(this);
     }
 

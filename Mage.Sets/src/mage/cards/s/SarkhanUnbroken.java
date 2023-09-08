@@ -68,7 +68,7 @@ class SarkhanUnbrokenAbility1 extends OneShotEffect {
         this.staticText = "Draw a card, then add one mana of any color.";
     }
 
-    public SarkhanUnbrokenAbility1(final SarkhanUnbrokenAbility1 effect) {
+    private SarkhanUnbrokenAbility1(final SarkhanUnbrokenAbility1 effect) {
         super(effect);
     }
 

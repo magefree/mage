@@ -66,7 +66,7 @@ class LukeSkywalkerCost extends CostImpl {
         this.text = "Remove all +1/+1 counters from {this}";
     }
 
-    public LukeSkywalkerCost(LukeSkywalkerCost cost) {
+    private LukeSkywalkerCost(final LukeSkywalkerCost cost) {
         super(cost);
     }
 

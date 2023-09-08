@@ -71,7 +71,7 @@ class CankerAbominationEffect extends OneShotEffect {
         Permanent cankerAbomination = game.getPermanentEntering(source.getSourceId());
         if (controller != null && cankerAbomination != null) {
             Target target = new TargetOpponent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             controller.choose(outcome, target, source, game);
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null) {

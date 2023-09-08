@@ -47,7 +47,7 @@ class PromiseOfBunreiEffect extends OneShotEffect {
         this.staticText = "sacrifice {this}. If you do, create four 1/1 colorless Spirit creature tokens";
     }
 
-    public PromiseOfBunreiEffect(final PromiseOfBunreiEffect effect) {
+    private PromiseOfBunreiEffect(final PromiseOfBunreiEffect effect) {
         super(effect);
     }
 

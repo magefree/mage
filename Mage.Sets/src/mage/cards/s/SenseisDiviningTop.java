@@ -51,7 +51,7 @@ class SenseisDiviningTopEffect extends OneShotEffect {
         staticText = ", then put {this} on top of its owner's library";
     }
 
-    public SenseisDiviningTopEffect(final SenseisDiviningTopEffect effect) {
+    private SenseisDiviningTopEffect(final SenseisDiviningTopEffect effect) {
         super(effect);
     }
 

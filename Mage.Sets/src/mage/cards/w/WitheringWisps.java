@@ -70,7 +70,7 @@ class WitheringWispsActivatedAbility extends ActivatedAbilityImpl {
 
     }
 
-    public WitheringWispsActivatedAbility(final WitheringWispsActivatedAbility ability) {
+    private WitheringWispsActivatedAbility(final WitheringWispsActivatedAbility ability) {
         super(ability);
     }
 

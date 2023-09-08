@@ -48,7 +48,7 @@ class TotalWarTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player attacks with one or more creatures, ");
     }
 
-    public TotalWarTriggeredAbility(final TotalWarTriggeredAbility ability) {
+    private TotalWarTriggeredAbility(final TotalWarTriggeredAbility ability) {
         super(ability);
     }
 

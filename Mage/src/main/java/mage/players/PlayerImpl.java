@@ -1194,15 +1194,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (alternateCosts == null) {
                         noMana = true;
                     } else {
-                        spellAbility.getManaCosts().clear();
-                        spellAbility.getManaCostsToPay().clear();
-                        spellAbility.getManaCosts().add(alternateCosts.copy());
-                        spellAbility.getManaCostsToPay().add(alternateCosts.copy());
+                        spellAbility.clearManaCosts();
+                        spellAbility.clearManaCostsToPay();
+                        spellAbility.addManaCost(alternateCosts.copy());
                     }
-                    spellAbility.getCosts().clear();
-                    if (costs != null) {
-                        spellAbility.getCosts().addAll(costs);
-                    }
+                    spellAbility.clearCosts();
+                    spellAbility.addCost(costs);
                 }
                 clearCastSourceIdManaCosts(); // TODO: test multiple alternative cost for different cards as same time
 
@@ -1537,7 +1534,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param noMana
      * @return
      */
-    public static LinkedHashMap<UUID, SpellAbility> getCastableSpellAbilities(Game game, UUID playerId, MageObject object, Zone zone, boolean noMana) {
+    public static Map<UUID, SpellAbility> getCastableSpellAbilities(Game game, UUID playerId, MageObject object, Zone zone, boolean noMana) {
         // it uses simple check from spellCanBeActivatedRegularlyNow
         // reason: no approved info here (e.g. forced to choose spell ability from cast card)
         LinkedHashMap<UUID, SpellAbility> useable = new LinkedHashMap<>();
@@ -1610,7 +1607,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public LinkedHashMap<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game) {
+    public Map<UUID, ActivatedAbility> getPlayableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         // stack abilities - can't activate anything
         // spell ability - can activate additional abilities (example: "Lightning Storm")
@@ -1637,7 +1634,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return useable;
     }
 
-    protected LinkedHashMap<UUID, ActivatedManaAbilityImpl> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
+    protected Map<UUID, ActivatedManaAbilityImpl> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedManaAbilityImpl> useable = new LinkedHashMap<>();
         boolean canUse = !(object instanceof Permanent) || ((Permanent) object).canUseActivatedAbilities(game);
         for (ActivatedManaAbilityImpl ability : object.getAbilities().getActivatedManaAbilities(zone)) {
@@ -2779,7 +2776,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean casted = false;
         TargetCard targetCard = new TargetCard(0, 1, Zone.LIBRARY, StaticFilters.FILTER_CARD);
         targetCard.setTargetName("card to cast from library");
-        targetCard.setNotTarget(true);
+        targetCard.withNotTarget(true);
         while (!castableCards.isEmpty()) {
             targetCard.clearChosen();
             if (!targetPlayer.choose(Outcome.AIDontUseIt, new CardsImpl(castableCards), targetCard, source, game)) {
@@ -3620,8 +3617,8 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                                 // alternative cost reduce
                                 copyAbility = ability.copy();
-                                copyAbility.getManaCostsToPay().clear();
-                                copyAbility.getManaCostsToPay().addAll(manaCosts.copy());
+                                copyAbility.clearManaCostsToPay();
+                                copyAbility.addManaCostsToPay(manaCosts.copy());
                                 copyAbility.adjustCosts(game);
                                 game.getContinuousEffects().costModification(copyAbility, game);
 
@@ -3686,12 +3683,12 @@ public abstract class PlayerImpl implements Player, Serializable {
 
                                 // alternative cost reduce
                                 copyAbility = ability.copy();
-                                copyAbility.getManaCostsToPay().clear();
+                                copyAbility.clearManaCostsToPay();
                                 // TODO: IDE warning:
                                 //              Unchecked assignment: 'mage.abilities.costs.mana.ManaCosts' to
                                 //              'java.util.Collection<? extends mage.abilities.costs.mana.ManaCost>'.
                                 //              Reason: 'manaCosts' has raw type, so result of copy is erased
-                                copyAbility.getManaCostsToPay().addAll(manaCosts.copy());
+                                copyAbility.addManaCostsToPay(manaCosts.copy());
                                 copyAbility.adjustCosts(game);
                                 game.getContinuousEffects().costModification(copyAbility, game);
 
@@ -3851,6 +3848,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // play hand from non hand zone (except battlefield - you can't play already played permanents)
                 approvingObject = game.getContinuousEffects().asThough(object.getId(),
                         AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
+
+                if (approvingObject == null && isPlaySpell
+                        && ((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.ADVENTURE_SPELL)) {
+                    approvingObject = game.getContinuousEffects().asThough(object.getId(),
+                            AsThoughEffectType.CAST_ADVENTURE_FROM_NOT_OWN_HAND_ZONE, ability, this.getId(), game);
+                }
             } else {
                 // other abilities from direct zones
                 approvingObject = null;
@@ -5044,7 +5047,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         cards.addAllCards(getLibrary().getTopCards(game, event.getAmount()));
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY,
-                    new FilterCard("card " + (cards.size() == 1 ? "" : "s")
+                    new FilterCard("card" + (cards.size() == 1 ? "" : "s")
                             + " to PUT into your GRAVEYARD (Surveil)"));
             chooseTarget(Outcome.Benefit, cards, target, source, game);
             moveCards(new CardsImpl(target.getTargets()), Zone.GRAVEYARD, source, game);
@@ -5191,7 +5194,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             if (choosing) {
                 TargetPermanent target = new TargetControlledCreaturePermanent();
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 target.withChooseHint("to be your Ring-bearer");
                 choose(Outcome.Neutral, target, null, game);
 

@@ -70,7 +70,7 @@ class VizkopaGuildmageDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new OpponentsLoseLifeEffect(), Duration.EndOfTurn, false);
     }
 
-    public VizkopaGuildmageDelayedTriggeredAbility(VizkopaGuildmageDelayedTriggeredAbility ability) {
+    private VizkopaGuildmageDelayedTriggeredAbility(final VizkopaGuildmageDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -105,7 +105,7 @@ class OpponentsLoseLifeEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    public OpponentsLoseLifeEffect(final OpponentsLoseLifeEffect effect) {
+    private OpponentsLoseLifeEffect(final OpponentsLoseLifeEffect effect) {
         super(effect);
     }
 

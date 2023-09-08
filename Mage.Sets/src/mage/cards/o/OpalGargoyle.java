@@ -56,7 +56,7 @@ class OpalGargoyleToken extends TokenImpl {
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
     }
-    public OpalGargoyleToken(final OpalGargoyleToken token) {
+    private OpalGargoyleToken(final OpalGargoyleToken token) {
         super(token);
     }
 

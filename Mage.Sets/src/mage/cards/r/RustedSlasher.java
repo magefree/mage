@@ -35,7 +35,7 @@ public final class RustedSlasher extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public RustedSlasher (final RustedSlasher card) {
+    private RustedSlasher(final RustedSlasher card) {
         super(card);
     }
 

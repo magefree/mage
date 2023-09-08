@@ -54,7 +54,7 @@ class NullstoneGargoyleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CounterTargetEffect(), false);
     }
 
-    public NullstoneGargoyleTriggeredAbility(final NullstoneGargoyleTriggeredAbility ability) {
+    private NullstoneGargoyleTriggeredAbility(final NullstoneGargoyleTriggeredAbility ability) {
         super(ability);
     }
 

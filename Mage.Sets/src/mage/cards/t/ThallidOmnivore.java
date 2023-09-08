@@ -64,7 +64,7 @@ class ThallidOmnivoreEffect extends OneShotEffect {
         this.staticText = "If a Saproling was sacrificed this way, you gain 2 life";
     }
 
-    public ThallidOmnivoreEffect(final ThallidOmnivoreEffect effect) {
+    private ThallidOmnivoreEffect(final ThallidOmnivoreEffect effect) {
         super(effect);
     }
 

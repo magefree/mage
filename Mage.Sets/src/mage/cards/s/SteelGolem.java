@@ -47,7 +47,7 @@ class SteelGolemEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "You can't cast creature spells";
     }
 
-    public SteelGolemEffect(final SteelGolemEffect effect) {
+    private SteelGolemEffect(final SteelGolemEffect effect) {
         super(effect);
     }
 

@@ -267,7 +267,7 @@ class MadnessCastEffect extends OneShotEffect {
         ManaCosts<ManaCost> costRef = castByMadness.getManaCostsToPay();
         castByMadness.setSpellAbilityType(SpellAbilityType.BASE_ALTERNATE);
         castByMadness.setSpellAbilityCastMode(SpellAbilityCastMode.MADNESS);
-        castByMadness.getCosts().clear();
+        castByMadness.clearCosts();
         castByMadness.addCost(new PayLifeCost(this.lifeCost));
         costRef.clear();
         costRef.add(madnessCost);

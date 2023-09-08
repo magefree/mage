@@ -79,7 +79,7 @@ class NissaVitalForceToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public NissaVitalForceToken(final NissaVitalForceToken token) {
+    private NissaVitalForceToken(final NissaVitalForceToken token) {
         super(token);
     }
 

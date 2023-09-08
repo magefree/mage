@@ -54,7 +54,7 @@ class OozeFluxCreateTokenEffect extends OneShotEffect {
         staticText = "Create an X/X green Ooze creature token, where X is the number of +1/+1 counters removed this way";
     }
 
-    public OozeFluxCreateTokenEffect(final OozeFluxCreateTokenEffect effect) {
+    private OozeFluxCreateTokenEffect(final OozeFluxCreateTokenEffect effect) {
         super(effect);
         this.token = effect.token.copy();
     }

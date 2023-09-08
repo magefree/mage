@@ -56,7 +56,7 @@ class ZamWesselEffect extends OneShotEffect {
         this.staticText = "";
     }
 
-    public ZamWesselEffect(final ZamWesselEffect effect) {
+    private ZamWesselEffect(final ZamWesselEffect effect) {
         super(effect);
     }
 

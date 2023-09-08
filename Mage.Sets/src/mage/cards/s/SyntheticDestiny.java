@@ -50,7 +50,7 @@ class SyntheticDestinyEffect extends OneShotEffect {
         this.staticText = "Exile all creatures you control. At the beginning of the next end step, reveal cards from the top of your library until you reveal that many creature cards, put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library";
     }
 
-    public SyntheticDestinyEffect(final SyntheticDestinyEffect effect) {
+    private SyntheticDestinyEffect(final SyntheticDestinyEffect effect) {
         super(effect);
     }
 
@@ -86,7 +86,7 @@ class SyntheticDestinyDelayedEffect extends OneShotEffect {
         this.staticText = "reveal cards from the top of your library until you reveal that many creature cards, put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library";
     }
 
-    public SyntheticDestinyDelayedEffect(final SyntheticDestinyDelayedEffect effect) {
+    private SyntheticDestinyDelayedEffect(final SyntheticDestinyDelayedEffect effect) {
         super(effect);
         this.numberOfCards = effect.numberOfCards;
     }

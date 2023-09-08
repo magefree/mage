@@ -61,7 +61,7 @@ class SlithermuseEffect extends OneShotEffect {
         this.staticText = "choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference";
     }
 
-    public SlithermuseEffect(final SlithermuseEffect effect) {
+    private SlithermuseEffect(final SlithermuseEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class SlithermuseEffect extends OneShotEffect {
         Permanent permanent = (Permanent)game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         if (player != null && permanent != null) {
             TargetOpponent target = new TargetOpponent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (player.choose(this.outcome, target, source, game)) {
                 Player chosenPlayer = game.getPlayer(target.getFirstTarget());
                 if (chosenPlayer != null) {

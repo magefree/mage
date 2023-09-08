@@ -98,12 +98,12 @@ public class CardIconsTest extends CardTestPlayerBase {
             Assert.assertEquals("must have 2 cards in stack", 2, gameView.getStack().values().size());
             CardView originalCardView = gameView.getStack().values()
                     .stream()
-                    .filter(c -> !c.getOriginalCard().isCopy())
+                    .filter(c -> !c.isOriginalACopy())
                     .findFirst()
                     .get();
             CardView copiedCardView = gameView.getStack().values()
                     .stream()
-                    .filter(c -> c.getOriginalCard().isCopy())
+                    .filter(c -> c.isOriginalACopy())
                     .findFirst()
                     .get();
             Assert.assertNotNull("stack must have original spell", originalCardView);

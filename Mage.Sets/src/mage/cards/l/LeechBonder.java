@@ -81,7 +81,7 @@ class LeechBonderEffect extends OneShotEffect {
         this.staticText = "Move a counter from target creature onto a second target creature";
     }
 
-    public LeechBonderEffect(final LeechBonderEffect effect) {
+    private LeechBonderEffect(final LeechBonderEffect effect) {
         super(effect);
     }
 

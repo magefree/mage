@@ -64,7 +64,7 @@ class KazarovSengirPurebloodTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
     }
 
-    public KazarovSengirPurebloodTriggeredAbility(final KazarovSengirPurebloodTriggeredAbility effect) {
+    private KazarovSengirPurebloodTriggeredAbility(final KazarovSengirPurebloodTriggeredAbility effect) {
         super(effect);
     }
 

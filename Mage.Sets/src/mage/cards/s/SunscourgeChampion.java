@@ -59,7 +59,7 @@ class SunscourgeChampionEffect extends OneShotEffect {
         staticText = "you gain life equal to its power.";
     }
 
-    public SunscourgeChampionEffect(final SunscourgeChampionEffect effect) {
+    private SunscourgeChampionEffect(final SunscourgeChampionEffect effect) {
         super(effect);
     }
 

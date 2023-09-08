@@ -71,7 +71,7 @@ class ThermalFluxEffect extends ContinuousEffectImpl {
         this.staticText = "Target " + (addSnow ? "non" : "") + "snow permanent " + (addSnow ? "becomes" : "isn't") + " snow until end of turn";
     }
 
-    public ThermalFluxEffect(final ThermalFluxEffect effect) {
+    private ThermalFluxEffect(final ThermalFluxEffect effect) {
         super(effect);
         this.addSnow = effect.addSnow;
     }

@@ -63,7 +63,7 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
         staticText = "you may return {this} from your graveyard to the battlefield attached to a creature that shares a creature type with that creature";
     }
 
-    public ReinsOfTheVinesteedEffect(final ReinsOfTheVinesteedEffect effect) {
+    private ReinsOfTheVinesteedEffect(final ReinsOfTheVinesteedEffect effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class ReinsOfTheVinesteedEffect extends OneShotEffect {
             );
             FILTER.add(new SharesCreatureTypePredicate(lastStateCreature));
             TargetPermanent target = new TargetPermanent(FILTER);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller != null
                     && controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                 Permanent targetPermanent = game.getPermanent(target.getFirstTarget());

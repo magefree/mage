@@ -67,7 +67,7 @@ class PyromancersGogglesTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When that mana is used to cast a red instant or sorcery spell, ");
     }
 
-    public PyromancersGogglesTriggeredAbility(final PyromancersGogglesTriggeredAbility ability) {
+    private PyromancersGogglesTriggeredAbility(final PyromancersGogglesTriggeredAbility ability) {
         super(ability);
         this.abilityOriginalId = ability.abilityOriginalId;
     }

@@ -71,7 +71,7 @@ class MistveilPlainsGraveyardToLibraryEffect extends OneShotEffect {
         this.staticText = "Put target card from your graveyard on the bottom of your library";
     }
 
-    public MistveilPlainsGraveyardToLibraryEffect(final MistveilPlainsGraveyardToLibraryEffect effect) {
+    private MistveilPlainsGraveyardToLibraryEffect(final MistveilPlainsGraveyardToLibraryEffect effect) {
         super(effect);
     }
 

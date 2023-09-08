@@ -56,7 +56,7 @@ class ExileAllEffect extends OneShotEffect {
         staticText = "exile all lands";
     }
 
-    public ExileAllEffect(final ExileAllEffect effect) {
+    private ExileAllEffect(final ExileAllEffect effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class RealmRazerEffect extends OneShotEffect {
         this.staticText = "return the exiled cards to the battlefield tapped under their owners' control";
     }
 
-    public RealmRazerEffect(final RealmRazerEffect effect) {
+    private RealmRazerEffect(final RealmRazerEffect effect) {
         super(effect);
     }
 

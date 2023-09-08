@@ -75,7 +75,7 @@ class OathOfLiegesEffect extends OneShotEffect {
                 + "The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle";
     }
 
-    public OathOfLiegesEffect(final OathOfLiegesEffect effect) {
+    private OathOfLiegesEffect(final OathOfLiegesEffect effect) {
         super(effect);
     }
 

@@ -59,7 +59,7 @@ class JaddiLifestriderEffect extends OneShotEffect {
         staticText = "you may tap any number of untapped creatures you control. You gain 2 life for each creature tapped this way";
     }
 
-    public JaddiLifestriderEffect(JaddiLifestriderEffect effect) {
+    private JaddiLifestriderEffect(final JaddiLifestriderEffect effect) {
         super(effect);
     }
 

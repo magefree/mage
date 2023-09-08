@@ -23,7 +23,7 @@ import java.util.UUID;
 public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
 
     public ReturnToHandChosenControlledPermanentCost(TargetControlledPermanent target) {
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1 && target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
             this.text = "return " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' '
@@ -37,7 +37,7 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
         }
     }
 
-    public ReturnToHandChosenControlledPermanentCost(ReturnToHandChosenControlledPermanentCost cost) {
+    private ReturnToHandChosenControlledPermanentCost(final ReturnToHandChosenControlledPermanentCost cost) {
         super(cost);
     }
 

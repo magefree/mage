@@ -44,7 +44,7 @@ class MisfortunesGainEffect extends OneShotEffect {
         this.staticText = "Destroy target creature. Its owner gains 4 life";
     }
 
-    public MisfortunesGainEffect(final MisfortunesGainEffect effect) {
+    private MisfortunesGainEffect(final MisfortunesGainEffect effect) {
         super(effect);
     }
 

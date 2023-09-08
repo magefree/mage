@@ -47,7 +47,7 @@ class SpellCastTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new StandstillEffect(), false);
     }
 
-    public SpellCastTriggeredAbility(final SpellCastTriggeredAbility ability) {
+    private SpellCastTriggeredAbility(final SpellCastTriggeredAbility ability) {
         super(ability);
     }
 
@@ -80,7 +80,7 @@ class StandstillEffect extends OneShotEffect {
         staticText = "sacrifice {this}. If you do, each of that player's opponents draws three cards";
     }
 
-    public StandstillEffect(final StandstillEffect effect) {
+    private StandstillEffect(final StandstillEffect effect) {
         super(effect);
     }
 

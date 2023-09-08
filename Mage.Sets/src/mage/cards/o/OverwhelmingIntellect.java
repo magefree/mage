@@ -46,7 +46,7 @@ class OverwhelmingIntellectEffect extends OneShotEffect {
         staticText = "Counter target creature spell. Draw cards equal to that spell's mana value";
     }
 
-    public OverwhelmingIntellectEffect(final OverwhelmingIntellectEffect effect) {
+    private OverwhelmingIntellectEffect(final OverwhelmingIntellectEffect effect) {
         super(effect);
     }
 

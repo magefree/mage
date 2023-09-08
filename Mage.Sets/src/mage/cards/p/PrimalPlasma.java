@@ -59,7 +59,7 @@ public final class PrimalPlasma extends CardImpl {
             staticText = "As {this} enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender";
         }
 
-        public PrimalPlasmaReplacementEffect(PrimalPlasmaReplacementEffect effect) {
+        private PrimalPlasmaReplacementEffect(final PrimalPlasmaReplacementEffect effect) {
             super(effect);
         }
 
@@ -113,7 +113,7 @@ public final class PrimalPlasma extends CardImpl {
                         game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), source);
                         break;
                 }
-                game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a), source);
+                game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield), source);
             }
             return false;
 

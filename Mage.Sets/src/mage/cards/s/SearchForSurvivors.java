@@ -55,7 +55,7 @@ class SearchForSurvivorsEffect extends OneShotEffect {
                 + "Otherwise, exile it";
     }
 
-    public SearchForSurvivorsEffect(final SearchForSurvivorsEffect effect) {
+    private SearchForSurvivorsEffect(final SearchForSurvivorsEffect effect) {
         super(effect);
     }
 

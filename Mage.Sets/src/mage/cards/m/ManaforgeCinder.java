@@ -1,29 +1,29 @@
 
 package mage.cards.m;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.mana.ManaEffect;
+import mage.abilities.mana.LimitedTimesPerTurnActivatedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
- * @author jeffwadsworth
+ * @author Susucr
  */
 public final class ManaforgeCinder extends CardImpl {
 
@@ -35,7 +35,11 @@ public final class ManaforgeCinder extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}: Add {B} or {R}. Activate this ability no more than three times each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new ManaforgeCinderManaEffect(), new ManaCostsImpl<>("{1}"), 3));
+        this.addAbility(new LimitedTimesPerTurnActivatedManaAbility(
+                Zone.BATTLEFIELD, new ManaforgeCinderManaEffect(),
+                new ManaCostsImpl<>("{1}"), 3,
+                ManaforgeCinderManaEffect.netMana
+        ));
 
     }
 
@@ -49,14 +53,22 @@ public final class ManaforgeCinder extends CardImpl {
     }
 }
 
-class ManaforgeCinderManaEffect extends OneShotEffect {
+class ManaforgeCinderManaEffect extends ManaEffect {
+
+    static final List<Mana> netMana = new ArrayList<>();
+
+    static {
+        netMana.add(new Mana(ColoredManaSymbol.R));
+        netMana.add(new Mana(ColoredManaSymbol.B));
+    }
+
 
     public ManaforgeCinderManaEffect() {
-        super(Outcome.PutManaInPool);
+        super();
         this.staticText = "Add {B} or {R}";
     }
 
-    public ManaforgeCinderManaEffect(final ManaforgeCinderManaEffect effect) {
+    private ManaforgeCinderManaEffect(final ManaforgeCinderManaEffect effect) {
         super(effect);
     }
 
@@ -66,33 +78,36 @@ class ManaforgeCinderManaEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Choice manaChoice = new ChoiceImpl();
-            Set<String> choices = new LinkedHashSet<>();
-            choices.add("Black");
-            choices.add("Red");
-            manaChoice.setChoices(choices);
-            manaChoice.setMessage("Select black or red mana to add");
-            Mana mana = new Mana();
-            if (!controller.choose(Outcome.Benefit, manaChoice, game)) {
-                return false;
+    public List<Mana> getNetMana(Game game, Ability source) {
+        return netMana;
+    }
+
+    @Override
+    public Mana produceMana(Game game, Ability source) {
+        Mana mana = new Mana();
+        if (game == null) {
+            return mana;
+        }
+        Choice choice = new ChoiceColor(true);
+        choice.getChoices().clear();
+        choice.setMessage("Pick a mana color");
+        choice.getChoices().add("Red");
+        choice.getChoices().add("Black");
+
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            if (!player.choose(outcome, choice, game)) {
+                return mana;
             }
-            if (manaChoice.getChoice() == null) {
-                return false;
-            }
-            switch (manaChoice.getChoice()) {
+            switch (choice.getChoice()) {
                 case "Black":
-                    mana.increaseBlack();
+                    mana.setBlack(1);
                     break;
                 case "Red":
-                    mana.increaseRed();
+                    mana.setRed(1);
                     break;
             }
-            controller.getManaPool().addMana(mana, game, source);
-            return true;
         }
-        return false;
+        return mana;
     }
 }

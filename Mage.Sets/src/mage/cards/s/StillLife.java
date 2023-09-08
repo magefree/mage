@@ -47,7 +47,7 @@ class StillLifeCentaur extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(3);
     }
-    public StillLifeCentaur(final StillLifeCentaur token) {
+    private StillLifeCentaur(final StillLifeCentaur token) {
         super(token);
     }
 

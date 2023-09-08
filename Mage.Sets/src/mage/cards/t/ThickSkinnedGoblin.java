@@ -54,7 +54,7 @@ class ThickSkinnedGoblinCostModificationEffect extends AsThoughEffectImpl {
         this.staticText = "You may pay {0} rather than pay the echo cost for permanents you control.";
     }
 
-    public ThickSkinnedGoblinCostModificationEffect(ThickSkinnedGoblinCostModificationEffect effect) {
+    private ThickSkinnedGoblinCostModificationEffect(final ThickSkinnedGoblinCostModificationEffect effect) {
         super(effect);
     }
 

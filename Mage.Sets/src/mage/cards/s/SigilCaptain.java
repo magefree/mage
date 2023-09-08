@@ -50,7 +50,7 @@ class SigilCaptainTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
     }
 
-    public SigilCaptainTriggeredAbility(final SigilCaptainTriggeredAbility ability) {
+    private SigilCaptainTriggeredAbility(final SigilCaptainTriggeredAbility ability) {
         super(ability);
     }
 

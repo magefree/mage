@@ -74,7 +74,7 @@ class StarlightSpectacularEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent(count);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.withChooseHint("the first creature you choose gets +0/+0");
         player.choose(outcome, target, source, game);
         int boost = 0;

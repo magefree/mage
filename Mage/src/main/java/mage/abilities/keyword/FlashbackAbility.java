@@ -113,9 +113,9 @@ public class FlashbackAbility extends SpellAbility {
                     return null;
                 }
                 spellAbilityCopy.setId(this.getId());
-                spellAbilityCopy.getManaCosts().clear();
-                spellAbilityCopy.getManaCostsToPay().clear();
-                spellAbilityCopy.getCosts().addAll(this.getCosts().copy());
+                spellAbilityCopy.clearManaCosts();
+                spellAbilityCopy.clearManaCostsToPay();
+                spellAbilityCopy.addCost(this.getCosts().copy());
                 spellAbilityCopy.addCost(this.getManaCosts().copy());
                 spellAbilityCopy.setSpellAbilityCastMode(this.getSpellAbilityCastMode());
                 spellAbilityToResolve = spellAbilityCopy;
@@ -148,19 +148,19 @@ public class FlashbackAbility extends SpellAbility {
     @Override
     public String getRule() {
         StringBuilder sbRule = new StringBuilder("Flashback");
-        if (!costs.isEmpty()) {
+        if (!getCosts().isEmpty()) {
             sbRule.append("&mdash;");
         } else {
             sbRule.append(' ');
         }
-        if (!manaCosts.isEmpty()) {
-            sbRule.append(manaCosts.getText());
+        if (!getManaCosts().isEmpty()) {
+            sbRule.append(getManaCosts().getText());
         }
-        if (!costs.isEmpty()) {
-            if (!manaCosts.isEmpty()) {
+        if (!getCosts().isEmpty()) {
+            if (!getManaCosts().isEmpty()) {
                 sbRule.append(", ");
             }
-            sbRule.append(costs.getText());
+            sbRule.append(getCosts().getText());
             sbRule.append('.');
         }
         if (abilityName != null) {

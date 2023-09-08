@@ -40,7 +40,7 @@ class MnemonicNexusEffect extends OneShotEffect {
         staticText = "Each player shuffles their graveyard into their library";
     }
 
-    public MnemonicNexusEffect(final MnemonicNexusEffect effect) {
+    private MnemonicNexusEffect(final MnemonicNexusEffect effect) {
         super(effect);
     }
 

@@ -53,7 +53,7 @@ class SunderingTitanDestroyLandEffect extends OneShotEffect {
         this.staticText = "choose a land of each basic land type, then destroy those lands";
     }
 
-    public SunderingTitanDestroyLandEffect(final SunderingTitanDestroyLandEffect effect) {
+    private SunderingTitanDestroyLandEffect(final SunderingTitanDestroyLandEffect effect) {
         super(effect);
     }
 

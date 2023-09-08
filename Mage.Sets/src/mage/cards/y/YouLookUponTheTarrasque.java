@@ -70,7 +70,7 @@ class YouLookUponTheTarrasqueEffect extends RequirementEffect {
         staticText = "All creatures your opponents control able to block that creature this turn do so";
     }
 
-    public YouLookUponTheTarrasqueEffect(final YouLookUponTheTarrasqueEffect effect) {
+    private YouLookUponTheTarrasqueEffect(final YouLookUponTheTarrasqueEffect effect) {
         super(effect);
     }
 

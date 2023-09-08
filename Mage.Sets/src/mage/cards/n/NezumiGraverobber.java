@@ -108,7 +108,7 @@ class NighteyesTheDesecratorToken extends TokenImpl {
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);
     }
-    public NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {
+    private NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {
         super(token);
     }
 

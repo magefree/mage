@@ -22,7 +22,7 @@ public final class Shock extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public Shock (final Shock card) {
+    private Shock(final Shock card) {
         super(card);
     }
 

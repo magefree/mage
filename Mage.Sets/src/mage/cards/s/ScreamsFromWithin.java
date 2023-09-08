@@ -66,7 +66,7 @@ class ScreamsFromWithinEffect extends OneShotEffect {
         staticText = "return {this} from your graveyard to the battlefield";
     }
 
-    public ScreamsFromWithinEffect(final ScreamsFromWithinEffect effect) {
+    private ScreamsFromWithinEffect(final ScreamsFromWithinEffect effect) {
         super(effect);
     }
 

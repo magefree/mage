@@ -58,7 +58,7 @@ class PowderKegEffect extends OneShotEffect {
         staticText = "Destroy each artifact and creature with mana value equal to the number of fuse counters on {this}";
     }
 
-    public PowderKegEffect(final PowderKegEffect effect) {
+    private PowderKegEffect(final PowderKegEffect effect) {
         super(effect);
     }
 

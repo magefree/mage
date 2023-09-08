@@ -30,7 +30,7 @@ public final class StewardOfValeron extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public StewardOfValeron (final StewardOfValeron card) {
+    private StewardOfValeron(final StewardOfValeron card) {
         super(card);
     }
 

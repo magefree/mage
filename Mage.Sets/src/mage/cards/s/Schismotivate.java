@@ -58,7 +58,7 @@ class SchismotivateEffect extends ContinuousEffectImpl {
         this.staticText = "Target creature gets +4/+0 until end of turn. Another target creature gets -4/-0 until end of turn";
     }
 
-    public SchismotivateEffect(final SchismotivateEffect effect) {
+    private SchismotivateEffect(final SchismotivateEffect effect) {
         super(effect);
     }
 

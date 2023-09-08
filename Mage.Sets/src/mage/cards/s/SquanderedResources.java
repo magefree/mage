@@ -55,7 +55,7 @@ class SquanderedResourcesEffect extends ManaEffect {
         staticText = "Add one mana of any type the sacrificed land could produce";
     }
 
-    public SquanderedResourcesEffect(final SquanderedResourcesEffect effect) {
+    private SquanderedResourcesEffect(final SquanderedResourcesEffect effect) {
         super(effect);
     }
 

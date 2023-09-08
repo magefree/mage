@@ -53,7 +53,7 @@ class MeteorCraterEffect extends ManaEffect {
         staticText = "Choose a color of a permanent you control. Add one mana of that color";
     }
 
-    public MeteorCraterEffect(final MeteorCraterEffect effect) {
+    private MeteorCraterEffect(final MeteorCraterEffect effect) {
         super(effect);
     }
 

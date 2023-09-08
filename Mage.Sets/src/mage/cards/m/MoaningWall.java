@@ -27,7 +27,7 @@ public final class MoaningWall extends CardImpl {
         addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
-    public MoaningWall(final MoaningWall moaningWall){
+    private MoaningWall(final MoaningWall moaningWall){
         super(moaningWall);
     }
 

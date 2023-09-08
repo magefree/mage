@@ -22,7 +22,7 @@ public final class Regress extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public Regress (final Regress card) {
+    private Regress(final Regress card) {
         super(card);
     }
 
