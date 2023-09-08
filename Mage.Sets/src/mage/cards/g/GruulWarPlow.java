@@ -53,7 +53,7 @@ class GruulWarPlowToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
-    public GruulWarPlowToken(final GruulWarPlowToken token) {
+    private GruulWarPlowToken(final GruulWarPlowToken token) {
         super(token);
     }
 

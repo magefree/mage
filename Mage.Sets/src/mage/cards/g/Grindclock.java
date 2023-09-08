@@ -51,7 +51,7 @@ class GrindclockEffect extends OneShotEffect {
         staticText = "Target player mills X cards, where X is the number of charge counters on {this}";
     }
 
-    public GrindclockEffect(final GrindclockEffect effect) {
+    private GrindclockEffect(final GrindclockEffect effect) {
         super(effect);
     }
 

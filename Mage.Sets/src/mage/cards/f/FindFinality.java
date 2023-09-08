@@ -66,7 +66,7 @@ class FinalityEffect extends OneShotEffect {
                 + "Then all creatures get -4/-4 until end of turn.";
     }
 
-    public FinalityEffect(final FinalityEffect effect) {
+    private FinalityEffect(final FinalityEffect effect) {
         super(effect);
     }
 

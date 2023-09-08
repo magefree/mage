@@ -67,7 +67,7 @@ class ForgeOfHeroesEffect extends OneShotEffect {
                 + "and a loyalty counter on it if it's a planeswalker";
     }
 
-    public ForgeOfHeroesEffect(final ForgeOfHeroesEffect effect) {
+    private ForgeOfHeroesEffect(final ForgeOfHeroesEffect effect) {
         super(effect);
     }
 

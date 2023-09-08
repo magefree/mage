@@ -55,7 +55,7 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public GraveBetrayalTriggeredAbility(final GraveBetrayalTriggeredAbility ability) {
+    private GraveBetrayalTriggeredAbility(final GraveBetrayalTriggeredAbility ability) {
         super(ability);
     }
 
@@ -101,7 +101,7 @@ class GraveBetrayalEffect extends OneShotEffect {
         staticText = " return the creature to the battlefield under your control with an additional +1/+1 counter. That creature is a black Zombie in addition to its other colors and types";
     }
 
-    public GraveBetrayalEffect(final GraveBetrayalEffect effect) {
+    private GraveBetrayalEffect(final GraveBetrayalEffect effect) {
         super(effect);
     }
 

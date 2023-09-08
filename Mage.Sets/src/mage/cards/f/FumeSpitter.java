@@ -34,7 +34,7 @@ public final class FumeSpitter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FumeSpitter (final FumeSpitter card) {
+    private FumeSpitter(final FumeSpitter card) {
         super(card);
     }
 

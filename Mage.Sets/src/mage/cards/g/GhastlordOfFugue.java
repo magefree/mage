@@ -62,7 +62,7 @@ class GhastlordOfFugueEffect extends OneShotEffect {
         staticText = "that player reveals their hand. You choose a card from it. That player exiles that card";
     }
 
-    public GhastlordOfFugueEffect(final GhastlordOfFugueEffect effect) {
+    private GhastlordOfFugueEffect(final GhastlordOfFugueEffect effect) {
         super(effect);
     }
 

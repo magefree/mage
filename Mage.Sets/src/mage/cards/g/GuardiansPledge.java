@@ -30,7 +30,7 @@ public final class GuardiansPledge extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn, filter, false));
     }
 
-    public GuardiansPledge (final GuardiansPledge card) {
+    private GuardiansPledge(final GuardiansPledge card) {
         super(card);
     }
 

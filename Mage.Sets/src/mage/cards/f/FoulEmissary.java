@@ -55,7 +55,7 @@ class FoulEmissaryTriggeredAbility extends SacrificeSourceTriggeredAbility {
         setTriggerPhrase("When you sacrifice {this} while casting a spell with emerge, ");
     }
 
-    public FoulEmissaryTriggeredAbility(final FoulEmissaryTriggeredAbility ability) {
+    private FoulEmissaryTriggeredAbility(final FoulEmissaryTriggeredAbility ability) {
         super(ability);
     }
 

@@ -51,7 +51,7 @@ class GaddockTeegReplacementEffect4 extends ContinuousRuleModifyingEffectImpl {
         staticText = "Noncreature spells with mana value 4 or greater can't be cast";
     }
 
-    public GaddockTeegReplacementEffect4(final GaddockTeegReplacementEffect4 effect) {
+    private GaddockTeegReplacementEffect4(final GaddockTeegReplacementEffect4 effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class GaddockTeegReplacementEffectX extends ContinuousRuleModifyingEffectImpl {
         staticText = "Noncreature spells with {X} in their mana costs can't be cast";
     }
 
-    public GaddockTeegReplacementEffectX(final GaddockTeegReplacementEffectX effect) {
+    private GaddockTeegReplacementEffectX(final GaddockTeegReplacementEffectX effect) {
         super(effect);
     }
 

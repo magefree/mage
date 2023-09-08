@@ -44,7 +44,7 @@ class FriendlyFireEffect extends OneShotEffect {
         this.staticText = "Target creature's controller reveals a card at random from their hand. {this} deals damage to that creature and that player equal to the revealed card's mana value";
     }
 
-    public FriendlyFireEffect(final FriendlyFireEffect effect) {
+    private FriendlyFireEffect(final FriendlyFireEffect effect) {
         super(effect);
     }
 

@@ -86,7 +86,7 @@ class GethsSummonsEffect extends OneShotEffect {
                 "the battlefield under your control";
     }
 
-    public GethsSummonsEffect(final GethsSummonsEffect effect) {
+    private GethsSummonsEffect(final GethsSummonsEffect effect) {
         super(effect);
     }
 

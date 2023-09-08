@@ -43,7 +43,7 @@ class FecundityEffect extends OneShotEffect {
         this.staticText = "that creature's controller may draw a card";
     }
 
-    public FecundityEffect(final FecundityEffect effect) {
+    private FecundityEffect(final FecundityEffect effect) {
         super(effect);
     }
 

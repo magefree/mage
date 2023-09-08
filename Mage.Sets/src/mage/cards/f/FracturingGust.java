@@ -48,7 +48,7 @@ class FracturingGustDestroyEffect extends OneShotEffect {
         this.staticText = "Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way";
     }
 
-    public FracturingGustDestroyEffect(final FracturingGustDestroyEffect effect) {
+    private FracturingGustDestroyEffect(final FracturingGustDestroyEffect effect) {
         super(effect);
     }
 

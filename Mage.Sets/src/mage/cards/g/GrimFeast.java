@@ -57,7 +57,7 @@ class GrimFeastTriggeredAbility extends PutIntoGraveFromBattlefieldAllTriggeredA
         super(new GrimFeastEffect(), false, filter, true, false);
     }
 
-    public GrimFeastTriggeredAbility(final GrimFeastTriggeredAbility effect) {
+    private GrimFeastTriggeredAbility(final GrimFeastTriggeredAbility effect) {
         super(effect);
     }
 
@@ -79,7 +79,7 @@ class GrimFeastEffect extends OneShotEffect {
         super(Outcome.GainLife);
     }
 
-    public GrimFeastEffect(final GrimFeastEffect effect) {
+    private GrimFeastEffect(final GrimFeastEffect effect) {
         super(effect);
     }
 

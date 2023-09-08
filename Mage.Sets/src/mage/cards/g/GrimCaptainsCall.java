@@ -46,7 +46,7 @@ class GrimCaptainsCallEffect extends OneShotEffect {
         this.staticText = "Return a Pirate card from your graveyard to your hand, then do the same for Vampire, Dinosaur, and Merfolk";
     }
 
-    public GrimCaptainsCallEffect(final GrimCaptainsCallEffect effect) {
+    private GrimCaptainsCallEffect(final GrimCaptainsCallEffect effect) {
         super(effect);
     }
 

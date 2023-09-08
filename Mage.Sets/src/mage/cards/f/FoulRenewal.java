@@ -52,7 +52,7 @@ class FoulRenewalEffect extends OneShotEffect {
         this.staticText = "Return target creature card from your graveyard to your hand. Target creature gets -X/-X until end of turn, where X is the toughness of the card returned this way";
     }
 
-    public FoulRenewalEffect(final FoulRenewalEffect effect) {
+    private FoulRenewalEffect(final FoulRenewalEffect effect) {
         super(effect);
     }
 

@@ -59,7 +59,7 @@ class GusthasScepterExileEffect extends OneShotEffect {
         staticText = "exile a card from your hand face down. You may look at it for as long as it remains exiled";
     }
 
-    public GusthasScepterExileEffect(final GusthasScepterExileEffect effect) {
+    private GusthasScepterExileEffect(final GusthasScepterExileEffect effect) {
         super(effect);
     }
 
@@ -136,7 +136,7 @@ class GusthasScepterLookAtCardEffect extends AsThoughEffectImpl {
         staticText = "You may look at it for as long as it remains exiled";
     }
 
-    public GusthasScepterLookAtCardEffect(final GusthasScepterLookAtCardEffect effect) {
+    private GusthasScepterLookAtCardEffect(final GusthasScepterLookAtCardEffect effect) {
         super(effect);
         this.mor = effect.mor;
     }
@@ -172,7 +172,7 @@ class GusthasScepterLoseControlAbility extends DelayedTriggeredAbility {
         super(new GusthasScepterPutExiledCardsInOwnersGraveyard(), Duration.EndOfGame, false);
     }
 
-    public GusthasScepterLoseControlAbility(final GusthasScepterLoseControlAbility ability) {
+    private GusthasScepterLoseControlAbility(final GusthasScepterLoseControlAbility ability) {
         super(ability);
     }
 
@@ -210,7 +210,7 @@ class GusthasScepterPutExiledCardsInOwnersGraveyard extends OneShotEffect {
         super(Outcome.Neutral);
     }
 
-    public GusthasScepterPutExiledCardsInOwnersGraveyard(final GusthasScepterPutExiledCardsInOwnersGraveyard effect) {
+    private GusthasScepterPutExiledCardsInOwnersGraveyard(final GusthasScepterPutExiledCardsInOwnersGraveyard effect) {
         super(effect);
     }
 

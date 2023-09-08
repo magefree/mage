@@ -60,7 +60,7 @@ class GolgothianSylexEffect extends OneShotEffect {
         this.staticText = "Each nontoken permanent from the Antiquities expansion is sacrificed by its controller.";
     }
 
-    public GolgothianSylexEffect(final GolgothianSylexEffect effect) {
+    private GolgothianSylexEffect(final GolgothianSylexEffect effect) {
         super(effect);
     }
 

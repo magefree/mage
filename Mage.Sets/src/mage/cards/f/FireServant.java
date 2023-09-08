@@ -54,7 +54,7 @@ class FireServantEffect extends ReplacementEffectImpl {
         staticText = "If a red instant or sorcery spell you control would deal damage, it deals double that damage instead";
     }
 
-    public FireServantEffect(final FireServantEffect effect) {
+    private FireServantEffect(final FireServantEffect effect) {
         super(effect);
     }
 

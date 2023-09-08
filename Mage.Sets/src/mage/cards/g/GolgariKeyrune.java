@@ -54,7 +54,7 @@ public final class GolgariKeyrune extends CardImpl {
             toughness = new MageInt(2);
             this.addAbility(DeathtouchAbility.getInstance());
         }
-        public GolgariKeyruneToken(final GolgariKeyruneToken token) {
+        private GolgariKeyruneToken(final GolgariKeyruneToken token) {
             super(token);
         }
 

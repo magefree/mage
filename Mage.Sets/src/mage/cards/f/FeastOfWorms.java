@@ -38,7 +38,7 @@ public final class FeastOfWorms extends CardImpl {
         this.getSpellAbility().addEffect(new FeastOfWormsEffect());
     }
 
-    public FeastOfWorms (final FeastOfWorms card) {
+    private FeastOfWorms(final FeastOfWorms card) {
         super(card);
     }
 

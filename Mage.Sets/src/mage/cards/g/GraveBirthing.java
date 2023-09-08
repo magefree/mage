@@ -59,7 +59,7 @@ class GraveBirthingEffect extends OneShotEffect {
         this.staticText = "Target opponent exiles a card from their graveyard";
     }
 
-    public GraveBirthingEffect(final GraveBirthingEffect effect) {
+    private GraveBirthingEffect(final GraveBirthingEffect effect) {
         super(effect);
     }
 

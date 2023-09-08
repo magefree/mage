@@ -58,7 +58,7 @@ class FateTransferEffect extends OneShotEffect {
         staticText = "Move all counters from target creature onto another target creature";
     }
 
-    public FateTransferEffect(final FateTransferEffect effect) {
+    private FateTransferEffect(final FateTransferEffect effect) {
         super(effect);
     }
 

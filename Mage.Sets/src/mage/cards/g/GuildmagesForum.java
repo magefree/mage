@@ -89,7 +89,7 @@ class GuildmagesForumEntersBattlefieldEffect extends ReplacementEffectImpl {
         this.mor = mor;
     }
 
-    public GuildmagesForumEntersBattlefieldEffect(GuildmagesForumEntersBattlefieldEffect effect) {
+    private GuildmagesForumEntersBattlefieldEffect(final GuildmagesForumEntersBattlefieldEffect effect) {
         super(effect);
         this.mor = effect.mor;
     }

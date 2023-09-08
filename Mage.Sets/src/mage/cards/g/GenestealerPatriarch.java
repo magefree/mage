@@ -81,7 +81,7 @@ class GenestealerPatriarchTriggeredAbility extends TriggeredAbilityImpl {
         ;
     }
 
-    public GenestealerPatriarchTriggeredAbility(GenestealerPatriarchTriggeredAbility ability) {
+    private GenestealerPatriarchTriggeredAbility(final GenestealerPatriarchTriggeredAbility ability) {
         super(ability);
     }
 
@@ -119,7 +119,7 @@ class GenestealerPatriarchCloneEffect extends OneShotEffect {
                 "except it's a Tyranid in addition to its other types";
     }
 
-    public GenestealerPatriarchCloneEffect(final GenestealerPatriarchCloneEffect effect) {
+    private GenestealerPatriarchCloneEffect(final GenestealerPatriarchCloneEffect effect) {
         super(effect);
     }
 

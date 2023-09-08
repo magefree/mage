@@ -93,7 +93,7 @@ class ForceBubbleStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    public ForceBubbleStateTriggeredAbility(final ForceBubbleStateTriggeredAbility ability) {
+    private ForceBubbleStateTriggeredAbility(final ForceBubbleStateTriggeredAbility ability) {
         super(ability);
     }
 

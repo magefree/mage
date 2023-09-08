@@ -48,7 +48,7 @@ class EachOpponentGainsLifeEffect extends OneShotEffect {
         this.staticText = "each opponent gains that much life";
     }
 
-    public EachOpponentGainsLifeEffect(final EachOpponentGainsLifeEffect effect) {
+    private EachOpponentGainsLifeEffect(final EachOpponentGainsLifeEffect effect) {
         super(effect);
     }
 

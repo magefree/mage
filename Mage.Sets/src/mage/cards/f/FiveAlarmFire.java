@@ -66,7 +66,7 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control deals combat damage, ");
     }
 
-    public FiveAlarmFireTriggeredAbility(final FiveAlarmFireTriggeredAbility ability) {
+    private FiveAlarmFireTriggeredAbility(final FiveAlarmFireTriggeredAbility ability) {
             super(ability);
             triggeringCreatures.addAll(ability.triggeringCreatures);
     }

@@ -45,7 +45,7 @@ class GloomlanceEffect extends OneShotEffect {
         this.staticText = "Destroy target creature. If that creature was green or white, its controller discards a card";
     }
 
-    public GloomlanceEffect(final GloomlanceEffect effect) {
+    private GloomlanceEffect(final GloomlanceEffect effect) {
         super(effect);
     }
 

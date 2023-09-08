@@ -63,7 +63,7 @@ class FiendslayerPaladinEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "{this} can't be the target of black or red spells your opponents control";
     }
 
-    public FiendslayerPaladinEffect(final FiendslayerPaladinEffect effect) {
+    private FiendslayerPaladinEffect(final FiendslayerPaladinEffect effect) {
         super(effect);
     }
 

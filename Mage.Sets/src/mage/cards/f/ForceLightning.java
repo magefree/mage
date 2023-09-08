@@ -49,7 +49,7 @@ class ForceLightningEffect extends OneShotEffect {
         this.staticText = "Scry X";
     }
 
-    public ForceLightningEffect(final ForceLightningEffect effect) {
+    private ForceLightningEffect(final ForceLightningEffect effect) {
         super(effect);
     }
 

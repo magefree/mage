@@ -72,7 +72,7 @@ class FlamerushRiderEffect extends OneShotEffect {
         this.staticText = "create a token that's a copy of another target attacking creature and that's tapped and attacking. Exile the token at end of combat";
     }
 
-    public FlamerushRiderEffect(final FlamerushRiderEffect effect) {
+    private FlamerushRiderEffect(final FlamerushRiderEffect effect) {
         super(effect);
     }
 

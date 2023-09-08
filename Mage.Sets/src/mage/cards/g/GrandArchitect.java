@@ -80,7 +80,7 @@ class GrandArchitectEffect extends ContinuousEffectImpl {
         staticText = "Target artifact creature becomes blue until end of turn";
     }
 
-    public GrandArchitectEffect(final GrandArchitectEffect effect) {
+    private GrandArchitectEffect(final GrandArchitectEffect effect) {
         super(effect);
     }
 
