@@ -51,7 +51,7 @@ class IncreasingDevotionEffect extends OneShotEffect {
         staticText = "Create five 1/1 white Human creature tokens. If this spell was cast from a graveyard, create ten of those tokens instead";
     }
 
-    public IncreasingDevotionEffect(final IncreasingDevotionEffect effect) {
+    private IncreasingDevotionEffect(final IncreasingDevotionEffect effect) {
         super(effect);
     }
 

@@ -50,7 +50,7 @@ class HighPriestOfPenanceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} is dealt damage, ");
     }
 
-    public HighPriestOfPenanceTriggeredAbility(final HighPriestOfPenanceTriggeredAbility ability) {
+    private HighPriestOfPenanceTriggeredAbility(final HighPriestOfPenanceTriggeredAbility ability) {
         super(ability);
     }
 

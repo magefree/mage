@@ -73,7 +73,7 @@ class HopeOfGhirapurCantCastEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Until your next turn, target player who was dealt combat damage by {this} this turn can't cast noncreature spells";
     }
 
-    public HopeOfGhirapurCantCastEffect(final HopeOfGhirapurCantCastEffect effect) {
+    private HopeOfGhirapurCantCastEffect(final HopeOfGhirapurCantCastEffect effect) {
         super(effect);
     }
 

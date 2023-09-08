@@ -32,7 +32,7 @@ public class Holochess extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Holochess(Holochess card) {
+    private Holochess(final Holochess card) {
         super(card);
     }
 

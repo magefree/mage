@@ -51,7 +51,7 @@ class HarmsWayPreventDamageTargetEffect extends RedirectionEffect {
         this.damageSource = new TargetSource();
     }
 
-    public HarmsWayPreventDamageTargetEffect(final HarmsWayPreventDamageTargetEffect effect) {
+    private HarmsWayPreventDamageTargetEffect(final HarmsWayPreventDamageTargetEffect effect) {
         super(effect);
         this.damageSource = effect.damageSource.copy();
     }

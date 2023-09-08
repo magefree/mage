@@ -46,7 +46,7 @@ class InvasionPlansEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "The attacking player chooses how each creature blocks each turn";
     }
 
-    public InvasionPlansEffect(final InvasionPlansEffect effect) {
+    private InvasionPlansEffect(final InvasionPlansEffect effect) {
         super(effect);
     }
 

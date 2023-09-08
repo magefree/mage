@@ -66,7 +66,7 @@ class HazoretsUndyingFuryEffect extends OneShotEffect {
                 "5 or less from among them without paying their mana costs";
     }
 
-    public HazoretsUndyingFuryEffect(final HazoretsUndyingFuryEffect effect) {
+    private HazoretsUndyingFuryEffect(final HazoretsUndyingFuryEffect effect) {
         super(effect);
     }
 

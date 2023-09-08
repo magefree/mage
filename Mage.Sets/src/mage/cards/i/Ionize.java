@@ -44,7 +44,7 @@ class IonizeEffect extends OneShotEffect {
                 + "{this} deals 2 damage to that spell's controller.";
     }
 
-    public IonizeEffect(final IonizeEffect effect) {
+    private IonizeEffect(final IonizeEffect effect) {
         super(effect);
     }
 

@@ -71,7 +71,7 @@ class HavengulLichPlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast target creature card in a graveyard this turn";
     }
 
-    public HavengulLichPlayEffect(final HavengulLichPlayEffect effect) {
+    private HavengulLichPlayEffect(final HavengulLichPlayEffect effect) {
         super(effect);
     }
 
@@ -107,7 +107,7 @@ class HavengulLichPlayedEffect extends OneShotEffect {
         super(Outcome.PutCreatureInPlay);
     }
 
-    public HavengulLichPlayedEffect(final HavengulLichPlayedEffect effect) {
+    private HavengulLichPlayedEffect(final HavengulLichPlayedEffect effect) {
         super(effect);
         staticText = "When you cast that card this turn, {this} gains all activated abilities of that card until end of turn";
     }
@@ -136,7 +136,7 @@ class HavengulLichDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.cardId = cardId;
     }
 
-    public HavengulLichDelayedTriggeredAbility(HavengulLichDelayedTriggeredAbility ability) {
+    private HavengulLichDelayedTriggeredAbility(final HavengulLichDelayedTriggeredAbility ability) {
         super(ability);
         this.cardId = ability.cardId;
     }
@@ -172,7 +172,7 @@ class HavengulLichEffect extends ContinuousEffectImpl {
         this.cardId = cardId;
     }
 
-    public HavengulLichEffect(final HavengulLichEffect effect) {
+    private HavengulLichEffect(final HavengulLichEffect effect) {
         super(effect);
         this.cardId = effect.cardId;
     }

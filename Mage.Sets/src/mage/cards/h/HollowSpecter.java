@@ -53,7 +53,7 @@ class HollowSpecterEffect extends OneShotEffect {
         staticText = "you may pay {X}. If you do, that player reveals X cards from their hand and you choose one of them. That player discards that card";
     }
 
-    public HollowSpecterEffect(final HollowSpecterEffect effect) {
+    private HollowSpecterEffect(final HollowSpecterEffect effect) {
         super(effect);
     }
 

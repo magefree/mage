@@ -55,7 +55,7 @@ class HarnessTheStormTriggeredAbility extends SpellCastControllerTriggeredAbilit
         super(effect, filter, optional);
     }
 
-    public HarnessTheStormTriggeredAbility(HarnessTheStormTriggeredAbility ability) {
+    private HarnessTheStormTriggeredAbility(final HarnessTheStormTriggeredAbility ability) {
         super(ability);
     }
 
@@ -92,7 +92,7 @@ class HarnessTheStormEffect extends OneShotEffect {
                 + "spell from your graveyard. <i>(you still pay its costs.)</i>";
     }
 
-    public HarnessTheStormEffect(final HarnessTheStormEffect effect) {
+    private HarnessTheStormEffect(final HarnessTheStormEffect effect) {
         super(effect);
     }
 

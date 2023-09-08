@@ -48,7 +48,7 @@ class IntoTheMawOfHellEffect extends OneShotEffect {
         this.staticText = "{this} deals 13 damage to target creature";
     }
 
-    public IntoTheMawOfHellEffect(final IntoTheMawOfHellEffect effect) {
+    private IntoTheMawOfHellEffect(final IntoTheMawOfHellEffect effect) {
         super(effect);
     }
 

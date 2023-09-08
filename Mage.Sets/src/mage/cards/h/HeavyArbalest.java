@@ -65,7 +65,7 @@ class HeavyArbalestEffect extends ReplacementEffectImpl {
         staticText = "Equipped creature doesn't untap during its controller's untap step";
     }
 
-    public HeavyArbalestEffect(final HeavyArbalestEffect effect) {
+    private HeavyArbalestEffect(final HeavyArbalestEffect effect) {
         super(effect);
     }
 

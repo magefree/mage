@@ -47,7 +47,7 @@ class HaazdaMarshalTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierLifelinkToken()));
     }
 
-    public HaazdaMarshalTriggeredAbility(final HaazdaMarshalTriggeredAbility ability) {
+    private HaazdaMarshalTriggeredAbility(final HaazdaMarshalTriggeredAbility ability) {
         super(ability);
     }
 

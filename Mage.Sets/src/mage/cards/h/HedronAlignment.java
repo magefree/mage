@@ -67,7 +67,7 @@ class HedronAlignmentEffect extends OneShotEffect {
         this.staticText = "you may reveal your hand. If you do, you win the game if you own a card named Hedron Alignment in exile, in your hand, in your graveyard, and on the battlefield";
     }
 
-    public HedronAlignmentEffect(final HedronAlignmentEffect effect) {
+    private HedronAlignmentEffect(final HedronAlignmentEffect effect) {
         super(effect);
     }
 

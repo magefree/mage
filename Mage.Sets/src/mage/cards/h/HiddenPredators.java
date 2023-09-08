@@ -51,7 +51,7 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When an opponent controls a creature with power 4 or greater, if {this} is an enchantment, ");
     }
 
-    public HiddenPredatorsStateTriggeredAbility(final HiddenPredatorsStateTriggeredAbility ability) {
+    private HiddenPredatorsStateTriggeredAbility(final HiddenPredatorsStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -110,7 +110,7 @@ class HiddenPredatorsToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public HiddenPredatorsToken(final HiddenPredatorsToken token) {
+    private HiddenPredatorsToken(final HiddenPredatorsToken token) {
         super(token);
     }
 

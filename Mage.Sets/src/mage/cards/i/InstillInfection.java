@@ -25,7 +25,7 @@ public final class InstillInfection extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public InstillInfection (final InstillInfection card) {
+    private InstillInfection(final InstillInfection card) {
         super(card);
     }
 

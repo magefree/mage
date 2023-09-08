@@ -54,7 +54,7 @@ class HarmonyOfNatureEffect extends OneShotEffect {
         staticText = "Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way";
     }
 
-    public HarmonyOfNatureEffect(HarmonyOfNatureEffect effect) {
+    private HarmonyOfNatureEffect(final HarmonyOfNatureEffect effect) {
         super(effect);
     }
 

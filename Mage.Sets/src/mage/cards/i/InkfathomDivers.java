@@ -34,7 +34,7 @@ public final class InkfathomDivers extends CardImpl {
 
     }
 
-    public InkfathomDivers (final InkfathomDivers card) {
+    private InkfathomDivers(final InkfathomDivers card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ class HeatOfBattleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
     }
 
-    public HeatOfBattleTriggeredAbility(HeatOfBattleTriggeredAbility ability) {
+    private HeatOfBattleTriggeredAbility(final HeatOfBattleTriggeredAbility ability) {
         super(ability);
     }
 

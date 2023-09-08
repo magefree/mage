@@ -31,7 +31,7 @@ public final class InfectiousHorror extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new InfectiousHorrorEffect(), false));
     }
 
-    public InfectiousHorror (final InfectiousHorror card) {
+    private InfectiousHorror(final InfectiousHorror card) {
         super(card);
     }
 

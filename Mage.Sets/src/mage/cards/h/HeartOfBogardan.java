@@ -90,7 +90,7 @@ class HeartOfBogardanEffect extends OneShotEffect {
                 + "where X is twice the number of age counters on {this} minus 2";
     }
 
-    public HeartOfBogardanEffect(final HeartOfBogardanEffect effect) {
+    private HeartOfBogardanEffect(final HeartOfBogardanEffect effect) {
         super(effect);
     }
 
