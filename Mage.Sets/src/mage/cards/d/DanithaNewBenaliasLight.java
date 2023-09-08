@@ -67,7 +67,7 @@ class DanithaNewBenaliasLightCastFromGraveyardEffect extends AsThoughEffectImpl 
         staticText = "once during each of your turns, you may cast an Aura or Equipment spell from your graveyard";
     }
 
-    DanithaNewBenaliasLightCastFromGraveyardEffect(final DanithaNewBenaliasLightCastFromGraveyardEffect effect) {
+    private DanithaNewBenaliasLightCastFromGraveyardEffect(final DanithaNewBenaliasLightCastFromGraveyardEffect effect) {
         super(effect);
     }
 

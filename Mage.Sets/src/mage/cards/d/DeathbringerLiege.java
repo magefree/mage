@@ -76,7 +76,7 @@ class DeathbringerLiegeEffect extends OneShotEffect {
         staticText = "destroy target creature if it's tapped";
     }
 
-    DeathbringerLiegeEffect(final DeathbringerLiegeEffect effect) {
+    private DeathbringerLiegeEffect(final DeathbringerLiegeEffect effect) {
         super(effect);
     }
 

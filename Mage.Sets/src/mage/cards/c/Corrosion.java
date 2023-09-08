@@ -60,7 +60,7 @@ class CorrosionUpkeepEffect extends OneShotEffect {
         this.staticText = "put a rust counter on each artifact target opponent controls. Then destroy each artifact with mana value less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated";
     }
     
-    CorrosionUpkeepEffect(final CorrosionUpkeepEffect effect) {
+    private CorrosionUpkeepEffect(final CorrosionUpkeepEffect effect) {
         super(effect);
     }
     

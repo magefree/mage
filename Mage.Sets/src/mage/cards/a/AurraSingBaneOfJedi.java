@@ -105,7 +105,7 @@ class SacrificeAllEffect extends OneShotEffect {
         staticText = "and sacrificies all creatures they control";
     }
 
-    SacrificeAllEffect(final SacrificeAllEffect effect) {
+    private SacrificeAllEffect(final SacrificeAllEffect effect) {
         super(effect);
     }
 

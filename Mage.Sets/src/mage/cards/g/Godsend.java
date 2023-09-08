@@ -67,7 +67,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GodsendExileEffect(), true);
     }
 
-    GodsendTriggeredAbility(final GodsendTriggeredAbility ability) {
+    private GodsendTriggeredAbility(final GodsendTriggeredAbility ability) {
         super(ability);
     }
 

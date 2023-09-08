@@ -44,7 +44,7 @@ class AcidicSoilEffect extends OneShotEffect {
         staticText = "{this} deals damage to each player equal to the number of lands they control";
     }
 
-    AcidicSoilEffect(final AcidicSoilEffect effect) {
+    private AcidicSoilEffect(final AcidicSoilEffect effect) {
         super(effect);
     }
 

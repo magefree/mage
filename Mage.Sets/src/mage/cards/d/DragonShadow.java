@@ -70,7 +70,7 @@ class DragonShadowEffect extends OneShotEffect {
         this.staticText = "return {this} from your graveyard to the battlefield attached to that creature";
     }
     
-    DragonShadowEffect(final DragonShadowEffect effect) {
+    private DragonShadowEffect(final DragonShadowEffect effect) {
         super(effect);
     }
     

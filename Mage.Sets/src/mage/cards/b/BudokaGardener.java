@@ -65,7 +65,7 @@ class BudokaGardenerEffect extends OneShotEffect {
         staticText = "If you control ten or more lands, flip {this}";
     }
 
-    BudokaGardenerEffect(final BudokaGardenerEffect effect) {
+    private BudokaGardenerEffect(final BudokaGardenerEffect effect) {
         super(effect);
     }
 

@@ -54,7 +54,7 @@ class CephalidConstableTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), false);
     }
 
-    CephalidConstableTriggeredAbility(final CephalidConstableTriggeredAbility ability) {
+    private CephalidConstableTriggeredAbility(final CephalidConstableTriggeredAbility ability) {
         super(ability);
     }
 

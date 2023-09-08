@@ -47,7 +47,7 @@ class FrayingOmnipotenceEffect extends OneShotEffect {
                 + "Round up each time.";
     }
 
-    FrayingOmnipotenceEffect(final FrayingOmnipotenceEffect effect) {
+    private FrayingOmnipotenceEffect(final FrayingOmnipotenceEffect effect) {
         super(effect);
     }
 

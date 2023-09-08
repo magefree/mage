@@ -96,7 +96,7 @@ class CoffinQueenDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new ExileTargetEffect(), Duration.EndOfGame, true);
     }
 
-    CoffinQueenDelayedTriggeredAbility(CoffinQueenDelayedTriggeredAbility ability) {
+    private CoffinQueenDelayedTriggeredAbility(final CoffinQueenDelayedTriggeredAbility ability) {
         super(ability);
     }
 

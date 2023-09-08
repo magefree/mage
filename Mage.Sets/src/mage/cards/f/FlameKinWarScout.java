@@ -55,7 +55,7 @@ class FlameKinWarScourEffect extends OneShotEffect {
         this.staticText = "sacrifice {this}. If you do, {this} deals 4 damage to that creature.";
     }
 
-    FlameKinWarScourEffect(final FlameKinWarScourEffect effect) {
+    private FlameKinWarScourEffect(final FlameKinWarScourEffect effect) {
         super(effect);
     }
 

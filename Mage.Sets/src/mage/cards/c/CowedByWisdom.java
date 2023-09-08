@@ -62,7 +62,7 @@ class CowedByWisdomayCostToAttackBlockEffect extends PayCostToAttackBlockEffectI
         staticText = "Enchanted creature can't attack or block unless its controller pays {1} for each card in your hand";
     }
 
-    CowedByWisdomayCostToAttackBlockEffect(CowedByWisdomayCostToAttackBlockEffect effect) {
+    private CowedByWisdomayCostToAttackBlockEffect(final CowedByWisdomayCostToAttackBlockEffect effect) {
         super(effect);
     }
 

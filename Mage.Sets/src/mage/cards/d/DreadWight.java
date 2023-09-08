@@ -70,7 +70,7 @@ class DreadWightTriggeredAbility extends TriggeredAbilityImpl {
         this.usesStack = false;
     }
 
-    DreadWightTriggeredAbility(final DreadWightTriggeredAbility ability) {
+    private DreadWightTriggeredAbility(final DreadWightTriggeredAbility ability) {
         super(ability);
     }
 

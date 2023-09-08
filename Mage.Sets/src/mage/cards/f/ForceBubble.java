@@ -60,7 +60,7 @@ class ForceBubbleReplacementEffect extends ReplacementEffectImpl {
         staticText = "If damage would be dealt to you, put that many depletion counters on {this} instead";
     }
 
-    ForceBubbleReplacementEffect(final ForceBubbleReplacementEffect effect) {
+    private ForceBubbleReplacementEffect(final ForceBubbleReplacementEffect effect) {
         super(effect);
     }
 

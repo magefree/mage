@@ -59,7 +59,7 @@ class ExclusionRitualImprintEffect extends OneShotEffect {
         staticText = "exile target nonland permanent";
     }
 
-    ExclusionRitualImprintEffect(final ExclusionRitualImprintEffect effect) {
+    private ExclusionRitualImprintEffect(final ExclusionRitualImprintEffect effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
         staticText = "Players can't cast spells with the same name as the exiled card";
     }
 
-    ExclusionRitualReplacementEffect(final ExclusionRitualReplacementEffect effect) {
+    private ExclusionRitualReplacementEffect(final ExclusionRitualReplacementEffect effect) {
         super(effect);
     }
 

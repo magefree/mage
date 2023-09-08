@@ -63,7 +63,7 @@ class FavorOfTheMightyEffect extends ContinuousEffectImpl {
         this.staticText = "Each creature with the highest mana value has protection from all colors.";
     }
 
-    FavorOfTheMightyEffect(final FavorOfTheMightyEffect effect) {
+    private FavorOfTheMightyEffect(final FavorOfTheMightyEffect effect) {
         super(effect);
     }
 

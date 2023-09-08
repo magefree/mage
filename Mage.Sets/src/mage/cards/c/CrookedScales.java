@@ -54,7 +54,7 @@ class CrookedScalesEffect extends OneShotEffect {
         this.staticText = "Flip a coin. If you win the flip, destroy target creature an opponent controls. If you lose the flip, destroy target creature you control unless you pay {3} and repeat this process";
     }
 
-    CrookedScalesEffect(final CrookedScalesEffect effect) {
+    private CrookedScalesEffect(final CrookedScalesEffect effect) {
         super(effect);
     }
 

@@ -87,7 +87,7 @@ class EaterOfVirtueExileEffect extends OneShotEffect {
         this.staticText = "exile it";
     }
 
-    EaterOfVirtueExileEffect(final EaterOfVirtueExileEffect effect) {
+    private EaterOfVirtueExileEffect(final EaterOfVirtueExileEffect effect) {
         super(effect);
     }
 

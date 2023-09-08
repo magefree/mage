@@ -118,7 +118,7 @@ class EmrakulsEvangelEffect extends OneShotEffect {
         this.staticText = "Create a 3/2 colorless Eldrazi Horror creature token for each creature sacrificed this way.";
     }
 
-    EmrakulsEvangelEffect(final EmrakulsEvangelEffect effect) {
+    private EmrakulsEvangelEffect(final EmrakulsEvangelEffect effect) {
         super(effect);
     }
 

@@ -44,7 +44,7 @@ class DoubleVisionCopyTriggeredAbility extends SpellCastControllerTriggeredAbili
         super(new CopyTargetSpellEffect(true), new FilterInstantOrSorcerySpell(), false);
     }
 
-    DoubleVisionCopyTriggeredAbility(DoubleVisionCopyTriggeredAbility ability) {
+    private DoubleVisionCopyTriggeredAbility(final DoubleVisionCopyTriggeredAbility ability) {
         super(ability);
     }
 

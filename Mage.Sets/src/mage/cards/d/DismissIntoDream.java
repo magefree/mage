@@ -52,7 +52,7 @@ class DismissIntoDreamEffect extends CreaturesBecomeOtherTypeEffect {
         this.staticText = this.staticText + " and has \"When this creature becomes the target of a spell or ability, sacrifice it.\"";
     }
 
-    DismissIntoDreamEffect(final DismissIntoDreamEffect effect) {
+    private DismissIntoDreamEffect(final DismissIntoDreamEffect effect) {
         super(effect);
     }
 

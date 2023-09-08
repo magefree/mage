@@ -134,7 +134,7 @@ class GraveBetrayalReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 
-    GraveBetrayalReplacementEffect(GraveBetrayalReplacementEffect effect) {
+    private GraveBetrayalReplacementEffect(final GraveBetrayalReplacementEffect effect) {
         super(effect);
     }
 

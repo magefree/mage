@@ -51,7 +51,7 @@ class AngelsTrumpetTapEffect extends OneShotEffect {
         this.staticText = "tap all untapped creatures that player controls that didn't attack this turn. Angel's Trumpet deals damage to the player equal to the number of creatures tapped this way";
     }
 
-    AngelsTrumpetTapEffect(final AngelsTrumpetTapEffect effect) {
+    private AngelsTrumpetTapEffect(final AngelsTrumpetTapEffect effect) {
         super(effect);
     }
 

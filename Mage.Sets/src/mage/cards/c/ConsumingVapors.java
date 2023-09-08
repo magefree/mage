@@ -50,7 +50,7 @@ class ConsumingVaporsEffect extends OneShotEffect {
         staticText = "Target player sacrifices a creature. You gain life equal to that creature's toughness";
     }
 
-    ConsumingVaporsEffect(ConsumingVaporsEffect effect) {
+    private ConsumingVaporsEffect(final ConsumingVaporsEffect effect) {
         super(effect);
     }
 

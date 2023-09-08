@@ -67,7 +67,7 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this} is put into your graveyard from the battlefield, ");
     }
 
-    EnigmaSphinxTriggeredAbility(EnigmaSphinxTriggeredAbility ability) {
+    private EnigmaSphinxTriggeredAbility(final EnigmaSphinxTriggeredAbility ability) {
         super(ability);
     }
 

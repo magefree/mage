@@ -70,7 +70,7 @@ class ForgeAnewCostEffect extends CostModificationEffectImpl {
         this.staticText = "you may pay {0} rather than pay the equip cost of the first equip ability you activate during each of your turns.";
     }
 
-    ForgeAnewCostEffect(final ForgeAnewCostEffect effect) {
+    private ForgeAnewCostEffect(final ForgeAnewCostEffect effect) {
         super(effect);
     }
 

@@ -179,7 +179,7 @@ class DarkIntimationsReplacementEffect extends ReplacementEffectImpl {
         staticText = "That planeswalker enters the battlefield with an additional loyalty counter on it";
     }
 
-    DarkIntimationsReplacementEffect(DarkIntimationsReplacementEffect effect) {
+    private DarkIntimationsReplacementEffect(final DarkIntimationsReplacementEffect effect) {
         super(effect);
     }
 

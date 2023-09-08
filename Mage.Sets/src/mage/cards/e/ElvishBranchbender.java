@@ -66,7 +66,7 @@ class ElvishBranchbenderEffect extends OneShotEffect {
         this.staticText = "Until end of turn, target Forest becomes an X/X Treefolk creature in addition to its other types, where X is the number of Elves you control";
     }
     
-    ElvishBranchbenderEffect(final ElvishBranchbenderEffect effect) {
+    private ElvishBranchbenderEffect(final ElvishBranchbenderEffect effect) {
         super(effect);
     }
     

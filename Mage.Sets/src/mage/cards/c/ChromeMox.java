@@ -113,7 +113,7 @@ class ChromeMoxManaEffect extends ManaEffect {
         staticText = "Add one mana of any of the exiled card's colors";
     }
 
-    ChromeMoxManaEffect(ChromeMoxManaEffect effect) {
+    private ChromeMoxManaEffect(final ChromeMoxManaEffect effect) {
         super(effect);
     }
 

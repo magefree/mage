@@ -93,7 +93,7 @@ class ChancellorOfTheAnnexDelayedTriggeredAbility extends DelayedTriggeredAbilit
         this.playerId = playerId;
     }
 
-    ChancellorOfTheAnnexDelayedTriggeredAbility(final ChancellorOfTheAnnexDelayedTriggeredAbility ability) {
+    private ChancellorOfTheAnnexDelayedTriggeredAbility(final ChancellorOfTheAnnexDelayedTriggeredAbility ability) {
         super(ability);
         this.playerId = ability.playerId;
     }

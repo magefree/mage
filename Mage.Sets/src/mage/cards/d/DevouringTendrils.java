@@ -102,7 +102,7 @@ class DevouringTendrilsDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.mor = mor;
     }
 
-    DevouringTendrilsDelayedTriggeredAbility(DevouringTendrilsDelayedTriggeredAbility ability) {
+    private DevouringTendrilsDelayedTriggeredAbility(final DevouringTendrilsDelayedTriggeredAbility ability) {
         super(ability);
         this.mor = ability.mor;
     }
