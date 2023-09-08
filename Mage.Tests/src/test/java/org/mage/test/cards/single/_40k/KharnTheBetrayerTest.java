@@ -8,7 +8,9 @@ import mage.constants.Zone;
 
 public class KharnTheBetrayerTest extends CardTestCommander4Players {
     
-    private static String KHARN = "Kharn the Betrayer";
+    private static final String KHARN = "Kharn the Betrayer";
+    private static final String BOLT = "Lightning Bolt";
+    private static final String OFFERING = "Harmless Offering";
 
     /**
      * 
@@ -23,15 +25,15 @@ public class KharnTheBetrayerTest extends CardTestCommander4Players {
         addCard(Zone.LIBRARY, playerB, "Mountain", 5);
 
         addCard(Zone.BATTLEFIELD, playerC, "Mountain", 2);
-        addCard(Zone.HAND, playerC, "Lightning Bolt", 2);
+        addCard(Zone.HAND, playerC, BOLT, 2);
 
         // Player C pings Kharn, which triggers his effect.
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerC, "Lightning Bolt", KHARN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerC, BOLT, KHARN);
         // Player A chooses Player B to gain control, draws 2 cards when losing control.
         setChoice(playerA, "PlayerB");
 
         // // Player C pings Kharn, triggering effect again.
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerC, "Lightning Bolt", KHARN);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerC, BOLT, KHARN);
         // // Player B chooses player A, draws 2 cards when losing control.
         setChoice(playerB, "PlayerC");
 
@@ -39,9 +41,31 @@ public class KharnTheBetrayerTest extends CardTestCommander4Players {
         setStrictChooseMode(true);
         execute();
 
-        assertHandCount(playerA, 3);
+        // Account for draw for turn
+        assertHandCount(playerA, 1 + 2);
         assertHandCount(playerB, 2);
         assertHandCount(playerC, 0);
         assertPermanentCount(playerC, KHARN, 1);
+    }
+
+    @Test
+    public void testLostControl() {
+        addCard(Zone.BATTLEFIELD, playerA, KHARN, 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, OFFERING);
+        addCard(Zone.LIBRARY, playerA, "Mountain", 5);
+        
+        // Player A gives Kharn to player B, should trigger Kharn's effect
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, OFFERING);
+        addTarget(playerA, playerB);
+        addTarget(playerA, KHARN);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        
+        // Account for draw for turn
+        assertPermanentCount(playerB, KHARN, 1);
+        assertHandCount(playerA, 1 + 2);
     }
 }
