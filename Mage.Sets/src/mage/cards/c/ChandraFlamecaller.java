@@ -60,7 +60,7 @@ class ChandraElementalEffect extends OneShotEffect {
         this.staticText = "Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step";
     }
 
-    public ChandraElementalEffect(final ChandraElementalEffect effect) {
+    private ChandraElementalEffect(final ChandraElementalEffect effect) {
         super(effect);
     }
 

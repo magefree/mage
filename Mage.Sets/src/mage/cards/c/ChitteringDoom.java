@@ -42,7 +42,7 @@ class ChitteringDoomTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken()), false);
     }
 
-    public ChitteringDoomTriggeredAbility(final ChitteringDoomTriggeredAbility ability) {
+    private ChitteringDoomTriggeredAbility(final ChitteringDoomTriggeredAbility ability) {
         super(ability);
     }
 

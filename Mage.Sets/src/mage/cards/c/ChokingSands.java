@@ -57,7 +57,7 @@ class ChokingSandsEffect extends OneShotEffect {
         this.staticText = "If that land was nonbasic, Choking Sands deals 2 damage to the land's controller";
     }
 
-    public ChokingSandsEffect(final ChokingSandsEffect effect) {
+    private ChokingSandsEffect(final ChokingSandsEffect effect) {
         super(effect);
     }
 

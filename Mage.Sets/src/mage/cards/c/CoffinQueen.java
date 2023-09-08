@@ -68,7 +68,7 @@ class CoffinQueenCreateDelayedTriggerEffect extends OneShotEffect {
         this.staticText = "When {this} becomes untapped or you lose control of {this}, exile that creature.";
     }
 
-    public CoffinQueenCreateDelayedTriggerEffect(final CoffinQueenCreateDelayedTriggerEffect effect) {
+    private CoffinQueenCreateDelayedTriggerEffect(final CoffinQueenCreateDelayedTriggerEffect effect) {
         super(effect);
     }
 

@@ -52,7 +52,7 @@ class ClarionUltimatumEffect extends OneShotEffect {
                 "Put those cards onto the battlefield tapped, then shuffle";
     }
 
-    public ClarionUltimatumEffect(final ClarionUltimatumEffect effect) {
+    private ClarionUltimatumEffect(final ClarionUltimatumEffect effect) {
         super(effect);
     }
 

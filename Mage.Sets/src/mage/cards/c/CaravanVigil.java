@@ -49,7 +49,7 @@ class CaravanVigilEffect extends OneShotEffect {
                 + "<i>Morbid</i> &mdash; You may put that card onto the battlefield instead of putting it into your hand if a creature died this turn";
     }
 
-    public CaravanVigilEffect(final CaravanVigilEffect effect) {
+    private CaravanVigilEffect(final CaravanVigilEffect effect) {
         super(effect);
     }
 

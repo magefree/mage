@@ -51,7 +51,7 @@ class CellarDoorEffect extends OneShotEffect {
         this.staticText = "Target player puts the bottom card of their library into their graveyard. If it's a creature card, you create a 2/2 black Zombie creature token";
     }
 
-    public CellarDoorEffect(final CellarDoorEffect effect) {
+    private CellarDoorEffect(final CellarDoorEffect effect) {
         super(effect);
     }
 

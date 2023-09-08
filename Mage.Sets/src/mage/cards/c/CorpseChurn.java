@@ -47,7 +47,7 @@ class CorpseChurnEffect extends OneShotEffect {
         this.staticText = ", then you may return a creature card from your graveyard to your hand";
     }
 
-    public CorpseChurnEffect(final CorpseChurnEffect effect) {
+    private CorpseChurnEffect(final CorpseChurnEffect effect) {
         super(effect);
     }
 

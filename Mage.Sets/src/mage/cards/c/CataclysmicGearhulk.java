@@ -84,7 +84,7 @@ class CataclysmicGearhulkEffect extends OneShotEffect {
                 "from among the nonland permanents they control, then sacrifices the rest";
     }
 
-    public CataclysmicGearhulkEffect(CataclysmicGearhulkEffect effect) {
+    private CataclysmicGearhulkEffect(final CataclysmicGearhulkEffect effect) {
         super(effect);
     }
 

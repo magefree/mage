@@ -42,7 +42,7 @@ class CowardiceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), false);
     }
 
-    public CowardiceTriggeredAbility(CowardiceTriggeredAbility ability) {
+    private CowardiceTriggeredAbility(final CowardiceTriggeredAbility ability) {
         super(ability);
     }
 

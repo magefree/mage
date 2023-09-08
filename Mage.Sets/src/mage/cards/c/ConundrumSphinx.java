@@ -58,7 +58,7 @@ class ConundrumSphinxEffect extends OneShotEffect {
                 "If it doesn't, that player puts it on the bottom of their library";
     }
 
-    public ConundrumSphinxEffect(final ConundrumSphinxEffect effect) {
+    private ConundrumSphinxEffect(final ConundrumSphinxEffect effect) {
         super(effect);
     }
 

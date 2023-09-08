@@ -48,7 +48,7 @@ class CondemnEffect extends OneShotEffect {
         staticText = "Its controller gains life equal to its toughness";
     }
 
-    public CondemnEffect(final CondemnEffect effect) {
+    private CondemnEffect(final CondemnEffect effect) {
         super(effect);
     }
 

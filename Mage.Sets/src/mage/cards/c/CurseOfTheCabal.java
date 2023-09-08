@@ -67,7 +67,7 @@ class CurseOfTheCabalSacrificeEffect extends OneShotEffect {
         this.staticText = "Target player sacrifices half the permanents they control, rounded down.";
     }
 
-    public CurseOfTheCabalSacrificeEffect(final CurseOfTheCabalSacrificeEffect effect) {
+    private CurseOfTheCabalSacrificeEffect(final CurseOfTheCabalSacrificeEffect effect) {
         super(effect);
     }
 
@@ -118,7 +118,7 @@ class CurseOfTheCabalInterveningIfTriggeredAbility extends ConditionalIntervenin
         // counters aren't placed
     }
 
-    public CurseOfTheCabalInterveningIfTriggeredAbility(final CurseOfTheCabalInterveningIfTriggeredAbility effect) {
+    private CurseOfTheCabalInterveningIfTriggeredAbility(final CurseOfTheCabalInterveningIfTriggeredAbility effect) {
         super(effect);
     }
 
@@ -150,7 +150,7 @@ class CurseOfTheCabalTriggeredAbilityConditionalDelay extends AddCountersSourceE
         return true;
     }
 
-    public CurseOfTheCabalTriggeredAbilityConditionalDelay(final CurseOfTheCabalTriggeredAbilityConditionalDelay effect) {
+    private CurseOfTheCabalTriggeredAbilityConditionalDelay(final CurseOfTheCabalTriggeredAbilityConditionalDelay effect) {
         super(effect);
     }
 

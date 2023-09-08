@@ -54,7 +54,7 @@ class CandlesGlowPreventDamageTargetEffect extends PreventionEffectImpl {
         staticText = "Prevent the next 3 damage that would be dealt to any target this turn. You gain life equal to the damage prevented this way";
     }
 
-    public CandlesGlowPreventDamageTargetEffect(final CandlesGlowPreventDamageTargetEffect effect) {
+    private CandlesGlowPreventDamageTargetEffect(final CandlesGlowPreventDamageTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

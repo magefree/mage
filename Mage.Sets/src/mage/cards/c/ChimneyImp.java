@@ -58,7 +58,7 @@ class ChimneyImpEffect extends OneShotEffect {
         this.staticText = "target opponent puts a card from their hand on top of their library.";
     }
 
-    public ChimneyImpEffect(final ChimneyImpEffect effect) {
+    private ChimneyImpEffect(final ChimneyImpEffect effect) {
         super(effect);
     }
 

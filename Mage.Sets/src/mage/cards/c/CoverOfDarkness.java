@@ -48,7 +48,7 @@ class FilterCoverOfDarkness extends FilterCreaturePermanent {
         super("creatures of the chosen type");
     }
 
-    public FilterCoverOfDarkness(final FilterCoverOfDarkness filter) {
+    private FilterCoverOfDarkness(final FilterCoverOfDarkness filter) {
         super(filter);
         this.subType = filter.subType;
     }

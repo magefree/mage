@@ -100,7 +100,7 @@ class CorrosionRemoveCountersEffect extends OneShotEffect {
         staticText = "remove all rust counters from all permanents";
     }
 
-    public CorrosionRemoveCountersEffect(final CorrosionRemoveCountersEffect effect) {
+    private CorrosionRemoveCountersEffect(final CorrosionRemoveCountersEffect effect) {
         super(effect);
     }
 

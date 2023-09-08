@@ -68,7 +68,7 @@ class ChromeMoxEffect extends OneShotEffect {
         staticText = "exile a nonartifact, nonland card from your hand";
     }
 
-    public ChromeMoxEffect(ChromeMoxEffect effect) {
+    private ChromeMoxEffect(final ChromeMoxEffect effect) {
         super(effect);
     }
 

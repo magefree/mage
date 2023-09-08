@@ -47,7 +47,7 @@ class CompellingDeterrenceEffect extends OneShotEffect {
         this.staticText = "return target nonland permanent to its owner's hand. Then that player discards a card if you control a Zombie";
     }
 
-    public CompellingDeterrenceEffect(final CompellingDeterrenceEffect effect) {
+    private CompellingDeterrenceEffect(final CompellingDeterrenceEffect effect) {
         super(effect);
     }
 

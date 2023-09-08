@@ -68,7 +68,7 @@ class ChaosphereEffect extends RestrictionEffect {
         staticText = "creatures with flying can block only creatures with flying";
     }
 
-    public ChaosphereEffect(final ChaosphereEffect effect) {
+    private ChaosphereEffect(final ChaosphereEffect effect) {
         super(effect);
     }
 
