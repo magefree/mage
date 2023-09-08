@@ -61,7 +61,7 @@ class DiscipleOfDeceitEffect extends OneShotEffect {
         this.staticText = "you may discard a nonland card. If you do, search your library for a card with the same mana value as that card, reveal it, put it into your hand, then shuffle";
     }
     
-    public DiscipleOfDeceitEffect(final DiscipleOfDeceitEffect effect) {
+    private DiscipleOfDeceitEffect(final DiscipleOfDeceitEffect effect) {
         super(effect);
     }
     

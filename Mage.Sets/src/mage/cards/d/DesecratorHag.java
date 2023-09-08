@@ -56,7 +56,7 @@ class DesecratorHagEffect extends OneShotEffect {
         this.staticText = "return to your hand the creature card in your graveyard with the greatest power. If two or more cards are tied for greatest power, you choose one of them";
     }
 
-    public DesecratorHagEffect(final DesecratorHagEffect effect) {
+    private DesecratorHagEffect(final DesecratorHagEffect effect) {
         super(effect);
     }
 

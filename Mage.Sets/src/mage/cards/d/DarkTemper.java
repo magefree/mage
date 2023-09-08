@@ -47,7 +47,7 @@ class DarkTemperEffect extends OneShotEffect {
         this.staticText = "{this} deals 2 damage to target creature. If you control a black permanent, destroy the creature instead";
     }
 
-    public DarkTemperEffect(final DarkTemperEffect effect) {
+    private DarkTemperEffect(final DarkTemperEffect effect) {
         super(effect);
     }
 

@@ -59,7 +59,7 @@ class DarigaazTheIgniterEffect extends OneShotEffect {
                 + " to the player equal to the number of cards of that color revealed this way";
     }
 
-    public DarigaazTheIgniterEffect(final DarigaazTheIgniterEffect effect) {
+    private DarigaazTheIgniterEffect(final DarigaazTheIgniterEffect effect) {
         super(effect);
     }
 

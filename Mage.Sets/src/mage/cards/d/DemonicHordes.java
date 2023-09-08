@@ -70,7 +70,7 @@ class DemonicHordesEffect extends OneShotEffect {
         staticText = "unless you pay {B}{B}{B}, tap {this} and sacrifice a land of an opponent's choice";
     }
 
-    public DemonicHordesEffect(final DemonicHordesEffect effect) {
+    private DemonicHordesEffect(final DemonicHordesEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

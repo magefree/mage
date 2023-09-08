@@ -47,7 +47,7 @@ class ExhumeEffect extends OneShotEffect {
         this.staticText = "Each player puts a creature card from their graveyard onto the battlefield";
     }
 
-    public ExhumeEffect(final ExhumeEffect effect) {
+    private ExhumeEffect(final ExhumeEffect effect) {
         super(effect);
     }
 

@@ -110,7 +110,7 @@ class DreadWightEffect extends OneShotEffect {
                 + "Each of those creatures gains \"{4}: Remove a paralyzation counter from this creature.\"";
     }
 
-    public DreadWightEffect(final DreadWightEffect effect) {
+    private DreadWightEffect(final DreadWightEffect effect) {
         super(effect);
     }
 
@@ -172,7 +172,7 @@ class DreadWightDoNotUntapEffect extends ContinuousRuleModifyingEffectImpl {
         this.permanentId = permanentId;
     }
 
-    public DreadWightDoNotUntapEffect(final DreadWightDoNotUntapEffect effect) {
+    private DreadWightDoNotUntapEffect(final DreadWightDoNotUntapEffect effect) {
         super(effect);
         this.permanentId = effect.permanentId;
     }

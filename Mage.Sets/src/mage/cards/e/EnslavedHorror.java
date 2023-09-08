@@ -54,7 +54,7 @@ class EnslavedHorrorEffect extends OneShotEffect {
         this.staticText = "each other player may put a creature card from their graveyard onto the battlefield";
     }
 
-    public EnslavedHorrorEffect(final EnslavedHorrorEffect effect) {
+    private EnslavedHorrorEffect(final EnslavedHorrorEffect effect) {
         super(effect);
     }
 

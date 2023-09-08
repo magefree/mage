@@ -49,7 +49,7 @@ class ElixerOfImmortalityEffect extends OneShotEffect {
         staticText = "You gain 5 life. Shuffle {this} and your graveyard into their owner's library";
     }
 
-    public ElixerOfImmortalityEffect(final ElixerOfImmortalityEffect effect) {
+    private ElixerOfImmortalityEffect(final ElixerOfImmortalityEffect effect) {
         super(effect);
     }
 

@@ -73,7 +73,7 @@ class DjeruWithEyesOpenPreventEffect extends PreventionEffectImpl {
         this.staticText = "If a source would deal damage to a planeswalker you control, prevent 1 of that damage";
     }
 
-    public DjeruWithEyesOpenPreventEffect(DjeruWithEyesOpenPreventEffect effect) {
+    private DjeruWithEyesOpenPreventEffect(final DjeruWithEyesOpenPreventEffect effect) {
         super(effect);
     }
 

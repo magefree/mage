@@ -70,7 +70,7 @@ class EmrakulsEvangelCost extends CostImpl {
         this.text = "Sacrifice {this} and any number of other non-Eldrazi creatures";
     }
 
-    public EmrakulsEvangelCost(EmrakulsEvangelCost cost) {
+    private EmrakulsEvangelCost(final EmrakulsEvangelCost cost) {
         super(cost);
         this.numSacrificed = cost.getNumSacrificed();
     }

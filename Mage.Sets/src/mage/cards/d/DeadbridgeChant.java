@@ -49,7 +49,7 @@ class DeadbridgeChantEffect extends OneShotEffect {
         this.staticText = "choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand";
     }
 
-    public DeadbridgeChantEffect(final DeadbridgeChantEffect effect) {
+    private DeadbridgeChantEffect(final DeadbridgeChantEffect effect) {
         super(effect);
     }
 

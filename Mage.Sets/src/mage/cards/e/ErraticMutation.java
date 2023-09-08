@@ -50,7 +50,7 @@ class ErraticMutationEffect extends OneShotEffect {
         this.staticText = "Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's mana value. Put all cards revealed this way on the bottom of your library in any order";
     }
 
-    public ErraticMutationEffect(final ErraticMutationEffect effect) {
+    private ErraticMutationEffect(final ErraticMutationEffect effect) {
         super(effect);
     }
 

@@ -88,7 +88,7 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
         staticText = "sacrifice {this} unless you pay {10}. This cost is reduced by {2} for each basic land type among lands you control.";
     }
 
-    public DracoSacrificeUnlessPaysEffect(final DracoSacrificeUnlessPaysEffect effect) {
+    private DracoSacrificeUnlessPaysEffect(final DracoSacrificeUnlessPaysEffect effect) {
         super(effect);
     }
 

@@ -48,7 +48,7 @@ class DazzlingReflectionEffect extends OneShotEffect {
         this.staticText = "You gain life equal to target creature's power. The next time that creature would deal damage this turn, prevent that damage";
     }
 
-    public DazzlingReflectionEffect(final DazzlingReflectionEffect effect) {
+    private DazzlingReflectionEffect(final DazzlingReflectionEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class DazzlingReflectionPreventEffect extends PreventionEffectImpl {
         staticText = "The next time that creature would deal damage this turn, prevent that damage";
     }
 
-    public DazzlingReflectionPreventEffect(final DazzlingReflectionPreventEffect effect) {
+    private DazzlingReflectionPreventEffect(final DazzlingReflectionPreventEffect effect) {
         super(effect);
     }
 

@@ -82,7 +82,7 @@ class EstridTheMaskedTokenEffect extends OneShotEffect {
                 + "The token has enchant permanent and totem armor";
     }
 
-    public EstridTheMaskedTokenEffect(final EstridTheMaskedTokenEffect effect) {
+    private EstridTheMaskedTokenEffect(final EstridTheMaskedTokenEffect effect) {
         super(effect);
     }
 
@@ -121,7 +121,7 @@ class EstridTheMaskedGraveyardEffect extends OneShotEffect {
                 + "then do the same for Aura cards";
     }
 
-    public EstridTheMaskedGraveyardEffect(final EstridTheMaskedGraveyardEffect effect) {
+    private EstridTheMaskedGraveyardEffect(final EstridTheMaskedGraveyardEffect effect) {
         super(effect);
     }
 

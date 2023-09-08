@@ -97,7 +97,7 @@ class ElvishBranchbenderToken extends TokenImpl {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
     }
-    public ElvishBranchbenderToken(final ElvishBranchbenderToken token) {
+    private ElvishBranchbenderToken(final ElvishBranchbenderToken token) {
         super(token);
     }
 

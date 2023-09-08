@@ -65,7 +65,7 @@ class EpochrasiteEffect extends OneShotEffect {
         this.staticText = "exile it with three time counters on it and it gains suspend";
     }
 
-    public EpochrasiteEffect(final EpochrasiteEffect effect) {
+    private EpochrasiteEffect(final EpochrasiteEffect effect) {
         super(effect);
     }
 

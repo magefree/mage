@@ -59,7 +59,7 @@ class DawnOfTheDeadEffect extends OneShotEffect {
         this.staticText = "return target creature card from your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step";
     }
 
-    public DawnOfTheDeadEffect(final DawnOfTheDeadEffect effect) {
+    private DawnOfTheDeadEffect(final DawnOfTheDeadEffect effect) {
         super(effect);
     }
 

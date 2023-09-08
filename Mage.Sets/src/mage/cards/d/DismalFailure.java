@@ -43,7 +43,7 @@ class DismalFailureEffect extends OneShotEffect {
         this.staticText = "Counter target spell. Its controller discards a card";
     }
 
-    public DismalFailureEffect(final DismalFailureEffect effect) {
+    private DismalFailureEffect(final DismalFailureEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class MichonneRuthlessSurvivorAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public MichonneRuthlessSurvivorAbility(final MichonneRuthlessSurvivorAbility ability) {
+    private MichonneRuthlessSurvivorAbility(final MichonneRuthlessSurvivorAbility ability) {
         super(ability);
     }
 

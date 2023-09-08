@@ -59,7 +59,7 @@ class DisappearEffect extends OneShotEffect {
         staticText = "Return enchanted creature and {this} to their owners' hands";
     }
 
-    public DisappearEffect(final DisappearEffect effect) {
+    private DisappearEffect(final DisappearEffect effect) {
         super(effect);
     }
 

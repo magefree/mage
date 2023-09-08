@@ -68,7 +68,7 @@ class ExperimentKrajEffect extends ContinuousEffectImpl {
         staticText = "{this} has all activated abilities of each other creature with a +1/+1 counter on it";
     }
 
-    public ExperimentKrajEffect(final ExperimentKrajEffect effect) {
+    private ExperimentKrajEffect(final ExperimentKrajEffect effect) {
         super(effect);
     }
 

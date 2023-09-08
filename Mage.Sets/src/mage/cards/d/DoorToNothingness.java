@@ -55,7 +55,7 @@ class DoorToNothingnessEffect extends OneShotEffect {
         this.staticText = "Target player loses the game";
     }
 
-    public DoorToNothingnessEffect(final DoorToNothingnessEffect effect) {
+    private DoorToNothingnessEffect(final DoorToNothingnessEffect effect) {
         super(effect);
     }
 

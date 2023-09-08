@@ -49,7 +49,7 @@ class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ElectropotenceEffect());
     }
 
-    public ElectropotenceTriggeredAbility(ElectropotenceTriggeredAbility ability) {
+    private ElectropotenceTriggeredAbility(final ElectropotenceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -86,7 +86,7 @@ class ElectropotenceEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    public ElectropotenceEffect(final ElectropotenceEffect effect) {
+    private ElectropotenceEffect(final ElectropotenceEffect effect) {
         super(effect);
     }
 

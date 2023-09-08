@@ -52,7 +52,7 @@ class DismantleEffect extends OneShotEffect {
 
     }
 
-    public DismantleEffect(final DismantleEffect effect) {
+    private DismantleEffect(final DismantleEffect effect) {
         super(effect);
     }
 
