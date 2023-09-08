@@ -56,7 +56,7 @@ class BackFromTheBrinkCost extends CostImpl {
         this.text = "Exile a creature card from your graveyard and pay its mana cost";
     }
 
-    public BackFromTheBrinkCost(final BackFromTheBrinkCost cost) {
+    private BackFromTheBrinkCost(final BackFromTheBrinkCost cost) {
         super(cost);
     }
 

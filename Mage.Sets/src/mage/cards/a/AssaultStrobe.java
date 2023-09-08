@@ -24,7 +24,7 @@ public final class AssaultStrobe extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public AssaultStrobe (final AssaultStrobe card) {
+    private AssaultStrobe(final AssaultStrobe card) {
         super(card);
     }
 

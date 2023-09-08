@@ -26,7 +26,7 @@ public final class AccorderPaladin extends CardImpl {
         this.addAbility(new BattleCryAbility());
     }
 
-    public AccorderPaladin (final AccorderPaladin card) {
+    private AccorderPaladin(final AccorderPaladin card) {
         super(card);
     }
 

@@ -63,7 +63,7 @@ class ReturnToHandEffect extends OneShotEffect {
         staticText = "That player returns a permanent they control to its owner's hand";
     }
 
-    public ReturnToHandEffect(final ReturnToHandEffect effect) {
+    private ReturnToHandEffect(final ReturnToHandEffect effect) {
         super(effect);
     }
 

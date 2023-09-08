@@ -75,7 +75,7 @@ class DynamicTargetCreaturePermanent extends TargetPermanent {
         super(StaticFilters.FILTER_PERMANENT_CREATURES);
     }
 
-    public DynamicTargetCreaturePermanent(final DynamicTargetCreaturePermanent target) {
+    private DynamicTargetCreaturePermanent(final DynamicTargetCreaturePermanent target) {
         super(target);
     }
 

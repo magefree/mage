@@ -55,7 +55,7 @@ class BodyDoubleCopyEffect extends OneShotEffect {
         this.staticText = "as a copy of any creature card in a graveyard";
     }
 
-    public BodyDoubleCopyEffect(final BodyDoubleCopyEffect effect) {
+    private BodyDoubleCopyEffect(final BodyDoubleCopyEffect effect) {
         super(effect);
     }
 

@@ -39,7 +39,7 @@ public final class BronzebeakMoa extends CardImpl {
 
     }
 
-    public BronzebeakMoa (final BronzebeakMoa card) {
+    private BronzebeakMoa(final BronzebeakMoa card) {
         super(card);
     }
 

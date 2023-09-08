@@ -58,7 +58,7 @@ class AssemblyHallEffect extends OneShotEffect {
                 + "reveal it, and put it into your hand. Then shuffle";
     }
 
-    public AssemblyHallEffect(final AssemblyHallEffect effect) {
+    private AssemblyHallEffect(final AssemblyHallEffect effect) {
         super(effect);
     }
 

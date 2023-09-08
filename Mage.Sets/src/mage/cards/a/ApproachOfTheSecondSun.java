@@ -52,7 +52,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
                 + "Otherwise, put {this} into its owner's library seventh from the top and you gain 7 life.";
     }
 
-    public ApproachOfTheSecondSunEffect(final ApproachOfTheSecondSunEffect effect) {
+    private ApproachOfTheSecondSunEffect(final ApproachOfTheSecondSunEffect effect) {
         super(effect);
     }
 

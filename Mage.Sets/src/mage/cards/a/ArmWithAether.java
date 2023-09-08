@@ -51,7 +51,7 @@ class ArmWithAetherTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), true);
     }
 
-    public ArmWithAetherTriggeredAbility(final ArmWithAetherTriggeredAbility ability) {
+    private ArmWithAetherTriggeredAbility(final ArmWithAetherTriggeredAbility ability) {
         super(ability);
     }
 

@@ -55,7 +55,7 @@ class BloodlineShamanEffect extends OneShotEffect {
                 + "Otherwise, put it into your graveyard";
     }
 
-    public BloodlineShamanEffect(final BloodlineShamanEffect effect) {
+    private BloodlineShamanEffect(final BloodlineShamanEffect effect) {
         super(effect);
     }
 

@@ -60,7 +60,7 @@ class AltarOfShadowsEffect extends OneShotEffect {
         this.staticText = "add {B} for each charge counter on Altar of Shadows";
     }
 
-    public AltarOfShadowsEffect(final AltarOfShadowsEffect effect) {
+    private AltarOfShadowsEffect(final AltarOfShadowsEffect effect) {
         super(effect);
     }
 

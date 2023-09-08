@@ -51,7 +51,7 @@ class AetherRiftEffect extends OneShotEffect {
         this.staticText = "discard a card at random. If you discard a creature card this way, return it from your graveyard to the battlefield unless any player pays 5 life";
     }
 
-    public AetherRiftEffect(final AetherRiftEffect effect) {
+    private AetherRiftEffect(final AetherRiftEffect effect) {
         super(effect);
     }
 

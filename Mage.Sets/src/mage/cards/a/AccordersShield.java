@@ -30,7 +30,7 @@ public final class AccordersShield extends CardImpl {
 
     }
 
-    public AccordersShield (final AccordersShield card) {
+    private AccordersShield(final AccordersShield card) {
         super(card);
     }
 

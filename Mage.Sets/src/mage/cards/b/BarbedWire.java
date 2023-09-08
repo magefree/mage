@@ -60,7 +60,7 @@ class BarbwireDamageEffect extends OneShotEffect {
         this.staticText = "";
     }
 
-    public BarbwireDamageEffect(final BarbwireDamageEffect effect) {
+    private BarbwireDamageEffect(final BarbwireDamageEffect effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class BarbedWirePreventionEffect extends PreventionEffectImpl {
         staticText = "Prevent the next 1 damage that would be dealt by {this} this turn";
     }
 
-    public BarbedWirePreventionEffect(final BarbedWirePreventionEffect effect) {
+    private BarbedWirePreventionEffect(final BarbedWirePreventionEffect effect) {
         super(effect);
     }
 

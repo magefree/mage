@@ -34,7 +34,7 @@ public final class Befoul extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public Befoul (final Befoul card) {
+    private Befoul(final Befoul card) {
         super(card);
     }
 

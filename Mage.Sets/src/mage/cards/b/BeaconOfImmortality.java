@@ -47,7 +47,7 @@ class BeaconOfImmortalityEffect extends OneShotEffect {
         this.staticText = "Double target player's life total";
     }
 
-    public BeaconOfImmortalityEffect(final BeaconOfImmortalityEffect effect) {
+    private BeaconOfImmortalityEffect(final BeaconOfImmortalityEffect effect) {
         super(effect);
     }
 

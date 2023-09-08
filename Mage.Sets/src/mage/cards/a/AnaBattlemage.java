@@ -75,7 +75,7 @@ class AnaBattlemageKickerEffect extends OneShotEffect {
         this.staticText = "tap target untapped creature and it deals damage equal to its power to its controller";
     }
 
-    public AnaBattlemageKickerEffect(final AnaBattlemageKickerEffect effect) {
+    private AnaBattlemageKickerEffect(final AnaBattlemageKickerEffect effect) {
         super(effect);
     }
 

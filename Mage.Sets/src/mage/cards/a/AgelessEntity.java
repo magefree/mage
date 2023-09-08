@@ -49,7 +49,7 @@ class AgelessEntityEffect extends OneShotEffect {
         this.staticText = "put that many +1/+1 counters on {this}";
     }
 
-    public AgelessEntityEffect(final AgelessEntityEffect effect) {
+    private AgelessEntityEffect(final AgelessEntityEffect effect) {
         super(effect);
     }
 

@@ -61,7 +61,7 @@ class AntiMagicAuraRuleEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "and can't be enchanted by other Auras";
     }
 
-    public AntiMagicAuraRuleEffect(final AntiMagicAuraRuleEffect effect) {
+    private AntiMagicAuraRuleEffect(final AntiMagicAuraRuleEffect effect) {
         super(effect);
     }
 

@@ -34,7 +34,7 @@ public final class AffaGuardHound extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AffaGuardHound (final AffaGuardHound card) {
+    private AffaGuardHound(final AffaGuardHound card) {
         super(card);
     }
 

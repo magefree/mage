@@ -66,7 +66,7 @@ class BiolumeEggEffect extends OneShotEffect {
         this.staticText = "return it to the battlefield transformed under your control";
     }
 
-    public BiolumeEggEffect(final BiolumeEggEffect effect) {
+    private BiolumeEggEffect(final BiolumeEggEffect effect) {
         super(effect);
     }
 

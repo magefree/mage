@@ -55,7 +55,7 @@ class EnchantedCreatureColorsCount implements DynamicValue {
     public EnchantedCreatureColorsCount() {
     }
 
-    public EnchantedCreatureColorsCount(final EnchantedCreatureColorsCount dynamicValue) {
+    private EnchantedCreatureColorsCount(final EnchantedCreatureColorsCount dynamicValue) {
     }
 
     @Override

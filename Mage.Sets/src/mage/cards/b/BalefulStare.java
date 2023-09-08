@@ -76,7 +76,7 @@ class BalefulStareEffect extends OneShotEffect {
         return false;
     }
 
-    public BalefulStareEffect(final BalefulStareEffect effect) {
+    private BalefulStareEffect(final BalefulStareEffect effect) {
         super(effect);
     }
 

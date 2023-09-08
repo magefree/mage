@@ -52,7 +52,7 @@ class BendOrBreakEffect extends OneShotEffect {
         this.staticText = "Each player separates all nontoken lands they control into two piles. For each player, one of their piles is chosen by one of their opponents of their choice. Destroy all lands in the chosen piles. Tap all lands in the other piles";
     }
 
-    public BendOrBreakEffect(final BendOrBreakEffect effect) {
+    private BendOrBreakEffect(final BendOrBreakEffect effect) {
         super(effect);
     }
 

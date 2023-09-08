@@ -57,7 +57,7 @@ class AlignedHedronNetworkExileEffect extends OneShotEffect {
         this.staticText = "exile all creatures with power 5 or greater until {this} leaves the battlefield";
     }
 
-    public AlignedHedronNetworkExileEffect(final AlignedHedronNetworkExileEffect effect) {
+    private AlignedHedronNetworkExileEffect(final AlignedHedronNetworkExileEffect effect) {
         super(effect);
     }
 

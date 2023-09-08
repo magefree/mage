@@ -61,7 +61,7 @@ class AuraFinesseEffect extends OneShotEffect {
         this.staticText = "Attach target Aura you control to target creature";
     }
 
-    public AuraFinesseEffect(final AuraFinesseEffect effect) {
+    private AuraFinesseEffect(final AuraFinesseEffect effect) {
         super(effect);
     }
 

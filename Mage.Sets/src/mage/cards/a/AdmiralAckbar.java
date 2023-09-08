@@ -65,7 +65,7 @@ class AdmiralAckbarTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public AdmiralAckbarTriggeredAbility(final AdmiralAckbarTriggeredAbility ability) {
+    private AdmiralAckbarTriggeredAbility(final AdmiralAckbarTriggeredAbility ability) {
         super(ability);
     }
 

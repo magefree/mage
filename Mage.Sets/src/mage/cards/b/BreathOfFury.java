@@ -60,7 +60,7 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When enchanted creature deals combat damage to a player, ");
     }
 
-    public BreathOfFuryAbility(final BreathOfFuryAbility ability) {
+    private BreathOfFuryAbility(final BreathOfFuryAbility ability) {
         super(ability);
     }
 
@@ -100,7 +100,7 @@ class BreathOfFuryEffect extends OneShotEffect {
         staticText = "sacrifice it and attach {this} to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase";
     }
 
-    public BreathOfFuryEffect(final BreathOfFuryEffect effect) {
+    private BreathOfFuryEffect(final BreathOfFuryEffect effect) {
         super(effect);
     }
 
