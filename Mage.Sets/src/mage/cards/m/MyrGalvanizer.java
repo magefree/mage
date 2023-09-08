@@ -62,7 +62,7 @@ class MyrGalvanizerEffect extends OneShotEffect {
         staticText = "Untap each other Myr you control";
     }
 
-    MyrGalvanizerEffect(final MyrGalvanizerEffect effect) {
+    private MyrGalvanizerEffect(final MyrGalvanizerEffect effect) {
         super(effect);
     }
 

@@ -97,7 +97,7 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect {
         staticText = effectText;
     }
 
-    KondasBannerTypeBoostEffect(KondasBannerTypeBoostEffect effect) {
+    private KondasBannerTypeBoostEffect(final KondasBannerTypeBoostEffect effect) {
         super(effect);
     }
 
@@ -137,7 +137,7 @@ class KondasBannerColorBoostEffect extends BoostAllEffect {
         staticText = effectText;
     }
 
-    KondasBannerColorBoostEffect(KondasBannerColorBoostEffect effect) {
+    private KondasBannerColorBoostEffect(final KondasBannerColorBoostEffect effect) {
         super(effect);
     }
 

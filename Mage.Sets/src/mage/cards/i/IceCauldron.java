@@ -121,7 +121,7 @@ class IceCauldronCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "You may cast that card for as long as it remains exiled";
     }
 
-    IceCauldronCastFromExileEffect(final IceCauldronCastFromExileEffect effect) {
+    private IceCauldronCastFromExileEffect(final IceCauldronCastFromExileEffect effect) {
         super(effect);
     }
 
@@ -191,7 +191,7 @@ class IceCauldronAddManaEffect extends ManaEffect {
         staticText = "Add {this}'s last noted type and amount of mana. Spend this mana only to cast the last card exiled with {this}";
     }
 
-    IceCauldronAddManaEffect(IceCauldronAddManaEffect effect) {
+    private IceCauldronAddManaEffect(final IceCauldronAddManaEffect effect) {
         super(effect);
         storedMana = effect.storedMana == null ? null : effect.storedMana.copy();
         exiledCardMor = effect.exiledCardMor;

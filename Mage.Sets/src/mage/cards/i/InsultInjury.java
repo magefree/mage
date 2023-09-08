@@ -100,7 +100,7 @@ class InjuryEffect extends OneShotEffect {
         this.staticText = "{this} deals 2 damage to target creature and 2 damage to target player or planeswalker";
     }
 
-    InjuryEffect(final InjuryEffect effect) {
+    private InjuryEffect(final InjuryEffect effect) {
         super(effect);
     }
 

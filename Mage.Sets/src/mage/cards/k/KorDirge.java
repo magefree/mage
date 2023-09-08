@@ -58,7 +58,7 @@ class KorDirgeEffect extends RedirectionEffect {
         staticText = "All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead";
     }
 
-    KorDirgeEffect(final KorDirgeEffect effect) {
+    private KorDirgeEffect(final KorDirgeEffect effect) {
         super(effect);
         this.target = effect.target;
     }

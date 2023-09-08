@@ -93,7 +93,7 @@ class LodestoneBaubleEffect extends OneShotEffect {
         this.staticText = "Put up to four target basic land cards from a player's graveyard on top of their library in any order";
     }
 
-    LodestoneBaubleEffect(final LodestoneBaubleEffect effect) {
+    private LodestoneBaubleEffect(final LodestoneBaubleEffect effect) {
         super(effect);
     }
 

@@ -136,7 +136,7 @@ class IntellectDevourerPlayFromExileEffect extends AsThoughEffectImpl {
         staticText = "You may play lands and cast spells from among cards exiled with {this}";
     }
 
-    IntellectDevourerPlayFromExileEffect(final IntellectDevourerPlayFromExileEffect effect) {super(effect);}
+    private IntellectDevourerPlayFromExileEffect(final IntellectDevourerPlayFromExileEffect effect) {super(effect);}
 
     @Override
     public boolean apply(Game game, Ability source) {return true;}

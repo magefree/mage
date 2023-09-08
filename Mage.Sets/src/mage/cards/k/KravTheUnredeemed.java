@@ -65,7 +65,7 @@ class KravTheUnredeemedEffect extends OneShotEffect {
         this.staticText = "Target player draws X cards and gains X life. Put X +1/+1 counters on {this}";
     }
 
-    KravTheUnredeemedEffect(final KravTheUnredeemedEffect effect) {
+    private KravTheUnredeemedEffect(final KravTheUnredeemedEffect effect) {
         super(effect);
     }
 

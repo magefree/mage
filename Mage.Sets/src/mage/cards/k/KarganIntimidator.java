@@ -87,7 +87,7 @@ class KarganIntimidatorEffect extends RestrictionEffect {
         staticText = "Cowards can't block Warriors";
     }
 
-    KarganIntimidatorEffect(final KarganIntimidatorEffect effect) {
+    private KarganIntimidatorEffect(final KarganIntimidatorEffect effect) {
         super(effect);
     }
 

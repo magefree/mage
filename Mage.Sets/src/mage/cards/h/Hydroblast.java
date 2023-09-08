@@ -50,7 +50,7 @@ class HydroblastCounterEffect extends OneShotEffect {
         this.staticText = "Counter target spell if it's red";
     }
 
-    HydroblastCounterEffect(final HydroblastCounterEffect effect) {
+    private HydroblastCounterEffect(final HydroblastCounterEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class HydroblastDestroyEffect extends OneShotEffect {
         this.staticText = "destroy target permanent if it's red";
     }
 
-    HydroblastDestroyEffect(final HydroblastDestroyEffect effect) {
+    private HydroblastDestroyEffect(final HydroblastDestroyEffect effect) {
         super(effect);
     }
 

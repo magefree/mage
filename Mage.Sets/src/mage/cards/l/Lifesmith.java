@@ -48,7 +48,7 @@ class LifesmithEffect extends OneShotEffect {
         staticText = "you may pay {1}. If you do, you gain 3 life";
     }
 
-    LifesmithEffect(final LifesmithEffect effect) {
+    private LifesmithEffect(final LifesmithEffect effect) {
         super(effect);
     }
 

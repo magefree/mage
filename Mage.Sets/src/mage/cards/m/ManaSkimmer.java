@@ -54,7 +54,7 @@ class ManaSkimmerTriggeredAbility extends TriggeredAbilityImpl {
         addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
     }
 
-    ManaSkimmerTriggeredAbility(ManaSkimmerTriggeredAbility ability) {
+    private ManaSkimmerTriggeredAbility(final ManaSkimmerTriggeredAbility ability) {
         super(ability);
     }
 

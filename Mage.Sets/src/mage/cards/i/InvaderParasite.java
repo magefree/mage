@@ -62,7 +62,7 @@ class InvaderParasiteImprintEffect extends OneShotEffect {
         staticText = "exile target land";
     }
 
-    InvaderParasiteImprintEffect(final InvaderParasiteImprintEffect effect) {
+    private InvaderParasiteImprintEffect(final InvaderParasiteImprintEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }
 
-    InvaderParasiteTriggeredAbility(final InvaderParasiteTriggeredAbility ability) {
+    private InvaderParasiteTriggeredAbility(final InvaderParasiteTriggeredAbility ability) {
         super(ability);
     }
 

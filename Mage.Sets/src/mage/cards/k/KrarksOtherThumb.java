@@ -46,7 +46,7 @@ class KrarksOtherThumbEffect extends ReplacementEffectImpl {
         staticText = "if you would roll a die, instead roll two of those dice and ignore one of those results";
     }
 
-    KrarksOtherThumbEffect(final KrarksOtherThumbEffect effect) {
+    private KrarksOtherThumbEffect(final KrarksOtherThumbEffect effect) {
         super(effect);
     }
 

@@ -69,7 +69,7 @@ class MagneticMountainEffect extends OneShotEffect {
         staticText = "that player may choose any number of tapped blue creatures they control and pay {4} for each creature chosen this way. If the player does, untap those creatures.";
     }
 
-    MagneticMountainEffect(MagneticMountainEffect effect) {
+    private MagneticMountainEffect(final MagneticMountainEffect effect) {
         super(effect);
     }
 

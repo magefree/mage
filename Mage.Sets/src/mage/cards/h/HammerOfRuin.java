@@ -59,7 +59,7 @@ class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
     }
 
-    HammerOfRuinTriggeredAbility(final HammerOfRuinTriggeredAbility ability) {
+    private HammerOfRuinTriggeredAbility(final HammerOfRuinTriggeredAbility ability) {
         super(ability);
     }
 

@@ -57,7 +57,7 @@ class NetherTraitorTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
     }
     
-    NetherTraitorTriggeredAbility(final NetherTraitorTriggeredAbility ability) {
+    private NetherTraitorTriggeredAbility(final NetherTraitorTriggeredAbility ability) {
         super(ability);
     }
     

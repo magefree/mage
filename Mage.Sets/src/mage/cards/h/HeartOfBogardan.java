@@ -53,7 +53,7 @@ class HeartOfBogardanTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    HeartOfBogardanTriggeredAbility(final HeartOfBogardanTriggeredAbility ability) {
+    private HeartOfBogardanTriggeredAbility(final HeartOfBogardanTriggeredAbility ability) {
         super(ability);
     }
 

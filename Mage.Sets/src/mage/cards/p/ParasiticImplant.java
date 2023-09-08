@@ -55,7 +55,7 @@ class ParasiticImplantEffect extends OneShotEffect {
         staticText = "enchanted creature's controller sacrifices it";
     }
 
-    ParasiticImplantEffect(final ParasiticImplantEffect effect) {
+    private ParasiticImplantEffect(final ParasiticImplantEffect effect) {
         super(effect);
     }
 

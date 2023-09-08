@@ -91,7 +91,7 @@ class MeriekeRiBeritDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new DestroyTargetEffect(true), Duration.Custom, true);
     }
 
-    MeriekeRiBeritDelayedTriggeredAbility(MeriekeRiBeritDelayedTriggeredAbility ability) {
+    private MeriekeRiBeritDelayedTriggeredAbility(final MeriekeRiBeritDelayedTriggeredAbility ability) {
         super(ability);
     }
 

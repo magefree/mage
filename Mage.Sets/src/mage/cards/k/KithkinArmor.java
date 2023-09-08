@@ -143,7 +143,7 @@ class KithkinArmorPreventionEffect extends PreventionEffectImpl {
         staticText = "The next time a source of your choice would deal damage to enchanted creature this turn, prevent that damage";
     }
 
-    KithkinArmorPreventionEffect(final KithkinArmorPreventionEffect effect) {
+    private KithkinArmorPreventionEffect(final KithkinArmorPreventionEffect effect) {
         super(effect);
     }
 

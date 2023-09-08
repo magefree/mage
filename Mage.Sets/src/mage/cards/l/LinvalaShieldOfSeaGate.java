@@ -83,7 +83,7 @@ class LinvalaShieldOfSeaGateRestrictionEffect extends RestrictionEffect {
         super(Duration.UntilYourNextTurn, Outcome.UnboostCreature);
     }
 
-    LinvalaShieldOfSeaGateRestrictionEffect(final LinvalaShieldOfSeaGateRestrictionEffect effect) {
+    private LinvalaShieldOfSeaGateRestrictionEffect(final LinvalaShieldOfSeaGateRestrictionEffect effect) {
         super(effect);
     }
 

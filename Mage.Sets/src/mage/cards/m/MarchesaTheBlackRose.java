@@ -109,7 +109,7 @@ class MarchesaTheBlackRoseEffect extends OneShotEffect {
         this.staticText = "return that card to the battlefield under your control at the beginning of the next end step.";
     }
 
-    MarchesaTheBlackRoseEffect(final MarchesaTheBlackRoseEffect effect) {
+    private MarchesaTheBlackRoseEffect(final MarchesaTheBlackRoseEffect effect) {
         super(effect);
     }
 

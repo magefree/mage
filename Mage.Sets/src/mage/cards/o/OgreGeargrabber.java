@@ -101,7 +101,7 @@ class OgreGeargrabberDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.equipmentId = equipmentId;
     }
 
-    OgreGeargrabberDelayedTriggeredAbility(OgreGeargrabberDelayedTriggeredAbility ability) {
+    private OgreGeargrabberDelayedTriggeredAbility(final OgreGeargrabberDelayedTriggeredAbility ability) {
         super(ability);
         this.equipmentId = ability.equipmentId;
     }

@@ -55,7 +55,7 @@ class PsychoticEpisodeEffect extends OneShotEffect {
         staticText = "Target player reveals their hand and the top card of their library. You choose a card revealed this way. That player puts the chosen card on the bottom of their library.";
     }
 
-    PsychoticEpisodeEffect(final PsychoticEpisodeEffect effect) {
+    private PsychoticEpisodeEffect(final PsychoticEpisodeEffect effect) {
         super(effect);
     }
 

@@ -72,7 +72,7 @@ class MairsilThePretenderExileEffect extends OneShotEffect {
         this.staticText = "you may exile an artifact or creature card from your hand or graveyard and put a cage counter on it.";
     }
 
-    MairsilThePretenderExileEffect(final MairsilThePretenderExileEffect effect) {
+    private MairsilThePretenderExileEffect(final MairsilThePretenderExileEffect effect) {
         super(effect);
     }
 

@@ -64,7 +64,7 @@ class PlungeIntoDarknessLifeEffect extends OneShotEffect {
         this.staticText = "Sacrifice any number of creatures, then you gain 3 life for each sacrificed creature";
     }
 
-    PlungeIntoDarknessLifeEffect(final PlungeIntoDarknessLifeEffect effect) {
+    private PlungeIntoDarknessLifeEffect(final PlungeIntoDarknessLifeEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class PlungeIntoDarknessSearchEffect extends OneShotEffect {
         this.staticText = "pay X life, then look at the top X cards of your library, put one of those cards into your hand, and exile the rest.";
     }
 
-    PlungeIntoDarknessSearchEffect(final PlungeIntoDarknessSearchEffect effect) {
+    private PlungeIntoDarknessSearchEffect(final PlungeIntoDarknessSearchEffect effect) {
         super(effect);
     }
 

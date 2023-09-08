@@ -48,7 +48,7 @@ class MoralityShiftEffect extends OneShotEffect {
         staticText = "Exchange your graveyard and library. Then shuffle your library.";
     }
 
-    MoralityShiftEffect(MoralityShiftEffect effect) {
+    private MoralityShiftEffect(final MoralityShiftEffect effect) {
         super(effect);
     }
 

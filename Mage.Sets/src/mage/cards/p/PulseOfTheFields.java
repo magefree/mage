@@ -45,7 +45,7 @@ class PulseOfTheFieldsReturnToHandEffect extends OneShotEffect {
         this.staticText = "Then if an opponent has more life than you, return {this} to its owner's hand";
     }
 
-    PulseOfTheFieldsReturnToHandEffect(final PulseOfTheFieldsReturnToHandEffect effect) {
+    private PulseOfTheFieldsReturnToHandEffect(final PulseOfTheFieldsReturnToHandEffect effect) {
         super(effect);
     }
 

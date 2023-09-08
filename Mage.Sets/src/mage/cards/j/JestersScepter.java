@@ -198,7 +198,7 @@ class JestersScepterCounterEffect extends OneShotEffect {
         staticText = "Counter target spell if it has the same name as that card";
     }
 
-    JestersScepterCounterEffect(final JestersScepterCounterEffect effect) {
+    private JestersScepterCounterEffect(final JestersScepterCounterEffect effect) {
         super(effect);
     }
 

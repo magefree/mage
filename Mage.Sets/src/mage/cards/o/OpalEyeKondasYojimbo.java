@@ -70,7 +70,7 @@ class OpalEyeKondasYojimboRedirectionEffect extends ReplacementEffectImpl {
         this.target = new TargetSource();
     }
 
-    OpalEyeKondasYojimboRedirectionEffect(final OpalEyeKondasYojimboRedirectionEffect effect) {
+    private OpalEyeKondasYojimboRedirectionEffect(final OpalEyeKondasYojimboRedirectionEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
