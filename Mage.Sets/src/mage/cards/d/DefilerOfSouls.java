@@ -79,7 +79,7 @@ class DefilerOfSoulsEffect extends OneShotEffect {
         amount = Math.min(1, realCount);
         
         Target target = new TargetControlledPermanent(amount, amount, filter, false);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
 
         //A spell or ability could have removed the only legal target this player
         //had, if thats the case this ability should fizzle.

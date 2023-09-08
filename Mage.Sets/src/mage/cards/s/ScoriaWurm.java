@@ -51,7 +51,7 @@ class ScoriaWurmEffect extends OneShotEffect {
         staticText = "flip a coin. If you lose the flip, return {this} to its owner's hand";
     }
 
-    public ScoriaWurmEffect(ScoriaWurmEffect effect) {
+    private ScoriaWurmEffect(final ScoriaWurmEffect effect) {
         super(effect);
     }
 

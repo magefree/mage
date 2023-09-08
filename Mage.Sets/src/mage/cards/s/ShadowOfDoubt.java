@@ -47,7 +47,7 @@ class LibrariesCantBeSearchedEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can't search libraries this turn";
     }
 
-    public LibrariesCantBeSearchedEffect(final LibrariesCantBeSearchedEffect effect) {
+    private LibrariesCantBeSearchedEffect(final LibrariesCantBeSearchedEffect effect) {
         super(effect);
     }
 

@@ -45,7 +45,7 @@ class RiseOfTheDarkRealmsEffect extends OneShotEffect {
         staticText = "Put all creature cards from all graveyards onto the battlefield under your control";
     }
 
-    public RiseOfTheDarkRealmsEffect(final RiseOfTheDarkRealmsEffect effect) {
+    private RiseOfTheDarkRealmsEffect(final RiseOfTheDarkRealmsEffect effect) {
         super(effect);
     }
 

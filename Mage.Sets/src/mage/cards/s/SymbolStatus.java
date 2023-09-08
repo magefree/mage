@@ -45,7 +45,7 @@ class SymbolStatusEffect extends OneShotEffect {
         this.staticText = "Create a 1/1 colorless Expansion-Symbol creature token for each different expansion symbol among permanents you control";
     }
 
-    public SymbolStatusEffect(final SymbolStatusEffect effect) {
+    private SymbolStatusEffect(final SymbolStatusEffect effect) {
         super(effect);
     }
 

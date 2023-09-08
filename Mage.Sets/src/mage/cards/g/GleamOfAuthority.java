@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -24,6 +23,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,10 +71,10 @@ class CountersOnControlledCount implements DynamicValue {
 
     static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    public CountersOnControlledCount() {
+    CountersOnControlledCount() {
     }
 
-    public CountersOnControlledCount(final CountersOnControlledCount dynamicValue) {
+    private CountersOnControlledCount(final CountersOnControlledCount dynamicValue) {
         super();
     }
 
@@ -90,7 +91,7 @@ class CountersOnControlledCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public CountersOnControlledCount copy() {
         return new CountersOnControlledCount(this);
     }
 

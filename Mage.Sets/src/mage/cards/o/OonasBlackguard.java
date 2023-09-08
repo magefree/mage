@@ -108,7 +108,7 @@ class OonasBlackguardTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DiscardTargetEffect(1), false);
     }
 
-    public OonasBlackguardTriggeredAbility(final OonasBlackguardTriggeredAbility ability) {
+    private OonasBlackguardTriggeredAbility(final OonasBlackguardTriggeredAbility ability) {
         super(ability);
     }
 

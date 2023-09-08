@@ -79,7 +79,7 @@ class GhoulsNightOutEffect extends OneShotEffect {
                     if (creatureInGraveyard) {
                         FilterCreatureCard filter = new FilterCreatureCard("creature card in " + player.getName() + "'s graveyard");
                         TargetCard target = new TargetCard(Zone.GRAVEYARD, filter);
-                        target.setNotTarget(true);
+                        target.withNotTarget(true);
                         controller.chooseTarget(controllerId.equals(playerId) ? Outcome.Benefit : Outcome.Detriment, player.getGraveyard(), target, source, game);
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {

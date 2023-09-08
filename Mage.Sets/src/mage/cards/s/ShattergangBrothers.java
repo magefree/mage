@@ -77,7 +77,7 @@ class ShattergangBrothersEffect extends OneShotEffect {
         this.staticText = "Each other player sacrifices " + filter.getMessage();
     }
 
-    public ShattergangBrothersEffect(final ShattergangBrothersEffect effect) {
+    private ShattergangBrothersEffect(final ShattergangBrothersEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -96,7 +96,7 @@ class ShattergangBrothersEffect extends OneShotEffect {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         TargetControlledPermanent target = new TargetControlledPermanent(filter);
-                        target.setNotTarget(true);
+                        target.withNotTarget(true);
                         if (target.canChoose(playerId, source, game)
                                 && player.chooseTarget(outcome, target, source, game)) {
                             Permanent permanent = game.getPermanent(target.getFirstTarget());

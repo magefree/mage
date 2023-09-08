@@ -54,7 +54,7 @@ class TwilightsCallEffect extends OneShotEffect {
         staticText = "Each player returns all creature cards from their graveyard to the battlefield";
     }
 
-    public TwilightsCallEffect(TwilightsCallEffect copy) {
+    private TwilightsCallEffect(final TwilightsCallEffect copy) {
         super(copy);
     }
 

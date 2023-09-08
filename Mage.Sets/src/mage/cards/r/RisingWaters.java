@@ -53,7 +53,7 @@ class RisingWatersUntapEffect extends OneShotEffect {
         this.staticText = "that player untaps a land they control";
     }
 
-    public RisingWatersUntapEffect(final RisingWatersUntapEffect effect) {
+    private RisingWatersUntapEffect(final RisingWatersUntapEffect effect) {
         super(effect);
     }
 

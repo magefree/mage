@@ -74,7 +74,7 @@ public class DoUnlessAnyPlayerPaysManaEffect extends ManaEffect {
     }
 
     @Override
-    public ManaEffect copy() {
+    public DoUnlessAnyPlayerPaysManaEffect copy() {
         return new DoUnlessAnyPlayerPaysManaEffect(this);
     }
 

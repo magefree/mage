@@ -45,7 +45,7 @@ public final class StudentOfWarfare extends LevelerCard {
         setMaxLevelCounters(7);
     }
 
-    public StudentOfWarfare (final StudentOfWarfare card) {
+    private StudentOfWarfare(final StudentOfWarfare card) {
         super(card);
     }
 

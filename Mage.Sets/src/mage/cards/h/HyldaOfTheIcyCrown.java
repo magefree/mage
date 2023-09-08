@@ -47,7 +47,7 @@ public final class HyldaOfTheIcyCrown extends CardImpl {
         
         // * Scry 2, then draw a card.
         Mode mode = new Mode(new ScryEffect(2, false));
-        mode.addEffect(new DrawCardSourceControllerEffect(1));
+        mode.addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
         delayed.addMode(mode);
 
         this.addAbility(new TapUntappedPermanentTriggeredAbility(

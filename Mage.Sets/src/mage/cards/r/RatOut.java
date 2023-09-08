@@ -23,7 +23,7 @@ public final class RatOut extends CardImpl {
         // Up to one target creature gets -1/-1 until end of turn. You create a 1/1 black Rat creature token with "This creature can't block."
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new RatCantBlockToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new RatCantBlockToken()).concatBy("You"));
     }
 
     private RatOut(final RatOut card) {

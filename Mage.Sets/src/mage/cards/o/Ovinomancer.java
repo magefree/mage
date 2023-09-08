@@ -73,7 +73,7 @@ class OvinomancerEffect extends OneShotEffect {
         this.staticText = "That creature's controller creates a 0/1 green Sheep creature token";
     }
 
-    public OvinomancerEffect(final OvinomancerEffect effect) {
+    private OvinomancerEffect(final OvinomancerEffect effect) {
         super(effect);
     }
 

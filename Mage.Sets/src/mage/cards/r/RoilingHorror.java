@@ -71,7 +71,7 @@ class RoilingHorrorTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, ");
     }
 
-    public RoilingHorrorTriggeredAbility(final RoilingHorrorTriggeredAbility ability) {
+    private RoilingHorrorTriggeredAbility(final RoilingHorrorTriggeredAbility ability) {
         super(ability);
     }
 

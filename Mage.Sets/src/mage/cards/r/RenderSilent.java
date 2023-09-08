@@ -49,7 +49,7 @@ class RenderSilentCounterEffect extends OneShotEffect {
         super(Outcome.Detriment);
     }
 
-    public RenderSilentCounterEffect(final RenderSilentCounterEffect effect) {
+    private RenderSilentCounterEffect(final RenderSilentCounterEffect effect) {
         super(effect);
     }
 
@@ -82,7 +82,7 @@ class RenderSilentEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Its controller can't cast spells this turn";
     }
 
-    public RenderSilentEffect(final RenderSilentEffect effect) {
+    private RenderSilentEffect(final RenderSilentEffect effect) {
         super(effect);
     }
 

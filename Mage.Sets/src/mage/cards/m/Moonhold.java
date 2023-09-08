@@ -61,7 +61,7 @@ class MoonholdEffect extends ContinuousRuleModifyingEffectImpl {
         super(Duration.EndOfTurn, Outcome.Detriment);
     }
 
-    public MoonholdEffect(final MoonholdEffect effect) {
+    private MoonholdEffect(final MoonholdEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class MoonholdEffect2 extends ContinuousRuleModifyingEffectImpl {
         super(Duration.EndOfTurn, Outcome.Detriment);
     }
 
-    public MoonholdEffect2(final MoonholdEffect2 effect) {
+    private MoonholdEffect2(final MoonholdEffect2 effect) {
         super(effect);
     }
 

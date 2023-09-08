@@ -46,7 +46,7 @@ class ScepterOfEmpiresEffect extends OneShotEffect {
         staticText = "Scepter of Empires deals 1 damage to target player or planeswalker. It deals 3 damage instead if you control artifacts named Crown of Empires and Throne of Empires";
     }
 
-    public ScepterOfEmpiresEffect(ScepterOfEmpiresEffect effect) {
+    private ScepterOfEmpiresEffect(final ScepterOfEmpiresEffect effect) {
         super(effect);
     }
 

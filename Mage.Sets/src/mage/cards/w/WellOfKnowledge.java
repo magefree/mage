@@ -44,7 +44,7 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
         condition = new IsStepCondition(PhaseStep.DRAW, false);
     }
 
-    public WellOfKnowledgeConditionalActivatedAbility(final WellOfKnowledgeConditionalActivatedAbility ability) {
+    private WellOfKnowledgeConditionalActivatedAbility(final WellOfKnowledgeConditionalActivatedAbility ability) {
         super(ability);
         this.condition = ability.condition;
     }
@@ -60,7 +60,7 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         if (condition.apply(game, this)
-                && costs.canPay(this, this, playerId, game)
+                && getCosts().canPay(this, this, playerId, game)
                 && game.isActivePlayer(playerId)) {
             this.activatorId = playerId;
             return ActivationStatus.getTrue(this, game);
@@ -86,7 +86,7 @@ class WellOfKnowledgeEffect extends OneShotEffect {
         super(Outcome.DrawCard);
     }
 
-    public WellOfKnowledgeEffect(final WellOfKnowledgeEffect effect) {
+    private WellOfKnowledgeEffect(final WellOfKnowledgeEffect effect) {
         super(effect);
     }
 

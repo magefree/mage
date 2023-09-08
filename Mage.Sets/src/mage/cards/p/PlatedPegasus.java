@@ -58,7 +58,7 @@ class PlatedPegasusEffect extends PreventionEffectImpl {
         staticText = "If a spell would deal damage to a permanent or player, prevent 1 damage that spell would deal to that permanent or player.";
     }
 
-    public PlatedPegasusEffect(PlatedPegasusEffect effect) {
+    private PlatedPegasusEffect(final PlatedPegasusEffect effect) {
         super(effect);
     }
 

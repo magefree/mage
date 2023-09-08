@@ -61,7 +61,7 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
         this.staticText = "Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend. <i>(At the beginning of your upkeep, remove a time counter from that card. When the last is removed, cast it without paying its mana cost. If it's a creature, it has haste.)</i>";
     }
 
-    public JhoiraOfTheGhituSuspendEffect(final JhoiraOfTheGhituSuspendEffect effect) {
+    private JhoiraOfTheGhituSuspendEffect(final JhoiraOfTheGhituSuspendEffect effect) {
         super(effect);
     }
 

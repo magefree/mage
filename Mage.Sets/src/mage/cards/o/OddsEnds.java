@@ -52,7 +52,7 @@ class OddsEffect extends OneShotEffect {
         this.staticText = "Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy";
     }
 
-    public OddsEffect(final OddsEffect effect) {
+    private OddsEffect(final OddsEffect effect) {
         super(effect);
     }
 

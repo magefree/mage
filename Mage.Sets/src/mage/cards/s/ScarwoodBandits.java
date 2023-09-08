@@ -83,7 +83,7 @@ class DoUnlessAnyOpponentPaysEffect extends OneShotEffect {
         this.chooseUseText = chooseUseText;
     }
 
-    public DoUnlessAnyOpponentPaysEffect(final DoUnlessAnyOpponentPaysEffect effect) {
+    private DoUnlessAnyOpponentPaysEffect(final DoUnlessAnyOpponentPaysEffect effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
         this.cost = effect.cost.copy();

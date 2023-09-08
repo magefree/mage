@@ -36,7 +36,7 @@ public class MeditateAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Meditate ").append(manaCosts.getText());
+        StringBuilder sb = new StringBuilder("Meditate ").append(getManaCosts().getText());
         sb.append(" <i>(Return this creature to its owner's hand. Meditate only as a sorcery.)</i>");
         return sb.toString();
     }

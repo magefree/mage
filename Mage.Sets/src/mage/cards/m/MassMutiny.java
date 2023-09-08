@@ -71,7 +71,7 @@ class MassMutinyEffect extends OneShotEffect {
         this.staticText = "For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn";
     }
 
-    public MassMutinyEffect(final MassMutinyEffect effect) {
+    private MassMutinyEffect(final MassMutinyEffect effect) {
         super(effect);
     }
 

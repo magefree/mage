@@ -76,7 +76,7 @@ class JayasPhoenixTriggeredAbility extends DelayedTriggeredAbility {
         super(new CopyTargetStackAbilityEffect(), Duration.EndOfTurn);
     }
 
-    public JayasPhoenixTriggeredAbility(final JayasPhoenixTriggeredAbility ability) {
+    private JayasPhoenixTriggeredAbility(final JayasPhoenixTriggeredAbility ability) {
         super(ability);
     }
 

@@ -42,7 +42,7 @@ public final class SeizanPerverterOfTruth extends CardImpl {
 
     }
 
-    public SeizanPerverterOfTruth (final SeizanPerverterOfTruth card) {
+    private SeizanPerverterOfTruth(final SeizanPerverterOfTruth card) {
         super(card);
     }
 

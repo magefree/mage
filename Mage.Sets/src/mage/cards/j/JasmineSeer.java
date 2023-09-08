@@ -64,7 +64,7 @@ class JasmineSeerEffect extends OneShotEffect {
                 + "You gain 2 life for each card revealed this way";
     }
 
-    public JasmineSeerEffect(final JasmineSeerEffect effect) {
+    private JasmineSeerEffect(final JasmineSeerEffect effect) {
         super(effect);
     }
 

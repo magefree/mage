@@ -73,7 +73,7 @@ class SithEvokerEffect extends OneShotEffect {
         staticText = "You gain life equal to that creature's power or toughness";
     }
 
-    public SithEvokerEffect(final SithEvokerEffect effect) {
+    private SithEvokerEffect(final SithEvokerEffect effect) {
         super(effect);
     }
 

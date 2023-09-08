@@ -141,8 +141,8 @@ public final class CardUtil {
      */
     private static void adjustAbilityCost(Ability ability, int reduceCount) {
         ManaCosts<ManaCost> adjustedCost = adjustCost(ability.getManaCostsToPay(), reduceCount);
-        ability.getManaCostsToPay().clear();
-        ability.getManaCostsToPay().addAll(adjustedCost);
+        ability.clearManaCostsToPay();
+        ability.addManaCostsToPay(adjustedCost);
     }
 
     private static ManaCosts<ManaCost> adjustCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
@@ -304,8 +304,8 @@ public final class CardUtil {
             increasedCost.add(manaCost.copy());
         }
 
-        spellAbility.getManaCostsToPay().clear();
-        spellAbility.getManaCostsToPay().addAll(increasedCost);
+        spellAbility.clearManaCostsToPay();
+        spellAbility.addManaCostsToPay(increasedCost);
     }
 
     /**
@@ -468,8 +468,8 @@ public final class CardUtil {
             adjustedCost.add(new GenericManaCost(0)); // neede to check if cost was reduced to 0
         }
         adjustedCost.setSourceFilter(previousCost.getSourceFilter());  // keep mana source restrictions
-        spellAbility.getManaCostsToPay().clear();
-        spellAbility.getManaCostsToPay().addAll(adjustedCost);
+        spellAbility.clearManaCostsToPay();
+        spellAbility.addManaCostsToPay(adjustedCost);
     }
 
     /**
@@ -1288,7 +1288,7 @@ public final class CardUtil {
             default:
                 Cards castableCards = new CardsImpl(cardMap.keySet());
                 TargetCard target = new TargetCard(0, 1, Zone.ALL, defaultFilter);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 player.choose(Outcome.PlayForFree, castableCards, target, source, game);
                 cardToCast = castableCards.get(target.getFirstTarget(), game);
         }
@@ -1496,6 +1496,11 @@ public final class CardUtil {
             return false;
         }
 
+        if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PAY_LIFE, player.getId(), source, player.getId(), lifeToPay))) {
+            // 2023-08-20: For now, Cost being replaced are paid.
+            // Waiting on actual ruling of Ashiok, Wicked Manipulator.
+            return true;
+        }
         if (player.loseLife(lifeToPay, game, source, false) >= lifeToPay) {
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIFE_PAID, player.getId(), source, player.getId(), lifeToPay));
             return true;

@@ -104,7 +104,7 @@ class NissaSageAnimistMinusAnimateEffect extends OneShotEffect {
         this.staticText = "They become 6/6 Elemental creatures. They're still lands";
     }
 
-    public NissaSageAnimistMinusAnimateEffect(final NissaSageAnimistMinusAnimateEffect effect) {
+    private NissaSageAnimistMinusAnimateEffect(final NissaSageAnimistMinusAnimateEffect effect) {
         super(effect);
     }
 

@@ -64,7 +64,7 @@ class VonasHungerEffect extends OneShotEffect {
         super(Outcome.Sacrifice);
     }
 
-    public VonasHungerEffect(final VonasHungerEffect effect) {
+    private VonasHungerEffect(final VonasHungerEffect effect) {
         super(effect);
     }
 

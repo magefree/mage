@@ -39,7 +39,7 @@ public final class GravityNegator extends CardImpl {
 
         // Whenenever Gravity Negator attacks, you may pay {C}. If you do, another target creature gains flying until end of turn.
         Ability ability = new AttacksTriggeredAbility(new DoIfCostPaid(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{C}")), false,
-                "Whenever {this} attacks you may pay {C}. If you do, another target creature gains flying until end of turn.");
+                "Whenever {this} attacks, you may pay {C}. If you do, another target creature gains flying until end of turn.");
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
     }

@@ -32,7 +32,7 @@ public final class VulshokHeartstoker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VulshokHeartstoker (final VulshokHeartstoker card) {
+    private VulshokHeartstoker(final VulshokHeartstoker card) {
         super(card);
     }
 

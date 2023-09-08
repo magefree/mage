@@ -60,7 +60,7 @@ class TitansPresenceEffect extends OneShotEffect {
         staticText = "Exile target creature if its power is less than or equal to the revealed card's power";
     }
 
-    public TitansPresenceEffect(TitansPresenceEffect effect) {
+    private TitansPresenceEffect(final TitansPresenceEffect effect) {
         super(effect);
     }
 

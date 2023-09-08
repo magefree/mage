@@ -43,7 +43,7 @@ class RoarOfReclamationEffect extends OneShotEffect {
         staticText = "Each player returns all artifact cards from their graveyard to the battlefield";
     }
 
-    public RoarOfReclamationEffect(final RoarOfReclamationEffect effect) {
+    private RoarOfReclamationEffect(final RoarOfReclamationEffect effect) {
         super(effect);
     }
 

@@ -80,7 +80,7 @@ class KeldonBattlewagonCost extends CostImpl {
         this.text = "Tap an untapped creature you control";
     }
 
-    public KeldonBattlewagonCost(final KeldonBattlewagonCost cost) {
+    private KeldonBattlewagonCost(final KeldonBattlewagonCost cost) {
         super(cost);
         this.target = cost.target.copy();
     }
@@ -120,7 +120,7 @@ class KeldonBattlewagonBoostEffect extends OneShotEffect {
         staticText = "{this} gets +X/+0 until end of turn, where X is the power of the creature tapped this way";
     }
 
-    public KeldonBattlewagonBoostEffect(KeldonBattlewagonBoostEffect effect) {
+    private KeldonBattlewagonBoostEffect(final KeldonBattlewagonBoostEffect effect) {
         super(effect);
     }
 

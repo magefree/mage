@@ -64,7 +64,7 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
         staticText = "each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands";
     }
 
-    public LiegeOfTheTangleEffect(final LiegeOfTheTangleEffect effect) {
+    private LiegeOfTheTangleEffect(final LiegeOfTheTangleEffect effect) {
         super(effect);
     }
 

@@ -47,7 +47,7 @@ class BloodClockEffect extends OneShotEffect {
         this.staticText = "that player returns a permanent they control to its owner's hand unless they pay 2 life";
     }
 
-    public BloodClockEffect(final BloodClockEffect effect) {
+    private BloodClockEffect(final BloodClockEffect effect) {
         super(effect);
     }
 

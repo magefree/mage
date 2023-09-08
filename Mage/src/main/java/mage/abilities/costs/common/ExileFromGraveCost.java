@@ -28,7 +28,7 @@ public class ExileFromGraveCost extends CostImpl {
     private boolean setTargetPointer = false;
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target) {
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1) {
             this.text = "exile "
@@ -46,19 +46,19 @@ public class ExileFromGraveCost extends CostImpl {
     }
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target, String text) {
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         this.text = text;
     }
 
     public ExileFromGraveCost(TargetCardInASingleGraveyard target, String text) {
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         this.text = text;
     }
 
     public ExileFromGraveCost(TargetCardInASingleGraveyard target) {
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         this.text = "exile " + target.getDescription();
     }

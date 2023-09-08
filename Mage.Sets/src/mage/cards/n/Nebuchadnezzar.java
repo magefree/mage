@@ -57,7 +57,7 @@ class NebuchadnezzarEffect extends OneShotEffect {
         staticText = "Target opponent reveals X cards at random from their hand. Then that player discards all cards with that name revealed this way";
     }
 
-    public NebuchadnezzarEffect(final NebuchadnezzarEffect effect) {
+    private NebuchadnezzarEffect(final NebuchadnezzarEffect effect) {
         super(effect);
     }
 

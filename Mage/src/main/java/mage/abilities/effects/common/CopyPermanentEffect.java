@@ -90,7 +90,7 @@ public class CopyPermanentEffect extends OneShotEffect {
             copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         } else {
             Target target = new TargetPermanent(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (target.canChoose(controller.getId(), source, game)) {
                 controller.choose(Outcome.Copy, target, source, game);
                 copyFromPermanent = game.getPermanent(target.getFirstTarget());
@@ -156,7 +156,7 @@ public class CopyPermanentEffect extends OneShotEffect {
         }
 
         // select new target
-        auraTarget.setNotTarget(true);
+        auraTarget.withNotTarget(true);
         if (!controller.choose(auraOutcome, auraTarget, source, game)) {
             return true;
         }

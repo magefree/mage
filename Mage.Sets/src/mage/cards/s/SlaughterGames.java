@@ -45,7 +45,7 @@ class SlaughterGamesEffect extends SearchTargetGraveyardHandLibraryForCardNameAn
         super(true, "target opponent's", "any number of cards with that name");
     }
 
-    public SlaughterGamesEffect(final SlaughterGamesEffect effect) {
+    private SlaughterGamesEffect(final SlaughterGamesEffect effect) {
         super(effect);
     }
 

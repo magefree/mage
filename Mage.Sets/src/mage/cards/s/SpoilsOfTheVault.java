@@ -45,7 +45,7 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
                 + "then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards";
     }
 
-    public SpoilsOfTheVaultEffect(final SpoilsOfTheVaultEffect effect) {
+    private SpoilsOfTheVaultEffect(final SpoilsOfTheVaultEffect effect) {
         super(effect);
     }
 

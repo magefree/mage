@@ -64,7 +64,7 @@ class SixthSenseTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, true);
     }
 
-    public SixthSenseTriggeredAbility(final SixthSenseTriggeredAbility ability) {
+    private SixthSenseTriggeredAbility(final SixthSenseTriggeredAbility ability) {
         super(ability);
     }
 

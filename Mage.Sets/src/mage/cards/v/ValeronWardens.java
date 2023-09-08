@@ -52,7 +52,7 @@ class ValeronWardensTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    public ValeronWardensTriggeredAbility(final ValeronWardensTriggeredAbility ability) {
+    private ValeronWardensTriggeredAbility(final ValeronWardensTriggeredAbility ability) {
         super(ability);
     }
 

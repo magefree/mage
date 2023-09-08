@@ -69,7 +69,7 @@ class GraveExchangeEffect extends OneShotEffect {
         }
 
         Target target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(player.getId(), source, game)
                 && player.choose(Outcome.Sacrifice, target, source, game)) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());

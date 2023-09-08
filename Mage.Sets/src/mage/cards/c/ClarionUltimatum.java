@@ -72,7 +72,7 @@ class ClarionUltimatumEffect extends OneShotEffect {
                 source.getControllerId(), source, game
         );
         TargetPermanent targetPermanent = new TargetControlledPermanent(Math.max(permCount, 5));
-        targetPermanent.setNotTarget(true);
+        targetPermanent.withNotTarget(true);
         player.choose(outcome, targetPermanent, source, game);
         Set<String> names = targetPermanent
                 .getTargets()

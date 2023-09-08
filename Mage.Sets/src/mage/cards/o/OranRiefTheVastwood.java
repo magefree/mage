@@ -52,7 +52,7 @@ class OranRiefTheVastwoodEffect extends OneShotEffect {
         staticText = "Put a +1/+1 counter on each green creature that entered the battlefield this turn";
     }
 
-    public OranRiefTheVastwoodEffect(final OranRiefTheVastwoodEffect effect) {
+    private OranRiefTheVastwoodEffect(final OranRiefTheVastwoodEffect effect) {
         super(effect);
     }
 

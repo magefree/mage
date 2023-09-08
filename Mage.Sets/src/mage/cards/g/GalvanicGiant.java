@@ -1,21 +1,22 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.cards.AdventureCard;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.target.common.TargetOpponentsCreaturePermanent;
-import mage.cards.AdventureCard;
-import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
+
+import java.util.UUID;
 
 /**
  *
@@ -46,6 +47,8 @@ public final class GalvanicGiant extends AdventureCard {
         // Storm Reading
         // Draw four cards, then discard two cards.
         this.getSpellCard().getSpellAbility().addEffect(new DrawDiscardControllerEffect(4, 2));
+
+        this.finalizeAdventure();
     }
 
     private GalvanicGiant(final GalvanicGiant card) {

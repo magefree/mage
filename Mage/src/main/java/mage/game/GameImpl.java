@@ -1263,7 +1263,7 @@ public abstract class GameImpl implements Game {
                 player.initLife(this.getStartingLife());
             }
             if (!gameOptions.testMode) {
-                player.drawCards(startingHandSize, null, this);
+                mulligan.drawHand(startingHandSize, player, this);
             }
         }
 
@@ -2688,7 +2688,7 @@ public abstract class GameImpl implements Game {
                     continue;
                 }
                 Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
-                targetLegendaryToKeep.setNotTarget(true);
+                targetLegendaryToKeep.withNotTarget(true);
                 targetLegendaryToKeep.setTargetName(legend.getName() + " to keep (Legendary Rule)?");
                 controller.choose(Outcome.Benefit, targetLegendaryToKeep, null, this);
                 for (Permanent dupLegend : getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {

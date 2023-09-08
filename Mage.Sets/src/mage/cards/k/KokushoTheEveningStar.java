@@ -50,7 +50,7 @@ class KokushoTheEveningStarEffect extends OneShotEffect {
         staticText = "each opponent loses 5 life. You gain life equal to the life lost this way";
     }
 
-    public KokushoTheEveningStarEffect(final KokushoTheEveningStarEffect effect) {
+    private KokushoTheEveningStarEffect(final KokushoTheEveningStarEffect effect) {
         super(effect);
     }
 

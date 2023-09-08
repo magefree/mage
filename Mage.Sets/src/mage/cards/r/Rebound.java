@@ -49,7 +49,7 @@ class ReboundEffect extends OneShotEffect {
         this.staticText = "Change the target of target spell that targets only a player. The new target must be a player";
     }
 
-    public ReboundEffect(final ReboundEffect effect) {
+    private ReboundEffect(final ReboundEffect effect) {
         super(effect);
     }
 

@@ -48,7 +48,7 @@ class ThatcherRevoltEffect extends OneShotEffect {
         this.staticText = "Create three 1/1 red Human creature tokens with haste. Sacrifice those tokens at the beginning of the next end step";
     }
 
-    public ThatcherRevoltEffect(final ThatcherRevoltEffect effect) {
+    private ThatcherRevoltEffect(final ThatcherRevoltEffect effect) {
         super(effect);
     }
 

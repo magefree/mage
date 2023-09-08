@@ -47,7 +47,7 @@ class WeedStrangleEffect extends OneShotEffect {
         this.staticText = "Destroy target creature. Clash with an opponent. If you win, you gain life equal to that creature's toughness";
     }
 
-    public WeedStrangleEffect(final WeedStrangleEffect effect) {
+    private WeedStrangleEffect(final WeedStrangleEffect effect) {
         super(effect);
     }
 

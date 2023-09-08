@@ -65,7 +65,7 @@ class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl {
         this.addEffect(new GainLifeEffect(CardsInControllerHandCount.instance));
     }
 
-    public SwordOfWarAndPeaceAbility(final SwordOfWarAndPeaceAbility ability) {
+    private SwordOfWarAndPeaceAbility(final SwordOfWarAndPeaceAbility ability) {
         super(ability);
     }
 

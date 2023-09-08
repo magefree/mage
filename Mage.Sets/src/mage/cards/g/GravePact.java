@@ -99,7 +99,7 @@ class GravePactEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !playerId.equals(source.getControllerId())) {
                     TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (target.canChoose(player.getId(), source, game)) {
                         player.chooseTarget(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());

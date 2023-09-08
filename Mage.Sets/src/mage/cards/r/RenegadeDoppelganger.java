@@ -93,7 +93,7 @@ class RenegadeDoppelgangerEffect extends OneShotEffect {
         this.staticText = "have {this} become a copy of that creature until end of turn";
     }
 
-    public RenegadeDoppelgangerEffect(final RenegadeDoppelgangerEffect effect) {
+    private RenegadeDoppelgangerEffect(final RenegadeDoppelgangerEffect effect) {
         super(effect);
     }
 

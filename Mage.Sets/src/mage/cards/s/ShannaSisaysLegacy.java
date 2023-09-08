@@ -68,7 +68,7 @@ class ShannaSisaysLegacyEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "{this} can't be the target of abilities your opponents control";
     }
 
-    public ShannaSisaysLegacyEffect(final ShannaSisaysLegacyEffect effect) {
+    private ShannaSisaysLegacyEffect(final ShannaSisaysLegacyEffect effect) {
         super(effect);
     }
 

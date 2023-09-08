@@ -61,7 +61,7 @@ class RiptideEntrancerTriggeredAbility extends TriggeredAbilityImpl {
         ), false);
     }
 
-    public RiptideEntrancerTriggeredAbility(final RiptideEntrancerTriggeredAbility ability) {
+    private RiptideEntrancerTriggeredAbility(final RiptideEntrancerTriggeredAbility ability) {
         super(ability);
     }
 

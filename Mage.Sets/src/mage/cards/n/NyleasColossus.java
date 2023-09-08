@@ -52,7 +52,7 @@ class NyleasColossusEffect extends OneShotEffect {
         this.staticText = "double target creature's power and toughness until end of turn";
     }
 
-    public NyleasColossusEffect(final NyleasColossusEffect effect) {
+    private NyleasColossusEffect(final NyleasColossusEffect effect) {
         super(effect);
     }
 

@@ -79,7 +79,7 @@ class GriftersBladeChooseCreatureEffect extends OneShotEffect {
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (controller != null && mageObject != null) {
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.choose(this.outcome, target, source, game)) {
                 Permanent attachToCreature = game.getPermanent(target.getFirstTarget());
                 if (attachToCreature != null) {

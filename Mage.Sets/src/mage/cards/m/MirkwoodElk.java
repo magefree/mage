@@ -66,7 +66,7 @@ class MirkwoodElkEffect extends OneShotEffect {
         this.staticText = "return target Elf card from your graveyard to your hand. You gain life equal to that card's power.";
     }
 
-    public MirkwoodElkEffect(final MirkwoodElkEffect effect) { super(effect); }
+    private MirkwoodElkEffect(final MirkwoodElkEffect effect) { super(effect); }
 
     @Override
     public MirkwoodElkEffect copy() { return new MirkwoodElkEffect(this); }

@@ -70,7 +70,7 @@ class InterventionPactEffect extends OneShotEffect {
         if (controller != null) {
             Target target = new TargetSource();
             target.setRequired(true);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.chooseTarget(outcome, target, source, game)) {
                 ContinuousEffect continuousEffect = new InterventionPactPreventDamageEffect();
                 continuousEffect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));

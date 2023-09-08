@@ -67,7 +67,7 @@ class SacrificeEquipedUnlessPaysEffect extends OneShotEffect {
         staticText = "that player sacrifices that creature unless they pay {2}";
     }
 
-    public SacrificeEquipedUnlessPaysEffect(final SacrificeEquipedUnlessPaysEffect effect) {
+    private SacrificeEquipedUnlessPaysEffect(final SacrificeEquipedUnlessPaysEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

@@ -60,7 +60,7 @@ class RelicOfProgenitusEffect extends OneShotEffect {
         this.staticText = "Target player exiles a card from their graveyard";
     }
 
-    public RelicOfProgenitusEffect(final RelicOfProgenitusEffect effect) {
+    private RelicOfProgenitusEffect(final RelicOfProgenitusEffect effect) {
         super(effect);
     }
 

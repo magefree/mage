@@ -29,10 +29,6 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     protected FilterPermanent filter;
     protected boolean forceQuotes = false;
 
-    public GainAbilityAllEffect(Ability ability, Duration duration) {
-        this(ability, duration, new FilterPermanent());
-    }
-
     public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter) {
         this(ability, duration, filter, false);
     }
@@ -43,11 +39,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     }
 
     public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
-        this(ability, duration, filter, excludeSource, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA);
-    }
-
-    public GainAbilityAllEffect(Ability ability, Duration duration, FilterPermanent filter, boolean excludeSource, Layer layer, SubLayer subLayer) {
-        super(duration, layer, subLayer, Outcome.AddAbility);
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability.copy();
         this.ability.newId();
         this.filter = filter;

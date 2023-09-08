@@ -55,7 +55,7 @@ class ReincarnationEffect extends OneShotEffect {
         staticText = "return a creature card from its owner's graveyard to the battlefield under the control of that creature's owner";
     }
 
-    public ReincarnationEffect(final ReincarnationEffect effect) {
+    private ReincarnationEffect(final ReincarnationEffect effect) {
         super(effect);
     }
 
@@ -74,7 +74,7 @@ class ReincarnationEffect extends OneShotEffect {
         FilterCreatureCard filter = new FilterCreatureCard("a creature card from " + owner.getName() + "'s graveyard");
         filter.add(new OwnerIdPredicate(owner.getId()));
         TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(controller.getId(), source, game)
                 && controller.chooseTarget(outcome, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());

@@ -50,7 +50,7 @@ class RavingOniSlaveEffect extends OneShotEffect {
         this.staticText = "you lose 3 life if you don't control a Demon";
     }
 
-    public RavingOniSlaveEffect(final RavingOniSlaveEffect effect) {
+    private RavingOniSlaveEffect(final RavingOniSlaveEffect effect) {
         super(effect);
     }
 

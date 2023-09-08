@@ -46,7 +46,7 @@ class StartYourEnginesEffect extends ContinuousEffectImpl {
         staticText = "Vehicles you control become artifact creatures until end of turn";
     }
 
-    public StartYourEnginesEffect(final StartYourEnginesEffect effect) {
+    private StartYourEnginesEffect(final StartYourEnginesEffect effect) {
         super(effect);
     }
 

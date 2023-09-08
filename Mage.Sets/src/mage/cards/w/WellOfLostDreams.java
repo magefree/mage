@@ -43,7 +43,7 @@ class WellOfLostDreamsEffect extends OneShotEffect {
         this.staticText = "you may pay {X}, where X is less than or equal to the amount of life you gained. If you do, draw X cards";
     }
 
-    public WellOfLostDreamsEffect(final WellOfLostDreamsEffect effect) {
+    private WellOfLostDreamsEffect(final WellOfLostDreamsEffect effect) {
         super(effect);
     }
 

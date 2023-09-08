@@ -61,7 +61,7 @@ class LeyLineEffect extends OneShotEffect {
         staticText = "that player may put a +1/+1 counter on target creature of their choice";
     }
 
-    public LeyLineEffect(LeyLineEffect effect) {
+    private LeyLineEffect(final LeyLineEffect effect) {
         super(effect);
     }
 

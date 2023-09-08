@@ -81,7 +81,7 @@ class ContractualSafeguardFirstEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.withChooseHint("to give a shield counter").setNotTarget(true);
+        target.withChooseHint("to give a shield counter").withNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         return permanent != null && permanent.addCounters(CounterType.SHIELD.createInstance(), source, game);
@@ -120,7 +120,7 @@ class ContractualSafeguardSecondEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null) {

@@ -35,7 +35,7 @@ public final class SphinxOfMagosi extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SphinxOfMagosi (final SphinxOfMagosi card) {
+    private SphinxOfMagosi(final SphinxOfMagosi card) {
         super(card);
     }
 

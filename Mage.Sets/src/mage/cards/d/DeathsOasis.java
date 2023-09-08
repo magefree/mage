@@ -129,7 +129,7 @@ class DeathsOasisEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInYourGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!player.choose(outcome, player.getGraveyard(), target, source, game)) {
             return false;
         }

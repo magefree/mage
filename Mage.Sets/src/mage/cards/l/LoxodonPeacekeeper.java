@@ -61,7 +61,7 @@ class LoxodonPeacekeeperEffect extends OneShotEffect {
         this.staticText = "the player with the lowest life total gains control of {this}. If two or more players are tied for lowest life total, you choose one of them, and that player gains control of {this}";
     }
 
-    public LoxodonPeacekeeperEffect(final LoxodonPeacekeeperEffect effect) {
+    private LoxodonPeacekeeperEffect(final LoxodonPeacekeeperEffect effect) {
         super(effect);
     }
 

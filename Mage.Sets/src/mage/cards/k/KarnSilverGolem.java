@@ -62,7 +62,7 @@ class KarnSilverGolemEffect extends ContinuousEffectImpl {
         staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
     }
 
-    public KarnSilverGolemEffect(final KarnSilverGolemEffect effect) {
+    private KarnSilverGolemEffect(final KarnSilverGolemEffect effect) {
         super(effect);
     }
 

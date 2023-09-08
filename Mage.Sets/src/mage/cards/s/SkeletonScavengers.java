@@ -63,7 +63,7 @@ class DynamicValueGenericManaCost extends CostImpl {
         setText();
     }
 
-    public DynamicValueGenericManaCost(DynamicValueGenericManaCost cost) {
+    private DynamicValueGenericManaCost(final DynamicValueGenericManaCost cost) {
         super(cost);
         this.amount = cost.amount;
     }

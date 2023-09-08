@@ -80,7 +80,7 @@ class ReturnSengirNosferatuEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetCardInExile(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }

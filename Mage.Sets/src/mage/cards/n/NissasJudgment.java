@@ -54,7 +54,7 @@ class NissasJudgmentEffect extends OneShotEffect {
         this.staticText = "Choose up to one target creature an opponent controls. Each creature you control with a +1/+1 counter on it deals damage equal to its power to that creature";
     }
 
-    public NissasJudgmentEffect(final NissasJudgmentEffect effect) {
+    private NissasJudgmentEffect(final NissasJudgmentEffect effect) {
         super(effect);
     }
 

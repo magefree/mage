@@ -72,7 +72,7 @@ class TetsuoUmezawaEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "{this} can't be the target of Aura spells";
     }
 
-    public TetsuoUmezawaEffect(final TetsuoUmezawaEffect effect) {
+    private TetsuoUmezawaEffect(final TetsuoUmezawaEffect effect) {
         super(effect);
     }
 

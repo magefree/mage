@@ -57,7 +57,7 @@ class VanguardsShieldEffect extends ContinuousEffectImpl {
         staticText = "Equipped creature can block an additional creature each combat";
     }
 
-    public VanguardsShieldEffect(final VanguardsShieldEffect effect) {
+    private VanguardsShieldEffect(final VanguardsShieldEffect effect) {
         super(effect);
     }
 

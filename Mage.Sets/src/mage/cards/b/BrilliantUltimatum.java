@@ -1,8 +1,5 @@
 package mage.cards.b;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -16,6 +13,10 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,10 @@ class BrilliantUltimatumEffect extends OneShotEffect {
 
     public BrilliantUltimatumEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Exile the top five cards of your library. An opponent separates those cards into two piles. You may play any number of cards from one of those piles without paying their mana costs";
+        this.staticText = "Exile the top five cards of your library. "
+                + "An opponent separates those cards into two piles. "
+                + "You may play lands and cast spells from one of those piles. "
+                + "If you cast a spell this way, you cast it without paying its mana cost";
     }
 
     public BrilliantUltimatumEffect(final BrilliantUltimatumEffect effect) {

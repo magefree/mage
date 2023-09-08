@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInLibrary;
@@ -24,10 +23,9 @@ import java.util.UUID;
  */
 public final class SpaceMarineScout extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("basic Plains card");
+    private static final FilterCard filter = new FilterCard("Plains card");
 
     static {
-        filter.add(SuperType.BASIC.getPredicate());
         filter.add(SubType.PLAINS.getPredicate());
     }
 
@@ -52,7 +50,7 @@ public final class SpaceMarineScout extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(
                         new TargetCardInLibrary(filter), true
                 ), true), condition, "When {this} enters the battlefield, if an opponent controls more lands " +
-                "than you, you may search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle."
+                "than you, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle."
         ).withFlavorWord("Concealed Position"));
     }
 

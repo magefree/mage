@@ -28,7 +28,7 @@ public final class SnappingCreeper extends CardImpl {
         this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), false));
     }
 
-    public SnappingCreeper (final SnappingCreeper card) {
+    private SnappingCreeper(final SnappingCreeper card) {
         super(card);
     }
 

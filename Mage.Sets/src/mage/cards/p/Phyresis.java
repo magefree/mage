@@ -39,7 +39,7 @@ public final class Phyresis extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Phyresis (final Phyresis card) {
+    private Phyresis(final Phyresis card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ class RallyTheRighteousUntapEffect extends OneShotEffect {
         staticText = "<i>Radiance</i> &mdash; Untap target creature and each other creature that shares a color with it";
     }
 
-    public RallyTheRighteousUntapEffect(final RallyTheRighteousUntapEffect effect) {
+    private RallyTheRighteousUntapEffect(final RallyTheRighteousUntapEffect effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class RallyTheRighteousBoostEffect extends ContinuousEffectImpl {
         staticText = "Those creatures get +2/+0 until end of turn";
     }
 
-    public RallyTheRighteousBoostEffect(final RallyTheRighteousBoostEffect effect) {
+    private RallyTheRighteousBoostEffect(final RallyTheRighteousBoostEffect effect) {
         super(effect);
     }
 

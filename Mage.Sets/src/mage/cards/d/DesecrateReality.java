@@ -123,7 +123,7 @@ class DesecrateRealityEffect extends OneShotEffect {
 
         // return a permanent card with an odd mana value from your graveyard to the battlefield.
         Target target = new TargetCardInYourGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (controller.choose(outcome, target, source, game)) {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
             effect.setTargetPointer(new FixedTarget(target.getFirstTarget(), game));

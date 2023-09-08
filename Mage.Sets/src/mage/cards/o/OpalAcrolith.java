@@ -66,7 +66,7 @@ class OpalAcrolithToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public OpalAcrolithToken(final OpalAcrolithToken token) {
+    private OpalAcrolithToken(final OpalAcrolithToken token) {
         super(token);
     }
 

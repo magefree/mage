@@ -55,7 +55,7 @@ class KindredSummonsEffect extends OneShotEffect {
                 + "then shuffle the rest of the revealed cards into your library";
     }
 
-    public KindredSummonsEffect(final KindredSummonsEffect effect) {
+    private KindredSummonsEffect(final KindredSummonsEffect effect) {
         super(effect);
     }
 

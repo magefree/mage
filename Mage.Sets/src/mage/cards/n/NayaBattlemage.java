@@ -41,7 +41,7 @@ public final class NayaBattlemage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NayaBattlemage (final NayaBattlemage card) {
+    private NayaBattlemage(final NayaBattlemage card) {
         super(card);
     }
 

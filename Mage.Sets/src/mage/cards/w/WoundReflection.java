@@ -45,7 +45,7 @@ class WoundReflectionEffect extends OneShotEffect {
         this.staticText = "each opponent loses life equal to the life they lost this turn";
     }
     
-    public WoundReflectionEffect(final WoundReflectionEffect effect) {
+    private WoundReflectionEffect(final WoundReflectionEffect effect) {
         super(effect);
     }
     

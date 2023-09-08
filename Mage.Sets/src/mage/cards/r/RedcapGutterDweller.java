@@ -35,7 +35,7 @@ public final class RedcapGutterDweller extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // When Redcap Gutter-Dweller enters the battlefield, create two 1/1 black Rat creature tokens with "This creature can't block."
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new RatCantBlockToken(), 2)));
@@ -47,7 +47,8 @@ public final class RedcapGutterDweller extends CardImpl {
                         new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)),
                         "Sacrifice another creature? If you do, put a +1/+1 counter on {this} "
                                 + "and exile the top card of your library. You may play that card this turn."
-                ).addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(1, false).concatBy("and")),
+                ).addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(1, false)
+                        .setText("and exile the top card of your library. You may play that card this turn")),
                 TargetController.YOU,
                 false
         ));

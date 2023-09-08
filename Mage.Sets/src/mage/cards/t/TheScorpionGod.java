@@ -73,7 +73,7 @@ class TheScorpionGodTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    public TheScorpionGodTriggeredAbility(TheScorpionGodTriggeredAbility ability) {
+    private TheScorpionGodTriggeredAbility(final TheScorpionGodTriggeredAbility ability) {
         super(ability);
     }
 

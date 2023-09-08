@@ -21,7 +21,7 @@ public final class RaiseTheAlarm extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierToken(), 2));
     }
 
-    public RaiseTheAlarm (final RaiseTheAlarm card) {
+    private RaiseTheAlarm(final RaiseTheAlarm card) {
         super(card);
     }
 

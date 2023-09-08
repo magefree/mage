@@ -58,7 +58,7 @@ class TemporalApertureEffect extends OneShotEffect {
                 + "paying its mana cost";
     }
 
-    public TemporalApertureEffect(final TemporalApertureEffect effect) {
+    private TemporalApertureEffect(final TemporalApertureEffect effect) {
         super(effect);
     }
 
@@ -96,7 +96,7 @@ class TemporalApertureTopCardCastEffect extends AsThoughEffectImpl {
                 + "of your library, you may cast it without paying its mana costs";
     }
 
-    public TemporalApertureTopCardCastEffect(final TemporalApertureTopCardCastEffect effect) {
+    private TemporalApertureTopCardCastEffect(final TemporalApertureTopCardCastEffect effect) {
         super(effect);
         this.card = effect.card;
     }

@@ -65,7 +65,7 @@ class ObNixilisOfTheBlackOathEffect1 extends OneShotEffect {
         staticText = "Each opponent loses 1 life. You gain life equal to the life lost this way";
     }
 
-    public ObNixilisOfTheBlackOathEffect1(final ObNixilisOfTheBlackOathEffect1 effect) {
+    private ObNixilisOfTheBlackOathEffect1(final ObNixilisOfTheBlackOathEffect1 effect) {
         super(effect);
     }
 

@@ -44,7 +44,7 @@ class LurkingJackalsStateTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When an opponent has 10 or less life, if {this} is an enchantment, ");
     }
 
-    public LurkingJackalsStateTriggeredAbility(final LurkingJackalsStateTriggeredAbility ability) {
+    private LurkingJackalsStateTriggeredAbility(final LurkingJackalsStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -110,7 +110,7 @@ class LurkingJackalsToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public LurkingJackalsToken(final LurkingJackalsToken token) {
+    private LurkingJackalsToken(final LurkingJackalsToken token) {
         super(token);
     }
 

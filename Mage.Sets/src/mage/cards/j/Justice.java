@@ -55,7 +55,7 @@ class JusticeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public JusticeTriggeredAbility(final JusticeTriggeredAbility ability) {
+    private JusticeTriggeredAbility(final JusticeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -96,7 +96,7 @@ class JusticeEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    public JusticeEffect(final JusticeEffect effect) {
+    private JusticeEffect(final JusticeEffect effect) {
         super(effect);
     }
 

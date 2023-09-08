@@ -57,7 +57,7 @@ class SnappingThraggTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetCreaturePermanent());
     }
 
-    public SnappingThraggTriggeredAbility(final SnappingThraggTriggeredAbility ability) {
+    private SnappingThraggTriggeredAbility(final SnappingThraggTriggeredAbility ability) {
         super(ability);
     }
 

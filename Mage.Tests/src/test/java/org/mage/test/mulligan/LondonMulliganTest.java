@@ -10,10 +10,15 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.assertEquals;
 
 public class LondonMulliganTest extends MulliganTestBase {
-
+    protected MulliganType getMullType() {
+        return MulliganType.LONDON;
+    }
+    protected int getCardsPerMull() {
+        return 7;
+    }
     @Test
     public void testLondonMulligan_NoMulligan() {
-        MulliganScenarioTest scenario = new MulliganScenarioTest(MulliganType.LONDON, 0);
+        MulliganScenarioTest scenario = new MulliganScenarioTest(getMullType(), 0);
         Set<UUID> hand1 = new HashSet<>();
         scenario.mulligan(() -> {
             scenario.assertSizes(7, 33);
@@ -28,7 +33,7 @@ public class LondonMulliganTest extends MulliganTestBase {
 
     @Test
     public void testLondonMulligan_OneMulligan() {
-        MulliganScenarioTest scenario = new MulliganScenarioTest(MulliganType.LONDON, 0);
+        MulliganScenarioTest scenario = new MulliganScenarioTest(getMullType(), 0);
         Set<UUID> hand1 = new HashSet<>();
         Set<UUID> hand2 = new HashSet<>();
         List<UUID> discarded = new ArrayList<>();
@@ -41,14 +46,14 @@ public class LondonMulliganTest extends MulliganTestBase {
         scenario.discardBottom(count -> {
             scenario.assertSizes(7, 33);
             assertEquals(1, count);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             scenario.getHand().stream().limit(count).forEach(discarded::add);
             remainingHand.addAll(Sets.difference(scenario.getHand(), new HashSet<>(discarded)));
             return discarded;
         });
         scenario.mulligan(() -> {
             scenario.assertSizes(6, 34);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             assertEquals(remainingHand, scenario.getHand());
             hand2.addAll(scenario.getHand());
             return false;
@@ -56,7 +61,7 @@ public class LondonMulliganTest extends MulliganTestBase {
         scenario.run(() -> {
             scenario.assertSizes(6, 34);
             assertEquals(remainingHand, new HashSet<>(scenario.getHand()));
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             assertEquals(hand2, scenario.getHand());
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
         });
@@ -64,7 +69,7 @@ public class LondonMulliganTest extends MulliganTestBase {
 
     @Test
     public void testLondonMulligan_TwoMulligan() {
-        MulliganScenarioTest scenario = new MulliganScenarioTest(MulliganType.LONDON, 0);
+        MulliganScenarioTest scenario = new MulliganScenarioTest(getMullType(), 0);
         Set<UUID> hand1 = new HashSet<>();
         Set<UUID> hand2 = new HashSet<>();
         Set<UUID> hand3 = new HashSet<>();
@@ -78,23 +83,23 @@ public class LondonMulliganTest extends MulliganTestBase {
         scenario.discardBottom(count -> {
             scenario.assertSizes(7, 33);
             assertEquals(1, count);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             scenario.getHand().stream().limit(count).forEach(discarded::add);
             remainingHand.addAll(Sets.difference(scenario.getHand(), new HashSet<>(discarded)));
             return discarded;
         });
         scenario.mulligan(() -> {
             scenario.assertSizes(6, 34);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             hand2.addAll(scenario.getHand());
             return true;
         });
         scenario.discardBottom(count -> {
             scenario.assertSizes(7, 33);
             assertEquals(1, count);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
-            assertEquals(discarded, scenario.getLibraryRangeSize(26, 1));
-            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(27, 6)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
+            assertEquals(discarded, scenario.getLibraryRangeSize(33-getCardsPerMull(), 1));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(34-getCardsPerMull(), 6)));
             discarded.clear();
             remainingHand.clear();
             scenario.getHand().stream().limit(count).forEach(discarded::add);
@@ -104,9 +109,9 @@ public class LondonMulliganTest extends MulliganTestBase {
         scenario.discardBottom(count -> {
             scenario.assertSizes(6, 34);
             assertEquals(1, count);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
-            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(27, 6)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(34-getCardsPerMull(), 6)));
             discarded.clear();
             remainingHand.clear();
             scenario.getHand().stream().limit(count).forEach(discarded::add);
@@ -115,8 +120,8 @@ public class LondonMulliganTest extends MulliganTestBase {
         });
         scenario.mulligan(() -> {
             scenario.assertSizes(5, 35);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
-            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(27, 6)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(34-getCardsPerMull(), 6)));
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
             hand3.addAll(scenario.getHand());
             return false;
@@ -124,8 +129,8 @@ public class LondonMulliganTest extends MulliganTestBase {
         scenario.run(() -> {
             scenario.assertSizes(5, 35);
             assertEquals(remainingHand, new HashSet<>(scenario.getHand()));
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
-            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(27, 6)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(34-getCardsPerMull(), 6)));
             assertEquals(hand3, scenario.getHand());
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
         });
@@ -133,7 +138,7 @@ public class LondonMulliganTest extends MulliganTestBase {
 
     @Test
     public void testLondonMulligan_FreeMulligan_NoMulligan() {
-        MulliganScenarioTest scenario = new MulliganScenarioTest(MulliganType.LONDON, 1);
+        MulliganScenarioTest scenario = new MulliganScenarioTest(getMullType(), 1);
         Set<UUID> hand1 = new HashSet<>();
         scenario.mulligan(() -> {
             scenario.assertSizes(7, 33);
@@ -148,7 +153,7 @@ public class LondonMulliganTest extends MulliganTestBase {
 
     @Test
     public void testLondonMulligan_FreeMulligan_OneMulligan() {
-        MulliganScenarioTest scenario = new MulliganScenarioTest(MulliganType.LONDON, 1);
+        MulliganScenarioTest scenario = new MulliganScenarioTest(getMullType(), 1);
         Set<UUID> hand1 = new HashSet<>();
         Set<UUID> hand2 = new HashSet<>();
         scenario.mulligan(() -> {
@@ -159,19 +164,19 @@ public class LondonMulliganTest extends MulliganTestBase {
         scenario.mulligan(() -> {
             scenario.assertSizes(7, 33);
             hand2.addAll(scenario.getHand());
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             return false;
         });
         scenario.run(() -> {
             scenario.assertSizes(7, 33);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             assertEquals(hand2, new HashSet<>(scenario.getHand()));
         });
     }
 
     @Test
     public void testLondonMulligan_FreeMulligan_TwoMulligan() {
-        MulliganScenarioTest scenario = new MulliganScenarioTest(MulliganType.LONDON, 1);
+        MulliganScenarioTest scenario = new MulliganScenarioTest(getMullType(), 1);
         Set<UUID> hand1 = new HashSet<>();
         Set<UUID> hand2 = new HashSet<>();
         Set<UUID> hand3 = new HashSet<>();
@@ -184,31 +189,31 @@ public class LondonMulliganTest extends MulliganTestBase {
         });
         scenario.mulligan(() -> {
             scenario.assertSizes(7, 33);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             hand2.addAll(scenario.getHand());
             return true;
         });
         scenario.discardBottom(count -> {
             scenario.assertSizes(7, 33);
             assertEquals(1, count);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
-            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             scenario.getHand().stream().limit(count).forEach(discarded::add);
             remainingHand.addAll(Sets.difference(scenario.getHand(), new HashSet<>(discarded)));
             return discarded;
         });
         scenario.mulligan(() -> {
             scenario.assertSizes(6, 34);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
-            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
             hand3.addAll(scenario.getHand());
             return false;
         });
         scenario.run(() -> {
             scenario.assertSizes(6, 34);
-            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(19, 7)));
-            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(26, 7)));
+            assertEquals(hand1, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull()*2, 7)));
+            assertEquals(hand2, new HashSet<>(scenario.getLibraryRangeSize(33-getCardsPerMull(), 7)));
             assertEquals(hand3, scenario.getHand());
             assertEquals(remainingHand, new HashSet<>(scenario.getHand()));
             assertEquals(discarded, scenario.getNBottomOfLibrary(1));
@@ -217,7 +222,7 @@ public class LondonMulliganTest extends MulliganTestBase {
 
     @Test
     public void testLondonMulligan_AlwaysMulligan() {
-        MulliganScenarioTest scenario = new MulliganScenarioTest(MulliganType.LONDON, 0);
+        MulliganScenarioTest scenario = new MulliganScenarioTest(getMullType(), 0);
         scenario.mulligan(() -> {
             scenario.assertSizes(7, 33);
             return true;

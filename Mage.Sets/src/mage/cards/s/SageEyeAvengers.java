@@ -58,7 +58,7 @@ class SageEyeAvengersEffect extends OneShotEffect {
         this.staticText = "you may return target creature to its owner's hand if its power is less than {this}'s power";
     }
 
-    public SageEyeAvengersEffect(final SageEyeAvengersEffect effect) {
+    private SageEyeAvengersEffect(final SageEyeAvengersEffect effect) {
         super(effect);
     }
 

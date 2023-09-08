@@ -52,7 +52,7 @@ public final class LostInThought extends CardImpl {
         this.addAbility(new LostInThoughtSpecialAction());
     }
 
-    public LostInThought (final LostInThought card) {
+    private LostInThought(final LostInThought card) {
         super(card);
     }
 
@@ -70,7 +70,7 @@ class LostInThoughtRestrictionEffect extends RestrictionEffect {
         this.staticText = "Enchanted creature can't attack or block";
     }
 
-    public LostInThoughtRestrictionEffect(final LostInThoughtRestrictionEffect effect) {
+    private LostInThoughtRestrictionEffect(final LostInThoughtRestrictionEffect effect) {
         super(effect);
     }
 
@@ -108,7 +108,7 @@ class LostInThoughtCantActivateAbilitiesEffect extends ContinuousRuleModifyingEf
         staticText = ", and its activated abilities can't be activated";
     }
 
-    public LostInThoughtCantActivateAbilitiesEffect(final LostInThoughtCantActivateAbilitiesEffect effect) {
+    private LostInThoughtCantActivateAbilitiesEffect(final LostInThoughtCantActivateAbilitiesEffect effect) {
         super(effect);
     }
 
@@ -152,7 +152,7 @@ class LostInThoughtSpecialAction extends SpecialAction {
         this.setMayActivate(TargetController.CONTROLLER_ATTACHED_TO);
     }
 
-    public LostInThoughtSpecialAction(final LostInThoughtSpecialAction ability) {
+    private LostInThoughtSpecialAction(final LostInThoughtSpecialAction ability) {
         super(ability);
     }
 

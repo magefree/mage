@@ -19,7 +19,7 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
         this.name = "Play " + cardName;
     }
 
-    public PlayLandAbility(PlayLandAbility ability) {
+    protected PlayLandAbility(final PlayLandAbility ability) {
         super(ability);
     }
 

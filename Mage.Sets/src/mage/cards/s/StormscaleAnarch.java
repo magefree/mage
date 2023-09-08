@@ -58,7 +58,7 @@ class StormscaleAnarchEffect extends OneShotEffect {
                 + "{this} deals 4 damage instead.";
     }
 
-    public StormscaleAnarchEffect(final StormscaleAnarchEffect effect) {
+    private StormscaleAnarchEffect(final StormscaleAnarchEffect effect) {
         super(effect);
     }
 

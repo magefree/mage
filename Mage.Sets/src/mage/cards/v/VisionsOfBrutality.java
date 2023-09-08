@@ -65,7 +65,7 @@ class VisionsOfBrutalityEffect extends OneShotEffect {
         this.staticText = "its controller loses that much life";
     }
 
-    public VisionsOfBrutalityEffect(final VisionsOfBrutalityEffect effect) {
+    private VisionsOfBrutalityEffect(final VisionsOfBrutalityEffect effect) {
         super(effect);
     }
 

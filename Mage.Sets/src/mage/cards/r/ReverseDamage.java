@@ -49,7 +49,7 @@ class ReverseDamageEffect extends PreventionEffectImpl {
         this.target = new TargetSource();
     }
 
-    public ReverseDamageEffect(final ReverseDamageEffect effect) {
+    private ReverseDamageEffect(final ReverseDamageEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }

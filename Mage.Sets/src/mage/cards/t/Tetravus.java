@@ -86,7 +86,7 @@ class TetravusCreateTokensEffect extends OneShotEffect {
                 + "They each have flying and \"This creature can't be enchanted.\"";
     }
 
-    public TetravusCreateTokensEffect(final TetravusCreateTokensEffect effect) {
+    private TetravusCreateTokensEffect(final TetravusCreateTokensEffect effect) {
         super(effect);
     }
 
@@ -137,7 +137,7 @@ class TetravusAddCountersEffect extends OneShotEffect {
                 + "If you do, put that many +1/+1 counters on {this}";
     }
 
-    public TetravusAddCountersEffect(final TetravusAddCountersEffect effect) {
+    private TetravusAddCountersEffect(final TetravusAddCountersEffect effect) {
         super(effect);
     }
 

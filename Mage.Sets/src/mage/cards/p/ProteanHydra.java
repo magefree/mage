@@ -59,7 +59,7 @@ public final class ProteanHydra extends CardImpl {
             super(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new ProteanHydraDelayedTriggeredAbility()), false);
         }
 
-        public ProteanHydraAbility(final ProteanHydraAbility ability) {
+        private ProteanHydraAbility(final ProteanHydraAbility ability) {
             super(ability);
         }
 
@@ -91,7 +91,7 @@ public final class ProteanHydra extends CardImpl {
             super(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
         }
 
-        public ProteanHydraDelayedTriggeredAbility(final ProteanHydraDelayedTriggeredAbility ability) {
+        private ProteanHydraDelayedTriggeredAbility(final ProteanHydraDelayedTriggeredAbility ability) {
             super(ability);
         }
 

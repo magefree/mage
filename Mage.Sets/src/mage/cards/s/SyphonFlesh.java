@@ -46,7 +46,7 @@ class SyphonFleshEffect extends OneShotEffect {
         this.staticText = "each other player sacrifices a creature. You create a 2/2 black Zombie creature token for each creature sacrificed this way.";
     }
 
-    public SyphonFleshEffect(final SyphonFleshEffect effect) {
+    private SyphonFleshEffect(final SyphonFleshEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class SyphonFleshEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !playerId.equals(source.getControllerId())) {
                     TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (target.canChoose(player.getId(), source, game)) {
                         player.chooseTarget(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());

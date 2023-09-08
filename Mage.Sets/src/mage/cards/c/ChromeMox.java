@@ -78,7 +78,7 @@ class ChromeMoxEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             TargetCard target = new TargetCard(Zone.HAND, filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Card cardToImprint = null;
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (!controller.getHand().isEmpty() && controller.choose(Outcome.Benefit, target, source, game)) {

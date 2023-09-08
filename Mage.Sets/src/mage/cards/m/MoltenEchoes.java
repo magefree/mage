@@ -66,7 +66,7 @@ class MoltenEchoesEffect extends OneShotEffect {
         this.staticText = "create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step";
     }
 
-    public MoltenEchoesEffect(final MoltenEchoesEffect effect) {
+    private MoltenEchoesEffect(final MoltenEchoesEffect effect) {
         super(effect);
     }
 

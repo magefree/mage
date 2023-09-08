@@ -65,8 +65,6 @@ public class GainProtectionFromColorAllEffect extends GainAbilityAllEffect {
             return staticText;
         }
 
-        String text = "Choose a color. " + filter.getMessage() + " gain protection from the chosen color " + duration.toString();
-
-        return text;
+        return "Choose a color. " + filter.getMessage() + " gain protection from the chosen color " + duration.toString();
     }
 }

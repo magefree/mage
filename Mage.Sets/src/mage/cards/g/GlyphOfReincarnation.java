@@ -108,7 +108,7 @@ class GlyphOfReincarnationEffect extends OneShotEffect {
                         FilterCreatureCard filter = new FilterCreatureCard("a creature card from " + player.getName() + "'s graveyard");
                         filter.add(new OwnerIdPredicate(player.getId()));
                         Target targetCreature = new TargetCardInGraveyard(filter);
-                        targetCreature.setNotTarget(true);
+                        targetCreature.withNotTarget(true);
                         if (targetCreature.canChoose(controller.getId(), source, game)
                                 && controller.chooseTarget(outcome, targetCreature, source, game)) {
                             Card card = game.getCard(targetCreature.getFirstTarget());

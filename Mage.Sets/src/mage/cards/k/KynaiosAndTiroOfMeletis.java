@@ -62,7 +62,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
         staticText = "draw a card. Each player may put a land card from their hand onto the battlefield, then each opponent who didn't draws a card";
     }
 
-    public KynaiosAndTirosEffect(final KynaiosAndTirosEffect effect) {
+    private KynaiosAndTirosEffect(final KynaiosAndTirosEffect effect) {
         super(effect);
     }
 

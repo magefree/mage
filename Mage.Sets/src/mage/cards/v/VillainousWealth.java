@@ -52,7 +52,7 @@ class VillainousWealthEffect extends OneShotEffect {
                 + "or less from among them without paying their mana costs";
     }
 
-    public VillainousWealthEffect(final VillainousWealthEffect effect) {
+    private VillainousWealthEffect(final VillainousWealthEffect effect) {
         super(effect);
     }
 

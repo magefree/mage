@@ -58,7 +58,7 @@ class TitaniasSongEffect extends ContinuousEffectImpl {
         staticText = "Each noncreature artifact loses its abilities and is an artifact creature with power and toughness each equal to its mana value";
     }
 
-    public TitaniasSongEffect(final TitaniasSongEffect effect) {
+    private TitaniasSongEffect(final TitaniasSongEffect effect) {
         super(effect);
     }
 

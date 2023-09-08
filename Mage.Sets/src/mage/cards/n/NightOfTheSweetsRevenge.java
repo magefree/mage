@@ -18,7 +18,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.FoodToken;
 
 import java.util.UUID;
@@ -29,7 +31,9 @@ import java.util.UUID;
  */
 public final class NightOfTheSweetsRevenge extends CardImpl {
 
-    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_FOOD);
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.FOOD, "Foods");
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
     private static final Hint hint = new ValueHint("Foods you control", xValue);
 
     public NightOfTheSweetsRevenge(UUID ownerId, CardSetInfo setInfo) {
@@ -41,8 +45,7 @@ public final class NightOfTheSweetsRevenge extends CardImpl {
 
         // Foods you control have "{T}: Add {G}."
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                new GreenManaAbility(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_CONTROLLED_FOOD
+                new GreenManaAbility(), Duration.WhileOnBattlefield, filter
         )));
 
         // {5}{G}{G}, Sacrifice Night of the Sweets' Revenge: Creatures you control get +X/+X until end of turn, where X is the number of Foods you control. Activate only as a sorcery.

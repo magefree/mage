@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -17,6 +16,8 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class BogbrewWitch extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}, {T}: Search your library for a card named Festering Newt or Bubbling Cauldron, put it onto the battlefield tapped, then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(1, 1, new FilterCard(filter));
+        TargetCardInLibrary target = new TargetCardInLibrary(1, 1, filter);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(target, true),
                 new ManaCostsImpl<>("{2}"));

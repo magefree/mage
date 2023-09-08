@@ -32,7 +32,7 @@ public final class KamiOfAncientLaw extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KamiOfAncientLaw (final KamiOfAncientLaw card) {
+    private KamiOfAncientLaw(final KamiOfAncientLaw card) {
         super(card);
     }
 

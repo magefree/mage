@@ -68,7 +68,7 @@ class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When you're dealt combat damage, ");
     }
 
-    public SwarmbornGiantTriggeredAbility(final SwarmbornGiantTriggeredAbility ability) {
+    private SwarmbornGiantTriggeredAbility(final SwarmbornGiantTriggeredAbility ability) {
         super(ability);
     }
 

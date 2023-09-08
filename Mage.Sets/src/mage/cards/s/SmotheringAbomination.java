@@ -63,7 +63,7 @@ class SmotheringAbominationTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you sacrifice a creature, ");
     }
 
-    public SmotheringAbominationTriggeredAbility(final SmotheringAbominationTriggeredAbility ability) {
+    private SmotheringAbominationTriggeredAbility(final SmotheringAbominationTriggeredAbility ability) {
         super(ability);
     }
 

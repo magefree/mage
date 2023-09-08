@@ -55,7 +55,7 @@ class ThrasiosTritonHeroEffect extends OneShotEffect {
                 "If it's a land card, put it onto the battlefield tapped. Otherwise, draw a card";
     }
 
-    public ThrasiosTritonHeroEffect(final ThrasiosTritonHeroEffect effect) {
+    private ThrasiosTritonHeroEffect(final ThrasiosTritonHeroEffect effect) {
         super(effect);
     }
 

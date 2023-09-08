@@ -60,7 +60,7 @@ class CounterSourceEffect extends OneShotEffect {
         this.staticText = "any player may discard three cards. If a player does, counter {this}";
     }
 
-    public CounterSourceEffect(final CounterSourceEffect effect) {
+    private CounterSourceEffect(final CounterSourceEffect effect) {
         super(effect);
     }
 

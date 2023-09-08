@@ -48,7 +48,7 @@ class PackHuntEffect extends OneShotEffect {
         this.staticText = "Search your library for up to three cards with the same name as target creature, reveal them, and put them into your hand. Then shuffle";
     }
 
-    public PackHuntEffect(final PackHuntEffect effect) {
+    private PackHuntEffect(final PackHuntEffect effect) {
         super(effect);
     }
 

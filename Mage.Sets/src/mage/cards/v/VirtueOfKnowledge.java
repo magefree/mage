@@ -34,6 +34,8 @@ public final class VirtueOfKnowledge extends AdventureCard {
         // Copy target activated or triggered ability you control. You may choose new targets for the copy.
         this.getSpellCard().getSpellAbility().addEffect(new CopyTargetStackAbilityEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility(filter));
+
+        this.finalizeAdventure();
     }
 
     private VirtueOfKnowledge(final VirtueOfKnowledge card) {

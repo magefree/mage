@@ -76,7 +76,7 @@ class AssemblyHallEffect extends OneShotEffect {
         }
         Card cardToReveal = null;
         Target target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (controller.chooseTarget(outcome, target, source, game)) {
             cardToReveal = game.getCard(target.getFirstTarget());
         }

@@ -91,7 +91,7 @@ class SatoruUmezawaEffect extends ContinuousEffectImpl {
         this.staticText = "each creature card in your hand has ninjutsu {2}{U}{B}";
     }
 
-    public SatoruUmezawaEffect(final SatoruUmezawaEffect effect) {
+    private SatoruUmezawaEffect(final SatoruUmezawaEffect effect) {
         super(effect);
     }
 

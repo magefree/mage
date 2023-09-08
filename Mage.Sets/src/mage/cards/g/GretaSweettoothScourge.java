@@ -52,7 +52,7 @@ public final class GretaSweettoothScourge extends CardImpl {
 
         // {1}{B}, Sacrifice a Food: You draw a card and you lose 1 life.
         ability = new SimpleActivatedAbility(
-                new DrawCardSourceControllerEffect(1),
+                new DrawCardSourceControllerEffect(1, "you"),
                 new ManaCostsImpl<>("{1}{B}")
         );
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_FOOD)));

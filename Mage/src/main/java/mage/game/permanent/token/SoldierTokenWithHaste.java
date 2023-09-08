@@ -27,6 +27,6 @@ public final class SoldierTokenWithHaste extends TokenImpl {
 
     @Override
     public SoldierTokenWithHaste copy() {
-        return new SoldierTokenWithHaste(this); //To change body of generated methods, choose Tools | Templates.
+        return new SoldierTokenWithHaste(this);
     }
 }

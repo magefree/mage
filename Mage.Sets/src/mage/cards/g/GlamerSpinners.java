@@ -97,7 +97,7 @@ class GlamerSpinnersEffect extends OneShotEffect {
             filterChoice.add(Predicates.not(new PermanentIdPredicate(targetPermanent.getId())));
 
             Target chosenPermanentToAttachAuras = new TargetPermanent(filterChoice);
-            chosenPermanentToAttachAuras.setNotTarget(true);
+            chosenPermanentToAttachAuras.withNotTarget(true);
 
             LinkedList<UUID> auras = new LinkedList<>();
             auras.addAll(targetPermanent.getAttachments());

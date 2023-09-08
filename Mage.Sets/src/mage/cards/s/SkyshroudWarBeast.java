@@ -65,7 +65,7 @@ class SkyshroudWarBeastEffect extends ContinuousEffectImpl {
         staticText = "{this}'s power and toughness are each equal to the number of nonbasic lands the chosen player controls";
     }
 
-    public SkyshroudWarBeastEffect(final SkyshroudWarBeastEffect effect) {
+    private SkyshroudWarBeastEffect(final SkyshroudWarBeastEffect effect) {
         super(effect);
     }
 

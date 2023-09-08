@@ -24,7 +24,7 @@ public final class RazakethsRite extends CardImpl {
         addAbility(new CyclingAbility(new ManaCostsImpl<>("{B}")));
     }
 
-    public RazakethsRite(final RazakethsRite razakethsRite){
+    private RazakethsRite(final RazakethsRite razakethsRite){
         super(razakethsRite);
     }
 

@@ -57,7 +57,7 @@ class SearchLibraryPutInGraveEffect extends SearchEffect {
         staticText = "Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles.";
     }
 
-    public SearchLibraryPutInGraveEffect(final SearchLibraryPutInGraveEffect effect) {
+    private SearchLibraryPutInGraveEffect(final SearchLibraryPutInGraveEffect effect) {
         super(effect);
     }
 

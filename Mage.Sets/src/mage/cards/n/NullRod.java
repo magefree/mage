@@ -42,7 +42,7 @@ class NullRodCantActivateEffect extends RestrictionEffect {
         staticText = "Activated abilities of artifacts can't be activated";
     }
 
-    public NullRodCantActivateEffect(final NullRodCantActivateEffect effect) {
+    private NullRodCantActivateEffect(final NullRodCantActivateEffect effect) {
         super(effect);
     }
 

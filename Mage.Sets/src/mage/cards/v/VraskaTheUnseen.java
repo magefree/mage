@@ -70,7 +70,7 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl {
         staticText = "Until your next turn, whenever a creature deals combat damage to {this}, destroy that creature";
     }
 
-    public VraskaTheUnseenGainAbilityEffect(final VraskaTheUnseenGainAbilityEffect effect) {
+    private VraskaTheUnseenGainAbilityEffect(final VraskaTheUnseenGainAbilityEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
     }
@@ -102,7 +102,7 @@ class VraskaTheUnseenTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());
     }
 
-    public VraskaTheUnseenTriggeredAbility(final VraskaTheUnseenTriggeredAbility ability) {
+    private VraskaTheUnseenTriggeredAbility(final VraskaTheUnseenTriggeredAbility ability) {
         super(ability);
     }
 

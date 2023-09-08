@@ -63,7 +63,7 @@ class ReyEffect extends OneShotEffect {
         staticText = "reveal the top card of target player's library. You gain life equal to that card's mana value";
     }
 
-    public ReyEffect(final ReyEffect effect) {
+    private ReyEffect(final ReyEffect effect) {
         super(effect);
     }
 

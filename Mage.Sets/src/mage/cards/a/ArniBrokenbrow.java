@@ -4,9 +4,8 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.abilities.keyword.BoastAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -88,7 +87,7 @@ class ArniBrokenbrowEffect extends OneShotEffect {
         if (controller.chooseUse(outcome, "Change base power of " + mageObject.getLogName() + " to "
                 + power + " until end of turn?", source, game
         )) {
-            game.addEffect(new SetBasePowerToughnessSourceEffect(StaticValue.get(power), null, Duration.EndOfTurn, SubLayer.SetPT_7b), source);
+            game.addEffect(new SetBasePowerSourceEffect(power, Duration.EndOfTurn), source);
             return true;
         }
         return false;

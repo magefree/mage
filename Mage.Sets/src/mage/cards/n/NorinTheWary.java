@@ -51,7 +51,7 @@ class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When a player casts a spell or a creature attacks, ");
     }
 
-    public NorinTheWaryTriggeredAbility(final NorinTheWaryTriggeredAbility ability) {
+    private NorinTheWaryTriggeredAbility(final NorinTheWaryTriggeredAbility ability) {
         super(ability);
     }
 

@@ -44,7 +44,7 @@ class TreasureHuntEffect extends OneShotEffect {
         this.staticText = "Reveal cards from the top of your library until you reveal a nonland card, then put all cards revealed this way into your hand";
     }
 
-    public TreasureHuntEffect(final TreasureHuntEffect effect) {
+    private TreasureHuntEffect(final TreasureHuntEffect effect) {
         super(effect);
     }
 

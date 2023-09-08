@@ -48,7 +48,7 @@ class ThroneOfEmpiresEffect extends OneShotEffect {
         staticText = "Create a 1/1 white Soldier creature token. Create five of those tokens instead if you control artifacts named Crown of Empires and Scepter of Empires";
     }
 
-    public ThroneOfEmpiresEffect(ThroneOfEmpiresEffect effect) {
+    private ThroneOfEmpiresEffect(final ThroneOfEmpiresEffect effect) {
         super(effect);
     }
 

@@ -54,7 +54,7 @@ class SlayersCleaverEffect extends RequirementEffect {
         staticText = "and must be blocked by an Eldrazi if able";
     }
 
-    public SlayersCleaverEffect(final SlayersCleaverEffect effect) {
+    private SlayersCleaverEffect(final SlayersCleaverEffect effect) {
         super(effect);
     }
 

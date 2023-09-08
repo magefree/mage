@@ -52,7 +52,7 @@ class RendingVinesEffect extends OneShotEffect {
         this.staticText = "Destroy target artifact or enchantment if its mana value is less than or equal to the number of cards in your hand";
     }
 
-    public RendingVinesEffect(final RendingVinesEffect effect) {
+    private RendingVinesEffect(final RendingVinesEffect effect) {
         super(effect);
     }
 

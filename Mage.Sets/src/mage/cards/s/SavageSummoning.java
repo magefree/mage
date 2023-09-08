@@ -65,7 +65,7 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
         staticText = "The next creature spell you cast this turn can be cast as though it had flash";
     }
 
-    public SavageSummoningAsThoughEffect(final SavageSummoningAsThoughEffect effect) {
+    private SavageSummoningAsThoughEffect(final SavageSummoningAsThoughEffect effect) {
         super(effect);
         this.watcher = effect.watcher;
         this.zoneChangeCounter = effect.zoneChangeCounter;
@@ -181,7 +181,7 @@ class SavageSummoningCantCounterEffect extends ContinuousRuleModifyingEffectImpl
         staticText = "That spell can't be countered";
     }
 
-    public SavageSummoningCantCounterEffect(final SavageSummoningCantCounterEffect effect) {
+    private SavageSummoningCantCounterEffect(final SavageSummoningCantCounterEffect effect) {
         super(effect);
         this.watcher = effect.watcher;
         this.zoneChangeCounter = effect.zoneChangeCounter;
@@ -239,7 +239,7 @@ class SavageSummoningEntersBattlefieldEffect extends ReplacementEffectImpl {
         staticText = "That creature enters the battlefield with an additional +1/+1 counter on it";
     }
 
-    public SavageSummoningEntersBattlefieldEffect(final SavageSummoningEntersBattlefieldEffect effect) {
+    private SavageSummoningEntersBattlefieldEffect(final SavageSummoningEntersBattlefieldEffect effect) {
         super(effect);
         this.watcher = effect.watcher;
         this.zoneChangeCounter = effect.zoneChangeCounter;

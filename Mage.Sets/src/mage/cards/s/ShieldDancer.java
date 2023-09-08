@@ -57,7 +57,7 @@ class ShieldDancerRedirectionEffect extends RedirectionEffect {
         staticText = "The next time target attacking creature would deal combat damage to {this} this turn, that creature deals that damage to itself instead";
     }
 
-    public ShieldDancerRedirectionEffect(final ShieldDancerRedirectionEffect effect) {
+    private ShieldDancerRedirectionEffect(final ShieldDancerRedirectionEffect effect) {
         super(effect);
     }
 

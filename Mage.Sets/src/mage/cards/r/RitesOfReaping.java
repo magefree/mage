@@ -59,7 +59,7 @@ class RitesOfReapingEffect extends ContinuousEffectImpl {
         this.staticText = "Target creature gets +3/+3 until end of turn. Another target creature gets -3/-3 until end of turn";
     }
 
-    public RitesOfReapingEffect(final RitesOfReapingEffect effect) {
+    private RitesOfReapingEffect(final RitesOfReapingEffect effect) {
         super(effect);
     }
 

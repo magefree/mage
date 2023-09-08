@@ -67,7 +67,7 @@ class SoulEchoOpponentsChoiceEffect extends OneShotEffect {
             "until your next upkeep, you remove an echo counter from {this} instead";
     }
 
-    public SoulEchoOpponentsChoiceEffect(final SoulEchoOpponentsChoiceEffect effect) {
+    private SoulEchoOpponentsChoiceEffect(final SoulEchoOpponentsChoiceEffect effect) {
         super(effect);
     }
 

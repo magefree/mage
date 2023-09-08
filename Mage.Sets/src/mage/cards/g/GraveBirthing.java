@@ -73,7 +73,7 @@ class GraveBirthingEffect extends OneShotEffect {
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (opponent != null) {
             Target target = new TargetCardInYourGraveyard();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             opponent.chooseTarget(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             opponent.moveCards(card, Zone.EXILED, source, game);

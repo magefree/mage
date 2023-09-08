@@ -70,7 +70,7 @@ class HumiliateEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.withChooseHint("+1/+1 counter");
         player.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());

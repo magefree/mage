@@ -53,7 +53,7 @@ class RealmwrightEffect extends ContinuousEffectImpl {
         staticText = "Lands you control are the chosen type in addition to their other types";
     }
 
-    public RealmwrightEffect(final RealmwrightEffect effect) {
+    private RealmwrightEffect(final RealmwrightEffect effect) {
         super(effect);
     }
 

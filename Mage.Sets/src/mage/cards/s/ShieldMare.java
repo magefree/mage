@@ -62,7 +62,7 @@ class ShieldMareTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.ALL, new GainLifeEffect(3));
     }
 
-    public ShieldMareTriggeredAbility(final ShieldMareTriggeredAbility effect) {
+    private ShieldMareTriggeredAbility(final ShieldMareTriggeredAbility effect) {
         super(effect);
     }
 

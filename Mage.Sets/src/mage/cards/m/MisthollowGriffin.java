@@ -54,7 +54,7 @@ class MisthollowGriffinPlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from exile";
     }
 
-    public MisthollowGriffinPlayEffect(final MisthollowGriffinPlayEffect effect) {
+    private MisthollowGriffinPlayEffect(final MisthollowGriffinPlayEffect effect) {
         super(effect);
     }
 

@@ -56,7 +56,7 @@ class SphinxBoneWandEffect extends OneShotEffect {
         this.staticText = "put a charge counter on Sphinx-Bone Wand. If you do, Sphinx-Bone Wand deals damage equal to the number of charge counters on it to any target";
     }
 
-    public SphinxBoneWandEffect(final SphinxBoneWandEffect effect) {
+    private SphinxBoneWandEffect(final SphinxBoneWandEffect effect) {
         super(effect);
     }
 

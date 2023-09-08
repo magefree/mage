@@ -60,7 +60,7 @@ class SamiteElderEffect extends OneShotEffect {
         staticText = "Creatures you control gain protection from the colors of target permanent you control until end of turn";
     }
 
-    public SamiteElderEffect(final SamiteElderEffect effect) {
+    private SamiteElderEffect(final SamiteElderEffect effect) {
         super(effect);
     }
 

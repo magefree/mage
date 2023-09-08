@@ -61,7 +61,7 @@ class SoulSculptorEffect extends ContinuousEffectImpl {
 
     }
 
-    public SoulSculptorEffect(final SoulSculptorEffect effect) {
+    private SoulSculptorEffect(final SoulSculptorEffect effect) {
         super(effect);
     }
 

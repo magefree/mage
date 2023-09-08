@@ -48,7 +48,7 @@ class MoonlightBargainEffect extends OneShotEffect {
         this.staticText = "Look at the top five cards of your library. For each card, put that card into your graveyard unless you pay 2 life. Then put the rest into your hand";
     }
 
-    public MoonlightBargainEffect(final MoonlightBargainEffect effect) {
+    private MoonlightBargainEffect(final MoonlightBargainEffect effect) {
         super(effect);
     }
 

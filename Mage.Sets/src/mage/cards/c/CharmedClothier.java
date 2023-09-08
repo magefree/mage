@@ -33,7 +33,7 @@ public final class CharmedClothier extends CardImpl {
 
         // When Charmed Clothier enters the battlefield, create a Royal Role token attached to another target creature you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateRoleAttachedTargetEffect(RoleType.ROYAL));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }
 

@@ -51,7 +51,7 @@ class UginsNexusSkipExtraTurnsEffect extends ReplacementEffectImpl {
         staticText = "If a player would begin an extra turn, that player skips that turn instead";
     }
 
-    public UginsNexusSkipExtraTurnsEffect(final UginsNexusSkipExtraTurnsEffect effect) {
+    private UginsNexusSkipExtraTurnsEffect(final UginsNexusSkipExtraTurnsEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class UginsNexusExileEffect extends ReplacementEffectImpl {
         staticText = "If {this} would be put into a graveyard from the battlefield, instead exile it and take an extra turn after this one";
     }
 
-    public UginsNexusExileEffect(final UginsNexusExileEffect effect) {
+    private UginsNexusExileEffect(final UginsNexusExileEffect effect) {
         super(effect);
     }
 

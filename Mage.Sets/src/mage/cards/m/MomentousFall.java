@@ -48,7 +48,7 @@ class MomentousFallEffect extends OneShotEffect {
         staticText = "You draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness";
     }
 
-    public MomentousFallEffect(final MomentousFallEffect effect) {
+    private MomentousFallEffect(final MomentousFallEffect effect) {
         super(effect);
     }
 

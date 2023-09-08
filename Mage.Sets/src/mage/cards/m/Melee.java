@@ -74,7 +74,7 @@ class MeleeTriggeredAbility extends DelayedTriggeredAbility {
         this.addEffect(new RemoveFromCombatTargetEffect());
     }
 
-    public MeleeTriggeredAbility(MeleeTriggeredAbility ability) {
+    private MeleeTriggeredAbility(final MeleeTriggeredAbility ability) {
         super(ability);
     }
 

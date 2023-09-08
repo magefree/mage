@@ -34,7 +34,7 @@ public final class SicarianInfiltrator extends CardImpl {
         // Benediction of Omnissiah -- When Sicarian Infiltrator enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
                 new DrawCardSourceControllerEffect(1)
-        ).withFlavorWord("Benediction of Omnissiah"));
+        ).withFlavorWord("Benediction of the Omnissiah"));
     }
 
     private SicarianInfiltrator(final SicarianInfiltrator card) {

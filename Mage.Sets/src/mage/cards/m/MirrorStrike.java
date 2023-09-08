@@ -56,7 +56,7 @@ class MirrorStrikeEffect extends ReplacementEffectImpl {
         staticText = "All combat damage that would be dealt to you this turn by target unblocked creature is dealt to its controller instead";
     }
 
-    public MirrorStrikeEffect(final MirrorStrikeEffect effect) {
+    private MirrorStrikeEffect(final MirrorStrikeEffect effect) {
         super(effect);
     }
 

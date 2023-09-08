@@ -61,7 +61,7 @@ class MournwillowEffect extends RestrictionEffect {
         staticText = "creatures with power 2 or less can't block this turn";
     }
 
-    public MournwillowEffect(final MournwillowEffect effect) {
+    private MournwillowEffect(final MournwillowEffect effect) {
         super(effect);
     }
 
