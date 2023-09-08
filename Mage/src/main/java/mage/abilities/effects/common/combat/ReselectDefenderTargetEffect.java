@@ -1,15 +1,14 @@
 package mage.abilities.effects.common.combat;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -17,7 +16,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetDefender;
 
-public class RedirectAttackerTargetEffect extends OneShotEffect {
+public class ReselectDefenderTargetEffect extends OneShotEffect {
     
     private final boolean includePermanents;
     private static final FilterPermanent filter = new FilterPermanent("permanent");
@@ -29,19 +28,19 @@ public class RedirectAttackerTargetEffect extends OneShotEffect {
         ));
     }
 
-    public RedirectAttackerTargetEffect(boolean includePermanents) {
+    public ReselectDefenderTargetEffect(boolean includePermanents) {
         super(Outcome.Benefit);
         this.includePermanents = includePermanents;
     }
 
-    public RedirectAttackerTargetEffect(final RedirectAttackerTargetEffect effect) {
+    public ReselectDefenderTargetEffect(final ReselectDefenderTargetEffect effect) {
         super(effect);
         this.includePermanents = effect.includePermanents;
     }
 
     @Override
-    public RedirectAttackerTargetEffect copy() {
-        return new RedirectAttackerTargetEffect(this);
+    public ReselectDefenderTargetEffect copy() {
+        return new ReselectDefenderTargetEffect(this);
     }
 
     @Override
@@ -66,15 +65,18 @@ public class RedirectAttackerTargetEffect extends OneShotEffect {
 
             // Reselecting which player or permanent a creature is attacking ignores all requirements, restrictions, and costs associated with attacking.
 
-            // Update possible defender
-            Set<UUID> defenders = new LinkedHashSet<>();
-            for (UUID playerId : game.getCombat().getAttackablePlayers(game)) {
-                defenders.add(playerId);
-                if (includePermanents) {
-                    for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
-                        defenders.add(permanent.getId());
-                    }
-                }
+            // Players
+            Set<UUID> defenders = game.getCombat().getAttackablePlayers(game).stream().collect(Collectors.toSet());
+
+            // Planeswalkers and Battles
+            if (includePermanents) {
+                game.getBattlefield().getAllActivePermanents(filter, game)
+                    .stream()
+                    .filter(p -> 
+                        (p.isPlaneswalker(game) && !p.isControlledBy(attackingCreature.getControllerId()))
+                        || (p.isBattle(game) && !p.isProtectedBy(attackingCreature.getControllerId())))
+                    .map(Permanent::getId)
+                    .forEach(defenders::add);                        
             }
 
             // Select the new defender(s)
