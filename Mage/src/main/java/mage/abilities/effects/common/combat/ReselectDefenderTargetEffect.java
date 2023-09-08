@@ -5,6 +5,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -103,4 +104,15 @@ public class ReselectDefenderTargetEffect extends OneShotEffect {
 
         return true;
     }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return "reselect which " + (includePermanents ? "player or permanent " : "player ") + 
+            getTargetPointer().describeTargets(mode.getTargets(), "that creature") 
+            + " is attacking";
+    }
+
 }
