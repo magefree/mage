@@ -111,7 +111,7 @@ class ImprisonUnblockEffect extends OneShotEffect {
         this.staticText = "tap the creature, remove it from combat, and creatures it was blocking that had become blocked by only that creature this combat become unblocked";
     }
 
-    public ImprisonUnblockEffect(final ImprisonUnblockEffect effect) {
+    private ImprisonUnblockEffect(final ImprisonUnblockEffect effect) {
         super(effect);
     }
 

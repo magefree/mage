@@ -73,7 +73,7 @@ class HomuraReturnFlippedSourceEffect extends OneShotEffect {
         staticText = "return it to the battlefield flipped";
     }
 
-    public HomuraReturnFlippedSourceEffect(final HomuraReturnFlippedSourceEffect effect) {
+    private HomuraReturnFlippedSourceEffect(final HomuraReturnFlippedSourceEffect effect) {
         super(effect);
         this.flipToken = effect.flipToken;
     }
@@ -121,7 +121,7 @@ class HomurasEssence2 extends TokenImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
     }
-    public HomurasEssence2(final HomurasEssence2 token) {
+    private HomurasEssence2(final HomurasEssence2 token) {
         super(token);
     }
 

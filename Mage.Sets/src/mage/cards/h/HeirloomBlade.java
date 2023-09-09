@@ -62,7 +62,7 @@ class HeirloomBladeEffect extends OneShotEffect {
                 + "Put that card into your hand and the rest on the bottom of your library in a random order";
     }
 
-    public HeirloomBladeEffect(final HeirloomBladeEffect effect) {
+    private HeirloomBladeEffect(final HeirloomBladeEffect effect) {
         super(effect);
     }
 

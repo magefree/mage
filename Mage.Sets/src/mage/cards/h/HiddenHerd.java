@@ -52,7 +52,7 @@ class HiddenHerdAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new HiddenHerdBeast(), null, Duration.WhileOnBattlefield), false);
     }
 
-    public HiddenHerdAbility(final HiddenHerdAbility ability) {
+    private HiddenHerdAbility(final HiddenHerdAbility ability) {
         super(ability);
     }
 
@@ -87,7 +87,7 @@ class HiddenHerdBeast extends TokenImpl {
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
-    public HiddenHerdBeast(final HiddenHerdBeast token) {
+    private HiddenHerdBeast(final HiddenHerdBeast token) {
         super(token);
     }
 

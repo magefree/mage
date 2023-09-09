@@ -53,7 +53,7 @@ class IllicitAuctionEffect extends GainControlTargetEffect {
         this.staticText = "Each player may bid life for control of target creature. You start the bidding with a bid of 0. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid and gains control of the creature.";
     }
 
-    public IllicitAuctionEffect(final IllicitAuctionEffect effect) {
+    private IllicitAuctionEffect(final IllicitAuctionEffect effect) {
         super(effect);
     }
 

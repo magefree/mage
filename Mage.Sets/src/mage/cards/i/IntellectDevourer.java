@@ -229,7 +229,7 @@ class IntellectDevourerReturnCardsAbility extends DelayedTriggeredAbility {
         this.setRuleVisible(false);
     }
 
-    public IntellectDevourerReturnCardsAbility(final IntellectDevourerReturnCardsAbility ability) {super(ability);}
+    private IntellectDevourerReturnCardsAbility(final IntellectDevourerReturnCardsAbility ability) {super(ability);}
 
     @Override
     public IntellectDevourerReturnCardsAbility copy() {return new IntellectDevourerReturnCardsAbility(this);}
@@ -258,7 +258,7 @@ class IntellectDevourerReturnExiledCardEffect extends OneShotEffect {
         this.staticText = "Return exiled cards to their owners' hands";
     }
 
-    public IntellectDevourerReturnExiledCardEffect(final IntellectDevourerReturnExiledCardEffect effect) {super(effect);}
+    private IntellectDevourerReturnExiledCardEffect(final IntellectDevourerReturnExiledCardEffect effect) {super(effect);}
 
     @Override
     public IntellectDevourerReturnExiledCardEffect copy() {return new IntellectDevourerReturnExiledCardEffect(this);}

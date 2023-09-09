@@ -56,7 +56,7 @@ class HixusPrisonWardenTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature deals combat damage to you, if {this} entered the battlefield this turn, ");
     }
 
-    public HixusPrisonWardenTriggeredAbility(final HixusPrisonWardenTriggeredAbility ability) {
+    private HixusPrisonWardenTriggeredAbility(final HixusPrisonWardenTriggeredAbility ability) {
         super(ability);
     }
 

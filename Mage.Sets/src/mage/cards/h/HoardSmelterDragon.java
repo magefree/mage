@@ -43,7 +43,7 @@ public final class HoardSmelterDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HoardSmelterDragon (final HoardSmelterDragon card) {
+    private HoardSmelterDragon(final HoardSmelterDragon card) {
         super(card);
     }
 

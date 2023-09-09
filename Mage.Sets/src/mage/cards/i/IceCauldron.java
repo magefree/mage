@@ -78,7 +78,7 @@ class IceCauldronExileEffect extends OneShotEffect {
         this.staticText = "and exile a nonland card from your hand. You may cast that card for as long as it remains exiled";
     }
 
-    public IceCauldronExileEffect(final IceCauldronExileEffect effect) {
+    private IceCauldronExileEffect(final IceCauldronExileEffect effect) {
         super(effect);
     }
 
@@ -157,7 +157,7 @@ class IceCauldronNoteManaEffect extends OneShotEffect {
         this.staticText = "Note the type and amount of mana spent to pay this activation cost";
     }
 
-    public IceCauldronNoteManaEffect(final IceCauldronNoteManaEffect effect) {
+    private IceCauldronNoteManaEffect(final IceCauldronNoteManaEffect effect) {
         super(effect);
         manaUsedString = effect.manaUsedString;
     }

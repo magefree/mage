@@ -72,7 +72,7 @@ class IllusoryGainsEffect extends OneShotEffect {
         super(Outcome.Detriment);
     }
 
-    public IllusoryGainsEffect(final IllusoryGainsEffect effect) {
+    private IllusoryGainsEffect(final IllusoryGainsEffect effect) {
         super(effect);
     }
 

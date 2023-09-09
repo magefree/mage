@@ -50,7 +50,7 @@ class HourOfNeedExileEffect extends OneShotEffect {
         this.staticText = "Exile any number of target creatures. For each creature exiled this way, its controller creates a 4/4 blue Sphinx creature token with flying";
     }
 
-    public HourOfNeedExileEffect(final HourOfNeedExileEffect effect) {
+    private HourOfNeedExileEffect(final HourOfNeedExileEffect effect) {
         super(effect);
     }
 

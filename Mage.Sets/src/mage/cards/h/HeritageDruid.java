@@ -62,7 +62,7 @@ class HeritageDruidManaEffect extends BasicManaEffect {
         this.filter = filter;
     }
 
-    public HeritageDruidManaEffect(final HeritageDruidManaEffect effect) {
+    private HeritageDruidManaEffect(final HeritageDruidManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

@@ -67,7 +67,7 @@ class HisokasGuardGainAbilityTargetEffect extends ContinuousEffectImpl {
         this.ability = ShroudAbility.getInstance();
     }
 
-    public HisokasGuardGainAbilityTargetEffect(final HisokasGuardGainAbilityTargetEffect effect) {
+    private HisokasGuardGainAbilityTargetEffect(final HisokasGuardGainAbilityTargetEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
     }

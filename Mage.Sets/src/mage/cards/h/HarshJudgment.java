@@ -58,7 +58,7 @@ class HarshJudgmentEffect extends RedirectionEffect {
         staticText = "If an instant or sorcery spell of the chosen color would deal damage to you, it deals that damage to its controller instead";
     }
 
-    public HarshJudgmentEffect(final HarshJudgmentEffect effect) {
+    private HarshJudgmentEffect(final HarshJudgmentEffect effect) {
         super(effect);
     }
 

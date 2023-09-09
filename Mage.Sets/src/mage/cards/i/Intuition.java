@@ -54,7 +54,7 @@ class IntuitionEffect extends SearchEffect {
     }
 
 
-    public IntuitionEffect(final IntuitionEffect effect) {
+    private IntuitionEffect(final IntuitionEffect effect) {
         super(effect);
     }
 

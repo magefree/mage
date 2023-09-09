@@ -26,7 +26,7 @@ public final class HumbleBudoka extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public HumbleBudoka (final HumbleBudoka card) {
+    private HumbleBudoka(final HumbleBudoka card) {
         super(card);
     }
 

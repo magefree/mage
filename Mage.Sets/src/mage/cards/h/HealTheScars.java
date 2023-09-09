@@ -47,7 +47,7 @@ class HealTheScarsEffect extends OneShotEffect {
         staticText = "You gain life equal to that creature's toughness";
     }
 
-    public HealTheScarsEffect(final HealTheScarsEffect effect) {
+    private HealTheScarsEffect(final HealTheScarsEffect effect) {
         super(effect);
     }
 

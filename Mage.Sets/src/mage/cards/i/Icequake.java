@@ -47,7 +47,7 @@ class IcequakeEffect extends OneShotEffect {
         this.staticText = "Destroy target land.<br>If that land was a snow land, {this} deals 1 damage to that land's controller.";
     }
 
-    public IcequakeEffect(final IcequakeEffect effect) {
+    private IcequakeEffect(final IcequakeEffect effect) {
         super(effect);
     }
 

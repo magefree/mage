@@ -61,7 +61,7 @@ class InsultDoubleDamageEffect extends ReplacementEffectImpl {
         staticText = "If a source you control would deal damage this turn, it deals double that damage to that permanent or player instead.";
     }
 
-    public InsultDoubleDamageEffect(final InsultDoubleDamageEffect effect) {
+    private InsultDoubleDamageEffect(final InsultDoubleDamageEffect effect) {
         super(effect);
     }
 

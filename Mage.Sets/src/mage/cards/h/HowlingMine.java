@@ -41,7 +41,7 @@ class HowlingMineAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1));
     }
 
-    public HowlingMineAbility(final HowlingMineAbility ability) {
+    private HowlingMineAbility(final HowlingMineAbility ability) {
         super(ability);
     }
 

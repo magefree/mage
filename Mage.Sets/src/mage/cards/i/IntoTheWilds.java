@@ -47,7 +47,7 @@ class IntoTheWildsEffect extends OneShotEffect {
         this.staticText = "look at the top card of your library. If it's a land card, you may put it onto the battlefield";
     }
 
-    public IntoTheWildsEffect(final IntoTheWildsEffect effect) {
+    private IntoTheWildsEffect(final IntoTheWildsEffect effect) {
         super(effect);
     }
 

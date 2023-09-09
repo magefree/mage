@@ -45,7 +45,7 @@ class HallowedBurialEffect extends OneShotEffect {
         this.staticText = "Put all creatures on the bottom of their owners' libraries";
     }
 
-    public HallowedBurialEffect(final HallowedBurialEffect effect) {
+    private HallowedBurialEffect(final HallowedBurialEffect effect) {
         super(effect);
     }
 
