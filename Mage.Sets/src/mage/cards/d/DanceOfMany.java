@@ -76,7 +76,7 @@ class DanceOfManyCreateTokenCopyEffect extends OneShotEffect {
         staticText = "create a token that's a copy of target nontoken creature";
     }
 
-    public DanceOfManyCreateTokenCopyEffect(final DanceOfManyCreateTokenCopyEffect effect) {
+    private DanceOfManyCreateTokenCopyEffect(final DanceOfManyCreateTokenCopyEffect effect) {
         super(effect);
     }
 
@@ -120,7 +120,7 @@ class DanceOfManyExileTokenEffect extends OneShotEffect {
         staticText = "exile the token";
     }
 
-    public DanceOfManyExileTokenEffect(final DanceOfManyExileTokenEffect effect) {
+    private DanceOfManyExileTokenEffect(final DanceOfManyExileTokenEffect effect) {
         super(effect);
     }
 

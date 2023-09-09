@@ -26,7 +26,7 @@ public final class DeathGrasp extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public DeathGrasp (final DeathGrasp card) {
+    private DeathGrasp(final DeathGrasp card) {
         super(card);
     }
 

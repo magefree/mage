@@ -56,7 +56,7 @@ public final class DeathWatch extends CardImpl {
             staticText = "that creature's controller loses life equal to its power and you gain life equal to its toughness.";
         }
 
-        public DeathWatchEffect(DeathWatchEffect copy) {
+        private DeathWatchEffect(final DeathWatchEffect copy) {
             super(copy);
         }
 

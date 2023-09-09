@@ -63,7 +63,7 @@ class DaxosOfMeletisEffect extends OneShotEffect {
         this.staticText = "exile the top card of that player's library. You gain life equal to that card's mana value. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell";
     }
 
-    public DaxosOfMeletisEffect(final DaxosOfMeletisEffect effect) {
+    private DaxosOfMeletisEffect(final DaxosOfMeletisEffect effect) {
         super(effect);
     }
 

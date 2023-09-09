@@ -121,7 +121,7 @@ class DefiantVanguardEffect extends OneShotEffect {
         staticText = "destroy it and all creatures it blocked this turn";
     }
 
-    public DefiantVanguardEffect(final DefiantVanguardEffect effect) {
+    private DefiantVanguardEffect(final DefiantVanguardEffect effect) {
         super(effect);
     }
 

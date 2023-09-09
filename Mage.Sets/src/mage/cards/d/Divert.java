@@ -46,7 +46,7 @@ class DivertEffect extends OneShotEffect {
         this.staticText = "Change the target of target spell with a single target unless that spell's controller pays {2}.";
     }
 
-    public DivertEffect(final DivertEffect effect) {
+    private DivertEffect(final DivertEffect effect) {
         super(effect);
     }
 

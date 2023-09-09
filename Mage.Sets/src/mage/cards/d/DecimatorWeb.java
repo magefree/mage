@@ -33,7 +33,7 @@ public final class DecimatorWeb extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DecimatorWeb (final DecimatorWeb card) {
+    private DecimatorWeb(final DecimatorWeb card) {
         super(card);
     }
 

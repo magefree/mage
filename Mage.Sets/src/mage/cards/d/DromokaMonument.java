@@ -56,7 +56,7 @@ public final class DromokaMonument extends CardImpl {
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
         }
-        public DromokaMonumentToken(final DromokaMonumentToken token) {
+        private DromokaMonumentToken(final DromokaMonumentToken token) {
             super(token);
         }
 

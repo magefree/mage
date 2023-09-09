@@ -68,7 +68,7 @@ class DevouringTendrilsEffect extends OneShotEffect {
         this.staticText = "when the permanent you don't control dies this turn, you gain 2 life";
     }
 
-    public DevouringTendrilsEffect(final DevouringTendrilsEffect effect) {
+    private DevouringTendrilsEffect(final DevouringTendrilsEffect effect) {
         super(effect);
     }
 

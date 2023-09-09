@@ -49,7 +49,7 @@ class EgoErasureEffect extends ContinuousEffectImpl {
         staticText = "creatures target player controls get -2/-0 and lose all creature types until end of turn";
     }
 
-    public EgoErasureEffect(final EgoErasureEffect effect) {
+    private EgoErasureEffect(final EgoErasureEffect effect) {
         super(effect);
     }
 

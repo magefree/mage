@@ -52,7 +52,7 @@ class DieYoungEffect extends OneShotEffect {
         this.staticText = "Choose target creature. You get {E}{E}, then you may pay any amount of {E}. The creature gets -1/-1 until end of turn for each {E} paid this way";
     }
 
-    public DieYoungEffect(final DieYoungEffect effect) {
+    private DieYoungEffect(final DieYoungEffect effect) {
         super(effect);
     }
 

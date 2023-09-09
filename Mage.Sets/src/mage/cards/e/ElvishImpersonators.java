@@ -47,7 +47,7 @@ class ElvishImpersonatorsEffect extends OneShotEffect {
         staticText = "roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result";
     }
 
-    public ElvishImpersonatorsEffect(final ElvishImpersonatorsEffect effect) {
+    private ElvishImpersonatorsEffect(final ElvishImpersonatorsEffect effect) {
         super(effect);
     }
 

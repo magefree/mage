@@ -90,7 +90,7 @@ class EunuchsIntriguesRestrictionEffect extends RestrictionEffect {
         this.targetId = targetId;
     }
 
-    public EunuchsIntriguesRestrictionEffect(final EunuchsIntriguesRestrictionEffect effect) {
+    private EunuchsIntriguesRestrictionEffect(final EunuchsIntriguesRestrictionEffect effect) {
         super(effect);
         targetId = effect.targetId;
     }

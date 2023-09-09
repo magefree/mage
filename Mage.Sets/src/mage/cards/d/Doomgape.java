@@ -59,7 +59,7 @@ class DoomgapeEffect extends OneShotEffect {
         this.staticText = "sacrifice a creature. You gain life equal to that creature's toughness";
     }
 
-    public DoomgapeEffect(final DoomgapeEffect effect) {
+    private DoomgapeEffect(final DoomgapeEffect effect) {
         super(effect);
     }
 

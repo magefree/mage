@@ -47,7 +47,7 @@ class DevastatingSummonsEffect extends OneShotEffect {
         staticText = "Create two X/X red Elemental creature tokens";
     }
 
-    public DevastatingSummonsEffect(final DevastatingSummonsEffect effect) {
+    private DevastatingSummonsEffect(final DevastatingSummonsEffect effect) {
         super(effect);
     }
 

@@ -41,7 +41,7 @@ class DebtToTheDeathlessEffect extends OneShotEffect {
         this.staticText = "Each opponent loses two times X life. You gain life equal to the life lost this way";
     }
 
-    public DebtToTheDeathlessEffect(final DebtToTheDeathlessEffect effect) {
+    private DebtToTheDeathlessEffect(final DebtToTheDeathlessEffect effect) {
         super(effect);
     }
 

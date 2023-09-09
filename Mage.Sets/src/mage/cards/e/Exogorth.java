@@ -72,7 +72,7 @@ class CanBlockOnlySpaceflightEffect extends RestrictionEffect {
         this.staticText = "{this} can block only creatures with spaceflight";
     }
 
-    public CanBlockOnlySpaceflightEffect(final CanBlockOnlySpaceflightEffect effect) {
+    private CanBlockOnlySpaceflightEffect(final CanBlockOnlySpaceflightEffect effect) {
         super(effect);
     }
 

@@ -103,7 +103,7 @@ class EnigmaSphinxEffect extends OneShotEffect {
         staticText = "put it into your library third from the top";
     }
 
-    public EnigmaSphinxEffect(final EnigmaSphinxEffect effect) {
+    private EnigmaSphinxEffect(final EnigmaSphinxEffect effect) {
         super(effect);
     }
 

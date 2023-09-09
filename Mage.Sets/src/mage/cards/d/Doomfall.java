@@ -59,7 +59,7 @@ class DoomfallEffect extends OneShotEffect {
         this.staticText = "target player exiles a creature they control";
     }
 
-    public DoomfallEffect(final DoomfallEffect effect) {
+    private DoomfallEffect(final DoomfallEffect effect) {
         super(effect);
     }
 

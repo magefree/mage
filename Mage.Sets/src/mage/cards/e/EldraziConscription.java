@@ -47,7 +47,7 @@ public final class EldraziConscription extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EldraziConscription (final EldraziConscription card) {
+    private EldraziConscription(final EldraziConscription card) {
         super(card);
     }
 

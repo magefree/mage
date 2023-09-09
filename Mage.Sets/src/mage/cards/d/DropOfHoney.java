@@ -56,7 +56,7 @@ class DropOfHoneyEffect extends OneShotEffect {
         this.staticText = "destroy the creature with the least power. It can't be regenerated. If two or more creatures are tied for least power, you choose one of them";
     }
     
-    public DropOfHoneyEffect(final DropOfHoneyEffect effect) {
+    private DropOfHoneyEffect(final DropOfHoneyEffect effect) {
         super(effect);
     }
     
@@ -113,7 +113,7 @@ class DropOfHoneyStateTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When there are no creatures on the battlefield, ");
     }
 
-    public DropOfHoneyStateTriggeredAbility(final DropOfHoneyStateTriggeredAbility ability) {
+    private DropOfHoneyStateTriggeredAbility(final DropOfHoneyStateTriggeredAbility ability) {
         super(ability);
     }
 

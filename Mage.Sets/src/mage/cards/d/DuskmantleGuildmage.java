@@ -63,7 +63,7 @@ class CardPutIntoOpponentGraveThisTurn extends DelayedTriggeredAbility {
         super(new LoseLifeTargetEffect(1), Duration.EndOfTurn, false);
     }
 
-    public CardPutIntoOpponentGraveThisTurn(final CardPutIntoOpponentGraveThisTurn ability) {
+    private CardPutIntoOpponentGraveThisTurn(final CardPutIntoOpponentGraveThisTurn ability) {
         super(ability);
     }
 

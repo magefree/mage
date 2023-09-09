@@ -119,7 +119,7 @@ class EaterOfVirtueGainAbilityAttachedEffect extends ContinuousEffectImpl {
         staticText = "As long as a card exiled with Eater of Virtue has flying, equipped creature has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance";
     }
 
-    public EaterOfVirtueGainAbilityAttachedEffect(final EaterOfVirtueGainAbilityAttachedEffect effect) {
+    private EaterOfVirtueGainAbilityAttachedEffect(final EaterOfVirtueGainAbilityAttachedEffect effect) {
         super(effect);
     }
 

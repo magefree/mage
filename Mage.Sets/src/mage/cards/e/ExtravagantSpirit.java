@@ -54,7 +54,7 @@ class ExtravagantSpiritEffect extends OneShotEffect {
         this.staticText = "sacrifice {this} unless you pay {1} for each card in your hand";
     }
 
-    public ExtravagantSpiritEffect(final ExtravagantSpiritEffect effect) {
+    private ExtravagantSpiritEffect(final ExtravagantSpiritEffect effect) {
         super(effect);
     }
 

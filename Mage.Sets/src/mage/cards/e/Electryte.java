@@ -83,7 +83,7 @@ class ElectryteEffect extends OneShotEffect {
         staticText = "it deals damage equal to its power to each blocking creature";
     }
 
-    public ElectryteEffect(final ElectryteEffect effect) {
+    private ElectryteEffect(final ElectryteEffect effect) {
         super(effect);
     }
 

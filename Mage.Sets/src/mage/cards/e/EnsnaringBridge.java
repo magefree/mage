@@ -43,7 +43,7 @@ class EnsnaringBridgeRestrictionEffect extends RestrictionEffect {
         this.staticText = "Creatures with power greater than the number of cards in your hand can't attack";
     }
 
-    public EnsnaringBridgeRestrictionEffect(final EnsnaringBridgeRestrictionEffect effect) {
+    private EnsnaringBridgeRestrictionEffect(final EnsnaringBridgeRestrictionEffect effect) {
         super(effect);
     }
 

@@ -49,7 +49,7 @@ class DreadStatuaryToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(2);
     }
-    public DreadStatuaryToken(final DreadStatuaryToken token) {
+    private DreadStatuaryToken(final DreadStatuaryToken token) {
         super(token);
     }
 

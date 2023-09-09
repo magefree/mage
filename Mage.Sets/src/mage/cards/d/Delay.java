@@ -52,7 +52,7 @@ class DelayEffect extends OneShotEffect {
         this.staticText = "Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard. If it doesn't have suspend, it gains suspend";
     }
 
-    public DelayEffect(final DelayEffect effect) {
+    private DelayEffect(final DelayEffect effect) {
         super(effect);
     }
 

@@ -49,7 +49,7 @@ class DoOrDieEffect extends OneShotEffect {
         this.staticText = "Separate all creatures target player controls into two piles. Destroy all creatures in the pile of that player's choice. They can't be regenerated";
     }
 
-    public DoOrDieEffect(final DoOrDieEffect effect) {
+    private DoOrDieEffect(final DoOrDieEffect effect) {
         super(effect);
     }
 

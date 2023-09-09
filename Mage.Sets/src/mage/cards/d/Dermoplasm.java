@@ -62,7 +62,7 @@ class DermoplasmEffect extends OneShotEffect {
         staticText = "you may put a creature card with a morph ability from your hand onto the battlefield face up. If you do, return {this} to its owner's hand";
     }
 
-    public DermoplasmEffect(final DermoplasmEffect effect) {
+    private DermoplasmEffect(final DermoplasmEffect effect) {
         super(effect);
     }
 

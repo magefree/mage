@@ -58,7 +58,7 @@ class ElbrusTheBindingBladeEffect extends OneShotEffect {
         staticText = "unattach {this}, then transform it";
     }
 
-    public ElbrusTheBindingBladeEffect(final ElbrusTheBindingBladeEffect effect) {
+    private ElbrusTheBindingBladeEffect(final ElbrusTheBindingBladeEffect effect) {
         super(effect);
     }
 

@@ -69,7 +69,7 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public DereviEmpyrialTacticianTriggeredAbility(DereviEmpyrialTacticianTriggeredAbility ability) {
+    private DereviEmpyrialTacticianTriggeredAbility(final DereviEmpyrialTacticianTriggeredAbility ability) {
         super(ability);
     }
 
@@ -123,7 +123,7 @@ class DereviEmpyrialTacticianAbility extends ActivatedAbilityImpl {
         return super.canActivate(playerId, game);
     }
 
-    public DereviEmpyrialTacticianAbility(DereviEmpyrialTacticianAbility ability) {
+    private DereviEmpyrialTacticianAbility(final DereviEmpyrialTacticianAbility ability) {
         super(ability);
     }
 
@@ -141,7 +141,7 @@ class PutCommanderOnBattlefieldEffect extends OneShotEffect {
         this.staticText = "Put Derevi onto the battlefield from the command zone";
     }
 
-    public PutCommanderOnBattlefieldEffect(final PutCommanderOnBattlefieldEffect effect) {
+    private PutCommanderOnBattlefieldEffect(final PutCommanderOnBattlefieldEffect effect) {
         super(effect);
     }
 

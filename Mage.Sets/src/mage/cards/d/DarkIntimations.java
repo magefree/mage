@@ -83,7 +83,7 @@ class DarkIntimationsEffect extends OneShotEffect {
         this.staticText = "Each opponent sacrifices a creature or planeswalker, then discards a card. You return a creature or planeswalker card from your graveyard to your hand, then draw a card";
     }
 
-    public DarkIntimationsEffect(final DarkIntimationsEffect effect) {
+    private DarkIntimationsEffect(final DarkIntimationsEffect effect) {
         super(effect);
     }
 
@@ -143,7 +143,7 @@ class DarkIntimationsGraveyardEffect extends OneShotEffect {
         this.staticText = "exile {this} from your graveyard. That planeswalker enters the battlefield with an additional loyalty counter on it";
     }
 
-    public DarkIntimationsGraveyardEffect(final DarkIntimationsGraveyardEffect effect) {
+    private DarkIntimationsGraveyardEffect(final DarkIntimationsGraveyardEffect effect) {
         super(effect);
     }
 

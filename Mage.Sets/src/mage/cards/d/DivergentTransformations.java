@@ -50,7 +50,7 @@ class DivergentTransformationsEffect extends OneShotEffect {
                 + "until they reveal a creature card, puts that card onto the battlefield, then shuffles the rest into their library";
     }
 
-    public DivergentTransformationsEffect(final DivergentTransformationsEffect effect) {
+    private DivergentTransformationsEffect(final DivergentTransformationsEffect effect) {
         super(effect);
     }
 
