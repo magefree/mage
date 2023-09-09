@@ -3,18 +3,15 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.targetpointer.FixedTarget;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -39,7 +36,9 @@ public final class NeyamShaiMurad extends CardImpl {
         // Rogue Trader -- Whenever Neyam Shai Murad deals combat damage to a player, you may have that player return target permanent card from their graveyard to their hand.
         // If you do, that player chooses a permanent card in your graveyard, then you put it onto the battlefield under your control.
 
-        this.addAbility(new NeyamShaiMuradTriggeredAbility().withFlavorWord("Rogue Trader"));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new NeyamShaiMuradEffect(), true, true)
+            .withFlavorWord("Rogue Trader")
+        );
     }
 
     private NeyamShaiMurad(final NeyamShaiMurad card) {
@@ -49,37 +48,6 @@ public final class NeyamShaiMurad extends CardImpl {
     @Override
     public NeyamShaiMurad copy() {
         return new NeyamShaiMurad(this);
-    }
-}
-
-class NeyamShaiMuradTriggeredAbility extends TriggeredAbilityImpl {
-
-    NeyamShaiMuradTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new NeyamShaiMuradEffect(), true);
-        setTriggerPhrase("Whenever {this} deals combat damage to a player, ");
-    }
-
-    private NeyamShaiMuradTriggeredAbility(final NeyamShaiMuradTriggeredAbility effect) {
-        super(effect);
-    }
-
-    @Override
-    public NeyamShaiMuradTriggeredAbility copy() {
-        return new NeyamShaiMuradTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getSourceId().equals(getSourceId()) || !((DamagedEvent) event).isCombatDamage()) {
-            return false;
-        }
-        getAllEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
-        return true;
     }
 }
 
