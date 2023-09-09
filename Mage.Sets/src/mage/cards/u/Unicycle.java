@@ -6,16 +6,16 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.*;
+import mage.abilities.keyword.CrewAbility;
+import mage.abilities.keyword.EquipAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
