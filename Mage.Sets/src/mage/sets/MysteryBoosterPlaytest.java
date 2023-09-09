@@ -24,6 +24,7 @@ public class MysteryBoosterPlaytest extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Slivdrazi Monstrosity", 102, Rarity.RARE, mage.cards.s.SlivdraziMonstrosity.class));
+        cards.add(new SetCardInfo("Unicycle", 110, Rarity.RARE, mage.cards.u.Unicycle.class));
     }
 
 }
