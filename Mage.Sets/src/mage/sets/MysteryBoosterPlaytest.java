@@ -25,6 +25,7 @@ public class MysteryBoosterPlaytest extends ExpansionSet {
 
         cards.add(new SetCardInfo("How to Keep an Izzet Mage Busy", 93, Rarity.RARE, mage.cards.h.HowToKeepAnIzzetMageBusy.class));
         cards.add(new SetCardInfo("Slivdrazi Monstrosity", 102, Rarity.RARE, mage.cards.s.SlivdraziMonstrosity.class));
+        cards.add(new SetCardInfo("Unicycle", 110, Rarity.RARE, mage.cards.u.Unicycle.class));
     }
 
 }
