@@ -44,6 +44,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Consider", 87, Rarity.COMMON, mage.cards.c.Consider.class));
         cards.add(new SetCardInfo("Court of Ardenvale", 21, Rarity.RARE, mage.cards.c.CourtOfArdenvale.class));
         cards.add(new SetCardInfo("Court of Embereth", 24, Rarity.RARE, mage.cards.c.CourtOfEmbereth.class));
+        cards.add(new SetCardInfo("Court of Garenbrig", 25, Rarity.RARE, mage.cards.c.CourtOfGarenbrig.class));
         cards.add(new SetCardInfo("Court of Vantress", 22, Rarity.RARE, mage.cards.c.CourtOfVantress.class));
         cards.add(new SetCardInfo("Danitha Capashen, Paragon", 64, Rarity.UNCOMMON, mage.cards.d.DanithaCapashenParagon.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 157, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
