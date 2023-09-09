@@ -1,9 +1,7 @@
 package mage.cards.k;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
@@ -157,11 +155,6 @@ class KaylasMusicBoxPlayFromExileEffect extends AsThoughEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
     }
 
     @Override
