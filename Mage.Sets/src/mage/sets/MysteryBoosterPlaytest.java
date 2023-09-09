@@ -23,6 +23,7 @@ public class MysteryBoosterPlaytest extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Banding Sliver", 2, Rarity.RARE, mage.cards.b.BandingSliver.class));
         cards.add(new SetCardInfo("Slivdrazi Monstrosity", 102, Rarity.RARE, mage.cards.s.SlivdraziMonstrosity.class));
     }
 

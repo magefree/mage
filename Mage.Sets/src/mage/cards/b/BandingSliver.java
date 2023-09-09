@@ -1,10 +1,10 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.keyword.BandingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -15,35 +15,37 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 
+import java.util.UUID;
+
 /**
  *
- * @author KholdFuzion
+ * @author Susucr
  */
-public final class BatteringSliver extends CardImpl {
+public final class BandingSliver extends CardImpl {
 
-    public BatteringSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
+    public BandingSliver(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
         this.subtype.add(SubType.SLIVER);
 
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // All Sliver creatures have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        // All Sliver creatures have banding.
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(
-                        TrampleAbility.getInstance(),
+                        BandingAbility.getInstance(),
                         Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_PERMANENT_ALL_SLIVERS
                 )
         ));
     }
 
-    private BatteringSliver(final BatteringSliver card) {
+    private BandingSliver(final BandingSliver card) {
         super(card);
     }
 
     @Override
-    public BatteringSliver copy() {
-        return new BatteringSliver(this);
+    public BandingSliver copy() {
+        return new BandingSliver(this);
     }
 }
