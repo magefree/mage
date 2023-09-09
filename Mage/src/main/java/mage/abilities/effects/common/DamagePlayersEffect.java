@@ -38,6 +38,10 @@ public class DamagePlayersEffect extends OneShotEffect {
         this(outcome, amount, TargetController.ANY);
     }
 
+    public DamagePlayersEffect(DynamicValue amount, TargetController controller) {
+        this(Outcome.Damage, amount, controller, "{this}");
+    }
+
     public DamagePlayersEffect(Outcome outcome, DynamicValue amount, TargetController controller) {
         this(outcome, amount, controller, "{this}");
     }
