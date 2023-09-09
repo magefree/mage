@@ -13,8 +13,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
-import mage.filter.common.FilterAttackingCreature;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetAttackingCreature;
+
 
 /**
  *
@@ -35,7 +35,7 @@ public final class MisleadingSignpost extends CardImpl {
                 new IsStepCondition(PhaseStep.DECLARE_ATTACKERS, false),
                 "When {this} enters the battlefield during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking. "
                 + "<i>(It can't attack its controller or their permanents)</i>");
-        ability.addTarget(new TargetCreaturePermanent(new FilterAttackingCreature()));
+        ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
 
         // {T}: Add {U}.
