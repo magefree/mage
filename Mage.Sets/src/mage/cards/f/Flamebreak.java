@@ -59,7 +59,7 @@ class FlamebreakCantRegenerateEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Creatures dealt damage this way can't be regenerated this turn";
     }
 
-    public FlamebreakCantRegenerateEffect(final FlamebreakCantRegenerateEffect effect) {
+    private FlamebreakCantRegenerateEffect(final FlamebreakCantRegenerateEffect effect) {
         super(effect);
     }
 

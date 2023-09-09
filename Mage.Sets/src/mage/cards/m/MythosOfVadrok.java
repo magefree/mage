@@ -81,7 +81,7 @@ class MythosOfVadrokRestrictionEffect extends RestrictionEffect {
         super(Duration.UntilYourNextTurn, Outcome.UnboostCreature);
     }
 
-    MythosOfVadrokRestrictionEffect(final MythosOfVadrokRestrictionEffect effect) {
+    private MythosOfVadrokRestrictionEffect(final MythosOfVadrokRestrictionEffect effect) {
         super(effect);
     }
 

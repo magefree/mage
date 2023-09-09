@@ -74,7 +74,7 @@ class DeathMatchEffect extends OneShotEffect {
         return false;
     }
 
-    public DeathMatchEffect(final DeathMatchEffect effect) {
+    private DeathMatchEffect(final DeathMatchEffect effect) {
         super(effect);
     }
 

@@ -56,7 +56,7 @@ class IronclawCurseEffect extends CantBlockAttachedEffect {
         this.staticText = "Enchanted creature can't block creatures with power equal to or greater than the enchanted creature's toughness";
     }
 
-    public IronclawCurseEffect(final IronclawCurseEffect effect) {
+    private IronclawCurseEffect(final IronclawCurseEffect effect) {
         super(effect);
     }
 

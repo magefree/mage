@@ -57,7 +57,7 @@ class MephidrossVampireEffect extends ContinuousEffectImpl {
         this.addDependedToType(DependencyType.BecomeCreature);
     }
 
-    MephidrossVampireEffect(final MephidrossVampireEffect effect) {
+    private MephidrossVampireEffect(final MephidrossVampireEffect effect) {
         super(effect);
     }
 

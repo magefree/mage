@@ -56,7 +56,7 @@ class GuardianOfTheAgesTriggerAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance()));
         this.addEffect(new LoseAbilitySourceEffect(DefenderAbility.getInstance()));
     }
-    public GuardianOfTheAgesTriggerAbility(final GuardianOfTheAgesTriggerAbility ability){
+    private GuardianOfTheAgesTriggerAbility(final GuardianOfTheAgesTriggerAbility ability){
         super(ability);
     }
 

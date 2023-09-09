@@ -63,7 +63,7 @@ class DomineeringWillEffect extends OneShotEffect {
         staticText = "Target player gains control of up to three target nonattacking creatures until end of turn. Untap those creatures. They block this turn if able";
     }
 
-    public DomineeringWillEffect(final DomineeringWillEffect effect) {
+    private DomineeringWillEffect(final DomineeringWillEffect effect) {
         super(effect);
     }
 

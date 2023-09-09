@@ -39,7 +39,7 @@ class ExsanguinateEffect extends OneShotEffect {
         staticText = "Each opponent loses X life. You gain life equal to the life lost this way";
     }
 
-    public ExsanguinateEffect(final ExsanguinateEffect effect) {
+    private ExsanguinateEffect(final ExsanguinateEffect effect) {
         super(effect);
     }
 

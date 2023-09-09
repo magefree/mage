@@ -166,7 +166,7 @@ class ThreeWishesPlayFromExileEffect extends AsThoughEffectImpl {
         staticText = "Until your next turn, you may play those cards";
     }
 
-    ThreeWishesPlayFromExileEffect(final ThreeWishesPlayFromExileEffect effect) {
+    private ThreeWishesPlayFromExileEffect(final ThreeWishesPlayFromExileEffect effect) {
         super(effect);
     }
 

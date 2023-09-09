@@ -94,7 +94,7 @@ class EliteArcanistImprintEffect extends OneShotEffect {
         staticText = "you may exile an instant card from your hand";
     }
 
-    public EliteArcanistImprintEffect(EliteArcanistImprintEffect effect) {
+    private EliteArcanistImprintEffect(final EliteArcanistImprintEffect effect) {
         super(effect);
     }
 
@@ -135,7 +135,7 @@ class EliteArcanistCopyEffect extends OneShotEffect {
                 + "without paying its mana cost. X is the mana value of the exiled card";
     }
 
-    public EliteArcanistCopyEffect(final EliteArcanistCopyEffect effect) {
+    private EliteArcanistCopyEffect(final EliteArcanistCopyEffect effect) {
         super(effect);
     }
 

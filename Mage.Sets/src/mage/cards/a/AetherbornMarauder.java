@@ -60,7 +60,7 @@ class AetherbornMarauderEffect extends OneShotEffect {
         this.staticText = "move any number of +1/+1 counters from other permanents you control onto {this}";
     }
 
-    public AetherbornMarauderEffect(final AetherbornMarauderEffect effect) {
+    private AetherbornMarauderEffect(final AetherbornMarauderEffect effect) {
         super(effect);
     }
 

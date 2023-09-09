@@ -61,7 +61,7 @@ class DefilerOfSoulsEffect extends OneShotEffect {
         staticText = "that player sacrifices a monocolored creature";
     }
 
-    DefilerOfSoulsEffect(final DefilerOfSoulsEffect effect) {
+    private DefilerOfSoulsEffect(final DefilerOfSoulsEffect effect) {
         super(effect);
     }
 

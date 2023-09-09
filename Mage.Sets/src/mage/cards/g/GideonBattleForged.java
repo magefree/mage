@@ -90,7 +90,7 @@ class GideonBattleForgedToken extends TokenImpl {
         this.addAbility(IndestructibleAbility.getInstance());
     }
 
-    public GideonBattleForgedToken(final GideonBattleForgedToken token) {
+    private GideonBattleForgedToken(final GideonBattleForgedToken token) {
         super(token);
     }
 
@@ -108,7 +108,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
         staticText = "Up to one target creature an opponent controls attacks {this} during its controller's next turn if able";
     }
 
-    public GideonBattleForgedAttacksIfAbleTargetEffect(final GideonBattleForgedAttacksIfAbleTargetEffect effect) {
+    private GideonBattleForgedAttacksIfAbleTargetEffect(final GideonBattleForgedAttacksIfAbleTargetEffect effect) {
         super(effect);
         this.targetPermanentReference = effect.targetPermanentReference;
     }

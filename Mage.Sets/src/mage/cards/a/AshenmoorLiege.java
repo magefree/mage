@@ -72,7 +72,7 @@ class AshenmoorLiegeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(4), false);
     }
 
-    public AshenmoorLiegeTriggeredAbility(final AshenmoorLiegeTriggeredAbility ability) {
+    private AshenmoorLiegeTriggeredAbility(final AshenmoorLiegeTriggeredAbility ability) {
         super(ability);
     }
 

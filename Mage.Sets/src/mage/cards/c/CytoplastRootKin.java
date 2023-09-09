@@ -64,7 +64,7 @@ class CytoplastRootKinEffect extends OneShotEffect {
         this.staticText = "Move a +1/+1 counter from target creature you control onto Cytoplast Root-Kin";
     }
 
-    CytoplastRootKinEffect(final CytoplastRootKinEffect effect) {
+    private CytoplastRootKinEffect(final CytoplastRootKinEffect effect) {
         super(effect);
     }
 

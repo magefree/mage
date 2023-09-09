@@ -54,7 +54,7 @@ class DivineReckoningEffect extends OneShotEffect {
         staticText = "Each player chooses a creature they control. Destroy the rest";
     }
 
-    public DivineReckoningEffect(DivineReckoningEffect effect) {
+    private DivineReckoningEffect(final DivineReckoningEffect effect) {
         super(effect);
     }
 

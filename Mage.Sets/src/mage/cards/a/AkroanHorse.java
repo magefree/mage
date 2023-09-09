@@ -100,7 +100,7 @@ class AkroanHorseGainControlEffect extends ContinuousEffectImpl {
         this.staticText = "Gain control of Akroan Horse";
     }
 
-    public AkroanHorseGainControlEffect(final AkroanHorseGainControlEffect effect) {
+    private AkroanHorseGainControlEffect(final AkroanHorseGainControlEffect effect) {
         super(effect);
         this.controller = effect.controller;
     }

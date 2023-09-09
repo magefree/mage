@@ -61,7 +61,7 @@ class HushwingGryffEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Creatures entering the battlefield don't cause abilities to trigger";
     }
 
-    HushwingGryffEffect(final HushwingGryffEffect effect) {
+    private HushwingGryffEffect(final HushwingGryffEffect effect) {
         super(effect);
     }
 

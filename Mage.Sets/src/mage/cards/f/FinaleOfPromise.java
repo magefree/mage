@@ -91,7 +91,7 @@ class FinaleOfPromiseEffect extends OneShotEffect {
                 + "twice. You may choose new targets for the copies.";
     }
 
-    public FinaleOfPromiseEffect(final FinaleOfPromiseEffect effect) {
+    private FinaleOfPromiseEffect(final FinaleOfPromiseEffect effect) {
         super(effect);
     }
 
@@ -170,7 +170,7 @@ class FinaleOfPromiseReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a card cast this way would be put into your graveyard this turn, exile it instead";
     }
 
-    public FinaleOfPromiseReplacementEffect(final FinaleOfPromiseReplacementEffect effect) {
+    private FinaleOfPromiseReplacementEffect(final FinaleOfPromiseReplacementEffect effect) {
         super(effect);
     }
 

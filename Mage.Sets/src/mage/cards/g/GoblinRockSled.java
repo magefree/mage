@@ -70,7 +70,7 @@ class DontUntapIfAttackedLastTurnSourceEffect extends ContinuousRuleModifyingEff
         staticText = "{this} doesn't untap during your untap step if it attacked during your last turn";
     }
 
-    public DontUntapIfAttackedLastTurnSourceEffect(final DontUntapIfAttackedLastTurnSourceEffect effect) {
+    private DontUntapIfAttackedLastTurnSourceEffect(final DontUntapIfAttackedLastTurnSourceEffect effect) {
         super(effect);
     }
 

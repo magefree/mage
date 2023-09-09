@@ -41,7 +41,7 @@ class TemporaryTruceEffect extends OneShotEffect {
         this.staticText = "Each player may draw up to two cards. For each card less than two a player draws this way, that player gains 2 life";
     }
 
-    TemporaryTruceEffect(final TemporaryTruceEffect effect) {
+    private TemporaryTruceEffect(final TemporaryTruceEffect effect) {
         super(effect);
     }
 

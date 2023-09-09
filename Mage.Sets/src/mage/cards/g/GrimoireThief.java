@@ -75,7 +75,7 @@ class GrimoireThiefExileEffect extends OneShotEffect {
         staticText = "exile the top three cards of target opponent's library face down";
     }
 
-    public GrimoireThiefExileEffect(final GrimoireThiefExileEffect effect) {
+    private GrimoireThiefExileEffect(final GrimoireThiefExileEffect effect) {
         super(effect);
     }
 
@@ -123,7 +123,7 @@ class GrimoireThiefLookEffect extends AsThoughEffectImpl {
         staticText = "You may look at cards exiled with {this}";
     }
 
-    public GrimoireThiefLookEffect(final GrimoireThiefLookEffect effect) {
+    private GrimoireThiefLookEffect(final GrimoireThiefLookEffect effect) {
         super(effect);
     }
 
@@ -175,7 +175,7 @@ class GrimoireThiefCounterspellEffect extends OneShotEffect {
                 + "Counter all spells with those names";
     }
 
-    public GrimoireThiefCounterspellEffect(final GrimoireThiefCounterspellEffect effect) {
+    private GrimoireThiefCounterspellEffect(final GrimoireThiefCounterspellEffect effect) {
         super(effect);
     }
 

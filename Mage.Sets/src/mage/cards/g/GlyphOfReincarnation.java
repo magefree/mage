@@ -68,7 +68,7 @@ class GlyphOfReincarnationEffect extends OneShotEffect {
         this.staticText = "Destroy all creatures that were blocked by target Wall this turn. They can't be regenerated. For each creature that died this way, put a creature card from the graveyard of the player who controlled that creature the last time it became blocked by that Wall onto the battlefield under its owner's control";
     }
 
-    public GlyphOfReincarnationEffect(final GlyphOfReincarnationEffect effect) {
+    private GlyphOfReincarnationEffect(final GlyphOfReincarnationEffect effect) {
         super(effect);
     }
 

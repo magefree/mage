@@ -49,7 +49,7 @@ class PhytohydraEffect extends ReplacementEffectImpl {
         staticText = "If damage would be dealt to {this}, put that many +1/+1 counters on it instead";
     }
 
-    PhytohydraEffect(final PhytohydraEffect effect) {
+    private PhytohydraEffect(final PhytohydraEffect effect) {
         super(effect);
     }
 

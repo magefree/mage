@@ -76,7 +76,7 @@ class FightEnchantedTargetEffect extends OneShotEffect {
                 "<i>(Each deals damage equal to its power to the other.)</i>";
     }
 
-    public FightEnchantedTargetEffect(final FightEnchantedTargetEffect effect) {
+    private FightEnchantedTargetEffect(final FightEnchantedTargetEffect effect) {
         super(effect);
     }
 

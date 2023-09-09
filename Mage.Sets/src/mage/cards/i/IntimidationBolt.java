@@ -46,7 +46,7 @@ class IntimidationEffect extends RestrictionEffect {
         staticText = "Other creatures can't attack this turn";
     }
 
-    public IntimidationEffect(final IntimidationEffect effect) {
+    private IntimidationEffect(final IntimidationEffect effect) {
         super(effect);
     }
 

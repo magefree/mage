@@ -88,7 +88,7 @@ class KopalaWardenOfWavesCostModificationEffect1 extends CostModificationEffectI
         this.staticText = "Spells your opponents cast that target a Merfolk you control cost {2} more to cast";
     }
 
-    KopalaWardenOfWavesCostModificationEffect1(KopalaWardenOfWavesCostModificationEffect1 effect) {
+    private KopalaWardenOfWavesCostModificationEffect1(final KopalaWardenOfWavesCostModificationEffect1 effect) {
         super(effect);
     }
 
@@ -118,7 +118,7 @@ class KopalaWardenOfWavesCostModificationEffect2 extends CostModificationEffectI
         this.staticText = "Abilities your opponents activate that target a Merfolk you control cost {2} more to activate";
     }
 
-    KopalaWardenOfWavesCostModificationEffect2(KopalaWardenOfWavesCostModificationEffect2 effect) {
+    private KopalaWardenOfWavesCostModificationEffect2(final KopalaWardenOfWavesCostModificationEffect2 effect) {
         super(effect);
     }
 

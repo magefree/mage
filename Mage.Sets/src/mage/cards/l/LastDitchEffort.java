@@ -46,7 +46,7 @@ class LastDitchEffortEffect extends OneShotEffect {
         this.staticText = "Sacrifice any number of creatures. {this} deals that much damage to any target";
     }
 
-    LastDitchEffortEffect(final LastDitchEffortEffect effect) {
+    private LastDitchEffortEffect(final LastDitchEffortEffect effect) {
         super(effect);
     }
 

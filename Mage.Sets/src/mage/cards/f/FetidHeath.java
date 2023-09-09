@@ -39,7 +39,7 @@ public final class FetidHeath extends CardImpl {
         this.addAbility(ability);          
     }
 
-    public FetidHeath (final FetidHeath card) {
+    private FetidHeath(final FetidHeath card) {
         super(card);
     }
 

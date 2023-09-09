@@ -71,7 +71,7 @@ class AlchemistsGambitEffect extends ReplacementEffectImpl {
         this.turnId = turnId;
     }
 
-    public AlchemistsGambitEffect(final AlchemistsGambitEffect effect) {
+    private AlchemistsGambitEffect(final AlchemistsGambitEffect effect) {
         super(effect);
         this.turnId = effect.turnId;
     }

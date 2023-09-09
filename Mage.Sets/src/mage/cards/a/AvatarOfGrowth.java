@@ -66,7 +66,7 @@ class AvatarOfGrowthSearchEffect extends OneShotEffect {
         this.staticText = "each player searches their library for up to two basic land cards, puts them onto the battlefield, then shuffles";
     }
 
-    public AvatarOfGrowthSearchEffect(final AvatarOfGrowthSearchEffect effect) {
+    private AvatarOfGrowthSearchEffect(final AvatarOfGrowthSearchEffect effect) {
         super(effect);
     }
 

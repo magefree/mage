@@ -47,7 +47,7 @@ class BeaconOfTomorrowsEffect extends OneShotEffect {
         staticText = "Target player takes an extra turn after this one";
     }
 
-    public BeaconOfTomorrowsEffect(final BeaconOfTomorrowsEffect effect) {
+    private BeaconOfTomorrowsEffect(final BeaconOfTomorrowsEffect effect) {
         super(effect);
     }
 

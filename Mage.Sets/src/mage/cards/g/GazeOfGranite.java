@@ -50,7 +50,7 @@ class GazeOfGraniteEffect extends OneShotEffect {
         staticText = "Destroy each nonland permanent with mana value X or less";
     }
 
-    public GazeOfGraniteEffect(final GazeOfGraniteEffect effect) {
+    private GazeOfGraniteEffect(final GazeOfGraniteEffect effect) {
         super(effect);
     }
 

@@ -64,7 +64,7 @@ class CrovaxTheCursedEffect extends OneShotEffect {
         this.staticText = "you may sacrifice a creature. If you do, put a +1/+1 counter on {this}. If you don't, remove a +1/+1 counter from {this}";
     }
 
-    public CrovaxTheCursedEffect(final CrovaxTheCursedEffect effect) {
+    private CrovaxTheCursedEffect(final CrovaxTheCursedEffect effect) {
         super(effect);
     }
 

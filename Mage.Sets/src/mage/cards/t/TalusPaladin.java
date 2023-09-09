@@ -61,7 +61,7 @@ class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new TalusPaladinEffect());
     }
     
-    TalusPaladinTriggeredAbility(final TalusPaladinTriggeredAbility ability) {
+    private TalusPaladinTriggeredAbility(final TalusPaladinTriggeredAbility ability) {
         super(ability);
     }
     

@@ -55,7 +55,7 @@ class BrineElementalEffect extends OneShotEffect {
         this.staticText = "each opponent skips their next untap step";
     }
 
-    public BrineElementalEffect(final BrineElementalEffect effect) {
+    private BrineElementalEffect(final BrineElementalEffect effect) {
         super(effect);
     }
 

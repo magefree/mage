@@ -64,7 +64,7 @@ class ButcherOfTheHordeEffect extends OneShotEffect {
         staticText = "{this} gains your choice of vigilance, lifelink, or haste until end of turn";
     }
 
-    ButcherOfTheHordeEffect(final ButcherOfTheHordeEffect effect) {
+    private ButcherOfTheHordeEffect(final ButcherOfTheHordeEffect effect) {
         super(effect);
     }
 

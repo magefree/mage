@@ -56,7 +56,7 @@ class HarmonicProdigyEffect extends ReplacementEffectImpl {
                 "that ability triggers an additional time";
     }
 
-    HarmonicProdigyEffect(final HarmonicProdigyEffect effect) {
+    private HarmonicProdigyEffect(final HarmonicProdigyEffect effect) {
         super(effect);
     }
 

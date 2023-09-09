@@ -98,7 +98,7 @@ class OrissSamiteGuardianCantCastEffect extends ContinuousRuleModifyingEffectImp
         staticText = "Target player can't cast spells this turn";
     }
 
-    OrissSamiteGuardianCantCastEffect(final OrissSamiteGuardianCantCastEffect effect) {
+    private OrissSamiteGuardianCantCastEffect(final OrissSamiteGuardianCantCastEffect effect) {
         super(effect);
     }
 

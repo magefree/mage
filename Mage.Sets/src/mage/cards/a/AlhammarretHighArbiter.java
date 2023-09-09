@@ -60,7 +60,7 @@ class AlhammarretHighArbiterEffect extends OneShotEffect {
                 + "<br>Your opponents can't cast spells with the chosen name";
     }
 
-    public AlhammarretHighArbiterEffect(final AlhammarretHighArbiterEffect effect) {
+    private AlhammarretHighArbiterEffect(final AlhammarretHighArbiterEffect effect) {
         super(effect);
     }
 
@@ -114,7 +114,7 @@ class AlhammarretHighArbiterCantCastEffect extends ContinuousRuleModifyingEffect
         staticText = "Your opponents can't cast spells with the chosen name";
     }
 
-    public AlhammarretHighArbiterCantCastEffect(final AlhammarretHighArbiterCantCastEffect effect) {
+    private AlhammarretHighArbiterCantCastEffect(final AlhammarretHighArbiterCantCastEffect effect) {
         super(effect);
         this.cardName = effect.cardName;
         this.zoneChangeCounter = effect.zoneChangeCounter;

@@ -126,7 +126,7 @@ class ArchangelOfStrifeWarEffect extends BoostAllEffect {
         return false;
     }
 
-    public ArchangelOfStrifeWarEffect(ArchangelOfStrifeWarEffect effect) {
+    private ArchangelOfStrifeWarEffect(final ArchangelOfStrifeWarEffect effect) {
         super(effect);
     }
 
@@ -157,7 +157,7 @@ class ArchangelOfStrifePeaceEffect extends BoostAllEffect {
         return false;
     }
 
-    public ArchangelOfStrifePeaceEffect(ArchangelOfStrifePeaceEffect effect) {
+    private ArchangelOfStrifePeaceEffect(final ArchangelOfStrifePeaceEffect effect) {
         super(effect);
     }
 

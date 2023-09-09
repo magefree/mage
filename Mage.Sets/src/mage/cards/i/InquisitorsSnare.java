@@ -52,7 +52,7 @@ class InquisitorsSnareEffect extends OneShotEffect {
         this.staticText = "Prevent all damage target attacking or blocking creature would deal this turn. If that creature is black or red, destroy it";
     }
 
-    public InquisitorsSnareEffect(final InquisitorsSnareEffect effect) {
+    private InquisitorsSnareEffect(final InquisitorsSnareEffect effect) {
         super(effect);
     }
 

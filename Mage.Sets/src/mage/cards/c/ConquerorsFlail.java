@@ -92,7 +92,7 @@ class ConquerorsFlailEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "as long as {this} is attached to a creature, your opponents can't cast spells during your turn";
     }
 
-    public ConquerorsFlailEffect(final ConquerorsFlailEffect effect) {
+    private ConquerorsFlailEffect(final ConquerorsFlailEffect effect) {
         super(effect);
     }
 

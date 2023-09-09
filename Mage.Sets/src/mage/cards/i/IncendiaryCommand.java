@@ -65,7 +65,7 @@ class IncendiaryCommandDrawEffect extends OneShotEffect {
         this.staticText = "each player discards all the cards in their hand, then draws that many cards";
     }
 
-    public IncendiaryCommandDrawEffect(final IncendiaryCommandDrawEffect effect) {
+    private IncendiaryCommandDrawEffect(final IncendiaryCommandDrawEffect effect) {
         super(effect);
     }
 

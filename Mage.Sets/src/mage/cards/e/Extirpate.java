@@ -67,7 +67,7 @@ class ExtirpateEffect extends OneShotEffect {
                 + "as that card and exile them. Then that player shuffles";
     }
 
-    public ExtirpateEffect(final ExtirpateEffect effect) {
+    private ExtirpateEffect(final ExtirpateEffect effect) {
         super(effect);
     }
 

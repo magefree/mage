@@ -61,7 +61,7 @@ class MossPitSkeletonTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.GRAVEYARD, new PutOnLibrarySourceEffect(true), true);
     }
 
-    MossPitSkeletonTriggeredAbility(final MossPitSkeletonTriggeredAbility ability) {
+    private MossPitSkeletonTriggeredAbility(final MossPitSkeletonTriggeredAbility ability) {
         super(ability);
     }
 

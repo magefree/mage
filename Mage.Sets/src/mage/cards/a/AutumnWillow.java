@@ -54,7 +54,7 @@ class AutumnWillowEffect extends AsThoughEffectImpl {
         staticText = "Until end of turn, Autumn Willow can be the target of spells and abilities controlled by target player as though it didn't have shroud";
     }
 
-    public AutumnWillowEffect(final AutumnWillowEffect effect) {
+    private AutumnWillowEffect(final AutumnWillowEffect effect) {
         super(effect);
     }
 

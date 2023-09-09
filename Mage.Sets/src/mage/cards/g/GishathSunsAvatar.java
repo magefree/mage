@@ -68,7 +68,7 @@ class GishathSunsAvatarEffect extends OneShotEffect {
         this.staticText = "reveal that many cards from the top of your library. Put any number of Dinosaur creature cards from among them onto the battlefield and the rest on the bottom of your library in a random order";
     }
 
-    GishathSunsAvatarEffect(final GishathSunsAvatarEffect effect) {
+    private GishathSunsAvatarEffect(final GishathSunsAvatarEffect effect) {
         super(effect);
     }
 

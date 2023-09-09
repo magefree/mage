@@ -46,7 +46,7 @@ class MindstormCrownEffect extends OneShotEffect {
         this.staticText = "draw a card if you had no cards in hand at the beginning of this turn. If you had a card in hand, {this} deals 1 damage to you";
     }
 
-    MindstormCrownEffect(final MindstormCrownEffect effect) {
+    private MindstormCrownEffect(final MindstormCrownEffect effect) {
         super(effect);
     }
 

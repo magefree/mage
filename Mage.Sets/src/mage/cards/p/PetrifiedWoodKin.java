@@ -75,7 +75,7 @@ class PetrifiedWoodKinEffect extends OneShotEffect {
         staticText = "";
     }
 
-    PetrifiedWoodKinEffect(final PetrifiedWoodKinEffect effect) {
+    private PetrifiedWoodKinEffect(final PetrifiedWoodKinEffect effect) {
         super(effect);
     }
 

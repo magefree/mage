@@ -75,7 +75,7 @@ class DemonicEmbracePlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard by paying 3 life and discarding a card in addition to paying its other costs";
     }
 
-    public DemonicEmbracePlayEffect(final DemonicEmbracePlayEffect effect) {
+    private DemonicEmbracePlayEffect(final DemonicEmbracePlayEffect effect) {
         super(effect);
     }
 

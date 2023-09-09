@@ -53,7 +53,7 @@ class EternalScourgePlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from exile";
     }
 
-    public EternalScourgePlayEffect(final EternalScourgePlayEffect effect) {
+    private EternalScourgePlayEffect(final EternalScourgePlayEffect effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class EternalScourgeAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ExileSourceEffect(), false);
     }
 
-    public EternalScourgeAbility(final EternalScourgeAbility ability) {
+    private EternalScourgeAbility(final EternalScourgeAbility ability) {
         super(ability);
     }
 

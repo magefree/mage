@@ -44,7 +44,7 @@ class HellionEruptionEffect extends OneShotEffect {
         this.staticText = "Sacrifice all creatures you control, then create that many 4/4 red Hellion creature tokens";
     }
 
-    public HellionEruptionEffect(final HellionEruptionEffect effect) {
+    private HellionEruptionEffect(final HellionEruptionEffect effect) {
         super(effect);
     }
 

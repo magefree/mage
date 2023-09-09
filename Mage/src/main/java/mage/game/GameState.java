@@ -845,7 +845,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             if (event instanceof DamagedPlayerBatchOnePlayerEvent) {
                 DamagedPlayerBatchOnePlayerEvent eventForPlayer = (DamagedPlayerBatchOnePlayerEvent) event;
                 if (eventForPlayer.getDamageClazz().isInstance(damagedEvent)
-                        && event.getPlayerId().equals(damagedEvent.getPlayerId())) {
+                        && event.getPlayerId().equals(damagedEvent.getTargetId())) {
 
                     // existing batch for damage of that damage class to the same player
                     eventForPlayer.addEvent(damagedEvent);
@@ -859,7 +859,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             // new batch for any kind of damage, creating a fresh one with damagedEvent inside.
             addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
         }
-        if (!flagBatchForPlayer && damagedEvent.getPlayerId() != null) {
+        if (!flagBatchForPlayer && damagedEvent.getPlayerId() != null && damagedEvent.getPlayerId().equals(damagedEvent.getTargetId())) {
             // new batch for damage from any source to the specific damaged player,
             //     creating a fresh one with damagedEvent inside.
             DamagedBatchEvent event = new DamagedPlayerBatchOnePlayerEvent(damagedEvent.getPlayerId());

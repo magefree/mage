@@ -66,7 +66,7 @@ class IntetTheDreamerExileEffect extends OneShotEffect {
         staticText = "exile the top card of your library face down. You may play that card without paying its mana cost for as long as Intet remains on the battlefield";
     }
 
-    public IntetTheDreamerExileEffect(final IntetTheDreamerExileEffect effect) {
+    private IntetTheDreamerExileEffect(final IntetTheDreamerExileEffect effect) {
         super(effect);
     }
 
@@ -165,7 +165,7 @@ class IntetTheDreamerLookEffect extends AsThoughEffectImpl {
         staticText = "You may look at that card for as long as it remains exiled";
     }
 
-    public IntetTheDreamerLookEffect(final IntetTheDreamerLookEffect effect) {
+    private IntetTheDreamerLookEffect(final IntetTheDreamerLookEffect effect) {
         super(effect);
     }
 

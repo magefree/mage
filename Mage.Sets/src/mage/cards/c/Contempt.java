@@ -64,7 +64,7 @@ class ContemptEffect extends OneShotEffect {
         this.staticText = "return it and {this} to their owners' hands at end of combat.";
     }
 
-    ContemptEffect(final ContemptEffect effect) {
+    private ContemptEffect(final ContemptEffect effect) {
         super(effect);
     }
 

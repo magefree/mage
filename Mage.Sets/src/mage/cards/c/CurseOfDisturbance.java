@@ -61,7 +61,7 @@ class CurseOfDisturbanceEffect extends OneShotEffect {
                 + "Each opponent attacking that player does the same.";
     }
 
-    CurseOfDisturbanceEffect(final CurseOfDisturbanceEffect effect) {
+    private CurseOfDisturbanceEffect(final CurseOfDisturbanceEffect effect) {
         super(effect);
     }
 

@@ -55,7 +55,7 @@ class FickleEfreetChangeControlEffect extends OneShotEffect {
         this.staticText = "flip a coin at end of combat. If you lose the flip, choose one of your opponents. That player gains control of {this}";
     }
 
-    public FickleEfreetChangeControlEffect(final FickleEfreetChangeControlEffect effect) {
+    private FickleEfreetChangeControlEffect(final FickleEfreetChangeControlEffect effect) {
         super(effect);
     }
 
@@ -102,7 +102,7 @@ class FickleEfreetGainControlEffect extends ContinuousEffectImpl {
         this.staticText = "That player gains control of {this}";
     }
 
-    public FickleEfreetGainControlEffect(final FickleEfreetGainControlEffect effect) {
+    private FickleEfreetGainControlEffect(final FickleEfreetGainControlEffect effect) {
         super(effect);
         this.controller = effect.controller;
     }

@@ -62,7 +62,7 @@ class TangleWireEffect extends OneShotEffect {
         staticText = "that player taps an untapped artifact, creature, or land they control for each fade counter on Tangle Wire";
     }
 
-    TangleWireEffect(final TangleWireEffect effect) {
+    private TangleWireEffect(final TangleWireEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class HaphazardBombardmentEffect extends OneShotEffect {
         this.staticText = "choose four nonenchantment permanents you don't control and put an aim counter on each of them";
     }
 
-    public HaphazardBombardmentEffect(final HaphazardBombardmentEffect effect) {
+    private HaphazardBombardmentEffect(final HaphazardBombardmentEffect effect) {
         super(effect);
     }
 
@@ -108,7 +108,7 @@ class HaphazardBombardmentEndOfTurnEffect extends OneShotEffect {
         this.staticText = "destroy one of those permanents at random";
     }
 
-    public HaphazardBombardmentEndOfTurnEffect(final HaphazardBombardmentEndOfTurnEffect effect) {
+    private HaphazardBombardmentEndOfTurnEffect(final HaphazardBombardmentEndOfTurnEffect effect) {
         super(effect);
     }
 

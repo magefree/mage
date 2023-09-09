@@ -61,7 +61,7 @@ class OonasBlackguardReplacementEffect extends ReplacementEffectImpl {
         staticText = "Each other Rogue creature you control enters the battlefield with an additional +1/+1 counter on it";
     }
 
-    OonasBlackguardReplacementEffect(OonasBlackguardReplacementEffect effect) {
+    private OonasBlackguardReplacementEffect(final OonasBlackguardReplacementEffect effect) {
         super(effect);
     }
 

@@ -73,7 +73,7 @@ class GuardianBeastConditionalEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = ", and other players can't gain control of them. This effect doesn't remove Auras already attached to those artifacts";
     }
 
-    public GuardianBeastConditionalEffect(final GuardianBeastConditionalEffect effect) {
+    private GuardianBeastConditionalEffect(final GuardianBeastConditionalEffect effect) {
         super(effect);
     }
 

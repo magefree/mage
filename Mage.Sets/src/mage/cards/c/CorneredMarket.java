@@ -58,7 +58,7 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
                 + "<br> Players can't play nonbasic lands with the same name as a nontoken permanent.";
     }
 
-    CorneredMarketReplacementEffect(final CorneredMarketReplacementEffect effect) {
+    private CorneredMarketReplacementEffect(final CorneredMarketReplacementEffect effect) {
         super(effect);
     }
 

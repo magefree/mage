@@ -47,7 +47,7 @@ class UntapAllArtifactsEffect extends OneShotEffect {
         staticText = "Untap all artifacts";
     }
 
-    public UntapAllArtifactsEffect(final UntapAllArtifactsEffect effect) {
+    private UntapAllArtifactsEffect(final UntapAllArtifactsEffect effect) {
         super(effect);
     }
 

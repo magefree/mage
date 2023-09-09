@@ -44,7 +44,7 @@ class AnHavvaInnEffect extends OneShotEffect {
         staticText = "You gain X plus 1 life, where X is the number of green creatures on the battlefield";
     }
 
-    public AnHavvaInnEffect(final AnHavvaInnEffect effect) {
+    private AnHavvaInnEffect(final AnHavvaInnEffect effect) {
         super(effect);
     }
 

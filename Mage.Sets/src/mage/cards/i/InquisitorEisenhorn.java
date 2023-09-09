@@ -63,7 +63,7 @@ class InquisitorEisenhornReplacementEffect extends ReplacementEffectImpl {
                 "sorcery card this way, create Cherubael, a legendary 4/4 black Demon creature token with flying";
     }
 
-    public InquisitorEisenhornReplacementEffect(final InquisitorEisenhornReplacementEffect effect) {
+    private InquisitorEisenhornReplacementEffect(final InquisitorEisenhornReplacementEffect effect) {
         super(effect);
     }
 

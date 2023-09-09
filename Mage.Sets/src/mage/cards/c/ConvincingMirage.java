@@ -58,7 +58,7 @@ class ConvincingMirageContinousEffect extends ContinuousEffectImpl {
         staticText = "Enchanted land is the chosen type";
     }
 
-    public ConvincingMirageContinousEffect(final ConvincingMirageContinousEffect effect) {
+    private ConvincingMirageContinousEffect(final ConvincingMirageContinousEffect effect) {
         super(effect);
     }
 

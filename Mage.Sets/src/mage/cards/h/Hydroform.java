@@ -50,7 +50,7 @@ class HydroformToken extends TokenImpl {
 
         this.addAbility(FlyingAbility.getInstance());
     }
-    public HydroformToken(final HydroformToken token) {
+    private HydroformToken(final HydroformToken token) {
         super(token);
     }
 

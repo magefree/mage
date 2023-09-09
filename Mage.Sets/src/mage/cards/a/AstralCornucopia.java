@@ -54,7 +54,7 @@ class AstralCornucopiaManaEffect extends ManaEffect {
         this.staticText = "Choose a color. Add one mana of that color for each charge counter on {this}";
     }
 
-    public AstralCornucopiaManaEffect(final AstralCornucopiaManaEffect effect) {
+    private AstralCornucopiaManaEffect(final AstralCornucopiaManaEffect effect) {
         super(effect);
     }
 

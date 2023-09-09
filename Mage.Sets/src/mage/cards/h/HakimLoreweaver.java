@@ -85,7 +85,7 @@ class HakimLoreweaverEffect extends OneShotEffect {
         this.staticText = "Return target Aura card from your graveyard to the battlefield attached to {this}.";
     }
 
-    public HakimLoreweaverEffect(final HakimLoreweaverEffect effect) {
+    private HakimLoreweaverEffect(final HakimLoreweaverEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class ElkBeastToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public ElkBeastToken(final ElkBeastToken token) {
+    private ElkBeastToken(final ElkBeastToken token) {
         super(token);
     }
 

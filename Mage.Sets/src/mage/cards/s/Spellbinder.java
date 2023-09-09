@@ -64,7 +64,7 @@ class SpellbinderTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SpellbinderCopyEffect(), true);
     }
 
-    SpellbinderTriggeredAbility(final SpellbinderTriggeredAbility ability) {
+    private SpellbinderTriggeredAbility(final SpellbinderTriggeredAbility ability) {
         super(ability);
     }
 

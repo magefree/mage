@@ -54,7 +54,7 @@ class PlanarChaosUpkeepEffect extends OneShotEffect {
         staticText = "flip a coin. If you lose the flip, sacrifice {this}";
     }
 
-    PlanarChaosUpkeepEffect(final PlanarChaosUpkeepEffect effect) {
+    private PlanarChaosUpkeepEffect(final PlanarChaosUpkeepEffect effect) {
         super(effect);
     }
 

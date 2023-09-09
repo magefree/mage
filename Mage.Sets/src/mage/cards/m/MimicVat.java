@@ -62,7 +62,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MimicVatEffect(), true);
     }
 
-    MimicVatTriggeredAbility(MimicVatTriggeredAbility ability) {
+    private MimicVatTriggeredAbility(final MimicVatTriggeredAbility ability) {
         super(ability);
     }
 

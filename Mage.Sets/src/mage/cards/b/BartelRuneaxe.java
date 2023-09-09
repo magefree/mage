@@ -51,7 +51,7 @@ class BartelRuneaxeEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "{this} can't be the target of Aura spells";
     }
 
-    public BartelRuneaxeEffect(final BartelRuneaxeEffect effect) {
+    private BartelRuneaxeEffect(final BartelRuneaxeEffect effect) {
         super(effect);
     }
 

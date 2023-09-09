@@ -45,7 +45,7 @@ class SurvivalCacheEffect extends OneShotEffect {
         staticText = "Then if you have more life than an opponent, draw a card";
     }
 
-    SurvivalCacheEffect(final SurvivalCacheEffect effect) {
+    private SurvivalCacheEffect(final SurvivalCacheEffect effect) {
         super(effect);
     }
 

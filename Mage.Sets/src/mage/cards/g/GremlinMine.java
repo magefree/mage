@@ -72,7 +72,7 @@ class GremlinMineEffect extends OneShotEffect {
         this.staticText = "Remove up to four charge counters from target noncreature artifact";
     }
 
-    public GremlinMineEffect(GremlinMineEffect effect) {
+    private GremlinMineEffect(final GremlinMineEffect effect) {
         super(effect);
     }
 

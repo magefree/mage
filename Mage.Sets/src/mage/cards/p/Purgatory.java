@@ -66,7 +66,7 @@ class PurgatoryTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new PurgatoryExileEffect(), false);
     }
 
-    PurgatoryTriggeredAbility(PurgatoryTriggeredAbility ability) {
+    private PurgatoryTriggeredAbility(final PurgatoryTriggeredAbility ability) {
         super(ability);
     }
 

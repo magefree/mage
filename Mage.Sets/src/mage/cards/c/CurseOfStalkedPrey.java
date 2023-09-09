@@ -62,7 +62,7 @@ class CurseOfStalkedPreyTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
     }
 
-    public CurseOfStalkedPreyTriggeredAbility(final CurseOfStalkedPreyTriggeredAbility ability) {
+    private CurseOfStalkedPreyTriggeredAbility(final CurseOfStalkedPreyTriggeredAbility ability) {
         super(ability);
     }
 

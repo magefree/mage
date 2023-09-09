@@ -25,7 +25,7 @@ public final class HomaridExplorer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HomaridExplorer(final HomaridExplorer homaridExplorer) {
+    private HomaridExplorer(final HomaridExplorer homaridExplorer) {
         super(homaridExplorer);
     }
 

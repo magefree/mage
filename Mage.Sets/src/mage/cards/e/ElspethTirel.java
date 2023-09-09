@@ -54,7 +54,7 @@ class ElspethTirelFirstEffect extends OneShotEffect {
         staticText = "You gain 1 life for each creature you control";
     }
 
-    public ElspethTirelFirstEffect(final ElspethTirelFirstEffect effect) {
+    private ElspethTirelFirstEffect(final ElspethTirelFirstEffect effect) {
         super(effect);
     }
 
@@ -82,7 +82,7 @@ class ElspethTirelThirdEffect extends OneShotEffect {
         staticText = "Destroy all other permanents except for lands and tokens";
     }
 
-    public ElspethTirelThirdEffect(final ElspethTirelThirdEffect effect) {
+    private ElspethTirelThirdEffect(final ElspethTirelThirdEffect effect) {
         super(effect);
     }
 

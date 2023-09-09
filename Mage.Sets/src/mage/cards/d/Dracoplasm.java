@@ -71,7 +71,7 @@ class DracoplasmEffect extends ReplacementEffectImpl {
         this.staticText = "As {this} enters the battlefield, sacrifice any number of creatures. {this}'s power becomes the total power of those creatures and its toughness becomes their total toughness";
     }
 
-    public DracoplasmEffect(final DracoplasmEffect effect) {
+    private DracoplasmEffect(final DracoplasmEffect effect) {
         super(effect);
     }
 

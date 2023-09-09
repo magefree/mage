@@ -57,7 +57,7 @@ class HallarTheFirefletcherTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you cast a spell, if that spell was kicked, ");
     }
 
-    HallarTheFirefletcherTriggeredAbility(final HallarTheFirefletcherTriggeredAbility ability) {
+    private HallarTheFirefletcherTriggeredAbility(final HallarTheFirefletcherTriggeredAbility ability) {
         super(ability);
     }
 

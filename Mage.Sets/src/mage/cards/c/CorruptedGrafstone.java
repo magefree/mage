@@ -53,7 +53,7 @@ class CorruptedGrafstoneManaAbility extends ActivatedManaAbilityImpl {
         super(Zone.BATTLEFIELD, new CorruptedGrafstoneManaEffect(), new TapSourceCost());
     }
 
-    public CorruptedGrafstoneManaAbility(final CorruptedGrafstoneManaAbility ability) {
+    private CorruptedGrafstoneManaAbility(final CorruptedGrafstoneManaAbility ability) {
         super(ability);
     }
 
@@ -82,7 +82,7 @@ class CorruptedGrafstoneManaEffect extends ManaEffect {
         this.staticText = "Choose a color of a card in your graveyard. Add one mana of that color";
     }
 
-    public CorruptedGrafstoneManaEffect(final CorruptedGrafstoneManaEffect effect) {
+    private CorruptedGrafstoneManaEffect(final CorruptedGrafstoneManaEffect effect) {
         super(effect);
         this.computedMana = effect.computedMana.copy();
     }

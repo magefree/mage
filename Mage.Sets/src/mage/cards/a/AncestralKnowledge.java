@@ -54,7 +54,7 @@ class AncestralKnowledgeEffect extends OneShotEffect {
         this.staticText = "look at the top ten cards of your library, then exile any number of them and put the rest back on top of your library in any order";
     }
 
-    AncestralKnowledgeEffect(final AncestralKnowledgeEffect effect) {
+    private AncestralKnowledgeEffect(final AncestralKnowledgeEffect effect) {
         super(effect);
     }
 

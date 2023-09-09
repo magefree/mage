@@ -49,7 +49,7 @@ class SwordPointDiplomacyEffect extends OneShotEffect {
         this.staticText = "Reveal the top three cards of your library. For each of those cards, put that card into your hand unless any opponent pays 3 life. Then exile the rest.";
     }
 
-    SwordPointDiplomacyEffect(final SwordPointDiplomacyEffect effect) {
+    private SwordPointDiplomacyEffect(final SwordPointDiplomacyEffect effect) {
         super(effect);
     }
 

@@ -72,7 +72,7 @@ class ChickenALaKingTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter));
     }
 
-    public ChickenALaKingTriggeredAbility(final ChickenALaKingTriggeredAbility ability) {
+    private ChickenALaKingTriggeredAbility(final ChickenALaKingTriggeredAbility ability) {
         super(ability);
     }
 

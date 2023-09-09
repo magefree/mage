@@ -63,7 +63,7 @@ class ScarecrowEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to you this turn by creatures with flying";
     }
 
-    ScarecrowEffect(final ScarecrowEffect effect) {
+    private ScarecrowEffect(final ScarecrowEffect effect) {
         super(effect);
     }
 

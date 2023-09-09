@@ -50,7 +50,7 @@ class AshesOfTheAbhorrentEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can't cast spells from graveyards or activate abilities of cards in graveyards";
     }
 
-    public AshesOfTheAbhorrentEffect(final AshesOfTheAbhorrentEffect effect) {
+    private AshesOfTheAbhorrentEffect(final AshesOfTheAbhorrentEffect effect) {
         super(effect);
     }
 

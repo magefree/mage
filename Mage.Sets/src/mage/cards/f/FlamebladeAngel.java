@@ -52,7 +52,7 @@ class FlamebladeAngelTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1), true);
     }
 
-    public FlamebladeAngelTriggeredAbility(final FlamebladeAngelTriggeredAbility ability) {
+    private FlamebladeAngelTriggeredAbility(final FlamebladeAngelTriggeredAbility ability) {
         super(ability);
     }
 

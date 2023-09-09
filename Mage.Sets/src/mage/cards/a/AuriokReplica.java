@@ -52,7 +52,7 @@ class AuriokReplicaEffect extends PreventionEffectImpl {
         this.target = new TargetSource();
     }
 
-    public AuriokReplicaEffect(final AuriokReplicaEffect effect) {
+    private AuriokReplicaEffect(final AuriokReplicaEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }

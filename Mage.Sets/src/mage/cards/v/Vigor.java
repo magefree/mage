@@ -60,7 +60,7 @@ class VigorReplacementEffect extends ReplacementEffectImpl {
         staticText = "if damage would be dealt to another creature you control, prevent that damage. Put a +1/+1 counter on that creature for each 1 damage prevented this way";
     }
 
-    VigorReplacementEffect(final VigorReplacementEffect effect) {
+    private VigorReplacementEffect(final VigorReplacementEffect effect) {
         super(effect);
     }
 

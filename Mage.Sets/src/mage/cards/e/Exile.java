@@ -60,7 +60,7 @@ class ExileEffect extends OneShotEffect {
         staticText = "You gain life equal to its toughness";
     }
 
-    public ExileEffect(final ExileEffect effect) {
+    private ExileEffect(final ExileEffect effect) {
         super(effect);
     }
 

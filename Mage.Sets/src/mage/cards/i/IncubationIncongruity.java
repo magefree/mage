@@ -56,7 +56,7 @@ class IncongruityEffect extends OneShotEffect {
         staticText = "That creature's controller creates a 3/3 green Frog Lizard creature token";
     }
 
-    public IncongruityEffect(final IncongruityEffect effect) {
+    private IncongruityEffect(final IncongruityEffect effect) {
         super(effect);
     }
 

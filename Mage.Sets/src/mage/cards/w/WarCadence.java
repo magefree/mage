@@ -51,7 +51,7 @@ class WarCadenceReplacementEffect extends ReplacementEffectImpl {
         staticText = "This turn, creatures can't block unless their controller pays {X} for each blocking creature they control";
     }
 
-    WarCadenceReplacementEffect(WarCadenceReplacementEffect effect) {
+    private WarCadenceReplacementEffect(final WarCadenceReplacementEffect effect) {
         super(effect);
     }
 

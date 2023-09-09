@@ -49,7 +49,7 @@ class LearnFromThePastEffect extends OneShotEffect {
         this.staticText = "Target player shuffles their graveyard into their library";
     }
     
-    LearnFromThePastEffect(final LearnFromThePastEffect effect) {
+    private LearnFromThePastEffect(final LearnFromThePastEffect effect) {
         super(effect);
     }
     

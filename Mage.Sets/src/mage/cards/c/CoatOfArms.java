@@ -43,7 +43,7 @@ class CoatOfArmsEffect extends ContinuousEffectImpl {
         this.staticText = "Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it";
     }
 
-    public CoatOfArmsEffect(final CoatOfArmsEffect effect) {
+    private CoatOfArmsEffect(final CoatOfArmsEffect effect) {
         super(effect);
     }
 

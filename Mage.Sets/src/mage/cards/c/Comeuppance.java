@@ -50,7 +50,7 @@ class ComeuppanceEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to you and planeswalkers you control this turn by sources you don't control. If damage from a creature source is prevented this way, {this} deals that much damage to that creature. If damage from a noncreature source is prevented this way, {this} deals that much damage to the source's controller";
     }
 
-    public ComeuppanceEffect(final ComeuppanceEffect effect) {
+    private ComeuppanceEffect(final ComeuppanceEffect effect) {
         super(effect);
     }
 

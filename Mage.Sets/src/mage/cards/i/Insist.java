@@ -51,7 +51,7 @@ class InsistEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "The next creature spell you cast this turn can't be countered";
     }
 
-    InsistEffect(final InsistEffect effect) {
+    private InsistEffect(final InsistEffect effect) {
         super(effect);
     }
 

@@ -61,7 +61,7 @@ class GoldnightCastigatorDoubleDamageEffect extends ReplacementEffectImpl {
             + "<br>If a source would deal damage to {this}, it deals double that damage to {this} instead.";
     }
 
-    public GoldnightCastigatorDoubleDamageEffect(final GoldnightCastigatorDoubleDamageEffect effect) {
+    private GoldnightCastigatorDoubleDamageEffect(final GoldnightCastigatorDoubleDamageEffect effect) {
         super(effect);
     }
 

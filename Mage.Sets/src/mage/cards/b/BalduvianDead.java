@@ -60,7 +60,7 @@ class BalduvianDeadEffect extends OneShotEffect {
         this.staticText = "Create a 3/1 black and red Graveborn creature token with haste. Sacrifice it at the beginning of the next end step";
     }
 
-    public BalduvianDeadEffect(final BalduvianDeadEffect effect) {
+    private BalduvianDeadEffect(final BalduvianDeadEffect effect) {
         super(effect);
     }
 

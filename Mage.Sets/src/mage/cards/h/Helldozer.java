@@ -59,7 +59,7 @@ class HelldozerEffect extends OneShotEffect {
         this.staticText = "Destroy target land. If that land was nonbasic, untap Helldozer";
     }
 
-    public HelldozerEffect(final HelldozerEffect effect) {
+    private HelldozerEffect(final HelldozerEffect effect) {
         super(effect);
     }
 

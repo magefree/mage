@@ -49,7 +49,7 @@ class IceCaveEffect extends OneShotEffect {
         this.staticText = "any other player may pay that spell's mana cost. If a player does, counter the spell";
     }
 
-    public IceCaveEffect(final IceCaveEffect effect) {
+    private IceCaveEffect(final IceCaveEffect effect) {
         super(effect);
     }
 

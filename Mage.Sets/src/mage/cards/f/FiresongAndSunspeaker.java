@@ -69,7 +69,7 @@ class FiresongAndSunspeakerTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetCreatureOrPlayer());
     }
 
-    public FiresongAndSunspeakerTriggeredAbility(final FiresongAndSunspeakerTriggeredAbility ability) {
+    private FiresongAndSunspeakerTriggeredAbility(final FiresongAndSunspeakerTriggeredAbility ability) {
         super(ability);
     }
 

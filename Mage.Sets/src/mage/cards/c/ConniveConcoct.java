@@ -75,7 +75,7 @@ class ConcoctEffect extends OneShotEffect {
                 + "from your graveyard to the battlefield.";
     }
 
-    public ConcoctEffect(final ConcoctEffect effect) {
+    private ConcoctEffect(final ConcoctEffect effect) {
         super(effect);
     }
 

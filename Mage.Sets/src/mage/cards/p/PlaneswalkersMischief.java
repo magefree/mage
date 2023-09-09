@@ -99,7 +99,7 @@ class PlaneswalkersMischiefCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "You may cast that card without paying its mana cost as long as it remains exiled";
     }
 
-    PlaneswalkersMischiefCastFromExileEffect(final PlaneswalkersMischiefCastFromExileEffect effect) {
+    private PlaneswalkersMischiefCastFromExileEffect(final PlaneswalkersMischiefCastFromExileEffect effect) {
         super(effect);
     }
 

@@ -57,7 +57,7 @@ class DeadlyDesignsTriggerAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new DeadlyDesignsEffect());
     }
 
-    public DeadlyDesignsTriggerAbility(final DeadlyDesignsTriggerAbility ability) {
+    private DeadlyDesignsTriggerAbility(final DeadlyDesignsTriggerAbility ability) {
         super(ability);
     }
 
@@ -86,7 +86,7 @@ class DeadlyDesignsEffect extends SacrificeSourceEffect {
         super();
     }
 
-    public DeadlyDesignsEffect(final DeadlyDesignsEffect effect) {
+    private DeadlyDesignsEffect(final DeadlyDesignsEffect effect) {
         super(effect);
         this.sacrificed = effect.sacrificed;
     }

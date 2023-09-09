@@ -54,7 +54,7 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you activate an ability of an artifact, if it isn't a mana ability, ");
     }
 
-    KurkeshOnakkeAncientTriggeredAbility(final KurkeshOnakkeAncientTriggeredAbility ability) {
+    private KurkeshOnakkeAncientTriggeredAbility(final KurkeshOnakkeAncientTriggeredAbility ability) {
         super(ability);
     }
 

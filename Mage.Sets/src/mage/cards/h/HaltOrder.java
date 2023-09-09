@@ -24,7 +24,7 @@ public final class HaltOrder extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
-    public HaltOrder (final HaltOrder card) {
+    private HaltOrder(final HaltOrder card) {
         super(card);
     }
 

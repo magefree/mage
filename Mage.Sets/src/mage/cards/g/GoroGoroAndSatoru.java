@@ -73,7 +73,7 @@ class GoroGoroAndSatoruTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new DragonSpiritToken()), false);
     }
 
-    public GoroGoroAndSatoruTriggeredAbility(final GoroGoroAndSatoruTriggeredAbility ability) {
+    private GoroGoroAndSatoruTriggeredAbility(final GoroGoroAndSatoruTriggeredAbility ability) {
         super(ability);
     }
 

@@ -72,7 +72,7 @@ class DecimatorBeetleEffect extends OneShotEffect {
         staticText = "remove a -1/-1 counter from target creature you control and put a -1/-1 counter on up to one target creature defending player controls";
     }
 
-    public DecimatorBeetleEffect(DecimatorBeetleEffect effect) {
+    private DecimatorBeetleEffect(final DecimatorBeetleEffect effect) {
         super(effect);
     }
 

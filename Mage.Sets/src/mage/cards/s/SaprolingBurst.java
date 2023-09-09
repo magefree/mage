@@ -61,7 +61,7 @@ class SaprolingBurstCreateTokenEffect extends OneShotEffect {
         this.staticText = "create a green Saproling creature token. It has \"This creature's power and toughness are each equal to the number of fade counters on {this}.\"";
     }
 
-    SaprolingBurstCreateTokenEffect(final SaprolingBurstCreateTokenEffect effect) {
+    private SaprolingBurstCreateTokenEffect(final SaprolingBurstCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class SaprolingBurstLeavesBattlefieldTriggeredAbility extends ZoneChangeTriggere
         super(Zone.BATTLEFIELD, null, new SaprolingBurstDestroyEffect(), "When {this} leaves the battlefield, ", false);
     }
 
-    SaprolingBurstLeavesBattlefieldTriggeredAbility(SaprolingBurstLeavesBattlefieldTriggeredAbility ability) {
+    private SaprolingBurstLeavesBattlefieldTriggeredAbility(final SaprolingBurstLeavesBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 
@@ -131,7 +131,7 @@ class SaprolingBurstDestroyEffect extends OneShotEffect {
         this.staticText = "destroy all tokens created with {this}. They can't be regenerated";
     }
 
-    SaprolingBurstDestroyEffect(final SaprolingBurstDestroyEffect effect) {
+    private SaprolingBurstDestroyEffect(final SaprolingBurstDestroyEffect effect) {
         super(effect);
         this.cardZoneString = effect.cardZoneString;
     }

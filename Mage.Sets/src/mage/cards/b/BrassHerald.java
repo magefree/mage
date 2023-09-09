@@ -57,7 +57,7 @@ class BrassHeraldEntersEffect extends OneShotEffect {
         this.staticText = "reveal the top four cards of your library. Put all creature cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order";
     }
 
-    public BrassHeraldEntersEffect(final BrassHeraldEntersEffect effect) {
+    private BrassHeraldEntersEffect(final BrassHeraldEntersEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class HanSoloScrumratTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} creature deals damage during your turn, ");
     }
 
-    public HanSoloScrumratTriggeredAbility(final HanSoloScrumratTriggeredAbility ability) {
+    private HanSoloScrumratTriggeredAbility(final HanSoloScrumratTriggeredAbility ability) {
         super(ability);
     }
 

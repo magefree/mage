@@ -54,7 +54,7 @@ class WarBargeDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new DestroyTargetEffect(true), Duration.EndOfTurn, false);
     }
 
-    WarBargeDelayedTriggeredAbility(final WarBargeDelayedTriggeredAbility ability) {
+    private WarBargeDelayedTriggeredAbility(final WarBargeDelayedTriggeredAbility ability) {
         super(ability);
     }
 

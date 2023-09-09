@@ -65,7 +65,7 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
         setTriggerPhrase(filter.getMessage() + ", if {this} is in your graveyard, ");
     }
 
-    public BridgeFromBelowAbility(BridgeFromBelowAbility ability) {
+    private BridgeFromBelowAbility(final BridgeFromBelowAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }

@@ -65,7 +65,7 @@ class EyeOfDoomEffect extends OneShotEffect {
         this.staticText = "each player chooses a nonland permanent and puts a doom counter on it";
     }
 
-    public EyeOfDoomEffect(final EyeOfDoomEffect effect) {
+    private EyeOfDoomEffect(final EyeOfDoomEffect effect) {
         super(effect);
     }
 

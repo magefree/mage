@@ -61,7 +61,7 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
         this.staticText = "choose a creature card in an opponent's graveyard, then that player chooses a creature card in your graveyard. You may return those cards to the battlefield under their owners' control";
     }
 
-    public DawnbreakReclaimerEffect(final DawnbreakReclaimerEffect effect) {
+    private DawnbreakReclaimerEffect(final DawnbreakReclaimerEffect effect) {
         super(effect);
     }
 

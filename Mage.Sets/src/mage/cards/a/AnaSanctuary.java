@@ -55,7 +55,7 @@ class BoostEffect extends OneShotEffect {
         this.amount = amount;
     }
 
-    BoostEffect(final BoostEffect effect) {
+    private BoostEffect(final BoostEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

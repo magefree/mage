@@ -46,7 +46,7 @@ class CinderCloudEffect extends OneShotEffect {
                 "{this} deals damage to that creature's controller equal to the creature's power";
     }
 
-    public CinderCloudEffect(final CinderCloudEffect effect) {
+    private CinderCloudEffect(final CinderCloudEffect effect) {
         super(effect);
     }
 

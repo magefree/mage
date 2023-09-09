@@ -69,7 +69,7 @@ class BrainInAJarCastEffect extends OneShotEffect {
                 + "counters on {this} from your hand without paying its mana cost";
     }
 
-    public BrainInAJarCastEffect(final BrainInAJarCastEffect effect) {
+    private BrainInAJarCastEffect(final BrainInAJarCastEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class BrainInAJarScryEffect extends OneShotEffect {
         this.staticText = "Scry X";
     }
 
-    public BrainInAJarScryEffect(final BrainInAJarScryEffect effect) {
+    private BrainInAJarScryEffect(final BrainInAJarScryEffect effect) {
         super(effect);
     }
 

@@ -106,7 +106,7 @@ class AkoumHellkiteDamageEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    public AkoumHellkiteDamageEffect(final AkoumHellkiteDamageEffect effect) {
+    private AkoumHellkiteDamageEffect(final AkoumHellkiteDamageEffect effect) {
         super(effect);
     }
 

@@ -100,7 +100,7 @@ class JeweledAmuletAddManaEffect extends ManaEffect {
         staticText = "Add one mana of {this}'s last noted type";
     }
 
-    JeweledAmuletAddManaEffect(JeweledAmuletAddManaEffect effect) {
+    private JeweledAmuletAddManaEffect(final JeweledAmuletAddManaEffect effect) {
         super(effect);
         storedMana = effect.storedMana == null ? null : effect.storedMana.copy();
     }

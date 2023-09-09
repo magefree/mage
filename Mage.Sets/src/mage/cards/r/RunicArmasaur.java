@@ -48,7 +48,7 @@ class RunicArmasaurTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    RunicArmasaurTriggeredAbility(final RunicArmasaurTriggeredAbility ability) {
+    private RunicArmasaurTriggeredAbility(final RunicArmasaurTriggeredAbility ability) {
         super(ability);
     }
 

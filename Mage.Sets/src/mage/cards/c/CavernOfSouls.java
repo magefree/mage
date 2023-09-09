@@ -168,7 +168,7 @@ class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = null;
     }
 
-    public CavernOfSoulsCantCounterEffect(final CavernOfSoulsCantCounterEffect effect) {
+    private CavernOfSoulsCantCounterEffect(final CavernOfSoulsCantCounterEffect effect) {
         super(effect);
     }
 

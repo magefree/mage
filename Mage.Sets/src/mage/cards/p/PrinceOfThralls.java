@@ -57,7 +57,7 @@ class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a permanent an opponent controls is put into a graveyard, ");
     }
 
-    PrinceOfThrallsTriggeredAbility(final PrinceOfThrallsTriggeredAbility ability) {
+    private PrinceOfThrallsTriggeredAbility(final PrinceOfThrallsTriggeredAbility ability) {
         super(ability);
     }
 

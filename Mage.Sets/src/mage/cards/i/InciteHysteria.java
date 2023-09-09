@@ -53,7 +53,7 @@ class InciteHysteriaEffect extends OneShotEffect {
         this.staticText = "Until end of turn, target creature and each other creature that shares a color with it gain \"This creature can't block.\"";
     }
 
-    public InciteHysteriaEffect(final InciteHysteriaEffect effect) {
+    private InciteHysteriaEffect(final InciteHysteriaEffect effect) {
         super(effect);
     }
 

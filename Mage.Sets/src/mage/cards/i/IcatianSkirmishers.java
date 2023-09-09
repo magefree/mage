@@ -41,7 +41,7 @@ public final class IcatianSkirmishers extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new IcatianSkirmishersEffect(), false));
     }
 
-    public IcatianSkirmishers(final IcatianSkirmishers card) {
+    private IcatianSkirmishers(final IcatianSkirmishers card) {
         super(card);
     }
 
@@ -59,7 +59,7 @@ class IcatianSkirmishersEffect extends OneShotEffect {
         this.staticText = "all creatures banded with it gain first strike until end of turn";
     }
 
-    public IcatianSkirmishersEffect(final IcatianSkirmishersEffect effect) {
+    private IcatianSkirmishersEffect(final IcatianSkirmishersEffect effect) {
         super(effect);
     }
 

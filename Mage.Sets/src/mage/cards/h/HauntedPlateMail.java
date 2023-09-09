@@ -66,7 +66,7 @@ class HauntedPlateMailToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
-    public HauntedPlateMailToken(final HauntedPlateMailToken token) {
+    private HauntedPlateMailToken(final HauntedPlateMailToken token) {
         super(token);
     }
 

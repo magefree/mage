@@ -61,7 +61,7 @@ class InfernalTutorEffect extends OneShotEffect {
         this.staticText = "Reveal a card from your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle";
     }
 
-    public InfernalTutorEffect(final InfernalTutorEffect effect) {
+    private InfernalTutorEffect(final InfernalTutorEffect effect) {
         super(effect);
     }
 

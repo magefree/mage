@@ -54,7 +54,7 @@ class AuratouchedMageEffect extends OneShotEffect {
         staticText = "search your library for an Aura card that could enchant it. If {this} is still on the battlefield, put that Aura card onto the battlefield attached to it. Otherwise, reveal the Aura card and put it into your hand. Then shuffle";
     }
 
-    public AuratouchedMageEffect(final AuratouchedMageEffect effect) {
+    private AuratouchedMageEffect(final AuratouchedMageEffect effect) {
         super(effect);
     }
 

@@ -65,7 +65,7 @@ class FreneticSliverEffect extends OneShotEffect {
                 + "at the beginning of the next end step. If you lose the flip, sacrifice it";
     }
 
-    public FreneticSliverEffect(final FreneticSliverEffect effect) {
+    private FreneticSliverEffect(final FreneticSliverEffect effect) {
         super(effect);
     }
 

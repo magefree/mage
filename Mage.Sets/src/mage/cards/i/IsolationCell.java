@@ -46,7 +46,7 @@ class IsolationCellTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new IsolationCellEffect(), false);
     }
 
-    public IsolationCellTriggeredAbility(final IsolationCellTriggeredAbility ability) {
+    private IsolationCellTriggeredAbility(final IsolationCellTriggeredAbility ability) {
         super(ability);
     }
 
@@ -86,7 +86,7 @@ class IsolationCellEffect extends OneShotEffect {
         this.staticText = "that player loses 2 life unless they pay {2}";
     }
 
-    public IsolationCellEffect(final IsolationCellEffect effect) {
+    private IsolationCellEffect(final IsolationCellEffect effect) {
         super(effect);
     }
 

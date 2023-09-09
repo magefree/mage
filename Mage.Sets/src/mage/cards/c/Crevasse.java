@@ -44,7 +44,7 @@ class CrevasseEffect extends AsThoughEffectImpl {
         staticText = "Creatures with mountainwalk can be blocked as though they didn't have mountainwalk";
     }
 
-    public CrevasseEffect(final CrevasseEffect effect) {
+    private CrevasseEffect(final CrevasseEffect effect) {
         super(effect);
     }
 

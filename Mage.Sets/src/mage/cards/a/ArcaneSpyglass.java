@@ -42,7 +42,7 @@ public final class ArcaneSpyglass extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3))));
     }
 
-    public ArcaneSpyglass (final ArcaneSpyglass card) {
+    private ArcaneSpyglass(final ArcaneSpyglass card) {
         super(card);
     }
 

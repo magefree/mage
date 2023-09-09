@@ -56,7 +56,7 @@ class EnhancedSurveillanceReplacementEffect extends ReplacementEffectImpl {
                 + "two cards each time you surveil.";
     }
 
-    public EnhancedSurveillanceReplacementEffect(final EnhancedSurveillanceReplacementEffect effect) {
+    private EnhancedSurveillanceReplacementEffect(final EnhancedSurveillanceReplacementEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class EnhancedSurveillanceShuffleEffect extends OneShotEffect {
         this.staticText = "Shuffle your graveyard into your library";
     }
 
-    public EnhancedSurveillanceShuffleEffect(final EnhancedSurveillanceShuffleEffect effect) {
+    private EnhancedSurveillanceShuffleEffect(final EnhancedSurveillanceShuffleEffect effect) {
         super(effect);
     }
 

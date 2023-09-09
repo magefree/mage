@@ -64,7 +64,7 @@ class GriftersBladeChooseCreatureEffect extends OneShotEffect {
         this.staticText = "choose a creature you control it could be attached to. If you do, it enters the battlefield attached to that creature";
     }
 
-    public GriftersBladeChooseCreatureEffect(final GriftersBladeChooseCreatureEffect effect) {
+    private GriftersBladeChooseCreatureEffect(final GriftersBladeChooseCreatureEffect effect) {
         super(effect);
     }
 

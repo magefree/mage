@@ -61,7 +61,7 @@ class GlyphOfDoomCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         this.staticText = "At this turn's next end of combat, destroy all creatures that were blocked by that creature this turn";
     }
 
-    public GlyphOfDoomCreateDelayedTriggeredAbilityEffect(final GlyphOfDoomCreateDelayedTriggeredAbilityEffect effect) {
+    private GlyphOfDoomCreateDelayedTriggeredAbilityEffect(final GlyphOfDoomCreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class GlyphOfDoomEffect extends OneShotEffect {
         this.targetCreature = targetCreature;
     }
 
-    public GlyphOfDoomEffect(final GlyphOfDoomEffect effect) {
+    private GlyphOfDoomEffect(final GlyphOfDoomEffect effect) {
         super(effect);
         targetCreature = effect.targetCreature;
     }

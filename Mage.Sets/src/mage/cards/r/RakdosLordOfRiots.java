@@ -96,7 +96,7 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
         staticText = "Creature spells you cast cost {1} less to cast for each 1 life your opponents have lost this turn";
     }
 
-    RakdosLordOfRiotsCostReductionEffect(RakdosLordOfRiotsCostReductionEffect effect) {
+    private RakdosLordOfRiotsCostReductionEffect(final RakdosLordOfRiotsCostReductionEffect effect) {
         super(effect);
     }
 

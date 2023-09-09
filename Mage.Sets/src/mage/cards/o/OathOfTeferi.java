@@ -58,7 +58,7 @@ class OathOfTeferiBlinkEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    OathOfTeferiBlinkEffect(OathOfTeferiBlinkEffect effect) {
+    private OathOfTeferiBlinkEffect(final OathOfTeferiBlinkEffect effect) {
         super(effect);
     }
 

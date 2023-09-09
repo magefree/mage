@@ -74,7 +74,7 @@ class DragonBreathEffect extends OneShotEffect {
         this.staticText = "return {this} from your graveyard to the battlefield attached to that creature";
     }
     
-    DragonBreathEffect(final DragonBreathEffect effect) {
+    private DragonBreathEffect(final DragonBreathEffect effect) {
         super(effect);
     }
     

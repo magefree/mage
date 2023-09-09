@@ -55,7 +55,7 @@ class AddCounterAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), false);
     }
 
-    public AddCounterAbility(final AddCounterAbility ability) {
+    private AddCounterAbility(final AddCounterAbility ability) {
         super(ability);
     }
 
@@ -96,7 +96,7 @@ class BoostCreatureEffectEffect extends ContinuousEffectImpl {
         staticText = "Creatures you control of the chosen type get +1/+1 for each charge counter on {this}";
     }
 
-    public BoostCreatureEffectEffect(final BoostCreatureEffectEffect effect) {
+    private BoostCreatureEffectEffect(final BoostCreatureEffectEffect effect) {
         super(effect);
     }
 

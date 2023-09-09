@@ -60,7 +60,7 @@ class CouncilOfTheAbsoluteReplacementEffect extends ContinuousRuleModifyingEffec
         staticText = "Your opponents can't cast spells with the chosen name";
     }
 
-    public CouncilOfTheAbsoluteReplacementEffect(final CouncilOfTheAbsoluteReplacementEffect effect) {
+    private CouncilOfTheAbsoluteReplacementEffect(final CouncilOfTheAbsoluteReplacementEffect effect) {
         super(effect);
     }
 

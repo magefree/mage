@@ -91,7 +91,7 @@ class HammerJammerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you roll a die, ");
     }
 
-    public HammerJammerTriggeredAbility(final HammerJammerTriggeredAbility ability) {
+    private HammerJammerTriggeredAbility(final HammerJammerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -125,7 +125,7 @@ class HammerJammerEffect extends OneShotEffect {
         this.staticText = "remove all +1/+1 counters from {this}, then put a number of +1/+1 counters on it equal to the result";
     }
 
-    public HammerJammerEffect(final HammerJammerEffect effect) {
+    private HammerJammerEffect(final HammerJammerEffect effect) {
         super(effect);
     }
 

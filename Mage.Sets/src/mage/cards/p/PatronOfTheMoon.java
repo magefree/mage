@@ -64,7 +64,7 @@ class PatronOfTheMoonEffect extends OneShotEffect {
         staticText = "Put up to two land cards from your hand onto the battlefield tapped";
     }
 
-    PatronOfTheMoonEffect(final PatronOfTheMoonEffect effect) {
+    private PatronOfTheMoonEffect(final PatronOfTheMoonEffect effect) {
         super(effect);
     }
 

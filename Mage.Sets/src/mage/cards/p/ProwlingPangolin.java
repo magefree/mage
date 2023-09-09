@@ -51,7 +51,7 @@ class ProwlingPangolinEffect extends OneShotEffect {
         this.staticText = "any player may sacrifice two creatures. If a player does, sacrifice {this}";
     }
 
-    ProwlingPangolinEffect(final ProwlingPangolinEffect effect) {
+    private ProwlingPangolinEffect(final ProwlingPangolinEffect effect) {
         super(effect);
     }
 

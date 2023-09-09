@@ -57,7 +57,7 @@ class MangarasTomeSearchEffect extends OneShotEffect {
         this.staticText = "search your library for five cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library";
     }
 
-    MangarasTomeSearchEffect(final MangarasTomeSearchEffect effect) {
+    private MangarasTomeSearchEffect(final MangarasTomeSearchEffect effect) {
         super(effect);
     }
 
@@ -94,7 +94,7 @@ class MangarasTomeReplacementEffect extends ReplacementEffectImpl {
         staticText = "The next time you would draw a card this turn, instead put the top card of the exiled pile into its owner's hand";
     }
 
-    MangarasTomeReplacementEffect(final MangarasTomeReplacementEffect effect) {
+    private MangarasTomeReplacementEffect(final MangarasTomeReplacementEffect effect) {
         super(effect);
     }
 

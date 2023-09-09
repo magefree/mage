@@ -75,7 +75,7 @@ class CircuDimirLobotomistEffect extends OneShotEffect {
         this.staticText = "exile the top card of target player's library";
     }
 
-    public CircuDimirLobotomistEffect(final CircuDimirLobotomistEffect effect) {
+    private CircuDimirLobotomistEffect(final CircuDimirLobotomistEffect effect) {
         super(effect);
     }
 
@@ -106,7 +106,7 @@ class CircuDimirLobotomistRuleModifyingEffect extends ContinuousRuleModifyingEff
         staticText = "Your opponents can't cast spells with the same name as a card exiled with {this}";
     }
 
-    public CircuDimirLobotomistRuleModifyingEffect(final CircuDimirLobotomistRuleModifyingEffect effect) {
+    private CircuDimirLobotomistRuleModifyingEffect(final CircuDimirLobotomistRuleModifyingEffect effect) {
         super(effect);
     }
 

@@ -59,7 +59,7 @@ class BazaarOfWondersEffect extends OneShotEffect {
                 + "or a nontoken permanent with the same name is on the battlefield";
     }
 
-    public BazaarOfWondersEffect(final BazaarOfWondersEffect effect) {
+    private BazaarOfWondersEffect(final BazaarOfWondersEffect effect) {
         super(effect);
     }
 

@@ -71,7 +71,7 @@ class GrimoireOfTheDeadEffect extends OneShotEffect {
                 "They're black Zombies in addition to their other colors and types";
     }
 
-    public GrimoireOfTheDeadEffect(final GrimoireOfTheDeadEffect effect) {
+    private GrimoireOfTheDeadEffect(final GrimoireOfTheDeadEffect effect) {
         super(effect);
     }
 
@@ -107,7 +107,7 @@ class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl {
         super(Duration.Custom, Outcome.Neutral);
     }
 
-    public GrimoireOfTheDeadEffect2(final GrimoireOfTheDeadEffect2 effect) {
+    private GrimoireOfTheDeadEffect2(final GrimoireOfTheDeadEffect2 effect) {
         super(effect);
     }
 

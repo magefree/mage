@@ -53,7 +53,7 @@ class GrenzosRuffiansEffect extends OneShotEffect {
         this.staticText = "it deals that much damage to each other opponent";
     }
 
-    public GrenzosRuffiansEffect(final GrenzosRuffiansEffect effect) {
+    private GrenzosRuffiansEffect(final GrenzosRuffiansEffect effect) {
         super(effect);
     }
 

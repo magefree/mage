@@ -64,7 +64,7 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you discard a card, ");
     }
 
-    NecropotenceTriggeredAbility(final NecropotenceTriggeredAbility ability) {
+    private NecropotenceTriggeredAbility(final NecropotenceTriggeredAbility ability) {
         super(ability);
     }
 

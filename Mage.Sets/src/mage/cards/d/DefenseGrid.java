@@ -43,7 +43,7 @@ class DefenseGridCostModificationEffect extends CostModificationEffectImpl {
         staticText = "Each spell costs {3} more to cast except during its controller's turn";
     }
 
-    DefenseGridCostModificationEffect(DefenseGridCostModificationEffect effect) {
+    private DefenseGridCostModificationEffect(final DefenseGridCostModificationEffect effect) {
         super(effect);
     }
 

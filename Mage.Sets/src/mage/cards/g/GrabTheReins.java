@@ -72,7 +72,7 @@ class GrabTheReinsEffect extends OneShotEffect {
         staticText = "sacrifice a creature. {this} deals damage equal to that creature's power to any target";
     }
 
-    public GrabTheReinsEffect(final GrabTheReinsEffect effect) {
+    private GrabTheReinsEffect(final GrabTheReinsEffect effect) {
         super(effect);
     }
 

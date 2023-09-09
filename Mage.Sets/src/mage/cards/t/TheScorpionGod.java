@@ -116,7 +116,7 @@ class TheScorpionGodEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    TheScorpionGodEffect(TheScorpionGodEffect effect) {
+    private TheScorpionGodEffect(final TheScorpionGodEffect effect) {
         super(effect);
     }
 

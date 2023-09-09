@@ -79,7 +79,7 @@ class ChromiumTheMutableToken extends TokenImpl {
         addAbility(HexproofAbility.getInstance());
     }
 
-    public ChromiumTheMutableToken(final ChromiumTheMutableToken token) {
+    private ChromiumTheMutableToken(final ChromiumTheMutableToken token) {
         super(token);
     }
 

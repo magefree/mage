@@ -51,7 +51,7 @@ class ChangeColorEffect extends OneShotEffect {
         staticText = "Target permanent becomes the color of your choice until end of turn";
     }
 
-    public ChangeColorEffect(final ChangeColorEffect effect) {
+    private ChangeColorEffect(final ChangeColorEffect effect) {
         super(effect);
     }
 

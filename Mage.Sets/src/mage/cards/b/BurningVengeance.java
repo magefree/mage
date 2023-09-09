@@ -46,7 +46,7 @@ class BurningVengeanceOnCastAbility extends TriggeredAbilityImpl {
         this.addTarget(target);
     }
 
-    BurningVengeanceOnCastAbility(BurningVengeanceOnCastAbility ability) {
+    private BurningVengeanceOnCastAbility(final BurningVengeanceOnCastAbility ability) {
         super(ability);
     }
 

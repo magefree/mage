@@ -48,7 +48,7 @@ class HereticsPunishmentEffect extends OneShotEffect {
         staticText = "Choose any target, then mill three cards. {this} deals damage to that permanent or player equal to the highest mana value among the milled cards";
     }
 
-    public HereticsPunishmentEffect(final HereticsPunishmentEffect effect) {
+    private HereticsPunishmentEffect(final HereticsPunishmentEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class HaakonStromgaldScourgePlayEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard";
     }
 
-    public HaakonStromgaldScourgePlayEffect(final HaakonStromgaldScourgePlayEffect effect) {
+    private HaakonStromgaldScourgePlayEffect(final HaakonStromgaldScourgePlayEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class HaakonStromgaldScourgePlayEffect2 extends ContinuousRuleModifyingEffectImp
         staticText = ", but not from anywhere else";
     }
 
-    public HaakonStromgaldScourgePlayEffect2 (final HaakonStromgaldScourgePlayEffect2 effect) {
+    private HaakonStromgaldScourgePlayEffect2(final HaakonStromgaldScourgePlayEffect2 effect) {
         super(effect);
     }
 
@@ -132,7 +132,7 @@ class HaakonPlayKnightsFromGraveyardEffect extends AsThoughEffectImpl {
         staticText = "As long as {this} is on the battlefield, you may cast Knight spells from your graveyard";
     }
 
-    public HaakonPlayKnightsFromGraveyardEffect(final HaakonPlayKnightsFromGraveyardEffect effect) {
+    private HaakonPlayKnightsFromGraveyardEffect(final HaakonPlayKnightsFromGraveyardEffect effect) {
         super(effect);
     }
 

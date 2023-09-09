@@ -54,7 +54,7 @@ class ConcussiveBoltEffect extends OneShotEffect {
         this.staticText = "<br><i>Metalcraft</i> &mdash; If you control three or more artifacts, creatures controlled by that player or by that planeswalker's controller can't block this turn.";
     }
 
-    public ConcussiveBoltEffect(final ConcussiveBoltEffect effect) {
+    private ConcussiveBoltEffect(final ConcussiveBoltEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class ConcussiveBoltRestrictionEffect extends RestrictionEffect {
         super(Duration.EndOfTurn);
     }
 
-    public ConcussiveBoltRestrictionEffect(final ConcussiveBoltRestrictionEffect effect) {
+    private ConcussiveBoltRestrictionEffect(final ConcussiveBoltRestrictionEffect effect) {
         super(effect);
     }
 

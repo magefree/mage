@@ -52,7 +52,7 @@ class GuardianSeraphEffect extends PreventionEffectImpl {
         this.staticText = "If a source an opponent controls would deal damage to you, prevent 1 of that damage";
     }
 
-    public GuardianSeraphEffect(final GuardianSeraphEffect effect) {
+    private GuardianSeraphEffect(final GuardianSeraphEffect effect) {
         super(effect);
     }
 

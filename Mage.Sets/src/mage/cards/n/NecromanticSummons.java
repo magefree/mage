@@ -56,7 +56,7 @@ class NecromanticSummoningReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfStep, Outcome.BoostCreature);
     }
 
-    NecromanticSummoningReplacementEffect(NecromanticSummoningReplacementEffect effect) {
+    private NecromanticSummoningReplacementEffect(final NecromanticSummoningReplacementEffect effect) {
         super(effect);
     }
 

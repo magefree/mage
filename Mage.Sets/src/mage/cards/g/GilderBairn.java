@@ -57,7 +57,7 @@ class GilderBairnEffect extends OneShotEffect {
         this.staticText = "Double the number of each kind of counter on target permanent";
     }
 
-    public GilderBairnEffect(final GilderBairnEffect effect) {
+    private GilderBairnEffect(final GilderBairnEffect effect) {
         super(effect);
     }
 

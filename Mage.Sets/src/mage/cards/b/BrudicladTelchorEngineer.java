@@ -73,7 +73,7 @@ class BrudicladTelchorEngineerEffect extends OneShotEffect {
         this.staticText = "create a 2/1 blue Phyrexian Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token";
     }
 
-    public BrudicladTelchorEngineerEffect(final BrudicladTelchorEngineerEffect effect) {
+    private BrudicladTelchorEngineerEffect(final BrudicladTelchorEngineerEffect effect) {
         super(effect);
     }
 

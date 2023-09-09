@@ -50,7 +50,7 @@ class ElkinBottleExileEffect extends OneShotEffect {
         this.staticText = "Exile the top card of your library. Until the beginning of your next upkeep, you may play that card";
     }
 
-    public ElkinBottleExileEffect(final ElkinBottleExileEffect effect) {
+    private ElkinBottleExileEffect(final ElkinBottleExileEffect effect) {
         super(effect);
     }
 

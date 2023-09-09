@@ -49,7 +49,7 @@ class DesperateRavingsEffect extends OneShotEffect {
         this.staticText = "Draw two cards, then discard a card at random";
     }
 
-    public DesperateRavingsEffect(final DesperateRavingsEffect effect) {
+    private DesperateRavingsEffect(final DesperateRavingsEffect effect) {
         super(effect);
     }
 

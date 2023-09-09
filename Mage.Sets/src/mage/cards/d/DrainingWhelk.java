@@ -60,7 +60,7 @@ class DrainingWhelkEffect extends CounterTargetEffect {
         staticText = "counter target spell. Put X +1/+1 counters on Draining Whelk, where X is that spell's mana value";
     }
     
-    DrainingWhelkEffect(final DrainingWhelkEffect effect) {
+    private DrainingWhelkEffect(final DrainingWhelkEffect effect) {
         super(effect);
     }
     

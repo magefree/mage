@@ -40,7 +40,7 @@ public final class BladedPinions extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), new TargetControlledCreaturePermanent(), false));
     }
 
-    public BladedPinions(final BladedPinions card) {
+    private BladedPinions(final BladedPinions card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ class BrightflameEffect extends OneShotEffect {
         staticText = "{this} deals X damage to target creature and each other creature that shares a color with it. You gain life equal to the damage dealt this way.";
     }
 
-    BrightflameEffect(final BrightflameEffect effect) {
+    private BrightflameEffect(final BrightflameEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }

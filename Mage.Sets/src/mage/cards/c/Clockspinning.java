@@ -57,7 +57,7 @@ class ClockspinningAddOrRemoveCounterEffect extends OneShotEffect {
         this.staticText = "Choose a counter on target permanent or suspended card. Remove that counter from that permanent or card or put another of those counters on it";
     }
 
-    ClockspinningAddOrRemoveCounterEffect(final ClockspinningAddOrRemoveCounterEffect effect) {
+    private ClockspinningAddOrRemoveCounterEffect(final ClockspinningAddOrRemoveCounterEffect effect) {
         super(effect);
     }
 

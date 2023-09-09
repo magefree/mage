@@ -57,7 +57,7 @@ class FortuneThiefReplacementEffect extends ReplacementEffectImpl {
         staticText = "Damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }
 
-    public FortuneThiefReplacementEffect(final FortuneThiefReplacementEffect effect) {
+    private FortuneThiefReplacementEffect(final FortuneThiefReplacementEffect effect) {
         super(effect);
     }
 

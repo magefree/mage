@@ -58,7 +58,7 @@ class ArsenalThresherEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public ArsenalThresherEffect(final ArsenalThresherEffect effect) {
+    private ArsenalThresherEffect(final ArsenalThresherEffect effect) {
         super(effect);
     }
 

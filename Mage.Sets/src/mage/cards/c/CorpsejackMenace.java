@@ -58,7 +58,7 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
         staticText = "If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on it instead";
     }
 
-    CorpsejackMenaceReplacementEffect(final CorpsejackMenaceReplacementEffect effect) {
+    private CorpsejackMenaceReplacementEffect(final CorpsejackMenaceReplacementEffect effect) {
         super(effect);
     }
 

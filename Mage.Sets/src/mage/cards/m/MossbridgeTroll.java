@@ -67,7 +67,7 @@ class MossbridgeTrollReplacementEffect extends ReplacementEffectImpl {
         staticText = "If {this} would be destroyed, regenerate it";
     }
 
-    MossbridgeTrollReplacementEffect(MossbridgeTrollReplacementEffect effect) {
+    private MossbridgeTrollReplacementEffect(final MossbridgeTrollReplacementEffect effect) {
         super(effect);
     }
 

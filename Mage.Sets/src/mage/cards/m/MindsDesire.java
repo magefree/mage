@@ -47,7 +47,7 @@ class MindsDesireEffect extends OneShotEffect {
         this.staticText = "Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost";
     }
 
-    MindsDesireEffect(final MindsDesireEffect effect) {
+    private MindsDesireEffect(final MindsDesireEffect effect) {
         super(effect);
     }
 

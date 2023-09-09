@@ -31,7 +31,7 @@ public final class InfectiousHorror extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new InfectiousHorrorEffect(), false));
     }
 
-    public InfectiousHorror (final InfectiousHorror card) {
+    private InfectiousHorror(final InfectiousHorror card) {
         super(card);
     }
 
@@ -48,7 +48,7 @@ class InfectiousHorrorEffect extends OneShotEffect {
         staticText = "each opponent loses 2 life";
     }
 
-    InfectiousHorrorEffect(final InfectiousHorrorEffect effect) {
+    private InfectiousHorrorEffect(final InfectiousHorrorEffect effect) {
         super(effect);
     }
 

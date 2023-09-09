@@ -53,7 +53,7 @@ class TheMimeoplasmEffect extends OneShotEffect {
         super(Outcome.Copy);
     }
 
-    TheMimeoplasmEffect(final TheMimeoplasmEffect effect) {
+    private TheMimeoplasmEffect(final TheMimeoplasmEffect effect) {
         super(effect);
     }
 

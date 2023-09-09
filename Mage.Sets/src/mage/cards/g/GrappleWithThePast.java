@@ -55,7 +55,7 @@ class GrappleWithThePastEffect extends OneShotEffect {
         this.staticText = ", then you may return a creature or land card from your graveyard to your hand";
     }
 
-    public GrappleWithThePastEffect(final GrappleWithThePastEffect effect) {
+    private GrappleWithThePastEffect(final GrappleWithThePastEffect effect) {
         super(effect);
     }
 

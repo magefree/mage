@@ -62,7 +62,7 @@ class BloodOathEffect extends OneShotEffect {
         staticText = "Choose a card type. Target opponent reveals their hand. {this} deals 3 damage to that player for each card of the chosen type revealed this way";
     }
 
-    public BloodOathEffect(final BloodOathEffect effect) {
+    private BloodOathEffect(final BloodOathEffect effect) {
         super(effect);
     }
 

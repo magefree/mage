@@ -60,7 +60,7 @@ class GlissaSunseekerEffect extends OneShotEffect {
         this.staticText = "Destroy target artifact if its mana value is equal to the amount of unspent mana you have";
     }
 
-    public GlissaSunseekerEffect(final GlissaSunseekerEffect effect) {
+    private GlissaSunseekerEffect(final GlissaSunseekerEffect effect) {
         super(effect);
     }
 

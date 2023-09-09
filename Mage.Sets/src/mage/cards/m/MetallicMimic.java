@@ -63,7 +63,7 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
         setCharacterDefining(true);
     }
 
-    MetallicMimicReplacementEffect(MetallicMimicReplacementEffect effect) {
+    private MetallicMimicReplacementEffect(final MetallicMimicReplacementEffect effect) {
         super(effect);
     }
 
