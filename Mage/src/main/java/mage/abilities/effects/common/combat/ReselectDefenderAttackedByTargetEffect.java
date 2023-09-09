@@ -17,7 +17,12 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetDefender;
 
-public class ReselectDefenderTargetEffect extends OneShotEffect {
+/**
+ * See 508.7 in the CR for ruling details
+ * 
+ * @author Xanderhall
+ */
+public class ReselectDefenderAttackedByTargetEffect extends OneShotEffect {
     
     private final boolean includePermanents;
     private static final FilterPermanent filter = new FilterPermanent("permanent");
@@ -29,19 +34,19 @@ public class ReselectDefenderTargetEffect extends OneShotEffect {
         ));
     }
 
-    public ReselectDefenderTargetEffect(boolean includePermanents) {
+    public ReselectDefenderAttackedByTargetEffect(boolean includePermanents) {
         super(Outcome.Benefit);
         this.includePermanents = includePermanents;
     }
 
-    public ReselectDefenderTargetEffect(final ReselectDefenderTargetEffect effect) {
+    protected ReselectDefenderAttackedByTargetEffect(final ReselectDefenderAttackedByTargetEffect effect) {
         super(effect);
         this.includePermanents = effect.includePermanents;
     }
 
     @Override
-    public ReselectDefenderTargetEffect copy() {
-        return new ReselectDefenderTargetEffect(this);
+    public ReselectDefenderAttackedByTargetEffect copy() {
+        return new ReselectDefenderAttackedByTargetEffect(this);
     }
 
     @Override
@@ -51,7 +56,6 @@ public class ReselectDefenderTargetEffect extends OneShotEffect {
             return false;
         }
         
-        // Get combat group for attacking creatures.
         for (UUID id : getTargetPointer().getTargets(game, source)) {
 
             Permanent attackingCreature = game.getPermanent(id);
@@ -64,23 +68,18 @@ public class ReselectDefenderTargetEffect extends OneShotEffect {
                 continue;
             }
 
-            // Reselecting which player or permanent a creature is attacking ignores all requirements, restrictions, and costs associated with attacking.
+            // 508.7b: While reselecting which player, planeswalker, or battle a creature is attacking, 
+            // that creature isn't affected by requirements or restrictions that apply to the declaration of attackers.
 
-            // Players
-            Set<UUID> defenders = game.getCombat().getAttackablePlayers(game).stream().collect(Collectors.toSet());
+            // 508.7c. The reselected player, planeswalker, or battle must be an opponent of the attacking creature's controller, 
+            // a planeswalker controlled by an opponent of the attacking creature's controller, 
+            // or a battle protected by an opponent of the attacking creature's controller.
 
-            // Planeswalkers and Battles
-            if (includePermanents) {
-                game.getBattlefield().getAllActivePermanents(filter, game)
-                    .stream()
-                    .filter(p -> 
-                        (p.isPlaneswalker(game) && !p.isControlledBy(attackingCreature.getControllerId()))
-                        || (p.isBattle(game) && !p.isProtectedBy(attackingCreature.getControllerId())))
-                    .map(Permanent::getId)
-                    .forEach(defenders::add);                        
-            }
+            Set<UUID> defenders = includePermanents ?
+                game.getCombat().getDefenders() :
+                game.getCombat().getAttackablePlayers(game).stream().collect(Collectors.toSet());
 
-            // Select the new defender(s)
+            // Select the new defender
             TargetDefender defender = new TargetDefender(defenders);
             if (controller.chooseTarget(Outcome.Damage, defender, source, game)) {
                 UUID firstTarget = defender.getFirstTarget();

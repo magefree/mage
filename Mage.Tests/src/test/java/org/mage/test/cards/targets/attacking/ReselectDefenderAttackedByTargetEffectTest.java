@@ -7,7 +7,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
-public class ReselectDefenderTargetEffectTest extends CardTestCommander4Players {
+public class ReselectDefenderAttackedByTargetEffectTest extends CardTestCommander4Players {
     
     private static final String SIGNPOST = "Misleading Signpost";
     private static final String MAGE = "Portal Mage";

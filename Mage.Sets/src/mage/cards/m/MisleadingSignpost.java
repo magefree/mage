@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.combat.ReselectDefenderTargetEffect;
+import mage.abilities.effects.common.combat.ReselectDefenderAttackedByTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class MisleadingSignpost extends CardImpl {
 
         // When Misleading Signpost enters the battlefield during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking.
         Ability ability = new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReselectDefenderTargetEffect(true), true),
+                new EntersBattlefieldTriggeredAbility(new ReselectDefenderAttackedByTargetEffect(true), true),
                 new IsStepCondition(PhaseStep.DECLARE_ATTACKERS, false),
                 "When {this} enters the battlefield during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking. "
                 + "<i>(It can't attack its controller or their permanents)</i>");
