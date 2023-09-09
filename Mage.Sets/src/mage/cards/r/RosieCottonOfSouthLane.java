@@ -55,7 +55,7 @@ class RosieCottonOfSouthLaneTriggeredAbility extends TriggeredAbilityImpl {
 
     RosieCottonOfSouthLaneTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        this.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        this.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
     }
 
     private RosieCottonOfSouthLaneTriggeredAbility(final RosieCottonOfSouthLaneTriggeredAbility ability) {
