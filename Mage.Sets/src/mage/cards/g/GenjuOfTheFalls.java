@@ -72,7 +72,7 @@ public final class GenjuOfTheFalls extends CardImpl {
             addAbility(FlyingAbility.getInstance());
         }
 
-        public SpiritToken(final SpiritToken token) {
+        private SpiritToken(final SpiritToken token) {
             super(token);
         }
 

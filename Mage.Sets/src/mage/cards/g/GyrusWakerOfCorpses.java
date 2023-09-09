@@ -75,7 +75,7 @@ class GyrusWakerOfCorpsesEffect extends OneShotEffect {
         this.staticText = "exile target creature card with lesser power from your graveyard. If you do, create a token that's a copy of that card and that's tapped and attacking. Exile the token at the end of combat.";
     }
 
-    public GyrusWakerOfCorpsesEffect(final GyrusWakerOfCorpsesEffect effect) {
+    private GyrusWakerOfCorpsesEffect(final GyrusWakerOfCorpsesEffect effect) {
         super(effect);
     }
 

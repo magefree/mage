@@ -49,7 +49,7 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control dies, ");
     }
 
-    public GravePactTriggeredAbility(final GravePactTriggeredAbility ability) {
+    private GravePactTriggeredAbility(final GravePactTriggeredAbility ability) {
         super(ability);
     }
 
@@ -81,7 +81,7 @@ class GravePactEffect extends OneShotEffect {
         this.staticText = "each other player sacrifices a creature";
     }
 
-    public GravePactEffect(final GravePactEffect effect) {
+    private GravePactEffect(final GravePactEffect effect) {
         super(effect);
     }
 

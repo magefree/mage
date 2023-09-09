@@ -64,7 +64,7 @@ class GreyHostReinforcementsEffect extends OneShotEffect {
                 "on {this} equal to the number of creature cards exiled this way";
     }
 
-    public GreyHostReinforcementsEffect(final GreyHostReinforcementsEffect effect) {
+    private GreyHostReinforcementsEffect(final GreyHostReinforcementsEffect effect) {
         super(effect);
     }
 

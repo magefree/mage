@@ -68,7 +68,7 @@ class FlickerwispEffect extends OneShotEffect {
         staticText = "exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step";
     }
 
-    public FlickerwispEffect(final FlickerwispEffect effect) {
+    private FlickerwispEffect(final FlickerwispEffect effect) {
         super(effect);
     }
 

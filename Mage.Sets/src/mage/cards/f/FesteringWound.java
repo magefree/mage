@@ -57,7 +57,7 @@ class FesteringWoundEffect extends OneShotEffect {
         this.staticText = "{this} deals X damage to that player, where X is the number of infection counters on {this}";
     }
 
-    public FesteringWoundEffect(final FesteringWoundEffect effect) {
+    private FesteringWoundEffect(final FesteringWoundEffect effect) {
         super(effect);
     }
 

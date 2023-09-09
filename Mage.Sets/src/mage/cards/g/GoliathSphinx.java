@@ -25,7 +25,7 @@ public final class GoliathSphinx extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public GoliathSphinx (final GoliathSphinx card) {
+    private GoliathSphinx(final GoliathSphinx card) {
         super(card);
     }
 

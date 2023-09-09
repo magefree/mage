@@ -46,7 +46,7 @@ class FurnaceCelebrationAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you sacrifice another permanent, ");
     }
 
-    public FurnaceCelebrationAbility(final FurnaceCelebrationAbility ability) {
+    private FurnaceCelebrationAbility(final FurnaceCelebrationAbility ability) {
         super(ability);
     }
 

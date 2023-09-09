@@ -57,7 +57,7 @@ class FertileThicketEffect extends OneShotEffect {
         this.staticText = "you may look at the top five cards of your library. If you do, reveal up to one basic land card from among them, then put that card on top of your library and the rest on the bottom in any order";
     }
 
-    public FertileThicketEffect(final FertileThicketEffect effect) {
+    private FertileThicketEffect(final FertileThicketEffect effect) {
         super(effect);
     }
 

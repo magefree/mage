@@ -68,7 +68,7 @@ class GlamerSpinnersEffect extends OneShotEffect {
         staticText = "attach all Auras enchanting target permanent to another permanent with the same controller";
     }
 
-    public GlamerSpinnersEffect(final GlamerSpinnersEffect effect) {
+    private GlamerSpinnersEffect(final GlamerSpinnersEffect effect) {
         super(effect);
     }
 

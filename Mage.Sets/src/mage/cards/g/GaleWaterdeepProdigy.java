@@ -75,7 +75,7 @@ class GaleWaterdeepProdigyTriggeredAbility extends SpellCastControllerTriggeredA
         addWatcher(new CastFromHandWatcher());
     }
 
-    public GaleWaterdeepProdigyTriggeredAbility(GaleWaterdeepProdigyTriggeredAbility ability) {
+    private GaleWaterdeepProdigyTriggeredAbility(final GaleWaterdeepProdigyTriggeredAbility ability) {
         super(ability);
     }
 

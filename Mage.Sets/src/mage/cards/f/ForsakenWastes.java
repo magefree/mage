@@ -56,7 +56,7 @@ class ForsakenWastesTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(5), false);
     }
 
-    public ForsakenWastesTriggeredAbility(final ForsakenWastesTriggeredAbility ability) {
+    private ForsakenWastesTriggeredAbility(final ForsakenWastesTriggeredAbility ability) {
         super(ability);
     }
 

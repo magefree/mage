@@ -52,7 +52,7 @@ class FiligreeAngelEffect extends OneShotEffect {
         staticText = "you gain 3 life for each artifact you control";
     }
 
-    public FiligreeAngelEffect(final FiligreeAngelEffect effect) {
+    private FiligreeAngelEffect(final FiligreeAngelEffect effect) {
         super(effect);
     }
 

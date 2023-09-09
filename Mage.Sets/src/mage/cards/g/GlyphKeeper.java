@@ -60,7 +60,7 @@ class GlyphKeeperAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CounterTargetEffect(), false);
     }
 
-    public GlyphKeeperAbility(final GlyphKeeperAbility ability) {
+    private GlyphKeeperAbility(final GlyphKeeperAbility ability) {
         super(ability);
     }
 

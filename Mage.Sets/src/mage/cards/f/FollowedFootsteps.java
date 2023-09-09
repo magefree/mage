@@ -60,7 +60,7 @@ class FollowedFootstepsEffect extends OneShotEffect {
         this.staticText = "create a token that's a copy of enchanted creature";
     }
 
-    public FollowedFootstepsEffect(final FollowedFootstepsEffect effect) {
+    private FollowedFootstepsEffect(final FollowedFootstepsEffect effect) {
         super(effect);
     }
 

@@ -49,7 +49,7 @@ class GenesisWaveEffect extends OneShotEffect {
         staticText = "Reveal the top X cards of your library. You may put any number of permanent cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard";
     }
 
-    public GenesisWaveEffect(final GenesisWaveEffect effect) {
+    private GenesisWaveEffect(final GenesisWaveEffect effect) {
         super(effect);
     }
 

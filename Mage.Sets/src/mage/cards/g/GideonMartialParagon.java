@@ -80,7 +80,7 @@ class GideonMartialParagonToken extends TokenImpl {
 
         addAbility(IndestructibleAbility.getInstance());
     }
-    public GideonMartialParagonToken(final GideonMartialParagonToken token) {
+    private GideonMartialParagonToken(final GideonMartialParagonToken token) {
         super(token);
     }
 

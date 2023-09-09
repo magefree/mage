@@ -71,7 +71,7 @@ class GemstoneCavernsAbility extends StaticAbility implements OpeningHandAction 
         super(Zone.HAND, new GemstoneCavernsEffect());
     }
 
-    public GemstoneCavernsAbility(final GemstoneCavernsAbility ability) {
+    private GemstoneCavernsAbility(final GemstoneCavernsAbility ability) {
         super(ability);
     }
 

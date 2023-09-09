@@ -66,7 +66,7 @@ class GruesomeMenagerieEffect extends OneShotEffect {
                 + "Return those cards to the battlefield.";
     }
 
-    public GruesomeMenagerieEffect(final GruesomeMenagerieEffect effect) {
+    private GruesomeMenagerieEffect(final GruesomeMenagerieEffect effect) {
         super(effect);
     }
 

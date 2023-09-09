@@ -49,7 +49,7 @@ class GoblinLyreEffect extends OneShotEffect {
                 + "If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent or that planeswalker's controller controls";
     }
 
-    public GoblinLyreEffect(final GoblinLyreEffect effect) {
+    private GoblinLyreEffect(final GoblinLyreEffect effect) {
         super(effect);
     }
 

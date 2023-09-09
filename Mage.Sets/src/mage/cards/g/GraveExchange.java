@@ -52,7 +52,7 @@ class GraveExchangeEffect extends OneShotEffect {
         this.staticText = "Target player sacrifices a creature";
     }
 
-    public GraveExchangeEffect(final GraveExchangeEffect effect) {
+    private GraveExchangeEffect(final GraveExchangeEffect effect) {
         super(effect);
     }
 

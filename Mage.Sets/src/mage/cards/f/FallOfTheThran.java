@@ -61,7 +61,7 @@ class FallOfTheThranReturnEffect extends OneShotEffect {
         this.staticText = "each player returns two land cards from their graveyard to the battlefield";
     }
 
-    public FallOfTheThranReturnEffect(final FallOfTheThranReturnEffect effect) {
+    private FallOfTheThranReturnEffect(final FallOfTheThranReturnEffect effect) {
         super(effect);
     }
 

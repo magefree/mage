@@ -54,7 +54,7 @@ class GladehartCavalryTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control with a +1/+1 counter on it dies, ");
     }
 
-    public GladehartCavalryTriggeredAbility(final GladehartCavalryTriggeredAbility ability) {
+    private GladehartCavalryTriggeredAbility(final GladehartCavalryTriggeredAbility ability) {
         super(ability);
     }
 

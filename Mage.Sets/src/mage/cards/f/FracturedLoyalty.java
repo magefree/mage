@@ -98,7 +98,7 @@ public final class FracturedLoyalty extends CardImpl {
             super(Zone.BATTLEFIELD, new FracturedLoyaltyEffect(), false);
         }
 
-        public FracturedLoyaltyTriggeredAbility(final FracturedLoyaltyTriggeredAbility ability) {
+        private FracturedLoyaltyTriggeredAbility(final FracturedLoyaltyTriggeredAbility ability) {
             super(ability);
         }
 

@@ -53,7 +53,7 @@ class GrandMoffTarkinTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("At the beginning of each opponent's upkeep, ");
     }
 
-    public GrandMoffTarkinTriggeredAbility(final GrandMoffTarkinTriggeredAbility ability) {
+    private GrandMoffTarkinTriggeredAbility(final GrandMoffTarkinTriggeredAbility ability) {
         super(ability);
     }
 
@@ -91,7 +91,7 @@ class GrandMoffTarkinEffect extends OneShotEffect {
         this.staticText = "destroy target creature that that player controls unless that player pays 2 life. If a player pays life this way, draw a card";
     }
 
-    public GrandMoffTarkinEffect(final GrandMoffTarkinEffect effect) {
+    private GrandMoffTarkinEffect(final GrandMoffTarkinEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class GreatOakGuardianEffect extends ContinuousEffectImpl {
         staticText = "creatures target player controls get +2/+2 until end of turn";
     }
 
-    public GreatOakGuardianEffect(final GreatOakGuardianEffect effect) {
+    private GreatOakGuardianEffect(final GreatOakGuardianEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class GreatOakGuardianUntapEffect extends OneShotEffect {
         this.staticText = "untap them";
     }
 
-    public GreatOakGuardianUntapEffect(final GreatOakGuardianUntapEffect effect) {
+    private GreatOakGuardianUntapEffect(final GreatOakGuardianUntapEffect effect) {
         super(effect);
     }
 

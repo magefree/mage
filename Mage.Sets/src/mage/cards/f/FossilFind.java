@@ -43,7 +43,7 @@ class FossilFindEffect extends OneShotEffect {
         this.staticText = "Return a card at random from your graveyard to your hand, then reorder your graveyard as you choose";
     }
 
-    public FossilFindEffect(final FossilFindEffect effect) {
+    private FossilFindEffect(final FossilFindEffect effect) {
         super(effect);
     }
 

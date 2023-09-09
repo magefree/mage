@@ -57,7 +57,7 @@ class GriefTyrantEffect extends OneShotEffect {
         this.staticText = "put a -1/-1 counter on target creature for each -1/-1 counter on {this}";
     }
     
-    public GriefTyrantEffect(final GriefTyrantEffect effect) {
+    private GriefTyrantEffect(final GriefTyrantEffect effect) {
         super(effect);
     }
     

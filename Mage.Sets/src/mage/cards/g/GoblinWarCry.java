@@ -90,7 +90,7 @@ class GoblinWarCryRestrictionEffect extends RestrictionEffect {
         this.targetId = targetId;
     }
 
-    public GoblinWarCryRestrictionEffect(final GoblinWarCryRestrictionEffect effect) {
+    private GoblinWarCryRestrictionEffect(final GoblinWarCryRestrictionEffect effect) {
         super(effect);
         targetId = effect.targetId;
     }

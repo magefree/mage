@@ -50,7 +50,7 @@ class FortunateFewEffect extends OneShotEffect {
         staticText = "Choose a nonland permanent you don't control, then each other player chooses a nonland permanent they don't control that hasn't been chosen this way. Destroy all other nonland permanents";
     }
 
-    public FortunateFewEffect(FortunateFewEffect effect) {
+    private FortunateFewEffect(final FortunateFewEffect effect) {
         super(effect);
     }
 

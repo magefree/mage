@@ -28,7 +28,7 @@ public final class GolemFoundry extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GolemToken()), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3))));
     }
 
-    public GolemFoundry (final GolemFoundry card) {
+    private GolemFoundry(final GolemFoundry card) {
         super(card);
     }
 

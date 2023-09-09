@@ -64,7 +64,7 @@ class FirestormEffect extends OneShotEffect {
         staticText = "{this} deals X damage to each of X targets";
     }
 
-    public FirestormEffect(final FirestormEffect effect) {
+    private FirestormEffect(final FirestormEffect effect) {
         super(effect);
     }
 

@@ -61,7 +61,7 @@ public final class GlissaSunslayer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GlissaSunslayer(final GlissaSunslayer card) {
+    private GlissaSunslayer(final GlissaSunslayer card) {
         super(card);
     }
 

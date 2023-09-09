@@ -61,7 +61,7 @@ class FrostTitanAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(2)), false);
     }
 
-    public FrostTitanAbility(final FrostTitanAbility ability) {
+    private FrostTitanAbility(final FrostTitanAbility ability) {
         super(ability);
     }
 

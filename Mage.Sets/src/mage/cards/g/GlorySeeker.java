@@ -24,7 +24,7 @@ public final class GlorySeeker extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public GlorySeeker (final GlorySeeker card) {
+    private GlorySeeker(final GlorySeeker card) {
         super(card);
     }
 

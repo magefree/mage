@@ -55,7 +55,7 @@ class GhazbanOgreEffect extends OneShotEffect {
         this.staticText = "the player with the most life gains control of {this}";
     }
 
-    public GhazbanOgreEffect(final GhazbanOgreEffect effect) {
+    private GhazbanOgreEffect(final GhazbanOgreEffect effect) {
         super(effect);
     }
 

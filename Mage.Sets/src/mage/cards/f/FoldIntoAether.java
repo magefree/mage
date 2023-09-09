@@ -47,7 +47,7 @@ class FoldIntoAetherEffect extends OneShotEffect {
         this.staticText = "Counter target spell. If that spell is countered this way, its controller may put a creature card from their hand onto the battlefield";
     }
 
-    public FoldIntoAetherEffect(final FoldIntoAetherEffect effect) {
+    private FoldIntoAetherEffect(final FoldIntoAetherEffect effect) {
         super(effect);
     }
 

@@ -74,7 +74,7 @@ class FeySteedTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public FeySteedTriggeredAbility(FeySteedTriggeredAbility ability) {
+    private FeySteedTriggeredAbility(final FeySteedTriggeredAbility ability) {
         super(ability);
     }
 

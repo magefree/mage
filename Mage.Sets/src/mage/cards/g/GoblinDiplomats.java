@@ -51,7 +51,7 @@ class GoblinDiplomatsEffect extends RequirementEffect {
         this.staticText = "Each creature attacks this turn if able";
     }
 
-    public GoblinDiplomatsEffect(final GoblinDiplomatsEffect effect) {
+    private GoblinDiplomatsEffect(final GoblinDiplomatsEffect effect) {
         super(effect);
     }
 

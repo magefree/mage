@@ -55,7 +55,7 @@ class FeedThePackEffect extends OneShotEffect {
         this.staticText = "sacrifice a nontoken creature. If you do, create X 2/2 green Wolf creature tokens, where X is the sacrificed creature's toughness";
     }
 
-    public FeedThePackEffect(final FeedThePackEffect effect) {
+    private FeedThePackEffect(final FeedThePackEffect effect) {
         super(effect);
     }
 

@@ -60,7 +60,7 @@ class FulfillContractEffect extends OneShotEffect {
         this.staticText = "Destroy target creature with a bounty counter on it. If that creature is destroyed this way, you may put a +1/+1 counter on target Rogue or Hunter you control";
     }
 
-    public FulfillContractEffect(final FulfillContractEffect effect) {
+    private FulfillContractEffect(final FulfillContractEffect effect) {
         super(effect);
     }
 

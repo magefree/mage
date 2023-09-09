@@ -65,7 +65,7 @@ class ForiysianTotemToken extends TokenImpl {
         toughness = new MageInt(4);
         this.addAbility(TrampleAbility.getInstance());
     }
-    public ForiysianTotemToken(final ForiysianTotemToken token) {
+    private ForiysianTotemToken(final ForiysianTotemToken token) {
         super(token);
     }
 
