@@ -87,6 +87,7 @@ public final class TheBrothersWarCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 31, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Izzet Boilerworks", 188, Rarity.UNCOMMON, mage.cards.i.IzzetBoilerworks.class));
         cards.add(new SetCardInfo("Jhoira, Weatherlight Captain", 126, Rarity.MYTHIC, mage.cards.j.JhoiraWeatherlightCaptain.class));
+        cards.add(new SetCardInfo("Kayla's Music Box", 15, Rarity.RARE, mage.cards.k.KaylasMusicBox.class));
         cards.add(new SetCardInfo("Liquimetal Torque", 145, Rarity.UNCOMMON, mage.cards.l.LiquimetalTorque.class));
         cards.add(new SetCardInfo("Lithoform Engine", 146, Rarity.MYTHIC, mage.cards.l.LithoformEngine.class));
         cards.add(new SetCardInfo("Losheel, Clockwork Scholar", 73, Rarity.RARE, mage.cards.l.LosheelClockworkScholar.class));
