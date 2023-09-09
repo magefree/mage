@@ -50,7 +50,7 @@ class ClamavusEffect extends ContinuousEffectImpl {
         this.staticText = "each creature you control gets +1/+1 for each +1/+1 counter on it";
     }
 
-    public ClamavusEffect(final ClamavusEffect effect) {
+    private ClamavusEffect(final ClamavusEffect effect) {
         super(effect);
     }
 

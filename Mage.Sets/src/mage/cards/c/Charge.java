@@ -19,7 +19,7 @@ public final class Charge extends CardImpl {
     }
 
 
-    public Charge(final Charge charge){
+    private Charge(final Charge charge){
         super(charge);
     }
 

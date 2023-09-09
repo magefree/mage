@@ -48,7 +48,7 @@ class CallToHeelEffect extends OneShotEffect {
         this.staticText = "Its controller draws a card";
     }
 
-    public CallToHeelEffect(final CallToHeelEffect effect) {
+    private CallToHeelEffect(final CallToHeelEffect effect) {
         super(effect);
     }
 

@@ -131,7 +131,7 @@ class ChooseCreatureTypeEffect extends OneShotEffect {
         staticText = "choose a creature type";
     }
 
-    public ChooseCreatureTypeEffect(final ChooseCreatureTypeEffect effect) {
+    private ChooseCreatureTypeEffect(final ChooseCreatureTypeEffect effect) {
         super(effect);
     }
 

@@ -67,7 +67,7 @@ class CreepingInnEffect extends OneShotEffect {
                 "where X is the number of creature cards exiled with Creeping Inn.";
     }
 
-    public CreepingInnEffect(final CreepingInnEffect effect) {
+    private CreepingInnEffect(final CreepingInnEffect effect) {
         super(effect);
     }
 

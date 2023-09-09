@@ -57,7 +57,7 @@ class CabalTherapyEffect extends OneShotEffect {
         staticText = "Target player reveals their hand and discards all cards with that name";
     }
 
-    public CabalTherapyEffect(final CabalTherapyEffect effect) {
+    private CabalTherapyEffect(final CabalTherapyEffect effect) {
         super(effect);
     }
 

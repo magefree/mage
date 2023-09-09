@@ -42,7 +42,7 @@ class ChameleonBlurEffect extends PreventionEffectImpl {
         staticText = "prevent all damage that creatures would deal to players this turn";
     }
 
-    public ChameleonBlurEffect(final ChameleonBlurEffect effect) {
+    private ChameleonBlurEffect(final ChameleonBlurEffect effect) {
         super(effect);
     }
 

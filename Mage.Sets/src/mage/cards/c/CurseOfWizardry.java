@@ -51,7 +51,7 @@ class CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility extends Trigger
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
     }
 
-    public CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility(final CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility ability) {
+    private CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility(final CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility ability) {
         super(ability);
     }
 

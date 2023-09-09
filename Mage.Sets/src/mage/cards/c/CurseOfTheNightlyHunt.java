@@ -54,7 +54,7 @@ class CurseOfTheNightlyHuntEffect extends RequirementEffect {
         staticText = "Creatures enchanted player controls attack each turn if able";
     }
 
-    public CurseOfTheNightlyHuntEffect(final CurseOfTheNightlyHuntEffect effect) {
+    private CurseOfTheNightlyHuntEffect(final CurseOfTheNightlyHuntEffect effect) {
         super(effect);
     }
 

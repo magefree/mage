@@ -62,7 +62,7 @@ class ChoArrimAlchemistEffect extends PreventionEffectImpl {
         this.target = new TargetSource();
     }
 
-    public ChoArrimAlchemistEffect(final ChoArrimAlchemistEffect effect) {
+    private ChoArrimAlchemistEffect(final ChoArrimAlchemistEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }

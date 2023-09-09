@@ -64,7 +64,7 @@ class SacrificeSourceBeginningCleanupStepEffect extends OneShotEffect {
         this.staticText = "sacrifice {this} at the beginning of the next cleanup step";
     }
 
-    public SacrificeSourceBeginningCleanupStepEffect(final SacrificeSourceBeginningCleanupStepEffect effect) {
+    private SacrificeSourceBeginningCleanupStepEffect(final SacrificeSourceBeginningCleanupStepEffect effect) {
         super(effect);
     }
 

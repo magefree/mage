@@ -64,7 +64,7 @@ class CrownOfTheAgesEffect extends OneShotEffect {
         this.staticText = "Attach target Aura attached to a creature to another creature";
     }
 
-    public CrownOfTheAgesEffect(final CrownOfTheAgesEffect effect) {
+    private CrownOfTheAgesEffect(final CrownOfTheAgesEffect effect) {
         super(effect);
     }
 

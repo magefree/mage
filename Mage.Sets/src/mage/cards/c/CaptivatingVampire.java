@@ -69,7 +69,7 @@ class CaptivatingVampireEffect extends ContinuousEffectImpl {
         staticText = "Gain control of target creature. It becomes a Vampire in addition to its other types";
     }
 
-    public CaptivatingVampireEffect(final CaptivatingVampireEffect effect) {
+    private CaptivatingVampireEffect(final CaptivatingVampireEffect effect) {
         super(effect);
     }
 

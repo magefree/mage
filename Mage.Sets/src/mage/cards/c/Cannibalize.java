@@ -49,7 +49,7 @@ class CannibalizeEffect extends OneShotEffect {
                 "Exile one of the creatures and put two +1/+1 counters on the other";
     }
 
-    public CannibalizeEffect(final CannibalizeEffect effect) {
+    private CannibalizeEffect(final CannibalizeEffect effect) {
         super(effect);
     }
 

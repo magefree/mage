@@ -46,7 +46,7 @@ class CountermandEffect extends OneShotEffect {
         staticText = "Counter target spell. Its controller mills four cards.";
     }
 
-    public CountermandEffect(final CountermandEffect effect) {
+    private CountermandEffect(final CountermandEffect effect) {
         super(effect);
     }
 

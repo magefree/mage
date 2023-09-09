@@ -48,7 +48,7 @@ class ConsignToDreamEffect extends OneShotEffect {
         this.staticText = "Return target permanent to its owner's hand. If that permanent is red or green, put it on top of its owner's library instead";
     }
 
-    public ConsignToDreamEffect(final ConsignToDreamEffect effect) {
+    private ConsignToDreamEffect(final ConsignToDreamEffect effect) {
         super(effect);
     }
 

@@ -46,7 +46,7 @@ class CunningRhetoricTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CunningRhetoricEffect(), false);
     }
 
-    public CunningRhetoricTriggeredAbility(final CunningRhetoricTriggeredAbility ability) {
+    private CunningRhetoricTriggeredAbility(final CunningRhetoricTriggeredAbility ability) {
         super(ability);
     }
 

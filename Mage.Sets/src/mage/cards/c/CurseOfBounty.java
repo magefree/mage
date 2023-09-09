@@ -109,7 +109,7 @@ class UntapAllNonlandsTargetEffect extends OneShotEffect {
         super(Outcome.Untap);
     }
 
-    public UntapAllNonlandsTargetEffect(final UntapAllNonlandsTargetEffect effect) {
+    private UntapAllNonlandsTargetEffect(final UntapAllNonlandsTargetEffect effect) {
         super(effect);
     }
 

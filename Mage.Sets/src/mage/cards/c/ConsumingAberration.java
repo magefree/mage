@@ -55,7 +55,7 @@ class ConsumingAberrationEffect extends OneShotEffect {
         this.staticText = "each opponent reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard";
     }
 
-    public ConsumingAberrationEffect(final ConsumingAberrationEffect effect) {
+    private ConsumingAberrationEffect(final ConsumingAberrationEffect effect) {
         super(effect);
     }
 

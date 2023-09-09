@@ -73,7 +73,7 @@ class ConsumingFerocityEffect extends OneShotEffect {
         staticText = "If that creature has three or more +1/+0 counters on it, it deals damage equal to its power to its controller, then destroy that creature and it can't be regenerated";
     }
 
-    public ConsumingFerocityEffect(final ConsumingFerocityEffect effect) {
+    private ConsumingFerocityEffect(final ConsumingFerocityEffect effect) {
         super(effect);
     }
 
