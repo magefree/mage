@@ -59,7 +59,7 @@ class GripOfPhyresisEffect extends CreateTokenEffect {
         staticText = ", then " + staticText + " and attach that Equipment to it";
     }
 
-    GripOfPhyresisEffect(final GripOfPhyresisEffect effect) {
+    private GripOfPhyresisEffect(final GripOfPhyresisEffect effect) {
         super(effect);
     }
 

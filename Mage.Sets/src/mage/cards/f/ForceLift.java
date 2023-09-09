@@ -53,7 +53,7 @@ class ForceLiftEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    ForceLiftEffect(ForceLiftEffect effect) {
+    private ForceLiftEffect(final ForceLiftEffect effect) {
         super(effect);
     }
 

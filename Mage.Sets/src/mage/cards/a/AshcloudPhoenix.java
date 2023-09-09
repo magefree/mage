@@ -64,7 +64,7 @@ class AshcloudPhoenixEffect extends OneShotEffect {
         this.staticText = "return it to the battlefield face down under your control";
     }
 
-    AshcloudPhoenixEffect(final AshcloudPhoenixEffect effect) {
+    private AshcloudPhoenixEffect(final AshcloudPhoenixEffect effect) {
         super(effect);
     }
 

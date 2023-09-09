@@ -56,7 +56,7 @@ class DawningPuristTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
     }
 
-    DawningPuristTriggeredAbility(final DawningPuristTriggeredAbility ability) {
+    private DawningPuristTriggeredAbility(final DawningPuristTriggeredAbility ability) {
         super(ability);
     }
 

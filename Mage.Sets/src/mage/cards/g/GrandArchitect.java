@@ -116,7 +116,7 @@ class GrandArchitectManaAbility extends ActivatedManaAbilityImpl {
         this.filter = filter;
     }
 
-    GrandArchitectManaAbility(GrandArchitectManaAbility ability) {
+    private GrandArchitectManaAbility(final GrandArchitectManaAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
     }

@@ -112,7 +112,7 @@ class TokTokVolcanoBornEffect extends ReplacementEffectImpl {
         staticText = "If a red source would deal damage to a player, it deals that much damage plus 1 to that player instead";
     }
 
-    TokTokVolcanoBornEffect(final TokTokVolcanoBornEffect effect) {
+    private TokTokVolcanoBornEffect(final TokTokVolcanoBornEffect effect) {
         super(effect);
     }
 

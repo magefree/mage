@@ -44,7 +44,7 @@ class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new UntapTargetEffect());
     }
 
-    AmuletOfVigorTriggeredAbility(final AmuletOfVigorTriggeredAbility ability) {
+    private AmuletOfVigorTriggeredAbility(final AmuletOfVigorTriggeredAbility ability) {
         super(ability);
     }
 

@@ -109,7 +109,7 @@ class GemstoneCavernsEffect extends OneShotEffect {
         this.staticText = "you may begin the game with {this} on the battlefield with a luck counter on it. If you do, exile a card from your hand";
     }
 
-    GemstoneCavernsEffect(final GemstoneCavernsEffect effect) {
+    private GemstoneCavernsEffect(final GemstoneCavernsEffect effect) {
         super(effect);
     }
 

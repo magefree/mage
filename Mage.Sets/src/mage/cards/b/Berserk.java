@@ -68,7 +68,7 @@ class BerserkReplacementEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Cast this spell only before the combat damage step";
     }
 
-    BerserkReplacementEffect(final BerserkReplacementEffect effect) {
+    private BerserkReplacementEffect(final BerserkReplacementEffect effect) {
         super(effect);
     }
 

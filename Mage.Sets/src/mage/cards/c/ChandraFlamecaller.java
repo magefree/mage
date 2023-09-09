@@ -90,7 +90,7 @@ class ChandraDrawEffect extends OneShotEffect {
         this.staticText = "Discard all the cards in your hand, then draw that many cards plus one";
     }
 
-    ChandraDrawEffect(final ChandraDrawEffect effect) {
+    private ChandraDrawEffect(final ChandraDrawEffect effect) {
         super(effect);
     }
 

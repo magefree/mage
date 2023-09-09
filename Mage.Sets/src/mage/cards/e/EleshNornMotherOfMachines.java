@@ -54,7 +54,7 @@ class EleshNornMotherOfMachinesPreventionEffect extends ContinuousRuleModifyingE
         staticText = "Permanents entering the battlefield don't cause abilities of permanents your opponents control to trigger";
     }
 
-    EleshNornMotherOfMachinesPreventionEffect(final EleshNornMotherOfMachinesPreventionEffect effect) {
+    private EleshNornMotherOfMachinesPreventionEffect(final EleshNornMotherOfMachinesPreventionEffect effect) {
         super(effect);
     }
 

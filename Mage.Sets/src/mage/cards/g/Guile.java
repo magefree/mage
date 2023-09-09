@@ -61,7 +61,7 @@ class GuileReplacementEffect extends ReplacementEffectImpl {
                 + "instead exile that spell and you may play that card without paying its mana cost";
     }
 
-    GuileReplacementEffect(final GuileReplacementEffect effect) {
+    private GuileReplacementEffect(final GuileReplacementEffect effect) {
         super(effect);
     }
 

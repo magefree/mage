@@ -49,7 +49,7 @@ class DrafnasRestorationTarget extends TargetCardInGraveyard {
         super(0, Integer.MAX_VALUE, new FilterArtifactCard("any number of artifact cards from that player's graveyard"));
     }
 
-    DrafnasRestorationTarget(final DrafnasRestorationTarget target) {
+    private DrafnasRestorationTarget(final DrafnasRestorationTarget target) {
         super(target);
     }
 
@@ -89,7 +89,7 @@ class DrafnasRestorationEffect extends OneShotEffect {
         this.staticText = "Put any number of target artifact cards from target player's graveyard on top of their library in any order.";
     }
 
-    DrafnasRestorationEffect(final DrafnasRestorationEffect effect) {
+    private DrafnasRestorationEffect(final DrafnasRestorationEffect effect) {
         super(effect);
     }
 

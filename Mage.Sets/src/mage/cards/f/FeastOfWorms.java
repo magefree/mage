@@ -56,7 +56,7 @@ class FeastOfWormsEffect extends OneShotEffect {
         staticText = "If that land was legendary, its controller sacrifices another land";
     }
 
-    FeastOfWormsEffect(FeastOfWormsEffect effect) {
+    private FeastOfWormsEffect(final FeastOfWormsEffect effect) {
         super(effect);
     }
 

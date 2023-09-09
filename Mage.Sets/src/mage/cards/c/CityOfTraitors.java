@@ -47,7 +47,7 @@ class CityOfTraitorsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
-    CityOfTraitorsTriggeredAbility(CityOfTraitorsTriggeredAbility ability) {
+    private CityOfTraitorsTriggeredAbility(final CityOfTraitorsTriggeredAbility ability) {
         super(ability);
     }
 

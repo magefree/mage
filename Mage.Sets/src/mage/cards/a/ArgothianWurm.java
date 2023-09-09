@@ -55,7 +55,7 @@ class ArgothianWurmEffect extends PutOnLibrarySourceEffect {
         this.staticText = "any player may sacrifice a land. If a player does, put {this} on top of its owner's library";
     }
     
-    ArgothianWurmEffect(final ArgothianWurmEffect effect) {
+    private ArgothianWurmEffect(final ArgothianWurmEffect effect) {
         super(effect);
     }
     

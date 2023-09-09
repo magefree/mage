@@ -61,7 +61,7 @@ class GisaAndGeralfCastFromGraveyardEffect extends AsThoughEffectImpl {
         staticText = "During each of your turns, you may cast a Zombie creature spell from your graveyard";
     }
 
-    GisaAndGeralfCastFromGraveyardEffect(final GisaAndGeralfCastFromGraveyardEffect effect) {
+    private GisaAndGeralfCastFromGraveyardEffect(final GisaAndGeralfCastFromGraveyardEffect effect) {
         super(effect);
     }
 

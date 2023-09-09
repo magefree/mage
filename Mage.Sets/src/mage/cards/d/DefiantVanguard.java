@@ -79,7 +79,7 @@ class DefiantVanguardTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    DefiantVanguardTriggeredAbility(final DefiantVanguardTriggeredAbility ability) {
+    private DefiantVanguardTriggeredAbility(final DefiantVanguardTriggeredAbility ability) {
         super(ability);
     }
 

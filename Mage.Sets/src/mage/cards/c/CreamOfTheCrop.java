@@ -59,7 +59,7 @@ class CreamOfTheCropEffect extends OneShotEffect {
                 + "rest on the bottom of your library in any order";
     }
 
-    CreamOfTheCropEffect(final CreamOfTheCropEffect effect) {
+    private CreamOfTheCropEffect(final CreamOfTheCropEffect effect) {
         super(effect);
     }
 

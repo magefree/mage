@@ -65,7 +65,7 @@ class CelestialDawnToPlainsEffect extends ContinuousEffectImpl {
         this.staticText = "Lands you control are Plains";
     }
 
-    CelestialDawnToPlainsEffect(final CelestialDawnToPlainsEffect effect) {
+    private CelestialDawnToPlainsEffect(final CelestialDawnToPlainsEffect effect) {
         super(effect);
     }
 

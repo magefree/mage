@@ -153,7 +153,7 @@ class AzorTheLawbringerAttacksEffect extends OneShotEffect {
         staticText = "you may pay {X}{W}{U}{U}. If you do, you gain X life and draw X cards";
     }
 
-    AzorTheLawbringerAttacksEffect(final AzorTheLawbringerAttacksEffect effect) {
+    private AzorTheLawbringerAttacksEffect(final AzorTheLawbringerAttacksEffect effect) {
         super(effect);
     }
 

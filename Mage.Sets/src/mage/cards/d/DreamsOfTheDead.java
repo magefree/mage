@@ -105,7 +105,7 @@ class DreamsOfTheDeadReplacementEffect extends ReplacementEffectImpl {
         staticText = "If the creature would leave the battlefield, exile it instead of putting it anywhere else";
     }
 
-    DreamsOfTheDeadReplacementEffect(final DreamsOfTheDeadReplacementEffect effect) {
+    private DreamsOfTheDeadReplacementEffect(final DreamsOfTheDeadReplacementEffect effect) {
         super(effect);
     }
 

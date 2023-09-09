@@ -59,7 +59,7 @@ class CurseOfVerbosityEffect extends OneShotEffect {
         this.staticText = "you draw a card. Each opponent attacking that player does the same.";
     }
 
-    CurseOfVerbosityEffect(final CurseOfVerbosityEffect effect) {
+    private CurseOfVerbosityEffect(final CurseOfVerbosityEffect effect) {
         super(effect);
     }
 

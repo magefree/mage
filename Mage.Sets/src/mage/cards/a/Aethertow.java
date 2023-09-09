@@ -51,7 +51,7 @@ class AethertowEffect extends OneShotEffect {
         staticText = "Put target attacking or blocking creature on top of its owner's library";
     }
 
-    AethertowEffect(final AethertowEffect effect) {
+    private AethertowEffect(final AethertowEffect effect) {
         super(effect);
     }
 

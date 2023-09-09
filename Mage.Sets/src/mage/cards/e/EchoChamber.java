@@ -56,7 +56,7 @@ class EchoChamberCreateTokenEffect extends OneShotEffect {
         this.staticText = "An opponent chooses target creature they control. Create a token that's a copy of that creature. That token gains haste until end of turn. Exile the token at the beginning of the next end step";
     }
 
-    EchoChamberCreateTokenEffect(final EchoChamberCreateTokenEffect effect) {
+    private EchoChamberCreateTokenEffect(final EchoChamberCreateTokenEffect effect) {
         super(effect);
     }
 

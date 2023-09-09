@@ -52,7 +52,7 @@ class CleansingBeamEffect extends OneShotEffect {
         staticText = "{this} deals 2 damage to target creature and each other creature that shares a color with it";
     }
 
-    CleansingBeamEffect(final CleansingBeamEffect effect) {
+    private CleansingBeamEffect(final CleansingBeamEffect effect) {
         super(effect);
     }
 

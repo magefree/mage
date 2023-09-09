@@ -135,7 +135,7 @@ class DarigaazReincarnatedReturnEffect extends OneShotEffect {
         this.staticText = "";
     }
 
-    DarigaazReincarnatedReturnEffect(final DarigaazReincarnatedReturnEffect effect) {
+    private DarigaazReincarnatedReturnEffect(final DarigaazReincarnatedReturnEffect effect) {
         super(effect);
     }
 

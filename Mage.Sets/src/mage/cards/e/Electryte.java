@@ -50,7 +50,7 @@ class ElectryteTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredAbili
         super(new ElectryteEffect(), false);
     }
 
-    ElectryteTriggeredAbility(final ElectryteTriggeredAbility effect) {
+    private ElectryteTriggeredAbility(final ElectryteTriggeredAbility effect) {
         super(effect);
     }
 

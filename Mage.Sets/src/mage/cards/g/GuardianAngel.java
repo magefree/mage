@@ -103,7 +103,7 @@ class GuardianAngelAction extends SpecialAction {
         this.addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1));
     }
 
-    GuardianAngelAction(final GuardianAngelAction ability) {
+    private GuardianAngelAction(final GuardianAngelAction ability) {
         super(ability);
     }
 
@@ -121,7 +121,7 @@ class GuardianAngelDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.setRuleVisible(false);
     }
 
-    GuardianAngelDelayedTriggeredAbility(GuardianAngelDelayedTriggeredAbility ability) {
+    private GuardianAngelDelayedTriggeredAbility(final GuardianAngelDelayedTriggeredAbility ability) {
         super(ability);
     }
 

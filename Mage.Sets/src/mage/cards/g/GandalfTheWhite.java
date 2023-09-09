@@ -67,7 +67,7 @@ class GandalfTheWhiteDoublingEffect extends ReplacementEffectImpl {
         staticText = "If a legendary permanent or an artifact entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.";
     }
 
-    GandalfTheWhiteDoublingEffect(final GandalfTheWhiteDoublingEffect effect) {
+    private GandalfTheWhiteDoublingEffect(final GandalfTheWhiteDoublingEffect effect) {
         super(effect);
     }
 

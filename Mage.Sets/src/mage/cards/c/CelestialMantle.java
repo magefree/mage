@@ -99,7 +99,7 @@ class CelestialMantleEffect extends OneShotEffect {
         super(Outcome.GainLife);
     }
 
-    CelestialMantleEffect(final CelestialMantleEffect effect) {
+    private CelestialMantleEffect(final CelestialMantleEffect effect) {
         super(effect);
     }
 

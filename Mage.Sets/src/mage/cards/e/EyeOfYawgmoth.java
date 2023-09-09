@@ -57,7 +57,7 @@ class EyeOfYawgmothEffect extends OneShotEffect {
         this.staticText = "Reveal a number of cards from the top of your library equal to the sacrificed creature's power. Put one into your hand and exile the rest";
     }
 
-    EyeOfYawgmothEffect(final EyeOfYawgmothEffect effect) {
+    private EyeOfYawgmothEffect(final EyeOfYawgmothEffect effect) {
         super(effect);
     }
 

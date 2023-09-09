@@ -45,7 +45,7 @@ class BlackSunsZenithEffect extends OneShotEffect {
         staticText = "Put X -1/-1 counters on each creature";
     }
 
-    BlackSunsZenithEffect(final BlackSunsZenithEffect effect) {
+    private BlackSunsZenithEffect(final BlackSunsZenithEffect effect) {
         super(effect);
     }
 

@@ -51,7 +51,7 @@ class BloodFrenzyCastRestriction extends ContinuousRuleModifyingEffectImpl {
         staticText = "Cast this spell only before the combat damage step";
     }
 
-    BloodFrenzyCastRestriction(final BloodFrenzyCastRestriction effect) {
+    private BloodFrenzyCastRestriction(final BloodFrenzyCastRestriction effect) {
         super(effect);
     }
 

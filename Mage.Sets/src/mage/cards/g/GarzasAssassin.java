@@ -60,7 +60,7 @@ class GarzasAssassinCost extends CostImpl {
         this.text = "Pay half your life, rounded up";
     }
 
-    GarzasAssassinCost(GarzasAssassinCost cost) {
+    private GarzasAssassinCost(final GarzasAssassinCost cost) {
         super(cost);
     }
 

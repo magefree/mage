@@ -56,7 +56,7 @@ class PunishmentEffect extends OneShotEffect {
         this.staticText = "Destroy each artifact, creature, and enchantment with mana value X";
     }
 
-    PunishmentEffect(final PunishmentEffect effect) {
+    private PunishmentEffect(final PunishmentEffect effect) {
         super(effect);
     }
 

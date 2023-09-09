@@ -59,7 +59,7 @@ class EldritchEvolutionEffect extends OneShotEffect {
                 + "onto the battlefield, then shuffle";
     }
 
-    EldritchEvolutionEffect(final EldritchEvolutionEffect effect) {
+    private EldritchEvolutionEffect(final EldritchEvolutionEffect effect) {
         super(effect);
     }
 

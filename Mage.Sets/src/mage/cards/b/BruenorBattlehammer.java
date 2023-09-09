@@ -94,7 +94,7 @@ class BruenorBattlehammerCostEffect extends CostModificationEffectImpl {
                 "of the first equip ability you activate each turn.";
     }
 
-    BruenorBattlehammerCostEffect(final BruenorBattlehammerCostEffect effect) {
+    private BruenorBattlehammerCostEffect(final BruenorBattlehammerCostEffect effect) {
         super(effect);
     }
 
