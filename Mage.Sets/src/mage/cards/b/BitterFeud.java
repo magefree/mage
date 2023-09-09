@@ -56,7 +56,7 @@ class BitterFeudEntersBattlefieldEffect extends OneShotEffect {
         staticText = "choose two players";
     }
 
-    public BitterFeudEntersBattlefieldEffect(final BitterFeudEntersBattlefieldEffect effect) {
+    private BitterFeudEntersBattlefieldEffect(final BitterFeudEntersBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -103,7 +103,7 @@ class BitterFeudEffect extends ReplacementEffectImpl {
         staticText = "If a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, that source deals double that damage to that player or permanent instead";
     }
 
-    public BitterFeudEffect(final BitterFeudEffect effect) {
+    private BitterFeudEffect(final BitterFeudEffect effect) {
         super(effect);
         this.player1 = effect.player1;
         this.player2 = effect.player2;

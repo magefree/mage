@@ -58,7 +58,7 @@ class BatheInLightEffect extends OneShotEffect {
         this.staticText = "Choose a color. Target creature and each other creature that shares a color with it gain protection from the chosen color until end of turn";
     }
 
-    public BatheInLightEffect(final BatheInLightEffect effect) {
+    private BatheInLightEffect(final BatheInLightEffect effect) {
         super(effect);
     }
 
@@ -108,7 +108,7 @@ class ProtectionChosenColorTargetEffect extends ContinuousEffectImpl {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
     }
 
-    public ProtectionChosenColorTargetEffect(final ProtectionChosenColorTargetEffect effect) {
+    private ProtectionChosenColorTargetEffect(final ProtectionChosenColorTargetEffect effect) {
         super(effect);
         if (effect.chosenColor != null) {
             this.chosenColor = effect.chosenColor.copy();

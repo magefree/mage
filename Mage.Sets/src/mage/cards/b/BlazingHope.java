@@ -44,7 +44,7 @@ class BlazingHopeTarget extends TargetCreaturePermanent {
         super(new FilterCreaturePermanent("creature with power greater than or equal to your life total"));
     }
 
-    public BlazingHopeTarget(final BlazingHopeTarget target) {
+    private BlazingHopeTarget(final BlazingHopeTarget target) {
         super(target);
     }
 

@@ -74,7 +74,7 @@ class AurraSingBaneOfJediEffect extends OneShotEffect {
         staticText = "You may have {this} deal 2 damage to target creature. If you don't, {this} deals 1 damage to you";
     }
 
-    public AurraSingBaneOfJediEffect(final AurraSingBaneOfJediEffect effect) {
+    private AurraSingBaneOfJediEffect(final AurraSingBaneOfJediEffect effect) {
         super(effect);
     }
 

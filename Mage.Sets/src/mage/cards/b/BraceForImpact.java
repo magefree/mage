@@ -55,7 +55,7 @@ class BraceForImpactPreventDamageTargetEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to target multicolored creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature";
     }
 
-    public BraceForImpactPreventDamageTargetEffect(final BraceForImpactPreventDamageTargetEffect effect) {
+    private BraceForImpactPreventDamageTargetEffect(final BraceForImpactPreventDamageTargetEffect effect) {
         super(effect);
     }
 

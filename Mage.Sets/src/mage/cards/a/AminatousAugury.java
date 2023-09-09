@@ -66,7 +66,7 @@ class AminatousAuguryEffect extends OneShotEffect {
                 + "you may cast a spell of that type from among the exiled cards without paying its mana cost.";
     }
 
-    public AminatousAuguryEffect(final AminatousAuguryEffect effect) {
+    private AminatousAuguryEffect(final AminatousAuguryEffect effect) {
         super(effect);
     }
 
@@ -142,7 +142,7 @@ class AminatousAuguryCastFromExileEffect extends AsThoughEffectImpl {
         staticText = "Cast this card without paying its mana cost";
     }
 
-    public AminatousAuguryCastFromExileEffect(final AminatousAuguryCastFromExileEffect effect) {
+    private AminatousAuguryCastFromExileEffect(final AminatousAuguryCastFromExileEffect effect) {
         super(effect);
     }
 

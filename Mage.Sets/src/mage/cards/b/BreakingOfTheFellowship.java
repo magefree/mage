@@ -55,7 +55,7 @@ class BreakingOfTheFellowshipEffect extends OneShotEffect {
         this.staticText = "Target creature an opponent controls deals damage equal to its power to another target creature that player controls";
     }
 
-    public BreakingOfTheFellowshipEffect(final BreakingOfTheFellowshipEffect effect) {
+    private BreakingOfTheFellowshipEffect(final BreakingOfTheFellowshipEffect effect) {
         super(effect);
     }
 
@@ -85,7 +85,7 @@ class BreakingOfTheFellowshipFirstTarget extends TargetCreaturePermanent {
         super(1, 1, filter, false);
     }
 
-    public BreakingOfTheFellowshipFirstTarget(final BreakingOfTheFellowshipFirstTarget target) {
+    private BreakingOfTheFellowshipFirstTarget(final BreakingOfTheFellowshipFirstTarget target) {
         super(target);
     }
 

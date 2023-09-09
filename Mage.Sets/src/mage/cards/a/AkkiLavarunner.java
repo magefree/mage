@@ -57,7 +57,7 @@ class AkkiLavarunnerAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new FlipSourceEffect(new TokTokVolcanoBorn()));
     }
 
-    public AkkiLavarunnerAbility(final AkkiLavarunnerAbility ability) {
+    private AkkiLavarunnerAbility(final AkkiLavarunnerAbility ability) {
         super(ability);
     }
 
@@ -96,7 +96,7 @@ class TokTokVolcanoBorn extends TokenImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TokTokVolcanoBornEffect()));
     }
-    public TokTokVolcanoBorn(final TokTokVolcanoBorn token) {
+    private TokTokVolcanoBorn(final TokTokVolcanoBorn token) {
         super(token);
     }
 

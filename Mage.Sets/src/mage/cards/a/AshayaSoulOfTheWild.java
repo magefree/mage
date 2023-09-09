@@ -65,7 +65,7 @@ class AshayaSoulOfTheWildEffect extends ContinuousEffectImpl {
         this.dependencyTypes.add(DependencyType.BecomeForest);
     }
 
-    public AshayaSoulOfTheWildEffect(final AshayaSoulOfTheWildEffect effect) {
+    private AshayaSoulOfTheWildEffect(final AshayaSoulOfTheWildEffect effect) {
         super(effect);
     }
 

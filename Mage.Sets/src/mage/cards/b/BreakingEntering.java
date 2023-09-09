@@ -56,7 +56,7 @@ class EnteringReturnFromGraveyardToBattlefieldEffect extends OneShotEffect {
         staticText = "Put a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.";
     }
 
-    public EnteringReturnFromGraveyardToBattlefieldEffect(final EnteringReturnFromGraveyardToBattlefieldEffect effect) {
+    private EnteringReturnFromGraveyardToBattlefieldEffect(final EnteringReturnFromGraveyardToBattlefieldEffect effect) {
         super(effect);
     }
 

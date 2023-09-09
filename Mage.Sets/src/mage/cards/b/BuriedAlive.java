@@ -45,7 +45,7 @@ class BuriedAliveEffect extends OneShotEffect {
         staticText = "search your library for up to three creature cards, put them into your graveyard, then shuffle";
     }
 
-    public BuriedAliveEffect(final BuriedAliveEffect effect) {
+    private BuriedAliveEffect(final BuriedAliveEffect effect) {
         super(effect);
     }
 

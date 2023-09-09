@@ -66,7 +66,7 @@ class AzorsGatewayEffect extends OneShotEffect {
                 "you gain 5 life, untap Azor's Gateway, and transform it";
     }
 
-    public AzorsGatewayEffect(final AzorsGatewayEffect effect) {
+    private AzorsGatewayEffect(final AzorsGatewayEffect effect) {
         super(effect);
     }
 

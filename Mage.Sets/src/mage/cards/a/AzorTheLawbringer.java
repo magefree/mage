@@ -66,7 +66,7 @@ class AzorTheLawbringerEntersBattlefieldEffect extends OneShotEffect {
         this.staticText = "each opponent can't cast instant or sorcery spells during that player's next turn";
     }
 
-    public AzorTheLawbringerEntersBattlefieldEffect(final AzorTheLawbringerEntersBattlefieldEffect effect) {
+    private AzorTheLawbringerEntersBattlefieldEffect(final AzorTheLawbringerEntersBattlefieldEffect effect) {
         super(effect);
     }
 
@@ -96,7 +96,7 @@ class AzorTheLawbringerCantCastEffect extends ContinuousRuleModifyingEffectImpl 
         playersNextTurn = 0;
     }
 
-    public AzorTheLawbringerCantCastEffect(final AzorTheLawbringerCantCastEffect effect) {
+    private AzorTheLawbringerCantCastEffect(final AzorTheLawbringerCantCastEffect effect) {
         super(effect);
         this.playersNextTurn = effect.playersNextTurn;
     }

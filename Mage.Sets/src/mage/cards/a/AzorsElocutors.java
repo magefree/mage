@@ -55,7 +55,7 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a source deals damage to you, ");
     }
 
-    public AzorsElocutorsTriggeredAbility(final AzorsElocutorsTriggeredAbility ability) {
+    private AzorsElocutorsTriggeredAbility(final AzorsElocutorsTriggeredAbility ability) {
         super(ability);
     }
 
@@ -82,7 +82,7 @@ class AzorsElocutorsEffect extends OneShotEffect {
         staticText = "put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game";
     }
 
-    public AzorsElocutorsEffect(final AzorsElocutorsEffect effect) {
+    private AzorsElocutorsEffect(final AzorsElocutorsEffect effect) {
         super(effect);
     }
 

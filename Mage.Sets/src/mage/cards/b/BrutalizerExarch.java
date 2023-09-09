@@ -70,7 +70,7 @@ class BrutalizerExarchEffect2 extends OneShotEffect {
         this.staticText = "put target noncreature permanent on the bottom of its owner's library";
     }
 
-    public BrutalizerExarchEffect2(final BrutalizerExarchEffect2 effect) {
+    private BrutalizerExarchEffect2(final BrutalizerExarchEffect2 effect) {
         super(effect);
     }
 

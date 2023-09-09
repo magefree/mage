@@ -64,7 +64,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
         this.staticText = "attach to it any number of Auras on the battlefield and you may put onto the battlefield attached to it any number of Aura cards that could enchant it from your graveyard and/or hand";
     }
 
-    public BrunaLightOfAlabasterEffect(final BrunaLightOfAlabasterEffect effect) {
+    private BrunaLightOfAlabasterEffect(final BrunaLightOfAlabasterEffect effect) {
         super(effect);
     }
 

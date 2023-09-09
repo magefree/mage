@@ -65,7 +65,7 @@ class AwesomePresenceRestrictionEffect extends PayCostToAttackBlockEffectImpl {
                 + " for each creature they control that's blocking it");
     }
 
-    public AwesomePresenceRestrictionEffect(AwesomePresenceRestrictionEffect effect) {
+    private AwesomePresenceRestrictionEffect(final AwesomePresenceRestrictionEffect effect) {
         super(effect);
     }
 

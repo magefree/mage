@@ -49,7 +49,7 @@ class AnHavvaConstableEffect extends ContinuousEffectImpl {
         staticText = "{this}'s toughness is equal to 1 plus the number of green creatures on the battlefield";
     }
 
-    public AnHavvaConstableEffect(final AnHavvaConstableEffect effect) {
+    private AnHavvaConstableEffect(final AnHavvaConstableEffect effect) {
         super(effect);
     }
 

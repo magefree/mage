@@ -64,7 +64,7 @@ class AnimalBoneyardEffect extends OneShotEffect {
         staticText = "You gain life equal to that creature's toughness";
     }
 
-    public AnimalBoneyardEffect(final AnimalBoneyardEffect effect) {
+    private AnimalBoneyardEffect(final AnimalBoneyardEffect effect) {
         super(effect);
     }
 

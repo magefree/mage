@@ -28,7 +28,7 @@ public final class BlackSunsZenith extends CardImpl {
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
     }
 
-    public BlackSunsZenith (final BlackSunsZenith card) {
+    private BlackSunsZenith(final BlackSunsZenith card) {
         super(card);
     }
 

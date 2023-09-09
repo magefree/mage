@@ -81,7 +81,7 @@ class AminatouPlusEffect extends OneShotEffect {
         staticText = "draw a card, then put a card from your hand on top of your library";
     }
 
-    public AminatouPlusEffect(final AminatouPlusEffect effect) {
+    private AminatouPlusEffect(final AminatouPlusEffect effect) {
         super(effect);
     }
 
@@ -122,7 +122,7 @@ class AminatouUltimateEffect extends OneShotEffect {
                 + " the Fateshifter controlled by the next player in the chosen direction.";
     }
 
-    public AminatouUltimateEffect(final AminatouUltimateEffect effect) {
+    private AminatouUltimateEffect(final AminatouUltimateEffect effect) {
         super(effect);
     }
 

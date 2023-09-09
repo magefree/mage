@@ -52,7 +52,7 @@ class BlessedReincarnationEffect extends OneShotEffect {
         this.staticText = "Exile target creature an opponent controls. That player reveals cards from the top of their library until a creature card is revealed. The player puts that card onto the battlefield, then shuffles the rest into their library";
     }
 
-    public BlessedReincarnationEffect(final BlessedReincarnationEffect effect) {
+    private BlessedReincarnationEffect(final BlessedReincarnationEffect effect) {
         super(effect);
     }
 

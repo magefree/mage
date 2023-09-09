@@ -64,7 +64,7 @@ class BubblingCauldronEffect extends OneShotEffect {
         staticText = "Each opponent loses 4 life. You gain life equal to the life lost this way";
     }
 
-    public BubblingCauldronEffect(final BubblingCauldronEffect effect) {
+    private BubblingCauldronEffect(final BubblingCauldronEffect effect) {
         super(effect);
     }
 

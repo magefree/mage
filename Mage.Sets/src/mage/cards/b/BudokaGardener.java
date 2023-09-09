@@ -104,7 +104,7 @@ class DokaiWeaverofLife extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public DokaiWeaverofLife(final DokaiWeaverofLife token) {
+    private DokaiWeaverofLife(final DokaiWeaverofLife token) {
         super(token);
     }
 

@@ -76,7 +76,7 @@ class BoreasChargerEffect extends OneShotEffect {
                 "and the rest into your hand, then shuffle";
     }
 
-    public BoreasChargerEffect(final BoreasChargerEffect effect) {
+    private BoreasChargerEffect(final BoreasChargerEffect effect) {
         super(effect);
     }
 

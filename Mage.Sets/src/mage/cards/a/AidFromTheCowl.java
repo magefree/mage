@@ -53,7 +53,7 @@ class AidFromTheCowlEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library. If it's a permanent card, you may put it onto the battlefield. Otherwise, you may put that card on the bottom of your library";
     }
 
-    public AidFromTheCowlEffect(final AidFromTheCowlEffect effect) {
+    private AidFromTheCowlEffect(final AidFromTheCowlEffect effect) {
         super(effect);
     }
 
