@@ -62,7 +62,7 @@ class RegnasSanctionEffect extends OneShotEffect {
                 + "Each foe chooses one untapped creature they control, then taps the rest";
     }
 
-    RegnasSanctionEffect(final RegnasSanctionEffect effect) {
+    private RegnasSanctionEffect(final RegnasSanctionEffect effect) {
         super(effect);
     }
 

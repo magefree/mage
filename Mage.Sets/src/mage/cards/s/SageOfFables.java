@@ -59,7 +59,7 @@ class SageOfFablesReplacementEffect extends ReplacementEffectImpl {
         staticText = "Each other Wizard creature you control enters the battlefield with an additional +1/+1 counter on it";
     }
 
-    SageOfFablesReplacementEffect(SageOfFablesReplacementEffect effect) {
+    private SageOfFablesReplacementEffect(final SageOfFablesReplacementEffect effect) {
         super(effect);
     }
 

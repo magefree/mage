@@ -105,7 +105,7 @@ class SnowMercyCost extends CostImpl {
         this.text = "{t}, {q}, {t}, {q}, {t}";
     }
 
-    SnowMercyCost(final SnowMercyCost cost) {
+    private SnowMercyCost(final SnowMercyCost cost) {
         super(cost);
     }
 

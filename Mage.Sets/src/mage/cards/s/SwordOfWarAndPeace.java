@@ -103,7 +103,7 @@ class SwordOfWarAndPeaceDamageEffect extends OneShotEffect {
         staticText = "{this} deals damage to that player equal to the number of cards in their hand";
     }
 
-    SwordOfWarAndPeaceDamageEffect(final SwordOfWarAndPeaceDamageEffect effect) {
+    private SwordOfWarAndPeaceDamageEffect(final SwordOfWarAndPeaceDamageEffect effect) {
         super(effect);
     }
 

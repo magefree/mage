@@ -62,7 +62,7 @@ class TimeVaultReplacementEffect extends ReplacementEffectImpl {
         staticText = "If you would begin your turn while {this} is tapped, you may skip that turn instead. If you do, untap Time Vault.";        
     }
     
-    TimeVaultReplacementEffect(final TimeVaultReplacementEffect effect) {
+    private TimeVaultReplacementEffect(final TimeVaultReplacementEffect effect) {
         super(effect);
     }
     

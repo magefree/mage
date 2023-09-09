@@ -69,7 +69,7 @@ class StalkingYetiEffect extends OneShotEffect {
                 + "and that creature deals damage equal to its power to {this}";
     }
 
-    StalkingYetiEffect(final StalkingYetiEffect effect) {
+    private StalkingYetiEffect(final StalkingYetiEffect effect) {
         super(effect);
     }
 

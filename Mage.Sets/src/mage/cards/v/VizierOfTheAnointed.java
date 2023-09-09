@@ -97,7 +97,7 @@ class VizierOfTheAnointedTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    VizierOfTheAnointedTriggeredAbility(final VizierOfTheAnointedTriggeredAbility ability) {
+    private VizierOfTheAnointedTriggeredAbility(final VizierOfTheAnointedTriggeredAbility ability) {
         super(ability);
     }
 

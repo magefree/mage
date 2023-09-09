@@ -70,7 +70,7 @@ class SquealingDevilEffect extends OneShotEffect {
         staticText = "you may pay {X}. If you do, target creature gets +X/+0 until end of turn.";
     }
 
-    SquealingDevilEffect(final SquealingDevilEffect effect) {
+    private SquealingDevilEffect(final SquealingDevilEffect effect) {
         super(effect);
     }
 

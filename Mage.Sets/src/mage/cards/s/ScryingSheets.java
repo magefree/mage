@@ -56,7 +56,7 @@ class ScryingSheetsEffect extends OneShotEffect {
         this.staticText = "Look at the top card of your library. If that card is snow, you may reveal it and put it into your hand";
     }
 
-    ScryingSheetsEffect(final ScryingSheetsEffect effect) {
+    private ScryingSheetsEffect(final ScryingSheetsEffect effect) {
         super(effect);
     }
 

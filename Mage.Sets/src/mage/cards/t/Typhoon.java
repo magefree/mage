@@ -49,7 +49,7 @@ class TyphoonEffect extends OneShotEffect {
         staticText = "{this} deals damage to each opponent equal to the number of Islands that player controls";
     }
 
-    TyphoonEffect(final TyphoonEffect effect) {
+    private TyphoonEffect(final TyphoonEffect effect) {
         super(effect);
     }
 

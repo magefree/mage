@@ -54,7 +54,7 @@ class ShieldOfTheAvatarPreventionEffect extends PreventionEffectImpl {
         this.staticText = "If a source would deal damage to equipped creature, prevent X of that damage, where X is the number of creatures you control.";
     }
 
-    ShieldOfTheAvatarPreventionEffect(final ShieldOfTheAvatarPreventionEffect effect) {
+    private ShieldOfTheAvatarPreventionEffect(final ShieldOfTheAvatarPreventionEffect effect) {
         super(effect);
     }
 

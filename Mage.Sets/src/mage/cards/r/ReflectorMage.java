@@ -100,7 +100,7 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
         this.ownerId = ownerId;
     }
 
-    ExclusionRitualReplacementEffect(final ExclusionRitualReplacementEffect effect) {
+    private ExclusionRitualReplacementEffect(final ExclusionRitualReplacementEffect effect) {
         super(effect);
         this.creatureName = effect.creatureName;
         this.ownerId = effect.ownerId;

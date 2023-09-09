@@ -100,7 +100,7 @@ class ZaxaraTheExemplaryHydraTokenEffect extends OneShotEffect {
         this.staticText = ", create a 0/0 green Hydra creature token, then put X +1/+1 counters on it.";
     }
 
-    ZaxaraTheExemplaryHydraTokenEffect(final ZaxaraTheExemplaryHydraTokenEffect effect) {
+    private ZaxaraTheExemplaryHydraTokenEffect(final ZaxaraTheExemplaryHydraTokenEffect effect) {
         super(effect);
     }
 

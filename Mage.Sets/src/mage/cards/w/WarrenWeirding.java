@@ -61,7 +61,7 @@ class WarrenWeirdingEffect extends OneShotEffect {
                 "creates two 1/1 black Goblin Rogue creature tokens, and those tokens gain haste until end of turn";
     }
 
-    WarrenWeirdingEffect(WarrenWeirdingEffect effect) {
+    private WarrenWeirdingEffect(final WarrenWeirdingEffect effect) {
         super(effect);
     }
 

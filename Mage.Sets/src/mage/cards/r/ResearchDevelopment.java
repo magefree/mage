@@ -89,7 +89,7 @@ class DevelopmentEffect extends OneShotEffect {
         staticText = "Create a 3/1 red Elemental creature token unless any opponent has you draw a card. Repeat this process two more times.";
     }
 
-    DevelopmentEffect(final DevelopmentEffect effect) {
+    private DevelopmentEffect(final DevelopmentEffect effect) {
         super(effect);
     }
 

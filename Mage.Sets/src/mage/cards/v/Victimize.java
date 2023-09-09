@@ -49,7 +49,7 @@ class VictimizeEffect extends OneShotEffect {
         this.staticText = "Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped";
     }
 
-    VictimizeEffect(final VictimizeEffect effect) {
+    private VictimizeEffect(final VictimizeEffect effect) {
         super(effect);
     }
 

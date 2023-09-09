@@ -50,7 +50,7 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you cast a kicked spell, ");
     }
 
-    RumblingAftershocksTriggeredAbility(final RumblingAftershocksTriggeredAbility ability) {
+    private RumblingAftershocksTriggeredAbility(final RumblingAftershocksTriggeredAbility ability) {
         super(ability);
     }
 

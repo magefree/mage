@@ -46,7 +46,7 @@ class TributeToHungerEffect extends OneShotEffect {
         staticText = "Target opponent sacrifices a creature. You gain life equal to that creature's toughness";
     }
 
-    TributeToHungerEffect(TributeToHungerEffect effect) {
+    private TributeToHungerEffect(final TributeToHungerEffect effect) {
         super(effect);
     }
 

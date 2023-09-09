@@ -96,7 +96,7 @@ class TheMendingOfDominariaSecondEffect extends OneShotEffect {
         this.staticText = "Return all land cards from your graveyard to the battlefield, then shuffle your graveyard into your library";
     }
 
-    TheMendingOfDominariaSecondEffect(final TheMendingOfDominariaSecondEffect effect) {
+    private TheMendingOfDominariaSecondEffect(final TheMendingOfDominariaSecondEffect effect) {
         super(effect);
     }
 

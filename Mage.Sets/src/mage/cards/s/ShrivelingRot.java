@@ -60,7 +60,7 @@ class ShrivelingRotDestroyTriggeredAbility extends DelayedTriggeredAbility {
         super(new DestroyTargetEffect(), Duration.EndOfTurn, false);
     }
 
-    ShrivelingRotDestroyTriggeredAbility(final ShrivelingRotDestroyTriggeredAbility ability) {
+    private ShrivelingRotDestroyTriggeredAbility(final ShrivelingRotDestroyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -96,7 +96,7 @@ class ShrivelingRotLoseLifeTriggeredAbility extends DelayedTriggeredAbility {
         super(new ShrivelingRotEffect(), Duration.EndOfTurn, false);
     }
 
-    ShrivelingRotLoseLifeTriggeredAbility(final ShrivelingRotLoseLifeTriggeredAbility ability) {
+    private ShrivelingRotLoseLifeTriggeredAbility(final ShrivelingRotLoseLifeTriggeredAbility ability) {
         super(ability);
     }
 

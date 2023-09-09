@@ -65,7 +65,7 @@ class StriderRangerOfTheNorthEffect extends OneShotEffect {
                 "or greater, it gains first strike until end of turn.";
     }
 
-    StriderRangerOfTheNorthEffect(final StriderRangerOfTheNorthEffect effect) {
+    private StriderRangerOfTheNorthEffect(final StriderRangerOfTheNorthEffect effect) {
         super(effect);
     }
 

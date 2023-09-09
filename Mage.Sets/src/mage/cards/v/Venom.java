@@ -62,7 +62,7 @@ class VenomTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    VenomTriggeredAbility(final VenomTriggeredAbility ability) {
+    private VenomTriggeredAbility(final VenomTriggeredAbility ability) {
         super(ability);
     }
 
