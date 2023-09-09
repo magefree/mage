@@ -4,17 +4,13 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.common.CounterTargetEffect;
-import mage.abilities.effects.common.UntapLandsEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.repository.TokenType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
