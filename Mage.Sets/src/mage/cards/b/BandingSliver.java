@@ -5,15 +5,12 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.BandingAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 
 import java.util.UUID;
 
