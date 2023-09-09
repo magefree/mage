@@ -127,7 +127,7 @@ class KheruLichLordReplacementEffect extends ReplacementEffectImpl {
         staticText = "If that card would leave the battlefield, exile it instead of putting it anywhere else";
     }
 
-    KheruLichLordReplacementEffect(final KheruLichLordReplacementEffect effect) {
+    private KheruLichLordReplacementEffect(final KheruLichLordReplacementEffect effect) {
         super(effect);
     }
 

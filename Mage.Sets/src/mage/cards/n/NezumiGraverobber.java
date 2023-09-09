@@ -67,7 +67,7 @@ class NezumiGraverobberFlipEffect extends OneShotEffect {
         staticText = "If no cards are in that graveyard, flip {this}";
     }
 
-    NezumiGraverobberFlipEffect(final NezumiGraverobberFlipEffect effect) {
+    private NezumiGraverobberFlipEffect(final NezumiGraverobberFlipEffect effect) {
         super(effect);
     }
 

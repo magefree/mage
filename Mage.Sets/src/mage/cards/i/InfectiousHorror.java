@@ -48,7 +48,7 @@ class InfectiousHorrorEffect extends OneShotEffect {
         staticText = "each opponent loses 2 life";
     }
 
-    InfectiousHorrorEffect(final InfectiousHorrorEffect effect) {
+    private InfectiousHorrorEffect(final InfectiousHorrorEffect effect) {
         super(effect);
     }
 

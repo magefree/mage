@@ -56,7 +56,7 @@ class OccupationTapEffect extends ReplacementEffectImpl {
         staticText = "Creatures your opponents control enter the battlefield tapped";
     }
 
-    OccupationTapEffect(final OccupationTapEffect effect) {
+    private OccupationTapEffect(final OccupationTapEffect effect) {
         super(effect);
     }
 

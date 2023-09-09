@@ -79,7 +79,7 @@ class LinessaZephyrMageEffect extends OneShotEffect {
         this.staticText = "Target player returns a creature they control to its owner's hand, then repeats this process for an artifact, an enchantment, and a land";
     }
 
-    LinessaZephyrMageEffect(final LinessaZephyrMageEffect effect) {
+    private LinessaZephyrMageEffect(final LinessaZephyrMageEffect effect) {
         super(effect);
     }
 

@@ -64,7 +64,7 @@ class MakeshiftMannequinEffect extends OneShotEffect {
                 + "or ability, sacrifice it.\"";
     }
 
-    MakeshiftMannequinEffect(final MakeshiftMannequinEffect effect) {
+    private MakeshiftMannequinEffect(final MakeshiftMannequinEffect effect) {
         super(effect);
     }
 
@@ -107,7 +107,7 @@ class MakeshiftMannequinGainAbilityEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
     }
 
-    MakeshiftMannequinGainAbilityEffect(final MakeshiftMannequinGainAbilityEffect effect) {
+    private MakeshiftMannequinGainAbilityEffect(final MakeshiftMannequinGainAbilityEffect effect) {
         super(effect);
     }
 

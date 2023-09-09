@@ -60,7 +60,7 @@ class CantAttackUnlessControllerControlsMoreLandsEffect extends RestrictionEffec
         super(Duration.WhileOnBattlefield);
     }
 
-    CantAttackUnlessControllerControlsMoreLandsEffect(final CantAttackUnlessControllerControlsMoreLandsEffect effect) {
+    private CantAttackUnlessControllerControlsMoreLandsEffect(final CantAttackUnlessControllerControlsMoreLandsEffect effect) {
         super(effect);
     }
 
@@ -108,7 +108,7 @@ class CantBlockUnlessControllerControlsMoreLandsEffect extends RestrictionEffect
         super(Duration.WhileOnBattlefield);
     }
 
-    CantBlockUnlessControllerControlsMoreLandsEffect(final CantBlockUnlessControllerControlsMoreLandsEffect effect) {
+    private CantBlockUnlessControllerControlsMoreLandsEffect(final CantBlockUnlessControllerControlsMoreLandsEffect effect) {
         super(effect);
     }
 

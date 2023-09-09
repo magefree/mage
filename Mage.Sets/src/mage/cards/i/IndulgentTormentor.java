@@ -61,7 +61,7 @@ class IndulgentTormentorEffect extends OneShotEffect {
         this.staticText = "draw a card unless target opponent sacrifices a creature or pays 3 life";
     }
 
-    IndulgentTormentorEffect(final IndulgentTormentorEffect effect) {
+    private IndulgentTormentorEffect(final IndulgentTormentorEffect effect) {
         super(effect);
     }
 

@@ -59,7 +59,7 @@ class HotSoupTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever equipped creature is dealt damage, ");
     }
     
-    HotSoupTriggeredAbility(final HotSoupTriggeredAbility ability) {
+    private HotSoupTriggeredAbility(final HotSoupTriggeredAbility ability) {
         super(ability);
     }
     

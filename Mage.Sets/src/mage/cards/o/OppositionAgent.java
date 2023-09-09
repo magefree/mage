@@ -65,7 +65,7 @@ class OppositionAgentReplacementEffect extends ReplacementEffectImpl {
                 + "of any color to cast them";
     }
 
-    OppositionAgentReplacementEffect(final OppositionAgentReplacementEffect effect) {
+    private OppositionAgentReplacementEffect(final OppositionAgentReplacementEffect effect) {
         super(effect);
     }
 

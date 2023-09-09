@@ -70,7 +70,7 @@ class ImprisonTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, ");
     }
 
-    ImprisonTriggeredAbility(final ImprisonTriggeredAbility ability) {
+    private ImprisonTriggeredAbility(final ImprisonTriggeredAbility ability) {
         super(ability);
     }
 

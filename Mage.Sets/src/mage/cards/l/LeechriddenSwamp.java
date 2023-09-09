@@ -76,7 +76,7 @@ class LeechriddenSwampLoseLifeEffect extends OneShotEffect {
         staticText = "each opponent loses 1 life";
     }
 
-    LeechriddenSwampLoseLifeEffect(LeechriddenSwampLoseLifeEffect effect) {
+    private LeechriddenSwampLoseLifeEffect(final LeechriddenSwampLoseLifeEffect effect) {
         super(effect);
     }
 

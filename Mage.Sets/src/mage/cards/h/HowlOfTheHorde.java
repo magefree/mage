@@ -60,7 +60,7 @@ class HowlOfTheHordeDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new CopyTargetSpellEffect(true), Duration.EndOfTurn);
     }
 
-    HowlOfTheHordeDelayedTriggeredAbility(final HowlOfTheHordeDelayedTriggeredAbility ability) {
+    private HowlOfTheHordeDelayedTriggeredAbility(final HowlOfTheHordeDelayedTriggeredAbility ability) {
         super(ability);
     }
 

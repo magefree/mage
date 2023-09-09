@@ -60,7 +60,7 @@ class LichenthropeEffect extends ReplacementEffectImpl {
         staticText = "If damage would be dealt to {this}, put that many -1/-1 counters on it instead";
     }
 
-    LichenthropeEffect(final LichenthropeEffect effect) {
+    private LichenthropeEffect(final LichenthropeEffect effect) {
         super(effect);
     }
 

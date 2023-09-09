@@ -55,7 +55,7 @@ class SacrificeAllLandEffect extends OneShotEffect {
         staticText = "sacrifice all lands you control";
     }
 
-    SacrificeAllLandEffect(final SacrificeAllLandEffect effect) {
+    private SacrificeAllLandEffect(final SacrificeAllLandEffect effect) {
         super(effect);
     }
 

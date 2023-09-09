@@ -61,7 +61,7 @@ class HoardSmelterEffect extends ContinuousEffectImpl {
         staticText = "{this} gets +X/+0 until end of turn, where X is that artifact's mana value";
     }
 
-    HoardSmelterEffect(final HoardSmelterEffect effect) {
+    private HoardSmelterEffect(final HoardSmelterEffect effect) {
         super(effect);
         this.costValue = effect.costValue;
     }

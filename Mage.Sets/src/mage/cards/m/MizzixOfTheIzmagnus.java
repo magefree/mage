@@ -90,7 +90,7 @@ class MizzixOfTheIzmagnusCostReductionEffect extends CostModificationEffectImpl 
         staticText = "Instant and sorcery spells you cast cost {1} less to cast for each experience counter you have";
     }
 
-    MizzixOfTheIzmagnusCostReductionEffect(MizzixOfTheIzmagnusCostReductionEffect effect) {
+    private MizzixOfTheIzmagnusCostReductionEffect(final MizzixOfTheIzmagnusCostReductionEffect effect) {
         super(effect);
     }
 

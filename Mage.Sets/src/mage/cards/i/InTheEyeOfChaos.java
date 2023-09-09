@@ -52,7 +52,7 @@ class InTheEyeOfChaosEffect extends OneShotEffect {
         this.staticText = "counter it unless that player pays {X}, where X is its mana value";
     }
 
-    InTheEyeOfChaosEffect(final InTheEyeOfChaosEffect effect) {
+    private InTheEyeOfChaosEffect(final InTheEyeOfChaosEffect effect) {
         super(effect);
     }
 

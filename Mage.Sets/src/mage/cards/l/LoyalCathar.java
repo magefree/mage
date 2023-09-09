@@ -63,7 +63,7 @@ class LoyalCatharEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    LoyalCatharEffect(LoyalCatharEffect effect) {
+    private LoyalCatharEffect(final LoyalCatharEffect effect) {
         super(effect);
     }
 

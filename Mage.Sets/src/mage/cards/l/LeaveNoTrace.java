@@ -56,7 +56,7 @@ class LeaveNoTraceEffect extends OneShotEffect {
         staticText = "Destroy target enchantment and each other enchantment that shares a color with it";
     }
 
-    LeaveNoTraceEffect(final LeaveNoTraceEffect effect) {
+    private LeaveNoTraceEffect(final LeaveNoTraceEffect effect) {
         super(effect);
     }
 
