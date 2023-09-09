@@ -23,6 +23,7 @@ public class MysteryBoosterPlaytest extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Recycla-bird", 28, Rarity.RARE, mage.cards.r.RecyclaBird.class));
         cards.add(new SetCardInfo("Slivdrazi Monstrosity", 102, Rarity.RARE, mage.cards.s.SlivdraziMonstrosity.class));
     }
 
