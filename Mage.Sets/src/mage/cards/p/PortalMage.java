@@ -33,12 +33,12 @@ public final class PortalMage extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
 
-        // When Portal Mage enters the battlefield during the declare attackers step, you may reselect which player or planeswalker target attacking creature is attacking.
+        // When Portal Mage enters the battlefield during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReselectDefenderAttackedByTargetEffect(true), true),
                 new IsStepCondition(PhaseStep.DECLARE_ATTACKERS, false),
-                "When {this} enters the battlefield during the declare attackers step, you may reselect which player or planeswalker target attacking creature is attacking. "
-                + "<i>(It can't attack its controller or its controller's planeswalkers.)</i>");
+                "When {this} enters the battlefield during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking. "
+                + "<i>(It can't attack its controller or its controller's permanents.)</i>");
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }
