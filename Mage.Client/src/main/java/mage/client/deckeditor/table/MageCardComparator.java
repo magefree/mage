@@ -79,8 +79,22 @@ public class MageCardComparator implements CardViewComparator {
                 bCom = b.getExpansionSetCode();
                 break;
             case 8:
-                aCom = Integer.parseInt(a.getCardNumber().replaceAll("[\\D]", ""));
-                bCom = Integer.parseInt(b.getCardNumber().replaceAll("[\\D]", ""));
+                try {
+                    aCom = Integer.parseInt(a.getCardNumber().replaceAll("[\\D]", ""));
+                }
+                catch (NumberFormatException nfe) {
+                    // If number can not be parsed from cardNumber, we sort the card last.
+                    // https://scryfall.com/card/sld/VS/viscera-seer is the only current case.
+                    aCom = 99999;
+                }
+                try {
+                    bCom = Integer.parseInt(b.getCardNumber().replaceAll("[\\D]", ""));
+                }
+                catch (NumberFormatException nfe) {
+                    // If number can not be parsed from cardNumber, we sort the card last.
+                    // https://scryfall.com/card/sld/VS/viscera-seer is the only current case.
+                    bCom = 99999;
+                }
                 break;
             case 9:
                 aCom = RateCard.rateCard(a, null);
