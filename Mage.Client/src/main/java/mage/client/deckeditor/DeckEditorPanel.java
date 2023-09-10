@@ -2,6 +2,8 @@ package mage.client.deckeditor;
 
 import mage.cards.Card;
 import mage.cards.decks.*;
+import static mage.cards.decks.DeckFormats.XMAGE;
+import static mage.cards.decks.DeckFormats.XMAGE_INFO;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -38,9 +40,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.*;
-
-import static mage.cards.decks.DeckFormats.XMAGE;
-import static mage.cards.decks.DeckFormats.XMAGE_INFO;
 
 /**
  * @author BetaSteward_at_googlemail.com, JayDi85, Elandril
@@ -1481,7 +1480,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             updateDeckTask.cancel(true);
         }
 
-        if (SessionHandler.submitDeck(tableId, deck.getDeckCardLists())) {
+        if (SessionHandler.submitDeck(mode, tableId, deck.getDeckCardLists())) {
             removeDeckEditor();
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
@@ -1497,7 +1496,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 updateDeckTask.cancel(true);
             }
 
-            if (SessionHandler.submitDeck(tableId, deck.getDeckCardLists())) {
+            if (SessionHandler.submitDeck(mode, tableId, deck.getDeckCardLists())) {
                 removeDeckEditor();
             }
             return null;
