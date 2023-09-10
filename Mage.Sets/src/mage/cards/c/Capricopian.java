@@ -1,25 +1,18 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
+import mage.abilities.effects.common.combat.ReselectDefenderAttackedByTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterPlayer;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.other.PlayerIdPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPlayer;
 
 import java.util.UUID;
 
@@ -59,7 +52,7 @@ class CapricopianActivatedAbility extends ActivatedAbilityImpl {
 
     CapricopianActivatedAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(2));
-        this.addEffect(new CapricopianEffect());
+        this.addEffect(new ReselectDefenderAttackedByTargetEffect(false, SetTargetPointer.PERMANENT));
         this.setMayActivate(TargetController.ANY);
         this.condition = new IsStepCondition(PhaseStep.DECLARE_ATTACKERS);
     }
@@ -85,44 +78,5 @@ class CapricopianActivatedAbility extends ActivatedAbilityImpl {
         return super.checkTargetController(playerId, game)
                 && playerId != null
                 && playerId.equals(game.getCombat().getDefenderId(this.getSourceId()));
-    }
-}
-
-class CapricopianEffect extends OneShotEffect {
-
-    CapricopianEffect() {
-        super(Outcome.Benefit);
-    }
-
-    private CapricopianEffect(final CapricopianEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CapricopianEffect copy() {
-        return new CapricopianEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player == null || permanent == null) {
-            return false;
-        }
-        if (!player.chooseUse(outcome, "Reselect attacker for " + permanent.getIdName() + "?", source, game)) {
-            return false;
-        }
-        FilterPlayer filterPlayer = new FilterPlayer();
-        filterPlayer.add(Predicates.not(new PlayerIdPredicate(permanent.getControllerId())));
-        filterPlayer.add(Predicates.not(new PlayerIdPredicate(game.getCombat().getDefenderId(permanent.getId()))));
-        TargetPlayer targetPlayer = new TargetPlayer(0, 1, true, filterPlayer);
-        player.choose(outcome, targetPlayer, source, game);
-        Player newPlayer = game.getPlayer(targetPlayer.getFirstTarget());
-        if (newPlayer == null) {
-            return false;
-        }
-        game.getCombat().removeAttacker(permanent.getId(), game);
-        return game.getCombat().addAttackingCreature(permanent.getId(), game, newPlayer.getId());
     }
 }

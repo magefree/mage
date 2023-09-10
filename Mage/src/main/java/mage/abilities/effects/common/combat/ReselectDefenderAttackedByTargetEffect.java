@@ -9,6 +9,7 @@ import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -25,6 +26,7 @@ import mage.target.common.TargetDefender;
 public class ReselectDefenderAttackedByTargetEffect extends OneShotEffect {
     
     private final boolean includePermanents;
+    private final SetTargetPointer setTargetPointer;
     private static final FilterPermanent filter = new FilterPermanent("permanent");
 
     static {
@@ -35,13 +37,19 @@ public class ReselectDefenderAttackedByTargetEffect extends OneShotEffect {
     }
 
     public ReselectDefenderAttackedByTargetEffect(boolean includePermanents) {
+        this(includePermanents, SetTargetPointer.PERMANENT_TARGET);
+    }
+
+    public ReselectDefenderAttackedByTargetEffect(boolean includePermanents, SetTargetPointer setTargetPointer) {
         super(Outcome.Benefit);
         this.includePermanents = includePermanents;
+        this.setTargetPointer = setTargetPointer;
     }
 
     protected ReselectDefenderAttackedByTargetEffect(final ReselectDefenderAttackedByTargetEffect effect) {
         super(effect);
         this.includePermanents = effect.includePermanents;
+        this.setTargetPointer = effect.setTargetPointer;
     }
 
     @Override
@@ -56,54 +64,64 @@ public class ReselectDefenderAttackedByTargetEffect extends OneShotEffect {
             return false;
         }
         
-        for (UUID id : getTargetPointer().getTargets(game, source)) {
+        switch (this.setTargetPointer) {
+            case PERMANENT_TARGET:
+                for (UUID id : getTargetPointer().getTargets(game, source)) {
+                    reselectDefender(id, controller, source, game);
+                }
+                return true;
+            case PERMANENT:
+                return reselectDefender(source.getSourceId(), controller, source, game);
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
 
-            Permanent attackingCreature = game.getPermanent(id);
-            if (attackingCreature == null) {
-                continue;
-            }
+    private boolean reselectDefender(UUID attackerId, Player controller, Ability source, Game game) {
+        Permanent attackingCreature = game.getPermanent(attackerId);
+        if (attackingCreature == null) {
+            return false;
+        }
 
-            CombatGroup combatGroupTarget = game.getCombat().findGroup(attackingCreature.getId());
-            if (combatGroupTarget == null) {
-                continue;
-            }
+        CombatGroup combatGroupTarget = game.getCombat().findGroup(attackingCreature.getId());
+        if (combatGroupTarget == null) {
+            return false;
+        }
 
-            // 508.7b: While reselecting which player, planeswalker, or battle a creature is attacking, 
-            // that creature isn't affected by requirements or restrictions that apply to the declaration of attackers.
+        // 508.7b: While reselecting which player, planeswalker, or battle a creature is attacking, 
+        // that creature isn't affected by requirements or restrictions that apply to the declaration of attackers.
 
-            // 508.7c. The reselected player, planeswalker, or battle must be an opponent of the attacking creature's controller, 
-            // a planeswalker controlled by an opponent of the attacking creature's controller, 
-            // or a battle protected by an opponent of the attacking creature's controller.
+        // 508.7c. The reselected player, planeswalker, or battle must be an opponent of the attacking creature's controller, 
+        // a planeswalker controlled by an opponent of the attacking creature's controller, 
+        // or a battle protected by an opponent of the attacking creature's controller.
 
-            Set<UUID> defenders = includePermanents ?
-                game.getCombat().getDefenders() :
-                game.getCombat().getAttackablePlayers(game).stream().collect(Collectors.toSet());
+        Set<UUID> defenders = includePermanents ?
+            game.getCombat().getDefenders() :
+            game.getCombat().getAttackablePlayers(game).stream().collect(Collectors.toSet());
 
-            // Select the new defender
-            TargetDefender defender = new TargetDefender(defenders);
-            if (controller.chooseTarget(Outcome.Damage, defender, source, game)) {
-                UUID firstTarget = defender.getFirstTarget();
-                if (combatGroupTarget.getDefenderId() != null && !combatGroupTarget.getDefenderId().equals(firstTarget)) {
-                    if (combatGroupTarget.changeDefenderPostDeclaration(firstTarget, game)) {
-                        String attacked = "";
-                        Player player = game.getPlayer(firstTarget);
-                        if (player != null) {
-                            attacked = player.getLogName();
-                        } else {
-                            Permanent permanent = game.getPermanent(firstTarget);
-                            if (permanent != null) {
-                                attacked = permanent.getLogName();
-                            }
+        // Select the new defender
+        TargetDefender defender = new TargetDefender(defenders);
+        if (controller.chooseTarget(Outcome.Damage, defender, source, game)) {
+            UUID firstTarget = defender.getFirstTarget();
+            if (combatGroupTarget.getDefenderId() != null && !combatGroupTarget.getDefenderId().equals(firstTarget)) {
+                if (combatGroupTarget.changeDefenderPostDeclaration(firstTarget, game)) {
+                    String attacked = "";
+                    Player player = game.getPlayer(firstTarget);
+                    if (player != null) {
+                        attacked = player.getLogName();
+                    } else {
+                        Permanent permanent = game.getPermanent(firstTarget);
+                        if (permanent != null) {
+                            attacked = permanent.getLogName();
                         }
-                        game.informPlayers(attackingCreature.getLogName() + " now attacks " + attacked);
                     }
+                    game.informPlayers(attackingCreature.getLogName() + " now attacks " + attacked);
+                    return true;
                 }
             }
         }
-
-        return true;
+        return false;
     }
-
     @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
