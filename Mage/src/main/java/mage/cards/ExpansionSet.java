@@ -54,6 +54,18 @@ public abstract class ExpansionSet implements Serializable {
             this.rarity = rarity;
             this.cardClass = cardClass;
             this.graphicInfo = graphicInfo;
+
+            try {
+                // CardNumber must contain an Integer. We check here that it is possible.
+                Integer.parseInt(cardNumber.replaceAll("[\\D]", ""));
+            }
+            catch (NumberFormatException npe) {
+                // How to fix: look to the set infos for that card, and adjust to something that can be parsed to Integer.
+                throw new IllegalStateException(
+                        this.name + " has been set a CardInfo with '" + this.cardNumber
+                                + "' as card number, which can not be parsed as Integer."
+                );
+            }
         }
 
         public String getName() {
