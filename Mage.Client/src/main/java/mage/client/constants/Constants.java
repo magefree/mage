@@ -104,6 +104,7 @@ public final class Constants {
 
         FREE_BUILDING,
         LIMITED_BUILDING,
+        LIMITED_SIDEBOARD_BUILDING,
         SIDEBOARDING,
         VIEW_LIMITED_DECK
     }

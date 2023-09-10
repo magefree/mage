@@ -238,7 +238,7 @@ public final class SessionHandler {
         if(autoSave.equals("true")){
             // Log the submitted deck in the log folder.
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-            String logFilename = sdf.format(new Date()) + "_limited_submission" + ".dck";
+            String logFilename = sdf.format(new Date()) + "_limited" + ".dck";
             try {
                 XMAGE.getExporter().writeDeck(logFilename, deckList);
             } catch (IOException e) {

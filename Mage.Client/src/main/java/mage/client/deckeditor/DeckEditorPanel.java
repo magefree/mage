@@ -213,6 +213,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         restoreDividerLocationsAndDeckAreaSettings();
         switch (mode) {
             case LIMITED_BUILDING:
+            case LIMITED_SIDEBOARD_BUILDING:
                 this.btnAddLand.setVisible(true);
                 this.txtTimeRemaining.setVisible(true);
                 this.btnLegality.setVisible(false); // legality check available only in free building mode
@@ -1438,7 +1439,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLoadActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
+        if (mode == DeckEditorMode.SIDEBOARDING
+                || mode == DeckEditorMode.LIMITED_BUILDING
+                || mode == DeckEditorMode.LIMITED_SIDEBOARD_BUILDING) {
             for (Card card : deck.getCards()) {
                 deck.getSideboard().add(card);
             }
