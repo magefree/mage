@@ -6,27 +6,14 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.ReselectDefenderAttackedByTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterAttackingCreature;
-import mage.game.Game;
-import mage.game.combat.CombatGroup;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetAttackingCreature;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetDefender;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
