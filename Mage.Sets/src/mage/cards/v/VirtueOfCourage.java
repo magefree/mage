@@ -46,7 +46,7 @@ public final class VirtueOfCourage extends AdventureCard {
 class VirtueOfCourageTriggeredAbility extends TriggeredAbilityImpl {
 
     VirtueOfCourageTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super(Zone.BATTLEFIELD, null, true);
     }
 
     private VirtueOfCourageTriggeredAbility(final VirtueOfCourageTriggeredAbility ability) {
