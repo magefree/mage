@@ -131,7 +131,7 @@ class DynaheirInvokerAdeptTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you next activate an ability this turn that isn't a mana ability by spending four or more mana to activate it, " +
+        return "When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it, " +
                 "copy that ability. You may choose new targets for the copy.";
     }
 }

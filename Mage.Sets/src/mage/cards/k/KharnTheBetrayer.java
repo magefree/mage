@@ -96,6 +96,7 @@ class KharnTheBetrayerPreventionEffect extends PreventionEffectImpl {
 
     KharnTheBetrayerPreventionEffect() {
         super(Duration.WhileOnBattlefield);
+        staticText = "if damage would be dealt to {this}, prevent that damage and an opponent of your choice gains control of it";
     }
 
     private KharnTheBetrayerPreventionEffect(final KharnTheBetrayerPreventionEffect effect) {

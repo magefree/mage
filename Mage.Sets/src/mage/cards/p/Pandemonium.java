@@ -29,7 +29,7 @@ public final class Pandemonium extends CardImpl {
         // Whenever a creature enters the battlefield, that creature's controller may have it deal damage equal to its power to any target of their choice.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new PandemoniumEffect(),
-                StaticFilters.FILTER_PERMANENT_CREATURE,
+                StaticFilters.FILTER_PERMANENT_A_CREATURE,
                 false, SetTargetPointer.PERMANENT, ""
         );
         ability.addTarget(new TargetAnyTarget());
