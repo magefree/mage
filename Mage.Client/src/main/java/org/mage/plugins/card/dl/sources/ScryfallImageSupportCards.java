@@ -371,7 +371,7 @@ public class ScryfallImageSupportCards {
             add("HOU"); // Hour of Devastation
             add("PS17"); // San Diego Comic-Con 2017
             add("C17"); // Commander 2017
-            add("PWCQ"); // World Magic Cup Qualifiers
+            add("WMC"); // World Magic Cup Qualifiers
             add("H17"); // HasCon 2017
             add("HTR16"); // 2016 Heroes of the Realm
             add("PXLN"); // Ixalan Promos

@@ -6,7 +6,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- * https://scryfall.com/sets/pwcq
+ * https://scryfall.com/sets/wmc
  * https://mtg.gamepedia.com/World_Magic_Cup_Qualifiers
  * @author fireshoes
  */
@@ -19,7 +19,7 @@ public final class WorldMagicCupQualifier extends ExpansionSet {
     }
 
     private WorldMagicCupQualifier() {
-        super("World Magic Cup Qualifier", "PWCQ", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
+        super("World Magic Cup Qualifiers", "WMC", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
