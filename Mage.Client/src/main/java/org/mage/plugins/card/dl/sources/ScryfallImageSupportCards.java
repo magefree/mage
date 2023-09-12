@@ -251,7 +251,7 @@ public class ScryfallImageSupportCards {
             add("PISD"); // Innistrad Promos
             add("ISD"); // Innistrad
             add("PD3"); // Premium Deck Series: Graveborn
-            add("PIDW"); // IDW Comics 2012
+            add("PIDW"); // IDW Comics Inserts
             add("PW12"); // Wizards Play Network 2012
             add("PDP12"); // Duels of the Planeswalkers 2012 Promos
             add("J12"); // Judge Gift Cards 2012
@@ -271,7 +271,6 @@ public class ScryfallImageSupportCards {
             add("PRTR"); // Return to Ravnica Promos
             add("CM1"); // Commander's Arsenal
             add("PDP13"); // Duels of the Planeswalkers 2013 Promos
-            add("PI13"); // IDW Comics 2013
             add("J13"); // Judge Gift Cards 2013
             add("F13"); // Friday Night Magic 2013
             add("PGTC"); // Gatecrash Promos
@@ -289,7 +288,6 @@ public class ScryfallImageSupportCards {
             add("THS"); // Theros
             add("C13"); // Commander 2013
             add("PDP14"); // Duels of the Planeswalkers 2014 Promos
-            add("PI14"); // IDW Comics 2014
             add("J14"); // Judge Gift Cards 2014
             add("F14"); // Friday Night Magic 2014
             add("PBNG"); // Born of the Gods Promos

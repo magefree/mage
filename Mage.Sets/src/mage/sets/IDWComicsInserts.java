@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * https://scryfall.com/sets/pidw
  */
-public class IDWComics2012 extends ExpansionSet {
+public class IDWComicsInserts extends ExpansionSet {
 
-    private static final IDWComics2012 instance = new IDWComics2012();
+    private static final IDWComicsInserts instance = new IDWComicsInserts();
 
-    public static IDWComics2012 getInstance() {
+    public static IDWComicsInserts getInstance() {
         return instance;
     }
 
-    private IDWComics2012() {
-        super("IDW Comics 2012", "PIDW", ExpansionSet.buildDate(2012, 1, 1), SetType.PROMOTIONAL);
+    private IDWComicsInserts() {
+        super("IDW Comics Inserts", "PIDW", ExpansionSet.buildDate(2012, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
@@ -29,5 +29,13 @@ public class IDWComics2012 extends ExpansionSet {
         cards.add(new SetCardInfo("Standstill", 7, Rarity.RARE, mage.cards.s.Standstill.class));
         cards.add(new SetCardInfo("Treasure Hunt", 1, Rarity.RARE, mage.cards.t.TreasureHunt.class));
         cards.add(new SetCardInfo("Turnabout", 9, Rarity.RARE, mage.cards.t.Turnabout.class));
+        cards.add(new SetCardInfo("Corrupt", 12, Rarity.RARE, mage.cards.c.Corrupt.class));
+        cards.add(new SetCardInfo("Gaze of Granite", 14, Rarity.RARE, mage.cards.g.GazeOfGranite.class));
+        cards.add(new SetCardInfo("High Tide", 13, Rarity.RARE, mage.cards.h.HighTide.class));
+        cards.add(new SetCardInfo("Ogre Arsonist", 11, Rarity.RARE, mage.cards.o.OgreArsonist.class));
+        cards.add(new SetCardInfo("Voidmage Husher", 10, Rarity.RARE, mage.cards.v.VoidmageHusher.class));
+        cards.add(new SetCardInfo("Acquire", 16, Rarity.RARE, mage.cards.a.Acquire.class));
+        cards.add(new SetCardInfo("Duress", 17, Rarity.RARE, mage.cards.d.Duress.class));
+        cards.add(new SetCardInfo("Wash Out", 15, Rarity.RARE, mage.cards.w.WashOut.class));
      }
 }
