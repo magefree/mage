@@ -183,11 +183,9 @@ public class ScryfallImageSupportCards {
             add("EVE"); // Eventide
             add("DRB"); // From the Vault: Dragons
             add("ME2"); // Masters Edition II
-            add("PWPN"); // Wizards Play Network 2008
             add("ALA"); // Shards of Alara
             add("PALA"); // Shards of Alara Promos
             add("DD2"); // Duel Decks: Jace vs. Chandra
-            add("PW09"); // Wizards Play Network 2009
             add("PDTP"); // Duels of the Planeswalkers 2009 Promos
             //add("PMPS09"); // Magic Premiere Shop 2009
             add("P09"); // Magic Player Rewards 2009
@@ -207,7 +205,6 @@ public class ScryfallImageSupportCards {
             add("DDD"); // Duel Decks: Garruk vs. Liliana
             add("H09"); // Premium Deck Series: Slivers
             add("PDP10"); // Duels of the Planeswalkers 2010 Promos
-            add("PW10"); // Wizards Play Network 2010
             //add("PMPS10"); // Magic Premiere Shop 2010
             add("P10"); // Magic Player Rewards 2010
             add("G10"); // Judge Gift Cards 2010

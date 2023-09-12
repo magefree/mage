@@ -5,7 +5,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- * https://scryfall.com/sets/pg07
+ * https://scryfall.com/sets/pdci
  */
 public class DCIPromos extends ExpansionSet {
 
@@ -40,6 +40,57 @@ public class DCIPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Wilt-Leaf Cavaliers", 18, Rarity.RARE, mage.cards.w.WiltLeafCavaliers.class));
         cards.add(new SetCardInfo("Duergar Hedge-Mage", 19, Rarity.RARE, mage.cards.d.DuergarHedgeMage.class));
         cards.add(new SetCardInfo("Selkie Hedge-Mage", 20, Rarity.RARE, mage.cards.s.SelkieHedgeMage.class));
+        cards.add(new SetCardInfo("Sprouting Thrinax", 21, Rarity.RARE, mage.cards.s.SproutingThrinax.class));
+        cards.add(new SetCardInfo("Woolly Thoctar", 22, Rarity.RARE, mage.cards.w.WoollyThoctar.class));
+        cards.add(new SetCardInfo("Path to Exile", 24, Rarity.RARE, mage.cards.p.PathToExile.class));
+        cards.add(new SetCardInfo("Hellspark Elemental", 25, Rarity.RARE, mage.cards.h.HellsparkElemental.class));
+        cards.add(new SetCardInfo("Marisi's Twinclaws", 26, Rarity.RARE, mage.cards.m.MarisisTwinclaws.class));
+        cards.add(new SetCardInfo("Slave of Bolas", 27, Rarity.RARE, mage.cards.s.SlaveOfBolas.class));
+        cards.add(new SetCardInfo("Mycoid Shepherd", 28, Rarity.RARE, mage.cards.m.MycoidShepherd.class));
+        cards.add(new SetCardInfo("Naya Sojourners", 29, Rarity.RARE, mage.cards.n.NayaSojourners.class));
+        cards.add(new SetCardInfo("Mind Control", 30, Rarity.RARE, mage.cards.m.MindControl.class));
+        cards.add(new SetCardInfo("Rise from the Grave", 31, Rarity.RARE, mage.cards.r.RiseFromTheGrave.class));
+        cards.add(new SetCardInfo("Kor Duelist", 32, Rarity.RARE, mage.cards.k.KorDuelist.class));
+        cards.add(new SetCardInfo("Vampire Nighthawk", 33, Rarity.RARE, mage.cards.v.VampireNighthawk.class));
+        cards.add(new SetCardInfo("Nissa's Chosen", 34, Rarity.RARE, mage.cards.n.NissasChosen.class));
+        cards.add(new SetCardInfo("Emeria Angel", 35, Rarity.RARE, mage.cards.e.EmeriaAngel.class));
+        cards.add(new SetCardInfo("Kor Firewalker", 36, Rarity.RARE, mage.cards.k.KorFirewalker.class));
+        cards.add(new SetCardInfo("Leatherback Baloth", 37, Rarity.RARE, mage.cards.l.LeatherbackBaloth.class));
+        cards.add(new SetCardInfo("Hada Freeblade", 38, Rarity.RARE, mage.cards.h.HadaFreeblade.class));
+        cards.add(new SetCardInfo("Kalastria Highborn", 39, Rarity.RARE, mage.cards.k.KalastriaHighborn.class));
+        cards.add(new SetCardInfo("Syphon Mind", 40, Rarity.RARE, mage.cards.s.SyphonMind.class));
+        // Planes 41-45
+        cards.add(new SetCardInfo("Pathrazer of Ulamog", 46, Rarity.RARE, mage.cards.p.PathrazerOfUlamog.class));
+        cards.add(new SetCardInfo("Curse of Wizardry", 47, Rarity.RARE, mage.cards.c.CurseOfWizardry.class));
+        cards.add(new SetCardInfo("Staggershock", 48, Rarity.RARE, mage.cards.s.Staggershock.class));
+        cards.add(new SetCardInfo("Deathless Angel", 49, Rarity.RARE, mage.cards.d.DeathlessAngel.class));
+        cards.add(new SetCardInfo("Fling", 50, Rarity.RARE, mage.cards.f.Fling.class));
+        cards.add(new SetCardInfo("Sylvan Ranger", 51, Rarity.RARE, mage.cards.s.SylvanRanger.class));
+        cards.add(new SetCardInfo("Liliana's Specter", 52, Rarity.COMMON, mage.cards.l.LilianasSpecter.class));
+        cards.add(new SetCardInfo("Mitotic Slime", 53, Rarity.RARE, mage.cards.m.MitoticSlime.class));
+        // Schemes 54-58
+        cards.add(new SetCardInfo("Plague Stinger", 59, Rarity.RARE, mage.cards.p.PlagueStinger.class));
+        cards.add(new SetCardInfo("Golem's Heart", 60, Rarity.RARE, mage.cards.g.GolemsHeart.class));
+        cards.add(new SetCardInfo("Memnite", 61, Rarity.UNCOMMON, mage.cards.m.Memnite.class));
+        cards.add(new SetCardInfo("Tempered Steel", 62, Rarity.RARE, mage.cards.t.TemperedSteel.class));
+        cards.add(new SetCardInfo("Skinrender", 63, Rarity.RARE, mage.cards.s.Skinrender.class));
+        cards.add(new SetCardInfo("Master's Call", 64, Rarity.RARE, mage.cards.m.MastersCall.class));
+        cards.add(new SetCardInfo("Plague Myr", 65, Rarity.RARE, mage.cards.p.PlagueMyr.class));
+        cards.add(new SetCardInfo("Signal Pest", 66, Rarity.RARE, mage.cards.s.SignalPest.class));
+        cards.add(new SetCardInfo("Treasure Mage", 67, Rarity.UNCOMMON, mage.cards.t.TreasureMage.class));
+        cards.add(new SetCardInfo("Black Sun's Zenith", 68, Rarity.RARE, mage.cards.b.BlackSunsZenith.class));
+        cards.add(new SetCardInfo("Fling", 69, Rarity.RARE, mage.cards.f.Fling.class));
+        cards.add(new SetCardInfo("Sylvan Ranger", 70, Rarity.RARE, mage.cards.s.SylvanRanger.class));
+        cards.add(new SetCardInfo("Vault Skirge", 71, Rarity.RARE, mage.cards.v.VaultSkirge.class));
+        cards.add(new SetCardInfo("Maul Splicer", 72, Rarity.RARE, mage.cards.m.MaulSplicer.class));
+        cards.add(new SetCardInfo("Shrine of Burning Rage", 73, Rarity.RARE, mage.cards.s.ShrineOfBurningRage.class));
+        cards.add(new SetCardInfo("Priest of Urabrask", 74, Rarity.UNCOMMON, mage.cards.p.PriestOfUrabrask.class));
+        cards.add(new SetCardInfo("Myr Superion", 75, Rarity.RARE, mage.cards.m.MyrSuperion.class));
+        cards.add(new SetCardInfo("Tormented Soul", 76, Rarity.RARE, mage.cards.t.TormentedSoul.class));
+        cards.add(new SetCardInfo("Auramancer", 77, Rarity.RARE, mage.cards.a.Auramancer.class));
+        cards.add(new SetCardInfo("Circle of Flame", 78, Rarity.RARE, mage.cards.c.CircleOfFlame.class));
+        cards.add(new SetCardInfo("Stormblood Berserker", 79, Rarity.UNCOMMON, mage.cards.s.StormbloodBerserker.class));
+        cards.add(new SetCardInfo("Dungrove Elder", 80, Rarity.RARE, mage.cards.d.DungroveElder.class));
 
      }
 }
