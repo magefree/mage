@@ -57,7 +57,6 @@ public class ScryfallImageSupportCards {
             add("VIS"); // Visions
             add("5ED"); // Fifth Edition
             //add("PVAN"); // Vanguard Series
-            add("PPOD"); // Portal Demo Game
             add("POR"); // Portal
             add("WTH"); // Weatherlight
             add("WC97"); // World Championship Decks 1997
@@ -164,7 +163,6 @@ public class ScryfallImageSupportCards {
             add("FUT"); // Future Sight
             add("10E"); // Tenth Edition
             add("P10E"); // Tenth Edition Promos
-            add("PSUM"); // Summer of Magic
             add("ME1"); // Masters Edition
             add("LRW"); // Lorwyn
             add("DD1"); // Duel Decks: Elves vs. Goblins
