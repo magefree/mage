@@ -2,15 +2,14 @@
 
 package mage.view;
 
-import mage.game.tournament.Round;
-import mage.game.tournament.Tournament;
-import mage.game.tournament.TournamentPlayer;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import mage.game.tournament.Round;
+import mage.game.tournament.Tournament;
+import mage.game.tournament.TournamentPlayer;
 
 /**
  *
@@ -21,7 +20,6 @@ public class TournamentView implements Serializable {
 
     private final String tournamentName;
     private final String tournamentType;
-    private final TournamentTypeView tournamentTypeView;
     private final String tournamentState;
     
     private final Date startTime;
@@ -46,7 +44,6 @@ public class TournamentView implements Serializable {
             typeText.append(' ').append(tournament.getNumberRounds()).append(" rounds");
         } 
         tournamentType = typeText.toString();
-        tournamentTypeView = new TournamentTypeView(tournament.getTournamentType());
         startTime = tournament.getStartTime();
         endTime = tournament.getEndTime();
         stepStartTime = tournament.getStepStartTime();
@@ -75,10 +72,6 @@ public class TournamentView implements Serializable {
 
     public String getTournamentType() {
         return tournamentType;
-    }
-
-    public TournamentTypeView getTournamentTypeView() {
-        return tournamentTypeView;
     }
 
     public Date getStartTime() {
