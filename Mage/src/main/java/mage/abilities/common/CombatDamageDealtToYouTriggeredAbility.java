@@ -5,19 +5,23 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForPlayersEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * A triggered ability for whenever one or more creatures deal combat damage to
  * you. Has an optional component for setting the target pointer to the opponent
  * whose creatures dealt combat damage to you.
- * 
+ *
  * @author alexander-novo
  */
 public class CombatDamageDealtToYouTriggeredAbility extends TriggeredAbilityImpl {
 
-    // Whether or not the ability should set a target targetting the opponent who
+    // Whether the ability should set a target targetting the opponent who
     // controls the creatures who dealt damage to you
     private final boolean setTarget;
 
@@ -47,7 +51,7 @@ public class CombatDamageDealtToYouTriggeredAbility extends TriggeredAbilityImpl
      * @param optional  Whether or not the ability is optional
      */
     public CombatDamageDealtToYouTriggeredAbility(Zone zone, Effect effect, boolean setTarget,
-            boolean optional) {
+                                                  boolean optional) {
         super(zone, effect, optional);
 
         this.setTarget = setTarget;
@@ -68,19 +72,29 @@ public class CombatDamageDealtToYouTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForPlayersEvent damageEvent = (DamagedBatchForPlayersEvent) event;
-        boolean check = damageEvent.getEvents()
-                .stream()
-                .anyMatch(c -> c.isCombatDamage() && c.getPlayerId() == this.controllerId);
+        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
 
-        if (check) {
-            if (this.setTarget) {
-                this.getEffects().setTargetPointer(
-                        new FixedTarget(game.getPermanent(damageEvent.getSourceId()).getControllerId()));
+        boolean isDamaged = false;
+        UUID damageSourceControllerID = null;
+        for (DamagedEvent damagedEvent : dEvent.getEvents()) {
+            if (damagedEvent.isCombatDamage() && damagedEvent.getPlayerId() == this.controllerId) {
+                isDamaged = true;
+                // TODO: current code support only one controller
+                //  (it's can be potentially bugged in team mode with multiple attack players)
+                Permanent damageSource = game.getPermanent(damagedEvent.getSourceId());
+                if (damageSource != null) {
+                    damageSourceControllerID = damageSource.getControllerId();
+                }
             }
+        }
 
+        if (isDamaged) {
+            if (this.setTarget && damageSourceControllerID != null) {
+                this.getEffects().setTargetPointer(new FixedTarget(damageSourceControllerID));
+            }
             return true;
         }
+
         return false;
     }
 
