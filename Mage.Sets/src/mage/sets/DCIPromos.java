@@ -64,8 +64,8 @@ public class DCIPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Curse of Wizardry", 47, Rarity.RARE, mage.cards.c.CurseOfWizardry.class));
         cards.add(new SetCardInfo("Staggershock", 48, Rarity.RARE, mage.cards.s.Staggershock.class));
         cards.add(new SetCardInfo("Deathless Angel", 49, Rarity.RARE, mage.cards.d.DeathlessAngel.class));
-        cards.add(new SetCardInfo("Fling", 50, Rarity.RARE, mage.cards.f.Fling.class));
-        cards.add(new SetCardInfo("Sylvan Ranger", 51, Rarity.RARE, mage.cards.s.SylvanRanger.class));
+        cards.add(new SetCardInfo("Fling", 50, Rarity.RARE, mage.cards.f.Fling.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sylvan Ranger", 51, Rarity.RARE, mage.cards.s.SylvanRanger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana's Specter", 52, Rarity.COMMON, mage.cards.l.LilianasSpecter.class));
         cards.add(new SetCardInfo("Mitotic Slime", 53, Rarity.RARE, mage.cards.m.MitoticSlime.class));
         // Schemes 54-58
@@ -79,8 +79,8 @@ public class DCIPromos extends ExpansionSet {
         cards.add(new SetCardInfo("Signal Pest", 66, Rarity.RARE, mage.cards.s.SignalPest.class));
         cards.add(new SetCardInfo("Treasure Mage", 67, Rarity.UNCOMMON, mage.cards.t.TreasureMage.class));
         cards.add(new SetCardInfo("Black Sun's Zenith", 68, Rarity.RARE, mage.cards.b.BlackSunsZenith.class));
-        cards.add(new SetCardInfo("Fling", 69, Rarity.RARE, mage.cards.f.Fling.class));
-        cards.add(new SetCardInfo("Sylvan Ranger", 70, Rarity.RARE, mage.cards.s.SylvanRanger.class));
+        cards.add(new SetCardInfo("Fling", 69, Rarity.RARE, mage.cards.f.Fling.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sylvan Ranger", 70, Rarity.RARE, mage.cards.s.SylvanRanger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vault Skirge", 71, Rarity.RARE, mage.cards.v.VaultSkirge.class));
         cards.add(new SetCardInfo("Maul Splicer", 72, Rarity.RARE, mage.cards.m.MaulSplicer.class));
         cards.add(new SetCardInfo("Shrine of Burning Rage", 73, Rarity.RARE, mage.cards.s.ShrineOfBurningRage.class));
