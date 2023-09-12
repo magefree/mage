@@ -70,18 +70,14 @@ class NettlingNuisanceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-
         if (player == null) {
             return false;
         }
-        
         Token token = new NettlingNuisancePirateToken();
-        token.putOntoBattlefield(1, game, source);
+        token.putOntoBattlefield(1, game, source, player.getId());
         token.getLastAddedTokenIds().forEach(id -> game.addEffect(
-            new GoadTargetEffect().setDuration(Duration.EndOfGame).setTargetPointer(new FixedTarget(id, game)),
-            source
+            new GoadTargetEffect().setDuration(Duration.EndOfGame).setTargetPointer(new FixedTarget(id, game)), source
         ));
-
         return true;
     }
 
@@ -91,4 +87,3 @@ class NettlingNuisanceEffect extends OneShotEffect {
     }
 
 }
-
