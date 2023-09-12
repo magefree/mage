@@ -1574,6 +1574,23 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     }
 
+    public void assertIsNotAttachedTo(TestPlayer thePlayer, String theAttachment, String thePermanent) {
+
+        List<Permanent> permanents = currentGame.getBattlefield().getAllActivePermanents().stream()
+                .filter(permanent -> permanent.isControlledBy(thePlayer.getId()))
+                .filter(permanent -> permanent.getName().equals(thePermanent))
+                .collect(Collectors.toList());
+        Assert.assertFalse(theAttachment + " was attached to " + thePermanent,
+                permanents.stream()
+                        .anyMatch(permanent -> permanent.getAttachments()
+                                .stream()
+                                .map(id -> currentGame.getCard(id))
+                                .map(MageObject::getName)
+                                .collect(Collectors.toList()).contains(theAttachment)));
+
+
+    }
+
     public Permanent getPermanent(String cardName, UUID controller) {
         assertAliaseSupportInActivateCommand(cardName, false);
         Permanent found = null;
