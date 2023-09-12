@@ -18,6 +18,7 @@ import mage.remote.SessionImpl;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -240,7 +241,7 @@ public final class SessionHandler {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
             String logFilename = sdf.format(new Date()) + "_limited" + ".dck";
             try {
-                XMAGE.getExporter().writeDeck(logFilename, deckList);
+                XMAGE.getExporter().writeDeck(new File("gamelogs"), logFilename, deckList);
             } catch (IOException e) {
                 e.printStackTrace();
             }
