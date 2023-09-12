@@ -57,7 +57,7 @@ class RuinRaiderEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to its mana value";
     }
 
-    RuinRaiderEffect(final RuinRaiderEffect effect) {
+    private RuinRaiderEffect(final RuinRaiderEffect effect) {
         super(effect);
     }
 

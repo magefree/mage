@@ -45,7 +45,7 @@ class CrumblingSanctuaryEffect extends PreventionEffectImpl {
         staticText = "If damage would be dealt to a player, that player exiles that many cards from the top of their library instead.";
     }
 
-    public CrumblingSanctuaryEffect(final CrumblingSanctuaryEffect effect) {
+    private CrumblingSanctuaryEffect(final CrumblingSanctuaryEffect effect) {
         super(effect);
     }
 

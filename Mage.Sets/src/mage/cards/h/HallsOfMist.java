@@ -50,7 +50,7 @@ class CantAttackIfAttackedLastTurnAllEffect extends RestrictionEffect {
         this.staticText = "Creatures that attacked during their controller's last turn can't attack";
     }
 
-    public CantAttackIfAttackedLastTurnAllEffect(final CantAttackIfAttackedLastTurnAllEffect effect) {
+    private CantAttackIfAttackedLastTurnAllEffect(final CantAttackIfAttackedLastTurnAllEffect effect) {
         super(effect);
     }
 

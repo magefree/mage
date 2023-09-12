@@ -48,7 +48,7 @@ class PainfulMemoriesEffect extends OneShotEffect {
         this.staticText = "Look at target opponent's hand and choose a card from it. Put that card on top of that player's library.";
     }
     
-    public PainfulMemoriesEffect(final PainfulMemoriesEffect effect) {
+    private PainfulMemoriesEffect(final PainfulMemoriesEffect effect) {
         super(effect);
     }
 

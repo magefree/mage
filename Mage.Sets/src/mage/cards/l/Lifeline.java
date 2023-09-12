@@ -53,7 +53,7 @@ class LifelineEffect extends OneShotEffect {
         this.staticText = "";
     }
 
-    public LifelineEffect(final LifelineEffect effect) {
+    private LifelineEffect(final LifelineEffect effect) {
         super(effect);
     }
 

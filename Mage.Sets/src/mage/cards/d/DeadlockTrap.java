@@ -59,7 +59,7 @@ class DeadlockTrapCantActivateEffect extends RestrictionEffect {
         staticText = "Its activated abilities can't be activated this turn";
     }
 
-    public DeadlockTrapCantActivateEffect(final DeadlockTrapCantActivateEffect effect) {
+    private DeadlockTrapCantActivateEffect(final DeadlockTrapCantActivateEffect effect) {
         super(effect);
     }
 

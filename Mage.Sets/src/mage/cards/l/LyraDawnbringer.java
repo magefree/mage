@@ -44,7 +44,7 @@ public final class LyraDawnbringer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LyraDawnbringer(final LyraDawnbringer lyraDawnbringer) {
+    private LyraDawnbringer(final LyraDawnbringer lyraDawnbringer) {
         super(lyraDawnbringer);
     }
 

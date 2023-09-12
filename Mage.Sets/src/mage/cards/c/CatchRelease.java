@@ -66,7 +66,7 @@ class ReleaseSacrificeEffect extends OneShotEffect {
         staticText = "Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker";
     }
 
-    public ReleaseSacrificeEffect(ReleaseSacrificeEffect effect) {
+    private ReleaseSacrificeEffect(final ReleaseSacrificeEffect effect) {
         super(effect);
     }
 

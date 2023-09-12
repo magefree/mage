@@ -23,7 +23,7 @@ public final class Rejuvenate extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 
-    public Rejuvenate (final Rejuvenate card) {
+    private Rejuvenate(final Rejuvenate card) {
         super(card);
     }
 

@@ -58,7 +58,7 @@ class CelestialKirinEffect extends OneShotEffect {
         this.staticText = "destroy all permanents with that spell's mana value";
     }
 
-    public CelestialKirinEffect(final CelestialKirinEffect effect) {
+    private CelestialKirinEffect(final CelestialKirinEffect effect) {
         super(effect);
     }
 

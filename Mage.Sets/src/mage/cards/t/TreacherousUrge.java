@@ -56,7 +56,7 @@ class TreacherousUrgeEffect extends OneShotEffect {
         this.staticText = "Target opponent reveals their hand. You may put a creature card from it onto the battlefield under your control. That creature gains haste. Sacrifice it at the beginning of the next end step";
     }
 
-    public TreacherousUrgeEffect(final TreacherousUrgeEffect effect) {
+    private TreacherousUrgeEffect(final TreacherousUrgeEffect effect) {
         super(effect);
     }
 

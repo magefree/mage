@@ -49,7 +49,7 @@ class GrafMoleTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you sacrifice a Clue, ");
     }
 
-    public GrafMoleTriggeredAbility(final GrafMoleTriggeredAbility ability) {
+    private GrafMoleTriggeredAbility(final GrafMoleTriggeredAbility ability) {
         super(ability);
     }
 

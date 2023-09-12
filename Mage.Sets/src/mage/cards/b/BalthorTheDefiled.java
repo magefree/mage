@@ -72,7 +72,7 @@ class BalthorTheDefiledEffect extends OneShotEffect {
         this.staticText = "Each player returns all black and all red creature cards from their graveyard to the battlefield";
     }
 
-    public BalthorTheDefiledEffect(final BalthorTheDefiledEffect effect) {
+    private BalthorTheDefiledEffect(final BalthorTheDefiledEffect effect) {
         super(effect);
     }
 

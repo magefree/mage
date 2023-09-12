@@ -57,7 +57,7 @@ class RhoxFaithmenderEffect extends ReplacementEffectImpl {
         staticText = "If you would gain life, you gain twice that much life instead";
     }
 
-    public RhoxFaithmenderEffect(final RhoxFaithmenderEffect effect) {
+    private RhoxFaithmenderEffect(final RhoxFaithmenderEffect effect) {
         super(effect);
     }
 

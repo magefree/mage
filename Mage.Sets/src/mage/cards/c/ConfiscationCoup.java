@@ -59,7 +59,7 @@ class ConfiscationCoupEffect extends OneShotEffect {
         this.staticText = "Choose target artifact or creature. You get {E}{E}{E}{E}, then you may pay an amount of {E} equal to that permanent's mana value. If you do, gain control of it";
     }
 
-    public ConfiscationCoupEffect(final ConfiscationCoupEffect effect) {
+    private ConfiscationCoupEffect(final ConfiscationCoupEffect effect) {
         super(effect);
     }
 

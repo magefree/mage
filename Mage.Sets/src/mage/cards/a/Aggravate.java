@@ -50,7 +50,7 @@ class AggravateRequirementEffect extends RequirementEffect {
         this.staticText = "Each creature dealt damage this way attacks this turn if able";
     }
 
-    public AggravateRequirementEffect(final AggravateRequirementEffect effect) {
+    private AggravateRequirementEffect(final AggravateRequirementEffect effect) {
         super(effect);
     }
 

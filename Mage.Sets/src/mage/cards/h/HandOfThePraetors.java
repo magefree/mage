@@ -50,7 +50,7 @@ public final class HandOfThePraetors extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HandOfThePraetors (final HandOfThePraetors card) {
+    private HandOfThePraetors(final HandOfThePraetors card) {
         super(card);
     }
 

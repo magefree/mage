@@ -76,7 +76,7 @@ class IbHalfheartGoblinTacticianEffect extends OneShotEffect {
         this.staticText = "sacrifice it. If you do, it deals 4 damage to each creature blocking it";
     }
 
-    public IbHalfheartGoblinTacticianEffect(final IbHalfheartGoblinTacticianEffect effect) {
+    private IbHalfheartGoblinTacticianEffect(final IbHalfheartGoblinTacticianEffect effect) {
         super(effect);
     }
 

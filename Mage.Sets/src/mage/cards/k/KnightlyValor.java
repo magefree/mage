@@ -57,7 +57,7 @@ public final class KnightlyValor extends CardImpl {
 
     }
 
-    public KnightlyValor (final KnightlyValor card) {
+    private KnightlyValor(final KnightlyValor card) {
         super(card);
     }
 

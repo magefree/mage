@@ -65,7 +65,7 @@ class NashiMoonSagesScionEffect extends OneShotEffect {
                 "pay life equal to its mana value rather than paying its mana cost";
     }
 
-    public NashiMoonSagesScionEffect(final NashiMoonSagesScionEffect effect) {
+    private NashiMoonSagesScionEffect(final NashiMoonSagesScionEffect effect) {
         super(effect);
     }
 

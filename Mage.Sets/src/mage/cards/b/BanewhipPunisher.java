@@ -46,7 +46,7 @@ public final class BanewhipPunisher extends CardImpl {
         
     }
 
-    public BanewhipPunisher(final BanewhipPunisher banewhipPunisher) {
+    private BanewhipPunisher(final BanewhipPunisher banewhipPunisher) {
         super(banewhipPunisher);
     }
 

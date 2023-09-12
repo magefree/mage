@@ -63,7 +63,7 @@ class TezzeretTheSeekerEffect2 extends OneShotEffect {
         this.staticText = "Search your library for an artifact card with mana value X or less, put it onto the battlefield, then shuffle";
     }
 
-    public TezzeretTheSeekerEffect2(final TezzeretTheSeekerEffect2 effect) {
+    private TezzeretTheSeekerEffect2(final TezzeretTheSeekerEffect2 effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class TezzeretTheSeekerEffect3 extends ContinuousEffectImpl {
         this.staticText = "Artifacts you control become artifact creatures with base power and toughness 5/5 until end of turn";
     }
 
-    public TezzeretTheSeekerEffect3(final TezzeretTheSeekerEffect3 effect) {
+    private TezzeretTheSeekerEffect3(final TezzeretTheSeekerEffect3 effect) {
         super(effect);
     }
 

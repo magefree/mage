@@ -42,7 +42,7 @@ class PsychicSpiralEffect extends OneShotEffect {
         staticText = "Shuffle all cards from your graveyard into your library. Target player mills that many cards";
     }
 
-    public PsychicSpiralEffect(final PsychicSpiralEffect effect) {
+    private PsychicSpiralEffect(final PsychicSpiralEffect effect) {
         super(effect);
     }
 

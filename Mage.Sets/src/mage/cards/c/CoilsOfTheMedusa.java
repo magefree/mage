@@ -64,7 +64,7 @@ class CoilsOfTheMedusaDestroyEffect extends OneShotEffect {
         this.staticText = "Destroy all non-Wall creatures blocking enchanted creature.";
     }
 
-    public CoilsOfTheMedusaDestroyEffect(final CoilsOfTheMedusaDestroyEffect effect) {
+    private CoilsOfTheMedusaDestroyEffect(final CoilsOfTheMedusaDestroyEffect effect) {
         super(effect);
     }
 

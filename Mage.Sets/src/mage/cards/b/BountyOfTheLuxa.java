@@ -52,7 +52,7 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
                 "Otherwise, add {C}{G}{U}";
     }
 
-    public BountyOfTheLuxaEffect(final BountyOfTheLuxaEffect effect) {
+    private BountyOfTheLuxaEffect(final BountyOfTheLuxaEffect effect) {
         super(effect);
     }
 

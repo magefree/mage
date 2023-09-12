@@ -58,7 +58,7 @@ class SelvalasEnforcerEffect extends OneShotEffect {
         this.staticText = "each player reveals the top card of their library. For each nonland card revealed this way, put a +1/+1 counter on {this}";
     }
 
-    public SelvalasEnforcerEffect(final SelvalasEnforcerEffect effect) {
+    private SelvalasEnforcerEffect(final SelvalasEnforcerEffect effect) {
         super(effect);
     }
 

@@ -38,7 +38,7 @@ public final class FeastOfWorms extends CardImpl {
         this.getSpellAbility().addEffect(new FeastOfWormsEffect());
     }
 
-    public FeastOfWorms (final FeastOfWorms card) {
+    private FeastOfWorms(final FeastOfWorms card) {
         super(card);
     }
 
@@ -56,7 +56,7 @@ class FeastOfWormsEffect extends OneShotEffect {
         staticText = "If that land was legendary, its controller sacrifices another land";
     }
 
-    FeastOfWormsEffect(FeastOfWormsEffect effect) {
+    private FeastOfWormsEffect(final FeastOfWormsEffect effect) {
         super(effect);
     }
 

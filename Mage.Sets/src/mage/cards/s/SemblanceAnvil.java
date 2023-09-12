@@ -54,7 +54,7 @@ class SemblanceAnvilEffect extends OneShotEffect {
         staticText = "exile a nonland card from your hand";
     }
 
-    public SemblanceAnvilEffect(SemblanceAnvilEffect effect) {
+    private SemblanceAnvilEffect(final SemblanceAnvilEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl {
         staticText = effectText;
     }
 
-    SemblanceAnvilCostReductionEffect(SemblanceAnvilCostReductionEffect effect) {
+    private SemblanceAnvilCostReductionEffect(final SemblanceAnvilCostReductionEffect effect) {
         super(effect);
     }
 

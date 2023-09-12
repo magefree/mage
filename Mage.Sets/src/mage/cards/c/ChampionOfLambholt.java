@@ -62,7 +62,7 @@ class ChampionOfLambholtEffect extends RestrictionEffect {
         staticText = "Creatures with power less than {this}'s power can't block creatures you control";
     }
 
-    ChampionOfLambholtEffect(final ChampionOfLambholtEffect effect) {
+    private ChampionOfLambholtEffect(final ChampionOfLambholtEffect effect) {
         super(effect);
     }
 

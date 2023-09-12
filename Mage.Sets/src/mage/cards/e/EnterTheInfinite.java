@@ -84,7 +84,7 @@ class PutCardOnLibraryEffect extends OneShotEffect {
         staticText = "Then put a card from your hand on top of your library";
     }
 
-    public PutCardOnLibraryEffect(final PutCardOnLibraryEffect effect) {
+    private PutCardOnLibraryEffect(final PutCardOnLibraryEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class MaximumHandSizeEffect extends MaximumHandSizeControllerEffect {
         staticText = "You have no maximum hand size until your next turn";
     }
 
-    public MaximumHandSizeEffect(final MaximumHandSizeEffect effect) {
+    private MaximumHandSizeEffect(final MaximumHandSizeEffect effect) {
         super(effect);
     }
 

@@ -88,7 +88,7 @@ public class DistributeCountersEffect extends OneShotEffect {
         String number = (amount instanceof StaticValue) ? CardUtil.numberToText(((StaticValue) amount).getValue()) : amount.toString();
         String text = "distribute " + number + ' ' + name + " counters among " + targetDescription;
         if (removeAtEndOfTurn) {
-            text += " For each " + name + " counter you put on a creature this way, remove a "
+            text += ". For each " + name + " counter you put on a creature this way, remove a "
                     + name + " counter from that creature at the beginning of the next cleanup step.";
         }
         return text;

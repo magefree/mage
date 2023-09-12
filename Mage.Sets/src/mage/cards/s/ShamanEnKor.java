@@ -76,7 +76,7 @@ class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
         staticText = "The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to {this} instead";
     }
 
-    ShamanEnKorRedirectFromTargetEffect(final ShamanEnKorRedirectFromTargetEffect effect) {
+    private ShamanEnKorRedirectFromTargetEffect(final ShamanEnKorRedirectFromTargetEffect effect) {
         super(effect);
         sourceObject = effect.sourceObject;
     }

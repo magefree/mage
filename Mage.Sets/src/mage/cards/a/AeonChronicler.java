@@ -60,7 +60,7 @@ class AeonChroniclerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a time counter is removed from {this} while it's exiled, " );
     }
 
-    public AeonChroniclerTriggeredAbility(final AeonChroniclerTriggeredAbility ability) {
+    private AeonChroniclerTriggeredAbility(final AeonChroniclerTriggeredAbility ability) {
         super(ability);
     }
 

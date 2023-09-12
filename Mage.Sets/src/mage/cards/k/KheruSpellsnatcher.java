@@ -59,7 +59,7 @@ class KheruSpellsnatcherEffect extends OneShotEffect {
                 + "You may cast that card without paying its mana cost as long as it remains exiled";
     }
 
-    KheruSpellsnatcherEffect(final KheruSpellsnatcherEffect effect) {
+    private KheruSpellsnatcherEffect(final KheruSpellsnatcherEffect effect) {
         super(effect);
     }
 

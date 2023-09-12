@@ -71,7 +71,7 @@ class RisenExecutionerCastEffect extends AsThoughEffectImpl {
         staticText = "You may cast {this} from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard";
     }
 
-    RisenExecutionerCastEffect(final RisenExecutionerCastEffect effect) {
+    private RisenExecutionerCastEffect(final RisenExecutionerCastEffect effect) {
         super(effect);
     }
 
@@ -112,7 +112,7 @@ class RisenExecutionerCostIncreasingEffect extends CostModificationEffectImpl {
         staticText = "";
     }
 
-    RisenExecutionerCostIncreasingEffect(final RisenExecutionerCostIncreasingEffect effect) {
+    private RisenExecutionerCostIncreasingEffect(final RisenExecutionerCostIncreasingEffect effect) {
         super(effect);
     }
 

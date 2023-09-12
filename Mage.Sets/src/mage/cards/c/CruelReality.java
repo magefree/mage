@@ -85,7 +85,7 @@ class CruelRealityEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(cursedPlayer.getId(), source, game)
                 && cursedPlayer.choose(Outcome.Sacrifice, target, source, game)) {
             Permanent objectToBeSacrificed = game.getPermanent(target.getFirstTarget());

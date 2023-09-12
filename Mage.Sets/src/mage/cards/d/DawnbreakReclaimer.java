@@ -61,7 +61,7 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
         this.staticText = "choose a creature card in an opponent's graveyard, then that player chooses a creature card in your graveyard. You may return those cards to the battlefield under their owners' control";
     }
 
-    public DawnbreakReclaimerEffect(final DawnbreakReclaimerEffect effect) {
+    private DawnbreakReclaimerEffect(final DawnbreakReclaimerEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
             TargetCard chosenCreatureOpponentGraveyard = new TargetCard(Zone.GRAVEYARD, filter);
             Player opponent = null;
             Card cardOpponentGraveyard = null;
-            chosenCreatureOpponentGraveyard.setNotTarget(true);
+            chosenCreatureOpponentGraveyard.withNotTarget(true);
             if (chosenCreatureOpponentGraveyard.canChoose(source.getControllerId(), source, game)) {
                 controller.choose(Outcome.Detriment, chosenCreatureOpponentGraveyard, source, game);
                 cardOpponentGraveyard = game.getCard(chosenCreatureOpponentGraveyard.getFirstTarget());
@@ -124,7 +124,7 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
                         new FilterCreatureCard("a creature card in " + controller.getName() + "'s the graveyard");
                 filterCreatureCard.add(new OwnerIdPredicate(controller.getId()));
                 TargetCardInGraveyard targetControllerGaveyard = new TargetCardInGraveyard(filterCreatureCard);
-                targetControllerGaveyard.setNotTarget(true);
+                targetControllerGaveyard.withNotTarget(true);
                 Card controllerCreatureCard = null;
                 if (targetControllerGaveyard.canChoose(opponent.getId(), source, game)
                         && opponent.choose(outcome, targetControllerGaveyard, source, game)) {

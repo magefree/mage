@@ -92,7 +92,7 @@ class DranaTheLastBloodchiefEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInGraveyard(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, controller.getGraveyard(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {

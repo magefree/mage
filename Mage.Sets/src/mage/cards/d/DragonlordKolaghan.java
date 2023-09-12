@@ -69,7 +69,7 @@ class DragonlordKolaghanTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard, ");
     }
 
-    public DragonlordKolaghanTriggeredAbility(final DragonlordKolaghanTriggeredAbility ability) {
+    private DragonlordKolaghanTriggeredAbility(final DragonlordKolaghanTriggeredAbility ability) {
         super(ability);
     }
 

@@ -70,7 +70,7 @@ class AngelicFavorEffect extends OneShotEffect {
         this.staticText = "Create a 4/4 white Angel creature token with flying. Exile it at the beginning of the next end step";
     }
 
-    public AngelicFavorEffect(final AngelicFavorEffect effect) {
+    private AngelicFavorEffect(final AngelicFavorEffect effect) {
         super(effect);
     }
 

@@ -51,7 +51,7 @@ class AbattoirGhoulEffect extends OneShotEffect {
         staticText = "you gain life equal to that creature's toughness";
     }
 
-    public AbattoirGhoulEffect(final AbattoirGhoulEffect effect) {
+    private AbattoirGhoulEffect(final AbattoirGhoulEffect effect) {
         super(effect);
     }
 

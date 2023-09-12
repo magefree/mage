@@ -44,7 +44,7 @@ public final class MazeRusher extends CardImpl {
 
     }
 
-    public MazeRusher (final MazeRusher card) {
+    private MazeRusher(final MazeRusher card) {
         super(card);
     }
 

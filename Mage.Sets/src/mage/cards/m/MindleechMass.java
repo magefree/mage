@@ -58,7 +58,7 @@ class MindleechMassEffect extends OneShotEffect {
                 "may cast a spell from among those cards without paying its mana cost";
     }
 
-    public MindleechMassEffect(final MindleechMassEffect effect) {
+    private MindleechMassEffect(final MindleechMassEffect effect) {
         super(effect);
     }
 

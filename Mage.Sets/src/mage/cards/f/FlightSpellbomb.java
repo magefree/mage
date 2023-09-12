@@ -35,7 +35,7 @@ public final class FlightSpellbomb extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{U}")), false));
     }
 
-    public FlightSpellbomb (final FlightSpellbomb card) {
+    private FlightSpellbomb(final FlightSpellbomb card) {
         super(card);
     }
 

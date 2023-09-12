@@ -69,7 +69,7 @@ class GoblinClearCutterManaEffect extends ManaEffect {
         netMana.add(new Mana(0, 0, 0, 3, 0, 0, 0, 0));
     }
 
-    public GoblinClearCutterManaEffect(final GoblinClearCutterManaEffect effect) {
+    private GoblinClearCutterManaEffect(final GoblinClearCutterManaEffect effect) {
         super(effect);
         netMana.addAll(effect.netMana);
     }

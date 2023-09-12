@@ -206,6 +206,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Dungeoneer's Pack", 312, Rarity.UNCOMMON, mage.cards.d.DungeoneersPack.class));
         cards.add(new SetCardInfo("Dusk // Dawn", 691, Rarity.RARE, mage.cards.d.DuskDawn.class));
         cards.add(new SetCardInfo("Dusk Mangler", 751, Rarity.UNCOMMON, mage.cards.d.DuskMangler.class));
+        cards.add(new SetCardInfo("Dynaheir, Invoker Adept", 273, Rarity.RARE, mage.cards.d.DynaheirInvokerAdept.class));
         cards.add(new SetCardInfo("Earth Tremor", 171, Rarity.COMMON, mage.cards.e.EarthTremor.class));
         cards.add(new SetCardInfo("Earthquake Dragon", 228, Rarity.RARE, mage.cards.e.EarthquakeDragon.class));
         cards.add(new SetCardInfo("Eight-and-a-Half-Tails", 692, Rarity.RARE, mage.cards.e.EightAndAHalfTails.class));

@@ -85,7 +85,7 @@ class DrawCardControllerTargetEffect extends OneShotEffect {
         this.staticText = "Its controller draws two cards";
     }
 
-    public DrawCardControllerTargetEffect(final DrawCardControllerTargetEffect effect) {
+    private DrawCardControllerTargetEffect(final DrawCardControllerTargetEffect effect) {
         super(effect);
     }
 

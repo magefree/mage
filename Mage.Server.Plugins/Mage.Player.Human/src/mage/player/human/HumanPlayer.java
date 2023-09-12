@@ -2009,7 +2009,7 @@ public class HumanPlayer extends PlayerImpl {
         int remainingDamage = damage;
         while (remainingDamage > 0 && canRespond()) {
             Target target = new TargetAnyTarget();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (singleTargetName != null) {
                 target.setTargetName(singleTargetName);
             }

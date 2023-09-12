@@ -64,7 +64,7 @@ class ChancellorOfTheAnnexEffect extends OneShotEffect {
         staticText = "when each opponent casts their first spell of the game, counter that spell unless that player pays {1}";
     }
 
-    public ChancellorOfTheAnnexEffect(ChancellorOfTheAnnexEffect effect) {
+    private ChancellorOfTheAnnexEffect(final ChancellorOfTheAnnexEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class ChancellorOfTheAnnexDelayedTriggeredAbility extends DelayedTriggeredAbilit
         this.playerId = playerId;
     }
 
-    ChancellorOfTheAnnexDelayedTriggeredAbility(final ChancellorOfTheAnnexDelayedTriggeredAbility ability) {
+    private ChancellorOfTheAnnexDelayedTriggeredAbility(final ChancellorOfTheAnnexDelayedTriggeredAbility ability) {
         super(ability);
         this.playerId = ability.playerId;
     }

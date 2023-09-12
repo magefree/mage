@@ -48,7 +48,7 @@ class DivinerSpiritEffect extends OneShotEffect {
         this.staticText = "you and that player each draw that many cards";
     }
 
-    public DivinerSpiritEffect(final DivinerSpiritEffect effect) {
+    private DivinerSpiritEffect(final DivinerSpiritEffect effect) {
         super(effect);
     }
 

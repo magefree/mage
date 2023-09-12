@@ -61,7 +61,7 @@ class HalfdaneUpkeepEffect extends OneShotEffect {
         this.staticText = "change {this}'s base power and toughness to the power and toughness of target creature other than Halfdane until the end of your next upkeep";
     }
 
-    public HalfdaneUpkeepEffect(final HalfdaneUpkeepEffect effect) {
+    private HalfdaneUpkeepEffect(final HalfdaneUpkeepEffect effect) {
         super(effect);
     }
 

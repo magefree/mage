@@ -72,7 +72,7 @@ class GrabTheReinsEffect extends OneShotEffect {
         staticText = "sacrifice a creature. {this} deals damage equal to that creature's power to any target";
     }
 
-    public GrabTheReinsEffect(final GrabTheReinsEffect effect) {
+    private GrabTheReinsEffect(final GrabTheReinsEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class GrabTheReinsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID controllerId = source.getControllerId();
         Target target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.setTargetName("a creature to sacrifice");
         if (!target.canChoose(controllerId, source, game)) {
             return false;

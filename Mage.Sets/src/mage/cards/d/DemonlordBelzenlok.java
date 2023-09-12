@@ -59,7 +59,7 @@ class DemonlordBelzenlokEffect extends OneShotEffect {
                 + "{this} deals 1 damage to you for each card put into your hand this way";
     }
 
-    public DemonlordBelzenlokEffect(final DemonlordBelzenlokEffect effect) {
+    private DemonlordBelzenlokEffect(final DemonlordBelzenlokEffect effect) {
         super(effect);
     }
 

@@ -64,7 +64,7 @@ class ScionOfTheUrDragonEffect extends SearchEffect {
         staticText = "Search your library for a Dragon permanent card and put it into your graveyard. If you do, {this} becomes a copy of that card until end of turn. Then shuffle.";
     }
 
-    ScionOfTheUrDragonEffect(final ScionOfTheUrDragonEffect effect) {
+    private ScionOfTheUrDragonEffect(final ScionOfTheUrDragonEffect effect) {
         super(effect);
     }
 

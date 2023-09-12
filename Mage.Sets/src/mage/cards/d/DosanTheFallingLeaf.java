@@ -48,7 +48,7 @@ class DosanTheFallingLeafEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can cast spells only during their own turns";
     }
 
-    DosanTheFallingLeafEffect(final DosanTheFallingLeafEffect effect) {
+    private DosanTheFallingLeafEffect(final DosanTheFallingLeafEffect effect) {
         super(effect);
     }
 

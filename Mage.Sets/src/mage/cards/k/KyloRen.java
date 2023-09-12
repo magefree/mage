@@ -83,7 +83,7 @@ class KyloRenTapTargetEffect extends TapTargetEffect {
         this.staticText = "and you may tap target creature defending player controls";
     }
 
-    public KyloRenTapTargetEffect(final KyloRenTapTargetEffect effect) {
+    private KyloRenTapTargetEffect(final KyloRenTapTargetEffect effect) {
         super(effect);
     }
 

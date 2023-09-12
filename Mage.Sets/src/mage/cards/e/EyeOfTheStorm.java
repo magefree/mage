@@ -50,7 +50,7 @@ class EyeOfTheStormAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new EyeOfTheStormEffect1(), false);
     }
 
-    public EyeOfTheStormAbility(final EyeOfTheStormAbility ability) {
+    private EyeOfTheStormAbility(final EyeOfTheStormAbility ability) {
         super(ability);
     }
 
@@ -91,7 +91,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                 + "For each copy, the player may cast the copy without paying its mana cost";
     }
 
-    public EyeOfTheStormEffect1(final EyeOfTheStormEffect1 effect) {
+    private EyeOfTheStormEffect1(final EyeOfTheStormEffect1 effect) {
         super(effect);
     }
 

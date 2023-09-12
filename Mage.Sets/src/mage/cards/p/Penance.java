@@ -51,7 +51,7 @@ class PenanceEffect extends PreventionEffectImpl {
         this.target = new TargetSource();
     }
 
-    public PenanceEffect(final PenanceEffect effect) {
+    private PenanceEffect(final PenanceEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }

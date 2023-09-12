@@ -62,7 +62,7 @@ class OraclesAttendantsReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "All damage that would be dealt to target creature this turn by a source of your choice is dealt to {this} instead";
     }
     
-    public OraclesAttendantsReplacementEffect(final OraclesAttendantsReplacementEffect effect) {
+    private OraclesAttendantsReplacementEffect(final OraclesAttendantsReplacementEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }

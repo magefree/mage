@@ -53,7 +53,7 @@ class NevermoreEffect2 extends ContinuousRuleModifyingEffectImpl {
         staticText = "Spells with the chosen name can't be cast";
     }
 
-    public NevermoreEffect2(final NevermoreEffect2 effect) {
+    private NevermoreEffect2(final NevermoreEffect2 effect) {
         super(effect);
     }
 

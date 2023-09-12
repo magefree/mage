@@ -60,7 +60,7 @@ class BattlefieldScroungerCost extends CostImpl {
     }
 
 
-    BattlefieldScroungerCost(final BattlefieldScroungerCost cost) {
+    private BattlefieldScroungerCost(final BattlefieldScroungerCost cost) {
         super(cost);
     }
 

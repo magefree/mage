@@ -58,7 +58,7 @@ class SplinteringWindCreateTokenEffect extends OneShotEffect {
         staticText = "create a 1/1 green Splinter creature token. It has flying and \"Cumulative upkeep {G}.\" When it leaves the battlefield, it deals 1 damage to you and each creature you control";
     }
 
-    public SplinteringWindCreateTokenEffect(final SplinteringWindCreateTokenEffect effect) {
+    private SplinteringWindCreateTokenEffect(final SplinteringWindCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -94,7 +94,7 @@ class SplinteringWindDelayedTriggeredAbility extends DelayedTriggeredAbility {
         this.tokenId = tokenId;
     }
 
-    SplinteringWindDelayedTriggeredAbility(final SplinteringWindDelayedTriggeredAbility ability) {
+    private SplinteringWindDelayedTriggeredAbility(final SplinteringWindDelayedTriggeredAbility ability) {
         super(ability);
         this.tokenId = ability.tokenId;
     }

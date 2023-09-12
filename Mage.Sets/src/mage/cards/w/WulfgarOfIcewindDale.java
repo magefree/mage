@@ -56,7 +56,7 @@ class WulfgarOfIcewindDaleEffect extends ReplacementEffectImpl {
                 "of a permanent you control to trigger, that ability triggers an additional time";
     }
 
-    WulfgarOfIcewindDaleEffect(final WulfgarOfIcewindDaleEffect effect) {
+    private WulfgarOfIcewindDaleEffect(final WulfgarOfIcewindDaleEffect effect) {
         super(effect);
     }
 

@@ -76,7 +76,7 @@ class FleshwritherEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    FleshwritherEffect(final FleshwritherEffect effect) {
+    private FleshwritherEffect(final FleshwritherEffect effect) {
         super(effect);
     }
 

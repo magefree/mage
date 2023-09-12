@@ -51,7 +51,7 @@ class ReclamationCostToAttackBlockEffect extends PayCostToAttackBlockEffectImpl 
         staticText = "Black creatures can't attack unless their controller sacrifices a land <i>(This cost is paid as attackers are declared.)</i>";
     }
 
-    ReclamationCostToAttackBlockEffect(ReclamationCostToAttackBlockEffect effect) {
+    private ReclamationCostToAttackBlockEffect(final ReclamationCostToAttackBlockEffect effect) {
         super(effect);
     }
 

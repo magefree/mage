@@ -50,7 +50,7 @@ class PoxEffect extends OneShotEffect {
                 + "Round up each time.";
     }
 
-    PoxEffect(final PoxEffect effect) {
+    private PoxEffect(final PoxEffect effect) {
         super(effect);
     }
 

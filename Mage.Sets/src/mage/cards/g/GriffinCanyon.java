@@ -53,7 +53,7 @@ class GriffinCanyonEffect extends OneShotEffect {
         this.staticText = "Untap target Griffin. If it's a creature, it gets +1/+1 until end of turn";
     }
 
-    public GriffinCanyonEffect(final GriffinCanyonEffect effect) {
+    private GriffinCanyonEffect(final GriffinCanyonEffect effect) {
         super(effect);
     }
 

@@ -64,7 +64,7 @@ class LodestoneBaubleTarget extends TargetCardInGraveyard {
         super(0, 4, new FilterBasicLandCard("basic land cards from a player's graveyard"));
     }
 
-    public LodestoneBaubleTarget(final LodestoneBaubleTarget target) {
+    private LodestoneBaubleTarget(final LodestoneBaubleTarget target) {
         super(target);
     }
 
@@ -93,7 +93,7 @@ class LodestoneBaubleEffect extends OneShotEffect {
         this.staticText = "Put up to four target basic land cards from a player's graveyard on top of their library in any order";
     }
 
-    LodestoneBaubleEffect(final LodestoneBaubleEffect effect) {
+    private LodestoneBaubleEffect(final LodestoneBaubleEffect effect) {
         super(effect);
     }
 
@@ -124,7 +124,7 @@ class LodestoneBaubleDrawEffect extends OneShotEffect {
         staticText = "That player draws a card at the beginning of the next turn's upkeep";
     }
 
-    public LodestoneBaubleDrawEffect(final LodestoneBaubleDrawEffect effect) {
+    private LodestoneBaubleDrawEffect(final LodestoneBaubleDrawEffect effect) {
         super(effect);
     }
 

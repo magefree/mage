@@ -55,7 +55,7 @@ class TreeOfPerditionEffect extends OneShotEffect {
         staticText = "Exchange target opponent's life total with {this}'s toughness";
     }
 
-    public TreeOfPerditionEffect(final TreeOfPerditionEffect effect) {
+    private TreeOfPerditionEffect(final TreeOfPerditionEffect effect) {
         super(effect);
     }
 

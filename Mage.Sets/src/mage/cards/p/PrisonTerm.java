@@ -73,7 +73,7 @@ class PrisonTermEffect extends OneShotEffect {
         super(Outcome.Detriment);
     }
 
-    public PrisonTermEffect(final PrisonTermEffect effect) {
+    private PrisonTermEffect(final PrisonTermEffect effect) {
         super(effect);
     }
 

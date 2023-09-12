@@ -62,7 +62,7 @@ class FalkenrathAristocratEffect extends OneShotEffect {
         this.staticText = "If the sacrificed creature was a Human, put a +1/+1 counter on {this}";
     }
 
-    public FalkenrathAristocratEffect(final FalkenrathAristocratEffect effect) {
+    private FalkenrathAristocratEffect(final FalkenrathAristocratEffect effect) {
         super(effect);
     }
 

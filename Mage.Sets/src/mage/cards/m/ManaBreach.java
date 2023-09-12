@@ -66,7 +66,7 @@ class ManaBreachEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         return player.moveCards(game.getPermanent(target.getFirstTarget()), Zone.HAND, source, game);
     }

@@ -69,7 +69,7 @@ class KarnLiberatedEffect extends OneShotEffect {
         this.staticText = "Restart the game, leaving in exile all non-Aura permanent cards exiled with {this}. Then put those cards onto the battlefield under your control";
     }
 
-    public KarnLiberatedEffect(final KarnLiberatedEffect effect) {
+    private KarnLiberatedEffect(final KarnLiberatedEffect effect) {
         super(effect);
     }
 
@@ -147,7 +147,7 @@ class KarnLiberatedDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new KarnLiberatedDelayedEffect(exileId));
     }
 
-    public KarnLiberatedDelayedTriggeredAbility(final KarnLiberatedDelayedTriggeredAbility ability) {
+    private KarnLiberatedDelayedTriggeredAbility(final KarnLiberatedDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -178,7 +178,7 @@ class KarnLiberatedDelayedEffect extends OneShotEffect {
         this.staticText = "Put those cards onto the battlefield under your control";
     }
 
-    public KarnLiberatedDelayedEffect(final KarnLiberatedDelayedEffect effect) {
+    private KarnLiberatedDelayedEffect(final KarnLiberatedDelayedEffect effect) {
         super(effect);
         this.exileId = effect.exileId;
     }
@@ -225,7 +225,7 @@ class KarnPlayerExileEffect extends OneShotEffect {
         staticText = "target player exiles a card from their hand.";
     }
 
-    public KarnPlayerExileEffect(final KarnPlayerExileEffect effect) {
+    private KarnPlayerExileEffect(final KarnPlayerExileEffect effect) {
         super(effect);
     }
 

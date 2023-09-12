@@ -55,7 +55,7 @@ class HorobiDeathsWailAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public HorobiDeathsWailAbility(final HorobiDeathsWailAbility ability) {
+    private HorobiDeathsWailAbility(final HorobiDeathsWailAbility ability) {
         super(ability);
     }
 

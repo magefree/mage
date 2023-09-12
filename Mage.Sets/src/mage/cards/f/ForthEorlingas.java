@@ -54,7 +54,7 @@ class ForthEorlingasTriggeredAbility extends DelayedTriggeredAbility {
         this.setTriggerPhrase("Whenever one or more creatures you control deal combat damage to one or more players this turn, ");
     }
 
-    public ForthEorlingasTriggeredAbility(ForthEorlingasTriggeredAbility ability) {
+    private ForthEorlingasTriggeredAbility(final ForthEorlingasTriggeredAbility ability) {
         super(ability);
     }
 

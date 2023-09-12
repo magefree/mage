@@ -52,7 +52,7 @@ public final class SelesnyaKeyrune extends CardImpl {
             power = new MageInt(3);
             toughness = new MageInt(3);
         }
-        public SelesnyaKeyruneToken(final SelesnyaKeyruneToken token) {
+        private SelesnyaKeyruneToken(final SelesnyaKeyruneToken token) {
             super(token);
         }
 

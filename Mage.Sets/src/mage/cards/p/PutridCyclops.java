@@ -57,7 +57,7 @@ class PutridCyclopEffect extends OneShotEffect {
                 + " <i>(To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)</i>";
     }
 
-    public PutridCyclopEffect(final PutridCyclopEffect effect) {
+    private PutridCyclopEffect(final PutridCyclopEffect effect) {
         super(effect);
     }
 

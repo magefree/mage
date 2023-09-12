@@ -49,7 +49,7 @@ class IncinerateEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "A creature dealt damage this way can't be regenerated this turn";
     }
 
-    public IncinerateEffect(final IncinerateEffect effect) {
+    private IncinerateEffect(final IncinerateEffect effect) {
         super(effect);
     }
 

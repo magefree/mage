@@ -45,7 +45,7 @@ class SeeBeyondEffect extends OneShotEffect {
         staticText = "Draw two cards, then shuffle a card from your hand into your library";
     }
 
-    public SeeBeyondEffect(SeeBeyondEffect effect) {
+    private SeeBeyondEffect(final SeeBeyondEffect effect) {
         super(effect);
     }
 

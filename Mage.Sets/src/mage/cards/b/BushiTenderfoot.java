@@ -68,7 +68,7 @@ class KenzoTheHardhearted extends TokenImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
         this.addAbility(new BushidoAbility(2));
     }
-    public KenzoTheHardhearted(final KenzoTheHardhearted token) {
+    private KenzoTheHardhearted(final KenzoTheHardhearted token) {
         super(token);
     }
 

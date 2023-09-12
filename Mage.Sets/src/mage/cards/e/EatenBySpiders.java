@@ -55,7 +55,7 @@ class EatenBySpidersEffect extends OneShotEffect {
         this.staticText = "Destroy target creature with flying and all Equipment attached to that creature";
     }
 
-    public EatenBySpidersEffect(final EatenBySpidersEffect effect) {
+    private EatenBySpidersEffect(final EatenBySpidersEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class JeweledSpiritEffect extends OneShotEffect {
         this.staticText = "{this} gains protection from artifacts or from the color of your choice until end of turn";
     }
 
-    public JeweledSpiritEffect(final JeweledSpiritEffect effect) {
+    private JeweledSpiritEffect(final JeweledSpiritEffect effect) {
         super(effect);
     }
 

@@ -29,7 +29,7 @@ public final class ShepherdOfTheLost extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public ShepherdOfTheLost (final ShepherdOfTheLost card) {
+    private ShepherdOfTheLost(final ShepherdOfTheLost card) {
         super(card);
     }
 

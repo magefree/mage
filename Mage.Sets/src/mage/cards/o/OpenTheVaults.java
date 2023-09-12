@@ -45,7 +45,7 @@ class OpenTheVaultsEffect extends OneShotEffect {
         this.staticText = "Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control";
     }
 
-    public OpenTheVaultsEffect(final OpenTheVaultsEffect effect) {
+    private OpenTheVaultsEffect(final OpenTheVaultsEffect effect) {
         super(effect);
     }
 

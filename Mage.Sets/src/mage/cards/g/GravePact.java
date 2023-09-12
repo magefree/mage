@@ -49,7 +49,7 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control dies, ");
     }
 
-    public GravePactTriggeredAbility(final GravePactTriggeredAbility ability) {
+    private GravePactTriggeredAbility(final GravePactTriggeredAbility ability) {
         super(ability);
     }
 
@@ -81,7 +81,7 @@ class GravePactEffect extends OneShotEffect {
         this.staticText = "each other player sacrifices a creature";
     }
 
-    public GravePactEffect(final GravePactEffect effect) {
+    private GravePactEffect(final GravePactEffect effect) {
         super(effect);
     }
 
@@ -99,7 +99,7 @@ class GravePactEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !playerId.equals(source.getControllerId())) {
                     TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (target.canChoose(player.getId(), source, game)) {
                         player.chooseTarget(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());

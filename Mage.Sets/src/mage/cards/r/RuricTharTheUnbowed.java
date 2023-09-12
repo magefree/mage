@@ -64,7 +64,7 @@ class RuricTharTheUnbowedAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(6), false);
     }
 
-    public RuricTharTheUnbowedAbility(final RuricTharTheUnbowedAbility ability) {
+    private RuricTharTheUnbowedAbility(final RuricTharTheUnbowedAbility ability) {
         super(ability);
     }
 

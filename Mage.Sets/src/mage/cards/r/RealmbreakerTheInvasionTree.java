@@ -98,7 +98,7 @@ class RealmbreakerTheInvasionTreeEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_LAND);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(Outcome.PutLandInPlay, opponent.getGraveyard(), target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {

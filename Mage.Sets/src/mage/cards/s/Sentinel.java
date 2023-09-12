@@ -61,7 +61,7 @@ class SentinelEffect extends OneShotEffect {
         this.staticText = "Change {this}'s base toughness to 1 plus the power of target creature blocking or blocked by {this}. <i>(This effect lasts indefinitely.)</i>";
     }
 
-    public SentinelEffect(final SentinelEffect effect) {
+    private SentinelEffect(final SentinelEffect effect) {
         super(effect);
     }
 

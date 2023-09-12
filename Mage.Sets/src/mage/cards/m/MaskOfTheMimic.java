@@ -62,7 +62,7 @@ class MaskOfTheMimicEffect extends OneShotEffect {
                 + " put that card onto the battlefield, then shuffle.";
     }
 
-    MaskOfTheMimicEffect(final MaskOfTheMimicEffect effect) {
+    private MaskOfTheMimicEffect(final MaskOfTheMimicEffect effect) {
         super(effect);
     }
 

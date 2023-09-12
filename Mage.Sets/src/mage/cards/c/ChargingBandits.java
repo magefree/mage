@@ -27,7 +27,6 @@ public final class ChargingBandits extends CardImpl {
 
         // Whenever Charging Bandits attacks, it gets +2/+0 until end of turn.
         Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
-        effect.setText("it gets +2/+2 until end of turn");
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 

@@ -56,7 +56,7 @@ class BifurcateEffect extends OneShotEffect {
         this.staticText = "search your library for a permanent card with the same name as target nontoken creature, put that card onto the battlefield, then shuffle";
     }
 
-    public BifurcateEffect(final BifurcateEffect effect) {
+    private BifurcateEffect(final BifurcateEffect effect) {
         super(effect);
     }
 

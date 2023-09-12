@@ -47,7 +47,7 @@ class MagesContestEffect extends OneShotEffect {
         this.staticText = "You and target spell's controller bid life. You start the bidding with a bid of 1. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid. If you win the bidding, counter that spell";
     }
 
-    public MagesContestEffect(final MagesContestEffect effect) {
+    private MagesContestEffect(final MagesContestEffect effect) {
         super(effect);
     }
 

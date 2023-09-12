@@ -64,7 +64,7 @@ class NewBloodEffect extends OneShotEffect {
         this.staticText = "Gain control of target creature. Change the text of that creature by replacing all instances of one creature type with Vampire";
     }
 
-    public NewBloodEffect(final NewBloodEffect effect) {
+    private NewBloodEffect(final NewBloodEffect effect) {
         super(effect);
     }
 
@@ -102,7 +102,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
         this.staticText = "Change the text of that creature by replacing all instances of one creature type with Vampire";
     }
 
-    public ChangeCreatureTypeTargetEffect(final ChangeCreatureTypeTargetEffect effect) {
+    private ChangeCreatureTypeTargetEffect(final ChangeCreatureTypeTargetEffect effect) {
         super(effect);
         this.fromSubType = effect.fromSubType;
         this.toSubType = effect.toSubType;
@@ -127,7 +127,7 @@ class ChangeCreatureTypeTargetEffect extends ContinuousEffectImpl {
             }
         }
 
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
     }
 
     @Override

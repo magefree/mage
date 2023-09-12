@@ -62,7 +62,7 @@ class LaviniaAzoriusRenegadeReplacementEffect extends ContinuousRuleModifyingEff
         staticText = "Each opponent can't cast noncreature spells with mana value greater than the number of lands that player controls.";
     }
 
-    LaviniaAzoriusRenegadeReplacementEffect(final LaviniaAzoriusRenegadeReplacementEffect effect) {
+    private LaviniaAzoriusRenegadeReplacementEffect(final LaviniaAzoriusRenegadeReplacementEffect effect) {
         super(effect);
     }
 

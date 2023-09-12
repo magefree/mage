@@ -55,7 +55,7 @@ class LastBreathEffect extends OneShotEffect {
         staticText = "Its controller gains 4 life";
     }
 
-    LastBreathEffect(final LastBreathEffect effect) {
+    private LastBreathEffect(final LastBreathEffect effect) {
         super(effect);
     }
 

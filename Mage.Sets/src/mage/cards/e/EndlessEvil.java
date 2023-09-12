@@ -70,7 +70,7 @@ class EndlessEvilCloneEffect extends OneShotEffect {
         this.staticText = "create a token that's a copy of enchanted creature, except the token is 1/1";
     }
 
-    public EndlessEvilCloneEffect(final EndlessEvilCloneEffect effect) {
+    private EndlessEvilCloneEffect(final EndlessEvilCloneEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class EndlessEvilBounceAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(false, true));
     }
 
-    public EndlessEvilBounceAbility(final EndlessEvilBounceAbility effect) {
+    private EndlessEvilBounceAbility(final EndlessEvilBounceAbility effect) {
         super(effect);
     }
 

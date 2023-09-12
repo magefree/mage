@@ -55,7 +55,7 @@ class SauronsRansomEffect extends OneShotEffect {
             "the other into your graveyard";
     }
 
-    public SauronsRansomEffect(final SauronsRansomEffect effect) {
+    private SauronsRansomEffect(final SauronsRansomEffect effect) {
         super(effect);
     }
 

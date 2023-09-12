@@ -71,7 +71,7 @@ class DovinBaanCantActivateAbilitiesEffect extends ContinuousRuleModifyingEffect
         staticText = "and its activated abilities can't be activated";
     }
 
-    DovinBaanCantActivateAbilitiesEffect(final DovinBaanCantActivateAbilitiesEffect effect) {
+    private DovinBaanCantActivateAbilitiesEffect(final DovinBaanCantActivateAbilitiesEffect effect) {
         super(effect);
     }
 

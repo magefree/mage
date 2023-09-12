@@ -70,7 +70,7 @@ class HazduhrTheAbbotRedirectDamageEffect extends RedirectionEffect {
         this.staticText = "The next X damage that would be dealt this turn to target white creature you control is dealt to {this} instead";
     }
 
-    public HazduhrTheAbbotRedirectDamageEffect(final HazduhrTheAbbotRedirectDamageEffect effect) {
+    private HazduhrTheAbbotRedirectDamageEffect(final HazduhrTheAbbotRedirectDamageEffect effect) {
         super(effect);
     }
 

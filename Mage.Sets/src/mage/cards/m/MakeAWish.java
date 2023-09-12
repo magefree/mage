@@ -61,7 +61,7 @@ class MakeAWishEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInYourGraveyard(Math.min(player.getGraveyard().size(), 2), StaticFilters.FILTER_CARD);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.setRandom(true);
         target.chooseTarget(outcome, player.getId(), source, game);
         return player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);

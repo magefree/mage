@@ -62,7 +62,7 @@ class SwordOfTheMeekEffect extends OneShotEffect {
         this.staticText = "you may return {this} from your graveyard to the battlefield, then attach it to that creature";
     }
 
-    public SwordOfTheMeekEffect(final SwordOfTheMeekEffect effect) {
+    private SwordOfTheMeekEffect(final SwordOfTheMeekEffect effect) {
         super(effect);
     }
 

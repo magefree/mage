@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -15,7 +15,6 @@ import mage.filter.FilterCard;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
@@ -39,7 +38,7 @@ public final class GusthasScepter extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new GusthasScepterReturnEffect(), new TapSourceCost()));
 
         // When you lose control of Gustha’s Scepter, put all cards exiled with Gustha’s Scepter into their owner’s graveyard.
-        this.addAbility(new GusthasScepterLoseControlAbility());
+        this.addAbility(new GusthasScepterTriggeredAbility());
     }
 
     private GusthasScepter(final GusthasScepter card) {
@@ -59,7 +58,7 @@ class GusthasScepterExileEffect extends OneShotEffect {
         staticText = "exile a card from your hand face down. You may look at it for as long as it remains exiled";
     }
 
-    public GusthasScepterExileEffect(final GusthasScepterExileEffect effect) {
+    private GusthasScepterExileEffect(final GusthasScepterExileEffect effect) {
         super(effect);
     }
 
@@ -116,7 +115,7 @@ class GusthasScepterReturnEffect extends OneShotEffect {
             return false;
         }
         TargetCard target = new TargetCardInExile(filter, CardUtil.getExileZoneId(game, source));
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }
@@ -136,7 +135,7 @@ class GusthasScepterLookAtCardEffect extends AsThoughEffectImpl {
         staticText = "You may look at it for as long as it remains exiled";
     }
 
-    public GusthasScepterLookAtCardEffect(final GusthasScepterLookAtCardEffect effect) {
+    private GusthasScepterLookAtCardEffect(final GusthasScepterLookAtCardEffect effect) {
         super(effect);
         this.mor = effect.mor;
     }
@@ -166,66 +165,52 @@ class GusthasScepterLookAtCardEffect extends AsThoughEffectImpl {
     }
 }
 
-class GusthasScepterLoseControlAbility extends DelayedTriggeredAbility {
+class GusthasScepterTriggeredAbility extends TriggeredAbilityImpl {
 
-    public GusthasScepterLoseControlAbility() {
-        super(new GusthasScepterPutExiledCardsInOwnersGraveyard(), Duration.EndOfGame, false);
+    public GusthasScepterTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new GusthasScepterPutExiledCardsInOwnersGraveyardEffect());
+        setTriggerPhrase("When you lose control of {this}, ");
     }
 
-    public GusthasScepterLoseControlAbility(final GusthasScepterLoseControlAbility ability) {
+    private GusthasScepterTriggeredAbility(final GusthasScepterTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public GusthasScepterLoseControlAbility copy() {
-        return new GusthasScepterLoseControlAbility(this);
+    public GusthasScepterTriggeredAbility copy() {
+        return new GusthasScepterTriggeredAbility(this);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.LOST_CONTROL
-                || event.getType() == GameEvent.EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.LOST_CONTROL;
     }
 
     public boolean checkTrigger(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case LOST_CONTROL:
-                return event.getPlayerId().equals(controllerId)
-                        && event.getTargetId().equals(this.getSourceId());
-            case ZONE_CHANGE:
-                return event.getTargetId().equals(this.getSourceId()) && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When you lose control of {this}, put all cards exiled with {this} into their owner's graveyard.";
+        return event.getTargetId().equals(sourceId);
     }
 }
 
-class GusthasScepterPutExiledCardsInOwnersGraveyard extends OneShotEffect {
+class GusthasScepterPutExiledCardsInOwnersGraveyardEffect extends OneShotEffect {
 
-    public GusthasScepterPutExiledCardsInOwnersGraveyard() {
+    public GusthasScepterPutExiledCardsInOwnersGraveyardEffect() {
         super(Outcome.Neutral);
+        this.staticText = "put all cards exiled with {this} into their owner's graveyard";
     }
 
-    public GusthasScepterPutExiledCardsInOwnersGraveyard(final GusthasScepterPutExiledCardsInOwnersGraveyard effect) {
+    private GusthasScepterPutExiledCardsInOwnersGraveyardEffect(final GusthasScepterPutExiledCardsInOwnersGraveyardEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        return exileZone != null && controller.moveCards(exileZone.getCards(game), Zone.GRAVEYARD, source, game);
+        exileZone.getCards(game).stream().forEach(card -> card.moveToZone(Zone.GRAVEYARD, source, game, false));
+        return true;
     }
 
     @Override
-    public GusthasScepterPutExiledCardsInOwnersGraveyard copy() {
-        return new GusthasScepterPutExiledCardsInOwnersGraveyard(this);
+    public GusthasScepterPutExiledCardsInOwnersGraveyardEffect copy() {
+        return new GusthasScepterPutExiledCardsInOwnersGraveyardEffect(this);
     }
 }

@@ -65,7 +65,7 @@ class AetherworksMarvelEffect extends OneShotEffect {
                 + "library in a random order";
     }
 
-    AetherworksMarvelEffect(final AetherworksMarvelEffect effect) {
+    private AetherworksMarvelEffect(final AetherworksMarvelEffect effect) {
         super(effect);
     }
 

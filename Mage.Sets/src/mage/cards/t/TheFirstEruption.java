@@ -80,7 +80,7 @@ class TheFirstEruptionEffect extends OneShotEffect {
         this.staticText = "Sacrifice a Mountain. If you do, {this} deals 3 damage to each creature";
     }
 
-    TheFirstEruptionEffect(final TheFirstEruptionEffect effect) {
+    private TheFirstEruptionEffect(final TheFirstEruptionEffect effect) {
         super(effect);
     }
 

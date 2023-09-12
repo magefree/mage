@@ -45,7 +45,7 @@ class PartingThoughtsEffect extends OneShotEffect {
         this.staticText = "Destroy target creature. You draw X cards and you lose X life, where X is the number of counters on that creature";
     }
 
-    public PartingThoughtsEffect(final PartingThoughtsEffect effect) {
+    private PartingThoughtsEffect(final PartingThoughtsEffect effect) {
         super(effect);
     }
 

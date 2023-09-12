@@ -64,7 +64,7 @@ class KarplusanMinotaurFlipWinTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetAnyTarget());
     }
 
-    public KarplusanMinotaurFlipWinTriggeredAbility(final KarplusanMinotaurFlipWinTriggeredAbility ability) {
+    private KarplusanMinotaurFlipWinTriggeredAbility(final KarplusanMinotaurFlipWinTriggeredAbility ability) {
         super(ability);
     }
 
@@ -100,7 +100,7 @@ class KarplusanMinotaurFlipLoseTriggeredAbility extends TriggeredAbilityImpl {
         targetAdjuster = KarplusanMinotaurAdjuster.instance;
     }
 
-    public KarplusanMinotaurFlipLoseTriggeredAbility(final KarplusanMinotaurFlipLoseTriggeredAbility ability) {
+    private KarplusanMinotaurFlipLoseTriggeredAbility(final KarplusanMinotaurFlipLoseTriggeredAbility ability) {
         super(ability);
     }
 

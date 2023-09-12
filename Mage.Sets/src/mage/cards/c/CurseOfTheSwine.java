@@ -66,7 +66,7 @@ class CurseOfTheSwineEffect extends OneShotEffect {
                 + "its controller creates a 2/2 green Boar creature token";
     }
 
-    public CurseOfTheSwineEffect(final CurseOfTheSwineEffect effect) {
+    private CurseOfTheSwineEffect(final CurseOfTheSwineEffect effect) {
         super(effect);
     }
 

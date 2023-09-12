@@ -59,7 +59,7 @@ class KeldonFirebombersEffect extends OneShotEffect {
         this.staticText = "each player sacrifices all lands they control except for three";
     }
 
-    public KeldonFirebombersEffect(final KeldonFirebombersEffect effect) {
+    private KeldonFirebombersEffect(final KeldonFirebombersEffect effect) {
         super(effect);
     }
 

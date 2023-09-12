@@ -61,7 +61,7 @@ class TobiasBeckettEffect extends OneShotEffect {
         staticText = "exile the top card of that player's library. You may cast cards exiled this way and spend mana as though it were mana of any type to cast that spell";
     }
 
-    public TobiasBeckettEffect(final TobiasBeckettEffect effect) {
+    private TobiasBeckettEffect(final TobiasBeckettEffect effect) {
         super(effect);
     }
 

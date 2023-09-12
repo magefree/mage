@@ -53,7 +53,7 @@ class ReprocessEffect extends OneShotEffect {
         staticText  = "Sacrifice any number of artifacts, creatures, and/or lands. Draw a card for each permanent sacrificed this way.";
     }
 
-    public ReprocessEffect(final ReprocessEffect effect) {
+    private ReprocessEffect(final ReprocessEffect effect) {
         super(effect);
     }
 

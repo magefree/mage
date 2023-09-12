@@ -73,7 +73,7 @@ class KraulHarpoonerEffect extends OneShotEffect {
                 + "then you may have {this} fight that creature.";
     }
 
-    public KraulHarpoonerEffect(final KraulHarpoonerEffect effect) {
+    private KraulHarpoonerEffect(final KraulHarpoonerEffect effect) {
         super(effect);
     }
 

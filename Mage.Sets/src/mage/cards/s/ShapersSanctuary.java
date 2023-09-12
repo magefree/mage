@@ -43,7 +43,7 @@ class CreaturesYouControlTargetedTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, true);
     }
 
-    public CreaturesYouControlTargetedTriggeredAbility(final CreaturesYouControlTargetedTriggeredAbility ability) {
+    private CreaturesYouControlTargetedTriggeredAbility(final CreaturesYouControlTargetedTriggeredAbility ability) {
         super(ability);
     }
 

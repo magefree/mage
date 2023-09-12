@@ -50,7 +50,7 @@ class LivingDestinyEffect extends OneShotEffect {
         staticText = "You gain life equal to the revealed card's mana value";
     }
 
-    public LivingDestinyEffect(LivingDestinyEffect effect) {
+    private LivingDestinyEffect(final LivingDestinyEffect effect) {
         super(effect);
     }
 

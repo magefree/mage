@@ -55,7 +55,7 @@ class KarnsTemporalSunderingEffect extends OneShotEffect {
         this.staticText = "Target player takes an extra turn after this one. Return up to one target nonland permanent to its owner's hand";
     }
 
-    public KarnsTemporalSunderingEffect(final KarnsTemporalSunderingEffect effect) {
+    private KarnsTemporalSunderingEffect(final KarnsTemporalSunderingEffect effect) {
         super(effect);
     }
 

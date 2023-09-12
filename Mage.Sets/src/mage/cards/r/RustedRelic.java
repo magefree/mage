@@ -52,7 +52,7 @@ class RustedRelicToken extends TokenImpl {
         toughness = new MageInt(5);
     }
 
-    public RustedRelicToken(final RustedRelicToken token) {
+    private RustedRelicToken(final RustedRelicToken token) {
         super(token);
     }
 

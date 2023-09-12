@@ -25,7 +25,7 @@ public final class Dismember extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Dismember (final Dismember card) {
+    private Dismember(final Dismember card) {
         super(card);
     }
 

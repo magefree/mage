@@ -19,7 +19,7 @@ public final class GreatFurnace extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public GreatFurnace (final GreatFurnace card) {
+    private GreatFurnace(final GreatFurnace card) {
         super(card);
     }
 

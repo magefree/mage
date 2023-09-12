@@ -1115,17 +1115,17 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public List<UUID> getAttachments() {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
     public boolean addAttachment(UUID permanentId, Ability source, Game game) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
     public boolean removeAttachment(UUID permanentId, Ability source, Game game) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     /**

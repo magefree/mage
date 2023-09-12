@@ -57,7 +57,7 @@ class PonybackBrigadeAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this} enters the battlefield or is turned face up, ");
     }
 
-    public PonybackBrigadeAbility(final PonybackBrigadeAbility ability) {
+    private PonybackBrigadeAbility(final PonybackBrigadeAbility ability) {
         super(ability);
     }
 

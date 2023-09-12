@@ -46,7 +46,7 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
         staticText = "Until end of turn, each creature target player controls loses all abilities and becomes a blue Frog with base power and toughness 1/1";
     }
 
-    public PolymorphistsJestEffect(final PolymorphistsJestEffect effect) {
+    private PolymorphistsJestEffect(final PolymorphistsJestEffect effect) {
         super(effect);
     }
 

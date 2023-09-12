@@ -67,7 +67,7 @@ public final class WanderingMage extends CardImpl {
         ability.addCost(new WanderingMageCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         Target target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }

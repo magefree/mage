@@ -65,7 +65,7 @@ class IzzetStaticasterDamageEffect extends OneShotEffect {
         this.staticText = "{this} deals 1 damage to target creature and each other creature with the same name as that creature";
     }
 
-    public IzzetStaticasterDamageEffect(final IzzetStaticasterDamageEffect effect) {
+    private IzzetStaticasterDamageEffect(final IzzetStaticasterDamageEffect effect) {
         super(effect);
     }
 

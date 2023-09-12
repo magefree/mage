@@ -52,7 +52,7 @@ class LurkingEvilCost extends CostImpl {
         this.text = "Pay half your life, rounded up";
     }
 
-    LurkingEvilCost(LurkingEvilCost cost) {
+    private LurkingEvilCost(final LurkingEvilCost cost) {
         super(cost);
     }
 
@@ -96,7 +96,7 @@ class LurkingEvilToken extends TokenImpl {
         cardType.add(CardType.CREATURE);
         this.addAbility(FlyingAbility.getInstance());
     }
-    public LurkingEvilToken(final LurkingEvilToken token) {
+    private LurkingEvilToken(final LurkingEvilToken token) {
         super(token);
     }
 

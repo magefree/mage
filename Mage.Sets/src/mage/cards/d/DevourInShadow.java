@@ -49,7 +49,7 @@ class DevourInShadowEffect extends OneShotEffect {
         staticText = "You lose life equal to that creature's toughness";
     }
 
-    public DevourInShadowEffect(final DevourInShadowEffect effect) {
+    private DevourInShadowEffect(final DevourInShadowEffect effect) {
         super(effect);
     }
 

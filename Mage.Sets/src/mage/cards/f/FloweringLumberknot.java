@@ -49,7 +49,7 @@ class FloweringLumberknotEffect extends RestrictionEffect {
         staticText = "{this} can't attack or block unless it's paired with a creature with soulbond";
     }
 
-    public FloweringLumberknotEffect(final FloweringLumberknotEffect effect) {
+    private FloweringLumberknotEffect(final FloweringLumberknotEffect effect) {
         super(effect);
     }
 

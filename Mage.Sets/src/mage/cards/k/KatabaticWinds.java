@@ -63,7 +63,7 @@ class KatabaticWindsRestrictionEffect extends RestrictionEffect {
         staticText = "Creatures with flying can't attack or block";
     }
 
-    public KatabaticWindsRestrictionEffect(final KatabaticWindsRestrictionEffect effect) {
+    private KatabaticWindsRestrictionEffect(final KatabaticWindsRestrictionEffect effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class KatabaticWindsRuleModifyingEffect extends ContinuousRuleModifyingEffectImp
         staticText = ", and their activated abilities with {T} in their costs can't be activated";
     }
 
-    public KatabaticWindsRuleModifyingEffect(final KatabaticWindsRuleModifyingEffect effect) {
+    private KatabaticWindsRuleModifyingEffect(final KatabaticWindsRuleModifyingEffect effect) {
         super(effect);
     }
 

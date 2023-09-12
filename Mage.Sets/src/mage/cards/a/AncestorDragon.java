@@ -53,7 +53,7 @@ class AncestorDragonEffect extends OneShotEffect {
         staticText = "you gain 1 life for each attacking creature";
     }
 
-    public AncestorDragonEffect(final AncestorDragonEffect effect) {
+    private AncestorDragonEffect(final AncestorDragonEffect effect) {
         super(effect);
     }
 

@@ -61,7 +61,7 @@ public final class CrazedArmodon extends CardImpl {
             super(new DestroySourceEffect());
         }
 
-        public CrazedArmodonDelayedTriggeredAbility(final CrazedArmodonDelayedTriggeredAbility ability) {
+        private CrazedArmodonDelayedTriggeredAbility(final CrazedArmodonDelayedTriggeredAbility ability) {
             super(ability);
         }
 

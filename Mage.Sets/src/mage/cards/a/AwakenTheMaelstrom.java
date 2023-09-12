@@ -97,7 +97,7 @@ class AwakenTheMaelstromEffect extends OneShotEffect {
 
     private void makeToken(Player player, Game game, Ability source) {
         TargetPermanent target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.withChooseHint("to copy");
         if (!target.canChoose(player.getId(), source, game)) {
             return;
@@ -114,7 +114,7 @@ class AwakenTheMaelstromEffect extends OneShotEffect {
             return;
         }
         TargetPermanentAmount target = new TargetCreaturePermanentAmount(3);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.withChooseHint("to distribute counters");
         player.choose(outcome, target, source, game);
         for (UUID targetId : target.getTargets()) {

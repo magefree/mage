@@ -58,7 +58,7 @@ class AetherplasmEffect extends OneShotEffect {
         this.staticText = "you may put a creature card from your hand onto the battlefield blocking that creature";
     }
 
-    public AetherplasmEffect(AetherplasmEffect effect) {
+    private AetherplasmEffect(final AetherplasmEffect effect) {
         super(effect);
     }
 

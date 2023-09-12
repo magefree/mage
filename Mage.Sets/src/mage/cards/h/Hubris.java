@@ -56,7 +56,7 @@ class HubrisReturnEffect extends OneShotEffect {
         this.staticText = "Return target creature and all Auras attached to it to their owners' hands";
     }
 
-    public HubrisReturnEffect(final HubrisReturnEffect effect) {
+    private HubrisReturnEffect(final HubrisReturnEffect effect) {
         super(effect);
     }
 

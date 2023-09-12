@@ -111,7 +111,7 @@ class ZaraRenegadeRecruiterEffect extends OneShotEffect {
             filter.getPlayerFilter().add(new PlayerIdPredicate(player.getId()));
             filter.getPermanentFilter().add(new ControllerIdPredicate(player.getId()));
             TargetPlayerOrPlaneswalker target = new TargetPlayerOrPlaneswalker(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             controller.choose(outcome, target, source, game);
             defenderId = target.getFirstTarget();
         }

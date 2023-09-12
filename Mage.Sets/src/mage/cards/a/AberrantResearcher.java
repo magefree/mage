@@ -55,7 +55,7 @@ class AberrantResearcherEffect extends OneShotEffect {
         staticText = "mill a card. If an instant or sorcery card was milled this way, transform {this}";
     }
 
-    public AberrantResearcherEffect(final AberrantResearcherEffect effect) {
+    private AberrantResearcherEffect(final AberrantResearcherEffect effect) {
         super(effect);
     }
 

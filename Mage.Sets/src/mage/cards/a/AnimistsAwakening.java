@@ -49,7 +49,7 @@ class AnimistsAwakeningEffect extends OneShotEffect {
                 + "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, untap those lands";
     }
 
-    public AnimistsAwakeningEffect(final AnimistsAwakeningEffect effect) {
+    private AnimistsAwakeningEffect(final AnimistsAwakeningEffect effect) {
         super(effect);
     }
 

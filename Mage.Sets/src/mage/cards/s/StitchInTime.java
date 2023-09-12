@@ -44,7 +44,7 @@ class StitchInTimeEffect extends OneShotEffect {
         staticText = "Flip a coin. If you win the flip, take an extra turn after this one";
     }
 
-    public StitchInTimeEffect(final StitchInTimeEffect effect) {
+    private StitchInTimeEffect(final StitchInTimeEffect effect) {
         super(effect);
     }
 

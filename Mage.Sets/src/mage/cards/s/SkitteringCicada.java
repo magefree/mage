@@ -78,7 +78,7 @@ class SkitteringCicadaBoostEffect extends OneShotEffect {
         this.staticText = " and gets +X/+X, where X is that spell's mana value";
     }
 
-    public SkitteringCicadaBoostEffect(final SkitteringCicadaBoostEffect effect) {
+    private SkitteringCicadaBoostEffect(final SkitteringCicadaBoostEffect effect) {
         super(effect);
     }
 

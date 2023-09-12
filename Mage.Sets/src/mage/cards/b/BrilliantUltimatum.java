@@ -51,7 +51,7 @@ class BrilliantUltimatumEffect extends OneShotEffect {
                 + "If you cast a spell this way, you cast it without paying its mana cost";
     }
 
-    public BrilliantUltimatumEffect(final BrilliantUltimatumEffect effect) {
+    private BrilliantUltimatumEffect(final BrilliantUltimatumEffect effect) {
         super(effect);
     }
 

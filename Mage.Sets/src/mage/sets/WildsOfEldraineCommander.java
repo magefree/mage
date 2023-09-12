@@ -24,7 +24,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ancestral Mask", 119, Rarity.COMMON, mage.cards.a.AncestralMask.class));
         cards.add(new SetCardInfo("Angelic Destiny", 60, Rarity.MYTHIC, mage.cards.a.AngelicDestiny.class));
         cards.add(new SetCardInfo("Arcane Denial", 84, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
-        cards.add(new SetCardInfo("Arcane Signet", 367, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Arcane Signet", 145, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archmage of Echoes", 9, Rarity.RARE, mage.cards.a.ArchmageOfEchoes.class));
         cards.add(new SetCardInfo("Archon of Sun's Grace", 61, Rarity.RARE, mage.cards.a.ArchonOfSunsGrace.class));
         cards.add(new SetCardInfo("Aura Gnarlid", 120, Rarity.COMMON, mage.cards.a.AuraGnarlid.class));
@@ -43,6 +43,8 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 156, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Consider", 87, Rarity.COMMON, mage.cards.c.Consider.class));
         cards.add(new SetCardInfo("Court of Ardenvale", 21, Rarity.RARE, mage.cards.c.CourtOfArdenvale.class));
+        cards.add(new SetCardInfo("Court of Embereth", 24, Rarity.RARE, mage.cards.c.CourtOfEmbereth.class));
+        cards.add(new SetCardInfo("Court of Garenbrig", 25, Rarity.RARE, mage.cards.c.CourtOfGarenbrig.class));
         cards.add(new SetCardInfo("Court of Vantress", 22, Rarity.RARE, mage.cards.c.CourtOfVantress.class));
         cards.add(new SetCardInfo("Danitha Capashen, Paragon", 64, Rarity.UNCOMMON, mage.cards.d.DanithaCapashenParagon.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 157, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
@@ -89,6 +91,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Mantle of the Ancients", 70, Rarity.RARE, mage.cards.m.MantleOfTheAncients.class));
         cards.add(new SetCardInfo("Midnight Clock", 99, Rarity.RARE, mage.cards.m.MidnightClock.class));
         cards.add(new SetCardInfo("Mind Stone", 148, Rarity.COMMON, mage.cards.m.MindStone.class));
+        cards.add(new SetCardInfo("Misleading Signpost", 11, Rarity.RARE, mage.cards.m.MisleadingSignpost.class));
         cards.add(new SetCardInfo("Myriad Landscape", 164, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Nettling Nuisance", 15, Rarity.RARE, mage.cards.n.NettlingNuisance.class));
         cards.add(new SetCardInfo("Nightmare Unmaking", 114, Rarity.RARE, mage.cards.n.NightmareUnmaking.class));
@@ -123,6 +126,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Snake Umbra", 133, Rarity.UNCOMMON, mage.cards.s.SnakeUmbra.class));
         cards.add(new SetCardInfo("Snap", 110, Rarity.COMMON, mage.cards.s.Snap.class));
         cards.add(new SetCardInfo("Sol Ring", 149, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
+        cards.add(new SetCardInfo("Songbirds' Blessing", 7, Rarity.RARE, mage.cards.s.SongbirdsBlessing.class));
         cards.add(new SetCardInfo("Sower of Temptation", 111, Rarity.RARE, mage.cards.s.SowerOfTemptation.class));
         cards.add(new SetCardInfo("Spectral Steel", 75, Rarity.UNCOMMON, mage.cards.s.SpectralSteel.class));
         cards.add(new SetCardInfo("Starfield Mystic", 76, Rarity.RARE, mage.cards.s.StarfieldMystic.class));

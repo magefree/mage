@@ -51,7 +51,7 @@ class BringToLightEffect extends OneShotEffect {
                 + "then shuffle. You may cast that card without paying its mana cost";
     }
 
-    public BringToLightEffect(final BringToLightEffect effect) {
+    private BringToLightEffect(final BringToLightEffect effect) {
         super(effect);
     }
 

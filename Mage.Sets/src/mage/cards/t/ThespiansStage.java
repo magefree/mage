@@ -55,7 +55,7 @@ class ThespiansStageCopyEffect extends OneShotEffect {
         this.staticText = "{this} becomes a copy of target land, except it has this ability";
     }
 
-    public ThespiansStageCopyEffect(final ThespiansStageCopyEffect effect) {
+    private ThespiansStageCopyEffect(final ThespiansStageCopyEffect effect) {
         super(effect);
     }
 

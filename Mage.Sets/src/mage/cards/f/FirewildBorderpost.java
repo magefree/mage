@@ -48,7 +48,7 @@ public final class FirewildBorderpost extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public FirewildBorderpost (final FirewildBorderpost card) {
+    private FirewildBorderpost(final FirewildBorderpost card) {
         super(card);
     }
 

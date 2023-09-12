@@ -47,7 +47,7 @@ class PlayALandTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageControllerEffect(1), false);
     }
 
-    public PlayALandTriggeredAbility(PlayALandTriggeredAbility ability) {
+    private PlayALandTriggeredAbility(final PlayALandTriggeredAbility ability) {
         super(ability);
     }
 

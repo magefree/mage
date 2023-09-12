@@ -69,7 +69,7 @@ class MetallurgicSummoningsTokenEffect extends OneShotEffect {
         staticText = "create an X/X colorless Construct artifact creature token, where X is that spell's mana value";
     }
 
-    public MetallurgicSummoningsTokenEffect(MetallurgicSummoningsTokenEffect ability) {
+    private MetallurgicSummoningsTokenEffect(final MetallurgicSummoningsTokenEffect ability) {
         super(ability);
     }
 
@@ -99,7 +99,7 @@ class MetallurgicSummoningsReturnEffect extends OneShotEffect {
         this.staticText = "Return all instant and sorcery cards from your graveyard to your hand. Activate only if you control six or more artifacts";
     }
 
-    MetallurgicSummoningsReturnEffect(final MetallurgicSummoningsReturnEffect effect) {
+    private MetallurgicSummoningsReturnEffect(final MetallurgicSummoningsReturnEffect effect) {
         super(effect);
     }
 

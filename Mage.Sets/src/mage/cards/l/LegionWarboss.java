@@ -67,7 +67,7 @@ class LegionWarbossEffect extends OneShotEffect {
                 + "and attacks this combat if able";
     }
 
-    public LegionWarbossEffect(final LegionWarbossEffect effect) {
+    private LegionWarbossEffect(final LegionWarbossEffect effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class LegionWarbossAbility extends StaticAbility {
         ).setText("this creature attacks this combat if able"));
     }
 
-    public LegionWarbossAbility(LegionWarbossAbility ability) {
+    private LegionWarbossAbility(final LegionWarbossAbility ability) {
         super(ability);
     }
 

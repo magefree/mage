@@ -101,7 +101,7 @@ class NahiriTheUnforgivingRestrictionEffect extends RestrictionEffect {
         this.staticText = " a player each combat if able.";
     }
 
-    NahiriTheUnforgivingRestrictionEffect(final NahiriTheUnforgivingRestrictionEffect effect) {
+    private NahiriTheUnforgivingRestrictionEffect(final NahiriTheUnforgivingRestrictionEffect effect) {
         super(effect);
     }
 
@@ -130,7 +130,7 @@ class NahiriTheUnforgivingTokenEffect extends OneShotEffect {
                 "Create a token that's a copy of it. That token gains haste. Exile it at the beginning of the next end step.";
     }
 
-    NahiriTheUnforgivingTokenEffect(final NahiriTheUnforgivingTokenEffect effect) {
+    private NahiriTheUnforgivingTokenEffect(final NahiriTheUnforgivingTokenEffect effect) {
         super(effect);
     }
 

@@ -39,7 +39,7 @@ public final class BeetleformMage extends CardImpl {
 
     }
 
-    public BeetleformMage (final BeetleformMage card) {
+    private BeetleformMage(final BeetleformMage card) {
         super(card);
     }
 

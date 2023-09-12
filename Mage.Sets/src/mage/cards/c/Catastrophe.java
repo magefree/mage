@@ -44,7 +44,7 @@ class CatastropheEffect extends OneShotEffect {
         this.staticText = "Destroy all lands or all creatures. Creatures destroyed this way can't be regenerated";
     }
 
-    public CatastropheEffect(final CatastropheEffect effect) {
+    private CatastropheEffect(final CatastropheEffect effect) {
         super(effect);
     }
 

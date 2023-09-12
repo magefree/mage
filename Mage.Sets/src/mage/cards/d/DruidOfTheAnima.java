@@ -30,7 +30,7 @@ public final class DruidOfTheAnima extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public DruidOfTheAnima (final DruidOfTheAnima card) {
+    private DruidOfTheAnima(final DruidOfTheAnima card) {
         super(card);
     }
 

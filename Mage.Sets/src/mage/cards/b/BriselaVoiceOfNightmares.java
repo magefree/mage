@@ -62,7 +62,7 @@ class BriselaVoiceOfNightmaresCantCastEffect extends ContinuousRuleModifyingEffe
         staticText = "Your opponents can't cast spells with mana value 3 or less";
     }
 
-    public BriselaVoiceOfNightmaresCantCastEffect(final BriselaVoiceOfNightmaresCantCastEffect effect) {
+    private BriselaVoiceOfNightmaresCantCastEffect(final BriselaVoiceOfNightmaresCantCastEffect effect) {
         super(effect);
     }
 

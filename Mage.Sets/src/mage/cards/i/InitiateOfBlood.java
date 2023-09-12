@@ -110,7 +110,7 @@ class GokaTheUnjust extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
-    public GokaTheUnjust(final GokaTheUnjust token) {
+    private GokaTheUnjust(final GokaTheUnjust token) {
         super(token);
     }
 

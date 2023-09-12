@@ -27,7 +27,7 @@ public final class HawkeaterMoth extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public HawkeaterMoth (final HawkeaterMoth card) {
+    private HawkeaterMoth(final HawkeaterMoth card) {
         super(card);
     }
 

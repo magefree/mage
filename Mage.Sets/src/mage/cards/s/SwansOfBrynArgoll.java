@@ -63,7 +63,7 @@ class SwansOfBrynArgollEffect extends PreventionEffectImpl {
         staticText = "If a source would deal damage to {this}, prevent that damage. The source's controller draws cards equal to the damage prevented this way";
     }
 
-    SwansOfBrynArgollEffect(final SwansOfBrynArgollEffect effect) {
+    private SwansOfBrynArgollEffect(final SwansOfBrynArgollEffect effect) {
         super(effect);
     }
 

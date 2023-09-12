@@ -53,7 +53,7 @@ class OvermasterEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "The next instant or sorcery spell you cast this turn can't be countered";
     }
 
-    OvermasterEffect(final OvermasterEffect effect) {
+    private OvermasterEffect(final OvermasterEffect effect) {
         super(effect);
     }
 

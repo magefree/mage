@@ -58,7 +58,7 @@ class LegacyOfTheBelovedEffect extends OneShotEffect {
         this.staticText = "Search you library for up to two creatures cards that each have a lower mana value that sacrificied creature's mana value, reveal them and put them onto the battlefield, then shuffle you library";
     }
 
-    public LegacyOfTheBelovedEffect(final LegacyOfTheBelovedEffect effect) {
+    private LegacyOfTheBelovedEffect(final LegacyOfTheBelovedEffect effect) {
         super(effect);
     }
 

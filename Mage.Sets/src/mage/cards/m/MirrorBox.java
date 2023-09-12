@@ -63,7 +63,7 @@ class MirrorBoxBoostEffect extends ContinuousEffectImpl {
                 "each other creature you control with the same name as that creature";
     }
 
-    public MirrorBoxBoostEffect(final MirrorBoxBoostEffect effect) {
+    private MirrorBoxBoostEffect(final MirrorBoxBoostEffect effect) {
         super(effect);
     }
 

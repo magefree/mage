@@ -45,7 +45,7 @@ class FeudkillersVerdictEffect extends OneShotEffect {
         this.staticText = "You gain 10 life. Then if you have more life than an opponent, create a 5/5 white Giant Warrior creature token";
     }
 
-    public FeudkillersVerdictEffect(final FeudkillersVerdictEffect effect) {
+    private FeudkillersVerdictEffect(final FeudkillersVerdictEffect effect) {
         super(effect);
     }
 

@@ -76,7 +76,7 @@ public final class DeathMaskDuplicant extends CardImpl {
             staticText = "As long as a card exiled with {this} has flying, {this} has flying. The same is true for fear, first strike, double strike, haste, landwalk, protection, and trample";
         }
 
-        public DeathMaskDuplicantEffect(final DeathMaskDuplicantEffect effect) {
+        private DeathMaskDuplicantEffect(final DeathMaskDuplicantEffect effect) {
             super(effect);
         }
 

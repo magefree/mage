@@ -54,7 +54,7 @@ class CrownHunterHirelingCantAttackEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless defending player is the monarch";
     }
 
-    public CrownHunterHirelingCantAttackEffect(final CrownHunterHirelingCantAttackEffect effect) {
+    private CrownHunterHirelingCantAttackEffect(final CrownHunterHirelingCantAttackEffect effect) {
         super(effect);
     }
 

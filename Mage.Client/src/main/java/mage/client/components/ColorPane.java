@@ -145,7 +145,7 @@ public class ColorPane extends JEditorPane {
 
     @Override
     public void setText(String string) {
-        super.setText(string); //To change body of generated methods, choose Tools | Templates.
+        super.setText(string);
     }
 
     public void append(String text) {

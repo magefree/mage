@@ -75,7 +75,7 @@ class CauldronsGiftEffect extends OneShotEffect {
             return true;
         }
         TargetCard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!player.choose(outcome, player.getGraveyard(), target, source, game)) {
             return true;
         }

@@ -61,7 +61,7 @@ class LaeliaTheBladeReforgedAddCountersTriggeredAbility extends TriggeredAbility
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
     }
 
-    LaeliaTheBladeReforgedAddCountersTriggeredAbility(final LaeliaTheBladeReforgedAddCountersTriggeredAbility ability) {
+    private LaeliaTheBladeReforgedAddCountersTriggeredAbility(final LaeliaTheBladeReforgedAddCountersTriggeredAbility ability) {
         super(ability);
     }
 

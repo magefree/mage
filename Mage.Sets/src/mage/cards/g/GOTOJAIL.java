@@ -58,7 +58,7 @@ class GoToJailExileEffect extends OneShotEffect {
         this.staticText = "exile target creature an opponent controls until {this} leaves the battlefield.";
     }
 
-    public GoToJailExileEffect(final GoToJailExileEffect effect) {
+    private GoToJailExileEffect(final GoToJailExileEffect effect) {
         super(effect);
     }
 
@@ -96,7 +96,7 @@ class GoToJailTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("At the beginning of the chosen player's upkeep, ");
     }
 
-    public GoToJailTriggeredAbility(final GoToJailTriggeredAbility ability) {
+    private GoToJailTriggeredAbility(final GoToJailTriggeredAbility ability) {
         super(ability);
     }
 
@@ -123,7 +123,7 @@ class GoToJailUpkeepEffect extends OneShotEffect {
         this.staticText = "that player rolls two six-sided dice. If they roll doubles, sacrifice {this}";
     }
 
-    public GoToJailUpkeepEffect(final GoToJailUpkeepEffect effect) {
+    private GoToJailUpkeepEffect(final GoToJailUpkeepEffect effect) {
         super(effect);
     }
 

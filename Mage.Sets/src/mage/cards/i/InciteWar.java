@@ -61,7 +61,7 @@ class InciteWarMustAttackEffect extends OneShotEffect {
         staticText = "Creatures target player controls attack this turn if able";
     }
 
-    public InciteWarMustAttackEffect(final InciteWarMustAttackEffect effect) {
+    private InciteWarMustAttackEffect(final InciteWarMustAttackEffect effect) {
         super(effect);
     }
 

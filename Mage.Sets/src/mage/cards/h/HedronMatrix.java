@@ -38,7 +38,7 @@ public final class HedronMatrix extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), new TargetControlledCreaturePermanent(), false));
     }
 
-    public HedronMatrix (final HedronMatrix card) {
+    private HedronMatrix(final HedronMatrix card) {
         super(card);
     }
 
@@ -56,7 +56,7 @@ class HedronMatrixEffect extends ContinuousEffectImpl {
         staticText = "Equipped creature gets +X/+X, where X is its mana value";
     }
 
-    public HedronMatrixEffect(final HedronMatrixEffect effect) {
+    private HedronMatrixEffect(final HedronMatrixEffect effect) {
         super(effect);
     }
 

@@ -34,7 +34,7 @@ public final class KathariRemnant extends CardImpl {
         this.addAbility(new CascadeAbility());
     }
 
-    public KathariRemnant (final KathariRemnant card) {
+    private KathariRemnant(final KathariRemnant card) {
         super(card);
     }
 

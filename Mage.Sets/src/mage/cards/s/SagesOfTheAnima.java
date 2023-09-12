@@ -58,7 +58,7 @@ class SagesOfTheAnimaReplacementEffect extends ReplacementEffectImpl {
                 + "and the rest on the bottom of your library in any order";
     }
 
-    public SagesOfTheAnimaReplacementEffect(final SagesOfTheAnimaReplacementEffect effect) {
+    private SagesOfTheAnimaReplacementEffect(final SagesOfTheAnimaReplacementEffect effect) {
         super(effect);
     }
 

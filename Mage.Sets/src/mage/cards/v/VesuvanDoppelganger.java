@@ -80,7 +80,7 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
             if (source instanceof SimpleStaticAbility) {
                 target = new TargetPermanent(new FilterCreaturePermanent("creature (you copy from)"));
                 target.setRequired(false);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
             }
             if (target.canChoose(source.getControllerId(), source, game)) {
                 controller.choose(Outcome.Copy, target, source, game);

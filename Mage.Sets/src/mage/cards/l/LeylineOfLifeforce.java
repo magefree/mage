@@ -50,7 +50,7 @@ class LeylineOfLifeforceEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Creature spells can't be countered";
     }
 
-    LeylineOfLifeforceEffect(final LeylineOfLifeforceEffect effect) {
+    private LeylineOfLifeforceEffect(final LeylineOfLifeforceEffect effect) {
         super(effect);
     }
 

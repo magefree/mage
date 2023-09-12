@@ -54,7 +54,7 @@ class ElsewhereFlaskEffect extends OneShotEffect {
         this.staticText = "Choose a basic land type. Each land you control becomes that type until end of turn";
     }
 
-    public ElsewhereFlaskEffect(final ElsewhereFlaskEffect effect) {
+    private ElsewhereFlaskEffect(final ElsewhereFlaskEffect effect) {
         super(effect);
     }
 

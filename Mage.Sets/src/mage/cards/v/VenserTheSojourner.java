@@ -76,7 +76,7 @@ class VenserTheSojournerEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    VenserTheSojournerEffect(VenserTheSojournerEffect effect) {
+    private VenserTheSojournerEffect(final VenserTheSojournerEffect effect) {
         super(effect);
     }
 

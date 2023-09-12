@@ -46,7 +46,7 @@ class CovenantOfMindsEffect extends OneShotEffect {
         this.staticText = "Reveal the top three cards of your library. Target opponent may choose to put those cards into your hand. If they don't, put those cards into your graveyard and draw five cards";
     }
 
-    public CovenantOfMindsEffect(final CovenantOfMindsEffect effect) {
+    private CovenantOfMindsEffect(final CovenantOfMindsEffect effect) {
         super(effect);
     }
 

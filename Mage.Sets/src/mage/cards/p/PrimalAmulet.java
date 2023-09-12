@@ -68,7 +68,7 @@ class PrimalAmuletEffect extends OneShotEffect {
                 + "you may remove those counters and transform it";
     }
 
-    PrimalAmuletEffect(final PrimalAmuletEffect effect) {
+    private PrimalAmuletEffect(final PrimalAmuletEffect effect) {
         super(effect);
     }
 

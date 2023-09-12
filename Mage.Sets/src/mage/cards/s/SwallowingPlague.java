@@ -28,7 +28,7 @@ public final class SwallowingPlague extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SwallowingPlague (final SwallowingPlague card) {
+    private SwallowingPlague(final SwallowingPlague card) {
         super(card);
     }
 

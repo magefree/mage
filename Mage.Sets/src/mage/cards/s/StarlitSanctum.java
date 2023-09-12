@@ -64,7 +64,7 @@ class StarlitSanctumWhiteEffect extends OneShotEffect {
         staticText = "You gain life equal to the sacrificed creature's toughness";
     }
 
-    public StarlitSanctumWhiteEffect(final StarlitSanctumWhiteEffect effect) {
+    private StarlitSanctumWhiteEffect(final StarlitSanctumWhiteEffect effect) {
         super(effect);
     }
 
@@ -100,7 +100,7 @@ class StarlitSanctumBlackEffect extends OneShotEffect {
         staticText = "Target player loses life equal to the sacrificed creature's power";
     }
 
-    public StarlitSanctumBlackEffect(final StarlitSanctumBlackEffect effect) {
+    private StarlitSanctumBlackEffect(final StarlitSanctumBlackEffect effect) {
         super(effect);
     }
 

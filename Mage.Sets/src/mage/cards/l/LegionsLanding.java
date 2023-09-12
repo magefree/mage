@@ -55,7 +55,7 @@ class LegionsLandingTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When you attack with three or more creatures, " );
     }
 
-    public LegionsLandingTriggeredAbility(final LegionsLandingTriggeredAbility ability) {
+    private LegionsLandingTriggeredAbility(final LegionsLandingTriggeredAbility ability) {
         super(ability);
     }
 

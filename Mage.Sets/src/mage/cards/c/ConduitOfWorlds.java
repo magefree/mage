@@ -111,7 +111,7 @@ class ConduitOfWorldsCantCastEffect extends ContinuousRuleModifyingEffectImpl {
         super(Duration.EndOfTurn, Outcome.Detriment);
     }
 
-    public ConduitOfWorldsCantCastEffect(final ConduitOfWorldsCantCastEffect effect) {
+    private ConduitOfWorldsCantCastEffect(final ConduitOfWorldsCantCastEffect effect) {
         super(effect);
     }
 

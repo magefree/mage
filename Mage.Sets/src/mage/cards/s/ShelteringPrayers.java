@@ -52,7 +52,7 @@ class ShelteringPrayersEffect extends ContinuousEffectImpl {
 
     }
 
-    public ShelteringPrayersEffect(final ShelteringPrayersEffect effect) {
+    private ShelteringPrayersEffect(final ShelteringPrayersEffect effect) {
         super(effect);
     }
 

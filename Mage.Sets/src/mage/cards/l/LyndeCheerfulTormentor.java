@@ -166,7 +166,7 @@ class LyndeCheerfulTormentorAttachCurseEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetPermanent targetPermanent = new TargetPermanent(filter);
-            targetPermanent.setNotTarget(true);
+            targetPermanent.withNotTarget(true);
             if (controller.chooseTarget(outcome, targetPermanent, source, game)) {
                 Permanent curse = game.getPermanent(targetPermanent.getFirstTarget());
                 if (curse != null) {

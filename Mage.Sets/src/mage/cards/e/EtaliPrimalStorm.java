@@ -54,7 +54,7 @@ class EtaliPrimalStormEffect extends OneShotEffect {
                 + "any number of spells from among those cards without paying their mana costs";
     }
 
-    public EtaliPrimalStormEffect(final EtaliPrimalStormEffect effect) {
+    private EtaliPrimalStormEffect(final EtaliPrimalStormEffect effect) {
         super(effect);
     }
 

@@ -53,7 +53,7 @@ class DeclarationInStoneEffect extends OneShotEffect {
         staticText = "Exile target creature and all other creatures its controller controls with the same name as that creature. That player investigates for each nontoken creature exiled this way.";
     }
 
-    public DeclarationInStoneEffect(final DeclarationInStoneEffect effect) {
+    private DeclarationInStoneEffect(final DeclarationInStoneEffect effect) {
         super(effect);
     }
 

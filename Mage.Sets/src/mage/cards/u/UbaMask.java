@@ -50,7 +50,7 @@ class UbaMaskReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "If a player would draw a card, that player exiles that card face up instead";
     }
 
-    UbaMaskReplacementEffect(final UbaMaskReplacementEffect effect) {
+    private UbaMaskReplacementEffect(final UbaMaskReplacementEffect effect) {
         super(effect);
     }
 

@@ -46,7 +46,7 @@ class GratuitousViolenceReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a creature you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead";
     }
 
-    GratuitousViolenceReplacementEffect(final GratuitousViolenceReplacementEffect effect) {
+    private GratuitousViolenceReplacementEffect(final GratuitousViolenceReplacementEffect effect) {
         super(effect);
     }
 

@@ -90,7 +90,7 @@ class TurnOverEffect extends OneShotEffect {
         this.staticText = "Turn over target nontoken creature";
     }
 
-    TurnOverEffect(final TurnOverEffect effect) {
+    private TurnOverEffect(final TurnOverEffect effect) {
         super(effect);
     }
 

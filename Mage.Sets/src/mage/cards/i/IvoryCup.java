@@ -44,7 +44,7 @@ class IvoryCupAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false);
     }
 
-    public IvoryCupAbility(final IvoryCupAbility ability) {
+    private IvoryCupAbility(final IvoryCupAbility ability) {
         super(ability);
     }
 

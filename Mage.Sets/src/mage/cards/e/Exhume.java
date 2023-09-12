@@ -47,7 +47,7 @@ class ExhumeEffect extends OneShotEffect {
         this.staticText = "Each player puts a creature card from their graveyard onto the battlefield";
     }
 
-    public ExhumeEffect(final ExhumeEffect effect) {
+    private ExhumeEffect(final ExhumeEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class ExhumeEffect extends OneShotEffect {
                     FilterCreatureCard filterCreatureCard = new FilterCreatureCard("creature card from your graveyard");
                     filterCreatureCard.add(new OwnerIdPredicate(playerId));
                     TargetCardInGraveyard target = new TargetCardInGraveyard(filterCreatureCard);
-                    target.setNotTarget(true);
+                    target.withNotTarget(true);
                     if (target.canChoose(playerId, source, game)
                             && player.chooseTarget(outcome, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());

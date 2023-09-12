@@ -54,7 +54,7 @@ class TheGoldenThroneEffect extends ReplacementEffectImpl {
         staticText = "if you would lose the game, instead exile {this} and your life total becomes 1";
     }
 
-    public TheGoldenThroneEffect(final TheGoldenThroneEffect effect) {
+    private TheGoldenThroneEffect(final TheGoldenThroneEffect effect) {
         super(effect);
     }
 

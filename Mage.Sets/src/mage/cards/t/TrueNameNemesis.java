@@ -66,7 +66,7 @@ class ProtectionFromPlayerAbility extends ProtectionAbility {
         super(new FilterCard());
     }
 
-    public ProtectionFromPlayerAbility(final ProtectionFromPlayerAbility ability) {
+    private ProtectionFromPlayerAbility(final ProtectionFromPlayerAbility ability) {
         super(ability);
     }
 

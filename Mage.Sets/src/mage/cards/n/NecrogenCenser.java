@@ -32,7 +32,7 @@ public final class NecrogenCenser extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NecrogenCenser (final NecrogenCenser card) {
+    private NecrogenCenser(final NecrogenCenser card) {
         super(card);
     }
 

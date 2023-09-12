@@ -60,7 +60,7 @@ class NissasPilgrimageEffect extends OneShotEffect {
                 + "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, search your library for up to three basic Forest cards instead of two.";
     }
 
-    public NissasPilgrimageEffect(final NissasPilgrimageEffect effect) {
+    private NissasPilgrimageEffect(final NissasPilgrimageEffect effect) {
         super(effect);
     }
 

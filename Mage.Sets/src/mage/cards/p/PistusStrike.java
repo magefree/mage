@@ -55,7 +55,7 @@ class PoisonControllerTargetCreatureEffect extends OneShotEffect {
         staticText = "Its controller gets a poison counter";
     }
 
-    public PoisonControllerTargetCreatureEffect(final PoisonControllerTargetCreatureEffect effect) {
+    private PoisonControllerTargetCreatureEffect(final PoisonControllerTargetCreatureEffect effect) {
         super(effect);
     }
 

@@ -93,7 +93,7 @@ class HeroOfBretagardTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    HeroOfBretagardTriggeredAbility(final HeroOfBretagardTriggeredAbility ability) {
+    private HeroOfBretagardTriggeredAbility(final HeroOfBretagardTriggeredAbility ability) {
         super(ability);
     }
 

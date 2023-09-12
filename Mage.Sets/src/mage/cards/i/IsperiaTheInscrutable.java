@@ -71,7 +71,7 @@ class IsperiaTheInscrutableEffect extends OneShotEffect {
         staticText = "That player reveals their hand. If a card with the chosen name is revealed this way, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle";
     }
 
-    public IsperiaTheInscrutableEffect(final IsperiaTheInscrutableEffect effect) {
+    private IsperiaTheInscrutableEffect(final IsperiaTheInscrutableEffect effect) {
         super(effect);
     }
 

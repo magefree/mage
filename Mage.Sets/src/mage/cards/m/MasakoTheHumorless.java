@@ -51,7 +51,7 @@ class BlockTappedEffect extends AsThoughEffectImpl {
         staticText ="Tapped creatures you control can block as though they were untapped";
     }
 
-    public BlockTappedEffect(final BlockTappedEffect effect) {
+    private BlockTappedEffect(final BlockTappedEffect effect) {
         super(effect);
     }
 

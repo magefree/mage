@@ -69,7 +69,7 @@ class AvenSoulgazerLookFaceDownEffect extends OneShotEffect {
         this.staticText = "Look at target face-down creature";
     }
 
-    public AvenSoulgazerLookFaceDownEffect(final AvenSoulgazerLookFaceDownEffect effect) {
+    private AvenSoulgazerLookFaceDownEffect(final AvenSoulgazerLookFaceDownEffect effect) {
         super(effect);
     }
 

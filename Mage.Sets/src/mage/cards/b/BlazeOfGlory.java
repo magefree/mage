@@ -58,7 +58,7 @@ class BlazeOfGloryRequirementEffect extends RequirementEffect {
         this.staticText = "It blocks each attacking creature this turn if able";
     }
 
-    public BlazeOfGloryRequirementEffect(final BlazeOfGloryRequirementEffect effect) {
+    private BlazeOfGloryRequirementEffect(final BlazeOfGloryRequirementEffect effect) {
         super(effect);
     }
 

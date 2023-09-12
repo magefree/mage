@@ -63,7 +63,7 @@ class FirecatBlitzEffect extends OneShotEffect {
         this.staticText = "Create X 1/1 red Elemental Cat creature tokens with haste. Exile them at the beginning of the next end step";
     }
 
-    public FirecatBlitzEffect(final FirecatBlitzEffect effect) {
+    private FirecatBlitzEffect(final FirecatBlitzEffect effect) {
         super(effect);
     }
 

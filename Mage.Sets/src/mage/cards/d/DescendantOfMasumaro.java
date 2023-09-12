@@ -56,7 +56,7 @@ class DescendantOfMasumaroEffect extends OneShotEffect {
         this.staticText = "put a +1/+1 counter on {this} for each card in your hand, then remove a +1/+1 counter from {this} for each card in target opponent's hand";
     }
 
-    public DescendantOfMasumaroEffect(final DescendantOfMasumaroEffect effect) {
+    private DescendantOfMasumaroEffect(final DescendantOfMasumaroEffect effect) {
         super(effect);
     }
 

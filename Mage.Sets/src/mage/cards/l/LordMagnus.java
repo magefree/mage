@@ -53,7 +53,7 @@ class LordMagnusFirstEffect extends AsThoughEffectImpl {
         staticText = "Creatures with plainswalk can be blocked as though they didn't have plainswalk";
     }
 
-    public LordMagnusFirstEffect(final LordMagnusFirstEffect effect) {
+    private LordMagnusFirstEffect(final LordMagnusFirstEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class LordMagnusSecondEffect extends AsThoughEffectImpl {
         staticText = "Creatures with forestwalk can be blocked as though they didn't have forestwalk";
     }
 
-    public LordMagnusSecondEffect(final LordMagnusSecondEffect effect) {
+    private LordMagnusSecondEffect(final LordMagnusSecondEffect effect) {
         super(effect);
     }
 

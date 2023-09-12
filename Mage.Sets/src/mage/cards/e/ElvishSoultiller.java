@@ -55,7 +55,7 @@ class ElvishSoultillerEffect extends OneShotEffect {
         this.staticText = "choose a creature type. Shuffle all creature cards of that type from your graveyard into your library";
     }
 
-    public ElvishSoultillerEffect(final ElvishSoultillerEffect effect) {
+    private ElvishSoultillerEffect(final ElvishSoultillerEffect effect) {
         super(effect);
     }
 

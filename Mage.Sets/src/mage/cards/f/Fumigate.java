@@ -43,7 +43,7 @@ class FumigateEffect extends OneShotEffect {
         this.staticText = "Destroy all creatures. You gain 1 life for each creature destroyed this way";
     }
 
-    public FumigateEffect(final FumigateEffect effect) {
+    private FumigateEffect(final FumigateEffect effect) {
         super(effect);
     }
 

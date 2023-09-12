@@ -51,7 +51,7 @@ class LongRoadHomeEffect extends OneShotEffect {
         staticText = effectText;
     }
 
-    LongRoadHomeEffect(LongRoadHomeEffect effect) {
+    private LongRoadHomeEffect(final LongRoadHomeEffect effect) {
         super(effect);
     }
 

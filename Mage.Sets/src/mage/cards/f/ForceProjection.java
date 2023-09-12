@@ -54,7 +54,7 @@ class ForceProjectionEffect extends OneShotEffect {
                 + "in addition to its other types and gains \"When this creature becomes the target of a spell, sacrifice it.\"";
     }
 
-    public ForceProjectionEffect(final ForceProjectionEffect effect) {
+    private ForceProjectionEffect(final ForceProjectionEffect effect) {
         super(effect);
     }
 

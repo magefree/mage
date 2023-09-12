@@ -73,7 +73,7 @@ class SerpentineSpikeEffect extends OneShotEffect {
         this.staticText = "{this} deals 2 damage to target creature, 3 damage to another target creature, and 4 damage to a third target creature";
     }
 
-    public SerpentineSpikeEffect(final SerpentineSpikeEffect effect) {
+    private SerpentineSpikeEffect(final SerpentineSpikeEffect effect) {
         super(effect);
     }
 

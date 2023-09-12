@@ -76,7 +76,7 @@ class MomirVigSimicVisionaryEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library. If it's a creature card, put that card into your hand";
     }
 
-    public MomirVigSimicVisionaryEffect(final MomirVigSimicVisionaryEffect effect) {
+    private MomirVigSimicVisionaryEffect(final MomirVigSimicVisionaryEffect effect) {
         super(effect);
     }
 

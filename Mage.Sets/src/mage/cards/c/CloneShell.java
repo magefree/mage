@@ -56,7 +56,7 @@ class CloneShellEffect extends OneShotEffect {
         staticText = "look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library in any order";
     }
 
-    public CloneShellEffect(CloneShellEffect effect) {
+    private CloneShellEffect(final CloneShellEffect effect) {
         super(effect);
     }
 
@@ -101,7 +101,7 @@ class CloneShellDiesEffect extends OneShotEffect {
         staticText = "turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control";
     }
 
-    public CloneShellDiesEffect(CloneShellDiesEffect effect) {
+    private CloneShellDiesEffect(final CloneShellDiesEffect effect) {
         super(effect);
     }
 

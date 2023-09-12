@@ -59,7 +59,7 @@ class LifebloodHydraEffect extends OneShotEffect {
         this.staticText = "you gain life and draw cards equal to its power";
     }
 
-    public LifebloodHydraEffect(final LifebloodHydraEffect effect) {
+    private LifebloodHydraEffect(final LifebloodHydraEffect effect) {
         super(effect);
     }
 

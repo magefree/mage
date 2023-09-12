@@ -47,7 +47,7 @@ class TwistedJusticeEffect extends OneShotEffect {
         staticText = "Target player sacrifices a creature. You draw cards equal to that creature's power";
     }
 
-    TwistedJusticeEffect(TwistedJusticeEffect effect) {
+    private TwistedJusticeEffect(final TwistedJusticeEffect effect) {
         super(effect);
     }
 

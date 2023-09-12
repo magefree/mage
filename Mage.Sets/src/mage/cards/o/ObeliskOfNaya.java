@@ -23,7 +23,7 @@ public final class ObeliskOfNaya extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public ObeliskOfNaya (final ObeliskOfNaya card) {
+    private ObeliskOfNaya(final ObeliskOfNaya card) {
         super(card);
     }
 

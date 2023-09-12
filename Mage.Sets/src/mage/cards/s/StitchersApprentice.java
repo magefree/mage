@@ -60,7 +60,7 @@ class StitchersApprenticeEffect extends OneShotEffect {
         this.staticText = "then sacrifice a creature";
     }
 
-    public StitchersApprenticeEffect(final StitchersApprenticeEffect effect) {
+    private StitchersApprenticeEffect(final StitchersApprenticeEffect effect) {
         super(effect);
     }
 

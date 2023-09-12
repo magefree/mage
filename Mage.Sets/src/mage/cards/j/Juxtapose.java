@@ -61,7 +61,7 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
         this.lockedControllers = new HashMap<>();
     }
 
-    public JuxtaposeEffect(final JuxtaposeEffect effect) {
+    private JuxtaposeEffect(final JuxtaposeEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
         this.zoneChangeCounter = new HashMap<>(effect.zoneChangeCounter);

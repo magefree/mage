@@ -60,7 +60,7 @@ class NecromanticSelectionEffect extends OneShotEffect {
         this.staticText = "Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types";
     }
 
-    public NecromanticSelectionEffect(final NecromanticSelectionEffect effect) {
+    private NecromanticSelectionEffect(final NecromanticSelectionEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class NecromanticSelectionEffect extends OneShotEffect {
             }
             filter.add(Predicates.or(cardIdPredicates));
             Target target = new TargetCardInGraveyard(filter);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (controller.chooseTarget(Outcome.Benefit, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {

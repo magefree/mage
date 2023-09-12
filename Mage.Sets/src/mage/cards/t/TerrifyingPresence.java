@@ -44,7 +44,7 @@ class TerrifyingPresenceEffect extends PreventionEffectImpl {
         this.staticText = "Prevent all combat damage that would be dealt by creatures other than target creature this turn";
     }
 
-    public TerrifyingPresenceEffect(final TerrifyingPresenceEffect effect) {
+    private TerrifyingPresenceEffect(final TerrifyingPresenceEffect effect) {
         super(effect);
     }
 

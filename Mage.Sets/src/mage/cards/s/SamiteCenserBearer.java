@@ -56,7 +56,7 @@ class SamiteCenserBearerEffect extends OneShotEffect {
         this.staticText = "Prevent the next 1 damage that would be dealt to each creature you control this turn";
     }
 
-    public SamiteCenserBearerEffect(final SamiteCenserBearerEffect effect) {
+    private SamiteCenserBearerEffect(final SamiteCenserBearerEffect effect) {
         super(effect);
     }
 

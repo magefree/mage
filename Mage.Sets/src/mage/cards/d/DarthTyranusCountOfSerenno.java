@@ -73,7 +73,7 @@ class DarthTyranusEffect extends OneShotEffect {
         staticText = "Target player's life total becomes 5. Another target players's life total becomes 30";
     }
 
-    public DarthTyranusEffect(DarthTyranusEffect effect) {
+    private DarthTyranusEffect(final DarthTyranusEffect effect) {
         super(effect);
     }
 
@@ -102,7 +102,7 @@ class TransmuteArtifactEffect extends SearchEffect {
         staticText = "Sacrifice an artifact. If you do, search your library for an artifact card and put that card onto the battlefield. Shuffle your library";
     }
 
-    public TransmuteArtifactEffect(final TransmuteArtifactEffect effect) {
+    private TransmuteArtifactEffect(final TransmuteArtifactEffect effect) {
         super(effect);
     }
 

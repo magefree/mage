@@ -53,7 +53,7 @@ class MoltenSentryEffect extends OneShotEffect {
         super(Outcome.Damage);
     }
 
-    public MoltenSentryEffect(MoltenSentryEffect effect) {
+    private MoltenSentryEffect(final MoltenSentryEffect effect) {
         super(effect);
     }
 

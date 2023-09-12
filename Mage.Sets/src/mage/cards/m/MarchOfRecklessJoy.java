@@ -66,7 +66,7 @@ class MarchOfRecklessJoyEffect extends OneShotEffect {
                 "You may play up to two of those cards until the end of your next turn.";
     }
 
-    public MarchOfRecklessJoyEffect(final MarchOfRecklessJoyEffect effect) {
+    private MarchOfRecklessJoyEffect(final MarchOfRecklessJoyEffect effect) {
         super(effect);
     }
 

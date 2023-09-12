@@ -56,7 +56,7 @@ class CurseOfExhaustionEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Enchanted player can't cast more than one spell each turn";
     }
 
-    public CurseOfExhaustionEffect(final CurseOfExhaustionEffect effect) {
+    private CurseOfExhaustionEffect(final CurseOfExhaustionEffect effect) {
         super(effect);
     }
 

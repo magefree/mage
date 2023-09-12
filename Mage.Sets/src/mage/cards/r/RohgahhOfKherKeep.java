@@ -81,7 +81,7 @@ class RohgahhOfKherKeepEffect extends OneShotEffect {
         this.staticText = "you may pay {R}{R}{R}. If you don't, tap {this} and all creatures named Kobolds of Kher Keep, then an opponent gains control of them.";
     }
 
-    RohgahhOfKherKeepEffect(final RohgahhOfKherKeepEffect effect) {
+    private RohgahhOfKherKeepEffect(final RohgahhOfKherKeepEffect effect) {
         super(effect);
     }
 

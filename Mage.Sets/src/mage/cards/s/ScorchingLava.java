@@ -63,7 +63,7 @@ class ScorchingLavaEffect extends OneShotEffect {
         super(Outcome.Exile);
     }
 
-    public ScorchingLavaEffect(final ScorchingLavaEffect effect) {
+    private ScorchingLavaEffect(final ScorchingLavaEffect effect) {
         super(effect);
     }
 

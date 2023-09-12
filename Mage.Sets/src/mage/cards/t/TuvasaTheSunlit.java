@@ -74,7 +74,7 @@ class TuvasaTheSunlitTriggeredAbility extends SpellCastControllerTriggeredAbilit
                 StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false, SetTargetPointer.SPELL);
     }
 
-    public TuvasaTheSunlitTriggeredAbility(final TuvasaTheSunlitTriggeredAbility ability) {
+    private TuvasaTheSunlitTriggeredAbility(final TuvasaTheSunlitTriggeredAbility ability) {
         super(ability);
     }
 

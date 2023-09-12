@@ -57,7 +57,7 @@ class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AngelheartVialEffect(), true);
     }
 
-    public AngelheartVialTriggeredAbility(final AngelheartVialTriggeredAbility ability) {
+    private AngelheartVialTriggeredAbility(final AngelheartVialTriggeredAbility ability) {
         super(ability);
     }
 
@@ -92,7 +92,7 @@ class AngelheartVialEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public AngelheartVialEffect(final AngelheartVialEffect effect) {
+    private AngelheartVialEffect(final AngelheartVialEffect effect) {
         super(effect);
     }
 

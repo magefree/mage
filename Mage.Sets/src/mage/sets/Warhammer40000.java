@@ -150,6 +150,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiring Call", 217, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Island", 307, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Keeper of Secrets", 78, Rarity.RARE, mage.cards.k.KeeperOfSecrets.class));
+        cards.add(new SetCardInfo("Kharn the Betrayer", 79, Rarity.RARE, mage.cards.k.KharnTheBetrayer.class));
         cards.add(new SetCardInfo("Kill! Maim! Burn!", 128, Rarity.RARE, mage.cards.k.KillMaimBurn.class));
         cards.add(new SetCardInfo("Knight Paladin", 160, Rarity.RARE, mage.cards.k.KnightPaladin.class));
         cards.add(new SetCardInfo("Knight Rampager", 80, Rarity.RARE, mage.cards.k.KnightRampager.class));
@@ -183,6 +184,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Necron Overlord", 43, Rarity.RARE, mage.cards.n.NecronOverlord.class));
         cards.add(new SetCardInfo("New Horizons", 218, Rarity.COMMON, mage.cards.n.NewHorizons.class));
         cards.add(new SetCardInfo("Nexos", 95, Rarity.RARE, mage.cards.n.Nexos.class));
+        cards.add(new SetCardInfo("Neyam Shai Murad", 135, Rarity.RARE, mage.cards.n.NeyamShaiMurad.class));
         cards.add(new SetCardInfo("Night Scythe", 162, Rarity.UNCOMMON, mage.cards.n.NightScythe.class));
         cards.add(new SetCardInfo("Noise Marine", 82, Rarity.UNCOMMON, mage.cards.n.NoiseMarine.class));
         cards.add(new SetCardInfo("Nurgle's Conscription", 44, Rarity.RARE, mage.cards.n.NurglesConscription.class));

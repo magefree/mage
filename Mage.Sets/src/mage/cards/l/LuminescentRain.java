@@ -47,7 +47,7 @@ class LuminescentRainEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. You gain 2 life for each permanent you control of that type.";
     }
 
-    LuminescentRainEffect(final LuminescentRainEffect effect) {
+    private LuminescentRainEffect(final LuminescentRainEffect effect) {
         super(effect);
     }
 

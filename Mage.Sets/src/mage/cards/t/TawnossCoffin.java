@@ -69,7 +69,7 @@ class TawnossCoffinTriggeredAbility extends LeavesBattlefieldTriggeredAbility {
         setTriggerPhrase("When {this} leaves the battlefield or becomes untapped, ");
     }
 
-    public TawnossCoffinTriggeredAbility(final TawnossCoffinTriggeredAbility ability) {
+    private TawnossCoffinTriggeredAbility(final TawnossCoffinTriggeredAbility ability) {
         super(ability);
     }
 
@@ -107,7 +107,7 @@ class TawnossCoffinEffect extends OneShotEffect {
                           "Note the number and kind of counters that were on that creature";
     }
 
-    public TawnossCoffinEffect(final TawnossCoffinEffect effect) {
+    private TawnossCoffinEffect(final TawnossCoffinEffect effect) {
         super(effect);
     }
 
@@ -151,7 +151,7 @@ class TawnossCoffinReturnEffect extends OneShotEffect {
                           "If you do, return the exiled Aura cards to the battlefield under their owner's control attached to that permanent";
     }
 
-    public TawnossCoffinReturnEffect(final TawnossCoffinReturnEffect effect) {
+    private TawnossCoffinReturnEffect(final TawnossCoffinReturnEffect effect) {
         super(effect);
     }
 

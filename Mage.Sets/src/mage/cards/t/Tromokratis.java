@@ -67,7 +67,7 @@ class CantBeBlockedUnlessAllEffect extends RestrictionEffect {
         staticText = "{this} can't be blocked unless all creatures defending player controls block it";
     }
 
-    public CantBeBlockedUnlessAllEffect(final CantBeBlockedUnlessAllEffect effect) {
+    private CantBeBlockedUnlessAllEffect(final CantBeBlockedUnlessAllEffect effect) {
         super(effect);
     }
 

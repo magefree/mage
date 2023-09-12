@@ -82,7 +82,7 @@ class LudevicNecroAlchemistEffect extends OneShotEffect {
         staticText = "that player may draw a card if a player other than you lost life this turn";
     }
 
-    public LudevicNecroAlchemistEffect(final LudevicNecroAlchemistEffect effect) {
+    private LudevicNecroAlchemistEffect(final LudevicNecroAlchemistEffect effect) {
         super(effect);
     }
 

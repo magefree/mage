@@ -38,7 +38,7 @@ public final class RuggedPrairie extends CardImpl {
         this.addAbility(ability);          
     }
 
-    public RuggedPrairie (final RuggedPrairie card) {
+    private RuggedPrairie(final RuggedPrairie card) {
         super(card);
     }
 

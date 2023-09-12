@@ -72,7 +72,7 @@ class MathasFiendSeekerGainAbilityEffect extends GainAbilityTargetEffect {
         super(ability, duration, rule);
     }
 
-    public MathasFiendSeekerGainAbilityEffect(final MathasFiendSeekerGainAbilityEffect effect) {
+    private MathasFiendSeekerGainAbilityEffect(final MathasFiendSeekerGainAbilityEffect effect) {
         super(effect);
     }
 
@@ -98,7 +98,7 @@ class OpponentsGainLifeEffect extends OneShotEffect {
         staticText = "and gains 2 life.";
     }
 
-    public OpponentsGainLifeEffect(final OpponentsGainLifeEffect effect) {
+    private OpponentsGainLifeEffect(final OpponentsGainLifeEffect effect) {
         super(effect);
     }
 

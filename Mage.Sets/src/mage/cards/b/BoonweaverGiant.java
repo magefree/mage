@@ -59,7 +59,7 @@ class BoonweaverGiantEffect extends OneShotEffect {
                 "If you search your library this way, shuffle.";
     }
 
-    public BoonweaverGiantEffect(final BoonweaverGiantEffect effect) {
+    private BoonweaverGiantEffect(final BoonweaverGiantEffect effect) {
         super(effect);
     }
 

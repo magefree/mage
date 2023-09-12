@@ -65,7 +65,7 @@ public final class RockHydra extends CardImpl {
             staticText = "For each 1 damage that would be dealt to {this}, if it has a +1/+1 counter on it, remove a +1/+1 counter from it and prevent that 1 damage.";
         }
 
-        public RockHydraEffect(final RockHydraEffect effect) {
+        private RockHydraEffect(final RockHydraEffect effect) {
             super(effect);
         }
 

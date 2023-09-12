@@ -63,7 +63,7 @@ class DreamTidesEffect extends OneShotEffect {
         staticText = "that player may choose any number of tapped nongreen creatures they control and pay {2} for each creature chosen this way. If the player does, untap those creatures";
     }
 
-    DreamTidesEffect(DreamTidesEffect effect) {
+    private DreamTidesEffect(final DreamTidesEffect effect) {
         super(effect);
     }
 

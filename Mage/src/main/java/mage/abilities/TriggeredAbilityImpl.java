@@ -157,14 +157,14 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 return false;
             }
         }
-        //20091005 - 603.4
-        if (!super.resolve(game)) {
-            return false;
-        }
         if (doOnlyOnceEachTurn) {
             game.getState().setValue(CardUtil.getCardZoneString(
                     "lastTurnUsed" + originalId, sourceId, game
             ), game.getTurnNum());
+        }
+        //20091005 - 603.4
+        if (!super.resolve(game)) {
+            return false;
         }
         return true;
     }

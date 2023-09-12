@@ -49,10 +49,15 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
         ));
     }
 
+    public static OptionalAdditionalCost makeBargainCost(){
+        OptionalAdditionalCost cost = new OptionalAdditionalCostImpl(keywordText, reminderText, new SacrificeTargetCost(bargainFilter));
+        cost.setRepeatable(false);
+        return cost;
+    }
+
     public BargainAbility() {
         super(Zone.STACK, null);
-        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderText, new SacrificeTargetCost(bargainFilter));
-        this.additionalCost.setRepeatable(false);
+        this.additionalCost = makeBargainCost();
         this.rule = additionalCost.getName() + ' ' + additionalCost.getReminderText();
         this.setRuleAtTheTop(true);
         this.addHint(BargainCostWasPaidHint.instance);
@@ -110,7 +115,6 @@ public class BargainAbility extends StaticAbility implements OptionalAdditionalS
     public boolean wasBargained(Game game, Ability source) {
         return activationKey != null && getActivationKey(source, game).equalsIgnoreCase(activationKey);
     }
-
 
     /**
      * TODO: remove with Tag Cost Tracking.

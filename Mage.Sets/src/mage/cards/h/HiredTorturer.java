@@ -51,7 +51,7 @@ public final class HiredTorturer extends CardImpl {
 
     }
 
-    public HiredTorturer (final HiredTorturer card) {
+    private HiredTorturer(final HiredTorturer card) {
         super(card);
     }
 
@@ -69,7 +69,7 @@ class HiredTorturerEffect extends OneShotEffect {
         staticText = "and reveals a card at random from their hand";
     }
 
-    public HiredTorturerEffect(final HiredTorturerEffect effect) {
+    private HiredTorturerEffect(final HiredTorturerEffect effect) {
         super(effect);
     }
 

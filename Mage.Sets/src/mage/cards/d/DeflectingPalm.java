@@ -50,7 +50,7 @@ class DeflectingPalmEffect extends PreventionEffectImpl {
         this.target = new TargetSource();
     }
 
-    public DeflectingPalmEffect(final DeflectingPalmEffect effect) {
+    private DeflectingPalmEffect(final DeflectingPalmEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }

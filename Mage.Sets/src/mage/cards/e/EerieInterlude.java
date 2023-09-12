@@ -53,7 +53,7 @@ class EerieInterludeEffect extends OneShotEffect {
         staticText = "Exile any number of target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step";
     }
 
-    public EerieInterludeEffect(final EerieInterludeEffect effect) {
+    private EerieInterludeEffect(final EerieInterludeEffect effect) {
         super(effect);
     }
 

@@ -63,7 +63,7 @@ class CounterSourceEffect extends OneShotEffect {
         this.staticText = "counter it unless you sacrifice a land";
     }
 
-    public CounterSourceEffect(final CounterSourceEffect effect) {
+    private CounterSourceEffect(final CounterSourceEffect effect) {
         super(effect);
     }
 
@@ -106,7 +106,7 @@ class ManaVortexStateTriggeredAbility extends StateTriggeredAbility {
         setTriggerPhrase("When there are no lands on the battlefield, ");
     }
 
-    public ManaVortexStateTriggeredAbility(final ManaVortexStateTriggeredAbility ability) {
+    private ManaVortexStateTriggeredAbility(final ManaVortexStateTriggeredAbility ability) {
         super(ability);
     }
 

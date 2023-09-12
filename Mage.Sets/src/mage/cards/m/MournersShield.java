@@ -66,7 +66,7 @@ class MournersShieldImprintEffect extends OneShotEffect {
         this.staticText = "you may exile target card from a graveyard";
     }
 
-    MournersShieldImprintEffect(final MournersShieldImprintEffect effect) {
+    private MournersShieldImprintEffect(final MournersShieldImprintEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class MournersShieldEffect extends PreventionEffectImpl {
         this.staticText = "Prevent all damage that would be dealt this turn by a source of your choice that shares a color with the exiled card.";
     }
 
-    public MournersShieldEffect(final MournersShieldEffect effect) {
+    private MournersShieldEffect(final MournersShieldEffect effect) {
         super(effect);
         if (effect.target != null) {
             this.target = effect.target.copy();

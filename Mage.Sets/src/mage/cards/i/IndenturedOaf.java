@@ -51,7 +51,7 @@ class IndenturedOafPreventEffectEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that {this} would deal to red creatures";
     }
 
-    public IndenturedOafPreventEffectEffect(final IndenturedOafPreventEffectEffect effect) {
+    private IndenturedOafPreventEffectEffect(final IndenturedOafPreventEffectEffect effect) {
         super(effect);
     }
 

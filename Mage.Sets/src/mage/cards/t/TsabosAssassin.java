@@ -59,7 +59,7 @@ class TsabosAssasinEffect extends OneShotEffect {
         this.staticText = "Destroy target creature if it shares a color with the most common color among all permanents or a color tied for most common. A creature destroyed this way can't be regenerated.";
     }
 
-    public TsabosAssasinEffect(final TsabosAssasinEffect effect) {
+    private TsabosAssasinEffect(final TsabosAssasinEffect effect) {
         super(effect);
     }
 

@@ -61,7 +61,7 @@ class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, false);
     }
 
-    public KiraGreatGlassSpinnerAbility(final KiraGreatGlassSpinnerAbility ability) {
+    private KiraGreatGlassSpinnerAbility(final KiraGreatGlassSpinnerAbility ability) {
         super(ability);
     }
 

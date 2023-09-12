@@ -60,7 +60,7 @@ class HammerheimEffect extends ContinuousEffectImpl {
         this.staticText = "Target creature loses all landwalk abilities until end of turn.";
     }
 
-    public HammerheimEffect(final HammerheimEffect effect) {
+    private HammerheimEffect(final HammerheimEffect effect) {
         super(effect);
     }
 

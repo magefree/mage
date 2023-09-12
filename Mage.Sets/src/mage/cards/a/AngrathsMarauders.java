@@ -52,7 +52,7 @@ class AngrathsMaraudersEffect extends ReplacementEffectImpl {
         staticText = "If a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead";
     }
 
-    public AngrathsMaraudersEffect(final AngrathsMaraudersEffect effect) {
+    private AngrathsMaraudersEffect(final AngrathsMaraudersEffect effect) {
         super(effect);
     }
 

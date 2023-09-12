@@ -60,7 +60,7 @@ class RiddleformToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public RiddleformToken(final RiddleformToken token) {
+    private RiddleformToken(final RiddleformToken token) {
         super(token);
     }
 

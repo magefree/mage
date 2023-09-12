@@ -59,7 +59,7 @@ class OpalineSliverTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    public OpalineSliverTriggeredAbility(final OpalineSliverTriggeredAbility ability) {
+    private OpalineSliverTriggeredAbility(final OpalineSliverTriggeredAbility ability) {
         super(ability);
     }
 

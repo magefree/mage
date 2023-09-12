@@ -23,7 +23,7 @@ public final class RiverKaijin extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public RiverKaijin (final RiverKaijin card) {
+    private RiverKaijin(final RiverKaijin card) {
         super(card);
     }
 

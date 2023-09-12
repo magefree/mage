@@ -58,7 +58,7 @@ class DreadTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
     }
     
-    DreadTriggeredAbility(final DreadTriggeredAbility ability) {
+    private DreadTriggeredAbility(final DreadTriggeredAbility ability) {
         super(ability);
     }
     

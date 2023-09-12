@@ -18,4 +18,10 @@ public abstract class OneShotEffect extends EffectImpl {
     protected OneShotEffect(final OneShotEffect effect) {
         super(effect);
     }
+
+    @Override
+    public OneShotEffect setText(String staticText) {
+        super.setText(staticText);
+        return this;
+    }
 }

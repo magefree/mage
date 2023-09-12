@@ -68,7 +68,7 @@ class JestersScepterEffect extends OneShotEffect {
         staticText = "exile the top five cards of target player's library face down";
     }
 
-    public JestersScepterEffect(final JestersScepterEffect effect) {
+    private JestersScepterEffect(final JestersScepterEffect effect) {
         super(effect);
     }
 
@@ -106,7 +106,7 @@ class JestersScepterLookAtCardEffect extends AsThoughEffectImpl {
         staticText = "You may look at cards exiled with {this}";
     }
 
-    public JestersScepterLookAtCardEffect(final JestersScepterLookAtCardEffect effect) {
+    private JestersScepterLookAtCardEffect(final JestersScepterLookAtCardEffect effect) {
         super(effect);
     }
 
@@ -145,7 +145,7 @@ class JestersScepterCost extends CostImpl {
         this.text = "Put a card exiled with {this} into its owner's graveyard";
     }
 
-    public JestersScepterCost(JestersScepterCost cost) {
+    private JestersScepterCost(final JestersScepterCost cost) {
         super(cost);
     }
 
@@ -154,7 +154,7 @@ class JestersScepterCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             TargetCardInExile target = new TargetCardInExile(new FilterCard(), CardUtil.getCardExileZoneId(game, ability));
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, ability));
             if (cards != null
                     && !cards.isEmpty()
@@ -198,7 +198,7 @@ class JestersScepterCounterEffect extends OneShotEffect {
         staticText = "Counter target spell if it has the same name as that card";
     }
 
-    JestersScepterCounterEffect(final JestersScepterCounterEffect effect) {
+    private JestersScepterCounterEffect(final JestersScepterCounterEffect effect) {
         super(effect);
     }
 

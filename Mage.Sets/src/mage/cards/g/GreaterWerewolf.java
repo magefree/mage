@@ -55,7 +55,7 @@ class GreaterWerewolfEffect extends OneShotEffect {
         this.staticText = "put a -0/-2 counter on each creature blocking or blocked by {this}";
     }
 
-    public GreaterWerewolfEffect(final GreaterWerewolfEffect effect) {
+    private GreaterWerewolfEffect(final GreaterWerewolfEffect effect) {
         super(effect);
     }
 

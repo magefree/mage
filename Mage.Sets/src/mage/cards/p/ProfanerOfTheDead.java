@@ -55,7 +55,7 @@ class ProfanerOfTheDeadReturnEffect extends OneShotEffect {
         staticText = "return to their owners' hands all creatures your opponents control with toughness less than the exploited creature's toughness";
     }
 
-    public ProfanerOfTheDeadReturnEffect(final ProfanerOfTheDeadReturnEffect effect) {
+    private ProfanerOfTheDeadReturnEffect(final ProfanerOfTheDeadReturnEffect effect) {
         super(effect);
     }
 

@@ -147,7 +147,7 @@ class ShelobChildOfUngoliantTriggeredAbility extends TriggeredAbilityImpl {
         this.setTriggerPhrase("Whenever another creature dealt damage this turn by a Spider you controlled dies, ");
     }
 
-    public ShelobChildOfUngoliantTriggeredAbility(final ShelobChildOfUngoliantTriggeredAbility ability) {
+    private ShelobChildOfUngoliantTriggeredAbility(final ShelobChildOfUngoliantTriggeredAbility ability) {
         super(ability);
     }
 
@@ -195,7 +195,7 @@ class ShelobChildOfUngoliantEffect extends OneShotEffect {
             "\"{2}, {T}, Sacrifice this artifact: You gain 3 life,\" and it loses all other card types.";
     }
 
-    public ShelobChildOfUngoliantEffect(final ShelobChildOfUngoliantEffect effect) {
+    private ShelobChildOfUngoliantEffect(final ShelobChildOfUngoliantEffect effect) {
         super(effect);
     }
 

@@ -98,7 +98,7 @@ class MindsDilationEffect extends OneShotEffect {
                 + "If it's a nonland card, you may cast it without paying its mana cost";
     }
 
-    MindsDilationEffect(final MindsDilationEffect effect) {
+    private MindsDilationEffect(final MindsDilationEffect effect) {
         super(effect);
     }
 

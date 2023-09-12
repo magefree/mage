@@ -61,7 +61,7 @@ public final class PhylacteryLich extends CardImpl {
             super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
         }
 
-        public PhylacteryLichAbility(final PhylacteryLichAbility ability) {
+        private PhylacteryLichAbility(final PhylacteryLichAbility ability) {
             super(ability);
         }
 
@@ -102,7 +102,7 @@ class PhylacteryLichEffect extends OneShotEffect {
         staticText = "put a phylactery counter on an artifact you control";
     }
 
-    public PhylacteryLichEffect(final PhylacteryLichEffect effect) {
+    private PhylacteryLichEffect(final PhylacteryLichEffect effect) {
         super(effect);
     }
 

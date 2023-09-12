@@ -42,7 +42,7 @@ class DeathPitsOfRathTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(true));
     }
 
-    public DeathPitsOfRathTriggeredAbility(final DeathPitsOfRathTriggeredAbility effect) {
+    private DeathPitsOfRathTriggeredAbility(final DeathPitsOfRathTriggeredAbility effect) {
         super(effect);
     }
 

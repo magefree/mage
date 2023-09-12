@@ -69,7 +69,7 @@ class MasterOfTheVeilEffect extends OneShotEffect {
         this.staticText = "turn target creature with a morph ability face down";
     }
 
-    MasterOfTheVeilEffect(final MasterOfTheVeilEffect effect) {
+    private MasterOfTheVeilEffect(final MasterOfTheVeilEffect effect) {
         super(effect);
     }
 

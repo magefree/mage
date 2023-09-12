@@ -60,7 +60,7 @@ class FireballEffect extends OneShotEffect {
                 "X damage divided evenly, rounded down, among any number of targets";
     }
 
-    public FireballEffect(final FireballEffect effect) {
+    private FireballEffect(final FireballEffect effect) {
         super(effect);
     }
 
@@ -101,7 +101,7 @@ class FireballTargetCreatureOrPlayer extends TargetAnyTarget {
         super(minNumTargets, maxNumTargets);
     }
 
-    public FireballTargetCreatureOrPlayer(final FireballTargetCreatureOrPlayer target) {
+    private FireballTargetCreatureOrPlayer(final FireballTargetCreatureOrPlayer target) {
         super(target);
     }
 

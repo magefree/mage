@@ -70,7 +70,7 @@ public final class ForgottenAncient extends CardImpl {
             this.staticText = "you may move any number of +1/+1 counters from {this} onto other creatures.";
         }
 
-        public ForgottenAncientEffect(final ForgottenAncientEffect effect) {
+        private ForgottenAncientEffect(final ForgottenAncientEffect effect) {
             super(effect);
         }
 

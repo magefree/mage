@@ -69,7 +69,7 @@ class EdificeOfAuthorityEffect extends OneShotEffect {
         staticText = ruleText;
     }
 
-    public EdificeOfAuthorityEffect(final EdificeOfAuthorityEffect effect) {
+    private EdificeOfAuthorityEffect(final EdificeOfAuthorityEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class EdificeOfAuthorityRestrictionEffect extends RestrictionEffect {
         staticText = "";
     }
 
-    public EdificeOfAuthorityRestrictionEffect(final EdificeOfAuthorityRestrictionEffect effect) {
+    private EdificeOfAuthorityRestrictionEffect(final EdificeOfAuthorityRestrictionEffect effect) {
         super(effect);
     }
 

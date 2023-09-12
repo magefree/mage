@@ -44,7 +44,7 @@ class MercyKillingTokenEffect extends OneShotEffect {
         staticText = ", then creates X 1/1 green and white Elf Warrior creature tokens, where X is that creature's power";
     }
 
-    public MercyKillingTokenEffect(final MercyKillingTokenEffect effect) {
+    private MercyKillingTokenEffect(final MercyKillingTokenEffect effect) {
         super(effect);
     }
 

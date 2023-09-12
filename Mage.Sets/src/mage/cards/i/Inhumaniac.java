@@ -50,7 +50,7 @@ class InhumaniacEffect extends OneShotEffect {
         this.staticText = "roll a six-sided die. On a 3 or 4, put a +1/+1 counter on {this}. On a 5 or higher, put two +1/+1 counters on it. On a 1, remove all +1/+1 counters from {this}";
     }
 
-    public InhumaniacEffect(final InhumaniacEffect effect) {
+    private InhumaniacEffect(final InhumaniacEffect effect) {
         super(effect);
     }
 

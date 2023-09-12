@@ -59,7 +59,7 @@ class InvasiveSurgeryEffect extends SearchTargetGraveyardHandLibraryForCardNameA
                 + "with the same name as that spell, exile those cards, then that player shuffles";
     }
 
-    public InvasiveSurgeryEffect(final InvasiveSurgeryEffect effect) {
+    private InvasiveSurgeryEffect(final InvasiveSurgeryEffect effect) {
         super(effect);
     }
 

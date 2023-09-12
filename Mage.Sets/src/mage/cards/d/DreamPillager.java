@@ -57,7 +57,7 @@ class DreamPillagerEffect extends OneShotEffect {
         this.staticText = "exile that many cards from the top of your library. Until end of turn, you may cast spells from among those exiled cards";
     }
 
-    public DreamPillagerEffect(final DreamPillagerEffect effect) {
+    private DreamPillagerEffect(final DreamPillagerEffect effect) {
         super(effect);
     }
 

@@ -29,7 +29,7 @@ public final class Pyromania extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // {1}{R}, Sacrifice Pyromania: Pyromania deals 1 damage to any target.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "it"), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

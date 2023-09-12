@@ -67,7 +67,7 @@ class BirchloreRangersManaEffect extends AddManaOfAnyColorEffect {
         this.filter = filter;
     }
 
-    public BirchloreRangersManaEffect(final BirchloreRangersManaEffect effect) {
+    private BirchloreRangersManaEffect(final BirchloreRangersManaEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

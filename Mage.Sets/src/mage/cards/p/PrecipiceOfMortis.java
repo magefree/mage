@@ -47,7 +47,7 @@ class PrecipiceOfMortisEffect extends ReplacementEffectImpl {
         staticText = "If a Jedi entering or leaving the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers additional time";
     }
 
-    public PrecipiceOfMortisEffect(final PrecipiceOfMortisEffect effect) {
+    private PrecipiceOfMortisEffect(final PrecipiceOfMortisEffect effect) {
         super(effect);
     }
 

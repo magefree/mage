@@ -59,7 +59,7 @@ class CurseOfChaosTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player attacks enchanted player with one or more creatures, ");
     }
 
-    public CurseOfChaosTriggeredAbility(final CurseOfChaosTriggeredAbility ability) {
+    private CurseOfChaosTriggeredAbility(final CurseOfChaosTriggeredAbility ability) {
         super(ability);
     }
 
@@ -96,7 +96,7 @@ class CurseOfChaosEffect extends OneShotEffect {
         this.staticText = "that attacking player may discard a card. If the player does, they draw a card";
     }
 
-    public CurseOfChaosEffect(final CurseOfChaosEffect effect) {
+    private CurseOfChaosEffect(final CurseOfChaosEffect effect) {
         super(effect);
     }
 

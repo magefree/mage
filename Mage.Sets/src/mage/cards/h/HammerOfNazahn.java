@@ -68,7 +68,7 @@ class HammerOfNazahnEffect extends OneShotEffect {
         this.staticText = "you may attach that Equipment to target creature you control";
     }
 
-    public HammerOfNazahnEffect(final HammerOfNazahnEffect effect) {
+    private HammerOfNazahnEffect(final HammerOfNazahnEffect effect) {
         super(effect);
     }
 

@@ -57,7 +57,7 @@ class TritonTacticsUntapEffect extends OneShotEffect {
                 "by one of those creatures this turn and it doesn't untap during its controller's next untap step";
     }
 
-    public TritonTacticsUntapEffect(final TritonTacticsUntapEffect effect) {
+    private TritonTacticsUntapEffect(final TritonTacticsUntapEffect effect) {
         super(effect);
     }
 

@@ -65,7 +65,7 @@ class OverwhelmingSplendorLoseAbilitiesEffect extends ContinuousEffectImpl {
         staticText = "Creatures enchanted player controls lose all abilities and have base power and toughness 1/1";
     }
 
-    public OverwhelmingSplendorLoseAbilitiesEffect(final OverwhelmingSplendorLoseAbilitiesEffect effect) {
+    private OverwhelmingSplendorLoseAbilitiesEffect(final OverwhelmingSplendorLoseAbilitiesEffect effect) {
         super(effect);
     }
 
@@ -125,7 +125,7 @@ class OverwhelmingSplendorCantActivateEffect extends ContinuousRuleModifyingEffe
         staticText = "Enchanted player can't activate abilities that aren't mana abilities or loyalty abilities";
     }
 
-    public OverwhelmingSplendorCantActivateEffect(final OverwhelmingSplendorCantActivateEffect effect) {
+    private OverwhelmingSplendorCantActivateEffect(final OverwhelmingSplendorCantActivateEffect effect) {
         super(effect);
     }
 

@@ -50,7 +50,7 @@ class MetamorphosisEffect extends OneShotEffect {
         staticText = "Add X mana of any one color, where X is 1 plus the sacrificed creature's mana value. Spend this mana only to cast creature spells.";
     }
 
-    public MetamorphosisEffect(final MetamorphosisEffect effect) {
+    private MetamorphosisEffect(final MetamorphosisEffect effect) {
         super(effect);
     }
 

@@ -53,7 +53,7 @@ class SolkanarTheSwampKingAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), false);
     }
 
-    public SolkanarTheSwampKingAbility(final SolkanarTheSwampKingAbility ability) {
+    private SolkanarTheSwampKingAbility(final SolkanarTheSwampKingAbility ability) {
         super(ability);
     }
 

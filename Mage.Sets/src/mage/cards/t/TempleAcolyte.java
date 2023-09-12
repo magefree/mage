@@ -27,7 +27,7 @@ public final class TempleAcolyte extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
     }
 
-    public TempleAcolyte (final TempleAcolyte card) {
+    private TempleAcolyte(final TempleAcolyte card) {
         super(card);
     }
 

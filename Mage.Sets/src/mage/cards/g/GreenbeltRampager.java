@@ -50,7 +50,7 @@ public final class GreenbeltRampager extends CardImpl {
             this.staticText = "pay {E}{E}. If you can't, return {this} to its owner's hand and you get {E}";
         }
 
-        GreenbeltRampagerEffect(final GreenbeltRampagerEffect effect) {
+        private GreenbeltRampagerEffect(final GreenbeltRampagerEffect effect) {
             super(effect);
         }
 
