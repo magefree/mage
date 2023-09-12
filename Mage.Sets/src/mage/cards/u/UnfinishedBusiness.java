@@ -55,9 +55,9 @@ public final class UnfinishedBusiness extends CardImpl {
 
 class UnfinishedBusinessEffect extends OneShotEffect{
 
-    public UnfinishedBusinessEffect() {
+    UnfinishedBusinessEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Return target creature card from your graveyard to the battlefield, then return up to two target Aura and/or Equipment cards from your graveyard to the battlefield attached to that creature. (If the Auras can not enchant that creature, they remain in your graveyard.)";
+        staticText = "Return target creature card from your graveyard to the battlefield, then return up to two target Aura and/or Equipment cards from your graveyard to the battlefield attached to that creature. <i>(If the Auras can not enchant that creature, they remain in your graveyard.)</i>";
     }
 
     private UnfinishedBusinessEffect(final UnfinishedBusinessEffect effect) {super(effect);}
@@ -71,10 +71,11 @@ class UnfinishedBusinessEffect extends OneShotEffect{
 
         // Return target creature from the graveyard to the battlefield
         Card targetCreature = game.getCard(source.getTargets().getFirstTarget());
+
         if (targetCreature != null){
             controller.moveCards(targetCreature, Zone.BATTLEFIELD, source, game);
         }
-        Permanent permanentCreature = targetCreature == null ? null : game.getPermanent(source.getTargets().getFirstTarget());
+        Permanent permanentCreature = targetCreature == null ? null : game.getPermanent(targetCreature.getId());
 
         // Target auras and/or equipment in your graveyard.
         Cards cardsInitial = new CardsImpl(source.getTargets().get(1).getTargets());
@@ -94,7 +95,7 @@ class UnfinishedBusinessEffect extends OneShotEffect{
                     !permanentCreature.cantBeAttachedBy(game.getCard(c),source, game, false) &&
                     game.getCard(c).hasSubtype(SubType.AURA, game)){
                 // only add auras if the creature has returned
-                // add auras that can be attached to creature
+                // only add auras that can be attached to creature
                 cards.add(c);
             }
         }
@@ -110,14 +111,16 @@ class UnfinishedBusinessEffect extends OneShotEffect{
         controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
         if (permanentCreature != null){
             for(UUID id: cards){
-                permanentCreature.addAttachment(id, source, game);
+                if (!permanentCreature.cantBeAttachedBy(game.getCard(id), source, game, true)){
+                    permanentCreature.addAttachment(id, source, game);
+                }
             }
         }
         return true;
     }
 
     @Override
-    public Effect copy() {
+    public UnfinishedBusinessEffect copy() {
         return new UnfinishedBusinessEffect(this);
     }
 }
