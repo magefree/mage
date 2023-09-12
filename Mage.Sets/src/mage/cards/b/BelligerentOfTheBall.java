@@ -41,6 +41,7 @@ public final class BelligerentOfTheBall extends CardImpl {
                 CelebrationCondition.instance, "At the beginning of combat on your turn, if two or more nonland "
                 + "permanents entered the battlefield under your control this turn, target creature you control "
                 + "gets +1/+0 and gains menace until end of turn."
+                + " <i>(It can't be blocked except by two or more creatures.)</i>"
         );
         ability.addEffect(new GainAbilityTargetEffect(new MenaceAbility(false)));
         ability.addTarget(new TargetControlledCreaturePermanent());
