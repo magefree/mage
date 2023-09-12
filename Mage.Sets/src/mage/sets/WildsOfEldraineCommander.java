@@ -24,7 +24,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ancestral Mask", 119, Rarity.COMMON, mage.cards.a.AncestralMask.class));
         cards.add(new SetCardInfo("Angelic Destiny", 60, Rarity.MYTHIC, mage.cards.a.AngelicDestiny.class));
         cards.add(new SetCardInfo("Arcane Denial", 84, Rarity.COMMON, mage.cards.a.ArcaneDenial.class));
-        cards.add(new SetCardInfo("Arcane Signet", 367, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Arcane Signet", 145, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archmage of Echoes", 9, Rarity.RARE, mage.cards.a.ArchmageOfEchoes.class));
         cards.add(new SetCardInfo("Archon of Sun's Grace", 61, Rarity.RARE, mage.cards.a.ArchonOfSunsGrace.class));
         cards.add(new SetCardInfo("Aura Gnarlid", 120, Rarity.COMMON, mage.cards.a.AuraGnarlid.class));
