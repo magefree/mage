@@ -145,7 +145,7 @@ public class ScryfallImageSupportCards {
             add("PAL06"); // Arena League 2006
             //add("PMPS06"); // Magic Premiere Shop 2006
             add("PHUK"); // Hachette UK
-            add("PGTW"); // Gateway 2006
+            add("PDCI"); // DCI Promos
             add("P06"); // Magic Player Rewards 2006
             add("G06"); // Judge Gift Cards 2006
             add("F06"); // Friday Night Magic 2006
@@ -155,7 +155,6 @@ public class ScryfallImageSupportCards {
             add("CSP"); // Coldsnap
             add("TSP"); // Time Spiral
             add("TSB"); // Time Spiral Timeshifted
-            add("PG07"); // Gateway 2007
             //add("PMPS07"); // Magic Premiere Shop 2007
             add("P07"); // Magic Player Rewards 2007
             add("HHO"); // Happy Holidays
@@ -173,7 +172,6 @@ public class ScryfallImageSupportCards {
             add("PJSE"); // Junior Series Europe
             add("PJAS"); // Junior APAC Series
             //add("PMPS08"); // Magic Premiere Shop 2008
-            add("PG08"); // Gateway 2008
             add("P08"); // Magic Player Rewards 2008
             add("G08"); // Judge Gift Cards 2008
             add("F08"); // Friday Night Magic 2008
