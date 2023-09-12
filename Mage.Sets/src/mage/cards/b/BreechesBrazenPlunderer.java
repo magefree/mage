@@ -10,7 +10,7 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedPlayerBatchEvent;
+import mage.game.events.DamagedBatchForPlayersEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -67,12 +67,12 @@ class BreechesBrazenPlundererTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerBatchEvent dEvent = (DamagedPlayerBatchEvent) event;
+        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
         Set<UUID> opponents = new HashSet<>();
         for (DamagedEvent damagedEvent : dEvent.getEvents()) {
             Permanent permanent = game.getPermanent(damagedEvent.getSourceId());

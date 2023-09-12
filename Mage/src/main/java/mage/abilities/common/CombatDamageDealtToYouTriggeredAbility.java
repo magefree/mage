@@ -4,9 +4,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedPlayerBatchEvent;
-import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.DamagedBatchForPlayersEvent;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -65,12 +63,12 @@ public class CombatDamageDealtToYouTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerBatchEvent damageEvent = (DamagedPlayerBatchEvent) event;
+        DamagedBatchForPlayersEvent damageEvent = (DamagedBatchForPlayersEvent) event;
         boolean check = damageEvent.getEvents()
                 .stream()
                 .anyMatch(c -> c.isCombatDamage() && c.getPlayerId() == this.controllerId);

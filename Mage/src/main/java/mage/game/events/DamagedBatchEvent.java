@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -30,8 +31,19 @@ public abstract class DamagedBatchEvent extends GameEvent {
                 .sum();
     }
 
+    public Set<UUID> getTargetIds() {
+        return events
+                .stream()
+                .map(GameEvent::getTargetId)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+    }
+
     @Override
+    @Deprecated // events can store a diff value, so search it from events list instead
     public UUID getTargetId() {
+        // TODO: replace it by getTargetIds or seearch in getEvents, enable exception
+        //throw new IllegalStateException("Wrong code usage. Must search batch value from a list");
         return events
                 .stream()
                 .map(GameEvent::getTargetId)
@@ -40,8 +52,19 @@ public abstract class DamagedBatchEvent extends GameEvent {
                 .orElse(null);
     }
 
+    public Set<UUID> getSourceIds() {
+        return events
+                .stream()
+                .map(GameEvent::getSourceId)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+    }
+
     @Override
+    @Deprecated // events can store a diff value, so search it from events list instead
     public UUID getSourceId() {
+        // TODO: replace it by getSourceIds or seearch in getEvents, enable exception
+        //throw new IllegalStateException("Wrong code usage. Must search batch value from a list");
         return events
                 .stream()
                 .map(GameEvent::getSourceId)
@@ -61,10 +84,10 @@ public abstract class DamagedBatchEvent extends GameEvent {
     public static DamagedBatchEvent makeEvent(DamagedEvent damagedEvent) {
         DamagedBatchEvent event;
         if (damagedEvent instanceof DamagedPlayerEvent) {
-            event = new DamagedPlayerBatchEvent();
+            event = new DamagedBatchForPlayersEvent();
             event.addEvent(damagedEvent);
         } else if (damagedEvent instanceof DamagedPermanentEvent) {
-            event = new DamagedPermanentBatchEvent();
+            event = new DamagedBatchForPermanentsEvent();
             event.addEvent(damagedEvent);
         } else {
             event = null;

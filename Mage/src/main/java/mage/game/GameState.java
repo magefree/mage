@@ -1,6 +1,5 @@
 package mage.game;
 
-import static java.util.Collections.emptyList;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.*;
@@ -44,6 +43,8 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static java.util.Collections.emptyList;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -816,53 +817,44 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
-        // This method does look for Batch Event in simultaneousEvents to batch
-        // damagedEvent with. For each kind of batch, either there is a batch
-        // of the proper class fitting the damagedEvent, or there is not.
+        // Combine multiple damage events in the single event (batch)
+        // * per damage type (see GameEvent.DAMAGED_BATCH_FOR_PERMANENTS, GameEvent.DAMAGED_BATCH_FOR_PLAYERS)
+        // * per player (see GameEvent.DAMAGED_BATCH_FOR_ONE_PLAYER)
         //
-        // If there is not one of the batched event (i.e. if the respective flag is
-        // at false after the loop), then a batched event is created for future
-        // events to be batched with.
+        // Warning, one event can be stored in multiple batches,
+        // example: DAMAGED_BATCH_FOR_PLAYERS + DAMAGED_BATCH_FOR_ONE_PLAYER
 
-        // All damage from any source to anything
-        // the batch is of class DamagedBatchEvent
-        boolean flagBatchAll = false;
+        boolean isPlayerDamage = damagedEvent instanceof DamagedPlayerEvent;
 
-        // All damage from any source to a specific player (damagedEvent.getPlayerId())
-        // the batch is of class DamagedPlayerBatchOnePlayerEvent
-        boolean flagBatchForPlayer = false;
-
+        // existing batch
+        boolean isDamageBatchUsed = false;
+        boolean isPlayerBatchUsed = false;
         for (GameEvent event : simultaneousEvents) {
 
+            // per damage type
             if ((event instanceof DamagedBatchEvent)
                     && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
-
-                // existing batch for damage of that damage class.
                 ((DamagedBatchEvent) event).addEvent(damagedEvent);
-                flagBatchAll = true;
+                isDamageBatchUsed = true;
             }
 
-            if (event instanceof DamagedPlayerBatchOnePlayerEvent) {
-                DamagedPlayerBatchOnePlayerEvent eventForPlayer = (DamagedPlayerBatchOnePlayerEvent) event;
-                if (eventForPlayer.getDamageClazz().isInstance(damagedEvent)
+            // per player
+            if (isPlayerDamage && event instanceof DamagedBatchForOnePlayerEvent) {
+                DamagedBatchForOnePlayerEvent oldPlayerBatch = (DamagedBatchForOnePlayerEvent) event;
+                if (oldPlayerBatch.getDamageClazz().isInstance(damagedEvent)
                         && event.getPlayerId().equals(damagedEvent.getTargetId())) {
-
-                    // existing batch for damage of that damage class to the same player
-                    eventForPlayer.addEvent(damagedEvent);
-                    flagBatchForPlayer = true;
+                    oldPlayerBatch.addEvent(damagedEvent);
+                    isPlayerBatchUsed = true;
                 }
             }
-
         }
 
-        if (!flagBatchAll) {
-            // new batch for any kind of damage, creating a fresh one with damagedEvent inside.
+        // new batch
+        if (!isDamageBatchUsed) {
             addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
         }
-        if (!flagBatchForPlayer && damagedEvent.getPlayerId() != null && damagedEvent.getPlayerId().equals(damagedEvent.getTargetId())) {
-            // new batch for damage from any source to the specific damaged player,
-            //     creating a fresh one with damagedEvent inside.
-            DamagedBatchEvent event = new DamagedPlayerBatchOnePlayerEvent(damagedEvent.getPlayerId());
+        if (!isPlayerBatchUsed && isPlayerDamage) {
+            DamagedBatchEvent event = new DamagedBatchForOnePlayerEvent(damagedEvent.getTargetId());
             event.addEvent(damagedEvent);
             addSimultaneousEvent(event, game);
         }

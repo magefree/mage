@@ -118,15 +118,16 @@ public class GameEvent implements Serializable {
          */
         DAMAGED_PLAYER,
 
-        /* DAMAGED_PLAYER_BATCH
-         combines all player damaged events in one single event
+        /* DAMAGED_BATCH_FOR_PLAYERS,
+         combines all player damage events to a single batch (event)
          */
-        DAMAGED_PLAYER_BATCH,
+        DAMAGED_BATCH_FOR_PLAYERS,
 
-        /* DAMAGED_PLAYER_BATCH_ONE_PLAYER
-         combines all player damaged events for a single player in one single event
+        /* DAMAGED_BATCH_FOR_ONE_PLAYER
+         combines all player damage events to a single batch (event) and split it per damaged player
+         playerId    the id of the damaged player
          */
-        DAMAGED_PLAYER_BATCH_ONE_PLAYER,
+        DAMAGED_BATCH_FOR_ONE_PLAYER,
 
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
@@ -406,10 +407,10 @@ public class GameEvent implements Serializable {
         DAMAGE_PERMANENT,
         DAMAGED_PERMANENT,
 
-        /*  DAMAGED_PERMANENT_BATCH
-         combine all permanent damage events to single event
+        /*  DAMAGED_BATCH_FOR_PERMANENTS
+         combine all permanent damage events to a single batch (event)
          */
-        DAMAGED_PERMANENT_BATCH,
+        DAMAGED_BATCH_FOR_PERMANENTS,
 
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
