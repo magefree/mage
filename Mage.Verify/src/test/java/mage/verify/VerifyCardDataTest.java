@@ -95,7 +95,7 @@ public class VerifyCardDataTest {
 
     private static final List<String> doubleWords = new ArrayList<>();
 
-    {
+    static {
         // numbers
         for (int i = 1; i <= 9; i++) {
             String s = CardUtil.numberToText(i).toLowerCase(Locale.ENGLISH);
@@ -140,7 +140,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
-        skipListAddName(SKIP_LIST_SUBTYPE, "WOE", "Hare Raising"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -156,7 +155,8 @@ public class VerifyCardDataTest {
         // skipListAddName(SKIP_LIST_DOUBLE_RARE, set, cardName);
 
         // Un-supported sets (mtgjson/scryfall contains that set but xmage don't implement it)
-        // Example: Non-English or empty sets: Token sets, Archenemy Schemes, Plane-Chase Planes, etc.
+        // Example: Non-English sets, Token sets, Archenemy Schemes, Plane-Chase Planes, etc.
+        // Sets with no cards or with "Oversized" in the name are automatically skipped.
         //
         // Non-English-only sets should not be added. https://github.com/magefree/mage/pull/6190#issuecomment-582354790
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "4BB"); // 4th Edition Foreign black border.
@@ -207,25 +207,13 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "THP2"); // Born of the Gods Hero's Path
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "THP3"); // Journey into Nyx Hero's Path
         //
-        // Commander Oversized cards.
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OCMD"); // Commander 2011 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC13"); // Commander 2013 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC14"); // Commander 2014 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC15"); // Commander 2015 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC16"); // Commander 2016 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC17"); // Commander 2017 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC18"); // Commander 2018 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OC19"); // Commander 2019 Oversized
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "OCM1"); // Commander's Arsenal Oversized
-        //
         // Other
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PCEL"); // Celebration Cards
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PMOA"); // Magic Online Avatar
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PVAN"); // Vanguard Series
-        skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "AMH1"); // Modern Horizons Art Series
         skipListAddName(SKIP_LIST_UNSUPPORTED_SETS, "PTG"); // Ponies: The Galloping
 
-        // wrond card numbers skip list
+        // wrong card numbers skip list
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "SWS"); // Star Wars
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UND"); // un-sets don't have full implementation of card variations
         skipListAddName(SKIP_LIST_WRONG_CARD_NUMBERS, "UST"); // un-sets don't have full implementation of card variations
@@ -505,10 +493,15 @@ public class VerifyCardDataTest {
 
             ExpansionSet mageSet = Sets.findSet(searchSet.toUpperCase(Locale.ENGLISH));
             if (mageSet == null) {
-                missingSets = missingSets + 1;
-                missingCards = missingCards + refSet.cards.size();
-                if (!CHECK_ONLY_ABILITIES_TEXT) {
-                    info.add("Warning: missing set " + refSet.code + " - " + refSet.name + " (cards: " + refSet.cards.size() + ", date: " + refSet.releaseDate + ")");
+                if (refSet.cards.isEmpty() || refSet.name.contains("Oversized")) {
+                    unsupportedSets++;
+                    unsupportedCards += refSet.totalSetSize;
+                } else {
+                    missingSets++;
+                    missingCards = missingCards + refSet.cards.size();
+                    if (!CHECK_ONLY_ABILITIES_TEXT) {
+                        info.add("Warning: missing set " + refSet.code + " - " + refSet.name + " (cards: " + refSet.cards.size() + ", date: " + refSet.releaseDate + ")");
+                    }
                 }
                 continue;
             }
