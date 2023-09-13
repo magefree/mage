@@ -5,6 +5,10 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+/**
+ * @author Codermann63
+ */
+
 public class UnfinishedBusinessTest extends CardTestPlayerBase {
 
     private static final String UNFINISHEDBUSINESS = "Unfinished Business";
@@ -38,8 +42,8 @@ public class UnfinishedBusinessTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, EQUIPMENT, 1);
 
         // Check aura and equipment is attached
-        assertIsAttachedTo(playerA, AURA, SHROUDCREATURE);
-        assertIsAttachedTo(playerA, EQUIPMENT, SHROUDCREATURE);
+        assertAttachedTo(playerA, AURA, SHROUDCREATURE, true);
+        assertAttachedTo(playerA, EQUIPMENT, SHROUDCREATURE, true);
     }
 
 
@@ -69,7 +73,7 @@ public class UnfinishedBusinessTest extends CardTestPlayerBase {
 
         // EEB should never have been attached and therefore the White knight should be untapped
         assertTapped(WHITEKNIGHT,false);
-        assertIsNotAttachedTo(playerA, EEB, WHITEKNIGHT);
+        assertAttachedTo(playerA, EEB, WHITEKNIGHT,false);
 
         // Check that Ghoulflesh never entered the battlefield
         assertLife(playerA, 20);
