@@ -593,6 +593,11 @@ public class GameEvent implements Serializable {
         return id;
     }
 
+    /**
+     * Some batch events can contain multiple events list, see BatchGameEvent for usage
+     *
+     * @return
+     */
     public UUID getTargetId() {
         return targetId;
     }

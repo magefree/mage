@@ -15,6 +15,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -44,7 +45,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
         // verify check: DoIfCostPaid effect already asks about action (optional), so no needs to ask it again in triggered ability
         if (effect instanceof DoIfCostPaid && (this.optional && ((DoIfCostPaid) effect).isOptional())) {
-                throw new IllegalArgumentException("DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): " + this.getClass().getSimpleName());
+            throw new IllegalArgumentException("DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): " + this.getClass().getSimpleName());
 
         }
     }
@@ -296,13 +297,16 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
          * latter triggers trigger from the game state after the move where the
          * Kozilek card is itself and has the ability.
          */
-        if (event == null || event.getTargetId() == null || !event.getTargetId().equals(getSourceId())) {
+
+        Set<UUID> eventTargets = CardUtil.getEventTargets(event);
+        if (!eventTargets.contains(getSourceId())) {
             return super.isInUseableZone(game, source, event);
         }
+
         switch (event.getType()) {
             case ZONE_CHANGE:
                 ZoneChangeEvent zce = (ZoneChangeEvent) event;
-                if (event.getTargetId().equals(getSourceId()) && !zce.getToZone().isPublicZone()) {
+                if (eventTargets.contains(getSourceId()) && !zce.getToZone().isPublicZone()) {
                     // If an ability triggers when the object that has it is put into a hidden zone from a graveyard,
                     // that ability triggers from the graveyard, (such as Golgari Brownscale),
                     // Yixlid Jailer will prevent that ability from triggering.

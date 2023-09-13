@@ -1,13 +1,15 @@
 package mage.game.events;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
  */
-public abstract class DamagedBatchEvent extends GameEvent {
+public abstract class DamagedBatchEvent extends GameEvent implements BatchGameEvent<DamagedEvent> {
 
     private final Class<? extends DamagedEvent> damageClazz;
     private final Set<DamagedEvent> events = new HashSet<>();
@@ -17,8 +19,17 @@ public abstract class DamagedBatchEvent extends GameEvent {
         this.damageClazz = damageClazz;
     }
 
+    @Override
     public Set<DamagedEvent> getEvents() {
         return events;
+    }
+
+    @Override
+    public Set<UUID> getTargets() {
+        return events.stream()
+                .map(GameEvent::getTargetId)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -32,7 +43,7 @@ public abstract class DamagedBatchEvent extends GameEvent {
     @Override
     @Deprecated // events can store a diff value, so search it from events list instead
     public UUID getTargetId() {
-        throw new IllegalStateException("Wrong code usage. Must search value from a getEvents list.");
+        throw new IllegalStateException("Wrong code usage. Must search value from a getEvents list or use CardUtil.getEventTargets(event)");
     }
 
     @Override
