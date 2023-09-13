@@ -369,7 +369,7 @@ public class CallbackClientImpl implements CallbackClient {
                         DeckView deckView = message.getDeck();
                         Deck deck = DeckUtil.construct(deckView);
                         if (message.getFlag()) {
-                            construct(deck, message.getTableId(), message.getTime());
+                            construct_sideboard(deck, message.getTableId(), message.getTime());
                         } else {
                             sideboard(deck, message.getTableId(), message.getTime());
                         }
@@ -609,6 +609,10 @@ public class CallbackClientImpl implements CallbackClient {
 
     protected void construct(Deck deck, UUID tableId, int time) {
         frame.showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, tableId, time);
+    }
+
+    protected void construct_sideboard(Deck deck, UUID tableId, int time) {
+        frame.showDeckEditor(DeckEditorMode.LIMITED_SIDEBOARD_BUILDING, deck, tableId, time);
     }
 
     protected void viewLimitedDeck(Deck deck, UUID tableId, int time) {
