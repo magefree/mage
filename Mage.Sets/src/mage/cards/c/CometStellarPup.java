@@ -73,10 +73,10 @@ class CometStellarPupAbility extends OneShotEffect {
     CometStellarPupAbility() {
         super(Outcome.Benefit);
         staticText = "Roll a six-sided die.<br>"
-                + "1 or 2 — [+2] , then create two 1/1 green Squirrel creature tokens. They gain haste until end of turn.<br>"
-                + "3 — [-1], then return a card with mana value 2 or less from your graveyard to your hand.<br>"
-                + "4 or 5 — {this} deals damage equal to the number of loyalty counters on him to a creature or player, then [-2].<br>"
-                + "6 — [+1], and you may activate Comet, Stellar Pup's loyalty ability two more times this turn.";
+                + "1 or 2 &mdash; [+2] , then create two 1/1 green Squirrel creature tokens. They gain haste until end of turn.<br>"
+                + "3 &mdash; [-1], then return a card with mana value 2 or less from your graveyard to your hand.<br>"
+                + "4 or 5 &mdash; {this} deals damage equal to the number of loyalty counters on him to a creature or player, then [-2].<br>"
+                + "6 &mdash; [+1], and you may activate Comet, Stellar Pup's loyalty ability two more times this turn.";
     }
 
     private CometStellarPupAbility(final CometStellarPupAbility effect) {
@@ -115,7 +115,7 @@ class CometStellarPupAbility extends OneShotEffect {
 
             // return a card with mana value 2 or less from your graveyard to your hand.
             TargetCard target = new TargetCardInYourGraveyard(filterCard);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (!target.canChoose(source.getControllerId(), source, game)) {
                 return true;
             }
@@ -127,7 +127,7 @@ class CometStellarPupAbility extends OneShotEffect {
         } else if (result <= 5) {
             // Comet, Stellar Pup deals damage equal to the number of loyalty counters on him to a creature or player
             TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             if (!target.canChoose(source.getControllerId(), source, game)) {
                 return true;
             }
@@ -145,10 +145,10 @@ class CometStellarPupAbility extends OneShotEffect {
                     .apply(game, source);
 
             // You may activate Comet, Stellar Pup’s loyalty ability two more times this turn.
-            Permanent comet = game.getPermanent(source.getSourceId());
+            Permanent comet = source.getSourcePermanentIfItStillExists(game);
             if (comet != null) {
                 game.addEffect(
-                        new CometStellarPupContinousEffect(new MageObjectReference(comet, game)),
+                        new CometStellarPupContinuousEffect(new MageObjectReference(comet, game)),
                         source
                 );
             }
@@ -157,23 +157,23 @@ class CometStellarPupAbility extends OneShotEffect {
     }
 }
 
-class CometStellarPupContinousEffect extends ContinuousEffectImpl {
+class CometStellarPupContinuousEffect extends ContinuousEffectImpl {
 
     private final MageObjectReference cometMOR;
 
-    public CometStellarPupContinousEffect(MageObjectReference cometMOR) {
+    CometStellarPupContinuousEffect(MageObjectReference cometMOR) {
         super(Duration.EndOfTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         this.cometMOR = cometMOR;
     }
 
-    private CometStellarPupContinousEffect(final CometStellarPupContinousEffect effect) {
+    private CometStellarPupContinuousEffect(final CometStellarPupContinuousEffect effect) {
         super(effect);
         this.cometMOR = effect.cometMOR;
     }
 
     @Override
-    public CometStellarPupContinousEffect copy() {
-        return new CometStellarPupContinousEffect(this);
+    public CometStellarPupContinuousEffect copy() {
+        return new CometStellarPupContinuousEffect(this);
     }
 
     @Override
