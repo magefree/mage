@@ -1319,22 +1319,30 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
 
-        ApprovingObject approvingObject = chooseApprovingObject(game, activationStatus.getApprovingObjects().stream().collect(Collectors.toList()));
+        ApprovingObjectResult approvingResult = chooseApprovingObject(
+                game,
+                activationStatus.getApprovingObjects().stream().collect(Collectors.toList()),
+                false
+        );
+        if(approvingResult.status.equals(ApprovingObjectResultStatus.NOT_REQUIRED_NO_CHOICE)) {
+            return false; // canceled choice of approving object.
+        }
+
         //20091005 - 305.1
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND,
-                card.getId(), playLandAbility, playerId, approvingObject))) {
+                card.getId(), playLandAbility, playerId, approvingResult.approvingObject))) {
             // int bookmark = game.bookmarkState();
             // land events must return original zone (uses for commander watcher)
             Zone cardZoneBefore = game.getState().getZone(card.getId());
             GameEvent landEventBefore = GameEvent.getEvent(GameEvent.EventType.PLAY_LAND,
-                    card.getId(), playLandAbility, playerId, approvingObject);
+                    card.getId(), playLandAbility, playerId, approvingResult.approvingObject);
             landEventBefore.setZone(cardZoneBefore);
             game.fireEvent(landEventBefore);
 
             if (moveCards(card, Zone.BATTLEFIELD, playLandAbility, game, false, false, false, null)) {
                 incrementLandsPlayed();
                 GameEvent landEventAfter = GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED,
-                        card.getId(), playLandAbility, playerId, approvingObject);
+                        card.getId(), playLandAbility, playerId, approvingResult.approvingObject);
                 landEventAfter.setZone(cardZoneBefore);
                 game.fireEvent(landEventAfter);
 
@@ -1358,10 +1366,26 @@ public abstract class PlayerImpl implements Player, Serializable {
         return true;
     }
 
-    private ApprovingObject chooseApprovingObject(Game game, List<ApprovingObject> possibleApprovingObjects) {
+    private enum ApprovingObjectResultStatus {
+        CHOSEN,
+        NO_POSSIBLE_CHOICE,
+        NOT_REQUIRED_NO_CHOICE,
+    }
+
+    private class ApprovingObjectResult {
+        public final ApprovingObjectResultStatus status;
+        public final ApprovingObject approvingObject; // not null iff status is CHOSEN
+
+        private ApprovingObjectResult(ApprovingObjectResultStatus status, ApprovingObject approvingObject) {
+            this.status = status;
+            this.approvingObject = approvingObject;
+        }
+    }
+
+    private ApprovingObjectResult chooseApprovingObject(Game game, List<ApprovingObject> possibleApprovingObjects, boolean required) {
         // Choosing
         if (possibleApprovingObjects.isEmpty()) {
-            return null;
+            return new ApprovingObjectResult(ApprovingObjectResultStatus.NO_POSSIBLE_CHOICE, null);
         } else {
             // Select the ability that you use to permit the action
             Map<String, String> keyChoices = new HashMap<>();
@@ -1384,18 +1408,21 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             int choice = 0;
             if (!game.inCheckPlayableState() && keyChoices.size() > 1) {
-                Choice choicePermitting = new ChoiceImpl(true);
+                Choice choicePermitting = new ChoiceImpl(required);
                 choicePermitting.setMessage("Choose the permitting object");
                 choicePermitting.setKeyChoices(keyChoices);
                 if(canRespond()) {
-                    choose(Outcome.Neutral, choicePermitting, game);
-                    String choiceKey = choicePermitting.getChoiceKey();
-                    if(choiceKey != null){
-                        choice = Integer.parseInt(choiceKey);
+                    if (choose(Outcome.Neutral, choicePermitting, game)) {
+                        String choiceKey = choicePermitting.getChoiceKey();
+                        if (choiceKey != null) {
+                            choice = Integer.parseInt(choiceKey);
+                        }
+                    } else {
+                        return new ApprovingObjectResult(ApprovingObjectResultStatus.NOT_REQUIRED_NO_CHOICE, null);
                     }
                 }
             }
-            return possibleApprovingObjects.get(choice);
+            return new ApprovingObjectResult(ApprovingObjectResultStatus.CHOSEN, possibleApprovingObjects.get(choice));
         }
     }
 
@@ -1552,8 +1579,16 @@ public abstract class PlayerImpl implements Player, Serializable {
                     result = playManaAbility((ActivatedManaAbilityImpl) ability.copy(), game);
                     break;
                 case SPELL:
-                    ApprovingObject approvingObject = chooseApprovingObject(game, activationStatus.getApprovingObjects().stream().collect(Collectors.toList()));
-                    result = cast((SpellAbility) ability, game, false, approvingObject);
+                    ApprovingObjectResult approvingResult = chooseApprovingObject(
+                            game,
+                            activationStatus.getApprovingObjects().stream().collect(Collectors.toList()),
+                            false
+                    );
+                    if(approvingResult.status.equals(ApprovingObjectResultStatus.NOT_REQUIRED_NO_CHOICE)) {
+                        return false; // chosen to not approve any AsThough.
+                    }
+
+                    result = cast((SpellAbility) ability, game, false, approvingResult.approvingObject);
                     break;
                 default:
                     result = playAbility(ability.copy(), game);
