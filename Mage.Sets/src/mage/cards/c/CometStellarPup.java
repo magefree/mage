@@ -95,7 +95,7 @@ class CometStellarPupAbility extends OneShotEffect {
             return false;
         }
         int result = player.rollDice(outcome, source, game, 6);
-        if (result <= 2) {
+        if (result == 1 || result == 2) {
             // [+2]
             new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(2))
                     .apply(game, source);
@@ -124,7 +124,7 @@ class CometStellarPupAbility extends OneShotEffect {
             if (card != null) {
                 player.moveCards(card, Zone.HAND, source, game);
             }
-        } else if (result <= 5) {
+        } else if (result == 4 || result == 5) {
             // Comet, Stellar Pup deals damage equal to the number of loyalty counters on him to a creature or player
             TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
             target.withNotTarget(true);
@@ -139,7 +139,7 @@ class CometStellarPupAbility extends OneShotEffect {
             // [−2]
             new RemoveCounterSourceEffect(CounterType.LOYALTY.createInstance(2))
                     .apply(game, source);
-        } else {
+        } else if (result == 6) {
             //[+1]
             new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(1))
                     .apply(game, source);
