@@ -138,7 +138,7 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
         if (cardToCast == null
                 || partsToCast.size() < 1
                 || !player.chooseUse(
-                Outcome.PlayForFree, "Cast spell without paying its mana cost (" + partsInfo + ")?", source, game
+                Outcome.PlayForFree, "Cast spell by paying life equal to its mana value rather than paying its mana cost (" + partsInfo + ")?", source, game
         )) {
             return false;
         }
