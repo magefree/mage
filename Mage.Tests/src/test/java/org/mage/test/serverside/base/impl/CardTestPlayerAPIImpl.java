@@ -1556,23 +1556,26 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertTopCardRevealed(TestPlayer player, boolean isRevealed) {
         Assert.assertEquals(isRevealed, player.isTopCardRevealed());
     }
-
-    public void assertIsAttachedTo(TestPlayer thePlayer, String theAttachment, String thePermanent) {
-
+    /**
+     * Asserts if, or if not, theAttachment is attached to thePermanent.
+     *
+     * @param isAttached true => assertIsAttachedTo, false => assertIsNotAttachedTo
+     */
+    public void assertAttachedTo(TestPlayer thePlayer, String theAttachment, String thePermanent, boolean isAttached) {
         List<Permanent> permanents = currentGame.getBattlefield().getAllActivePermanents().stream()
                 .filter(permanent -> permanent.isControlledBy(thePlayer.getId()))
                 .filter(permanent -> permanent.getName().equals(thePermanent))
                 .collect(Collectors.toList());
-        assertTrue(theAttachment + " was not attached to " + thePermanent,
+        assertTrue(theAttachment + " was "+ (!isAttached ? "":"not") +" attached to " + thePermanent,
+                !isAttached ^
                 permanents.stream()
                         .anyMatch(permanent -> permanent.getAttachments()
                                 .stream()
                                 .map(id -> currentGame.getCard(id))
                                 .map(MageObject::getName)
                                 .collect(Collectors.toList()).contains(theAttachment)));
-
-
     }
+
 
     public Permanent getPermanent(String cardName, UUID controller) {
         assertAliaseSupportInActivateCommand(cardName, false);

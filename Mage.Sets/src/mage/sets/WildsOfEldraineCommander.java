@@ -148,6 +148,7 @@ public final class WildsOfEldraineCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tithe Taker", 80, Rarity.RARE, mage.cards.t.TitheTaker.class));
         cards.add(new SetCardInfo("Transcendent Envoy", 81, Rarity.COMMON, mage.cards.t.TranscendentEnvoy.class));
         cards.add(new SetCardInfo("Umbra Mystic", 82, Rarity.RARE, mage.cards.u.UmbraMystic.class));
+        cards.add(new SetCardInfo("Unfinished Business", 8, Rarity.RARE, mage.cards.u.UnfinishedBusiness.class));
         cards.add(new SetCardInfo("Utopia Sprawl", 135, Rarity.COMMON, mage.cards.u.UtopiaSprawl.class));
         cards.add(new SetCardInfo("Verdant Embrace", 136, Rarity.RARE, mage.cards.v.VerdantEmbrace.class));
         cards.add(new SetCardInfo("Vitu-Ghazi, the City-Tree", 173, Rarity.UNCOMMON, mage.cards.v.VituGhaziTheCityTree.class));
