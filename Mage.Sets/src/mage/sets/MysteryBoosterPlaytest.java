@@ -24,6 +24,7 @@ public class MysteryBoosterPlaytest extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Banding Sliver", 2, Rarity.RARE, mage.cards.b.BandingSliver.class));
+        cards.add(new SetCardInfo("Evil Boros Charm", 90, Rarity.RARE, mage.cards.e.EvilBorosCharm.class));
         cards.add(new SetCardInfo("Frogkin Kidnapper", 42, Rarity.RARE, mage.cards.f.FrogkinKidnapper.class));
         cards.add(new SetCardInfo("How to Keep an Izzet Mage Busy", 93, Rarity.RARE, mage.cards.h.HowToKeepAnIzzetMageBusy.class));
         cards.add(new SetCardInfo("Recycla-bird", 28, Rarity.RARE, mage.cards.r.RecyclaBird.class));
