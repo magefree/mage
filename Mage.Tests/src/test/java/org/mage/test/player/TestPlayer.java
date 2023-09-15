@@ -2196,7 +2196,7 @@ public class TestPlayer implements Player {
             List<UUID> usedTargets = new ArrayList<>();
 
 
-            // TODO: Why TargetAnyTarget not handled there?
+            // TODO: Allow to choose a player with TargetPermanentOrPlayer
             if ((target.getOriginalTarget() instanceof TargetPermanent)
                     || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) // player target not implemented yet
                     || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)) { // player target not implemented yet
