@@ -1,5 +1,6 @@
 package mage.cards.m;
 
+import mage.MageIdentifier;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -31,7 +32,8 @@ public final class MaestrosAscendancy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
 
         // Once during each of your turns, you may cast an instant or sorcery spell from your graveyard by sacrificing a creature in addition to paying its other costs. If a spell cast this way would be put into your graveyard, exile it instead.
-        Ability ability = new SimpleStaticAbility(new MaestrosAscendancyCastEffect());
+        Ability ability = new SimpleStaticAbility(new MaestrosAscendancyCastEffect())
+                .setIdentifier(MageIdentifier.MaestrosAscendencyAlternateCast);
         ability.addEffect(new MaestrosAscendancyExileEffect());
         this.addAbility(ability, new MaestrosAscendancyWatcher());
     }
@@ -87,7 +89,10 @@ class MaestrosAscendancyCastEffect extends AsThoughEffectImpl {
         Costs<Cost> newCosts = new CostsImpl<>();
         newCosts.addAll(card.getSpellAbility().getCosts());
         newCosts.add(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
-        player.setCastSourceIdWithAlternateMana(card.getId(), card.getManaCost(), newCosts);
+        player.setCastSourceIdWithAlternateMana(
+                card.getId(), card.getManaCost(), newCosts,
+                MageIdentifier.MaestrosAscendencyAlternateCast
+        );
         return true;
     }
 }

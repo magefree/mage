@@ -54,7 +54,19 @@ public enum MageIdentifier {
     // If there are other ways to cast from the top of the library, then the MageIdentifier being different
     // means that the alternate cast won't apply to the other ways to cast.
     BolassCitadelAlternateCast,
-    RisenExectutionerAlternateCast;
+    RisenExectutionerAlternateCast,
+    DemilichAlternateCast,
+    DemonicEmbraceAlternateCast,
+    FalcoSparaPactweaverAlternateCast,
+    HelbruteAlternateCast,
+    MaestrosAscendencyAlternateCast,
+    NashiMoonSagesScionAlternateCast,
+    RafinnesGuidanceAlternateCast,
+    RonaSheoldredsFaithfulAlternateCast,
+    ScourgeOfNelTothAlternateCast,
+    SqueeDubiousMonarchAlternateCast,
+    WorldheartPhoenixAlternateCast,
+    XandersPactAlternateCast;
 
     /**
      * Additional text if there is need to differentiate two very similar effects
