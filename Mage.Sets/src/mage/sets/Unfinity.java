@@ -29,6 +29,7 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Circuits Act", 103, Rarity.COMMON, mage.cards.c.CircuitsAct.class));
         cards.add(new SetCardInfo("Clown Car", 186, Rarity.RARE, mage.cards.c.ClownCar.class));
         cards.add(new SetCardInfo("Clowning Around", 6, Rarity.COMMON, mage.cards.c.ClowningAround.class));
+        cards.add(new SetCardInfo("Comet, Stellar Pup", 166, Rarity.MYTHIC, mage.cards.c.CometStellarPup.class));
         cards.add(new SetCardInfo("Dissatisfied Customer", 72, Rarity.COMMON, mage.cards.d.DissatisfiedCustomer.class));
         cards.add(new SetCardInfo("Embiggen", 137, Rarity.COMMON, mage.cards.e.Embiggen.class));
         cards.add(new SetCardInfo("Forest", 239, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true)));//there are multipiles so use the true boolean here for useVariousArt
