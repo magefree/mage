@@ -31,7 +31,7 @@ public enum MageIdentifier {
     WishWatcher,
     GlimpseTheCosmosWatcher,
     SerraParagonWatcher,
-    OneWithTheMultiverseWatcher,
+    OneWithTheMultiverseWatcher("Without paying manacost"),
     JohannApprenticeSorcererWatcher,
     KaghaShadowArchdruidWatcher,
     CourtOfLocthwainWatcher("Without paying manacost"),

@@ -1401,7 +1401,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     choiceValue += possibleApprovingObject.getApprovingAbility().getRule();
                 } else {
                     choiceValue += mageObject.getIdName() + ": ";
-                    choiceValue += possibleApprovingObject.getApprovingAbility().getRule(mageObject.getName());
+                    String moreDetails = possibleApprovingObject.getApprovingAbility().getRule(mageObject.getName());
+                    choiceValue += moreDetails.isEmpty() ? "Cast normally" : moreDetails;
                 }
                 keyChoices.put((i++) + "", choiceValue);
             }

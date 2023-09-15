@@ -1,6 +1,7 @@
 package mage.abilities;
 
 import mage.ApprovingObject;
+import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Zone;
@@ -44,6 +45,17 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
                 || !game.getPlayer(playerId).canPlayLand()
                 || !game.canPlaySorcery(playerId)) {
             return ActivationStatus.getFalse();
+        }
+
+        // TODO: this check may not be required, but removing it require more investigation.
+        //       As of now it is only a way for One with the Multiverse to work.
+        if (!approvingObjects.isEmpty()) {
+            Card card = game.getCard(sourceId);
+            Zone zone = game.getState().getZone(sourceId);
+            if(card != null && card.isOwnedBy(playerId) && Zone.HAND.match(zone)) {
+                // Regular casting, to be an alternative to the AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE from hand (e.g. One with the Multiverse):
+                approvingObjects.add(new ApprovingObject(this, game));
+            }
         }
 
         if(approvingObjects.isEmpty()) {
