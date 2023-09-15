@@ -5,7 +5,7 @@ import mage.abilities.Mode;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -13,7 +13,7 @@ import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.UnblockedPredicate;
-import mage.game.permanent.token.Spirit11ColorlessLifelinkHasteToken;
+import mage.game.permanent.token.SpiritEvilBorosCharmToken;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -40,12 +40,12 @@ public final class EvilBorosCharm extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addEffect(new GainLifeEffect(2).concatBy("and"));
 
-        // • Create a 1/1 colorless Spirit creature token with lifelink and haste.
-        Mode mode = new Mode(new CreateTokenEffect(new Spirit11ColorlessLifelinkHasteToken()));
+        // • Unblocked attacking creatures get +1/+0 until end of turn.
+        Mode mode = new Mode(new BoostAllEffect(1, 0, Duration.EndOfTurn, filter, false));
         this.getSpellAbility().addMode(mode);
 
-        // • Unblocked attacking creatures get +1/+0 until end of turn.
-        mode = new Mode(new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter));
+        // • Create a 1/1 colorless Spirit creature token with lifelink and haste.
+        mode = new Mode(new CreateTokenEffect(new SpiritEvilBorosCharmToken()));
         this.getSpellAbility().addMode(mode);
     }
 

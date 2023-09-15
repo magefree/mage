@@ -7,11 +7,11 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- * @author weirddan455
+ * @author Susucr
  */
-public class Spirit11ColorlessLifelinkHasteToken extends TokenImpl {
+public class SpiritEvilBorosCharmToken extends TokenImpl {
 
-    public Spirit11ColorlessLifelinkHasteToken() {
+    public SpiritEvilBorosCharmToken() {
         super("Spirit Token", "1/1 colorless Spirit creature token with lifelink and haste");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SPIRIT);
@@ -22,12 +22,12 @@ public class Spirit11ColorlessLifelinkHasteToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    private Spirit11ColorlessLifelinkHasteToken(final Spirit11ColorlessLifelinkHasteToken token) {
+    private SpiritEvilBorosCharmToken(final SpiritEvilBorosCharmToken token) {
         super(token);
     }
 
     @Override
-    public Spirit11ColorlessLifelinkHasteToken copy() {
-        return new Spirit11ColorlessLifelinkHasteToken(this);
+    public SpiritEvilBorosCharmToken copy() {
+        return new SpiritEvilBorosCharmToken(this);
     }
 }
