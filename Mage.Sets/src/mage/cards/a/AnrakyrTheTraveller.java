@@ -1,20 +1,10 @@
 package mage.cards.a;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.ApprovingObject;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
-import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -22,29 +12,16 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.cost.CastFromHandForFreeEffect;
-import mage.cards.AdventureCard;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.CardWithHalves;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterArtifactSpell;
-import mage.filter.common.FilterCreatureAttackingYou;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.util.CardUtil;
-import mage.util.CardUtil.SpellCastTracker;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author gravitybone
@@ -53,7 +30,6 @@ import mage.util.CardUtil.SpellCastTracker;
 public final class AnrakyrTheTraveller extends CardImpl {
 
     private static final FilterCard filter = new FilterArtifactCard();
-
 
     public AnrakyrTheTraveller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[] { CardType.ARTIFACT, CardType.CREATURE }, "{4}{B}");
@@ -67,7 +43,6 @@ public final class AnrakyrTheTraveller extends CardImpl {
         Ability ability = new AttacksTriggeredAbility(new AnrakyrTheTravellerEffect(filter));
 
         this.addAbility(ability.withFlavorWord("Lord of the Pyrrhian Legions"));
-
     }
 
     private AnrakyrTheTraveller(final AnrakyrTheTraveller card) {
@@ -83,18 +58,16 @@ public final class AnrakyrTheTraveller extends CardImpl {
 class AnrakyrTheTravellerEffect extends OneShotEffect {
     private final FilterCard filter;
 
-    public AnrakyrTheTravellerEffect(FilterCard filter) {
+    AnrakyrTheTravellerEffect(FilterCard filter) {
         super(Outcome.AIDontUseIt);
         this.filter = filter;
         this.staticText = "you may cast an " + filter.getMessage() + " from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.";
     }
 
-    protected AnrakyrTheTravellerEffect(final AnrakyrTheTravellerEffect effect) {
+    private AnrakyrTheTravellerEffect(final AnrakyrTheTravellerEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
-
-    
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -128,7 +101,6 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
         if (cardToCast == null) {
             return false;
         }
-
 
         List<Card> partsToCast = cardMap.get(cardToCast.getId());
         String partsInfo = partsToCast
@@ -165,9 +137,6 @@ class AnrakyrTheTravellerEffect extends OneShotEffect {
             cards.remove(cardToCast);
         }
         return result;
-        
-
-        
     }
 
     private static List<Card> getCastableComponents(Card cardToCast, FilterCard filter, Ability source, Player player, Game game, boolean playLand) {
