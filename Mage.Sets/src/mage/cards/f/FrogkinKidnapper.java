@@ -63,7 +63,7 @@ class FrogkinKidnapperEffect extends OneShotEffect {
     FrogkinKidnapperEffect() {
         super(Outcome.Exile);
         this.staticText = "target opponent reveals their hand. Choose a nonland card from it. "
-                + "Ransom that card. (Exile it. Its owner may pay {3} at any time to return it to their hand.)";
+                + "Ransom that card. <i>(Exile it. Its owner may pay {3} at any time to return it to their hand.)</i>";
     }
 
     private FrogkinKidnapperEffect(final FrogkinKidnapperEffect effect) {
