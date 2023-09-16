@@ -40,7 +40,7 @@ public abstract class TargetImpl implements Target {
 
     protected int targetTag; // can be set if other target check is needed (AnotherTargetPredicate)
     protected String chooseHint = null; // UI choose hints after target name
-    protected boolean shouldReportEvents = true;
+    protected boolean shouldReportEvents = true; // generates TARGET and TARGETED events (can be disabled in non targeting mode, e.g. on target change)
 
     @Override
     public abstract TargetImpl copy();
