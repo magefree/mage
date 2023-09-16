@@ -86,7 +86,7 @@ class LiberatedLivestockEffect extends OneShotEffect {
         ox.putOntoBattlefield(1, game, source, source.getControllerId());
 
         List<Token> tokens = Arrays.asList(cat, bird, ox);
-        FilterCard filter = new FilterCard("an Aura");
+        FilterCard filter = new FilterCard("Up to one Aura");
         filter.add(SubType.AURA.getPredicate());
 
         TargetCard target;
@@ -94,28 +94,22 @@ class LiberatedLivestockEffect extends OneShotEffect {
         for (Token token : tokens){
             for (UUID t : token.getLastAddedTokenIds()){
                 Permanent sourcePermanent = game.getPermanent(t);
+                if (sourcePermanent == null){continue;}
                 if (controller.chooseUse(outcome, "Look in Hand or Graveyard?", null, "Hand", "Graveyard", source, game)){
-                    target = new TargetCardInHand(filter);
+                    target = new TargetCardInHand(0,1,filter);
                 }
                 else{
-                    target = new TargetCardInYourGraveyard(filter);
+                    target = new TargetCardInYourGraveyard(0,1,filter);
                 }
 
                 target.withNotTarget(true);
-                if (target.canTarget(controller.getId(), source, game)){
-                    controller.chooseTarget(outcome, target, source, game);
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null){
-                        if (sourcePermanent != null){
-                            game.getState().setValue("attachTo:" + card.getId(), sourcePermanent);
-                        }
-                    }
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    if(sourcePermanent != null){
-                        sourcePermanent.addAttachment(card.getId(), source, game);
-                    }
+                controller.chooseTarget(outcome, target, source, game);
+                Card card = game.getCard(target.getFirstTarget());
+                if (card == null){continue;}
+                game.getState().setValue("attachTo:" + card.getId(), sourcePermanent);
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                sourcePermanent.addAttachment(card.getId(), source, game);
 
-                }
             }
 
         }
