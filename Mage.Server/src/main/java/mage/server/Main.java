@@ -50,14 +50,14 @@ public final class Main {
     private static final Logger logger = Logger.getLogger(Main.class);
     private static final MageVersion version = new MageVersion(Main.class);
 
+    // arg settings can be setup by run script or IDE's program arguments like -xxx=yyy
+    // prop settings can be setup by -Dxxx=yyy in the launcher
+    // priority: default setting -> prop setting -> arg setting
     private static final String testModeArg = "-testMode=";
-    private static final String fastDBModeArg = "-fastDbMode=";
+    private static final String testModeProp = "xmage.testMode";
+    private static final String fastDBModeArg = "-fastDbMode="; // TODO: outdated, must be deleted
     private static final String adminPasswordArg = "-adminPassword=";
-    /**
-     * The property that holds the path to the configuration file. Defaults to "config/config.xml".
-     * <p>
-     * To set up a different one, start the application with the java option "-Dxmage.config.path=&lt;path&gt;"
-     */
+    private static final String adminPasswordProp = "xmage.adminPassword";
     private static final String configPathProp = "xmage.config.path";
 
     private static final File pluginFolder = new File("plugins");
@@ -91,6 +91,21 @@ public final class Main {
         // enable test mode by default for developer build (if you run it from source code)
         testMode |= version.isDeveloperBuild();
 
+        // settings by properties (-Dxxx=yyy from a launcher)
+        if (System.getProperty(testModeProp) != null) {
+            testMode = Boolean.parseBoolean(System.getProperty(testModeProp));
+        }
+        if (System.getProperty(adminPasswordProp) != null) {
+            adminPassword = SystemUtil.sanitize(System.getProperty(adminPasswordProp));
+        }
+        final String configPath;
+        if (System.getProperty(configPathProp) != null) {
+            configPath = System.getProperty(configPathProp);
+        } else {
+            configPath = defaultConfigPath;
+        }
+
+        // settings by program arguments (-xxx=yyy from a command line)
         for (String arg : args) {
             if (arg.startsWith(testModeArg)) {
                 testMode = Boolean.parseBoolean(arg.replace(testModeArg, ""));
@@ -101,9 +116,6 @@ public final class Main {
                 fastDbMode = Boolean.parseBoolean(arg.replace(fastDBModeArg, ""));
             }
         }
-
-        final String configPath = Optional.ofNullable(System.getProperty(configPathProp))
-                .orElse(defaultConfigPath);
 
         logger.info(String.format("Reading configuration from path=%s", configPath));
         final ConfigWrapper config = new ConfigWrapper(ConfigFactory.loadFromFile(configPath));
