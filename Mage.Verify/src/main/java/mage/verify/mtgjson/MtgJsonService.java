@@ -63,6 +63,10 @@ public final class MtgJsonService {
         return SetHolder.sets;
     }
 
+    public static Map<String, MtgJsonCard> cards() {
+        return CardHolder.cards;
+    }
+
     public static MtgJsonMetadata meta() {
         return SetHolder.meta;
     }
@@ -95,18 +99,9 @@ public final class MtgJsonService {
     private static <T> T findReference(Map<String, T> reference, String name) {
         T ref = reference.get(name);
         if (ref == null) {
-            //name = name.replaceFirst("\\bA[Ee]", "Æ");
-            //ref = reference.get(name);
-        }
-        if (ref == null) {
-            //name = name.replace("'", "\""); // for Kongming, "Sleeping Dragon" & Pang Tong, "Young Phoenix"
-            //ref = reference.get(name);
-        }
-        if (ref == null) {
             name = convertXmageToMtgJsonCardName(name);
             ref = reference.get(name);
         }
-
         return ref;
     }
 
