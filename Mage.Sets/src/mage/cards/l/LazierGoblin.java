@@ -66,8 +66,7 @@ class LazierGoblinSpecialAction extends SpecialAction {
         super(Zone.BATTLEFIELD);
         this.setTiming(TimingRule.SORCERY);
         this.addCost(new ManaCostsImpl<>("{3}{R}"));
-        this.addEffect(new LazierGoblinMotivateEffect());
-        this.name = "Motivate {3}{R}";
+        this.addEffect(new LazierGoblinMotivateEffect().setText("Motivate {3}{R}")); // text is for game log to make sense.
     }
 
     private LazierGoblinSpecialAction(final LazierGoblinSpecialAction ability) {
@@ -187,6 +186,6 @@ class LazierGoblinWatcher extends Watcher {
     }
 
     public boolean isMotivated(UUID playerId, MageObjectReference mor) {
-        return motivationMap.getOrDefault(playerId, new HashSet<MageObjectReference>()).contains(mor);
+        return motivationMap.getOrDefault(playerId, new HashSet<>()).contains(mor);
     }
 }
