@@ -705,11 +705,15 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void addEmblem(Player player, Emblem emblem) {
-        currentGame.addEmblem(
-                emblem,
-                emblem, // So this is a little ugly, but addEmblem is expecting a non-null source.
-                player.getId()
-        );
+        Emblem newEmblem = emblem.copy();
+        newEmblem.setControllerId(player.getId());
+        newEmblem.assignNewId();
+        newEmblem.getAbilities().newId();
+        for (Ability ability : newEmblem.getAbilities()) {
+            ability.setSourceId(newEmblem.getId());
+        }
+
+        currentGame.getState().addCommandObject(newEmblem);
     }
 
     /**
