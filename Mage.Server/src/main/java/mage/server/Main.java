@@ -55,7 +55,6 @@ public final class Main {
     // priority: default setting -> prop setting -> arg setting
     private static final String testModeArg = "-testMode=";
     private static final String testModeProp = "xmage.testMode";
-    private static final String fastDBModeArg = "-fastDbMode="; // TODO: outdated, must be deleted
     private static final String adminPasswordArg = "-adminPassword=";
     private static final String adminPasswordProp = "xmage.adminPassword";
     private static final String configPathProp = "xmage.config.path";
@@ -76,11 +75,6 @@ public final class Main {
     // - debug main menu for GUI and rendering testing (must use -debug arg for client app);
     private static boolean testMode;
 
-    private static boolean fastDbMode;
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         logger.info("Starting MAGE server version " + version);
@@ -112,8 +106,6 @@ public final class Main {
             } else if (arg.startsWith(adminPasswordArg)) {
                 adminPassword = arg.replace(adminPasswordArg, "");
                 adminPassword = SystemUtil.sanitize(adminPassword);
-            } else if (arg.startsWith(fastDBModeArg)) {
-                fastDbMode = Boolean.parseBoolean(arg.replace(fastDBModeArg, ""));
             }
         }
 
@@ -169,11 +161,7 @@ public final class Main {
         }
 
         logger.info("Loading cards...");
-        if (fastDbMode) {
-            CardScanner.scanned = true;
-        } else {
-            CardScanner.scan();
-        }
+        CardScanner.scan();
         logger.info("Done.");
 
         // cards preload with ratings
