@@ -1,8 +1,8 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DisturbAbility;
 import mage.cards.CardImpl;
@@ -83,7 +83,12 @@ class BrineComberTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Spell spell = game.getSpell(event.getSourceId());
-        return spell != null && spell.hasSubtype(SubType.AURA, game);
+        if(spell == null) {
+            return false;
+        }
+        SpellAbility spellAbility = (SpellAbility) spell.getStackAbility();
+        return spellAbility != null
+                && spellAbility.getCharacteristics(game).hasSubtype(SubType.AURA, game);
     }
 
     @Override
