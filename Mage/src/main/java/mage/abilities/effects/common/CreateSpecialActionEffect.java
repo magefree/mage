@@ -14,22 +14,22 @@ import java.util.UUID;
 public class CreateSpecialActionEffect extends OneShotEffect {
 
     private final SpecialAction action;
-    private final UUID playerId; // If set, that player can activate the special action. If null, use the source controller instead.
+    private final UUID newActionControllerId; // another player can activate the special action
 
     public CreateSpecialActionEffect(SpecialAction action) {
         this(action, null);
     }
 
-    public CreateSpecialActionEffect(SpecialAction action, UUID playerId) {
+    public CreateSpecialActionEffect(SpecialAction action, UUID newActionControllerId) {
         super(action.getEffects().getOutcome(action));
         this.action = action;
-        this.playerId = playerId;
+        this.newActionControllerId = newActionControllerId;
     }
 
     protected CreateSpecialActionEffect(final CreateSpecialActionEffect effect) {
         super(effect);
         this.action = (SpecialAction) effect.action.copy();
-        this.playerId = effect.playerId;
+        this.newActionControllerId = effect.newActionControllerId;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class CreateSpecialActionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         SpecialAction newAction = (SpecialAction) action.copy();
         newAction.setSourceId(source.getSourceId());
-        newAction.setControllerId(playerId == null ? source.getControllerId() : playerId);
+        newAction.setControllerId(newActionControllerId != null ? newActionControllerId : source.getControllerId());
         newAction.getTargets().addAll(source.getTargets());
         game.getState().getSpecialActions().add(newAction);
         return true;

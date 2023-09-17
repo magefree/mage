@@ -4294,10 +4294,11 @@ public class TestPlayer implements Player {
                             if (specialAction.canActivate(this.getId(), game).canActivate()) {
                                 choices.remove(0);
                                 choiceRemoved = true;
-                                specialAction.setUnpaidMana(unpaid);
                                 if (activateAbility(specialAction, game)) {
                                     choiceUsed = true;
                                 }
+                            } else {
+                                Assert.fail("Found non active special mana action, but must generates only active: " + specialAction.getRule(true));
                             }
                         }
                     }

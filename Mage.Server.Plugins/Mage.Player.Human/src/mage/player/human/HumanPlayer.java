@@ -41,12 +41,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetDefender;
-import mage.util.CardUtil;
-import mage.util.GameLog;
-import mage.util.ManaUtil;
-import mage.util.MessageToClient;
-import mage.util.MultiAmountMessage;
-
+import mage.util.*;
 import org.apache.log4j.Logger;
 
 import java.awt.*;
@@ -2058,8 +2053,14 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
-            int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmountWithIndividualConstraints(
+            Outcome outcome,
+            List<MultiAmountMessage> messages,
+            int min,
+            int max,
+            MultiAmountType type,
+            Game game
+    ) {
         int needCount = messages.size();
         List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
         if (needCount == 0 || (needCount == 1 && min == max)
@@ -2146,14 +2147,9 @@ public class HumanPlayer extends PlayerImpl {
             waitForResponse(game);
 
             UUID responseId = getFixedResponseUUID(game);
-            if (responseId != null) {
-                if (specialActions.containsKey(responseId)) {
-                    SpecialAction specialAction = specialActions.get(responseId);
-                    if (unpaidForManaAction != null) {
-                        specialAction.setUnpaidMana(unpaidForManaAction);
-                    }
-                    activateAbility(specialAction, game);
-                }
+            SpecialAction specialAction = specialActions.getOrDefault(responseId, null);
+            if (specialAction != null) {
+                activateAbility(specialAction, game);
             }
         }
     }

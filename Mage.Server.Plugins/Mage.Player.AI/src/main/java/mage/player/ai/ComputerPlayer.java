@@ -1681,8 +1681,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         // pay special mana like convoke cost (tap for pay)
         // GUI: user see "special" button while pay spell's cost
         // TODO: AI can't prioritize special mana types to pay, e.g. it will use first available
-        SpecialAction specialAction = game.getState().getSpecialActions().getControlledBy(this.getId(), true)
-                .values().stream().findFirst().orElse(null);
+        SpecialAction specialAction = game.getState().getSpecialActions().getControlledBy(this.getId(), true).values()
+                .stream()
+                .findFirst()
+                .orElse(null);
         ManaOptions specialMana = specialAction == null ? null : specialAction.getManaOptions(ability, game, unpaid);
         if (specialMana != null) {
             for (Mana netMana : specialMana) {
@@ -1690,11 +1692,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
                         continue;
                     }
-                    specialAction.setUnpaidMana(unpaid);
                     if (activateAbility(specialAction, game)) {
                         return true;
                     }
-                    // only one time try to pay
+                    // only one time try to pay to skip infinite AI loop
                     break;
                 }
             }
