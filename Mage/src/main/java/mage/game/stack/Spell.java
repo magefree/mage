@@ -79,9 +79,6 @@ public class Spell extends StackObjectImpl implements Card {
             // simulate another side as new card (another code part in continues effect from disturb ability)
             affectedCard = TransformAbility.transformCardSpellStatic(card, card.getSecondCardFace(), game);
         }
-        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.MORPH){
-            this.faceDown = true;
-        }
 
         this.card = affectedCard;
         this.color = affectedCard.getColor(null).copy();
@@ -93,6 +90,12 @@ public class Spell extends StackObjectImpl implements Card {
         this.zoneChangeCounter = affectedCard.getZoneChangeCounter(game); // sync card's ZCC with spell (copy spell settings)
         this.ability = ability;
         this.ability.setControllerId(controllerId);
+
+        if (ability.getSpellAbilityCastMode() == SpellAbilityCastMode.MORPH){
+            this.faceDown = true;
+            this.getColor(game).setColor(null);
+            game.getState().getCreateMageObjectAttribute(this.getCard(), game).getSubtype().clear();
+        }
         if (ability.getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
             // if this spell is going to be a copy, these abilities will be copied in copySpell
             if (!isCopy) {
