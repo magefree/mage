@@ -436,6 +436,7 @@ public abstract class AbilityImpl implements Ability {
                 case DISTURB:
                 case MORE_THAN_MEETS_THE_EYE:
                 case BESTOW:
+                case MORPH:
                     // from Snapcaster Mage:
                     // If you cast a spell from a graveyard using its flashback ability, you can't pay other alternative costs
                     // (such as that of Foil). (2018-12-07)

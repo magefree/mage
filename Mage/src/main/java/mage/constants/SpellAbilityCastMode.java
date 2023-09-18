@@ -1,6 +1,7 @@
 package mage.constants;
 
 import mage.abilities.keyword.BestowAbility;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.game.Game;
 
@@ -12,6 +13,7 @@ public enum SpellAbilityCastMode {
     MADNESS("Madness"),
     FLASHBACK("Flashback"),
     BESTOW("Bestow"),
+    MORPH("Morph"),
     TRANSFORMED("Transformed", true),
     DISTURB("Disturb", true),
     MORE_THAN_MEETS_THE_EYE("More than Meets the Eye", true);
@@ -49,6 +51,8 @@ public enum SpellAbilityCastMode {
             if (tmp != null) {
                 cardCopy = tmp.copy();
             }
+        if (this.equals(MORPH)) {
+            MorphAbility.setObjectToFaceDownCreature(cardCopy, game);
         }
         return cardCopy;
     }
