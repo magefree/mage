@@ -163,7 +163,7 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Clever Impersonator", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clever Impersonator");
 
